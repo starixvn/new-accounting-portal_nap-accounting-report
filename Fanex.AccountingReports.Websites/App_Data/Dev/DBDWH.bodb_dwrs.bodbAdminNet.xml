@@ -5,7 +5,7 @@
   </Function>
   <Function Name="Misc - Bet Count">
     <Setting Key="Misc_BetCount_GetAllProductsForBetCountReport" SpName="Acc_Rpt_BetCount_SelSports" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
-    <Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
   </Function>
   <Function Name="Gaming - Number Game Win Loss By Date">
     <Setting Key="Gaming_NumberGameWinlossByDate_GetReport" SpName="Acc_Rpt_NumberGameWinlossByDate" DbName="DBDWH.bodb_dwrs.bodbAdminNet" ></Setting>
@@ -47,11 +47,11 @@
     <Setting Key="Special_PunterAnalysis_GetTopPunter_ByLeague_User" SpName="Acc_SelTopPunterBySporttypeSum" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
   <Function Name="Main - Match Win Loss (2a)">
-    <Setting Key="Main_MatchWinLoss2a_GetMainReport_WH" SpName="Acc_Rpt_MatchWinLoss2_New_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_MatchWinLoss2a_GetMainReport_WH" SpName="Acc_Rpt_MatchWinLoss2_New_Old_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetThirdPartyCasinoReport_WH" SpName="Acc_Rpt_WinlostCA_Details_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
-    <Setting Key="Main_MatchWinloss2a_GetWinLossByBettype_WH" SpName="Acc_Rpt_WinlossByBettype_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_MatchWinloss2a_GetWinLossByBettype_WH" SpName="Acc_Rpt_WinlossByBettype_Old_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetWinLossDetailReportByBetType_WH" SpName="Acc_Rpt_MatchWinLoss2_Sporttype_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
-    <Setting Key="Main_MatchWinLoss2a_GetAllDetailReportBySportsType_WH" SpName="Acc_Rpt_MatchWinLoss2_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_MatchWinLoss2a_GetAllDetailReportBySportsType_WH" SpName="Acc_Rpt_MatchWinLoss2_Old_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetMetricGamingReport_WH" SpName="Acc_Rpt_WinlostMG_Details_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
   </Function>
   <Function Name="Misc - Credit Site Bet Count">
@@ -65,9 +65,9 @@
     <Setting Key="WinLoss_DailyMixParlayWinLoss_GetAdvanceMixParlayReport_WH" SpName="Acc_Rpt_MixParlay_Advance_Dw" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
   </Function>
   <Function Name="Main - Daily Win Loss (2h)">
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_WH" SpName="Acc_Rpt_DailyWLDirect_Bettype_Site_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_WH" SpName="Acc_Rpt_DailyWLDirect_Bettype_Site_Old_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
     <Setting Key="Main_DailyWinLoss2h_GetReportByBetType_WH" SpName="Acc_Rpt_DailyWLDirect_Details" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
-    <Setting Key="Main_DailyWinLoss2h_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="Main_DailyWinLoss2h_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Old_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
     <Setting Key="Main_DailyWinLoss2h_GetCasinoReport_WH" SpName="Acc_Rpt_DailyWLDirect_Casino" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />    
     <Setting Key="Main_DailyWinLoss2h_GetLiveCasinoReport_WH" SpName="Acc_Rpt_DailyWLDirect_LiveCasino" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
     <Setting Key="Main_DailyWinLoss2h_GetKenoReport_WH" SpName="Acc_Rpt_DailyWLDirect_Keno" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
@@ -106,13 +106,13 @@
     <Setting Key="Main_DailyWinLoss2h_GetMetricGamingBettypeReport_WH" SpName="Acc_Rpt_DailyWLDirect_MetricGaming" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Main Report - Daily Win Loss (2h) Soccer">
-    <Setting Key="Main_DailyWinLoss2hSoccer_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="Main_DailyWinLoss2hSoccer_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer_Old_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
   </Function>
   <Function Name="Main Report - Daily Win Loss (2h) Other Sports">
     <Setting Key="Main_DailyWinLoss2hOtherSports_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_OtherSports_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
   </Function>
   <Function Name="Main Report - Daily Win Loss (2h) Soccer Minor Bettypes">
-    <Setting Key="Main_DailyWinLoss2hSoccerMinorBettype_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="Main_DailyWinLoss2hSoccerMinorBettype_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer_Old_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
   </Function>
   <Function Name="Gaming - Number Game Win Loss">
     <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeMainReport_WH" SpName="Acc_Rpt_NumberGameWinlossByBettype" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
@@ -148,14 +148,14 @@
     <Setting Key="Gaming_WinLoss_CS_Detail_WH" SpName="Acc_Rpt_WinlostCA_Details_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
   </Function>
   <Function Name="Win Loss - Tree Win Loss">
-    <Setting Key="WinLoss_TreeWinLoss_GetDataByProduct_WH" SpName="Acc_Rpt_TreeWinlostByProduct_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="WinLoss_TreeWinLoss_GetDataByCom_WH" SpName="Acc_Rpt_TreeWinlostByCom_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
+    <Setting Key="WinLoss_TreeWinLoss_GetDataByProduct_WH" SpName="Acc_Rpt_TreeWinlostByProduct_Old_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="WinLoss_TreeWinLoss_GetDataByCom_WH" SpName="Acc_Rpt_TreeWinlostByCom_Old_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
     </Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetDataBySuper_WH" SpName="Acc_Rpt_TreeWinlostBySAg_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
+    <Setting Key="WinLoss_TreeWinLoss_GetDataBySuper_WH" SpName="Acc_Rpt_TreeWinlostBySAg_Old_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
     </Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetDataByMaster_WH" SpName="Acc_Rpt_TreeWinlostByMAg_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
+    <Setting Key="WinLoss_TreeWinLoss_GetDataByMaster_WH" SpName="Acc_Rpt_TreeWinlostByMAg_Old_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
     </Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetDataByAgent_WH" SpName="Acc_Rpt_TreeWinlostByAg_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
+    <Setting Key="WinLoss_TreeWinLoss_GetDataByAgent_WH" SpName="Acc_Rpt_TreeWinlostByAg_Old_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
     </Setting>
   </Function>
 
@@ -163,8 +163,8 @@
     <Setting Key="Misc_MAMonitorTool_GetLeagueList" SpName="Acc_Rpt_MAMonitor_LeagueSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
       <Mapping DataField="leagueid" ObjectProperty="LeagueId" />
     </Setting>
-    <Setting Key="Misc_MAMonitorTool_GetReport" SpName="Acc_Rpt_MAMonitor" DbName="DBDWH.bodb_dwrs.bodbAdminNet"  TimeOut="0"></Setting>
-    <Setting Key="Misc_MAMonitorTool_GetReport_Archive" SpName="Acc_Rpt_MAMonitor_Archive" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Misc_MAMonitorTool_GetReport" SpName="Acc_Rpt_MAMonitor_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet"  TimeOut="0"></Setting>
+    <Setting Key="Misc_MAMonitorTool_GetReport_Archive" SpName="Acc_Rpt_MAMonitor_Archive_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
   </Function>
   
   <Function Name="Gaming - Number Game Monthly Winloss">
