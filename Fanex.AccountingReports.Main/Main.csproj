@@ -135,6 +135,7 @@
     <Compile Include="Criteria\DailyWinLoss2hSoccerMinorBettype\GetMainReportCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2hSoccerMinorBettype\GetSoccerReportCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2hSoccer\GetMain2hReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetBettradeCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetKenoReportCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetBingoReportCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetCasinoReportCriteria.cs" />
@@ -237,6 +238,7 @@
     <Compile Include="Services\Implement\DailyWinLoss2hSoccerMinorBettype\SportTypeReportService.cs" />
     <Compile Include="Services\Implement\DailyWinLoss2hSoccer\DailyWinLoss2hService.cs" />
     <Compile Include="Services\Implement\DailyWinLoss2hSoccer\MainReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\BettradeService.cs" />
     <Compile Include="Services\Implement\DailyWinLoss2h\BettypeReportService.cs" />
     <Compile Include="Services\Implement\DailyWinLoss2h\BingoReportService.cs" />
     <Compile Include="Services\Implement\DailyWinLoss2h\CasinoReportService.cs" />
@@ -284,6 +286,7 @@
     <Compile Include="Services\Interface\CreditTerm\IInstallmentAmountExportExcelService.cs" />
     <Compile Include="Services\Interface\CreditTerm\IInstallmentAmountService.cs" />
     <Compile Include="Services\Interface\CreditTerm\ICreditTermExcelUtil.cs" />
+    <Compile Include="Services\Interface\DailyWinLoss2h\IBettradeService.cs" />
     <Compile Include="Services\Interface\DailyWinLoss2h\IMetricGamingService.cs" />
     <Compile Include="Services\Interface\IDailyWinLoss2hOtherSportsService.cs" />
     <Compile Include="Services\Interface\IDailyWinLoss2hService.cs" />

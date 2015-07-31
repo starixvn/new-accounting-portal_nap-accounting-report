@@ -104,6 +104,7 @@
 
     <Setting Key="Main_DailyWinLoss2h_GetParlayReport_WH" SpName="Acc_Rpt_DailyWLDirect_Parlay" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
     <Setting Key="Main_DailyWinLoss2h_GetMetricGamingBettypeReport_WH" SpName="Acc_Rpt_DailyWLDirect_MetricGaming" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetBettradeReport_WH" SpName="Acc_Rpt_DailyWLDirect_BetTrade_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
   </Function>
   <Function Name="Main Report - Daily Win Loss (2h) Soccer">
     <Setting Key="Main_DailyWinLoss2hSoccer_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer_Old_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />

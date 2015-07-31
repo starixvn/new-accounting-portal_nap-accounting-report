@@ -76,7 +76,8 @@ Main2hReport.prototype.RenderReport = function (report) {
                     sportWinLoss.Id == AccReportData.Constants.SportType.LiveCasino ||
                     sportWinLoss.Id == AccReportData.Constants.SportType.VirtualSports ||
                     sportWinLoss.Id == AccReportData.Constants.SportType.Keno ||
-                    isCasinoSport;
+                    isCasinoSport ||
+                    sportWinLoss.Id == AccReportData.Constants.SportType.Bettrade;
                 var len = sportWinLoss.ChildsInfo.length;
                 info = sportWinLoss.NormalTotal;
                 groupdId = tableId + "_Product" + product.Id + "_Sport" + sportWinLoss.Id;
@@ -518,6 +519,13 @@ Main2hReport.prototype.GetSportLink = function (winLossInfo) {
 
         case reportManager._2hSportConstant.metricGaming:
             sportLink = "<span class='report2h-link bold' onclick=\"showHideReportManager.ShowMetricGamingReport('" +
+                            winLossInfo.Id + "','" +
+                            winLossInfo.Name + "','" +
+                            reportManager.Main2hReport.Params.reportParams.Winlostdate + "'); return;\">" +
+                            winLossInfo.Name + '</span>';
+            break;
+        case AccReportData.Constants.SportType.Bettrade: //-2
+            sportLink = "<span class='report2h-link bold' onclick=\"showHideReportManager.ShowBettrade('" +
                             winLossInfo.Id + "','" +
                             winLossInfo.Name + "','" +
                             reportManager.Main2hReport.Params.reportParams.Winlostdate + "'); return;\">" +

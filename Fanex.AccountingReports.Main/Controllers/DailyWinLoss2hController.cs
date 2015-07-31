@@ -27,16 +27,18 @@ namespace Fanex.AccountingReports.Main.Controllers
     {
         private readonly IDailyWinLoss2hService _reportService;
         private readonly IMetricGamingService _metricGamingService;
+        private readonly IBettradeService _bettradeService;
 
         public DailyWinLoss2hController()
-            : this(null, null)
+            : this(null, null, null)
         {
         }
 
-        public DailyWinLoss2hController(IDailyWinLoss2hService reportService, IMetricGamingService metricGamingService)
+        public DailyWinLoss2hController(IDailyWinLoss2hService reportService, IMetricGamingService metricGamingService, IBettradeService bettradeService)
         {
             this._reportService = reportService ?? new DailyWinLoss2hService();
             this._metricGamingService = metricGamingService ?? new MetricGamingService();
+            this._bettradeService = bettradeService ?? new BettradeService();
         }
 
         [HttpGet]
@@ -240,6 +242,14 @@ namespace Fanex.AccountingReports.Main.Controllers
             return Json(report);
         }
 
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetBettradeReport(GetBettradeCriteria criteria)
+        {
+            var report = _bettradeService.GetBettradeReport(criteria);
+            return Json(report);
+        }
+
         //// ExportExcel
 
         public ActionResult ExportMain2hReport(GetMain2hReportCriteria criteria)
@@ -395,6 +405,12 @@ namespace Fanex.AccountingReports.Main.Controllers
         public ActionResult ExportLiveCasinoWinLossByProductReport(GetLiveCasinoWinLossByProductCriteria criteria)
         {
             this._reportService.ExportGetLiveCasinoWinLossByProductReport(criteria);
+            return new EmptyResult();
+        }
+
+        public ActionResult ExportBettradeReport(GetBettradeCriteria criteria)
+        {
+            this._bettradeService.ExportBettradeReport(criteria);
             return new EmptyResult();
         }
 

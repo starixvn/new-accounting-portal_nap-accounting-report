@@ -172,6 +172,11 @@ ShowHideReportManager = function () {
         self.CacheData.currentReport = reportManager.LiveCasinoWinLossByProductReport;
         self.ShowDrilldownReport(sportId, sportName, winLossDate);
     };
+
+    self.ShowBettrade = function (sportId, sportName, winLossDate) {
+        self.CacheData.currentReport = reportManager.Bettrade;
+        self.ShowDrilldownReport(sportId, sportName, winLossDate);
+    };
 };
 
 var showHideReportManager = new ShowHideReportManager();

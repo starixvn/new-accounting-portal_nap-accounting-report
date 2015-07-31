@@ -16,8 +16,7 @@
 
     self.Params = {
         reportParams: {
-            Winlostdate: null,
-            SubProduct: 'MG-SuperLive'
+            Winlostdate: null
         }
     };
 

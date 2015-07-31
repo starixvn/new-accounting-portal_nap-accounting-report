@@ -61,7 +61,8 @@ var AccReportData = {
             VirtualCycling: 185,
             Keno:202,
             SoccerMajorBetType: 1,
-            SoccerMinorBetType: 2
+            SoccerMinorBetType: 2,
+            Bettrade: -2
         },
 
         BetType: {

@@ -115,6 +115,24 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daily Win Loss 2h - Bettrade.
+        /// </summary>
+        public static string Daily_WinLoss2h_Bettrade_SheetName {
+            get {
+                return ResourceManager.GetString("Daily_WinLoss2h_Bettrade_SheetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MAIN &gt; BETTRADE PRODUCT WIN/LOSS REPORT.
+        /// </summary>
+        public static string DailyWinLoss2h_BettradeReport_Title {
+            get {
+                return ResourceManager.GetString("DailyWinLoss2h_BettradeReport_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Daily Win Loss - Bingo.
         /// </summary>
         public static string DailyWinLoss2h_BingoReport_SheetName {
