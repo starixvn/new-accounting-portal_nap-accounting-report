@@ -38,6 +38,8 @@ namespace Fanex.AccountingReports.Main.Common
         public const int WinLossSummaryBingoSportId = 252;
         public const int WinLossSummaryP2PSportId = 253;
 
+        public const int Bettrade = 903;
+
         public static readonly string MatchWinLoss2aSummaryReportByBetTypeSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.SummaryReportByBetType";
         public static readonly string MatchWinLoss2aSummaryReportBySportTypeSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.SummaryReportBySportType";
         public static readonly string MatchWinLoss2aDetailReportByBetTypeSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.DetailReportBetType";

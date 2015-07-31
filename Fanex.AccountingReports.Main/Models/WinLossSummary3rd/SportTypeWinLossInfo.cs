@@ -51,7 +51,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                     Id == SportContants.MetricGamingSuperLive ||
                     Id == SportContants.MicroGamingSuperLive ||
                     Id == SportContants.AGCasino ||
-                    Id == SportContants.Macau)
+                    Id == SportContants.Macau ||
+                    Id == SportContants.Bettrade)
                 {
                     return false;
                 }

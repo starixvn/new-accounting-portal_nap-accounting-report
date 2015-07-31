@@ -67,7 +67,7 @@ namespace Fanex.AccountingReports.Core.Constants
 
         public const int MetricGamingSuperLive = -1;
         public const int GoldDeluxe = 255;
-
+        public const int Bettrade = -2;
         public const int MicroGamingSuperLive = 203;
         public const int AGCasino = 250;
         public const int Macau = 249;

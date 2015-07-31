@@ -511,6 +511,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bettrade.
+        /// </summary>
+        public static string Bettrade {
+            get {
+                return ResourceManager.GetString("Bettrade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BetType.
         /// </summary>
         public static string Bettype {

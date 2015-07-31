@@ -1200,6 +1200,8 @@
   </data>
   <data name="AG_Casino" xml:space="preserve">
     <value>AG Casino</value>
+  <data name="Bettrade" xml:space="preserve">
+    <value>Bettrade</value>
   </data>
   <data name="Microgaming" xml:space="preserve">
     <value>Microgaming</value>
