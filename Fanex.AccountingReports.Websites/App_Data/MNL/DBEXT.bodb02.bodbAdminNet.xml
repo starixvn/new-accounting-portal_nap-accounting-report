@@ -40,11 +40,6 @@
   <Function Name="External - Daily Win Loss">
     <Setting Key="External_DailyWinLoss_GetReport" SpName="EAS_Rpt_WinLossDaily_Com14" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
-  <Function Name="Special - Check Bet">
-    <Setting Key="Special_CheckBet_GetReport" SpName="Acc_Rpt_CheckBet" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Special_CheckBet_GetReport_Normal" SpName="Acc_Rpt_CheckBet_Normal" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Special_CheckBet_GetReport_Reject" SpName="Acc_Rpt_CheckBet_Reject" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-  </Function>
   
   <Function Name="Balance - Master Balance">
     <Setting Key="Balance_MasterBalance_AgentDownline" SpName="Acc_Rpt_Balance_Agent" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"></Setting>

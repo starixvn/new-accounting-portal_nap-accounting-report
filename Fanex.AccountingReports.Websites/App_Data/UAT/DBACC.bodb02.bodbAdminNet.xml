@@ -27,14 +27,14 @@
   <Function Name="Special - Special Match Analysis">
     <Setting Key="Special_SpecialMatchAnalysis_GetLeagues" SpName="Acc_LeagueSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Special_SpecialMatchAnalysis_GetMatches" SpName="Acc_MatchSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetBetTypeByMatch" SpName="Acc_BettypeSelFromMatch" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetReportByCurrency" SpName="Acc_Rpt_MatchAnalysisByCurrency" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetReportByBetType" SpName="Acc_Rpt_MatchAnalysisByBettype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper" SpName="Acc_Rpt_MatchAnalysisBySuper" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetReportByMember" SpName="Acc_Rpt_MatchAnalysisByMember" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper_SAg" SpName="Acc_Rpt_MatchAnalysisBySuper_SAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper_MAg" SpName="Acc_Rpt_MatchAnalysisBySuper_MAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper_Ag" SpName="Acc_Rpt_MatchAnalysisBySuper_Ag" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetBetTypeByMatch" SpName="Acc_BettypeSelFromMatch_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetReportByCurrency" SpName="Acc_Rpt_MatchAnalysisByCurrency_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetReportByBetType" SpName="Acc_Rpt_MatchAnalysisByBettype_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper" SpName="Acc_Rpt_MatchAnalysisBySuper_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetReportByMember" SpName="Acc_Rpt_MatchAnalysisByMember_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper_SAg" SpName="Acc_Rpt_MatchAnalysisBySuper_SAg_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper_MAg" SpName="Acc_Rpt_MatchAnalysisBySuper_MAg_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper_Ag" SpName="Acc_Rpt_MatchAnalysisBySuper_Ag_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Win Loss - League Win Loss">
     <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLoss" SpName="Acc_Rpt_LeagueWL_Sporttype_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
@@ -233,8 +233,8 @@
   </Function>
 
   <Function Name="Special - Daily Turnover">
-    <Setting Key="Special_DailyTurnover_GetReport" SpName="Acc_Rpt_DailyTurnover" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_DailyTurnoverChangedDetail_GetReport" SpName="Acc_Rpt_DailyTurnover_ChangedDetail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Special_DailyTurnover_GetReport" SpName="Acc_Rpt_DailyTurnover_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Special_DailyTurnoverChangedDetail_GetReport" SpName="Acc_Rpt_DailyTurnover_ChangedDetail_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
 
   <Function Name="Main - Match Win Loss (2a)">
@@ -297,11 +297,6 @@
     <Setting Key="Main_DailyWinLoss2h_GetKenoReport_14" SpName="Acc_Rpt_DailyWLDirect_Keno_Bettype14" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Keno" SpName="Acc_Rpt_DailyWLDirect_Keno_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Keno_14" SpName="Acc_Rpt_DailyWLDirect_Keno_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" />
-  </Function>
-
-  <Function Name="Special - Daily Turnover">
-    <Setting Key="Special_DailyTurnover_GetReport" SpName="Acc_Rpt_DailyTurnover" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_DailyTurnoverChangedDetail_GetReport" SpName="Acc_Rpt_DailyTurnover_ChangedDetail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
 
   <Function Name="Licensee - Play tech casino win loss">
