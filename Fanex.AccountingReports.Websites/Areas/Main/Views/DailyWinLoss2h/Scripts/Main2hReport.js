@@ -336,7 +336,7 @@ Main2hReport.prototype.RenderReport = function (report) {
             });
 
             var reportNote = "* Virtual All Total: Soccer + Metric Gaming - Super Live + Other Sports + Parlay" +
-                             "<br/>* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing +  Bingo + P2P";
+                             "<br/>* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing +  Bingo + P2P + Bettrade";
             footerData.push({
                 Columns: [{
                     Name: "ColSportType",
