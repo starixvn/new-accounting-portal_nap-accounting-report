@@ -162,11 +162,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 {
                     case RowType._2hReportCredit:
                         winLoss.AliasName = Labels.Credit;
+                        bettradeWinLoss.CreditTotal.BettypeId = winLoss.BettypeId;
                         bettradeWinLoss.CreditTotal.Add(winLoss);
                         break;
 
                     case RowType._2hReportDeposit:
                         winLoss.AliasName = Labels.Deposit;
+                        bettradeWinLoss.DepositTotal.BettypeId = winLoss.BettypeId;
                         bettradeWinLoss.DepositTotal.Add(winLoss);
                         break;
                 }
@@ -194,7 +196,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 Commission = Converter.ToDecimal(data.Commission),
                 LineTotal = Converter.ToDecimal(data.LineTotal),
                 Turnover = Converter.ToDecimal(data.Turnover),
-                SiteType = Converter.ToInt(data.site)
+                SiteType = Converter.ToInt(data.site),
+                BettypeId = Converter.ToInt(data.bettype)
             };
         }
     }
