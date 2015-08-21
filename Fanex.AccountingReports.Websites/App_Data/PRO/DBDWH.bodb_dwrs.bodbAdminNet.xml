@@ -58,7 +58,7 @@
     <Setting Key="Main_DailyWinLoss2h_GetSummaryNumberGameReport_WH" SpName="Acc_Rpt_DailyWLDirect_NumberGame" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_DailyWinLoss2h_GetSummaryOtherSportReport_WH" SpName="Acc_Rpt_DailyWLDirect_OtherSport" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_DailyWinLoss2h_GetOtherSportReportBySport_WH" SpName="Acc_Rpt_DailyWLDirect_OtherSport_Bettype" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
-    <Setting Key="Main_DailyWinLoss2h_GetSoccerReport_WH" SpName="Acc_Rpt_DailyWLDirect_Soccer_Bettype" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_DailyWinLoss2h_GetSoccerReport_WH" SpName="Acc_Rpt_DailyWLDirect_Soccer_Bettype_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_DailyWinLoss2h_GetBingoReport_WH" SpName="Acc_Rpt_DailyWLDirect_Bingo" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_DailyWinLoss2h_GetVirtualSportReport_WH" SpName="Acc_Rpt_DailyWLDirect_VirtualSports_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetVirtualSportReportBySport_WH" SpName="Acc_Rpt_DailyWLDirect_VirtualSports_Bettype_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
