@@ -1,0 +1,2118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{025C9961-7A27-4E2A-9591-0227C61B6A13}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fanex.AccountingReports.Websites</RootNamespace>
+    <AssemblyName>Fanex.AccountingReports.Websites</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.3.1.7705, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="dotless.Core">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\dotless.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelUtil, Version=29.3.0.1000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\ExcelUtil.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.BetList.Core, Version=2.2.2.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.BetList.Core.2.2.5.1\lib\net40\Fanex.BetList.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.BetList.GoldDeluxe, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.BetList.Core.2.2.5.1\lib\net40\Fanex.BetList.GoldDeluxe.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Caching, Version=1.0.404.94, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data, Version=0.5.404.59, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Excel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Core, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Framework, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Nap.SSO">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Nap.SSO.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Result.Core, Version=2.0.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.0.7\lib\net40\Fanex.Result.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Result.Core.Base, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.0.7\lib\net40\Fanex.Result.Core.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Result.Core.GoldDeluxe, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Result.Core-GoldDeluxe.1.0.0.2\lib\net40\Fanex.Result.Core.GoldDeluxe.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Result.Core.Sportsbook, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Fanex.Result.Core-Sportsbook.1.0.0.3\lib\net40\Fanex.Result.Core.Sportsbook.dll</HintPath>
+    </Reference>
+    <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.File.1.0.0\lib\net40\IBCFile.dll</HintPath>
+    </Reference>
+    <Reference Include="IBCUtils">
+      <HintPath>..\_Dependencies\IBCUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.7.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.7.0\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="RemotingRef, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RemotingRef.1.0.0.2\lib\net40\RemotingRef.dll</HintPath>
+    </Reference>
+    <Reference Include="SPSRemoting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
+    </Reference>
+    <Reference Include="Sunplus.Core.Common">
+      <HintPath>..\packages\Sunplus.Core.Common.1.1.4505.19054\lib\net40\Sunplus.Core.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0-rc\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20505.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20505.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20505.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20505.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.0\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="TplCore, Version=1.0.4694.29951, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TplCore.1.0.4694.29951\lib\net40\TplCore.dll</HintPath>
+    </Reference>
+    <Reference Include="UMControllerLibrary">
+      <HintPath>..\_Dependencies\UM\UMControllerLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="App_Data\MNL\DBACC.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBACC.bodb_ACC.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBAGE.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\MNL\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBEXT.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBNAP.bodb_NAP.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBONUSER.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBRPT.bodb_Report.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBTXN.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBCUST.CustDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBCUST.IPDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBACC.bodb02.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\Dev\DBACC.bodb_ACC.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBAGE.bodb02.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\Dev\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\Dev\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBEXT.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBNAP.bodb_NAP.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBONUSER.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBRPT.bodb_Report.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBTXN.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBCUST.CustDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBCUST.IPDB.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\Local\DBONUSER.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBACC.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBACC.bodb_ACC.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBAGE.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\Master\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBEXT.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBNAP.bodb_NAP.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBONUSER.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBRPT.bodb_Report.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBTXN.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBCUST.CustDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBCUST.IPDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBACC.bodb02.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\Local\DBACC.bodb_ACC.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBAGE.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\Local\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBEXT.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBNAP.bodb_NAP.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBRPT.bodb_Report.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBTXN.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBCUST.CustDB.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\Local\DBCUST.IPDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBACC.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBACC.bodb_ACC.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBAGE.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\PRO\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBEXT.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBNAP.bodb_NAP.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBONUSER.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBRPT.bodb_Report.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBTXN.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBCUST.CustDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBCUST.IPDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBACC.bodb02.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\UAT\DBACC.bodb_ACC.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBAGE.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\UAT\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBEXT.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBNAP.bodb_NAP.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBONUSER.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBRPT.bodb_Report.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBTXN.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBCUST.CustDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBCUST.IPDB.bodbAdminNet.xml" />
+    <Content Include="App_Readme\Transformer.NET\LICENSE.txt" />
+    <Content Include="App_Readme\Transformer.NET\README.txt" />
+    <Content Include="Areas\Balance\Views\CompanyBalanceDifference\Index.cshtml" />
+    <Content Include="App_Browsers\ie.browser" />
+    <Content Include="App_Browsers\firefox.browser" />
+    <Content Include="Areas\Balance\Views\DirectBalance\DirectBalance.less" />
+    <Content Include="Areas\Balance\Views\SuperBalance\Scripts\SuperBalance.js" />
+    <Content Include="Areas\Balance\Views\SuperBalance\Scripts\SuperBalanceReportManager.js" />
+    <Content Include="Areas\Balance\Views\SuperBalance\Index.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Betlist\Views\BetlistReport\Scripts\BetListByRefNo.js" />
+    <Content Include="Areas\Betlist\Views\MemberBetListReport\Scripts\WinLossMemberBetList.js" />
+    <Content Include="Areas\Betlist\Views\MemberBetListReport\Styles\WinLossMemberBetList.css" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\BadmintonInfo.js" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\BaseballInfo.js" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\BasketballInfo.js" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\BillardInfo.js" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\CommonSportInfo.js" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\HockeySportInfo.js" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\NumberGameInfo.js" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\ScoreInfoManager.js" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\SoccerInfo.js" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\TennisInfo.js" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\VirtualSoccerInfo.js" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\Styles\Images\firstGoal.gif" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\Styles\Images\lastGoal.gif" />
+    <Content Include="Areas\Betlist\Views\Scripts\BetlistGlobal.js" />
+    <Content Include="Areas\Betlist\Views\Style\BetList.css" />
+    <Content Include="Areas\Betlist\Views\Style\Images\bgHeader.jpg" />
+    <Content Include="Areas\Betlist\Views\Style\Images\firstGoal.gif" />
+    <Content Include="Areas\Betlist\Views\Style\Images\green-star.gif" />
+    <Content Include="Areas\Betlist\Views\Style\Images\lastGoal.gif" />
+    <Content Include="Areas\Betlist\Views\Style\Images\loading.gif" />
+    <Content Include="Areas\Betlist\Views\Style\Images\q_Icon2_1.png" />
+    <Content Include="Areas\Betlist\Views\Style\Images\q_Icon_2.png" />
+    <Content Include="Areas\Gaming\Views\BingoOutStanding\Scripts\ReportManager.js" />
+    <Content Include="Areas\Gaming\Views\BingoStatistic\Scripts\ReportByAgent.js" />
+    <Content Include="Areas\Gaming\Views\BingoStatistic\Scripts\ReportByCompany.js" />
+    <Content Include="Areas\Gaming\Views\BingoStatistic\Scripts\ReportByCurrency.js" />
+    <Content Include="Areas\Gaming\Views\BingoStatistic\Scripts\ReportByDailyRange.js" />
+    <Content Include="Areas\Gaming\Views\BingoStatistic\Scripts\ReportByMonthlyRange.js" />
+    <Content Include="Areas\Gaming\Views\BingoStatistic\Scripts\ReportByUserName.js" />
+    <Content Include="Areas\Gaming\Views\BingoStatistic\Scripts\ReportManager.js" />
+    <Content Include="Areas\Gaming\Views\BingoWinLoss\Index.cshtml" />
+    <Content Include="Areas\Betlist\Views\BetlistReport\Index.cshtml" />
+    <Content Include="Areas\Betlist\Views\BetlistReport\_BetListByRefNo.cshtml" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\BadmintonInfo.cshtml" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\BaseballInfo.cshtml" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\BasketballInfo.cshtml" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\BillardInfo.cshtml" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\CommonSportInfo.cshtml" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\HockeySportInfo.cshtml" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\NumberGameInfo.cshtml" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\ScoreInformation.cshtml" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\SoccerInfo.cshtml" />
+    <Content Include="Areas\Betlist\Views\MemberBetListReport\Index.cshtml" />
+    <Content Include="Areas\Betlist\Views\MemberBetListReport\_WinLossMemberBetList.cshtml" />
+    <Content Include="Areas\Balance\Views\SuperBalance\SuperBalance.less" />
+    <Content Include="Areas\Betlist\Views\MemberBetListReport\_MixParlayDetail.cshtml" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\Styles\ScoreInformation.less" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\TennisInfo.cshtml" />
+    <Content Include="Areas\Betlist\Views\ScoreInformation\VirtualSoccerInfo.cshtml" />
+    <Content Include="Areas\Betlist\Views\Web.config" />
+    <Content Include="Areas\Betlist\Views\_AgentPTCom.cshtml" />
+    <Content Include="Areas\Betlist\Views\_MasterPTCom.cshtml" />
+    <Content Include="Areas\Betlist\Views\_MixParlayDetail.cshtml" />
+    <Content Include="Areas\Betlist\Views\_Odds.cshtml" />
+    <Content Include="Areas\Betlist\Views\_Status.cshtml" />
+    <Content Include="Areas\Betlist\Views\_SuperPTCom.cshtml" />
+    <Content Include="Areas\Betlist\Views\_VirtualHRPopup.cshtml" />
+    <Content Include="Areas\Betlist\Views\_VirtualTennisPopup.cshtml" />
+    <Content Include="Areas\Betlist\Views\_WinLoss.cshtml" />
+    <Content Include="Areas\Betlist\Views\_LicenseeWinLoss.cshtml" />
+    <Content Include="Areas\Betlist\Views\_StatusMember.cshtml" />
+    <Content Include="Areas\Betlist\Views\_CombinationMPDetail.cshtml" />
+    <Content Include="Areas\Gaming\Views\BingoOutStanding\Index.cshtml" />
+    <Content Include="Areas\Betlist\Views\_RacingToteWinLoss.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\Gaming\Views\BingoOutStanding\Styles\BingoOutStanding.less" />
+    <Content Include="Areas\Gaming\Views\BingoStatistic\Index.cshtml" />
+    <Content Include="Areas\Gaming\Views\BingoStatistic\Styles\BingoStatistic.less" />
+    <Content Include="Areas\Gaming\Views\BingoWinLoss\Styles\BingoWinLoss.less" />
+    <Content Include="Areas\Gaming\Views\CasinoWinLoss\Scripts\CasinoWinLoss.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent_AgentReport.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent_BaseReport.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent_MasterReport.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent_MemberReport.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent_SuperReport.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByDailyRange.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByGameTable.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByGameType.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByMonthlyRange.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByUserName.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportManager.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoGameFinancialReport\Index.cshtml" />
+    <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Index.cshtml" />
+    <Content Include="Areas\Gaming\Views\NumberGameFinancial\Index.cshtml" />
+    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Index.cshtml" />
+    <Content Include="Areas\Gaming\Views\CasinoWinLoss\Index.cshtml" />
+    <Content Include="Areas\Gaming\Views\CasinoWinLoss\Styles\CasinoWinLoss.less" />
+    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Styles\NumberGameWinLossByBetTypeMatch.less" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Index.cshtml" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Styles\LiveCasinoAgencyWinLoss.less" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Index.cshtml" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Styles\LiveCasinoGameStatistic.less" />
+    <Content Include="Areas\Gaming\Views\NumberGameWinLossByCurrency\Styles\NumberGameWinlossByCur.less" />
+    <Content Include="Areas\Gaming\Views\NumberGameWinlossByDate\Styles\NumberGameWinlossByDate.less" />
+    <Compile Include="Areas\UserControl\Controllers\UserController.cs" />
+    <Compile Include="Areas\UserControl\UserControlAreaRegistration.cs" />
+    <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
+    <Compile Include="Areas\UserLogin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\UserLogin\Controllers\SSOController.cs" />
+    <Compile Include="Areas\UserLogin\UserLoginAreaRegistration.cs" />
+    <Content Include="Areas\Gaming\Views\BingoWinLoss\Scripts\ReportManager.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoGameFinancialReport\Scripts\ReportManager.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoGameFinancialReport\Styles\LiveCasinoGameFinancialReport.css" />
+    <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Scripts\NumberGameMonthlyWinLoss.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameFinancial\Scripts\NumberGameFinancial.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByCompany.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByCurrency.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByDailyRange.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByGameTable.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByGameType.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByMonthlyRange.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByUserName.js" />
+    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportManager.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\ReportManager.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByBetType.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByBetTypeDetailReport.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByBetTypeMainReport.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByMatch.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByMatchDetailReport.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByMatchMainReport.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameWinLossByCurrency\Scripts\NumberGameWinlossByCur.js" />
+    <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Styles\Images\icon-search.png" />
+    <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Styles\NumberOfActiveMember.less" />
+    <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Scripts\NumberOfActiveMember.js" />
+    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Scripts\ReportManager.js" />
+    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Scripts\VirtualSportsWinLossDetail.js" />
+    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Scripts\VirtualSportsWinLoss.js" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\CopyLegend.js" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\GuideMan.js" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\GuideManMessage.js" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\InputedLegendManager.js" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\LegendManagement.js" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\UploadImagePopup.js" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\Styles\Images\image-up1.png" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\Styles\Images\SubTabHeadLineIcon-Collapse.png" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\Styles\Images\SubTabHeadLineIcon-Expand.png" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\Styles\Images\ui-bg_gloss-wave_75_2191c0_500x100.png" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\Styles\Images\upload-image-icon.png" />
+    <Content Include="Areas\Licensee\Views\AGCasinoWinloss\Scripts\Index.js" />
+    <Content Include="Areas\Licensee\Views\AGCasinoWinloss\Styles\Index.less" />
+    <Content Include="Areas\Licensee\Views\CompanyWinLoss\Scripts\Index.js" />
+    <Content Include="Areas\Licensee\Views\KenoWinLoss\Scripts\KenoWinLoss.js" />
+    <Content Include="Areas\Licensee\Views\PlaytechCasinoWinLoss\Scripts\PlaytechCasinoWinLoss.js" />
+    <Content Include="Areas\Licensee\Views\KenoWinLoss\Index.cshtml" />
+    <Content Include="Areas\Licensee\Views\KenoWinLoss\Styles\KenoWinLoss.less" />
+    <Content Include="Areas\Licensee\Views\PlaytechCasinoWinLoss\Styles\PlaytechCasinoWinLoss.less" />
+    <Content Include="Areas\LegendManagement\Views\Web.config" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\Index.cshtml" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\Styles\LegendManagement.less" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\Styles\UploadImagePopup.less" />
+    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Scripts\MasterReport.js" />
+    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Scripts\SuperReport.js" />
+    <Content Include="Areas\Main\Views\CreditTerm\Scripts\CreditTerm.js" />
+    <Content Include="Areas\Main\Views\CreditTerm\Scripts\InstallAmount.js" />
+    <Content Include="Areas\Main\Views\CreditTerm\Scripts\ReportManager.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\Main2hReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportReport_ByBetType.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportReport_BySportType.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportReport_Summary.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\ReportManager.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\ShowHideReportManager.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\WinLossBySite_BetType.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\ShowHideSiteTypeManager.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Styles\Images\icon-collpase.png" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Styles\Images\icon-expand.png" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\Scripts\Index.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\Main2hReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\ReportManager.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\ShowHideReportManager.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\SoccerReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\SoccerReport_ByBetType.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\SoccerReport_Summary.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\WinLossBySite_BetType.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\ShowHideSiteTypeManager.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Styles\Images\icon-collpase.png" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Styles\Images\icon-expand.png" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Index.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\BingoReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\CasinoReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\KenoReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\LiveCasinoWinLossByProductReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\MainLiveCasinoReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\LiveCasinoReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Main2hReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\MetricGamingReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\MixParlayReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\NumberGame\NumberGameReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\NumberGame\NumberGameReport_ByBetType.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\NumberGame\NumberGameReport_Summary.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportReport_ByBetType.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportReport_BySportType.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportReport_Summary.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\ParlayReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Racing\RacingReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Racing\RacingReport_BySportType.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Racing\RacingReport_Summary.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\ReportManager.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Racing\RacingReport_ByBetType.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\ShowHideReportManager.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\ShowHideSiteTypeManager.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Soccer\SoccerReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Soccer\SoccerReport_ByBetType.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Soccer\SoccerReport_Summary.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\SystemParlayReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\VirtualSports\VirtualSportsReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\VirtualSports\VirtualSportsReport_ByBetType.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\VirtualSports\VirtualSportsReport_BySportType.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\VirtualSports\VirtualSportsReport_Summary.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\VirtualSports\VirtualSports_VirtualHorseRacingReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\WinLossBySite_BetType.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Styles\Images\icon-collpase.png" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Styles\Images\icon-expand.png" />
+    <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\DetailReportByBetType.js" />
+    <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\DetailReportBySportsType.js" />
+    <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\ReportManager.js" />
+    <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\SummaryReportByBetType.js" />
+    <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\SummaryReportBySportType.js" />
+    <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\ThirdPartyDetailReport.js" />
+    <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Index.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\KenoReport.cshtml" />
+    <Content Include="Areas\Licensee\Views\PlaytechCasinoWinLoss\Index.cshtml" />
+    <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Styles\TraderPerformanceOtherSports.less" />
+    <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Scripts\TraderPerformanceOtherSports.js" />
+    <Content Include="Areas\Main\Views\TraderPerformanceSoccer\Scripts\TraderPerformanceSoccer.js" />
+    <Content Include="Areas\Main\Views\WinLossSummary3rd\Scripts\GameMatchDetails.js" />
+    <Content Include="Areas\Main\Views\WinLossSummary3rd\Scripts\ReportManager.js" />
+    <Content Include="Areas\Main\Views\WinLossSummary3rd\Scripts\WinLossSummary.js" />
+    <Content Include="Areas\Main\Views\WinLossSummary3rd\Styles\img\icn_view.png" />
+    <Content Include="Areas\Main\Views\WinLossSummary\Scripts\ReportManager.js" />
+    <Content Include="Areas\Misc\Views\AutoGeneratedReport\images\content_download_all_icon.png" />
+    <Content Include="Areas\Misc\Views\AutoGeneratedReport\images\excel-icon.png" />
+    <Content Include="Areas\Misc\Views\AutoGeneratedReport\Scripts\AutoGeneratedReport.js" />
+    <Content Include="Areas\Misc\Views\CreditMovement\Scripts\CreditMovement.js" />
+    <Content Include="Areas\Misc\Views\DuplicateTickets\DuplicateTickets.less" />
+    <Content Include="Areas\Misc\Views\DuplicateTickets\audio-player.js" />
+    <Content Include="Areas\Misc\Views\DuplicateTickets\Images\countdownCheck.png" />
+    <Content Include="Areas\Misc\Views\DuplicateTickets\Images\dropdown.png" />
+    <Content Include="Areas\Misc\Views\DuplicateTickets\Images\refresh.png" />
+    <Content Include="Areas\Misc\Views\DuplicateTickets\Media\big_ben.mp3" />
+    <Content Include="Areas\Misc\Views\DuplicateTickets\Media\koekoeksklok.mp3" />
+    <Content Include="Areas\Misc\Views\DuplicateTickets\player.swf" />
+    <Content Include="Areas\Misc\Views\MAMonitorTool\Scripts\BaseReport.js" />
+    <Content Include="Areas\Misc\Views\MAMonitorTool\Scripts\HistoryReport.js" />
+    <Content Include="Areas\Misc\Views\MAMonitorTool\Scripts\NormalReport.js" />
+    <Content Include="Areas\Misc\Views\MAMonitorTool\Scripts\ReportManager.js" />
+    <Content Include="Areas\Misc\Views\SMATurnover\Scripts\SMATurnover.js" />
+    <Content Include="Areas\Misc\Views\SMATurnover\Styles\SMATurnover.less" />
+    <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Scripts\ReportManager.js" />
+    <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Scripts\StatusDetail.js" />
+    <Content Include="Areas\Racing\Views\GreyhoundAUSTote\Styles\img\help.png" />
+    <Content Include="Areas\Racing\Views\HarnessAUSTote\Styles\img\help.png" />
+    <Content Include="Areas\Racing\Views\RacingGroupDaily\Scripts\RacingGroupDaily.js" />
+    <Content Include="Areas\Racing\Views\GreyhoundAUSTote\Scripts\ReportManager.js" />
+    <Content Include="Areas\Special\Views\DailyTurnover\Scripts\DailyTurnover.js" />
+    <Content Include="Areas\Racing\Views\GreyhoundAUSTote\Scripts\GreyhoundAUSToteBetlist.js" />
+    <Content Include="Areas\Racing\Views\GreyhoundAUSTote\Scripts\GreyhoundAUSToteDetail.js" />
+    <Content Include="Areas\Racing\Views\GreyhoundAUSTote\Scripts\GreyhoundAUSToteMain.js" />
+    <Content Include="Areas\Racing\Views\GreyhoundAUSTote\Styles\GreyhoundAUSTote.less" />
+    <Content Include="Areas\Racing\Views\HarnessAUSTote\Scripts\ReportManager.js" />
+    <Content Include="Areas\Racing\Views\HarnessAUSTote\Scripts\HarnessAUSToteBetlist.js" />
+    <Content Include="Areas\Racing\Views\HarnessAUSTote\Scripts\HarnessAUSToteDetail.js" />
+    <Content Include="Areas\Racing\Views\HarnessAUSTote\Scripts\HarnessAUSToteMain.js" />
+    <Content Include="Areas\Racing\Views\HarnessAUSTote\Styles\HarnessAUSTote.less" />
+    <Content Include="Areas\Racing\Views\RacingAUSTote\Scripts\RacingAUSToteBetlist.js" />
+    <Content Include="Areas\Racing\Views\RacingAUSTote\Scripts\RacingAUSToteDetail.js" />
+    <Content Include="Areas\Racing\Views\RacingAUSTote\Scripts\RacingAUSToteMain.js" />
+    <Content Include="Areas\Racing\Views\RacingAUSTote\Scripts\ReportManager.js" />
+    <Content Include="Areas\Racing\Views\RacingAUSTote\Styles\img\help.png" />
+    <Content Include="Areas\Racing\Views\RacingSATote\Scripts\RacingSAToteBetlist.js" />
+    <Content Include="Areas\Racing\Views\RacingSATote\Scripts\RacingSAToteDetail.js" />
+    <Content Include="Areas\Racing\Views\RacingSATote\Scripts\ReportManager.js" />
+    <Content Include="Areas\Racing\Views\RacingSATote\Scripts\RacingSAToteMain.js" />
+    <Content Include="Areas\Racing\Views\RacingSATote\Styles\img\help.png" />
+    <Content Include="Areas\Racing\Views\RacingUKTote\Scripts\RacingUKToteBetlist.js" />
+    <Content Include="Areas\Racing\Views\RacingUKTote\Scripts\RacingUKToteDetail.js" />
+    <Content Include="Areas\Racing\Views\RacingUKTote\Scripts\RacingUKToteMain.js" />
+    <Content Include="Areas\Racing\Views\RacingUKTote\Scripts\ReportManager.js" />
+    <Content Include="Areas\Racing\Views\RacingUKTote\Styles\img\help.png" />
+    <Content Include="Areas\Special\Views\MarginReport\Scripts\MarginReport.js" />
+    <Content Include="Areas\Racing\Views\NumberOfActiveMembersForRacing\Scripts\NumberOfActiveMembers.js" />
+    <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Scripts\RacingDailyReport.js" />
+    <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Scripts\RacingDailyReportApply50Percent.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Images\setting.png" />
+    <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Scripts\ReportManager.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\DatepickerManager.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\ReportManager.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterBetCountByUser.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterBetCount_ByLeague_BetType.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterBetCount_ByLeague_SportType.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterBetCount_ByLeague_User.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterBetCount_ByUser_BetType.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterBetCount_ByUser_SportType.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterByUser.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterIPByUser.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunter_ByLeague.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunter_ByLeague_BetType.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunter_ByLeague_SportType.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunter_ByLeague_User.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunter_ByUser_BetType.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunter_ByUser_SportType.js" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\WeekPickerManager.js" />
+    <Content Include="Areas\Special\Views\SaveBetReport\Images\download.png" />
+    <Content Include="Areas\Special\Views\ReportingServices\Images\excel.gif" />
+    <Content Include="Areas\Special\Views\ReportingServices\Images\excel.png" />
+    <Content Include="Areas\Special\Views\SMATurnover\Scripts\SMATurnover.js" />
+    <Content Include="Areas\Special\Views\SMATurnover\Styles\SMATurnover.less" />
+    <Content Include="Areas\Special\Views\ReportingServices\Images\folder.gif" />
+    <Content Include="Areas\Special\Views\ReportingServices\Scripts\ReportingServices.js" />
+    <Content Include="Areas\Special\Views\SaveBetReport\Styles\SaveBetReport.less" />
+    <Content Include="Areas\Special\Views\ReportingServices\Styles\ReportingServices.less" />
+    <Content Include="Areas\Special\Views\SaveBetReport\Scripts\SaveBetReport.js" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\MatchAnalysisBaseReport.js" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\MatchAnalysisByAgent.js" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\MatchAnalysisByMaster.js" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\MatchAnalysisByMember.js" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\MatchAnalysisManager.js" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\MatchAnalysisNormal.js" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\MatchSelection.js" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\ReportManager.js" />
+    <Content Include="Areas\Misc\Views\TotalCreditAccountByProduct\Scripts\TotalCreditAccountByProduct.js" />
+    <Content Include="Areas\Uncategorized\IMS\ims.js" />
+    <Content Include="Areas\Uncategorized\ReportLegend\FanexLegend.js" />
+    <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon.png" />
+    <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon2-hover.png" />
+    <Content Include="Areas\UserLogin\scripts\lib\CryptoJS.js" />
+    <Content Include="Areas\WinLoss\Views\AllCustomerTurnOver\Scripts\AllCustomerTurnOver.js" />
+    <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon2.png" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\AdvanceMixParlayReport.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\CombinationWinLoss.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\CombinationWinLoss_HistoryReport.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\HistoryReportManager.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\MixParlayPopupManager.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\NormalMixParlayReport.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\ReportManager.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\WinLossByProduct.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\WinLossByProduct_HistoryReport.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\AdvanceMixParlayReport.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\CombinationWinLoss.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\CombinationWinLoss_HistoryReport.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\HistoryReportManager.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\MixParlayPopupManager.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\NormalMixParlayReport.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\ReportManager.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\WinLossByProduct.js" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\WinLossByProduct_HistoryReport.js" />
+    <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLossByBetType.js" />
+    <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\ReportManager.js" />
+    <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLossBySport.js" />
+    <Compile Include="Controllers\DownloadReportController.cs" />
+    <Compile Include="Controllers\HomeController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Areas\WinLoss\Views\MatchWinLossByBettype\Scripts\MatchWinLossByBettype.js" />
+    <Content Include="Areas\WinLoss\Views\MatchWinLossSingleBet\Scripts\MatchWinLossSingleBet.js" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\Scripts\ReportManager.js" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\Scripts\TreeWinLoss.js" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\Scripts\TreeWinLossByAgent.js" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\Scripts\TreeWinLossByComm.js" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\Scripts\TreeWinLossByMaster.js" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\Scripts\TreeWinLossBySuper.js" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\Scripts\VirtualRateHistory.js" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\Styles\TreeWinLoss.less" />
+    <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
+    <Content Include="Content\Fanex.Result\fanex.result-customized.css" />
+    <Content Include="Content\Fanex.Result\fanex.result.css" />
+    <Content Include="Content\Fanex.Result\images\goal-icon.png" />
+    <Content Include="proxy.html" />
+    <Content Include="scripts\ReCheckIn.js" />
+    <Content Include="scripts\_lib\Autocomplete\jquery.autocomplete.js" />
+    <Content Include="scripts\_lib\Autocomplete\jquery.autocomplete.min.js" />
+    <Content Include="scripts\_lib\Autocomplete\shadow.png" />
+    <Content Include="scripts\_lib\Autocomplete\styles.css" />
+    <Content Include="scripts\_lib\CrossdomainAjax\jquery.xdomainajax.js" />
+    <Content Include="scripts\_lib\crossdomainiframe\porthole.js" />
+    <Content Include="scripts\_lib\crossdomainiframe\porthole.min.js" />
+    <Content Include="scripts\_lib\crossdomainiframe\proxy.html" />
+    <Content Include="scripts\_lib\CustomScrollbar\aplweb.scrollbars.js" />
+    <Content Include="scripts\_lib\CustomScrollbar\jquery.ba-resize.js" />
+    <Content Include="scripts\_lib\CustomScrollbar\jquery.event.drag-2.0.js" />
+    <Content Include="scripts\_lib\CustomScrollbar\jquery.mousewheel.js" />
+    <Content Include="scripts\_lib\CustomScrollbar\mousehold.js" />
+    <Content Include="scripts\_lib\CustomScrollbar\Styles\scrollbars-black.css" />
+    <Content Include="scripts\_lib\CustomScrollbar\Styles\scrollbars-custom.css" />
+    <Content Include="scripts\_lib\CustomScrollbar\Styles\scrollbars-itunes.css" />
+    <Content Include="scripts\_lib\CustomScrollbar\Styles\scrollbars.css" />
+    <Content Include="scripts\_lib\Fanex.Grid\Fanex.Pagination.css" />
+    <Content Include="scripts\_lib\Fanex.Grid\Fanex.Pagination.js" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\go-hover-icon.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\icon_page.gif" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\seperations.png" />
+    <Content Include="scripts\_lib\FileUpload\ajaxFileUpload.js" />
+    <Content Include="scripts\_lib\jquery.fileDownload.js" />
+    <Content Include="scripts\_lib\NumericTextBox\jquery.caret.1.02.js" />
+    <Content Include="scripts\_lib\NumericTextBox\jquery.formattyping.js" />
+    <Content Include="scripts\_lib\jquery.stringformat.js" />
+    <Content Include="scripts\_lib\msgbox\images\alert.png" />
+    <Content Include="scripts\_lib\msgbox\images\btn-close.png" />
+    <Content Include="scripts\_lib\msgbox\images\confirm.png" />
+    <Content Include="scripts\_lib\msgbox\images\error.png" />
+    <Content Include="scripts\_lib\msgbox\images\info.png" />
+    <Content Include="scripts\_lib\msgbox\images\question.png" />
+    <Content Include="scripts\_lib\msgbox\msgbox-0.0.1.css" />
+    <Content Include="scripts\_lib\msgbox\msgbox-0.0.1.js" />
+    <Content Include="scripts\_lib\msgbox\msgbox-0.0.1.min.css" />
+    <Content Include="scripts\_lib\msgbox\msgbox-0.0.1.min.js" />
+    <Content Include="scripts\_lib\MultipleSelect\jquery.multiselect.nlevel.js" />
+    <Content Include="scripts\_lib\MultipleSelect\jquery.multiselect.nlevel1.js" />
+    <Content Include="scripts\_lib\NumericTextBox\jquery.caret.1.02.js" />
+    <Content Include="scripts\_lib\NumericTextBox\jquery.setcaretposition.js" />
+    <Content Include="scripts\_lib\NumericTextBox\jquery.formattyping.js" />
+    <Content Include="scripts\_lib\NumericTextBox\jquery.setcaretposition.js" />
+    <Content Include="scripts\_lib\TinyMCE\ajax.upload.js" />
+    <Content Include="scripts\_lib\TinyMCE\changelog.txt" />
+    <Content Include="scripts\_lib\TinyMCE\jquery.tinymce.js" />
+    <Content Include="scripts\_lib\TinyMCE\langs\en.js" />
+    <Content Include="scripts\_lib\TinyMCE\license.txt" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advhr\css\advhr.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advhr\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advhr\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advhr\js\rule.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advhr\langs\en_dlg.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advhr\rule.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advimage\css\advimage.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advimage\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advimage\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advimage\image.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advimage\img\sample.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advimage\js\image.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advimage\langs\en_dlg.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advlink\css\advlink.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advlink\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advlink\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advlink\js\advlink.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advlink\langs\en_dlg.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advlink\link.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advlist\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\advlist\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\autoresize\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\autoresize\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\autosave\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\autosave\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\autosave\langs\en.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\bbcode\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\bbcode\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\contextmenu\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\contextmenu\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\directionality\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\directionality\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\emotions.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-cool.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-cry.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-embarassed.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-foot-in-mouth.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-frown.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-innocent.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-kiss.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-laughing.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-money-mouth.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-sealed.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-smile.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-surprised.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-tongue-out.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-undecided.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-wink.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\img\smiley-yell.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\js\emotions.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\emotions\langs\en_dlg.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\example\dialog.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\example\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\example\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\example\img\example.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\example\js\dialog.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\example\langs\en.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\example\langs\en_dlg.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\fullpage\css\fullpage.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\fullpage\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\fullpage\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\fullpage\fullpage.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\fullpage\js\fullpage.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\fullpage\langs\en_dlg.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\fullscreen\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\fullscreen\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\fullscreen\fullscreen.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\iespell\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\iespell\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\inlinepopups\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\inlinepopups\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\inlinepopups\skins\clearlooks2\img\alert.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\inlinepopups\skins\clearlooks2\img\button.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\inlinepopups\skins\clearlooks2\img\buttons.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\inlinepopups\skins\clearlooks2\img\confirm.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\inlinepopups\skins\clearlooks2\img\corners.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\inlinepopups\skins\clearlooks2\img\horizontal.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\inlinepopups\skins\clearlooks2\img\vertical.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\inlinepopups\skins\clearlooks2\window.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\inlinepopups\template.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\insertdatetime\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\insertdatetime\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\layer\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\layer\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\legacyoutput\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\legacyoutput\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\css\content.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\css\media.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\img\flash.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\img\flv_player.swf" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\img\quicktime.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\img\realmedia.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\img\shockwave.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\img\trans.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\img\windowsmedia.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\js\embed.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\js\media.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\langs\en_dlg.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\media\media.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\nonbreaking\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\nonbreaking\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\noneditable\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\noneditable\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\pagebreak\css\content.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\pagebreak\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\pagebreak\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\pagebreak\img\pagebreak.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\pagebreak\img\trans.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\paste\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\paste\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\paste\js\pastetext.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\paste\js\pasteword.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\paste\langs\en_dlg.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\paste\pastetext.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\paste\pasteword.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\preview\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\preview\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\preview\example.html" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\preview\jscripts\embed.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\preview\preview.html" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\print\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\print\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\save\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\save\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\searchreplace\css\searchreplace.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\searchreplace\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\searchreplace\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\searchreplace\js\searchreplace.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\searchreplace\langs\en_dlg.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\searchreplace\searchreplace.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\spellchecker\css\content.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\spellchecker\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\spellchecker\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\spellchecker\img\wline.gif" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\style\css\props.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\style\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\style\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\style\js\props.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\style\langs\en_dlg.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\style\props.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\tabfocus\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\tabfocus\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\table\cell.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\table\css\cell.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\table\css\row.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\table\css\table.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\table\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\table\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\table\js\cell.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\table\js\merge_cells.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\table\js\row.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\table\js\table.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\table\langs\en_dlg.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\table\merge_cells.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\table\row.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\table\table.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\template\blank.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\template\css\template.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\template\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\template\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\template\js\template.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\template\langs\en_dlg.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\template\template.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\visualchars\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\visualchars\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\wordcount\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\wordcount\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\abbr.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\acronym.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\attributes.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\cite.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\css\attributes.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\css\popup.css" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\del.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\editor_plugin.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\editor_plugin_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\ins.htm" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\js\abbr.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\js\acronym.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\js\attributes.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\js\cite.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\js\del.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\js\element_common.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\js\ins.js" />
+    <Content Include="scripts\_lib\TinyMCE\plugins\xhtmlxtras\langs\en_dlg.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\about.htm" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\anchor.htm" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\charmap.htm" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\color_picker.htm" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\editor_template.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\editor_template_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\image.htm" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\img\colorpicker.jpg" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\img\icons.gif" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\js\about.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\js\anchor.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\js\charmap.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\js\color_picker.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\js\image.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\js\link.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\js\source_editor.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\langs\en.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\langs\en_dlg.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\link.htm" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\default\content.css" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\default\dialog.css" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\default\img\buttons.png" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\default\img\items.gif" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\default\img\menu_arrow.gif" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\default\img\menu_check.gif" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\default\img\progress.gif" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\default\img\tabs.gif" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\default\ui.css" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\o2k7\content.css" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\o2k7\dialog.css" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\o2k7\img\button_bg.png" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\o2k7\img\button_bg_black.png" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\o2k7\img\button_bg_silver.png" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\o2k7\ui.css" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\o2k7\ui_black.css" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\skins\o2k7\ui_silver.css" />
+    <Content Include="scripts\_lib\TinyMCE\themes\advanced\source_editor.htm" />
+    <Content Include="scripts\_lib\TinyMCE\themes\simple\editor_template.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\simple\editor_template_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\simple\img\icons.gif" />
+    <Content Include="scripts\_lib\TinyMCE\themes\simple\langs\en.js" />
+    <Content Include="scripts\_lib\TinyMCE\themes\simple\skins\default\content.css" />
+    <Content Include="scripts\_lib\TinyMCE\themes\simple\skins\default\ui.css" />
+    <Content Include="scripts\_lib\TinyMCE\themes\simple\skins\o2k7\content.css" />
+    <Content Include="scripts\_lib\TinyMCE\themes\simple\skins\o2k7\img\button_bg.png" />
+    <Content Include="scripts\_lib\TinyMCE\themes\simple\skins\o2k7\ui.css" />
+    <Content Include="scripts\_lib\TinyMCE\tiny_mce.js" />
+    <Content Include="scripts\_lib\TinyMCE\tiny_mce_popup.js" />
+    <Content Include="scripts\_lib\TinyMCE\tiny_mce_src.js" />
+    <Content Include="scripts\_lib\TinyMCE\utils\editable_selects.js" />
+    <Content Include="scripts\_lib\TinyMCE\utils\form_utils.js" />
+    <Content Include="scripts\_lib\TinyMCE\utils\mctabs.js" />
+    <Content Include="scripts\_lib\TinyMCE\utils\validate.js" />
+    <Content Include="test.htm" />
+    <Content Include="themes\base\img\collapse-icon.png" />
+    <Content Include="themes\base\img\excel-icon.png" />
+    <Content Include="themes\base\img\expand-icon.png" />
+    <Content Include="themes\base\img\icn-collpase.png" />
+    <Content Include="themes\base\img\icn-expand.png" />
+    <Content Include="Areas\UserLogin\Views\Common\Images\AccReport_banner.png" />
+    <Content Include="Areas\UserLogin\Views\Common\Images\notice.png" />
+    <Content Include="Areas\UserLogin\Views\Common\Images\notice32.png" />
+    <Content Include="Areas\UserLogin\Views\Common\Style\expirednotification.less" />
+    <Content Include="Views\Errors\Error404.htm" />
+    <Content Include="Views\Errors\GeneralError.htm" />
+    <Content Include="Web.Configuration\RMSection.config" />
+    <Content Include="Web.Configuration\MAMonitorSection.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Configuration\VirtualSportsWinLossSection.config" />
+    <Content Include="Web.Configuration\LegendSection.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Configuration\RacingSection.config" />
+    <Content Include="Web.Configuration\SMAsTurnoverSection.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Configuration\TotalCreditAccountByProductSection.config" />
+    <Content Include="Web.Configuration\RacingSection.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Balance\Views\CompanyBalanceDifference\Scripts\CompanyBalanceDifference.js" />
+    <Content Include="Areas\Balance\Views\DirectBalance\Scripts\DirectBalance.js" />
+    <Content Include="Areas\Balance\Views\DirectBalance\Scripts\DirectBalanceDownline.js" />
+    <Content Include="Areas\Balance\Views\DirectBalance\Scripts\ReportManager.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameWinlossByDate\Scripts\NumberGameWinlossByDate.js" />
+    <Content Include="Areas\Licensee\Views\LiveCasinoWinLoss\LiveCasinoWinLoss.js" />
+    <Content Include="Areas\Licensee\Views\NegativeBalance\NegativeBalance.js" />
+    <Content Include="Areas\Licensee\Views\NumberGameWinLoss\NumberGameWinLoss.js" />
+    <Content Include="Areas\Licensee\Views\PeakConcurrentUsers\PeakConcurrentUser.js" />
+    <Content Include="Areas\Licensee\Views\TotalTransactions\ReportManager.js" />
+    <Content Include="Areas\Licensee\Views\TotalTransactions\TotalTransactions.js" />
+    <Content Include="Areas\Licensee\Views\VirtualSportWinLoss\VirtualSportWinLoss.js" />
+    <Content Include="Areas\Licensee\Views\Web.config" />
+    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Scripts\AgentReport.js" />
+    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Scripts\BaseReport.js" />
+    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Scripts\CurrencyReport.js" />
+    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Scripts\MemberReport.js" />
+    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Scripts\ReportManager.js" />
+    <Content Include="Areas\Misc\Views\BetCount\Scripts\BaseReport.js" />
+    <Content Include="Areas\Misc\Views\CreditSitesBetCounts\CreditSitesBetCounts.js" />
+    <Content Include="Areas\Misc\Views\DailyCreatedCustomers\DailyCreatedCustomers.js" />
+    <Content Include="Areas\Misc\Views\DailyCreatedCustomers\DailyCreatedCustomersDetails.js" />
+    <Content Include="Areas\Misc\Views\DailyCreatedCustomers\ReportManager.js" />
+    <Content Include="Areas\Misc\Views\DuplicateTickets\DuplicateTickets.js" />
+    <Content Include="Areas\Special\Views\CheckBet\Scripts\RejectChangedTickets.js" />
+    <Content Include="Areas\Special\Views\CheckBet\Scripts\NormalChangedTickets.js" />
+    <Content Include="Areas\Special\Views\CheckBet\Scripts\ReportManager.js" />
+    <Content Include="Areas\Special\Views\ParlayWon\Scripts\ReportManager.js" />
+    <Content Include="Areas\Test\Views\ExternalReport\ExternalReportRazor.js" />
+    <Content Include="Areas\Misc\Views\BetCount\Scripts\ReportManager.js" />
+    <Content Include="Areas\Misc\Views\BetCount\Scripts\HistoryReport.js" />
+    <Content Include="Areas\Misc\Views\BetCount\Scripts\NormalReport.js" />
+    <Content Include="Areas\Special\Views\CheckBet\Scripts\CheckBet.js" />
+    <Content Include="Areas\Test\Views\ExternalReport\ExternalReport.js" />
+    <Content Include="Areas\Test\Views\Grid\Scripts\Fanex.Grid.0.1.js" />
+    <Content Include="Areas\Test\Views\Grid\Styles\Fanex.Grid.css" />
+    <Content Include="Areas\Test\Views\Grid\Styles\images\collapse-small.png" />
+    <Content Include="Areas\Test\Views\Grid\Styles\images\expand-small.png" />
+    <Content Include="Areas\Test\Views\Grid\Styles\images\sort-icon.png" />
+    <Content Include="Areas\UserLogin\scripts\lib\jquery-1.8.0.min.js" />
+    <Content Include="Areas\UserLogin\scripts\Plugin\jquery-1.6.2.js" />
+    <Content Include="Areas\UserLogin\scripts\ReCheckIn.js" />
+    <Content Include="Areas\UserLogin\themes\Copy of login.css" />
+    <Content Include="Areas\UserLogin\themes\img\auth-bg.png" />
+    <Content Include="Areas\UserLogin\themes\img\bg.png" />
+    <Content Include="Areas\UserLogin\themes\img\bkg-pat.png" />
+    <Content Include="Areas\UserLogin\themes\img\firefox_original.png" />
+    <Content Include="Areas\UserLogin\themes\img\header_bg.jpg" />
+    <Content Include="Areas\UserLogin\themes\img\ie.png" />
+    <Content Include="Areas\UserLogin\themes\img\lock.png" />
+    <Content Include="Areas\UserLogin\themes\img\logo.png" />
+    <Content Include="Areas\UserLogin\themes\img\password.png" />
+    <Content Include="Areas\UserLogin\themes\img\pattern.png" />
+    <Content Include="Areas\UserLogin\themes\img\title-bg.jpg" />
+    <Content Include="Areas\UserLogin\themes\img\username.png" />
+    <Content Include="Areas\UserLogin\themes\img\warn.png" />
+    <Content Include="Areas\UserLogin\themes\img\welcome.png" />
+    <Content Include="Areas\UserLogin\themes\img\welcome2.png" />
+    <Content Include="Areas\UserLogin\themes\login.css" />
+    <Content Include="Areas\UserLogin\Views\Common\Style\AccessDenied.css" />
+    <Content Include="Areas\UserLogin\Views\Common\Style\Images\accessDenied.gif" />
+    <Content Include="Areas\UserLogin\Views\Common\Style\Images\UnderMaintenance.gif" />
+    <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLoss.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="scripts\NapAccReports.js" />
+    <Content Include="scripts\_lib\BlockUI\jquery.blockUI.1.33.min.js" />
+    <Content Include="scripts\_lib\classList.js" />
+    <Content Include="scripts\_lib\Fanex.Grid\Fanex.Grid.js" />
+    <Content Include="scripts\_lib\Fanex.Grid\Fanex.Grid.css" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\1350530947_page_excel.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\ajax-loader.gif" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\back-icon.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\bgtitle.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\bg_gloss_wave.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\collapse-icon.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\collapse-small.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\email.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\excel-icon.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\expand-icon.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\expand-small.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\icn_add.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\icn_del.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\icn_edit.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\refresh_icon.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\report_check.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\send-mail.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\setting.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\sort-icon-new.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\sort-icon-new1.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\sort-icon-new3.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\sort-icon.png" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\sorting_asc.gif" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\sorting_bg.gif" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\sorting_desc.gif" />
+    <Content Include="scripts\_lib\Fanex.Grid\images\white-top-bottom.gif" />
+    <Content Include="scripts\_lib\GridScroller\images\back-icon.png" />
+    <Content Include="scripts\_lib\GridScroller\images\expand-icon.png" />
+    <Content Include="scripts\_lib\GridScroller\images\excel-icon.png" />
+    <Content Include="scripts\_lib\GridScroller\images\send-mail.png" />
+    <Content Include="scripts\_lib\GridScroller\images\sort-icon.png" />
+    <Content Include="scripts\_lib\GridScroller\jquery.gridscroller.1.1.js" />
+    <Content Include="scripts\_lib\jquery.cookie.js" />
+    <Content Include="scripts\_lib\jquery.fixedsortable.js" />
+    <Content Include="scripts\_lib\MonthPicker\images\dropdown-icon.png" />
+    <Content Include="scripts\_lib\MultipleSelect\images\sprites.png" />
+    <Content Include="scripts\_lib\MultipleSelect\jquery.multiselect.min.js" />
+    <Content Include="scripts\_lib\Namespace.js" />
+    <Content Include="scripts\_lib\Pager\go-hover-icon.png" />
+    <Content Include="scripts\_lib\Pager\icon_page.gif" />
+    <Content Include="scripts\_lib\Pager\jpager.js" />
+    <Content Include="scripts\_lib\Pager\pagination.css" />
+    <Content Include="scripts\_lib\Pager\seperations.png" />
+    <Content Include="scripts\_lib\PopUp\dialogbox.js" />
+    <Content Include="scripts\_lib\TemplateRender\doT\doT.js" />
+    <Content Include="scripts\_lib\TemplateRender\doT\doT.min.js" />
+    <Content Include="scripts\_lib\Tooltip\jquery.tipsy.min.js" />
+    <Content Include="scripts\_lib\Tooltip\Demo.htm" />
+    <Content Include="scripts\_lib\Tooltip\jquery.tipsy.js" />
+    <Content Include="scripts\_lib\Tooltip\tipsy.css" />
+    <Content Include="scripts\_lib\Utils\jquery.fixBugsBrowser.js" />
+    <Content Include="themes\accounting-site5_02.jpg" />
+    <Content Include="themes\base\img\favorite-icon.png" />
+    <Content Include="themes\base\img\information-icon.png" />
+    <Content Include="themes\base\img\Controls.png" />
+    <Content Include="themes\base\img\info-square-blue.png" />
+    <Content Include="themes\base\img\information-icon2.png" />
+    <Content Include="themes\base\img\info_blue.png" />
+    <Content Include="themes\base\img\loading.gif" />
+    <Content Include="scripts\_lib\BlockUI\jquery.blockUI.1.33.js" />
+    <Content Include="scripts\_lib\DatePicker\Demo.htm" />
+    <Content Include="scripts\_lib\DatePicker\images\icon-calendar.png" />
+    <Content Include="scripts\_lib\DatePicker\jquery.nexDatePicker.css" />
+    <Content Include="scripts\_lib\DatePicker\jquery.nexDatePicker.js" />
+    <Content Include="scripts\_lib\FormatLibs\DateTimeFormat\moment.js" />
+    <Content Include="scripts\_lib\FormatLibs\DateTimeFormat\moment.min.js" />
+    <Content Include="scripts\_lib\GridScroller\images\collapse-icon.png" />
+    <Content Include="scripts\_lib\jquery-ui-1.9.1.js" />
+    <Content Include="scripts\_lib\jquery-ui-1.9.1.min.js" />
+    <Content Include="themes\base\img\icon-calendar.png" />
+    <Content Include="scripts\_lib\GridScroller\gridscroller.css" />
+    <Content Include="scripts\_lib\GridScroller\images\1350530947_page_excel.png" />
+    <Content Include="scripts\_lib\GridScroller\images\ajax-loader.gif" />
+    <Content Include="scripts\_lib\GridScroller\images\bgtitle.png" />
+    <Content Include="scripts\_lib\GridScroller\images\bg_gloss_wave.png" />
+    <Content Include="scripts\_lib\GridScroller\images\collapse-small.png" />
+    <Content Include="scripts\_lib\GridScroller\images\email.png" />
+    <Content Include="scripts\_lib\GridScroller\images\expand-small.png" />
+    <Content Include="scripts\_lib\GridScroller\images\icn_add.png" />
+    <Content Include="scripts\_lib\GridScroller\images\icn_del.png" />
+    <Content Include="scripts\_lib\GridScroller\images\icn_edit.png" />
+    <Content Include="scripts\_lib\GridScroller\images\refresh_icon.png" />
+    <Content Include="scripts\_lib\GridScroller\images\report_check.png" />
+    <Content Include="scripts\_lib\GridScroller\images\setting.png" />
+    <Content Include="scripts\_lib\GridScroller\images\sorting_asc.gif" />
+    <Content Include="scripts\_lib\GridScroller\images\sorting_bg.gif" />
+    <Content Include="scripts\_lib\GridScroller\images\sorting_desc.gif" />
+    <Content Include="scripts\_lib\GridScroller\images\white-top-bottom.gif" />
+    <Content Include="scripts\_lib\GridScroller\jquery.gridscroller.1.0.js" />
+    <Content Include="scripts\_lib\GridScroller\jquery.gridscroller.js" />
+    <Content Include="scripts\_lib\GridScroller\jquery.gridscrollerlite.1.0.js" />
+    <Content Include="scripts\_lib\GridScroller\jquery.gridscrollerlite.1.1.js" />
+    <Content Include="scripts\_lib\html5shiv.js" />
+    <Content Include="scripts\_lib\html5shiv.min.js" />
+    <Content Include="scripts\_lib\jquery-1.8.2.js" />
+    <Content Include="scripts\_lib\jquery-1.8.2.min.js" />
+    <Content Include="scripts\_lib\jquery.unobtrusive-ajax.js" />
+    <Content Include="scripts\_lib\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="scripts\_lib\jquery.validate-vsdoc.js" />
+    <Content Include="scripts\_lib\jquery.validate.js" />
+    <Content Include="scripts\_lib\jquery.validate.min.js" />
+    <Content Include="scripts\_lib\jquery.validate.unobtrusive.js" />
+    <Content Include="scripts\_lib\jquery.validate.unobtrusive.min.js" />
+    <Content Include="scripts\_lib\knockout-2.0.0.debug.js" />
+    <Content Include="scripts\_lib\knockout-2.0.0.js" />
+    <Content Include="scripts\_lib\modernizr-2.0.6-development-only.js" />
+    <Content Include="scripts\_lib\MonthPicker\images\bg-demo-docs-param.gif" />
+    <Content Include="scripts\_lib\MonthPicker\images\demo-spindown-closed.gif" />
+    <Content Include="scripts\_lib\MonthPicker\images\demo-spindown-open.gif" />
+    <Content Include="scripts\_lib\MonthPicker\images\icon-left.png" />
+    <Content Include="scripts\_lib\MonthPicker\images\icon-right.png" />
+    <Content Include="scripts\_lib\MonthPicker\images\spindown-closed.png" />
+    <Content Include="scripts\_lib\MonthPicker\images\spindown-open.png" />
+    <Content Include="scripts\_lib\MonthPicker\monPickr-0.0.3.css" />
+    <Content Include="scripts\_lib\MonthPicker\monPickr-0.0.3.js" />
+    <Content Include="scripts\_lib\MonthPicker\monPickr-0.0.3.min.css" />
+    <Content Include="scripts\_lib\MonthPicker\monPickr-0.0.3.min.js" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\redmond\jquery-ui-1.8.17.css" />
+    <Content Include="scripts\_lib\MonthPicker\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="scripts\_lib\MonthPicker\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="scripts\_lib\MonthPicker\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="scripts\_lib\MonthPicker\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="scripts\_lib\MonthPicker\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="scripts\_lib\MonthPicker\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\smoothness\images\ui-icons_888888_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\smoothness\jquery-ui-1.8.17.css" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-bg_diagonals-medium_20_d34d17_40x40.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-bg_flat_30_cccccc_40x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-bg_flat_50_5c5c5c_40x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-bg_gloss-wave_45_817865_500x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-bg_gloss-wave_60_fece2f_500x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-bg_gloss-wave_70_ffdd57_500x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-bg_gloss-wave_90_fff9e5_500x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-bg_highlight-soft_100_feeebd_1x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-bg_inset-soft_30_ffffff_1x100.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-icons_3d3d3d_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-icons_bd7b00_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-icons_d19405_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-icons_eb990f_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-icons_ed9f26_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-icons_fadc7a_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\images\ui-icons_ffe180_256x240.png" />
+    <Content Include="scripts\_lib\MonthPicker\sunny\jquery-ui-1.8.17.css" />
+    <Content Include="scripts\_lib\MultipleSelect\images\BottomLine.png" />
+    <Content Include="scripts\_lib\MultipleSelect\images\FirstNodeSpan.png" />
+    <Content Include="scripts\_lib\MultipleSelect\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="scripts\_lib\MultipleSelect\images\MiddleLine.png" />
+    <Content Include="scripts\_lib\MultipleSelect\images\NodeSpan.png" />
+    <Content Include="scripts\_lib\MultipleSelect\images\ui-icons_2e83ff_256x240-2.png" />
+    <Content Include="scripts\_lib\MultipleSelect\images\PlusMinus.png" />
+    <Content Include="scripts\_lib\MultipleSelect\images\TopLine.png" />
+    <Content Include="scripts\_lib\MultipleSelect\images\ui-icons_2e83ff_256x240-1.png" />
+    <Content Include="scripts\_lib\MultipleSelect\jquery.multiselect.css" />
+    <Content Include="scripts\_lib\MultipleSelect\jquery.multiselect.js" />
+    <Content Include="scripts\_lib\MultipleSelect\jquery.nextreeview.css" />
+    <Content Include="scripts\_lib\MultipleSelect\jquery.nextreeview.js" />
+    <Content Include="scripts\_lib\FormatLibs\NumberFormat\numeral-min.js" />
+    <Content Include="scripts\_lib\FormatLibs\NumberFormat\numeral.js" />
+    <Content Include="scripts\_lib\FormatLibs\jquery.customformat.js" />
+    <Content Include="themes\base\img\1350530947_page_excel.png" />
+    <Content Include="themes\base\img\actions\add-user.png" />
+    <Content Include="themes\base\img\actions\chgpwd-ico.png" />
+    <Content Include="themes\base\img\actions\dd\action-ico.png" />
+    <Content Include="themes\base\img\actions\dd\chgpwd-ico.png" />
+    <Content Include="themes\base\img\actions\dd\edit-ico.png" />
+    <Content Include="themes\base\img\actions\dd\permission-ico.png" />
+    <Content Include="themes\base\img\actions\dd\site-ico.png" />
+    <Content Include="themes\base\img\actions\dd\user-info-ico.png" />
+    <Content Include="themes\base\img\actions\edit-ico.png" />
+    <Content Include="themes\base\img\actions\permission-ico.png" />
+    <Content Include="themes\base\img\actions\site-ico.png" />
+    <Content Include="themes\base\img\actions\url-ico.png" />
+    <Content Include="themes\base\img\actions\user-info-ico.png" />
+    <Content Include="themes\base\img\arrow-down.png" />
+    <Content Include="themes\base\img\arrow-up.png" />
+    <Content Include="themes\base\img\bg-menu.png" />
+    <Content Include="themes\base\img\bg-submenu-more.png" />
+    <Content Include="themes\base\img\bgmenu-hover.png" />
+    <Content Include="themes\base\img\bgmenu-more.png" />
+    <Content Include="themes\base\img\bg_body.png" />
+    <Content Include="themes\base\img\bg_footer.jpg" />
+    <Content Include="themes\base\img\bg_header.png" />
+    <Content Include="themes\base\img\blank.png" />
+    <Content Include="themes\base\img\btn-edit.png" />
+    <Content Include="themes\base\img\chosen-sprite.png" />
+    <Content Include="themes\base\img\collapse-small.png" />
+    <Content Include="themes\base\img\collapsed.png" />
+    <Content Include="themes\base\img\combo-pickr\bottom.png" />
+    <Content Include="themes\base\img\combo-pickr\closebutton.png" />
+    <Content Include="themes\base\img\combo-pickr\inner.png" />
+    <Content Include="themes\base\img\combo-pickr\link-overlay.png" />
+    <Content Include="themes\base\img\combo-pickr\mainbg.png" />
+    <Content Include="themes\base\img\combo-pickr\openbutton.png" />
+    <Content Include="themes\base\img\edit-icon.png" />
+    <Content Include="themes\base\img\expand-small.png" />
+    <Content Include="themes\base\img\expanded.png" />
+    <Content Include="themes\base\img\grid-view.png" />
+    <Content Include="themes\base\img\hub.png" />
+    <Content Include="themes\base\img\lnk-white.png" />
+    <Content Include="themes\base\img\logo.png" />
+    <Content Include="themes\base\img\logo1.png" />
+    <Content Include="themes\base\img\logo2.png" />
+    <Content Include="themes\base\img\logo3.png" />
+    <Content Include="themes\base\img\moreinfo.png" />
+    <Content Include="Areas\UserLogin\themes\img\pattern6.png" />
+    <Content Include="themes\base\img\report-icon.png" />
+    <Content Include="themes\base\img\seperation.png" />
+    <Content Include="themes\base\img\setting.png" />
+    <Content Include="themes\base\img\small-arrow-down.png" />
+    <Content Include="themes\base\img\sort-icon.png" />
+    <Content Include="themes\base\img\sprites-image.png" />
+    <Content Include="themes\base\img\sprites.png" />
+    <Content Include="themes\base\img\textures\fabric.png" />
+    <Content Include="themes\base\img\textures\grid.png" />
+    <Content Include="themes\base\img\textures\scratches.png" />
+    <Content Include="themes\base\img\tick-ico-16.png" />
+    <Content Include="themes\base\img\tree-view.png" />
+    <Content Include="themes\base\img\ui-modal-btn.png" />
+    <Content Include="themes\base\img\user.png" />
+    <Content Include="themes\base\jquery\images\ui-bg_flat_60_4264ac_40x100.png" />
+    <Content Include="themes\base\jquery\images\ui-bg_flat_75_5476bb_40x100.png" />
+    <Content Include="themes\base\jquery\images\ui-bg_flat_90_466bb9_40x100.png" />
+    <Content Include="themes\base\jquery\images\ui-bg_flat_90_aaaaaa_40x100.png" />
+    <Content Include="themes\base\jquery\images\ui-bg_glass_45_f4f3f1_1x400.png" />
+    <Content Include="themes\base\jquery\images\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="themes\base\jquery\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="themes\base\jquery\images\ui-bg_highlight-soft_90_999999_1x100.png" />
+    <Content Include="themes\base\jquery\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="themes\base\jquery\images\ui-icons_4264ac_256x240.png" />
+    <Content Include="themes\base\jquery\images\ui-icons_c6cddc_256x240.png" />
+    <Content Include="themes\base\jquery\images\ui-icons_cbd4e6_256x240.png" />
+    <Content Include="themes\base\jquery\images\ui-icons_d0d9ec_256x240.png" />
+    <Content Include="themes\base\jquery\images\ui-icons_f7a50d_256x240.png" />
+    <Content Include="themes\base\jquery\images\ui-icons_fcd113_256x240.png" />
+    <Content Include="themes\base\jquery\jquery-ui-1.9.1.custom.css" />
+    <Content Include="themes\base\jquery\jquery-ui-1.9.1.custom.min.css" />
+    <Content Include="themes\easyui\default\accordion.css" />
+    <Content Include="themes\easyui\default\calendar.css" />
+    <Content Include="themes\easyui\default\combo.css" />
+    <Content Include="themes\easyui\default\combobox.css" />
+    <Content Include="themes\easyui\default\datagrid.css" />
+    <Content Include="themes\easyui\default\datebox.css" />
+    <Content Include="themes\easyui\default\dialog.css" />
+    <Content Include="themes\easyui\default\easyui.css" />
+    <Content Include="themes\easyui\default\images\accordion_collapse.png" />
+    <Content Include="themes\easyui\default\images\accordion_expand.png" />
+    <Content Include="themes\easyui\default\images\blank.gif" />
+    <Content Include="themes\easyui\default\images\button_a_bg.gif" />
+    <Content Include="themes\easyui\default\images\button_plain_hover.png" />
+    <Content Include="themes\easyui\default\images\button_span_bg.gif" />
+    <Content Include="themes\easyui\default\images\calendar_nextmonth.gif" />
+    <Content Include="themes\easyui\default\images\calendar_nextyear.gif" />
+    <Content Include="themes\easyui\default\images\calendar_prevmonth.gif" />
+    <Content Include="themes\easyui\default\images\calendar_prevyear.gif" />
+    <Content Include="themes\easyui\default\images\combo_arrow.gif" />
+    <Content Include="themes\easyui\default\images\datagrid_header_bg.gif" />
+    <Content Include="themes\easyui\default\images\datagrid_row_collapse.gif" />
+    <Content Include="themes\easyui\default\images\datagrid_row_expand.gif" />
+    <Content Include="themes\easyui\default\images\datagrid_sort_asc.gif" />
+    <Content Include="themes\easyui\default\images\datagrid_sort_desc.gif" />
+    <Content Include="themes\easyui\default\images\datagrid_title_bg.png" />
+    <Content Include="themes\easyui\default\images\datebox_arrow.png" />
+    <Content Include="themes\easyui\default\images\layout_arrows.png" />
+    <Content Include="themes\easyui\default\images\menu.gif" />
+    <Content Include="themes\easyui\default\images\menu_downarrow.png" />
+    <Content Include="themes\easyui\default\images\menu_rightarrow.png" />
+    <Content Include="themes\easyui\default\images\menu_sep.png" />
+    <Content Include="themes\easyui\default\images\menu_split_downarrow.png" />
+    <Content Include="themes\easyui\default\images\messager_error.gif" />
+    <Content Include="themes\easyui\default\images\messager_info.gif" />
+    <Content Include="themes\easyui\default\images\messager_question.gif" />
+    <Content Include="themes\easyui\default\images\messager_warning.gif" />
+    <Content Include="themes\easyui\default\images\pagination_first.gif" />
+    <Content Include="themes\easyui\default\images\pagination_last.gif" />
+    <Content Include="themes\easyui\default\images\pagination_load.png" />
+    <Content Include="themes\easyui\default\images\pagination_loading.gif" />
+    <Content Include="themes\easyui\default\images\pagination_next.gif" />
+    <Content Include="themes\easyui\default\images\pagination_prev.gif" />
+    <Content Include="themes\easyui\default\images\panel_loading.gif" />
+    <Content Include="themes\easyui\default\images\panel_title.png" />
+    <Content Include="themes\easyui\default\images\panel_tools.gif" />
+    <Content Include="themes\easyui\default\images\searchbox_button.png" />
+    <Content Include="themes\easyui\default\images\slider_handle.png" />
+    <Content Include="themes\easyui\default\images\spinner_arrow_down.gif" />
+    <Content Include="themes\easyui\default\images\spinner_arrow_up.gif" />
+    <Content Include="themes\easyui\default\images\tabs_active.png" />
+    <Content Include="themes\easyui\default\images\tabs_close.gif" />
+    <Content Include="themes\easyui\default\images\tabs_enabled.png" />
+    <Content Include="themes\easyui\default\images\tabs_leftarrow.png" />
+    <Content Include="themes\easyui\default\images\tabs_rightarrow.png" />
+    <Content Include="themes\easyui\default\images\tree_arrows.gif" />
+    <Content Include="themes\easyui\default\images\tree_checkbox_0.gif" />
+    <Content Include="themes\easyui\default\images\tree_checkbox_1.gif" />
+    <Content Include="themes\easyui\default\images\tree_checkbox_2.gif" />
+    <Content Include="themes\easyui\default\images\tree_dnd_no.png" />
+    <Content Include="themes\easyui\default\images\tree_dnd_yes.png" />
+    <Content Include="themes\easyui\default\images\tree_elbow.png" />
+    <Content Include="themes\easyui\default\images\tree_file.gif" />
+    <Content Include="themes\easyui\default\images\tree_folder.gif" />
+    <Content Include="themes\easyui\default\images\tree_folder_open.gif" />
+    <Content Include="themes\easyui\default\images\tree_loading.gif" />
+    <Content Include="themes\easyui\default\images\validatebox_pointer.gif" />
+    <Content Include="themes\easyui\default\images\validatebox_warning.png" />
+    <Content Include="themes\easyui\default\layout.css" />
+    <Content Include="themes\easyui\default\linkbutton.css" />
+    <Content Include="themes\easyui\default\menu.css" />
+    <Content Include="themes\easyui\default\menubutton.css" />
+    <Content Include="themes\easyui\default\messager.css" />
+    <Content Include="themes\easyui\default\pagination.css" />
+    <Content Include="themes\easyui\default\panel.css" />
+    <Content Include="themes\easyui\default\progressbar.css" />
+    <Content Include="themes\easyui\default\propertygrid.css" />
+    <Content Include="themes\easyui\default\searchbox.css" />
+    <Content Include="themes\easyui\default\slider.css" />
+    <Content Include="themes\easyui\default\spinner.css" />
+    <Content Include="themes\easyui\default\splitbutton.css" />
+    <Content Include="themes\easyui\default\tabs.css" />
+    <Content Include="themes\easyui\default\tree.css" />
+    <Content Include="themes\easyui\default\validatebox.css" />
+    <Content Include="themes\easyui\default\window.css" />
+    <Content Include="themes\easyui\gray\accordion.css" />
+    <Content Include="themes\easyui\gray\calendar.css" />
+    <Content Include="themes\easyui\gray\combo.css" />
+    <Content Include="themes\easyui\gray\combobox.css" />
+    <Content Include="themes\easyui\gray\datagrid.css" />
+    <Content Include="themes\easyui\gray\datebox.css" />
+    <Content Include="themes\easyui\gray\dialog.css" />
+    <Content Include="themes\easyui\gray\easyui.css" />
+    <Content Include="themes\easyui\gray\images\accordion_collapse.png" />
+    <Content Include="themes\easyui\gray\images\accordion_expand.png" />
+    <Content Include="themes\easyui\gray\images\blank.gif" />
+    <Content Include="themes\easyui\gray\images\button_a_bg.gif" />
+    <Content Include="themes\easyui\gray\images\button_plain_hover.png" />
+    <Content Include="themes\easyui\gray\images\button_span_bg.gif" />
+    <Content Include="themes\easyui\gray\images\calendar_nextmonth.gif" />
+    <Content Include="themes\easyui\gray\images\calendar_nextyear.gif" />
+    <Content Include="themes\easyui\gray\images\calendar_prevmonth.gif" />
+    <Content Include="themes\easyui\gray\images\calendar_prevyear.gif" />
+    <Content Include="themes\easyui\gray\images\combo_arrow.gif" />
+    <Content Include="themes\easyui\gray\images\datagrid_header_bg.gif" />
+    <Content Include="themes\easyui\gray\images\datagrid_row_collapse.gif" />
+    <Content Include="themes\easyui\gray\images\datagrid_row_expand.gif" />
+    <Content Include="themes\easyui\gray\images\datagrid_sort_asc.gif" />
+    <Content Include="themes\easyui\gray\images\datagrid_sort_desc.gif" />
+    <Content Include="themes\easyui\gray\images\datagrid_title_bg.gif" />
+    <Content Include="themes\easyui\gray\images\datebox_arrow.png" />
+    <Content Include="themes\easyui\gray\images\layout_arrows.png" />
+    <Content Include="themes\easyui\gray\images\menu.gif" />
+    <Content Include="themes\easyui\gray\images\menu_downarrow.png" />
+    <Content Include="themes\easyui\gray\images\menu_rightarrow.png" />
+    <Content Include="themes\easyui\gray\images\menu_sep.png" />
+    <Content Include="themes\easyui\gray\images\menu_split_downarrow.png" />
+    <Content Include="themes\easyui\gray\images\messager_error.gif" />
+    <Content Include="themes\easyui\gray\images\messager_info.gif" />
+    <Content Include="themes\easyui\gray\images\messager_question.gif" />
+    <Content Include="themes\easyui\gray\images\messager_warning.gif" />
+    <Content Include="themes\easyui\gray\images\pagination_first.gif" />
+    <Content Include="themes\easyui\gray\images\pagination_last.gif" />
+    <Content Include="themes\easyui\gray\images\pagination_load.png" />
+    <Content Include="themes\easyui\gray\images\pagination_loading.gif" />
+    <Content Include="themes\easyui\gray\images\pagination_next.gif" />
+    <Content Include="themes\easyui\gray\images\pagination_prev.gif" />
+    <Content Include="themes\easyui\gray\images\panel_loading.gif" />
+    <Content Include="themes\easyui\gray\images\panel_title.gif" />
+    <Content Include="themes\easyui\gray\images\panel_tools.gif" />
+    <Content Include="themes\easyui\gray\images\searchbox_button.png" />
+    <Content Include="themes\easyui\gray\images\slider_handle.png" />
+    <Content Include="themes\easyui\gray\images\spinner_arrow_down.gif" />
+    <Content Include="themes\easyui\gray\images\spinner_arrow_up.gif" />
+    <Content Include="themes\easyui\gray\images\tabs_close.gif" />
+    <Content Include="themes\easyui\gray\images\tabs_enabled.gif" />
+    <Content Include="themes\easyui\gray\images\tabs_leftarrow.png" />
+    <Content Include="themes\easyui\gray\images\tabs_rightarrow.png" />
+    <Content Include="themes\easyui\gray\images\tree_arrows.gif" />
+    <Content Include="themes\easyui\gray\images\tree_checkbox_0.gif" />
+    <Content Include="themes\easyui\gray\images\tree_checkbox_1.gif" />
+    <Content Include="themes\easyui\gray\images\tree_checkbox_2.gif" />
+    <Content Include="themes\easyui\gray\images\tree_dnd_no.png" />
+    <Content Include="themes\easyui\gray\images\tree_dnd_yes.png" />
+    <Content Include="themes\easyui\gray\images\tree_elbow.png" />
+    <Content Include="themes\easyui\gray\images\tree_file.gif" />
+    <Content Include="themes\easyui\gray\images\tree_folder.gif" />
+    <Content Include="themes\easyui\gray\images\tree_folder_open.gif" />
+    <Content Include="themes\easyui\gray\images\tree_loading.gif" />
+    <Content Include="themes\easyui\gray\images\validatebox_pointer.gif" />
+    <Content Include="themes\easyui\gray\images\validatebox_warning.png" />
+    <Content Include="themes\easyui\gray\layout.css" />
+    <Content Include="themes\easyui\gray\linkbutton.css" />
+    <Content Include="themes\easyui\gray\menu.css" />
+    <Content Include="themes\easyui\gray\menubutton.css" />
+    <Content Include="themes\easyui\gray\messager.css" />
+    <Content Include="themes\easyui\gray\pagination.css" />
+    <Content Include="themes\easyui\gray\panel.css" />
+    <Content Include="themes\easyui\gray\progressbar.css" />
+    <Content Include="themes\easyui\gray\propertygrid.css" />
+    <Content Include="themes\easyui\gray\searchbox.css" />
+    <Content Include="themes\easyui\gray\slider.css" />
+    <Content Include="themes\easyui\gray\spinner.css" />
+    <Content Include="themes\easyui\gray\splitbutton.css" />
+    <Content Include="themes\easyui\gray\tabs.css" />
+    <Content Include="themes\easyui\gray\tree.css" />
+    <Content Include="themes\easyui\gray\validatebox.css" />
+    <Content Include="themes\easyui\gray\window.css" />
+    <Content Include="themes\easyui\icon.css" />
+    <Content Include="themes\easyui\icons\back.png" />
+    <Content Include="themes\easyui\icons\blank.gif" />
+    <Content Include="themes\easyui\icons\cancel.png" />
+    <Content Include="themes\easyui\icons\cut.png" />
+    <Content Include="themes\easyui\icons\edit_add.png" />
+    <Content Include="themes\easyui\icons\edit_remove.png" />
+    <Content Include="themes\easyui\icons\filesave.png" />
+    <Content Include="themes\easyui\icons\help.png" />
+    <Content Include="themes\easyui\icons\mini_add.png" />
+    <Content Include="themes\easyui\icons\mini_edit.png" />
+    <Content Include="themes\easyui\icons\mini_refresh.png" />
+    <Content Include="themes\easyui\icons\no.png" />
+    <Content Include="themes\easyui\icons\ok.png" />
+    <Content Include="themes\easyui\icons\pencil.png" />
+    <Content Include="themes\easyui\icons\print.png" />
+    <Content Include="themes\easyui\icons\redo.png" />
+    <Content Include="themes\easyui\icons\reload.png" />
+    <Content Include="themes\easyui\icons\search.png" />
+    <Content Include="themes\easyui\icons\sum.png" />
+    <Content Include="themes\easyui\icons\tip.png" />
+    <Content Include="themes\easyui\icons\undo.png" />
+    <Content Include="themes\easyui\metro\accordion.css" />
+    <Content Include="themes\easyui\metro\calendar.css" />
+    <Content Include="themes\easyui\metro\combo.css" />
+    <Content Include="themes\easyui\metro\combobox.css" />
+    <Content Include="themes\easyui\metro\datagrid.css" />
+    <Content Include="themes\easyui\metro\datebox.css" />
+    <Content Include="themes\easyui\metro\dialog.css" />
+    <Content Include="themes\easyui\metro\easyui.css" />
+    <Content Include="themes\easyui\metro\images\accordion_collapse.png" />
+    <Content Include="themes\easyui\metro\images\accordion_expand.png" />
+    <Content Include="themes\easyui\metro\images\blank.gif" />
+    <Content Include="themes\easyui\metro\images\calendar_nextmonth.gif" />
+    <Content Include="themes\easyui\metro\images\calendar_nextyear.gif" />
+    <Content Include="themes\easyui\metro\images\calendar_prevmonth.gif" />
+    <Content Include="themes\easyui\metro\images\calendar_prevyear.gif" />
+    <Content Include="themes\easyui\metro\images\combo_arrow.gif" />
+    <Content Include="themes\easyui\metro\images\datagrid_row_collapse.gif" />
+    <Content Include="themes\easyui\metro\images\datagrid_row_expand.gif" />
+    <Content Include="themes\easyui\metro\images\datagrid_sort_asc.gif" />
+    <Content Include="themes\easyui\metro\images\datagrid_sort_desc.gif" />
+    <Content Include="themes\easyui\metro\images\datebox_arrow.png" />
+    <Content Include="themes\easyui\metro\images\layout_arrows.png" />
+    <Content Include="themes\easyui\metro\images\menu_downarrow.png" />
+    <Content Include="themes\easyui\metro\images\menu_rightarrow.png" />
+    <Content Include="themes\easyui\metro\images\menu_sep.png" />
+    <Content Include="themes\easyui\metro\images\menu_split_downarrow.png" />
+    <Content Include="themes\easyui\metro\images\messager_error.gif" />
+    <Content Include="themes\easyui\metro\images\messager_info.gif" />
+    <Content Include="themes\easyui\metro\images\messager_question.gif" />
+    <Content Include="themes\easyui\metro\images\messager_warning.gif" />
+    <Content Include="themes\easyui\metro\images\pagination_first.gif" />
+    <Content Include="themes\easyui\metro\images\pagination_last.gif" />
+    <Content Include="themes\easyui\metro\images\pagination_load.png" />
+    <Content Include="themes\easyui\metro\images\pagination_loading.gif" />
+    <Content Include="themes\easyui\metro\images\pagination_next.gif" />
+    <Content Include="themes\easyui\metro\images\pagination_prev.gif" />
+    <Content Include="themes\easyui\metro\images\panel_loading.gif" />
+    <Content Include="themes\easyui\metro\images\panel_tools.gif" />
+    <Content Include="themes\easyui\metro\images\searchbox_button.png" />
+    <Content Include="themes\easyui\metro\images\slider_handle.png" />
+    <Content Include="themes\easyui\metro\images\tabs_close.gif" />
+    <Content Include="themes\easyui\metro\images\tabs_leftarrow.png" />
+    <Content Include="themes\easyui\metro\images\tabs_rightarrow.png" />
+    <Content Include="themes\easyui\metro\images\tree_arrows.gif" />
+    <Content Include="themes\easyui\metro\images\tree_checkbox_0.gif" />
+    <Content Include="themes\easyui\metro\images\tree_checkbox_1.gif" />
+    <Content Include="themes\easyui\metro\images\tree_checkbox_2.gif" />
+    <Content Include="themes\easyui\metro\images\tree_dnd_no.png" />
+    <Content Include="themes\easyui\metro\images\tree_dnd_yes.png" />
+    <Content Include="themes\easyui\metro\images\tree_elbow.png" />
+    <Content Include="themes\easyui\metro\images\tree_file.gif" />
+    <Content Include="themes\easyui\metro\images\tree_folder.gif" />
+    <Content Include="themes\easyui\metro\images\tree_folder_open.gif" />
+    <Content Include="themes\easyui\metro\images\tree_loading.gif" />
+    <Content Include="themes\easyui\metro\images\validatebox_warning.png" />
+    <Content Include="themes\easyui\metro\layout.css" />
+    <Content Include="themes\easyui\metro\linkbutton.css" />
+    <Content Include="themes\easyui\metro\menu.css" />
+    <Content Include="themes\easyui\metro\menubutton.css" />
+    <Content Include="themes\easyui\metro\messager.css" />
+    <Content Include="themes\easyui\metro\pagination.css" />
+    <Content Include="themes\easyui\metro\panel.css" />
+    <Content Include="themes\easyui\metro\progressbar.css" />
+    <Content Include="themes\easyui\metro\propertygrid.css" />
+    <Content Include="themes\easyui\metro\searchbox.css" />
+    <Content Include="themes\easyui\metro\slider.css" />
+    <Content Include="themes\easyui\metro\splitbutton.css" />
+    <Content Include="themes\easyui\metro\tabs.css" />
+    <Content Include="themes\easyui\metro\tree.css" />
+    <Content Include="themes\easyui\metro\validatebox.css" />
+    <Content Include="themes\easyui\metro\window.css" />
+    <Content Include="themes\reset.css" />
+    <Content Include="themes\Site.css" />
+    <Content Include="Views\Common\Style\AccessDenied.css" />
+    <Content Include="Views\Common\Style\Images\accessDenied.gif" />
+    <Content Include="Views\Common\Style\Images\UnderMaintenance.gif" />
+    <Content Include="Views\Home\MostVisitedPages\Scripts\MostVisitedPages.js" />
+    <Content Include="Views\Home\MostVisitedPages\Styles\Images\Controls.png" />
+    <Content Include="Views\Home\MostVisitedPages\Styles\Images\Controls2.png" />
+    <Content Include="Views\Home\MostVisitedPages\Styles\Images\TileBackGround.png" />
+    <Content Include="Views\Test\Scripts\TotalTransactions.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="scripts\_lib\_references.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\LegendManagement\Views\LegendManagement\UploadedImage\" />
+    <Folder Include="Areas\UserControl\Models\" />
+    <Folder Include="Areas\UserControl\Views\Shared\" />
+    <Folder Include="Areas\UserLogin\Models\" />
+    <Folder Include="scripts\_lib\BlockUI\img\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.AccountingReports.Balance\Balance.csproj">
+      <Project>{26F7C78E-F834-4C35-B55E-C60BA3BCA906}</Project>
+      <Name>Balance</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.Racing\Racing.csproj">
+      <Project>{A6EAD323-42D7-46B6-ADAC-A31F4FCCD17B}</Project>
+      <Name>Racing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">
+      <Project>{A5608298-26C2-4F05-A7FD-AA8C0700ED38}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.Gaming\Gaming.csproj">
+      <Project>{5A9082BF-0969-47A0-9C6E-3932734E0392}</Project>
+      <Name>Gaming</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.Licensee\Licensee.csproj">
+      <Project>{972F4451-B4C2-4E68-83E8-C1D81FD6A2F9}</Project>
+      <Name>Licensee</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.Main\Main.csproj">
+      <Project>{FBC08CFC-CA34-44D0-BA0B-A500A2228A9A}</Project>
+      <Name>Main</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.Misc\Misc.csproj">
+      <Project>{F4EB0A2C-2271-48FA-8DC2-3B220B78F890}</Project>
+      <Name>Misc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.Special\Special.csproj">
+      <Project>{A58769CB-55CB-4741-B1FA-ACF437D12701}</Project>
+      <Name>Special</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.WinLoss\WinLoss.csproj">
+      <Project>{71497EB2-B2CA-473B-9AB8-81220A9AD9AD}</Project>
+      <Name>WinLoss</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.BetList.Accounting\BetList.csproj">
+      <Project>{DCEA602C-2786-45B3-B3C4-1D3241F40F09}</Project>
+      <Name>BetList</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.LegendManagement\LegendManagement.csproj">
+      <Project>{9036948C-3231-42CF-8AF5-0AF601DFB199}</Project>
+      <Name>LegendManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.LegendManagement\LegendManagement.csproj">
+      <Project>{9036948C-3231-42CF-8AF5-0AF601DFB199}</Project>
+      <Name>LegendManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.LegendManagement\LegendManagement.csproj">
+      <Project>{9036948C-3231-42CF-8AF5-0AF601DFB199}</Project>
+      <Name>LegendManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.LegendManagement\LegendManagement.csproj">
+      <Project>{9036948C-3231-42CF-8AF5-0AF601DFB199}</Project>
+      <Name>LegendManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.LegendManagement\LegendManagement.csproj">
+      <Project>{9036948C-3231-42CF-8AF5-0AF601DFB199}</Project>
+      <Name>LegendManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.LegendManagement\LegendManagement.csproj">
+      <Project>{9036948C-3231-42CF-8AF5-0AF601DFB199}</Project>
+      <Name>LegendManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.LegendManagement\LegendManagement.csproj">
+      <Project>{9036948C-3231-42CF-8AF5-0AF601DFB199}</Project>
+      <Name>LegendManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.LegendManagement\LegendManagement.csproj">
+      <Project>{9036948C-3231-42CF-8AF5-0AF601DFB199}</Project>
+      <Name>LegendManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.LegendManagement\LegendManagement.csproj">
+      <Project>{9036948C-3231-42CF-8AF5-0AF601DFB199}</Project>
+      <Name>LegendManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.LegendManagement\LegendManagement.csproj">
+      <Project>{9036948C-3231-42CF-8AF5-0AF601DFB199}</Project>
+      <Name>LegendManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.LegendManagement\LegendManagement.csproj">
+      <Project>{9036948C-3231-42CF-8AF5-0AF601DFB199}</Project>
+      <Name>LegendManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.LegendManagement\LegendManagement.csproj">
+      <Project>{9036948C-3231-42CF-8AF5-0AF601DFB199}</Project>
+      <Name>LegendManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fanex.AccountingReports.LegendManagement\LegendManagement.csproj">
+      <Project>{9036948C-3231-42CF-8AF5-0AF601DFB199}</Project>
+      <Name>LegendManagement</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Test\Test.csproj">
+      <Project>{37848609-0CA3-4723-93E9-06DD93A17473}</Project>
+      <Name>Test</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\UserControl\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\UserLogin\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Licensee\Views\NumberGameWinLoss\Index.cshtml" />
+    <Content Include="Areas\Licensee\Views\LiveCasinoWinLoss\Index.cshtml" />
+    <Content Include="Areas\Test\Views\Web.config" />
+    <Content Include="Areas\Test\Views\ExternalReport\Index.cshtml" />
+    <Content Include="Areas\Balance\Views\DirectBalance\Index.cshtml" />
+    <Content Include="Areas\Balance\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Gaming\Views\NumberGameWinLossByCurrency\Index.cshtml" />
+    <Content Include="Areas\Gaming\Views\NumberGameWinlossByDate\Index.cshtml" />
+    <Content Include="Areas\Gaming\Views\Web.config" />
+    <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Index.cshtml" />
+    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Index.cshtml" />
+    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Styles\VirtualSportsWinLoss.less" />
+    <Content Include="Areas\Licensee\Views\LiveCasinoWinLoss\LiveCasinoWinLoss.less" />
+    <Content Include="Areas\Licensee\Views\NegativeBalance\Index.cshtml" />
+    <Content Include="Areas\Licensee\Views\NegativeBalance\NegativeBalance.less" />
+    <Content Include="Areas\Licensee\Views\NumberGameWinLoss\NumberGameWinLoss.less" />
+    <Content Include="Areas\Licensee\Views\PeakConcurrentUsers\Index.cshtml" />
+    <Content Include="Areas\Licensee\Views\PeakConcurrentUsers\PeakConcurrentUser.less" />
+    <Content Include="Areas\Test\Views\ExternalReport\IndexRazor.cshtml" />
+    <Content Include="Areas\Test\Views\ExternalReport\_IndexContent.cshtml" />
+    <Content Include="Areas\Special\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Special\Views\CheckBet\Index.cshtml" />
+    <Content Include="Areas\Special\Views\CheckBet\NormalChangedTickets.cshtml" />
+    <Content Include="Areas\Special\Views\CheckBet\RejectChangedTickets.cshtml" />
+    <Content Include="Areas\Misc\Views\CreditSitesBetCounts\Index.cshtml" />
+    <Content Include="Areas\Main\Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Main\Views\MatchWinLoss2a\Index.cshtml" />
+    <Content Include="Areas\Licensee\Views\WinLossByLicensee\WinLossByLicensee_SuperReport.cshtml" />
+    <Content Include="Areas\Licensee\Views\WinLossByLicensee\WinLossByLicensee_MasterReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\BingoReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\CasinoReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\LiveCasinoReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Main2hReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\MixParlayReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\NumberGameReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\OtherSportReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\RacingReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\SoccerReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Index.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Main2hReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\SoccerReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Index.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Main2hReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\OtherSportReport.cshtml" />
+    <Content Include="Areas\Main\Views\CreditTerm\Index.cshtml" />
+    <Content Include="Areas\Main\Views\CreditTerm\Styles\CreditTerm.less" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Styles\DailyWinLoss2h.less" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\WinLossBySite_BetType.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Styles\DailyWinLoss2h.less" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\WinLossBySite_BetType.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Styles\DailyWinLoss2h.less" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\SystemParlayReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\VirtualSportsReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\VirtualSports_VirtualHorseRacingReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\WinLossBySite_BetType.cshtml" />
+    <Content Include="Areas\Main\Views\MatchWinLoss2a\Styles\MatchWinLoss2a.less" />
+    <Content Include="Areas\Main\Views\WinLossSummary\Index.cshtml" />
+    <Content Include="Areas\Main\Views\WinLossSummary3rd\Index.cshtml" />
+    <Content Include="Areas\Main\Views\TraderPerformanceSoccer\Index.cshtml" />
+    <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\_TraderPerformanceMainReport.cshtml" />
+    <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\_TraderPerformanceDetailReport.cshtml" />
+    <Content Include="Areas\Main\Views\TraderPerformanceSoccer\Styles\TraderPerformanceSoccer.less" />
+    <Content Include="Areas\Main\Views\TraderPerformanceSoccer\_TraderPerformanceMainReport.cshtml" />
+    <Content Include="Areas\Main\Views\TraderPerformanceSoccer\_TraderPerformanceDetailReport.cshtml" />
+    <Content Include="Areas\Main\Views\WinLossSummary3rd\Styles\WinLossSummary.less" />
+    <Content Include="Areas\Main\Views\WinLossSummary\Styles\WinLossSummary.less" />
+    <Content Include="Areas\Main\Views\WinLossSummary\SummaryReport.cshtml" />
+    <Content Include="Areas\Misc\Views\CreditSitesBetCounts\CreditSitesBetCounts.less" />
+    <Content Include="Areas\Misc\Views\DailyCreatedCustomers\Index.cshtml" />
+    <Content Include="Areas\Misc\Views\DailyCreatedCustomers\DailyCreatedCustomers.less" />
+    <Content Include="Areas\Misc\Views\DailyCreatedCustomers\SummaryDailyCreatedCustomers.cshtml" />
+    <Content Include="Areas\Misc\Views\DailyCreatedCustomers\DetailsDailyCreatedCustomers.cshtml" />
+    <Content Include="Areas\Misc\Views\DuplicateTickets\Index.cshtml" />
+    <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Index.cshtml" />
+    <Content Include="Areas\Misc\Views\MAMonitorTool\Index.cshtml" />
+    <Content Include="Areas\Misc\Views\MAMonitorTool\Styles\MAMonitorTool.less" />
+    <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Styles\TotalSMAMemberActive.less" />
+    <Content Include="Areas\Racing\Views\RacingGroupDaily\Index.cshtml" />
+    <Content Include="Areas\Racing\Views\RacingGroupDaily\Styles\RacingGroupDaily.less" />
+    <Content Include="Areas\Racing\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\Racing\Views\NumberOfActiveMembersForRacing\Index.cshtml" />
+    <Content Include="Areas\Racing\Views\GreyhoundAUSTote\Index.cshtml" />
+    <Content Include="Areas\Racing\Views\HarnessAUSTote\Index.cshtml" />
+    <Content Include="Areas\Racing\Views\NumberOfActiveMembersForRacing\Styles\NumberOfActiveMembers.less" />
+    <Content Include="Areas\Racing\Views\Web.config" />
+    <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Index.cshtml" />
+    <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Styles\RacingDailyReport.less" />
+    <Content Include="Areas\Racing\Views\RacingSATote\Index.cshtml" />
+    <Content Include="Areas\Racing\Views\RacingAUSTote\Index.cshtml" />
+    <Content Include="Areas\Racing\Views\RacingAUSTote\Styles\RacingAUSTote.less" />
+    <Content Include="Areas\Racing\Views\RacingSATote\Styles\RacingSATote.less">
+      <Compile>True</Compile>
+      <Minify>True</Minify>
+    </Content>
+    <Content Include="Areas\Racing\Views\RacingUKTote\Index.cshtml" />
+    <Content Include="Areas\Racing\Views\RacingUKTote\Styles\RacingUKTote.less" />
+    <Content Include="Areas\Special\Views\CheckBet\Style\CheckBet.less" />
+    <Content Include="Areas\Special\Views\ParlayWon\Index.cshtml" />
+    <Content Include="Areas\Special\Views\DailyTurnover\Index.cshtml" />
+    <Content Include="Areas\Special\Views\MarginReport\Index.cshtml" />
+    <Content Include="Areas\Special\Views\DailyTurnover\Styles\DailyTurnover.less" />
+    <Content Include="Areas\Special\Views\ParlayWon\ParlayWon.less" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Index.cshtml" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\TopPunter_ByUser_BetType_MonthRangeSummary.cshtml" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Index.cshtml" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchAnalysisByAgent.cshtml" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchAnalysisByMaster.cshtml" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchAnalysisByMember.cshtml" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchAnalysisNormal.cshtml" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchSelection.cshtml" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Styles\PunterAnalysis.less" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\TopPunter_ByLeague_BetType_MonthRangeSummary.cshtml" />
+    <Content Include="Areas\Special\Views\SaveBetReport\Index.cshtml" />
+    <Content Include="Areas\Special\Views\ReportingServices\Index.cshtml" />
+    <Content Include="Areas\Special\Views\SMATurnover\Index.cshtml" />
+    <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Styles\SpecialMatchAnalysis.less" />
+    <Content Include="Areas\Misc\Views\TotalCreditAccountByProduct\Index.cshtml" />
+    <Content Include="Areas\Test\Views\ExternalReport\ExternalReport.less" />
+    <Content Include="Areas\Test\Views\ExternalReport\_IndexFreezeColumn.cshtml" />
+    <Content Include="Areas\Test\Views\Grid\DemoGrid.cshtml" />
+    <Content Include="Areas\Test\Views\Grid\WLByLicensee.cshtml" />
+    <Content Include="Areas\Test\Views\Grid\TotalTransactionsPage.cshtml" />
+    <Content Include="Areas\Test\Views\Grid\DemoOnlyGrid.cshtml" />
+    <Content Include="Areas\UserLogin\Views\Common\Offline.cshtml" />
+    <Content Include="Areas\Test\Views\Grid\ExternalReport.cshtml" />
+    <Content Include="Areas\UserLogin\Views\Common\AccessDenied.cshtml" />
+    <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Index.cshtml" />
+    <Content Include="Areas\WinLoss\Web.config" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Index.cshtml" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\MixParlayReportPopup.cshtml" />
+    <Content Include="Areas\Uncategorized\ReportLegend\FanexLegend.less" />
+    <Content Include="Areas\WinLoss\Views\AllCustomerTurnOver\Index.cshtml" />
+    <Content Include="Areas\WinLoss\Views\AllCustomerTurnOver\Styles\AllCustomerTurnOver.less" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Styles\DailyMixParlayWinLoss.less" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Styles\MixParlayPopup.less" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Index.cshtml" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\MixParlayReportPopup.cshtml" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Styles\DailyMixParlayWinLoss.less" />
+    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Styles\MixParlayPopup.less" />
+    <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Styles\LeagueWinLoss.less" />
+    <Content Include="Areas\WinLoss\Views\MatchWinLossSingleBet\Index.cshtml" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\Index.cshtml" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\TreeWinLossByAgent.cshtml" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\TreeWinLossByComm.cshtml" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\TreeWinLossByMaster.cshtml" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\TreeWinLossByProduct.cshtml" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\TreeWinLossBySuper.cshtml" />
+    <Content Include="Areas\WinLoss\Views\TreeWinLoss\VirtualRateHistory.cshtml" />
+    <Content Include="Areas\WinLoss\Views\MatchWinLossByBettype\Index.cshtml" />
+    <Content Include="Areas\Misc\Views\SMATurnover\Index.cshtml" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\CopyLegend.cshtml" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\InputedLegendReport.cshtml" />
+    <Content Include="Areas\LegendManagement\Views\LegendManagement\UploadImagePopup.cshtml" />
+    <Content Include="Areas\WinLoss\Views\MatchWinLossByBettype\Styles\MatchWinLossByBettype.less" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\ParlayReport.cshtml" />
+    <Content Include="Areas\Licensee\Views\AGCasinoWinloss\Index.cshtml" />
+    <Content Include="Areas\WinLoss\Views\MatchWinLossSingleBet\Styles\MatchWinLossSingleBet.less" />
+    <Content Include="Areas\Uncategorized\IMS\ims.less" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\BettypeReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\Index.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\Main2hReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\SoccerReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\Styles\DailyWinLoss2h.less" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\WinLossBySite_BetType.cshtml" />
+    <Content Include="Areas\Misc\Views\CreditMovement\Index.cshtml" />
+    <Content Include="Areas\Licensee\Views\CompanyWinLoss\Index.cshtml" />
+    <Content Include="Areas\Licensee\Views\CompanyWinLoss\Styles\Index.less" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\MetricGamingReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\MainLiveCasinoReport.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\LiveCasinoWinLossByProductReport.cshtml" />
+    <Content Include="Areas\Misc\Views\AutoGeneratedReport\Index.cshtml" />
+    <Content Include="Areas\Misc\Views\AutoGeneratedReport\Styles\AutoGeneratedReport.less" />
+    <None Include="BundleTransformer.Configuration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Views\Test\Style\TotalTransactions.less" />
+    <Content Include="Areas\Licensee\Views\TotalTransactions\Index.cshtml" />
+    <Content Include="Areas\Licensee\Views\TotalTransactions\TotalTransactions.less" />
+    <Content Include="Areas\UserControl\Views\User\ChangePassword.cshtml" />
+    <Content Include="Areas\UserControl\Views\User\UserProfile.cshtml" />
+    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Index.cshtml" />
+    <Content Include="Areas\Licensee\Views\VirtualSportWinLoss\Index.cshtml" />
+    <Content Include="Areas\Licensee\Views\VirtualSportWinLoss\VirtualSportWinLoss.less" />
+    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Styles\WinLossByLicensee.less" />
+    <Content Include="Areas\Licensee\Views\WinLossByLicensee\WinLossByLicensee_CurrencyReport.cshtml" />
+    <Content Include="Areas\Licensee\Views\WinLossByLicensee\WinLossByLicensee_AgentReport.cshtml" />
+    <Content Include="Areas\Licensee\Views\WinLossByLicensee\WinLossByLicensee_MemberReport.cshtml" />
+    <Content Include="Areas\Misc\Views\Web.config" />
+    <Content Include="Areas\Misc\Views\BetCount\Index.cshtml" />
+    <Content Include="Areas\Misc\Views\BetCount\Styles\BetCount.less" />
+    <Content Include="Areas\Misc\Views\BetCount\BetCountReport.cshtml" />
+    <Content Include="Areas\Misc\Views\BetCount\HistoryBetCountReport.cshtml" />
+    <None Include="Areas\UserLogin\themes\fonts\Abel.woff" />
+    <None Include="Areas\UserLogin\themes\fonts\OpenSans.woff" />
+    <None Include="Areas\UserLogin\themes\fonts\YanoneKaffeesatz.woff" />
+    <Content Include="Areas\UserLogin\themes\select-site.less" />
+    <Content Include="Areas\UserLogin\Views\Login\Index.cshtml" />
+    <Content Include="Areas\UserLogin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\UserLogin\Views\SSO\SSOIndex.cshtml" />
+    <Content Include="Areas\UserLogin\Views\UserSite\Site.cshtml" />
+    <Content Include="Web.ConnectionString.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.AppSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="scripts\_lib\MonthPicker\monPickr-0.0.3-custom.less" />
+    <Content Include="themes\base\colors.less" />
+    <Content Include="themes\base\common.less" />
+    <Content Include="themes\base\grid.less" />
+    <Content Include="themes\base\fonts.less" />
+    <Content Include="themes\base\jqueryuicustom.less" />
+    <Content Include="themes\base\style.less" />
+    <Content Include="themes\base\themes.less" />
+    <Content Include="Web.master.AppSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.master.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.master.ConnectionString.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.local.AppSettings.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.local.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.local.Debug.config">
+      <DependentUpon>Web.local.config</DependentUpon>
+    </Content>
+    <Content Include="Web.local.Release.config">
+      <DependentUpon>Web.local.config</DependentUpon>
+    </Content>
+    <Content Include="Web.local.ConnectionString.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Content\Fanex.Result\fanex.result.less" />
+    <Content Include="Web.backupMNL.AppSettings.config" />
+    <Content Include="Web.backupMNL.config" />
+    <Content Include="Web.backupMNL.ConnectionString.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="scripts\_lib\Fanex.Grid\images\Thumbs.db" />
+    <None Include="themes\easyui\default\images\Thumbs.db" />
+    <None Include="themes\easyui\gray\images\Thumbs.db" />
+    <Content Include="themes\fonts\OpenSans.woff" />
+    <Content Include="themes\fonts\YanoneKaffeesatz.woff" />
+    <Content Include="Views\Home\MostVisitedPages\MostVisitedPages_Content.cshtml" />
+    <Content Include="Views\Common\AccessDenied.cshtml" />
+    <Content Include="Views\Common\UnderMaintenance.cshtml" />
+    <Content Include="Views\Home\MostVisitedPages\Styles\MostVisitedPages.less" />
+    <Content Include="Web.Configuration\LicenseeReportSection.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Configuration\LicenseeEmailSection.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Web.pro.AppSettings.config" />
+    <Content Include="Web.pro.config" />
+    <Content Include="Web.pro.ConnectionString.config" />
+    <Content Include="Web.uat.AppSettings.config" />
+    <Content Include="Web.uat.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.uat.ConnectionString.config" />
+    <Content Include="Areas\UserLogin\Views\Common\ExpiredNotification.cshtml" />
+    <Content Include="Web.Configuration\LiveCasinoProductSection.config" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>63738</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,93 @@
+@using Fanex.AccountingReports.Licensee.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {    
+    @Styles.Render("~/scripts/_lib/MultipleSelect/style", "~/scripts/_lib/MonthPicker/style", "~/scripts/_lib/Fanex.Grid/style")    
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css?ver=1" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less?ver=2" />
+
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Licensee/Views/CompanyWinLoss/Styles/Index.less" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Licensee / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <span id="notemessage" class="note-info-message" title=''></span>
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_3 align-right">
+                    @Labels.Month
+                </div>
+                 <div class="edit-field col_5">
+                        <div id="dvMonth">
+                        </div>
+                </div>
+                <div class="lbl-field col_4 align-right">
+                    @Labels.Licensee
+                </div>
+               <div class="edit-field col_7">
+                    <div id="dvLicensee">
+                        <select id="ddlLicensee"></select>
+                    </div>
+                </div>                 
+                <div class="lbl-field col_3 align-right">
+                    @Labels.Currency
+                </div>
+               <div class="edit-field col_5">
+                    <div id="dvCurrency">
+                        <select id="ddlCurrency"></select>
+                    </div>
+                </div>
+                <div class="lbl-field col_3 align-right">
+                    @Labels.Product
+                </div>
+               <div class="edit-field col_5">
+                    <div id="dvProduct">
+                        <select id="ddlProduct"></select>
+                    </div>
+                </div>
+                <div class="submit width-auto col_4 prefix_5">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="ErrMsg" class="col_35 display-none width-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="reportContainer" class="content-grid display-none">
+    <div id="reportContent" class="freegrid display-none">
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var today = '@DateTime.Today.ToShortDateString()';
+        var minDate = '@(new DateTime(2015, 06, 1))';
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="@Url.Content("~/scripts/_lib/MonthPicker/monPickr-0.0.3.js")" ></script>
+    @Scripts.Render("~/scripts/_lib/multiselect", "~/scripts/_lib/monPickr")
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/PopUp/dialogbox.js"></script>
+    <script type="text/javascript" src="~/Areas/Licensee/Views/CompanyWinLoss/Scripts/Index.js"></script>
+}

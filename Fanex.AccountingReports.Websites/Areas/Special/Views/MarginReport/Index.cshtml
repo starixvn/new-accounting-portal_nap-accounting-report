@@ -1,0 +1,50 @@
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.AccountingReports.Special.Resources;
+@using Fanex.AccountingReports.Core.Services.Impl;
+@using Fanex.AccountingReports.Core.Web;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Pager/pagination.css" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Special / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field align-right col_2">
+                    @SpecialResources.Amount</div>
+                <div class="col_4">
+                    <input type="text" id="txtAmount" />
+                </div>
+                <div class="submit width-auto col_4 prefix_2">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="ErrMsg" class="col_35 display-none width-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-grid">
+    <div id="marginReportContainer" class="display-none">
+        <div id="marginReport" class="freegrid display-none">
+        </div>
+    </div>
+</div>
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/Areas/Special/Views/MarginReport/Scripts/MarginReport.js"></script>
+}

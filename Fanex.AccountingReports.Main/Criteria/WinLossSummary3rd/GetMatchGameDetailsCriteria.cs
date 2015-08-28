@@ -1,0 +1,111 @@
+﻿// --------------------------------------------------------------------------
+// <copyright file="GetMatchGameDetailsCriteria.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Kan.Nguyen" date="2013.06.27">Created</change>
+// </history>
+
+namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd
+{
+    using System;
+    using System.Linq;
+    using Fanex.AccountingReports.Core.Constants;
+    using Fanex.AccountingReports.Main.Common;
+    using Fanex.NAP.Framework.Data;
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    public class GetMatchGameDetailsCriteria : CriteriaBase
+    {
+        // To determine type of this detail: SB, Racing, Virtual sports, Virtual racing
+        private SportTypeWinLoss _type = SportTypeWinLoss.Unknown;
+
+        public DateTime FromDate { get; set; }
+
+        public DateTime ToDate { get; set; }
+
+        public int SportType { get; set; }
+
+        public int BetType { get; set; }
+
+        public int LiveIndicator { get; set; }
+
+        public string ParentName { get; set; }
+
+        [SpParam(SqlParamName = "drilldownbytype")]
+        public int DrillDownByType { get; set; }
+
+        public SportTypeWinLoss Type
+        {
+            get
+            {
+                if (_type == SportTypeWinLoss.Unknown)
+                {
+                    if (SportType <= MainConstants.WinLossSummaryMaxSportbookId ||
+                        SportType == SportContants.NumberGame ||
+                        SportType == SportContants.HorseRacingFixedOdds)
+                    {
+                        _type = SportTypeWinLoss.SportBook;
+                    }
+                    else if (MainConstants.WinLossSummaryRacingSportIds.Contains(SportType))
+                    {
+                        _type = SportTypeWinLoss.Racing;
+                    }
+                    else if (MainConstants.WinLossSummaryVirtualRacingSportTypeIds.Contains(SportType))
+                    {
+                        _type = SportTypeWinLoss.VirtualRacing;
+                    }
+                    else if (MainConstants.WinLossSummaryVirtualSportIds.Contains(SportType))
+                    {
+                        _type = SportTypeWinLoss.VirtualSports;
+                    }
+                }
+
+                return _type;
+            }
+        }
+
+        /// <summary>
+        /// Gets the setting key.
+        /// </summary>
+        /// <returns>The setting key.</returns>
+        public override string GetSettingKey()
+        {
+            string storeProcedureName;
+            SportTypeWinLoss type = this.Type;
+            switch (type)
+            {
+                case SportTypeWinLoss.SportBook:
+                    storeProcedureName = "Main_WinLossSummary3rd_Get_Sporttype_SB";
+                    break;
+
+                case SportTypeWinLoss.Racing:
+                    storeProcedureName = "Main_WinLossSummary3rd_Get_Racing";
+                    break;
+
+                case SportTypeWinLoss.VirtualSports:
+                    storeProcedureName = "Main_WinLossSummary3rd_Get_VirtualSports";
+                    break;
+
+                case SportTypeWinLoss.VirtualRacing:
+                    storeProcedureName = "Main_WinLossSummary3rd_Get_VirtualRacing";
+                    break;
+
+                case SportTypeWinLoss.Unknown:
+                default:
+                    storeProcedureName = string.Empty;
+                    break;
+            }
+
+            return storeProcedureName;
+        }
+
+        public override bool IsValid()
+        {
+            return true;
+        }
+    }
+}

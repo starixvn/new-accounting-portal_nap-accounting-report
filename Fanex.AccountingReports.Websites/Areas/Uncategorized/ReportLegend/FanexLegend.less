@@ -1,0 +1,50 @@
+.reportLegend
+{
+    background: url("Images/information-icon.png") no-repeat scroll 0 3px transparent;
+    cursor: help;
+    float: right;
+    height: 16px;
+    margin: 0 2px;
+    padding: 4px 10px;
+}
+
+.reportLegend:hover
+{
+    background: url("Images/information-icon2-hover.png") no-repeat scroll 0 3px transparent;
+}
+
+#previewReportLegendDialog 
+{
+    font-family: Tahoma,Arial,Helvetica,sans-serif !important;
+    width: 650px !important;
+    .title-tab
+    {
+        font-size: 1.0em;
+    }
+
+    #lengendContentContainer ul
+    {
+        font-size: 1.0em;
+        margin-bottom: 5px;
+        padding: 0px 10px;
+        > li
+        {
+            list-style: disc outside none;            
+        }
+        
+        > ul > li
+        {
+            list-style: circle outside none;               
+        }
+            
+        > ul > ul > li
+        {
+            list-style: square outside none;
+        }
+    }
+    
+    .content
+    {
+        margin-top: 6px;
+    }
+}

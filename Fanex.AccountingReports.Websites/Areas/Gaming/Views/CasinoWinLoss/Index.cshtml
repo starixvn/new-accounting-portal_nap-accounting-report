@@ -1,0 +1,64 @@
+@using Fanex.AccountingReports.Gaming.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Core.Configurations;
+@using Fanex.AccountingReports.Core.Extensions;
+
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Head {
+    @Styles.Render("~/scripts/_lib/MultipleSelect/style")
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Autocomplete/styles.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Gaming/Views/CasinoWinLoss/Styles/CasinoWinLoss.less" />
+}
+
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Gaming / </span><span class="curr">@ViewBag.Title</span> 
+        </div>
+    </div>
+}
+
+<div id="filter-bar">
+    <div class="filter-form">
+        <div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="datepickerplugin" class="lbl-field col_15 align-right">
+                    </div>
+                </div>
+                <div class="submit col_4">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="CasinoWinLostContainer" class="display-none content-grid casino-win-lost-container">
+    <div id="CasinoWinLostContent" class="freegrid">
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var labelDate = '@Labels.Date';
+        var isDisplayTotalCurrency = '@AppSettings.IsDisplayTotalCurrency';
+        var today = '@DateTime.Today.ToShortFormatedDate()';
+        var minDay = '@DateTime.Today.AddMonths(-3).ToShortFormatedDate()';
+    </script>
+}
+
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/CasinoWinLoss/Scripts/CasinoWinLoss.js"></script>
+}

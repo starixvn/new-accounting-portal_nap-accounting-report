@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="agentPTcomm" xml:space="preserve">
+    <value>AgentPT/ &lt;br/&gt;Comm</value>
+  </data>
+  <data name="bingo" xml:space="preserve">
+    <value>Bingo</value>
+  </data>
+  <data name="casinoGame" xml:space="preserve">
+    <value>Casino Games</value>
+  </data>
+  <data name="choice" xml:space="preserve">
+    <value>Choice</value>
+  </data>
+  <data name="even" xml:space="preserve">
+    <value>Even</value>
+  </data>
+  <data name="firstgoal" xml:space="preserve">
+    <value>First Goal</value>
+  </data>
+  <data name="ft" xml:space="preserve">
+    <value>FT</value>
+  </data>
+  <data name="high" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="ht" xml:space="preserve">
+    <value>HT</value>
+  </data>
+  <data name="lbl1x2" xml:space="preserve">
+    <value>1 X 2</value>
+  </data>
+  <data name="lblBoth" xml:space="preserve">
+    <value>Both</value>
+  </data>
+  <data name="lblDraw" xml:space="preserve">
+    <value>Draw</value>
+  </data>
+  <data name="lblNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="lblOne" xml:space="preserve">
+    <value>One</value>
+  </data>
+  <data name="lblOr" xml:space="preserve">
+    <value>Or</value>
+  </data>
+  <data name="lblYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="lose" xml:space="preserve">
+    <value>Lose</value>
+  </data>
+  <data name="low" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="masterPTcomm" xml:space="preserve">
+    <value>MasterPT/ &lt;br/&gt;Comm</value>
+  </data>
+  <data name="member" xml:space="preserve">
+    <value>Member</value>
+  </data>
+  <data name="next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="nogoal" xml:space="preserve">
+    <value>No Goal</value>
+  </data>
+  <data name="noInfo" xml:space="preserve">
+    <value>No information is available</value>
+  </data>
+  <data name="numbergameno" xml:space="preserve">
+    <value>Number Game No</value>
+  </data>
+  <data name="odd" xml:space="preserve">
+    <value>Odd</value>
+  </data>
+  <data name="odds" xml:space="preserve">
+    <value>Odds</value>
+  </data>
+  <data name="over" xml:space="preserve">
+    <value>Over</value>
+  </data>
+  <data name="pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="race" xml:space="preserve">
+    <value>Race</value>
+  </data>
+  <data name="refno" xml:space="preserve">
+    <value>Ref No</value>
+  </data>
+  <data name="results" xml:space="preserve">
+    <value>Results</value>
+  </data>
+  <data name="stake" xml:space="preserve">
+    <value>Stake</value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="superPTcomm" xml:space="preserve">
+    <value>SuperPT/ &lt;br/&gt;Comm</value>
+  </data>
+  <data name="transfer" xml:space="preserve">
+    <value>Transfer</value>
+  </data>
+  <data name="transtime" xml:space="preserve">
+    <value>Trans.Time</value>
+  </data>
+  <data name="under" xml:space="preserve">
+    <value>Under</value>
+  </data>
+  <data name="winloss" xml:space="preserve">
+    <value>Win Loss</value>
+  </data>
+  <data name="won" xml:space="preserve">
+    <value>Won</value>
+  </data>
+  <data name="correctscore" xml:space="preserve">
+    <value>Correct Score</value>
+  </data>
+  <data name="lblMemberBetList" xml:space="preserve">
+    <value>Member Bet List</value>
+  </data>
+  <data name="lblMasterWinLoseDetail" xml:space="preserve">
+    <value>Master Win Lost Detail</value>
+  </data>
+  <data name="lblMatchWinLostDetail" xml:space="preserve">
+    <value>Match Win Loss Detail</value>
+  </data>
+  <data name="lblMixParlay" xml:space="preserve">
+    <value>Mix Parlay</value>
+  </data>
+  <data name="subtotalCom" xml:space="preserve">
+    <value>Subtotal(Com.)</value>
+  </data>
+  <data name="subtotalWinlost" xml:space="preserve">
+    <value>Subtotal(winlost)</value>
+  </data>
+  <data name="total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="place" xml:space="preserve">
+    <value>Place</value>
+  </data>
+  <data name="win" xml:space="preserve">
+    <value>Win</value>
+  </data>
+  <data name="reject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="running" xml:space="preserve">
+    <value>Running</value>
+  </data>
+  <data name="draw" xml:space="preserve">
+    <value>Draw</value>
+  </data>
+  <data name="waiting" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="refund" xml:space="preserve">
+    <value>Refund</value>
+  </data>
+  <data name="voided" xml:space="preserve">
+    <value>Void</value>
+  </data>
+  <data name="lblOverEven" xml:space="preserve">
+    <value>Over/Even</value>
+  </data>
+  <data name="lblOverOdd" xml:space="preserve">
+    <value>Over/Odd</value>
+  </data>
+  <data name="lblUnderEven" xml:space="preserve">
+    <value>Under/Even</value>
+  </data>
+  <data name="lblUnderOdd" xml:space="preserve">
+    <value>Under/Odd</value>
+  </data>
+  <data name="warrior2ndBall" xml:space="preserve">
+    <value>2nd ball win</value>
+  </data>
+  <data name="warrior3rdBall" xml:space="preserve">
+    <value>3rd ball win</value>
+  </data>
+  <data name="losingtickets" xml:space="preserve">
+    <value>Total of losing tickets</value>
+  </data>
+  <data name="details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="scoreMap" xml:space="preserve">
+    <value>Score Map</value>
+  </data>
+  <data name="a" xml:space="preserve">
+    <value>A</value>
+  </data>
+  <data name="h" xml:space="preserve">
+    <value>H</value>
+  </data>
+  <data name="betweenXandY" xml:space="preserve">
+    <value>Between {0} and {1}</value>
+  </data>
+  <data name="points" xml:space="preserve">
+    <value>points</value>
+  </data>
+  <data name="upPoints" xml:space="preserve">
+    <value>UP points</value>
+  </data>
+  <data name="exactly" xml:space="preserve">
+    <value>Exactly</value>
+  </data>
+  <data name="noTiebreak" xml:space="preserve">
+    <value>No Tiebreak</value>
+  </data>
+  <data name="date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>Event</value>
+  </data>
+  <data name="LicenseeWLComm" xml:space="preserve">
+    <value>Licensee WL/Comm</value>
+  </data>
+  <data name="WinLossComm" xml:space="preserve">
+    <value>Win Loss/Comm</value>
+  </data>
+</root>

@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{71497EB2-B2CA-473B-9AB8-81220A9AD9AD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fanex.AccountingReports.WinLoss</RootNamespace>
+    <AssemblyName>Fanex.AccountingReports.WinLoss</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ExcelUtil, Version=29.3.0.1000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\ExcelUtil.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Caching, Version=1.0.404.94, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Logging">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Core">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Framework">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20505.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants\WinLossContants.cs" />
+    <Compile Include="Controllers\AllCustomerTurnOverController.cs" />
+    <Compile Include="Controllers\DailyMixParlayWinLossController.cs" />
+    <Compile Include="Controllers\DailyMixParlayWinLoss_2hLinkController.cs" />
+    <Compile Include="Controllers\LeagueWinLossController.cs" />
+    <Compile Include="Controllers\MatchWinLossByBettypeController.cs" />
+    <Compile Include="Controllers\MatchWinLossSingleBetController.cs" />
+    <Compile Include="Controllers\TreeWinLossController.cs" />
+    <Compile Include="Criteria\AllCustomerTurnOver\GetAllCustomerTurnOverCriteria.cs" />
+    <Compile Include="Criteria\DailyMixParlayWinLoss\GetAdvanceMixParlayReportCriteria.cs" />
+    <Compile Include="Criteria\DailyMixParlayWinLoss\GetCombinationWinLossReportCriteria.cs" />
+    <Compile Include="Criteria\DailyMixParlayWinLoss\GetMixParlayReportCriteria.cs" />
+    <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossByBetTypeCriteria.cs" />
+    <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossBySportCriteria.cs" />
+    <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossCriteria.cs" />
+    <Compile Include="Criteria\MatchWinLossByBettype\MatchWinLossByBettypeCriteria.cs" />
+    <Compile Include="Criteria\MatchWinLossSingleBet\GetMatchWinLossSingleBetCriteria.cs" />
+    <Compile Include="Criteria\TreeWinLoss\GetTreeWinLossByLevelCriteria.cs" />
+    <Compile Include="Criteria\TreeWinLoss\GetTreeWinLossByProductCriteria.cs" />
+    <Compile Include="Criteria\TreeWinLoss\GetVirtualRateCriteria.cs" />
+    <Compile Include="Criteria\TreeWinLoss\GetVirtualRateHistoryCriteria.cs" />
+    <Compile Include="Models\AllCustomerTurnOver\CustomerTurnOverBySite.cs" />
+    <Compile Include="Models\AllCustomerTurnOver\CustomerTurnoverBySiteDetail.cs" />
+    <Compile Include="Models\DailyMixParlayWinLoss\WinLossInfo.cs" />
+    <Compile Include="Models\LeagueWinLoss\LeagueWinLossInfo.cs" />
+    <Compile Include="Models\MatchWinLossByBettype\MatchWinLossByBettype.cs" />
+    <Compile Include="Models\MatchWinLossSingleBet\MatchWinLossSingleBet.cs" />
+    <Compile Include="Models\TreeWinLoss\SMAVirtualRate.cs" />
+    <Compile Include="Models\TreeWinLoss\TreeWinLoss.cs" />
+    <Compile Include="Models\TreeWinLoss\TreeWinLossInfo.cs" />
+    <Compile Include="Models\TreeWinLoss\TreeWinLossVirtualRate.cs" />
+    <Compile Include="Models\TreeWinLoss\VirtualRateByBettypeInfo.cs" />
+    <Compile Include="Models\TreeWinLoss\VirtualRateInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Implement\DailyMixParlayWinLossRepository.cs" />
+    <Compile Include="Repositories\Implement\LeagueWinLossRepository.cs" />
+    <Compile Include="Repositories\Implement\TreeWinLossRepository.cs" />
+    <Compile Include="Repositories\Interface\IDailyMixParlayWinLossRepository.cs" />
+    <Compile Include="Repositories\Interface\ILeagueWinLossRepository.cs" />
+    <Compile Include="Repositories\Interface\ITreeWinLossRepository.cs" />
+    <Compile Include="Resources\Labels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Labels.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\WinLossResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WinLossResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Implement\AllCustomerTurnOver\AllCustomerTurnOverExportReportService.cs" />
+    <Compile Include="Services\Implement\AllCustomerTurnOver\AllCustomerTurnOverGetReportService.cs" />
+    <Compile Include="Services\Implement\DailyMixParlayWinLoss\DailyMixParlayWinLossService.cs" />
+    <Compile Include="Services\Implement\LeagueWinLossService.cs" />
+    <Compile Include="Services\Implement\MatchWinLossByBettype\MatchWinLossByBettypeExportDataService.cs" />
+    <Compile Include="Services\Implement\MatchWinLossByBettype\MatchWinLossByBettypeService.cs" />
+    <Compile Include="Services\Implement\MatchWinLossSingleBet\MatchWinLossSingleBetService.cs" />
+    <Compile Include="Services\Implement\TreeWinLoss\TreeWinLossExcelService.cs" />
+    <Compile Include="Services\Implement\TreeWinLoss\TreeWinLossService.cs" />
+    <Compile Include="Services\Implement\TreeWinLoss\TreeWinLossUtil.cs" />
+    <Compile Include="Services\Interface\AllCustomerTurnOver\IAllCustomerTurnOverExportReportService.cs" />
+    <Compile Include="Services\Interface\AllCustomerTurnOver\IAllCustomerTurnOverGetReportService.cs" />
+    <Compile Include="Services\Interface\DailyMixParlayWinLoss\IDailyMixParlayWinLossService.cs" />
+    <Compile Include="Services\Interface\ILeagueWinLossService.cs" />
+    <Compile Include="Services\Interface\MatchWinLossByBettype\IMatchWinLossByBettypeExportDataService.cs" />
+    <Compile Include="Services\Interface\MatchWinLossByBettype\IMatchWinLossByBettypeService.cs" />
+    <Compile Include="Services\Interface\MatchWinLossSingleBet\IMatchWinLossSingleBetService.cs" />
+    <Compile Include="Services\Interface\TreeWinLoss\ITreeWinLossExcelService.cs" />
+    <Compile Include="Services\Interface\TreeWinLoss\ITreeWinLossService.cs" />
+    <Compile Include="WinLossAreaRegistration.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Labels.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Labels.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\WinLossResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WinLossResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">
+      <Project>{A5608298-26C2-4F05-A7FD-AA8C0700ED38}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

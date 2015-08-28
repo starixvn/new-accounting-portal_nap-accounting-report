@@ -1,0 +1,81 @@
+﻿@using Fanex.AccountingReports.Core.Configurations;
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.AccountingReports.Special.Resources;
+@using Fanex.AccountingReports.Core.Services.Impl;
+@using Fanex.AccountingReports.Core.Web;
+@{
+    ViewBag.Title =
+        AppSession.CurrentWorkingOnMenu != null
+        ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Special/Views/SaveBetReport/Styles/SaveBetReport.less" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Special / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <div class="filter-form">
+        <div id="matchSelectionFilter">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="datepickerplugin" class="lbl-field col_8 align-right">
+                    </div>
+                </div>
+                <div id="sportContainer" class="sportContainer display-none">
+                    <div class="lbl-field align-right col_2">
+                        @Labels.Sport</div>
+                    <div class="edit-field col_8">
+                        <select id="ddlSport" class="ddlSport">
+                        </select>
+                    </div>
+                    <div class="clear-both"></div>
+                </div>
+                <div id="leagueContainer" class="leagueContainer display-none">
+                    <div class="lbl-field align-right col_2">
+                        @Labels.League</div>
+                    <div class="edit-field col_16">
+                        <select id="ddlLeague" class="ddlLeague">
+                        </select>
+                    </div>
+                    <div class="clear-both"></div>
+                </div>
+                <div id="generateBtnContainer" class="submit col_4 display-none">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+                <div id="noneSportAndLeagueMsg" class="display-none noneSportAndLeagueMsg">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-grid display-inline-block">
+    <div id="saveBetReportContainer" class="display-none">
+        <div id="saveBetReport" class="freegrid display-none">
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var labelDate = '@Labels.Date';
+        var today = '@DateTime.Today.ToShortDateString()';
+        var minDate = '1/1/2014';
+        var noneSportAndLeagueMsg = '@Labels.There_are_no_sports_and_leagues';
+        var newSaveBetReportDate = '@AppSettings.NewSaveBetReportDate';
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MultipleSelect/jquery.multiselect.js"></script>
+    <script type="text/javascript" src="~/Areas/Special/Views/SaveBetReport/Scripts/SaveBetReport.js"></script>
+}

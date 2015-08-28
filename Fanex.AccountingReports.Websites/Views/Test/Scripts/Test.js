@@ -1,0 +1,3 @@
+﻿function Testing() {
+    alert('hi');
+}

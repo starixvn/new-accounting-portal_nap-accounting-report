@@ -1,0 +1,60 @@
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.AccountingReports.Gaming.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/scripts/_lib/DatePicker/style", "~/scripts/_lib/Fanex.Grid/style", "~/scripts/_lib/MultipleSelect/style")
+    <link rel="stylesheet" type="text/css" href="~/Areas/Gaming/Views/NumberOfActiveMember/Styles/NumberOfActiveMember.less" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Gaming / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <div class="filter-form">
+        <div id="betCountReportFilter">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="datepickerplugin" class="lbl-field col_15 align-right">
+                    </div>
+                    <div class="lbl-field col_2 align-right">
+                        @Labels.Product
+                    </div>
+                    <div class="edit-field  col_7 align-left ddlProductContainer">
+                        <select id="ddlProduct">
+                        </select>
+                    </div>
+                </div>
+                <div class="submit col_4">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="numberActiveMemberContainer" class="content-grid display-none">
+    <div id="numberActiveMemberContent" class="freegrid display-none">
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var labelFrom = '@Labels.From';
+        var labelTo = '@Labels.To';
+        var today = '@DateTime.Today.ToShortDateString()';
+    </script>
+}
+@section Foot {
+    @Scripts.Render("~/scripts/_lib/multiselect")
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/NumberOfActiveMember/Scripts/NumberOfActiveMember.js"></script>
+}

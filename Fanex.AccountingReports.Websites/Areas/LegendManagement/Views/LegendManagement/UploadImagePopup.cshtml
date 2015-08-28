@@ -1,0 +1,47 @@
+﻿@using Fanex.AccountingReports.LegendManagement.Configurations;
+@using Fanex.AccountingReports.LegendManagement.Resources;
+@{
+    ViewBag.Title = Labels.LegendManagement;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/Areas/LegendManagement/Views/LegendManagement/Styles/UploadImagePopup.less" />
+}
+@section Headline {
+}
+<div class="content-grid display-inline-block">
+    <div id="uploadImageDialog">
+        <ul id="uploadbox-tab">
+            <li><a id="tab-url-a" href="javascript:;" class="tab-item current">@Labels.From_URL</a></li>
+            <li><a id="tab-choose-a" href="javascript:;" class="tab-item">@Labels.Upload_Image</a></li>
+        </ul>
+        <div id="tab-url" class="tab-url chooseimg display-none">
+            <div class="bold image-location">@Labels.Image_location</div>
+            <input id="txt_url" type="input" value="" />
+        </div>
+        <div id="tab-choose" class="tab-choose chooseimg display-none">
+            <div class="bold label-choosing-image">@Labels.Choosing_image</div>
+            <input id="txtInputfile" type="input" name="txtInputfile" size="40" class="inputfile"
+                readonly="true" />
+            <input id="btnInputfile" type="submit" class="contentButton" value="@Labels.Browse..." />
+            <input id="txtfile" type="file" name="txtfile" size="40" class="inputfile" />
+            <small>@Labels.LegendManagement_UploadFileNote</small>
+        </div>
+        <div class="uploadbuttonbar">
+            <input id="btnUpload" type="submit" class="contentButton" value="Upload" />
+            <input id="btnCancelUpload" type="submit" class="contentButton" value="Cancel" />
+        </div>
+        <div id="upload_message" class="display-none">
+        </div>
+    </div>
+</div>
+@section scripts
+{
+}
+@section Foot {
+    <script type="text/javascript" src="~/Scripts/_Lib/TinyMCE/jquery.tinymce.js"></script>
+    <script type="text/javascript" src="~/Scripts/_Lib/TinyMCE/ajax.upload.js"></script>
+    <script type="text/javascript" src="~/Scripts/_Lib/Utils/jquery.fixBugsBrowser.js"></script>
+    @Scripts.Render("~/scripts-bundle/legendmanagement")
+    <script type="text/javascript" src="~/Areas/LegendManagement/Views/LegendManagement/Scripts/UploadImagePopup.js"></script>
+}

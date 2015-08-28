@@ -1,0 +1,239 @@
+@using System;
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.AccountingReports.Misc.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Core.Services.Impl;
+@using Fanex.AccountingReports.Misc.Constants;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/scripts/_lib/MultipleSelect/style")
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Autocomplete/styles.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Misc/Views/MAMonitorTool/Styles/MAMonitorTool.less" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Misc / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <span id="notemessage" class="note-info-message" title=''></span>
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.Report_by
+                </div>
+                <div class="edit-field col_11">
+                    <select id="dropdown-reportby" class="dropdown-reportby">
+                    </select>
+                </div>
+                <div id="datepickerplugin" class="lbl-field col_27 align-right">
+                </div>
+                <div class="lbl-field col_3 historyreport-filter bold display-none">
+                    <div>
+                        @Labels.Month</div>
+                </div>
+                <div class="edit-field col_15 historyreport-filter">
+                    <div id="dropdown-month">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.Product
+                </div>
+                @*<div id="productcontainer" class="col_32"></div>*@
+                <div id="productcontainer" class="edit-field col_32">
+                      <select id="dropdown-product" class="dropdown-product">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.Sport
+                </div>
+                <div class="edit-field col_11">
+                    <select id="dropdown-sport" class="dropdown-sport">
+                    </select>
+                </div>
+                <div class="lbl-field col_3 align-right bold">
+                    @Labels.Bet_Type
+                </div>
+                <div class="edit-field col_7">
+                    <select id="dropdown-bettype" class="dropdown-bettype">
+                    </select>
+                </div>
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.Currency
+                </div>
+                <div class="edit-field col_6">
+                    <select id="dropdown-currency" class="dropdown-currency">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.League
+                </div>
+                <div class="edit-field col_11">
+                    <select id="dropdown-league" class="dropdown-league">
+                    </select>
+                    <select id="dropdown-league-disable" disabled="disabled" class="display-none">
+                        <option value="0">@Labels.All_Leagues</option>
+                    </select>
+                </div>
+                <div id="leaguetype-container" class="col_8">
+                </div>
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.Live_Status
+                </div>
+                <div id="livestatus-container" class="lbl-field col_9 align-left">
+                    <div class="col_2 alpha">
+                        <input id="radio-livestatus-all" type="radio" value="-1" checked="checked" name="radio-livestatus"
+                            class="radio-livestatus" />
+                        <label for="radio-livestatus-all">
+                            @Labels.All</label>
+                    </div>
+                    <div class="col_4">
+                        <input id="radio-livestatus-nonline" type="radio" value="0" name="radio-livestatus"
+                            class="radio-livestatus" />
+                        <label for="radio-livestatus-nonline">
+                            @Labels.Non_Live</label>
+                    </div>
+                    <div class="col_2 omega">
+                        <input id="radio-livestatus-live" type="radio" value="1" name="radio-livestatus"
+                            class="radio-livestatus">
+                        <label for="radio-livestatus-live">
+                            @Labels.Live</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.Turnover
+                </div>
+                <div title="@MiscResources.MAMonitorTool_TurnoverRangeNote" class="turnoverrange lbl-field col_11">
+                    <input type="text" id="textbox-minturnover" maxlength="16" class="numberic-textbox" />
+                    <span><b>-</b></span>
+                    <input type="text" id="textbox-maxturnover" maxlength="16" class="numberic-textbox" />
+                </div>
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.Win_Loss
+                </div>
+                <div title="@MiscResources.MAMonitorTool_WinLossRangeNote" class="winlossrange lbl-field col_11">
+                    <input type="text" id="textbox-minwinloss" maxlength="16" class="numberic-textbox" />
+                    <span><b>-</b></span>
+                    <input type="text" id="textbox-maxwinloss" maxlength="16" class="numberic-textbox" />
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_3 prefix_1 align-right bold">
+                    @Labels.UserName
+                </div>
+                <div class="col_12">
+                    <input id="txt-username" type="text" maxlength="50" value="@Labels.Search_All" class="default-suggestionbox" />
+                </div>
+                <div class="submit width-auto col_4">
+                    <input id="button-generate" name="button-generate" type="submit" value="@Labels.Generate" />
+                </div>
+                <div class="submit width-auto col_4">
+                    <input id="button-reset" name="button-reset" type="submit" value="@Labels.Reset" />
+                </div>
+                <div class="submit col_4">
+                    <input id="button-viewhistoryreport" name="button-viewhistoryreport" type="submit"
+                        value="@Labels.History_Report" 
+                        class="currentreport-filter"/>
+                    <input id="button-viewcurrentreport" name="button-viewcurrentreport" type="submit"
+                        value="@Labels.Back" 
+                        class="historyreport-filter display-none"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="parentContainer" class="content-grid">
+    <div id="mainMAMonitorToolReportContainer">
+        <div id="mainMAMonitorToolReport" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="historyMAMonitorToolReportContainer">
+        <div id="historyMAMonitorToolReport" class="freegrid display-none">
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var noteMessage = '@Html.Raw(MiscResources.MAMonitorTool_FilterNote)';
+        var today = '@DateTime.Today.ToShortFormatedDate()';
+        var yesterday = '@DateTime.Today.AddDays(-1).ToShortFormatedDate()';
+        var balanceUpDay = '@ReportService.BalanceUp.BalanceUpDay.ToShortFormatedDate()';
+
+        var minHistoryReportDate = '@(new DateTime(2006, 1, 1).ToShortFormatedDate())';
+        var maxHistoryReportDate = '@ReportService.BalanceUp.BalanceUpDay.AddDays(-1).ToShortFormatedDate()';
+        var viewResources = {
+            From_Date: '@Labels.From_Date',
+            To_Date: '@Labels.To_Date',
+            All_Leagues: '@Labels.All_Leagues',
+            No_league_found: '@Labels.No_league_found',
+            Error_MAMonitorTool_InputTurnoverRange: '@MiscResources.Error_MAMonitorTool_InputTurnoverRange',
+            Error_MAMonitorTool_InputMinMaxTurnoverRange: '@MiscResources.Error_MAMonitorTool_InputMinMaxTurnoverRange',
+            Error_MAMonitorTool_InputWinLossRange: '@MiscResources.Error_MAMonitorTool_InputWinLossRange',
+            Error_MAMonitorTool_InputMinMaxWinLossRange: '@MiscResources.Error_MAMonitorTool_InputMinMaxWinLossRange',
+            Error_MAMonitorTool_WrongUsername: '@MiscResources.Error_MAMonitorTool_WrongUsername',
+            Error_MAMonitorTool_InputLeague: '@MiscResources.Error_MAMonitorTool_InputLeague',
+            MAMonitorTool_ReportTitle: '@MiscResources.MAMonitorTool_ReportTitle',
+            UserName: '@Labels.UserName',
+            Member: '@Labels.Member',
+            Agent: '@Labels.Agent',
+            Master: '@Labels.Master',
+            Super: '@Labels.Super',
+            Turnover: '@Labels.Turnover',
+            Win_Loss: '@Labels.WinLoss',
+            Bet_Count: '@Labels.Bet_Count',
+            Date: '@Labels.Date',
+            Month: '@Labels.Month',
+            Bet_Type: '@Labels.Bet_Type',
+            League: '@Labels.League',
+            Game: '@Labels.Game',
+            Currency: '@Labels.Currency',
+            Sport: '@Labels.Sport',
+            Vs: '@Labels.Vs'
+        };
+    </script>
+}
+@section Foot {
+    @Scripts.Render("~/scripts/_lib/multiselect")
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Autocomplete/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/NumericTextBox/jquery.setcaretposition.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/NumericTextBox/jquery.caret.1.02.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/NumericTextBox/jquery.formattyping.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MonthPicker/monPickr-0.0.3.js"></script>
+    <script type="text/javascript" src="~/Areas/Misc/Views/MAMonitorTool/Scripts/BaseReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Misc/Views/MAMonitorTool/Scripts/NormalReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Misc/Views/MAMonitorTool/Scripts/HistoryReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Misc/Views/MAMonitorTool/Scripts/ReportManager.js"></script>
+}

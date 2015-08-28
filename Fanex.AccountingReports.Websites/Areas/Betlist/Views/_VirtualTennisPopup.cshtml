@@ -1,0 +1,65 @@
+@using Fanex.BetList.Accounting.Models
+@{
+    VirtualTennisModel virtualPopupModel = new VirtualTennisModel();
+    virtualPopupModel = Model;
+    
+}
+<div>
+    <table id="tbl-content">
+        <thead>
+            <tr>
+                <th>
+                    <div>
+                        Kick Off. Time</div>
+                </th>
+                <th>
+                    <div>
+                        Team
+                    </div>
+                </th>
+                <th>
+                    <div>
+                        Total Points</div>
+                </th>
+                <th>
+                    <div>
+                        Event Status</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="c" rowspan="2">
+                    <div class="width120">
+                        @virtualPopupModel.KickOffTime.ToShortDateString()</div>
+                </td>
+                <td class="l">
+                    <div class="width300">
+                        @virtualPopupModel.HomeName</div>
+                </td>
+                <td class="c">
+                    <div class="width100 b"  style="font-size: 14px;">
+                        @virtualPopupModel.HomePoints</div>
+                </td>
+                <td class="c" rowspan="2 ">
+                    <div class="width100 b" style="font-size: 14px;">
+                        @virtualPopupModel.EventStatus</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="l">
+                    <div class="width300">
+                        @virtualPopupModel.AwayName</div>
+                </td>
+                <td class="c">
+                    <div class="width100 b"  style="font-size: 14px;">
+                        @virtualPopupModel.AwayPoints</div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript">
+   var _leagueName = '@virtualPopupModel.LeageName';
+</script>

@@ -1,0 +1,34 @@
+@using Fanex.AccountingReports.Core.Configurations;
+@using Fanex.AccountingReports.Core.Criteria;
+@using Fanex.AccountingReports.Core.Services.Impl;
+@using Fanex.AccountingReports.Core.Resources;
+@using Fanex.Common;
+@{
+    ViewBag.Title = Labels.New_Accounting_Portal;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/Views/Home/MostVisitedPages/Styles/MostVisitedPages.less" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <div>@Labels.Most_Visited_Pages</div>
+        </div>
+    </div>
+}
+<div class="contentBox">
+    @Html.Partial("~/Views/Home/MostVisitedPages/MostVisitedPages_Content.cshtml")
+</div>
+@section scripts {
+    <script type="text/javascript">
+        var maxPages = '@AppSettings.MaxPagesOfMostVisitedPage';
+        var isDisableMostvisitedPage = @(AppSettings.IsDisableMostvisitedPage != null ? AppSettings.IsDisableMostvisitedPage.ToString().ToLower() : "false");
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/jquery.fixedsortable.js"></script>
+    <script type="text/javascript" src="~/Views/Home/MostVisitedPages/Scripts/MostVisitedPages.js"></script>
+}

@@ -1,0 +1,171 @@
+@using Fanex.AccountingReports.Special.Resources;
+<div>
+    <div id="matchAnalysisByMasterReportHeader" class="grid-title display-none">
+        <div class="grid-title-label" id="matchAnalysisByMasterReportTitle">
+        </div>
+        <div class="grid-toolbox">
+            <input id="matchAnalysisByMasterReport_ExportExcel" class="btnExcel" type="button"
+                title="Export to Excel" value="" name="btnExcel" />
+        </div>
+    </div>
+    <div id="matchAnalysisByMasterReport" class="freegrid display-none">
+        <div class="free-cell free-top-left">
+            <table class="grid-fixed-table free-cell-top-left">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="table-cell col160 ">
+                                @Labels.Master
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="row_header_wrapper">
+            <div class="row_header row-headers-background" id="matchAnalysisByMasterReportRowHeader">
+                <table class="grid-fixed-table row_header_content">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="table-cell col160">
+                                    @Labels.Master
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col_header row-headers-background scroll-y">
+            <div class="header-container">
+                <table class="grid-fixed-table col_header_content">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="table-cell col160">
+                                    @Labels.Master
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col120">
+                                    @Labels.Member_Turnover
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col120">
+                                    @Labels.Member_Win_Loss
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100">
+                                    @Labels.Bet_Count
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col120">
+                                    @Labels.Company_Turnover
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col120">
+                                    @Labels.Company_Win_Loss
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col120">
+                                    @Labels.Agency_Turnover
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col120">
+                                    @Labels.Agency_Win_Loss
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col80">
+                                    @Labels.Currency
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="grid-container container">
+            <div class="content-container">
+                <table id="matchAnalysisByMasterReportContent" class="grid-fixed-table col_body_content">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="table-cell col160">
+                                    @Labels.Master
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col120">
+                                    @Labels.Member_Turnover
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col120">
+                                    @Labels.Member_Win_Loss
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100">
+                                    @Labels.Bet_Count
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col120">
+                                    @Labels.Company_Turnover
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col120">
+                                    @Labels.Company_Win_Loss
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col120">
+                                    @Labels.Agency_Turnover
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col120">
+                                    @Labels.Agency_Win_Loss
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col80">
+                                    @Labels.Currency
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row_footer row-footer-background z999">
+            <table class="grid-fixed-table row_footer_content">
+                <thead>
+                </thead>
+            </table>
+        </div>
+        <div class="col_footer row-footer-background scroll-y">
+            <div class="footer-container">
+                <table class="col_footer_content grid-fixed-table">
+                    <thead>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

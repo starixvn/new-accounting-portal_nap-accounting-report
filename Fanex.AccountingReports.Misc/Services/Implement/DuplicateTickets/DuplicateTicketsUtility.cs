@@ -1,0 +1,145 @@
+﻿// -----------------------------------------------------------------------
+// <copyright file="DuplicateTicketsUtility.cs" company="Microsoft">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Security.Cryptography;
+    using System.Text;
+    using Fanex.AccountingReports.Core.Extensions;
+    using Fanex.AccountingReports.Misc.Models.DuplicateTickets;
+    using Fanex.Common;
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    public class DuplicateTicketsUtility
+    {
+        public const int TotalMilliseconds = 1000;
+
+        /// <summary>
+        /// Assign sub-ticket info into a group, In a group of duplicate ticket, trans date of tickets must be compared with min(ticket) and less than 1000 millisecond.
+        /// </summary>
+        /// <param name="duplicateTicketByUserName">Duplicate ticket by user name.</param>
+        /// <returns>Return tickets list.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
+        public List<TicketInfo> AssignSubTicketInfo(IGrouping<dynamic, dynamic> duplicateTicketByUserName)
+        {
+            List<TicketInfo> groups = new List<TicketInfo>();
+            DateTime prevBetTimeGroup = new DateTime(2014, 7, 11); 
+            DateTime prevBetTimeTicket = new DateTime(2014, 7, 11);
+            int ticketIndex = 0;
+            double timeDifferenceGroup = 0;
+            double timeDifferenceTicket = 0;
+            int groupNo = 0;           
+
+            foreach (var duplicateTicket in duplicateTicketByUserName)
+            {
+                DateTime betTime = duplicateTicket.bettime;
+                TimeSpan timeSpanGroup = betTime.Subtract(prevBetTimeGroup);
+                TimeSpan timeSpanTicket = betTime.Subtract(prevBetTimeTicket);
+                timeDifferenceGroup = timeSpanGroup.TotalMilliseconds;
+                timeDifferenceTicket = timeSpanTicket.TotalMilliseconds;
+
+                if (ticketIndex == 0)
+                {
+                    timeDifferenceGroup = 0;
+                    timeDifferenceTicket = 0;
+                }
+
+                if (timeDifferenceGroup < 0)
+                {
+                    continue;
+                }
+
+                if (timeDifferenceGroup >= TotalMilliseconds)
+                {
+                    groupNo++;
+                    ticketIndex = 0;
+                    timeDifferenceGroup = 0;
+                    timeDifferenceTicket = 0;
+                }
+
+                TicketInfo ticketInfo = new TicketInfo()
+                {
+                    Status = Converter.ToString2(duplicateTicket.status),
+                    ReferenceNumber = Convert.ToInt64(duplicateTicket.refno),
+                    BetTime = betTime.ToLongMMMddFormatedDate(),
+                    TimeDifference = timeDifferenceTicket,
+                    GroupNo = groupNo
+                };
+
+                if (ticketIndex == 0)
+                {
+                    prevBetTimeGroup = betTime;
+                }
+
+                prevBetTimeTicket = betTime;
+
+                ticketIndex++;
+                groups.Add(ticketInfo);
+            }
+
+            return groups;
+        }
+
+        /// <summary>
+        /// Assign main ticket info.
+        /// </summary>
+        /// <param name="duplicateTicketByUserName">Duplicate ticket by user name.</param>
+        /// <returns>Return object list main tickets.</returns>
+        public DuplicateTicketsByUserName AssignMainTicketInfo(IGrouping<dynamic, dynamic> duplicateTicketByUserName)
+        {
+            DateTime winlostDate = Converter.ToDateTime(duplicateTicketByUserName.Key.winlostdate);
+            var ticket = new DuplicateTicketsByUserName
+            {
+                UserName = Converter.ToString2(duplicateTicketByUserName.Key.username),
+                CustId = Converter.ToInt(duplicateTicketByUserName.Key.custid),
+                BetType = Converter.ToString2(duplicateTicketByUserName.Key.typename),
+                WinLostDate = winlostDate.ToShortFormatedDate(),
+                BalanceBeforeBet = Converter.ToDecimal(duplicateTicketByUserName.Key.balance),
+                Stake = Converter.ToDecimal(duplicateTicketByUserName.Key.stake),
+                Odds = Converter.ToDecimal(duplicateTicketByUserName.Key.odds)
+            };
+
+            return ticket;
+        }
+
+        /// <summary>
+        /// Compress string to MD5 code.
+        /// </summary>
+        /// <param name="input">Input string.</param>
+        /// <returns>
+        /// The MD5 code of input parameter.
+        /// </returns>
+        public string GetMD5Hash(string input)
+        {
+            MD5 md5Hash = MD5.Create();
+
+            // Convert the input string to a byte array and compute the hash. 
+            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+            // Create a new Stringbuilder to collect the bytes 
+            // and create a string.
+            StringBuilder builder = new StringBuilder();
+
+            // Loop through each byte of the hashed data  
+            // and format each one as a hexadecimal string. 
+            for (int i = 0; i < data.Length; i++)
+            {
+                builder.Append(data[i].ToString("x2"));
+            }
+
+            // Return the hexadecimal string. 
+            return builder.ToString();
+        }
+    }
+}

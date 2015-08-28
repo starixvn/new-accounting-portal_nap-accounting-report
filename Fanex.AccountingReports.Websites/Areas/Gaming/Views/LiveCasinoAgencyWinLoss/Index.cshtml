@@ -1,0 +1,245 @@
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.AccountingReports.Gaming.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Core.Services.Impl;
+@using Fanex.AccountingReports.Gaming.Constants;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/scripts/_lib/MultipleSelect/style")
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Autocomplete/styles.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Gaming/Views/LiveCasinoAgencyWinLoss/Styles/LiveCasinoAgencyWinLoss.less" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Gaming / </span><span class="curr">@ViewBag.Title</span>
+            <div class="showHideFilter expanded" title="@Labels.Hide_filter">
+            </div>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.Search_by
+                </div>
+                 <div class="lbl-field col_4 align-right">
+                    @Labels.Product
+                </div>
+                <div class="edit-field col_6">
+                    <select id="ddl-product" class="ddl-product">
+                       @* <option value="0">All</option>
+                        <option value="4">SLI</option>
+                        <option value="12">Gold Deluxe</option>
+                        <option value="13">Microgaming</option>
+                        <option value="11">AG Casino</option>*@
+                    </select>
+                </div>
+                <div id="datepickerplugin" class="lbl-field col_27 align-right">
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.User_search
+                </div>
+                <div class="lbl-field col_3 prefix_1 align-right">
+                    @Labels.UserName
+                </div>
+                <div class="col_6">
+                    <input id="txt-username" type="text" maxlength="50" value="@Labels.Search_All" class="default-suggestionbox" />
+                </div>
+                <div class="lbl-field col_5 align-left">
+                    @Labels.Currency
+                </div>
+                <div class="edit-field col_6">
+                    <select id="dropdown-currency" class="dropdown-currency">
+                    </select>
+                </div>
+                <div class="lbl-field col_6 align-left">
+                    <input id="exclude-test-data" type="checkbox" class="alpha" checked="checked" />
+                    <label for="exclude-test-data">
+                        @Labels.Exclude_Test_Data</label>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.Game_search
+                </div>
+                <div class="lbl-field col_3 prefix_1 align-right">
+                    @Labels.Company
+                </div>
+                <div class="edit-field col_6">
+                    <select id="dropdown-company" class="dropdown-company">
+                    </select>
+                </div>
+                <div class="lbl-field col_5 align-left">
+                    @Labels.Game_type
+                </div>
+                <div class="edit-field col_6">
+                    <select id="dropdown-gametype" class="dropdown-gametype">
+                    </select>
+                </div>
+                <div id="game-table-container" class="col_10">
+                    <div class="lbl-field col_3 align-left">
+                        @Labels.Game_table
+                    </div>
+                    <div class="edit-field col_6">
+                        <select id="dropdown-gametable" class="dropdown-gametable">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.Report_by
+                </div>
+                <div id="reportBy" class="lbl-field col_29 prefix_4 align-left">
+                    <div class="col_3 alpha">
+                        <input type="radio" name="radio-reportby" id="radio-reportbydaily" checked="checked" value="@PeriodTypeConstants.LiveCasinoAgencyWinLossDaily" />
+                        <label for="radio-reportbydaily">
+                            @Labels.Daily</label></div>
+                    <div class="col_3">
+                        <input type="radio" name="radio-reportby" id="radio-reportbymonthly" value="@PeriodTypeConstants.LiveCasinoAgencyWinLossMonthly" />
+                        <label for="radio-reportbymonthly">
+                            @Labels.Monthly</label></div>
+                    <div class="col_4">
+                        <input type="radio" name="radio-reportby" id="radio-reportbyusername" value="@PeriodTypeConstants.LiveCasinoAgencyWinLossUsername" />
+                        <label for="radio-reportbyusername">
+                            @Labels.UserName</label></div>
+                    <div class="col_4">
+                        <input type="radio" name="radio-reportby" id="radio-reportbygametype"  value="@PeriodTypeConstants.LiveCasinoAgencyWinLossGameType" />
+                        <label for="radio-reportbygametype">
+                            @Labels.Game_type</label></div>
+                    <div id="rdGameTableContainer" class="col_4">
+                        <input type="radio" name="radio-reportby" id="radio-reportbygametable" value="@PeriodTypeConstants.LiveCasinoAgencyWinLossGameTable" />
+                        <label for="radio-reportbygametable">
+                            @Labels.Game_table</label></div>
+                    <div class="col_4">
+                        <input type="radio" name="radio-reportby" id="radio-reportbyagent" value="@PeriodTypeConstants.LiveCasinoAgencyWinLossAgent" />
+                        <label for="radio-reportbyagent">
+                            @Labels.Agent</label></div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="submit width-auto col_4 prefix_8">
+                    <input id="button-generate" name="button-generate" type="submit" value="@Labels.Generate" />
+                    <input id="button-today" name="button-today" type="submit" value="@Labels.Today" />
+                    <input id="button-yesterday" name="button-yesterday" type="submit" value="@Labels.Yesterday" />
+                    <div id="button-export" class="export-excel-div-button" title="@Labels.Export_to_Excel">
+                        <div class="export-excel-icon">
+                        </div>
+                        <div class="export-excel-label">
+                            @Labels.Export</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="parentContainer" class="content-grid">
+    <div id="mainLiveCasinoAgencyWinLossReportContainer">
+        <div id="mainLiveCasinoAgencyWinLossReport" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="reportByAgent_MasterReportContainer">
+        <div id="reportByAgent_MasterReport" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="reportByAgent_AgentReportContainer">
+        <div id="reportByAgent_AgentReport" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="reportByAgent_MemberReportContainer">
+        <div id="reportByAgent_MemberReport" class="freegrid display-none">
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var today = '@DateTime.Today.ToShortFormatedDate()';
+        var yesterday = '@DateTime.Today.AddDays(-1).ToShortFormatedDate()';
+        var minDate = '@DateTime.Today.AddMonths(-6).FirstDayOfMonth().ToShortFormatedDate()';
+        var beginLast3Months = '@DateTime.Today.AddMonths(-3).FirstDayOfMonth().ToShortFormatedDate()';
+        var endLast3Months = '@DateTime.Today.AddMonths(-1).LastDayOfMonth().ToShortFormatedDate()';
+        var beginLast6Months = '@DateTime.Today.AddMonths(-6).FirstDayOfMonth().ToShortFormatedDate()';
+        var endLast6Months = '@DateTime.Today.AddMonths(-1).LastDayOfMonth().ToShortFormatedDate()';
+        var viewResources = {
+            Time_period: '@Labels.Time_period',
+            From_Date: '@Labels.From_Date',
+            To_Date: '@Labels.To_Date',
+            Options_LastMonthRange: '@Labels.Options_LastMonthRange',
+            Hide_filter: '@Labels.Hide_filter',
+            Show_filter: '@Labels.Show_filter',
+            All: '@Labels.All',
+            Search_All: '@Labels.Search_All',
+            No_company_found: '@Labels.No_company_found',
+            All_Companies: '@Labels.All_Companies',
+            UserName: '@Labels.UserName',
+            Currency: '@Labels.Currency',
+            Total_bets: '@Labels.Total_Bets',
+            Total_wins: '@Labels.Total_Wins',
+            Game_income: '@Labels.Game_income',
+            Game_payout: '@Labels.Game_payout',
+            Company_comm: '@Labels.Company_comm',
+            Company_net_income: '@Labels.Company_net_income',
+            No_Players: '@Labels.No_Players',
+            Company: '@Labels.Company',
+            Date: '@Labels.Date',
+            Month: '@Labels.Month',
+            LiveCasinoAgencyWinLoss_ReportTitle: '@GamingResources.LiveCasinoAgencyWinLoss_ReportTitle',
+            All_Currencies: '@Labels.All_Currencies',
+            Error_NoCurrencyFound: '@Labels.Error_NoCurrencyFound',
+            All: '@Labels.All',
+            No_Games: '@Labels.No_Games',
+            Company_Turnover: '@Labels.Company_Turnover',
+            Game: '@Labels.Game',
+            Table: '@Labels.Table',
+            Gross_Commission: '@Labels.Gross_Commission',
+            Member: '@Labels.Member',
+            Agent: '@Labels.Agent',
+            Master: '@Labels.Master',
+            Super: '@Labels.Super',
+            Company: '@Labels.Company',
+            Win_Loss: '@Labels.Win_Loss',
+            Commission: '@Labels.Commission',
+            Total: '@Labels.Total',
+            Symbol_TotalBets: '@Labels.Symbol_TotalBets'
+        };
+    </script>
+}
+@section Foot {
+    @Scripts.Render("~/scripts/_lib/multiselect")
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Autocomplete/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/LiveCasinoAgencyWinLoss/Scripts/ReportByDailyRange.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/LiveCasinoAgencyWinLoss/Scripts/ReportByMonthlyRange.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/LiveCasinoAgencyWinLoss/Scripts/ReportByUserName.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/LiveCasinoAgencyWinLoss/Scripts/ReportByGameType.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/LiveCasinoAgencyWinLoss/Scripts/ReportByGameTable.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/LiveCasinoAgencyWinLoss/Scripts/ReportByAgent/ReportByAgent.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/LiveCasinoAgencyWinLoss/Scripts/ReportByAgent/ReportByAgent_BaseReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/LiveCasinoAgencyWinLoss/Scripts/ReportByAgent/ReportByAgent_SuperReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/LiveCasinoAgencyWinLoss/Scripts/ReportByAgent/ReportByAgent_MasterReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/LiveCasinoAgencyWinLoss/Scripts/ReportByAgent/ReportByAgent_AgentReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/LiveCasinoAgencyWinLoss/Scripts/ReportByAgent/ReportByAgent_MemberReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/LiveCasinoAgencyWinLoss/Scripts/ReportManager.js"></script>
+}

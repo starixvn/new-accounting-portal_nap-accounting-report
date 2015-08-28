@@ -1,0 +1,69 @@
+@using Fanex.BetList.Accounting.Models;
+@using Fanex.BetList.Accounting.Core;
+@using Fanex.BetList.Accounting.Extensions;
+@using Fanex.BetList.Accounting.Services;
+@using Fanex.AccountingReports.Core.Constants;
+@{
+    var betdetail = Model;
+    var ticket = betdetail.Ticket;
+    string statusTemp = ticket.Status.ToLower();
+    BetListHelper betlistHelper = new BetListHelper();
+    int _liveAwayScore = ticket.LiveAwayScore;
+    int _liveHomeScore = ticket.LiveHomeScore;
+}
+@if (betlistHelper.IsHRWinPlaceBettype(ticket.BetTypeId) && (statusTemp.Equals("won") || statusTemp.Equals("lose")))
+{
+    var _homeTemp = string.Empty;
+    switch (_liveHomeScore)
+    {
+        case 2:
+            _homeTemp = "WON";
+            break;
+        case 4:
+            _homeTemp = "LOSE";
+            break;
+        case 0:
+            _homeTemp = "REFUND";
+            break;
+    }
+    var _placeTemp = string.Empty;
+    switch (_liveAwayScore)
+    {
+        case 2:
+            _placeTemp = "WON";
+            break;
+        case 4:
+            _placeTemp = "LOSE";
+            break;
+        case 0:
+            _placeTemp = "REFUND";
+            break;
+    }
+    <div>
+        <span style="color: #2673CE;">Win: </span><span class="positive">@_homeTemp </span>
+    </div>
+    <div class="margin-top-5">
+        <span>Place: </span><span>@_placeTemp</span>
+    </div>
+}
+else
+{
+    <div class="bl_status c">
+        @ticket.Status
+    </div>
+}
+@{
+    //var result = betlistHelper.StatusRefNo(betdetail);
+    var ip = @IpService.ReplaceVNIP(ticket.IP);
+}
+@*@if (!String.IsNullOrEmpty(result))
+{
+	<br />
+    <a id="result_@betdetail.Ticket.TransId" onclick="@result">Result</a><br />
+	
+}
+<br />*@
+@if (ip != "-")
+{
+    <a href="../BetList/BetListByIP.aspx?bltype=3&fdate=@ticket.TransDate.ToShortDateString()&ip=@ticket.IP">@ip</a>
+}

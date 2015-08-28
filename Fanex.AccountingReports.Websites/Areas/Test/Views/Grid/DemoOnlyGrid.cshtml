@@ -1,0 +1,271 @@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/scripts/_lib/Fanex.Grid/Fanex.Grid.css" rel="stylesheet"
+        type="text/css" />
+    <link href="~/scripts/_lib/Pager/pagination.css" rel="stylesheet" type="text/css" />
+    <script src="~/scripts/_lib/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script src="~/scripts/_lib/jquery-ui-1.9.1.js" type="text/javascript"></script>
+    <script src="~/scripts/_lib/Pager/jpager.js" type="text/javascript"></script>
+    <script src="~/scripts/_lib/Fanex.Grid/Fanex.Grid.js" type="text/javascript"></script>
+    <title>DemoOnlyGrid</title>
+    <script type="text/javascript">
+        function InitPager(total_items, itemsPerPage, currentPage) {
+            negativeBalance.pagerOpts.callback = negativeBalance.pageSelectCallback;
+            negativeBalance.pagerOpts.itemsPerPage = itemsPerPage;
+            negativeBalance.pagerOpts.currentPage = currentPage;
+
+            $("#pagination").fanexPagination(total_items, pagerOpts);
+        }
+        var headerCusmtomizeRows = [
+                 {
+                     Columns: [
+                            { HeaderText: "ColumnHeader1", Name: "Data1",  MergeRowNumber: 2 },
+                            { HeaderText: "ColumnHeader6", Name: "Data2",  MergeRowNumber: 2 },
+                            { HeaderText: "ColumnHeader7", Name: "Data3",  MergeColNumber: 4 }
+                        ]
+                 }
+        ];
+
+        function CreateBody(num) {
+            var bodyRows = [
+                {
+                    Columns: [
+                        { Name: "Data1", Value: 200 },
+                        { Name: "Data2", Value: 100 },
+                        { Name: "Data3", Value: 300 },
+                        { Name: "Data4", Value: 350 },
+                        { Name: "Data5", Value: 350 },
+                         { Name: "Data12", Value: 350 }
+                    ],
+                    CssClass: "DemoRowCss"
+                },
+                {
+                    Columns: [
+                     { Name: "Data1", Value: 200 },
+                        { Name: "Data2", Value: 100 },
+                        {
+                            Name: "Data3", Value: 600,
+                            CustomRender: function (item) {
+                                return "<div style='text-align:center;'>" + item.Value + "demo" + "</div>";
+                            }
+                        },
+                        { Name: "Data4", Value: 520 },
+                        { Name: "Data5", Value: 350 },
+                        { Name: "Data12", Value: 350 }
+                    ]
+                },
+                {
+                    Columns: [
+                     { Name: "Data1", Value: 200 },
+                        { Name: "Data2", Value: 100 },
+                        { Name: "Data3", Value: 640, CssClass: "DemoColCssClass" },
+                        { Name: "Data4", Value: 520 },
+                        { Name: "Data5", Value: 350 },
+                        { Name: "Data12", Value: 350 }
+                    ]
+                },
+                {
+                    Columns: [
+                        { Name: "Data1", Value: 480 },
+                        { Name: "Data2", Value: 590 },
+                        { Name: "Data3", Value: 640 },
+                        { Name: "Data4", Value: 590 },
+                        { Name: "Data5", Value: 350 },
+                        { Name: "Data12", Value: 350 }
+                    ]
+                },
+                {
+                    Columns: [
+                     { Name: "Data1", Value: 480 },
+                        { Name: "Data2", Value: 530 },
+                        { Name: "Data3", Value: 630 },
+                        { Name: "Data4", Value: 520 },
+                        { Name: "Data5", Value: 350 },
+                        { Name: "Data12", Value: 350 }
+                    ]
+                },
+                {
+                    Columns: [
+                        { Name: "Data1", Value: 450 },
+                        { Name: "Data2", Value: 530 },
+                        { Name: "Data3", Value: 630 },
+                        { Name: "Data4", Value: 520 },
+                        { Name: "Data5", Value: 350 },
+                        { Name: "Data12", Value: 350 }
+                    ]
+                },
+                {
+                    Columns: [
+                    { Name: "Data1", Value: 450 },
+                        { Name: "Data2", Value: 530 },
+                        { Name: "Data3", Value: 130 },
+                        { Name: "Data4", Value: 120 },
+                        { Name: "Data5", Value: 150 },
+                        { Name: "Data12", Value: 150 }
+                    ]
+                },
+                {
+                    Columns: [
+                        { Name: "Data1", Value: 450 },
+                        { Name: "Data2", Value: 530 },
+                        { Name: "Data3", Value: 630 },
+                        { Name: "Data4", Value: 520 },
+                        { Name: "Data5", Value: 350 },
+                        { Name: "Data12", Value: 350 }
+                    ]
+                },
+                {
+                    Columns: [
+                    { Name: "Data1", Value: 450 },
+                        { Name: "Data2", Value: 530 },
+                        { Name: "Data3", Value: 630 },
+                        { Name: "Data4", Value: 520 },
+                        { Name: "Data5", Value: 350 },
+                        { Name: "Data12", Value: 350 }
+                    ]
+                },
+                {
+                    Columns: [
+                    { Name: "Data1", Value: 450 },
+                        { Name: "Data2", Value: 530 },
+                        { Name: "Data3", Value: 630 },
+                        { Name: "Data4", Value: 520 },
+                        { Name: "Data5", Value: 350 },
+                        { Name: "Data12", Value: 350 }
+                    ]
+                }
+            ];
+            var mainBodyRows = bodyRows.slice(0);
+            for (var i = 0; i < num; i++) {
+                var copyBodyRows = JSON.parse(JSON.stringify(bodyRows.slice(0)));
+                for (var j = 0; j < copyBodyRows.length; j++) {
+                    //copyBodyRows[j].Columns[0].Value = i * 10 + j;
+
+                    var columncopy = [];
+                    for (var k = 0; k < copyBodyRows[j].Columns.length; k++) {
+                        columncopy.push(copyBodyRows[j].Columns[k]);
+                    }
+                    columncopy[0].Value = i * 10 + j;
+                    columncopy[4].Value = i * 10 + j;
+                    copyBodyRows[j].Columns = JSON.parse(JSON.stringify(columncopy));
+                    mainBodyRows.push(copyBodyRows[j]);
+                }
+            }
+            //            for (var i = 0; i < mainBodyRows.length; i++) {
+            //                mainBodyRows[i].Columns[0].Value
+            //            }
+            console.log(mainBodyRows.length);
+            return mainBodyRows;
+        };
+
+        var gridOptions =
+        {
+            columns: [
+                { HeaderText: "ColumnHeader1", Width: 200, Name: "Data1", Sort: true },
+                { HeaderText: "ColumnHeader2", Width: 200, Name: "Data2", CssClass: "demoHeaderClass" },
+                { HeaderText: "ColumnHeader3", Width: 200, Name: "Data3",
+                    CustomRender: function (col) {
+                        return "<div style='text-align:left;'>" + col.Text + "demo" + "</div>";
+                    }
+                },
+                { HeaderText: "ColumnHeader4", Width: 400, Name: "Data4", CellAlign: "center" },
+                { HeaderText: "ColumnHeader5", Width: 400, Name: "Data5", Sort: true, CellAlign: "right" },
+                { HeaderText: "ColumnHeader12", Width: 400, Name: "Data12" }
+            ],
+            customizeHeader: false,
+            groupHeaderRows: headerCusmtomizeRows,
+            bodyRows: CreateBody(10),
+            numberOfFrozenColumn: 1,
+            showFooter: true,
+            footerRows: [
+                  {
+                      Columns: [
+                        { Name: "Data1", Value: "Total",  MergeRowNumber: 2, CssClass: "demoFooterClass" },
+                        { Name: "Data2", Value: 1530, CustomRender: function (item) {
+                            return "<div style='text-align:right;'>" + item.Value + "demo" + "</div>";
+                        }
+                        },
+                        { Name: "Data3", Value: 130 },
+                        { Name: "Data4", Value: 1520 },
+                        { Name: "Data5", Value: 1350 },
+                        { Name: "Data12", Value: 1350,  MergeRowNumber: 2 }
+                    ]
+                  },
+                  {
+                      Columns: [
+                      //{ Name: "Data1", Value: 1450 },
+                        {Name: "Data2", Value: 1530 },
+                        { Name: "Data3", Value: 1630 },
+                        { Name: "Data4", Value: 1520 },
+                        { Name: "Data5", Value: 1350 }
+                    ]
+                  }
+            ],
+            showTitle: true,
+            titleInfo:
+                {
+                    text: "Demo Title",
+                    showExcelButton: true,
+                    exportExcelFunction: function () {
+                        alert("a");
+                    },
+                    showBackButton: true,
+                    backFunction: function () {
+                        alert("b");
+                    },
+                    showSendMailButton: true,
+                    sendMailFunction: function () {
+                        alert("c");
+                    }
+                },
+            showPager: true,
+            pagerOption: {
+                itemsPerPage: 10,
+                maxItemsPerPage: 100,
+                currentPage: 0,
+                totalItem: 1000,
+                startPerPage: 0,
+                pageStep: 10
+            },
+            customPager: false,
+            customPagerOption: {
+                callback: function (page_index, itemsPerPage, jq) {
+                    alert("pageIndex:" + page_index + ", itemPerPage:" + itemsPerPage + ", jq:" + jq);
+                },
+                startPerPage: 100,
+                stepPerPage: 100,
+                maxTtemsPerPage: 1000,
+                itemsPerPage: 400,
+                currentPage: 1,
+                total_items: 1200
+            },
+            sortFunction: function (columnName, sortDirection) {
+                alert("Col: " + columnName + ", " + sortDirection);
+            }
+        };
+        $(function () {
+            var currentGrid = $("#gridId").fanexGrid(gridOptions);
+
+            $('#btnReRender').click(function () {
+                gridOptions.numberOfFrozenColumn = 1;
+                $("#gridId").fanexGrid("reRender", gridOptions);
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <div>
+        <div id="gridId" class="freegrid">
+        </div>
+        <div>
+            <input type="button" value="Re-Render" id="btnReRender" />
+        </div>
+    </div>
+</body>
+</html>

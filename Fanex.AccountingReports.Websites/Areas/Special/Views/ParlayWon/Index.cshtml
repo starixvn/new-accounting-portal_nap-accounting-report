@@ -1,0 +1,341 @@
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.AccountingReports.Special.Resources;
+@using Fanex.AccountingReports.Core.Services.Impl;
+@using Fanex.AccountingReports.Core.Web;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Pager/pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Special/Views/ParlayWon/ParlayWon.less">
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Special / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field align-right col_2">
+                    @SpecialResources.ParlayWon_Type</div>
+                <div id="betTypeList" class="lbl-field col_9 align-left">
+                    <div class="col_4 alpha">
+                        <input type="radio" name="rdBetType" id="rdBetTypeMixParlay" checked="checked" value="9" />
+                        <label for="rdBetTypeMixParlay">
+                            @Labels.Mix_Parlay</label></div>
+                    <div class="col_5 omega">
+                        <input type="radio" name="rdBetType" id="rdBetTypeSystemParlay" value="29" />
+                        <label for="rdBetTypeSystemParlay">
+                            @Labels.System_Parlay</label></div>
+                </div>
+                <div id="datepickerplugin" class="lbl-field col_9 align-right">
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field align-right col_2">
+                    @SpecialResources.ParlayWon_Sport</div>
+                <div id="sportList" class="lbl-field col_9 align-left">
+                    <div class="col_4 alpha">
+                        <input type="radio" name="rdSport" id="rdSportSoccer" />
+                        <label for="rdSportSoccer">
+                            @Labels.Soccer</label></div>
+                    <div class="col_5 omega">
+                        <input type="radio" name="rdSport" id="rdSportOtherSports" checked="checked" />
+                        <label for="rdSportOtherSports">
+                            @Labels.Other_Sports</label></div>
+                </div>
+                <div class="submit width-auto col_4 prefix_2">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-grid">
+    <div id="parlayWonReportHeader" class="grid-title display-none">
+        <div class="grid-title-label" id="parlayWonReportTitle">
+        </div>
+        <div class="grid-toolbox">
+            <input id="parlayWonReport_ExportExcel" class="btnExcel" type="button" title="Export to Excel"
+                value="" name="btnExcel" />
+        </div>
+    </div>
+    <div id="parlayWonReport" class="freegrid display-none">
+        <div class="free-cell free-top-left">
+            <table class="grid-fixed-table free-cell-top-left">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="table-cell col90 height60">
+                                @Labels.Ref_No
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col130 height60">
+                                @Labels.UserName
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col70 height60">
+                                @Labels.Currency
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col70 height60">
+                                @Labels.Exchange
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="row_header_wrapper">
+            <div class="row_header row-headers-background" id="parlayWonReportRowHeader">
+                <table class="grid-fixed-table row_header_content">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="table-cell col90 height60">
+                                    @Labels.Ref_No
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col130 height60">
+                                    @Labels.UserName
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col70 height60">
+                                    @Labels.Currency
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col70 height60">
+                                    @Labels.Exchange
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col_header row-headers-background scroll-y">
+            <div class="header-container">
+                <table class="grid-fixed-table col_header_content">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">
+                                <div class="table-cell col90 height60">
+                                    @Labels.Ref_No
+                                </div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col130 height60">
+                                    @Labels.UserName
+                                </div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col70 height60">
+                                    @Labels.Currency
+                                </div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col70 height60">
+                                    @Labels.Exchange
+                                </div>
+                            </th>
+                            <th colspan="2">
+                                <div class="table-cell colOriginalCurrency">
+                                    @Labels.Original_Currency
+                                </div>
+                            </th>
+                            <th colspan="4">
+                                <div class="table-cell colBaseCurrency">
+                                    @Labels.Base_Currency
+                                </div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col60 height60">
+                                    @Labels.Selection
+                                </div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col90 height60">
+                                    @Labels.Win_Odds
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div class="table-cell col100">
+                                    @Labels.Stake
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100">
+                                    @Labels.Win_Loss
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100">
+                                    @Labels.Stake
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 colSorter">
+                                    <div class="display-inline-block">
+                                        @Labels.Win_Loss
+                                    </div>
+                                    <div id="colBaseWinLoss" class="divSorter">
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col130">
+                                    @Labels.Company_Stake
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col160 colSorter">
+                                    <div class="display-inline-block">@Labels.Company_Win_Loss
+                                    </div>
+                                    <div id="colBaseCompanyWinLoss" class="divSorter">
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="grid-container container">
+            <div class="content-container">
+                <table id="parlayWonReportContent" class="grid-fixed-table col_body_content">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">
+                                <div class="table-cell col90 height60">
+                                    @Labels.Ref_No
+                                </div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col130 height60">
+                                    @Labels.UserName
+                                </div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col70 height60">
+                                    @Labels.Currency
+                                </div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col70 height60">
+                                    @Labels.Exchange
+                                </div>
+                            </th>
+                            <th colspan="2">
+                                <div class="table-cell colOriginalCurrency">
+                                    @Labels.Original_Currency
+                                </div>
+                            </th>
+                            <th colspan="4">
+                                <div class="table-cell colBaseCurrency">
+                                    @Labels.Base_Currency
+                                </div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col60 height60">
+                                    @Labels.Selection
+                                </div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col90 height60">
+                                    @Labels.Win_Odds
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div class="table-cell col100">
+                                    @Labels.Stake
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100">
+                                    @Labels.Win_Loss
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100">
+                                    @Labels.Stake
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100">
+                                    @Labels.Win_Loss
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col130">
+                                    @Labels.Company_Stake
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col160">
+                                    @Labels.Company_Win_Loss
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row_footer row-footer-background z999">
+            <table class="grid-fixed-table row_footer_content">
+                <thead>
+                </thead>
+            </table>
+        </div>
+        <div class="col_footer row-footer-background scroll-y">
+            <div class="footer-container">
+                <table class="col_footer_content grid-fixed-table">
+                    <thead>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var labelDate = '@Labels.Date';
+        var today = '@DateTime.Today.ToShortDateString()';
+        var minDate = new Date('@ReportService.BalanceUp.BalanceUpDay');
+        var minHistoryReportDate = new Date(2009, 1, 1); 
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MonthPicker/monPickr-0.0.3.min.js?ver=10"></script>
+    <script type="text/javascript" src="~/Areas/Special/Views/ParlayWon/Scripts/ReportManager.js"></script>
+}

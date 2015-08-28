@@ -1,0 +1,62 @@
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.AccountingReports.WinLoss.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/scripts/_lib/DatePicker/style", "~/scripts/_lib/Fanex.Grid/style")
+    <link rel="stylesheet" type="text/css" href="~/Areas/WinLoss/Views/MatchWinLossByBettype/Styles/MatchWinLossByBettype.less?ver=10" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.WinLoss / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <div class="filter-form">
+        <div id="numberGameFinancialReportFilter">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="datepickerplugin" class="lbl-field col_15 align-right">
+                    </div>
+                </div>
+                <div class="submit col_4">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="matchWinLossByBettypeReportGrid" class="display-none content-grid width-100percent">
+    <div id="matchWinLossByBettypeReportMainGrid" class="freegrid">
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var labelFrom = '@Labels.From';
+        var labelTo = '@Labels.To';
+        var today = '@DateTime.Today.ToShortDateString()';
+        var minDate = '@DateTime.Today.AddMonths(-3).ToShortDateString()';
+        var noTitle = '@Labels.No';
+        var bettype = '@Labels.Bettype';
+        var match = '@Labels.Match';
+        var baseCurrency = '@Labels.Base_Currency';
+        var grandTotal = '@Labels.Grand_Total';
+        var liveIndicator = '!@Labels.Live';
+        var hyphen = '-';
+        var breakText = ' ';
+        var vsTitle = '-vs-'
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/Areas/WinLoss/Views/MatchWinLossByBettype/Scripts/MatchWinLossByBettype.js"></script>
+}

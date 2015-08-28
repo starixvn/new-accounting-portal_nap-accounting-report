@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BingoOutStanding_ReportName" xml:space="preserve">
+    <value>Bingo_OutStanding_Report</value>
+  </data>
+  <data name="BingoOutStanding_ReportTitle" xml:space="preserve">
+    <value>Bingo OutStanding Report</value>
+  </data>
+  <data name="BingoOutStanding_SheetName" xml:space="preserve">
+    <value>Bingo OutStanding</value>
+  </data>
+  <data name="BingoStatistic_ReportName" xml:space="preserve">
+    <value>Bingo_Statistic_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="BingoStatistic_ReportTitle" xml:space="preserve">
+    <value>Bingo Statistic Report From {0} To {1}</value>
+  </data>
+  <data name="BingoStatistic_SheetName" xml:space="preserve">
+    <value>Bingo Statistic</value>
+  </data>
+  <data name="BingoWinLoss_ReportName" xml:space="preserve">
+    <value>Bingo_WinLoss_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="BingoWinLoss_ReportTitle" xml:space="preserve">
+    <value>Bingo Win Loss Report From {0} To {1}</value>
+  </data>
+  <data name="BingoWinLoss_SheetName" xml:space="preserve">
+    <value>Bingo Win Loss</value>
+  </data>
+  <data name="DirectBalance_SheetName" xml:space="preserve">
+    <value>DirectBalance</value>
+  </data>
+  <data name="LiveCasinoAgencyWinLoss_ReportName" xml:space="preserve">
+    <value>Live_Casino_Agency_Win_Loss_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="Error_LiveCasinoGameStatistic_BetLess_LessThan_BetMore" xml:space="preserve">
+    <value>The value of Total bet less than must greater than the value of Total bet more than!</value>
+  </data>
+  <data name="LiveCasinoAgencyWinLoss_ReportTitle" xml:space="preserve">
+    <value>Live Casino Agency Win Loss Report From {0} To {1}</value>
+  </data>
+  <data name="Error_LiveCasinoGameStatistic_WinLess_LessThan_WinMore" xml:space="preserve">
+    <value>The value of Total win less than must greater than the value of Total win more than!</value>
+  </data>
+  <data name="LiveCasinoAgencyWinLoss_SheetName" xml:space="preserve">
+    <value>Live Casino Agency Win Loss</value>
+  </data>
+  <data name="LiveCasinoFinancial_FilterNote" xml:space="preserve">
+    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;* All figures are display in USD&lt;/li&gt;&lt;li&gt;* Data is only available up to yesterday (after 5AM GMT-4) &lt;/li&gt;&lt;li&gt;* For data accuracy, generate the billing report 5 days after month-end &lt;/li&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="LiveCasinoGameFinancialReport_ReportName" xml:space="preserve">
+    <value>Live_Casino_Game_Financial_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="LiveCasinoGameFinancialReport_SheetName" xml:space="preserve">
+    <value>Financial Report</value>
+  </data>
+  <data name="LiveCasinoGameStatistic_ReportName" xml:space="preserve">
+    <value>Live_Casino_Game_Statistic_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="LiveCasinoGameStatistic_ReportTitle" xml:space="preserve">
+    <value>Live Casino Game Statistic Report From {0} To {1}</value>
+  </data>
+  <data name="LiveCasinoGameStatistic_SheetName" xml:space="preserve">
+    <value>Live Casino Game Statistic</value>
+  </data>
+  <data name="LiveCasinoWL_NoteMessage" xml:space="preserve">
+    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ All figures are displayed in EUR&lt;/li&gt;&lt;li&gt;+ Data is only available up to yesterday (after 5AM GMT-4)&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="Live_Casino_Game_Financial_Report_Title" xml:space="preserve">
+    <value>Live Casino Game Financial Report From {0} To {1}</value>
+  </data>
+  <data name="NumberGameMonthlyWinLoss_FilterNote" xml:space="preserve">
+    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;* Data is only available up to yesterday (after 5AM GMT-4)&lt;/li&gt;&lt;li&gt;* For data accuracy, generate the billing report 5 days after month-end.&lt;/li&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="NumberGameFinancial_ReportName" xml:space="preserve">
+    <value>Number_Game_Financial_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="NumberGameWinLossByBetTypeMatch_ByBetTypeDetailReportTitle" xml:space="preserve">
+    <value>Number Game Product Win Loss By Bet Type Report {0} on {1}</value>
+  </data>
+  <data name="NumberGameMonthlyWinLoss_ReportName" xml:space="preserve">
+    <value>Number_Game_Monthly_Win_Loss_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="NumberGameFinancial_ReportTitle" xml:space="preserve">
+    <value>Number Game Financial Report From {0} To {1}</value>
+  </data>
+  <data name="NumberGameWinLossByBetTypeMatch_ByBetTypeMainReportTitle" xml:space="preserve">
+    <value>Number Game Product Win Loss By Bet Type Report on {0}</value>
+  </data>
+  <data name="NumberGameFinancial_SheetName" xml:space="preserve">
+    <value>Number Game Financial</value>
+  </data>
+  <data name="NumberGameMonthlyWinLoss_ReportTitle" xml:space="preserve">
+    <value>Number Game Monthly Win Loss Report From {0} To {1}</value>
+  </data>
+  <data name="NumberGameWinLossByBetTypeMatch_ByMatchDetailReportTitle" xml:space="preserve">
+    <value>Number Game Product Win Loss By Match {0} - {1} - {2} Report on {3}</value>
+  </data>
+  <data name="NumberGameMonthlyWinLoss_SheetName" xml:space="preserve">
+    <value>Number Game Monthly Win Loss</value>
+  </data>
+  <data name="NumberGameWinLossByBetTypeMatch_ByMatchMainReportTitle" xml:space="preserve">
+    <value>Number Game Product Win Loss By Match Report on {0}</value>
+  </data>
+  <data name="NumberGameWinLossByBetTypeMatch_ReportName" xml:space="preserve">
+    <value>Number_Game_Win_Loss_on_{0}</value>
+  </data>
+  <data name="NumberGameWinLossByBetTypeMatch_SheetName" xml:space="preserve">
+    <value>Number Game Win Loss</value>
+  </data>
+  <data name="NumberGameWinLossByCurrency_Detail_ReportName" xml:space="preserve">
+    <value>NUMBERGAME_WINLOSS_BYCURRENCY_DETAIL_</value>
+  </data>
+  <data name="NumberGameWinLossByCurrency_Detail_Title" xml:space="preserve">
+    <value>Number Game WinLoss By Currency Detail For </value>
+  </data>
+  <data name="NumberGameWinLossByCurrency_Main_ReportName" xml:space="preserve">
+    <value>NUMBERGAME_WINLOSS_BYCURRENCY_MAIN</value>
+  </data>
+  <data name="NumberGameWinLossByCurrency_Main_Title" xml:space="preserve">
+    <value>Number Game Win Loss by Currency</value>
+  </data>
+  <data name="NumberOfActiveMember_ReportName" xml:space="preserve">
+    <value>Number_Of_Active_Members_From_{0}_To_{1}</value>
+  </data>
+  <data name="NumberOfActiveMember_ReportTitle" xml:space="preserve">
+    <value>Number Of Active Members From {0} To {1}</value>
+  </data>
+  <data name="NumberOfActiveMember_SheetName" xml:space="preserve">
+    <value>Number Of Active Members</value>
+  </data>
+  <data name="VirtualSportsWinLossDetail_ReportName" xml:space="preserve">
+    <value>Virtual_Sports_Win_Loss_Details_{0}_{1}</value>
+  </data>
+  <data name="VirtualSportsWinLossDetail_ReportTitle" xml:space="preserve">
+    <value>Virtual Sports Win Loss Details - {0} - {1}</value>
+  </data>
+  <data name="VirtualSportsWinLossDetail_SheetName" xml:space="preserve">
+    <value>Virtual Sports Win Loss Details</value>
+  </data>
+  <data name="VirtualSportsWinLoss_ReportName" xml:space="preserve">
+    <value>Virtual_Sports_Win_Loss_From_{0}_To_{1}</value>
+  </data>
+  <data name="VirtualSportsWinLoss_ReportTitle" xml:space="preserve">
+    <value>Virtual Sports Win Loss From {0} To {1}</value>
+  </data>
+  <data name="VirtualSportsWinLoss_SheetName" xml:space="preserve">
+    <value>Virtual Sports Win Loss</value>
+  </data>
+  <data name="WinLossByLicensee_FilterNote" xml:space="preserve">
+    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ This report is using OANDA exchange rate for currency conversion&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="CasinoWinLoss_ReportName" xml:space="preserve">
+    <value>Casino_Daily_Report_{0}</value>
+  </data>
+  <data name="CasinoWinLoss_ReportTitle" xml:space="preserve">
+    <value>Casino Daily Report: {0}</value>
+  </data>
+  <data name="CasinoWinLoss_SheetName" xml:space="preserve">
+    <value>Casino Daily Report</value>
+  </data>
+</root>

@@ -1,0 +1,58 @@
+.scrollable .scrollwrap
+{
+    width: 100%;
+}
+
+.scrollable .vscroller
+{
+    width: 15px;
+    border-radius: 2px;
+    background-image: -moz-linear-gradient(right center , #F2F2F2 0%, #FEFEFE 100%);
+    bottom: 0px;
+}
+
+.scrollable .vscroller .scrollblock
+{
+    background-image: -moz-linear-gradient(right center , #AAAEB2 0%, #DADCDF 100%);
+}
+
+.scrollable .vscroller .scrollarea
+{
+    top: 5px;
+    bottom: 20px;
+}
+
+.scrollable .vscroller .scrolltop, .scrollable .vscroller .scrolldown
+{
+    display: none;
+}
+
+.scrollable .scrollwrap .hscroller
+{
+    height: 17px;
+    border-radius: 2px;
+    background-image: -moz-linear-gradient(right center , #F2F2F2 0%, #FEFEFE 100%);
+    right: 15px;
+}
+
+.scrollable .scrollwrap .hscroller .scrollarea
+{
+    left: 0;
+    right: 0;
+}
+
+.scrollable .hscroller .scrollleft, .scrollable .hscroller .scrollright
+{
+    display: none;
+}
+
+.scrollable.no_scroll_h .scrollcontent
+{
+    top: 0;
+}
+
+.scrollable.no_scroll_v .scrollcontent
+{
+    left: 0;
+}
+

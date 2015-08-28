@@ -1,0 +1,203 @@
+@using Fanex.AccountingReports.Misc.Resources;
+<div id="historyBetCountReportHeader" class="grid-title display-none">
+    <div class="grid-title-label" id="historyBetCountReportTitle">
+    </div>
+    <div class="grid-toolbox">
+        <input id="historyBetCountReport_ExportExcel" class="btnExcel" type="button" title="Export to Excel"
+            value="" name="btnExcel" />
+    </div>
+</div>
+<div id="historyBetCountReport" class="freegrid display-none">
+    <div class="free-cell free-top-left">
+        <table class="grid-fixed-table free-cell-top-left">
+            <thead>
+                <tr>
+                    <th>
+                        <div class="table-cell col80 height55">
+                            @Labels.Site
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="row_header_wrapper">
+        <div class="row_header row-headers-background" id="historyBetCountReportRowHeader">
+            <table class="grid-fixed-table row_header_content">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="table-cell col80 height55">
+                                @Labels.Site
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col_header row-headers-background scroll-y">
+        <div class="header-container">
+            <table class="grid-fixed-table col_header_content">
+                <thead>
+                    <tr>
+                        <th rowspan="2">
+                            <div class="table-cell col80 height55">
+                                @Labels.Site
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col120 height55">
+                                @Labels.Bet_Count</div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55 colSorter">
+                                <div class="display-inline-block">
+                                    @Labels.Total_Turnover
+                                </div>
+                                <div id="colHeaderTotalTurnover_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col150 height55 colSorter">
+                                <div class="display-inline-block">
+                                    @Labels.Member_Win_Loss
+                                </div>
+                                <div id="colHeaderMemberWinLoss_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55 colSorter">
+                                <div class="display-inline-block">
+                                    @Labels.Margin_Percent
+                                </div>
+                                <div id="colHeaderMarginPercent_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th colspan="3">
+                            <div class="table-cell col430 height25">
+                                @Labels.SMA_Winloss
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55 colSorter">
+                                <div class="display-inline-block">
+                                    @Labels.Company
+                                </div>
+                                <div id="colHeaderCompanyWinLoss_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="table-cell col140 table-cell height25 colSorter">
+                                <div class="display-inline-block">
+                                    @Labels.Agent
+                                </div>
+                                <div id="colHeaderAgentWinLoss_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25 colSorter">
+                                <div class="display-inline-block">
+                                    @Labels.Master
+                                </div>
+                                <div id="colHeaderMasterWinLoss_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25 colSorter">
+                                <div class="display-inline-block">
+                                    @Labels.Super
+                                </div>
+                                <div id="colHeaderSuperWinLoss_HistoryReport" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="grid-container container">
+        <div class="content-container">
+            <table id="historyBetCountReportContent" class="grid-fixed-table col_body_content">
+                <thead>
+                    <tr>
+                        <th rowspan="2">
+                            <div class="table-cell col80 height55">
+                                @Labels.Site
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col120 height55">
+                                @Labels.Bet_Count</div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55">
+                                @Labels.Total_Turnover</div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col150 height55">
+                                @Labels.Member_Win_Loss</div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55">
+                                @Labels.Margin_Percent</div>
+                        </th>
+                        <th colspan="3">
+                            <div class="table-cell col430 height25">
+                                @Labels.SMA_Winloss
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col140 height55">
+                                @Labels.Company
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <div class="table-cell col140 table-cell height25">
+                                @Labels.Agent</div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25">
+                                @Labels.Master</div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25">
+                                @Labels.Super</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row_footer row-footer-background z999">
+        <table class="grid-fixed-table row_footer_content">
+            <thead>
+            </thead>
+        </table>
+    </div>
+    <div class="col_footer row-footer-background scroll-y">
+        <div class="footer-container">
+            <table class="col_footer_content grid-fixed-table">
+                <thead>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>

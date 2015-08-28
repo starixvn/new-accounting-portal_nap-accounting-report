@@ -1,0 +1,38 @@
+﻿// --------------------------------------------------------------------------
+// <copyright file="GetCompanyBalanceDifferenceCriteria.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Louis.Nguyen" date="2012.12.07">Created</change>
+// </history>
+
+namespace Fanex.AccountingReports.Balance.Criteria.CompanyBalanceDifference
+{
+    using System;
+    using Fanex.AccountingReports.Core.Services.Impl;
+    using Fanex.NAP.Framework.Data;
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    public class GetCompanyBalanceDifferenceCriteria : CriteriaBase
+    {
+        public GetCompanyBalanceDifferenceCriteria()
+        {
+            ////this.BalanceUpDay = ReportService.BalanceUp.BalanceUpDay;
+        }
+
+        ////public DateTime BalanceUpDay { get; set; }
+
+        public override bool IsValid()
+        {
+            return true;
+        }
+
+        public override string GetSettingKey()
+        {
+            return "Balance_CompanyBalanceDifference_GetReport";
+        }
+    }
+}

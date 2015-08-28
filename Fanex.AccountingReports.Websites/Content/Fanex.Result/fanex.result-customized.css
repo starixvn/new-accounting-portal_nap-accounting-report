@@ -1,0 +1,94 @@
+﻿table.fn-rs
+{
+    clear: both;
+    width: 100%;
+    border-right: 1px solid #7C98A4;
+    border-top: 1px solid #7C98A4;
+    border-collapse: collapse;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    cursor: default;
+}
+
+table.fn-rs tr.header th:first-child
+{
+    border-left: 1px solid #7C98A4;
+}
+
+table.fn-rs tr.header th
+{
+    background: -moz-linear-gradient(#B5C4D0, #B5C4D0) #B5C4D0;
+    background: #B5C4D0;
+    background: -webkit-linear-gradient(#B5C4D0, #B5C4D0) #B5C4D0;
+    color: #000;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: -moz-use-text-color #7C98A4 #7C98A4 -moz-use-text-color;
+    border-image: none;
+    border-right: 1px solid #7C98A4;
+    border-bottom: 1px solid #7C98A4;
+    border-style: none solid solid none;
+    border-width: medium 1px 1px medium;
+    font-size: 1em;
+    font-weight: bold;
+    height: 21px;
+    overflow: hidden;
+    padding: 2px;
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;
+}
+
+table.fn-rs tr.data
+{
+}
+
+table.fn-rs tr.data:hover
+{
+    background: #fcf911;
+}
+
+table.fn-rs tr.data td, table.fn-rs tr.row-noinfo td
+{
+    border-left: 1px solid #7C98A4;
+    border-bottom: 1px solid #7C98A4;
+    font-size: 1em;
+    height: 22px;
+    padding: 2px;
+    vertical-align: middle;
+    color: #222222;
+    white-space: normal;
+    border-color: #7C98A4;
+}
+
+table.fn-rs tr.data td.cl-ht-score, 
+table.fn-rs tr.data td.cl-f-score, 
+table.fn-rs tr.data td.cl-status, 
+table.fn-rs tr.data td.cl-totalgames, 
+table.fn-rs tr.data td.cl-totalset, 
+table.fn-rs tr.data td.cl-s,
+table.fn-rs tr.data td.cl-ei,
+table.fn-rs tr.row-noinfo td
+{
+    font-weight: bold;
+}
+
+table.fn-rs tr.data td:hover, table.fn-rs tr.row-noinfo td:hover
+{
+    color: #222222;
+}
+
+table.fn-rs tbody .cl-match.home, table.fn-rs tbody .cl-match.away
+{
+    color: #222222;
+    font-weight: inherit;
+}
+
+table.fn-rs .cl-ko-time {
+}
+
+table.fn-rs .cl-ht-score, table.fn-rs .cl-f-score {
+    width: 95px;
+}

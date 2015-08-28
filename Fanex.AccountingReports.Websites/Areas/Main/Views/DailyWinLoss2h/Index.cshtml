@@ -1,0 +1,180 @@
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.AccountingReports.Main.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Core.Configurations;
+@using Fanex.AccountingReports.Core;
+@using Fanex.AccountingReports.Core.Services.Impl;
+@using Fanex.AccountingReports.Core.Constants;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Main/Views/DailyWinLoss2h/Styles/DailyWinLoss2h.less" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Main / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="datepickerplugin" class="lbl-field col_7 align-right">
+                </div>
+            </div>
+            <div class="filter-cell site-type-cell display-none">
+                <div class="lbl-field col_2 align-right">
+                    @Labels.Site
+                </div>
+                <div class="edit-field col_6 align-left">
+                    <select id="ddlSiteType" class="alpha">
+                        <option value="0">@Labels.All_Sites</option>
+                        <option value="1">@Labels.Credit</option>
+                        <option value="2">@Labels.Deposit</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="submit width-auto col_4">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="@Labels.Generate" />
+                    <input id="btnToday" name="btnToday" type="submit" value="@Labels.Today" />
+                    <input id="btnYesterday" name="btnYesterday" type="submit" value="@Labels.Yesterday" />
+                    <input id="btnExport" name="btnExport" type="submit" value="@Labels.Export" title="@Labels.Export" disabled="disabled" />
+                    <input id="btnShowHideSiteTypeInfo" name="btnShowHideSiteTypeInfo" type="submit" value="@Labels.Expand" title="@Labels.Collapse/@Labels.Expand" disabled="disabled" />
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="errMsg" class="col_35 display-none width-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="parentContainer" class="content-grid">
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/Main2hReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/CasinoReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/LiveCasinoReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/KenoReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/MixParlayReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/SystemParlayReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/MixParlayReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/RacingReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/NumberGameReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/OtherSportReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/SoccerReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/BingoReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/VirtualSportsReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2hOtherSports/WinLossBySite_BetType.cshtml")
+    @Html.Partial("~/Areas/BetList/Views/ScoreInformation/ScoreInformation.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/WinLossBySite_BetType.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/ParlayReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/MetricGamingReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/MainLiveCasinoReport.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/LiveCasinoWinLossByProductReport.cshtml")
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var today = '@DateTime.Today.ToShortDateString()';
+        var shortFormattedYesterday = '@DateTime.Today.AddDays(-1).ToShortFormatedDate()';
+        var shortFormattedToday = '@DateTime.Today.ToShortFormatedDate()';
+        var minDate = '@(new DateTime(2011, 1, 1).ToShortFormatedDate())';
+        var beginSupportAdvanceMixParlayDate = '@AppSettings.MixParlayAdvanceSupportDate';
+        var balanceUpDay = '@ReportService.BalanceUp.BalanceUpDay.ToShortFormatedDate()';
+        var is8RMActive = '@(RMSection.Instance.Report[ReportName.DailyWinLoss2h.ToString()].ReportConfigs[RMSection.RMType.EightRM.ToString()].IsActive)'.toLowerCase();
+        var isBARMActive = '@(RMSection.Instance.Report[ReportName.DailyWinLoss2h.ToString()].ReportConfigs[RMSection.RMType.BARM.ToString()].IsActive)'.toLowerCase();
+        var viewResources = {
+            Date: '@Labels.Date',
+            Sport_Type: '@Labels.Sport_Type',
+            Win_Loss: '@Labels.Win_Loss',
+            Position: '@Labels.Position',
+            Commission: '@Labels.Commission',
+            Line_Total: '@Labels.Line_Total',
+            Turnover: '@Labels.Turnover',
+            Margin: '@Labels.Margin',
+            Bet_Type: '@Labels.Bet_Type',
+            Code: '@Labels.Code',
+            Event: '@Labels.Event',
+            Real: '@Labels.Real',
+            Virtual: '@Labels.Virtual',
+            Variance: '@Labels.Variance',
+            IBC: '@Labels.IBC',
+            _8RM: '@Labels.EightRM',
+            BARM: '@Labels.BARM',
+            Total: '@Labels.Total',
+            Main: '@Labels.Main',
+            Bet_Type: '@Labels.Bet_Type',
+            Live: '@Labels.Live',
+            Non_Live: '@Labels.Non_Live',
+            Symbol_Sparse_Non_Live: '@Labels.Symbol_Sparse_Non_Live',
+            Show_Score_Information: '@Labels.Show_Score_Information',
+            Symbol_NeutralSuffix: '@Labels.Symbol_NeutralSuffix',
+            NotAvailable: '@Labels.NotAvailable',
+            Site: '@Labels.Site',
+            Credit_Site: '@Labels.Credit_Site',
+            Deposit_Site: '@Labels.Deposit_Site',
+            All_Sites: '@Labels.All_Sites',
+            Expand: '@Labels.Expand',
+            Collapse: '@Labels.Collapse',
+            EmptyReportMessage: '@Labels.EmptyReportMessage',
+            DailyWinLoss2h_Main2hReport_Title: '@MainResources.DailyWinLoss2h_Main2hReport_Title',
+            DailyWinLoss2h_ReportTitleSuffix: '@MainResources.DailyWinLoss2h_ReportTitleSuffix',
+            DailyWinLoss2h_WinLossBySite_BetType_ReportTitle: '@MainResources.DailyWinLoss2h_WinLossBySite_BetType_ReportTitle',
+            DailyWinLoss2hSoccer_ReportNote: '@MainResources.DailyWinLoss2hSoccer_ReportNote',
+            DailyWinLoss2h_SoccerReport_MainReport_Title: '@MainResources.DailyWinLoss2h_SoccerReport_MainReport_Title',
+            DailyWinLoss2h_Main2hReport_ReportTitle: '@MainResources.DailyWinLoss2h_Main2hReport_ReportTitle',
+            Member_WinLoss: '@Labels.Member_Win_Loss',
+            SMA_WinLoss: '@Labels.SMA_Win_Loss',
+            Company_Income: '@Labels.Company_Income',
+            Company_Turnover: '@Labels.Company_Turnover'
+        }; 
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/PopUp/dialogbox.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Main2hReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/CasinoReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/SystemParlayReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Racing/RacingReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Racing/RacingReport_Summary.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Racing/RacingReport_BySportType.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Racing/RacingReport_ByBetType.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/LiveCasinoReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/KenoReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/MixParlayReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/NumberGame/NumberGameReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/NumberGame/NumberGameReport_Summary.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/NumberGame/NumberGameReport_ByBetType.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/OtherSports/OtherSportReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/OtherSports/OtherSportReport_Summary.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/OtherSports/OtherSportReport_BySportType.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/OtherSports/OtherSportReport_ByBetType.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Soccer/SoccerReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Soccer/SoccerReport_Summary.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Soccer/SoccerReport_ByBetType.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/BingoReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSports_VirtualHorseRacingReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSportsReport_Summary.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSportsReport_BySportType.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSportsReport_ByBetType.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSportsReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ParlayReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/MetricGamingReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/MainLiveCasinoReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/LiveCasinoWinLossByProductReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/WinLossBySite_BetType.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ShowHideSiteTypeManager.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ReportManager.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ShowHideReportManager.js"></script>
+}

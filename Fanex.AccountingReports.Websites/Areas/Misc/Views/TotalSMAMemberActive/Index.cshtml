@@ -1,0 +1,117 @@
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Misc.Resources;
+@using Fanex.AccountingReports.Misc.Resources;
+@using Fanex.AccountingReports.Core.Extensions;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/scripts/_lib/MultipleSelect/style", "~/scripts/_lib/DatePicker/style")
+    <link rel="stylesheet" type="text/css" href="~/Areas/Misc/Views/TotalSMAMemberActive/Styles/TotalSMAMemberActive.less">
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Misc / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <span id="notemessage" class="note-info-message" title=''></span>
+    <div id="filter-form" class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="datepickerplugin" class="lbl-field col_27 align-right">
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_2 align-right">
+                    @Labels.Site
+                </div>
+                <div class="edit-field col_7 align-left ddlSiteContainer">
+                    <select id="ddlSite" class="col_7 alpha">
+                    </select>
+                </div>
+                <div class="submit width-auto prefix_2">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="@Labels.Generate" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="parentContainer" class="content-grid">
+    <div id="reportContainer" class="display-none">
+        <div class="freegrid" id="reportSummary">
+        </div>
+    </div>
+    <div id="reportActiveContainer" class="display-none">
+        <div class="grid-title" id="reportActiveDetail-grid-title">
+            <div id="reporttile" class="grid-title-label">@MiscResources.TotalSMAMemberActiveReport_ActiveTitle</div>
+            <div class="grid-toolbox">
+            </div>
+        </div>
+        <div id="reportActiveDetail">
+            <table id="tblActiveDetail">
+                <thead>
+                    <tr id="trSiteName">
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="trSMA">
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br style="clear: both;" />
+    <div id="detailContainer" class="display-none">
+        <div class="freegrid" id="reportDetail">
+        </div>
+    </div>
+</div>
+@{
+    var today = DateTime.Today;
+    var minDate = today.AddMonths(-1);
+    minDate = new DateTime(minDate.Year, minDate.Month, 1);
+    var noteMessage = Html.Raw(MiscResources.TotalSMAMemberActiveReport_NoteMsg);
+}
+@section scripts
+{
+    <script type="text/javascript">
+        var today = '@today.ToShortDateString()';
+        var minDate = '@minDate.ToShortDateString()';
+        var viewResources = {
+            From: '@Labels.From',
+            To: '@Labels.To',
+            // grid columns
+            NewCreated: '@Labels.NewCreated',
+            Active: '@Labels.Active',
+            Suspended: '@Labels.Suspended',
+            Closed: '@Labels.Closed',
+            Date: '@Labels.Date',
+            GroupHeadline: '@Labels.GroupHeadline',
+            Username: '@Labels.UserName',
+            Status: '@Labels.Status',
+            Site: '@Labels.Site',
+            Currency: '@Labels.Currency',
+            Position: '@Labels.Position',
+            CreatedTime: '@Labels.CreatedTime',
+            Creator: '@Labels.Creator',
+            NoSiteSelected: '@Errors.NoSiteSelected',
+            reportTitle: '@MiscResources.TotalSMAMemberActiveReport_Title',
+            Details: '@Labels.Details',
+            NoteMessage: '@noteMessage'
+        };
+    </script>
+}
+@section Foot {
+    @Scripts.Render("~/scripts/_lib/multiselect")
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/Areas/Misc/Views/TotalSMAMemberActive/Scripts/StatusDetail.js"></script>
+    <script type="text/javascript" src="~/Areas/Misc/Views/TotalSMAMemberActive/Scripts/ReportManager.js"></script>
+}

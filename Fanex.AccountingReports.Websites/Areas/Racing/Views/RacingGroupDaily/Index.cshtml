@@ -1,0 +1,61 @@
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Racing.Resources;
+
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Head {
+    @Styles.Render("~/scripts/_lib/DatePicker/style")  
+    <link rel="Stylesheet" type="text/css" href="~/Areas/Racing/Views/RacingGroupDaily/Styles/RacingGroupDaily.less" />
+}
+
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Racing / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+
+<div id="filter-bar">
+    <div class="filter-form">
+        <div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="datepickerplugin" class="lbl-field col_15 align-right">
+                    </div>
+                </div>
+                <div class="submit col_4">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="RacingGroupDailyContainer" class="content-grid display-none">
+    <div id="RacingGroupDailyContent" class="freegrid">
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var labelFrom = '@Labels.From';
+        var labelTo = '@Labels.To';
+        var today = '@DateTime.Today.ToShortDateString()';
+    </script>
+}
+
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MonthPicker/monPickr-0.0.3.min.js?ver=10"></script>
+    <script type="text/javascript" src="~/Areas/Racing/Views/RacingGroupDaily/Scripts/RacingGroupDaily.js">
+    </script>
+}
+

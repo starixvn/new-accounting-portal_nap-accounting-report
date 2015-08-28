@@ -1,0 +1,113 @@
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.AccountingReports.Gaming.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Core.Services.Impl;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/scripts/_lib/MultipleSelect/style")
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Autocomplete/styles.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Gaming/Views/BingoOutStanding/Styles/BingoOutStanding.less">
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Gaming / </span><span class="curr">@ViewBag.Title</span>
+            <div class="showHideFilter expanded" title="@Labels.Hide_filter">
+            </div>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.User_search
+                </div>
+                <div class="lbl-field col_3 prefix_1 align-right">
+                    @Labels.UserName
+                </div>
+                <div class="col_8">
+                    <input id="txtUserName" type="text" maxlength="50" value="@Labels.Search_All" class="defaultSuggestionBox" />
+                </div>
+                <div class="lbl-field col_6 align-left">
+                    <input id="exclude-test-account" type="checkbox" class="alpha" checked="checked" />
+                    <label for="exclude-test-account">
+                        @Labels.Exclude_test_accounts</label>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.Game_search
+                </div>
+                <div class="lbl-field col_3 prefix_1 align-right">
+                    @Labels.Company
+                </div>
+                <div class="edit-field col_8">
+                    <select id="dropdownCompany" class="dropdownCompany">
+                    </select>
+                </div>
+                <div class="lbl-field col_3 align-right">
+                    @Labels.Currency
+                </div>
+                <div class="edit-field col_8">
+                    <select id="dropdownCurrency" class="dropdownCurrency">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="submit width-auto col_4 prefix_8">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="@Labels.Generate" />
+                    <div id="btnExport" class="export-excel-div-button" title="Export to Excel">
+                        <div class="export-excel-icon">
+                        </div>
+                        <div class="export-excel-label">
+                            @Labels.Export</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="parentContainer" class="content-grid">
+    <div id="mainBingoOutStandingReportContainer">
+        <div id="mainBingoOutStandingReport" class="freegrid display-none">
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var viewResources = {
+            Time_period: '@Labels.Time_period',
+            Hide_filter: '@Labels.Hide_filter',
+            Show_filter: '@Labels.Show_filter',
+            All: '@Labels.All',
+            Search_All: '@Labels.Search_All',
+            No_company_found: '@Labels.No_company_found',
+            All_Companies: '@Labels.All_Companies',
+            UserName: '@Labels.UserName',
+            Currency: '@Labels.Currency',
+            Outstanding: '@Labels.Outstanding',
+            Company: '@Labels.Company',
+            Date: '@Labels.Date',
+            BingoOutStanding_ReportTitle: '@GamingResources.BingoOutStanding_ReportTitle'
+        };
+    </script>
+}
+@section Foot {
+    @Scripts.Render("~/scripts/_lib/multiselect")
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Autocomplete/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/BingoOutStanding/Scripts/ReportManager.js"></script>
+}

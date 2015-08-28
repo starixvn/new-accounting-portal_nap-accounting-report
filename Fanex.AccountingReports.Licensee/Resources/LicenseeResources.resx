@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AmountDueONEWorks" xml:space="preserve">
+    <value>Amount Due To ONEWorks</value>
+  </data>
+  <data name="CACHE_ALL_RESELLERS" xml:space="preserve">
+    <value>CACHE_ALL_RESELLERS</value>
+  </data>
+  <data name="CACHE_LICENSEE_BY_RESELLER" xml:space="preserve">
+    <value>Fanex.AccountingReports.Licensee.TotalTransactionsByLicensee.ResellerByLicensee</value>
+  </data>
+  <data name="CACHE_TOTAL_TRANSACTIONS_BY_LICENSEE" xml:space="preserve">
+    <value>Fanex.AccountingReports.Licensee.TotalTransactionsByLicensee.TotalTransactionsByLicensee</value>
+  </data>
+  <data name="DistributorRevenue" xml:space="preserve">
+    <value>Distributor's Revenue</value>
+  </data>
+  <data name="LiveCasinoWinLoss" xml:space="preserve">
+    <value>Live Casino Win Loss</value>
+  </data>
+  <data name="LiveCasinoWL_NoteMessage" xml:space="preserve">
+    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ All figures are displayed in EUR&lt;/li&gt;&lt;li&gt;+ Data is only available up to yesterday (after 5AM GMT-4)&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="LiveCasinoWL_ReportFileName" xml:space="preserve">
+    <value>Licensee-LiveCasinoWinLoss</value>
+  </data>
+  <data name="LupineRevenue" xml:space="preserve">
+    <value>Lupine's Revenue</value>
+  </data>
+  <data name="NegativeBalance" xml:space="preserve">
+    <value>Negative Balance</value>
+  </data>
+  <data name="NegativeBalance_Report" xml:space="preserve">
+    <value>Negative Balance Report</value>
+  </data>
+  <data name="NegativeBalance_ReportFileName" xml:space="preserve">
+    <value>Licensee-NegativeBalance</value>
+  </data>
+  <data name="NumberGameWL_NoteMessage" xml:space="preserve">
+    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ All figures are displayed in EUR&lt;/li&gt;&lt;li&gt;+ Data is only available up to yesterday (after 5AM GMT-4)&lt;/li&gt;&lt;li&gt;+ Licensing fee for 12bet has been dropped from 17% to 15% effective from 19th September 2012.&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="NumberGameWL_NumberGameWinloss" xml:space="preserve">
+    <value>NumberGame Win Loss</value>
+  </data>
+  <data name="NumberGameWL_ReportFileName" xml:space="preserve">
+    <value>Licensee-NumberGameWinLoss</value>
+  </data>
+  <data name="PeakConcurrentUser" xml:space="preserve">
+    <value>Peak Concurrent Users</value>
+  </data>
+  <data name="PeakConcurrentUser_Average" xml:space="preserve">
+    <value>Average Peak Concurrent Users</value>
+  </data>
+  <data name="PeakConcurrentUser_Max" xml:space="preserve">
+    <value>Max Peak Concurrent Users</value>
+  </data>
+  <data name="PeakConcurrentUser_Min" xml:space="preserve">
+    <value>Min Peak Concurrent Users</value>
+  </data>
+  <data name="PeakConcurrentUser_ReportFileName" xml:space="preserve">
+    <value>Licensee-PeakConcurrentUser</value>
+  </data>
+  <data name="PeakConcurrentUser_Total" xml:space="preserve">
+    <value>Total Peak Concurrent Users</value>
+  </data>
+  <data name="PleaseSelectALicensee" xml:space="preserve">
+    <value>Please select a Licensee!</value>
+  </data>
+  <data name="Site" xml:space="preserve">
+    <value>Site</value>
+  </data>
+  <data name="StarExpressRevenue" xml:space="preserve">
+    <value>Star Express's Revenue</value>
+  </data>
+  <data name="TotalTransactionByLicensee_EURCost" xml:space="preserve">
+    <value>Transaction Cost (EUR)</value>
+  </data>
+  <data name="TotalTransactionByLicensee_FilterNote" xml:space="preserve">
+    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ Data is only available up to yesterday (after 5AM GMT-4).&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;li&gt;- View in full month range for accurate Total Costs of &lt;span class="bold-weight-tip"&gt;PIH/FDL&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="TotalTransactionByLicensee_Header" xml:space="preserve">
+    <value>Total Transactions by Licensee on {0}</value>
+  </data>
+  <data name="TotalTransactionByLicensee_ReportFilterText" xml:space="preserve">
+    <value>Licensee: 
+     Normal: {0}
+     Starlit: {1}
+     Month: {2}
+     Products: {3}</value>
+  </data>
+  <data name="TotalTransactionByLicensee_ReportName" xml:space="preserve">
+    <value>Total_Transactions_By_Licensee</value>
+  </data>
+  <data name="TotalTransactionByLicensee_ReportTitle" xml:space="preserve">
+    <value>Total Transactions by Licensee</value>
+  </data>
+  <data name="TotalTransactionByLicensee_SheetName" xml:space="preserve">
+    <value>Total Transactions</value>
+  </data>
+  <data name="TotalTransactions" xml:space="preserve">
+    <value>Total Transactions</value>
+  </data>
+  <data name="VirtualSports_Report" xml:space="preserve">
+    <value>Virtual Sports Win Loss</value>
+  </data>
+  <data name="VirtualSports_ReportFileName" xml:space="preserve">
+    <value>Licensee-VirtualSportsWinLoss</value>
+  </data>
+  <data name="VirtualSportWL_NoteMessage" xml:space="preserve">
+    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ All figures are displayed in EUR&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="WinLossByLicensee_AgentReportTitle" xml:space="preserve">
+    <value>Win Loss By Licensee for {0} from {1} to {2} in {3}{4}</value>
+  </data>
+  <data name="WinLossByLicensee_CurrencyReportTitle" xml:space="preserve">
+    <value>Win Loss By Licensee for {0} from {1} to {2} in {3}{4}</value>
+  </data>
+  <data name="WinLossByLicensee_FilterNote" xml:space="preserve">
+    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ This report is using OANDA exchange rate for currency conversion&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="WinLossByLicensee_MemberReportTitle" xml:space="preserve">
+    <value>Win Loss By Licensee for {0} from {1} to {2} in {3}{4}</value>
+  </data>
+  <data name="WinLossByLicensee_ReportName" xml:space="preserve">
+    <value>Win_Loss_By_Licensee_For_{0}_From_{1}_To_{2}</value>
+  </data>
+  <data name="WinLossByLicensee_ReportTitle_BaseCurrency" xml:space="preserve">
+    <value> (Base {0})</value>
+  </data>
+  <data name="WinLossByLicensee_SheetName" xml:space="preserve">
+    <value>Win Loss By Licensee</value>
+  </data>
+  <data name="PlaytechCasinoWinLoss_ReportName" xml:space="preserve">
+    <value>Playtech_Casino_Win_Loss_From_{0}_To_{1}</value>
+  </data>
+  <data name="PlaytechCasinoWinLoss_ReportTitle" xml:space="preserve">
+    <value>Playtech Casino Win Loss From {0} To {1}</value>
+  </data>
+  <data name="PlaytechCasinoWinLoss_SheetName" xml:space="preserve">
+    <value>Playtech Casino Win Loss</value>
+  </data>
+  <data name="KenoWinLossReportInformation" xml:space="preserve">
+    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ This report is using OANDA exchange rate for currency conversion&lt;/li&gt;&lt;li&gt;+ Data is only available up to yesterday (after 5AM GMT-4)&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="KenoWinLoss_ExcelFileName" xml:space="preserve">
+    <value>KenoWinLoss_for_{0}_from_{1}_to_{2}_in_{3}-{4}_Country/Market</value>
+  </data>
+  <data name="KenoWinLoss_ReportTitle" xml:space="preserve">
+    <value>Keno Win Loss Report for {0} from {1} to {2} in {3} - {4} Country/Market</value>
+  </data>
+  <data name="KenoWinLoss_SheetName" xml:space="preserve">
+    <value>KenoWinLoss</value>
+  </data>
+</root>

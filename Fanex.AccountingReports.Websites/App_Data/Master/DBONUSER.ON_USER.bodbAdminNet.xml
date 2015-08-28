@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="Licensee - Peak Concurrent User">
+    <Setting Key="Licensee_PeakConcurrentUser_GetReport" SpName="Acc_Rpt_LicenseeOnlineUserSel" DbName="DBONUSER.ON_USER.bodbAdminNet" />
+  </Function>
+</Functions>

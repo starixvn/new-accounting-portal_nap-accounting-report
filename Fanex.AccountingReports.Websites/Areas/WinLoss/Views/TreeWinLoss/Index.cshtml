@@ -1,0 +1,102 @@
+@using Fanex.AccountingReports.Core.Services.Impl;
+@using Fanex.AccountingReports.WinLoss.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Core.Configurations;
+@using Fanex.AccountingReports.Core;
+@using Fanex.AccountingReports.Core.Constants;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head{
+     @Styles.Render("~/scripts/_lib/MultipleSelect/style", "~/scripts/_lib/MonthPicker/style")
+     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
+      <link rel="stylesheet" type="text/css" href="~/Areas/WinLoss/Views/TreeWinLoss/Styles/TreeWinLoss.less" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Win_Loss / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <span id="notemessage" class="note-info-message" title=''></span>
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="datepickerplugin" class="lbl-field col_22 align-right">
+                </div>
+                 <div class="lbl-field col_3 align-right width-auto">
+                    @Labels.Product
+                </div>
+                <div class="edit-field col_7 ddlProductContainer">
+                    <select id="ddlProduct">
+                    </select>
+                </div>
+                <div class="submit width-auto col_4">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" class="" />
+                </div>
+                <div class=" width-auto col_4">
+                   
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="ErrMsg" class="col_35 display-none width-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="parentContainer" class="content-grid">
+    <div id="treeWinLossByProductContainer">
+        <div id="treeWinLossByProduct" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="treeWinLossByCommContainer" class="display-none full-width">
+        <div id="treeWinLossByComm" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="treeWinLossBySuperContainer" class="display-none full-width">
+        <div id="treeWinLossBySuper" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="treeWinLossByMasterContainer" class="display-none full-width">
+        <div id="treeWinLossByMaster" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="treeWinLossByAgentContainer" class="display-none full-width">
+        <div id="treeWinLossByAgent" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="virtualRateHistoryContainer" class="display-none virtualRateInfo">
+        <div id="virtualRateHistory" class="freegrid display-none">
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var noteMessage = '@Html.Raw(string.Format(WinLossResources.TreeWinLoss_FilterNote, DateTime.Today.AddMonths(-3).ToShortDateString()))';
+        var labelFrom = '@Labels.From';
+        var labelTo = '@Labels.To';
+        var today = '@DateTime.Today.ToShortDateString()';
+        var minDate = '@DateTime.Today.AddMonths(-3)';
+    </script>
+}
+@section Foot {
+     @Scripts.Render("~/scripts/_lib/multiselect")
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/Areas/WinLoss/Views/TreeWinLoss/Scripts/VirtualRateHistory.js"></script>
+    <script type="text/javascript" src="~/Areas/WinLoss/Views/TreeWinLoss/Scripts/TreeWinLoss.js"></script>
+    <script type="text/javascript" src="~/Areas/WinLoss/Views/TreeWinLoss/Scripts/TreeWinLossByComm.js"></script>
+    <script type="text/javascript" src="~/Areas/WinLoss/Views/TreeWinLoss/Scripts/TreeWinLossBySuper.js"></script>
+    <script type="text/javascript" src="~/Areas/WinLoss/Views/TreeWinLoss/Scripts/TreeWinLossByMaster.js"></script>
+    <script type="text/javascript" src="~/Areas/WinLoss/Views/TreeWinLoss/Scripts/TreeWinLossByAgent.js"></script>
+    <script type="text/javascript" src="~/Areas/WinLoss/Views/TreeWinLoss/Scripts/ReportManager.js"></script>
+
+}

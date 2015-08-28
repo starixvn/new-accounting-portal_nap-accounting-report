@@ -1,0 +1,47 @@
+@using Fanex.AccountingReports.Main.Resources;
+<div id="mixParlayReport" class="display-none">
+    <div class="grid-title">
+        <div id="mixParlayReportTitle" class="grid-title-label">
+            @MainResources.DailyWinLoss2h_MixParlayReport_Title
+        </div>
+        <div class="grid-toolbox">
+            <input class="btnBack" type="button" name="btnBack" value="" title="Back" />
+        </div>
+    </div>
+    <table id="mixParlayReportContent" class="reportTable">
+        <thead>
+            <tr>
+                <th>
+                    <div class="col160">
+                        @Labels.Bet_Type</div>
+                </th>
+                <th>
+                    <div class="col100">
+                        @Labels.Member_Win_Loss</div>
+                </th>
+                <th>
+                    <div class="col90">
+                        @Labels.SMA_Win_Loss</div>
+                </th>
+                <th>
+                    <div class="col80">
+                        @Labels.Comm</div>
+                </th>
+                <th>
+                    <div class="col100">
+                        @Labels.Company_Income</div>
+                </th>
+                <th>
+                    <div class="col100">
+                        @Labels.Company_Turnover</div>
+                </th>
+                <th>
+                    <div class="col80">
+                        @Labels.Margin</div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,1257 @@
+@using Fanex.AccountingReports.Main.Resources;
+<div id="soccerReportContainer" class="display-none">
+    <div id="soccerReportHeader" class="grid-title display-none">
+        <div class="grid-title-label" id="soccerReportTitle">
+        </div>
+        <div class="grid-toolbox">
+            <input id="btnExportTraderSoccerReport" class="btnExcel" type="button" title="Export to Excel"
+                value="" name="btnExcel" />
+        </div>
+    </div>
+    <div id="soccerReport" class="freegrid display-none">
+        <div class="free-cell free-top-left">
+            <table class="grid-fixed-table free-cell-top-left">
+                <thead>
+                    <tr>
+                        <th rowspan="2">
+                            <div class="table-cell col40 height61">
+                                @Labels.No</div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col100 height61 colSorter">
+                                <div class="display-inline-block">
+                                    @Labels.Trader</div>
+                                <div data-columnname="Trader" class="divSorter ">
+                                </div>
+                            </div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col40 height61">
+                                @Labels.Match</div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col40 height61">
+                                @Labels.Major</div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col40 height61">
+                                @Labels.Minor1</div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col40 height61">
+                                @Labels.Minor2</div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col40 height61">
+                                @Labels.Minor3</div>
+                        </th>
+                        <th rowspan="2">
+                            <div class="table-cell col40 height61">
+                                @Labels.Others</div>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="row_header_wrapper">
+            <div class="row_header row-headers-background" id="soccerReportRowHeader">
+                <table id="frozenContent_soccerReport" class="grid-fixed-table row_header_content">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height61">
+                                    @Labels.No</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height61 colSorter">
+                                    <div class="display-inline-block">
+                                        @Labels.Trader</div>
+                                    <div data-columnname="Trader" class="divSorter">
+                                    </div>
+                                </div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height61">
+                                    @Labels.Match</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height61">
+                                    @Labels.Major</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height61">
+                                    @Labels.Minor1</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height61">
+                                    @Labels.Minor2</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height61">
+                                    @Labels.Minor3</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height61">
+                                    @Labels.Others</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col_header row-headers-background scroll-y">
+            <div class="header-container">
+                <table class="grid-fixed-table col_header_content">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height28">
+                                    @Labels.No</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col100 height28 colSorter">
+                                    <div class="display-inline-block">
+                                        @Labels.Trader</div>
+                                </div>
+                                <div data-columnname="Trader" class="divSorter">
+                                </div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height28">
+                                    @Labels.Match</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height28">
+                                    @Labels.Major</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height28">
+                                    @Labels.Minor1</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height28">
+                                    @Labels.Minor2</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height28">
+                                    @Labels.Minor3</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height28">
+                                    @Labels.Others</div>
+                            </th>
+                            <th colspan="24">
+                                <div class="table-cell height28 col2505" align="center">
+                                    @Labels.Win_Loss</div>
+                            </th>
+                            <th colspan="24">
+                                <div class="table-cell height28 col2505" align="center">
+                                    @Labels.Turnover</div>
+                            </th>
+                            <th colspan="24">
+                                <div class="table-cell height28 col2505" align="center">
+                                    @Labels.Live_BetCount</div>
+                            </th>
+                            <th colspan="24">
+                                <div class="table-cell height28 col2505" align="center">
+                                    @Labels.Margin_Percent</div>
+                            </th>
+                            <th colspan="24">
+                                <div class="table-cell height28 col2505" align="center">
+                                    @Labels.Commission</div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10_min_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Single_Team_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15_min__Corner_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15min_Total_Booking_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Booking</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 colSorter height28">
+                                    <div class="display-inline-block">
+                                        Overall</div>
+                                    <div data-columnname="WinLossOverall" class="divSorter ">
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10_min_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Single_Team_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15_min__Corner_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15min_Total_Booking_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Booking</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 colSorter height28">
+                                    <div class="display-inline-block">
+                                        Overall</div>
+                                    <div data-columnname="TurnOverOverall" class="divSorter ">
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10_min_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Single_Team_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15_min__Corner_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15min_Total_Booking_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Booking</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 colSorter height28">
+                                    <div class="display-inline-block">
+                                        Overall</div>
+                                    <div data-columnname="LiveBetCountOverall" class="divSorter ">
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10_min_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Single_Team_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15_min__Corner_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15min_Total_Booking_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Booking</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 colSorter height28">
+                                    <div class="display-inline-block">
+                                        Overall</div>
+                                    <div data-columnname="MarginOverall" class="divSorter ">
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10_min_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Single_Team_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15_min__Corner_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15min_Total_Booking_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Booking</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 colSorter height28">
+                                    <div class="display-inline-block">
+                                        Overall</div>
+                                    <div data-columnname="CommOverall" class="divSorter ">
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="grid-container container">
+            <div class="content-container">
+                <table id="soccerReportContent" class="grid-fixed-table col_body_content">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height28">
+                                    @Labels.No</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col100 height28 colSorter">
+                                    <div class="display-inline-block">
+                                        @Labels.Trader</div>
+                                </div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height28">
+                                    @Labels.Match</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height28">
+                                    @Labels.Major</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height28">
+                                    @Labels.Minor1</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height28">
+                                    @Labels.Minor2</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height28">
+                                    @Labels.Minor3</div>
+                            </th>
+                            <th rowspan="2">
+                                <div class="table-cell col40 height28">
+                                    @Labels.Others</div>
+                            </th>
+                            <th colspan="24">
+                                <div class="table-cell col2505 height28">
+                                    @Labels.Win_Loss</div>
+                            </th>
+                            <th colspan="24">
+                                <div class="table-cell col2505 height28">
+                                    @Labels.Turnover</div>
+                            </th>
+                            <th colspan="24">
+                                <div class="table-cell col2505 height28">
+                                    @Labels.Live_BetCount</div>
+                            </th>
+                            <th colspan="24">
+                                <div class="table-cell col2505 height28">
+                                    @Labels.Margin_Percent</div>
+                            </th>
+                            <th colspan="24">
+                                <div class="table-cell col2505 height28">
+                                    @Labels.Commission</div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10_min_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Single_Team_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15_min__Corner_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15min_Total_Booking_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Booking</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28 colSorter">
+                                    <div class="display-inline-block">
+                                        Overall</div>
+                                    <div data-columnname="WinLossOverall" class="divSorter ">
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell">
+                                    @Labels.O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10_min_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Single_Team_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15_min__Corner_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15min_Total_Booking_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Booking</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28 colSorter">
+                                    <div class="display-inline-block">
+                                        Overall</div>
+                                    <div data-columnname="TurnOverOverall" class="divSorter ">
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10_min_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Single_Team_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15_min__Corner_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15min_Total_Booking_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Booking</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28 colSorter">
+                                    <div class="display-inline-block">
+                                        Overall</div>
+                                    <div data-columnname="LiveBetCountOverall" class="divSorter ">
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15minsHDP</div>
+                            </th>
+                             <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10_min_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Single_Team_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15_min__Corner_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15min_Total_Booking_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Booking</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28 colSorter">
+                                    <div class="display-inline-block">
+                                        Overall</div>
+                                    <div data-columnname="MarginOverall" class="divSorter ">
+                                    </div>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins1x2</div>
+                            </th>
+                             <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10mins1x2</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.HDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10minsHDP</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.O_U</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15mins_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._10_min_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Single_Team_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.No_of_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15_min__Corner_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Corner</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Total_Bookings</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._15min_Total_Booking_OU</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.Next_Booking</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels._1st_OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28">
+                                    @Labels.OE</div>
+                            </th>
+                            <th>
+                                <div class="table-cell col100 height28 colSorter">
+                                    <div class="display-inline-block">
+                                        Overall</div>
+                                    <div data-columnname="CommOverall" class="divSorter ">
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row_footer row-footer-background z999">
+            <table class="grid-fixed-table row_footer_content">
+                <thead>
+                </thead>
+            </table>
+        </div>
+        <div class="col_footer row-footer-background scroll-y">
+            <div class="footer-container">
+                <table class="col_footer_content grid-fixed-table">
+                    <thead>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

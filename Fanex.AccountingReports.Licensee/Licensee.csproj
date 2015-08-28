@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{972F4451-B4C2-4E68-83E8-C1D81FD6A2F9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fanex.AccountingReports.Licensee</RootNamespace>
+    <AssemblyName>Fanex.AccountingReports.Licensee</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="Accessibility">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ExcelUtil, Version=29.3.0.1000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\ExcelUtil.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Caching, Version=1.0.404.94, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data, Version=0.5.404.57, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Excel">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Core, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Framework">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20505.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants\AGCasinoWinlossConstants.cs" />
+    <Compile Include="Constants\FormatConstants.cs" />
+    <Compile Include="Constants\LicenseeConstants.cs" />
+    <Compile Include="Constants\Resellers.cs" />
+    <Compile Include="Controllers\AGCasinoWinLossController.cs" />
+    <Compile Include="Controllers\CompanyWinLossController.cs" />
+    <Compile Include="Controllers\KenoWinLossController.cs" />
+    <Compile Include="Controllers\LicenseeController.cs" />
+    <Compile Include="Controllers\NegativeBalanceController.cs" />
+    <Compile Include="Controllers\LiveCasinoWinLossController.cs" />
+    <Compile Include="Controllers\NumberGameWinLossController.cs" />
+    <Compile Include="Controllers\PeakConcurrentUsersController.cs" />
+    <Compile Include="Controllers\PlaytechCasinoWinLossController.cs" />
+    <Compile Include="Controllers\TotalTransactionsController.cs" />
+    <Compile Include="Controllers\VirtualSportWinLossController.cs" />
+    <Compile Include="Controllers\WinLossByLicenseeController.cs" />
+    <Compile Include="Core\Configurations\LicenseeEmailSection\MailCollection.cs" />
+    <Compile Include="Core\Configurations\LicenseeEmailSection\MailElement.cs" />
+    <Compile Include="Core\Configurations\LicenseeReportSection\LicenseeReportCollection.cs" />
+    <Compile Include="Core\Configurations\LicenseeReportSection\LicenseeReportElement.cs" />
+    <Compile Include="Core\Configurations\LicenseeReportSection\LicenseeReportSection.cs" />
+    <Compile Include="Core\Configurations\LicenseeEmailSection\LicenseeEmailSection.cs" />
+    <Compile Include="Criteria\AGCasinoWinloss\GetAgentReportCriteria.cs" />
+    <Compile Include="Criteria\AGCasinoWinloss\GetCurrencyByLicensee.cs" />
+    <Compile Include="Criteria\AGCasinoWinloss\GetLicenseeCriteria.cs" />
+    <Compile Include="Criteria\AGCasinoWinloss\GetMainReportCriteria.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Criteria\AGCasinoWinloss\GetMasterReportCriteria.cs" />
+    <Compile Include="Criteria\AGCasinoWinloss\GetMemberReportCriteria.cs" />
+    <Compile Include="Criteria\AGCasinoWinloss\GetSuperReportCriteria.cs" />
+    <Compile Include="Criteria\CompanyWinLoss\CompanyWinLossCriteria.cs" />
+    <Compile Include="Criteria\CompanyWinLoss\GetCurrenciesByLicenseeCriteria.cs" />
+    <Compile Include="Criteria\CompanyWinLoss\ProductListByLicenseCriteria.cs" />
+    <Compile Include="Criteria\KenoWinLoss\GetKenoCurrencyByLicenseeCriteria.cs" />
+    <Compile Include="Criteria\KenoWinLoss\GetKenoCountryMarketCriteria.cs" />
+    <Compile Include="Criteria\KenoWinLoss\GetKenoLicenseeCriteria.cs" />
+    <Compile Include="Criteria\KenoWinLoss\GetKenoWinLossCriteria.cs" />
+    <Compile Include="Criteria\GetCurrenciesByLicenseeCriteria.cs" />
+    <Compile Include="Criteria\LiveCasinoWinLoss\GetGameTypeCriteria.cs" />
+    <Compile Include="Criteria\NegativeBalance\NegativeBalanceCriteria.cs" />
+    <Compile Include="Criteria\GetLicenseeByResellerCriteria.cs" />
+    <Compile Include="Criteria\LiveCasinoWinLoss\GetLiveCasinoWinLossCriteria.cs" />
+    <Compile Include="Criteria\NumberGameWinLoss\GetNumberGameWinLossCriteria.cs" />
+    <Compile Include="Criteria\PeakConcurrentUser\PeakConcurrentUserCriteria.cs" />
+    <Compile Include="Criteria\GetAllLicenseeCriteria.cs" />
+    <Compile Include="Criteria\PlaytechCasinoWinLoss\GetPlaytechCasinoLicenseeCriteria.cs" />
+    <Compile Include="Criteria\PlaytechCasinoWinLoss\GetPlaytechCasinoWinLossCriteria.cs" />
+    <Compile Include="Criteria\TotalTransactions\GetResellerRatesCriteria.cs" />
+    <Compile Include="Criteria\TotalTransactions\GetTotalTransactionsCriteria.cs" />
+    <Compile Include="Criteria\VirtualSportWinLoss\GetVirtualSportBySporttypeCriteria.cs" />
+    <Compile Include="Criteria\VirtualSportWinLoss\GetVirtualSportWinLossCriteria.cs" />
+    <Compile Include="Criteria\WinLossByLicensee\GetCurrencyReportCriteria.cs" />
+    <Compile Include="Criteria\WinLossByLicensee\GetLevelReportByCustIdCriteria.cs" />
+    <Compile Include="Criteria\WinLossByLicensee\WinLossByLicenseeCriteria.cs" />
+    <Compile Include="Enum\KenoWinlossChangeType.cs" />
+    <Compile Include="LicenseeAreaRegistration.cs" />
+    <Compile Include="Models\AGCasinoWinloss\AGCasinoWinloss.cs" />
+    <Compile Include="Models\AGCasinoWinloss\AGCasinoWinlossData.cs" />
+    <Compile Include="Models\AGCasinoWinloss\Licensee.cs" />
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\KenoWinLoss\Columns.cs" />
+    <Compile Include="Models\KenoWinLoss\GridDataRow.cs" />
+    <Compile Include="Models\KenoWinLoss\GridOptions.cs" />
+    <Compile Include="Models\KenoWinLoss\HeaderColumns.cs" />
+    <Compile Include="Models\KenoWinLoss\KenoWinLoss.cs" />
+    <Compile Include="Models\Licensee.cs" />
+    <Compile Include="Models\LiveCasinoWinLoss\GameType.cs" />
+    <Compile Include="Models\LiveCasinoWinLoss\LiveCasinoWinLossByGroupResellers.cs" />
+    <Compile Include="Models\LiveCasinoWinLoss\LiveCasinoWinLossDetail.cs" />
+    <Compile Include="Models\LiveCasinoWinLoss\LiveCasinoWinLoss.cs" />
+    <Compile Include="Models\LiveCasinoWinLoss\ResellerLiveCasinoWinLoss.cs" />
+    <Compile Include="Models\NegativeBalance\MailParam.cs" />
+    <Compile Include="Models\NegativeBalance\NegativeBalance.cs" />
+    <Compile Include="Models\NegativeBalance\NegativeBalanceMemberMailFormat.cs" />
+    <Compile Include="Models\NegativeBalance\NegativeBalanceMemberSendMailFail.cs" />
+    <Compile Include="Models\NegativeBalance\NegativeBalanceMemberSendMailResult.cs" />
+    <Compile Include="Models\NegativeBalance\NegativeBalanceModel.cs" />
+    <Compile Include="Models\NegativeBalance\NegativeBalanceUser.cs" />
+    <Compile Include="Models\NumberGameWinLoss\LicenseeNumberGameWinLoss.cs" />
+    <Compile Include="Models\NumberGameWinLoss\NumberGameWinLoss.cs" />
+    <Compile Include="Models\NumberGameWinLoss\NumberGameWinLossGroupByResellers.cs" />
+    <Compile Include="Models\NumberGameWinLoss\ResellerNumberGameWinLoss.cs" />
+    <Compile Include="Models\PeakConcurrentUser\ConcurrentUser.cs" />
+    <Compile Include="Models\PeakConcurrentUser\PeakConcurrentUser.cs" />
+    <Compile Include="Models\PlaytechCasinoWinLoss\PlaytechCasinoWinLoss.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\TotalTransactions\Licensee.cs" />
+    <Compile Include="Models\TotalTransactions\Reseller.cs" />
+    <Compile Include="Models\TotalTransactions\ResellerRate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\TotalTransactions\TransactionItem.cs" />
+    <Compile Include="Models\VirtualSportWinLoss\LicenseeVirtualSportWinLoss.cs" />
+    <Compile Include="Models\VirtualSportWinLoss\ResellerVirtualSportWinLoss.cs" />
+    <Compile Include="Models\VirtualSportWinLoss\SportType.cs" />
+    <Compile Include="Models\VirtualSportWinLoss\VirtualSportWinLoss.cs" />
+    <Compile Include="Models\VirtualSportWinLoss\VirtualSportWinLossGroupByResellers.cs" />
+    <Compile Include="Models\VirtualSportWinLoss\VirtualSportWinLossNEW.cs" />
+    <Compile Include="Models\WinLossByLicensee\WinLossByLicensee.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Implement\CompanyWinLossRepository.cs" />
+    <Compile Include="Repositories\Implement\NegativeBalanceRepository.cs" />
+    <Compile Include="Repositories\Implement\WinLossByLicenseeRepository.cs" />
+    <Compile Include="Repositories\Interface\ICompanyWinLossRepository.cs" />
+    <Compile Include="Repositories\Interface\INegativeBalanceRepository.cs" />
+    <Compile Include="Repositories\Interface\IWinLossByLicenseeRepository.cs" />
+    <Compile Include="Resources\Labels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Labels.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\LicenseeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LicenseeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Implement\AGCasinoWinLossService.cs" />
+    <Compile Include="Services\Implement\CompanyWinLossService.cs" />
+    <Compile Include="Services\Implement\NegativeBalanceService.cs" />
+    <Compile Include="Services\Implement\LicenseeSiteService.cs" />
+    <Compile Include="Services\Implement\KenoWinLossService.cs" />
+    <Compile Include="Services\Implement\PlaytechCasinoWinLoss\PlaytechCasinoWinLossService.cs" />
+    <Compile Include="Services\Implement\VirtualSportWinLossService.cs" />
+    <Compile Include="Services\Implement\WinLossByLicenseeService.cs" />
+    <Compile Include="Services\Interface\IAGCasinoWinLossService.cs" />
+    <Compile Include="Services\Interface\ICompanyWinLossService.cs" />
+    <Compile Include="Services\Interface\IKenoWinLossService.cs" />
+    <Compile Include="Services\Interface\ILicenseeSiteService.cs" />
+    <Compile Include="Services\Implement\LiveCasinoWinLossService.cs" />
+    <Compile Include="Services\Implement\NumberGameWinLossService.cs" />
+    <Compile Include="Services\Implement\PeakConcurrentUserService.cs" />
+    <Compile Include="Services\Interface\ILiveCasinoWinLossService.cs" />
+    <Compile Include="Services\Interface\INegativeBanlance.cs" />
+    <Compile Include="Services\Interface\IPeakConcurrentUserService.cs" />
+    <Compile Include="Services\Interface\IPlaytechCasinoWinLossService.cs" />
+    <Compile Include="Services\Interface\ITotalTransactionsService.cs" />
+    <Compile Include="Services\Implement\TotalTransactionsService.cs" />
+    <Compile Include="Services\Interface\INumberGameWinLossService.cs" />
+    <Compile Include="Services\Interface\IVirtualSportWinLossService.cs" />
+    <Compile Include="Services\Interface\IWinLossByLicenseeService.cs" />
+    <Compile Include="Utilities\AGCasinoWinloss\ExcelUtility.cs" />
+    <Compile Include="Utilities\KenoWinLoss\CellStyles\KenoWinLossSubTotalCellStyles.cs" />
+    <Compile Include="Utilities\KenoWinLoss\CellStyles\KenoWinLossFooterCellStyles.cs" />
+    <Compile Include="Utilities\KenoWinLoss\CellStyles\KenoWinLossBodyCellStyles.cs" />
+    <Compile Include="Utilities\KenoWinLoss\CellStyles\KenoWinLossCellStyles.cs" />
+    <Compile Include="Utilities\KenoWinLoss\Color\CustomColor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Labels.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Labels.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\LicenseeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LicenseeResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utilities\KenoWinLoss\ExcelUtility\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">
+      <Project>{A5608298-26C2-4F05-A7FD-AA8C0700ED38}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

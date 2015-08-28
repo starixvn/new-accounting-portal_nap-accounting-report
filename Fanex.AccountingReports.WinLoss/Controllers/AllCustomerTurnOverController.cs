@@ -1,0 +1,64 @@
+﻿// -----------------------------------------------------------------------
+// <copyright file="AllCustomerTurnOverController.cs" company="Nexcel Solutions Vietnam">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Fanex.AccountingReports.WinLoss.Controllers
+{
+    using System.Web.Mvc;
+    using Fanex.AccountingReports.Core.Exceptions;
+    using Fanex.AccountingReports.Core.Web.Controllers;
+    using Fanex.AccountingReports.WinLoss.Criteria.GetAllCustomerTurnOver;
+    using Fanex.AccountingReports.WinLoss.Services.Implement;
+    using Fanex.AccountingReports.WinLoss.Services.Implement.AllCustomerTurnOver;
+    using Fanex.AccountingReports.WinLoss.Services.Interface;
+    using Fanex.AccountingReports.WinLoss.Services.Interface.AllCustomerTurnOver;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    [NapSuperAuth]
+    public class AllCustomerTurnOverController : BaseController
+    {
+        private readonly IAllCustomerTurnOverGetReportService _getReportService;
+        private readonly IAllCustomerTurnOverExportReportService _exportReportService;
+
+        public AllCustomerTurnOverController()
+            : this(null, null)
+        {
+        }
+
+        public AllCustomerTurnOverController(IAllCustomerTurnOverGetReportService getReportService, IAllCustomerTurnOverExportReportService exportReportService)
+        {
+            this._getReportService = getReportService ?? new AllCustomerTurnOverGetReportService();
+            this._exportReportService = exportReportService ?? new AllCustomerTurnOverExportReportService();
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = AccReportFunctionKeys.AllCustomerTurnoverBySite, Policy = Constant.Policy.Read)]
+        public ActionResult Index()
+        {
+            return View("~/Areas/WinLoss/Views/AllCustomerTurnOver/Index.cshtml");
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetReport(GetAllCustomerTurnOverCriteria criteria)
+        {            
+            var report = this._getReportService.GetReport(criteria);
+            var jsonResult = Json(report);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return jsonResult;
+        }
+
+        public ActionResult ExportReport(GetAllCustomerTurnOverCriteria criteria)
+        {
+            this._exportReportService.ExportReport(criteria);
+            return new EmptyResult();
+        }
+    }
+}

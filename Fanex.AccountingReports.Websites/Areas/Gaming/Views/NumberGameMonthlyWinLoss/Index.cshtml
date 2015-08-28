@@ -1,0 +1,69 @@
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.AccountingReports.Gaming.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/scripts/_lib/DatePicker/style", "~/scripts/_lib/Fanex.Grid/style")
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Gaming / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <span id="notemessage" class="note-info-message" title=''></span>
+    <div class="filter-form">
+        <div id="numberGameMonthlyWinLossFilter">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="datepickerplugin" class="lbl-field col_15 align-right">
+                    </div>
+                </div>
+                <div class="submit col_4">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="numberGameMonthlyWinLossReportGrid" class="display-none content-grid width-100percent">
+    <div id="numberGameMonthlyWinLossReportMainGrid" class="freegrid">
+    </div>
+</div>
+@{    
+    var initFromdate = DateTime.Today.AddMonths(-1).AddDays(- DateTime.Today.Day + 1);
+    var initToDate = initFromdate.AddMonths(1).AddDays(-1);   
+}
+@section scripts
+{
+    <script type="text/javascript">
+        var noteMessage = '@Html.Raw(GamingResources.NumberGameMonthlyWinLoss_FilterNote)';
+        var labelFrom = '@Labels.From';
+        var labelTo = '@Labels.To';
+        var today = '@DateTime.Today.ToShortDateString()';
+        var total = '@Labels.Total';
+        var notAvailable = '@Labels.NotAvailable';
+        var month = '@Labels.Month';
+        var memberWinLoss = '@Labels.Member_Win_Loss';
+        var position = '@Labels.Position';
+        var commission = '@Labels.Commission';
+        var lineTotal = '@Labels.LineTotal';
+        var turnOver = '@Labels.Turnover';
+        var margin = '@Labels.Margin';
+
+        var initFromDate = '@initFromdate.ToShortDateString()';
+        var initToDate = '@initToDate.ToShortDateString()';
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/NumberGameMonthlyWinLoss/Scripts/NumberGameMonthlyWinLoss.js"></script>
+}

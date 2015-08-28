@@ -1,0 +1,117 @@
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.AccountingReports.Gaming.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Core.Configurations;
+
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Head {
+    @Styles.Render("~/scripts/_lib/DatePicker/style", "~/scripts/_lib/Fanex.Grid/style")
+    @Styles.Render("~/scripts/_lib/MultipleSelect/style", "~/scripts/_lib/MonthPicker/style")
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less?ver=1" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Gaming/Views/VirtualSportsWinLoss/Styles/VirtualSportsWinLoss.less" />
+}
+
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Gaming / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+
+<div id="filter-bar">
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_3">
+                    <div>
+                        @Labels.Month
+                    </div> 
+                </div>
+                <div class="edit-field col_16"> 
+                    <div id="renderMonthPicker">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_3">
+                    <div>
+                        @Labels.DrawFilter
+                    </div> 
+                </div>
+                <div class="edit-field col_7">
+                    <select id="DrawFilter" class="alpha">
+                        <option selected value="1">Normal</option>
+                        <option value="2">No Draw</option>
+                        <option value="3">No Draw for Turnover Only</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="lbl-field col_3">
+                    <div>
+                        @Labels.Sports_Type
+                    </div> 
+                </div>
+                <div class="edit-field col_7">
+                    <select id="SportsType">
+                    </select>
+                </div>
+            </div>
+             <div class="filter-cell">
+                 <div class="lbl-field col_5">
+                    <div>
+                        <input id="ExcludeTest" type="checkbox" checked/>
+                        <span>
+                            @Labels.Exclude_Test_Data
+                        </span>
+                    </div> 
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="submit col_4 prefix_1">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="VirtualSportsWinLossContainer" class="content-grid display-none">
+    <div id="VirtualSportsWinLossContent" class="freegrid">
+    </div>
+</div>
+
+<div id="VirtualSportsWinLossDetailContainer" class="content-grid display-none">
+    <div id="VirtualSportsWinLossDetailContent" class="freegrid">
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        var today = '@DateTime.Today.ToShortDateString()';
+        var minDate = '@AppSettings.VirtualSportsWinLoss_MinDate.ToShortDateString()';
+        var yesterday = '@DateTime.Today.AddDays(-1).ToShortDateString()';
+        var previousMonth = '@DateTime.Today.AddMonths(-1).ToShortDateString()';
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    @Scripts.Render("~/scripts/_lib/multiselect", "~/scripts/_lib/monPickr")
+    <script type="text/javascript" src="~/Areas/Gaming/Views/VirtualSportsWinLoss/Scripts/ReportManager.js" >
+    </script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/VirtualSportsWinLoss/Scripts/VirtualSportsWinLoss.js" >
+    </script> 
+    <script type="text/javascript" src="~/Areas/Gaming/Views/VirtualSportsWinLoss/Scripts/VirtualSportsWinLossDetail.js" >
+    </script> 
+}
+

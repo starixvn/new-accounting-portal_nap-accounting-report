@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FBC08CFC-CA34-44D0-BA0B-A500A2228A9A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fanex.AccountingReports.Main</RootNamespace>
+    <AssemblyName>Fanex.AccountingReports.Main</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ExcelUtil">
+      <HintPath>..\_Dependencies\ExcelUtil.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Caching, Version=1.0.404.95, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data, Version=0.5.404.59, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Excel">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Core, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Framework, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20505.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants\BetTypeConstants.cs" />
+    <Compile Include="Constants\MainConstants.cs" />
+    <Compile Include="Constants\RowType.cs" />
+    <Compile Include="Constants\SoccerBetTypeConstants.cs" />
+    <Compile Include="Constants\SportContants.cs" />
+    <Compile Include="Constants\SportTypeWinLoss.cs" />
+    <Compile Include="Controllers\DailyWinLoss2hSoccerMinorBettypeController.cs" />
+    <Compile Include="Controllers\CreditTermController.cs" />
+    <Compile Include="Controllers\DailyWinLoss2hController.cs" />
+    <Compile Include="Controllers\DailyWinLoss2hOtherSportsController.cs" />
+    <Compile Include="Controllers\DailyWinLoss2hSoccerController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\MatchWinLoss2aController.cs" />
+    <Compile Include="Controllers\TraderPerformanceOtherSportsController.cs" />
+    <Compile Include="Controllers\TraderPerformanceSoccerController.cs" />
+    <Compile Include="Controllers\WinLossSummary3rdController.cs" />
+    <Compile Include="Controllers\WinLossSummaryController.cs" />
+    <Compile Include="Criteria\CreditTerm\GetCreditTermCriteria.cs" />
+    <Compile Include="Criteria\CreditTerm\GetInstallAmountCriteria.cs" />
+    <Compile Include="Criteria\CreditTerm\GetRemarkEditedCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2hOtherSports\GetMain2hReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2hSoccerMinorBettype\GetMainReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2hSoccerMinorBettype\GetSoccerReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2hSoccer\GetMain2hReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetKenoReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetBingoReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetCasinoReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetLiveCasinoWinLossByProductCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetLiveCasinoReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetMain2hReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetMetricGamingBettypeCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetOtherSportReportBySportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetParlayReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetRacingReportByBetTypeCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetRacingReportBySportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetReportByBetTypeCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetSoccerReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetSummaryNumberGameReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetSummaryOtherSportReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetSummaryRacingReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetMixParlayReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetVirtualSportReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetVirtualSportReportBySportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetVirtualSports_VirtualHorseRacingReportCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_BetTypeCriteria.cs" />
+    <Compile Include="Criteria\MatchWinLoss2a\GetAllDetailReportBySportsCriteria.cs" />
+    <Compile Include="Criteria\MatchWinLoss2a\GetDetailReportByBetTypeCriteria.cs" />
+    <Compile Include="Criteria\MatchWinLoss2a\GetMainReportCriteria.cs" />
+    <Compile Include="Criteria\MatchWinLoss2a\GetMetricGamingCriteria.cs" />
+    <Compile Include="Criteria\MatchWinLoss2a\GetThirdPartyCasinoReportCriteria.cs" />
+    <Compile Include="Criteria\MatchWinLoss2a\GetWinLossByBetTypeCriteria.cs" />
+    <Compile Include="Criteria\TraderPerformance\GetDetailReportCriteria.cs" />
+    <Compile Include="Criteria\TraderPerformance\GetReportCriteria.cs" />
+    <Compile Include="Criteria\WinLossSummary3rd\GetMatchGameDetailsCriteria.cs" />
+    <Compile Include="Criteria\WinLossSummary3rd\GetRecalculateWinLossCriteria.cs" />
+    <Compile Include="Criteria\WinLossSummary\GetReportCriteria.cs" />
+    <Compile Include="Criteria\WinLossSummary3rd\GetReportCriteria.cs" />
+    <Compile Include="Enums\DailyWinloss2hSoccerMinorBettype\ColumnMappingEnums.cs" />
+    <Compile Include="MainAreaRegistration.cs" />
+    <Compile Include="Models\CreditTerm\CreditTerm.cs" />
+    <Compile Include="Models\CreditTerm\EditedRemarkResult.cs" />
+    <Compile Include="Models\CreditTerm\InstallAmount.cs" />
+    <Compile Include="Models\DailyWinLoss2h\ProductWinLoss.cs" />
+    <Compile Include="Models\DailyWinLoss2h\WinLossInfo.cs" />
+    <Compile Include="Models\DailyWinLoss2h\LiveAndNoneLiveReport.cs" />
+    <Compile Include="Models\MatchWinLoss2a\MetricGaming.cs" />
+    <Compile Include="Models\MatchWinLoss2a\SummaryReportByBetType.cs" />
+    <Compile Include="Models\MatchWinLoss2a\WinLossInfo.cs" />
+    <Compile Include="Models\TraderPerformanceOtherSports\TraderPerformanceOtherSports.cs" />
+    <Compile Include="Models\TraderPerformanceOtherSports\TraderPerformanceOtherSportsDetail.cs" />
+    <Compile Include="Models\TraderPerformanceSoccer\TraderPerformanceSoccer.cs" />
+    <Compile Include="Models\TraderPerformanceSoccer\TraderPerformanceSoccerDetail.cs" />
+    <Compile Include="Models\WinLossSummary3rd\BetTypeWinLossInfo.cs" />
+    <Compile Include="Models\WinLossSummary3rd\MatchGame3rdInfo.cs" />
+    <Compile Include="Models\WinLossSummary3rd\MatchGameBetTypeInfo.cs" />
+    <Compile Include="Models\WinLossSummary3rd\MatchGameLeagueInfo.cs" />
+    <Compile Include="Models\WinLossSummary3rd\MatchGameWinLossInfo.cs" />
+    <Compile Include="Models\WinLossSummary3rd\SportTypeWinLossInfo.cs" />
+    <Compile Include="Models\WinLossSummary3rd\WinLoss3rdInfo.cs" />
+    <Compile Include="Models\WinLossSummary3rd\WinLossInfo.cs" />
+    <Compile Include="Models\WinLossSummary\WinLossInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Implement\CreditTermRepository.cs" />
+    <Compile Include="Repositories\Implement\DailyWinLoss2hOtherSportsRepository.cs" />
+    <Compile Include="Repositories\Implement\DailyWinLoss2hRepository.cs" />
+    <Compile Include="Repositories\Implement\DailyWinLoss2hSoccerRepository.cs" />
+    <Compile Include="Repositories\Implement\TraderPerformanceOtherSportsRepository.cs" />
+    <Compile Include="Repositories\Implement\TraderPerformanceSoccerRepository.cs" />
+    <Compile Include="Repositories\Implement\WinlossSummary3rdRepository.cs" />
+    <Compile Include="Repositories\Implement\MatchWinLoss2aRepository.cs" />
+    <Compile Include="Repositories\Implement\WinLossSummaryRepository.cs" />
+    <Compile Include="Repositories\Interface\ICreditTermRepository.cs" />
+    <Compile Include="Repositories\Interface\IDailyWinLoss2hOtherSportsRepository.cs" />
+    <Compile Include="Repositories\Interface\IDailyWinLoss2hRepository.cs" />
+    <Compile Include="Repositories\Interface\IDailyWinLoss2hSoccerRepository.cs" />
+    <Compile Include="Repositories\Interface\IMatchWinLoss2aRepository.cs" />
+    <Compile Include="Repositories\Interface\ITraderPerformanceOtherSportsRepository.cs" />
+    <Compile Include="Repositories\Interface\ITraderPerformanceSoccerRepository.cs" />
+    <Compile Include="Repositories\Interface\IWinlossSummary3rdRepository.cs" />
+    <Compile Include="Repositories\Interface\IWinLossSummaryRepository.cs" />
+    <Compile Include="Resources\Labels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Labels.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\MainResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Implement\CreditTerm\CreditTermExportExcelService.cs" />
+    <Compile Include="Services\Implement\CreditTerm\CreditTermService.cs" />
+    <Compile Include="Services\Implement\CreditTerm\InstallmentAmountExportExcelService.cs" />
+    <Compile Include="Services\Implement\CreditTerm\InstallmentAmountService.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Services\Implement\CreditTerm\CreditTermExcelUtil.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2hOtherSports\DailyWinLoss2hService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2hOtherSports\MainReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2hSoccerMinorBettype\BaseReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2hSoccerMinorBettype\BetTypeReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2hSoccerMinorBettype\SiteReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2hSoccerMinorBettype\MainReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2hSoccerMinorBettype\SportTypeReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2hSoccer\DailyWinLoss2hService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2hSoccer\MainReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\BettypeReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\BingoReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\CasinoReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\DailyWinLoss2hService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\DailyWinLoss2hUtilityService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\LiveCasinoReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\MainReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\MetricGamingService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\NumberGameReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\OtherSportReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\ParlayReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\RacingReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\MixParlayReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\SoccerReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\VirtualSportReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\VirtualSport_VirtualHorseRacingReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\WinLossBySiteService.cs" />
+    <Compile Include="Services\Implement\MatchWinLoss2a\MatchWinLoss2aUtilityService.cs" />
+    <Compile Include="Services\Implement\MatchWinLoss2a\MetricGamingService.cs" />
+    <Compile Include="Services\Implement\MatchWinLoss2a\ReportCellStyle.cs" />
+    <Compile Include="Services\Implement\MatchWinLoss2a\ExportAllDetailReportBySportService.cs" />
+    <Compile Include="Services\Implement\MatchWinLoss2a\ExportAllDetailReportService.cs" />
+    <Compile Include="Services\Implement\MatchWinLoss2a\ExportDetailReportByBetTypeService.cs" />
+    <Compile Include="Services\Implement\MatchWinLoss2a\ExportDetailReportBySportsTypeService.cs" />
+    <Compile Include="Services\Implement\MatchWinLoss2a\ExportSummaryReportByBetTypeService.cs" />
+    <Compile Include="Services\Implement\MatchWinLoss2a\ExportSummaryReportBySportTypeService.cs" />
+    <Compile Include="Services\Implement\MatchWinLoss2a\MatchWinLoss2aService.cs">
+      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Services\Implement\MatchWinLoss2a\RowType.cs" />
+    <Compile Include="Services\Implement\TraderPerformanceOtherSports\ExportDetailReportService.cs" />
+    <Compile Include="Services\Implement\TraderPerformanceOtherSports\ExportReportService.cs" />
+    <Compile Include="Services\Implement\TraderPerformanceOtherSports\TraderPerformanceOtherSportsService.cs" />
+    <Compile Include="Services\Implement\TraderPerformanceSoccer\ExportDetailReportService.cs" />
+    <Compile Include="Services\Implement\TraderPerformanceSoccer\ExportReportService.cs" />
+    <Compile Include="Services\Implement\TraderPerformanceSoccer\TraderPerformanceSoccerService.cs" />
+    <Compile Include="Services\Implement\WinLoss3rdSummary\ExportWinLossSummary3rdService.cs" />
+    <Compile Include="Services\Implement\WinLoss3rdSummary\WinLossSummary3rdService.cs" />
+    <Compile Include="Services\Implement\WinLossSummary\WinLossSummaryService.cs" />
+    <Compile Include="Services\Interface\DailyWinLoss2hSoccerMinorBettype\IBettypeReportService.cs" />
+    <Compile Include="Services\Interface\DailyWinLoss2hSoccerMinorBettype\ISoccerReportService.cs" />
+    <Compile Include="Services\Interface\DailyWinLoss2hSoccerMinorBettype\IMainReportService.cs" />
+    <Compile Include="Services\Interface\CreditTerm\ICreditTermExportExcelService.cs" />
+    <Compile Include="Services\Interface\CreditTerm\ICreditTermService.cs" />
+    <Compile Include="Services\Interface\CreditTerm\IInstallmentAmountExportExcelService.cs" />
+    <Compile Include="Services\Interface\CreditTerm\IInstallmentAmountService.cs" />
+    <Compile Include="Services\Interface\CreditTerm\ICreditTermExcelUtil.cs" />
+    <Compile Include="Services\Interface\DailyWinLoss2h\IMetricGamingService.cs" />
+    <Compile Include="Services\Interface\IDailyWinLoss2hOtherSportsService.cs" />
+    <Compile Include="Services\Interface\IDailyWinLoss2hService.cs" />
+    <Compile Include="Services\Interface\IDailyWinLoss2hSoccerService.cs" />
+    <Compile Include="Services\Interface\IMatchWinLoss2aService.cs" />
+    <Compile Include="Services\Interface\ITraderPerformanceOtherSportsService.cs" />
+    <Compile Include="Services\Interface\ITraderPerformanceSoccerService.cs" />
+    <Compile Include="Services\Interface\IWinLossSummary3rdService.cs" />
+    <Compile Include="Services\Interface\IWinLossSummaryService.cs" />
+    <Compile Include="Services\Interface\MatchWinLoss2a\IMetricGamingService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">
+      <Project>{A5608298-26C2-4F05-A7FD-AA8C0700ED38}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Labels.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Labels.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MainResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>MainResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

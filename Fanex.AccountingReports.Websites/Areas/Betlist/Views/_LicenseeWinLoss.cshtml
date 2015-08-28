@@ -1,0 +1,26 @@
+@using Fanex.BetList.Accounting.Models;
+@using Fanex.BetList.Accounting.Core;
+@using Fanex.BetList.Accounting.Extensions;
+
+@{
+    var betdetail = Model;
+    decimal licenseeWL = betdetail.Ticket.AgentWinlost;
+    decimal comm = betdetail.Ticket.Comm;
+}
+@if (licenseeWL != 0 && comm != 0)
+{
+	<font class='underdog'>
+		@licenseeWL.Format(2)
+	</font><br />
+	<span>@comm.Format(2)</span>
+}
+else if (comm == 0)
+{
+	<font class='underdog'>
+		@licenseeWL.Format(2)
+	</font>
+}
+else
+{
+	<span>@comm.Format(2)</span>
+}

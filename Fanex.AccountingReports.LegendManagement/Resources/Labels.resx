@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="BetCountLegend" xml:space="preserve">
+    <value>&lt;div id="lengendContentContainer"&gt;&lt;br /&gt;
+&lt;div id="generalInfo"&gt;
+&lt;div class="title-container" style="font-family: tahoma,Arial,Helvetica,sans-serif; font-size: 96%; margin-left: 0; padding: 0px 0;"&gt;
+&lt;div class="title" style="border-bottom: 1px solid #CEE1EE; height: 22px; margin-left: 6px;"&gt;
+&lt;div class="title-tab" style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; background: none repeat scroll 0 0 #CDDEF2; border-color: #E3EEF8 #E3EEF8 -moz-use-text-color; border-style: solid solid none; border-width: 1px 1px medium; color: #3361a2; display: inline; font-size: 1.2em; font-weight: bold; height: 24px; line-height: 18px; margin: 0; padding: 6px; text-decoration: none;"&gt;General Info&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="content" style="float: none; padding-left: 6px;"&gt;
+&lt;ul style="font-size: 1.2em;"&gt;
+&lt;li style="line-height: 20px;"&gt;For Super/Master/Agent/Member, a positive number indicates a win and vice versa.&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;For company, a negative number indicates a win and vice versa. Besides, a losing amount will be highlighted in &lt;strong&gt;&lt;span style="color: #ff0000;"&gt;red&lt;/span&gt;&lt;/strong&gt;.&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;All amount shown are in MYR (Malaysian ringgit).&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;In Deposit Group, Licensee winloss is shown under Agent column.&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;Data is only available from last 3 months up to yesterday (After 11 AM, GMT -4).&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;Data can be filtered by betting product.&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;Include won, lose, draw tickets only.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="detailsInfo"&gt;
+&lt;div class="title-container" style="font-family: tahoma,Arial,Helvetica,sans-serif; font-size: 96%; margin-left: 0; padding: 0px 0;"&gt;
+&lt;div class="title" style="border-bottom: 1px solid #CEE1EE; height: 22px; margin-left: 6px;"&gt;
+&lt;div class="title-tab" style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; background: none repeat scroll 0 0 #CDDEF2; border-color: #E3EEF8 #E3EEF8 -moz-use-text-color; border-style: solid solid none; border-width: 1px 1px medium; color: #3361a2; display: inline; font-size: 1.2em; font-weight: bold; height: 24px; line-height: 18px; margin: 0; padding: 6px; text-decoration: none;"&gt;Term definition and explanation&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="content" style="float: none; padding-left: 6px;"&gt;
+&lt;ul style="font-size: 1.2em;"&gt;
+&lt;li style="line-height: 20px;"&gt;&lt;strong&gt;Site&lt;/strong&gt;: list of betting sites which are divided into 2 groups i.e. Credit and Deposit site.&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;&lt;strong&gt;Bet Count&lt;/strong&gt;: total number of betting transaction.&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;&lt;strong&gt;Total Turnover&lt;/strong&gt;: total stake amount.&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;&lt;strong&gt;Member Winloss&lt;/strong&gt;: total member winloss including commission.&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;&lt;strong&gt;Margin %&lt;/strong&gt;: percentage of member winloss over total turnover.&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;&lt;strong&gt;SMA Winloss&lt;/strong&gt;: Super-Master-Agent winloss.&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;&lt;strong&gt;Agent&lt;/strong&gt;: total net income of Agent after deducting member commission.&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;&lt;strong&gt;Master&lt;/strong&gt;: total net income of Master after deducting agent commission.&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;&lt;strong&gt;Super&lt;/strong&gt;: total net income of Super after deducting master commission.&lt;/li&gt;
+&lt;li style="line-height: 20px;"&gt;&lt;strong&gt;Company&lt;/strong&gt;: total net income of company in the view of member.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="Choosing_image" xml:space="preserve">
+    <value>Choosing image</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="Copy_Legend" xml:space="preserve">
+    <value>Copy Legend</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="From_URL" xml:space="preserve">
+    <value>From URL</value>
+  </data>
+  <data name="Image_location" xml:space="preserve">
+    <value>Image location</value>
+  </data>
+  <data name="Is_Note" xml:space="preserve">
+    <value>Is Note</value>
+  </data>
+  <data name="LegendManagement_UploadFileNote" xml:space="preserve">
+    <value>(Max size: 2M. File type: jpg, jpeg, gif, png, bmp)</value>
+  </data>
+  <data name="Legend_Management" xml:space="preserve">
+    <value>Legend Management</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="NotExistLegend" xml:space="preserve">
+    <value>Not exist legend for report!</value>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="SampleTemplate" xml:space="preserve">
+    <value>&lt;div id="lengendContentContainer"&gt;&lt;br /&gt;&lt;div id="generalInfo" style=""&gt;&lt;div class="title-container" style="font-family: tahoma,Arial,Helvetica,sans-serif; font-size: 96%; margin-left: 0; padding: 0px 0;"&gt;&lt;div class="title" style="border-bottom: 1px solid #CEE1EE; height: 22px; margin-left: 6px;"&gt;&lt;div class="title-tab" style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; background: none repeat scroll 0 0 #CDDEF2; border-color: #E3EEF8 #E3EEF8 -moz-use-text-color; border-style: solid solid none; border-width: 1px 1px medium; color: #3361a2; display: inline; font-size: 1.2em; font-weight: bold; height: 24px; line-height: 18px; margin: 0; padding: 6px; text-decoration: none;"&gt;&amp;nbsp;General Info&amp;nbsp;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="content" style="float: none; padding-left: 6px;"&gt;&lt;ul style="font-size: 1.2em;"&gt;&lt;li style="line-height: 20px;"&gt;&lt;em&gt;&lt;strong&gt;Write general information of menu legend here.&lt;/strong&gt;&lt;/em&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;div id="detailsInfo"&gt;&lt;div class="title-container" style="font-family: tahoma,Arial,Helvetica,sans-serif; font-size: 96%; margin-left: 0; padding: 0px 0;"&gt;&lt;div class="title" style="border-bottom: 1px solid #CEE1EE; height: 22px; margin-left: 6px;"&gt;&lt;div class="title-tab" style="-moz-border-bottom-colors: none; -moz-border-left-colors: none; -moz-border-right-colors: none; -moz-border-top-colors: none; background: none repeat scroll 0 0 #CDDEF2; border-color: #E3EEF8 #E3EEF8 -moz-use-text-color; border-style: solid solid none; border-width: 1px 1px medium; color: #3361a2; display: inline; font-size: 1.2em; font-weight: bold; height: 24px; line-height: 18px; margin: 0; padding: 6px; text-decoration: none;"&gt;&amp;nbsp;Term definition and explanation&amp;nbsp;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="content" style="float: none; padding-left: 6px;"&gt;&lt;ul style="font-size: 1.2em;"&gt;&lt;li style="line-height: 20px;"&gt;&lt;strong&gt;&lt;em&gt;Write details information of menu legend here.&lt;/em&gt;&lt;/strong&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SP_Contants_Error" xml:space="preserve">
+    <value>errmsg</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="Upload_Image" xml:space="preserve">
+    <value>Upload Image</value>
+  </data>
+  <data name="SampleNote" xml:space="preserve">
+    <value>&lt;div style="padding-top: 5px;"&gt;&lt;div style="font-size: 1.0em; margin-top: 0px; color: #6F6F6F"&gt;&lt;div style="padding-top: 2px; padding-bttom: 2px; font-weight: bold;"&gt;- Data is only available from last 3 months up to yesterday (After 11 AM, GMT -4).&lt;/div&gt;&lt;div style="padding-top: 2px; padding-bottom: 2px; font-weight: bold;"&gt;- For more historical data, please click to &lt;span class="" style="color: #0066CC;"&gt;View History Report&lt;/span&gt;.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="Tab_1" xml:space="preserve">
+    <value>Tab 1</value>
+  </data>
+  <data name="Add_Tab" xml:space="preserve">
+    <value>Add Tab</value>
+  </data>
+  <data name="Add_Sub_Tab" xml:space="preserve">
+    <value>Add Sub Tab</value>
+  </data>
+  <data name="DefaultTabTemplate" xml:space="preserve">
+    <value>&lt;div id="lengendWindow"&gt;&lt;ul class="report-tab-container" style="padding: 5px 0 0; margin-bottom: 0; font-family: tahoma,Arial,Helvetica,sans-serif;font-size: 96%; margin-left: 0;"&gt;&lt;li style="display: inline-block; list-style: none outside none; margin: 0 5px 0 0;"&gt;&lt;a id="tab-header-1" href="javascript:;" class="report-tab current" rel="tab-1" style="background: none repeat scroll 0 0 #EBEBEB; border-top-color: #B1B1B1; border-left-color: #B1B1B1; border-bottom-color: #EBEBEB; border-right-color: #B1B1B1; border-style: solid; border-width: 1px; color: #464646;cursor: pointer; font-size: 12px; font-weight: bold; line-height: 28px; padding: 6px 0.7em; text-decoration: none; border-radius: 2px 2px 0 0;"&gt;&amp;nbsp;Tab 1&amp;nbsp; &lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div class="content-tab-container" style="border-radius: 0px 4px 4px 4px; background-color: #EBEBEB; border-color: #B1B1B1; border-style: solid; border-width: 1px; padding: 10px 10px 0 10px;"&gt;&lt;div id="tab-1" class="content-tab"&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</value>
+  </data>
+  <data name="SubTabHeadLineIcon_Collapse_Image" xml:space="preserve">
+    <value>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACVJREFUeNpi/P//PwM+wEhVBdhUMqKbgMxhxGXFf5gkdRwJEGAAEK0a8Uj/akQAAAAASUVORK5CYII=</value>
+  </data>
+  <data name="SubTabHeadLineIcon_Expand_Image" xml:space="preserve">
+    <value>data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAACxJREFUeNpi/P//PwM+wMRAAKAr+E+MCf+JseI/IQWM+BQw4rOCEV01QIABAMpJBg00Znx5AAAAAElFTkSuQmCC</value>
+  </data>
+  <data name="Add_Session" xml:space="preserve">
+    <value>Add Session</value>
+  </data>
+  <data name="Add_Section" xml:space="preserve">
+    <value>Add Section</value>
+  </data>
+  <data name="Remove_Tab" xml:space="preserve">
+    <value>Remove Tab</value>
+  </data>
+  <data name="Is_Reviewed" xml:space="preserve">
+    <value>Is Reviewed</value>
+  </data>
+  <data name="View_Inputed" xml:space="preserve">
+    <value>View Inputed</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="Report_Id" xml:space="preserve">
+    <value>Report Id</value>
+  </data>
+  <data name="Report_Name" xml:space="preserve">
+    <value>Report Name</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>System</value>
+  </data>
+</root>

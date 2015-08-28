@@ -1,0 +1,62 @@
+﻿// -----------------------------------------------------------------------
+// <copyright file="RacingGroupDailyController.cs" company="Nexcel Solutions Vietnam">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Fanex.AccountingReports.Racing.Controllers
+{
+    using System.Web.Mvc;
+    using Fanex.AccountingReports.Core.Exceptions;
+    using Fanex.AccountingReports.Core.Web.Controllers;
+    using Fanex.AccountingReports.Racing.Criteria.RacingGroupDaily;
+    using Fanex.AccountingReports.Racing.Services.Implement.RacingGroupDaily;
+    using Fanex.AccountingReports.Racing.Services.Interface.RacingGroupDaily;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
+
+    /// <summary>
+    /// The controller of Racing Group Daily report.
+    /// </summary>
+    public class RacingGroupDailyController : BaseController
+    {
+        private IRacingGroupDailyGetReportServices _getReportService;
+        private IRacingGroupDailyExportReportServices _exportReportService;
+
+        public RacingGroupDailyController()
+            : this(null, null)
+        {
+        }
+
+        public RacingGroupDailyController(
+            IRacingGroupDailyGetReportServices getReportService,
+            IRacingGroupDailyExportReportServices exportReportService)
+        {
+            this._getReportService = getReportService ?? new RacingGroupDailyGetReportServices();
+            this._exportReportService = exportReportService ?? new RacingGroupDailyExportReportServices();
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = AccReportFunctionKeys.RacingGroupDaily, Policy = Constant.Policy.Read)]
+        public ActionResult Index()
+        {
+            return View("~/Areas/Racing/Views/RacingGroupDaily/Index.cshtml");
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetReport(GetWinLostRacingGroupCriteria criteria)
+        {
+            var report = this._getReportService.GetReport(criteria);
+            var jsonResult = Json(report);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        public EmptyResult ExportReport(GetWinLostRacingGroupCriteria criteria)
+        {
+            this._exportReportService.ExportReport(criteria);
+            return new EmptyResult();
+        }
+    }
+}

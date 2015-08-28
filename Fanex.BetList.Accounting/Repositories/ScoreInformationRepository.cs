@@ -1,0 +1,160 @@
+﻿// --------------------------------------------------------------------------
+// <copyright file="ScoreInformationRepository.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Louis.Nguyen" date="2012.10.18">Created</change>
+// </history>
+
+namespace Fanex.BetList.Accounting.Repositories
+{
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Data;
+    using Fanex.BetList.Accounting.Criteria;
+    using Fanex.Common;
+    using Fanex.Data;
+    using Fanex.Result.Core.Sportsbook.DTO;
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    public class ScoreInformationRepository : IScoreInformationRepository
+    {
+        /// <summary>
+        /// Gets the score information.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="outputParams">The output parameters.</param>>
+        /// <returns>
+        /// The score information.
+        /// </returns>
+        public List<Sportsbook> GetScoreInformation(
+            GetScoreInformationCriteria criteria,
+            ref Hashtable outputParams)
+        {
+            var result = new List<Sportsbook>();
+
+            using (ObjectDb objDb = new ObjectDb(criteria.GetSettingKey()))
+            {
+                objDb.AddInParameter("MatchID", DbType.Int32, criteria.MatchId);
+                objDb.AddInParameter("Bettype", DbType.Int32, criteria.Bettype);
+                objDb.AddOutParameter("tradername", DbType.String, 1000);
+
+                using (var reader = objDb.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        result.Add(BindSportsbook(reader, criteria));
+
+                        if (reader.NextResult())
+                        {
+                            while (reader.Read())
+                            {
+                                result[0].GameDetails.Add(BindGameDetail(reader));
+                            }
+                        }
+
+                        if (result[0].GameDetails.Count == 0)
+                        {
+                            result[0].GameDetails.Add(new GameDetail());
+                        }
+                    }
+                }
+
+                outputParams = objDb.GetOuputParams();
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the sporting solutions result.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>The sporting solutions result.</returns>
+        public List<dynamic> GetSportingSolutionsResult(GetSportingSolutionsResultCriteria criteria)
+        {
+            var dataTable = new DataTable();
+            using (ObjectDb objDb = new ObjectDb(criteria.GetSettingKey()))
+            {
+                objDb.AddInParameter("matchid", DbType.Int32, criteria.MatchId);
+                objDb.AddInParameter("resourceid", DbType.String, criteria.Resourceid);
+                var ds = objDb.ExecuteDataSet();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    dataTable = ds.Tables[0];
+                }
+            }
+
+            var result = new List<dynamic>();
+            if (dataTable != null && dataTable.Rows.Count > 0)
+            {
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    result.Add(new
+                    {
+                        resultvalue = Converter.ToString2(row["resultvalue"])
+                    });
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Bind game detail value.
+        /// </summary>
+        /// <param name="reader">The data reader.</param>
+        /// <returns>The game detail value.</returns>
+        private static GameDetail BindGameDetail(IDataReader reader)
+        {
+            return new GameDetail
+            {
+                MatchId = int.Parse(reader["matchid"].ToString()),
+                ResourceId = reader["ResourceId"].ToString(),
+                HomeValue = reader["HomeValue"].ToString(),
+                AwayValue = reader["AwayValue"].ToString(),
+                ResultStatusID = int.Parse(reader["ResultStatusID"].ToString()),
+                SettlementStatusID = int.Parse(reader["SettlementStatusID"].ToString()),
+                OtherInfo = Converter.ToString2(reader["OtherInfo"])
+            };
+        }
+
+        /// <summary>
+        /// Binds the SPORTSBOOK.
+        /// </summary>
+        /// <param name="reader">The reader.</param>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>The object of SPORTSBOOK.</returns>
+        private static Sportsbook BindSportsbook(IDataReader reader, GetScoreInformationCriteria criteria)
+        {
+            return new Sportsbook()
+            {
+                HomeId = Converter.ToInt(reader["homeID"]),
+                AwayId = Converter.ToInt(reader["awayID"]),
+                HtHomeScore = Converter.ToInt(reader["hthomescore"]),
+                FinalHomeScore = Converter.ToInt(reader["finalhomescore"]),
+                HtAwayScore = Converter.ToInt(reader["htawayscore"]),
+                FinalAwayScore = Converter.ToInt(reader["finalawayscore"]),
+                EventStatus = Converter.ToString2(reader["eventstatus"]),
+                KickOffTime = Converter.ToDateTime(reader["kickofftime"].ToString()),
+                EventDate = Converter.ToDateTime(reader["eventdate"].ToString()),
+                IsNeutral = Converter.ToBool(reader["IsNeutral"]),
+                BetStatus = Converter.ToString2(reader["betstatus"]),
+                IsPending = Converter.ToBool(reader["IsPending"]),
+                LeagueId = criteria.LeagueId,
+                MatchId = criteria.MatchId,
+                Color = string.Empty,
+                MatchCode = criteria.MatchCode,
+                GoalRecord = string.Empty,
+                IsHTCal = false,
+                Calculate = false,
+                Bettype = criteria.Bettype,
+                RefNo = string.Empty,
+                GameDetails = new List<GameDetail>()
+            };
+        }
+    }
+}

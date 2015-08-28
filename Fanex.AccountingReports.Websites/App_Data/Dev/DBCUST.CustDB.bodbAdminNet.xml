@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="NAP Update pwd">
+    <Setting Key="NAP_Cust_UpdatePassword" SpName="NAP_Cust_UpdatePassword" DbName="DBCUST.CustDB.bodbAdminNet"  />
+  </Function>
+  
+  <Function Name="Main - Credit Term">
+    <Setting Key="Acc_CreditTermUpdRemark" SpName="Acc_CreditTermUpdRemark" DbName="DBCUST.CustDB.bodbAdminNet"  />
+  </Function>
+  <Function Name="Customer - Smart punter">
+    <Setting Key="Acc_CustomerSelCheckSmartPunter" SpName="Acc_CustomerSelCheckSmartPunter" DbName="DBCUST.CustDB.bodbAdminNet" />
+  </Function>  
+</Functions>

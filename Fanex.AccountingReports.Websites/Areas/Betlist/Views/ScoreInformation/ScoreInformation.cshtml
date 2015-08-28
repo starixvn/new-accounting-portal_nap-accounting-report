@@ -1,0 +1,29 @@
+@using System.Web.Mvc.Html;
+<link type="text/css" rel="stylesheet" href="~/Content/Fanex.Result/fanex.result.css" />
+<link type="text/css" rel="stylesheet" href="~/Content/Fanex.Result/fanex.result-customized.css" />
+<link type="text/css" rel="stylesheet" href="~/Areas/BetList/Views/ScoreInformation/Styles/ScoreInformation.less" />
+<script type="text/javascript" src="~/Areas/BetList/Views/ScoreInformation/Scripts/SoccerInfo.js"></script>
+<script type="text/javascript" src="~/Areas/BetList/Views/ScoreInformation/Scripts/BasketballInfo.js"></script>
+<script type="text/javascript" src="~/Areas/BetList/Views/ScoreInformation/Scripts/HockeySportInfo.js"></script>
+<script type="text/javascript" src="~/Areas/BetList/Views/ScoreInformation/Scripts/TennisInfo.js"></script>
+<script type="text/javascript" src="~/Areas/BetList/Views/ScoreInformation/Scripts/BillardInfo.js"></script>
+<script type="text/javascript" src="~/Areas/BetList/Views/ScoreInformation/Scripts/BaseballInfo.js"></script>
+<script type="text/javascript" src="~/Areas/BetList/Views/ScoreInformation/Scripts/BadmintonInfo.js"></script>
+<script type="text/javascript" src="~/Areas/BetList/Views/ScoreInformation/Scripts/CommonSportInfo.js"></script>
+<script type="text/javascript" src="~/Areas/BetList/Views/ScoreInformation/Scripts/NumberGameInfo.js"></script>
+<script type="text/javascript" src="~/Areas/BetList/Views/ScoreInformation/Scripts/VirtualSoccerInfo.js"></script>
+<script type="text/javascript" src="~/Areas/BetList/Views/ScoreInformation/Scripts/ScoreInfoManager.js"></script>
+<div id="scoreInformationPopupContainer" class="display-none">
+	<div id="scoreInformationPopup">
+		@Html.Partial("~/Areas/BetList/Views/ScoreInformation/SoccerInfo.cshtml")
+		@Html.Partial("~/Areas/BetList/Views/ScoreInformation/BasketballInfo.cshtml")
+		@Html.Partial("~/Areas/BetList/Views/ScoreInformation/HockeySportInfo.cshtml")
+		@Html.Partial("~/Areas/BetList/Views/ScoreInformation/TennisInfo.cshtml")
+		@Html.Partial("~/Areas/BetList/Views/ScoreInformation/BillardInfo.cshtml")
+		@Html.Partial("~/Areas/BetList/Views/ScoreInformation/BaseballInfo.cshtml")
+		@Html.Partial("~/Areas/BetList/Views/ScoreInformation/BadmintonInfo.cshtml")
+		@Html.Partial("~/Areas/BetList/Views/ScoreInformation/CommonSportInfo.cshtml")
+		@Html.Partial("~/Areas/BetList/Views/ScoreInformation/NumberGameInfo.cshtml")
+		@Html.Partial("~/Areas/BetList/Views/ScoreInformation/VirtualSoccerInfo.cshtml")
+	</div>
+</div>

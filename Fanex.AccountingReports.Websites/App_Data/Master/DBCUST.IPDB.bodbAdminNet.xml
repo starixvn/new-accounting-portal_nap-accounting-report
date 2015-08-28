@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="Core - Bet List Core">
+    <Setting Key="BetList_GetIPVN" SpName="GetIPVN" DbName="DBCUST.IPDB.bodbAdminNet" />
+  </Function>
+</Functions>

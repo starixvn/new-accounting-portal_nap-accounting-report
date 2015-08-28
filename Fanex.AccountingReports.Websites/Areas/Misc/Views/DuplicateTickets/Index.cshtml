@@ -1,0 +1,81 @@
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.AccountingReports.Misc.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Core.Services.Impl.Worker;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null
+        ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/scripts/_lib/DatePicker/style", "~/scripts/_lib/Fanex.Grid/style")
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MultipleSelect/jquery.multiselect.css?ver=10" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Misc/Views/DuplicateTickets/DuplicateTickets.less">
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Misc / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <div class="filter-form">
+        <div id="duplicateTicketsFilter">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="datepickerplugin" class="lbl-field col_15 align-right">
+                    </div>
+                </div>
+                <div class="submit col_4">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="timeCountDownContainer">
+        <div class="refreshBox">
+            <div id="refreshIcon" class="refreshIcon" title="Refresh">
+                60
+            </div>
+            <div id="showCountDownTime" class="showCountDownTime">
+            </div>
+        </div>
+        <div id="countDownOptionContainer" class="countDownOptionContainer">
+            <div class="countDownOption" val="300">
+                5 minutes</div>
+            <div class="countDownOption" val="240">
+                4 minutes</div>
+            <div class="countDownOption" val="180">
+                3 minutes</div>
+            <div class="countDownOption" val="120">
+                2 minutes</div>
+            <div class="countDownOption countDownOptionCheck" val="60">
+                1 minute</div>            
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div id="DuplicateTicketsContainer" class="display-none content-grid display-inline-block">
+    <div id="DuplicateTicketsContent" class="freegrid">
+    </div>
+</div>
+ <div id="audioplayer">Alternative content</div>
+@section scripts 
+{
+    <script type="text/javascript">
+        var date = '@Labels.Date';
+        var today = '@DateTime.Today.ToShortDateString()';
+        var moveBetsDate = '@Fanex.BetList.Accounting.Services.ReportService.BalanceUp.MoveBetsDay.ToShortDateString()';
+    </script>
+}
+@section Foot
+{
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/Areas/Misc/Views/DuplicateTickets/audio-player.js"></script>
+    <script type="text/javascript" src="~/Areas/Misc/Views/DuplicateTickets/DuplicateTickets.js"></script>
+}

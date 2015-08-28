@@ -1,0 +1,108 @@
+﻿@using Fanex.BetList.Accounting.Models
+@{
+    TennisMatchResult match = Model;
+    string trbeginTag = "<tr>";
+    string trendTag = "</tr>";
+    int numerousSet = match.SetResults.Count;
+}
+@if (numerousSet > 0)
+{
+    foreach (var set in match.SetResults)
+    {
+        if (set.MaxGame > 0)
+        {
+            int rows = (set.MaxGame / 13) + 1;
+
+            int rowSpan = rows == 1 ? 1 : (2 * rows + 1);
+    <table style="margin-top: 10px; margin-left: 20px;" id="tbl-content">
+        <thead>
+            <tr>
+                <th>
+                    <div>
+                        Set @set.SetDetail.ResourceId[1] Game Result</div>
+                </th>
+                @for (int i = 1; i < 14; i++)
+                {
+                    <th>
+                        <div>
+                            @i</div>
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="c" rowspan="@rowSpan">
+                    <div class="width150">
+                        @match.HomeName</div>
+                    @if (rows > 1)
+                    {
+                        <div class="width150 b ">
+                            @match.AwayName</div>}
+                </td>
+                @for (int i = 0; i < rows; i++)
+                {
+                    if (i > 0)
+                    {   
+                    @MvcHtmlString.Create(trbeginTag) 
+                      for (int y = 1; y < 14; y++)
+                      {
+                        <th>
+                            <div>
+                                @(13 * i + y)</div>
+                        </th>
+                      }
+                      @MvcHtmlString.Create(trendTag)
+                      @MvcHtmlString.Create(trbeginTag) 
+                    }
+
+                    for (int j = 0; j < 13; j++)
+                    {
+                        int homePosition = 13 * i + j;
+                                    
+                    <td class="c">
+                        <div class="width55 b" >
+                            @if (homePosition < set.MaxGame)
+                            { 
+                                @set.GameResults[homePosition].TennisGame.HomeValue
+                            }
+                            else
+                            {
+                                <span>-</span>
+                            }
+                        </div>
+                    </td>
+                    }
+                    @MvcHtmlString.Create(trendTag) 
+                                
+                    <tr>
+                        @if (rows == 1)
+                        {
+                            <td class="c">
+                                <div class="width150 b">
+                                    @match.AwayName</div>
+                            </td>
+                        }
+                        @for (int z = 0; z < 13; z++)
+                        {
+                            int awayPosition = 13 * i + z;
+                            <td class="c">
+                                <div class="width55 b">
+                                    @if (awayPosition < set.MaxGame)
+                                    { 
+                                        @set.GameResults[awayPosition].TennisGame.AwayValue
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                }
+        </tbody>
+    </table>
+        }
+    }
+}

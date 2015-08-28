@@ -1,0 +1,81 @@
+﻿// --------------------------------------------------------------------------
+// <copyright file="NumberGameWinlossByDateController.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="" date="2012.12.07">Created</change>
+// </history>
+
+namespace Fanex.AccountingReports.Gaming.Controllers
+{
+    using System.Web.Mvc;
+    using Fanex.AccountingReports.Core.Exceptions;
+    using Fanex.AccountingReports.Core.Web.Controllers;
+    using Fanex.AccountingReports.Gaming.Criteria;
+    using Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByDate;
+    using Fanex.AccountingReports.Gaming.Services.Implement;
+    using Fanex.AccountingReports.Gaming.Services.Interface;
+    using Fanex.NAP.Core.Business;
+    using Fanex.NAP.Core.Web.Attribute;
+
+    /// <summary>
+    /// TODO: Update summary.
+    /// </summary>
+    public class NumberGameWinlossByDateController : BaseController
+    {
+        private readonly INumberGameWinlossByDateService _numberGameWinlossByDateService;
+
+        public NumberGameWinlossByDateController()
+            : this(null)
+        {
+        }
+
+        public NumberGameWinlossByDateController(INumberGameWinlossByDateService numberGameWinlossByDateService)
+        {
+            this._numberGameWinlossByDateService = numberGameWinlossByDateService ?? new NumberGameWinlossByDateService();
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = AccReportFunctionKeys.NumberGameWinLossByDate, Policy = Constant.Policy.Read)]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult GetLicensee(GetNumberGameLicenseeCriteria getNumberGameLicenseeCriteria)
+        {
+            var result = this._numberGameWinlossByDateService.GetLicensee(getNumberGameLicenseeCriteria);
+            return Json(result);
+        }
+
+        [HttpPost]
+        public JsonResult GetBettypes(GetNumberGameBetTypeListCriteria getNumberGameBettypeCriteria)
+        {
+            var result = this._numberGameWinlossByDateService.GetBetTypes(getNumberGameBettypeCriteria);
+            return Json(result);
+        }
+
+        [HttpPost]
+        public JsonResult GetCurrencies()
+        {
+            var result = this._numberGameWinlossByDateService.GetCurrencies();
+            return Json(result);
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetNumberGameWinlossByDate(GetNumberGameWinLossByDateCriteria getNumberGameWinlossByDateCriteria)
+        {
+            var result = this._numberGameWinlossByDateService.GetNumberGameWinLossByDate(getNumberGameWinlossByDateCriteria);
+            return Json(result);
+        }
+
+        public ActionResult ExportReport(GetNumberGameWinLossByDateCriteria getNumberGameWinlossByDateCriteria)
+        {
+            this._numberGameWinlossByDateService.ExportNumberGameByDate(getNumberGameWinlossByDateCriteria);
+            return new EmptyResult();
+        }
+    }
+}

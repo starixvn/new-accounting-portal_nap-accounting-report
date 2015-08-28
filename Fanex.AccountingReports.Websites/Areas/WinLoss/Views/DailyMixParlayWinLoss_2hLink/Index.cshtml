@@ -1,0 +1,198 @@
+@using Fanex.AccountingReports.Core.Services.Impl;
+@using Fanex.AccountingReports.WinLoss.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Core.Configurations;
+@using Fanex.AccountingReports.Core;
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.Common;
+@{
+    ViewBag.Title = "Daily Mix Parlay Win Loss";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/scripts/_lib/MultipleSelect/style", "~/scripts/_lib/MonthPicker/style")
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/WinLoss/Views/DailyMixParlayWinLoss_2hLink/Styles/DailyMixParlayWinLoss.less" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Win_Loss / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <span id="notemessage" class="note-info-message" title=''></span>
+    <div class="filter-form">
+        <div id="mixParlayReportFilter">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="lbl-field col_3 align-right">
+                        @Labels.Report
+                    </div>
+                    <div class="edit-field col_8 align-left">
+                        <select id="ddlReport" class="alpha">
+                            <option value="0">@Labels.Parlay_Combination_Win_Loss</option>
+                            <option value="1">@Labels.Parlay_Win_Loss_by_Product</option>
+                        </select>
+                    </div>
+                    <div class="lbl-field col_2 align-right">
+                        @Labels.Site
+                    </div>
+                    <div class="edit-field col_6 align-left">
+                        <select id="ddlSiteType" class="alpha">
+                            <option value="0">@Labels.All_Sites</option>
+                            <option value="1">@Labels.Credit</option>
+                            <option value="2">@Labels.Deposit</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="datepickerplugin" class="lbl-field col_15 align-right">
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="submit width-auto col_4 prefix_3">
+                        <input id="btnGenerate" name="btnGenerate" type="submit" value="@Labels.Generate" />
+                        <input id="btnToday" name="btnToday" type="submit" value="@Labels.Today" />
+                        <input id="btnYesterday" name="btnYesterday" type="submit" value="@Labels.Yesterday" />
+                        <input id="btnHistoryReport" name="btnHistoryReport" type="submit" value="@Labels.History_Report" />
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="ErrMsg" class="col_35 display-none width-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="mixParlayReportFilter_HistoryReport" class="">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="lbl-field col_3 align-right">
+                        @Labels.Report
+                    </div>
+                    <div class="edit-field col_8 align-left">
+                        <select id="ddlReport_HistoryReport" class="alpha">
+                            <option value="0">@Labels.Parlay_Combination_Win_Loss</option>
+                            <option value="1">@Labels.Parlay_Win_Loss_by_Product</option>
+                        </select>
+                    </div>
+                    <div class="lbl-field col_2 align-right">
+                        @Labels.Site
+                    </div>
+                    <div class="edit-field col_6 align-left">
+                        <select id="ddlSiteType_HistoryReport" class="alpha">
+                            <option value="0">@Labels.All_Sites</option>
+                            <option value="1">@Labels.Credit</option>
+                            <option value="2">@Labels.Deposit</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filter-row">
+                    <div class="filter-cell">
+                        <div class="lbl-field col_3">
+                            <div>
+                                @Labels.Month</div>
+                        </div>
+                        <div class="edit-field col_16">
+                            <div id="ddlMonth">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="submit col_4 prefix_3">
+                        <input id="btnGenerate_HistoryReport" name="btnGenerate_HistoryReport" type="submit"
+                            value="@Labels.Generate" />
+                    </div>
+                    <div class="submit col_4">
+                        <input id="btnBack_HistoryReport" name="btnBack_HistoryReport" type="submit" value="@Labels.Back" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="parentContainer" class="content-grid">
+    <div id="normalMixParlayReport">
+        <div id="combinationReportContainer">
+            <div id="combinationReport" class="freegrid display-none">
+            </div>
+        </div>
+        <div id="advanceMixParlayReportContainer">
+            <div id="advanceMixParlayReport" class="freegrid display-none">
+            </div>
+        </div>
+    </div>
+    <div id="historyMixParlayReport" class="display-none">
+        <div id="combinationReportContainer_HistoryReport">
+            <div id="combinationReport_HistoryReport" class="freegrid display-none">
+            </div>
+        </div>
+        <div id="advanceMixParlayReportContainer_HistoryReport">
+            <div id="advanceMixParlayReport_HistoryReport" class="freegrid display-none">
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    string reportDate = DateTime.Today.ToShortFormatedDate();
+    string betType = string.Empty;
+    bool isRedirect = false;
+    if (Request["IsRedirect"] != null)
+    {
+        isRedirect = Converter.ToBool(Request["IsRedirect"]);
+    }
+    if (Request["reportDate"] != null)
+    {
+        reportDate = Converter.ToString2(Request["reportDate"]);
+    }
+
+    var noteMessage = Html.Raw(string.Format(WinLossResources.DailyMixParlayWinLoss_FilterNote,
+        ReportService.BalanceUp.MoveBetsDay.ToShortFormatedDate()));
+}
+@section scripts
+{
+    <script type="text/javascript">
+        var labelFrom = '@Labels.From';
+        var labelTo = '@Labels.To';
+        var today = '@DateTime.Today.ToShortFormatedDate()';
+        var yesterday = '@DateTime.Today.AddDays(-1).ToShortFormatedDate()';
+        var minDate = '@ReportService.BalanceUp.MoveBetsDay.AddDays(1).ToShortDateString()';
+        var noteMessage = '@noteMessage'; var minHistoryReportDate = '@(new DateTime(2011, 1, 1))';
+        var maxHistoryReportDate = '@DateTime.Today.AddDays(-2).ToShortFormatedDate()';
+        var reportDate = '@reportDate';
+        var isredirect = '@isRedirect';
+        var movebetday = '@ReportService.BalanceUp.MoveBetsDay.ToShortDateString()';
+        var viewResources = {
+            Credit_Site: '@Labels.Credit_Site',
+            Deposit_Site: '@Labels.Deposit_Site',
+            All_Sites: '@Labels.All_Sites',
+            Member: '@Labels.Member',
+            Agency: '@Labels.Agency',
+            Company: '@Labels.Company',
+            EmptyReportMessage: '@Labels.EmptyReportMessage'
+        };
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MonthPicker/monPickr-0.0.3.min.js?ver=10"></script>
+    <script type="text/javascript" src="~/Areas/WinLoss/Views/DailyMixParlayWinLoss_2hLink/Scripts/CombinationWinLoss.js"></script>
+    <script type="text/javascript" src="~/Areas/WinLoss/Views/DailyMixParlayWinLoss_2hLink/Scripts/WinLossByProduct.js"></script>
+    <script type="text/javascript" src="~/Areas/WinLoss/Views/DailyMixParlayWinLoss_2hLink/Scripts/CombinationWinLoss_HistoryReport.js"></script>
+    <script type="text/javascript" src="~/Areas/WinLoss/Views/DailyMixParlayWinLoss_2hLink/Scripts/WinLossByProduct_HistoryReport.js"></script>
+    <script type="text/javascript" src="~/Areas/WinLoss/Views/DailyMixParlayWinLoss_2hLink/Scripts/HistoryReportManager.js"></script>
+    <script type="text/javascript" src="~/Areas/WinLoss/Views/DailyMixParlayWinLoss_2hLink/Scripts/ReportManager.js"></script>
+}

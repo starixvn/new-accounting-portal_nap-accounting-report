@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AmountDue" xml:space="preserve">
+    <value>Amount Due</value>
+  </data>
+  <data name="AUS" xml:space="preserve">
+    <value>Aust</value>
+  </data>
+  <data name="CommExpense" xml:space="preserve">
+    <value>Comm Expense</value>
+  </data>
+  <data name="CommIncome" xml:space="preserve">
+    <value>Comm Income</value>
+  </data>
+  <data name="DividendWon" xml:space="preserve">
+    <value>Dividend Won</value>
+  </data>
+  <data name="NetIncome" xml:space="preserve">
+    <value>Net Income</value>
+  </data>
+  <data name="PlaceTO" xml:space="preserve">
+    <value>Place TO</value>
+  </data>
+  <data name="Pool" xml:space="preserve">
+    <value>Pool</value>
+  </data>
+  <data name="PTWL" xml:space="preserve">
+    <value>PT Win/Loss</value>
+  </data>
+  <data name="RacingWinLoss_reportName" xml:space="preserve">
+    <value>{0}DailyReportfor{1}</value>
+  </data>
+  <data name="SA" xml:space="preserve">
+    <value>SA</value>
+  </data>
+  <data name="TotalTO" xml:space="preserve">
+    <value>Total TO</value>
+  </data>
+  <data name="ToteFee" xml:space="preserve">
+    <value>Tote Fee</value>
+  </data>
+  <data name="UK" xml:space="preserve">
+    <value>UK</value>
+  </data>
+  <data name="WinTO" xml:space="preserve">
+    <value>Win TO</value>
+  </data>
+  <data name="WPTO" xml:space="preserve">
+    <value>W/P TO</value>
+  </data>
+  <data name="Meeting" xml:space="preserve">
+    <value>Meeting</value>
+  </data>
+  <data name="Race" xml:space="preserve">
+    <value>Race</value>
+  </data>
+  <data name="RacingTote_ReportName" xml:space="preserve">
+    <value>{0} Daily Report for {1} - {2}</value>
+  </data>
+  <data name="RacingTote_ReportTitle" xml:space="preserve">
+    <value>{0}DailyFor{1}Tote_{2}</value>
+  </data>
+  <data name="RacingTote_SheetName" xml:space="preserve">
+    <value>{0}{1}Tote</value>
+  </data>
+  <data name="AmountDueFormular" xml:space="preserve">
+    <value>= [Total TO Partner] + [Tote Fee] - [Dividend Won] - [Comm Income IBC]</value>
+  </data>
+  <data name="NetIncomeFormular" xml:space="preserve">
+    <value>= [PT Win/Loss IBC] + [Comm Income IBC] - [Comm Income Agency] - [Tote Fee]</value>
+  </data>
+  <data name="Agency" xml:space="preserve">
+    <value>Agency</value>
+  </data>
+  <data name="Partner" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="Greyhound" xml:space="preserve">
+    <value>Greyhound</value>
+  </data>
+  <data name="Harness" xml:space="preserve">
+    <value>Harness</value>
+  </data>
+  <data name="Racing" xml:space="preserve">
+    <value>HorseRacing</value>
+  </data>
+  <data name="AmountDueFormularUK" xml:space="preserve">
+    <value>[Total TO Partner] - [Tote Fee] - [Dividend Won] - [Comm Income IBC]</value>
+  </data>
+  <data name="NetIncomeFormularUK" xml:space="preserve">
+    <value>[PT Win/Loss IBC] + [Comm Income IBC] - [Comm Income Agency]</value>
+  </data>
+  <data name="RacingGroupDaily_ReportName" xml:space="preserve">
+    <value>Racing_Group_Daily_From_{0}_To_{1}</value>
+  </data>
+  <data name="RacingGroupDaily_ReportTitle" xml:space="preserve">
+    <value>Racing Group Daily - From {0} To {1}</value>
+  </data>
+  <data name="RacingGroupDaily_SheetName" xml:space="preserve">
+    <value>Racing Group Daily</value>
+  </data>
+  <data name="NumberOfActiveMember_ReportName" xml:space="preserve">
+    <value>Number_Active_Members_Report_For_Racing_From_{0}_To_{1}</value>
+  </data>
+  <data name="NumberOfActiveMember_SheetName" xml:space="preserve">
+    <value>Number Of Active Members - For Racing</value>
+  </data>
+  <data name="NumberOfActiveMember_Title" xml:space="preserve">
+    <value>Number Of Active Members - For Racing From {0} To {1}</value>
+  </data>
+  <data name="RacingToteDetail_ReportTitle" xml:space="preserve">
+    <value>{0} Daily Report for {1} - {2} - {3}</value>
+  </data>
+   <data name="RacingWinLossByLicensee_ReportName" xml:space="preserve">
+    <value>Racing_Daily_Report_{0}_Date_{1}</value>
+  </data>
+  <data name="RacingWinLossByLicensee_ReportTitle" xml:space="preserve">
+    <value>Racing Daily Report ({0}) Date: {1}</value>
+  </data>
+  <data name="RacingWinLossbyLicensee_SheetName" xml:space="preserve">
+    <value>Racing Daily Report</value>
+  </data>
+</root>

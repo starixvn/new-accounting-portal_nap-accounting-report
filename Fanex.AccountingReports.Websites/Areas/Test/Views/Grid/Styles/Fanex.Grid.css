@@ -1,0 +1,49 @@
+/* File Created: December 19, 2012 */
+div.sorter
+{
+    background-image: url(images/sort-icon.png);
+    background-repeat: no-repeat !important;
+    background-position: right 10px top -15px !important;
+	cursor: pointer;
+    display: inline-block;
+    float: right;
+    height: 16px;
+    margin-right: 10px;
+    width: 10px;
+}
+div.sorter.asc
+{
+    background-image: url(images/sort-icon.png) !important;
+    background-position: right 10px top -5px !important;
+}
+
+div.sorter.desc
+{
+    background-image: url(images/sort-icon.png) !important;
+    background-position: right 10px top 7px !important;
+}
+.parentRow td {
+    background-color: #C2D9EC;
+    color: #30465D;
+    font-weight: bold;
+}
+
+.parentRow .trgridcollapseexpand {
+    cursor: pointer;
+}
+
+
+span.gridexpand {
+    background: url("images/expand-small.png") no-repeat scroll 4px center transparent;
+    padding: 8px;
+}
+
+span.gridcollapse{
+	padding:8px;
+	background: url(images/collapse-small.png) 4px center no-repeat;
+}
+.even td 
+{
+     background-color: #E4F2FD;
+}
+	

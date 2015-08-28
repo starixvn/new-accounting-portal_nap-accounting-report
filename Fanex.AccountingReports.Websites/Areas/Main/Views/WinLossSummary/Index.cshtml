@@ -1,0 +1,89 @@
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.AccountingReports.Main.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Core.Services.Impl;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Main/Views/WinLossSummary/Styles/WinLossSummary.less">
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Main / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <span id="notemessage" class="note-info-message" title=''></span>
+    <div class="filter-form">
+        <div id="betCountReportFilter">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="datepickerplugin" class="lbl-field col_15 align-right">
+                    </div>
+                </div>
+                <div class="submit col_4">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+                <div class="submit col_4">
+                    <input id="btnExport" name="btnExport" type="submit" value="EXPORT" disabled="disabled" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="parentContainer" class="content-grid">
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <div id="leftReport">
+                        @Html.Partial("~/Areas/Main/Views/WinLossSummary/SummaryReport.cshtml")
+                    </div>
+                    <div id="calculateNote" class="bold">
+                        Note : report will auto-recalculate every 2 hours.
+                        <br />
+                        Click following date to recalculate the report right now
+                        <br />
+                        <div class="lnkCalculateToday">
+                            <a id="calculateToday"></a>
+                        </div>
+                        <div class="lnkCalculateYesterday">
+                            <a id="calculateYesterday"></a>
+                        </div>
+                    </div>
+                </td>
+                <td class="gridSplitter display-none">
+                </td>
+                <td>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+@{
+    var noteMessage = Html.Raw(string.Format(MainResources.WinLossSummary_FilterNote,
+        ReportService.BalanceUp.MoveBetsDay.ToShortFormatedDate()));
+}
+@section scripts
+{
+    <script type="text/javascript">
+        var labelFrom = '@Labels.From';
+        var labelTo = '@Labels.To';
+        var today = '@DateTime.Today.ToShortDateString()';
+        var yesterday = '@DateTime.Today.AddDays(-1).ToShortDateString()';
+        var minDate = '@DateTime.Today.AddMonths(-3).ToShortDateString()';
+        var noteMessage = '@noteMessage';
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/WinLossSummary/Scripts/ReportManager.js"></script>
+}

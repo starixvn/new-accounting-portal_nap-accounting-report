@@ -1,0 +1,156 @@
+﻿@using Fanex.AccountingReports.LegendManagement.Configurations;
+@using Fanex.AccountingReports.LegendManagement.Resources;
+@{
+    ViewBag.Title = Labels.Legend_Management;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/Scripts/_Lib/CustomScrollbar/Styles/scrollbars.css" />
+    <link rel="stylesheet" type="text/css" href="~/Scripts/_Lib/CustomScrollbar/Styles/scrollbars-itunes.css" />
+    <link rel="stylesheet" type="text/css" href="~/Scripts/_Lib/Fanex.Grid/Fanex.Grid.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/LegendManagement/Views/LegendManagement/Styles/LegendManagement.less" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Legend_Management</span>
+        </div>
+    </div>
+}
+<div id="editLegendView">
+    <div id="filter-bar">
+        <div class="filter-form">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="lbl-field col_2 align-right bold">
+                        @Labels.Menu
+                    </div>
+                    <div class="edit-field col_11 width-auto">
+                        <select id="ddlMenu">
+                        </select>
+                    </div>
+                    <div class="edit-field col_1 display-none">
+                        <input id="chbIsNote" type="checkbox" class="lbl-field col_1" />
+                    </div>
+                    <label for="chbIsNote" class="lbl-field col_3 width-auto align-left bold display-none">
+                        @Labels.Is_Note</label>
+                    <div class="edit-field col_1">
+                        <input id="chbIsReviewed" type="checkbox" class="lbl-field col_1 display-none" />
+                    </div>
+                    <label for="chbIsReviewed" class="lbl-field col_4 width-auto align-left bold display-none">
+                        @Labels.Is_Reviewed</label>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="submit col_4 prefix_2">
+                        <input id="btnLoad" name="btnLoad" type="submit" value="@Labels.Load" class="btn" />
+                    </div>
+                    <div class="submit col_4">
+                        <input id="btnClear" name="btnClear" type="submit" value="@Labels.Clear" class="btn" />
+                    </div>
+                    <div class="submit col_4">
+                        <input id="btnSave" name="btnSave" type="submit" value="@Labels.Save" class="btn" />
+                    </div>
+                    <div class="submit col_4">
+                        <input id="btnPreview" name="btnPreview" type="submit" value="@Labels.Preview" class="btn" />
+                    </div>
+                    <div class="submit col_5">
+                        <input id="btnCopyLegend" name="btnCopyLegend" type="submit" value="@Labels.Copy_Legend" class="btn display-none"/>
+                    </div>
+                    <div class="submit col_5">
+                        <input id="button-inputedlegend-report" name="button-inputedlegend-report" type="submit" value="@Labels.View_Inputed" class="btn display-none"/>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="submit col_4 prefix_2">
+                        <input id="btnAddTab" name="btnAddTab" type="submit" value="@Labels.Add_Tab" class="btn"/>
+                    </div>
+                    <div class="submit col_4">
+                        <input id="btnAddSubTab" name="btnAddSubTab" type="submit" value="@Labels.Add_Section" class="btn"/>
+                    </div>
+                    <div class="submit col_4 ">
+                        <input id="btnRemoveTab" name="btnRemoveTab" type="submit" value="@Labels.Remove_Tab" class="btn"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-grid display-inline-block">
+        <div id="htmlEditor">
+        </div>
+        <div id="previewReportLegendDialog" class="display-none">
+        </div>
+        <div id="uploadImageDialog" class="display-none">
+        </div>
+        <div id="uploadImageDialogTemplate" class="display-none">
+            <ul id="uploadbox-tab">
+                <li><a id="tab-url-a" href="javascript:;" class="tab-item current">@Labels.From_URL</a></li>
+                <li><a id="tab-choose-a" href="javascript:;" class="tab-item">@Labels.Upload_Image</a></li>
+            </ul>
+            <div id="tab-url" class="tab-url chooseimg display-none">
+                <div class="bold image-location">@Labels.Image_location</div>
+                <input id="txt_url" type="input" value="" />
+            </div>
+            <div id="tab-choose" class="tab-choose chooseimg display-none">
+                <div class="bold label-choosing-image">@Labels.Choosing_image</div>
+                <div>
+                    <input id="txtInputfile" type="input" name="txtInputfile" size="40" class="inputfile"
+                        readonly="true" />
+                    <input id="btnInputfile" type="submit" class="contentButton" value="@Labels.Browse..." />
+                    <input id="txtfile" type="file" name="txtfile" size="40" class="inputfile display-none" />
+                    <input id="txtfileIE" type="file" name="txtfile" size="40" class="inputfile display-none" />
+                </div>
+                <small>@Labels.LegendManagement_UploadFileNote</small>
+            </div>
+            <div class="uploadbuttonbar">
+                <input id="btnUpload" type="submit" class="contentButton" value="Upload" />
+                <input id="btnCancelUpload" type="submit" class="contentButton" value="Cancel" />
+            </div>
+            <div id="upload_message" class="display-none">
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("~/Areas/LegendManagement/Views/LegendManagement/CopyLegend.cshtml")
+@Html.Partial("~/Areas/LegendManagement/Views/LegendManagement/InputedLegendReport.cshtml")
+@{
+    var rootWebPath = Request.Url.GetLeftPart(UriPartial.Authority) + Request.ApplicationPath.TrimEnd('/');
+}
+@section scripts
+{
+    <script type="text/javascript">
+        window.rootWebPath = '@(rootWebPath)';
+        var defaultTabTemplate = '@Html.Raw(Labels.DefaultTabTemplate)';
+        var defaultReportTemplate = '@Html.Raw(Labels.SampleTemplate)';
+        var inlineImageExpand = '@Labels.SubTabHeadLineIcon_Expand_Image';
+        var inlineImageCollapse = '@Labels.SubTabHeadLineIcon_Collapse_Image';
+        var viewResources = {
+            System: "@Labels.System",
+            Report_Id: "@Labels.Report_Id",
+            Report_Name: "@Labels.Report_Name",
+            Content: "@Labels.Content",
+            Inputed_Legend_Report_Title: "Inputed Legend Report"
+        };
+
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/Scripts/_Lib/TinyMCE/ajax.upload.js"></script>
+    <script type="text/javascript" src="~/Scripts/_Lib/TinyMCE/jquery.tinymce.js"></script>
+    <script type="text/javascript" src="~/Scripts/_Lib/FileUpload/ajaxFileUpload.js"></script>
+    <script type="text/javascript" src="~/Scripts/_Lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/Scripts/_Lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/Scripts/_Lib/CustomScrollbar/jquery.event.drag-2.0.js"></script>
+    <script type="text/javascript" src="~/Scripts/_Lib/CustomScrollbar/jquery.ba-resize.js"></script>
+    <script type="text/javascript" src="~/Scripts/_Lib/CustomScrollbar/mousehold.js"></script>
+    <script type="text/javascript" src="~/Scripts/_Lib/CustomScrollbar/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="~/Scripts/_Lib/CustomScrollbar/aplweb.scrollbars.js"></script>
+    <script type="text/javascript" src="~/Scripts/_Lib/Fanex.Grid/Fanex.Grid.js"></script>
+    @Scripts.Render("~/scripts-bundle/legendmanagement")
+    <script type="text/javascript" src="~/Areas/LegendManagement/Views/LegendManagement/Scripts/LegendManagement.js"></script>
+    <script type="text/javascript" src="~/Areas/LegendManagement/Views/LegendManagement/Scripts/CopyLegend.js"></script>
+    <script type="text/javascript" src="~/Areas/LegendManagement/Views/LegendManagement/Scripts/InputedLegendManager.js"></script>
+}

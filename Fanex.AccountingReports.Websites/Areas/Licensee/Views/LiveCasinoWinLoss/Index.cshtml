@@ -1,0 +1,222 @@
+@using Fanex.AccountingReports.Licensee.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/scripts/_lib/MultipleSelect/style", "~/scripts/_lib/DatePicker/style")
+    <link rel="stylesheet" type="text/css" href="~/Areas/Licensee/Views/LiveCasinoWinLoss/LiveCasinoWinLoss.less" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Licensee / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <span id="notemessage" class="note-info-message" title='@LicenseeResources.LiveCasinoWL_NoteMessage'>
+    </span>
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_3 align-right">
+                    @Labels.Licensee
+                </div>
+                <div class="edit-field col_6">
+                    <select id="ddlLicenseese">
+                    </select>
+                </div>
+                <div class="lbl-field col_3 align-right">
+                    @Labels.GameType
+                </div>
+                <div class="edit-field col_5">
+                    <select id="ddlGameType" style="width: 124px">
+                    </select>
+                </div>
+                <div id="datepickerplugin">
+                </div>
+                <div class="submit col_4">
+                    <input id="btnGenerate" value="Generate" type="submit" />
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="InformationMssg" class="col_35 display-none width-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-grid  width-100percent">
+    <div class="grid-title display-none">
+        <div class="grid-title-label" id="reporttile">
+            @Labels.Title</div>
+        <div class="grid-toolbox">
+            <input type="button" id="btnExport" class="btnExcel" title="Export to Excel" />
+        </div>
+    </div>
+    <div id="livecasinowinloss" class="freegrid display-none">
+        <div class="free-cell free-top-left">
+            <table class="grid-fixed-table free-cell-top-left">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="table-cell licenseeCol">
+                                @Labels.Licensee</div>
+                        </th>
+                        <th>
+                            <div class="table-cell turnoverCol">
+                                @Labels.Turnover</div>
+                        </th>
+                        <th>
+                            <div class="table-cell totalTransactionCol">
+                                @Labels.TotalTransactions</div>
+                        </th>
+                        <th>
+                            <div class="table-cell grossWinCol">
+                                @Labels.GrossWin</div>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="row_header_wrapper">
+            <div class="row_header row-headers-background">
+                <table class="grid-fixed-table row_header_content" id="tblContentHeader">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="table-cell licenseeCol">
+                                    @Labels.Licensee</div>
+                            </th>
+                            <th>
+                                <div class="table-cell turnoverCol">
+                                    @Labels.Turnover</div>
+                            </th>
+                            <th>
+                                <div class="table-cell totalTransactionCol">
+                                    @Labels.TotalTransactions</div>
+                            </th>
+                            <th>
+                                <div class="table-cell grossWinCol">
+                                    @Labels.GrossWin</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col_header row-headers-background scroll-y">
+            <div class="header-container">
+                <table class="grid-fixed-table col_header_content">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="table-cell licenseeCol">
+                                    @Labels.Licensee</div>
+                            </th>
+                            <th>
+                                <div class="table-cell turnoverCol">
+                                    @Labels.Turnover</div>
+                            </th>
+                            <th>
+                                <div class="table-cell totalTransactionCol">
+                                    @Labels.TotalTransactions</div>
+                            </th>
+                            <th>
+                                <div class="table-cell grossWinCol">
+                                    @Labels.GrossWin</div>
+                            </th>
+                            <th>
+                                <div class="table-cell distributorRevenueCol">
+                                    @LicenseeResources.DistributorRevenue</div>
+                            </th>
+                            <th>
+                                <div class="table-cell lupineRevenueCol">
+                                    @LicenseeResources.StarExpressRevenue</div>
+                            </th>
+                            <th>
+                                <div class="table-cell amountDueONEWorksCol">
+                                    @LicenseeResources.AmountDueONEWorks</div>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="grid-container container">
+            <div class="content-container">
+                <table id="tblContent" class="grid-fixed-table col_header_content">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="table-cell licenseeCol">
+                                    @Labels.Licensee</div>
+                            </th>
+                            <th>
+                                <div class="table-cell turnoverCol">
+                                    @Labels.Turnover</div>
+                            </th>
+                            <th>
+                                <div class="table-cell totalTransactionCol">
+                                    @Labels.TotalTransactions</div>
+                            </th>
+                            <th>
+                                <div class="table-cell grossWinCol">
+                                    @Labels.GrossWin</div>
+                            </th>
+                            <th>
+                                <div class="table-cell distributorRevenueCol">
+                                    @LicenseeResources.DistributorRevenue</div>
+                            </th>
+                            <th>
+                                <div class="table-cell lupineRevenueCol">
+                                    @LicenseeResources.StarExpressRevenue</div>
+                            </th>
+                            <th>
+                                <div class="table-cell amountDueONEWorksCol">
+                                    @LicenseeResources.AmountDueONEWorks</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row_footer row-footer-background z999">
+            <table class="grid-fixed-table row_footer_content">
+                <thead>
+                </thead>
+            </table>
+        </div>
+        <div class="col_footer row-footer-background scroll-y">
+            <div class="footer-container">
+                <table class="col_footer_content grid-fixed-table">
+                    <thead>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<iframe id="frm" width="0" height="0" frameborder="0" style="display: none"></iframe>
+@section scripts
+{
+    <script type="text/javascript">
+        var _today = '@DateTime.Today.ToShortDateString()';
+        var _yesterday = '@DateTime.Today.AddDays(-1).ToShortDateString()';
+        var labelFrom = '@Labels.From';
+        var labelTo = '@Labels.To';
+        var selectLicenseeMessage = '@LicenseeResources.PleaseSelectALicensee';
+    </script>
+}
+@section Foot {
+    @Scripts.Render("~/scripts/_lib/multiselect", "~/scripts/_lib/nexDatePicker")
+    <script type="text/javascript" src="~/Areas/Licensee/Views/LiveCasinoWinLoss/LiveCasinoWinLoss.js?ver=5"></script>
+}

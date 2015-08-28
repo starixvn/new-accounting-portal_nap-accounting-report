@@ -1,0 +1,114 @@
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.AccountingReports.Misc.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MultipleSelect/jquery.multiselect.css?ver=10" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Misc/Views/BetCount/Styles/BetCount.less">
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Misc / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <span id="notemessage" class="note-info-message" title=''></span>
+    <div class="filter-form">
+        <div id="betCountReportFilter">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="datepickerplugin" class="lbl-field col_23 align-right">
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="lbl-field col_2 align-right">
+                        @Labels.Product
+                    </div>
+                    <div class="edit-field  col_6 align-left ddlProductContainer">
+                        <select id="ddlProduct">
+                        </select>
+                    </div>
+                    <div class="submit col_6 prefix_2">
+                        <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                    </div>
+                    <div class="submit col_6 prefix_1">
+                        <input id="btnViewHistoryReport" name="btnViewHistoryReport" type="submit" value="HISTORY REPORT" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="historyBetCountReportFilter" class="display-none">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="lbl-field col_2">
+                        <div>
+                            @Labels.Month</div>
+                    </div>
+                    <div class="edit-field col_15">
+                        <div id="ddlMonth">
+                        </div>
+                    </div>
+                    <div class="lbl-field col_2 align-right">
+                        @Labels.Product
+                    </div>
+                    <div class="edit-field  col_6 align-left ddlProductContainer_HistoryReport">
+                        <select id="ddlProduct_HistoryReport">
+                        </select>
+                    </div>
+                    <div class="submit col_4 prefix_1">
+                        <input id="btnGenerate_HistoryReport" name="btnGenerate_HistoryReport" type="submit"
+                            value="GENERATE" />
+                    </div>
+                    <div class="submit col_4">
+                        <input id="btnBack_HistoryReport" name="btnBack_HistoryReport" type="submit" value="BACK" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="ErrMsg" class="col_35 display-none width-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-grid  width-100percent">
+    <div>
+        @Html.Partial("BetCountReport")</div>
+    <div>
+        @Html.Partial("HistoryBetCountReport")</div>
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var noteMessage = '@Html.Raw(MiscResources.BetCount_FilterNote)';
+        var labelFrom = '@Labels.From';
+        var labelTo = '@Labels.To';
+        var today = '@DateTime.Today.ToShortDateString()';
+        var mindate = new Date('@DateTime.Now.FirstDayOfMonth().AddMonths(-3).ToString()');
+        var minHistoryReportDate = new Date(2009, 1, 1);
+    </script>
+}
+@section Foot {
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MultipleSelect/jquery.multiselect.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MonthPicker/monPickr-0.0.3.min.js?ver=10"></script>
+    <script type="text/javascript" src="~/Areas/Misc/Views/BetCount/Scripts/ReportManager.js"></script>
+    <script type="text/javascript" src="~/Areas/Misc/Views/BetCount/Scripts/NormalReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Misc/Views/BetCount/Scripts/HistoryReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Misc/Views/BetCount/Scripts/BaseReport.js"></script>
+}

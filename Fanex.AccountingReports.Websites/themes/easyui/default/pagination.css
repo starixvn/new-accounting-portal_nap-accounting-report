@@ -1,0 +1,51 @@
+.fanexPagination{
+	zoom:1;
+}
+.fanexPagination table{
+	float:left;
+	height:30px;
+}
+.fanexPagination td{
+	border:0;
+}
+.fanexPagination-btn-separator{
+	float:left;
+	height:24px;
+	border-left:1px solid #ccc;
+	border-right:1px solid #fff;
+	margin:3px 1px;
+}
+.fanexPagination-num{
+	border:1px solid #ccc;
+	margin:0 2px;
+}
+.fanexPagination-page-list{
+	margin:0px 6px;
+}
+.fanexPagination-info{
+	float:right;
+	padding-right:6px;
+	padding-top:8px;
+	font-size:12px;
+}
+.fanexPagination span{
+	font-size:12px;
+}
+.fanexPagination-first{
+	background:url('images/pagination_first.gif') no-repeat;
+}
+.fanexPagination-prev{
+	background:url('images/pagination_prev.gif') no-repeat;
+}
+.fanexPagination-next{
+	background:url('images/pagination_next.gif') no-repeat;
+}
+.fanexPagination-last{
+	background:url('images/pagination_last.gif') no-repeat;
+}
+.fanexPagination-load{
+	background:url('images/pagination_load.png') no-repeat;
+}
+.fanexPagination-loading{
+	background:url('images/pagination_loading.gif') no-repeat;
+}

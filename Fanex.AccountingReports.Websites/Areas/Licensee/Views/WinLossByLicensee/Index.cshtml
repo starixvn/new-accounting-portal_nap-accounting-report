@@ -1,0 +1,155 @@
+@using Fanex.AccountingReports.Licensee.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/scripts/_lib/MultipleSelect/style", "~/scripts/_lib/DatePicker/style")
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Licensee/Views/WinLossByLicensee/Styles/WinLossByLicensee.less?ver=12" />
+}
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Licensee / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <span id="notemessage" class="note-info-message" title=''></span>
+    <div class="filter-form">
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_3 align-right">
+                    @Labels.Licensee
+                </div>
+                <div class="edit-field col_7 align-left ddlLicenseeContainer">
+                    <select id="ddlLicensee" class="col_7 alpha">
+                    </select>
+                </div>
+                <div class="lbl-field col_5 align-right">
+                    @Labels.Report_by
+                </div>
+                <div id="reportBy" class="lbl-field col_7 align-left">
+                    <div class="col_3 alpha">
+                        <input type="radio" name="rdReportBy" id="rdReportByDaily" checked="checked" value="1" />
+                        <label for="rdReportByDaily">
+                            @Labels.Daily</label></div>
+                    <div class="col_4 omega">
+                        <input type="radio" name="rdReportBy" id="rdReportByMonthly" value="2" />
+                        <label for="rdReportByMonthly">
+                            @Labels.Monthly</label></div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_3 align-right">
+                    @Labels.Currency
+                </div>
+                <div class="edit-field col_7 align-left ddlCurrencyContainer">
+                    <select id="ddlCurrency" class="col_7 alpha">
+                    </select>
+                </div>
+                <div class="lbl-field col_5 align-right">
+                    @Labels.ConvertFiguresTo
+                </div>
+                <div id="currencyConvert" class="lbl-field col_16 align-left">
+                    <div class="col_3 alpha">
+                        <input type="radio" name="rdCurrencyConvert" id="rdCurrencyConvertNone" checked="checked"
+                            value="0" text="" />
+                        <label for="rdCurrencyConvertNone">
+                            @Labels.None</label></div>
+                    <div class="col_4">
+                        <input type="radio" name="rdCurrencyConvert" id="rdCurrencyConvertMYR" value="2"
+                            text="MYR" />
+                        <label for="rdCurrencyConvertMYR">
+                            @Labels.MYR</label></div>
+                    <div class="col_3">
+                        <input type="radio" name="rdCurrencyConvert" id="rdCurrencyConvertEUR" value="3"
+                            text="EUR" />
+                        <label for="rdCurrencyConvertEUR">
+                            @Labels.EUR</label></div>
+                    <div class="col_3">
+                        <input type="radio" name="rdCurrencyConvert" id="rdCurrencyConvertUSD" value="1"
+                            text="USD" />
+                        <label for="rdCurrencyConvertUSD">
+                            @Labels.USD</label></div>
+                    <div class="col_3 omega">
+                        <input type="radio" name="rdCurrencyConvert" id="rdCurrencyConvertGBP" value="4"
+                            text="GBP" />
+                        <label for="rdCurrencyConvertGBP">
+                            @Labels.GBP</label></div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="datepickerplugin" class="lbl-field col_27 align-right">
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_3 align-right">
+                    @Labels.DrawFilter
+                </div>
+                <div class="edit-field col_7 align-left ddlDrawFilterContainer">
+                    <select id="ddlDrawFilter" class="col_7 alpha">
+                        <option value="1">Normal</option>
+                        <option value="3">No Draw for Turnover only</option>
+                        <option value="2">No Draw</option>
+                    </select>
+                </div>
+                <div class="lbl-field col_5 align-right">
+                    @Labels.Product
+                </div>
+                <div class="edit-field  col_7 align-left ddlProductContainer">
+                    <select id="ddlProduct">
+                    </select>
+                </div>
+                <div class="submit width-auto col_4 prefix_1">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div id="ErrMsg" class="col_35 display-none width-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-grid  width-100percent">
+    @Html.Partial("WinLossByLicensee_CurrencyReport")
+    @Html.Partial("WinLossByLicensee_SuperReport")
+    @Html.Partial("WinLossByLicensee_MasterReport")
+    @Html.Partial("WinLossByLicensee_AgentReport")
+    @Html.Partial("WinLossByLicensee_MemberReport")
+</div>
+@section scripts
+{
+    <script type="text/javascript">
+        var noteMessage = '@Html.Raw(LicenseeResources.WinLossByLicensee_FilterNote)';
+        var labelFrom = '@Labels.From';
+        var labelTo = '@Labels.To';
+        var today = '@DateTime.Today.ToShortDateString()';
+        var minDate = '@(new DateTime(DateTime.Now.Year - 4, 1, 1))';
+    </script>
+}
+@section Foot {
+    @Scripts.Render("~/scripts/_lib/multiselect", "~/scripts/_lib/nexDatePicker")
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/PopUp/dialogbox.js"></script>
+    <script type="text/javascript" src="~/Areas/Licensee/Views/WinLossByLicensee/Scripts/ReportManager.js?ver=10"></script>
+    <script type="text/javascript" src="~/Areas/Licensee/Views/WinLossByLicensee/Scripts/CurrencyReport.js?ver=10"></script>
+    <script type="text/javascript" src="~/Areas/Licensee/Views/WinLossByLicensee/Scripts/SuperReport.js?ver=10"></script>
+    <script type="text/javascript" src="~/Areas/Licensee/Views/WinLossByLicensee/Scripts/MasterReport.js?ver=10"></script>
+    <script type="text/javascript" src="~/Areas/Licensee/Views/WinLossByLicensee/Scripts/AgentReport.js?ver=10"></script>
+    <script type="text/javascript" src="~/Areas/Licensee/Views/WinLossByLicensee/Scripts/MemberReport.js?ver=10"></script>
+    <script type="text/javascript" src="~/Areas/Licensee/Views/WinLossByLicensee/Scripts/BaseReport.js?ver=10"></script>
+}

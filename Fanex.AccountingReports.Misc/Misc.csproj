@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F4EB0A2C-2271-48FA-8DC2-3B220B78F890}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fanex.AccountingReports.Misc</RootNamespace>
+    <AssemblyName>Fanex.AccountingReports.Misc</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ExcelUtil, Version=29.3.0.1000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\ExcelUtil.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Caching, Version=1.0.404.94, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Common">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Excel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Core, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Framework">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\packages\DotNetZip.1.9.1.5\lib\net40\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20505.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20505.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20505.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20505.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants\MiscConstants.cs" />
+    <Compile Include="Constants\ProductContants.cs" />
+    <Compile Include="Constants\SMATurnOverConstants.cs" />
+    <Compile Include="Constants\SportConstants.cs" />
+    <Compile Include="Constants\Status.cs" />
+    <Compile Include="Controllers\AutoGeneratedReportController.cs" />
+    <Compile Include="Controllers\BetCountController.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Controllers\CreditMovementController.cs" />
+    <Compile Include="Controllers\CreditSitesBetCountsController.cs" />
+    <Compile Include="Controllers\DailyCreatedCustomersController.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Controllers\DuplicateTicketsController.cs" />
+    <Compile Include="Controllers\MAMonitorToolController.cs" />
+    <Compile Include="Controllers\SMATurnoverController.cs" />
+    <Compile Include="Controllers\TotalCreditAccountByProductController.cs" />
+    <Compile Include="Controllers\TotalSMAMemberActiveController.cs" />
+    <Compile Include="Criteria\BetCount\GetAllProductsCriteria.cs" />
+    <Compile Include="Criteria\BetCount\GetBetCountReportCriteria.cs" />
+    <Compile Include="Criteria\CreditMovement\GetCreditMovementCriteria.cs" />
+    <Compile Include="Criteria\CreditSitesBetCounts\GetCreditSitesBetCountsCriteria.cs" />
+    <Compile Include="Criteria\DailyCreatedCustomers\GetDailyCreatedCustomersCriteria.cs" />
+    <Compile Include="Criteria\DailyCreatedCustomers\GetDailyCreatedCustomersDetailsCriteria.cs" />
+    <Compile Include="Criteria\MAMonitorTool\GetBetTypeListCriteria.cs" />
+    <Compile Include="Criteria\DuplicateTickets\GetDuplicateTicketsCriteria.cs" />
+    <Compile Include="Criteria\MAMonitorTool\GetCurrencyListCriteria.cs" />
+    <Compile Include="Criteria\MAMonitorTool\GetLeagueListCriteria.cs" />
+    <Compile Include="Criteria\MAMonitorTool\GetReportCriteria.cs" />
+    <Compile Include="Criteria\MAMonitorTool\GetSportListCriteria.cs" />
+    <Compile Include="Criteria\SMATurnover\GetSMATurnoverReportCriteria.cs" />
+    <Compile Include="Criteria\TotalCreditAccountByProduct\GetBetCountDetailCriteria.cs" />
+    <Compile Include="Criteria\TotalCreditAccountByProduct\GetTotalCreditAccountByProductCriteria.cs" />
+    <Compile Include="Criteria\TotalSMAMemberActive\GetSitesCriteria.cs" />
+    <Compile Include="Criteria\TotalSMAMemberActive\GetStatusDetailsCriteria.cs" />
+    <Compile Include="Criteria\TotalSMAMemberActive\GetTotalSMAMemberActiveCriteria.cs" />
+    <Compile Include="MiscAreaRegistration.cs" />
+    <Compile Include="Models\AutoGeneratedReport\DownloadReportCriteria.cs" />
+    <Compile Include="Models\AutoGeneratedReport\Report.cs" />
+    <Compile Include="Models\AutoGeneratedReport\ReportGroup.cs" />
+    <Compile Include="Models\CreditMovement\Site.cs" />
+    <Compile Include="Models\DailyCreatedCustomers\DetailInformation.cs" />
+    <Compile Include="Models\DailyCreatedCustomers\SummaryInformation.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Models\DuplicateTickets\DuplicateTicketsByUserName.cs" />
+    <Compile Include="Models\DuplicateTickets\DuplicateTicketsInfo.cs" />
+    <Compile Include="Models\DuplicateTickets\TicketInfo.cs" />
+    <Compile Include="Models\MAMonitorTool\Bettype.cs" />
+    <Compile Include="Models\MAMonitorTool\OptionInfo.cs" />
+    <Compile Include="Models\MAMonitorTool\ProductBettype.cs" />
+    <Compile Include="Models\MAMonitorTool\WinLossInfo.cs" />
+    <Compile Include="Models\SMATurnover\SMATurnover.cs" />
+    <Compile Include="Models\TotalCreditAccountByProduct\BetCountDetail.cs" />
+    <Compile Include="Models\TotalCreditAccountByProduct\TotalCreditAccountByProduct.cs" />
+    <Compile Include="Models\TotalSMAMemberActive\GroupStatusDetailInfo.cs" />
+    <Compile Include="Models\TotalSMAMemberActive\SMASummaryInfo.cs" />
+    <Compile Include="Models\TotalSMAMemberActive\StatusDetailInfo.cs" />
+    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Implement\TotalSMAMemberActiveRepository.cs" />
+    <Compile Include="Repositories\Interface\ITotalSMAMemberActiveRepository.cs" />
+    <Compile Include="Resources\Errors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Errors.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Labels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Labels.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\MiscResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MiscResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Implement\AutoGeneratedReport\AutoGeneratedTodayReport.cs" />
+    <Compile Include="Services\Implement\AutoGeneratedReport\AutoGeneratedHistoryReport.cs" />
+    <Compile Include="Services\Implement\BetCountService.cs" />
+    <Compile Include="Services\Implement\CreditMovement\CreditMovementService.cs" />
+    <Compile Include="Services\Implement\CreditSitesBetCountsService.cs" />
+    <Compile Include="Services\Implement\DailyCreatedCustomersService.cs" />
+    <Compile Include="Services\Implement\DuplicateTickets\DuplicateTicketsService.cs" />
+    <Compile Include="Services\Implement\DuplicateTickets\DuplicateTicketsUtility.cs" />
+    <Compile Include="Services\Implement\MAMonitorTool\MAMonitorToolExportExcelService.cs" />
+    <Compile Include="Services\Implement\MAMonitorTool\MAMonitorToolService.cs" />
+    <Compile Include="Services\Implement\MAMonitorTool\ReportTypeConstants.cs" />
+    <Compile Include="Services\Implement\SMATurnover\SMATurnoverExportDataService.cs" />
+    <Compile Include="Services\Implement\SMATurnover\SMATurnoverService.cs" />
+    <Compile Include="Services\Implement\TotalCreditAccountByProduct\ExportTotalCreditAccountByProductService.cs" />
+    <Compile Include="Services\Implement\TotalCreditAccountByProduct\TotalCreditAccountByProductService.cs" />
+    <Compile Include="Services\Implement\TotalSMAMemberActiveService.cs" />
+    <Compile Include="Services\Interface\AutoGeneratedReport\IAutoGeneratedHistoryReport.cs" />
+    <Compile Include="Services\Interface\CrediMovement\ICreditMovementService.cs" />
+    <Compile Include="Services\Interface\DuplicateTickets\IDuplicateTicketsService.cs" />
+    <Compile Include="Services\Interface\AutoGeneratedReport\IAutoGeneratedTodayReport.cs" />
+    <Compile Include="Services\Interface\IBetCountService.cs" />
+    <Compile Include="Services\Interface\ICreditSitesBetCountsService.cs" />
+    <Compile Include="Services\Interface\IDailyCreatedCustomersService.cs" />
+    <Compile Include="Services\Interface\IMAMonitorToolService.cs" />
+    <Compile Include="Services\Interface\ISMATurnoverService.cs" />
+    <Compile Include="Services\Interface\ITotalCreditAccountByProductService.cs" />
+    <Compile Include="Services\Interface\ITotalSMAMemberActiveService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Errors.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Errors.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Labels.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Labels.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\MiscResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MiscResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">
+      <Project>{A5608298-26C2-4F05-A7FD-AA8C0700ED38}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,28 @@
+@using Fanex.AccountingReports.Core.Configurations;
+<div class="content-grid">
+    <div id="page-list" class="display-none">
+        <div class="tile-page-content">
+            <div class="tileContainer">
+                @{ 
+                    var maxPages = AppSettings.MaxPagesOfMostVisitedPage;
+                    for (int index = 1; index <= maxPages; index++)
+                    {
+                    <div class="tile col_6 @("most-visited-" + index) ">
+                        <div class="btnGroup">
+                            <div class="btnGroupContainer">
+                                <span class="pin-button" title="Pin this site at its current position"></span><span
+                                    class="remove-button" title="Remove this site"></span>
+                            </div>
+                        </div>
+                        <div class="reportInfo">
+                            <div class="reportInfoContainer">
+                                <a class="reportLink"></a>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

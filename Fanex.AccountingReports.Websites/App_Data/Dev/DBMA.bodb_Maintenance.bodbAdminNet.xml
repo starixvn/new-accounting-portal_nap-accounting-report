@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+  <Function Name="Home - Most Visited Page">
+    <Setting Key="Home_MostVisitedPage_GetFavouriteReports" SpName="Acc_FunctionFavouriteSel" DbName="DBMA.bodb_Maintenance.bodbAdminNet">
+    </Setting>
+    <Setting Key="Home_MostVisitedPage_InsFavouriteReport" SpName="Acc_FunctionFavouriteIns" DbName="DBMA.bodb_Maintenance.bodbAdminNet">
+    </Setting>
+    <Setting Key="Home_MostVisitedPage_DelFavouriteReport" SpName="Acc_FunctionFavouriteDel" DbName="DBMA.bodb_Maintenance.bodbAdminNet">
+    </Setting>
+    <Setting Key="Home_MostVisitedPage_GetMostvisitedPage" SpName="Acc_FunctionUsageSel" DbName="DBMA.bodb_Maintenance.bodbAdminNet">
+    </Setting>
+    <Setting Key="Home_MostVisitedPage_UpdateMostvisitedPageCount" SpName="Acc_FunctionUsageUpdVisitedCount" DbName="DBMA.bodb_Maintenance.bodbAdminNet">
+    </Setting>
+    <Setting Key="Home_MostVisitedPage_UpdateMostvisitedPagePosition" SpName="Acc_FunctionUsageUpdPosition" DbName="DBMA.bodb_Maintenance.bodbAdminNet">
+    </Setting>
+    <Setting Key="Home_MostVisitedPage_DeleteMostvisitedPage" SpName="Acc_FunctionUsageDel" DbName="DBMA.bodb_Maintenance.bodbAdminNet">
+    </Setting>
+  </Function>
+
+  <Function Name="Legend Management - Core">
+    <Setting Key="LegendManagement_SelReportLegend" SpName="Acc_FunctionLegendSel" DbName="DBMA.bodb_Maintenance.bodbAdminNet" > </Setting>
+    <Setting Key="LegendManagement_SaveReportLegend" SpName="Acc_FunctionLegendUpd" DbName="DBMA.bodb_Maintenance.bodbAdminNet" > </Setting>
+    <Setting Key="LegendManagement_SaveReportLegendMapping" SpName="Acc_FunctionLegendCopy" DbName="DBMA.bodb_Maintenance.bodbAdminNet" > </Setting>
+    <Setting Key="LegendManagement_GetInputedLegend" SpName="ReportLegend_GetInputedLegend" DbName="DBMA.bodb_Maintenance.bodbAdminNet" > </Setting>
+  </Function>
+</Functions>

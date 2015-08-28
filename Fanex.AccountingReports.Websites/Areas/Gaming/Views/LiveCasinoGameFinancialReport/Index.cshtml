@@ -1,0 +1,117 @@
+@using Fanex.AccountingReports.Gaming.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Core.Configurations;
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    @Styles.Render("~/scripts/_lib/MultipleSelect/style", "~/scripts/_lib/MonthPicker/style", "~/scripts/_lib/Fanex.Grid/style")
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css?ver=1" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less?ver=2" />
+}
+@section Headline{
+    <div class="title">
+        <div>
+            <span>@Labels.Gaming/ </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+<div id="filter-bar">
+    <span id="notemessage" class="note-info-message" title=''></span>
+    <div class="filter-form">
+        <div id="LiveCasinoGameFinancialReport">
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="lbl-field col_3 align-right">
+                        @Labels.Licensee
+                    </div>
+                    <div class="edit-field col_7">
+                        <div id="ddwLicensee">
+                        </div>
+                    </div>
+                    <div class="lbl-field col_3 align-right">
+                        @Labels.Month
+                    </div>
+                    <div class="edit-field col_16">
+                        <div id="spMonth">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div class="lbl-field col_3 align-right">
+                        @Labels.Currency
+                    </div>
+                    <div class="edit-field col_7">
+                        <div id="ddwCurrency">
+                        </div>
+                    </div>
+                    <div class="lbl-field col_3 align-right">
+                        @Labels.Game_type
+                    </div>
+                    <div class="edit-field col_6">
+                        <div id="ddwGameType">
+                        </div>
+                    </div>
+                    <div class="lbl-field col_3 align-right">
+                        @Labels.Game_table
+                    </div>
+                    <div class="edit-field col_7">
+                        <div id="ddwGameTable">
+                        </div>
+                    </div>
+                    <div class="submit col_4">
+                        <input id="btnReport" name="btnReport" type="submit" value="@Labels.Generate" />
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="inforMessage" class="col_35 display-none width-auto">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="numberGameWLByDateGrid" class="display-none content-grid width-100percent">
+    <div id="GridContainer" class="freegrid">
+    </div>
+</div>
+<iframe id="frm" width="0" height="0" frameborder="0" class="hidden"></iframe>
+@section scripts
+{
+    @*@Scripts.Render("~/scripts/_lib/monPickr")*@
+    <script type="text/javascript" src="@Url.Content("~/scripts/_lib/MonthPicker/monPickr-0.0.3.js")" ></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/_lib/MultipleSelect/jquery.multiselect.nlevel1.js")" ></script>
+    <script type="text/javascript" src="@Url.Content("~/Areas/Gaming/Views/LiveCasinoGameFinancialReport/Scripts/ReportManager.js")" ></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/_lib/jquery.stringformat.js")" ></script>
+    <script type="text/javascript">        var _today = '@DateTime.Today.ToShortDateString()';
+        var _yesterday = '@DateTime.Today.AddDays(-1).ToShortDateString()';
+        var _minDate = '@AppSettings.LiveCasinoFinancialReport_MinDate.ToShortDateString()';
+        var lastDay = '@DateTime.DaysInMonth(DateTime.Now.AddMonths(-1).Year, DateTime.Now.AddMonths(-1).Month)';
+        var lastMonth = '@DateTime.Now.AddMonths(-1).Month';
+        var lastYear = '@DateTime.Now.AddMonths(-1).Year';
+        window.rootUrl = '@Url.Content("~")';
+        var resources =
+            {
+                Table: "@Labels.Table",
+                LiveCasinoGameFinancialReport_Players: "@Labels.LiveCasinoGameFinancialReport_Players",
+                LiveCasinoGameFinancialReport_Games: "@Labels.LiveCasinoGameFinancialReport_Games",
+                LiveCasinoGameFinancialReport_GamePayout: "@Labels.LiveCasinoGameFinancialReport_GamePayout",
+                LiveCasinoGameFinancialReport_GameLevy: "@Labels.LiveCasinoGameFinancialReport_GameLevy",
+                Game_Levy_to_pay: "@Labels.Game_Levy_to_pay",
+                Total_Bets: "@Labels.Total_Bets",
+                Total_Wins: "@Labels.Total_Wins",
+                Gross_Income: "@Labels.Gross_Income",
+                Comm: "@Labels.Comm",
+                Net_Income: "@Labels.Net_Income",
+                Company: "@Labels.Company",
+                GridTitle: "@Labels.Live_Casino_Game_Financial_Report",
+                NoteMessage: '@Html.Raw(GamingResources.LiveCasinoFinancial_FilterNote)'
+            };
+    </script>
+}

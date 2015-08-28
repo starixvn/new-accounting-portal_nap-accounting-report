@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A6EAD323-42D7-46B6-ADAC-A31F4FCCD17B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fanex.AccountingReports.Racing</RootNamespace>
+    <AssemblyName>Fanex.AccountingReports.Racing</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ExcelUtil, Version=29.3.0.1000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\ExcelUtil.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data, Version=0.5.404.59, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Core, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Framework, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20505.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Contants\RacingConstants.cs" />
+    <Compile Include="Controllers\GreyhoundAUSToteController.cs" />
+    <Compile Include="Controllers\HarnessAUSToteController.cs" />
+    <Compile Include="Controllers\RacingAUSToteController.cs" />
+    <Compile Include="Controllers\RacingGroupDailyController.cs" />
+    <Compile Include="Controllers\RacingSAToteController.cs" />
+    <Compile Include="Controllers\NumberOfActiveMembersForRacingController.cs" />
+    <Compile Include="Core\Configurations\RacingSection\RacingSection.cs" />
+    <Compile Include="Criteria\ForTote\GreyhoundAUSTote\GetBetlistGreyhoundAUSToteCriteria.cs" />
+    <Compile Include="Criteria\ForTote\GreyhoundAUSTote\GetDetailGreyhoundAUSToteCriteria.cs" />
+    <Compile Include="Controllers\RacingWinLossByLicenseeController.cs" />
+    <Compile Include="Criteria\ForTote\GreyhoundAUSTote\GetMainGreyhoundAUSToteCriteria.cs" />
+    <Compile Include="Criteria\ForTote\HarnessAUSTote\GetBetlistHarnessAUSToteCriteria.cs" />
+    <Compile Include="Criteria\ForTote\HarnessAUSTote\GetDetailHarnessAUSToteCriteria.cs" />
+    <Compile Include="Criteria\ForTote\HarnessAUSTote\GetMainHarnessAUSToteCriteria.cs" />
+    <Compile Include="Criteria\NumberOActiveMembersForRacing\NumberOfActiveMembersCriteria.cs" />
+    <Compile Include="Criteria\RacingGroupDaily\GetWinLostRacingGroupCriteria.cs" />
+    <Compile Include="Criteria\RacingGroupDaily\GetWinLostRacingGroupDailyCriteria.cs" />
+    <Compile Include="Models\GreyhoundAUSTote\GreyhoundWinLossAUSTote.cs" />
+    <Compile Include="Criteria\RacingWinLossByLicensee\GetDetailBetListCriteria.cs" />
+    <Compile Include="Criteria\RacingWinLossByLicensee\GetLicenseeCriteria.cs" />
+    <Compile Include="Criteria\RacingWinLossByLicensee\GetRacingDailyReportCriteria.cs" />
+    <Compile Include="Models\GreyhoundAUSTote\GreyhoundWinLossDetailAUSTote.cs" />
+    <Compile Include="Models\HarnessAUSTote\HarnessWinLossAUSTote.cs" />
+    <Compile Include="Models\HarnessAUSTote\HarnessWinLossDetailAUSTote.cs" />
+    <Compile Include="Models\NumberOActiveMembersForRacing\NumberOfActiveMembers.cs" />
+    <Compile Include="Controllers\RacingUKToteController.cs" />
+    <Compile Include="Criteria\ForTote\GetBetlistForToteCriteria.cs" />
+    <Compile Include="Criteria\ForTote\GetDetailForToteCriteria.cs" />
+    <Compile Include="Criteria\ForTote\GetMainForToteCriteria.cs" />
+    <Compile Include="Models\RacingWinLossByLicensee\DetailBetList.cs" />
+    <Compile Include="Models\RacingWinLossByLicensee\RaceWinLost.cs" />
+    <Compile Include="Models\RacingWinLossByLicensee\RacingDailyReport.cs" />
+    <Compile Include="Models\RacingWinLossByLicensee\RacingLicensee.cs" />
+    <Compile Include="Criteria\ForTote\RacingAUSTote\GetBetlistRacingAUSToteCriteria.cs" />
+    <Compile Include="Criteria\ForTote\RacingAUSTote\GetDetailRacingAUSToteCriteria.cs" />
+    <Compile Include="Criteria\ForTote\RacingAUSTote\GetMainRacingAUSToteCriteria.cs" />
+    <Compile Include="Criteria\ForTote\RacingSATote\GetBetlistRacingSAToteCriteria.cs" />
+    <Compile Include="Criteria\ForTote\RacingSATote\GetDetailRacingSAToteCriteria.cs" />
+    <Compile Include="Criteria\ForTote\RacingSATote\GetMainRacingSAToteCriteria.cs" />
+    <Compile Include="Criteria\ForTote\RacingUKTote\GetMainRacingUKToteCriteria.cs" />
+    <Compile Include="Criteria\ForTote\RacingUKTote\GetBetlistRacingUKToteCriteria.cs" />
+    <Compile Include="Criteria\ForTote\RacingUKTote\GetDetailRacingUKToteCriteria.cs" />
+    <Compile Include="Models\HorseRacingAUSTote\RacingWinLossAUSTote.cs" />
+    <Compile Include="Models\HorseRacingAUSTote\RacingWinLossDetailAUSTote.cs" />
+    <Compile Include="Models\HorseRacingSATote\RacingWinLossDetailSATote.cs" />
+    <Compile Include="Models\HorseRacingSATote\RacingWinLossSATote.cs" />
+    <Compile Include="Models\HorseRacingUKTote\RacingWinLossDetailUKTote.cs" />
+    <Compile Include="Models\HorseRacingUKTote\RacingWinLossUKTote.cs" />
+    <Compile Include="Models\RacingGroupDaily\RacingGroupDaily.cs" />
+    <Compile Include="Models\RacingTote\IDailyWinLoss.cs" />
+    <Compile Include="Models\RacingTote\IDailyWinLossDetail.cs" />
+    <Compile Include="Models\RacingTote\WinLossTote.cs" />
+    <Compile Include="Models\RacingTote\WinLossToteDetail.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RacingAreaRegistration.cs" />
+    <Compile Include="Repositories\Implement\RacingGroupDailyRepository.cs" />
+    <Compile Include="Repositories\Interface\IRacingGroupDailyRepository.cs" />
+    <Compile Include="Resources\Labels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Labels.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\RacingResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RacingResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\Implement\ForTote\GreyhoundAUSTote\GreyhoundWinLossAUSToteExcelService.cs" />
+    <Compile Include="Services\Implement\ForTote\GreyhoundAUSTote\GreyhoundWinLossAUSToteService.cs" />
+    <Compile Include="Services\Implement\ForTote\HarnessAUSTote\HarnessWinLossAUSToteExcelService.cs" />
+    <Compile Include="Services\Implement\ForTote\HarnessAUSTote\HarnessWinLossAUSToteService.cs" />
+    <Compile Include="Services\Implement\ForTote\ToteDailyWinLossAbstractExcelService.cs" />
+    <Compile Include="Services\Implement\ForTote\ToteDailyWinLossAbstractService.cs" />
+    <Compile Include="Services\Implement\ForTote\RacingAUSTote\RacingDailyAUSToteExcelService.cs" />
+    <Compile Include="Services\Implement\ForTote\RacingAUSTote\RacingWinLossAUSToteService.cs" />
+    <Compile Include="Services\Implement\ForTote\ToteDailyWinLossExcelService.cs" />
+    <Compile Include="Services\Implement\ForTote\RacingSATote\RacingDailySAToteExcelService.cs" />
+    <Compile Include="Services\Implement\ForTote\RacingDailyWinLossUtil.cs" />
+    <Compile Include="Services\Implement\ForTote\RacingSATote\RacingWinLossSAToteService.cs" />
+    <Compile Include="Services\Implement\ForTote\RacingUKTote\RacingDailyUKToteExcelService.cs" />
+    <Compile Include="Services\Implement\ForTote\ToteDailyWinLossService.cs" />
+    <Compile Include="Services\Implement\ForTote\RacingUKTote\RacingWinLossUKToteService.cs" />
+    <Compile Include="Services\Implement\NumberOfActiveMembersForRacing\NumberOfActiveMembersExportDataService.cs" />
+    <Compile Include="Services\Implement\NumberOfActiveMembersForRacing\NumberOfActiveMembersService.cs" />
+    <Compile Include="Services\Implement\RacingWinLossByLicensee\RacingGetListLicenseeService.cs" />
+    <Compile Include="Services\Implement\RacingWinLossByLicensee\RacingWinLossByLicenseeApply50PercentService.cs" />
+    <Compile Include="Services\Implement\RacingWinLossByLicensee\RacingWinLossByLicenseeExportReportService.cs" />
+    <Compile Include="Services\Implement\RacingWinLossByLicensee\RacingWinLossByLicenseeService.cs" />
+    <Compile Include="Services\Implement\RacingWinLossByLicensee\RacingWinLossByLicenseeUtility.cs" />
+    <Compile Include="Services\Implement\RacingGroupDaily\RacingGroupDailyExportReportServices.cs" />
+    <Compile Include="Services\Implement\RacingGroupDaily\RacingGroupDailyGetReportServices.cs" />
+    <Compile Include="Services\Implement\RacingWinLossByLicensee\RacingDetailBetListService.cs" />
+    <Compile Include="Services\Interface\NumberOfActiveMembersForRacing\INumberOfActiveMembersExportDataService.cs" />
+    <Compile Include="Services\Interface\NumberOfActiveMembersForRacing\INumberOfActiveMembersService.cs" />
+    <Compile Include="Services\Interface\RacingWinLossByLicensee\IRacingDetailBetListService.cs" />
+    <Compile Include="Services\Interface\RacingWinLossByLicensee\IRacingGetListLicenseeService.cs" />
+    <Compile Include="Services\Interface\RacingWinLossByLicensee\IRacingWinLossByLicenseeApply50PercentService.cs" />
+    <Compile Include="Services\Interface\RacingWinLossByLicensee\IRacingWinLossByLicenseeExportReportService.cs" />
+    <Compile Include="Services\Interface\RacingWinLossByLicensee\IRacingWinLossByLicenseeService.cs" />
+    <Compile Include="Services\Interface\RacingGroupDaily\IRacingGroupDailyExportReportServices.cs" />
+    <Compile Include="Services\Interface\RacingGroupDaily\IRacingGroupDailyGetReportServices.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Labels.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Labels.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\RacingResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RacingResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">
+      <Project>{A5608298-26C2-4F05-A7FD-AA8C0700ED38}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,64 @@
+@using Fanex.AccountingReports.Core.Services.Impl;
+@using Fanex.AccountingReports.WinLoss.Resources;
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Core.Configurations;
+@using Fanex.AccountingReports.Core;
+@using Fanex.AccountingReports.Core.Extensions;
+@using Fanex.Common;
+<link type="text/css" rel="Stylesheet" href="~/scripts/_lib/Fanex.Grid/Fanex.Grid.css?ver=2" />
+<link type="text/css" rel="Stylesheet" href="~/themes/base/style.less" />
+<link type="text/css" rel="Stylesheet" href="~/themes/reset.css" />
+<link rel="stylesheet" type="text/css" href="~/Areas/WinLoss/Views/DailyMixParlayWinLoss_2hLink/Styles/DailyMixParlayWinLoss.less" />
+<link rel="stylesheet" type="text/css" href="~/Areas/WinLoss/Views/DailyMixParlayWinLoss_2hLink/Styles/MixParlayPopup.less" />
+<div id="parentContainer" class="content-grid">
+    <div id="normalMixParlayContainer">
+        <div id="normalMixParlayReport" class="freegrid display-none">
+        </div>
+    </div>
+    <div id="advanceMixParlayReportContainer">
+        <div id="advanceMixParlayReport" class="freegrid display-none">
+        </div>
+    </div>
+</div>
+@{     
+    DateTime reportDate = DateTime.Today;
+
+    int betTypeId = 0;
+    string betType = string.Empty;
+    var beginSupportMPDate = AppSettings.MixParlayAdvanceSupportDate;
+    if (Request["reportDate"] != null)
+    {
+        reportDate = Converter.ToDateTime(Request["reportDate"]);
+    }
+    else
+    {
+        reportDate = DateTime.Today;
+    }
+
+    if (Request["BetTypeId"] != null)
+    {
+        betTypeId = Converter.ToInt(Request["BetTypeId"]);
+    }
+
+    if (Request["BetType"] != null)
+    {
+        betType = Converter.ToString2(Request["BetType"]);
+    }
+}
+<script type="text/javascript">
+    window.rootUrl = '@Url.Content("~")';
+    var moveBetsDay = '@ReportService.BalanceUp.MoveBetsDay.ToShortDateString()';
+    var beginSupportMPDate = '@beginSupportMPDate';
+    var reportDate = '@reportDate';
+    var betType = '@betType';
+    var betTypeId = '@betTypeId';
+</script>
+<script type="text/javascript" src="~/scripts/_lib/jquery-1.8.2.js"></script>
+<script type="text/javascript" src="~/scripts/_lib/BlockUI/jquery.blockUI.1.33.js"></script>
+<script type="text/javascript" src="~/scripts/_lib/Fanex.Grid/Fanex.Grid.js"></script>
+<script type="text/javascript" src="~/scripts/NapAccReports.js"></script>
+<script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+<script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+<script type="text/javascript" src="~/Areas/WinLoss/Views/DailyMixParlayWinLoss_2hLink/Scripts/AdvanceMixParlayReport.js"></script>
+<script type="text/javascript" src="~/Areas/WinLoss/Views/DailyMixParlayWinLoss_2hLink/Scripts/NormalMixParlayReport.js"></script>
+<script type="text/javascript" src="~/Areas/WinLoss/Views/DailyMixParlayWinLoss_2hLink/Scripts/MixParlayPopupManager.js"></script>

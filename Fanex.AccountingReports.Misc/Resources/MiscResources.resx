@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BetCountReport_ReportName" xml:space="preserve">
+    <value>Bet_Count_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="BetCountReport_SheetName" xml:space="preserve">
+    <value>Bet Count</value>
+  </data>
+  <data name="BetCount_FilterNote" xml:space="preserve">
+    <value>Data is only available from last 3 months up to yesterday (after 11AM GMT-4). For more historical data, please click &lt;span class="bold-tip"&gt;HISTORY REPORT&lt;/span&gt;</value>
+  </data>
+  <data name="BetCount_ReportTitle" xml:space="preserve">
+    <value>Bet count report from {0} to {1}</value>
+  </data>
+  <data name="CreditSitesBetCounts_ReportName" xml:space="preserve">
+    <value>Credit_Sites_Bet_Counts_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="CreditSitesBetCounts_ReportTitle" xml:space="preserve">
+    <value>Number of bets for Credit sites  from {0} to {1}</value>
+  </data>
+  <data name="CreditSitesBetCounts_SheetName" xml:space="preserve">
+    <value>Number of bets for Credit sites</value>
+  </data>
+  <data name="DailyCreatedCustomersDetailsReport_ReportName" xml:space="preserve">
+    <value>{0}_List_Created_On_{1}</value>
+  </data>
+  <data name="DailyCreatedCustomersDetailsReport_ReportTitle" xml:space="preserve">
+    <value>{0} List ({1})</value>
+  </data>
+  <data name="DailyCreatedCustomersDetailsReport_SheetName" xml:space="preserve">
+    <value>{0} List</value>
+  </data>
+  <data name="DailyCreatedCustomersReport_ReportName" xml:space="preserve">
+    <value>Daily_Created_Customer_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="DailyCreatedCustomersReport_ReportTitle" xml:space="preserve">
+    <value>Daily Created Customers Report from {0} to {1}</value>
+  </data>
+  <data name="DailyCreatedCustomersReport_SheetName" xml:space="preserve">
+    <value>Daily Created Customers</value>
+  </data>
+  <data name="Error_MAMonitorTool_InputLeague" xml:space="preserve">
+    <value>Please select at least one league.</value>
+  </data>
+  <data name="DuplicateTickets_ReportName" xml:space="preserve">
+    <value>Duplicate_Tickets_On_{0}</value>
+  </data>
+  <data name="Error_MAMonitorTool_InputTurnoverRange" xml:space="preserve">
+    <value>Enter the Turnover range. Eg: 100,000- 200,000.</value>
+  </data>
+  <data name="DuplicateTickets_ReportTitle" xml:space="preserve">
+    <value>Duplicate Tickets On {0}</value>
+  </data>
+  <data name="Error_MAMonitorTool_InputWinLossRange" xml:space="preserve">
+    <value>Enter the Win Loss range. Eg: 100,000- 200,000.</value>
+  </data>
+  <data name="DuplicateTickets_SheetName" xml:space="preserve">
+    <value>Duplicate Tickets</value>
+  </data>
+  <data name="Error_MAMonitorTool_WrongUsername" xml:space="preserve">
+    <value>Wrong input Username.</value>
+  </data>
+  <data name="MAMonitorTool_FilterNote" xml:space="preserve">
+    <value>Data is only available from latest Balance day up to yesterday. For more historical data, please click &lt;span class="bold-tip"&gt;HISTORY REPORT&lt;/span&gt;</value>
+  </data>
+  <data name="MAMonitorTool_ReportName" xml:space="preserve">
+    <value>MA_Monitor_Tool_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="MAMonitorTool_ReportTitle" xml:space="preserve">
+    <value>MA Monitor Tool Report From {0} To {1}</value>
+  </data>
+  <data name="MAMonitorTool_SheetName" xml:space="preserve">
+    <value>MA Monitor Tool</value>
+  </data>
+  <data name="MAMonitorTool_TurnoverRangeNote" xml:space="preserve">
+    <value>Enter the amount range. Eg: 100,000- 200,000</value>
+  </data>
+  <data name="MAMonitorTool_WinLossRangeNote" xml:space="preserve">
+    <value>Enter the amount range. Eg: 100,000- 200,000</value>
+  </data>
+  <data name="TotalSMAMemberActiveReport_ActiveTitle" xml:space="preserve">
+    <value>Member Site (Active)</value>
+  </data>
+  <data name="TotalSMAMemberActiveReport_NoteMsg" xml:space="preserve">
+    <value>&lt;b&gt;Some accounts may be closed/suspended when you\'re viewing the report and keeping it idle for some time.&lt;br/&gt;So, suspended/closed numbers between the main and drilldown reports may not match.&lt;br/&gt;In that case, please refresh by clicking Generate button again to make sure numbers are updated.&lt;/b&gt;</value>
+  </data>
+  <data name="TotalSMAMemberActiveReport_ReportName" xml:space="preserve">
+    <value>Total_SMA_and_Member_Active_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="TotalSMAMemberActiveReport_SheetName" xml:space="preserve">
+    <value>Total SMA and Member Active Report</value>
+  </data>
+  <data name="TotalSMAMemberActiveReport_Title" xml:space="preserve">
+    <value>Total SMA and Member Active Report from {0} to {1}</value>
+  </data>
+  <data name="Error_MAMonitorTool_InputMinMaxTurnoverRange" xml:space="preserve">
+    <value>Min Turnover must be less than or equal Max Turnover</value>
+  </data>
+  <data name="Error_MAMonitorTool_InputMinMaxWinLossRange" xml:space="preserve">
+    <value>Min Win Loss must be less than or equal Max Win Loss</value>
+  </data>
+  <data name="DuplicateTicket_OfUser" xml:space="preserve">
+    <value>Duplicate Tickets of {0}</value>
+  </data>
+  <data name="TotalCreditAccountByProduct_SheetName" xml:space="preserve">
+    <value>Total Credit Accounts</value>
+  </data>
+  <data name="BetCountDetail_ReportName" xml:space="preserve">
+    <value>Bet_Count_Details_For_{0}_in_Current_Month_from_{1}_to_{2}_Super_{3}</value>
+  </data>
+  <data name="BetCountDetail_ReportTitle" xml:space="preserve">
+    <value>Bet Count Details for {0} in Current Month - from {1} to {2} (Super: {3})</value>
+  </data>
+  <data name="BetCountDetail_SheetName" xml:space="preserve">
+    <value>Bet Count Details</value>
+  </data>
+  <data name="TotalCreditAccountByProduct_FilterNote" xml:space="preserve">
+    <value>This report is to allow user to view a number of enabled / disabled accounts by supers and number of members that have placed bet(s) on the specific product.</value>
+  </data>
+  <data name="SMA_TurnOver_ReportName" xml:space="preserve">
+    <value>Daily_SMA_Turnover_{0}</value>
+  </data>
+  <data name="SMA_TurnOver_ReportTitle" xml:space="preserve">
+    <value>Daily SMA Turnover Report - {0}</value>
+  </data>
+  <data name="SMA_TurnOver_SheetName" xml:space="preserve">
+    <value>SMA Turnover</value>
+  </data>
+  <data name="SMA_TurnOver_Annually_ReportName" xml:space="preserve">
+    <value>Annually_SMA_Turnover_{0}</value>
+  </data>
+  <data name="SMA_TurnOver_Annually_ReportTitle" xml:space="preserve">
+    <value>Annually SMA Turnover Report - {0}</value>
+  </data>
+  <data name="SMA_TurnOver_Monthly_ReportName" xml:space="preserve">
+    <value>Monthly_SMA_Turnover_{0}</value>
+  </data>
+  <data name="SMA_TurnOver_Monthly_ReportTitle" xml:space="preserve">
+    <value>Monthly SMA Turnover Report - {0}</value>
+  </data>
+  <data name="CreditMovement_ReportTitle" xml:space="preserve">
+    <value>Accounts which have been allocated with more than {0} RM credit for SMA + Member Line</value>
+  </data>
+  <data name="CreditMovement_ReportName" xml:space="preserve">
+    <value>Credit_Movement_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="CreditMovementReport_SheetName" xml:space="preserve">
+    <value>Credit Movement</value>
+  </data>
+</root>

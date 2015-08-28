@@ -1,0 +1,193 @@
+@{
+    ViewBag.Title = "ExternalReport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Head {
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Pager/pagination.css" />
+    <style type="text/css">
+        .negative
+        {
+            color:Red;
+        }
+    </style>
+}
+<div id="filter-bar">
+    <input type="button" value="Hide % Columns" id="showhidecolumn" data-showhide="0" />
+    <input type="button" value="Hide User Name" id="showhideus" data-showhide="0" />
+    <input type="button" value="Hide TO" id="showhideto" data-showhide="0" />
+</div>
+<div id="gridId" class="freegrid content-grid">
+</div>
+<div id="gridId1" class="freegrid content-grid">
+</div>
+
+@section Foot {
+    <script type="text/javascript">
+        function CustomBodyCellRender(cellData) {
+            var customHtml = cellData.Value.indexOf("-") > -1 ? '<span class="negative">' +cellData.Value+ '</span>'  : cellData.Value;
+            return customHtml;
+        }
+
+        function GetGridOption(rs) {
+            var gridOption = {
+                customizeHeader: true,
+                groupHeaderRows: [
+                         {
+                             Columns: [
+                                    { HeaderText: "No.", Name: "Number", MergeRowNumber: 2 },
+                                    { HeaderText: "Username", Name: "Username", MergeRowNumber: 2 },
+                                    { HeaderText: "Total Turnover", Name: "TotalTurnover", MergeRowNumber: 2 },
+                                    { HeaderText: "Turnover & Position Taking", Name: "TurnoverCompany", MergeColNumber: 8 },
+                                    { HeaderText: "Win/Loss & Margin", Name: "WinLossCompany", MergeColNumber: 8 },
+                                ]
+                         }
+                ],
+                //                headerColumnHeight: 30,
+                //                bodyRowHeight: 30,
+                columns: [
+                    { HeaderText: "No.", Width: 50, Name: "Number", CellAlign: "center", Sort: true },
+                    { HeaderText: "Username", Width: 90, Name: "Username", CellAlign: "center",
+                        CustomCellRender: function (cell) {
+                            return '<a href="' + cell.Value.CustId + '" >' + cell.Value.Username + '</a>';
+                        }, Sort: true
+                    },
+                    { HeaderText: "Total Turnover", Width: 150, Name: "TotalTurnover", CellAlign: "right", Sort: true },
+                    { HeaderText: "Company", Width: 100, Name: "TurnoverCompany", CellAlign: "right", Sort: true },
+                    { HeaderText: "%", Width: 50, Name: "TurnoverPercent", CellAlign: "right", Sort: true },
+                    { HeaderText: "Super", Width: 100, Name: "TurnoverSuper", CellAlign: "right", Sort: true },
+                    { HeaderText: "%", Width: 50, Name: "TurnoverSuperPercent", CellAlign: "right", Sort: true },
+                    { HeaderText: "Master", Width: 100, Name: "TurnoverMaster", CellAlign: "right", Sort: true },
+                    { HeaderText: "%", Width: 50, Name: "TurnoverMasterPercent", CellAlign: "right", Sort: true },
+                    { HeaderText: "Agent", Width: 100, Name: "TurnoverAgent", CellAlign: "right", Sort: true },
+                    { HeaderText: "%", Width: 50, Name: "TurnoverAgentPercent", CellAlign: "right", Sort: true },
+                    { HeaderText: "Company", Width: 100, Name: "WinLossCompany", CellAlign: "right", Sort: true, CustomCellRender: CustomBodyCellRender },
+                    { HeaderText: "%", Width: 50, Name: "WinLossCompanyPercent", CellAlign: "right", Sort: true, CustomCellRender: CustomBodyCellRender },
+                    { HeaderText: "Super", Width: 100, Name: "WinLossSuper", CellAlign: "right", Sort: true, CustomCellRender: CustomBodyCellRender },
+                    { HeaderText: "%", Width: 50, Name: "WinLossSuperPercent", CellAlign: "right", Sort: true, CustomCellRender: CustomBodyCellRender },
+                    { HeaderText: "Master", Width: 100, Name: "WinLossMaster", CellAlign: "right", Sort: true, CustomCellRender: CustomBodyCellRender },
+                    { HeaderText: "%", Width: 50, Name: "WinLossMasterPercent", CellAlign: "right", Sort: true, CustomCellRender: CustomBodyCellRender },
+                    { HeaderText: "Agent", Width: 100, Name: "WinLossAgent", CellAlign: "right", Sort: true, CustomCellRender: CustomBodyCellRender },
+                    { HeaderText: "%", Width: 50, Name: "WinLossAgentPercent", CellAlign: "right", Sort: true, CustomCellRender: CustomBodyCellRender }
+                ],
+                numberOfFrozenColumn: 3,
+                showFooter: true,
+                showTitle: true,
+                titleInfo:
+                {
+                    text: "Win Loss by Licensee report for 12Bet from Dec 16, 2012 to Dec 22, 2012 in All Currencies",
+                    showExcelButton: true,
+                    exportExcelFunction: function () {
+                        alert("ExportExcel");
+                    }
+                },
+                gridExpandHeight: 120,
+                showPager: true,
+                pagerOption: {
+                    itemsPerPage: 10,
+                    maxItemsPerPage: 100,
+                    currentPage: 0,
+                    totalItem: 0,
+                    startPerPage: 10,
+                    pageStep: 10
+                }
+            };
+
+            var bodyData = [];
+            var footerData = [];
+
+            //// Assing BodyData
+            var detailLength = rs.WinlossDetails.length;
+            for (var index = 0; index < detailLength; index++) {
+                var currentRow = rs.WinlossDetails[index];
+                var cssClass = index % 2 == 0 ? 'even' : '';
+                bodyData.push({
+                    Columns: [
+                    { Name: "Number", Value: (index +1) },
+                    { Name: "Username", Value: currentRow },
+                    { Name: "TotalTurnover", Value: currentRow.TotalTo },
+                    { Name: "TurnoverCompany", Value: currentRow.CompanyTo },
+                    { Name: "TurnoverPercent", Value: currentRow.CompanyPt },
+                    { Name: "TurnoverSuper", Value: currentRow.SuperTo },
+                    { Name: "TurnoverSuperPercent", Value: currentRow.SuperPt },
+                    { Name: "TurnoverMaster", Value: currentRow.MasterTo },
+                    { Name: "TurnoverMasterPercent", Value: currentRow.MasterPt },
+                    { Name: "TurnoverAgent", Value: currentRow.AgentTo },
+                    { Name: "TurnoverAgentPercent", Value: currentRow.AgentPt },
+                    { Name: "WinLossCompany", Value: currentRow.CompanyWinlost },
+                    { Name: "WinLossCompanyPercent", Value: currentRow.CompanyMargin },
+                    { Name: "WinLossSuper", Value: currentRow.SuperWinlost },
+                    { Name: "WinLossSuperPercent", Value: currentRow.SuperMargin },
+                    { Name: "WinLossMaster", Value: currentRow.MasterWinlost },
+                    { Name: "WinLossMasterPercent", Value: currentRow.MasterMargin },
+                    { Name: "WinLossAgent", Value: currentRow.AgentWinlost },
+                    { Name: "WinLossAgentPercent", Value: currentRow.AgentMargin }
+                    ]
+                    //CssClass: cssClass
+                })
+            };
+            gridOption.bodyRows = bodyData;
+            gridOption.pagerOption.totalItem = bodyData.length;
+
+            //// Asign Footer Data
+            footerData.push(
+            {
+                Columns:[
+                { Name: "Number", Value: "Grand Total", MergeColNumber: 2 },
+                { Name: "TotalTurnover", Value: rs.TotalTo },
+                { Name: "TurnoverCompany", Value: rs.CompanyTo },
+                { Name: "TurnoverPercent", Value: rs.CompanyPt },
+                { Name: "TurnoverSuper", Value: rs.SuperTo },
+                { Name: "TurnoverSuperPercent", Value: rs.SuperPt },
+                { Name: "TurnoverMaster", Value: rs.MasterTo },
+                { Name: "TurnoverMasterPercent", Value: rs.MasterPt },
+                { Name: "TurnoverAgent", Value: rs.AgentTo },
+                { Name: "TurnoverAgentPercent", Value: rs.AgentPt },
+                { Name: "WinLossCompany", Value: rs.CompanyWinlost, CustomCellRender: CustomBodyCellRender },
+                { Name: "WinLossCompanyPercent", Value: rs.CompanyMargin, CustomCellRender: CustomBodyCellRender },
+                { Name: "WinLossSuper", Value: rs.SuperWinlost, CustomCellRender: CustomBodyCellRender },
+                { Name: "WinLossSuperPercent", Value: rs.SuperMargin, CustomCellRender: CustomBodyCellRender },
+                { Name: "WinLossMaster", Value: rs.MasterWinlost, CustomCellRender: CustomBodyCellRender },
+                { Name: "WinLossMasterPercent", Value: rs.MasterMargin, CustomCellRender: CustomBodyCellRender },
+                { Name: "WinLossAgent", Value: rs.AgentWinlost, CustomCellRender: CustomBodyCellRender },
+                { Name: "WinLossAgentPercent", Value: rs.AgentMargin, CustomCellRender: CustomBodyCellRender }
+                ]
+            });
+            gridOption.footerRows = footerData;
+            return gridOption;
+        }
+
+        $(function () {
+            var gridOptions = null;
+            $.ajax({
+                type: "POST",
+                url: window.rootUrl + "Test/Grid/GetDailyWinlost",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "",
+                beforeSend: function () {
+                },
+                success: function (rs) {
+                    //console.log("a");
+                    gridOptions = GetGridOption(rs);
+                    var currentGrid = $("#gridId").fanexGrid(gridOptions);
+                    //var currentGrid = $("#gridId1").fanexGrid(gridOptions);
+                },
+                error: function (event, jqXHR, ajaxSettings) {
+                },
+                complete: function () {
+                    //console.log("a");
+                }
+            });
+
+            $('#showhidecolumn').click(function () {
+                $("#gridId").fanexGrid("hideColumns", gridOptions, [12, 14, 16, 18]);
+            })
+            $('#showhideus').click(function () {
+                $("#gridId").fanexGrid("hideColumns", gridOptions, [1]);
+            });
+            $('#showhideto').click(function () {
+                $("#gridId").fanexGrid("hideColumns", gridOptions, [2, 3, 5, 7, 9]);
+            });
+        });
+    </script>
+}

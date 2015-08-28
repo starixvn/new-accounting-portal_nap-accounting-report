@@ -1,0 +1,58 @@
+
+
+
+#reportNote 
+{
+    margin-top: 5px;
+}
+
+.warning ul
+{
+    color: #6F6F6F;
+    font-weight: bold;
+    list-style: none outside none;
+    margin-bottom: 0px;
+    margin-left: -41px;
+    margin-top: 0;
+}
+
+.labelMonth, .labelFrom 
+{
+    padding-left: 10px;
+    width: 70px;
+}
+
+.selectedDayWrapParent 
+{
+    margin-top: 0px;
+}
+
+.btnReport 
+{
+    margin-left: 10px;
+}
+
+.border-bottom-none 
+{
+    border-bottom: none 0px;
+}
+
+.row-span-2
+{
+    height: 35px;
+}
+
+#contentBox 
+{
+    margin-top: 10px;
+}
+
+.colCompany 
+{
+    width: 520px;
+}
+
+.color-red 
+{
+    color: #FF0000;
+}

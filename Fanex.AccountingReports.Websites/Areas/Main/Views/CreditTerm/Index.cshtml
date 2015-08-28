@@ -1,0 +1,240 @@
+@using Fanex.AccountingReports.Core.Web;
+@using Fanex.AccountingReports.Main.Resources;
+
+@{
+    ViewBag.Title = AppSession.CurrentWorkingOnMenu != null 
+        ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Head {
+     @Styles.Render("~/scripts/_lib/Fanex.Grid/style")
+     <link rel="stylesheet" type="text/css" href="~/Areas/Main/Views/CreditTerm/Styles/CreditTerm.less" />
+}
+
+@section Headline {
+    <div class="title">
+        <div>
+            <span>@Labels.Main / </span><span class="curr">@ViewBag.Title</span>
+        </div>
+    </div>
+}
+
+<div id="filter-bar">
+    <div class="filter-form">
+            <div class="filter-row">
+                <div id="dvReport" class="align-left div-tab-report"> 
+                    <ul id="tabReport">
+                        <li>
+                            <a id="PreAgreedLink" href="#" class="selected-tab">
+                                PRE AGREED REPORT
+                            </a>
+                        </li>
+                        <li>
+                            <a id="InstallmentAmountLink" href="#" >
+                                INSTALLMENT AMOUNT REPORT
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="PreAgreedAmountHeader">
+                <div class="filter-row">
+                    <div class="filter-cell">
+                        <div class="lbl-field col_7 align-right">
+                            Search by Checker
+                        </div>
+                        <div class= "edit-field col_8 align-left">
+                            <input id="txtCheckname" type="text" name="txtCheckname">
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-row">
+                    <div class="filter-cell">
+                        <div class="lbl-field col_7 align-right" >
+                            or Pre-Agreed Amount from 
+                        </div>
+                        <div class= "edit-field col_5 align-left">
+                            <input id="txtFromPreAmount" type="text" name="txtFromPreAmount" >
+                        </div>
+                        <div class="lbl-field col_1 align-center" >
+                            to 
+                        </div>
+                        <div class= "edit-field col_6 align-left">
+                            <input id="txtToPreAmount" type="text" name="txtToPreAmount" >
+                        </div>
+                        <div class="submit col_4">
+                            <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="InstallAmountHeader" class="display-none">
+                <div class="filter-row">
+                    <div class="filter-cell">
+                        <div class="lbl-field col_2 align-right">
+                            Role
+                        </div>
+                        <div class="edit-field col_4 align-left">
+                            <select id="Role" class="alpha">
+                                <option selected value="1">MEMBER</option>
+                                <option value="2">AGENT</option>
+                                <option value="3">MASTER</option>
+                                <option value="4">SUPER</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="filter-cell">
+                         <div class="submit">
+                            <input id="btnGenerateInstallAmount" name="btnGenerateInstallAmount" type="submit" value="GENERATE" />
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+<div id="PreAgreedReport" class="content-grid  width-100percent pre-agreed-container">
+    <div class="grid-title display-none">
+        <div id="PreAgreedReportTitle" class="grid-title-label"></div>
+        <div class="grid-toolbox">
+            <input type="button" id="btnExport" class="btnExcel" title="Export to Excel" />
+        </div>
+    </div>
+    <div id="CreditTermContainer" class="freegrid display-none"> 
+        <div class="col_header row-headers-background scroll-y">
+            <div class="header-container">
+                <table class="grid-fixed-table col_header_content">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="table-cell rolCol">
+                                    @Labels.Role</div>
+                            </th>
+                            <th>
+                                <div class="table-cell usernameCol">
+                                    @Labels.UserName</div>
+                            </th>
+                            <th>
+                                <div class="table-cell currencyCol">
+                                    @Labels.Curr</div>
+                            </th>
+                            <th>
+                                <div class="table-cell preAgreedAmountCol">
+                                    @Labels.Pre_Agreed_Amount</div>
+                            </th>
+                            <th>
+                                <div class="table-cell balanceCol">
+                                    @Labels.Balance</div>
+                            </th>
+                            <th>
+                                <div class="table-cell baseBalanceCol">
+                                    @Labels.BaseRM</div>
+                            </th>
+                            <th>
+                                <div class="table-cell remarkCol">
+                                    @Labels.Account_Remark</div>
+                            </th>
+                             <th>
+                                <div class="table-cell phoneCol">
+                                    @Labels.Phone</div>
+                            </th>
+                             <th>
+                                <div class="table-cell checkerNameCol">
+                                    @Labels.Checker_Name</div>
+                            </th>
+                              <th>
+                                <div class="table-cell remarkDateCol">
+                                    @Labels.Remark_Time_Stamp</div>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="grid-container container">
+            <div class="content-container">
+                <table id="CreditTermContent" class="grid-fixed-table col_header_content">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="table-cell rolCol">
+                                    @Labels.Role</div>
+                            </th>
+                            <th>
+                                <div class="table-cell usernameCol">
+                                    @Labels.User_Name</div>
+                            </th>
+                            <th>
+                                <div class="table-cell currencyCol">
+                                    @Labels.Curr</div>
+                            </th>
+                            <th>
+                                <div class="table-cell preAgreedAmountCol">
+                                    @Labels.Pre_Agreed_Amount</div>
+                            </th>
+                            <th>
+                                <div class="table-cell balanceCol">
+                                    @Labels.Balance</div>
+                            </th>
+                            <th>
+                                <div class="table-cell baseBalanceCol">
+                                    @Labels.BaseRM</div>
+                            </th>
+                            <th>
+                                <div class="table-cell remarkCol">
+                                    @Labels.Account_Remark</div>
+                            </th>
+                             <th>
+                                <div class="table-cell phoneCol">
+                                    @Labels.Phone</div>
+                            </th>
+                             <th>
+                                <div class="table-cell checkerNameCol">
+                                    @Labels.Checker_Name</div>
+                            </th>
+                              <th>
+                                <div class="table-cell remarkDateCol">
+                                    @Labels.Remark_Time_Stamp</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col_footer row-footer-background scroll-y">
+            <div class="footer-container">
+                <table class="col_footer_content grid-fixed-table">
+                    <thead>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="InstallmentAmountContainer" class="content-grid display-none installment-amount-container">
+    <div id="InstallmentAmountContent" class="freegrid">
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var permissionError = '@Fanex.AccountingReports.Core.Resources.Errors.PermissionError';
+    </script>
+}
+@section Foot
+{
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/CreditTerm/Scripts/CreditTerm.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/CreditTerm/Scripts/ReportManager.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/CreditTerm/Scripts/InstallAmount.js"></script>
+}

@@ -1,0 +1,46 @@
+﻿// -----------------------------------------------------------------------
+// <copyright file="BetCountDetail.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------
+// <history>
+//   <change who="Franklin.Nguyen" date="2014.06.10">Created</change>
+// </history>
+
+namespace Fanex.AccountingReports.Misc.Models.TotalCreditAccountByProduct
+{
+    using System;
+    using System.Collections.Generic;
+
+    /// <summary>
+    /// Bet count detail.
+    /// </summary>
+    [Serializable]
+    public class BetCountDetail
+    {
+        public BetCountDetail()
+        {
+            ReportRows = new List<BetCountDetail>();
+        }
+
+        public string UserName { get; set; }
+
+        public bool IsDisable { get; set; }
+
+        public int SettledBetCount { get; set; }
+
+        public int RunningBetCount { get; set; }
+
+        public List<BetCountDetail> ReportRows { get; set; }
+
+        public BetCountDetail Total { get; set; }
+
+        public int ReportLength { get; set; }
+
+        public void CalculateTotal(BetCountDetail betCountDetail)
+        {
+            this.SettledBetCount += betCountDetail.SettledBetCount;
+            this.RunningBetCount += betCountDetail.RunningBetCount;
+        }
+    }
+}

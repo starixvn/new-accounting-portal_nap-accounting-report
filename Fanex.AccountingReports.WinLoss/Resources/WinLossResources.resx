@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AbsoluteTotal" xml:space="preserve">
+    <value>Absolute Total</value>
+  </data>
+  <data name="AllCustomerTurnOver_ReportMessageTitle" xml:space="preserve">
+    <value>Current Selected Site : {0} which bet via : {1}</value>
+  </data>
+  <data name="AgentWinLoss" xml:space="preserve">
+    <value>Agent Win Loss (Master {0})</value>
+  </data>
+  <data name="AllCustomerTurnOver_ReportName" xml:space="preserve">
+    <value>All_Customer_Turn_Over_From_{0}_To_{1}</value>
+  </data>
+  <data name="BARM" xml:space="preserve">
+    <value>BARM</value>
+  </data>
+  <data name="AllCustomerTurnOver_ReportTitle" xml:space="preserve">
+    <value>All Customer Turn Over From {0} To {1}</value>
+  </data>
+  <data name="AllCustomerTurnOver_SheetName" xml:space="preserve">
+    <value>All Customer Turn Over</value>
+  </data>
+  <data name="AllCustomerTurnOver_SiteTotal" xml:space="preserve">
+    <value>{0}'s Total</value>
+  </data>
+  <data name="DailyMixParlayWinLoss_AdvanceMixParlay_ReportName" xml:space="preserve">
+    <value>Daily_Mix_Parlay_Win_Loss</value>
+  </data>
+  <data name="DailyMixParlayWinLoss_AdvanceMixParlay_ReportTitle" xml:space="preserve">
+    <value>Parlay Win Loss by {0}  - From {1} To {2}</value>
+  </data>
+  <data name="DailyMixParlayWinLoss_CombinationNameFormat" xml:space="preserve">
+    <value>{0}XCombinations{1}</value>
+  </data>
+  <data name="DailyMixParlayWinLoss_CombinationWinLoss_ReportName" xml:space="preserve">
+    <value>Daily_Mix_Parlay_Win_Loss</value>
+  </data>
+  <data name="DailyMixParlayWinLoss_CombinationWinLoss_ReportTitle" xml:space="preserve">
+    <value>Parlay Combination Win Loss by {0} - From {1} To {2}</value>
+  </data>
+  <data name="DailyMixParlayWinLoss_FilterNote" xml:space="preserve">
+    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ Data is available {0} onward. For more historical data, please click to &lt;span class="bold-tip"&gt;HISTORY REPORT&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;</value>
+  </data>
+  <data name="DailyMixParlayWinLoss_MaxCombinationSuffix" xml:space="preserve">
+    <value> &amp; up</value>
+  </data>
+  <data name="DailyMixParlayWinLoss_NormalMixParlay_ReportName" xml:space="preserve">
+    <value>Mix_Parlay_Product_Win_Loss_Report</value>
+  </data>
+  <data name="DailyMixParlayWinLoss_NormalMixParlay_ReportTitle" xml:space="preserve">
+    <value>MIX PARLAY PRODUCT WIN/LOSS REPORT</value>
+  </data>
+  <data name="DailyMixParlayWinLoss_SheetName" xml:space="preserve">
+    <value>Daily Mix Parlay Win Loss</value>
+  </data>
+  <data name="LeagueWinLossByBetType_ReportTitle" xml:space="preserve">
+    <value>{0} - {1} - {2}</value>
+  </data>
+  <data name="LeagueWinLossBySport_ReportTitle" xml:space="preserve">
+    <value>{0} - {1}{2}</value>
+  </data>
+  <data name="LeagueWinLoss_ReportName" xml:space="preserve">
+    <value>League_Win_Loss_Report_on_{0}</value>
+  </data>
+  <data name="LeagueWinLoss_ReportTitle" xml:space="preserve">
+    <value>League Win Loss on {0}</value>
+  </data>
+  <data name="LeagueWinLoss_SheetName" xml:space="preserve">
+    <value>League Win Loss</value>
+  </data>
+  <data name="MasterWinLoss" xml:space="preserve">
+    <value>Master Win Loss (Super {0})</value>
+  </data>
+  <data name="MemberWinLoss" xml:space="preserve">
+    <value>Member Win Loss (Agent {0})</value>
+  </data>
+  <data name="Minus" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="Plus" xml:space="preserve">
+    <value>+</value>
+  </data>
+  <data name="SuperWinLoss" xml:space="preserve">
+    <value>Super Win Loss ({0} currency)</value>
+  </data>
+  <data name="TreeWinLoss_FilterNote" xml:space="preserve">
+    <value>* Data is available from {0} onward &lt;br/&gt; * The Virtual Currency is applied for Sportsbook and Number Game products. Other products are based on Actual Currency</value>
+  </data>
+  <data name="TreeWinLoss_ReportName" xml:space="preserve">
+    <value>Tree_Win_Loss_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="TreeWinLoss_SheetName" xml:space="preserve">
+    <value>TreeWinLoss</value>
+  </data>
+  <data name="TreeWinLoss_WLByCurrency" xml:space="preserve">
+    <value>Win Loss By Currency</value>
+  </data>
+  <data name="TurnoverVariance" xml:space="preserve">
+    <value>Turnover Variance</value>
+  </data>
+  <data name="VarianceMargin" xml:space="preserve">
+    <value>Variance Margin</value>
+  </data>
+  <data name="VirtualRate" xml:space="preserve">
+    <value>Virtual Rate</value>
+  </data>
+  <data name="VirtualTotal" xml:space="preserve">
+    <value>Virtual Total</value>
+  </data>
+  <data name="VirtualTurnover" xml:space="preserve">
+    <value>Virtual Turnover</value>
+  </data>
+  <data name="WinlostVariance" xml:space="preserve">
+    <value>Winlost Variance</value>
+  </data>
+  <data name="MatchWinLossSingleBet_ReportName" xml:space="preserve">
+    <value>Match_Win_Loss_Single_Bet_From_{0}_To_{1} </value>
+  </data>
+  <data name="MatchWinLossSingleBet_ReportTitle" xml:space="preserve">
+    <value>Match Win Loss Single Bet From {0} To {1}</value>
+  </data>
+  <data name="MatchWinLossSingleBet_SheetName" xml:space="preserve">
+    <value>Match Win Loss Single Bet</value>
+  </data>
+  <data name="MatchWinLossByBettype_ReportName" xml:space="preserve">
+    <value>Match_Win_Loss_By_Bettype_From_{0}_To_{1}</value>
+  </data>
+  <data name="MatchWinLossByBettype_ReportTitle" xml:space="preserve">
+    <value>Match Win Loss By Bettype From {0} To {1}</value>
+  </data>
+  <data name="MatchWinLossByBettype_SheetName" xml:space="preserve">
+    <value>Match Win Loss By Bettype</value>
+  </data>
+  <data name="TreeWinLoss_VirtualRate_SheetName" xml:space="preserve">
+    <value>VirtualRate {0}</value>
+  </data>
+</root>

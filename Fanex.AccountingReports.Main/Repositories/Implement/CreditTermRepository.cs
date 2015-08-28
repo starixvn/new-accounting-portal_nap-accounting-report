@@ -1,0 +1,162 @@
+﻿// -----------------------------------------------------------------------
+// <copyright file="CreditTermRepository.cs" company="Nexcel Solutions Vietnam">
+// TODO: Update copyright text.
+// </copyright>
+// -----------------------------------------------------------------------
+
+namespace Fanex.AccountingReports.Main.Repositories.Implement
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using Fanex.AccountingReports.Core.Criteria;
+    using Fanex.AccountingReports.Core.Services.Impl;
+    using Fanex.AccountingReports.Main.Criteria.CreditTerm;
+    using Fanex.AccountingReports.Main.Models.CreditTerm;
+    using Fanex.AccountingReports.Main.Repositories.Interface;
+    using Fanex.Common;
+    using Fanex.Data;
+
+    /// <summary>
+    /// The get report repository of Credit Term.
+    /// </summary>
+    public class CreditTermRepository : ICreditTermRepository
+    {
+        /// <summary>
+        /// Get Credit Term report.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>The list CreditTerm.</returns>
+        public List<CreditTerm> GetCreditTerm(GetCreditTermCriteria criteria)
+        {
+            var report = new List<CreditTerm>();
+            var settingKey = criteria.GetSettingKey();
+
+            using (ObjectDb db = new ObjectDb(settingKey))
+            {
+                DataSet multipleResult = db.ExecuteDataSet(criteria.GetSpParams());
+
+                if (multipleResult != null && multipleResult.Tables.Count >= 2)
+                {
+                    report = this.LoopAndConvertDataIntoReport(multipleResult, report);
+                }
+            }
+
+            return report;
+        }
+
+        /// <summary>
+        /// Save and write log edited remark.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>The GetRemarkEditedCriteria.</returns>
+        public EditedRemarkResult EditRemark(GetRemarkEditedCriteria criteria)
+        {
+            var editedRemark = new EditedRemarkResult();
+            var settingKey = criteria.GetSettingKey();
+
+            if (criteria.AccountRemark == null)
+            {
+                criteria.AccountRemark = string.Empty;
+            }
+
+            using (ObjectDb objectdb = new ObjectDb(settingKey, 500))
+            {
+                objectdb.AssignParamValues(criteria.GetSpParams());
+
+                objectdb.ExecuteNonQuery();
+
+                editedRemark.ErrorCode = Converter.ToInt(objectdb.GetParameterValue("errcode"));
+                editedRemark.ErrorMessage = Converter.ToString2(objectdb.GetParameterValue("errmsg"));
+                editedRemark.AccountEditedRemarkDate = 
+                    Converter.ToString2(objectdb.GetParameterValue("accountremarkdate"));
+
+                return editedRemark;
+            }
+        }
+
+        /// <summary>
+        /// Loop, convert data and push data into report.
+        /// </summary>
+        /// <param name="multipleResult">The data set.</param>
+        /// <param name="report">The report.</param>
+        /// <returns>The list CreditTerm.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
+        private List<CreditTerm> LoopAndConvertDataIntoReport(
+            DataSet multipleResult,
+            List<CreditTerm> report)
+        {
+            var groupRows = multipleResult.Tables[0].Rows;
+            var memberRows = multipleResult.Tables[1].AsEnumerable();
+
+            GetCurrencyByLicenseeCriteria criteria = new GetCurrencyByLicenseeCriteria();
+            var currencies = ReportService.GetCurrencyByLicensee(criteria);
+
+            if (groupRows != null && groupRows.Count > 0)
+            {
+                foreach (DataRow parentRow in groupRows)
+                {
+                    var groupID = parentRow["groupID"];
+                    var currencyID = Converter.ToInt(parentRow["currency"]);
+                    var currencyName = currencies.Where(s => s.Id == currencyID)
+                                                 .Select(s => s.Name).FirstOrDefault();
+                    
+                    var parentMember = new CreditTerm
+                    {
+                        GroupID = Converter.ToInt(groupID),
+                        RoleName = Converter.ToString2(parentRow["Role"]),
+                        Username = Converter.ToString2(parentRow["Username"]),
+                        CurrencyName = currencyName,
+                        PreAgreeAmount = Convert.ToDecimal(parentRow["PreAgreeAmount"]),
+                        Balance = Convert.ToDecimal(parentRow["Balance"]),
+                        BalanceBase = Convert.ToDecimal(parentRow["Balance_Base"]),
+                        AccountRemark = Converter.ToString2(parentRow["AccountRemark"]),
+                        PhoneNumber = Converter.ToString2(parentRow["phone"]),
+                        CheckerName = Converter.ToString2(parentRow["checkername"]),
+                        AccountRemarkDate = Converter.ToString2(parentRow["AccountRemarkDate"]),
+                        OverLimit = Convert.ToBoolean(parentRow["OverLimit"])
+                    };
+
+                    if (memberRows != null)
+                    {
+                        var membersOfGroup = memberRows.Where(row => row["groupID"].Equals(groupID))
+                                                       .Distinct().ToList();
+
+                        if (membersOfGroup != null && membersOfGroup.Count > 0)
+                        {
+                            foreach (DataRow memberRow in membersOfGroup)
+                            {
+                                var memberCurrencyId = Converter.ToInt(memberRow["currency"]);
+                                var memberCurrencyName = currencies.Where(s => s.Id == memberCurrencyId)
+                                                                   .Select(s => s.Name).FirstOrDefault();
+
+                                var member = new CreditTerm
+                                {
+                                    RoleName = Converter.ToString2(memberRow["Role"]),
+                                    Username = Converter.ToString2(memberRow["Username"]),
+                                    CustomerID = Converter.ToInt(memberRow["custid"]),
+                                    CurrencyName = memberCurrencyName,
+                                    Balance = Convert.ToDecimal(memberRow["Balance"]),
+                                    BalanceBase = Convert.ToDecimal(memberRow["Balance_Base"]),
+                                    BalanceGroup = Convert.ToDecimal(memberRow["Balance_Group"]),
+                                    AccountRemark = Converter.ToString2(memberRow["AccountRemark"]),
+                                    AccountRemarkDate = Converter.ToString2(memberRow["AccountRemarkDate"])
+                                };
+
+                                parentMember.Rows.Add(member);
+                            }
+
+                            report.Add(parentMember);
+                        }
+                    }
+                }
+            }
+
+            return report;
+        }
+    }
+}
