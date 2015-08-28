@@ -29,7 +29,7 @@ namespace Fanex.AccountingReports.Main.Constants
         public const int _2hAGCasinoSport = 11;
         public const int _2hGoldDeluxeSport = 12;
 
-        public const int _2dBettrade = -2;
+        public const int _2dBettrade = -3;
         public const int _2hMicroGamingSport = 13;
         public const int _2hCasinoSport = 6;
         public const int _2hVegasGamesSport = 14;
