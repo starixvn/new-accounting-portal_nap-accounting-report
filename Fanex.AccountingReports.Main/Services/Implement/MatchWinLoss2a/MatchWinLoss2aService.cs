@@ -1276,6 +1276,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     winLoss.Turnover = 0;
                 }
 
+                winLoss.Margin = this._matchWinLoss2aUtilityService.CalculateMargin(winLoss.LineTotal, winLoss.Turnover);
                 report.ThirdPartyInfo.GrandTotal.Margin = this._matchWinLoss2aUtilityService.CalculateMargin(
                     report.ThirdPartyInfo.GrandTotal.LineTotal,
                     report.ThirdPartyInfo.GrandTotal.Turnover);
