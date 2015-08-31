@@ -272,7 +272,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
     self.LoadFilterValues = function () {
         self.GetProductList();
         self.GetCompanyList();
-        self.GetGameTypeList();
+        //self.GetGameTypeList();
         self.GetCurrencyList();
     };
 
@@ -338,6 +338,13 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
     };
 
     self.CompletedLoadFilter = function () {
+        if (self.CachedData.isLoadedProductList &&
+            self.CachedData.isLoadedCompanyList &&
+            self.CachedData.isLoadedCurrencyList &&
+            !self.CachedData.isLoadedGameTypeList) {
+            self.GetGameTypeList();
+        }
+
         if (self.CachedData.isLoadedProductList &&
             self.CachedData.isLoadedCompanyList &&
             self.CachedData.isLoadedCurrencyList &&

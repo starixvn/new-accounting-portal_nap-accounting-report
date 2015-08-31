@@ -63,6 +63,9 @@ namespace Fanex.AccountingReports.Core.Configurations
         private static string _autoGenerateReportParentFolder;
         private static int _autoGenerateReportParentId;
 
+        private static int _unit3UserGroupId;
+        private static string _unit3GroupName;
+
         static AppSettings()
         {
             LbServiceUrl = ConfigurationManager.AppSettings["LBUrl"];
@@ -98,6 +101,9 @@ namespace Fanex.AccountingReports.Core.Configurations
             _main2hSoccerMinorBettypes = ConfigurationManager.AppSettings["Main2hSoccerMinorBetttypes"];
             _autoGenerateReportParentFolder = ConfigurationManager.AppSettings["AutoGenerateReportParentFolder"];
             _autoGenerateReportParentId = Converter.To<int>(ConfigurationManager.AppSettings["AutoGenerateReportFunctionId"]);
+
+            _unit3UserGroupId = Converter.To<int>(ConfigurationManager.AppSettings["U3AccountGroupId"]);
+            _unit3GroupName = ConfigurationManager.AppSettings["U3AccountGroupName"];
         }
 
         /// <summary>
@@ -350,6 +356,22 @@ namespace Fanex.AccountingReports.Core.Configurations
             get
             {
                 return _autoGenerateReportParentId;
+            }
+        }
+
+        public static int U3GroupId
+        {
+            get
+            {
+                return _unit3UserGroupId;
+            }
+        }
+
+        public static string U3GroupName
+        {
+            get
+            {
+                return _unit3GroupName;
             }
         }
 

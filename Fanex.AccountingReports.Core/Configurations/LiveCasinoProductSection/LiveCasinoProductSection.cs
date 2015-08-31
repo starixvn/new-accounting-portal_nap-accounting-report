@@ -35,5 +35,19 @@ namespace Fanex.AccountingReports.Core.Configurations
                 return products;
             }
         }
+
+        [ConfigurationProperty("U3Products", IsDefaultCollection = false)]
+        [ConfigurationCollection(typeof(LiveCasinoProductCollection),
+            AddItemName = "add",
+            ClearItemsName = "clear",
+            RemoveItemName = "remove")]
+        public LiveCasinoProductCollection U3Products
+        {
+            get
+            {
+                var products = (LiveCasinoProductCollection)base["U3Products"];
+                return products;
+            }
+        }
     }
 }

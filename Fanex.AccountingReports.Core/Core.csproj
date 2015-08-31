@@ -175,6 +175,7 @@
     <Compile Include="Constants\SportContants.cs" />
     <Compile Include="Constants\SystemNameConstants.cs" />
     <Compile Include="Criteria\DeleteMostVisitedPagesCriteria.cs" />
+    <Compile Include="Criteria\GetAdminGroupCriteria.cs" />
     <Compile Include="Criteria\GetCurrencyByLicenseeCriteria.cs" />
     <Compile Include="Criteria\GetDWHDateRangeCriteria.cs" />
     <Compile Include="Criteria\GetExchangeCurrenciesCriteria.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Models\MailAttachment.cs" />
     <Compile Include="Models\MailItem.cs" />
     <Compile Include="Models\Result.cs" />
+    <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\UserNameSuggestion.cs" />
     <Compile Include="Repository\Impl\BaseRepository.cs" />
     <Compile Include="Repository\Impl\ExchangeCurrencyRepository.cs" />
@@ -220,10 +222,12 @@
       <DependentUpon>Labels.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\Impl\CacheRef.cs" />
+    <Compile Include="Services\Impl\Interface\IUserGroupService.cs" />
     <Compile Include="Services\Impl\LoggingHandler.cs" />
     <Compile Include="Services\Impl\MostVisitedPagesService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\Impl\UserGroupService.cs" />
     <Compile Include="Services\Impl\Worker\BaseWorker.cs" />
     <Compile Include="Services\Impl\Worker\MostVisitedPageSavingWorker.cs" />
     <Compile Include="Services\Impl\Interface\IMostVisitedPagesService.cs" />

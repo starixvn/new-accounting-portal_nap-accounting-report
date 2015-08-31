@@ -15,5 +15,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Interface
     public interface ILiveCasinoProductService
     {
         List<BaseModel> GetProductList();
+
+        List<BaseModel> GetU3ProductList();
     }
 }

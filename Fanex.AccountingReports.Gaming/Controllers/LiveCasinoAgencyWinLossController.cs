@@ -35,8 +35,8 @@ namespace Fanex.AccountingReports.Gaming.Controllers
 
         public LiveCasinoAgencyWinLossController(ILiveCasinoAgencyWinLossService reportService, ILiveCasinoProductService liveCasinoProductService)
         {
-            _reportService = reportService ?? new LiveCasinoAgencyWinLossService();
-            _liveCasinoProductService = liveCasinoProductService ?? new LiveCasinoProductService();
+            this._reportService = reportService ?? new LiveCasinoAgencyWinLossService();
+            this._liveCasinoProductService = liveCasinoProductService ?? new LiveCasinoProductService();
         }
 
         [HttpGet]
@@ -50,7 +50,7 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         [HandleAjaxError]
         public JsonResult GetProductList()
         {
-            var result = _reportService.GetProductList();
+            var result = this._reportService.GetProductList();
             return Json(result);
         }
 
@@ -58,7 +58,7 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         [HandleAjaxError]
         public JsonResult GetProductGameType(GetGameTypeListCriteria criteria)
         {
-            var result = _reportService.GetProductGameTypes(criteria);
+            var result = this._reportService.GetProductGameTypes(criteria);
             return Json(result);
         }
 
@@ -66,7 +66,7 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         [HandleAjaxError]
         public JsonResult GetCurrencyList(GetExchangeCurrenciesCriteria criteria)
         {
-            var result = _reportService.GetCurrencyList(criteria);
+            var result = this._reportService.GetCurrencyList(criteria);
             return Json(result);
         }
 
@@ -74,7 +74,7 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         [HandleAjaxError]
         public JsonResult GetGameTableList(GetGameTableListCriteria criteria)
         {
-            var result = _reportService.GetGameTableList(criteria);
+            var result = this._reportService.GetGameTableList(criteria);
             return Json(result);
         }
 
