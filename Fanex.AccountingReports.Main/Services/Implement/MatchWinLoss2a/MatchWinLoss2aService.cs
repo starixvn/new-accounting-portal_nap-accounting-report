@@ -465,11 +465,21 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             SummaryReportByBetType winLoss,
             bool isExcludeVirtualLineTotal)
         {
-            winLoss.LineTotal_Soccer_Live_Str = winLoss.LineTotal_Soccer_Live.Format(2);
-            winLoss.LineTotal_Soccer_Non_Live_Str = winLoss.LineTotal_Soccer_Non_Live.Format(2);
-            winLoss.LineTotal_Others_Live_Str = winLoss.LineTotal_Others_Live.Format(2);
-            winLoss.LineTotal_Others_Non_Live_Str = winLoss.LineTotal_Others_Non_Live.Format(2);
-            winLoss.LineTotalReal_Str = winLoss.LineTotalReal.Format(2);
+            if (!_matchWinLoss2aUtilityService.IsBetTrade(winLoss.Id))
+            {
+                winLoss.LineTotal_Soccer_Live_Str = winLoss.LineTotal_Soccer_Live.Format(2);
+                winLoss.LineTotal_Soccer_Non_Live_Str = winLoss.LineTotal_Soccer_Non_Live.Format(2);
+                winLoss.LineTotal_Others_Live_Str = winLoss.LineTotal_Others_Live.Format(2);
+                winLoss.LineTotal_Others_Non_Live_Str = winLoss.LineTotal_Others_Non_Live.Format(2);
+                winLoss.LineTotalReal_Str = winLoss.LineTotalReal.Format(2);
+            }
+            else
+            {
+                winLoss.LineTotalReal_Str = winLoss.LineTotalReal.Format(2);
+                winLoss.LineTotalVirtual_Str = winLoss.LineTotalVirtual.Format(2);
+                winLoss.Variance_Str = winLoss.Variance.Format(2);
+            }
+
             if (string.IsNullOrEmpty(winLoss.Turnover_Str))
             {
                 winLoss.Turnover_Str = winLoss.Turnover.Format(2);
@@ -580,7 +590,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     };
 
                     bool isKenoBetType = this._matchWinLoss2aUtilityService.IsKenoBetType(winLoss.Id);
-                    bool isMetricGamingMetricGamingSuperLiveBettype = this._matchWinLoss2aUtilityService.IsMetricGamingSuperLiveBetType(winLoss.Id);
 
                     if (winLoss.Id == CoreConstants.SportContants.Bingo ||
                         winLoss.Id == CoreConstants.SportContants.Casino)
@@ -613,8 +622,25 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     summaryReport.GrandTotal.LineTotalReal += winLoss.LineTotalReal;
                     summaryReport.GrandTotal.Turnover += winLoss.Turnover;
 
-                    if (this._matchWinLoss2aUtilityService.IsExcludeVirtualLineTotal(betType) || isKenoBetType || isMetricGamingMetricGamingSuperLiveBettype)
+                    if (this._matchWinLoss2aUtilityService.IsExcludeVirtualLineTotal(betType))
                     {
+                        if (_matchWinLoss2aUtilityService.IsBetTrade(betType))
+                        {
+                            winLoss.Name = Labels.Bettrade;
+                            winLoss.LineTotal_Soccer_Live_Str = Labels.NotAvailable;
+                            winLoss.LineTotal_Soccer_Non_Live_Str = Labels.NotAvailable;
+                            winLoss.LineTotal_Others_Live_Str = Labels.NotAvailable;
+                            winLoss.LineTotal_Others_Non_Live_Str = Labels.NotAvailable;
+                            winLoss.Variance = 0;
+                            winLoss.Turnover = 0;
+                            winLoss.Margin = 0;
+                            winLoss.Margin_Str = Labels.NotAvailable;
+                            winLoss.LineTotalVirtual = Converter.ToDecimal(info.VirtualLineTotal_soccer_live) +
+                                Converter.ToDecimal(info.VirtualLineTotal_soccer) +
+                                Converter.ToDecimal(info.VirtualLineTotal_others_live) +
+                                Converter.ToDecimal(info.VirtualLineTotal_others);
+                        }
+
                         winLoss.VirtualLineTotal_Soccer_Live_Str = Labels.NotAvailable;
                         winLoss.VirtualLineTotal_Soccer_Non_Live_Str = Labels.NotAvailable;
                         winLoss.VirtualLineTotal_Others_Live_Str = Labels.NotAvailable;
@@ -1250,6 +1276,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     winLoss.Turnover = 0;
                 }
 
+                winLoss.Margin = this._matchWinLoss2aUtilityService.CalculateMargin(winLoss.LineTotal, winLoss.Turnover);
                 report.ThirdPartyInfo.GrandTotal.Margin = this._matchWinLoss2aUtilityService.CalculateMargin(
                     report.ThirdPartyInfo.GrandTotal.LineTotal,
                     report.ThirdPartyInfo.GrandTotal.Turnover);

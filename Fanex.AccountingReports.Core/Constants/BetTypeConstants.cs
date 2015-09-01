@@ -115,6 +115,8 @@ namespace Fanex.AccountingReports.Core.Constants
 
         public const int MinMicroGamingBetType = 2001;
         public const int MaxMicroGamingBetType = 2009;
+        public const int MinBetTradeBetType = 901;
+        public const int MaxBetTradeBetType = 903;
 
         public const int GoldDeluxeDeposit = 1700;
         public const int AGCasinoDeposit = 1800;

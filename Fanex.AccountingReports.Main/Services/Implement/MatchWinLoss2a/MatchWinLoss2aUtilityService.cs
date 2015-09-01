@@ -131,6 +131,11 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                 this._betTypeNameSuffixCache.Add(betTypeId, nameSuffix);
             }
 
+            if (this.IsBetTrade(betTypeId))
+            {
+                betTypeName = Labels.Bettrade;
+            }
+
             return betTypeName;
         }
 
@@ -199,7 +204,22 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                 result = true;
             }
 
+            if (this.IsKenoBetType(betType))
+            {
+                result = true;
+            }
+
+            if (this.IsMetricGamingSuperLiveBetType(betType))
+            {
+                result = true;
+            }
+            
             if (this.IsMicroGamingBetType(betType))
+            {
+                result = true;
+            }
+
+            if (this.IsBetTrade(betType))
             {
                 result = true;
             }
@@ -305,6 +325,18 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             {
                 return true;
             }
+        }
+
+        public bool IsBetTrade(int betType)
+        {
+            var result = false;
+            if (CoreConstants.BetTypeConstants.MinBetTradeBetType <= betType &&
+                  betType <= CoreConstants.BetTypeConstants.MaxBetTradeBetType)
+            {
+                result = true;
+            }
+
+            return result;
         }
     }
 }

@@ -419,4 +419,10 @@
   <data name="DailyWinLoss2h_MetricGamingReport_SheetName" xml:space="preserve">
     <value>Daily Win Loss 2h - Metric Gaming - Super Live</value>
   </data>
+  <data name="DailyWinLoss2h_BettradeReport_Title" xml:space="preserve">
+    <value>MAIN &gt; BETTRADE PRODUCT WIN/LOSS REPORT</value>
+  </data>
+  <data name="Daily_WinLoss2h_Bettrade_SheetName" xml:space="preserve">
+    <value>Daily Win Loss 2h - Bettrade</value>
+  </data>
 </root>

@@ -22,6 +22,7 @@ ReportManager = function () {
     self.MetricGamingReport = new MetricGamingReport();
     self.MainLiveCasinoReport = new MainLiveCasinoReport();
     self.LiveCasinoWinLossByProductReport = new LiveCasinoWinLossByProductReport();
+    self.Bettrade = new Bettrade();
 
     self.Enum = {
         DrillDownLevel: {

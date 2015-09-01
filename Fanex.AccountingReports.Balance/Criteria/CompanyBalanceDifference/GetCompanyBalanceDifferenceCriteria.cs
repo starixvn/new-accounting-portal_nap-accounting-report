@@ -18,13 +18,6 @@ namespace Fanex.AccountingReports.Balance.Criteria.CompanyBalanceDifference
     /// </summary>
     public class GetCompanyBalanceDifferenceCriteria : CriteriaBase
     {
-        public GetCompanyBalanceDifferenceCriteria()
-        {
-            ////this.BalanceUpDay = ReportService.BalanceUp.BalanceUpDay;
-        }
-
-        ////public DateTime BalanceUpDay { get; set; }
-
         public override bool IsValid()
         {
             return true;

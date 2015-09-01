@@ -76,7 +76,8 @@ Main2hReport.prototype.RenderReport = function (report) {
                     sportWinLoss.Id == AccReportData.Constants.SportType.LiveCasino ||
                     sportWinLoss.Id == AccReportData.Constants.SportType.VirtualSports ||
                     sportWinLoss.Id == AccReportData.Constants.SportType.Keno ||
-                    isCasinoSport;
+                    isCasinoSport ||
+                    sportWinLoss.Id == AccReportData.Constants.SportType.Bettrade;
                 var len = sportWinLoss.ChildsInfo.length;
                 info = sportWinLoss.NormalTotal;
                 groupdId = tableId + "_Product" + product.Id + "_Sport" + sportWinLoss.Id;
@@ -335,7 +336,7 @@ Main2hReport.prototype.RenderReport = function (report) {
             });
 
             var reportNote = "* Virtual All Total: Soccer + Metric Gaming - Super Live + Other Sports + Parlay" +
-                             "<br/>* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing +  Bingo + P2P";
+                             "<br/>* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing +  Bingo + P2P + Bettrade";
             footerData.push({
                 Columns: [{
                     Name: "ColSportType",
@@ -518,6 +519,13 @@ Main2hReport.prototype.GetSportLink = function (winLossInfo) {
 
         case reportManager._2hSportConstant.metricGaming:
             sportLink = "<span class='report2h-link bold' onclick=\"showHideReportManager.ShowMetricGamingReport('" +
+                            winLossInfo.Id + "','" +
+                            winLossInfo.Name + "','" +
+                            reportManager.Main2hReport.Params.reportParams.Winlostdate + "'); return;\">" +
+                            winLossInfo.Name + '</span>';
+            break;
+        case AccReportData.Constants.SportType.Bettrade: //-2
+            sportLink = "<span class='report2h-link bold' onclick=\"showHideReportManager.ShowBettrade('" +
                             winLossInfo.Id + "','" +
                             winLossInfo.Name + "','" +
                             reportManager.Main2hReport.Params.reportParams.Winlostdate + "'); return;\">" +

@@ -435,6 +435,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 case SportContants.Macau:
                     sportName = Labels.Macau;
                     break;
+                case SportContants.Bettrade:
+                    sportName = Labels.Bettrade;
+                    break;
+
                 default:
                     sportName = this._sportTypeNameCache[sportId];
                     break;
@@ -454,6 +458,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             if (betId == MainConstants.WinLossSummaryTotalBetTypeId)
             {
                 betName = Labels.Others;
+            }
+            else if (betId == MainConstants.Bettrade)
+            {
+                betName = Labels.Bettrade;
             }
             else
             {
