@@ -22,7 +22,6 @@ namespace Fanex.AccountingReports.Misc.Controllers
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [NapSuperAuth]
     public class DuplicateTicketsController : BaseController
     {
         private readonly IDuplicateTicketsService _reportService;

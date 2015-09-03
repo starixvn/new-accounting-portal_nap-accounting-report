@@ -19,7 +19,6 @@ namespace Fanex.AccountingReports.Special.Controllers
     /// <summary>
     /// The controller of Daily Turnover.
     /// </summary>
-    [NapSuperAuth]
     public class DailyTurnoverController : BaseController
     {
         private readonly IDailyTurnoverService _reportService;

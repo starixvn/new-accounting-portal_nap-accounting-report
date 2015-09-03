@@ -20,7 +20,6 @@ namespace Fanex.AccountingReports.Special.Controllers
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [NapSuperAuth]
     public class SpecialMatchAnalysisController : BaseController
     {
         private readonly ISpecialMatchAnalysisService _reportService;

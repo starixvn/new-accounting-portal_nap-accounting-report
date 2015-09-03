@@ -20,7 +20,6 @@ namespace Fanex.AccountingReports.Special.Controllers
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [NapSuperAuth]
     public class CheckBetController : BaseController
     {
         private readonly ICheckBetService _checkBetService;

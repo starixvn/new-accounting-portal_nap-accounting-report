@@ -18,7 +18,6 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     /// <summary>
     /// The controller.
     /// </summary>
-    [NapSuperAuth]
     public class MatchWinLossSingleBetController : BaseController
     {
         private readonly IMatchWinLossSingleBetService _reportService;

@@ -21,7 +21,6 @@ namespace Fanex.AccountingReports.Misc.Controllers
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [NapSuperAuth]
     public class DailyCreatedCustomersController : BaseController
     {
         private readonly IDailyCreatedCustomersService _reportService;

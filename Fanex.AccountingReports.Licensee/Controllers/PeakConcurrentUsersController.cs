@@ -21,7 +21,6 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [NapSuperAuth]
     public class PeakConcurrentUsersController : BaseController
     {
         private readonly IPeakConcurrentUserService _reportService;
