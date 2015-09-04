@@ -177,6 +177,11 @@ ShowHideReportManager = function () {
         self.CacheData.currentReport = reportManager.Bettrade;
         self.ShowDrilldownReport(sportId, sportName, winLossDate);
     };
+
+    self.ShowColossusBet = function (sportId, sportName, winLossDate) {
+        self.CacheData.currentReport = reportManager.ColossusBet;
+        self.ShowDrilldownReport(sportId, sportName, winLossDate);
+    };
 };
 
 var showHideReportManager = new ShowHideReportManager();

@@ -1213,4 +1213,7 @@
   <data name="Macau" xml:space="preserve">
     <value>Macau</value>
   </data>
+  <data name="Colossus_Bets" xml:space="preserve">
+    <value>Colossus Bets</value>
+  </data>
 </root>

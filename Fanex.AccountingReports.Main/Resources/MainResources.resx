@@ -210,10 +210,6 @@
   <data name="DailyWinLoss2h_ReportName" xml:space="preserve">
     <value>Daily_Win_Loss_2h_On_{0}</value>
   </data>
-  <data name="DailyWinLoss2h_ReportNote" xml:space="preserve">
-    <value>* Virtual All Total: Mix Parlay + System Parlay + Other Sports + Soccer
-* Grand Total: Virtual All Total + 8RM + BARM + Virtual Sports + Number Game + Racing + Casino + Live Casino + Bingo + P2P + Keno</value>
-  </data>
   <data name="DailyWinLoss2h_ReportTitleSuffix" xml:space="preserve">
     <value>PRODUCT WIN/LOSS REPORT</value>
   </data>
@@ -406,12 +402,9 @@
   <data name="DailyWinLoss2h_ParlayReport_Title" xml:space="preserve">
     <value>PARLAY PRODUCT WIN/LOSS REPORT</value>
   </data>
-  <data name="DailyWinLoss2h_ReportFooterNote" xml:space="preserve">
-    <value>* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P</value>
-  </data>
   <data name="DailyWinLoss2h_MainReportFooterNote" xml:space="preserve">
-    <value>* Virtual All Total: Mix Parlay + System Parlay + Other Sports + Soccer
-* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P</value>
+    <value>* Virtual All Total: Soccer + Metric Gaming - Super Live + Other Sports + Parlay
+* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P + Bettrade + Colossus Bets</value>
   </data>
   <data name="DailyWinLoss2h_MetricGamingReport_ReportTitle" xml:space="preserve">
     <value>Metric Gaming - Super Live Win/Loss report</value>
@@ -424,5 +417,11 @@
   </data>
   <data name="Daily_WinLoss2h_Bettrade_SheetName" xml:space="preserve">
     <value>Daily Win Loss 2h - Bettrade</value>
+  </data>
+  <data name="DailyWinLoss2h_ColossusBetsReport_Title" xml:space="preserve">
+    <value>MAIN &gt; COLOSSUS BETS PRODUCT WIN/LOSS REPORT</value>
+  </data>
+  <data name="Daily_WinLoss2h_ColossusBets_SheetName" xml:space="preserve">
+    <value>Daily Win Loss 2h - Colossus Bets</value>
   </data>
 </root>

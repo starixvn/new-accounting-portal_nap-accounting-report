@@ -66,6 +66,8 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
 
         public bool ShowAGCS { get; set; }
 
+        public bool ShowCB { get; set; }
+
         public override bool IsValid()
         {
             return true;

@@ -212,7 +212,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 info.Id != CoreConstants.SportContants.LiveCasino &&
                                 info.Id != CoreConstants.SportContants.Keno &&
                                 info.Id != CoreConstants.SportContants.VirtualSportGroup &&
-                                info.Id != SportContants._2hReportCasino)
+                                info.Id != SportContants._2hReportCasino &&
+                                info.Id != CoreConstants.SportContants.ColossusBet)
                             {
                                 info.VirtualTurnover = 0;
                             }
@@ -574,7 +575,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 sportWinLoss.Id == CoreConstants.SportContants.LiveCasino ||
                                 sportWinLoss.Id == CoreConstants.SportContants.Keno ||
                                 sportWinLoss.Id == CoreConstants.SportContants.VirtualSportGroup ||
-                                sportWinLoss.Id == SportContants._2hReportCasino;
+                                sportWinLoss.Id == SportContants._2hReportCasino ||
+                                sportWinLoss.Id == CoreConstants.SportContants.ColossusBet;
 
                             var len = sportWinLoss.ChildsInfo.Count;
 

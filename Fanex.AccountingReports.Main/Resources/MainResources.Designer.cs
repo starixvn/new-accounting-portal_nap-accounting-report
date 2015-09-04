@@ -124,6 +124,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daily Win Loss 2h - Colossus Bets.
+        /// </summary>
+        public static string Daily_WinLoss2h_ColossusBets_SheetName {
+            get {
+                return ResourceManager.GetString("Daily_WinLoss2h_ColossusBets_SheetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MAIN &gt; BETTRADE PRODUCT WIN/LOSS REPORT.
         /// </summary>
         public static string DailyWinLoss2h_BettradeReport_Title {
@@ -165,6 +174,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         public static string DailyWinLoss2h_CasinoReport_Title {
             get {
                 return ResourceManager.GetString("DailyWinLoss2h_CasinoReport_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MAIN &gt; COLOSSUS BETS PRODUCT WIN/LOSS REPORT.
+        /// </summary>
+        public static string DailyWinLoss2h_ColossusBetsReport_Title {
+            get {
+                return ResourceManager.GetString("DailyWinLoss2h_ColossusBetsReport_Title", resourceCulture);
             }
         }
         
@@ -214,8 +232,8 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to * Virtual All Total: Mix Parlay + System Parlay + Other Sports + Soccer
-        ///* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P.
+        ///   Looks up a localized string similar to * Virtual All Total: Soccer + Metric Gaming - Super Live + Other Sports + Parlay
+        ///* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P + Bettrade + Colossus Bets.
         /// </summary>
         public static string DailyWinLoss2h_MainReportFooterNote {
             get {
@@ -386,30 +404,11 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to * Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P.
-        /// </summary>
-        public static string DailyWinLoss2h_ReportFooterNote {
-            get {
-                return ResourceManager.GetString("DailyWinLoss2h_ReportFooterNote", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Daily_Win_Loss_2h_On_{0}.
         /// </summary>
         public static string DailyWinLoss2h_ReportName {
             get {
                 return ResourceManager.GetString("DailyWinLoss2h_ReportName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to * Virtual All Total: Mix Parlay + System Parlay + Other Sports + Soccer
-        ///* Grand Total: Virtual All Total + 8RM + BARM + Virtual Sports + Number Game + Racing + Casino + Live Casino + Bingo + P2P + Keno.
-        /// </summary>
-        public static string DailyWinLoss2h_ReportNote {
-            get {
-                return ResourceManager.GetString("DailyWinLoss2h_ReportNote", resourceCulture);
             }
         }
         

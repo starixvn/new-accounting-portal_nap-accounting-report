@@ -62,7 +62,8 @@ var AccReportData = {
             Keno:202,
             SoccerMajorBetType: 1,
             SoccerMinorBetType: 2,
-            Bettrade: -2
+            Bettrade: -2,
+            ColossusBet: 204
         },
 
         BetType: {
