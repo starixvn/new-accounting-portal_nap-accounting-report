@@ -147,6 +147,7 @@
     </Compile>
     <Compile Include="Controllers\DuplicateTicketsController.cs" />
     <Compile Include="Controllers\MAMonitorToolController.cs" />
+    <Compile Include="Controllers\MemberWinLossOnRNGCasinoController.cs" />
     <Compile Include="Controllers\SMATurnoverController.cs" />
     <Compile Include="Controllers\TotalCreditAccountByProductController.cs" />
     <Compile Include="Controllers\TotalSMAMemberActiveController.cs" />
