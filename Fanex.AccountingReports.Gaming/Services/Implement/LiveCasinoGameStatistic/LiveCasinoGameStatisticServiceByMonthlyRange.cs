@@ -299,7 +299,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
             }
 
             var reportName = string.Format(
-                GamingResources.BingoStatistic_ReportName,
+                GamingResources.LiveCasinoGameStatistic_ReportName,
                 Converter.ToDateTime(criteria.FromDate).ToShortFormatedDateWithSlash().Replace('/', '_'),
                 Converter.ToDateTime(criteria.ToDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
             excelFile.ReponseStream(reportName);
