@@ -190,7 +190,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                 case CoreConstants.BetTypeConstants.GoldDeluxeDeposit:
                 case CoreConstants.BetTypeConstants.AGCasinoDeposit:
                 case CoreConstants.BetTypeConstants.VegasGameDeposit:
-                case RowType.ThirdParty:
                     result = true;
                     break;
 

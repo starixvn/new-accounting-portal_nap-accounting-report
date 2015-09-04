@@ -235,6 +235,9 @@
     <Content Include="App_Data\Dev\DBEXT.bk.bodbAdminNet.xml" />
     <Content Include="App_Data\Local\DBEXT.bk.bodbAdminNet.xml" />
     <Content Include="App_Data\Master\DBEXT.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBPOLICY.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBPOLICY.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBPOLICY.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBACC.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBACC.bodb_ACC.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBAGE.bodb02.bodbAdminNet.xml" />
@@ -250,6 +253,7 @@
     <Content Include="App_Data\MNL\DBNAP.bodb_NAP.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBONUSER.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBPOLICY.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBRPT.bodb_Report.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBCUST.CustDB.bodbAdminNet.xml" />
@@ -335,6 +339,7 @@
     <Content Include="App_Data\PRO\DBNAP.bodb_NAP.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBONUSER.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBPOLICY.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBRPT.bodb_Report.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBCUST.CustDB.bodbAdminNet.xml" />
@@ -356,6 +361,7 @@
     <Content Include="App_Data\UAT\DBNAP.bodb_NAP.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBONUSER.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBPOLICY.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBRPT.bodb_Report.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBCUST.CustDB.bodbAdminNet.xml" />

@@ -14,10 +14,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using ExcelUtil.Spreadsheet;
+    using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Criteria;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
+    using Fanex.AccountingReports.Core.Services.Impl.Interface;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Gaming.Constants;
     using Fanex.AccountingReports.Gaming.Criteria.LiveCasinoGameStatistic;
@@ -36,6 +38,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
     {
         private readonly ILiveCasinoGameStatisticRepository _reportRepository;
         private readonly ILiveCasinoProductService _liveCasinoProductService;
+        private readonly IUserGroupService _userGroupService;
 
         private readonly string _reportSessionKey = "Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.Report" +
             (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
@@ -44,21 +47,32 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
        (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
 
         public LiveCasinoGameStatisticService()
-            : this(null, null)
+            : this(null, null, null)
         {
         }
 
-        public LiveCasinoGameStatisticService(ILiveCasinoGameStatisticRepository reportRepository, ILiveCasinoProductService liveCasinoProductService)
+        public LiveCasinoGameStatisticService(ILiveCasinoGameStatisticRepository reportRepository, ILiveCasinoProductService liveCasinoProductService, IUserGroupService userGroupService)
         {
             _reportRepository = reportRepository ?? new LiveCasinoGameStatisticRepository();
             _liveCasinoProductService = liveCasinoProductService ?? new LiveCasinoProductService();
+            _userGroupService = userGroupService ?? new UserGroupService();
         }
 
         public List<BaseModel> GetProductList()
         {
             try
             {
-                List<BaseModel> result = _liveCasinoProductService.GetProductList();
+                bool isU3Account = this.CheckUserIsU3Account();
+                List<BaseModel> result;
+                if (isU3Account)
+                {
+                    result = _liveCasinoProductService.GetU3ProductList();
+                }
+                else
+                {
+                    result = _liveCasinoProductService.GetProductList();
+                }
+
                 SessionManager.Set<List<BaseModel>>(_productSessionKey, result);
                 return result;
             }
@@ -934,6 +948,14 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
             }
 
             return result;
+        }
+
+        private bool CheckUserIsU3Account()
+        {
+            bool isU3Account = false;
+            var userGroup = _userGroupService.GetAdminGroup(new GetAdminGroupCriteria() { UserName = AppSession.CurrentUser.Username });
+            isU3Account = userGroup.GroupId == AppSettings.U3GroupId && string.Equals(userGroup.GroupName, AppSettings.U3GroupName);
+            return isU3Account;
         }
     }
 }

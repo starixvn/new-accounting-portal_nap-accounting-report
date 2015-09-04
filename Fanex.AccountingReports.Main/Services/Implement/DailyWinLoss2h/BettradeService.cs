@@ -30,7 +30,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         private string _dailyWinLoss2hCacheBettradeKey = "Fanex.AccountingReports.Main.DailyWinLoss2h.Bettrade" +
     (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
 
-        private Dictionary<object, string> _cachedBettypesName;
         private DailyWinLoss2hUtilityService _dailyWinLoss2hUtilityService;
 
         public BettradeService()
