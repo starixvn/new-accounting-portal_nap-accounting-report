@@ -10,12 +10,12 @@
 namespace Fanex.AccountingReports.Misc.Criteria.TotalSMAMemberActive
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class GetTotalSMAMemberActiveCriteria : CriteriaBase, ICriteria
+    public class GetTotalSMAMemberActiveCriteria : CriteriaBase
     {
         public DateTime FromDate { get; set; }
 

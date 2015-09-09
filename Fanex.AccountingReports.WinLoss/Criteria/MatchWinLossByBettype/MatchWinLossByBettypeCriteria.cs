@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.MatchWinLossByBettype
 {
     using System;
     using Fanex.AccountingReports.Core.Extensions;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Match Win Loss By Bet Type Criteria.

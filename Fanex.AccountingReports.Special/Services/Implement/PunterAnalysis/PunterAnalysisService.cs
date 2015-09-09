@@ -562,7 +562,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
         {
             try
             {
-                var rawData = this.GetReportData<dynamic>(criteria);
+                var rawData = this.GetReportData<Punter>(criteria);
                 if (rawData != null)
                 {
                     var nonLiveInfo = new PunterWinLossInfo
@@ -596,10 +596,10 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
                         }
                     };
 
-                    var betTypeList = rawData.Select(info => info.bettype as dynamic).Distinct().ToList();
+                    var betTypeList = rawData.Select(info => info.BetType as dynamic).Distinct().ToList();
                     this.SaveBetTypeCacheRef(betTypeList, ref PunterAnalysisService._betTypeNameCache);
 
-                    var betTypeGroups = rawData.GroupBy(info => info.bettype);
+                    var betTypeGroups = rawData.GroupBy(info => info.BetType);
                     foreach (var betTypeGroup in betTypeGroups)
                     {
                         nonLiveInfo = new PunterWinLossInfo
@@ -636,11 +636,11 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
                         {
                             var info = new PunterWinLossInfo
                             {
-                                WinLoss = Converter.ToDecimal(liveType.winloss),
-                                Turnover = Converter.ToDecimal(liveType.turnover),
-                                BetCount = Converter.ToInt(liveType.betcount),
-                                Margin = Converter.ToDecimal(liveType.margin),
-                                LiveType = Converter.ToInt(liveType.isLive),
+                                WinLoss = Converter.ToDecimal(liveType.WinLoss),
+                                Turnover = Converter.ToDecimal(liveType.Turnover),
+                                BetCount = Converter.ToInt(liveType.BetCount),
+                                Margin = Converter.ToDecimal(liveType.Margin),
+                                LiveType = Converter.ToInt(liveType.IsLive),
                             };
 
                             info = PunterWinLossInfo.Format(info);

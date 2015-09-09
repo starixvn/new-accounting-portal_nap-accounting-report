@@ -13,7 +13,7 @@ namespace Fanex.AccountingReports.Balance.Repositories.Interface
     using System.Collections.Generic;
     using Fanex.AccountingReports.Balance.Criteria.SuperBalance;
     using Fanex.AccountingReports.Balance.Models.SuperBalance;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

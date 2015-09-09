@@ -7,7 +7,7 @@
 namespace Fanex.AccountingReports.Gaming.Criteria.VirtualSportsWinLoss
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// The criteria of Virtual Sports Win Loss detail report.

@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.LegendManagement.Criteria
 {
     using Fanex.AccountingReports.LegendManagement.Configurations;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Save Report Legend Criteria.

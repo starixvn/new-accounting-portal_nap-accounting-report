@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.Licensee.Criteria.TotalTransactions
 {
     using System;
     using Fanex.AccountingReports.Core.Extensions;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

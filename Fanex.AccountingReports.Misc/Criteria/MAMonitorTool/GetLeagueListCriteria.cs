@@ -13,12 +13,12 @@ namespace Fanex.AccountingReports.Misc.Criteria.MAMonitorTool
     using System.Collections;
     using System.Collections.Generic;
     using Fanex.AccountingReports.Misc.Models.MAMonitorTool;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get League List Criteria.
     /// </summary>
-    public class GetLeagueListCriteria : CriteriaBase, ICriteria
+    public class GetLeagueListCriteria : CriteriaBase
     {
         [SpParam(SqlParamName = "sporttype")]
         public int SportType { get; set; }
@@ -74,7 +74,7 @@ namespace Fanex.AccountingReports.Misc.Criteria.MAMonitorTool
                 }
             }
 
-            storeProcedureParams.Add("only4mgsl", IsOnlyMetricGamingSuperLive);
+            // storeProcedureParams.Add("only4mgsl", IsOnlyMetricGamingSuperLive);
             return storeProcedureParams;
         }
 

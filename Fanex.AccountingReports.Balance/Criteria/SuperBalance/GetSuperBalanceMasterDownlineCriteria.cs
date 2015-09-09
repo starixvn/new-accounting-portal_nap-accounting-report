@@ -9,7 +9,7 @@
 
 namespace Fanex.AccountingReports.Balance.Criteria.SuperBalance
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

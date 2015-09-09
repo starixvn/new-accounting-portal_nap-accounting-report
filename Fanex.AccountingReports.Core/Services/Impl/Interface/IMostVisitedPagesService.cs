@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.Core.Services.Interface
 {
     using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Models;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     public interface IMostVisitedPagesService
     {

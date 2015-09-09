@@ -10,8 +10,8 @@ namespace Fanex.AccountingReports.Licensee.Services.Interface
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Licensee.Criteria.CompanyWinLoss;
     using Fanex.AccountingReports.Licensee.Models;
+    using Fanex.Data.Repository;
     using Fanex.Excel.Models;
-    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.

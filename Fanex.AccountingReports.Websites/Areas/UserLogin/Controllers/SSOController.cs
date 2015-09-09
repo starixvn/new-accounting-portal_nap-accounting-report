@@ -34,6 +34,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
     public class SSOController : BaseController
     {
         #region members
+
         private readonly int _timeExipration = 30;
         private IUserService _userService;
         private IMenuItemService _menuItemService;
@@ -102,7 +103,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                     Platform = CurrentContext.Platform
                 };
 
-                this._userService.UserSSOCheckIn(ref criteria);
+                this._userService.UserSSOCheckIn(criteria);
 
                 if (criteria.OnUserId != 0)
                 {
@@ -178,7 +179,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                         Platform = currentContext.Platform
                     };
 
-                    _userService.UserCheckIn(ref criteria);
+                    _userService.UserCheckIn(criteria);
                     _currentSession.UserId = user.Id;
                     _currentSession.Username = user.Username;
                     _currentSession.OnUserId = Convert.ToInt32(criteria.OnUserId);
@@ -216,6 +217,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                 return Redirect(FormsAuthentication.LoginUrl);
             }
         }
+
         #region utilities
 
         /// <summary>
@@ -224,7 +226,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         /// <param name="user">The user value.</param>
         private void CreateAuthInfo(User user)
         {
-            var currentDomain = CurrentContext.GetCurrentDomain();
+            var currentDomain = CurrentContext.CurrentDomain;
 
             var authInfo = new AuthInfo();
 

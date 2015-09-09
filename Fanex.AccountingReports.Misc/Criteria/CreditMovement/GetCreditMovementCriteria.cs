@@ -7,7 +7,7 @@
 namespace Fanex.AccountingReports.Misc.Criteria.CreditMovement
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get credit movement criteria.

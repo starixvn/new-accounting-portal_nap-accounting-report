@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Core.Models
 {
     using System;
-    using Fanex.NAP.Framework.Domain;
+    using Fanex.NAP.Core.Domain;
 
     /// <summary>
     /// TODO: Update summary.

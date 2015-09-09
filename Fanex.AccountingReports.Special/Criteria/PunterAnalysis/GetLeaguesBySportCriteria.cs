@@ -10,12 +10,12 @@
 namespace Fanex.AccountingReports.Special.Criteria.PunterAnalysis
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-     public class GetLeaguesBySportCriteria : CriteriaBase
+    public class GetLeaguesBySportCriteria : CriteriaBase
     {
         public DateTime FromDate { get; set; }
 

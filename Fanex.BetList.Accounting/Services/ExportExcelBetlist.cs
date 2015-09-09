@@ -15,10 +15,10 @@ namespace Fanex.BetList.Accounting.Services
     using System.Text;
     using Fanex.BetList.Accounting.Constants;
     using Fanex.BetList.Accounting.Criteria;
+    using Fanex.BetList.Accounting.Extension;
     using Fanex.BetList.Accounting.Extensions;
     using Fanex.BetList.Accounting.Models;
     using Fanex.BetList.Accounting.Resources;
-    using Fanex.BetList.Age.BetListExcelBuilderExt;
     using Fanex.BetList.Core.Builder;
     using Fanex.BetList.Core.Entities;
     using Fanex.BetList.Core.Factories;

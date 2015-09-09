@@ -8,6 +8,7 @@ namespace Fanex.AccountingReports.Licensee.Repositories.Interface
 {
     using System.Data;
     using Fanex.AccountingReports.Licensee.Criteria.WinLossByLicensee;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -16,6 +17,6 @@ namespace Fanex.AccountingReports.Licensee.Repositories.Interface
     {
         DataTable GetCurrencyReport(GetCurrencyReportCriteria criteria);
 
-        DataTable GetLevelReport(GetLevelReportByCustIdCriteria criteria);
+        DataTable GetLevelReport(CriteriaBase criteria);
     }
 }

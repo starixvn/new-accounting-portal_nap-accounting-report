@@ -10,7 +10,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.GetAllCustomerTurnOver
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -25,10 +25,13 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.GetAllCustomerTurnOver
 
         public string From { get; set; }
 
+        [SpParam(Ignored = true)]
         public bool IsPagingCallBack { get; set; }
 
+        [SpParam(Ignored = true)]
         public int StartIndex { get; set; }
 
+        [SpParam(Ignored = true)]
         public int UsersPerPage { get; set; }
 
         public override string GetSettingKey()

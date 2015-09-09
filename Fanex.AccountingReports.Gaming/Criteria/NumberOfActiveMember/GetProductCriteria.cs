@@ -6,7 +6,7 @@
 
 namespace Fanex.AccountingReports.Gaming.Criteria.NumberOfActiveMember
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get product criteria.

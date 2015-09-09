@@ -21,9 +21,9 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using Fanex.AccountingReports.Licensee.Resources;
     using Fanex.AccountingReports.Licensee.Services.Interface;
     using Fanex.Common;
+    using Fanex.Data.Repository;
     using Fanex.Excel.Enums;
     using Fanex.Excel.Models;
-    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
@@ -32,7 +32,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     {
         private const int ExtendCachedTimeOut = 2;
         private readonly string _dataCachedKey = "Fanex.AccountingReports.Misc.CompanyWinLoss." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
-        private ICompanyWinLossRepository _repository;        
+        private ICompanyWinLossRepository _repository;
 
         public CompanyWinLossService(ICompanyWinLossRepository repository)
         {
@@ -151,7 +151,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
                 TitleInfoText = Labels.Company_Win_Loss + " from " + criteria.FromDate.ToShortFormatedDate() + " to " + criteria.ToDate.ToShortFormatedDate()
             };
         }
-       
+
         private List<GroupHeaderRows> CreateGroupHeaderRows()
         {
             var groupHeader = new List<GroupHeaderRows>();
@@ -160,13 +160,13 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             {
                 new HeaderColumns() { HeaderText = "#", Name = Labels.RowId, Width = 50 },
                 new HeaderColumns() { HeaderText = Labels.Super, Name = Labels.UserName, Width = 250 },
-                new HeaderColumns() { HeaderText = Labels.Company_Win_Loss, Name = Labels.CompanyWL, Width = 250 },                
+                new HeaderColumns() { HeaderText = Labels.Company_Win_Loss, Name = Labels.CompanyWL, Width = 250 },
             });
             groupHeader.Add(groupHeaderRow);
 
             return groupHeader;
         }
-       
+
         private List<HeaderColumns> CreateHeaderColumns()
         {
             var header = new List<HeaderColumns>();
@@ -174,12 +174,12 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             {
                 new HeaderColumns() { HeaderText = "#", Name = Labels.RowId, Width = 50, CustomCellType = ExcelCellType.Integer, CellAlignment = HAlignment.Center },
                 new HeaderColumns() { HeaderText = Labels.Super, Name = Labels.UserName, Width = 250, CellAlignment = HAlignment.Left },
-                new HeaderColumns() { HeaderText = Labels.Company_Win_Loss, Name = Labels.CompanyWL, Width = 250, CustomCellType = ExcelCellType.DoubleRedNegative, CellAlignment = HAlignment.Right },                
+                new HeaderColumns() { HeaderText = Labels.Company_Win_Loss, Name = Labels.CompanyWL, Width = 250, CustomCellType = ExcelCellType.DoubleRedNegative, CellAlignment = HAlignment.Right },
             });
 
             return header;
         }
-        
+
         private List<GridDataRow> MapReportDataRows(IDataReader reader)
         {
             int dataColIndex = 0;
@@ -205,6 +205,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             string reportName = Labels.Company_Win_Loss.Replace(" ", string.Empty) + " From " + criteria.FromDate.ToShortFormatedDateWithSlash().Replace(@"\", "_") + " To " + criteria.ToDate.ToShortFormatedDateWithSlash().Replace(@"\", "_");
 
             return reportName;
-        }        
+        }
     }
 }

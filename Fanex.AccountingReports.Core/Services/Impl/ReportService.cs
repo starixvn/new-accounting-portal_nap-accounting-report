@@ -19,7 +19,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl
     using Fanex.AccountingReports.Core.Resources;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.Common;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -108,7 +108,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         /// </summary>
         public static void UpdateLatestExchangeCurrencies()
         {
-            var exchangeCurrencies = GetExchangeCurrencies(new GetExchangeCurrenciesCriteria());           
+            var exchangeCurrencies = GetExchangeCurrencies(new GetExchangeCurrenciesCriteria());
         }
 
         /// <summary>
@@ -317,9 +317,11 @@ namespace Fanex.AccountingReports.Core.Services.Impl
                 case LiveTypeConstants.NonLive:
                     name = Labels.Non_Live;
                     break;
+
                 case LiveTypeConstants.Live:
                     name = Labels.Live;
                     break;
+
                 case LiveTypeConstants.MixLiveTypes:
                     name = Labels.Mix_Live_and_Non_Live;
                     break;

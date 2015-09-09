@@ -36,7 +36,7 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
 
         protected readonly int SiteId = NapSettings.Settings.SiteId;
 
-        private int _issiteLogin = NapSettings.Settings.IsSiteLogin;
+        private bool _issiteLogin = NapSettings.Settings.EnableDirectLogin;
 
         private ViewFlags _viewFlags;
 
@@ -55,7 +55,7 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
 
             ViewFlags = new ViewFlags
             {
-                IsLive = this.Environment.Equals(Constant.LIVE),
+                IsLive = this.Environment.Equals(Constant.Live),
                 HasEditRight = false
             };
             this._menuService = new MenuService();
@@ -67,8 +67,8 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
         /// </summary>
         /// <value>
         /// The is site login.
-        /// </value>        
-        public int IsSiteLogin
+        /// </value>
+        public bool IsSiteLogin
         {
             get
             {

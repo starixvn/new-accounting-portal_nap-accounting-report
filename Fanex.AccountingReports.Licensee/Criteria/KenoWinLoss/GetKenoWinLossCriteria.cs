@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Licensee.Criteria.KenoWinLoss
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get play tech casino win loss criteria.

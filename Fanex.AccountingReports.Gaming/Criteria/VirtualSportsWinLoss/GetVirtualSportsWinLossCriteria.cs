@@ -7,7 +7,7 @@
 namespace Fanex.AccountingReports.Gaming.Criteria.VirtualSportsWinLoss
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// The criteria of Virtual Sports Win Loss report.
@@ -24,10 +24,13 @@ namespace Fanex.AccountingReports.Gaming.Criteria.VirtualSportsWinLoss
 
         public string SportType { get; set; }
 
+        [SpParam(Ignored = true)]
         public bool IsPagingCallBack { get; set; }
 
+        [SpParam(Ignored = true)]
         public int StartIndex { get; set; }
 
+        [SpParam(Ignored = true)]
         public int UsersPerPage { get; set; }
 
         public override string GetSettingKey()

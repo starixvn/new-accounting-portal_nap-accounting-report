@@ -7,7 +7,7 @@
 namespace Fanex.AccountingReports.Special.Criteria.DailyTurnover
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// The criteria of detail daily turnover.

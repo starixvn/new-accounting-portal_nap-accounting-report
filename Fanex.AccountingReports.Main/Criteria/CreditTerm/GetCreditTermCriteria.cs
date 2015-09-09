@@ -6,7 +6,7 @@
 
 namespace Fanex.AccountingReports.Main.Criteria.CreditTerm
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// The criteria of Credit Term report.

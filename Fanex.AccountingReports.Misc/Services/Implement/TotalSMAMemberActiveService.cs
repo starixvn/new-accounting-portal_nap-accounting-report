@@ -27,7 +27,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
     using Fanex.AccountingReports.Misc.Resources;
     using Fanex.AccountingReports.Misc.Services.Interface;
     using Fanex.Common;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -68,7 +68,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                         return;
                     }
                 }
-                
+
                 ExcelFile excelFile = new ExcelFile();
                 ExcelWorksheetCollection worksheets = excelFile.Worksheets;
                 string sheetName = MiscResources.TotalSMAMemberActiveReport_SheetName;
@@ -81,7 +81,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
                 ExcelCell currentCell;
                 CellRange currentCellRange;
-                
+
                 var titleTextStyle = ExcelExtensions.GetCellTextStyle(
                     ExcelExtensions.HeaderTitleColor,
                     true,
@@ -90,7 +90,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                     ExcelExtensions.BackGroundColor);
                 var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
                 var textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false, HorizontalAlignmentStyle.Center);
-                
+
                 int maxColumnIndex = 3;
                 for (int i = 0; i < maxColumnIndex; i++)
                 {
@@ -130,7 +130,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = Labels.Closed;
                 currentCell.Style = headerTextStyle;
-                
+
                 int index = -1;
                 var newCreated = report[++index];
                 var active = report[++index];
@@ -159,7 +159,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = this.BuildSMA(closed);
                 currentCell.Style = textStyle;
-                
+
                 int reportLen = report.Count;
                 int maxColumIndexActive = reportLen - index - 1;
                 for (int i = 1; i <= maxColumIndexActive; i++)
@@ -190,7 +190,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                     currentCell.Style = headerTextStyle;
                     currentColumn++;
                 }
-                
+
                 currentRow++;
                 currentColumn = startColumn;
                 for (int i = index; i < reportLen; i++)
@@ -200,7 +200,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                     currentCell.Style = textStyle;
                     currentColumn++;
                 }
-                
+
                 var reportName = string.Format(
                     MiscResources.TotalSMAMemberActiveReport_ReportName,
                     criteria.FromDate.ToShortFormatedDateWithSlash(),
@@ -363,19 +363,19 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The sites.</returns>
-        public IList<EntityBase<int, string>> GetSites(ICriteria criteria)
+        public IList<EntityBase<int, string>> GetSites(CriteriaBase criteria)
         {
             IList<EntityBase<int, string>> sites = null;
             try
             {
-                var rawData = GetReportData<dynamic>(criteria);
+                var rawData = GetReportData<SiteEntity>(criteria);
                 sites = new List<EntityBase<int, string>>();
                 foreach (var item in rawData)
                 {
                     sites.Add(new EntityBase<int, string>
                     {
-                        Id = Converter.ToInt(item.siteid),
-                        Name = Converter.ToString2(item.site)
+                        Id = item.SiteId,
+                        Name = item.Site
                     });
                 }
             }
@@ -515,12 +515,15 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 case Status.NewCreated:
                     title = Labels.NewCreated;
                     break;
+
                 case Status.Suspended:
                     title = Labels.Suspended;
                     break;
+
                 case Status.Closed:
                     title = Labels.Closed;
                     break;
+
                 default:
                     title = Labels.NotAvailable;
                     break;

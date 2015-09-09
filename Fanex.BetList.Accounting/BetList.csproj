@@ -44,6 +44,12 @@
     <Reference Include="Accessibility">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="Couchbase">
+      <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Couchbase.dll</HintPath>
+    </Reference>
+    <Reference Include="Enyim.Caching">
+      <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Enyim.Caching.dll</HintPath>
+    </Reference>
     <Reference Include="ExcelUtil, Version=29.3.0.1000, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_Dependencies\ExcelUtil.dll</HintPath>
@@ -51,10 +57,6 @@
     <Reference Include="Fanex.AuthenticationFilter, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_Dependencies\Fanex.AuthenticationFilter.dll</HintPath>
-    </Reference>
-    <Reference Include="Fanex.BetList.Age, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.BetList.Age.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.BetList.BetTrade, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.BetList.Core.2.6.0.0\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
@@ -84,26 +86,22 @@
       <HintPath>..\packages\Fanex.BetList.MyanmarOdds.1.0.1.4\lib\net40\Fanex.BetList.MyanmarOdds.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Caching">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Caching.dll</HintPath>
+      <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Fanex.Caching.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Common">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
+      <HintPath>..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Data, Version=0.5.404.59, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
+      <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Logging.dll</HintPath>
+      <HintPath>..\packages\Fanex.Logging.1.0.0.0\lib\net40\Fanex.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Fanex.NAP.Framework, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
+      <HintPath>..\packages\Fanex.NAP.Core.2.0.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Result.Core, Version=2.0.1.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.1.7\lib\net40\Fanex.Result.Core.dll</HintPath>
@@ -140,10 +138,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="IBCFile">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\IBCFile.dll</HintPath>
+      <HintPath>..\packages\Fanex.File.1.0.0\lib\net40\IBCFile.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\ICSharpCode.SharpZipLib.dll</HintPath>
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
       <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
@@ -154,20 +152,23 @@
     </Reference>
     <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.dll</HintPath>
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="RazorEngine, Version=3.7.3.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RazorEngine.3.7.3\lib\net40\RazorEngine.dll</HintPath>
     </Reference>
-    <Reference Include="RemotingRef, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RemotingRef.1.0.0.3\lib\net40\RemotingRef.dll</HintPath>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
     </Reference>
-    <Reference Include="SPSRemoting">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\SPSRemoting.dll</HintPath>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
-    <Reference Include="Sunplus.Agent.Model">
-      <HintPath>..\_Dependencies\Sunplus.Agent.Model.dll</HintPath>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.7.0\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="RemotingRef">
+      <HintPath>..\packages\RemotingRef.1.0.0.2\lib\net40\RemotingRef.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -204,6 +205,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TplCore">
+      <HintPath>..\packages\TplCore.1.0.4694.29951\lib\net40\TplCore.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_GlobalResources\BetList.Designer.cs" />
@@ -234,6 +238,7 @@
     <Compile Include="Criteria\BetListByRefNoU3Criteria.cs" />
     <Compile Include="Criteria\BetTypeByDateU3Criteria.cs" />
     <Compile Include="Criteria\ResultParlayCriteria.cs" />
+    <Compile Include="Extensions\BetListExcelBuilderExt.cs" />
     <Compile Include="Extensions\BetListExtension.cs" />
     <Compile Include="Core\BetListHelper.cs" />
     <Compile Include="Core\CacheManager.cs" />
@@ -254,6 +259,8 @@
     <Compile Include="Criteria\MixParlayDetailCriteria.cs" />
     <Compile Include="Criteria\ResultPopupCriteria.cs" />
     <Compile Include="Criteria\WinLossMemberBetListCriteria.cs" />
+    <Compile Include="Extensions\WinLoss.htm.cs" />
+    <Compile Include="Extensions\WinLost.cs" />
     <Compile Include="Models\BetListRacingToteWinLoss.cs" />
     <Compile Include="Models\ScoreInformation\BadmintonInfo.cs" />
     <Compile Include="Models\BalanceUp.cs" />
@@ -288,6 +295,11 @@
     <Compile Include="Repositories\IBetListRepository.cs" />
     <Compile Include="Repositories\IScoreInformationRepository.cs" />
     <Compile Include="Repositories\ScoreInformationRepository.cs" />
+    <Compile Include="Resources\BetListGlobalResources.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BetListGlobalResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\BetListResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -315,6 +327,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App_GlobalResources\BetList.resx" />
+    <EmbeddedResource Include="Resources\BetListGlobalResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BetListGlobalResources.designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\BetListResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BetListResources.Designer.cs</LastGenOutput>

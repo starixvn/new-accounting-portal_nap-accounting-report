@@ -9,7 +9,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
     using System;
     using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

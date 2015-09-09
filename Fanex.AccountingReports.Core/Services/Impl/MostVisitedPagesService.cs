@@ -21,13 +21,13 @@ namespace Fanex.AccountingReports.Core.Services.Impl
     using Fanex.AccountingReports.Core.Services.Interface;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.Common;
+    using Fanex.Data.Repository;
     using Fanex.NAP.Core.Service.Impl;
-    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class MostVisitedPagesService : BaseService, IMostVisitedPagesService
+    public class MostVisitedPagesService : ServiceBase, IMostVisitedPagesService
     {
         private readonly IMostVisitedPagesRepository _mostVisitedPagesRepository;
         private readonly MenuService _menuService;

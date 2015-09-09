@@ -6,7 +6,7 @@
 
 namespace Fanex.AccountingReports.Racing.Criteria.RacingWinLossByLicensee
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// The criteria to get list licensee.

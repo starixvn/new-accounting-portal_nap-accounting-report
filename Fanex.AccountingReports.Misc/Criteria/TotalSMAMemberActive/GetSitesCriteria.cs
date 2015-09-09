@@ -1,24 +1,20 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="GetSitesCriteria.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Kan.Nguyen" date="2013.07.15">Created</change>
-// </history>
-
-namespace Fanex.AccountingReports.Misc.Criteria.TotalSMAMemberActive
+﻿namespace Fanex.AccountingReports.Misc.Criteria.TotalSMAMemberActive
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class GetSitesCriteria : GetTotalSMAMemberActiveCriteria, ICriteria
+    public class GetSitesCriteria : CriteriaBase
     {
         public override string GetSettingKey()
         {
             return "Misc_TotalSMAMemberActive_GetSites";
+        }
+
+        public override bool IsValid()
+        {
+            return true;
         }
     }
 }

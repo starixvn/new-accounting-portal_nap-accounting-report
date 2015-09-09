@@ -12,7 +12,7 @@ namespace Fanex.AccountingReports.Core.Criteria
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

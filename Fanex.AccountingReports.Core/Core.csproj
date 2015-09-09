@@ -36,69 +36,48 @@
     <Reference Include="ExcelUtil">
       <HintPath>..\_Dependencies\ExcelUtil.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.BetList.Core">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.BetList.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Fanex.Caching, Version=1.0.404.94, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Caching.dll</HintPath>
+      <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Fanex.Caching.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Common">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Common.dll</HintPath>
+      <HintPath>..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Data, Version=0.5.404.59, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Data.dll</HintPath>
+      <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Excel">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Excel.dll</HintPath>
+      <HintPath>..\_Dependencies\Fanex.Excel.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Logging">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Logging.dll</HintPath>
+      <HintPath>..\packages\Fanex.Logging.1.0.0.0\lib\net40\Fanex.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.MailDeliver.MailClient">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.MailDeliver.MailClient.dll</HintPath>
+      <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.2\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Core.dll</HintPath>
+      <HintPath>..\packages\Fanex.NAP.Core.2.0.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Framework">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
-      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
-    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OOXML">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OOXML.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXml4Net">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OpenXml4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXmlFormats">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OpenXmlFormats.dll</HintPath>
-    </Reference>
-    <Reference Include="OfficeOpenXmlCrypto">
-      <HintPath>..\_Dependencies\Fanex.NAP.Framework\OfficeOpenXmlCrypto.dll</HintPath>
+      <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="RemotingRef">
-      <HintPath>..\_Dependencies\RemotingRef\RemotingRef.dll</HintPath>
+      <HintPath>..\packages\RemotingRef.1.0.0.2\lib\net40\RemotingRef.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
@@ -124,15 +103,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="UMControllerLibrary">
-      <HintPath>..\_Dependencies\UM\UMControllerLibrary.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\LiveCasinoProductSection\LiveCasinoProductCollection.cs" />
@@ -195,6 +168,10 @@
     <Compile Include="Helper\SportHelper\BetType.cs" />
     <Compile Include="Helper\SportHelper\CalcOdds.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\SiteEntity.cs" />
+    <Compile Include="Models\Sport.cs" />
+    <Compile Include="Models\League.cs" />
+    <Compile Include="Models\ProductEntity.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\DWHDateRange.cs" />
     <Compile Include="Models\MailAttachment.cs" />

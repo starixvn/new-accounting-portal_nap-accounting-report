@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Special.Criteria.PunterAnalysis
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -22,6 +22,7 @@ namespace Fanex.AccountingReports.Special.Criteria.PunterAnalysis
         [SpParam(Ignored = true)]
         public string UserName { get; set; }
 
+        [SpParam(Ignored = true)]
         public bool ByLeague { get; set; }
 
         public int? LeagueID { get; set; }

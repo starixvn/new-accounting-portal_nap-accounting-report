@@ -25,6 +25,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
     using Fanex.AccountingReports.WinLoss.Services.Interface.TreeWinLoss;
     using Fanex.Common;
     using Fanex.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Create service for tree win loss.
@@ -382,6 +383,90 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private TreeWinLossVirtualRate GetTreeWinLossDateRangeByLevel(GetTreeWinLossByLevelCriteria criteria)
+        {            
+            switch (criteria.RoleId)
+            {
+                case 5:
+                    return GetTreeWinlossData(
+                        new GetTreeWinLossByComCriteria
+                    {
+                        Currency = criteria.Currency,
+                        FromDate = criteria.FromDate,
+                        ToDate = criteria.ToDate,
+                        ShowBI = criteria.ShowBI,
+                        ShowCasino = criteria.ShowCasino,
+                        ShowKeno = criteria.ShowKeno,
+                        ShowLiveCasino = criteria.ShowLiveCasino,
+                        ShowNG = criteria.ShowNG,
+                        ShowP2P = criteria.ShowP2P,
+                        ShowRB = criteria.ShowRB,
+                        ShowSB = criteria.ShowSB,
+                        ShowVS = criteria.ShowVS
+                    }, 
+                    criteria.RoleId);
+                case 4:
+                    return GetTreeWinlossData(
+                        new GetTreeWinLossBySuperCriteria
+                    {
+                        SRecommend = criteria.SRecommend,
+                        FromDate = criteria.FromDate,
+                        ToDate = criteria.ToDate,
+                        ShowBI = criteria.ShowBI,
+                        ShowCasino = criteria.ShowCasino,
+                        ShowKeno = criteria.ShowKeno,
+                        ShowLiveCasino = criteria.ShowLiveCasino,
+                        ShowNG = criteria.ShowNG,
+                        ShowP2P = criteria.ShowP2P,
+                        ShowRB = criteria.ShowRB,
+                        ShowSB = criteria.ShowSB,
+                        ShowVS = criteria.ShowVS,
+                        ShowGD = criteria.ShowGD
+                    }, 
+                    criteria.RoleId);
+                case 3:
+                    return GetTreeWinlossData(
+                        new GetTreeWinLossByMasterCriteria
+                    {
+                        MRecommend = criteria.MRecommend,
+                        FromDate = criteria.FromDate,
+                        ToDate = criteria.ToDate,
+                        ShowBI = criteria.ShowBI,
+                        ShowCasino = criteria.ShowCasino,
+                        ShowKeno = criteria.ShowKeno,
+                        ShowLiveCasino = criteria.ShowLiveCasino,
+                        ShowNG = criteria.ShowNG,
+                        ShowP2P = criteria.ShowP2P,
+                        ShowRB = criteria.ShowRB,
+                        ShowSB = criteria.ShowSB,
+                        ShowVS = criteria.ShowVS,
+                        ShowGD = criteria.ShowGD
+                    }, 
+                    criteria.RoleId);
+                case 2:
+                    return GetTreeWinlossData(
+                        new GetTreeWinLossByAgentCriteria
+                    {
+                        Recommend = criteria.Recommend,
+                        FromDate = criteria.FromDate,
+                        ToDate = criteria.ToDate,
+                        ShowBI = criteria.ShowBI,
+                        ShowCasino = criteria.ShowCasino,
+                        ShowKeno = criteria.ShowKeno,
+                        ShowLiveCasino = criteria.ShowLiveCasino,
+                        ShowNG = criteria.ShowNG,
+                        ShowP2P = criteria.ShowP2P,
+                        ShowRB = criteria.ShowRB,
+                        ShowSB = criteria.ShowSB,
+                        ShowVS = criteria.ShowVS,
+                        ShowGD = criteria.ShowGD
+                    }, 
+                    criteria.RoleId);
+            }
+
+            return new TreeWinLossVirtualRate();
+        }
+
+        private TreeWinLossVirtualRate GetTreeWinlossData(CriteriaBase criteria, int roleId)
         {
             TreeWinLossVirtualRate treeWinLossVirtualRate = new TreeWinLossVirtualRate();
             var treeWinLoss = new TreeWinLoss
@@ -391,40 +476,33 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             };
 
             SMAVirtualRate virtualRate = null;
-            try
+
+            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+                IDataReader reader = objectDb.ExecuteReader(criteria.GetSpParams());
+                var totalWinLoss = new TreeWinLossInfo
                 {
-                    IDataReader reader = objectDb.ExecuteReader(criteria.GetSpParams());
-                    var totalWinLoss = new TreeWinLossInfo
-                    {
-                        Name = Labels.Total
-                    };
+                    Name = Labels.Total
+                };
 
-                    while (reader.Read())
-                    {
-                        var winLoss = MapTreeWinLossData(reader, criteria.RoleId);
-                        winLoss = TreeWinLossUtil.RoundTreeWinLossInfo(winLoss);
-                        treeWinLoss.ChildsInfo.Add(winLoss);
-                        TreeWinLossUtil.AddToTotal(winLoss, ref totalWinLoss);
-                    }
-
-                    treeWinLoss.TotalInfo.Add(totalWinLoss);
-                    treeWinLossVirtualRate.TreeWinLoss = treeWinLoss;
-
-                    if (reader.NextResult())
-                    {
-                        virtualRate = MapSMAVirtualRateData(reader);
-                    }
-
-                    treeWinLossVirtualRate.SMAVirtualRate = virtualRate;
-                    reader.Close();
+                while (reader.Read())
+                {
+                    var winLoss = MapTreeWinLossData(reader, roleId);
+                    winLoss = TreeWinLossUtil.RoundTreeWinLossInfo(winLoss);
+                    treeWinLoss.ChildsInfo.Add(winLoss);
+                    TreeWinLossUtil.AddToTotal(winLoss, ref totalWinLoss);
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
+
+                treeWinLoss.TotalInfo.Add(totalWinLoss);
+                treeWinLossVirtualRate.TreeWinLoss = treeWinLoss;
+
+                if (reader.NextResult())
+                {
+                    virtualRate = MapSMAVirtualRateData(reader);
+                }
+
+                treeWinLossVirtualRate.SMAVirtualRate = virtualRate;
+                reader.Close();
             }
 
             return treeWinLossVirtualRate;

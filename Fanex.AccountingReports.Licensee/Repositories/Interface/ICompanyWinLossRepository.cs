@@ -7,13 +7,13 @@
 namespace Fanex.AccountingReports.Licensee.Repositories.Interface
 {
     using System.Data;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public interface ICompanyWinLossRepository
     {
-        IDataReader GetDataFromDB(ICriteria criteria);        
+        IDataReader GetDataFromDB(ICriteria criteria);
     }
 }

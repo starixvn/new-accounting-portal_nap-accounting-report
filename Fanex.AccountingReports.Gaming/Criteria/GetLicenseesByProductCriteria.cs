@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Gaming.Criteria
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -38,7 +38,7 @@ namespace Fanex.AccountingReports.Gaming.Criteria
         public override bool IsValid()
         {
             return true;
-        }        
+        }
 
         public override string GetSettingKey()
         {

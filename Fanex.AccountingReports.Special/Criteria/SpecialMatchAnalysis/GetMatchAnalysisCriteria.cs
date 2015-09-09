@@ -12,7 +12,7 @@ namespace Fanex.AccountingReports.Special.Criteria.SpecialMatchAnalysis
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Special.Models.SpecialMatchAnalysis;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -84,24 +84,31 @@ namespace Fanex.AccountingReports.Special.Criteria.SpecialMatchAnalysis
                 case ReportType.Currency:
                     storeProcedureName = "Special_SpecialMatchAnalysis_GetReportByCurrency";
                     break;
+
                 case ReportType.Bettype:
                     storeProcedureName = "Special_SpecialMatchAnalysis_GetReportByBetType";
                     break;
+
                 case ReportType.Super:
                     storeProcedureName = "Special_SpecialMatchAnalysis_GetReportBySuper";
                     break;
+
                 case ReportType.Member:
                     storeProcedureName = "Special_SpecialMatchAnalysis_GetReportByMember";
                     break;
+
                 case ReportType.SuperViewOnMaster:
                     storeProcedureName = "Special_SpecialMatchAnalysis_GetReportBySuper_SAg";
                     break;
+
                 case ReportType.MasterViewOnAgent:
                     storeProcedureName = "Special_SpecialMatchAnalysis_GetReportBySuper_MAg";
                     break;
+
                 case ReportType.AgentViewOnMember:
                     storeProcedureName = "Special_SpecialMatchAnalysis_GetReportBySuper_Ag";
                     break;
+
                 default:
                     storeProcedureName = string.Empty;
                     break;

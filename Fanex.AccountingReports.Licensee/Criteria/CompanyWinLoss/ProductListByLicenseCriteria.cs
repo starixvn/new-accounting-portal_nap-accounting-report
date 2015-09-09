@@ -6,7 +6,7 @@
 
 namespace Fanex.AccountingReports.Licensee.Criteria.CompanyWinLoss
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -23,6 +23,6 @@ namespace Fanex.AccountingReports.Licensee.Criteria.CompanyWinLoss
         public override string GetSettingKey()
         {
             return "Acc_GetProductListByLicenseId";
-        }        
+        }
     }
 }

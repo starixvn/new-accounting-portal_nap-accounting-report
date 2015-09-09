@@ -9,7 +9,7 @@ namespace Fanex.AccountingReports.Licensee.Repositories.Implement
     using System.Data;
     using Fanex.AccountingReports.Licensee.Repositories.Interface;
     using Fanex.Data;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

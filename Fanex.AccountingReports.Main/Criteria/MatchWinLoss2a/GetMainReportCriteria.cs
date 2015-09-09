@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.Main.Criteria.MatchWinLoss2a
 {
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get main report criteria.

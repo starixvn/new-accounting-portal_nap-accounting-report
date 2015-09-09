@@ -8,7 +8,7 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoWinLoss
 {
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// The criteria.

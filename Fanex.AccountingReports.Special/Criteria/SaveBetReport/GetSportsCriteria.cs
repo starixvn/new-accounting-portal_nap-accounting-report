@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Special.Criteria.SaveBetReport
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get sports criteria.

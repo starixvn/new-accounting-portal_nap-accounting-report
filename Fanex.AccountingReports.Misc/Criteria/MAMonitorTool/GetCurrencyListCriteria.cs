@@ -10,12 +10,12 @@
 namespace Fanex.AccountingReports.Misc.Criteria.MAMonitorTool
 {
     using Fanex.AccountingReports.Core.Constants;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get Currency List Criteria.
     /// </summary>
-    public class GetCurrencyListCriteria : CriteriaBase, ICriteria
+    public class GetCurrencyListCriteria : CriteriaBase
     {
         [SpParam(SqlParamName = "system")]
         public string SystemName

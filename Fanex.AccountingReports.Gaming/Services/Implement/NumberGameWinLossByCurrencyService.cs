@@ -26,7 +26,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
     using Fanex.AccountingReports.Gaming.Models.NumberGameWinLossByCurrency;
     using Fanex.AccountingReports.Gaming.Resources;
     using Fanex.Common;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

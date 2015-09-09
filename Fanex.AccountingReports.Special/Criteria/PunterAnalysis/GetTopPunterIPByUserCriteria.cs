@@ -10,18 +10,18 @@
 namespace Fanex.AccountingReports.Special.Criteria.PunterAnalysis
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-     public class GetTopPunterIPByUserCriteria : CriteriaBase
+    public class GetTopPunterIPByUserCriteria : CriteriaBase
     {
         public int CustID { get; set; }
 
         [SpParam(Ignored = true)]
         public string UserName { get; set; }
-    
+
         public DateTime Fromdate { get; set; }
 
         public DateTime Todate { get; set; }

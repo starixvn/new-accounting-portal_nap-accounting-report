@@ -7,7 +7,7 @@
 namespace Fanex.AccountingReports.WinLoss.Criteria.MatchWinLossSingleBet
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// The criteria.

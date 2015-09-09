@@ -11,8 +11,8 @@ namespace Fanex.AccountingReports.Core.Criteria
 {
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Web;
+    using Fanex.Data.Repository;
     using Fanex.NAP.Core.Configuration;
-    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.

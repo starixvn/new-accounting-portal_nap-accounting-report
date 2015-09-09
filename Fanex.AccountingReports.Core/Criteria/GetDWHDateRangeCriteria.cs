@@ -13,14 +13,14 @@ namespace Fanex.AccountingReports.Core.Criteria
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class GetDWHDateRangeCriteria : CriteriaBase
     {
-        public string Cube 
+        public string Cube
         {
             get
             {

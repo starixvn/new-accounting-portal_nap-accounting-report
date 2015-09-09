@@ -9,12 +9,12 @@
 
 namespace Fanex.AccountingReports.Misc.Criteria.MAMonitorTool
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get Sport List Criteria.
     /// </summary>
-    public class GetSportListCriteria : CriteriaBase, ICriteria
+    public class GetSportListCriteria : CriteriaBase
     {
         public override string GetSettingKey()
         {

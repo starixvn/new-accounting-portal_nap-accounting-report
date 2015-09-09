@@ -20,7 +20,6 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
     using Fanex.AccountingReports.Gaming.Repositories.Interface;
     using Fanex.Common;
     using Fanex.Data;
-    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.

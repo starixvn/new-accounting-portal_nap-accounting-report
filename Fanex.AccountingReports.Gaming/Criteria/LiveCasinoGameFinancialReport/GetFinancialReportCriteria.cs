@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Gaming.Criteria.LiveCasinoGameFinancialReport
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -20,6 +20,7 @@ namespace Fanex.AccountingReports.Gaming.Criteria.LiveCasinoGameFinancialReport
         [SpParam(SqlParamName = "licensee")]
         public string Licensee { get; set; }
 
+        [SpParam(Ignored = true)]
         public string LicenseeName { get; set; }
 
         [SpParam(SqlParamName = "datestart")]
@@ -31,16 +32,19 @@ namespace Fanex.AccountingReports.Gaming.Criteria.LiveCasinoGameFinancialReport
         [SpParam(SqlParamName = "currency")]
         public string Currency { get; set; }
 
+        [SpParam(Ignored = true)]
         public string CurrencyName { get; set; }
 
         [SpParam(SqlParamName = "gametype")]
         public string GameType { get; set; }
 
+        [SpParam(Ignored = true)]
         public string GameTypeName { get; set; }
 
         [SpParam(SqlParamName = "gametable")]
         public string GameTable { get; set; }
 
+        [SpParam(Ignored = true)]
         public string GameTableName { get; set; }
 
         public int TotalPlayers { get; set; }
