@@ -36,7 +36,6 @@
         {
             var winLossDateSuffix = ReportService.GetStoreMappingSuffix(this.WinLostDate);
             return string.Format("Main_DailyWinLoss2h_WinLossBySiteBetType{0}", winLossDateSuffix);
-           
         }
 
         public override bool IsValid()

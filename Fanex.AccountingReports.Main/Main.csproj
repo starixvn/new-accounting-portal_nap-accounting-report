@@ -118,6 +118,7 @@
     <Compile Include="Criteria\DailyWinLoss2hSoccer\GetMain2hReportCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetBettradeCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetColossusBetCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_BettradeCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_BetTypeWHCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_MetricGamingCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_VirtualSportsCriteria.cs" />
