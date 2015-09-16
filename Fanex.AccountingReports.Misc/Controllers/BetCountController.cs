@@ -21,7 +21,6 @@ namespace Fanex.AccountingReports.Misc.Controllers
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [NapSuperAuth]
     public class BetCountController : BaseController
     {
         private readonly IBetCountService _reportService;

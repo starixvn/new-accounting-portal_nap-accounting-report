@@ -22,7 +22,6 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     /// <summary>
     /// Play tech casino win loss controller.
     /// </summary>
-    [NapSuperAuth]
     public class KenoWinLossController : BaseController
     {
         private IKenoWinLossService _kenoWinLossService;

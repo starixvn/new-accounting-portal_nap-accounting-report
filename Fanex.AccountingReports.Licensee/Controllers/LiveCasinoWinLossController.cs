@@ -22,7 +22,6 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [NapSuperAuth]
     public class LiveCasinoWinLossController : BaseController
     {
         private readonly ILiveCasinoWinLossService _reportService;

@@ -20,7 +20,6 @@ namespace Fanex.AccountingReports.Special.Controllers
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [NapSuperAuth]
     public class ParlayWonController : BaseController
     {
         private readonly IParlayWonService _reportService;

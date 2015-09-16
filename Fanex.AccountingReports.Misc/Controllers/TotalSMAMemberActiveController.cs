@@ -21,7 +21,6 @@ namespace Fanex.AccountingReports.Misc.Controllers
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [NapSuperAuth]
     public class TotalSMAMemberActiveController : BaseController
     {
         private readonly ITotalSMAMemberActiveService _reportService;

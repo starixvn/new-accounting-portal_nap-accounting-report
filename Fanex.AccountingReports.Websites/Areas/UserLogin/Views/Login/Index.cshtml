@@ -22,7 +22,7 @@
         If you are having problems, try <a href='http://browsehappy.com/'>this</a> for full
         browsing experience. Thank you!
     </div>
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Index", "Login", new { ReturnUrl = @ViewBag.ReturnUrl }, FormMethod.Post))
     {
         @Html.AntiForgeryToken()
         <div class="center">

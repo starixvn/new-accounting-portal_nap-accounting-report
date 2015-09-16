@@ -103,8 +103,9 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         /// </summary>
         /// <returns>The index page.</returns>
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             var maintenanceInfo = _maintenanceService.GetDowntimeInfo();
             if (maintenanceInfo.IsDowntime)
             {
@@ -112,7 +113,6 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
             }
 
             GenerateToken();
-
             return View();
         }
 
@@ -127,7 +127,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        public ActionResult Index(string username, string password, string loginToken)
+        public ActionResult Index(string username, string password, string loginToken, string returnUrl)
         {            
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password) && CheckValidToken(loginToken))
             {
@@ -218,7 +218,15 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                                         if (userIsActiveOnThisSite)
                                         {
                                             AppSession.ViewIPVN = PermissionService.HasPermission(AccReportFunctionKeys.ViewIPVN);
-                                            return Redirect(FormsAuthentication.DefaultUrl);
+                                            if (string.IsNullOrEmpty(returnUrl))
+                                            {
+                                                return Redirect(FormsAuthentication.DefaultUrl);
+                                            }
+                                            else
+                                            {
+                                                returnUrl = Server.UrlDecode(returnUrl);
+                                                return Redirect(returnUrl);
+                                            }
                                         }
                                         else
                                         {
@@ -297,7 +305,6 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         public ActionResult LogOut()
         {
             DoSignOut();
-
             return Redirect(FormsAuthentication.LoginUrl);
         }
 
@@ -420,6 +427,12 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
             });
             FormsAuthentication.SignOut();
             _currentSession.ClearAll();
+
+            var requestCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName);
+            cookie.Expires = DateTime.Now.AddYears(-1);
+            cookie.Path = requestCookie.Path;
+            Response.Cookies.Add(cookie);
         }
 
         /// <summary>

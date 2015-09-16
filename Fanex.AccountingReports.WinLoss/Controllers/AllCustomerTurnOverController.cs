@@ -20,7 +20,6 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [NapSuperAuth]
     public class AllCustomerTurnOverController : BaseController
     {
         private readonly IAllCustomerTurnOverGetReportService _getReportService;

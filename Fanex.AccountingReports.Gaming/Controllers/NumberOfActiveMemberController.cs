@@ -22,7 +22,6 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     /// <summary>
     /// Number of Active Member Controller.
     /// </summary>
-    [NapSuperAuth]
     public class NumberOfActiveMemberController : BaseController
     {
         /// <summary>

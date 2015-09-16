@@ -20,7 +20,6 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    [NapSuperAuth]
     public class WinLossByLicenseeController : BaseController
     {
         private readonly IWinLossByLicenseeService _reportService;
