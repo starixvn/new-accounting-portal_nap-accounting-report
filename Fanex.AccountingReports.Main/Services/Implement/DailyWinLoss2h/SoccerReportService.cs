@@ -502,7 +502,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 info.Id == CoreConstants.BetTypeConstants._3wayHandicap ||
                 info.Id == CoreConstants.BetTypeConstants.HomeNoBetBetType ||
                 info.Id == CoreConstants.BetTypeConstants.AwayNoBetBetType ||
-                info.Id == CoreConstants.BetTypeConstants.DrawNoDrawBetType)
+                info.Id == CoreConstants.BetTypeConstants.DrawNoDrawBetType ||
+                info.Id == CoreConstants.BetTypeConstants.MyanmarHandicap)
             {
                 _firstBettypeGroup.ChildsInfo.Add(info);
                 _firstBettypeGroup.GrandTotal.Add(info.CreditTotal);
@@ -510,7 +511,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
             else if (info.Id == CoreConstants.BetTypeConstants.OverUnder2 ||
                 info.Id == CoreConstants.BetTypeConstants.TotalGoal ||
-                info.Id == CoreConstants.BetTypeConstants.OddEvenBetType)
+                info.Id == CoreConstants.BetTypeConstants.OddEvenBetType ||
+                info.Id == CoreConstants.BetTypeConstants.MyanmarOverUnder)
             {
                 _secondBettypeGroup.ChildsInfo.Add(info);
                 _secondBettypeGroup.GrandTotal.Add(info.CreditTotal);
@@ -518,7 +520,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
             else if (info.Id == CoreConstants.BetTypeConstants._1stHandicap ||
                 info.Id == CoreConstants.BetTypeConstants._1st1x2BetType ||
-                info.Id == CoreConstants.BetTypeConstants._1stDoubleChange)
+                info.Id == CoreConstants.BetTypeConstants._1stDoubleChange ||
+                info.Id == CoreConstants.BetTypeConstants._1stMyanmarHandicap)
             {
                 _thirdBettypeGroup.ChildsInfo.Add(info);
                 _thirdBettypeGroup.GrandTotal.Add(info.CreditTotal);

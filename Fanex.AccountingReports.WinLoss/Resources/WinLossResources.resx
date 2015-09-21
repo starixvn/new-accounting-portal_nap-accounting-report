@@ -232,7 +232,7 @@
     <value>Winlost Variance</value>
   </data>
   <data name="MatchWinLossSingleBet_ReportName" xml:space="preserve">
-    <value>Match_Win_Loss_Single_Bet_From_{0}_To_{1} </value>
+    <value>Match_Win_Loss_Single_Bet_From_{0}_To_{1}</value>
   </data>
   <data name="MatchWinLossSingleBet_ReportTitle" xml:space="preserve">
     <value>Match Win Loss Single Bet From {0} To {1}</value>
