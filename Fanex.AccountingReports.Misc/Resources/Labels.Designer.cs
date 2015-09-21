@@ -1808,6 +1808,15 @@ namespace Fanex.AccountingReports.Misc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no data.
+        /// </summary>
+        public static string nodata {
+            get {
+                return ResourceManager.GetString("nodata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Non-Live.
         /// </summary>
         public static string Non_Live {
@@ -3046,6 +3055,24 @@ namespace Fanex.AccountingReports.Misc.Resources {
         public static string WinLoss {
             get {
                 return ResourceManager.GetString("WinLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win Loss in Member Currency.
+        /// </summary>
+        public static string WinLossInMemberCurrency {
+            get {
+                return ResourceManager.GetString("WinLossInMemberCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win Loss(RM).
+        /// </summary>
+        public static string WinLossRM {
+            get {
+                return ResourceManager.GetString("WinLossRM", resourceCulture);
             }
         }
         

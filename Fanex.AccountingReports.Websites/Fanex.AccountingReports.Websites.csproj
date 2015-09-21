@@ -650,7 +650,13 @@
     <Content Include="Areas\Misc\Views\MemberWinLossOnRNGCasino\images\content_download_all_icon.png" />
     <Content Include="Areas\Misc\Views\MemberWinLossOnRNGCasino\images\excel-icon.png" />
     <Content Include="Areas\Misc\Views\MemberWinLossOnRNGCasino\images\icon-calendar.png" />
+    <Content Include="Areas\Misc\Views\MemberWinLossOnRNGCasino\images\mute-volume.png" />
     <Content Include="Areas\Misc\Views\MemberWinLossOnRNGCasino\images\sprite.png" />
+    <Content Include="Areas\Misc\Views\MemberWinLossOnRNGCasino\images\volume.png" />
+    <Content Include="Areas\Misc\Views\MemberWinLossOnRNGCasino\Media\big_ben.mp3" />
+    <Content Include="Areas\Misc\Views\MemberWinLossOnRNGCasino\Media\koekoeksklok.mp3" />
+    <Content Include="Areas\Misc\Views\MemberWinLossOnRNGCasino\Media\player.swf" />
+    <Content Include="Areas\Misc\Views\MemberWinLossOnRNGCasino\Scripts\audio-player.js" />
     <Content Include="Areas\Misc\Views\MemberWinLossOnRNGCasino\Scripts\RNGCasinoReport.js" />
     <Content Include="Areas\Misc\Views\SMATurnover\Scripts\SMATurnover.js" />
     <Content Include="Areas\Misc\Views\SMATurnover\Styles\SMATurnover.less" />

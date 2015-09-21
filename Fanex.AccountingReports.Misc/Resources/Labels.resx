@@ -1138,4 +1138,13 @@
   <data name="Today_Reports" xml:space="preserve">
     <value>Today Report(s)</value>
   </data>
+  <data name="WinLossInMemberCurrency" xml:space="preserve">
+    <value>Win Loss in Member Currency</value>
+  </data>
+  <data name="WinLossRM" xml:space="preserve">
+    <value>Win Loss(RM)</value>
+  </data>
+  <data name="nodata" xml:space="preserve">
+    <value>There is no data</value>
+  </data>
 </root>

@@ -14,9 +14,10 @@
 
 .icon-warning
 {
-	background: url('../images/sprite.png') no-repeat -45px -38px;
+	background: url('../images/sprite.png') no-repeat -45px -36px;
 	width: 18px !important;
 	height: 18px !important;
+	display: inline-block;
 }
 
 .note-filter-bar {
@@ -39,15 +40,79 @@
 	    float: left;
 	    padding: 5px 10px 3px;
 	    color: #ED1C24;
-    }
-
-    .note-filter-bar i {
-	    margin-top:3px
+	    float:left;
+	    
+	    span 
+	    {
+            vertical-align: top;
+	    }
     }
 
     .toggle-filter-bar
     {
 	    margin: 5px 15px;
 	    cursor: pointer;
+	    
+	    .hide-filter-icon
+	    {
+	        background: url('../images/sprite.png') no-repeat -112px -36px;
+	        width: 18px !important;
+	        height: 18px !important;
+	        display: inline-block;
+        }
+        .show-filter-icon
+        {
+            background: url('../images/sprite.png') no-repeat -95px -36px;
+	        width: 18px !important;
+	        height: 18px !important;
+	        display: inline-block;
+        }
     }
+    .timeRangeContainer 
+    {
+        float: left;
+    }
+    .volume
+    {
+        float: right;
+        display: inline-block;
+    }
+    .grid-title-label
+    {
+        width: 96%;
+    }
+    .volume-controll-icon
+    {
+        width: 18px;
+	    height: 18px;
+	    display: block;
+	    cursor: pointer;
+    }
+    .icon-volume
+    {
+        background: url('../images/volume.png') no-repeat top left transparent;
+    }
+    .icon-mute-volume
+    {
+        background: url('../images/mute-volume.png') no-repeat top left transparent;
+    }
+    #audioplayer
+    {
+        left: -1000px;
+        position:absolute;
+    }
+	.nodata
+	{
+		color: red;
+		font-weight: bold;
+	}
 
+	.width80
+	{
+		width:80px !important;
+	}
+	
+	.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current 
+	{
+		display: none !important;
+	}

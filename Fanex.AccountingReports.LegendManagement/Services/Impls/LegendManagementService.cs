@@ -165,9 +165,8 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
                     return reportLegendContent;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                HandleException(ex);
             }
 
             return string.Empty;

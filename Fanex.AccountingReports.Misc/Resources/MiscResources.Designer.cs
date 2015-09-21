@@ -376,6 +376,33 @@ namespace Fanex.AccountingReports.Misc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Member_WL_on_RNG_Casino_From_{0}_To_{1}.
+        /// </summary>
+        public static string MemberWinLossOnRNGCasino_ReportName {
+            get {
+                return ResourceManager.GetString("MemberWinLossOnRNGCasino_ReportName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Member Win Loss On RNG Casino.
+        /// </summary>
+        public static string MemberWinLossOnRNGCasino_SheetName {
+            get {
+                return ResourceManager.GetString("MemberWinLossOnRNGCasino_SheetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RNG Casino - Member(s) with winloss greater or equal RM ${0} from {1} to {2}.
+        /// </summary>
+        public static string RNGCasinoReportTitle {
+            get {
+                return ResourceManager.GetString("RNGCasinoReportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Annually_SMA_Turnover_{0}.
         /// </summary>
         public static string SMA_TurnOver_Annually_ReportName {
