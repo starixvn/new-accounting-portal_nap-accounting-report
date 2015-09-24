@@ -214,7 +214,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         for (int j = 0; j < betLen; j++)
                         {
                             betWinLoss = sportWinLoss.BetTypeWinLosses[j];
-
+                            var backgroundColor = j % 2 == 0 ? ExcelExtensions.BackGroundColor : ExcelExtensions.EvenRowColor;
+                            textStyle.FillPattern.SetSolid(backgroundColor);
+                            text8RM_BARMStyle.FillPattern.SetSolid(backgroundColor);
                             foreach (var winloss in betWinLoss.IBCs)
                             {
                                 currentRow++;
@@ -227,7 +229,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                                     currentRow,
                                     currentColumn,
                                     winloss,
-                                    textStyle);
+                                    textStyle,
+                                    backgroundColor);
                             }
 
                             // 8RM winloss
@@ -241,7 +244,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                                     currentRow,
                                     currentColumn,
                                     betWinLoss.EightRM,
-                                    text8RM_BARMStyle);
+                                    text8RM_BARMStyle,
+                                    backgroundColor);
                             }
 
                             // BARM winloss
@@ -255,7 +259,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                                     currentRow,
                                     currentColumn,
                                     betWinLoss.BARM,
-                                    text8RM_BARMStyle);
+                                    text8RM_BARMStyle,
+                                    backgroundColor);
                             }
 
                             // Hedge
@@ -270,7 +275,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                                     currentColumn,
                                     Labels.Hedge_title,
                                     betWinLoss.Hedge,
-                                    text8RM_BARMStyle);
+                                    text8RM_BARMStyle,
+                                    backgroundColor);
                             }
 
                             if (
@@ -534,11 +540,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             Color? backgroundColor = null)
         {
             ExcelCell currentCell;
-
             // Bet type
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Style = titleStyle;
-
             currentCell.Value = betTypeName;
             currentColumn++;
 
