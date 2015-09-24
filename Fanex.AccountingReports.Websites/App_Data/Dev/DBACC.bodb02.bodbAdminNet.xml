@@ -68,7 +68,7 @@
     <Setting Key="WinLoss_DailyMixParlayWinLoss_GetAdvanceMixParlayReport_14" SpName="Acc_Rpt_MixParlay_Advance14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Win Loss - Match Win Loss Single Bet">
-    <Setting Key="WinLoss_MatchWinLossSingleBet_GetReport" SpName="Acc_Rpt_MatchWinLossSingleBet" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="WinLoss_MatchWinLossSingleBet_GetReport" SpName="Acc_Rpt_MatchWinLossSingleBet_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Win Loss - All Customer Turn Over">
     <Setting Key="WinLoss_AllCustomerTurnOver_GetReport" SpName="Acc_Rpt_CustomerTurnoverBySite" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />

@@ -173,17 +173,17 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                 var IBCs = betType.IBCs;
                 if (IBCs) {
                     $.each(IBCs, function (index, value) {
-                        sportType.SubRows.push(renderWinLoss(value, true, sportWinloss.Id, id > 0 ? sportName : value.Name, betTypeDrillDown));
+                        sportType.SubRows.push(renderWinLoss(value, true, sportWinloss.Id, id > 0 ? sportName : value.Name, betTypeDrillDown, i));
                     });
                 }
                 if (betType.EightRM) { // 8RM
-                    sportType.SubRows.push(renderWinLoss(betType.EightRM, false, sportWinloss.Id, id > 0 ? sportName : betType.EightRM.Name, false));
+                    sportType.SubRows.push(renderWinLoss(betType.EightRM, false, sportWinloss.Id, id > 0 ? sportName : betType.EightRM.Name, false, i));
                 }
                 if (betType.BARM) { // BARM
-                    sportType.SubRows.push(renderWinLoss(betType.BARM, false, sportWinloss.Id, id > 0 ? sportName : betType.BARM.Name, false));
+                    sportType.SubRows.push(renderWinLoss(betType.BARM, false, sportWinloss.Id, id > 0 ? sportName : betType.BARM.Name, false, i));
                 }
                 if (betType.Hedge) { // Hedge
-                    sportType.SubRows.push(renderWinLoss(betType.Hedge, false, sportWinloss.Id, id > 0 ? sportName : betType.Hedge.Name, false));
+                    sportType.SubRows.push(renderWinLoss(betType.Hedge, false, sportWinloss.Id, id > 0 ? sportName : betType.Hedge.Name, false, i));
                 }
                 // total
                 var total = betType.Total;
@@ -207,10 +207,12 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
         }
         return sportType;
     };
-    var renderWinLoss = function (winloss, ibc, sportId, sportName, showDetailLink) {
+    var renderWinLoss = function (winloss, ibc, sportId, sportName, showDetailLink, bettypeIndex) {
+        var cssClass = bettypeIndex % 2 == 0 ? 'evenRow' : 'oddRow';
         var betType = ibc ? ((winloss.LiveIndicator == 1 ? '<span class="live">Live!</span> ' : '') + winloss.Name) : winloss.Name;
         return {
             Columns: [{ Name: 'ColView',
+                TdClass: cssClass,
                 CustomCellRender: function () {
                     if (showDetailLink) {
                         return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
@@ -219,7 +221,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 										sportId + ',' +
 										winloss.Id + ',' +
 										winloss.LiveIndicator + ',\'' +
-										sportName + '\',' + 
+										sportName + '\',' +
                                         drillDownByType.byBettype + ')">&nbsp;</div>';
                     }
                     else {
@@ -227,17 +229,17 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                     }
                 }
             },
-						{ Name: 'ColBetType', Value: betType, CellAlign: ibc ? 'left' : 'center', CssClass: ibc ? 'bold' : '' },
-						{ Name: 'ColWinLoss', Value: formatNumberCell(winloss.WinLossStr, true, false, false) },
-						{ Name: 'ColPosition', Value: winloss.PositionStr },
-						{ Name: 'ColComm', Value: winloss.CommissionStr },
-						{ Name: 'ColRealLineTotal', Value: formatNumberCell(winloss.RealLineTotalStr, true, false, false) },
-						{ Name: 'ColVirtualLineTotal', Value: formatNumberCell(winloss.VirtualLineTotalStr, true, false, false) },
-						{ Name: 'ColVariance', Value: formatNumberCell(winloss.VarianceStr, true, false, false) },
-						{ Name: 'ColRealTurnover', Value: winloss.RealTurnoverStr },
-						{ Name: 'ColVirtualTurnover', Value: winloss.VirtualTurnoverStr },
-						{ Name: 'ColRealMargin', Value: formatNumberCell(winloss.RealMarginStr, true, false, true) },
-						{ Name: 'ColVirtualMargin', Value: formatNumberCell(winloss.VirtualMarginStr, true, false, true)}]
+						{ Name: 'ColBetType', Value: betType, CellAlign: ibc ? 'left' : 'center', CssClass: ibc ? 'bold' : '', TdClass: cssClass },
+						{ Name: 'ColWinLoss', Value: formatNumberCell(winloss.WinLossStr, true, false, false), TdClass: cssClass },
+						{ Name: 'ColPosition', Value: winloss.PositionStr, TdClass: cssClass },
+						{ Name: 'ColComm', Value: winloss.CommissionStr, TdClass: cssClass },
+						{ Name: 'ColRealLineTotal', Value: formatNumberCell(winloss.RealLineTotalStr, true, false, false), TdClass: cssClass },
+						{ Name: 'ColVirtualLineTotal', Value: formatNumberCell(winloss.VirtualLineTotalStr, true, false, false), TdClass: cssClass },
+						{ Name: 'ColVariance', Value: formatNumberCell(winloss.VarianceStr, true, false, false), TdClass: cssClass },
+						{ Name: 'ColRealTurnover', Value: winloss.RealTurnoverStr, TdClass: cssClass },
+						{ Name: 'ColVirtualTurnover', Value: winloss.VirtualTurnoverStr, TdClass: cssClass },
+						{ Name: 'ColRealMargin', Value: formatNumberCell(winloss.RealMarginStr, true, false, true), TdClass: cssClass },
+						{ Name: 'ColVirtualMargin', Value: formatNumberCell(winloss.VirtualMarginStr, true, false, true), TdClass: cssClass}]
         }
     };
     var renderTotal = function (total, css, title) {
