@@ -30,7 +30,7 @@
 	</Function>
 
 	<Function Name="Special - SMAs Turn Over">
-		<Setting Key="Special_SMAsTurnOver" SpName="Acc_Rpt_SMAs_TurnOver" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />
+		<Setting Key="Special_SMAsTurnOver" SpName="Acc_Rpt_SMAs_TurnOver_xpre" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />
 	</Function>
 
 	<Function Name="Special - Total Credit Account By Product">

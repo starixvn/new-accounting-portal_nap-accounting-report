@@ -232,7 +232,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Content Include="App_Data\Dev\DBEXT.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\Dev\DBEXT.bk.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\Local\DBEXT.bk.bodbAdminNet.xml" />
     <Content Include="App_Data\Master\DBEXT.bk.bodbAdminNet.xml" />
     <Content Include="App_Data\Dev\DBPOLICY.bodb02.bodbAdminNet.xml" />
