@@ -540,6 +540,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             Color? backgroundColor = null)
         {
             ExcelCell currentCell;
+
             // Bet type
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Style = titleStyle;
