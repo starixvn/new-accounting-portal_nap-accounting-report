@@ -54,16 +54,22 @@ namespace Fanex.AccountingReports.Special.Controllers
         [HandleAjaxError]
         public JsonResult GetReport(GetDailyTurnoverCriteria criteria)
         {
-            var report = this._reportService.GetReport(criteria);
-            return Json(report);
+            var result = this._reportService.GetReport(criteria);
+            var jsonResult = Json(result);
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
         }
 
         [HttpPost]
         [HandleAjaxError]
         public JsonResult GetDetailReport(GetDailyTurnoverChangedDetailCriteria criteria)
         {
-            var detailReport = this._reportDetailService.GetDetailReport(criteria);
-            return Json(detailReport);
+            var result = this._reportDetailService.GetDetailReport(criteria);
+            var jsonResult = Json(result);
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
         }
 
         public EmptyResult ExportReport(GetDailyTurnoverCriteria criteria)

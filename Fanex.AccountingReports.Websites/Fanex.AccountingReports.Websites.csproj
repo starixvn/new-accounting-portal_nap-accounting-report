@@ -2080,7 +2080,9 @@
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Web.pro.AppSettings.config" />
     <Content Include="Web.pro.config" />
-    <Content Include="Web.pro.ConnectionString.config" />
+    <Content Include="Web.pro.ConnectionString.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.uat.AppSettings.config" />
     <Content Include="Web.uat.config">
       <SubType>Designer</SubType>
