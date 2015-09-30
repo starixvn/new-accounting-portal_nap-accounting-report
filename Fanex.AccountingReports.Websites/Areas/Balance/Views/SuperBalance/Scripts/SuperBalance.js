@@ -89,7 +89,12 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
     self.renderFirstLetterList = function (rs) {
         for (var i = 0; i < rs.length; i++) {
             var alphabet = rs[i];
-            _tables.ddlLetter.append('<option value="' + alphabet + '">' + alphabet + '</option>');
+            if (alphabet == '0-9') {
+                _tables.ddlLetter.append('<option value="[' + alphabet + ']">' + alphabet + '</option>');
+            }
+            else {
+                _tables.ddlLetter.append('<option value="' + alphabet + '">' + alphabet + '</option>');
+            }            
         }
     };
 
