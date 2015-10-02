@@ -191,23 +191,31 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
         public List<ProductBettype> GetProductBettype(GetBetTypeListCriteria criteria)
         {
             var productBettypes = new List<ProductBettype>();
-            var rawData = GetReportData<dynamic>(criteria);
-            var productGroups = rawData.GroupBy(x => x.ProductId).ToList();
-            var cachedProducts = GetProductFromCache();
-            foreach (var productGroup in productGroups)
+            try
             {
-                var productBettype = new ProductBettype();
-                productBettype.ProductName = cachedProducts[productGroup.Key];
-                foreach (var bettype in productGroup)
+                var rawData = GetReportData<dynamic>(criteria);
+                var productGroups = rawData.GroupBy(x => x.ProductId).ToList();
+                var cachedProducts = GetProductFromCache();
+                foreach (var productGroup in productGroups)
                 {
-                    productBettype.Bettypes.Add(new Bettype()
+                    var productBettype = new ProductBettype();
+                    productBettype.ProductName = cachedProducts[productGroup.Key];
+                    foreach (var bettype in productGroup)
                     {
-                        BettypeId = Converter.ToInt(bettype.TypeId),
-                        BettypeName = Converter.ToString2(bettype.TypeName)
-                    });
-                }
+                        productBettype.Bettypes.Add(new Bettype()
+                        {
+                            BettypeId = Converter.ToInt(bettype.TypeId),
+                            BettypeName = Converter.ToString2(bettype.TypeName)
+                        });
+                    }
 
-                productBettypes.Add(productBettype);
+                    productBettypes.Add(productBettype);
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+                throw;
             }
 
             return productBettypes;

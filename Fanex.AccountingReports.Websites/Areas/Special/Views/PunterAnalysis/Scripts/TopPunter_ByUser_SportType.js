@@ -60,6 +60,10 @@ TopPunter_ByUser_SportType.prototype.RenderBetCountLink = function (currentCell)
         return '<div>' + currentCell.Value.BetCount + '</div>';
     }
 
+    if (currentCell.Value.BetTypeId == 18000 || currentCell.Value.BetTypeName == "Colossus Bets") {
+        return currentCell.Value.BetCount;
+    }
+
     var clickEvent = ' onclick = "reportManager.GetTopPunterBetCount_ByUser_BetType(\'' +
                             currentCell.Value.BetTypeId + '\',\'' +
                             currentCell.Value.BetTypeName + '\',' +
@@ -72,6 +76,10 @@ TopPunter_ByUser_SportType.prototype.RenderBetCountLink = function (currentCell)
 TopPunter_ByUser_SportType.prototype.RenderWinLossLink = function (currentCell) {
     if (currentCell.Value.BetCount == "") {
         return '<div>' + currentCell.Value.WinLoss + '</div>';
+    }
+
+    if (currentCell.Value.BetTypeId == 18000 || currentCell.Value.BetTypeName == "Colossus Bets") {
+        return reportManager.FormatNumberCell(currentCell.Value.WinLoss, false, true, false);
     }
 
     var clickEvent = ' onclick = "reportManager.GetTopPunterWinLoss_ByUser_BetType(\'' +
