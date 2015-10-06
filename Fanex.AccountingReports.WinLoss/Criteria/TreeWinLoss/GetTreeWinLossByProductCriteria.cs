@@ -47,6 +47,8 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
 
         public bool ShowAGCS { get; set; }
 
+        public bool ShowCB { get; set; }
+
         public double Turnover_8RM { get; set; }
 
         public double Total_8RM { get; set; }

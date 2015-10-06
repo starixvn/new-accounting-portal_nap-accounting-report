@@ -102,7 +102,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
                 workSheet.Columns[0].Width = 80 * ExcelExtensions.FontWidth;
                 workSheet.Columns[6].Width = 80 * ExcelExtensions.FontWidth;
                 currentColumn = startColumn;
-                for (int colIndex = 1; colIndex < 6; colIndex++)
+                for (int colIndex = 1; colIndex < 7; colIndex++)
                 {
                     workSheet.Columns[startColumn + colIndex].Width = 120 * ExcelExtensions.FontWidth;
                 }
@@ -112,14 +112,14 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
                     criteria.ActualStake);
 
                 currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
                 currentCellRange.Merged = true;
                 currentCellRange.Value = title;
                 currentCellRange.Style.FormatTitleCell(titleColor);
                 currentRow++;
                 if (marginWinLoss != null && marginWinLoss.ChildsInfo.Count > 0)
                 {
-                    workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 5);
+                    workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 6);
 
                     this.MarginReportExportHeader(ref workSheet, startColumn, ref currentRow);
                     this.MarginReportExportBody(ref workSheet, marginWinLoss.ChildsInfo, startColumn, ref currentRow);
@@ -156,6 +156,11 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = Labels.UserName;
+            currentCell.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Type;
             currentCell.Style.FormatTitleCell(headerColor);
             currentColumn++;
 
@@ -227,6 +232,12 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
                 currentCell.Value = info.UserName;
                 currentCell.Style = textStyle;
                 currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.BettypeName;
+                currentCell.Style = textStyle;
+                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];

@@ -37,7 +37,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             ShowMGSL: true,
             ShowAGCS: true,
             ShowVG: true,
-            ShowMGC: true
+            ShowMGC: true,
+            ShowCB: true
         }
     };
 
@@ -120,7 +121,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                         { Id: 'chbVirtualSports', Text: 'Virtual Sports' },
                         { Id: 'chbKeno', Text: 'Keno' },
                         { Id: 'chbMetricGamingSuperLive', Text: 'Metric Gaming - Super Live' },
-                        { Id: 'chbMicroGaming', Text: 'Microgaming'}];
+                        { Id: 'chbMicroGaming', Text: 'Microgaming' },
+                        { Id: 'chbColossusBets', Text: 'Colossus Bets'}];
 
         var len = products.length;
         var ddwnProducts = [];
@@ -168,7 +170,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             metricGamingSuperLive: $('#ddlProduct_chbMetricGamingSuperLive'),
             microgaming: $('#ddlProduct_chbMicroGaming'),
             agCasino: $('#ddlProduct_chbAGCasino'),
-            macau: $('#ddlProduct_chbMacau')
+            macau: $('#ddlProduct_chbMacau'),
+            colossusBets: $('#ddlProduct_chbColossusBets')
         };
     };
 
@@ -236,6 +239,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         self.Params.reportParams.ShowMGC = checkBoxIsChecked(_tables.productsList.microgaming);
         self.Params.reportParams.ShowAGCS = checkBoxIsChecked(_tables.productsList.agCasino);
         self.Params.reportParams.ShowVG = checkBoxIsChecked(_tables.productsList.macau);
+        self.Params.reportParams.ShowCB = checkBoxIsChecked(_tables.productsList.colossusBets);
     };
 
     var validateParams = function () {
@@ -256,7 +260,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             self.Params.reportParams.ShowMGSL == false &&
             self.Params.reportParams.ShowMGC == false &&
             self.Params.reportParams.ShowVG == false &&
-            self.Params.reportParams.ShowAGCS == false) {
+            self.Params.reportParams.ShowAGCS == false &&
+            self.Params.reportParams.ShowCB == false) {
             if (message == '') {
                 message = "Please select at least one product!";
             }
@@ -329,7 +334,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                 !self.Params.reportParams.ShowMGSL &&
                 !self.Params.reportParams.ShowVG &&
                 !self.Params.reportParams.ShowAGCS &&
-                !self.Params.reportParams.ShowMGC) && (self.Params.reportParams.ShowCasino || self.Params.reportParams.ShowBI || self.Params.reportParams.ShowP2P)) {
+                !self.Params.reportParams.ShowMGC &&
+                !self.Params.reportParams.ShowCB) && (self.Params.reportParams.ShowCasino || self.Params.reportParams.ShowBI || self.Params.reportParams.ShowP2P)) {
             isShowNA = true;
         }
         if (report && report.ChildsInfo.length > 0) {

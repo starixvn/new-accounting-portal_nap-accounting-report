@@ -121,5 +121,10 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int GoldDeluxeDeposit = 1700;
         public const int AGCasinoDeposit = 1800;
         public const int VegasGameDeposit = 1900;
+
+        public const int MyanmarHandicap = 301;
+        public const int MyanmarOverUnder = 302;
+        public const int _1stMyanmarHandicap = 303;
+        public const int _1stMyanmarOverUnder = 304;
     }
 }

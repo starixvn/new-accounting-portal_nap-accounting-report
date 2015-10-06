@@ -28,17 +28,19 @@ namespace Fanex.AccountingReports.Main.Controllers
         private readonly IDailyWinLoss2hService _reportService;
         private readonly IMetricGamingService _metricGamingService;
         private readonly IBettradeService _bettradeService;
+        private readonly IColossusBetService _colossusBetService;
 
         public DailyWinLoss2hController()
-            : this(null, null, null)
+            : this(null, null, null, null)
         {
         }
 
-        public DailyWinLoss2hController(IDailyWinLoss2hService reportService, IMetricGamingService metricGamingService, IBettradeService bettradeService)
+        public DailyWinLoss2hController(IDailyWinLoss2hService reportService, IMetricGamingService metricGamingService, IBettradeService bettradeService, IColossusBetService colossusBetService)
         {
             this._reportService = reportService ?? new DailyWinLoss2hService();
             this._metricGamingService = metricGamingService ?? new MetricGamingService();
             this._bettradeService = bettradeService ?? new BettradeService();
+            this._colossusBetService = colossusBetService ?? new ColossusBetService();
         }
 
         [HttpGet]
@@ -250,6 +252,14 @@ namespace Fanex.AccountingReports.Main.Controllers
             return Json(report);
         }
 
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetColossusBetReport(GetColossusBetCriteria criteria)
+        {
+            var report = _colossusBetService.GetColossusBetReport(criteria);
+            return Json(report);
+        }
+
         //// ExportExcel
 
         public ActionResult ExportMain2hReport(GetMain2hReportCriteria criteria)
@@ -411,6 +421,12 @@ namespace Fanex.AccountingReports.Main.Controllers
         public ActionResult ExportBettradeReport(GetBettradeCriteria criteria)
         {
             this._bettradeService.ExportBettradeReport(criteria);
+            return new EmptyResult();
+        }
+
+        public ActionResult ExportColossusBetReport(GetColossusBetCriteria criteria)
+        {
+            this._colossusBetService.ExportColossusBetReport(criteria);
             return new EmptyResult();
         }
 

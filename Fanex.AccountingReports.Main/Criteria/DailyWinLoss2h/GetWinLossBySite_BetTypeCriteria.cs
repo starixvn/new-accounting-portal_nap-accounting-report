@@ -84,6 +84,9 @@ namespace Fanex.AccountingReports.Main.Criteria.DailyWinLoss2h
                 case CoreConstants.SportContants.Bettrade:
                     sportNameSuffix = "_Bettrade";
                     break;
+                case CoreConstants.SportContants.ColossusBet:
+                    sportNameSuffix = "_ColossusBet";
+                    break;
             }
 
             return string.Format("{0}{1}{2}", storeProcedureAliasName, sportNameSuffix, winLossDateSuffix);

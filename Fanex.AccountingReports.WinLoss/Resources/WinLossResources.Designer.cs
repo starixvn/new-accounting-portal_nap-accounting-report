@@ -304,7 +304,7 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Match_Win_Loss_Single_Bet_From_{0}_To_{1} .
+        ///   Looks up a localized string similar to Match_Win_Loss_Single_Bet_From_{0}_To_{1}.
         /// </summary>
         public static string MatchWinLossSingleBet_ReportName {
             get {

@@ -25,6 +25,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossBySuper = function () {
             ShowAGCS: true,
             ShowVG: true,
             ShowMGC: true,
+            ShowCB: true,
             RoleId: 0
         }
     };
@@ -129,7 +130,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossBySuper = function () {
                 !self.Params.reportParams.ShowMGSL &&
                 !self.Params.reportParams.ShowVG &&
                 !self.Params.reportParams.ShowAGCS &&
-                !self.Params.reportParams.ShowMGC) && (self.Params.reportParams.ShowCasino || self.Params.reportParams.ShowBI || self.Params.reportParams.ShowP2P)) {
+                !self.Params.reportParams.ShowMGC &&
+                !self.Params.reportParams.ShowCB) && (self.Params.reportParams.ShowCasino || self.Params.reportParams.ShowBI || self.Params.reportParams.ShowP2P)) {
             isShowNA = true;
         }
         var totalItems = report.ChildsInfo.length;
