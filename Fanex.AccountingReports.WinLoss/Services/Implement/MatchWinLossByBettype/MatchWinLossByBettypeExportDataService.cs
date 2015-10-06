@@ -43,8 +43,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.MatchWinLossByBetty
         /// <param name="getMatchWinLossByBettypeCriteria">The get match win loss by bet type criteria.</param>
         public void ExportMatchWinLossByBettypeReport(MatchWinLossByBettypeCriteria getMatchWinLossByBettypeCriteria)
         {
-            getMatchWinLossByBettypeCriteria.ToDate = getMatchWinLossByBettypeCriteria.ToDate.AddDays(1).AddMilliseconds(-1);
-
             try
             {
                 var fullReport = SessionManager.Get<MatchWinLossByBettype>(_matchWinLossByBettypeReportSessionKey);

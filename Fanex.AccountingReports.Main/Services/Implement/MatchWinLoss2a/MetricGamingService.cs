@@ -154,7 +154,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             decimal lineTotal = Converter.ToDecimal(totalRow.Columns[MetricGamingByBettypeLineTotalColumnIndex].Value);
             decimal turnOver = Converter.ToDecimal(totalRow.Columns[MetricGamingByBettypeTurnoverColumnIndex].Value);
             totalRow.Columns[MetricGamingByBettypeTotalLabelColumnIndex].Value = "Metric Gaming - Super Live Total";
-            totalRow.Columns[MetricGamingByBettypeMarginColumnIndex].Value = lineTotal / turnOver * 100;
+            totalRow.Columns[MetricGamingByBettypeMarginColumnIndex].Value = turnOver == 0 ? (object)Labels.NotAvailable : lineTotal / turnOver * 100;
             return totalRow;
         }
     }
