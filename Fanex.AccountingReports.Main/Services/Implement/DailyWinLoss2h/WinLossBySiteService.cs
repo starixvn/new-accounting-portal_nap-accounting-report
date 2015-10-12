@@ -145,6 +145,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         WinLostDate = criteria.WinLostDate,
                         Site = criteria.Site
                     };
+                case CoreConstants.SportContants.ColossusBet:
+                    return new GetWinLossBySite_ColossusBetCriteria
+                    {
+                        WinLostDate = criteria.WinLostDate,
+                        Site = criteria.Site
+                    };
             }
 
             return criteria;
