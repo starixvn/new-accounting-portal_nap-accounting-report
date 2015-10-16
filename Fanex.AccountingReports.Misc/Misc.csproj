@@ -147,6 +147,7 @@
     </Compile>
     <Compile Include="Controllers\DuplicateTicketsController.cs" />
     <Compile Include="Controllers\MAMonitorToolController.cs" />
+    <Compile Include="Controllers\MemberWinLossOnRNGCasinoController.cs" />
     <Compile Include="Controllers\SMATurnoverController.cs" />
     <Compile Include="Controllers\TotalCreditAccountByProductController.cs" />
     <Compile Include="Controllers\TotalSMAMemberActiveController.cs" />
@@ -162,6 +163,9 @@
     <Compile Include="Criteria\MAMonitorTool\GetLeagueListCriteria.cs" />
     <Compile Include="Criteria\MAMonitorTool\GetReportCriteria.cs" />
     <Compile Include="Criteria\MAMonitorTool\GetSportListCriteria.cs" />
+    <Compile Include="Criteria\MemberWinLossOnRNGCasino\IMemberWinLossOnRNGCasinoCriteria.cs" />
+    <Compile Include="Criteria\MemberWinLossOnRNGCasino\MemberWinLossOnRNGCasinoHistoricalCriteria.cs" />
+    <Compile Include="Criteria\MemberWinLossOnRNGCasino\MemberWinLossOnRNGCasinoRecentCriteria.cs" />
     <Compile Include="Criteria\SMATurnover\GetSMATurnoverReportCriteria.cs" />
     <Compile Include="Criteria\TotalCreditAccountByProduct\GetBetCountDetailCriteria.cs" />
     <Compile Include="Criteria\TotalCreditAccountByProduct\GetTotalCreditAccountByProductCriteria.cs" />
@@ -184,6 +188,7 @@
     <Compile Include="Models\MAMonitorTool\OptionInfo.cs" />
     <Compile Include="Models\MAMonitorTool\ProductBettype.cs" />
     <Compile Include="Models\MAMonitorTool\WinLossInfo.cs" />
+    <Compile Include="Models\MemberWinLossOnRNGCasino\MemberWinLoss.cs" />
     <Compile Include="Models\SMATurnover\SMATurnover.cs" />
     <Compile Include="Models\TotalCreditAccountByProduct\BetCountDetail.cs" />
     <Compile Include="Models\TotalCreditAccountByProduct\TotalCreditAccountByProduct.cs" />
@@ -220,6 +225,7 @@
     <Compile Include="Services\Implement\MAMonitorTool\MAMonitorToolExportExcelService.cs" />
     <Compile Include="Services\Implement\MAMonitorTool\MAMonitorToolService.cs" />
     <Compile Include="Services\Implement\MAMonitorTool\ReportTypeConstants.cs" />
+    <Compile Include="Services\Implement\MemberWinLossOnRNGCasinoService.cs" />
     <Compile Include="Services\Implement\SMATurnover\SMATurnoverExportDataService.cs" />
     <Compile Include="Services\Implement\SMATurnover\SMATurnoverService.cs" />
     <Compile Include="Services\Implement\TotalCreditAccountByProduct\ExportTotalCreditAccountByProductService.cs" />
@@ -236,6 +242,7 @@
     <Compile Include="Services\Interface\ISMATurnoverService.cs" />
     <Compile Include="Services\Interface\ITotalCreditAccountByProductService.cs" />
     <Compile Include="Services\Interface\ITotalSMAMemberActiveService.cs" />
+    <Compile Include="Services\Interface\IMemberWinLossOnRNGCasinoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Errors.resx">

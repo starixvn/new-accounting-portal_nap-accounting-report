@@ -364,6 +364,13 @@ namespace Fanex.AccountingReports.Core.Services.Impl
                 string.Equals(currencyName, "H");
         }
 
+        public static DateTime ConvertTimeZone(DateTime dateTime)
+        { 
+            TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("SA Western Standard Time");
+            DateTime newDateTime = TimeZoneInfo.ConvertTime(dateTime, timeZone);
+
+            return newDateTime;
+        }
         #endregion StaticMethods
     }
 }

@@ -264,4 +264,13 @@
   <data name="CreditMovementReport_SheetName" xml:space="preserve">
     <value>Credit Movement</value>
   </data>
+  <data name="RNGCasinoReportTitle" xml:space="preserve">
+    <value>RNG Casino - Member(s) with winloss greater or equal RM ${0} from {1} to {2}</value>
+  </data>
+  <data name="MemberWinLossOnRNGCasino_ReportName" xml:space="preserve">
+    <value>Member_WL_on_RNG_Casino_From_{0}_To_{1}</value>
+  </data>
+  <data name="MemberWinLossOnRNGCasino_SheetName" xml:space="preserve">
+    <value>Member Win Loss On RNG Casino</value>
+  </data>
 </root>
