@@ -1084,6 +1084,12 @@ Fanex.AccountingReports.Misc.MAMonitorTool.ReportManager = function () {
             return false;
         }
 
+        if (!self.Tables.dropdownProductHeaderCheckBox.prop("checked") &&
+            selectParams.Products.length == 0) {
+            AccReport.popUp.show("Please select one product!", "dropdown-product");
+            return false;
+        }
+
         return true;
     };
     self.ShowHideReportByGameFilter = function () {
