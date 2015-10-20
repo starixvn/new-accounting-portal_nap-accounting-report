@@ -419,3 +419,8 @@ div.ticketList div.void > div.match, div.ticketList div.void div.firstGoal, div.
 .lnk:hover {
 	text-decoration: underline;
 }
+
+.light-blue
+{
+    color:#0017CD;
+}
