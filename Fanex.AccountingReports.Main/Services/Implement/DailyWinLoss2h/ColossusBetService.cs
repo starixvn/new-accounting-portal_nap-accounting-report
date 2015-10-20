@@ -157,17 +157,17 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             {
                 WinLossInfo winLoss = MapWinLossData(data);
                 var rowType = _dailyWinLoss2hUtilityService.GetRowType(0, winLoss.SiteType);
+                colosusBetWinLoss.CreditTotal.BettypeId = winLoss.BettypeId;
+                colosusBetWinLoss.DepositTotal.BettypeId = winLoss.BettypeId;
                 switch (rowType)
                 {
                     case RowType._2hReportCredit:
                         winLoss.AliasName = Labels.Credit;
-                        colosusBetWinLoss.CreditTotal.BettypeId = winLoss.BettypeId;
                         colosusBetWinLoss.CreditTotal.Add(winLoss);
                         break;
 
                     case RowType._2hReportDeposit:
                         winLoss.AliasName = Labels.Deposit;
-                        colosusBetWinLoss.DepositTotal.BettypeId = winLoss.BettypeId;
                         colosusBetWinLoss.DepositTotal.Add(winLoss);
                         break;
                 }
