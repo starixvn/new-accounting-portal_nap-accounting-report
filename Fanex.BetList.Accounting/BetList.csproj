@@ -52,21 +52,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.BetList.Age.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.BetList.BetTrade">
-      <HintPath>..\packages\Fanex.BetList.Core.2.5.4-beta\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
-    </Reference>
-    <Reference Include="Fanex.BetList.Core, Version=2.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Fanex.BetList.BetTrade, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Fanex.BetList.Core.2.5.4-beta\lib\net40\Fanex.BetList.Core.dll</HintPath>
+      <HintPath>..\packages\Fanex.BetList.Core.2.5.8\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.BetList.Core, Version=2.2.6.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Fanex.BetList.Core.2.5.8\lib\net40\Fanex.BetList.Core.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.BetList.GoldDeluxe, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.5.4-beta\lib\net40\Fanex.BetList.GoldDeluxe.dll</HintPath>
+      <HintPath>..\packages\Fanex.BetList.Core.2.5.8\lib\net40\Fanex.BetList.GoldDeluxe.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.BetList.MetricGaming">
-      <HintPath>..\packages\Fanex.BetList.Core.2.5.4-beta\lib\net40\Fanex.BetList.MetricGaming.dll</HintPath>
+    <Reference Include="Fanex.BetList.MetricGaming, Version=1.0.4.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.BetList.Core.2.5.8\lib\net40\Fanex.BetList.MetricGaming.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.BetList.Microgaming">
-      <HintPath>..\packages\Fanex.BetList.Core.2.5.4-beta\lib\net40\Fanex.BetList.Microgaming.dll</HintPath>
+    <Reference Include="Fanex.BetList.Microgaming, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Fanex.BetList.Core.2.5.8\lib\net40\Fanex.BetList.Microgaming.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Caching">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Caching.dll</HintPath>
@@ -128,8 +130,7 @@
       <HintPath>..\packages\RazorEngine.3.7.0\lib\net40\RazorEngine.dll</HintPath>
     </Reference>
     <Reference Include="RemotingRef, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_Dependencies\RemotingRef\RemotingRef.dll</HintPath>
+      <HintPath>..\packages\RemotingRef.1.0.0.3\lib\net40\RemotingRef.dll</HintPath>
     </Reference>
     <Reference Include="SPSRemoting">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\SPSRemoting.dll</HintPath>
