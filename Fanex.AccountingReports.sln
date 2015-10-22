@@ -48,9 +48,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{02C0ED
 	EndProjectSection
 EndProject
 Global
-	GlobalSection(JSLint) = preSolution
-		SolutionConfigurationLocation = JSLintOptions.xml
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -209,5 +206,8 @@ Global
 		{DCEA602C-2786-45B3-B3C4-1D3241F40F09} = {B055800A-814C-454C-80BD-1F01884D910B}
 		{A6EAD323-42D7-46B6-ADAC-A31F4FCCD17B} = {B055800A-814C-454C-80BD-1F01884D910B}
 		{9036948C-3231-42CF-8AF5-0AF601DFB199} = {B055800A-814C-454C-80BD-1F01884D910B}
+	EndGlobalSection
+	GlobalSection(JSLint) = preSolution
+		SolutionConfigurationLocation = JSLintOptions.xml
 	EndGlobalSection
 EndGlobal

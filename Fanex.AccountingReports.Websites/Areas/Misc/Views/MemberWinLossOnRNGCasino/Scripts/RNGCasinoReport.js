@@ -313,6 +313,7 @@ Fanex.AccountingReports.Misc.RNGCasinoReport = function () {
 
         gridOptions.showTitle = true;
         gridOptions.titleInfo = titleInfo;
+        gridOptions.showTree = true;
         gridOptions.gridExpandHeight = 220;
         self.Tables.historyReportContent.removeClass("display-none").fanexGrid(gridOptions);
     };
