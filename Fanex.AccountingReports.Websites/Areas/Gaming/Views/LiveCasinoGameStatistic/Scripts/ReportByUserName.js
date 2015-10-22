@@ -13,6 +13,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
                 info = report.ChildsInfo[i];
                 columns = [];
                 columns.push({ Name: "ColName", Value: info.Name });
+                columns.push({ Name: "ColId", Value: info.Id });
                 columns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });
                 columns.push({ Name: "ColCurrency", Value: info.CurrencyName });
                 columns.push({ Name: "ColTotalBets", Value: info.TotalBets });
@@ -43,6 +44,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
             var footerColumns = [];
             info = report.GrandTotal.ChildsInfo[footerReportLength - 1];
             footerColumns.push({ Name: "ColName", Value: info.Name });
+            footerColumns.push({ Name: "ColId", Value: "" });
             footerColumns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });
             footerColumns.push({ Name: "ColCurrency", Value: info.CurrencyName });
             footerColumns.push({ Name: "ColTotalBets", Value: info.TotalBets });
@@ -63,8 +65,12 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
         var columnsHeader = [];
         columnsHeader.push({
             HeaderText: viewResources.UserName, Width: 160, Name: "ColName", HeaderAlign: "center", CellAlign: "center",
-            Sort: true, SortDirection: reportManager.getSortDirection("Name") 
-            });
+            Sort: true, SortDirection: reportManager.getSortDirection("Name")
+        });
+        columnsHeader.push({
+            HeaderText: viewResources.CustId, Width: 100, Name: "ColId", HeaderAlign: "center", CellAlign: "center",
+            Sort: true, SortDirection: reportManager.getSortDirection("Id")
+        });
         columnsHeader.push({
             HeaderText: viewResources.No_Games, Width: 100, Name: "ColNumberOfGames", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.INT_NUMBER,
             Sort: true, SortDirection: reportManager.getSortDirection("NumberOfGames") 
@@ -116,7 +122,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
             bodyRows: bodyData,
             footerRows: footerData,
             numberOfFrozenColumn: 0,
-            gridWidth: 1400,
+            gridWidth: 1500,
             gridExpandHeight: 355,
             fullWidth: true,
             showDistinctRow: false,
@@ -153,6 +159,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
     self.AddChildTotalToBodyData = function (columns, currentChildTotal, bodyData) {
         columns = [];
         columns.push({ Name: "ColName", Value: currentChildTotal.Name, TdClass: "subTotal bold" });
+        columns.push({ Name: "ColId", Value: currentChildTotal.Id, TdClass: "subTotal bold" });
         columns.push({ Name: "ColNumberOfGames", Value: currentChildTotal.NumberOfGames, TdClass: "subTotal bold" });
         columns.push({ Name: "ColCurrency", Value: currentChildTotal.CurrencyName, TdClass: "subTotal bold" });
         columns.push({ Name: "ColTotalBets", Value: currentChildTotal.TotalBets, TdClass: "subTotal bold" });

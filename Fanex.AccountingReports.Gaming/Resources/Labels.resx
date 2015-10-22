@@ -1165,4 +1165,7 @@
   <data name="Total_Active_Members" xml:space="preserve">
     <value>Total Active Members</value>
   </data>
+  <data name="CustId" xml:space="preserve">
+    <value>Player ID</value>
+  </data>
 </root>

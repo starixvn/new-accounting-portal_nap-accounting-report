@@ -62,6 +62,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
                 info = new WinLossInfo
                 {
                     Name = data.Id,
+                    Id = data.CustId,
                     CurrencyName = data.CurrencyName,
                     NumberOfPlayers = data.NumberOfPlayers,
                     NumberOfGames = data.NumberOfGames,
@@ -151,7 +152,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
 
             int startRow = 0;
             int startColumn = 0;
-            int maxColumnIndex = criteria.ShowRefundColumn ? 10 : 9;
+            int maxColumnIndex = criteria.ShowRefundColumn ? 11 : 10;
             var currentRow = startRow;
 
             var currentColumn = startColumn;
@@ -195,6 +196,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
                     currentColumn = startColumn;
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.Name;
+                    currentCell.Style = textStyle;
+                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Converter.To<int>(info.Id);
                     currentCell.Style = textStyle;
                     currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
                     currentColumn++;

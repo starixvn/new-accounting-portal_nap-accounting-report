@@ -9,6 +9,7 @@
 
 namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Extensions;
@@ -84,12 +85,12 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
                     workSheet = worksheets.Add(sheetName + (totalSheet > 1 ? " - " + (sheetIndex + 1) : string.Empty));
                     currentRow = 0;
                     ExportReport_Header(
-                       ref workSheet,
-                       startRow,
-                       startColumn,
-                       ref currentRow,
-                       maxColumnIndex,
-                       criteria);
+                        ref workSheet,
+                        startRow,
+                        startColumn,
+                        ref currentRow,
+                        maxColumnIndex,
+                        criteria);
                     var startIndex = itemPerSheet * sheetIndex;
                     var endIndex = (sheetIndex == totalSheet - 1) ?
                         reportLength :
@@ -122,11 +123,11 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
                         ref twoDecimalNegativeNumberStyle,
                         false);
                     ExportReport_GrandTotal(
-                       report.GrandTotal,
-                       ref workSheet,
-                       startColumn,
-                       ref currentRow,
-                       criteria);
+                        report.GrandTotal,
+                        ref workSheet,
+                        startColumn,
+                        ref currentRow,
+                        criteria);
                     currentRow++;
                 }
             }
@@ -147,7 +148,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
                 MiscResources.MAMonitorTool_ReportName,
                 Converter.ToDateTime(criteria.FromDate).ToShortFormatedDateWithSlash().Replace('/', '_'),
                 Converter.ToDateTime(criteria.ToDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
-            excelFile.ReponseStream(reportName);
+            excelFile.ReponseStream(reportName);           
         }
 
         /// <summary>
