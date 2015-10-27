@@ -18,6 +18,8 @@
             Agent = string.Empty;
         }
 
+        public int Id { get; set; }
+
         public string Member { get; set; }
 
         public int Currency { get; set; }

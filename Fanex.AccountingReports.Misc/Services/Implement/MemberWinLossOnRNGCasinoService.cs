@@ -16,7 +16,7 @@
     using Fanex.Excel;
     using Fanex.Excel.Enums;
     using Fanex.Excel.Models;
-    using NPOI.SS.UserModel;
+    using NPOI.SS.UserModel;    
 
     /// <summary>
     /// TODO: Update summary.
@@ -44,9 +44,11 @@
                 using (ObjectDb objectDb = new ObjectDb(criteria.GetSettingKey()))
                 {
                     IDataReader reader = objectDb.ExecuteReader(criteria.GetSpParams());
+                    int id = 0;
                     while (reader.Read())
                     {
-                        MemberWinLoss winLoss = MappingWinLossData(reader, isRecent);
+                        id++;
+                        MemberWinLoss winLoss = MappingWinLossData(reader, isRecent, id);
                         winLoss.CurrencyName = exchangeCurrencies[winLoss.Currency];
                         memberWinLosses.Add(winLoss);
                     }
@@ -57,25 +59,11 @@
 
                     if (isRecent)
                     {
-                        var blockTimes = memberWinLosses.Select(s => Converter.ToDateTime(s.TransactionTime)).Distinct().ToList();
-                        var minDate = criteria.FromDate;
-                        var maxDate = Converter.ToDateTime(criteria.ToDate.AddSeconds(1).ToString("yyyy-MM-dd HH:00"));
-                        var time = Converter.ToDateTime(minDate.ToString("yyyy-MM-dd HH:00"));
-                        while (time < maxDate)
-                        {
-                            bool isExistTime = blockTimes.Where(s => s == time).Count() > 0;
-                            if (!isExistTime)
-                            {
-                                memberWinLosses.Add(new MemberWinLoss() 
-                                {
-                                    TransactionTime = time.ToString("yyyy-MM-dd HH:00")
-                                });
-                            }
-
-                            time = time.AddHours(1);
-                        }
-
-                        memberWinLosses = memberWinLosses.OrderByDescending(s => Converter.ToDateTime(s.TransactionTime)).ThenBy(x => x.Member).ToList();
+                        memberWinLosses = RefineRecentData(criteria, memberWinLosses);
+                    }
+                    else 
+                    {
+                        memberWinLosses = RefineHistoricalData(criteria, memberWinLosses);
                     }
                 }
             }
@@ -84,6 +72,89 @@
                 HandleException(ex);
             }
 
+            return memberWinLosses;
+        }
+
+        private static List<MemberWinLoss> RefineHistoricalData(IMemberWinLossOnRNGCasinoCriteria criteria, List<MemberWinLoss> memberWinLosses)
+        {
+            List<MemberWinLoss> result = new List<MemberWinLoss>();
+
+            var blockTimes = memberWinLosses.Select(s => Converter.ToDateTime(s.TransactionTime)).Distinct().ToList();
+            var minDate = criteria.FromDate;
+            var maxDate = criteria.ToDate;
+            var time = criteria.FromDate.AddHours(1);
+            if (time > maxDate)
+            {
+                time = maxDate;
+            }
+
+            var beginBlockTime = minDate;
+            var endBlockTime = time;
+            while (time <= maxDate && beginBlockTime < endBlockTime)
+            {
+                var listMembersInBlockTime = memberWinLosses.Where(s => Converter.ToDateTime(s.TransactionTime) >= beginBlockTime && Converter.ToDateTime(s.TransactionTime) < endBlockTime).ToList();
+                bool isExistTime = listMembersInBlockTime.Count > 0;
+                if (!isExistTime)
+                {
+                    result.Add(new MemberWinLoss()
+                    {
+                        TransactionTime = beginBlockTime.ToString("yyyy-MM-dd HH:mm:ss")
+                    });
+                }
+                else
+                {
+                    var members = listMembersInBlockTime.Select(s => s.Member).ToList().Distinct();
+                    foreach (var member in members)
+                    {
+                        var row = listMembersInBlockTime.Where(s => s.Member == member).FirstOrDefault();
+                        result.Add(new MemberWinLoss()
+                        {
+                            Member = member, 
+                            Agent = row.Agent,
+                            CurrencyName = row.CurrencyName,
+                            TransactionTime = beginBlockTime.ToString("yyyy-MM-dd HH:mm:ss"),
+                            NumberOfBet = 1,
+                            WinLoss = listMembersInBlockTime.Where(s => s.Member == member).Sum(s => s.WinLoss),
+                            WinLossRM = listMembersInBlockTime.Where(s => s.Member == member).Sum(s => s.WinLossRM),                     
+                        });
+                    }
+                }
+
+                beginBlockTime = time;
+                time = time.AddHours(1);
+                if (time > maxDate)
+                {
+                    time = maxDate;
+                }
+
+                endBlockTime = time;
+            }
+
+            result = result.OrderByDescending(s => Converter.ToDateTime(s.TransactionTime)).ThenBy(x => x.Member).ToList();
+            return result;
+        }
+
+        private static List<MemberWinLoss> RefineRecentData(IMemberWinLossOnRNGCasinoCriteria criteria, List<MemberWinLoss> memberWinLosses)
+        {
+            var blockTimes = memberWinLosses.Select(s => Converter.ToDateTime(s.TransactionTime)).Distinct().ToList();
+            var minDate = criteria.FromDate;
+            var maxDate = Converter.ToDateTime(criteria.ToDate.AddSeconds(1).ToString("yyyy-MM-dd HH:00"));
+            var time = Converter.ToDateTime(minDate.ToString("yyyy-MM-dd HH:00"));
+            while (time < maxDate)
+            {
+                bool isExistTime = blockTimes.Where(s => s == time).Count() > 0;
+                if (!isExistTime)
+                {
+                    memberWinLosses.Add(new MemberWinLoss()
+                    {
+                        TransactionTime = time.ToString("yyyy-MM-dd HH:00")
+                    });
+                }
+
+                time = time.AddHours(1);
+            }
+
+            memberWinLosses = memberWinLosses.OrderByDescending(s => Converter.ToDateTime(s.TransactionTime)).ThenBy(x => x.Member).ToList();
             return memberWinLosses;
         }
 
@@ -113,7 +184,7 @@
             try
             {
                 var memberWinLosses = GetReportData(criteria, false);
-                var dataRows = HistoryReportDataRows(memberWinLosses);
+                var dataRows = HistoryReportDataRows(memberWinLosses, criteria);
                 gridOptions.BodyRows = dataRows;
             }
             catch (Exception ex)
@@ -160,17 +231,18 @@
                 criteria.ToDate.ToString("HH_mm_dd_MMM_yyyy"));
         }
 
-        private MemberWinLoss MappingWinLossData(IDataReader reader, bool isRecent)
+        private MemberWinLoss MappingWinLossData(IDataReader reader, bool isRecent, int id)
         {
             return new MemberWinLoss
             {
+                Id = id,
                 Member = Converter.ToString2(reader["member"]),
                 Currency = Converter.ToInt(reader["currency"]),
                 Agent = Converter.ToString2(reader["agent"]),
                 WinLoss = Converter.ToDecimal(reader["winlost"]),
                 WinLossRM = Converter.ToDecimal(reader["winlost_rm"]),                
                 NumberOfBet = isRecent ? Converter.ToInt(reader["NumOfBets"]) : 0,
-                TransactionTime = isRecent ? Converter.ToString2(reader["Truncate"]) : string.Empty
+                TransactionTime = isRecent ? Converter.ToString2(reader["Truncate"]) : Converter.ToString2(reader["TransDate"])
             };
         }
 
@@ -210,12 +282,42 @@
             return header;
         }
 
-        private List<GridDataRow> HistoryReportDataRows(List<MemberWinLoss> memberWinLosses)
+        private List<GridDataRow> HistoryReportDataRows(List<MemberWinLoss> memberWinLosses, IMemberWinLossOnRNGCasinoCriteria criteria)
         {
             List<GridDataRow> dataRows = new List<GridDataRow>();
-            foreach (var memberWinLoss in memberWinLosses)
+            var memberWinLossByTransactionGroups = memberWinLosses.GroupBy(x => x.TransactionTime).ToList();
+            foreach (var transactionGroup in memberWinLossByTransactionGroups)
             {
-                var dataRow = BuildMemberWinLossDataRow(memberWinLoss, false);
+                var dataRow = new GridDataRow() { RowType = RowType.ParentLevelOne };
+                string fromTime = Converter.ToDateTime(transactionGroup.Key).ToString("MMM dd, yyyy HH:mm:ss");
+                string toTime = Converter.ToDateTime(transactionGroup.Key).AddMinutes(60).ToString("MMM dd, yyyy HH:mm:ss");
+                if (Converter.ToDateTime(transactionGroup.Key).AddMinutes(60) > criteria.ToDate)
+                {
+                    toTime = criteria.ToDate.ToString("MMM dd, yyyy HH:mm:ss");
+                }
+
+                if (Converter.ToDateTime(fromTime).Day == Converter.ToDateTime(toTime).Day)
+                {
+                    fromTime = Converter.ToDateTime(fromTime).ToString("HH:mm:ss");
+                    toTime = Converter.ToDateTime(toTime).ToString("HH:mm:ss");
+                }
+
+                int numOfMembers = transactionGroup.Count();
+
+                if (numOfMembers == 1)
+                {
+                    var wl = transactionGroup.FirstOrDefault();
+                    numOfMembers = wl.NumberOfBet;
+                }
+
+                string blockTime = fromTime + " - " + toTime + " (" + numOfMembers + " member" + (numOfMembers > 1 ? "s" : string.Empty) + ")";
+                dataRow.CreateColumns(new Columns { Name = Labels.Member, MergeColNumber = 5, Value = blockTime, Bold = true, });
+                foreach (var memberWinLoss in transactionGroup)
+                {
+                    var memberWinLossDataRow = BuildMemberWinLossDataRow(memberWinLoss, true);
+                    dataRow.CreateSubRows(memberWinLossDataRow);
+                }
+
                 dataRows.Add(dataRow);
             }
 
@@ -263,7 +365,7 @@
             int columnIndex = 0;
             GridDataRow dataRow = new GridDataRow();
 
-            if (winLoss.NumberOfBet == 0 && isRecent)
+            if (winLoss.NumberOfBet == 0)
             {
                 dataRow.CreateColumns(new Columns() { Name = Labels.Member, Value = Labels.nodata, MergeColNumber = 5, CellAlignment = HAlignment.Center, CssClass = "nodata" });
             }
