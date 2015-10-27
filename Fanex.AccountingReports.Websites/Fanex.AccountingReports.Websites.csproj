@@ -49,17 +49,20 @@
       <HintPath>..\_Dependencies\ExcelUtil.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.BetList.BetTrade, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.5.8.9\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
+      <HintPath>..\packages\Fanex.BetList.Core.2.6.0.0\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.BetList.ColossusBets, Version=1.0.0.8, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.ColossusBets.1.0.0.8\lib\net40\Fanex.BetList.ColossusBets.dll</HintPath>
+    <Reference Include="Fanex.BetList.ColossusBets, Version=1.0.1.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.BetList.ColossusBets.1.0.1.2\lib\net40\Fanex.BetList.ColossusBets.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.BetList.Core, Version=2.2.9.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Fanex.BetList.Core.2.5.8.9\lib\net40\Fanex.BetList.Core.dll</HintPath>
+    <Reference Include="Fanex.BetList.Core, Version=2.2.9.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.BetList.Core.2.6.0.0\lib\net40\Fanex.BetList.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.BetList.GoldDeluxe, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.5.8.9\lib\net40\Fanex.BetList.GoldDeluxe.dll</HintPath>
+      <HintPath>..\packages\Fanex.BetList.Core.2.6.0.0\lib\net40\Fanex.BetList.GoldDeluxe.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.BetList.MetricGaming, Version=1.0.4.2, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -104,18 +107,20 @@
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.Nap.SSO.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Result.Core, Version=2.0.1.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.1.5\lib\net40\Fanex.Result.Core.dll</HintPath>
+      <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.1.7\lib\net40\Fanex.Result.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.Result.Core.Base, Version=1.0.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.1.5\lib\net40\Fanex.Result.Core.Base.dll</HintPath>
+    <Reference Include="Fanex.Result.Core.Base, Version=1.0.1.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.1.7\lib\net40\Fanex.Result.Core.Base.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Result.Core.GoldDeluxe, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Fanex.Result.Core-GoldDeluxe.1.0.0.6\lib\net40\Fanex.Result.Core.GoldDeluxe.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Result.Core.LiveCasino">
-      <HintPath>..\packages\Fanex.Result.Core-LiveCasino.1.0.0.3\lib\net40\Fanex.Result.Core.LiveCasino.dll</HintPath>
+    <Reference Include="Fanex.Result.Core.LiveCasino, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Result.Core-LiveCasino.1.0.0.4\lib\net40\Fanex.Result.Core.LiveCasino.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Result.Core.MetricGaming">
       <HintPath>..\packages\Fanex.Result.Core-MetricGaming.1.0.0.3\lib\net40\Fanex.Result.Core.MetricGaming.dll</HintPath>
@@ -124,15 +129,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Fanex.Result.Core-MicroGaming.1.0.0.2\lib\net40\Fanex.Result.Core.MicroGaming.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Result.Core.NumberGame">
-      <HintPath>..\packages\Fanex.Result.Core-NumberGame.1.0.0.3\lib\net40\Fanex.Result.Core.NumberGame.dll</HintPath>
+    <Reference Include="Fanex.Result.Core.NumberGame, Version=1.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Result.Core-NumberGame.1.0.0.5\lib\net40\Fanex.Result.Core.NumberGame.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Result.Core.Racing">
       <HintPath>..\packages\Fanex.Result.Core-Racing.1.0.0.3\lib\net40\Fanex.Result.Core.Racing.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.Result.Core.Sportsbook, Version=1.0.1.2, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Fanex.Result.Core-Sportsbook.1.0.1.2\lib\net40\Fanex.Result.Core.Sportsbook.dll</HintPath>
+    <Reference Include="Fanex.Result.Core.Sportsbook, Version=1.0.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Result.Core-Sportsbook.1.0.1.4\lib\net40\Fanex.Result.Core.Sportsbook.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.File.1.0.0\lib\net40\IBCFile.dll</HintPath>
