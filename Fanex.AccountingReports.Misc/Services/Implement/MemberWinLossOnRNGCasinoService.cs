@@ -161,7 +161,7 @@
         public GridOptions GetRecentReport(IMemberWinLossOnRNGCasinoCriteria criteria)
         {
             ConvertTimeZone(criteria); 
-            GridOptions gridOptions = InitCasinoMemberWinLossGridOptions(criteria);            
+            GridOptions gridOptions = InitCasinoMemberWinLossGridOptions(criteria, true);            
             try
             {
                 var memberWinLosses = GetReportData(criteria, true);
@@ -180,7 +180,7 @@
 
         public GridOptions GetHistoryReport(IMemberWinLossOnRNGCasinoCriteria criteria)
         {
-            GridOptions gridOptions = InitCasinoMemberWinLossGridOptions(criteria);            
+            GridOptions gridOptions = InitCasinoMemberWinLossGridOptions(criteria, false);            
             try
             {
                 var memberWinLosses = GetReportData(criteria, false);
@@ -246,8 +246,16 @@
             };
         }
 
-        private GridOptions InitCasinoMemberWinLossGridOptions(IMemberWinLossOnRNGCasinoCriteria criteria)
+        private GridOptions InitCasinoMemberWinLossGridOptions(IMemberWinLossOnRNGCasinoCriteria criteria, bool isRecent)
         {
+            var fromdate = criteria.FromDate.ToString("MMM dd, yyyy HH:mm");
+            var todate = criteria.ToDate.AddSeconds(1).ToString("MMM dd, yyyy HH:mm");
+            if (!isRecent)
+            {
+                fromdate = criteria.FromDate.ToString("MMM dd, yyyy HH:mm:ss");
+                todate = criteria.ToDate.ToString("MMM dd, yyyy HH:mm:ss");
+            }
+
             return new GridOptions
             {
                 Columns = HeaderColumns(),
@@ -259,8 +267,8 @@
                 TitleInfoText = string.Format(
                 MiscResources.RNGCasinoReportTitle,
                 criteria.Amount.ToString("0,0"),
-                criteria.FromDate.ToString("MMM dd, yyyy HH:mm"),
-                criteria.ToDate.AddSeconds(1).ToString("MMM dd, yyyy HH:mm"))
+                fromdate,
+                todate)
             };
         }
 

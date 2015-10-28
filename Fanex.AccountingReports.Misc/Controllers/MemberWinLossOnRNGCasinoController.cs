@@ -54,7 +54,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
             DateTime lastHour = ReportService.ConvertTimeZone(DateTime.Now.AddHours(-1));
 
             criteria.FromDate = Converter.ToDateTime(lastHour.ToString("yyyy-MM-dd HH:00:00"));
-            criteria.ToDate = Converter.ToDateTime(lastHour.ToString("yyyy-MM-dd HH:59:59.997"));
+            criteria.ToDate = Converter.ToDateTime(lastHour.ToString("yyyy-MM-dd HH:59:59.997")); 
             var result = _service.GetRecentReport(criteria);
             return new JsonNetResult(result);
         }
@@ -74,6 +74,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
         [HandleAjaxError]
         public ActionResult GetHistoryReport(MemberWinLossOnRNGCasinoHistoricalCriteria criteria)
         {
+            criteria.ToDate = Converter.ToDateTime(criteria.ToDate.ToString("yyyy-MM-dd HH:mm:ss.997")); 
             var result = _service.GetHistoryReport(criteria);
             return new JsonNetResult(result);
         }
