@@ -291,6 +291,11 @@
                 var dataRow = new GridDataRow() { RowType = RowType.ParentLevelOne };
                 string fromTime = Converter.ToDateTime(transactionGroup.Key).ToString("MMM dd, yyyy HH:mm:ss");
                 string toTime = Converter.ToDateTime(transactionGroup.Key).AddMinutes(60).ToString("MMM dd, yyyy HH:mm:ss");
+                if (dataRows.Count > 0)
+                {
+                    toTime = Converter.ToDateTime(transactionGroup.Key).AddMinutes(60).AddSeconds(-1).ToString("MMM dd, yyyy HH:mm:ss");
+                }
+
                 if (Converter.ToDateTime(transactionGroup.Key).AddMinutes(60) > criteria.ToDate)
                 {
                     toTime = criteria.ToDate.ToString("MMM dd, yyyy HH:mm:ss");
