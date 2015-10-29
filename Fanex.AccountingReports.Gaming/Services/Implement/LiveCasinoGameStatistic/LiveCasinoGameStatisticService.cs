@@ -597,6 +597,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
 
                 case PeriodTypeConstants.LiveCasinoGameStatisticUsername:
                     currentCell.Value = Labels.UserName;
+                    
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Style = headerTextStyle;                    
+                    currentCell.Value = Labels.CustId;
                     break;
 
                 case PeriodTypeConstants.LiveCasinoGameStatisticGameType:
@@ -847,6 +853,16 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
             currentCell.Value = info.Name;
             currentCell.Style = textStyle_GrandTotal;
             currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+
+            if (criteria.ReportType == PeriodTypeConstants.LiveCasinoGameStatisticUsername)
+            {
+                currentColumn++;
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = string.Empty;
+                currentCell.Style = textStyle_GrandTotal;
+                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+            }
+
             currentColumn++;
 
             ExportReport_WinLossRow(
@@ -918,6 +934,14 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = info.Name;
                 currentCell.Style = textStyle_SubTotal;
+
+                if (criteria.ReportType == PeriodTypeConstants.LiveCasinoGameStatisticUsername)
+                {
+                    currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = string.Empty;
+                    currentCell.Style = textStyle_SubTotal;
+                }
 
                 currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
                 currentColumn++;

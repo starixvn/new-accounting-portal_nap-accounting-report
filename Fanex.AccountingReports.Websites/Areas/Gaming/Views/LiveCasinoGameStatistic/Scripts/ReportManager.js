@@ -848,6 +848,10 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
                 sortInfo.sortColumnName = "Name";
                 sortInfo.sortDataType = self.Enums.SortDataType.String;
                 break;
+            case "ColId":
+                sortInfo.sortColumnName = "Id";
+                sortInfo.sortDataType = self.Enums.SortDataType.String;
+                break;
             case "ColNumberOfPlayers":
                 sortInfo.sortColumnName = "NumberOfPlayers";
                 sortInfo.sortDataType = self.Enums.SortDataType.String;
@@ -906,6 +910,10 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
         switch (columnName) {
             case "ColName":
                 sortInfo.sortColumnName = "Name";
+                sortInfo.sortDataType = self.Enums.SortDataType.Date;
+                break;
+            case "ColId":
+                sortInfo.sortColumnName = "Id";
                 sortInfo.sortDataType = self.Enums.SortDataType.Date;
                 break;
             case "ColNumberOfPlayers":

@@ -54,14 +54,26 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
             {
                 var winLossInfoTable = result.Tables[0];
                 var winLossInfo = new List<WinLossInfoEntity>();
+                string custId = string.Empty;
+                int numberOfPlayers = 0;
                 foreach (DataRow row in winLossInfoTable.Rows)
                 {
+                    if (criteria.ReportType == PeriodTypeConstants.LiveCasinoGameStatisticUsername)
+                    {
+                        numberOfPlayers = 0;
+                        custId = Converter.ToString2(row["custid"]);
+                    }
+                    else
+                    {
+                        numberOfPlayers = Converter.ToInt(row["NoOfPlayers"]);
+                        custId = string.Empty;
+                    }
+
                     var info = new WinLossInfoEntity
                     {
                         Id = GetWinLossInfoId(criteria, row),
-                        NumberOfPlayers = criteria.ReportType == PeriodTypeConstants.LiveCasinoGameStatisticUsername ?
-                            0 :
-                            Converter.ToInt(row["NoOfPlayers"]),
+                        CustId = custId,
+                        NumberOfPlayers = numberOfPlayers,
                         NumberOfGames = Converter.ToInt(row["NoOfGames"]),
                         CurrencyName = Converter.ToString2(row["Currency"]),
 

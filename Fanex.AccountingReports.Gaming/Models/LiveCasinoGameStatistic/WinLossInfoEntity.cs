@@ -20,6 +20,8 @@ namespace Fanex.AccountingReports.Gaming.Models.LiveCasinoGameStatistic
     {
         public string Id { get; set; }
 
+        public string CustId { get; set; }
+
         public int NumberOfPlayers { get; set; }
 
         public int NumberOfGames { get; set; }
