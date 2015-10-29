@@ -376,7 +376,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Member_WL_on_RNG_Casino_From_{0}_To_{1}.
+        ///   Looks up a localized string similar to Member_WL_on_SLI_RNG_Casino_From_{0}_To_{1}.
         /// </summary>
         public static string MemberWinLossOnRNGCasino_ReportName {
             get {
@@ -385,7 +385,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Member Win Loss On RNG Casino.
+        ///   Looks up a localized string similar to Member WL On SLI - RNG Casino.
         /// </summary>
         public static string MemberWinLossOnRNGCasino_SheetName {
             get {
@@ -394,7 +394,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RNG Casino - Member(s) with winloss greater or equal RM ${0} from {1} to {2}.
+        ///   Looks up a localized string similar to SLI - RNG Casino - Member(s) with winloss greater or equal RM ${0} from {1} to {2}.
         /// </summary>
         public static string RNGCasinoReportTitle {
             get {
