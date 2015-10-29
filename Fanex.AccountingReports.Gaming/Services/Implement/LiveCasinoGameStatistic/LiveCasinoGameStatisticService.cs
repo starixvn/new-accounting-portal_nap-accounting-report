@@ -472,7 +472,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
             if (!string.Equals(criteria.Currency, ((int)CoreConstants.CurrencyContants.All).ToString()) &&
                 !string.Equals(criteria.Currency, ((int)CoreConstants.CurrencyContants.BaseRM).ToString()))
             {
-                var firstCurrencyTotal = report.GrandTotal.ChildsInfo[0];
+                var firstCurrencyTotal = report.GrandTotal.ChildsInfo.Count > 0 ? report.GrandTotal.ChildsInfo[0] : new WinLossInfo();
                 var info = new WinLossInfo
                 {
                     Name = Labels.Grand_Total + " " + firstCurrencyTotal.CurrencyName,
