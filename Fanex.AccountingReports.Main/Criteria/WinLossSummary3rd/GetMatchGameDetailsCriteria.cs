@@ -67,45 +67,5 @@ namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd
                 return _type;
             }
         }
-
-        /// <summary>
-        /// Gets the setting key.
-        /// </summary>
-        /// <returns>The setting key.</returns>
-        public override string GetSettingKey()
-        {
-            string storeProcedureName;
-            SportTypeWinLoss type = this.Type;
-            switch (type)
-            {
-                case SportTypeWinLoss.SportBook:
-                    storeProcedureName = "Main_WinLossSummary3rd_Get_Sporttype_SB";
-                    break;
-
-                case SportTypeWinLoss.Racing:
-                    storeProcedureName = "Main_WinLossSummary3rd_Get_Racing";
-                    break;
-
-                case SportTypeWinLoss.VirtualSports:
-                    storeProcedureName = "Main_WinLossSummary3rd_Get_VirtualSports";
-                    break;
-
-                case SportTypeWinLoss.VirtualRacing:
-                    storeProcedureName = "Main_WinLossSummary3rd_Get_VirtualRacing";
-                    break;
-
-                case SportTypeWinLoss.Unknown:
-                default:
-                    storeProcedureName = string.Empty;
-                    break;
-            }
-
-            return storeProcedureName;
-        }
-
-        public override bool IsValid()
-        {
-            return true;
-        }
     }
 }

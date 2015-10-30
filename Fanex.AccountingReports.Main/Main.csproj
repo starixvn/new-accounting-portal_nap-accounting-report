@@ -227,6 +227,10 @@
     <Compile Include="Criteria\TraderPerformance\GetReportCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetMatchGameDetailsCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetRecalculateWinLossCriteria.cs" />
+    <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdRacingSportTypeCriteria.cs" />
+    <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdSportbookSportTypeCriteria.cs" />
+    <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdVirtualRacingSportTypeCriteria.cs" />
+    <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdVirtualSportSportTypeCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary\GetReportCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetReportCriteria.cs" />
     <Compile Include="Enums\DailyWinloss2hSoccerMinorBettype\ColumnMappingEnums.cs" />

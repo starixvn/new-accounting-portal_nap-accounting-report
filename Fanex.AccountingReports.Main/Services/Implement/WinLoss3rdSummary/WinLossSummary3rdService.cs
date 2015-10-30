@@ -12,11 +12,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using System.Drawing;
     using System.Linq;
-    using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
-    using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
@@ -410,7 +407,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
             return report;
         }
-        
+
         //// Private methods
 
         /// <summary>
@@ -426,15 +423,19 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 case MainConstants.WinLossSummaryMixParlaySportId:
                     sportName = Labels.Mix_Parlay;
                     break;
+
                 case MainConstants.WinLossSummarySystemParlaySportId:
                     sportName = Labels.System_Parlay;
                     break;
+
                 case SportContants.MetricGamingSuperLive:
                     sportName = Labels.Metric_Gaming_Super_Live;
                     break;
+
                 case SportContants.Macau:
                     sportName = Labels.Macau;
                     break;
+
                 case SportContants.Bettrade:
                     sportName = Labels.Bettrade;
                     break;
@@ -503,7 +504,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
         private IEnumerable<dynamic> GetMatchGameDetails(GetMatchGameDetailsCriteria criteria)
         {
             IEnumerable<dynamic> report = null;
-            var rawData = GetReportData<dynamic>(criteria);
+            var winLossBySportCriteria = this.CreateWinLossBySportTypeCriteria(criteria);
+            var rawData = GetReportData<dynamic>(winLossBySportCriteria);
 
             SportTypeWinLoss type = criteria.Type;
             switch (type)
@@ -743,6 +745,69 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             }
 
             return hedgeIsExistInSportType;
+        }
+
+        private CriteriaBase CreateWinLossBySportTypeCriteria(GetMatchGameDetailsCriteria criteria)
+        {
+            SportTypeWinLoss type = criteria.Type;
+
+            switch (type)
+            {
+                case SportTypeWinLoss.SportBook:
+                    return CreateWinLossSummary3rdSportbookSportTypeCriteria(criteria);
+                case SportTypeWinLoss.Racing:
+                    return CreateWinLossSummary3rdRacingSportTypeCriteria(criteria);
+                case SportTypeWinLoss.VirtualSports:
+                    return CreateWinLossSummary3rdVirtualSportSportTypeCriteria(criteria);
+                case SportTypeWinLoss.VirtualRacing:
+                    return CreateWinLossSummary3rdVirtualRacingSportTypeCriteria(criteria);
+                case SportTypeWinLoss.Unknown:
+                default:
+                    return criteria;
+            }
+        }
+
+        private CriteriaBase CreateWinLossSummary3rdSportbookSportTypeCriteria(GetMatchGameDetailsCriteria criteria)
+        {
+            return new GetWinLossSummary3rdSportbookSportTypeCriteria
+            {
+                FromDate = criteria.FromDate,
+                ToDate = criteria.ToDate,
+                SportType = criteria.SportType,
+                BetType = criteria.BetType,
+                LiveIndicator = criteria.LiveIndicator,
+                DrillDownByType = criteria.DrillDownByType
+            };
+        }
+
+        private CriteriaBase CreateWinLossSummary3rdVirtualSportSportTypeCriteria(GetMatchGameDetailsCriteria criteria)
+        {
+            return new GetWinLossSummary3rdVirtualSportSportTypeCriteria
+            {
+                FromDate = criteria.FromDate,
+                ToDate = criteria.ToDate,
+                SportType = criteria.SportType
+            };
+        }
+
+        private CriteriaBase CreateWinLossSummary3rdRacingSportTypeCriteria(GetMatchGameDetailsCriteria criteria)
+        {
+            return new GetWinLossSummary3rdRacingSportTypeCriteria
+            {
+                FromDate = criteria.FromDate,
+                ToDate = criteria.ToDate,
+                SportType = criteria.SportType
+            };
+        }
+
+        private CriteriaBase CreateWinLossSummary3rdVirtualRacingSportTypeCriteria(GetMatchGameDetailsCriteria criteria)
+        {
+            return new GetWinLossSummary3rdVirtualRacingSportTypeCriteria
+            {
+                FromDate = criteria.FromDate,
+                ToDate = criteria.ToDate,
+                SportType = criteria.SportType
+            };
         }
     }
 }
