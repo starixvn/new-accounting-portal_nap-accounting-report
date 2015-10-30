@@ -655,11 +655,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             this._bettype.Add(4, BetTypeConstants._1stOverUnder);
             this._bettype.Add(5, BetTypeConstants._1stOddEvenBetType);
             this._bettype.Add(6, BetTypeConstants.MoneyLineBettype);
-            this._bettype.Add(7, BetTypeConstants._1stMoneyLineBettype);
-            this._bettype.Add(8, BetTypeConstants.SetXWinnerBettype);
-            this._bettype.Add(9, BetTypeConstants.MatchWinnerBettype);
-            this._bettype.Add(10, BetTypeConstants.SetXWinner3Rd);
-            this._bettype.Add(11, BetTypeConstants.SetXGameYWinner);
+            this._bettype.Add(7, BetTypeConstants._1stMoneyLineBettype);                   
+            this._bettype.Add(8, BetTypeConstants.SetXGameYWinner);
         }
 
         private string GetSportName(int sportId)

@@ -27,7 +27,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
     /// </summary>
     public class TreeWinLossExcelService : ServiceBase, ITreeWinLossExcelService
     {
-        private const int _MaxUserPerSheet = 200000;
+        private const int _MaxUserPerSheet = 40000;
         private static CellStyle headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
         private static Color backgroundColor = ExcelExtensions.BackGroundColor;
         private static CellStyle textStyle = ExcelExtensions.GetCellTextStyle(backgroundColor, false);
@@ -313,7 +313,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 var virtualRateByUserInSheet = report.SMAVirtualRate.ReportRows.Skip(sheetIndex * maxUserPerSheet).Take(maxUserPerSheet).ToList();
                 string sheetName = string.Format(WinLossResources.TreeWinLoss_VirtualRate_SheetName, sheetIndex + 1);
                 ExcelWorksheet worksheet = workSheets.Add(sheetName);
-                for (var colIndex = 1; colIndex < 13; colIndex++)
+                for (var colIndex = 1; colIndex < 12; colIndex++)
                 {
                     worksheet.Columns[colIndex].Width = 120 * ExcelExtensions.FontWidth;
                 }
@@ -322,18 +322,17 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 worksheet.Columns[2].Width = 200 * ExcelExtensions.FontWidth;
                 worksheet.Columns[9].Width = 180 * ExcelExtensions.FontWidth;
                 worksheet.Columns[10].Width = 180 * ExcelExtensions.FontWidth;
-                worksheet.Columns[11].Width = 180 * ExcelExtensions.FontWidth;
-                worksheet.Columns[12].Width = 180 * ExcelExtensions.FontWidth;
+                worksheet.Columns[11].Width = 180 * ExcelExtensions.FontWidth;                
 
                 int currentRow = 0;
                 string title = GetReportTitleByLevel(criteria);
 
-                CellRange currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, 0, currentRow, 12);
+                CellRange currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, 0, currentRow, 11);
                 currentCellRange.Merged = true;
                 currentCellRange.Value = title;
                 currentCellRange.Style = headerTextStyle;
                 currentRow++;
-                worksheet.ExportEmptyRow(currentRow, 0, ref currentRow, 12);
+                worksheet.ExportEmptyRow(currentRow, 0, ref currentRow, 11);
 
                 this.ExportVirtualRateReportHeader(worksheet, ref currentRow);
 
@@ -1221,7 +1220,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentCellRange.Style = headerTextStyle;
             currentColumn++;
 
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 9);
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 8);
             currentCellRange.Merged = true;
             currentCellRange.Value = string.Format("{0} %", Labels.VirtualRate);
             currentCellRange.Style = headerTextStyle;
@@ -1259,17 +1258,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = string.Format("{0} / \n {1}", Labels.Moneyline, Labels.MatchWinner);
+            currentCell.Value = Labels.Moneyline;
             currentCell.Style = headerTextStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = Labels._1st_Moneyline;
-            currentCell.Style = headerTextStyle;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = string.Format("{0} / \n {1}", Labels.SetXWinner, Labels.SetXWinner3Rd);
             currentCell.Style = headerTextStyle;
             currentColumn++;
 
@@ -1334,7 +1328,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 currentColumn++;
 
                 VirtualRateByBettypeInfo virtualRateByBettype = null;
-                for (int i = 0; i < 6; i++)
+                for (int i = 0; i < 9; i++)
                 {
                     virtualRateByBettype = virtualRateBySportAndLiveStatus.VirtualRateByBettypeInfo[i];
                     currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -1343,34 +1337,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     currentCell.Style = pecentStyle;
                     currentColumn++;
                 }
-
-                virtualRateByBettype = virtualRateBySportAndLiveStatus.VirtualRateByBettypeInfo[6];
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                SetCellValue(virtualRateByBettype.VirtualRate, ref currentCell);
-                pecentStyle.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentCell.Style = pecentStyle;
-                currentColumn++;
-
-                virtualRateByBettype = virtualRateBySportAndLiveStatus.VirtualRateByBettypeInfo[7];
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                SetCellValue(virtualRateByBettype.VirtualRate, ref currentCell);
-                pecentStyle.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentCell.Style = pecentStyle;
-                currentColumn++;
-
-                virtualRateByBettype = virtualRateBySportAndLiveStatus.VirtualRateByBettypeInfo[8];
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                SetCellValue(virtualRateByBettype.VirtualRate, ref currentCell);
-                pecentStyle.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentCell.Style = pecentStyle;
-                currentColumn++;
-
-                virtualRateByBettype = virtualRateBySportAndLiveStatus.VirtualRateByBettypeInfo[11];
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                SetCellValue(virtualRateByBettype.VirtualRate, ref currentCell);
-                pecentStyle.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentCell.Style = pecentStyle;
-                currentColumn++;
 
                 currentRow++;
             }
