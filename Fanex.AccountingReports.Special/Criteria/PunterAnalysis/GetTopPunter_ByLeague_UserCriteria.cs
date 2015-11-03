@@ -19,6 +19,7 @@ namespace Fanex.AccountingReports.Special.Criteria.PunterAnalysis
     {
         public int CustID { get; set; }
 
+        [SpParam(Ignored = true)]
         public string UserName { get; set; }
 
         public int Sporttype { get; set; }
@@ -39,11 +40,13 @@ namespace Fanex.AccountingReports.Special.Criteria.PunterAnalysis
 
         public int Reporttype { get; set; }
 
+        [SpParam(Ignored = true)]
         public int OrderBy { get; set; }
 
         [SpParam(Ignored = true)]
         public string OrderByName { get; set; }
 
+        [SpParam(Ignored = true)]
         public int OrderType { get; set; }
 
         [SpParam(Ignored = true)]

@@ -121,8 +121,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     return Labels.SLI;
                 case SportContants._2hGoldDeluxeSport:
                     return Labels.Gold_Deluxe;
-                case SportContants._2hMicroGamingSport:
-                    return Labels.Microgaming;
+                case SportContants._2hMicroGamingLiveCasinoSport:
+                    return Labels.MicroGaming_LiveCasino;
+                case SportContants._2hMicroGamingRNGCasinoSport:
+                    return Labels.Microgaming_RNGCasino;
                 case SportContants._2hAGCasinoSport:
                     return Labels.AG_Casino;
                 case SportContants._2hVegasGamesSport:

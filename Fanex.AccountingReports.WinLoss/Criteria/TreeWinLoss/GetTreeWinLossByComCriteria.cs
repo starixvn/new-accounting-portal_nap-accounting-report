@@ -36,6 +36,18 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
 
         public int Currency { get; set; }
 
+        public bool ShowGD { get; set; }
+
+        public bool ShowMGSL { get; set; }
+
+        public bool ShowMGCLC { get; set; }
+
+        public bool ShowMGCRNG { get; set; }
+
+        public bool ShowVG { get; set; }
+
+        public bool ShowAGCS { get; set; }
+
         public override bool IsValid()
         {
             return true;

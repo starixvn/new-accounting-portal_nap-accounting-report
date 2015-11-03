@@ -401,7 +401,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                         ShowP2P = criteria.ShowP2P,
                         ShowRB = criteria.ShowRB,
                         ShowSB = criteria.ShowSB,
-                        ShowVS = criteria.ShowVS
+                        ShowVS = criteria.ShowVS,
+                        ShowMGSL = criteria.ShowMGSL,
+                        ShowMGCLC = criteria.ShowMGCLC,
+                        ShowMGCRNG = criteria.ShowMGCRNG,
+                        ShowVG = criteria.ShowVG,
+                        ShowAGCS = criteria.ShowAGCS
                     }, 
                     criteria.RoleId);
                 case 4:
@@ -420,7 +425,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                         ShowRB = criteria.ShowRB,
                         ShowSB = criteria.ShowSB,
                         ShowVS = criteria.ShowVS,
-                        ShowGD = criteria.ShowGD
+                        ShowGD = criteria.ShowGD,
+                        ShowMGSL = criteria.ShowMGSL,
+                        ShowMGCLC = criteria.ShowMGCLC,
+                        ShowMGCRNG = criteria.ShowMGCRNG,
+                        ShowVG = criteria.ShowVG,
+                        ShowAGCS = criteria.ShowAGCS
                     }, 
                     criteria.RoleId);
                 case 3:
@@ -439,7 +449,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                         ShowRB = criteria.ShowRB,
                         ShowSB = criteria.ShowSB,
                         ShowVS = criteria.ShowVS,
-                        ShowGD = criteria.ShowGD
+                        ShowGD = criteria.ShowGD,
+                        ShowMGSL = criteria.ShowMGSL,
+                        ShowMGCLC = criteria.ShowMGCLC,
+                        ShowMGCRNG = criteria.ShowMGCRNG,
+                        ShowVG = criteria.ShowVG,
+                        ShowAGCS = criteria.ShowAGCS
                     }, 
                     criteria.RoleId);
                 case 2:
@@ -458,7 +473,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                         ShowRB = criteria.ShowRB,
                         ShowSB = criteria.ShowSB,
                         ShowVS = criteria.ShowVS,
-                        ShowGD = criteria.ShowGD
+                        ShowGD = criteria.ShowGD,
+                        ShowMGSL = criteria.ShowMGSL,
+                        ShowMGCLC = criteria.ShowMGCLC,
+                        ShowMGCRNG = criteria.ShowMGCRNG,
+                        ShowVG = criteria.ShowVG,
+                        ShowAGCS = criteria.ShowAGCS
                     }, 
                     criteria.RoleId);
             }

@@ -24,7 +24,8 @@ namespace Fanex.AccountingReports.Main.Criteria.MatchWinLoss2a
 
         public int Bettype { get; set; }
 
-        public string BetTypeName { get; set; }        
+        [SpParam(Ignored = true)]
+        public string BetTypeName { get; set; }
 
         public bool LiveIndicator { get; set; }
 

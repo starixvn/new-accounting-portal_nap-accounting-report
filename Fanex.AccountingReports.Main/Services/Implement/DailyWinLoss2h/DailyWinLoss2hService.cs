@@ -149,10 +149,16 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     break;
             }
 
-            if (CoreConstants.BetTypeConstants.MinMicroGamingBetType < winLoss.Id &&
-                winLoss.Id < CoreConstants.BetTypeConstants.MaxMicroGamingBetType)
+            if (CoreConstants.BetTypeConstants.MinMicroGamingLiveCasinoBetType < winLoss.Id &&
+                winLoss.Id < CoreConstants.BetTypeConstants.MaxMicroGamingLiveCasinoBetType)
             {
-                result = Labels.Microgaming;
+                result = Labels.MicroGaming_LiveCasino;
+            }
+
+            if (CoreConstants.BetTypeConstants.MinMicroGamingRNGCasinoBetType < winLoss.Id &&
+                winLoss.Id < CoreConstants.BetTypeConstants.MaxMicroGamingRNGCasinoBetType)
+            {
+                result = Labels.Microgaming_RNGCasino;
             }
 
             if (!string.IsNullOrEmpty(winLoss.Hedge) &&

@@ -19,11 +19,11 @@
     <Setting Key="Licensee_VirtualSportWinloss_GetReport" SpName="Acc_Rpt_LicVirtualSportWinloss" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Licensee - Win Loss By Licensee">
-    <Setting Key="Licensee_WinLossByLicensee_GetCurrencyReport" SpName="Acc_Rpt_LicWinloss2" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
-    <Setting Key="Licensee_WinLossByLicensee_GetWinLossAgent" SpName="Acc_Rpt_LicWinlossDetail_Ag2" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
-    <Setting Key="Licensee_WinLossByLicensee_GetWinLossSuper" SpName="Acc_Rpt_LicWinlossDetail_SAg2" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
-    <Setting Key="Licensee_WinLossByLicensee_GetWinLossMaster" SpName="Acc_Rpt_LicWinlossDetail_MAg2" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
-    <Setting Key="Licensee_WinLossByLicensee_GetWinLossMember" SpName="Acc_Rpt_LicWinlossDetail2" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
+    <Setting Key="Licensee_WinLossByLicensee_GetCurrencyReport" SpName="Acc_Rpt_LicWinloss2_xpre" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
+    <Setting Key="Licensee_WinLossByLicensee_GetWinLossAgent" SpName="Acc_Rpt_LicWinlossDetail_Ag2_xpre" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
+    <Setting Key="Licensee_WinLossByLicensee_GetWinLossSuper" SpName="Acc_Rpt_LicWinlossDetail_SAg2_xpre" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
+    <Setting Key="Licensee_WinLossByLicensee_GetWinLossMaster" SpName="Acc_Rpt_LicWinlossDetail_MAg2_xpre" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
+    <Setting Key="Licensee_WinLossByLicensee_GetWinLossMember" SpName="Acc_Rpt_LicWinlossDetail2_xpre" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
   </Function>
   <Function Name="Licensee - Negative Balance">
     <Setting Key="Licensee_NegativeBalance_GetReport" SpName="Acc_Rpt_NegativeBalanceMember_Dep" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"  />

@@ -1154,7 +1154,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
                             Name = Converter.ToString2(data.username),
                             WinLoss = Converter.ToDecimal(data.Winloss),
                             Turnover = Converter.ToDecimal(data.TurnOver),
-                            BetCount = Converter.ToInt(data.BetCount)
+                            BetCount = Converter.ToInt(data.Betcount)
                         };
 
                         info.Margin = ReportService.CalculateMargin(

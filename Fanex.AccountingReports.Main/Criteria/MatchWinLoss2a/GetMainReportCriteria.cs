@@ -24,6 +24,10 @@ namespace Fanex.AccountingReports.Main.Criteria.MatchWinLoss2a
 
         public double WinLost_BARM { get; set; }
 
+        public double IBCTurnover_8RM { get; set; }
+
+        public double IBCTurnover_BARM { get; set; }
+
         [SpParam(Ignored = true)]
         public bool IsGetMainReport { get; set; }
 

@@ -10,23 +10,9 @@
     {
         public DateTime WinLostDate { get; set; }
 
-        public int SportType { get; set; }
-
         public int BetType { get; set; }
 
-        public bool LiveIndicator { get; set; }
-
-        public bool IsHedge { get; set; }
-
         public int Site { get; set; }
-
-        [SpParam(Ignored = true)]
-        public string PreviousBreadScrum { get; set; }
-
-        [SpParam(Ignored = true)]
-        public int SportGroupId { get; set; }
-
-        public int ProductId { get; set; }
 
         /// <summary>
         /// Gets the setting key.

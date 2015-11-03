@@ -79,7 +79,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 Turnover = Converter.ToDecimal(data.Turnover)
                             };
 
-                            DateTime raceTime = Converter.ToDateTime(data.race);
+                            DateTime raceTime = Converter.ToDateTime(data.Race);
                             info.Name = string.Format(DateTimeFormatConstants.ShortTime, raceTime);
                             info.AliasName = raceTime.ToLongFormatedDateWithSlash();
                             leagueWinLoss.GrandTotal.Add(info);

@@ -95,7 +95,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 case MainSportConstants.SportContants._2hGoldDeluxeSport:
                 case MainSportConstants.SportContants._2hLiveCasinoSport:
                 case MainSportConstants.SportContants._2hAGCasinoSport:
-                case MainSportConstants.SportContants._2hMicroGamingSport:
+                case MainSportConstants.SportContants._2hMicroGamingLiveCasinoSport:
                     return new GetWinLossBySite_LiveCasinoCriteria
                     {
                         BetType = criteria.BetType,
@@ -136,7 +136,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     {
                         Site = criteria.Site,
                         WinLostDate = criteria.WinLostDate,
-                        SportType = criteria.SportType,
                         BetType = criteria.BetType
                     };
                 case CoreConstants.SportContants.Bettrade:

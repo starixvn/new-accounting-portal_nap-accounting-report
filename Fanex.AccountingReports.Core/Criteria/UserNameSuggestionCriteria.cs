@@ -45,6 +45,7 @@ namespace Fanex.AccountingReports.Core.Criteria
             }
         }
 
+        [SpParam(Ignored = true)]
         public bool ExcludeTestAccounts { get; set; }
 
         public override string GetSettingKey()

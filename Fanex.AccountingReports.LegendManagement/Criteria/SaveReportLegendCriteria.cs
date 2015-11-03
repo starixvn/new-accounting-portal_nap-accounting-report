@@ -30,8 +30,10 @@ namespace Fanex.AccountingReports.LegendManagement.Criteria
 
         public string System { get; set; }
 
+        [SpParam(Ignored = true)]
         public bool IsNote { get; set; }
 
+        [SpParam(Ignored = true)]
         public bool IsReviewed { get; set; }
 
         [SpParam(Ignored = true)]
