@@ -43,6 +43,12 @@
                 Dictionary<int, string> exchangeCurrencies = ReportService.ExchangeCurrencies;
                 using (ObjectDb objectDb = new ObjectDb(criteria.GetSettingKey()))
                 {
+                    var amount = criteria.Amount;
+                    if (!isRecent)
+                    {
+                        criteria.Amount = 0;
+                    }
+
                     IDataReader reader = objectDb.ExecuteReader(criteria.GetSpParams());
                     int id = 0;
                     while (reader.Read())
@@ -63,6 +69,7 @@
                     }
                     else 
                     {
+                        criteria.Amount = amount;
                         memberWinLosses = RefineHistoricalData(criteria, memberWinLosses);
                     }
                 }
@@ -104,19 +111,40 @@
                 else
                 {
                     var members = listMembersInBlockTime.Select(s => s.Member).ToList().Distinct();
+                    var countNumofMemberLargerThanWL = listMembersInBlockTime.GroupBy(s => s.Member)
+                        .Where(s => Math.Abs(s.Sum(g => g.WinLossRM)) >= Converter.ToDecimal(criteria.Amount))
+                        .Count();
+                    bool isRemarkNoData = false;
+
                     foreach (var member in members)
                     {
                         var row = listMembersInBlockTime.Where(s => s.Member == member).FirstOrDefault();
-                        result.Add(new MemberWinLoss()
+                        var winLossRM = Math.Abs(listMembersInBlockTime.Where(s => s.Member == member).Sum(s => s.WinLossRM));
+                        if (winLossRM < Converter.ToDecimal(criteria.Amount))
                         {
-                            Member = member, 
-                            Agent = row.Agent,
-                            CurrencyName = row.CurrencyName,
-                            TransactionTime = beginBlockTime.ToString("yyyy-MM-dd HH:mm:ss"),
-                            NumberOfBet = 1,
-                            WinLoss = listMembersInBlockTime.Where(s => s.Member == member).Sum(s => s.WinLoss),
-                            WinLossRM = listMembersInBlockTime.Where(s => s.Member == member).Sum(s => s.WinLossRM),                     
-                        });
+                            if (countNumofMemberLargerThanWL == 0 && !isRemarkNoData)
+                            {
+                                result.Add(new MemberWinLoss()
+                                {
+                                    TransactionTime = beginBlockTime.ToString("yyyy-MM-dd HH:mm:ss")
+                                });
+
+                                isRemarkNoData = true;
+                            }
+                        }
+                        else
+                        {
+                            result.Add(new MemberWinLoss()
+                            {
+                                Member = member,
+                                Agent = row.Agent,
+                                CurrencyName = row.CurrencyName,
+                                TransactionTime = beginBlockTime.ToString("yyyy-MM-dd HH:mm:ss"),
+                                NumberOfBet = 1,
+                                WinLoss = listMembersInBlockTime.Where(s => s.Member == member).Sum(s => s.WinLoss),
+                                WinLossRM = listMembersInBlockTime.Where(s => s.Member == member).Sum(s => s.WinLossRM),
+                            });
+                        }
                     }
                 }
 
