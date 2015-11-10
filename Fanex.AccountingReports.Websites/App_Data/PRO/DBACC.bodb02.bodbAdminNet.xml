@@ -288,6 +288,6 @@
   </Function>
   <Function Name="Misc - Member Win Loss On RNG Casino">
     <Setting Key="Misc_MemberWinLossOnRNGCasinoRecent" SpName="Acc_Rpt_RNGCasinoAutomail_Recent" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Misc_MemberWinLossOnRNGCasinoHistorical" SpName="Acc_Rpt_RNGCasinoAutomail_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Misc_MemberWinLossOnRNGCasinoHistorical" SpName="Acc_Rpt_RNGCasinoAutomail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
 </Functions>
