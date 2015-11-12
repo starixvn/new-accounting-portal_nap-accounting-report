@@ -180,6 +180,18 @@
   <data name="LiveCasinoGameStatistic_SheetName" xml:space="preserve">
     <value>Live Casino Game Statistic</value>
   </data>
+  <data name="CasinoGameStatistic_ReportName" xml:space="preserve">
+    <value>Casino_Game_Statistic_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="CasinoGameStatistic_ReportTitle" xml:space="preserve">
+    <value>{0} Game Statistic Report From {1} To {2}</value>
+  </data>
+  <data name="CasinoGameStatisticOnDateByCurrency_ReportTitle" xml:space="preserve">
+    <value>{0} Game Statistic Report On {1} By Currency</value>
+  </data>
+  <data name="CasinoGameStatistic_SheetName" xml:space="preserve">
+    <value>Casino Game Statistic</value>
+  </data>
   <data name="LiveCasinoWL_NoteMessage" xml:space="preserve">
     <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ All figures are displayed in EUR&lt;/li&gt;&lt;li&gt;+ Data is only available up to yesterday (after 5AM GMT-4)&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;</value>
   </data>

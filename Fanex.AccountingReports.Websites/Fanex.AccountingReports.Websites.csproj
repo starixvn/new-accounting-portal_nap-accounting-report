@@ -554,7 +554,17 @@
     <Content Include="Areas\Gaming\Views\BingoStatistic\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\BingoStatistic\Styles\BingoStatistic.less" />
     <Content Include="Areas\Gaming\Views\BingoWinLoss\Styles\BingoWinLoss.less" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByHourly.js" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByGrandTotal.js" />
     <Content Include="Areas\Gaming\Views\CasinoWinLoss\Scripts\CasinoWinLoss.js" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByCompany.js" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByCurrency.js" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByDailyRange.js" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByGameTable.js" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByGameType.js" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByMonthlyRange.js" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByUserName.js" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent_AgentReport.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent_BaseReport.js" />
@@ -2037,7 +2047,6 @@
     <Content Include="Areas\Special\Views\MarginReport\Index.cshtml" />
     <Content Include="Areas\Special\Views\DailyTurnover\Styles\DailyTurnover.less" />
     <Content Include="Areas\Special\Views\ParlayWon\ParlayWon.less" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Index.cshtml" />
     <Content Include="Areas\Special\Views\PunterAnalysis\TopPunter_ByUser_BetType_MonthRangeSummary.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Index.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchAnalysisByAgent.cshtml" />
@@ -2113,6 +2122,8 @@
     <Content Include="Areas\Misc\Views\MemberWinLossOnRNGCasino\Styles\RNGCasinoReport.less" />
     <None Include="App_Data\Fanex.Result\Badminton.xls" />
     <None Include="App_Data\Fanex.Result\BaseBall.xls" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Index.cshtml" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Styles\CasinoGameStatistic.less" />
     <None Include="App_Data\Fanex.Result\Basketball.xls" />
     <None Include="App_Data\Fanex.Result\Billiard.xls" />
     <None Include="App_Data\Fanex.Result\GoldDeluxe.xls" />
@@ -2132,6 +2143,7 @@
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisSporting\_TennisSetSporting.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisSporting\_TennisSportting.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameStatistic\Index.cshtml" />
+    <Content Include="Areas\Special\Views\PunterAnalysis\Index.cshtml" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>

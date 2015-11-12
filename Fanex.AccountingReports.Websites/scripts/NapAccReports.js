@@ -216,19 +216,8 @@ var AccReport = function ($) {
             if (url && data) {
                 //data can be string of parameters or array/object
                 data = typeof data == 'string' ? data : $.param(data);
-                if (url.indexOf('ExportTopPunter') > 0 || url.indexOf('MAMonitorTool') > 0) {
-                    $.fileDownload(url, { httpMethod: "POST", data: data });
-                }
-                else {
-                    var downloadUrl = url + "?" + data;
-                    var iframe = $('body iframe');
-                    if (iframe.length == 0) {
-                        iframe = $('<iframe width="0" height="0" class="display-none"></iframe>');
-                        iframe.appendTo('body');
-                    }
-
-                    iframe.attr('src', downloadUrl); 
-                }
+                $.fileDownload(url, { httpMethod: "POST", data: data })
+                AccReport.enableInput();
             }
         },
         reCheckIn: function () {

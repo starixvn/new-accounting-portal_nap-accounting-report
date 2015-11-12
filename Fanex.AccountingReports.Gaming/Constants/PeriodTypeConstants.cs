@@ -20,6 +20,7 @@ namespace Fanex.AccountingReports.Gaming.Constants
         public const int GamingBingoStatisticCompany = 5;
         public const int GamingBingoStatisticCurrency = 6;
         public const int GamingBingoStatisticAgent = 7;
+        
         public const int LiveCasinoAgencyWinLossDaily = 0;
         public const int LiveCasinoAgencyWinLossMonthly = 1;
         public const int LiveCasinoAgencyWinLossUsername = 2;
@@ -33,5 +34,19 @@ namespace Fanex.AccountingReports.Gaming.Constants
         public const int LiveCasinoGameStatisticGameTable = 4;
         public const int LiveCasinoGameStatisticCompany = 5;
         public const int LiveCasinoGameStatisticCurrency = 6;
+
+        public const int CasinoAgencyWinLossDaily = 0;
+        public const int CasinoAgencyWinLossMonthly = 1;
+        public const int CasinoAgencyWinLossUsername = 2;
+        public const int CasinoAgencyWinLossGameType = 3;
+        public const int CasinoAgencyWinLossGameTable = 4;
+        public const int CasinoAgencyWinLossAgent = 5;
+        public const int CasinoGameStatisticDaily = 0;
+        public const int CasinoGameStatisticMonthly = 1;
+        public const int CasinoGameStatisticUsername = 2;
+        public const int CasinoGameStatisticGameType = 3;
+        public const int CasinoGameStatisticGameTable = 4;
+        public const int CasinoGameStatisticCompany = 5;
+        public const int CasinoGameStatisticCurrency = 6;
     }
 }

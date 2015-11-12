@@ -363,6 +363,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         public static bool IsExcludeCurrency(string currencyName)
         {
             return string.Equals(currencyName, "C") ||
+                string.Equals(currencyName, "UUS") ||
                 string.Equals(currencyName, "H");
         }
 

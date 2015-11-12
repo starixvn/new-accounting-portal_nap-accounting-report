@@ -232,4 +232,5 @@ public static class AccReportFunctionKeys
     public const string MemberWinLossOnRNGCasino = "HourlyMemberWin_LossonMBC_RNGCasino";
 
     public const string NumberGameStatistic = "NumberGameStatistic";
+    public const string CasinoGameStatistics = "CasinoGameStatistics";
 }

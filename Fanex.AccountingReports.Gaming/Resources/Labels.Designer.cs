@@ -142,6 +142,15 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 3rd Party.
+        /// </summary>
+        public static string _3rdParty {
+            get {
+                return ResourceManager.GetString("_3rdParty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 8RM.
         /// </summary>
         public static string _8RM {
@@ -556,7 +565,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Company comm.
+        ///   Looks up a localized string similar to Company Comm.
         /// </summary>
         public static string Company_comm {
             get {
@@ -565,7 +574,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Company net income.
+        ///   Looks up a localized string similar to Company Net Income.
         /// </summary>
         public static string Company_net_income {
             get {
@@ -1339,7 +1348,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to IBC Group.
+        ///   Looks up a localized string similar to MBC Group.
         /// </summary>
         public static string IBC_Group {
             get {
