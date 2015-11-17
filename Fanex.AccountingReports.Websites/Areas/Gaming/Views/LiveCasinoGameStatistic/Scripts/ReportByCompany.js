@@ -51,7 +51,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByCompany = functio
             }
 
             var footerColumns = [];
-            info = report.GrandTotal.ChildsInfo[reportLength - 1];
+            info = report.GrandTotal.ChildsInfo[reportLength];
             footerColumns.push({ Name: "ColName", Value: info.Name });
             footerColumns.push({ Name: "ColNumberOfPlayers", Value: info.NumberOfPlayers });
             footerColumns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });

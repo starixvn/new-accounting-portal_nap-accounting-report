@@ -76,7 +76,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.DetailReportByBetType = function () 
                 currentRow =
                 {
                     Columns: [{ Name: "ColBetType", Value: getBetTypeNameWithMatchCode(info.LiveIndicatorId, info.Name, info.MatchCode) },
-                              { Name: "ColHomeTeamName", Value: info.IsNeutral ? '(N)' : '' + info.HomeTeamName },
+                              { Name: "ColHomeTeamName", Value: info.HomeTeamName + (info.IsNeutral ? ' (N)' : '') },
                               { Name: "ColVs", Value: ' -vs- ' },
                               { Name: "ColAwayTeamName", Value: info.AwayTeamName },
                               { Name: "ColWinLoss", Value: info.WinLoss_Str },

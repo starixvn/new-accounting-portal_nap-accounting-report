@@ -27,7 +27,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
     using Fanex.Common;
     using Fanex.NAP.Framework.Data;
     using NPOI.HSSF.UserModel;
-    using NPOI.HSSF.Util;
     using NPOI.SS.UserModel;
     using NPOI.SS.Util;
     using CoreConstants = Fanex.AccountingReports.Core.Constants;
@@ -47,6 +46,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         private Dictionary<object, string> _betTypeNameCache;
         private Dictionary<object, string> _teamNameCache;
         private IMatchWinLoss2aRepository _reportRepository;
+
         private string _matchWinLoss2aCacheOutputParamSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.CacheOutputResult" +
             (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
 
@@ -72,7 +72,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
 
         private MatchWinLoss2aUtilityService _matchWinLoss2aUtilityService;
-       
+
         public MatchWinLoss2aService()
             : this(null)
         {
@@ -590,6 +590,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     };
 
                     bool isKenoBetType = this._matchWinLoss2aUtilityService.IsKenoBetType(winLoss.Id);
+                    bool isBettradeBettype = _matchWinLoss2aUtilityService.IsBetTrade(betType);
 
                     if (winLoss.Id == CoreConstants.SportContants.Bingo ||
                         winLoss.Id == CoreConstants.SportContants.Casino)
@@ -615,16 +616,20 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                         winLoss.LineTotal_Others_Non_Live;
                     winLoss.Margin = this._matchWinLoss2aUtilityService.CalculateMargin(winLoss.LineTotalReal, winLoss.Turnover);
 
-                    summaryReport.GrandTotal.LineTotal_Soccer_Live += winLoss.LineTotal_Soccer_Live;
-                    summaryReport.GrandTotal.LineTotal_Soccer_Non_Live += winLoss.LineTotal_Soccer_Non_Live;
-                    summaryReport.GrandTotal.LineTotal_Others_Live += winLoss.LineTotal_Others_Live;
-                    summaryReport.GrandTotal.LineTotal_Others_Non_Live += winLoss.LineTotal_Others_Non_Live;
+                    if (!isBettradeBettype)
+                    {
+                        summaryReport.GrandTotal.LineTotal_Soccer_Live += winLoss.LineTotal_Soccer_Live;
+                        summaryReport.GrandTotal.LineTotal_Soccer_Non_Live += winLoss.LineTotal_Soccer_Non_Live;
+                        summaryReport.GrandTotal.LineTotal_Others_Live += winLoss.LineTotal_Others_Live;
+                        summaryReport.GrandTotal.LineTotal_Others_Non_Live += winLoss.LineTotal_Others_Non_Live;
+                    }
+
                     summaryReport.GrandTotal.LineTotalReal += winLoss.LineTotalReal;
                     summaryReport.GrandTotal.Turnover += winLoss.Turnover;
 
                     if (this._matchWinLoss2aUtilityService.IsExcludeVirtualLineTotal(betType))
                     {
-                        if (_matchWinLoss2aUtilityService.IsBetTrade(betType))
+                        if (isBettradeBettype)
                         {
                             winLoss.Name = Labels.Bettrade;
                             winLoss.LineTotal_Soccer_Live_Str = Labels.NotAvailable;
@@ -639,6 +644,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                                 Converter.ToDecimal(info.VirtualLineTotal_soccer) +
                                 Converter.ToDecimal(info.VirtualLineTotal_others_live) +
                                 Converter.ToDecimal(info.VirtualLineTotal_others);
+                            summaryReport.GrandTotal.LineTotalVirtual += winLoss.LineTotalVirtual;
+                            summaryReport.GrandTotal.Variance += winLoss.Variance;
                         }
 
                         winLoss.VirtualLineTotal_Soccer_Live_Str = Labels.NotAvailable;
