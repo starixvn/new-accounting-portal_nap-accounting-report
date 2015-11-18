@@ -17,7 +17,5 @@ namespace Fanex.AccountingReports.Gaming.Models.NumberOfActiveMember
         public int ProductId { get; set; }
 
         public string ProductName { get; set; }
-
-        public string ProductShortName { get; set; }
     }
 }
