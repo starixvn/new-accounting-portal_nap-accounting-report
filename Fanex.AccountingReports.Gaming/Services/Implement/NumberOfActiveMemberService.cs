@@ -225,15 +225,22 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             for (int i = 0; i < numberCombinations; i++)
             {
                 var combinationGroup = report[i];
-                var combinationGroupDataRow = CreateCombinationParentRow(combinationGroup.CombinationName);
-                foreach (var combinationItem in combinationGroup.NumberActiveMemberByProduct)
+                bool zeroMemberCountInCombinationGroup = CheckZeroMemberCountInCombinationGroup(combinationGroup);
+                if (!zeroMemberCountInCombinationGroup)
                 {
-                    var combinationDataRow = BindingCombinationDataRow(combinationItem);
-                    combinationGroupDataRow.SubRows.Add(combinationDataRow);
-                    totalActiveMember += combinationItem.MemberCount;
-                }
+                    var combinationGroupDataRow = CreateCombinationParentRow(combinationGroup);
+                    foreach (var combinationItem in combinationGroup.NumberActiveMemberByProduct)
+                    {
+                        if (combinationItem.MemberCount > 0)
+                        {
+                            var combinationDataRow = BindingCombinationDataRow(combinationItem);
+                            combinationGroupDataRow.SubRows.Add(combinationDataRow);
+                            totalActiveMember += combinationItem.MemberCount;
+                        }
+                    }
 
-                gridOptions.BodyRows.Add(combinationGroupDataRow);
+                    gridOptions.BodyRows.Add(combinationGroupDataRow);
+                }
             }
 
             var totalActiveMemberDataRow = CreateTotalMemberActiveDataRow(totalActiveMember);
@@ -241,11 +248,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             return gridOptions;
         }
 
-        private GridDataRow CreateCombinationParentRow(string combinationName)
+        private GridDataRow CreateCombinationParentRow(NumberActiveMemeberByCombination combinationGroup)
         {
             GridDataRow dataRow = new GridDataRow();
-            dataRow.CreateColumns(new Columns(0, Labels.Combinations, combinationName, HAlignment.Left));
-            dataRow.Columns[0].MergeColNumber = 2;
+            var totalActiveMember = GetTotalMemberActiveInGroup(combinationGroup);
+            dataRow.CreateColumns(new Columns(0, Labels.Combinations, combinationGroup.CombinationName, HAlignment.Left));
+            dataRow.CreateColumns(new Columns(1, Labels.Number_Of_Active_Members, totalActiveMember, HAlignment.Right));
             return dataRow;
         }
 
@@ -342,6 +350,31 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             }
 
             return results;
+        }
+
+        private bool CheckZeroMemberCountInCombinationGroup(NumberActiveMemeberByCombination combination)
+        {
+            bool isZeroMemberCount = true;
+            foreach (var item in combination.NumberActiveMemberByProduct)
+            {
+                if (item.MemberCount > 0)
+                {
+                    isZeroMemberCount = false;
+                }
+            }
+
+            return isZeroMemberCount;
+        }
+
+        private int GetTotalMemberActiveInGroup(NumberActiveMemeberByCombination combination)
+        {
+            int totalMemberActive = 0;
+            foreach (var item in combination.NumberActiveMemberByProduct)
+            {
+                totalMemberActive += item.MemberCount;
+            }
+
+            return totalMemberActive;
         }
     }
 }
