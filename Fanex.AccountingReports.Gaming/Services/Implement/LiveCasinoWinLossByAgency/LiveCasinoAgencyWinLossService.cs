@@ -106,7 +106,13 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoWinLossByA
                         GameTypes = new List<EntityBase<int, string>>()
                     };
 
-                    productGameType.ProductName = products.FirstOrDefault(x => x.Id == Converter.ToInt(group.Key)).Name;
+                    var productGroup = products.FirstOrDefault(x => x.Id == Converter.ToInt(group.Key));
+                    if (productGroup == null)
+                    {
+                        continue;
+                    }
+
+                    productGameType.ProductName = productGroup.Name;
                     foreach (var gameType in group)
                     {
                         productGameType.GameTypes.Add(new EntityBase<int, string>()

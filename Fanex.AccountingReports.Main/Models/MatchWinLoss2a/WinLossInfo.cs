@@ -128,7 +128,7 @@ namespace Fanex.AccountingReports.Main.Models.MatchWinLoss2a
             this.GrandTotal.VirtualComm += winLoss.VirtualComm;
             this.GrandTotal.LineTotal += winLoss.LineTotal;
             this.GrandTotal.VirtualLineTotal += winLoss.VirtualLineTotal;
-            this.GrandTotal.Variance += winLoss.Variance;
+            this.GrandTotal.Variance = this.GrandTotal.LineTotal - this.GrandTotal.VirtualLineTotal;
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace Fanex.AccountingReports.Main.Models.MatchWinLoss2a
             this.VirtualComm += winLoss.VirtualComm;
             this.LineTotal += winLoss.LineTotal;
             this.VirtualLineTotal += winLoss.VirtualLineTotal;
-            this.Variance += winLoss.Variance;
+            this.Variance = this.LineTotal - this.VirtualLineTotal;
         }
     }
 }

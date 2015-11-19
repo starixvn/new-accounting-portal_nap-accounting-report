@@ -402,6 +402,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                         ShowRB = criteria.ShowRB,
                         ShowSB = criteria.ShowSB,
                         ShowVS = criteria.ShowVS,
+                        ShowGD = criteria.ShowGD,
                         ShowMGSL = criteria.ShowMGSL,
                         ShowMGCLC = criteria.ShowMGCLC,
                         ShowMGCRNG = criteria.ShowMGCRNG,

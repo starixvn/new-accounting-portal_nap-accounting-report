@@ -80,7 +80,7 @@ namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
         {
             get 
             {
-                if (this.BaseRMTurnover != 0)
+                if (this.BaseRMVirtualTurnover != 0)
                 {
                     return Math.Round((this.BaseRMVirtualTotal / this.BaseRMVirtualTurnover) * 100, 2).ToString();
                 }

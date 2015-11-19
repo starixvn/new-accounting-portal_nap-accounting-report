@@ -520,6 +520,15 @@ namespace Fanex.AccountingReports.Misc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Colossus Bets.
+        /// </summary>
+        public static string ColossusBets {
+            get {
+                return ResourceManager.GetString("ColossusBets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Combinations.
         /// </summary>
         public static string Combinations {

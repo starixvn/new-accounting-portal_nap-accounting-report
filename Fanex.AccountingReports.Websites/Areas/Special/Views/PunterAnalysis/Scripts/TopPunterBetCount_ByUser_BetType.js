@@ -124,7 +124,7 @@ TopPunterBetCount_ByUser_BetType.prototype.RenderReport = function (report) {
         showTree: false,
         bodyRows: bodyData,
         footerRows: footerData,
-        gridExpandHeight: 200,
+        gridExpandHeight: 250,
         numberOfFrozenColumn: 1,
         gridWidth: 900,
         showDistinctRow: false,

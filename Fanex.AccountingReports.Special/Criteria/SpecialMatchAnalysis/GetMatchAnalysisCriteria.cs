@@ -65,6 +65,7 @@ namespace Fanex.AccountingReports.Special.Criteria.SpecialMatchAnalysis
 
         public int StatusId { get; set; }
 
+        [SpParam(Ignored = true)]
         public int CustId { get; set; }
 
         public override bool IsValid()
@@ -95,18 +96,6 @@ namespace Fanex.AccountingReports.Special.Criteria.SpecialMatchAnalysis
 
                 case ReportType.Member:
                     storeProcedureName = "Special_SpecialMatchAnalysis_GetReportByMember";
-                    break;
-
-                case ReportType.SuperViewOnMaster:
-                    storeProcedureName = "Special_SpecialMatchAnalysis_GetReportBySuper_SAg";
-                    break;
-
-                case ReportType.MasterViewOnAgent:
-                    storeProcedureName = "Special_SpecialMatchAnalysis_GetReportBySuper_MAg";
-                    break;
-
-                case ReportType.AgentViewOnMember:
-                    storeProcedureName = "Special_SpecialMatchAnalysis_GetReportBySuper_Ag";
                     break;
 
                 default:

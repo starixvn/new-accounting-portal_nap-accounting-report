@@ -278,7 +278,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
 
     self.GetProductList = function () {
         AccReport.utility.CallAjax(this,
-            window.rootUrl + "Gaming/LiveCasinoAgencyWinLoss/GetProductList",
+            window.rootUrl + "Gaming/LiveCasinoGameStatistic/GetProductList",
             null,
             self.RenderProductList,
             self.RenderProductList,

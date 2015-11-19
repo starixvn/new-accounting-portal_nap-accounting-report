@@ -1147,4 +1147,7 @@
   <data name="nodata" xml:space="preserve">
     <value>There is no data</value>
   </data>
+  <data name="ColossusBets" xml:space="preserve">
+    <value>Colossus Bets</value>
+  </data>
 </root>

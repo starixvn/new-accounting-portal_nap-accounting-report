@@ -195,6 +195,7 @@
     <Compile Include="Criteria\SaveBetReport\GetSportsCriteria.cs" />
     <Compile Include="Criteria\SpecialMatchAnalysis\GetBettypeCriteria.cs" />
     <Compile Include="Criteria\SpecialMatchAnalysis\GetLeageMatchCriteria.cs" />
+    <Compile Include="Criteria\SpecialMatchAnalysis\GetMatchAnalysisByUserLevelCriteria.cs" />
     <Compile Include="Criteria\SpecialMatchAnalysis\GetMatchAnalysisCriteria.cs" />
     <Compile Include="Criteria\SpecialMatchAnalysis\GetSportLeagueCriteria.cs" />
     <Compile Include="Models\CheckBet\NormalTicketDetail.cs" />

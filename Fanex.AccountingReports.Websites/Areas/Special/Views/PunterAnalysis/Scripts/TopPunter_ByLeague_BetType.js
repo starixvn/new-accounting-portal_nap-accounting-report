@@ -316,7 +316,7 @@ TopPunter_ByLeague_BetType.prototype.RenderReportDaily = function (report) {
         showTree: false,
         bodyRows: bodyData,
         footerRows: footerData,
-        gridExpandHeight: 200,
+        gridExpandHeight: 300,
         numberOfFrozenColumn: 1,
         gridWidth: 2000,
         showDistinctRow: false,

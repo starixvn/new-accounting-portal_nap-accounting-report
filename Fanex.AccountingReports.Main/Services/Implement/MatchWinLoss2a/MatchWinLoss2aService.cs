@@ -704,6 +704,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                 }
 
                 summaryReport.GrandTotal.Margin = this._matchWinLoss2aUtilityService.CalculateMargin(summaryReport.GrandTotal.LineTotalReal, summaryReport.GrandTotal.Turnover);
+                summaryReport.GrandTotal.Variance = summaryReport.GrandTotal.LineTotalReal - summaryReport.GrandTotal.LineTotalVirtual;
                 summaryReport.GrandTotal = this.FormatSummaryReportByBetType(summaryReport.GrandTotal, false);
                 SessionManager.Set<SummaryReportByBetType>(_matchWinLoss2aReportByBetTypeSessionKey, summaryReport);
                 return summaryReport;

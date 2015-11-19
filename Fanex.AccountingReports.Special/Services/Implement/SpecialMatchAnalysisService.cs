@@ -24,6 +24,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
     using Fanex.AccountingReports.Special.Models.SpecialMatchAnalysis;
     using Fanex.AccountingReports.Special.Resources;
     using Fanex.AccountingReports.Special.Services.Interface;
+using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -171,7 +172,8 @@ namespace Fanex.AccountingReports.Special.Services.Implement
 
             try
             {
-                var data = GetReportData<dynamic>(criteria);
+                var getMatchAnalysisCriteria = GetMatchAnalysisCriteria(criteria);
+                var data = GetReportData<dynamic>(getMatchAnalysisCriteria);
 
                 //// Assign Rows
                 foreach (var d in data)
@@ -258,6 +260,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             catch (Exception ex)
             {
                 HandleException(ex);
+                throw;
             }
 
             return matchAnalysis;
@@ -803,6 +806,28 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     return Labels.Bet_Type;
                 default:
                     return reportType.ToString();
+            }
+        }
+
+        private CriteriaBase GetMatchAnalysisCriteria(GetMatchAnalysisCriteria criteria)
+        {
+            switch (criteria.Reporttype)
+            {
+                case ReportType.SuperViewOnMaster:
+                case ReportType.MasterViewOnAgent:
+                case ReportType.AgentViewOnMember:
+                    return new GetMatchAnalysisByUserLevelCriteria()
+                    {
+                        EventDate = criteria.EventDate,
+                        MatchId = criteria.MatchId,
+                        LiveIndicator = criteria.LiveIndicator,
+                        Bettypes = criteria.Bettypes,
+                        StatusId = criteria.StatusId,
+                        CustId = criteria.CustId,
+                        Reporttype = criteria.Reporttype
+                    };
+                default:
+                    return criteria;
             }
         }
     }

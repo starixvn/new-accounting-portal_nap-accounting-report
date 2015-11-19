@@ -37,7 +37,6 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             ShowMGSL: true,
             ShowAGCS: true,
             ShowVG: true,
-            //ShowMGC: true,
             ShowMGCLC: true,
             ShowMGCRNG: true,
             ShowCB: true
