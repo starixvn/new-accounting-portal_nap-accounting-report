@@ -16,7 +16,7 @@ namespace Fanex.AccountingReports.Misc.Repositories.Implement
     using Fanex.AccountingReports.Misc.Criteria.TotalSMAMemberActive;
     using Fanex.AccountingReports.Misc.Repositories.Interface;
     using Fanex.Data;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

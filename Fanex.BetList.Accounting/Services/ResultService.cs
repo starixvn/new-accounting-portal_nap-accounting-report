@@ -18,7 +18,7 @@ namespace Fanex.BetList.Accounting.Services
     using Fanex.Common;
     using Fanex.Common.Extensions;
     using Fanex.Data;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Result service.
@@ -39,7 +39,7 @@ namespace Fanex.BetList.Accounting.Services
                 if (criteria.IsValid())
                 {
                     var leagues = new List<TennisLeagueResult>();
-                    
+
                     using (var objDb = new ObjectDb(criteria.GetSettingKey()))
                     {
                         using (var reader = objDb.ExecuteReader(criteria.GetSpParams()))
@@ -211,33 +211,33 @@ namespace Fanex.BetList.Accounting.Services
         private void InsertInexistenceSetToMatch(TennisMatchResult match)
         {
             for (int i = 0; i < 5; i++)
+            {
+                var isExistedSet = match.SetResults.Find(item => Converter.ToInt(item.SetDetail.ResourceId).Equals(i + 1)) != null;
+                if (!isExistedSet)
                 {
-                    var isExistedSet = match.SetResults.Find(item => Converter.ToInt(item.SetDetail.ResourceId).Equals(i + 1)) != null;
-                    if (!isExistedSet)
-                    {
-                        match.SetResults.Insert(
-                            i, 
-                            new TennisSetResult 
-                            { 
-                                SetDetail = new TennisResultEntity
-                                {
-                                    ResourceId = "0" + i.ToString(),
-                                    HomeValue = "-",
-                                    AwayValue = "-",
-                                    SettlementStatusId = 1
-                                }
-                        });
-                    }
-                    else
-                    {
-                        var set = match.SetResults[i];
-                        this.InsertInexistenceGameToSet(set);
-                        if (set.SetDetail.SettlementStatusId.Equals(4))
+                    match.SetResults.Insert(
+                        i,
+                        new TennisSetResult
                         {
-                            match.HomeTotalGames = (Converter.ToDecimal(match.HomeTotalGames) + Converter.ToDecimal(set.SetDetail.HomeValue)).ToString();
-                            match.AwayTotalGames = (Converter.ToDecimal(match.AwayTotalGames) + Converter.ToDecimal(set.SetDetail.AwayValue)).ToString();
-                        }
+                            SetDetail = new TennisResultEntity
+                            {
+                                ResourceId = "0" + i.ToString(),
+                                HomeValue = "-",
+                                AwayValue = "-",
+                                SettlementStatusId = 1
+                            }
+                        });
+                }
+                else
+                {
+                    var set = match.SetResults[i];
+                    this.InsertInexistenceGameToSet(set);
+                    if (set.SetDetail.SettlementStatusId.Equals(4))
+                    {
+                        match.HomeTotalGames = (Converter.ToDecimal(match.HomeTotalGames) + Converter.ToDecimal(set.SetDetail.HomeValue)).ToString();
+                        match.AwayTotalGames = (Converter.ToDecimal(match.AwayTotalGames) + Converter.ToDecimal(set.SetDetail.AwayValue)).ToString();
                     }
+                }
             }
         }
 
@@ -255,8 +255,8 @@ namespace Fanex.BetList.Accounting.Services
                 if (!isExistedGame)
                 {
                     set.GameResults.Insert(
-                        j, 
-                        new TennisGameResult 
+                        j,
+                        new TennisGameResult
                         {
                             TennisGame = new TennisResultEntity
                             {
@@ -264,7 +264,7 @@ namespace Fanex.BetList.Accounting.Services
                                 HomeValue = "-",
                                 AwayValue = "-"
                             }
-                    });
+                        });
                 }
             }
         }
@@ -345,21 +345,27 @@ namespace Fanex.BetList.Accounting.Services
                 case "closed":
                     match.EventStatus = "Pending";
                     break;
+
                 case "running":
                     match.EventStatus = match.IsPending ? "Pending" : "Running";
                     break;
+
                 case "refund":
                     match.EventStatus = "Refund";
                     break;
+
                 case "refundft":
                     match.EventStatus = "RefundFT";
                     break;
+
                 case "refunht":
                     match.EventStatus = "RefundHT";
                     break;
+
                 case "completed":
                     match.EventStatus = this.SetSettlementStatus(match.SettlementStatusId);
                     break;
+
                 default:
                     break;
             }
@@ -378,15 +384,19 @@ namespace Fanex.BetList.Accounting.Services
                 case 0:
                     status = "-";
                     break;
+
                 case 1:
                     status = "Refund";
                     break;
+
                 case 2:
                     status = "RefundHT";
                     break;
+
                 case 3:
                     status = "RefundFT";
                     break;
+
                 default:
                     status = "Completed";
                     break;

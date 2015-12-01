@@ -12,7 +12,7 @@ namespace Fanex.AccountingReports.Core.Repository.Interface
     using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Criteria;
     using Fanex.AccountingReports.Core.Models;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     public interface IMostVisitedPagesRepository
     {

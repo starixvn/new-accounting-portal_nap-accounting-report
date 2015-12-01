@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.Main.Criteria.MatchWinLoss2a
 {
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get main report criteria.
@@ -23,6 +23,10 @@ namespace Fanex.AccountingReports.Main.Criteria.MatchWinLoss2a
         public double WinLost_8RM { get; set; }
 
         public double WinLost_BARM { get; set; }
+
+        public double IBCTurnover_8RM { get; set; }
+
+        public double IBCTurnover_BARM { get; set; }
 
         [SpParam(Ignored = true)]
         public bool IsGetMainReport { get; set; }

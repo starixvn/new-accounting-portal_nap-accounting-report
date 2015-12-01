@@ -430,6 +430,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     product = Labels.Keno;
                     break;
 
+                case ProductContants.ColossusBets:
+                    product = Labels.ColossusBets;
+                    break;
+
                 default:
                     break;
             }

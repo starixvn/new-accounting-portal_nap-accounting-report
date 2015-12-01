@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.LegendManagement.Criteria
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Web;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Upload File Criteria.

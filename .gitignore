@@ -33,4 +33,8 @@ _ReSharper*/
 $tf*/
 Fanex.AccountingReports.Websites/Fanex.AccountingReports.Websites.Publish.xml
 StyleCop.Cache
-Fanex.AccountingReports.suo
+*.GhostDoc.user.dic
+*.suo
+*.GhostDoc.xml
+*.csproj.user
+*.Publish.xml

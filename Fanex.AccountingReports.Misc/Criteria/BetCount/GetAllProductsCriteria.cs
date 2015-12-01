@@ -9,7 +9,7 @@
 
 namespace Fanex.AccountingReports.Misc.Criteria.BetCount
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

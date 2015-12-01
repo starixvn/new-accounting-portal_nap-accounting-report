@@ -13,7 +13,7 @@ namespace Fanex.AccountingReports.Licensee.Repositories.Implement
     using Fanex.AccountingReports.Licensee.Models.NegativeBalance;
     using Fanex.AccountingReports.Licensee.Repositories.Interface;
     using Fanex.Common.Extensions;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

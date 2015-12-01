@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.Misc.Criteria.SMATurnover
 {
     using System;
     using Fanex.AccountingReports.Misc.Constants;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -55,12 +55,15 @@ namespace Fanex.AccountingReports.Misc.Criteria.SMATurnover
                 case SMATurnOverConstants.ReportByDate:
                     settingKey = "SMA_TurnOver_ReportByDate";
                     break;
+
                 case SMATurnOverConstants.ReportByMonth:
                     settingKey = "SMA_TurnOver_ReportByMonth";
                     break;
+
                 case SMATurnOverConstants.ReportByYear:
                     settingKey = "SMA_TurnOver_ReportByYear";
                     break;
+
                 default:
                     break;
             }

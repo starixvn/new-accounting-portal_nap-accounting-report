@@ -53,8 +53,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 var rawData = this.GetReportData<dynamic>(criteria);
                 if (rawData != null)
                 {
-                    var leagueGroups = rawData.GroupBy(data => data.leagueid);
-                    var leagueIdList = rawData.Select(data => Converter.ToInt(data.leagueid))
+                    var leagueGroups = rawData.GroupBy(data => data.LeagueID);
+                    var leagueIdList = rawData.Select(data => Converter.ToInt(data.LeagueID))
                                               .ToList();
                     CacheRef.SaveCacheRefResponse(leagueIdList, CacheRef.GetLeagueName, ref this._leagueNameCache);
                     foreach (var leagueGroup in leagueGroups)
@@ -79,7 +79,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 Turnover = Converter.ToDecimal(data.Turnover)
                             };
 
-                            DateTime raceTime = Converter.ToDateTime(data.race);
+                            DateTime raceTime = Converter.ToDateTime(data.Race);
                             info.Name = string.Format(DateTimeFormatConstants.ShortTime, raceTime);
                             info.AliasName = raceTime.ToLongFormatedDateWithSlash();
                             leagueWinLoss.GrandTotal.Add(info);

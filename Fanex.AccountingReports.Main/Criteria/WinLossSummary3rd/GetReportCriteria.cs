@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

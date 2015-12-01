@@ -113,8 +113,6 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int MinMetricGamingSuperLiveBetType = 801;
         public const int MaxMetricGamingSuperLiveBetType = 899;
 
-        public const int MinMicroGamingBetType = 2001;
-        public const int MaxMicroGamingBetType = 2009;
         public const int MinBetTradeBetType = 901;
         public const int MaxBetTradeBetType = 903;
 
@@ -126,5 +124,11 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int MyanmarOverUnder = 302;
         public const int _1stMyanmarHandicap = 303;
         public const int _1stMyanmarOverUnder = 304;
+
+        public const int MinMicroGamingLiveCasinoBetType = 2001;
+        public const int MaxMicroGamingLiveCasinoBetType = 2007;
+
+        public const int MinMicroGamingRNGCasinoBetType = 2008;
+        public const int MaxMicroGamingRNGCasinoBetType = 2009;
     }
 }

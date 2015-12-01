@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameFinancial
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get Number Game Financial Criteria.

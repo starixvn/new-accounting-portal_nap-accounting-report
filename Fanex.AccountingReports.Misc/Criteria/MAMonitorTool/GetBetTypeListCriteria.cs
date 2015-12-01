@@ -12,14 +12,13 @@ namespace Fanex.AccountingReports.Misc.Criteria.MAMonitorTool
     using System.Collections;
     using System.Collections.Generic;
     using Fanex.AccountingReports.Misc.Models.MAMonitorTool;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get Bet Type List Criteria.
     /// </summary>
-    public class GetBetTypeListCriteria : CriteriaBase, ICriteria
+    public class GetBetTypeListCriteria : CriteriaBase
     {
-        [SpParam(SqlParamName = "sporttype")]
         public int SportType { get; set; }
 
         public string Products { get; set; }

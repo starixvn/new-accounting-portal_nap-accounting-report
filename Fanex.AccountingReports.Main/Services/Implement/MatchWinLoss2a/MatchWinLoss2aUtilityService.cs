@@ -121,9 +121,14 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                 nameSuffix = string.Format("({0})", Labels.Virtual_Sports);
             }
 
-            if (this.IsMicroGamingBetType(betTypeId))
+            if (this.IsMicroGamingLiveCasinoBetType(betTypeId))
             {
-                nameSuffix = string.Format("({0})", Labels.Microgaming);
+                nameSuffix = string.Format("({0})", Labels.MicroGaming_LiveCasino);
+            }
+
+            if (this.IsMicroGamingRNGCasinoBetType(betTypeId))
+            {
+                nameSuffix = string.Format("({0})", Labels.Microgaming_RNGCasino);
             }
 
             if (!this._betTypeNameSuffixCache.ContainsKey(betTypeId))
@@ -213,7 +218,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                 result = true;
             }
             
-            if (this.IsMicroGamingBetType(betType))
+            if (this.IsMicroGamingLiveCasinoBetType(betType))
+            {
+                result = true;
+            }
+
+            if (this.IsMicroGamingRNGCasinoBetType(betType))
             {
                 result = true;
             }
@@ -271,7 +281,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                    string.Equals(betTypeName, Labels.Keno, StringComparison.OrdinalIgnoreCase) ||
                    string.Equals(betTypeName, Labels.Metric_Gaming_Super_Live, StringComparison.OrdinalIgnoreCase) ||
                    string.Equals(betTypeName, Labels.Gold_Deluxe, StringComparison.OrdinalIgnoreCase) ||
-                   string.Equals(betTypeName, Labels.Microgaming, StringComparison.OrdinalIgnoreCase) ||
+                   string.Equals(betTypeName, Labels.MicroGaming_LiveCasino, StringComparison.OrdinalIgnoreCase) ||
+                   string.Equals(betTypeName, Labels.Microgaming_RNGCasino, StringComparison.OrdinalIgnoreCase) ||
                    string.Equals(betTypeName, Labels.Macau, StringComparison.OrdinalIgnoreCase) ||
                    string.Equals(betTypeName, Labels.AG_Casino, StringComparison.OrdinalIgnoreCase));
         }
@@ -313,10 +324,23 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             }
         }
 
-        public bool IsMicroGamingBetType(int betTypeId)
+        public bool IsMicroGamingLiveCasinoBetType(int betTypeId)
         {
-            if (betTypeId < CoreConstants.BetTypeConstants.MinMicroGamingBetType ||
-                betTypeId > CoreConstants.BetTypeConstants.MaxMicroGamingBetType)
+            if (betTypeId < CoreConstants.BetTypeConstants.MinMicroGamingLiveCasinoBetType ||
+                betTypeId > CoreConstants.BetTypeConstants.MaxMicroGamingLiveCasinoBetType)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public bool IsMicroGamingRNGCasinoBetType(int betTypeId)
+        {
+            if (betTypeId < CoreConstants.BetTypeConstants.MinMicroGamingRNGCasinoBetType ||
+                betTypeId > CoreConstants.BetTypeConstants.MaxMicroGamingRNGCasinoBetType)
             {
                 return false;
             }

@@ -9,7 +9,7 @@
 
 namespace Fanex.AccountingReports.LegendManagement.Criteria
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get Inputted Legend Report Criteria.

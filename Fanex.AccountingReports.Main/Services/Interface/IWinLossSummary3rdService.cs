@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.Main.Services.Interface
 {
     using Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd;
     using Fanex.AccountingReports.Main.Models.WinLossSummary3rd;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     public interface IWinLossSummary3rdService
     {

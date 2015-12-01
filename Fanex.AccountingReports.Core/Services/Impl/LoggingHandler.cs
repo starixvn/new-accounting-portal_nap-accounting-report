@@ -40,18 +40,18 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         {
             SqlException sqlException = ex as SqlException;
             string message = ex.Message +
-                              "<br>\r\nSOURCE: " + ex.Source +
-                              "<br>\r\nDOMAIN: " + HttpContext.Current.Request.Headers["Host"] +
-                              "<br>\r\nREFERRER: " + HttpContext.Current.Request.UrlReferrer +
-                              "<br>\r\nFORM: " + HttpContext.Current.Request.Form.ToString() +
-                              "<br>\r\nQUERYSTRING: " + HttpContext.Current.Request.QueryString.ToString() +
-                              "<br>\r\nTARGETSITE: " + ex.TargetSite +
-                              "<br>\r\nSTACKTRACE: " + ex.StackTrace;
+                              "<br />\r\nSOURCE: " + ex.Source +
+                              "<br />\r\nDOMAIN: " + HttpContext.Current.Request.Headers["Host"] +
+                              "<br />\r\nREFERRER: " + HttpContext.Current.Request.UrlReferrer +
+                              "<br />\r\nFORM: " + HttpContext.Current.Request.Form.ToString() +
+                              "<br />\r\nQUERYSTRING: " + HttpContext.Current.Request.QueryString.ToString() +
+                              "<br />\r\nTARGETSITE: " + ex.TargetSite +
+                              "<br />\r\nSTACKTRACE: " + ex.StackTrace;
             if (sqlException != null)
             {
-                message += "<br>\r\nProcedure:" + sqlException.Procedure +
-                            "<br>\r\nLine Number: " + sqlException.LineNumber +
-                            "<br>\r\nServer:" + sqlException.Server;
+                message += "<br />\r\nProcedure:" + sqlException.Procedure +
+                            "<br />\r\nLine Number: " + sqlException.LineNumber +
+                            "<br />\r\nServer:" + sqlException.Server;
             }
 
             Logger.Log.Error(message);

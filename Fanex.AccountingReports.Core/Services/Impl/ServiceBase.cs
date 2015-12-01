@@ -14,7 +14,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl
     using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Services.Interface;
     using Fanex.Common.Helper;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

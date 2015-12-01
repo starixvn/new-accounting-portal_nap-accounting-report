@@ -27,6 +27,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using Fanex.AccountingReports.Licensee.Resources;
     using Fanex.AccountingReports.Licensee.Services.Interface;
     using Fanex.Common;
+using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -154,7 +155,9 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
         {
             try
             {
-                var rawData = _repository.GetLevelReport(criteria).AsEnumerable().OrderBy(s => s["username"]);
+                var resultCriteria = GetLevelCriteria(criteria);
+
+                var rawData = _repository.GetLevelReport(resultCriteria).AsEnumerable().OrderBy(s => s["username"]);
 
                 WinLossByLicensee levelReport = new WinLossByLicensee
                 {
@@ -195,10 +198,99 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             return null;
         }
 
-        /// <summary>
-        /// Export win loss by licensee report, currency level.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
+        public CriteriaBase GetLevelCriteria(GetLevelReportByCustIdCriteria criteria)
+        {
+            switch (criteria.LevelReport)
+            {
+                case 1:
+                    return new WinLossBySuperCriteria
+                    {
+                        LicenseeID = criteria.LicenseeID,
+                        Currency = criteria.Currency,
+                        FromDate = criteria.FromDate,
+                        ToDate = criteria.ToDate,
+                        ShowSB = criteria.ShowSB,
+                        ShowRB = criteria.ShowRB,
+                        ShowNG = criteria.ShowNG,
+                        ShowBA = criteria.ShowBA,
+                        ShowLC = criteria.ShowLC,
+                        ShowVS = criteria.ShowVS,
+                        ShowCS = criteria.ShowCS,
+                        ShowKN = criteria.ShowKN,
+                        ShowMGC = criteria.ShowMGC,
+                        ShowAGC = criteria.ShowAGC,
+                        ShowGD = criteria.ShowGD,
+                        Drawfilter = criteria.Drawfilter
+                    };
+                case 2:
+                    return new WinLossByMasterCriteria
+                    {
+                        CustID = criteria.CustID,
+                        LicenseeID = criteria.LicenseeID,
+                        Currency = criteria.Currency,
+                        FromDate = criteria.FromDate,
+                        ToDate = criteria.ToDate,
+                        ShowSB = criteria.ShowSB,
+                        ShowRB = criteria.ShowRB,
+                        ShowNG = criteria.ShowNG,
+                        ShowBA = criteria.ShowBA,
+                        ShowLC = criteria.ShowLC,
+                        ShowVS = criteria.ShowVS,
+                        ShowCS = criteria.ShowCS,
+                        ShowKN = criteria.ShowKN,
+                        ShowMGC = criteria.ShowMGC,
+                        ShowAGC = criteria.ShowAGC,
+                        ShowGD = criteria.ShowGD,
+                        Drawfilter = criteria.Drawfilter
+                    };
+                case 3:
+                    return new WinLossByAgentCriteria
+                    {
+                        CustID = criteria.CustID,
+                        LicenseeID = criteria.LicenseeID,
+                        Currency = criteria.Currency,
+                        FromDate = criteria.FromDate,
+                        ToDate = criteria.ToDate,
+                        ShowSB = criteria.ShowSB,
+                        ShowRB = criteria.ShowRB,
+                        ShowNG = criteria.ShowNG,
+                        ShowBA = criteria.ShowBA,
+                        ShowLC = criteria.ShowLC,
+                        ShowVS = criteria.ShowVS,
+                        ShowCS = criteria.ShowCS,
+                        ShowKN = criteria.ShowKN,
+                        ShowMGC = criteria.ShowMGC,
+                        ShowAGC = criteria.ShowAGC,
+                        ShowGD = criteria.ShowGD,
+                        Drawfilter = criteria.Drawfilter
+                    };
+
+                case 4:
+                    return new WinLossByMemberCriteria
+                    {
+                        CustID = criteria.CustID,
+                        LicenseeID = criteria.LicenseeID,
+                        Currency = criteria.Currency,
+                        FromDate = criteria.FromDate,
+                        ToDate = criteria.ToDate,
+                        ShowSB = criteria.ShowSB,
+                        ShowRB = criteria.ShowRB,
+                        ShowNG = criteria.ShowNG,
+                        ShowBA = criteria.ShowBA,
+                        ShowLC = criteria.ShowLC,
+                        ShowVS = criteria.ShowVS,
+                        ShowCS = criteria.ShowCS,
+                        ShowKN = criteria.ShowKN,
+                        ShowMGC = criteria.ShowMGC,
+                        ShowAGC = criteria.ShowAGC,
+                        ShowGD = criteria.ShowGD,
+                        Drawfilter = criteria.Drawfilter
+                    };
+            }
+
+            return criteria;
+        }
+
         public void ExportCurrencyReport(GetCurrencyReportCriteria criteria)
         {
             try
@@ -234,7 +326,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
                     startRow,
                     startColumn,
                     ref currentRow,
-                    criteria,
                     currencyReport);
 
                 //// MakeExcelFile
@@ -290,7 +381,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
                     startRow,
                     startColumn,
                     ref currentRow,
-                    criteria,
                     levelReport);
 
                 //// MakeExcelFile
@@ -1275,7 +1365,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             int startRow,
             int startColumn,
             ref int currentRow,
-            GetCurrencyReportCriteria criteria,
             WinLossByLicensee report)
         {
             //// ExcelTypes
@@ -1464,7 +1553,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             int startRow,
             int startColumn,
             ref int currentRow,
-            GetLevelReportByCustIdCriteria criteria,
             WinLossByLicensee report)
         {
             //// ExcelTypes

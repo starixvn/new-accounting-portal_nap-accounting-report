@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Misc.Criteria.TotalCreditAccountByProduct
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get bet count detail criteria.

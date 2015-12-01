@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Gaming.Criteria.LiveCasinoGameStatistic
 {
     using Fanex.AccountingReports.Core.Constants;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

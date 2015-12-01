@@ -56,7 +56,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
                 switch (criteria.System)
                 {
                     case Constants.SystemName.AccNapReport:
-                        var menuList = this._accNapMenuService.GetBySite(WebSettings.NAPSiteId, Constant.UAT);
+                        var menuList = this._accNapMenuService.GetBySite(WebSettings.NAPSiteId, Constant.Uat);
                         return this.MappingNapMenuToAccountingMenu(menuList);
                     case Constants.SystemName.AccReport:
                         var rawData = GetReportData<dynamic>(criteria)

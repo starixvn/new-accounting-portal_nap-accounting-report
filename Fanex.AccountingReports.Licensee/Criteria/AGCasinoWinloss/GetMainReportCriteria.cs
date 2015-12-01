@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Licensee.Criteria.AGCasinoWinloss
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

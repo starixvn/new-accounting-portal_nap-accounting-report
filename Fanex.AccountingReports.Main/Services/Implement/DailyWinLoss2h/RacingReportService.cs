@@ -94,12 +94,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                             WinLossInfo info = new WinLossInfo
                             {
                                 Id = sportTypeWinLoss.Id,
-                                WinLoss = Converter.ToDecimal(data.winlost),
-                                Position = Converter.ToDecimal(data.position),
-                                Commission = Converter.ToDecimal(data.commission),
+                                WinLoss = Converter.ToDecimal(data.WinLost),
+                                Position = Converter.ToDecimal(data.Position),
+                                Commission = Converter.ToDecimal(data.Commission),
                                 LineTotal = Converter.ToDecimal(data.LineTotal),
                                 Turnover = Converter.ToDecimal(data.Turnover),
-                                SiteType = Converter.ToInt(data.site)
+                                SiteType = Converter.ToInt(data.Site)
                             };
 
                             var rowType = _dailyWinLoss2hUtilityService.GetRowType(0, info.SiteType);
@@ -202,9 +202,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                             WinLossInfo info = new WinLossInfo
                             {
                                 Id = betTypeWinLoss.Id,
-                                WinLoss = Converter.ToDecimal(data.winlost),
-                                Position = Converter.ToDecimal(data.position),
-                                Commission = Converter.ToDecimal(data.commission),
+                                WinLoss = Converter.ToDecimal(data.WinLost),
+                                Position = Converter.ToDecimal(data.Position),
+                                Commission = Converter.ToDecimal(data.Commission),
                                 LineTotal = Converter.ToDecimal(data.LineTotal),
                                 Turnover = Converter.ToDecimal(data.Turnover),
                                 SiteType = Converter.ToInt(data.site)
@@ -292,10 +292,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         {
                             WinLossInfo info = new WinLossInfo
                             {
-                                Name = Converter.ToString2(data.race),
-                                WinLoss = Converter.ToDecimal(data.winlost),
-                                Position = Converter.ToDecimal(data.position),
-                                Commission = Converter.ToDecimal(data.commission),
+                                Name = Converter.ToString2(data.Race),
+                                WinLoss = Converter.ToDecimal(data.WinLost),
+                                Position = Converter.ToDecimal(data.Position),
+                                Commission = Converter.ToDecimal(data.Commission),
                                 LineTotal = Converter.ToDecimal(data.LineTotal),
                                 Turnover = Converter.ToDecimal(data.Turnover)
                             };

@@ -9,7 +9,7 @@
 
 namespace Fanex.AccountingReports.Main.Repositories.Interface
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     public interface IWinlossSummary3rdRepository
     {

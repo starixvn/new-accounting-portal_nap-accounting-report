@@ -10,6 +10,7 @@ namespace Fanex.AccountingReports.Licensee.Repositories.Implement
     using Fanex.AccountingReports.Licensee.Criteria.WinLossByLicensee;
     using Fanex.AccountingReports.Licensee.Repositories.Interface;
     using Fanex.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -32,7 +33,7 @@ namespace Fanex.AccountingReports.Licensee.Repositories.Implement
             return dataTable;
         }
 
-        public DataTable GetLevelReport(GetLevelReportByCustIdCriteria criteria)
+        public DataTable GetLevelReport(CriteriaBase criteria)
         {
             DataTable dataTable = new DataTable();
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))

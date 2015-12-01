@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Main.Services.Interface
 {
     using Fanex.AccountingReports.Main.Models.WinLossSummary;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     public interface IWinLossSummaryService
     {

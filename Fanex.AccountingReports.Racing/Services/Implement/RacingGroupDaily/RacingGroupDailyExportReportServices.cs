@@ -9,6 +9,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.RacingGroupDaily
     using System;
     using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Extensions;
+    using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Racing.Constants;
     using Fanex.AccountingReports.Racing.Criteria.RacingGroupDaily;
@@ -24,7 +25,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.RacingGroupDaily
     /// <summary>
     /// The implement of export Racing Group Daily report.
     /// </summary>
-    public class RacingGroupDailyExportReportServices : BaseService, IRacingGroupDailyExportReportServices
+    public class RacingGroupDailyExportReportServices : ServiceBase, IRacingGroupDailyExportReportServices
     {
         private const short DailySubTotalColorIndex = 29;
 
@@ -120,9 +121,9 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.RacingGroupDaily
             worksheet.SetColumnWidth(1, 180 * ExcelExtensions.FontWidth);
 
             this.RenderReportHeaderDetail(
-                            ref worksheet, 
-                            ref currentRow, 
-                            criteria, 
+                            ref worksheet,
+                            ref currentRow,
+                            criteria,
                             headerStyle);
         }
 
@@ -134,9 +135,9 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.RacingGroupDaily
         /// <param name="criteria">The criteria.</param>
         /// <param name="headerStyle">The style of header.</param>
         private void RenderReportHeaderDetail(
-            ref ISheet worksheet, 
-            ref int currentRow, 
-            GetWinLostRacingGroupCriteria criteria, 
+            ref ISheet worksheet,
+            ref int currentRow,
+            GetWinLostRacingGroupCriteria criteria,
             ICellStyle headerStyle)
         {
             var currentColumn = 0;
@@ -150,7 +151,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.RacingGroupDaily
             currentRow += 2;
             worksheet.AddMergedRegion(new CellRangeAddress(currentRow, currentRow, 0, 17));
             currentRow++;
-            
+
             row = worksheet.CreateRow(currentRow);
             currentColumn = 0;
 
@@ -234,7 +235,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.RacingGroupDaily
                 this.ExportPartnerTypeSubTotalRow(
                     ref worksheet,
                     ref row,
-                    ref currentRow, 
+                    ref currentRow,
                     ref currentColumn,
                     partnerTypeSubTotalTextStyle,
                     partnerTypeSubTotalDecimalStyle,
@@ -389,7 +390,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.RacingGroupDaily
             ICellStyle grandTotalTextStyle = NpoiExcelExtensions.TextStyle(excelFile, GrandTotalColorIndex, true, NpoiExcelExtensions.Alignment.Center);
             grandTotalTextStyle.BorderTop = BorderStyle.Medium;
             grandTotalTextStyle.TopBorderColor = GrandTotalBorderColorIndex;
-            
+
             ICellStyle grandTotalDecimalStyle = NpoiExcelExtensions.DecimalStyle(excelFile, GrandTotalColorIndex, true);
             grandTotalDecimalStyle.BorderTop = BorderStyle.Medium;
             grandTotalDecimalStyle.TopBorderColor = GrandTotalBorderColorIndex;

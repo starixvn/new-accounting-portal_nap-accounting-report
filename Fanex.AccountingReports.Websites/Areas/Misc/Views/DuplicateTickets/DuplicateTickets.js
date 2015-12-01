@@ -16,7 +16,8 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
     };
 
     var _params = {
-        Date: null
+        Date: null,
+        CheckTime: 1
     };
 
     var _report = null;
@@ -273,6 +274,7 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
 
     var getParams = function () {
         _params.Date = _table.datePickerPlugin.nexDatePicker("getSingleDate");
+        _params.CheckTime = 1;
     };
 
     var validateParams = function () {

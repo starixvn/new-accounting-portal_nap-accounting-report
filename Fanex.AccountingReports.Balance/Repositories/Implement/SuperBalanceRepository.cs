@@ -19,7 +19,7 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.Common;
     using Fanex.Data;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

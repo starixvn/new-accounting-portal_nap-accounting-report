@@ -7,7 +7,7 @@
 namespace Fanex.AccountingReports.Racing.Criteria.RacingGroupDaily
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// The criteria of Racing Group Daily.

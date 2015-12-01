@@ -11,7 +11,7 @@ namespace Fanex.BetList.Accounting.Services
 {
     using System.Collections.Generic;
     using Fanex.BetList.Accounting.Models;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     public interface IResultService
     {

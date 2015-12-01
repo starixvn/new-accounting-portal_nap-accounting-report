@@ -17,18 +17,18 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-     public class CommonController : Controller
+    public class CommonController : Controller
     {
-        private readonly IMaintainanceService _maintenanceService;
+        private readonly IMaintenanceService _maintenanceService;
 
         public CommonController()
             : this(null)
         {
         }
 
-        public CommonController(IMaintainanceService maintenanceService)
+        public CommonController(IMaintenanceService maintenanceService)
         {
-            _maintenanceService = maintenanceService ?? new MaintainanceService();
+            _maintenanceService = maintenanceService ?? new MaintenanceService();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
             {
                 message = "Sorry, This file is not found. Please contact Starix IT for more details.";
             }
-            
+
             ViewBag.Message = message;
             return View("ExpiredNotification");
         }

@@ -9,7 +9,7 @@
 
 namespace Fanex.AccountingReports.Core.Criteria
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// BalanceUpCriteria: criteria for getting balance up day and move bet day.

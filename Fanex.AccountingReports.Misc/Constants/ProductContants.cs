@@ -32,5 +32,7 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int VirtualSports = 180;
 
         public const int Keno = 202;
+
+        public const int ColossusBets = 204;
     }
 }

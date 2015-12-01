@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Gaming.Criteria.LiveCasinoWinLossByAgency
 {
     using Fanex.AccountingReports.Core.Constants;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

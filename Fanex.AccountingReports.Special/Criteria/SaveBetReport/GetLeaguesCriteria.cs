@@ -13,7 +13,7 @@ namespace Fanex.AccountingReports.Special.Criteria.SaveBetReport
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

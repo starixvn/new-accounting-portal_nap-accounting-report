@@ -22,6 +22,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Misc.Constants;
     using Fanex.AccountingReports.Misc.Criteria.MAMonitorTool;
+    using Fanex.AccountingReports.Misc.Entities.MAMonitorTool;
     using Fanex.AccountingReports.Misc.Models.MAMonitorTool;
     using Fanex.AccountingReports.Misc.Resources;
     using Fanex.AccountingReports.Misc.Services.Interface;
@@ -132,13 +133,13 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
                     Name = Labels.All
                 });
 
-                var rawData = GetReportData<dynamic>(new GetSportListCriteria());
+                var rawData = GetReportData<Sport>(new GetSportListCriteria());
                 foreach (var row in rawData)
                 {
                     result.Add(new EntityBase<int, string>()
                     {
-                        Id = Converter.ToInt(row.SportType),
-                        Name = Converter.ToString2(row.SportName)
+                        Id = row.SportType,
+                        Name = row.SportName
                     });
                 }
 
@@ -169,13 +170,13 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
                     Name = Labels.All
                 });
 
-                var rawData = GetReportData<dynamic>(criteria);
+                var rawData = GetReportData<ProductEntity>(criteria);
                 foreach (var row in rawData)
                 {
                     result.Add(new EntityBase<int, string>()
                     {
-                        Id = Converter.ToInt(row.TypeId),
-                        Name = Converter.ToString2(row.TypeName)
+                        Id = row.TypeId,
+                        Name = row.TypeName
                     });
                 }
 
@@ -193,7 +194,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
             var productBettypes = new List<ProductBettype>();
             try
             {
-                var rawData = GetReportData<dynamic>(criteria);
+                var rawData = GetReportData<ProductBettypeEntity>(criteria);
                 var productGroups = rawData.GroupBy(x => x.ProductId).ToList();
                 var cachedProducts = GetProductFromCache();
                 foreach (var productGroup in productGroups)
@@ -299,15 +300,14 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
             try
             {
                 List<EntityBase<int, string>> result = new List<EntityBase<int, string>>();
-                var rawData = GetReportData<dynamic>(criteria);
+                var rawData = GetReportData<League>(criteria);
                 foreach (var row in rawData)
                 {
                     var league = new EntityBase<int, string>()
                     {
-                        Id = Converter.ToInt(row.LeagueId)
+                        Id = row.LeagueId,
+                        Name = row.LeagueName
                     };
-
-                    league.Name = CacheRef.GetLeagueName(league.Id);
                     result.Add(league);
                 }
 
@@ -337,7 +337,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
                     fullReport = GetAndConvertFullReport(criteria);
                     pagingReport = fullReport;
                     ClearAllPagingSessionKey();
-                    
+
                     if (criteria.ReportBy != 2)
                     {
                         SessionManager.Set<WinLossInfo>(ReportSessionKey, fullReport);
@@ -591,7 +591,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
             };
 
             return pagingReport;
-        } 
+        }
 
         /// <summary>
         /// Determines whether [is correct filtered information] [the specified criteria].

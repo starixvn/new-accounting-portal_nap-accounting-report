@@ -26,7 +26,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByComm = function () {
             Currency: 0,
             ShowAGCS: true,
             ShowVG: true,
-            ShowMGC: true,
+            ShowMGCLC: true,
+            ShowMGCRNG: true,
             ShowCB: true,
             CurrencyName: null
         }
@@ -132,7 +133,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByComm = function () {
                 !self.Params.reportParams.ShowMGSL &&
                 !self.Params.reportParams.ShowVG &&
                 !self.Params.reportParams.ShowAGCS &&
-                !self.Params.reportParams.ShowMGC &&
+                !self.Params.reportParams.ShowMGCLC &&
+                !self.Params.reportParams.ShowMGCRNG &&
                 !self.Params.reportParams.ShowCB) && (self.Params.reportParams.ShowCasino || self.Params.reportParams.ShowBI || self.Params.reportParams.ShowP2P)) {
             isShowNA = true;
         }

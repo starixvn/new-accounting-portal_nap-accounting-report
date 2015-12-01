@@ -8,7 +8,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
 {
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -41,7 +41,9 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
 
         public bool ShowMGSL { get; set; }
 
-        public bool ShowMGC { get; set; }
+        public bool ShowMGCLC { get; set; }
+
+        public bool ShowMGCRNG { get; set; }
 
         public bool ShowVG { get; set; }
 

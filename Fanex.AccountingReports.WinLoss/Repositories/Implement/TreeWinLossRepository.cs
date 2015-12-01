@@ -14,7 +14,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
     using Fanex.AccountingReports.WinLoss.Repositories.Interface;
     using Fanex.Common;
     using Fanex.Data;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

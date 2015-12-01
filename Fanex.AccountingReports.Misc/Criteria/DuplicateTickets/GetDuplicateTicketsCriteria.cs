@@ -10,7 +10,7 @@ namespace Fanex.AccountingReports.Misc.Criteria.DuplicateTickets
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -19,7 +19,7 @@ namespace Fanex.AccountingReports.Misc.Criteria.DuplicateTickets
     {
         public DateTime Date { get; set; }
 
-        public bool ShowTime { get; set; }
+        public short CheckTime { get; set; }
 
         public override string GetSettingKey()
         {

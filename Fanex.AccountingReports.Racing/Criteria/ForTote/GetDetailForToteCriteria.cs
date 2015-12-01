@@ -8,7 +8,7 @@ namespace Fanex.AccountingReports.Racing.Criteria.ForTote
 {
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Create Get racing for tote detail.

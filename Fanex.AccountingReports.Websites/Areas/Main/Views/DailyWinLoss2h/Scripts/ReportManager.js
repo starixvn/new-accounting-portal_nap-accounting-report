@@ -175,7 +175,7 @@ ReportManager.prototype.GetWinlossBySiteLink = function (selectParams) {
         selectParams.SportType + "','" +
         selectParams.SportGroupId + "','" +
         selectParams.BetType + "','" +
-        selectParams.BetTypeName + "'," +
+        selectParams.BetTypeName.replace("'", "\\'") + "'," +
         selectParams.IsLive + "," +
         selectParams.IsHedge + "," +
         selectParams.SiteType + ",'" +
@@ -247,7 +247,8 @@ ReportManager.prototype.BindingEvent_WinLossBySite_BetType = function () {
             IsLive: self.WinLossBySite_BetType.Params.reportParams.liveindicator,
             IsHedge: self.WinLossBySite_BetType.Params.reportParams.IsHedge,
             SiteType: self.WinLossBySite_BetType.Params.reportParams.site,
-            SportGroupId: self.WinLossBySite_BetType.Params.reportParams.SportGroupId
+            SportGroupId: self.WinLossBySite_BetType.Params.reportParams.SportGroupId,
+            ProductId: self.WinLossBySite_BetType.Params.reportParams.ProductId
         });
     });
 
@@ -263,7 +264,8 @@ ReportManager.prototype.BindingEvent_WinLossBySite_BetType = function () {
             IsLive: self.WinLossBySite_BetType.Params.reportParams.liveindicator,
             IsHedge: self.WinLossBySite_BetType.Params.reportParams.IsHedge,
             SiteType: self.WinLossBySite_BetType.Params.reportParams.site,
-            SportGroupId: self.WinLossBySite_BetType.Params.reportParams.SportGroupId
+            SportGroupId: self.WinLossBySite_BetType.Params.reportParams.SportGroupId,
+            ProductId: self.WinLossBySite_BetType.Params.reportParams.ProductId
         });
     });
 
@@ -279,7 +281,8 @@ ReportManager.prototype.BindingEvent_WinLossBySite_BetType = function () {
             IsLive: self.WinLossBySite_BetType.Params.reportParams.liveindicator,
             IsHedge: self.WinLossBySite_BetType.Params.reportParams.IsHedge,
             SiteType: self.WinLossBySite_BetType.Params.reportParams.site,
-            SportGroupId: self.WinLossBySite_BetType.Params.reportParams.SportGroupId
+            SportGroupId: self.WinLossBySite_BetType.Params.reportParams.SportGroupId,
+            ProductId: self.WinLossBySite_BetType.Params.reportParams.ProductId
         });
     });
 

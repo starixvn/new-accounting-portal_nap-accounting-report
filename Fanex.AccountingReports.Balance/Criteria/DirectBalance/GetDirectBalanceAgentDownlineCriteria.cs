@@ -9,7 +9,7 @@
 
 namespace Fanex.AccountingReports.Balance.Criteria.DirectBalance
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

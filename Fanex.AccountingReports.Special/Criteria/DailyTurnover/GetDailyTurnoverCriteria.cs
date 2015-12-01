@@ -7,7 +7,7 @@
 namespace Fanex.AccountingReports.Special.Criteria.DailyTurnover
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// The criteria of daily turnover.
@@ -18,9 +18,9 @@ namespace Fanex.AccountingReports.Special.Criteria.DailyTurnover
 
         public bool IsActual { get; set; }
 
-        public bool ErrorCode { get; set; }
+        public bool ErrCode { get; set; }
 
-        public string ErrorMessage { get; set; }
+        public string ErrMsg { get; set; }
 
         public override string GetSettingKey()
         {

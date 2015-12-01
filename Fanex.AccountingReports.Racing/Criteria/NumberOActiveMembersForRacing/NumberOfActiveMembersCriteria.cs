@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Racing.Criteria.NumberOActiveMembersForRacing
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Racing - Number Of Active Member Criteria.

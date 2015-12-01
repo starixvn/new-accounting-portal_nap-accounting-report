@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.LegendManagement.Criteria
 {
     using Fanex.AccountingReports.LegendManagement.Configurations;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get Report Legend Criteria.
@@ -29,6 +29,7 @@ namespace Fanex.AccountingReports.LegendManagement.Criteria
 
         public string System { get; set; }
 
+        [SpParam(Ignored = true)]
         public bool IsNote { get; set; }
 
         [SpParam(Ignored = true)]

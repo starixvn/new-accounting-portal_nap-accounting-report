@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.LegendManagement.Repositories.Impls
 {
     using System.Collections;
     using Fanex.Data;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Base Repository.

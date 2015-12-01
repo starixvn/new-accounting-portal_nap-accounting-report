@@ -23,6 +23,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoWinLossByA
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Gaming.Constants;
     using Fanex.AccountingReports.Gaming.Criteria.LiveCasinoWinLossByAgency;
+    using Fanex.AccountingReports.Gaming.Models;
     using Fanex.AccountingReports.Gaming.Models.LiveCasinoWinLossByAgency;
     using Fanex.AccountingReports.Gaming.Repositories.Implement;
     using Fanex.AccountingReports.Gaming.Repositories.Interface;
@@ -91,7 +92,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoWinLossByA
             {
                 List<ProductGameType> result = new List<ProductGameType>();
                 var products = GetProductFromCache();
-                var gameTypes = GetReportData<dynamic>(criteria);
+                var gameTypes = GetReportData<GamingType>(criteria);
                 if (gameTypes == null)
                 {
                     return result;
@@ -105,7 +106,13 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoWinLossByA
                         GameTypes = new List<EntityBase<int, string>>()
                     };
 
-                    productGameType.ProductName = products.FirstOrDefault(x => x.Id == Converter.ToInt(group.Key)).Name;
+                    var productGroup = products.FirstOrDefault(x => x.Id == Converter.ToInt(group.Key));
+                    if (productGroup == null)
+                    {
+                        continue;
+                    }
+
+                    productGameType.ProductName = productGroup.Name;
                     foreach (var gameType in group)
                     {
                         productGameType.GameTypes.Add(new EntityBase<int, string>()

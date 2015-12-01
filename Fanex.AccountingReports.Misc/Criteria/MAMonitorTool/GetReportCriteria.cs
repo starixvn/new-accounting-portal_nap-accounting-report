@@ -15,12 +15,12 @@ namespace Fanex.AccountingReports.Misc.Criteria.MAMonitorTool
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Misc.Models.MAMonitorTool;
     using Fanex.Common;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get Report Criteria.
     /// </summary>
-    public class GetReportCriteria : CriteriaBase, ICriteria
+    public class GetReportCriteria : CriteriaBase
     {
         [SpParam(SqlParamName = "reportby")]
         public int ReportBy { get; set; }

@@ -13,7 +13,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Interface
     using System.Collections.Generic;
     using Fanex.AccountingReports.Main.Criteria.MatchWinLoss2a;
     using Fanex.AccountingReports.Main.Models.MatchWinLoss2a;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     public interface IMatchWinLoss2aRepository
     {

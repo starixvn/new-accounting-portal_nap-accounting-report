@@ -6,12 +6,12 @@
 
 namespace Fanex.BetList.Accounting.Criteria
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class ResultPopupCriteria : CriteriaBase 
+    public class ResultPopupCriteria : CriteriaBase
     {
         [SpParam(SqlParamName = "MatchID")]
         public int MatchId { get; set; }

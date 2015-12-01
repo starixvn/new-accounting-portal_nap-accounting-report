@@ -18,13 +18,18 @@
 @away-color:#008d95;
 @bg_pending: Yellow;
 @bg_postponed: #FDFD87;
-div.fn-rs-content-header
+@color-red:#CC0000;
+@color-blue:#4169E1;
+@color-black:#000000;
+@color-green:#33CC33;
+
+.fn-rs-content-header
 {
     border: 1px solid @border-color;
     padding-right: 15px;
 }
 
-div.fn-rs-content-scroll
+.fn-rs-content-scroll
 {
 	max-height: 740px;
 	overflow-y: scroll;
@@ -34,6 +39,45 @@ div.fn-rs-content-scroll
 	width: 100%;
 	max-height: 780px;
 }
+.goal-record
+    {
+		float:right;
+		padding::5px 0px;
+		table
+        {
+        	min-width:180px;
+			 border-collapse: collapse;
+			  text-align: center;
+			th
+		   {
+				border-right: 1px solid @border-color;
+				font-weight: normal;
+				vertical-align: middle;
+				text-align: center;
+				color: #FFF !important;
+	
+           }
+			.header
+			{
+		 			color: @header-color;
+					 background-color: @header-background;
+			}
+			tbody{
+				td
+				{
+					border: solid 1px @border-color;
+					padding: 1px;
+					vertical-align: middle;
+				}
+            	.cl-goal
+				{
+					width: 50%;
+				}
+			}
+			}
+        }
+		
+
 
 table
 {
@@ -43,6 +87,7 @@ table
     {
 	 min-width: 650px !important;
     }
+	
     &.fn-rs
     {
         border-collapse: collapse;
@@ -93,16 +138,43 @@ table
                 color: @league-color;
                 background: @league-background;
                 vertical-align: middle;
-                border: 0;
                 font-weight: bold;
                 text-align: left;
                 line-height: 7px;
                 height: 21px;
+				&.sub
+				{
+					
+					
+				}
+            }
+			
+			.cl-team
+            {
+            	text-align:left;
+            }
+			.cl-match-mt
+            {
+				text-align:left;
+                font-size: 12px;
+                padding-left: 3px;
+				 &.home
+                {
+                    color: @color-red;
+                }
+                &.away
+                {
+                    color: @color-blue;
+                }
+				&.win
+                {
+                
+					font-weight:bold;
+                }
             }
             .cl-match
             {
                 text-align:left;
-                font-weight: bold;
                 font-size: 12px;
                 padding-left: 3px;
                 &.home
@@ -112,6 +184,11 @@ table
                 &.away
                 {
                     color: @away-color;
+                }
+				&.win
+                {
+                
+					font-weight:bold;
                 }
                 div
                 {
@@ -132,7 +209,7 @@ table
                     }
                     &.first-half-last-goal
                     {
-                        background: url(@goal-icon) no-repeat -9px -83px;
+                        background: url(@goal-icon) no-repeat no-repeat -9px -83px;
                     }
 					&.home
                     {
@@ -170,7 +247,18 @@ table
         {
             width: 90px;
         }
-
+		.cl-result
+        {
+        	text-align:center;
+			&.home
+            {
+				min-width:150px;
+            }
+			&.away
+            {
+				min-width:150px;
+            }
+        }
         .cl-match
         {
            min-width: 82px;
@@ -207,6 +295,11 @@ table
 					color: #D2592D;
 				}
 			}
+			.ko
+            {
+				color:#677AE0;
+				font-weight: bold;
+            }
         }
 		.cl-bg-pending
         {
@@ -216,6 +309,42 @@ table
         {
         			background:@bg_postponed;
 
+        }
+    }
+	&.metric-gaming
+    {
+     /*header*/
+		td,th
+        {
+			line-height: 25px;
+        }
+		.header
+        {
+			td
+            {
+				border-left:solid 1px @header-background;
+				border-right:solid 1px @header-background;
+				text-align:center !important;
+            }
+			
+        }
+		.data-header
+        {
+        	td,th
+            {
+            	background:@league-background;
+				font-weight: bold;
+				
+            }
+        }
+		.cl-result
+        {
+        	width:150px;
+			text-align:left;
+        }
+		.cl-event
+        {
+        	text-align:left;
         }
     }
 	&.number-game
@@ -248,13 +377,150 @@ table
             }
 	
     }
+	&.ag-cs
+    {
+    	/*header*/
+		.cl-match
+        {
+			.gd
+            {
+            	display:table;
+				width:100%;
+				margin-top: 2px ;
+				text-align:center;
+				
+            }
+			.banker,.player,.dragon,.tiger
+            {
+				display:table-cell;
+				width:50%;
+				padding:0;
+				margin: 0;
+				li
+                {
+					float: left;
+					margin-left:15px;
+					line-height:20px;
+                }
+				li:first-child
+                {
+                	margin-left:0px;
+                }
+				.diamond,.heart,.club,.spade
+                {
+					.icon
+                    {
+                    	font-size:19px;
+                    }
+					.card
+                    {
+						margin-left:2px;
+						font-size:14px;
+                    }
+					
+                }
+				.diamond,.heart
+				{
+            		color: @color-red;
+					
+				}
+				.club,.spade
+				{
+            		color: @color-black;
+				}
+            }
+		
+			.black
+			{
+        		color:@color-black;
+				font-size:28px;
+				font-weight:bold;
+				text-align:center;
+				display:table-cell;
+			}
+		}
+    }
 	&.casino
     {
     	/*header*/
 		.cl-result
         {
         	width:334px;
+			
         }
+		
+		.cl-match
+        {
+			.gd
+            {
+            	display:table;
+				width:100%;
+				margin-top: 2px ;
+				text-align:center;
+				
+            }
+			.banker,.player
+            {
+				display:table-cell;
+				width:50%;
+				padding:0;
+				margin: 0;
+				li
+                {
+					float: left;
+					margin-left:15px;
+					line-height:20px;
+                }
+				li:first-child
+                {
+                	margin-left:0px;
+                }
+				.diamond,.heart,.club,.spade
+                {
+					.icon
+                    {
+                    	font-size:19px;
+                    }
+					.card
+                    {
+						margin-left:2px;
+						font-size:14px;
+                    }
+					
+                }
+				.diamond,.heart
+				{
+            		color: @color-red;
+					
+				}
+				.club,.spade
+				{
+            		color: @color-black;
+				}
+            }
+			
+		
+			.green,.red,.black
+			 {
+        		font-size:28px;
+				font-weight:bold;
+				text-align:center;
+				display:table-cell;
+			 }
+			.green
+			{
+        		color: @color-green;
+			}
+			.red
+			{
+        		color: @color-red;
+			}
+			.black
+			{
+        		color:@color-black;
+			}
+		}
+
     }
 	&.racing
     {
@@ -264,10 +530,10 @@ table
 			width: 180px;
 		}
 	
-		.cl-result
+		td.cl-result
         {
         	font-weight: bold;
-			text-align: left;
+			text-align:left;
         }
 
 		.cl-win, .cl-place
@@ -307,4 +573,22 @@ table
     tr.data:hover
     {
     }
+}
+
+.iframe-rs
+{
+	width:100%;
+	height:100%;
+	border:none;
+}
+.no-info-rs
+{
+	 min-width: 650px !important;
+	 height:30px;
+	 font-weight:bold;
+	 text-align:center;
+}
+.iframe-rs-wrap
+{
+
 }

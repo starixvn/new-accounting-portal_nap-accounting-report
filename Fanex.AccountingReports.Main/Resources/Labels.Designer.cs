@@ -1789,6 +1789,24 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Microgaming - Live Casino.
+        /// </summary>
+        public static string MicroGaming_LiveCasino {
+            get {
+                return ResourceManager.GetString("MicroGaming_LiveCasino", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Microgaming - RNG Casino.
+        /// </summary>
+        public static string Microgaming_RNGCasino {
+            get {
+                return ResourceManager.GetString("Microgaming_RNGCasino", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Minor1.
         /// </summary>
         public static string Minor1 {

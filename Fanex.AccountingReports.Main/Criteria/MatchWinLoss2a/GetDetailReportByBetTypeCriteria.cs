@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.Main.Criteria.MatchWinLoss2a
 {
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// Get detail report by bet type criteria.
@@ -24,7 +24,8 @@ namespace Fanex.AccountingReports.Main.Criteria.MatchWinLoss2a
 
         public int Bettype { get; set; }
 
-        public string BetTypeName { get; set; }        
+        [SpParam(Ignored = true)]
+        public string BetTypeName { get; set; }
 
         public bool LiveIndicator { get; set; }
 

@@ -1216,4 +1216,10 @@
   <data name="Colossus_Bets" xml:space="preserve">
     <value>Colossus Bets</value>
   </data>
+  <data name="MicroGaming_LiveCasino" xml:space="preserve">
+    <value>Microgaming - Live Casino</value>
+  </data>
+  <data name="Microgaming_RNGCasino" xml:space="preserve">
+    <value>Microgaming - RNG Casino</value>
+  </data>
 </root>

@@ -8,7 +8,7 @@ namespace Fanex.AccountingReports.Racing.Criteria.RacingWinLossByLicensee
 {
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// The criteria to get detail bet list.
@@ -38,7 +38,7 @@ namespace Fanex.AccountingReports.Racing.Criteria.RacingWinLossByLicensee
             }
             else
             {
-                suffix = "_14"; 
+                suffix = "_14";
             }
 
             return "Racing_RacingWinLostLicensee_DetailBetList" + suffix;

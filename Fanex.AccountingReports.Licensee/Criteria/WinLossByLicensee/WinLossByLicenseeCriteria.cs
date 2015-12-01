@@ -12,7 +12,7 @@ namespace Fanex.AccountingReports.Licensee.Criteria.WinLossByLicensee
     using System;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -34,8 +34,6 @@ namespace Fanex.AccountingReports.Licensee.Criteria.WinLossByLicensee
 
         [SpParam(Ignored = true)]
         public string CurrencyName { get; set; }
-
-        public int CustID { get; set; }
 
         [SpParam(Ignored = true)]
         public string UserName { get; set; }
@@ -65,8 +63,6 @@ namespace Fanex.AccountingReports.Licensee.Criteria.WinLossByLicensee
         public bool ShowGD { get; set; }
 
         public bool ShowMGC { get; set; }
-
-        public int ReportType { get; set; }
 
         public int Drawfilter { get; set; }
 

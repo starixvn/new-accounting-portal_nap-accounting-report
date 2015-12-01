@@ -15,6 +15,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.MatchWinLossByBetty
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
+    using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.WinLoss.Criteria.MatchWinLossByBettype;
     using Fanex.AccountingReports.WinLoss.Models.MatchWinLossByBettype;
@@ -25,7 +26,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.MatchWinLossByBetty
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class MatchWinLossByBettypeExportDataService : BaseService, IMatchWinLossByBettypeExportDataService
+    public class MatchWinLossByBettypeExportDataService : ServiceBase, IMatchWinLossByBettypeExportDataService
     {
         private string _matchWinLossByBettypeReportSessionKey = "Fanex.AccountingReports.WinLoss.MatchWinLossByBettype." +
            (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);

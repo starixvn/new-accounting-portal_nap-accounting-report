@@ -7,7 +7,7 @@
 namespace Fanex.AccountingReports.Racing.Criteria.RacingGroupDaily
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// The criteria of Racing Group.
@@ -18,10 +18,13 @@ namespace Fanex.AccountingReports.Racing.Criteria.RacingGroupDaily
 
         public DateTime ToDate { get; set; }
 
+        [SpParam(Ignored = true)]
         public bool IsPagingCallback { get; set; }
 
+        [SpParam(Ignored = true)]
         public int StartIndex { get; set; }
 
+        [SpParam(Ignored = true)]
         public int DatesPerPage { get; set; }
 
         public override string GetSettingKey()

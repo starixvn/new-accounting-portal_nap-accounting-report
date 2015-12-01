@@ -52,7 +52,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             ShowMGSL: _treeWinLoss.Params.reportParams.ShowMGSL,
             ShowAGCS: _treeWinLoss.Params.reportParams.ShowAGCS,
             ShowVG: _treeWinLoss.Params.reportParams.ShowVG,
-            ShowMGC: _treeWinLoss.Params.reportParams.ShowMGC,
+            ShowMGCLC: _treeWinLoss.Params.reportParams.ShowMGCLC,
+            ShowMGCRNG: _treeWinLoss.Params.reportParams.ShowMGCRNG,
             ShowCB: _treeWinLoss.Params.reportParams.ShowCB
         });
     };
@@ -78,7 +79,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             ShowMGSL: _treeWinLoss.Params.reportParams.ShowMGSL,
             ShowAGCS: _treeWinLoss.Params.reportParams.ShowAGCS,
             ShowVG: _treeWinLoss.Params.reportParams.ShowVG,
-            ShowMGC: _treeWinLoss.Params.reportParams.ShowMGC,
+            ShowMGCLC: _treeWinLoss.Params.reportParams.ShowMGCLC,
+            ShowMGCRNG: _treeWinLoss.Params.reportParams.ShowMGCRNG,
             ShowCB: _treeWinLoss.Params.reportParams.ShowCB
         });
     };
@@ -104,7 +106,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             ShowMGSL: _treeWinLoss.Params.reportParams.ShowMGSL,
             ShowAGCS: _treeWinLoss.Params.reportParams.ShowAGCS,
             ShowVG: _treeWinLoss.Params.reportParams.ShowVG,
-            ShowMGC: _treeWinLoss.Params.reportParams.ShowMGC,
+            ShowMGCLC: _treeWinLoss.Params.reportParams.ShowMGCLC,
+            ShowMGCRNG: _treeWinLoss.Params.reportParams.ShowMGCRNG,
             ShowCB: _treeWinLoss.Params.reportParams.ShowCB
         });
     };
@@ -130,7 +133,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             ShowMGSL: _treeWinLoss.Params.reportParams.ShowMGSL,
             ShowAGCS: _treeWinLoss.Params.reportParams.ShowAGCS,
             ShowVG: _treeWinLoss.Params.reportParams.ShowVG,
-            ShowMGC: _treeWinLoss.Params.reportParams.ShowMGC,
+            ShowMGCLC: _treeWinLoss.Params.reportParams.ShowMGCLC,
+            ShowMGCRNG: _treeWinLoss.Params.reportParams.ShowMGCRNG,
             ShowCB: _treeWinLoss.Params.reportParams.ShowCB
         });
     };

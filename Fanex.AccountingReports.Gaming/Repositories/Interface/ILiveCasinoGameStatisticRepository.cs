@@ -13,7 +13,6 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Interface
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Gaming.Criteria.LiveCasinoGameStatistic;
     using Fanex.AccountingReports.Gaming.Models.LiveCasinoGameStatistic;
-    using Fanex.NAP.Framework.Data;
 
     /// <summary>
     /// TODO: Update summary.

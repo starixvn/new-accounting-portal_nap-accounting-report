@@ -32,7 +32,8 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         NumberGame: 161,
         LiveCasiono: 162,
         VirtualSport: 180,
-        Keno: 202
+        Keno: 202,
+        ColossusBets: 204
     };
 
     var cachedData = {
@@ -460,6 +461,9 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 break;
             case productEnums.Keno:
                 productName = "Keno";
+                break;
+            case productEnums.ColossusBets:
+                productName = "Colossus Bets";
                 break;
             default:
                 break;

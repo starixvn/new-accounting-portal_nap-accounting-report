@@ -10,7 +10,7 @@
 namespace Fanex.AccountingReports.Balance.Criteria.SuperBalance
 {
     using Fanex.AccountingReports.Core.Constants;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -31,6 +31,8 @@ namespace Fanex.AccountingReports.Balance.Criteria.SuperBalance
 
         [SpParam(SqlParamName = "IsViewTotalOnly")]
         public bool IsViewTotalOnly { get; set; }
+
+        public double Total { get; set; }  
 
         public override bool IsValid()
         {

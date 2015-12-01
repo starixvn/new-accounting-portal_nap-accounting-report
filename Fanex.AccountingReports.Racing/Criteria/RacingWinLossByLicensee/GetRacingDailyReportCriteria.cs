@@ -8,7 +8,7 @@ namespace Fanex.AccountingReports.Racing.Criteria.RacingWinLossByLicensee
 {
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// The criteria of Racing Win Loss By Licensee.
@@ -19,10 +19,13 @@ namespace Fanex.AccountingReports.Racing.Criteria.RacingWinLossByLicensee
 
         public string Site { get; set; }
 
+        [SpParam(Ignored = true)]
         public bool IsPagingReport { get; set; }
 
+        [SpParam(Ignored = true)]
         public int NumberItemsPerPage { get; set; }
 
+        [SpParam(Ignored = true)]
         public int StartIndex { get; set; }
 
         /// <summary>

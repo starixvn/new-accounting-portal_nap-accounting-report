@@ -10,7 +10,7 @@ namespace Fanex.AccountingReports.Main.Criteria.CreditTerm
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// The criteria of Install Amount report.

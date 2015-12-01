@@ -22,6 +22,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
     using Fanex.AccountingReports.Main.Models.DailyWinLoss2h;
     using Fanex.AccountingReports.Main.Resources;
     using Fanex.Common;
+    using Fanex.Data.Repository;
+    using CoreConstants = Fanex.AccountingReports.Core.Constants;
     using MainSportConstants = Fanex.AccountingReports.Main.Constants;
 
     /// <summary>
@@ -34,9 +36,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The win loss by site bet type.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetWinLossBySite_BetType(GetWinLossBySite_BetTypeCriteria criteria)
         {
             try
@@ -48,57 +47,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     criteria.SportGroupId == SportContants.Keno ||
                     criteria.SportGroupId == SportContants.VirtualSportGroup;
 
-                WinLossInfo report = new WinLossInfo
-                {
-                    GrandTotal = new WinLossInfo
-                    {
-                        Name = Labels.Total,
-                        EnableVirtual = enableVirtual
-                    },
-                    ChildsInfo = new List<WinLossInfo>(),
-                    Name = ReportService.GetSiteTypeName(criteria.Site),
-                    EnableVirtual = enableVirtual,
-                    IsHideRealTurnover = _dailyWinLoss2hUtilityService.IsHideRealTurnover(criteria.SportGroupId) ||
-                        criteria.ProductId == MainSportConstants.SportContants._2hCasinoSport
-                };
-
-                report.GrandTotal.IsHideRealTurnover = report.IsHideRealTurnover;
-                var rawData = this.GetReportData<dynamic>(criteria);
-                if (rawData != null)
-                {
-                    foreach (var data in rawData)
-                    {
-                        WinLossInfo info = new WinLossInfo
-                        {
-                            Name = Converter.ToString2(data.site),
-                            WinLoss = Converter.ToDecimal(data.WinLost),
-                            Position = Converter.ToDecimal(data.Position),
-                            Commission = Converter.ToDecimal(data.Commission),
-                            LineTotal = Converter.ToDecimal(data.RealLineTotal),
-                            VirtualLineTotal = Converter.ToDecimal(data.VirtualLineTotal),
-                            Turnover = Converter.ToDecimal(data.RealTurnover),
-                            VirtualTurnover = Converter.ToDecimal(data.VirtualTurnover),
-                            EnableVirtual = enableVirtual,
-                            IsHideRealTurnover = report.IsHideRealTurnover
-                        };
-
-                        if (info.IsHideRealTurnover)
-                        {
-                            info.Turnover = 0;
-                        }
-
-                        if (!isShowVirtualTurnover)
-                        {
-                            info.VirtualTurnover = 0;
-                        }
-
-                        report.GrandTotal.Add(info);
-                        info = WinLossInfo.Format(info);
-                        report.ChildsInfo.Add(info);
-                    }
-
-                    report = WinLossInfo.Format_Total(report);
-                }
+                var convertCriteria = WinlossBySiteCriteria(criteria);
+                var report = WinlossBySiteInfo(convertCriteria, enableVirtual, isShowVirtualTurnover, criteria.Site, criteria.SportGroupId, criteria.ProductId);
 
                 SessionManager.Set<WinLossInfo>(MainConstants.DailyWinLoss2hWinLossBySiteBetTypeReportSessionKey, report);
                 return report;
@@ -109,6 +59,157 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 SessionManager.Set<WinLossInfo>(MainConstants.DailyWinLoss2hWinLossBySiteBetTypeReportSessionKey, null);
                 throw;
             }
+        }
+
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        private CriteriaBase WinlossBySiteCriteria(GetWinLossBySite_BetTypeCriteria criteria)
+        {
+            var winLossDateSuffix = ReportService.GetStoreMappingSuffix(criteria.WinLostDate);
+            if (winLossDateSuffix == ReportService.WarehouseSPSuffix)
+            {
+                return new GetWinLossBySite_BetTypeWHCriteria
+                {
+                    BetType = criteria.BetType,
+                    IsHedge = criteria.IsHedge,
+                    LiveIndicator = criteria.LiveIndicator,
+                    ProductId = criteria.ProductId,
+                    Site = criteria.Site,
+                    SportType = criteria.SportType,
+                    WinLostDate = criteria.WinLostDate
+                };
+            }
+
+            switch (criteria.SportGroupId)
+            {
+                case CoreConstants.SportContants.HorseRacing:
+                    return new GetWinLossBySite_RacingCriteria
+                    {
+                        BetType = criteria.BetType,
+                        Site = criteria.Site,
+                        SportType = criteria.SportType,
+                        WinLostDate = criteria.WinLostDate
+                    };
+                case CoreConstants.SportContants.LiveCasino:
+                case MainSportConstants.SportContants._2hGoldDeluxeSport:
+                case MainSportConstants.SportContants._2hLiveCasinoSport:
+                case MainSportConstants.SportContants._2hAGCasinoSport:
+                case MainSportConstants.SportContants._2hMicroGamingLiveCasinoSport:
+                    return new GetWinLossBySite_LiveCasinoCriteria
+                    {
+                        BetType = criteria.BetType,
+                        Site = criteria.Site,
+                        WinLostDate = criteria.WinLostDate
+                    };
+                case CoreConstants.SportContants.Keno:
+                    return new GetWinLossBySite_KenoCriteria
+                    {
+                        BetType = criteria.BetType,
+                        Site = criteria.Site,
+                        WinLostDate = criteria.WinLostDate
+                    };
+                case CoreConstants.SportContants.Bingo:
+                    return new GetWinLossBySite_BingoCriteria
+                    {
+                        Site = criteria.Site,
+                        WinLostDate = criteria.WinLostDate
+                    };
+                case MainSportConstants.SportContants._2hReportCasino:
+                    return new GetWinLossBySite_CasinoCriteria
+                    {
+                        Site = criteria.Site,
+                        WinLostDate = criteria.WinLostDate,
+                        ProductId = criteria.ProductId,
+                        BetType = criteria.BetType
+                    };
+                case CoreConstants.SportContants.VirtualSoccer:
+                    return new GetWinLossBySite_VirtualSportsCriteria
+                    {
+                        Site = criteria.Site,
+                        WinLostDate = criteria.WinLostDate,
+                        SportType = criteria.SportType,
+                        BetType = criteria.BetType
+                    };
+                case CoreConstants.SportContants.MetricGamingSuperLive:
+                    return new GetWinLossBySite_MetricGamingCriteria
+                    {
+                        Site = criteria.Site,
+                        WinLostDate = criteria.WinLostDate,
+                        BetType = criteria.BetType
+                    };
+                case CoreConstants.SportContants.Bettrade:
+                    return new GetWinLossBySite_BettradeCriteria
+                    {
+                        WinLostDate = criteria.WinLostDate,
+                        Site = criteria.Site
+                    };
+                case CoreConstants.SportContants.ColossusBet:
+                    return new GetWinLossBySite_ColossusBetCriteria
+                    {
+                        WinLostDate = criteria.WinLostDate,
+                        Site = criteria.Site
+                    };
+            }
+
+            return criteria;
+        }
+
+        private WinLossInfo WinlossBySiteInfo(CriteriaBase criteria, bool enableVirtual, bool isShowVirtualTurnover, int site, int sportGroupId, int productId)
+        {
+            WinLossInfo report = new WinLossInfo
+            {
+                GrandTotal = new WinLossInfo
+                {
+                    Name = Labels.Total,
+                    EnableVirtual = enableVirtual
+                },
+                ChildsInfo = new List<WinLossInfo>(),
+                Name = ReportService.GetSiteTypeName(site),
+                EnableVirtual = enableVirtual,
+                IsHideRealTurnover = _dailyWinLoss2hUtilityService.IsHideRealTurnover(sportGroupId) ||
+                    productId == MainSportConstants.SportContants._2hCasinoSport
+            };
+
+            report.GrandTotal.IsHideRealTurnover = report.IsHideRealTurnover;
+            var rawData = this.GetReportData<dynamic>(criteria);
+            if (rawData != null)
+            {
+                foreach (var data in rawData)
+                {
+                    WinLossInfo info = new WinLossInfo
+                    {
+                        Name = Converter.ToString2(data.site),
+                        WinLoss = Converter.ToDecimal(data.WinLost),
+                        Position = Converter.ToDecimal(data.Position),
+                        Commission = Converter.ToDecimal(data.Commission),
+                        LineTotal = Converter.ToDecimal(data.RealLineTotal),
+                        VirtualLineTotal = Converter.ToDecimal(data.VirtualLineTotal),
+                        Turnover = Converter.ToDecimal(data.RealTurnover),
+                        VirtualTurnover = Converter.ToDecimal(data.VirtualTurnover),
+                        EnableVirtual = enableVirtual,
+                        IsHideRealTurnover = report.IsHideRealTurnover
+                    };
+
+                    if (info.IsHideRealTurnover)
+                    {
+                        info.Turnover = 0;
+                    }
+
+                    if (!isShowVirtualTurnover)
+                    {
+                        info.VirtualTurnover = 0;
+                    }
+
+                    report.GrandTotal.Add(info);
+                    info = WinLossInfo.Format(info);
+                    report.ChildsInfo.Add(info);
+                }
+
+                report = WinLossInfo.Format_Total(report);
+            }
+
+            return report;
         }
 
         /// <summary>

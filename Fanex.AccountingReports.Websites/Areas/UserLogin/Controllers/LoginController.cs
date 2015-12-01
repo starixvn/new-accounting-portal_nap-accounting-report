@@ -39,6 +39,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
     public class LoginController : BaseController
     {
         #region members
+
         private const string LoginFormToken = "_SecureLoginFormToken";
         private IUserService _userService;
         private IGroupService _groupService;
@@ -46,8 +47,9 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         private IMenuItemService _menuItemService;
         private ICurrentSession _currentSession;
         private IFunctionService _functionService;
-        private IMaintainanceService _maintenanceService;
+        private IMaintenanceService _maintenanceService;
         private HashAlgorithm _hashAlgorithm;
+
         #endregion members
 
         #region ctors
@@ -64,7 +66,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
             IMenuItemService menuItemService,
             ICurrentSession currentSession,
             IFunctionService functionService,
-            IMaintainanceService maintenanceService)
+            IMaintenanceService maintenanceService)
         {
             _userService = userService ?? new UserService();
             _groupService = groupService ?? new GroupService();
@@ -72,7 +74,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
             _menuItemService = menuItemService ?? new MenuItemService();
             _currentSession = currentSession ?? new CurrentSession();
             _functionService = functionService ?? new FunctionService();
-            _maintenanceService = maintenanceService ?? new MaintainanceService();
+            _maintenanceService = maintenanceService ?? new MaintenanceService();
             _hashAlgorithm = new SHA256Managed();
         }
 
@@ -128,7 +130,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public ActionResult Index(string username, string password, string loginToken, string returnUrl)
-        {            
+        {
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password) && CheckValidToken(loginToken))
             {
                 var user = _userService.GetByUsername(username.Trim()) as User;
@@ -166,7 +168,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                                     Platform = CurrentContext.Platform
                                 };
 
-                                _userService.UserCheckIn(ref criteria);
+                                _userService.UserCheckIn(criteria);
 
                                 //// check-in user
 
@@ -199,7 +201,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                                     //// redirects user
 
                                     // if the user login directly, not through NAP Hub
-                                    if (this.IsSiteLogin == 1)
+                                    if (this.IsSiteLogin)
                                     {
                                         //// checks if logging-in user is active on this site
 
@@ -213,7 +215,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                                             }
                                         }
 
-        #endregion checks if logging-in user is active on this site
+        #endregion sign in
 
                                         if (userIsActiveOnThisSite)
                                         {
@@ -350,7 +352,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 
                     UserReCheckInUserCriteria criteria = new UserReCheckInUserCriteria();
                     criteria.OnUserId = Convert.ToInt32(_currentSession.OnUserId);
-                    _userService.ReUserCheckIn(ref criteria);
+                    _userService.ReUserCheckIn(criteria);
 
                     return Json(new
                     {
@@ -392,7 +394,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         /// <param name="user">The user value.</param>
         private void CreateAuthInfo(User user)
         {
-            var currentDomain = CurrentContext.GetCurrentDomain();
+            var currentDomain = CurrentContext.CurrentDomain;
 
             var authInfo = new AuthInfo();
 

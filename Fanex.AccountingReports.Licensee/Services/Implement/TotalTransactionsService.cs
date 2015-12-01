@@ -27,7 +27,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using Fanex.AccountingReports.Licensee.Services.Interface;
     using Fanex.Common.Extensions;
     using Fanex.Common.Helper;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

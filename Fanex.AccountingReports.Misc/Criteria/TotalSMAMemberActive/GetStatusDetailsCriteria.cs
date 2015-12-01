@@ -10,18 +10,18 @@
 namespace Fanex.AccountingReports.Misc.Criteria.TotalSMAMemberActive
 {
     using System;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class GetStatusDetailsCriteria : GetTotalSMAMemberActiveCriteria, ICriteria
+    public class GetStatusDetailsCriteria : CriteriaBase
     {
-        public new DateTime FromDate { get; set; }
+        public DateTime FromDate { get; set; }
 
-        public new DateTime ToDate { get; set; }
+        public DateTime ToDate { get; set; }
 
-        public new string SiteList { get; set; }
+        public string SiteList { get; set; }
 
         // for title of detail report
         [SpParam(Ignored = true)]
@@ -71,7 +71,6 @@ namespace Fanex.AccountingReports.Misc.Criteria.TotalSMAMemberActive
 
         public int PageIndex { get; set; }
 
-        [SpParam(Ignored = true)]
         public int TotalRow { get; set; }
 
         #endregion Paging params
@@ -81,7 +80,7 @@ namespace Fanex.AccountingReports.Misc.Criteria.TotalSMAMemberActive
         [SpParam(Ignored = true)]
         public int Status { get; set; }
 
-        #endregion
+        #endregion Client params
 
         public override string GetSettingKey()
         {

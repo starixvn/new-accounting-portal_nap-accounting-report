@@ -11,7 +11,7 @@ namespace Fanex.BetList.Accounting.Criteria
 {
     using System;
     using Fanex.BetList.Accounting.Services;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

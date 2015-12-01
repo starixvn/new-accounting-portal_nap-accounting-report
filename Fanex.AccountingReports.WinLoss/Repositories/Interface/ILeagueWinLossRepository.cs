@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Interface
 {
     using System.Collections;
     using System.Collections.Generic;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     public interface ILeagueWinLossRepository
     {

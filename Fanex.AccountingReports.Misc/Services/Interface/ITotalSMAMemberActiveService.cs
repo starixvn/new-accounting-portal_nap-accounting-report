@@ -13,7 +13,7 @@ namespace Fanex.AccountingReports.Misc.Services.Interface
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Misc.Criteria.TotalSMAMemberActive;
     using Fanex.AccountingReports.Misc.Models.TotalSMAMemberActive;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     public interface ITotalSMAMemberActiveService
     {
@@ -23,7 +23,7 @@ namespace Fanex.AccountingReports.Misc.Services.Interface
 
         IList<SMASummaryInfo> GetReport(GetTotalSMAMemberActiveCriteria criteria);
 
-        IList<EntityBase<int, string>> GetSites(ICriteria criteria);
+        IList<EntityBase<int, string>> GetSites(CriteriaBase criteria);
 
         IList<GroupStatusDetailInfo> GetStatusDetails(GetStatusDetailsCriteria criteria);
     }

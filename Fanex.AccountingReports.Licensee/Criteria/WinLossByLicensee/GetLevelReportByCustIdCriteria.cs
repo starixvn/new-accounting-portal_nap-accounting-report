@@ -9,13 +9,16 @@
 
 namespace Fanex.AccountingReports.Licensee.Criteria.WinLossByLicensee
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class GetLevelReportByCustIdCriteria : WinLossByLicenseeCriteria
     {
+        [SpParam(Ignored = true)]
+        public int CustID { get; set; }
+
         public int Srecommend
         {
             get { return CustID; }
@@ -39,15 +42,19 @@ namespace Fanex.AccountingReports.Licensee.Criteria.WinLossByLicensee
                 case 1:
                     alias = "Licensee_WinLossByLicensee_GetWinLossSuper";
                     break;
+
                 case 2:
                     alias = "Licensee_WinLossByLicensee_GetWinLossMaster";
                     break;
+
                 case 3:
                     alias = "Licensee_WinLossByLicensee_GetWinLossAgent";
                     break;
+
                 case 4:
                     alias = "Licensee_WinLossByLicensee_GetWinLossMember";
                     break;
+
                 default:
                     alias = string.Empty;
                     break;
