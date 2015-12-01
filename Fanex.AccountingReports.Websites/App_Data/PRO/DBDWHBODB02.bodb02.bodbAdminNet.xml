@@ -5,7 +5,7 @@
 	</Function>
 
 	<Function Name="MA Monitor Tool">
-		<Setting Key="Misc_MAMonitorTool_GetBetTypeList" SpName="Acc_Rpt_MAMonitor_BettypeSel_xpre" DbName="DBDWHBODB02.bodb02.bodbAdminNet" TimeOut="0" >
+		<Setting Key="Misc_MAMonitorTool_GetBetTypeList" SpName="Acc_Rpt_MAMonitor_BettypeSel" DbName="DBDWHBODB02.bodb02.bodbAdminNet" TimeOut="0" >
       <Mapping DataField="productid" ObjectProperty="ProductId" />
       <Mapping DataField="typeid" ObjectProperty="TypeId" />
 			<Mapping DataField="typenamee" ObjectProperty="TypeName" />
