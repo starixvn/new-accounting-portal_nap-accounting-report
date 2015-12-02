@@ -6,7 +6,7 @@
 
 namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
 {
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.

@@ -318,6 +318,7 @@
     <Compile Include="Services\Implement\BingoWinLoss\BingoWinLossService.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Services\Implement\CasinoGameStatistic\Utilities.cs" />
     <Compile Include="Services\Implement\CasinoGameStatistic\ExportExcelHourlyService.cs" />
     <Compile Include="Services\Implement\CasinoGameStatistic\ExportExcelService.cs" />
     <Compile Include="Services\Implement\CasinoGameStatistic\FilterSectionService.cs" />

@@ -26,7 +26,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class CasinoGameStatisticServiceByMonthlyRange : CasinoGameStatisticService
+    public class CasinoGameStatisticServiceByMonthlyRange_Delete : CasinoGameStatisticService
     {
         public override WinLossInfo GetReport(List<WinLossInfoEntity> winLossInfoTable, WinLossInfoEntity grandTotal, GetReportByDailyCriteria criteria)
         {
@@ -222,7 +222,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 startRow,
                 startColumn,
                 ref currentRow,
-                PeriodTypeConstants.GamingBingoStatisticMonthly,
+                PeriodTypeConstants.CasinoGameStatisticMonthly,
                 maxColumnIndex,
                 criteria);
 

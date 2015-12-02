@@ -4,10 +4,9 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using System;
-
 namespace Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic
 {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>

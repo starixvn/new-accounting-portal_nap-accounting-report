@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
 {
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -50,7 +50,7 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
 
         [SpParam(SqlParamName = "currency")]
         public string Currency { get; set; }
-      
+
         [SpParam(Ignored = true)]
         public bool ShowRefundColumn { get; set; }
 

@@ -41,6 +41,7 @@ namespace Fanex.AccountingReports.Gaming.Constants
         public const int CasinoAgencyWinLossGameType = 3;
         public const int CasinoAgencyWinLossGameTable = 4;
         public const int CasinoAgencyWinLossAgent = 5;
+
         public const int CasinoGameStatisticDaily = 0;
         public const int CasinoGameStatisticMonthly = 1;
         public const int CasinoGameStatisticUsername = 2;

@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
 {
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.NAP.Framework.Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -51,7 +51,7 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
         [SpParam(SqlParamName = "currency")]
         public string Currency { get; set; }
 
-        [SpParam(SqlParamName = "ReportBy")]
+        [SpParam(Ignored = true)]
         public int ReportType { get; set; }
 
         [SpParam(Ignored = true)]
@@ -84,6 +84,7 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
         [SpParam(SqlParamName = "ProductID")]
         public string ProductId { get; set; }
 
+        [SpParam(Ignored = true)]
         public string Product { get; set; }
 
         [SpParam(Ignored = true)]
@@ -94,7 +95,21 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
 
         public override string GetSettingKey()
         {
-            return "Acc_Rpt_CasinoGameStatistics_Daily";
+            string spame = string.Empty;
+            switch (ReportType)
+            {
+                case 0:
+                    spame = "Acc_Rpt_CasinoGameStatistics_Daily";
+                    break;
+                case 1:
+                    spame = "Acc_Rpt_CasinoGameStatistics_Monthly";
+                    break;
+                case 2:
+                    spame = "Acc_Rpt_CasinoGameStatistics_UserName";
+                    break;
+            }
+
+            return spame;
         }
 
         public override bool IsValid()

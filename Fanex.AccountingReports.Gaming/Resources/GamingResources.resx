@@ -189,6 +189,9 @@
   <data name="CasinoGameStatisticOnDateByCurrency_ReportTitle" xml:space="preserve">
     <value>{0} Game Statistic Report On {1} By Currency</value>
   </data>
+  <data name="CasinoGameStatistic_MonthlyReportTitle" xml:space="preserve">
+    <value>{0} Game Statistic Report From {1} To {2} By Currency</value>
+  </data>
   <data name="CasinoGameStatistic_SheetName" xml:space="preserve">
     <value>Casino Game Statistic</value>
   </data>

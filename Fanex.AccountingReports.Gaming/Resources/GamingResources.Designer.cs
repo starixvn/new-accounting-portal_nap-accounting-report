@@ -142,6 +142,15 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} Game Statistic Report From {1} To {2} By Currency.
+        /// </summary>
+        public static string CasinoGameStatistic_MonthlyReportTitle {
+            get {
+                return ResourceManager.GetString("CasinoGameStatistic_MonthlyReportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Casino_Game_Statistic_Report_From_{0}_To_{1}.
         /// </summary>
         public static string CasinoGameStatistic_ReportName {

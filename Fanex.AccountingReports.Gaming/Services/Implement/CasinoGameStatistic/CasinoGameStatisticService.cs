@@ -14,12 +14,8 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using ExcelUtil.Spreadsheet;
-    using Fanex.AccountingReports.Core.Configurations;
-    using Fanex.AccountingReports.Core.Criteria;
     using Fanex.AccountingReports.Core.Extensions;
-    using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.AccountingReports.Core.Services.Impl.Interface;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Gaming.Constants;
     using Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic;
@@ -36,14 +32,15 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
     /// </summary>
     public partial class CasinoGameStatisticService : ServiceBase, ICasinoGameStatisticService
     {
-        private int _timeCaching = 2;
-        private readonly ICasinoGameStatisticRepository _reportRepository;        
+        private readonly ICasinoGameStatisticRepository _reportRepository;
 
         private readonly string _reportSessionKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Report" +
             (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
 
         private readonly string _reportDrillDownSessionKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.ReportDrillDown" +
             (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+
+        private int _timeCaching = 2;
 
         private string _grandTotalSessionKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GrandTotal" +
        (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
@@ -58,13 +55,15 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 
         public CasinoGameStatisticService(ICasinoGameStatisticRepository reportRepository)
         {
-            _reportRepository = reportRepository ?? new CasinoGameStatisticRepository();            
-        }       
+            _reportRepository = reportRepository ?? new CasinoGameStatisticRepository();
+        }
 
         public WinLossInfo GetReport(GetReportByDailyCriteria criteria)
         {
             try
             {
+                Utilities.ReSetPeriodTimeByReportType(criteria);
+
                 var rawData = _reportRepository.GetReport(criteria);
                 var report = new WinLossInfo
                 {
@@ -90,12 +89,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 CasinoGameStatisticService reportManager = null;
                 switch (criteria.ReportType)
                 {
-                    case PeriodTypeConstants.LiveCasinoGameStatisticDaily:
+                    case PeriodTypeConstants.CasinoGameStatisticDaily:
+                    case PeriodTypeConstants.CasinoGameStatisticMonthly:
                         reportManager = new CasinoGameStatisticServiceByDailyRange();
-                        break;
-
-                    case PeriodTypeConstants.LiveCasinoGameStatisticMonthly:
-                        reportManager = new CasinoGameStatisticServiceByMonthlyRange();
                         break;
 
                     case PeriodTypeConstants.LiveCasinoGameStatisticUsername:
@@ -153,11 +149,8 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             switch (getReportCriteria.ReportType)
             {
                 case PeriodTypeConstants.CasinoGameStatisticDaily:
-                    reportManager = new CasinoGameStatisticServiceByDailyRange();
-                    break;
-
                 case PeriodTypeConstants.CasinoGameStatisticMonthly:
-                    reportManager = new CasinoGameStatisticServiceByMonthlyRange();
+                    reportManager = new CasinoGameStatisticServiceByDailyRange();
                     break;
 
                 case PeriodTypeConstants.CasinoGameStatisticUsername:
@@ -233,12 +226,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 CasinoGameStatisticService reportManager = null;
                 switch (criteria.ReportType)
                 {
-                    case PeriodTypeConstants.LiveCasinoGameStatisticDaily:
+                    case PeriodTypeConstants.CasinoGameStatisticDaily:
+                    case PeriodTypeConstants.CasinoGameStatisticMonthly:
                         reportManager = new CasinoGameStatisticServiceByDailyRange();
-                        break;
-
-                    case PeriodTypeConstants.LiveCasinoGameStatisticMonthly:
-                        reportManager = new CasinoGameStatisticServiceByMonthlyRange();
                         break;
 
                     case PeriodTypeConstants.LiveCasinoGameStatisticUsername:
@@ -351,10 +341,8 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 
             if (criteria.IsDrillDown)
             {
-                title = string.Format(
-                GamingResources.CasinoGameStatisticOnDateByCurrency_ReportTitle,
-                criteria.Product,
-                Converter.ToDateTime(criteria.FromDate).ToShortFormatedDate());
+                Utilities.ReSetPeriodTimeByReportType(criteria);
+                title = Utilities.GetTitleExcelFileWhenDrilDown(criteria);
             }
 
             currentColumn = startColumn;
@@ -381,11 +369,11 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 
                 case PeriodTypeConstants.CasinoGameStatisticUsername:
                     currentCell.Value = Labels.UserName;
-                    
+
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Style = headerTextStyle;                    
+                    currentCell.Style = headerTextStyle;
                     currentCell.Value = Labels.CustId;
                     break;
 
@@ -760,7 +748,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 grandTotal = CacheManager.Get<WinLossInfo>(_grandTotalSessionKey);
                 if (grandTotal == null)
                 {
-                    grandTotal.ChildsInfo = _reportRepository.GetReportByGrandTotal(criteria);        
+                    grandTotal.ChildsInfo = _reportRepository.GetReportByGrandTotal(criteria);
                 }
             }
             else
@@ -768,7 +756,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 grandTotal.ChildsInfo = _reportRepository.GetReportByGrandTotal(criteria);
                 CacheManager.Set<WinLossInfo>(_grandTotalSessionKey, grandTotal, DateTime.Now.AddHours(_timeCaching));
             }
-            
+
             return grandTotal;
         }
 
@@ -784,7 +772,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 hourly = _reportRepository.GetReportByHourly(criteria);
                 CacheManager.Set<Hourly>(_hourlySessionKey, hourly, DateTime.Now.AddHours(_timeCaching));
             }
-            
+
             return hourly;
         }
     }

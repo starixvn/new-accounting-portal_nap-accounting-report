@@ -4,14 +4,9 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic;
-
 namespace Fanex.AccountingReports.Gaming.Services.Interface.CasinoGameStatistic
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
+    using Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic;
 
     /// <summary>
     /// TODO: Update summary.

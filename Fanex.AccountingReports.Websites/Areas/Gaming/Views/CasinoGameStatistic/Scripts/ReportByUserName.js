@@ -115,7 +115,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
             showTitle: true,
             showFooter: true,
             titleInfo: {
-                text: AccReport.utility.StringFormat(viewResources.LiveCasinoGameStatistic_ReportTitle,
+                text: AccReport.utility.StringFormat(viewResources.CasinoGameStatistic_ReportTitle,
                     [reportManager.Params.reportParams.FromDate, reportManager.Params.reportParams.ToDate]),
                 showExcelButton: false
             },

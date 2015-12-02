@@ -9,7 +9,6 @@
 
 namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
@@ -38,8 +37,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 }
             };
 
-            WinLossInfo info;
-            Dictionary<string, int> currencyIndexDictionary = new Dictionary<string, int>();
+            WinLossInfo info = new WinLossInfo();
             WinLossInfo grandTotalRM = new WinLossInfo
             {
                 Name = Labels.Grand_Total + " " + Labels.RM,
@@ -72,35 +70,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                     continue;
                 }
 
-                grandTotalRM.Sum(new WinLossInfo
-                {
-                    NumberOfPlayers = data.NumberOfPlayers,
-                    NumberOfGames = data.NumberOfGames,
-
-                    TotalBets = data.TotalBets,
-                    TotalWins = data.TotalWins,
-                    TotalRefund = data.TotalRefund,
-
-                    GameIncome = data.GameIncome,
-
-                    CompanyTurnover = data.CompanyTurnover,
-                    CompanyNetIncome = data.CompanyNetIncome,
-                    CompanyCommission = data.CompanyCommission
-                });
-
-                if (!currencyIndexDictionary.ContainsKey(info.CurrencyName))
-                {
-                    report.GrandTotal.ChildsInfo.Add(new WinLossInfo
-                    {
-                        Name = Labels.Total + " " + info.CurrencyName,
-                        CurrencyName = info.CurrencyName
-                    });
-
-                    currencyIndexDictionary.Add(info.CurrencyName, report.GrandTotal.ChildsInfo.Count - 1);
-                }
-
-                var currencyIndex = currencyIndexDictionary[info.CurrencyName];
-                report.GrandTotal.ChildsInfo[currencyIndex].Sum(info);
                 info = WinLossInfo.Format(info);
                 report.ChildsInfo.Add(info);
             }
@@ -108,6 +77,11 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             report.ChildsInfo = report.ChildsInfo.OrderBy(winLoss => winLoss.Name)
                                                  .ThenBy(winLoss => winLoss.CurrencyName)
                                                  .ToList();
+
+            Utilities.AssignGrandTotal(grandTotal, grandTotalRM);
+
+            report.GrandTotal.ChildsInfo.Add(grandTotalRM);
+
             return report;
         }
 
@@ -121,14 +95,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             return report;
         }
 
-        /// <summary>
-        /// Exports the name of the report by user.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
         public override void ExportReport(
             WinLossInfo report,
             GetReportByDailyCriteria criteria)

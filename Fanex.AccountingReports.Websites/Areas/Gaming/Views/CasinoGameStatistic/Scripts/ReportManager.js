@@ -857,11 +857,13 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
         self.CachedData.currentReport = report;
         switch (reportType) {
             case reportTypeEnum.Daily:
+            case reportTypeEnum.Monthly:
+            //case reportTypeEnum.UserName:
                 gridOptions = self.ReportByDailyRange.GetGridOptions(report);
                 break;
-            case reportTypeEnum.Monthly:
-                gridOptions = self.ReportByMonthlyRange.GetGridOptions(report);
-                break;
+//            case reportTypeEnum.Monthly:
+//                gridOptions = self.ReportByMonthlyRange.GetGridOptions(report);
+//                break;
             case reportTypeEnum.UserName:
                 gridOptions = self.ReportByUserName.GetGridOptions(report);
                 break;

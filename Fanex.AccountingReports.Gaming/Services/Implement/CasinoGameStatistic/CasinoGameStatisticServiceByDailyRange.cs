@@ -42,7 +42,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             WinLossInfo info;
             var timeRangeGroups = winLossInfoTable.GroupBy(
                 data => Converter.ToDateTime(data.Id));
-            Dictionary<string, int> currencyIndexDictionary = new Dictionary<string, int>();
+            
             WinLossInfo grandTotalRM = new WinLossInfo
             {
                 Name = Labels.Grand_Total + " " + Labels.RM,
@@ -55,7 +55,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 var timeRangeWinLoss = new WinLossInfo
                 {
                     Id = dateTime.ToShortFormatedDate(),
-                    Name = dateTime.ToShortFormatedDate(),
+                    Name = Utilities.GetNameByReportType(criteria.ReportType, dateTime),
                     ChildsInfo = new List<WinLossInfo>()
                 };
 
@@ -99,38 +99,13 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 
             report.ChildsInfo = report.ChildsInfo.OrderBy(winLoss => winLoss.Name).ToList();
 
-            AssignGrandTotal(grandTotal, grandTotalRM);
+            Utilities.AssignGrandTotal(grandTotal, grandTotalRM);
 
             report.GrandTotal.ChildsInfo.Add(grandTotalRM);
 
             return report;
         }
 
-        private static void AssignGrandTotal(WinLossInfoEntity grandTotal, WinLossInfo grandTotalRM)
-        {
-            grandTotalRM.Sum(new WinLossInfo
-            {
-                NumberOfPlayers = grandTotal.NumberOfPlayers,
-                NumberOfGames = grandTotal.NumberOfGames,
-
-                TotalBets = grandTotal.TotalBets,
-                TotalWins = grandTotal.TotalWins,
-                TotalRefund = grandTotal.TotalRefund,
-
-                GameIncome = grandTotal.GameIncome,
-
-                CompanyTurnover = grandTotal.CompanyTurnover,
-                CompanyNetIncome = grandTotal.CompanyNetIncome,
-                CompanyCommission = grandTotal.CompanyCommission
-            });
-        }
-
-        /// <summary>
-        /// Sorts the report data.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <param name="getReportCriteria">The get report criteria.</param>
-        /// <returns>Report data after sort.</returns>
         public override WinLossInfo SortReportData(WinLossInfo report, GetReportByDailyCriteria getReportCriteria)
         {
             if (getReportCriteria.SortColumnName == "Name")

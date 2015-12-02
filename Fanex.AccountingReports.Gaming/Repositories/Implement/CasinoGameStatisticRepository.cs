@@ -7,19 +7,18 @@
 //   <change who="Louis.Nguyen" date="2012.12.07">Created</change>
 // </history>
 
-using System.Linq;
-using Fanex.AccountingReports.Gaming.Resources;
-
 namespace Fanex.AccountingReports.Gaming.Repositories.Implement
 {
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Gaming.Constants;
     using Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic;
     using Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic;
     using Fanex.AccountingReports.Gaming.Repositories.Interface;
+    using Fanex.AccountingReports.Gaming.Resources;
     using Fanex.Common;
     using Fanex.Data;
 
@@ -68,9 +67,7 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
                         CustId = custId,
                         NumberOfPlayers = numberOfPlayers,
 
-                        NumberOfGames = criteria.ReportType == PeriodTypeConstants.CasinoAgencyWinLossDaily ?
-                            Converter.ToInt(row["BetCount"]) :
-                            0,
+                        NumberOfGames = GetBetCountByReportTye(criteria.ReportType, row),
 
                         CurrencyName = Converter.ToString2(row["Currency"]),
                         CurrencyId = Converter.To<int>(row["CurrencyId"]),
@@ -103,9 +100,7 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
                             0 :
                             Converter.ToInt(row["NoOfPlayers"]),
 
-                        NumberOfGames = criteria.ReportType == PeriodTypeConstants.CasinoAgencyWinLossDaily ?
-                            Converter.ToInt(row["BetCount"]) :
-                            0,
+                        NumberOfGames = GetBetCountByReportTye(criteria.ReportType, row),
 
                         CurrencyName = Converter.ToString2(row["Currency"]),
 
@@ -124,6 +119,20 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
             }
 
             return report;
+        }
+
+        private int GetBetCountByReportTye(int reportType, DataRow row)
+        {
+            int betcount = 0;
+            switch (reportType)
+            {
+                case PeriodTypeConstants.CasinoGameStatisticDaily:
+                case PeriodTypeConstants.CasinoGameStatisticMonthly:
+                    betcount = Converter.ToInt(row["BetCount"]);
+                    break;
+            }
+
+            return betcount;
         }
 
         private string GetWinLossInfoId(GetReportByDailyCriteria criteria, DataRow dataRow)
@@ -164,8 +173,8 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
                 {
                     while (reader.Read())
                     {
-                        products.Products.Add(new ProductItem() 
-                        { 
+                        products.Products.Add(new ProductItem()
+                        {
                             ProductId = Converter.To<int>(reader["ProductID"]),
                             ProductName = Converter.To<string>(reader["ProductName"]),
                             ProductGroup = Converter.To<string>(reader["ProductGroup"])
@@ -187,8 +196,8 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
                 var reader = db.ExecuteReader();
                 while (reader.Read())
                 {
-                    gameTypes.Add(new GameTypeItem() 
-                    { 
+                    gameTypes.Add(new GameTypeItem()
+                    {
                         ProductId = Converter.To<int>(reader["ProductId"]),
                         TypeId = Converter.To<int>(reader["TypeId"]),
                         Name = Converter.To<string>(reader["TypeNamee"])
@@ -209,7 +218,7 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
                 var reader = db.ExecuteReader();
                 while (reader.Read())
                 {
-                    gameTable.Add(new EntityBase<int, string>() 
+                    gameTable.Add(new EntityBase<int, string>()
                     {
                         Id = Converter.To<int>(reader["GameTableId"]),
                         Name = Converter.To<string>(reader["GameTable"])
@@ -243,7 +252,7 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
                         CompanyNetIncome = Converter.ToDecimal(row["CompanyNetIncome"]),
                         CompanyTurnover = Converter.ToDecimal(row["CompanyTurnOver"]),
                         CompanyCommission = Converter.ToDecimal(row["CompanyComm"])
-                    }); 
+                    });
                 }
             }
 
