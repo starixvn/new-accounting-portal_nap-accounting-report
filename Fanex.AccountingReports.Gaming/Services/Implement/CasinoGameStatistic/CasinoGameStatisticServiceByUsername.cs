@@ -51,6 +51,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                     Name = data.Id,
                     Id = data.CustId,
                     CurrencyName = data.CurrencyName,
+                    CurrencyId = data.CurrencyId,
                     NumberOfPlayers = data.NumberOfPlayers,
                     NumberOfGames = data.NumberOfGames,
 

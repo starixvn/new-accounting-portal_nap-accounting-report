@@ -554,6 +554,9 @@
     <Content Include="Areas\Gaming\Views\BingoStatistic\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\BingoStatistic\Styles\BingoStatistic.less" />
     <Content Include="Areas\Gaming\Views\BingoWinLoss\Styles\BingoWinLoss.less" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportMonthlyByCurrency.js" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportDailyByCurrency.js" />
+    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByMonthlyToDailyRange.js" />
     <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByHourly.js" />
     <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByGrandTotal.js" />
     <Content Include="Areas\Gaming\Views\CasinoWinLoss\Scripts\CasinoWinLoss.js" />

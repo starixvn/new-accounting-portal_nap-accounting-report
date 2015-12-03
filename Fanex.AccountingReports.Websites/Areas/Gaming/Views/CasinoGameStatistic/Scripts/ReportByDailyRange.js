@@ -4,6 +4,8 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByDailyRange = func
 
     self.GetGridOptions = function (report) {
         var isDrillDown = reportManager.Params.globalVariable.IsDrillDown;
+        var isBaseRM = reportManager.GetReportParams().Currency === "-1";
+        
         var bodyData = [];
         var footerData = [];
         var columns = [];
@@ -24,9 +26,10 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByDailyRange = func
                                 var clickEvent = ' onclick = "reportManager.GetHourlyReport(\'' + currentCell.Value.Name + '\''
                                                                                 + ',\'' + currentCell.Value.CurrencyId
                                                                                 + "');\"";
-                                var result = '<div ' + clickEvent + ' class="link">' + currentCell.Value.Name + '</div>';
-                                if (isDrillDown) {
-                                    result = '<div>' + currentCell.Value.Name + '</div>';
+
+                                var result = '<div>' + currentCell.Value.Name + '</div>';
+                                if (isBaseRM) {
+                                    result = '<div ' + clickEvent + ' class="link">' + currentCell.Value.Name + '</div>';
                                 }
 
                                 return result;
@@ -37,14 +40,10 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByDailyRange = func
                     columns.push({ Name: "ColNumberOfPlayers", Value: info.NumberOfPlayers });
                     columns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });
                     columns.push({ Name: "ColCurrency", Value: info, CustomCellRender: function (currentCell) {
-                            var clickEvent = ' onclick = "reportManager.GetReport(\'' + true + '\''
-                                                                                + ',\'' + currentCell.Value.Name + '\''
+                        var clickEvent = ' onclick = "reportManager.GetReportDailyByCurrency(\'' + currentCell.Value.Name + '\''
                                                                                 + ',\'' + currentCell.Value.CurrencyId
                                                                                 + "');\"";
                             var result = '<div ' + clickEvent + ' class="link">' + currentCell.Value.CurrencyName + '</div>';
-                            if (isDrillDown) {
-                                result = '<div>' + currentCell.Value.CurrencyName + '</div>';
-                            }
 
                             return result;
                         } 
@@ -73,9 +72,6 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByDailyRange = func
             footerColumns.push({ Name: "ColName", Value: info, CustomCellRender: function(currentCell) {
                 var clickEvent = ' onclick = "reportManager.RenderGrandTotal();"';
                     var result = '<div ' + clickEvent + ' class="link">' + currentCell.Value.Name + '</div>';
-                    if (isDrillDown) {
-                        result = '<div>' + currentCell.Value.Name + '</div>';
-                    }
 
                     return result;
                 }
@@ -155,21 +151,26 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByDailyRange = func
         var title = AccReport.utility.StringFormat(viewResources.CasinoGameStatistic_ReportTitle, [reportManager.Params.reportParams.Product, reportManager.Params.reportParams.FromDate, reportManager.Params.reportParams.ToDate]);
         var showBackButton = false;
         if (isDrillDown) {
-            title = AccReport.utility.StringFormat(viewResources.CasinoGameStatisticOnDateByCurrency_ReportTitle, [reportManager.Params.reportParams.Product, reportManager.Params.reportParams.FromDate]);
+            var reportType = reportManager.Params.globalVariable.PrevReportType;
+            title = "<span class='link' onclick='reportManager.RenderParentReport(" + reportType + ");'>Back</span> < " + AccReport.utility.StringFormat(viewResources.CasinoGameStatisticOnDateByCurrency_ReportTitle, [reportManager.Params.reportParams.Product, reportManager.Params.reportParams.FromDate]);
             showBackButton = true;
         }
-        
+
+        if (reportManager.Params.globalVariable.showBackButton) {
+            showBackButton = true;
+        }
+
         var gridOptions = {
             columns: columnsHeader,
             showTitle: true,
             showFooter: true,
             titleInfo: {
                 text: title,
-                showExcelButton: false,
-                showBackButton: showBackButton,
-                backFunction: function () {
-                    reportManager.RenderParentReport();
-                }
+                showExcelButton: true,
+                exportExcelFunction: function () {
+                    self.exportExcel();
+                },
+                showBackButton: false
             },
             bodyRows: bodyData,
             footerRows: footerData,
@@ -206,5 +207,12 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByDailyRange = func
         };
 
         return gridOptions;
+    };
+
+    self.exportExcel = function() {
+        AccReport.disableInput();
+        var exportParams = reportManager.Params.globalVariable.CacheParam.Daily;
+        exportParams.ViewReport = reportManager.Params.globalVariable.viewReport.Daily;
+        AccReport.downloadFile(window.rootUrl + "Gaming/CasinoGameStatistic/ExportReport", exportParams);
     };
 };

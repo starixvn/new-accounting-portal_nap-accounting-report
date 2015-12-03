@@ -128,6 +128,9 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
             {
                 case PeriodTypeConstants.CasinoGameStatisticDaily:
                 case PeriodTypeConstants.CasinoGameStatisticMonthly:
+                case PeriodTypeConstants.CasinoGameStatisticUsername:
+                case PeriodTypeConstants.CasinoGameStatisticUsernameDaily:
+                case PeriodTypeConstants.CasinoGameStatisticMonthlyToDaily:
                     betcount = Converter.ToInt(row["BetCount"]);
                     break;
             }
@@ -140,6 +143,8 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
             switch (criteria.ReportType)
             {
                 case PeriodTypeConstants.LiveCasinoGameStatisticDaily:
+                case PeriodTypeConstants.CasinoGameStatisticUsernameDaily:
+                case PeriodTypeConstants.CasinoGameStatisticMonthlyToDaily:
                     return Converter.ToDateTime(dataRow["WinLostDate"]).ToShortFormatedDate();
                 case PeriodTypeConstants.LiveCasinoGameStatisticMonthly:
                     return string.Format("{0}-{1}", dataRow["Year"], dataRow["Month"]);

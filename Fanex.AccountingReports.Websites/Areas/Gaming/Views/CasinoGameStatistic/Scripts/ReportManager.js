@@ -31,7 +31,9 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
             GameType: 3,
             GameTable: 4,
             Company: 5,
-            Currency: 6
+            Currency: 6,
+            UserNameDaily:7,
+            MonthlyToDaily: 8
         },
 
         SortDirection: {
@@ -61,9 +63,12 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
     };
 
     self.ReportByDailyRange = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByDailyRange();
+    self.ReportDailyByCurrency = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportDailyByCurrency();
     self.ReportByGrandTotal = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGrandTotal();
     self.ReportByHourly = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByHourly();
     self.ReportByMonthlyRange = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByMonthlyRange();
+    self.ReportMonthlyByCurrency = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportMonthlyByCurrency();
+    self.ReportByMonthlyToDailyRange = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByMonthlyToDailyRange();
     self.ReportByUserName = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName();
     self.ReportByCompany = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByCompany();
     self.ReportByCurrency = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByCurrency();
@@ -152,6 +157,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
             GameTableId: null,
             Currency: null,
             ReportType: null,
+            DataType: null,
             ShowRefundColumn: null,
             IsChangedValue: false,
             SortDirection: null,
@@ -163,8 +169,38 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
         },
 
         globalVariable: {
+            viewReport: {
+                Daily: 0,
+                DailyByCurrency: 1,
+                DailyByHourly: 2,
+                Monthly:3,
+                MonthlyByCurrency:4,
+                UserName:5,
+                DailyByUserName:6
+            },
+            gridOptionReport: {
+                Daily:null,
+                DailyByCurrency: null,
+                DailyByHourly: null,
+                Monthly: null,
+                MonthlyByCurrency: null,
+                UserName: null,
+                DailyByUserName: null
+            },
+            CacheParam: {
+                Daily: null,
+                DailyByCurrency: null,
+                DailyByHourly: null,
+                Monthly: null,
+                MonthlyByCurrency: null,
+                UserName: null,
+                DailyByUserName: null
+            },
+            CacheUserName: null,
+            CurrentReportType: null,
+            PrevReportType: null,
             IsDrillDown: false,
-            ParentGridOptions: null
+            DrillReportType: null
         }
     };
 
@@ -244,7 +280,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
         self.Tables.btnGenerate = $("#btnGenerate");
         self.Tables.btnToday = $("#btnToday");
         self.Tables.btnYesterday = $("#btnYesterday");
-        self.Tables.btnExport = $("#button-export");
+        //self.Tables.btnExport = $("#button-export");
 
         self.Tables.txtTotalBetLessThan = $("#txt-totalbet-lessthan");
         self.Tables.txtTotalBetMoreThan = $("#txt-totalbet-morethan");
@@ -614,6 +650,8 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
 
         this.Tables.btnGenerate.unbind("click");
         this.Tables.btnGenerate.click(function () {
+            reportManager.Params.globalVariable.IsDrillDownFromUser = false;
+            reportManager.Params.globalVariable.CacheReportType = "";
             self.GetReport(false, self.Tables.datepickerplugin.nexDatePicker("getSingleDate"));
         });
 
@@ -625,11 +663,6 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
         this.Tables.btnYesterday.unbind("click");
         this.Tables.btnYesterday.click(function () {
             self.btnYesterdayClick();
-        });
-
-        this.Tables.btnExport.unbind("click");
-        this.Tables.btnExport.click(function () {
-            self.ExportReport();
         });
 
         this.Tables.dropdownProduct.change(function () {
@@ -777,6 +810,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
             GameTableId: self.Tables.dropdownGameTable.multiSelect('getCheckedItems').toString(),
             Currency: self.Tables.dropdownCurrency.val(),
             ReportType: self.Tables.reportBy.find("input[name='rdReportBy']:checked").val(),
+            ViewReport:0,
             ShowRefundColumn: self.Tables.showRefundColumn.prop("checked") ? true : false,
 
             TotalBetLessThan: self.Tables.txtTotalBetLessThan.getNumberValue(),
@@ -792,25 +826,117 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
         };
     };
 
-    self.GetReport = function (isdrilldown, reportDate, currencyId) {
+    self.GetReport = function () {
+        var reportType = parseInt(self.Tables.reportBy.find("input[name='rdReportBy']:checked").val());
+        self.Params.globalVariable.IsDrillDown = false;
+        self.Params.globalVariable.DrillReportType = null;
+        switch (reportType) {
+            case self.Enums.ReportType.Daily:
+                self.GetReportByDaily();
+                break;
+            case self.Enums.ReportType.Monthly:
+                self.GetByMonthly();
+                break;
+            case self.Enums.ReportType.UserName:
+                self.GetByUserName();
+                break;
+        }
+    };
+
+    self.GetReportByDaily = function (date, reportType) {
         var self = this;
         AccReport.disableInput();
         self.CachedData.sortDirection = null;
         self.CachedData.sortColName = null;
         self.CachedData.sortDataType = null;
-        self.Params.globalVariable.IsDrillDown = isdrilldown;
+
+        var selectParam = self.GetReportParams();
+        selectParam.ViewReport = self.Params.globalVariable.viewReport.Daily;
+        self.Params.globalVariable.PrevReportType = self.Params.globalVariable.CurrentReportType;
+        self.Params.globalVariable.CurrentReportType = self.Params.globalVariable.viewReport.Daily;
+
+        if (!self.CheckReportParams(selectParam)) {
+            AccReport.enableInput();
+            return;
+        }
+
+        if (date != null) {
+            selectParam.FromDate = date;
+            selectParam.ToDate = date;
+            selectParam.ReportType = reportType;
+            self.Params.globalVariable.IsDrillDown = true;
+        } else {
+            self.Params.globalVariable.IsDrillDown = false;
+        }
+
+        selectParam.IsDrillDown = self.Params.globalVariable.IsDrillDown;
+        self.Params.globalVariable.CacheParam.Daily = selectParam;
+        self.Params.globalVariable.DrillReportType = reportType;
+
+        self.CachedData.currentPage = 0;
+        self.Params.reportParams = selectParam;
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "Gaming/CasinoGameStatistic/GetReportByDaily",
+            self.Params.reportParams,
+            self.RenderReport,
+            self.RenderReport,
+            AccReport.enableInput);
+    };
+
+    self.GetReportDailyByCurrency = function (date, currency) {
+        var self = this;
+        AccReport.disableInput();
+        self.CachedData.sortDirection = null;
+        self.CachedData.sortColName = null;
+        self.CachedData.sortDataType = null;
+        if (currency === "2") {
+            currency = "0";
+        }
+
+        self.Params.globalVariable.IsDrillDown = false;
+        var selectParam = self.GetReportParams();
+
+        selectParam.FromDate = date;
+        selectParam.ToDate = date;
+        selectParam.Currency = currency;
+        selectParam.ViewReport = self.Params.globalVariable.viewReport.DailyByCurrency;
+
+        self.Params.globalVariable.PrevReportType = self.Params.globalVariable.CurrentReportType;
+        self.Params.globalVariable.CurrentReportType = self.Params.globalVariable.viewReport.DailyByCurrency;
+        self.Params.globalVariable.CacheParam.DailyByCurrency = selectParam;
+
+        if (!self.CheckReportParams(selectParam)) {
+            AccReport.enableInput();
+            return;
+        }
+
+        if (self.Params.globalVariable.DrillReportType != null) {
+            selectParam.ReportType = self.Params.globalVariable.DrillReportType;
+        }
+
+        self.CachedData.currentPage = 0;
+        self.Params.reportParams = selectParam;
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "Gaming/CasinoGameStatistic/GetReportDailyByCurrency",
+            self.Params.reportParams,
+            self.RenderReport,
+            self.RenderReport,
+            AccReport.enableInput);
+    };
+
+    self.GetByMonthly = function () {
+        var self = this;
+        AccReport.disableInput();
+        self.CachedData.sortDirection = null;
+        self.CachedData.sortColName = null;
+        self.CachedData.sortDataType = null;
+
         var selectParam = self.GetReportParams();
         
-        if (isdrilldown) {
-            if (selectParam.Currency === "-1") {
-                selectParam.Currency = "0";
-            } else {
-                selectParam.Currency = currencyId;    
-            }
-            
-            selectParam.FromDate = reportDate;
-            selectParam.ToDate = reportDate;
-        }
+        selectParam.ViewReport = self.Params.globalVariable.viewReport.Monthly;
+
+        self.Params.globalVariable.PrevReportType = null;
+        self.Params.globalVariable.CurrentReportType = self.Params.globalVariable.viewReport.Monthly;
 
         if (!self.CheckReportParams(selectParam)) {
             AccReport.enableInput();
@@ -820,13 +946,120 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
         self.CachedData.currentPage = 0;
         self.Params.reportParams = selectParam;
         AccReport.utility.CallAjax(this,
-            window.rootUrl + "Gaming/CasinoGameStatistic/GetReport",
+            window.rootUrl + "Gaming/CasinoGameStatistic/GetReportByMonthly",
             self.Params.reportParams,
             self.RenderReport,
             self.RenderReport,
             AccReport.enableInput);
     };
 
+    self.GetByMonthlyByCurrency = function (date, currency) {
+        var self = this;
+        AccReport.disableInput();
+        self.CachedData.sortDirection = null;
+        self.CachedData.sortColName = null;
+        self.CachedData.sortDataType = null;
+        if (currency === "2") {
+            currency = "0";
+        }
+
+        self.Params.globalVariable.IsDrillDown = false;
+        var selectParam = self.GetReportParams();
+
+        selectParam.FromDate = date;
+        selectParam.ToDate = date;
+        selectParam.Currency = currency;
+        selectParam.ViewReport = self.Params.globalVariable.viewReport.MonthlyByCurrency;
+
+        self.Params.globalVariable.PrevReportType = self.Params.globalVariable.CurrentReportType;
+        self.Params.globalVariable.CurrentReportType = self.Params.globalVariable.viewReport.MonthlyByCurrency;
+        self.Params.globalVariable.CacheParam.MonthlyByCurrency = selectParam;
+
+        if (!self.CheckReportParams(selectParam)) {
+            AccReport.enableInput();
+            return;
+        }
+
+        self.CachedData.currentPage = 0;
+        self.Params.reportParams = selectParam;
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "Gaming/CasinoGameStatistic/GetReportMonthlyByCurrency",
+            self.Params.reportParams,
+            self.RenderReport,
+            self.RenderReport,
+            AccReport.enableInput);
+    };
+
+    self.GetByUserName = function () {
+        var self = this;
+        AccReport.disableInput();
+        self.CachedData.sortDirection = null;
+        self.CachedData.sortColName = null;
+        self.CachedData.sortDataType = null;
+
+        var selectParam = self.GetReportParams();
+
+        selectParam.ViewReport = self.Params.globalVariable.viewReport.UserName;
+
+        self.Params.globalVariable.PrevReportType = null;
+        self.Params.globalVariable.CurrentReportType = self.Params.globalVariable.viewReport.UserName;
+
+        if (!self.CheckReportParams(selectParam)) {
+            AccReport.enableInput();
+            return;
+        }
+
+        self.Params.globalVariable.CacheParam.UserName = selectParam;
+
+        self.CachedData.currentPage = 0;
+        self.Params.reportParams = selectParam;
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "Gaming/CasinoGameStatistic/GetReportByUserName",
+            self.Params.reportParams,
+            self.RenderReport,
+            self.RenderReport,
+            AccReport.enableInput);
+    };
+
+    self.ReportDailyByUserName = function (username, reportType) {
+        var self = this;
+        AccReport.disableInput();
+        self.CachedData.sortDirection = null;
+        self.CachedData.sortColName = null;
+        self.CachedData.sortDataType = null;
+
+        var selectParam = self.GetReportParams();
+        selectParam.ViewReport = self.Params.globalVariable.viewReport.Daily;
+        self.Params.globalVariable.PrevReportType = self.Params.globalVariable.CurrentReportType;
+        self.Params.globalVariable.CurrentReportType = self.Params.globalVariable.viewReport.Daily;
+
+        if (!self.CheckReportParams(selectParam)) {
+            AccReport.enableInput();
+            return;
+        }
+
+        if (username != null) {
+            selectParam.UserName = username;
+            selectParam.ReportType = reportType;
+            self.Params.globalVariable.IsDrillDown = true;
+        } else {
+            self.Params.globalVariable.IsDrillDown = false;
+        }
+
+        selectParam.IsDrillDown = self.Params.globalVariable.IsDrillDown;
+        self.Params.globalVariable.CacheParam.Daily = selectParam;
+        self.Params.globalVariable.DrillReportType = reportType;
+
+        self.CachedData.currentPage = 0;
+        self.Params.reportParams = selectParam;
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "Gaming/CasinoGameStatistic/GetReportByDaily",
+            self.Params.reportParams,
+            self.RenderReport,
+            self.RenderReport,
+            AccReport.enableInput);
+    };
+    
     self.CheckReportParams = function (selectParam) {
         AccReport.popUp.hide();
         if (selectParam.TotalBetLessThan.length > 0 &&
@@ -850,41 +1083,54 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
         var self = this;
         self.Tables.mainLiveCasinoGameStatisticReportContainer.removeClass("display-none");
         self.Tables.mainLiveCasinoGameStatisticReport.addClass("display-none");
-        var reportTypeEnum = self.Enums.ReportType;
+        var viewReport = self.Params.globalVariable.viewReport;
+        var gridOptionReport = self.Params.globalVariable.gridOptionReport;
 
         var gridOptions = null;
-        var reportType = parseInt(self.Params.reportParams.ReportType);
+        var reportType = parseInt(self.Params.globalVariable.CurrentReportType);
         self.CachedData.currentReport = report;
+
         switch (reportType) {
-            case reportTypeEnum.Daily:
-            case reportTypeEnum.Monthly:
-            //case reportTypeEnum.UserName:
+            case viewReport.Daily:
                 gridOptions = self.ReportByDailyRange.GetGridOptions(report);
+                gridOptionReport.Daily = gridOptions;
                 break;
-//            case reportTypeEnum.Monthly:
-//                gridOptions = self.ReportByMonthlyRange.GetGridOptions(report);
-//                break;
-            case reportTypeEnum.UserName:
+            case viewReport.DailyByCurrency:
+                gridOptions = self.ReportDailyByCurrency.GetGridOptions(report);
+                gridOptionReport.DailyByCurrency = gridOptions;
+                break;
+            case viewReport.Monthly:
+                gridOptions = self.ReportByMonthlyRange.GetGridOptions(report);
+                gridOptionReport.Monthly = gridOptions;
+                break;
+            case viewReport.MonthlyByCurrency:
+                gridOptions = self.ReportMonthlyByCurrency.GetGridOptions(report);
+                gridOptionReport.MonthlyByCurrency = gridOptions;
+                break;
+            case viewReport.UserName:
                 gridOptions = self.ReportByUserName.GetGridOptions(report);
+                gridOptionReport.UserName = gridOptions;
                 break;
-            case reportTypeEnum.GameType:
-                gridOptions = self.ReportByGameType.GetGridOptions(report);
-                break;
-            case reportTypeEnum.GameTable:
-                gridOptions = self.ReportByGameTable.GetGridOptions(report);
-                break;
-            case reportTypeEnum.Company:
-                gridOptions = self.ReportByCompany.GetGridOptions(report);
-                break;
-            case reportTypeEnum.Currency:
-                gridOptions = self.ReportByCurrency.GetGridOptions(report);
-                break;
-            default:
-                break;
-        }
-        
-        if (!self.Params.globalVariable.IsDrillDown) {
-            self.Params.globalVariable.ParentGridOptions = gridOptions;
+
+//            case reportTypeEnum.UserNameDaily:
+//                gridOptions = self.ReportByDailyRange.GetGridOptions(report);
+//                self.Params.globalVariable.UserNameDailyGridOption  = gridOptions;
+
+//                break;
+//            case reportTypeEnum.GameType:
+//                gridOptions = self.ReportByGameType.GetGridOptions(report);
+//                break;
+//            case reportTypeEnum.GameTable:
+//                gridOptions = self.ReportByGameTable.GetGridOptions(report);
+//                break;
+//            case reportTypeEnum.Company:
+//                gridOptions = self.ReportByCompany.GetGridOptions(report);
+//                break;
+//            case reportTypeEnum.Currency:
+//                gridOptions = self.ReportByCurrency.GetGridOptions(report);
+//                break;
+//            default:
+//                break;
         }
 
         if (gridOptions != null) {
@@ -892,10 +1138,28 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
         }
     };
 
-    self.RenderParentReport = function () {
+    self.RenderParentReport = function (reportType) {
         AccReport.disableInput();
-        self.Params.globalVariable.IsDrillDown = false;
-        var gridOptions = self.Params.globalVariable.ParentGridOptions;
+        var gridOptions = [];
+        
+        var viewReport = self.Params.globalVariable.viewReport;
+        var gridOptionReport = self.Params.globalVariable.gridOptionReport;
+        
+        switch (reportType) {
+            case viewReport.Daily:
+                self.Params.globalVariable.CurrentReportType = viewReport.Daily;
+                gridOptions = gridOptionReport.Daily;
+                break;
+            case viewReport.Monthly:
+                self.Params.globalVariable.CurrentReportType = viewReport.Monthly;
+                gridOptions = gridOptionReport.Monthly;
+                break;
+            case viewReport.UserName:
+                self.Params.globalVariable.CurrentReportType = viewReport.UserName;
+                gridOptions = gridOptionReport.UserName;
+                break;
+        }
+
         this.Tables.mainLiveCasinoGameStatisticReport.removeClass("display-none").fanexGrid(gridOptions);
         this.Tables.grandTotalContainer.addClass("display-none");
         this.Tables.hourlyReportContainer.addClass("display-none");
@@ -906,12 +1170,15 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
     self.GetHourlyReport = function (reportDate, currencyId) {
         var self = this;
         AccReport.disableInput();
+
+        self.Params.globalVariable.PrevReportType = self.Params.globalVariable.CurrentReportType;
+        self.Params.globalVariable.CurrentReportType = self.Params.globalVariable.viewReport.DailyByHourly;
         var selectParam = self.GetReportParams();
 
         selectParam.Currency = currencyId;
         selectParam.FromDate = reportDate;
         selectParam.ToDate = reportDate;
-        
+
         self.Params.reportParams = selectParam;
         AccReport.utility.CallAjax(this,
             window.rootUrl + "Gaming/CasinoGameStatistic/GetReportByHourly",

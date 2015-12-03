@@ -123,10 +123,12 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByHourly = function
         });
 
         var title = "Hourly " + product + " Game Statistic Record on " + date + " GMT+8";
-        
+
+        var reportType = reportManager.Params.globalVariable.PrevReportType;
         if (isAccumulated) {
-            title = "Accumulated Hourly " + product + " Game Statistic Record on " + date + " GMT+8";
+            title = "<span class='link' onclick='reportManager.RenderParentReport(" + reportType + ");'>Main</span> > " + "Accumulated Hourly " + product + " Game Statistic Record on " + date + " GMT+8";
         }
+
         var gridOptions = {
             columns: columnsHeader,
             showTitle: true,
@@ -137,10 +139,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByHourly = function
                 exportExcelFunction: function() {
                     self.exportExcel();
                 },
-                showBackButton: isAccumulated,
-                backFunction: function () {
-                    reportManager.RenderParentReport();
-                }
+                showBackButton: false
             },
             bodyRows: bodyData,
             footerRows: footerData,

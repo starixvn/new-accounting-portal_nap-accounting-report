@@ -12,7 +12,16 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
             for (var i = indexRange.startIndex; i < indexRange.endIndex; i++) {
                 info = report.ChildsInfo[i];
                 columns = [];
-                columns.push({ Name: "ColName", Value: info.Name });
+                columns.push({ Name: "ColName", Value: info.Name,
+                    Value: info, CustomCellRender: function (currentCell) {
+                        var clickEvent = ' onclick = "reportManager.ReportDailyByUserName(\'' + currentCell.Value.Name + '\''
+                                                                                + ',\'' + reportManager.Enums.ReportType.Daily
+                                                                                + "');\"";
+                        var result = '<div ' + clickEvent + ' class="link">' + currentCell.Value.Name + '</div>';
+
+                        return result;
+                    } 
+                });
                 columns.push({ Name: "ColId", Value: info.Id });
                 columns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });
                 columns.push({ Name: "ColCurrency", Value: info.CurrencyName });
@@ -43,7 +52,13 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
             var footerReportLength = report.GrandTotal.ChildsInfo.length;
             var footerColumns = [];
             info = report.GrandTotal.ChildsInfo[footerReportLength - 1];
-            footerColumns.push({ Name: "ColName", Value: info.Name });
+            footerColumns.push({ Name: "ColName", Value: info, CustomCellRender: function(currentCell) {
+                    var clickEvent = ' onclick = "reportManager.RenderGrandTotal();"';
+                    var result = '<div ' + clickEvent + ' class="link">' + currentCell.Value.Name + '</div>';
+
+                    return result;
+                }
+            });
             footerColumns.push({ Name: "ColId", Value: "" });
             footerColumns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });
             footerColumns.push({ Name: "ColCurrency", Value: info.CurrencyName });
@@ -72,7 +87,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
             Sort: true, SortDirection: reportManager.getSortDirection("Id")
         });
         columnsHeader.push({
-            HeaderText: viewResources.No_Games, Width: 100, Name: "ColNumberOfGames", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.INT_NUMBER,
+            HeaderText: viewResources.Bet_Count, Width: 100, Name: "ColNumberOfGames", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.INT_NUMBER,
             Sort: true, SortDirection: reportManager.getSortDirection("NumberOfGames") 
             });
         columnsHeader.push({
@@ -110,14 +125,17 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
             Sort: true, SortDirection: reportManager.getSortDirection("CompanyNetIncome")
         });
 
+        var title = AccReport.utility.StringFormat(viewResources.CasinoGameStatistic_ReportTitle, [reportManager.Params.reportParams.Product, reportManager.Params.reportParams.FromDate, reportManager.Params.reportParams.ToDate]);
         var gridOptions = {
             columns: columnsHeader,
             showTitle: true,
             showFooter: true,
             titleInfo: {
-                text: AccReport.utility.StringFormat(viewResources.CasinoGameStatistic_ReportTitle,
-                    [reportManager.Params.reportParams.FromDate, reportManager.Params.reportParams.ToDate]),
-                showExcelButton: false
+                text: title,
+                showExcelButton: true,
+                exportExcelFunction: function () {
+                    self.exportExcel();
+                }
             },
             bodyRows: bodyData,
             footerRows: footerData,
@@ -176,5 +194,12 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
         bodyData.push({
             Columns: columns
         });
+    };
+
+    self.exportExcel = function () {
+        AccReport.disableInput();
+        var exportParams = reportManager.Params.globalVariable.CacheParam.UserName;
+        exportParams.ViewReport = reportManager.Params.globalVariable.viewReport.UserName;
+        AccReport.downloadFile(window.rootUrl + "Gaming/CasinoGameStatistic/ExportReport", exportParams);
     };
 };

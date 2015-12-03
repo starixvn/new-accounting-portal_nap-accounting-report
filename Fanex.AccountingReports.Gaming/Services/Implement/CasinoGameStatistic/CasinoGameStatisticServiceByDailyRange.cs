@@ -97,7 +97,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 }
             }
 
-            report.ChildsInfo = report.ChildsInfo.OrderBy(winLoss => winLoss.Name).ToList();
+            report.ChildsInfo = report.ChildsInfo.OrderBy(winLoss => Converter.To<DateTime>(winLoss.Name)).ToList();
 
             Utilities.AssignGrandTotal(grandTotal, grandTotalRM);
 

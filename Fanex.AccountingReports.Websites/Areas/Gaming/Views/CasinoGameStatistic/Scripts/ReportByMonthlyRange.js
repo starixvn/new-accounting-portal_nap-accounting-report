@@ -3,14 +3,16 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByMonthlyRange = fu
     var self = this;
 
     self.GetGridOptions = function (report) {
+        var isDrillDown = reportManager.Params.globalVariable.IsDrillDown;
+        var isBaseRM = reportManager.GetReportParams().Currency === "-1";
+
         var bodyData = [];
         var footerData = [];
+        var columns = [];
         var timeRangeLength = report && report.ChildsInfo ?
-            report.ChildsInfo.length :
-            0;
+            report.ChildsInfo.length : 0;
         if (timeRangeLength > 0) {
             var info;
-            var columns = [];
             var indexRange = reportManager.GetPagingIndexRange(timeRangeLength);
             for (var i = indexRange.startIndex; i < indexRange.endIndex; i++) {
                 var timeRangeWinLoss = report.ChildsInfo[i];
@@ -18,13 +20,42 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByMonthlyRange = fu
                 for (var j = 0; j < reportLength; j++) {
                     columns = [];
                     info = timeRangeWinLoss.ChildsInfo[j];
-                    if (j == 0) {
-                        columns.push({ Name: "ColName", Value: timeRangeWinLoss.Name, MergeRowNumber: reportLength });
+                    if (j === 0) {
+                        columns.push({ Name: "ColName",
+                            Value: info, CustomCellRender: function (currentCell) {
+                                var clickEvent = ' onclick = "reportManager.GetReportByDaily(\'' + currentCell.Value.Name + '\''
+                                                                                + ',\'' + reportManager.Enums.ReportType.Daily
+                                                                                + "');\"";
+
+                                var result = '<div>' + currentCell.Value.Name + '</div>';
+                                if (isBaseRM) {
+                                    result = '<div ' + clickEvent + ' class="link">' + currentCell.Value.Name + '</div>';
+                                }
+
+                                if (isDrillDown) {
+                                    result = '<div>' + currentCell.Value.Name + '</div>';
+                                }
+
+                                return result;
+                            },
+                            MergeRowNumber: reportLength
+                        });
                     }
 
                     columns.push({ Name: "ColNumberOfPlayers", Value: info.NumberOfPlayers });
                     columns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });
-                    columns.push({ Name: "ColCurrency", Value: info.CurrencyName });
+                    columns.push({ Name: "ColCurrency", Value: info, CustomCellRender: function (currentCell) {
+                        var clickEvent = ' onclick = "reportManager.GetByMonthlyByCurrency(\'' + currentCell.Value.Name + '\''
+                                                                                + ',\'' + currentCell.Value.CurrencyId
+                                                                                + "');\"";
+                        var result = '<div ' + clickEvent + ' class="link">' + currentCell.Value.CurrencyName + '</div>';
+                        if (isDrillDown) {
+                            result = '<div>' + currentCell.Value.CurrencyName + '</div>';
+                        }
+
+                        return result;
+                    }
+                    });
                     columns.push({ Name: "ColTotalBets", Value: info.TotalBets });
                     columns.push({ Name: "ColTotalWins", Value: info.TotalWins });
                     columns.push({ Name: "ColGameIncome", Value: info.GameIncome });
@@ -42,19 +73,17 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByMonthlyRange = fu
                 }
             }
 
-            var totalChildLength = report && report.GrandTotal ?
-                report.GrandTotal.ChildsInfo.length : 0;
-
-            for (var totalChildIndex = 0; totalChildIndex < totalChildLength - 1; totalChildIndex++) {
-                var currentChildTotal = report.GrandTotal.ChildsInfo[totalChildIndex];
-                self.AddChildTotalToBodyData(columns, currentChildTotal, bodyData);
-            }
-
             var reportLength = report.GrandTotal.ChildsInfo.length;
 
             var footerColumns = [];
             info = report.GrandTotal.ChildsInfo[reportLength - 1];
-            footerColumns.push({ Name: "ColName", Value: info.Name });
+            footerColumns.push({ Name: "ColName", Value: info, CustomCellRender: function (currentCell) {
+                var clickEvent = ' onclick = "reportManager.RenderGrandTotal();"';
+                var result = '<div ' + clickEvent + ' class="link">' + currentCell.Value.Name + '</div>';
+
+                return result;
+            }
+            });
             footerColumns.push({ Name: "ColNumberOfPlayers", Value: info.NumberOfPlayers });
             footerColumns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });
             footerColumns.push({ Name: "ColCurrency", Value: info.CurrencyName });
@@ -71,11 +100,12 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByMonthlyRange = fu
             footerColumns.push({ Name: "ColCompanyNetIncome", Value: info.CompanyNetIncome });
 
             footerData.push({ Columns: footerColumns });
+
         }
 
         var columnsHeader = [];
         columnsHeader.push({
-            HeaderText: viewResources.Month, Width: 160, Name: "ColName", HeaderAlign: "center", CellAlign: "center",
+            HeaderText: viewResources.Date, Width: 160, Name: "ColName", HeaderAlign: "center", CellAlign: "center",
             Sort: true, SortDirection: reportManager.getSortDirection("Name")
         });
         columnsHeader.push({
@@ -83,7 +113,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByMonthlyRange = fu
             FormatNumber: FormatConstant.INT_NUMBER, Sort: true, SortDirection: reportManager.getSortDirection("NumberOfPlayers")
         });
         columnsHeader.push({
-            HeaderText: viewResources.No_Games, Width: 100, Name: "ColNumberOfGames", HeaderAlign: "center", CellAlign: "right",
+            HeaderText: viewResources.Bet_Count, Width: 100, Name: "ColNumberOfGames", HeaderAlign: "center", CellAlign: "right",
             FormatNumber: FormatConstant.INT_NUMBER, Sort: true, SortDirection: reportManager.getSortDirection("NumberOfGames")
         });
         columnsHeader.push({
@@ -99,8 +129,8 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByMonthlyRange = fu
             FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true, SortDirection: reportManager.getSortDirection("TotalWins")
         });
         columnsHeader.push({
-            HeaderText: viewResources.Game_income, Width: 120, Name: "ColGameIncome", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center",
-            CellAlign: "right", FormatNegative: '$', Sort: true, SortDirection: reportManager.getSortDirection("GameIncome")
+            HeaderText: viewResources.Game_income, Width: 120, Name: "ColGameIncome", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER,
+            HeaderAlign: "center", CellAlign: "right", FormatNegative: '$', Sort: true, SortDirection: reportManager.getSortDirection("GameIncome")
         });
         columnsHeader.push({
             HeaderText: viewResources.Game_payout, Width: 120, Name: "ColGamePayout", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER,
@@ -108,8 +138,8 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByMonthlyRange = fu
         });
         if (reportManager.Params.reportParams.ShowRefundColumn) {
             columnsHeader.push({
-                HeaderText: viewResources.Total_refund, Width: 120, Name: "ColTotalRefund", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center",
-                CellAlign: "right", FormatNegative: '$', Sort: true, SortDirection: reportManager.getSortDirection("TotalRefund")
+                HeaderText: viewResources.Total_refund, Width: 120, Name: "ColTotalRefund", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER,
+                HeaderAlign: "center", CellAlign: "right", FormatNegative: '$', Sort: true, SortDirection: reportManager.getSortDirection("TotalRefund")
             });
         }
 
@@ -118,22 +148,36 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByMonthlyRange = fu
             HeaderAlign: "center", CellAlign: "right", Sort: true, SortDirection: reportManager.getSortDirection("CompanyTurnover")
         });
         columnsHeader.push({
-            HeaderText: viewResources.Company_comm, Width: 120, Name: "CompanyCommission", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center",
-            CellAlign: "right", FormatNegative: '$', Sort: true, SortDirection: reportManager.getSortDirection("CompanyCommission")
+            HeaderText: viewResources.Company_comm, Width: 120, Name: "CompanyCommission", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER,
+            HeaderAlign: "center", CellAlign: "right", FormatNegative: '$', Sort: true, SortDirection: reportManager.getSortDirection("CompanyCommission")
         });
         columnsHeader.push({
             HeaderText: viewResources.Company_net_income, Width: 160, Name: "ColCompanyNetIncome", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER,
             HeaderAlign: "center", CellAlign: "right", FormatNegative: '$', Sort: true, SortDirection: reportManager.getSortDirection("CompanyNetIncome")
         });
 
+        var title = AccReport.utility.StringFormat(viewResources.CasinoGameStatistic_ReportTitle, [reportManager.Params.reportParams.Product, reportManager.Params.reportParams.FromDate, reportManager.Params.reportParams.ToDate]);
+        var showBackButton = false;
+        if (isDrillDown) {
+            title = AccReport.utility.StringFormat(viewResources.CasinoGameStatisticOnDateByCurrency_ReportTitle, [reportManager.Params.reportParams.Product, reportManager.Params.reportParams.FromDate]);
+            showBackButton = true;
+        }
+
+        if (reportManager.Params.globalVariable.IsDrillDownFromUser) {
+            showBackButton = true;
+        }
+
         var gridOptions = {
             columns: columnsHeader,
             showTitle: true,
             showFooter: true,
             titleInfo: {
-                text: AccReport.utility.StringFormat(viewResources.LiveCasinoGameStatistic_ReportTitle,
-                    [reportManager.Params.reportParams.FromDate, reportManager.Params.reportParams.ToDate]),
-                showExcelButton: false
+                text: title,
+                showExcelButton: true,
+                exportExcelFunction: function () {
+                    self.exportExcel();
+                },
+                showBackButton: false
             },
             bodyRows: bodyData,
             footerRows: footerData,
@@ -141,7 +185,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByMonthlyRange = fu
             gridWidth: 1400,
             gridExpandHeight: 355,
             fullWidth: true,
-            showDistinctRow: false,
+            showDistinctRow: true,
             showHighlightRow: false,
             headerColumnHeight: 29,
             showPager: true,
@@ -172,25 +216,10 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByMonthlyRange = fu
         return gridOptions;
     };
 
-    self.AddChildTotalToBodyData = function (columns, currentChildTotal, bodyData) {
-        columns = [];
-        columns.push({ Name: "ColName", Value: currentChildTotal.Name, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColNumberOfPlayers", Value: currentChildTotal.NumberOfPlayers, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColNumberOfGames", Value: currentChildTotal.NumberOfGames, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColCurrency", Value: currentChildTotal.CurrencyName, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColTotalBets", Value: currentChildTotal.TotalBets, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColTotalWins", Value: currentChildTotal.TotalWins, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColGameIncome", Value: currentChildTotal.GameIncome, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColGamePayout", Value: currentChildTotal.GamePayout, TdClass: "subTotal bold" });
-        if (reportManager.Params.reportParams.ShowRefundColumn) {
-            columns.push({ Name: "ColTotalRefund", Value: currentChildTotal.TotalRefund, TdClass: "subTotal bold" });
-        }
-
-        columns.push({ Name: "ColCompanyTurnover", Value: currentChildTotal.CompanyTurnover, TdClass: "subTotal bold" });
-        columns.push({ Name: "CompanyCommission", Value: currentChildTotal.CompanyCommission, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColCompanyNetIncome", Value: currentChildTotal.CompanyNetIncome, TdClass: "subTotal bold" });
-        bodyData.push({
-            Columns: columns
-        });
+    self.exportExcel = function () {
+        AccReport.disableInput();
+        var exportParams = reportManager.GetReportParams();
+        exportParams.ViewReport = reportManager.Params.globalVariable.viewReport.Monthly;
+        AccReport.downloadFile(window.rootUrl + "Gaming/CasinoGameStatistic/ExportReport", exportParams);
     };
 };

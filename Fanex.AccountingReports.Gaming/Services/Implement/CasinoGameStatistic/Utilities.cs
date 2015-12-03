@@ -5,6 +5,7 @@
 // -----------------------------------------------------------------------
 
 using Fanex.AccountingReports.Core.Extensions;
+using Fanex.AccountingReports.Core.Web;
 using Fanex.AccountingReports.Gaming.Constants;
 using Fanex.AccountingReports.Gaming.Resources;
 
@@ -20,12 +21,30 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
     /// </summary>
     public class Utilities
     {
+        public enum ViewReport
+        {
+            Daily = 0,
+            DailyByCurrency = 1,
+            Monthly = 3,
+            MonthlyByCurrency = 4,
+            UserName = 5,
+            DailyByUserName = 6
+        }
+
+        private static string _reportDailyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Daily." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportDailyByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.DailyByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportMonthlyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Monthly." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportMonthlyByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.MonthlyByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportUserNameKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.UserName." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportDailyByUserNameKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.DailyByUserName." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+
         public static string GetTitleExcelFileWhenDrilDown(GetReportByDailyCriteria criteria)
         {
             string title = string.Empty;
             switch (criteria.ReportType)
             {
                 case PeriodTypeConstants.CasinoGameStatisticDaily:
+                case PeriodTypeConstants.CasinoGameStatisticUsernameDaily:
                     title = string.Format(
                             GamingResources.CasinoGameStatisticOnDateByCurrency_ReportTitle,
                             criteria.Product,
@@ -46,15 +65,22 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 
         public static void ReSetPeriodTimeByReportType(GetReportByDailyCriteria criteria)
         {
-            switch (criteria.ReportType)
+            switch (criteria.ViewReport)
             {
-                case PeriodTypeConstants.CasinoGameStatisticMonthly:
-                    var fromDate = Converter.To<DateTime>(Converter.ToDateTime(criteria.FromDate).ToString("yyyy-MM-01"));
-                    var toDate = DateTimeExtensions.LastDayOfMonth(fromDate);
-                    criteria.FromDate = fromDate.ToString();
-                    criteria.ToDate = toDate.ToString();
+                case (int)ViewReport.MonthlyByCurrency:
+                    ResetDayInMonth(criteria);
                     break;
             }
+
+
+        }
+
+        public static void ResetDayInMonth(GetReportByDailyCriteria criteria)
+        {
+            var fromDate = Converter.To<DateTime>(Converter.ToDateTime(criteria.FromDate).ToString("yyyy-MM-01"));
+            var toDate = DateTimeExtensions.LastDayOfMonth(fromDate);
+            criteria.FromDate = fromDate.ToString();
+            criteria.ToDate = toDate.ToString();
         }
 
         public static void AssignGrandTotal(WinLossInfoEntity grandTotal, WinLossInfo grandTotalRM)
@@ -82,6 +108,8 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             switch (reportType)
             {
                 case PeriodTypeConstants.CasinoGameStatisticDaily:
+                case PeriodTypeConstants.CasinoGameStatisticUsernameDaily:
+                case PeriodTypeConstants.CasinoGameStatisticMonthlyToDaily:
                     name = dateTime.ToShortFormatedDate();
                     break;
                 case PeriodTypeConstants.CasinoGameStatisticMonthly:
@@ -90,6 +118,34 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             }
 
             return name;
+        }
+
+        public static string GetReportKey(int viewReport)
+        {
+            string key = string.Empty;
+            switch (viewReport)
+            {
+                case (int)ViewReport.Daily:
+                    key = _reportDailyKey;
+                    break;
+                case (int)ViewReport.DailyByCurrency:
+                    key = _reportDailyByCurrencyKey;
+                    break;
+                case (int)ViewReport.Monthly:
+                    key = _reportMonthlyKey;
+                    break;
+                case (int)ViewReport.MonthlyByCurrency:
+                    key = _reportMonthlyByCurrencyKey;
+                    break;
+                case (int)ViewReport.UserName:
+                    key = _reportUserNameKey;
+                    break;
+                case (int)ViewReport.DailyByUserName:
+                    key = _reportDailyByUserNameKey;
+                    break;
+            }
+
+            return key;
         }
     }
 }

@@ -49,5 +49,7 @@ namespace Fanex.AccountingReports.Gaming.Constants
         public const int CasinoGameStatisticGameTable = 4;
         public const int CasinoGameStatisticCompany = 5;
         public const int CasinoGameStatisticCurrency = 6;
+        public const int CasinoGameStatisticUsernameDaily = 7;
+        public const int CasinoGameStatisticMonthlyToDaily = 8;
     }
 }

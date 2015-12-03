@@ -100,6 +100,61 @@ namespace Fanex.AccountingReports.Gaming.Controllers
 
         [HttpPost]
         [HandleAjaxError]
+        public JsonResult GetReportByDaily(GetReportByDailyCriteria criteria)
+        {
+            var result = _reportService.GetReport(criteria);
+            var jsonResult = Json(result);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return jsonResult;
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetReportDailyByCurrency(GetReportByDailyCriteria criteria)
+        {
+            var result = _reportService.GetReport(criteria);
+            var jsonResult = Json(result);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return jsonResult;
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetReportByMonthly(GetReportByDailyCriteria criteria)
+        {
+            var result = _reportService.GetReport(criteria);
+            var jsonResult = Json(result);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return jsonResult;
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetReportMonthlyByCurrency(GetReportByDailyCriteria criteria)
+        {
+            var result = _reportService.GetReport(criteria);
+            var jsonResult = Json(result);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return jsonResult;
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetReportByUserName(GetReportByDailyCriteria criteria)
+        {
+            var result = _reportService.GetReport(criteria);
+            var jsonResult = Json(result);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return jsonResult;
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
         public JsonResult SortReport(GetReportByDailyCriteria getReportCriteria)
         {
             var result = _reportService.SortReport(getReportCriteria);

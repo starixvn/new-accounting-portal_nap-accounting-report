@@ -27,7 +27,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             CellRange currentCellRange;
             ExcelCell currentCell;
             var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
-            var isShowNoPlayers = periodType != PeriodTypeConstants.LiveCasinoGameStatisticUsername;
+            var isShowNoPlayers = true;////periodType != PeriodTypeConstants.LiveCasinoGameStatisticUsername;
             var isShowColumnCurrency = periodType != PeriodTypeConstants.LiveCasinoGameStatisticCurrency;
 
             workSheet.Columns[startColumn].Width = 160 * ExcelExtensions.FontWidth;
@@ -78,42 +78,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             currentColumn = startColumn;
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Style = headerTextStyle;
-            switch (criteria.ReportType)
-            {
-                case PeriodTypeConstants.CasinoGameStatisticDaily:
-                    currentCell.Value = Labels.Date;
-                    break;
-
-                case PeriodTypeConstants.CasinoGameStatisticMonthly:
-                    currentCell.Value = Labels.Month;
-                    break;
-
-                case PeriodTypeConstants.CasinoGameStatisticUsername:
-                    currentCell.Value = Labels.UserName;
-
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Style = headerTextStyle;
-                    currentCell.Value = Labels.CustId;
-                    break;
-
-                case PeriodTypeConstants.CasinoGameStatisticGameType:
-                    currentCell.Value = Labels.Game;
-                    break;
-
-                case PeriodTypeConstants.CasinoGameStatisticGameTable:
-                    currentCell.Value = Labels.Table;
-                    break;
-
-                case PeriodTypeConstants.CasinoGameStatisticCompany:
-                    currentCell.Value = Labels.Company;
-                    break;
-
-                case PeriodTypeConstants.CasinoGameStatisticCurrency:
-                    currentCell.Value = Labels.Currency;
-                    break;
-            }
+            currentCell.Value = Labels.Currency;
 
             currentColumn++;
 
@@ -188,7 +153,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
         private void ExportReport_WinLossRow(ref ExcelWorksheet workSheet, int startColumn, ref int currentRow, CellStyle intNumberStyle, CellStyle textStyle, CellStyle twoDecimalNumberStyle, CellStyle twoDecimalNegativeNumberStyle, CellStyle twoDecimalNegativePercentNumberStyle, GetReportByDailyCriteria criteria, WinLossInfo info)
         {
             ExcelCell currentCell;
-            var isShowNoPlayers = criteria.ReportType != PeriodTypeConstants.LiveCasinoGameStatisticUsername;
+            var isShowNoPlayers = true;//// criteria.ReportType != PeriodTypeConstants.LiveCasinoGameStatisticUsername;
             var isShowColumnCurrency = criteria.ReportType != PeriodTypeConstants.LiveCasinoGameStatisticCurrency;
 
             var currentColumn = startColumn;
@@ -306,14 +271,14 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             currentCell.Style = textStyle_GrandTotal;
             currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
 
-            if (criteria.ReportType == PeriodTypeConstants.LiveCasinoGameStatisticUsername)
-            {
-                currentColumn++;
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = string.Empty;
-                currentCell.Style = textStyle_GrandTotal;
-                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-            }
+            //if (criteria.ReportType == PeriodTypeConstants.LiveCasinoGameStatisticUsername)
+            //{
+            //    currentColumn++;
+            //    currentCell = workSheet.Cells[currentRow, currentColumn];
+            //    currentCell.Value = string.Empty;
+            //    currentCell.Style = textStyle_GrandTotal;
+            //    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+            //}
 
             currentColumn++;
 

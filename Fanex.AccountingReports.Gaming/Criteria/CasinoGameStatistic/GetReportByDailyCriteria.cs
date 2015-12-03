@@ -93,12 +93,17 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
         [SpParam(Ignored = true)]
         public bool IsExportExcel { get; set; }
 
+        [SpParam(Ignored = true)]
+        public int ViewReport { get; set; }
+
         public override string GetSettingKey()
         {
             string spame = string.Empty;
             switch (ReportType)
             {
                 case 0:
+                case 7:
+                case 8:
                     spame = "Acc_Rpt_CasinoGameStatistics_Daily";
                     break;
                 case 1:

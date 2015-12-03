@@ -47,6 +47,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 
         private string _hourlySessionKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Hourly" +
        (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+       
 
         public CasinoGameStatisticService()
             : this(null)
@@ -64,6 +65,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             {
                 Utilities.ReSetPeriodTimeByReportType(criteria);
 
+                if (criteria.IsDrillDown && criteria.ViewReport == (int) Utilities.ViewReport.Daily)
+                {
+                    Utilities.ResetDayInMonth(criteria);
+                }
+
+                string key = Utilities.GetReportKey(criteria.ViewReport);
                 var rawData = _reportRepository.GetReport(criteria);
                 var report = new WinLossInfo
                 {
@@ -73,7 +80,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 
                 if (rawData == null || rawData.Count < 2)
                 {
-                    CacheManager.Set<WinLossInfo>(_reportSessionKey, report, DateTime.Now.AddHours(_timeCaching));
+                    CacheManager.Set<WinLossInfo>(key, report, DateTime.Now.AddHours(_timeCaching));
                     return report;
                 }
 
@@ -82,7 +89,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 if (winLossInfoTable == null ||
                     winLossInfoTable.Count == 0)
                 {
-                    CacheManager.Set<WinLossInfo>(_reportSessionKey, report, DateTime.Now.AddHours(_timeCaching));
+                    CacheManager.Set<WinLossInfo>(key, report, DateTime.Now.AddHours(_timeCaching));
                     return report;
                 }
 
@@ -90,7 +97,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 switch (criteria.ReportType)
                 {
                     case PeriodTypeConstants.CasinoGameStatisticDaily:
+                    case PeriodTypeConstants.CasinoGameStatisticUsernameDaily:
                     case PeriodTypeConstants.CasinoGameStatisticMonthly:
+                    case PeriodTypeConstants.CasinoGameStatisticMonthlyToDaily:
                         reportManager = new CasinoGameStatisticServiceByDailyRange();
                         break;
 
@@ -120,7 +129,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 }
 
                 report = reportManager.GetReport(winLossInfoTable, grandTotalInfoTable, criteria);
-                string key = criteria.IsDrillDown ? _reportSessionKey : _reportDrillDownSessionKey;
                 CacheManager.Set<WinLossInfo>(key, report, DateTime.Now.AddHours(_timeCaching));
                 return report;
             }
@@ -141,12 +149,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
         /// <summary>
         /// Sorts the report.
         /// </summary>
-        /// <param name="getReportCriteria">The get report criteria.</param>
+        /// <param name="criteria">The get report criteria.</param>
         /// <returns>Report data after sort.</returns>
-        public WinLossInfo SortReport(GetReportByDailyCriteria getReportCriteria)
+        public WinLossInfo SortReport(GetReportByDailyCriteria criteria)
         {
             CasinoGameStatisticService reportManager = null;
-            switch (getReportCriteria.ReportType)
+            switch (criteria.ReportType)
             {
                 case PeriodTypeConstants.CasinoGameStatisticDaily:
                 case PeriodTypeConstants.CasinoGameStatisticMonthly:
@@ -178,15 +186,15 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                     break;
             }
 
-            string key = getReportCriteria.IsDrillDown ? _reportSessionKey : _reportDrillDownSessionKey;
+            string key = criteria.IsDrillDown ? _reportDrillDownSessionKey : _reportSessionKey;
             var report = CacheManager.Get<WinLossInfo>(key);
 
             if (report == null)
             {
-                report = GetReport(getReportCriteria);
+                report = GetReport(criteria);
             }
 
-            reportManager.SortReportData(report, getReportCriteria);
+            reportManager.SortReportData(report, criteria);
 
             return report;
         }
@@ -215,7 +223,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             try
             {
                 WinLossInfo report;
-                string key = criteria.IsDrillDown ? _reportSessionKey : _reportDrillDownSessionKey;
+                Utilities.ReSetPeriodTimeByReportType(criteria);
+                if (criteria.IsDrillDown && criteria.ViewReport == (int)Utilities.ViewReport.Daily)
+                {
+                    Utilities.ResetDayInMonth(criteria);
+                }
+                string key = Utilities.GetReportKey(criteria.ViewReport);
                 report = CacheManager.Get<WinLossInfo>(key);
 
                 if (report == null)
@@ -748,6 +761,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 grandTotal = CacheManager.Get<WinLossInfo>(_grandTotalSessionKey);
                 if (grandTotal == null)
                 {
+                    grandTotal = new WinLossInfo();
                     grandTotal.ChildsInfo = _reportRepository.GetReportByGrandTotal(criteria);
                 }
             }
