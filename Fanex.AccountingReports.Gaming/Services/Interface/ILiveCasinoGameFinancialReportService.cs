@@ -13,6 +13,7 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Gaming.Criteria.LiveCasinoGameFinancialReport;
     using Fanex.AccountingReports.Gaming.Models.LiveCasinoGameFinancialReport;
+    using Fanex.AccountingReports.Gaming.Models.NumberGameFinancialReport;
 
     public interface ILiveCasinoGameFinancialReportService
     {
@@ -20,7 +21,7 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
 
         List<BaseModel> GetCurrencies();
 
-        List<BaseModel> GetGameTypes();
+        List<ProductGameType> GetGameTypes(GetGameTypesCriteria criteria);
 
         List<BaseModel> GetGameTables(GetGameTableCriteria criteria);
 

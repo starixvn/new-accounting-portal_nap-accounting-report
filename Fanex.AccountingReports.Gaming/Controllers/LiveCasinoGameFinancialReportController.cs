@@ -54,9 +54,9 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetGameTypes()
+        public JsonResult GetGameTypes(GetGameTypesCriteria criteria)
         {
-            var gameTypes = this._reportService.GetGameTypes();
+            var gameTypes = this._reportService.GetGameTypes(criteria);
             return Json(gameTypes, JsonRequestBehavior.AllowGet);
         }
 

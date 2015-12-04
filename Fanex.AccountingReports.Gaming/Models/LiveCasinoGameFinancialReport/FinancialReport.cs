@@ -18,13 +18,15 @@ namespace Fanex.AccountingReports.Gaming.Models.LiveCasinoGameFinancialReport
     [Serializable]
     public class FinancialReport
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public int PlayerCount { get; set; }
 
         public int GameCount { get; set; }
+
+        public bool IsGameTable { get; set; }
+
+        public int BetCount { get; set; }
 
         public decimal TotalBets { get; set; }
 
@@ -48,6 +50,7 @@ namespace Fanex.AccountingReports.Gaming.Models.LiveCasinoGameFinancialReport
 
         public void AddToGrandTotal(FinancialReport info)
         {
+            this.GrandTotal.BetCount += info.BetCount;
             this.GrandTotal.TotalBets += info.TotalBets;
             this.GrandTotal.TotalWins += info.TotalWins;
             this.GrandTotal.GrossIncome += info.GrossIncome;

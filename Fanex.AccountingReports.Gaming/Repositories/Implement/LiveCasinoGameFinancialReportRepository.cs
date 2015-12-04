@@ -17,6 +17,7 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Gaming.Criteria.LiveCasinoGameFinancialReport;
+    using Fanex.AccountingReports.Gaming.Models.LiveCasinoGameFinancialReport;
     using Fanex.AccountingReports.Gaming.Repositories.Interface;
     using Fanex.Data;
 
@@ -55,12 +56,12 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
         /// Gets the game types.
         /// </summary>
         /// <returns>The game types.</returns>
-        public List<dynamic> GetGameTypes()
+        public List<dynamic> GetGameTypes(GetGameTypesCriteria criteria)
         {
             var dataTable = new DataTable();
             using (ObjectDb objDb = new ObjectDb("Gaming_LiveCasinoGameFinancial_GetGameType"))
             {
-                var ds = objDb.ExecuteDataSet();
+                var ds = objDb.ExecuteDataSet(criteria.GetSpParams());
                 if (ds != null && ds.Tables.Count >= 1)
                 {
                     dataTable = ds.Tables[0];
@@ -74,6 +75,7 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
                 {
                     result.Add(new
                     {
+                        ProductId = Convert.ToInt32(row["ProductId"]),
                         typeID = Convert.ToInt32(row["typeID"]),
                         typenamee = row["typenamee"].ToString1()
                     });
@@ -161,7 +163,7 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
         /// <param name="criteria">The criteria.</param>
         /// <param name="outputParam">The output parameter.</param>
         /// <returns>The financial report.</returns>
-        public List<dynamic> GetFinancialReport(GetFinancialReportCriteria criteria, ref Hashtable outputParam)
+        public List<FinancialReport> GetFinancialReport(GetFinancialReportCriteria criteria, ref Hashtable outputParam)
         {
             DataTable dataTable = null;
             using (ObjectDb objDb = new ObjectDb(criteria.GetSettingKey()))
@@ -184,20 +186,23 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
                 }
             }
 
-            var result = new List<dynamic>();
+            var result = new List<FinancialReport>();
             if (dataTable != null && dataTable.Rows.Count >= 1)
             {
                 foreach (DataRow row in dataTable.Rows)
                 {
-                    result.Add(new
+                    bool isGameTable = Convert.ToInt32(row["isGameTable"]) == 1;
+                    result.Add(new FinancialReport
                     {
-                        TableName = row["tablename"].ToString1(),
-                        players = Convert.ToInt32(row["players"]),
-                        games = Convert.ToInt32(row["games"]),
-                        totalbets = Convert.ToDecimal(row["totalbets"]),
-                        totalwins = Convert.ToDecimal(row["totalwins"]),
+                        Name = row["tablename"].ToString1(),
+                        PlayerCount = Convert.ToInt32(row["players"]),
+                        GameCount = isGameTable ? Convert.ToInt32(row["games"]) : 0,
+                        IsGameTable = isGameTable,
+                        BetCount = Convert.ToInt32(row["BetCount"]),
+                        TotalBets = Convert.ToDecimal(row["totalbets"]),
+                        TotalWins = Convert.ToDecimal(row["totalwins"]),
                         GrossIncome = Convert.ToDecimal(row["GrossIncome"]),
-                        Comm = Convert.ToDecimal(row["Comm"]),
+                        Commission = Convert.ToDecimal(row["Comm"]),
                         NetIncome = Convert.ToDecimal(row["NetIncome"])
                     });
                 }

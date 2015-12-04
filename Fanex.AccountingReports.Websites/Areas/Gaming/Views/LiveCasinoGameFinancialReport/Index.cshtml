@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css?ver=1" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less?ver=2" />
+     <link rel="stylesheet" type="text/css" href="~/Areas/Gaming/Views/LiveCasinoGameFinancialReport/Styles/LiveCasinoGameFinancialReport.css" />
 }
 @section Headline{
     <div class="title">
@@ -56,11 +57,13 @@
                         <div id="ddwGameType">
                         </div>
                     </div>
-                    <div class="lbl-field col_3 align-right">
-                        @Labels.Game_table
-                    </div>
-                    <div class="edit-field col_7">
-                        <div id="ddwGameTable">
+                    <div id="gameTableContainer">
+                        <div class="lbl-field col_3 align-right">
+                            @Labels.Game_table
+                        </div>
+                        <div class="edit-field col_7">
+                            <div id="ddwGameTable">
+                            </div>
                         </div>
                     </div>
                     <div class="submit col_4">
