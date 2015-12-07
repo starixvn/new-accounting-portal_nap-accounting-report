@@ -209,7 +209,7 @@
   </Function>
 
   <Function Name="Gaming - Live Casino Agency Win Loss">
-    <Setting Key="Gaming_LiveCasinoAgencyWinLoss_GetReport" SpName="Acc_Rpt_LiveCasino_AgencyWinLoss" TimeOut="0" DbName="DBACC.bodb02.bodbAdminNet"/>
+    <Setting Key="Gaming_LiveCasinoAgencyWinLoss_GetReport" SpName="Acc_Rpt_LiveCasino_AgencyWinLoss_xtest" TimeOut="0" DbName="DBACC.bodb02.bodbAdminNet"/>
   </Function>
 
   <Function Name="WinLoss - Match Win Loss By Bettype">

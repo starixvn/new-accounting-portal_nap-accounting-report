@@ -204,7 +204,7 @@
     <Setting Key="Balance_DirectBalance_DirectMemberYesterday" SpName="Acc_Rpt_Balance_Direct_Member_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
   <Function Name="Gaming - Live Casino Agency Win Loss">
-    <Setting Key="Gaming_LiveCasinoAgencyWinLoss_GetReport" SpName="Acc_Rpt_LiveCasino_AgencyWinLoss" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Gaming_LiveCasinoAgencyWinLoss_GetReport" SpName="Acc_Rpt_LiveCasino_AgencyWinLoss_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Balance - Supper Balance">
     <Setting Key="Balance_SuperBalance_Super" SpName="Acc_Rpt_Balance_Super" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
