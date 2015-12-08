@@ -578,7 +578,7 @@ Fanex.AccountingReports.Misc.MAMonitorTool.ReportManager = function () {
     };
 
     self.GetBetTypeList = function () {
-        var products = self.Tables.dropdownProductHeaderCheckBox.prop("checked") ? "0" : self.Tables.ddlProduct.multiSelect("getCheckedItems").join(',');
+        var products = self.Tables.ddlProduct.multiSelect("getCheckedItems").join(',');
         var validateParams = self.validateGetBettypeParams(products);
         if (validateParams) {
             AccReport.popUp.removeHighLight();
@@ -921,7 +921,7 @@ Fanex.AccountingReports.Misc.MAMonitorTool.ReportManager = function () {
             ReportBy: self.Tables.dropdownReportBy.val(),
             FromDate: dateRange.FromDate,
             ToDate: dateRange.ToDate,
-            Products: self.Tables.dropdownProductHeaderCheckBox.prop("checked") ? "0" : self.Tables.ddlProduct.multiSelect("getCheckedItems").join(','),
+            Products: self.Tables.ddlProduct.multiSelect("getCheckedItems").join(','),
             SportType: hasSportsbook ?
                 self.Tables.dropdownSport.val() :
                 self.Enums.Sport.All,
