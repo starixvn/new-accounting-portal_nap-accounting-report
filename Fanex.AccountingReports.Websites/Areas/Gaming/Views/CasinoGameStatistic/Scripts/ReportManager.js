@@ -71,6 +71,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
     self.ReportByMonthlyToDailyRange = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByMonthlyToDailyRange();
     self.ReportByUserName = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName();
     self.ReportByCompany = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByCompany();
+    self.ReportCompanyByCurrency = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportCompanyByCurrency();
     self.ReportByCurrency = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByCurrency();
     self.ReportByGameType = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameType();
     self.ReportGameTypeByCurrency = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportGameTypeByCurrency();
@@ -182,7 +183,9 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
                 GameType:7,
                 GameTypeByCurrency:8,
                 GameTable:9,
-                GameTableByCurrency: 10
+                GameTableByCurrency: 10,
+                Company: 11,
+                CompanyByCurrency: 12
             },
             gridOptionReport: {
                 Daily:null,
@@ -195,7 +198,9 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
                 GameType: null,
                 GameTypeByCurrency: null,
                 GameTable: null,
-                GameTableByCurrency: null
+                GameTableByCurrency: null,
+                Company: null,
+                CompanyByCurrency: null
             },
             CacheParam: {
                 Daily: null,
@@ -208,7 +213,9 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
                 GameType: null,
                 GameTypeByCurrency: null,
                 GameTable: null,
-                GameTableByCurrency: null
+                GameTableByCurrency: null,
+                Company: null,
+                CompanyByCurrency: null
             },
             CacheUserName: null,
             CurrentReportType: null,
@@ -860,6 +867,9 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
             case self.Enums.ReportType.GameTable:
                 self.GetReportByGameTable();
                 break;
+            case self.Enums.ReportType.Company:
+                self.GetReportByCompany();
+                break;
         }
     };
 
@@ -1215,6 +1225,74 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
             self.RenderReport,
             AccReport.enableInput);
     };
+
+    self.GetReportByCompany = function () {
+        var self = this;
+        AccReport.disableInput();
+        self.CachedData.sortDirection = null;
+        self.CachedData.sortColName = null;
+        self.CachedData.sortDataType = null;
+
+        var selectParam = self.GetReportParams();
+        selectParam.ViewReport = self.Params.globalVariable.viewReport.Company;
+        self.Params.globalVariable.PrevReportType = self.Params.globalVariable.CurrentReportType;
+        self.Params.globalVariable.CurrentReportType = self.Params.globalVariable.viewReport.Company;
+
+        if (!self.CheckReportParams(selectParam)) {
+            AccReport.enableInput();
+            return;
+        }
+
+        selectParam.IsDrillDown = self.Params.globalVariable.IsDrillDown;
+        self.Params.globalVariable.CacheParam.Company = selectParam;
+
+        self.CachedData.currentPage = 0;
+        self.Params.reportParams = selectParam;
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "Gaming/CasinoGameStatistic/GetReportByCompany",
+            self.Params.reportParams,
+            self.RenderReport,
+            self.RenderReport,
+            AccReport.enableInput);
+    };
+
+    self.GetReportCompanyByCurrency = function (siteId, currency) {
+        var self = this;
+        AccReport.disableInput();
+        self.CachedData.sortDirection = null;
+        self.CachedData.sortColName = null;
+        self.CachedData.sortDataType = null;
+
+        var selectParam = self.GetReportParams();
+
+        if (currency === "2") {
+            currency = "0";
+        }
+
+        selectParam.LicenseeId = siteId;
+        selectParam.Currency = currency;
+
+        selectParam.ViewReport = self.Params.globalVariable.viewReport.CompanyByCurrency;
+        self.Params.globalVariable.PrevReportType = self.Params.globalVariable.CurrentReportType;
+        self.Params.globalVariable.CurrentReportType = self.Params.globalVariable.viewReport.CompanyByCurrency;
+
+        if (!self.CheckReportParams(selectParam)) {
+            AccReport.enableInput();
+            return;
+        }
+
+        selectParam.IsDrillDown = self.Params.globalVariable.IsDrillDown;
+        self.Params.globalVariable.CacheParam.CompanyByCurrency = selectParam;
+
+        self.CachedData.currentPage = 0;
+        self.Params.reportParams = selectParam;
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "Gaming/CasinoGameStatistic/GetReportCompanyByCurrency",
+            self.Params.reportParams,
+            self.RenderReport,
+            self.RenderReport,
+            AccReport.enableInput);
+    };
     
     self.CheckReportParams = function (selectParam) {
         AccReport.popUp.hide();
@@ -1283,10 +1361,15 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
                 gridOptions = self.ReportGameTableByCurrency.GetGridOptions(report);
                 gridOptionReport.GameTableByCurrency = gridOptions;
                 break;
+            case viewReport.Company:
+                gridOptions = self.ReportByCompany.GetGridOptions(report);
+                gridOptionReport.Company = gridOptions;
+                break;
+            case viewReport.CompanyByCurrency:
+                gridOptions = self.ReportCompanyByCurrency.GetGridOptions(report);
+                gridOptionReport.CompanyByCurrency = gridOptions;
+                break;
 
-//            case reportTypeEnum.GameTable:
-//                gridOptions = self.ReportByGameTable.GetGridOptions(report);
-//                break;
 //            case reportTypeEnum.Company:
 //                gridOptions = self.ReportByCompany.GetGridOptions(report);
 //                break;
@@ -1331,6 +1414,10 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
             case viewReport.GameTable:
                 self.Params.globalVariable.CurrentReportType = viewReport.GameTable;
                 gridOptions = gridOptionReport.GameTable;
+                break;
+            case viewReport.Company:
+                self.Params.globalVariable.CurrentReportType = viewReport.Company;
+                gridOptions = gridOptionReport.Company;
                 break;
         }
 

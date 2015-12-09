@@ -32,7 +32,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             GameType = 7,
             GameTypeByCurrency = 8,
             GameTable = 9,
-            GameTableByCurrency = 10
+            GameTableByCurrency = 10,
+            Company = 11,
+            CompanyByCurrency = 12
         }
 
         private static string _reportDailyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Daily." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
@@ -45,6 +47,8 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
         private static string _reportGameTypeByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTypeByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
         private static string _reportGameTableKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTable." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
         private static string _reportGameTableByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTableByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportCompanyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Company." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportCompanyByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.CompanyByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
 
         public static string GetTitleExcelFileWhenDrilDown(GetReportByDailyCriteria criteria)
         {
@@ -161,7 +165,13 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                     key = _reportGameTableKey;
                     break;
                 case (int)ViewReport.GameTableByCurrency:
-                    key = _reportGameTableKey;
+                    key = _reportGameTableByCurrencyKey;
+                    break;
+                case (int)ViewReport.Company:
+                    key = _reportCompanyKey;
+                    break;
+                case (int)ViewReport.CompanyByCurrency:
+                    key = _reportCompanyByCurrencyKey;
                     break;
             }
 

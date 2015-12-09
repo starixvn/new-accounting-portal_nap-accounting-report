@@ -129,6 +129,8 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
                 case PeriodTypeConstants.CasinoGameStatisticMonthly:
                 case PeriodTypeConstants.CasinoGameStatisticUsername:
                 case PeriodTypeConstants.CasinoGameStatisticGameType:
+                case PeriodTypeConstants.CasinoGameStatisticGameTable:
+                case PeriodTypeConstants.CasinoGameStatisticCompany:
                     betcount = Converter.ToInt(row["BetCount"]);
                     break;
             }

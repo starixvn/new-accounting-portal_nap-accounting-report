@@ -199,6 +199,28 @@ namespace Fanex.AccountingReports.Gaming.Controllers
 
         [HttpPost]
         [HandleAjaxError]
+        public JsonResult GetReportByCompany(GetReportByDailyCriteria criteria)
+        {
+            var result = _reportService.GetReport(criteria);
+            var jsonResult = Json(result);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return jsonResult;
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetReportCompanyByCurrency(GetReportByDailyCriteria criteria)
+        {
+            var result = _reportService.GetReport(criteria);
+            var jsonResult = Json(result);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return jsonResult;
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
         public JsonResult SortReport(GetReportByDailyCriteria getReportCriteria)
         {
             var result = _reportService.SortReport(getReportCriteria);
