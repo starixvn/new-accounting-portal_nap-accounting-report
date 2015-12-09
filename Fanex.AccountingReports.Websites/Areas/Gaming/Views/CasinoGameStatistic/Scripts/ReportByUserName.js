@@ -14,7 +14,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
                 columns = [];
                 columns.push({ Name: "ColName", Value: info.Name,
                     Value: info, CustomCellRender: function (currentCell) {
-                        var clickEvent = ' onclick = "reportManager.ReportDailyByUserName(\'' + currentCell.Value.Name + '\''
+                        var clickEvent = ' onclick = "reportManager.GetReportDailyByUserName(\'' + currentCell.Value.Name + '\''
                                                                                 + ',\'' + reportManager.Enums.ReportType.Daily
                                                                                 + "');\"";
                         var result = '<div ' + clickEvent + ' class="link">' + currentCell.Value.Name + '</div>';

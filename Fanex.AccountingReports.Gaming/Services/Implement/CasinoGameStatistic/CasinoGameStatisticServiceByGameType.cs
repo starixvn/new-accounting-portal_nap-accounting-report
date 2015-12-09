@@ -62,6 +62,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 {
                     info = new WinLossInfo
                     {
+                        Id = gameTypeWinLoss.Id,
                         Name = gameTypeWinLoss.Name,
                         CurrencyName = data.CurrencyName,
                         NumberOfPlayers = data.NumberOfPlayers,
@@ -83,35 +84,36 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                         continue;
                     }
 
-                    grandTotalRM.Sum(new WinLossInfo
-                    {
-                        NumberOfPlayers = data.NumberOfPlayers,
-                        NumberOfGames = data.NumberOfGames,
+                    //grandTotalRM.Sum(new WinLossInfo
+                    //{
+                    //    NumberOfPlayers = data.NumberOfPlayers,
+                    //    NumberOfGames = data.NumberOfGames,
 
-                        TotalBets = data.TotalBets,
-                        TotalWins = data.TotalWins,
-                        TotalRefund = data.TotalRefund,
+                    //    TotalBets = data.TotalBets,
+                    //    TotalWins = data.TotalWins,
+                    //    TotalRefund = data.TotalRefund,
 
-                        GameIncome = data.GameIncome,
+                    //    GameIncome = data.GameIncome,
 
-                        CompanyTurnover = data.CompanyTurnover,
-                        CompanyNetIncome = data.CompanyNetIncome,
-                        CompanyCommission = data.CompanyCommission
-                    });
+                    //    CompanyTurnover = data.CompanyTurnover,
+                    //    CompanyNetIncome = data.CompanyNetIncome,
+                    //    CompanyCommission = data.CompanyCommission
+                    //});
 
-                    if (!currencyIndexDictionary.ContainsKey(info.CurrencyName))
-                    {
-                        report.GrandTotal.ChildsInfo.Add(new WinLossInfo
-                        {
-                            Name = Labels.Total + " " + info.CurrencyName,
-                            CurrencyName = info.CurrencyName
-                        });
+                    //if (!currencyIndexDictionary.ContainsKey(info.CurrencyName))
+                    //{
+                    //    report.GrandTotal.ChildsInfo.Add(new WinLossInfo
+                    //    {
+                    //        Name = Labels.Total + " " + info.CurrencyName,
+                    //        CurrencyName = info.CurrencyName
+                    //    });
 
-                        currencyIndexDictionary.Add(info.CurrencyName, report.GrandTotal.ChildsInfo.Count - 1);
-                    }
+                    //    currencyIndexDictionary.Add(info.CurrencyName, report.GrandTotal.ChildsInfo.Count - 1);
+                    //}
 
-                    var currencyIndex = currencyIndexDictionary[info.CurrencyName];
-                    report.GrandTotal.ChildsInfo[currencyIndex].Sum(info);
+                    //var currencyIndex = currencyIndexDictionary[info.CurrencyName];
+                    //report.GrandTotal.ChildsInfo[currencyIndex].Sum(info);
+
                     info = WinLossInfo.Format(info);
                     gameTypeWinLoss.ChildsInfo.Add(info);
                 }
@@ -124,6 +126,11 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             }
 
             report.ChildsInfo = report.ChildsInfo.OrderBy(winLoss => winLoss.Name).ToList();
+
+            Utilities.AssignGrandTotal(grandTotal, grandTotalRM);
+
+            report.GrandTotal.ChildsInfo.Add(grandTotalRM);
+
             return report;
         }
 

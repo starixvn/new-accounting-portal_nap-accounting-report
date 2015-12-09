@@ -60,7 +60,7 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
                         numberOfPlayers = Converter.ToInt(row["NoOfPlayers"]);
                         custId = string.Empty;
                     }
-
+                    
                     var info = new WinLossInfoEntity
                     {
                         Id = GetWinLossInfoId(criteria, row),
@@ -70,7 +70,6 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
                         NumberOfGames = GetBetCountByReportTye(criteria.ReportType, row),
 
                         CurrencyName = Converter.ToString2(row["Currency"]),
-                        CurrencyId = Converter.To<int>(row["CurrencyId"]),
 
                         TotalBets = Converter.ToDecimal(row["TotalBets"]),
                         TotalWins = Converter.ToDecimal(row["TotalWins"]),
@@ -129,8 +128,7 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
                 case PeriodTypeConstants.CasinoGameStatisticDaily:
                 case PeriodTypeConstants.CasinoGameStatisticMonthly:
                 case PeriodTypeConstants.CasinoGameStatisticUsername:
-                case PeriodTypeConstants.CasinoGameStatisticUsernameDaily:
-                case PeriodTypeConstants.CasinoGameStatisticMonthlyToDaily:
+                case PeriodTypeConstants.CasinoGameStatisticGameType:
                     betcount = Converter.ToInt(row["BetCount"]);
                     break;
             }
@@ -143,15 +141,13 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
             switch (criteria.ReportType)
             {
                 case PeriodTypeConstants.LiveCasinoGameStatisticDaily:
-                case PeriodTypeConstants.CasinoGameStatisticUsernameDaily:
-                case PeriodTypeConstants.CasinoGameStatisticMonthlyToDaily:
                     return Converter.ToDateTime(dataRow["WinLostDate"]).ToShortFormatedDate();
                 case PeriodTypeConstants.LiveCasinoGameStatisticMonthly:
                     return string.Format("{0}-{1}", dataRow["Year"], dataRow["Month"]);
                 case PeriodTypeConstants.LiveCasinoGameStatisticUsername:
                     return Converter.ToString2(dataRow["Username"]);
                 case PeriodTypeConstants.LiveCasinoGameStatisticGameType:
-                    return Converter.ToString2(dataRow["GameTypeID"]);
+                    return Converter.ToString2(dataRow["GameTypeId"]);
                 case PeriodTypeConstants.LiveCasinoGameStatisticGameTable:
                     return Converter.ToString2(dataRow["GameTableID"]);
                 case PeriodTypeConstants.LiveCasinoGameStatisticCompany:

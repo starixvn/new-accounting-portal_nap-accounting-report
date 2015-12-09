@@ -112,6 +112,9 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
                 case 2:
                     spame = "Acc_Rpt_CasinoGameStatistics_UserName";
                     break;
+                case 3:
+                    spame = "Acc_Rpt_CasinoGameStatistics_GameType";
+                    break;
             }
 
             return spame;

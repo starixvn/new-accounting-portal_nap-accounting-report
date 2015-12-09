@@ -5,9 +5,8 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameType = functi
     self.GetGridOptions = function (report) {
         var bodyData = [];
         var footerData = [];
-        var gameTypeLength = report && report.ChildsInfo ?
-            report.ChildsInfo.length :
-            0;
+        var gameTypeLength = report && report.ChildsInfo ? report.ChildsInfo.length : 0;
+        
         if (gameTypeLength > 0) {
             var info;
             var columns = [];
@@ -19,12 +18,20 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameType = functi
                     columns = [];
                     info = gameTypeWinLoss.ChildsInfo[j];
                     if (j == 0) {
-                        columns.push({ Name: "ColName", Value: gameTypeWinLoss.Name, MergeRowNumber: reportLength });
+                        columns.push({ Name: "ColName", Value: gameTypeWinLoss.Name , MergeRowNumber: reportLength });
                     }
 
                     columns.push({ Name: "ColNumberOfPlayers", Value: info.NumberOfPlayers });
                     columns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });
-                    columns.push({ Name: "ColCurrency", Value: info.CurrencyName });
+                    columns.push({ Name: "ColCurrency", Value: info, CustomCellRender: function(currentCell) {
+                        var clickEvent = ' onclick = "reportManager.GetReportGameTypeCurrency(\'' + currentCell.Value.Id + '\''
+                                + ',\'' + currentCell.Value.CurrencyId
+                                + "');\"";
+                            var result = '<div ' + clickEvent + ' class="link">' + currentCell.Value.CurrencyName + '</div>';
+
+                            return result;
+                        }
+                    });
                     columns.push({ Name: "ColTotalBets", Value: info.TotalBets });
                     columns.push({ Name: "ColTotalWins", Value: info.TotalWins });
                     columns.push({ Name: "ColGameIncome", Value: info.GameIncome });
@@ -54,7 +61,13 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameType = functi
 
             var footerColumns = [];
             info = report.GrandTotal.ChildsInfo[reportLength - 1];
-            footerColumns.push({ Name: "ColName", Value: info.Name });
+            footerColumns.push({ Name: "ColName", Value: info, CustomCellRender: function(currentCell) {
+                    var clickEvent = ' onclick = "reportManager.RenderGrandTotal();"';
+                    var result = '<div ' + clickEvent + ' class="link">' + currentCell.Value.Name + '</div>';
+
+                    return result;
+                }
+            });
             footerColumns.push({ Name: "ColNumberOfPlayers", Value: info.NumberOfPlayers });
             footerColumns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });
             footerColumns.push({ Name: "ColCurrency", Value: info.CurrencyName });
@@ -75,7 +88,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameType = functi
 
         var columnsHeader = [];
         columnsHeader.push({
-            HeaderText: viewResources.Game, Width: 160, Name: "ColName", HeaderAlign: "center", CellAlign: "center",
+            HeaderText: "Game Type", Width: 160, Name: "ColName", HeaderAlign: "center", CellAlign: "center",
             Sort: true, SortDirection: reportManager.getSortDirection("Name")
         });
         columnsHeader.push({
@@ -126,14 +139,17 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameType = functi
             HeaderAlign: "center", CellAlign: "right", FormatNegative: '$', Sort: true, SortDirection: reportManager.getSortDirection("CompanyNetIncome")
         });
 
+        var title = AccReport.utility.StringFormat(viewResources.CasinoGameStatistic_ReportTitle, [reportManager.Params.reportParams.Product, reportManager.Params.reportParams.FromDate, reportManager.Params.reportParams.ToDate]);
         var gridOptions = {
             columns: columnsHeader,
             showTitle: true,
             showFooter: true,
             titleInfo: {
-                text: AccReport.utility.StringFormat(viewResources.LiveCasinoGameStatistic_ReportTitle,
-                    [reportManager.Params.reportParams.FromDate, reportManager.Params.reportParams.ToDate]),
-                showExcelButton: false
+                text: title,
+                showExcelButton: true,
+                exportExcelFunction: function () {
+                    self.exportExcel();
+                }
             },
             bodyRows: bodyData,
             footerRows: footerData,
@@ -192,5 +208,12 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameType = functi
         bodyData.push({
             Columns: columns
         });
+    };
+
+    self.exportExcel = function () {
+        AccReport.disableInput();
+        var exportParams = reportManager.Params.globalVariable.CacheParam.GameType;
+        exportParams.ViewReport = reportManager.Params.globalVariable.viewReport.GameType;
+        AccReport.downloadFile(window.rootUrl + "Gaming/CasinoGameStatistic/ExportReport", exportParams);
     };
 };

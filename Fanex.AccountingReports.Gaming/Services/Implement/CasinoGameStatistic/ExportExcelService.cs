@@ -27,7 +27,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             CellRange currentCellRange;
             ExcelCell currentCell;
             var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
-            var isShowNoPlayers = true;////periodType != PeriodTypeConstants.LiveCasinoGameStatisticUsername;
+            var isShowNoPlayers = true;
             var isShowColumnCurrency = periodType != PeriodTypeConstants.LiveCasinoGameStatisticCurrency;
 
             workSheet.Columns[startColumn].Width = 160 * ExcelExtensions.FontWidth;
@@ -153,7 +153,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
         private void ExportReport_WinLossRow(ref ExcelWorksheet workSheet, int startColumn, ref int currentRow, CellStyle intNumberStyle, CellStyle textStyle, CellStyle twoDecimalNumberStyle, CellStyle twoDecimalNegativeNumberStyle, CellStyle twoDecimalNegativePercentNumberStyle, GetReportByDailyCriteria criteria, WinLossInfo info)
         {
             ExcelCell currentCell;
-            var isShowNoPlayers = true;//// criteria.ReportType != PeriodTypeConstants.LiveCasinoGameStatisticUsername;
+            var isShowNoPlayers = true;
             var isShowColumnCurrency = criteria.ReportType != PeriodTypeConstants.LiveCasinoGameStatisticCurrency;
 
             var currentColumn = startColumn;
@@ -270,15 +270,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             currentCell.Value = info.Name;
             currentCell.Style = textStyle_GrandTotal;
             currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-
-            //if (criteria.ReportType == PeriodTypeConstants.LiveCasinoGameStatisticUsername)
-            //{
-            //    currentColumn++;
-            //    currentCell = workSheet.Cells[currentRow, currentColumn];
-            //    currentCell.Value = string.Empty;
-            //    currentCell.Style = textStyle_GrandTotal;
-            //    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-            //}
 
             currentColumn++;
 

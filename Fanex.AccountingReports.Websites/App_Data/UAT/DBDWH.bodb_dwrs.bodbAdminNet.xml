@@ -201,5 +201,7 @@
     <Setting Key="Acc_Rpt_CasinoGameStatistics_Hourly" SpName="Acc_Rpt_CasinoGameStatistics_Hourly" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Acc_Rpt_CasinoGameStatistics_Monthly" SpName="Acc_Rpt_CasinoGameStatistics_Monthly" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Acc_Rpt_CasinoGameStatistics_UserName" SpName="Acc_Rpt_CasinoGameStatistics_UserName" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_GameType" SpName="Acc_Rpt_CasinoGameStatistics_GameType" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_GameTable" SpName="Acc_Rpt_CasinoGameStatistics_GameTable" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
 </Functions>
