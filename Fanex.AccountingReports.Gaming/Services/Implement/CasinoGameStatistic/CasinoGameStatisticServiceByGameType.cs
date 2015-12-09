@@ -42,7 +42,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 
             WinLossInfo info;
             var gameTypeGroups = winLossInfoTable.GroupBy(data => data.Id);
-            Dictionary<string, int> currencyIndexDictionary = new Dictionary<string, int>();
             WinLossInfo grandTotalRM = new WinLossInfo
             {
                 Name = Labels.Grand_Total + " " + Labels.RM,
@@ -83,36 +82,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                     {
                         continue;
                     }
-
-                    //grandTotalRM.Sum(new WinLossInfo
-                    //{
-                    //    NumberOfPlayers = data.NumberOfPlayers,
-                    //    NumberOfGames = data.NumberOfGames,
-
-                    //    TotalBets = data.TotalBets,
-                    //    TotalWins = data.TotalWins,
-                    //    TotalRefund = data.TotalRefund,
-
-                    //    GameIncome = data.GameIncome,
-
-                    //    CompanyTurnover = data.CompanyTurnover,
-                    //    CompanyNetIncome = data.CompanyNetIncome,
-                    //    CompanyCommission = data.CompanyCommission
-                    //});
-
-                    //if (!currencyIndexDictionary.ContainsKey(info.CurrencyName))
-                    //{
-                    //    report.GrandTotal.ChildsInfo.Add(new WinLossInfo
-                    //    {
-                    //        Name = Labels.Total + " " + info.CurrencyName,
-                    //        CurrencyName = info.CurrencyName
-                    //    });
-
-                    //    currencyIndexDictionary.Add(info.CurrencyName, report.GrandTotal.ChildsInfo.Count - 1);
-                    //}
-
-                    //var currencyIndex = currencyIndexDictionary[info.CurrencyName];
-                    //report.GrandTotal.ChildsInfo[currencyIndex].Sum(info);
 
                     info = WinLossInfo.Format(info);
                     gameTypeWinLoss.ChildsInfo.Add(info);

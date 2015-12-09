@@ -102,8 +102,6 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
             switch (ReportType)
             {
                 case 0:
-                case 7:
-                case 8:
                     spame = "Acc_Rpt_CasinoGameStatistics_Daily";
                     break;
                 case 1:
@@ -114,6 +112,9 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
                     break;
                 case 3:
                     spame = "Acc_Rpt_CasinoGameStatistics_GameType";
+                    break;
+                case 4:
+                    spame = "Acc_Rpt_CasinoGameStatistics_GameTable";
                     break;
             }
 

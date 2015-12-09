@@ -75,6 +75,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
     self.ReportByGameType = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameType();
     self.ReportGameTypeByCurrency = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportGameTypeByCurrency();
     self.ReportByGameTable = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameTable();
+    self.ReportGameTableByCurrency = new Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportGameTableByCurrency();
 
     self.Tables = {
         datepickerplugin: null,
@@ -179,7 +180,9 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
                 UserName:5,
                 DailyByUserName:6,
                 GameType:7,
-                GameTypeByCurrency:8
+                GameTypeByCurrency:8,
+                GameTable:9,
+                GameTableByCurrency: 10
             },
             gridOptionReport: {
                 Daily:null,
@@ -190,7 +193,9 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
                 UserName: null,
                 DailyByUserName: null,
                 GameType: null,
-                GameTypeByCurrency: null
+                GameTypeByCurrency: null,
+                GameTable: null,
+                GameTableByCurrency: null
             },
             CacheParam: {
                 Daily: null,
@@ -201,7 +206,9 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
                 UserName: null,
                 DailyByUserName: null,
                 GameType: null,
-                GameTypeByCurrency: null
+                GameTypeByCurrency: null,
+                GameTable: null,
+                GameTableByCurrency: null
             },
             CacheUserName: null,
             CurrentReportType: null,
@@ -850,6 +857,9 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
             case self.Enums.ReportType.GameType:
                 self.GetReportByGameType();
                 break;
+            case self.Enums.ReportType.GameTable:
+                self.GetReportByGameTable();
+                break;
         }
     };
 
@@ -1137,6 +1147,74 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
             self.RenderReport,
             AccReport.enableInput);
     };
+
+    self.GetReportByGameTable = function () {
+        var self = this;
+        AccReport.disableInput();
+        self.CachedData.sortDirection = null;
+        self.CachedData.sortColName = null;
+        self.CachedData.sortDataType = null;
+
+        var selectParam = self.GetReportParams();
+        selectParam.ViewReport = self.Params.globalVariable.viewReport.GameTable;
+        self.Params.globalVariable.PrevReportType = self.Params.globalVariable.CurrentReportType;
+        self.Params.globalVariable.CurrentReportType = self.Params.globalVariable.viewReport.GameTable;
+
+        if (!self.CheckReportParams(selectParam)) {
+            AccReport.enableInput();
+            return;
+        }
+
+        selectParam.IsDrillDown = self.Params.globalVariable.IsDrillDown;
+        self.Params.globalVariable.CacheParam.GameTable = selectParam;
+
+        self.CachedData.currentPage = 0;
+        self.Params.reportParams = selectParam;
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "Gaming/CasinoGameStatistic/GetReportByGameTable",
+            self.Params.reportParams,
+            self.RenderReport,
+            self.RenderReport,
+            AccReport.enableInput);
+    };
+
+    self.GetReportGameTableByCurrency = function (gameTableId, currency) {
+        var self = this;
+        AccReport.disableInput();
+        self.CachedData.sortDirection = null;
+        self.CachedData.sortColName = null;
+        self.CachedData.sortDataType = null;
+
+        var selectParam = self.GetReportParams();
+
+        if (currency === "2") {
+            currency = "0";
+        }
+
+        selectParam.GameTableId = gameTableId;
+        selectParam.Currency = currency;
+
+        selectParam.ViewReport = self.Params.globalVariable.viewReport.GameTableByCurrency;
+        self.Params.globalVariable.PrevReportType = self.Params.globalVariable.CurrentReportType;
+        self.Params.globalVariable.CurrentReportType = self.Params.globalVariable.viewReport.GameTableByCurrency;
+
+        if (!self.CheckReportParams(selectParam)) {
+            AccReport.enableInput();
+            return;
+        }
+
+        selectParam.IsDrillDown = self.Params.globalVariable.IsDrillDown;
+        self.Params.globalVariable.CacheParam.GameTableByCurrency = selectParam;
+
+        self.CachedData.currentPage = 0;
+        self.Params.reportParams = selectParam;
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "Gaming/CasinoGameStatistic/GetReportGameTableByCurrency",
+            self.Params.reportParams,
+            self.RenderReport,
+            self.RenderReport,
+            AccReport.enableInput);
+    };
     
     self.CheckReportParams = function (selectParam) {
         AccReport.popUp.hide();
@@ -1197,6 +1275,14 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
                 gridOptions = self.ReportGameTypeByCurrency.GetGridOptions(report);
                 gridOptionReport.GameTypeByCurrency = gridOptions;
                 break;
+            case viewReport.GameTable:
+                gridOptions = self.ReportByGameTable.GetGridOptions(report);
+                gridOptionReport.GameTable = gridOptions;
+                break;
+            case viewReport.GameTableByCurrency:
+                gridOptions = self.ReportGameTableByCurrency.GetGridOptions(report);
+                gridOptionReport.GameTableByCurrency = gridOptions;
+                break;
 
 //            case reportTypeEnum.GameTable:
 //                gridOptions = self.ReportByGameTable.GetGridOptions(report);
@@ -1241,6 +1327,10 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
             case viewReport.GameType:
                 self.Params.globalVariable.CurrentReportType = viewReport.GameType;
                 gridOptions = gridOptionReport.GameType;
+                break;
+            case viewReport.GameTable:
+                self.Params.globalVariable.CurrentReportType = viewReport.GameTable;
+                gridOptions = gridOptionReport.GameTable;
                 break;
         }
 

@@ -30,7 +30,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             UserName = 5,
             DailyByUserName = 6,
             GameType = 7,
-            GameTypeByCurrency = 8
+            GameTypeByCurrency = 8,
+            GameTable = 9,
+            GameTableByCurrency = 10
         }
 
         private static string _reportDailyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Daily." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
@@ -41,6 +43,8 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
         private static string _reportDailyByUserNameKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.DailyByUserName." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
         private static string _reportGameTypeKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameType." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
         private static string _reportGameTypeByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTypeByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportGameTableKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTable." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportGameTableByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTableByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
 
         public static string GetTitleExcelFileWhenDrilDown(GetReportByDailyCriteria criteria)
         {
@@ -152,6 +156,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                     break;
                 case (int)ViewReport.GameTypeByCurrency:
                     key = _reportGameTypeByCurrencyKey;
+                    break;
+                case (int)ViewReport.GameTable:
+                    key = _reportGameTableKey;
+                    break;
+                case (int)ViewReport.GameTableByCurrency:
+                    key = _reportGameTableKey;
                     break;
             }
 

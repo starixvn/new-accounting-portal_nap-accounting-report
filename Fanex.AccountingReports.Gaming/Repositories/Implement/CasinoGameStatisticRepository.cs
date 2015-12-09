@@ -149,7 +149,7 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
                 case PeriodTypeConstants.LiveCasinoGameStatisticGameType:
                     return Converter.ToString2(dataRow["GameTypeId"]);
                 case PeriodTypeConstants.LiveCasinoGameStatisticGameTable:
-                    return Converter.ToString2(dataRow["GameTableID"]);
+                    return Converter.ToString2(dataRow["LeagueId"]);
                 case PeriodTypeConstants.LiveCasinoGameStatisticCompany:
                     return Converter.ToString2(dataRow["Company"]);
                 case PeriodTypeConstants.LiveCasinoGameStatisticCurrency:
