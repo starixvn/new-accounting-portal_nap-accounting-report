@@ -168,6 +168,7 @@
     <Compile Include="Constants\CompanyConstants.cs" />
     <Compile Include="Constants\GameTypeConstants.cs" />
     <Compile Include="Constants\GamingConstants.cs" />
+    <Compile Include="Constants\LiveCasinoProductConstants.cs" />
     <Compile Include="Constants\PeriodTypeConstants.cs" />
     <Compile Include="Constants\RowTypeConstants.cs" />
     <Compile Include="Controllers\BingoOutStandingController.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Models\LiveCasinoWinLossByAgency\ProductGameType.cs" />
     <Compile Include="Models\LiveCasinoWinLossByAgency\WinLossInfo.cs" />
     <Compile Include="Models\LiveCasinoWinLossByAgency\WinLossInfoEntity.cs" />
+    <Compile Include="Models\NumberGameFinancialReport\ProductGameType.cs" />
     <Compile Include="Models\NumberGameMonthlyWinLoss\NumberGameMonthlyWinLoss.cs" />
     <Compile Include="Models\NumberGameFinancialReport\NumberGameFinancial.cs" />
     <Compile Include="Models\NumberGameWinLossByBetTypeMatch\WinLossByMatchDetailEntity.cs" />

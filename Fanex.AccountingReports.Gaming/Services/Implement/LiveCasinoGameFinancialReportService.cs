@@ -24,9 +24,11 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
     using Fanex.AccountingReports.Gaming.Constants;
     using Fanex.AccountingReports.Gaming.Criteria.LiveCasinoGameFinancialReport;
     using Fanex.AccountingReports.Gaming.Models.LiveCasinoGameFinancialReport;
+    using Fanex.AccountingReports.Gaming.Models.NumberGameFinancialReport;
     using Fanex.AccountingReports.Gaming.Repositories.Implement;
     using Fanex.AccountingReports.Gaming.Repositories.Interface;
     using Fanex.AccountingReports.Gaming.Resources;
+    using Fanex.Common;
     using Fanex.Logging;
 
     /// <summary>
@@ -130,42 +132,43 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
             return null;
         }
 
-        /// <summary>
-        /// Gets the game types.
-        /// </summary>
-        /// <returns>The game types.</returns>
-        public List<BaseModel> GetGameTypes()
+        public List<ProductGameType> GetGameTypes(GetGameTypesCriteria criteria)
         {
+            var productGameTypes = new List<ProductGameType>();
             try
             {
-                var rawData = this._reportRepository.GetGameTypes();
-                var liveCasinoFinancialReport_GameType = AppSettings.LiveCasinoFinancialReport_GameType;
-                var report = new List<BaseModel>();
-
-                foreach (var data in rawData)
+                var rawData = this._reportRepository.GetGameTypes(criteria);
+                var productGameTypeGroups = rawData.GroupBy(x => x.ProductId).ToList();
+                foreach (var group in productGameTypeGroups)
                 {
-                    var typeID = Convert.ToInt32(data.typeID);
-
-                    if (liveCasinoFinancialReport_GameType.Contains(typeID))
+                    int productId = Converter.ToInt(group.Key);
+                    var productGameType = new ProductGameType
                     {
-                        var info = new BaseModel
-                        {
-                            Id = typeID,
-                            Name = data.typenamee.ToString()
-                        };
-                        report.Add(info);
-                    }
-                }
+                        ProductId = productId,
+                        ProductName = GetProductName(productId),
+                        GameTypes = new List<BaseModel>()
+                    };
 
-                report = report.OrderBy(info => info.Name).ToList();
-                return report;
+                    foreach (var data in group)
+                    {
+                        productGameType.GameTypes.Add(
+                            new BaseModel
+                            {
+                                Id = Converter.ToInt(data.typeID),
+                                Name = Converter.ToString2(data.typenamee),
+                            });
+                    }
+
+                    productGameTypes.Add(productGameType);
+                }
             }
             catch (Exception ex)
             {
-                LogService.Error(ex.Message);
+                HandleException(ex);
+                throw;
             }
 
-            return null;
+            return productGameTypes;
         }
 
         /// <summary>
@@ -241,14 +244,16 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
                 {
                     var info = new FinancialReport
                     {
-                        Name = data.TableName,
-                        PlayerCount = Convert.ToInt32(data.players),
-                        GameCount = Convert.ToInt32(data.games),
-                        TotalBets = Convert.ToDecimal(data.totalbets),
-                        TotalWins = Convert.ToDecimal(data.totalwins),
-                        GrossIncome = Convert.ToDecimal(data.GrossIncome),
-                        Commission = Convert.ToDecimal(data.Comm),
-                        NetIncome = Convert.ToDecimal(data.NetIncome)
+                        Name = data.Name,
+                        PlayerCount = Convert.ToInt32(data.PlayerCount),
+                        GameCount = Convert.ToInt32(data.GameCount),
+                        IsGameTable = data.IsGameTable,
+                        BetCount = data.BetCount,
+                        TotalBets = data.TotalBets,
+                        TotalWins = data.TotalWins,
+                        GrossIncome = data.GrossIncome,
+                        Commission = data.Commission,
+                        NetIncome = data.NetIncome
                     };
 
                     info.GamePayout = this.CaculateGamePayout(info);
@@ -262,15 +267,17 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
                         grandTotalNetIncome += data.NetIncome;
                     }
 
-                    info.GameLevyToPay = Math.Max(gameLevyToPay, info.GameLevy);
+                    info.GameLevyToPay = info.IsGameTable ? Math.Max(gameLevyToPay, info.GameLevy) : 0;
 
                     report.AddToGrandTotal(info);
                     info = this.FormatFinancialReport(info);
                     report.ChildInfo.Add(info);
                 }
 
+                bool isShowNotAvailableGrandTotalGameCount = outputParam["totalgames"] == DBNull.Value;
+                report.GrandTotal.IsGameTable = !isShowNotAvailableGrandTotalGameCount;
                 report.GrandTotal.PlayerCount = Convert.ToInt32(outputParam["totalplayers"]);
-                report.GrandTotal.GameCount = Convert.ToInt32(outputParam["totalgames"]);
+                report.GrandTotal.GameCount = isShowNotAvailableGrandTotalGameCount ? 0 : Convert.ToInt32(outputParam["totalgames"]);
                 report.GrandTotal.GamePayout = this.CaculateGamePayout(report.GrandTotal);
                 report.GrandTotal.GameLevy = report.GameLevy * grandTotalNetIncome;
                 SessionExtension.AddSession(HttpContext.Current.Session, GamingConstants.LiveCasinoGameFinancialReportSessionKey, report);
@@ -333,7 +340,7 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
                 ExcelCell currentCell;
 
                 currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 10);
+                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 11);
                 currentCellRange.Merged = true;
                 currentCellRange.Value = string.Format(
                     GamingResources.Live_Casino_Game_Financial_Report_Title,
@@ -352,7 +359,7 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
                 currentColumn = startColumn;
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
                 currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.Table;
+                currentCellRange.Value = "Game Type/Game Table";
                 currentCellRange.Style = headerText;
                 workSheet.Columns[startColumn + currentColumn].Width = 120 * 40;
                 currentColumn++;
@@ -367,6 +374,13 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
                 currentCellRange.Merged = true;
                 currentCellRange.Value = Labels.LiveCasinoGameFinancialReport_Games;
+                currentCellRange.Style = headerText;
+                workSheet.Columns[startColumn + currentColumn].Width = 80 * 40;
+                currentColumn++;
+
+                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = "Bet Count";
                 currentCellRange.Style = headerText;
                 workSheet.Columns[startColumn + currentColumn].Width = 80 * 40;
                 currentColumn++;
@@ -400,7 +414,7 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
                 currentRow++;
 
                 ////SecondRow
-                currentColumn = startColumn + 3;
+                currentColumn = startColumn + 4;
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = Labels.Total_Bets;
                 currentCell.Style = headerText;
@@ -431,7 +445,7 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
                 workSheet.Columns[startColumn + currentColumn].Width = 100 * 40;
                 currentColumn++;
                 currentRow++;
-                
+
                 if (report != null && report.ChildInfo.Count > 0)
                 {
                     var length = report.ChildInfo.Count;
@@ -452,7 +466,12 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.GameCount;
+                        currentCell.Value = info.IsGameTable ? info.GameCount : (object)Labels.NotAvailable;
+                        currentCell.Style = intType;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+                        currentCell.Value = info.BetCount;
                         currentCell.Style = intType;
                         currentColumn++;
 
@@ -512,7 +531,12 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.GameCount;
+                    currentCell.Value = info.IsGameTable ? info.GameCount : (object)Labels.NotAvailable;
+                    currentCell.Style = intType_GrandTotal;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.BetCount;
                     currentCell.Style = intType_GrandTotal;
                     currentColumn++;
 
@@ -620,6 +644,28 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
             DateTime lastDayOfMonth = fromDate.LastDayOfMonth();
 
             return fromDate == firstDayOfMonth && toDate == lastDayOfMonth;
+        }
+
+        private string GetProductName(int productId)
+        {
+            string productName = string.Empty;
+
+            switch (productId)
+            {
+                case LiveCasinoProductConstants.SLI:
+                    productName = Labels.SLI;
+                    break;
+
+                case LiveCasinoProductConstants.GoldDeluxe:
+                    productName = Labels.Gold_Deluxe;
+                    break;
+
+                default:
+                    productName = string.Empty;
+                    break;
+            }
+
+            return productName;
         }
     }
 }

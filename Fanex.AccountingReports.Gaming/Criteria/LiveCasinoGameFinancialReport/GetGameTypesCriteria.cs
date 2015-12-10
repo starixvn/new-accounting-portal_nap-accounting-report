@@ -16,6 +16,8 @@ namespace Fanex.AccountingReports.Gaming.Criteria.LiveCasinoGameFinancialReport
     /// </summary>
     public class GetGameTypesCriteria : CriteriaBase
     {
+        public string ProductID { get; set; }
+
         public override string GetSettingKey()
         {
             return "Gaming_LiveCasinoGameFinancial_GetGameType";
@@ -23,7 +25,7 @@ namespace Fanex.AccountingReports.Gaming.Criteria.LiveCasinoGameFinancialReport
 
         public override bool IsValid()
         {
-            return true;
+            return !string.IsNullOrWhiteSpace(this.ProductID);
         }
     }
 }
