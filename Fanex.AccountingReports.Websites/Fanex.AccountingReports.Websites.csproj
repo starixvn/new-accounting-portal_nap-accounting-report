@@ -570,6 +570,10 @@
     <Content Include="Areas\Gaming\Views\LiveCasinoGameFinancialReport\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameFinancial\Index.cshtml" />
+    <Content Include="Areas\Gaming\Views\NumberGameStatistic\Scripts\NumberGameStatistic.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameStatistic\Styles\NumberGameStatistic.less">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\CasinoWinLoss\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\CasinoWinLoss\Styles\CasinoWinLoss.less" />
@@ -2127,6 +2131,7 @@
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisSporting\_TennisMatchSporting.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisSporting\_TennisSetSporting.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisSporting\_TennisSportting.cshtml" />
+    <Content Include="Areas\Gaming\Views\NumberGameStatistic\Index.cshtml" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>

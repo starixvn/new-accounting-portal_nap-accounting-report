@@ -276,4 +276,13 @@
   <data name="CasinoWinLoss_SheetName" xml:space="preserve">
     <value>Casino Daily Report</value>
   </data>
+  <data name="NumberGameStatistic_ReportName" xml:space="preserve">
+    <value>Number_Game_Statistic_Report_From_{0}_To_{1}</value>
+  </data>
+  <data name="NumberGameStatistic_ReportTitle" xml:space="preserve">
+    <value>Number Game Statistic Report From {0} To {1}</value>
+  </data>
+  <data name="NumberGameStatistic_SheetName" xml:space="preserve">
+    <value>Number Game Statistic</value>
+  </data>
 </root>

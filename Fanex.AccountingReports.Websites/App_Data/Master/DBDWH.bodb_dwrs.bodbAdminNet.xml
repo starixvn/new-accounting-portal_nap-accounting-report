@@ -183,4 +183,7 @@
   <Function Name="Core - Get DWH Date Range">
     <Setting Key="Core_GetDWH_DateRange" SpName="BI_GetDWStatusByCube" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
   </Function>
+  <Function Name="Gaming - NumberGameStatistic">
+    <Setting Key="NumberGameStatistics_GetReport" SpName="Acc_Rpt_NumberGameStatistics" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+  </Function>
 </Functions>

@@ -1168,4 +1168,10 @@
   <data name="CustId" xml:space="preserve">
     <value>Player ID</value>
   </data>
+  <data name="CompanyNetInCome" xml:space="preserve">
+    <value>Company Net Income</value>
+  </data>
+  <data name="GameInCome" xml:space="preserve">
+    <value>Game Income</value>
+  </data>
 </root>
