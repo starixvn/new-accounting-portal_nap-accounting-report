@@ -12,6 +12,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
     using System.Linq;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Extensions;
@@ -19,6 +20,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Gaming.Constants;
     using Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic;
+    using Fanex.AccountingReports.Gaming.Models;
     using Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic;
     using Fanex.AccountingReports.Gaming.Repositories.Implement;
     using Fanex.AccountingReports.Gaming.Repositories.Interface;
@@ -34,8 +36,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
     {
         private readonly ICasinoGameStatisticRepository _reportRepository;
 
-        private int _timeCaching = 2;
-
         public CasinoGameStatisticService()
             : this(null)
         {
@@ -50,11 +50,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
         {
             try
             {
-                Utilities.ReSetPeriodTimeByReportType(criteria);
-
-                if (criteria.IsDrillDown && criteria.ViewReport == (int) Utilities.ViewReport.Daily)
+                if (Converter.To<DateTime>(criteria.EffectiveDate) > Converter.To<DateTime>(criteria.FromDate))
                 {
-                    Utilities.ResetDayInMonth(criteria);
+                    criteria.FromDate = criteria.EffectiveDate;
                 }
 
                 string key = Utilities.GetReportKey(criteria.ViewReport);
@@ -67,7 +65,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 
                 if (rawData == null || rawData.Count < 2)
                 {
-                    CacheManager.Set<WinLossInfo>(key, report, DateTime.Now.AddHours(_timeCaching));
                     return report;
                 }
 
@@ -76,7 +73,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 if (winLossInfoTable == null ||
                     winLossInfoTable.Count == 0)
                 {
-                    CacheManager.Set<WinLossInfo>(key, report, DateTime.Now.AddHours(_timeCaching));
                     return report;
                 }
 
@@ -84,10 +80,11 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 switch (criteria.ReportType)
                 {
                     case PeriodTypeConstants.CasinoGameStatisticDaily:
-                    case PeriodTypeConstants.CasinoGameStatisticUsernameDaily:
-                    case PeriodTypeConstants.CasinoGameStatisticMonthly:
-                    case PeriodTypeConstants.CasinoGameStatisticMonthlyToDaily:
                         reportManager = new CasinoGameStatisticServiceByDailyRange();
+                        break;
+
+                    case PeriodTypeConstants.CasinoGameStatisticMonthly:
+                        reportManager = new CasinoGameStatisticServiceByMonthlyRange();
                         break;
 
                     case PeriodTypeConstants.LiveCasinoGameStatisticUsername:
@@ -116,7 +113,8 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 }
 
                 report = reportManager.GetReport(winLossInfoTable, grandTotalInfoTable, criteria);
-                CacheManager.Set<WinLossInfo>(key, report, DateTime.Now.AddHours(_timeCaching));
+                SessionManager.Set<WinLossInfo>(key, report);
+
                 return report;
             }
             catch (Exception ex)
@@ -147,7 +145,15 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                     break;
 
                 case PeriodTypeConstants.CasinoGameStatisticUsername:
-                    reportManager = new CasinoGameStatisticServiceByUsername();
+                    if (criteria.ViewReport == (int)Utilities.ViewReport.Daily || criteria.ViewReport == (int)Utilities.ViewReport.DailyByCurrency)
+                    {
+                        reportManager = new CasinoGameStatisticServiceByDailyRange();
+                    }
+                    else
+                    {
+                        reportManager = new CasinoGameStatisticServiceByUsername();
+                    }
+
                     break;
 
                 case PeriodTypeConstants.CasinoGameStatisticGameType:
@@ -171,9 +177,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                     break;
             }
 
-            string key = Utilities.GetReportKey(criteria.ViewReport);
-            var report = CacheManager.Get<WinLossInfo>(key);
-
+            string key = Utilities.GetReportKey(criteria.ViewReport);      
+            
+            var report = SessionManager.Get<WinLossInfo>(key);
             if (report == null)
             {
                 report = GetReport(criteria);
@@ -208,13 +214,8 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             try
             {
                 WinLossInfo report;
-                Utilities.ReSetPeriodTimeByReportType(criteria);
-                if (criteria.IsDrillDown && criteria.ViewReport == (int)Utilities.ViewReport.Daily)
-                {
-                    Utilities.ResetDayInMonth(criteria);
-                }
                 string key = Utilities.GetReportKey(criteria.ViewReport);
-                report = CacheManager.Get<WinLossInfo>(key);
+                report = SessionManager.Get<WinLossInfo>(key);
 
                 if (report == null)
                 {
@@ -260,24 +261,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             {
                 HandleException(ex);
             }
-        }
-
-        /// <summary>
-        /// Determines whether [is correct filtered information] [the specified criteria].
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="info">The information.</param>
-        /// <returns>Is correct filtered information.</returns>
-        public bool IsCorrectFilteredInfo(GetReportByDailyCriteria criteria, WinLossInfo info)
-        {
-            return (string.IsNullOrEmpty(criteria.TotalBetLessThan) ||
-                    info.TotalBets <= Converter.ToDecimal(criteria.TotalBetLessThan)) &&
-                   (string.IsNullOrEmpty(criteria.TotalBetMoreThan) ||
-                    Converter.ToDecimal(criteria.TotalBetMoreThan) <= info.TotalBets) &&
-                   (string.IsNullOrEmpty(criteria.TotalWinLessThan) ||
-                    info.TotalWins <= Converter.ToDecimal(criteria.TotalWinLessThan)) &&
-                   (string.IsNullOrEmpty(criteria.TotalWinMoreThan) ||
-                    Converter.ToDecimal(criteria.TotalWinMoreThan) <= info.TotalWins);
         }
 
         /// <summary>
@@ -380,7 +363,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                     break;
 
                 case PeriodTypeConstants.CasinoGameStatisticGameTable:
-                    currentCell.Value = Labels.Table;
+                    currentCell.Value = GamingResources.GameTable;
                     break;
 
                 case PeriodTypeConstants.CasinoGameStatisticCompany:
@@ -532,6 +515,15 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             currentCell.Value = info.GameIncome;
             currentColumn++;
 
+            if (info.GamePayout > 1)
+            {
+                twoDecimalNegativePercentNumberStyle.Font.Color = Color.Red;
+            }
+            else
+            {
+                twoDecimalNegativePercentNumberStyle.Font.Color = Color.Black;
+            }
+
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Style = twoDecimalNegativePercentNumberStyle;
             currentCell.Value = info.GamePayout;
@@ -681,28 +673,11 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             var currentColumn = startColumn;
             ExcelCell currentCell;
 
-            GetReportByGrandRMCriteria grandRMCriteria = new GetReportByGrandRMCriteria()
-            {
-                FromDate = criteria.FromDate,
-                ToDate = criteria.ToDate,
-                UserName = criteria.UserName,
-                ExcludeTestData = criteria.ExcludeTestData,
-                LicenseeId = criteria.LicenseeId,
-                GameTypeId = criteria.GameTypeId,
-                GameTableId = criteria.GameTableId,
-                Currency = criteria.Currency,
-                ShowRefundColumn = criteria.ShowRefundColumn,
-                ProductId = criteria.ProductId,
-                Product = criteria.Product,
-                IsExportGrandTotal = criteria.IsExportGrandTotal,
-                ViewReport = criteria.ViewReport
-            };
-
             List<WinLossInfo> totalList = new List<WinLossInfo>();
             if (criteria.IsExportGrandTotal)
             {
-                totalList = _reportRepository.GetReportByGrandTotal(grandRMCriteria);
-                totalList.RemoveAt(totalList.Count - 1);
+                criteria.IsGrandRM = true;
+                totalList = _reportRepository.GetReportByGrandTotal(criteria);
             }
 
             foreach (WinLossInfo info in totalList)
@@ -711,6 +686,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = info.Name;
                 currentCell.Style = textStyle_SubTotal;
+                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
 
                 if (criteria.ReportType == PeriodTypeConstants.LiveCasinoGameStatisticUsername)
                 {
@@ -739,13 +715,13 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             }
         }
 
-        public WinLossInfo GetReportByGrandTotal(GetReportByGrandRMCriteria criteria)
+        public WinLossInfo GetReportByGrandTotal(GetReportByDailyCriteria criteria)
         {
             WinLossInfo grandTotal = new WinLossInfo();
             string key = Utilities.GetReportKey(criteria.ViewReport);
             if (criteria.IsExportGrandTotal)
             {
-                grandTotal = CacheManager.Get<WinLossInfo>(key);
+                grandTotal = SessionManager.Get<WinLossInfo>(key);
                 if (grandTotal == null)
                 {
                     grandTotal = new WinLossInfo();
@@ -755,7 +731,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             else
             {
                 grandTotal.ChildsInfo = _reportRepository.GetReportByGrandTotal(criteria);
-                CacheManager.Set<WinLossInfo>(key, grandTotal, DateTime.Now.AddHours(_timeCaching));
             }
 
             return grandTotal;
@@ -769,15 +744,20 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 
             if (criteria.IsExportExcel)
             {
-                hourly = CacheManager.Get<Hourly>(key) ?? _reportRepository.GetReportByHourly(criteria);
+                hourly = SessionManager.Get<Hourly>(key) ?? _reportRepository.GetReportByHourly(criteria);
             }
             else
             {
                 hourly = _reportRepository.GetReportByHourly(criteria);
-                CacheManager.Set<Hourly>(key, hourly, DateTime.Now.AddHours(_timeCaching));
+                SessionManager.Set<Hourly>(key, hourly);
             }
 
             return hourly;
+        }
+
+        public CompanyInfo GetLicenseeList(GetLicenseeListCriteria criteria)
+        {
+            return _reportRepository.GetLicenseeList(criteria);
         }
     }
 }

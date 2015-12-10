@@ -51,7 +51,7 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
         [SpParam(SqlParamName = "currency")]
         public string Currency { get; set; }
 
-        [SpParam(Ignored = true)]
+        [SpParam(SqlParamName = "ShowRefund")]
         public bool ShowRefundColumn { get; set; }
 
         [SpParam(SqlParamName = "ProductID")]

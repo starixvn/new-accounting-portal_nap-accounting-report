@@ -27,17 +27,19 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         private readonly ICasinoGameStatisticService _reportService;
         private readonly IFilterSectionService _filterService;
         private readonly IExportExcelService _excelService;
+        private readonly IExportExcelHourlyService _excelHourlyService;
 
         public CasinoGameStatisticController()
-            : this(null, null, null)
+            : this(null, null, null, null)
         {
         }
 
-        public CasinoGameStatisticController(ICasinoGameStatisticService reportService, IFilterSectionService filterService, IExportExcelService excelService)
+        public CasinoGameStatisticController(ICasinoGameStatisticService reportService, IFilterSectionService filterService, IExportExcelService excelService, IExportExcelHourlyService excelHourlyService)
         {
             _reportService = reportService ?? new CasinoGameStatisticService();
             _filterService = filterService ?? new FilterSectionService();
             _excelService = excelService ?? new ExportExcelService();
+            _excelHourlyService = excelHourlyService ?? new ExportExcelHourlyService();
         }
 
         [HttpGet]
@@ -85,17 +87,6 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         {
             var result = _filterService.GetGameTableList(criteria);
             return Json(result);
-        }
-
-        [HttpPost]
-        [HandleAjaxError]
-        public JsonResult GetReport(GetReportByDailyCriteria criteria)
-        {
-            var result = _reportService.GetReport(criteria);
-            var jsonResult = Json(result);
-            jsonResult.MaxJsonLength = int.MaxValue;
-            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
-            return jsonResult;
         }
 
         [HttpPost]
@@ -249,9 +240,9 @@ namespace Fanex.AccountingReports.Gaming.Controllers
 
         [HttpPost]
         [HandleAjaxError]
-        public JsonResult GetReportByGrandTotal(GetReportByGrandRMCriteria criteria)
+        public JsonResult GetReportByGrandTotal(GetReportByDailyCriteria criteria)
         {
-            var result = _reportService.GetReportByGrandTotal(criteria);
+            var result = _reportService.GetReport(criteria);
             var jsonResult = Json(result);
             jsonResult.MaxJsonLength = int.MaxValue;
             jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
@@ -260,24 +251,7 @@ namespace Fanex.AccountingReports.Gaming.Controllers
 
         public ActionResult ExportGrandTotal(GetReportByDailyCriteria criteria)
         {
-            GetReportByGrandRMCriteria grandRMCriteria = new GetReportByGrandRMCriteria()
-            {
-                FromDate = criteria.FromDate,
-                ToDate = criteria.ToDate,
-                UserName = criteria.UserName,
-                ExcludeTestData = criteria.ExcludeTestData,
-                LicenseeId = criteria.LicenseeId,
-                GameTypeId = criteria.GameTypeId,
-                GameTableId = criteria.GameTableId,
-                Currency = criteria.Currency,
-                ShowRefundColumn = criteria.ShowRefundColumn,
-                ProductId = criteria.ProductId,
-                Product = criteria.Product,
-                IsExportGrandTotal = criteria.IsExportGrandTotal,
-                ViewReport = criteria.ViewReport
-            };
-
-            var total = _reportService.GetReportByGrandTotal(grandRMCriteria);
+            var total = _reportService.GetReportByGrandTotal(criteria);
 
             _excelService.ExportReport(total, criteria);
             return new EmptyResult();
@@ -292,6 +266,23 @@ namespace Fanex.AccountingReports.Gaming.Controllers
             jsonResult.MaxJsonLength = int.MaxValue;
             jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             return jsonResult;
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetLicenseeList(GetLicenseeListCriteria criteria)
+        {
+            var result = _reportService.GetLicenseeList(criteria);
+            var jsonResult = Json(result);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return jsonResult;
+        }
+
+        public ActionResult ExportHourly(GetReportByHourlyCriteria criteria)
+        {
+            _excelHourlyService.ExportReport(criteria);
+            return new EmptyResult();
         }
     }
 }

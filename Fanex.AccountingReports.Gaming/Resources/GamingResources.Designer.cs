@@ -61,6 +61,24 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Average.
+        /// </summary>
+        public static string Average {
+            get {
+                return ResourceManager.GetString("Average", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bet Count.
+        /// </summary>
+        public static string BetCount {
+            get {
+                return ResourceManager.GetString("BetCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bingo_OutStanding_Report.
         /// </summary>
         public static string BingoOutStanding_ReportName {
@@ -142,6 +160,24 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accumulated Hourly {0} Game Statistic Record {1} on {2} GMT+8.
+        /// </summary>
+        public static string CasinoGameStatistic_Accumulated_Title {
+            get {
+                return ResourceManager.GetString("CasinoGameStatistic_Accumulated_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hourly {0} Game Statistic Record {1} on {2} GMT+8.
+        /// </summary>
+        public static string CasinoGameStatistic_Hourly_Title {
+            get {
+                return ResourceManager.GetString("CasinoGameStatistic_Hourly_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} Game Statistic Report From {1} To {2} By Currency.
         /// </summary>
         public static string CasinoGameStatistic_MonthlyReportTitle {
@@ -151,7 +187,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Casino_Game_Statistic_Report_From_{0}_To_{1}.
+        ///   Looks up a localized string similar to {0}_Game_Statistic_Report_From_{1}_To_{2}.
         /// </summary>
         public static string CasinoGameStatistic_ReportName {
             get {
@@ -174,6 +210,33 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         public static string CasinoGameStatistic_SheetName {
             get {
                 return ResourceManager.GetString("CasinoGameStatistic_SheetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Game Statistic Report For {1} From {2} To {3}.
+        /// </summary>
+        public static string CasinoGameStatistic_UserName_ReportTitle {
+            get {
+                return ResourceManager.GetString("CasinoGameStatistic_UserName_ReportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Game Statistic Report For {1} On {2} By Currency.
+        /// </summary>
+        public static string CasinoGameStatistic_UserNameOnDateByCurrency_ReportTitle {
+            get {
+                return ResourceManager.GetString("CasinoGameStatistic_UserNameOnDateByCurrency_ReportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Game Statistic Report In {1} By Currency.
+        /// </summary>
+        public static string CasinoGameStatisticInMonthByCurrency_ReportTitle {
+            get {
+                return ResourceManager.GetString("CasinoGameStatisticInMonthByCurrency_ReportTitle", resourceCulture);
             }
         }
         
@@ -214,6 +277,42 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company Comm.
+        /// </summary>
+        public static string CompanyComm {
+            get {
+                return ResourceManager.GetString("CompanyComm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Net Income.
+        /// </summary>
+        public static string CompanyNetIncome {
+            get {
+                return ResourceManager.GetString("CompanyNetIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Turnover.
+        /// </summary>
+        public static string CompanyTurnover {
+            get {
+                return ResourceManager.GetString("CompanyTurnover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        public static string Currency {
+            get {
+                return ResourceManager.GetString("Currency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DirectBalance.
         /// </summary>
         public static string DirectBalance_SheetName {
@@ -237,6 +336,33 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         public static string Error_LiveCasinoGameStatistic_WinLess_LessThan_WinMore {
             get {
                 return ResourceManager.GetString("Error_LiveCasinoGameStatistic_WinLess_LessThan_WinMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game Income.
+        /// </summary>
+        public static string GameIncome {
+            get {
+                return ResourceManager.GetString("GameIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game Payout.
+        /// </summary>
+        public static string GamePayout {
+            get {
+                return ResourceManager.GetString("GamePayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game Table.
+        /// </summary>
+        public static string GameTable {
+            get {
+                return ResourceManager.GetString("GameTable", resourceCulture);
             }
         }
         
@@ -543,6 +669,51 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         public static string NumberOfActiveMember_SheetName {
             get {
                 return ResourceManager.GetString("NumberOfActiveMember_SheetName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online Players.
+        /// </summary>
+        public static string OnlinePlayers {
+            get {
+                return ResourceManager.GetString("OnlinePlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        public static string Time {
+            get {
+                return ResourceManager.GetString("Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Bets.
+        /// </summary>
+        public static string TotalBets {
+            get {
+                return ResourceManager.GetString("TotalBets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total refund.
+        /// </summary>
+        public static string TotalRefund {
+            get {
+                return ResourceManager.GetString("TotalRefund", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Wins.
+        /// </summary>
+        public static string TotalWins {
+            get {
+                return ResourceManager.GetString("TotalWins", resourceCulture);
             }
         }
         

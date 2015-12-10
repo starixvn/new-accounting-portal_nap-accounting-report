@@ -21,6 +21,22 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
     /// </summary>
     public class Utilities
     {
+        private static string _reportDailyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Daily." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportDailyByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.DailyByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportMonthlyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Monthly." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportMonthlyByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.MonthlyByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportUserNameKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.UserName." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportDailyByUserNameKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.DailyByUserName." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportGameTypeKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameType." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportGameTypeByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTypeByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportGameTableKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTable." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportGameTableByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTableByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportCompanyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Company." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportCompanyByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.CompanyByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Currency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportGrandTotalKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GrandTotal." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportHourlyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Hourly." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+
         public enum ViewReport
         {
             Daily = 0,
@@ -39,22 +55,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             GrandTotal = 14,
             Hourly = 15
         }
-
-        private static string _reportDailyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Daily." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportDailyByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.DailyByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportMonthlyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Monthly." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportMonthlyByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.MonthlyByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportUserNameKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.UserName." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportDailyByUserNameKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.DailyByUserName." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportGameTypeKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameType." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportGameTypeByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTypeByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportGameTableKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTable." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportGameTableByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTableByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportCompanyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Company." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportCompanyByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.CompanyByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Currency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportGrandTotalKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GrandTotal." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportHourlyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Hourly." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
 
         public static string GetTitleExcelFileWhenDrilDown(GetReportByDailyCriteria criteria)
         {
@@ -89,8 +89,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                     ResetDayInMonth(criteria);
                     break;
             }
-
-
         }
 
         public static void ResetDayInMonth(GetReportByDailyCriteria criteria)
@@ -103,21 +101,19 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 
         public static void AssignGrandTotal(WinLossInfoEntity grandTotal, WinLossInfo grandTotalRM)
         {
-            grandTotalRM.Sum(new WinLossInfo
-            {
-                NumberOfPlayers = grandTotal.NumberOfPlayers,
-                NumberOfGames = grandTotal.NumberOfGames,
+            grandTotalRM.NumberOfPlayers = grandTotal.NumberOfPlayers;
+            grandTotalRM.NumberOfGames = grandTotal.NumberOfGames;
 
-                TotalBets = grandTotal.TotalBets,
-                TotalWins = grandTotal.TotalWins,
-                TotalRefund = grandTotal.TotalRefund,
+            grandTotalRM.TotalBets = grandTotal.TotalBets;
+            grandTotalRM.TotalWins = grandTotal.TotalWins;
+            grandTotalRM.TotalRefund = grandTotal.TotalRefund;
 
-                GameIncome = grandTotal.GameIncome,
+            grandTotalRM.GameIncome = grandTotal.GameIncome;
+            grandTotalRM.GamePayout = grandTotal.GamePayout;
 
-                CompanyTurnover = grandTotal.CompanyTurnover,
-                CompanyNetIncome = grandTotal.CompanyNetIncome,
-                CompanyCommission = grandTotal.CompanyCommission
-            });
+            grandTotalRM.CompanyTurnover = grandTotal.CompanyTurnover;
+            grandTotalRM.CompanyNetIncome = grandTotal.CompanyNetIncome;
+            grandTotalRM.CompanyCommission = grandTotal.CompanyCommission;
         }
 
         public static string GetNameByReportType(int reportType, DateTime dateTime)

@@ -12,6 +12,7 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Interface
     using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic;
+    using Fanex.AccountingReports.Gaming.Models;
     using Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic;
 
     /// <summary>
@@ -27,8 +28,10 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Interface
 
         List<EntityBase<int, string>> GetGameTableList(GetGameTableListCriteria criteria);
 
-        List<WinLossInfo> GetReportByGrandTotal(GetReportByGrandRMCriteria criteria);
+        List<WinLossInfo> GetReportByGrandTotal(GetReportByDailyCriteria criteria);
 
         Hourly GetReportByHourly(GetReportByHourlyCriteria criteria);
+
+        CompanyInfo GetLicenseeList(GetLicenseeListCriteria criteria);
     }
 }

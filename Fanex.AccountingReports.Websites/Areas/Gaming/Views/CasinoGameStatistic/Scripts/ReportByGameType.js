@@ -6,6 +6,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameType = functi
         var bodyData = [];
         var footerData = [];
         var gameTypeLength = report && report.ChildsInfo ? report.ChildsInfo.length : 0;
+        var classPayout = "";
         
         if (gameTypeLength > 0) {
             var info;
@@ -35,7 +36,15 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameType = functi
                     columns.push({ Name: "ColTotalBets", Value: info.TotalBets });
                     columns.push({ Name: "ColTotalWins", Value: info.TotalWins });
                     columns.push({ Name: "ColGameIncome", Value: info.GameIncome });
-                    columns.push({ Name: "ColGamePayout", Value: info.GamePayout });
+
+                    if (info.GamePayout > 1) {
+                        classPayout = " red";
+                    }
+                    else {
+                        classPayout = "";
+                    }
+
+                    columns.push({ Name: "ColGamePayout", Value: info.GamePayout, TdClass:classPayout });
                     if (reportManager.Params.reportParams.ShowRefundColumn) {
                         columns.push({ Name: "ColTotalRefund", Value: info.TotalRefund });
                     }
@@ -74,7 +83,15 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameType = functi
             footerColumns.push({ Name: "ColTotalBets", Value: info.TotalBets });
             footerColumns.push({ Name: "ColTotalWins", Value: info.TotalWins });
             footerColumns.push({ Name: "ColGameIncome", Value: info.GameIncome });
-            footerColumns.push({ Name: "ColGamePayout", Value: info.GamePayout });
+
+            if (info.GamePayout > 1) {
+                classPayout = " red";
+            }
+            else {
+                classPayout = "";
+            }
+
+            footerColumns.push({ Name: "ColGamePayout", Value: info.GamePayout, TdClass:classPayout });
             if (reportManager.Params.reportParams.ShowRefundColumn) {
                 footerColumns.push({ Name: "ColTotalRefund", Value: info.TotalRefund });
             }
@@ -96,7 +113,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameType = functi
             FormatNumber: FormatConstant.INT_NUMBER, Sort: true, SortDirection: reportManager.getSortDirection("NumberOfPlayers")
         });
         columnsHeader.push({
-            HeaderText: viewResources.No_Games, Width: 100, Name: "ColNumberOfGames", HeaderAlign: "center", CellAlign: "right",
+            HeaderText: "Bet Count", Width: 100, Name: "ColNumberOfGames", HeaderAlign: "center", CellAlign: "right",
             FormatNumber: FormatConstant.INT_NUMBER, Sort: true, SortDirection: reportManager.getSortDirection("NumberOfGames")
         });
         columnsHeader.push({
@@ -157,7 +174,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameType = functi
             gridWidth: 1400,
             gridExpandHeight: 355,
             fullWidth: true,
-            showDistinctRow: false,
+            showDistinctRow: true,
             showHighlightRow: false,
             headerColumnHeight: 29,
             showPager: true,
@@ -214,6 +231,8 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGameType = functi
         AccReport.disableInput();
         var exportParams = reportManager.Params.globalVariable.CacheParam.GameType;
         exportParams.ViewReport = reportManager.Params.globalVariable.viewReport.GameType;
+        exportParams.IsExportGrandTotal = true;
         AccReport.downloadFile(window.rootUrl + "Gaming/CasinoGameStatistic/ExportReport", exportParams);
+        AccReport.enableInput();
     };
 };

@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Autocomplete/styles.css" />
-    <link rel="stylesheet" type="text/css" href="~/Areas/Gaming/Views/CasinoGameStatistic/Styles/CasinoGameStatistic.less" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Gaming/Views/CasinoGameStatistic/Styles/CasinoGameStatistic.less?v=1" />
 }
 @section Headline {
     <div class="title">
@@ -74,7 +74,7 @@
                     <label for="exclude-test-data">
                         @Labels.Exclude_Test_Data</label>
                 </div>
-                <div class="lbl-field col_6 align-left width150">
+                <div class="lbl-field col_9 align-left">
                     <input id="show-refund-column" type="checkbox" class="alpha" />
                     <label for="show-refund-column">
                         @Labels.Show_refund_column</label>
@@ -124,13 +124,13 @@
                     @Labels.Total_bet_less_than
                 </div>
                 <div class="edit-field col_6">
-                    <input id="txt-totalbet-lessthan" type="text" maxlength="9" class="format-numberonly" />
+                    <input id="txt-totalbet-lessthan" type="text" maxlength="14" class="format-numberonly" />
                 </div>
                 <div class="lbl-field col_5 align-left">
                     @Labels.Total_bet_more_than
                 </div>
                 <div class="edit-field col_6">
-                    <input id="txt-totalbet-morethan" type="text" maxlength="9" class="format-numberonly" />
+                    <input id="txt-totalbet-morethan" type="text" maxlength="14" class="format-numberonly" />
                 </div>
             </div>
         </div>
@@ -140,13 +140,13 @@
                     @Labels.Total_win_less_than
                 </div>
                 <div class="edit-field col_6">
-                    <input id="txt-totalwin-lessthan" type="text" maxlength="9" class="format-numberonly" />
+                    <input id="txt-totalwin-lessthan" type="text" maxlength="14" class="format-numberonly" />
                 </div>
                 <div class="lbl-field col_5 align-left">
                     @Labels.Total_win_more_than
                 </div>
                 <div class="edit-field col_6">
-                    <input id="txt-totalwin-morethan" type="text" maxlength="9" class="format-numberonly" />
+                    <input id="txt-totalwin-morethan" type="text" maxlength="14" class="format-numberonly" />
                 </div>
             </div>
         </div>
@@ -193,12 +193,6 @@
                     <input id="btnGenerate" name="btnGenerate" type="submit" value="@Labels.Generate" />
                     <input id="btnToday" name="btnToday" type="submit" value="@Labels.Today" />
                     <input id="btnYesterday" name="btnYesterday" type="submit" value="@Labels.Yesterday" />
-                   @* <div id="button-export" class="export-excel-div-button" title="Export to Excel">
-                        <div class="export-excel-icon">
-                        </div>
-                        <div class="export-excel-label">
-                            @Labels.Export</div>
-                    </div>*@
                 </div>
             </div>
         </div>
@@ -253,9 +247,14 @@
             Month: '@Labels.Month',
             CasinoGameStatistic_ReportTitle: '@GamingResources.CasinoGameStatistic_ReportTitle',
             CasinoGameStatisticOnDateByCurrency_ReportTitle: '@GamingResources.CasinoGameStatisticOnDateByCurrency_ReportTitle',
+            CasinoGameStatistic_UserNameOnDateByCurrency_ReportTitle: '@GamingResources.CasinoGameStatistic_UserNameOnDateByCurrency_ReportTitle',
+            CasinoGameStatisticInMonthByCurrency_ReportTitle: '@GamingResources.CasinoGameStatisticInMonthByCurrency_ReportTitle',
+            CasinoGameStatistic_MonthlyReportTitle: '@GamingResources.CasinoGameStatistic_MonthlyReportTitle',
+            CasinoGameStatistic_UserName_ReportTitle: '@GamingResources.CasinoGameStatistic_UserName_ReportTitle',
+            CasinoGameStatistic_Hourly_Title: '@GamingResources.CasinoGameStatistic_Hourly_Title',
+            CasinoGameStatistic_Accumulated_Title: '@GamingResources.CasinoGameStatistic_Accumulated_Title',
             All_Currencies: '@Labels.All_Currencies',
             Error_NoCurrencyFound: '@Labels.Error_NoCurrencyFound',
-            All: '@Labels.All',
             Error_LiveCasinoGameStatistic_BetLess_LessThan_BetMore: '@GamingResources.Error_LiveCasinoGameStatistic_BetLess_LessThan_BetMore',
             Error_LiveCasinoGameStatistic_WinLess_LessThan_WinMore: '@GamingResources.Error_LiveCasinoGameStatistic_WinLess_LessThan_WinMore',
             No_Games: '@Labels.No_Games',
@@ -291,7 +290,6 @@
     <script type="text/javascript" src="~/Areas/Gaming/Views/CasinoGameStatistic/Scripts/ReportDailyByCurrency.js"></script>
     <script type="text/javascript" src="~/Areas/Gaming/Views/CasinoGameStatistic/Scripts/ReportByMonthlyRange.js"></script>
     <script type="text/javascript" src="~/Areas/Gaming/Views/CasinoGameStatistic/Scripts/ReportMonthlyByCurrency.js"></script>
-    <script type="text/javascript" src="~/Areas/Gaming/Views/CasinoGameStatistic/Scripts/ReportByMonthlyToDailyRange.js"></script>
     <script type="text/javascript" src="~/Areas/Gaming/Views/CasinoGameStatistic/Scripts/ReportByGrandTotal.js"></script>
     <script type="text/javascript" src="~/Areas/Gaming/Views/CasinoGameStatistic/Scripts/ReportByHourly.js"></script>
     <script type="text/javascript" src="~/Areas/Gaming/Views/CasinoGameStatistic/Scripts/ReportManager.js?v=1"></script>

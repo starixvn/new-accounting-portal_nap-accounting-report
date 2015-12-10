@@ -4,6 +4,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
     self.GetGridOptions = function (report) {
         var bodyData = [];
         var footerData = [];
+        var classPayout = "";
         if (report && report.ChildsInfo && report.ChildsInfo.length > 0) {
             var reportLength = report.ChildsInfo.length;
             var info;
@@ -28,7 +29,15 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
                 columns.push({ Name: "ColTotalBets", Value: info.TotalBets });
                 columns.push({ Name: "ColTotalWins", Value: info.TotalWins });
                 columns.push({ Name: "ColGameIncome", Value: info.GameIncome });
-                columns.push({ Name: "ColGamePayout", Value: info.GamePayout });
+
+                if (info.GamePayout > 1) {
+                    classPayout = " red";
+                }
+                else {
+                    classPayout = "";
+                }
+
+                columns.push({ Name: "ColGamePayout", Value: info.GamePayout, TdClass:classPayout });
                 if (reportManager.Params.reportParams.ShowRefundColumn) {
                     columns.push({ Name: "ColTotalRefund", Value: info.TotalRefund });
                 }
@@ -39,14 +48,6 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
                 bodyData.push({
                     Columns: columns
                 });
-            }
-
-            var totalChildLength = report && report.GrandTotal ?
-                report.GrandTotal.ChildsInfo.length : 0;
-
-            for (var totalChildIndex = 0; totalChildIndex < totalChildLength - 1; totalChildIndex++) {
-                var currentChildTotal = report.GrandTotal.ChildsInfo[totalChildIndex];
-                self.AddChildTotalToBodyData(columns, currentChildTotal, bodyData);
             }
 
             var footerReportLength = report.GrandTotal.ChildsInfo.length;
@@ -65,7 +66,15 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
             footerColumns.push({ Name: "ColTotalBets", Value: info.TotalBets });
             footerColumns.push({ Name: "ColTotalWins", Value: info.TotalWins });
             footerColumns.push({ Name: "ColGameIncome", Value: info.GameIncome });
-            footerColumns.push({ Name: "ColGamePayout", Value: info.GamePayout });
+
+            if (info.GamePayout > 1) {
+                classPayout = " red";
+            }
+            else {
+                classPayout = "";
+            }
+
+            footerColumns.push({ Name: "ColGamePayout", Value: info.GamePayout, TdClass:classPayout });
             if (reportManager.Params.reportParams.ShowRefundColumn) {
                 footerColumns.push({ Name: "ColTotalRefund", Value: info.TotalRefund });
             }
@@ -143,7 +152,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
             gridWidth: 1500,
             gridExpandHeight: 355,
             fullWidth: true,
-            showDistinctRow: false,
+            showDistinctRow: true,
             showHighlightRow: false,
             headerColumnHeight: 25,
             customPager: true,
@@ -174,32 +183,12 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByUserName = functi
         return gridOptions;
     };
 
-    self.AddChildTotalToBodyData = function (columns, currentChildTotal, bodyData) {
-        columns = [];
-        columns.push({ Name: "ColName", Value: currentChildTotal.Name, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColId", Value: currentChildTotal.Id, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColNumberOfGames", Value: currentChildTotal.NumberOfGames, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColCurrency", Value: currentChildTotal.CurrencyName, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColTotalBets", Value: currentChildTotal.TotalBets, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColTotalWins", Value: currentChildTotal.TotalWins, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColGameIncome", Value: currentChildTotal.GameIncome, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColGamePayout", Value: currentChildTotal.GamePayout, TdClass: "subTotal bold" });
-        if (reportManager.Params.reportParams.ShowRefundColumn) {
-            columns.push({ Name: "ColTotalRefund", Value: currentChildTotal.TotalRefund, TdClass: "subTotal bold" });
-        }
-
-        columns.push({ Name: "ColCompanyTurnover", Value: currentChildTotal.CompanyTurnover, TdClass: "subTotal bold" });
-        columns.push({ Name: "CompanyCommission", Value: currentChildTotal.CompanyCommission, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColCompanyNetIncome", Value: currentChildTotal.CompanyNetIncome, TdClass: "subTotal bold" });
-        bodyData.push({
-            Columns: columns
-        });
-    };
-
     self.exportExcel = function () {
         AccReport.disableInput();
         var exportParams = reportManager.Params.globalVariable.CacheParam.UserName;
         exportParams.ViewReport = reportManager.Params.globalVariable.viewReport.UserName;
+        exportParams.IsExportGrandTotal = true;
         AccReport.downloadFile(window.rootUrl + "Gaming/CasinoGameStatistic/ExportReport", exportParams);
+        AccReport.enableInput();
     };
 };

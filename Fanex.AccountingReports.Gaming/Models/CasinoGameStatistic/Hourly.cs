@@ -18,7 +18,7 @@ namespace Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic
         public Hourly()
         {
             Name = string.Empty;
-            OnlinePlayers = "0";
+            OnlinePlayers = string.Empty;
             NumberOfGames = string.Empty;
             Currency = string.Empty;
             TotalBets = string.Empty;
@@ -28,6 +28,7 @@ namespace Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic
             CompanyTO = string.Empty;
             CompanyComm = string.Empty;
             CompanyNetInCome = string.Empty;
+            TotalRefund = string.Empty;
 
             DataOnEachHourList = new List<Hourly>();
             DataAccumulatedList = new List<Hourly>();
@@ -48,6 +49,8 @@ namespace Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic
         public string GameIncome { get; set; }
 
         public string GamePayout { get; set; }
+
+        public string TotalRefund { get; set; }
 
         public string CompanyTO { get; set; }
 

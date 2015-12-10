@@ -40,10 +40,8 @@ namespace Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic
 
         public decimal GamePayout
         {
-            get
-            {
-                return Math.Round(TotalBets == 0 ? 0 : TotalWins / TotalBets, 4);
-            }
+            get;
+            set;
         }
 
         public decimal CompanyTurnover { get; set; }
@@ -56,11 +54,6 @@ namespace Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic
 
         public List<WinLossInfo> ChildsInfo { get; set; }
 
-        /// <summary>
-        /// Formats the specified win loss.
-        /// </summary>
-        /// <param name="winLoss">The win loss.</param>
-        /// <returns>The specified win loss.</returns>
         public static WinLossInfo Format(WinLossInfo winLoss)
         {
             if (winLoss == null)
@@ -94,7 +87,7 @@ namespace Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic
             this.TotalRefund += winLoss.TotalRefund;
 
             this.GameIncome += winLoss.GameIncome;
-
+            this.GamePayout = winLoss.TotalBets == 0 ? 0 : winLoss.TotalWins / winLoss.TotalBets;
             this.CompanyTurnover += winLoss.CompanyTurnover;
             this.CompanyNetIncome += winLoss.CompanyNetIncome;
             this.CompanyCommission += winLoss.CompanyCommission;

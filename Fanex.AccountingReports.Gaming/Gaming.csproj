@@ -194,8 +194,8 @@
     <Compile Include="Criteria\BingoOutStanding\GetReportCriteria.cs" />
     <Compile Include="Criteria\BingoStatistic\GetReportCriteria.cs" />
     <Compile Include="Criteria\BingoWinLoss\GetReportCriteria.cs" />
+    <Compile Include="Criteria\CasinoGameStatistic\GetLicenseeListCriteria.cs" />
     <Compile Include="Criteria\CasinoGameStatistic\GetReportByHourlyCriteria.cs" />
-    <Compile Include="Criteria\CasinoGameStatistic\GetReportByGrandRMCriteria.cs" />
     <Compile Include="Criteria\CasinoGameStatistic\GetProductListCriteria.cs" />
     <Compile Include="Criteria\CasinoWinLoss\GetCasinoWinLossCriteria.cs" />
     <Compile Include="Criteria\CasinoGameStatistic\GetGameTableListCriteria.cs" />
@@ -372,7 +372,9 @@
     <Compile Include="Services\Interface\CasinoGameStatistic\IFilterSectionService.cs" />
     <Compile Include="Services\Interface\CasinoWinLoss\ICasinoWinLossGetReportService.cs" />
     <Compile Include="Services\Interface\CasinoWinLoss\ICasinoWinLossExportReportService.cs" />
-    <Compile Include="Services\Interface\CasinoGameStatistic\ICasinoGameStatisticService.cs" />
+    <Compile Include="Services\Interface\CasinoGameStatistic\ICasinoGameStatisticService.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Services\Interface\IBingoWinLossService.cs" />
     <Compile Include="Services\Interface\ILiveCasinoAgencyWinLossService.cs" />
     <Compile Include="Services\Interface\ILiveCasinoGameFinancialReportService.cs" />
@@ -411,8 +413,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\GamingResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>GamingResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>GamingResources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Labels.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

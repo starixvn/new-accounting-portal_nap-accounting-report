@@ -216,7 +216,7 @@ var AccReport = function ($) {
             if (url && data) {
                 //data can be string of parameters or array/object
                 data = typeof data == 'string' ? data : $.param(data);
-                $.fileDownload(url, { httpMethod: "POST", data: data })
+                $.fileDownload(url, { httpMethod: "POST", data: data });
                 AccReport.enableInput();
             }
         },

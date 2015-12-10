@@ -6,7 +6,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportGameTypeByCurrency 
         var bodyData = [];
         var footerData = [];
         var gameTypeLength = report && report.ChildsInfo ? report.ChildsInfo.length : 0;
-        
+        var classPayout = "";
         if (gameTypeLength > 0) {
             var info;
             var columns = [];
@@ -27,7 +27,15 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportGameTypeByCurrency 
                     columns.push({ Name: "ColTotalBets", Value: info.TotalBets });
                     columns.push({ Name: "ColTotalWins", Value: info.TotalWins });
                     columns.push({ Name: "ColGameIncome", Value: info.GameIncome });
-                    columns.push({ Name: "ColGamePayout", Value: info.GamePayout });
+
+                    if (info.GamePayout > 1) {
+                        classPayout = " red";
+                    }
+                    else {
+                        classPayout = "";
+                    }
+
+                    columns.push({ Name: "ColGamePayout", Value: info.GamePayout, TdClass:classPayout });
                     if (reportManager.Params.reportParams.ShowRefundColumn) {
                         columns.push({ Name: "ColTotalRefund", Value: info.TotalRefund });
                     }
@@ -60,7 +68,15 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportGameTypeByCurrency 
             footerColumns.push({ Name: "ColTotalBets", Value: info.TotalBets });
             footerColumns.push({ Name: "ColTotalWins", Value: info.TotalWins });
             footerColumns.push({ Name: "ColGameIncome", Value: info.GameIncome });
-            footerColumns.push({ Name: "ColGamePayout", Value: info.GamePayout });
+
+            if (info.GamePayout > 1) {
+                classPayout = " red";
+            }
+            else {
+                classPayout = "";
+            }
+
+            footerColumns.push({ Name: "ColGamePayout", Value: info.GamePayout, TdClass:classPayout });
             if (reportManager.Params.reportParams.ShowRefundColumn) {
                 footerColumns.push({ Name: "ColTotalRefund", Value: info.TotalRefund });
             }
@@ -202,5 +218,6 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportGameTypeByCurrency 
         var exportParams = reportManager.Params.globalVariable.CacheParam.GameTypeByCurrency;
         exportParams.ViewReport = reportManager.Params.globalVariable.viewReport.GameTypeByCurrency;
         AccReport.downloadFile(window.rootUrl + "Gaming/CasinoGameStatistic/ExportReport", exportParams);
+        AccReport.enableInput();
     };
 };

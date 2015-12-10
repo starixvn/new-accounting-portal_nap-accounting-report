@@ -75,16 +75,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                         TotalRefund = data.TotalRefund,
 
                         GameIncome = data.GameIncome,
+                        GamePayout = data.GamePayout,
 
                         CompanyTurnover = data.CompanyTurnover,
                         CompanyNetIncome = data.CompanyNetIncome,
                         CompanyCommission = data.CompanyCommission
                     };
-
-                    if (!IsCorrectFilteredInfo(criteria, info))
-                    {
-                        continue;
-                    }                    
 
                     info = WinLossInfo.Format(info);
                     timeRangeWinLoss.ChildsInfo.Add(info);
@@ -160,7 +156,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
         {
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-            string sheetName = GamingResources.CasinoGameStatistic_SheetName;
+            string sheetName = string.Format(Labels.CasinoGameStatistic_SheetName, criteria.Product);
             ExcelWorksheet workSheet = worksheets.Add(sheetName);
 
             int startRow = 0;
@@ -259,6 +255,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 
             var reportName = string.Format(
                 GamingResources.CasinoGameStatistic_ReportName,
+                criteria.Product.Replace(" ", "_"),
                 Converter.ToDateTime(criteria.FromDate).ToShortFormatedDateWithSlash().Replace('/', '_'),
                 Converter.ToDateTime(criteria.ToDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
             excelFile.ReponseStream(reportName);

@@ -16,23 +16,25 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGrandTotal = func
         _tables.reportParentContainer = $("#parentContainer");
         _tables.reportContainer = $('#grandTotalContainer');
         _tables.report = $('#grandTotal');
-        
+
     };
 
-    self.renderReport = function() {
+    self.renderReport = function () {
         AccReport.disableInput();
-        var selectParam = reportManager.GetReportParams();
+        var selectParam = reportManager.Params.globalVariable.CacheParam.Params;
         selectParam.IsExportGrandTotal = false;
         selectParam.ViewReport = reportManager.Params.globalVariable.viewReport.GrandTotal;
+        selectParam.IsGrandRM = true;
 
         reportManager.Params.globalVariable.CacheParam.GrandTotal = selectParam;
-        
+
         AccReport.utility.CallAjax(this,
             window.rootUrl + "Gaming/CasinoGameStatistic/GetReportByGrandTotal",
             selectParam,
             self.RenderGridOptions,
             self.RenderGridOptions,
             AccReport.enableInput);
+
     };
 
     self.closeDialog = function () {
@@ -43,58 +45,83 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGrandTotal = func
         }
     };
 
-    self.exportGrandTotal = function() {
+    self.exportGrandTotal = function () {
         AccReport.disableInput();
         var exportParams = reportManager.Params.globalVariable.CacheParam.GrandTotal;
         exportParams.IsExportGrandTotal = true;
 
         AccReport.downloadFile(window.rootUrl + "Gaming/CasinoGameStatistic/ExportGrandTotal", exportParams);
+        AccReport.enableInput();
     };
 
-    self.RenderGridOptions = function (report) {
+    self.refineData = function (report) {
         var bodyData = [];
         var footerData = [];
         var columns = [];
-        var info;
+
         var reportLength = report && report.ChildsInfo ? report.ChildsInfo.length : 0;
-        if (reportLength > 0) {
+        var classPayout = "";
 
-            for (var i = 0; i < reportLength - 1; i++) {
-                info = report.ChildsInfo[i];
-                columns = [];
+        var timeRangeLength = report && report.ChildsInfo ? report.ChildsInfo.length : 0;
+        if (timeRangeLength > 0) {
+            var info;
+            var indexRange = reportManager.GetPagingIndexRange(timeRangeLength);
+            for (var i = indexRange.startIndex; i < indexRange.endIndex; i++) {
+                var timeRangeWinLoss = report.ChildsInfo[i];
+                var reportLength = timeRangeWinLoss.ChildsInfo.length;
+                for (var j = 0; j < reportLength; j++) {
+                    columns = [];
+                    info = timeRangeWinLoss.ChildsInfo[j];
 
-                columns.push({ Name: "ColName", Value: info.Name });
+                    columns.push({ Name: "ColName", Value: "Total " + info.CurrencyName });
+                    columns.push({ Name: "ColNumberOfPlayers", Value: info.NumberOfPlayers });
+                    columns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });
+                    columns.push({ Name: "ColCurrency", Value: info.CurrencyName });
+                    columns.push({ Name: "ColTotalBets", Value: info.TotalBets });
+                    columns.push({ Name: "ColTotalWins", Value: info.TotalWins });
+                    columns.push({ Name: "ColGameIncome", Value: info.GameIncome });
 
-                columns.push({ Name: "ColNumberOfPlayers", Value: info.NumberOfPlayers });
-                columns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });
-                columns.push({ Name: "ColCurrency", Value: info.CurrencyName });
-                columns.push({ Name: "ColTotalBets", Value: info.TotalBets });
-                columns.push({ Name: "ColTotalWins", Value: info.TotalWins });
-                columns.push({ Name: "ColGameIncome", Value: info.GameIncome });
-                columns.push({ Name: "ColGamePayout", Value: info.GamePayout });
-                if (reportManager.Params.reportParams.ShowRefundColumn) {
-                    columns.push({ Name: "ColTotalRefund", Value: info.TotalRefund });
+                    if (info.GamePayout > 1) {
+                        classPayout = " red";
+                    }
+                    else {
+                        classPayout = "";
+                    }
+
+                    columns.push({ Name: "ColGamePayout", Value: info.GamePayout, TdClass: classPayout });
+                    if (reportManager.Params.reportParams.ShowRefundColumn) {
+                        columns.push({ Name: "ColTotalRefund", Value: info.TotalRefund });
+                    }
+
+                    columns.push({ Name: "ColCompanyTurnover", Value: info.CompanyTurnover });
+                    columns.push({ Name: "CompanyCommission", Value: info.CompanyCommission });
+                    columns.push({ Name: "ColCompanyNetIncome", Value: info.CompanyNetIncome });
+                    bodyData.push({
+                        Columns: columns
+                    });
                 }
-
-                columns.push({ Name: "ColCompanyTurnover", Value: info.CompanyTurnover });
-                columns.push({ Name: "CompanyCommission", Value: info.CompanyCommission });
-                columns.push({ Name: "ColCompanyNetIncome", Value: info.CompanyNetIncome });
-
-                bodyData.push({
-                    Columns: columns
-                });
             }
 
+            var reportLength = report.GrandTotal.ChildsInfo.length;
+
             var footerColumns = [];
-            info = report.ChildsInfo[reportLength - 1];
-            footerColumns.push({ Name: "ColName", Value: "Grand Total RM" });
+            info = report.GrandTotal.ChildsInfo[reportLength - 1];
+            footerColumns.push({ Name: "ColName", Value: info.Name });
             footerColumns.push({ Name: "ColNumberOfPlayers", Value: info.NumberOfPlayers });
             footerColumns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });
-            footerColumns.push({ Name: "ColCurrency", Value: "RM" });
+            footerColumns.push({ Name: "ColCurrency", Value: info.CurrencyName });
             footerColumns.push({ Name: "ColTotalBets", Value: info.TotalBets });
             footerColumns.push({ Name: "ColTotalWins", Value: info.TotalWins });
             footerColumns.push({ Name: "ColGameIncome", Value: info.GameIncome });
-            footerColumns.push({ Name: "ColGamePayout", Value: info.GamePayout });
+
+            if (info.GamePayout > 1) {
+                classPayout = " red";
+            }
+            else {
+                classPayout = "";
+            }
+
+            footerColumns.push({ Name: "ColGamePayout", Value: info.GamePayout, TdClass: classPayout });
             if (reportManager.Params.reportParams.ShowRefundColumn) {
                 footerColumns.push({ Name: "ColTotalRefund", Value: info.TotalRefund });
             }
@@ -104,12 +131,121 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGrandTotal = func
             footerColumns.push({ Name: "ColCompanyNetIncome", Value: info.CompanyNetIncome });
 
             footerData.push({ Columns: footerColumns });
-
         }
+
+        var data = {
+            bodyData: bodyData,
+            footerData: footerData,
+            columns: columns
+        };
+
+        return data;
+    };
+
+    self.refineDataByUserName = function (report) {
+        var bodyData = [];
+        var footerData = [];
+        var columns = [];
+
+        var reportLength = report && report.ChildsInfo ? report.ChildsInfo.length : 0;
+        var classPayout = "";
+
+        var timeRangeLength = report && report.ChildsInfo ? report.ChildsInfo.length : 0;
+        if (timeRangeLength > 0) {
+            var info;
+            var indexRange = reportManager.GetPagingIndexRange(timeRangeLength);
+            for (var i = indexRange.startIndex; i < indexRange.endIndex; i++) {
+                info = report.ChildsInfo[i];
+                columns = [];
+                columns.push({ Name: "ColName", Value: "Total " + info.CurrencyName });
+                columns.push({ Name: "ColNumberOfPlayers", Value: info.NumberOfPlayers });
+                columns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });
+                columns.push({ Name: "ColCurrency", Value: info.CurrencyName });
+                columns.push({ Name: "ColTotalBets", Value: info.TotalBets });
+                columns.push({ Name: "ColTotalWins", Value: info.TotalWins });
+                columns.push({ Name: "ColGameIncome", Value: info.GameIncome });
+
+                if (info.GamePayout >= 1) {
+                    classPayout = " red";
+                }
+                else {
+                    classPayout = "";
+                }
+
+                columns.push({ Name: "ColGamePayout", Value: info.GamePayout, TdClass: classPayout });
+                if (reportManager.Params.reportParams.ShowRefundColumn) {
+                    columns.push({ Name: "ColTotalRefund", Value: info.TotalRefund });
+                }
+
+                columns.push({ Name: "ColCompanyTurnover", Value: info.CompanyTurnover });
+                columns.push({ Name: "CompanyCommission", Value: info.CompanyCommission });
+                columns.push({ Name: "ColCompanyNetIncome", Value: info.CompanyNetIncome });
+                bodyData.push({
+                    Columns: columns
+                });
+            }
+
+            var reportLength = report.GrandTotal.ChildsInfo.length;
+
+            var footerColumns = [];
+            info = report.GrandTotal.ChildsInfo[reportLength - 1];
+            footerColumns.push({ Name: "ColName", Value: info.Name });
+            footerColumns.push({ Name: "ColNumberOfPlayers", Value: info.NumberOfPlayers });
+            footerColumns.push({ Name: "ColNumberOfGames", Value: info.NumberOfGames });
+            footerColumns.push({ Name: "ColCurrency", Value: info.CurrencyName });
+            footerColumns.push({ Name: "ColTotalBets", Value: info.TotalBets });
+            footerColumns.push({ Name: "ColTotalWins", Value: info.TotalWins });
+            footerColumns.push({ Name: "ColGameIncome", Value: info.GameIncome });
+
+            if (info.GamePayout >= 1) {
+                classPayout = " red";
+            }
+            else {
+                classPayout = "";
+            }
+
+            footerColumns.push({ Name: "ColGamePayout", Value: info.GamePayout, TdClass: classPayout });
+            if (reportManager.Params.reportParams.ShowRefundColumn) {
+                footerColumns.push({ Name: "ColTotalRefund", Value: info.TotalRefund });
+            }
+
+            footerColumns.push({ Name: "ColCompanyTurnover", Value: info.CompanyTurnover });
+            footerColumns.push({ Name: "CompanyCommission", Value: info.CompanyCommission });
+            footerColumns.push({ Name: "ColCompanyNetIncome", Value: info.CompanyNetIncome });
+
+            footerData.push({ Columns: footerColumns });
+        }
+
+        var data = {
+            bodyData: bodyData,
+            footerData: footerData,
+            columns: columns
+        };
+
+        return data;
+    };
+
+    self.RenderGridOptions = function (report) {
+        var bodyData = [];
+        var footerData = [];
+        var columns = [];
+        var data = null;
+        var selectParam = reportManager.Params.globalVariable.CacheParam.Params;
+        var isReportByUserName = selectParam.ReportType == reportManager.Enums.ReportType.UserName;
+        if (isReportByUserName) {
+            data = self.refineDataByUserName(report);
+        }
+        else {
+            data = self.refineData(report);
+        }
+
+        bodyData = data.bodyData;
+        footerData = data.footerData;
+        columns = data.columns;
 
         var columnsHeader = [];
         columnsHeader.push({
-            HeaderText: "Grand Total", Width: 80, Name: "ColName", HeaderAlign: "center", CellAlign: "center"
+            HeaderText: "Grand Total", Width: 100, Name: "ColName", HeaderAlign: "center", CellAlign: "center"
         });
         columnsHeader.push({
             HeaderText: viewResources.No_Players, Width: 80, Name: "ColNumberOfPlayers", HeaderAlign: "center", CellAlign: "right",
@@ -167,14 +303,14 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGrandTotal = func
             titleInfo: {
                 text: title,
                 showExcelButton: true,
-                exportExcelFunction: function() {
+                exportExcelFunction: function () {
                     self.exportGrandTotal();
                 }
             },
             bodyRows: bodyData,
             footerRows: footerData,
             numberOfFrozenColumn: 1,
-            gridWidth: 1400,
+            gridWidth: 1000,
             gridExpandHeight: 355,
             fullWidth: true,
             showDistinctRow: true,
@@ -186,11 +322,18 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGrandTotal = func
 
         _tables.reportContainer.removeClass("display-none");
         _tables.report.removeClass("display-none").fanexGrid(gridOptions);
+        _tables.report.fanexGrid("resizeGrid");
+
+        var selectParam = reportManager.Params.globalVariable.CacheParam.Params;
+        var width = 1170;
+        if (selectParam.ShowRefundColumn) {
+            width = 1290;
+        }
 
         _tables.reportContainer.dialog({
             title: "",
             autoOpen: false,
-            width: 1190,
+            width: width,
             modal: false,
             resizable: false,
             close: function (event, ui) {

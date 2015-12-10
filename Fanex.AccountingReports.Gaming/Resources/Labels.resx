@@ -376,13 +376,13 @@
     <value>Game Type</value>
   </data>
   <data name="Game_income" xml:space="preserve">
-    <value>Game income</value>
+    <value>Game Income</value>
   </data>
   <data name="Game_Levy_to_pay" xml:space="preserve">
     <value>Game Levy to pay</value>
   </data>
   <data name="Game_payout" xml:space="preserve">
-    <value>Game payout</value>
+    <value>Game Payout</value>
   </data>
   <data name="Game_search" xml:space="preserve">
     <value>Game search</value>
@@ -1176,5 +1176,8 @@
   </data>
   <data name="GameInCome" xml:space="preserve">
     <value>Game Income</value>
+  </data>
+  <data name="CasinoGameStatistic_SheetName" xml:space="preserve">
+    <value>{0} Game Statistic</value>
   </data>
 </root>

@@ -26,7 +26,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class CasinoGameStatisticServiceByMonthlyRange_Delete : CasinoGameStatisticService
+    public class CasinoGameStatisticServiceByMonthlyRange : CasinoGameStatisticService
     {
         public override WinLossInfo GetReport(List<WinLossInfoEntity> winLossInfoTable, WinLossInfoEntity grandTotal, GetReportByDailyCriteria criteria)
         {
@@ -42,7 +42,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             WinLossInfo info;
             var timeRangeGroups = winLossInfoTable.GroupBy(
                 data => Converter.ToDateTime(data.Id));
-            Dictionary<string, int> currencyIndexDictionary = new Dictionary<string, int>();
             WinLossInfo grandTotalRM = new WinLossInfo
             {
                 Name = Labels.Grand_Total + " " + Labels.RM,
@@ -52,9 +51,22 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             foreach (var timeRangeGroup in timeRangeGroups)
             {
                 DateTime dateTime = timeRangeGroup.Key;
+                var fromDate = Converter.To<DateTime>(dateTime.ToString("yyyy-MM-01"));
+                if (fromDate < Converter.ToDateTime(criteria.FromDate))
+                {
+                    fromDate = Converter.ToDateTime(criteria.FromDate);
+                }
+
+                var toDate = DateTimeExtensions.LastDayOfMonth(fromDate);
+
+                if (toDate > Converter.ToDateTime(criteria.ToDate))
+                {
+                    toDate = Converter.ToDateTime(criteria.ToDate);
+                }
+
                 var timeRangeWinLoss = new WinLossInfo
                 {
-                    Id = dateTime.ToShortFormatedDate(),
+                    Id = fromDate.ToString("MMM dd, yyyy") + "|" + toDate.ToString("MMM dd, yyyy"),
                     Name = dateTime.ToMonthYearWithSlash(),
                     ChildsInfo = new List<WinLossInfo>()
                 };
@@ -66,6 +78,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                         Id = timeRangeWinLoss.Id,
                         Name = timeRangeWinLoss.Name,
                         CurrencyName = data.CurrencyName,
+                        CurrencyId = data.CurrencyId,
                         NumberOfPlayers = data.NumberOfPlayers,
                         NumberOfGames = data.NumberOfGames,
 
@@ -74,46 +87,13 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                         TotalRefund = data.TotalRefund,
 
                         GameIncome = data.GameIncome,
+                        GamePayout = data.GamePayout,
 
                         CompanyTurnover = data.CompanyTurnover,
                         CompanyNetIncome = data.CompanyNetIncome,
                         CompanyCommission = data.CompanyCommission
                     };
 
-                    if (!IsCorrectFilteredInfo(criteria, info))
-                    {
-                        continue;
-                    }
-
-                    grandTotalRM.Sum(new WinLossInfo
-                    {
-                        NumberOfPlayers = data.NumberOfPlayers,
-                        NumberOfGames = data.NumberOfGames,
-
-                        TotalBets = data.TotalBets,
-                        TotalWins = data.TotalWins,
-                        TotalRefund = data.TotalRefund,
-
-                        GameIncome = data.GameIncome,
-
-                        CompanyTurnover = data.CompanyTurnover,
-                        CompanyNetIncome = data.CompanyNetIncome,
-                        CompanyCommission = data.CompanyCommission
-                    });
-
-                    if (!currencyIndexDictionary.ContainsKey(info.CurrencyName))
-                    {
-                        report.GrandTotal.ChildsInfo.Add(new WinLossInfo
-                        {
-                            Name = Labels.Total + " " + info.CurrencyName,
-                            CurrencyName = info.CurrencyName
-                        });
-
-                        currencyIndexDictionary.Add(info.CurrencyName, report.GrandTotal.ChildsInfo.Count - 1);
-                    }
-
-                    var currencyIndex = currencyIndexDictionary[info.CurrencyName];
-                    report.GrandTotal.ChildsInfo[currencyIndex].Sum(info);
                     info = WinLossInfo.Format(info);
                     timeRangeWinLoss.ChildsInfo.Add(info);
                 }
@@ -126,6 +106,11 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             }
 
             report.ChildsInfo = report.ChildsInfo.OrderBy(winLoss => winLoss.Name).ToList();
+
+            Utilities.AssignGrandTotal(grandTotal, grandTotalRM);
+
+            report.GrandTotal.ChildsInfo.Add(grandTotalRM);
+
             return report;
         }
 
@@ -189,7 +174,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
         {
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-            string sheetName = GamingResources.LiveCasinoGameStatistic_SheetName;
+            string sheetName = string.Format(Labels.CasinoGameStatistic_SheetName, criteria.Product);
             ExcelWorksheet workSheet = worksheets.Add(sheetName);
 
             int startRow = 0;
@@ -287,9 +272,10 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             }
 
             var reportName = string.Format(
-                GamingResources.LiveCasinoGameStatistic_ReportName,
-                Converter.ToDateTime(criteria.FromDate).ToShortFormatedDateWithSlash().Replace('/', '_'),
-                Converter.ToDateTime(criteria.ToDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
+                 GamingResources.CasinoGameStatistic_ReportName,
+                 criteria.Product.Replace(" ", "_"),
+                 Converter.ToDateTime(criteria.FromDate).ToShortFormatedDateWithSlash().Replace('/', '_'),
+                 Converter.ToDateTime(criteria.ToDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
             excelFile.ReponseStream(reportName);
         }
     }

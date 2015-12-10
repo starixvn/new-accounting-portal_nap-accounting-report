@@ -8,6 +8,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportDailyByCurrency = f
         var bodyData = [];
         var footerData = [];
         var columns = [];
+        var classPayout = "";
         var timeRangeLength = report && report.ChildsInfo ?
             report.ChildsInfo.length : 0;
         if (timeRangeLength > 0) {
@@ -29,7 +30,15 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportDailyByCurrency = f
                     columns.push({ Name: "ColTotalBets", Value: info.TotalBets });
                     columns.push({ Name: "ColTotalWins", Value: info.TotalWins });
                     columns.push({ Name: "ColGameIncome", Value: info.GameIncome });
-                    columns.push({ Name: "ColGamePayout", Value: info.GamePayout });
+
+                    if (info.GamePayout > 1) {
+                        classPayout = " red";
+                    }
+                    else {
+                        classPayout = "";
+                    }
+
+                    columns.push({ Name: "ColGamePayout", Value: info.GamePayout, TdClass: classPayout });
                     if (reportManager.Params.reportParams.ShowRefundColumn) {
                         columns.push({ Name: "ColTotalRefund", Value: info.TotalRefund });
                     }
@@ -54,7 +63,15 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportDailyByCurrency = f
             footerColumns.push({ Name: "ColTotalBets", Value: info.TotalBets });
             footerColumns.push({ Name: "ColTotalWins", Value: info.TotalWins });
             footerColumns.push({ Name: "ColGameIncome", Value: info.GameIncome });
-            footerColumns.push({ Name: "ColGamePayout", Value: info.GamePayout });
+
+            if (info.GamePayout > 1) {
+                classPayout = " red";
+            }
+            else {
+                classPayout = "";
+            }
+
+            footerColumns.push({ Name: "ColGamePayout", Value: info.GamePayout, TdClass:classPayout });
             if (reportManager.Params.reportParams.ShowRefundColumn) {
                 footerColumns.push({ Name: "ColTotalRefund", Value: info.TotalRefund });
             }
@@ -123,7 +140,14 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportDailyByCurrency = f
         var title = AccReport.utility.StringFormat(viewResources.CasinoGameStatistic_ReportTitle, [reportManager.Params.reportParams.Product, reportManager.Params.reportParams.FromDate, reportManager.Params.reportParams.ToDate]);
         var showBackButton = false;
         var reportType = reportManager.Params.globalVariable.PrevReportType;
-        title = "<span class='link' onclick='reportManager.RenderParentReport(" + reportType + ");'>Back</span> < " + AccReport.utility.StringFormat(viewResources.CasinoGameStatisticOnDateByCurrency_ReportTitle, [reportManager.Params.reportParams.Product, reportManager.Params.reportParams.FromDate]);
+
+        var username = reportManager.Params.reportParams.UserName;
+        if (username != null) {
+            title = "<span class='link' onclick='reportManager.RenderParentReport(" + reportType + ");'>Back</span> < " + AccReport.utility.StringFormat(viewResources.CasinoGameStatistic_UserNameOnDateByCurrency_ReportTitle, [reportManager.Params.reportParams.Product, username, reportManager.Params.reportParams.FromDate]);
+        } else {
+            title = "<span class='link' onclick='reportManager.RenderParentReport(" + reportType + ");'>Back</span> < " + AccReport.utility.StringFormat(viewResources.CasinoGameStatisticOnDateByCurrency_ReportTitle, [reportManager.Params.reportParams.Product, reportManager.Params.reportParams.FromDate]);
+        }
+        
 
         if (reportManager.Params.globalVariable.showBackButton) {
             showBackButton = true;
@@ -183,5 +207,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportDailyByCurrency = f
         var exportParams = reportManager.Params.globalVariable.CacheParam.DailyByCurrency;
         exportParams.ViewReport = reportManager.Params.globalVariable.viewReport.DailyByCurrency;
         AccReport.downloadFile(window.rootUrl + "Gaming/CasinoGameStatistic/ExportReport", exportParams);
+        AccReport.enableInput();
     };
+
 };

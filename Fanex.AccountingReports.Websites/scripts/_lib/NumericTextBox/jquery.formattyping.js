@@ -30,6 +30,7 @@ jQuery(document).ready(function () {
                 //not format at this event
                 //-------------------------------------------
                 //check dot(.), just for currency
+                
                 var key = e.charCode || e.keyCode || 0;
                 if (key == 110 || key == 190) {
                     //dot(.)
@@ -50,6 +51,7 @@ jQuery(document).ready(function () {
                 (e.ctrlKey && e.keyCode == 67) || //accept ctrl + c(copy)
                 (e.ctrlKey && e.keyCode == 86) || //accept ctrl + v(paste)
                 (e.ctrlKey && e.keyCode == 65) || //accept ctrl + a(select all)
+                (e.ctrlKey && e.keyCode == 88) || //accept ctrl + x(cut)
                 key == 16 || //shift
                 key == 17 || //ctrl
                 key == 8 || //backspace

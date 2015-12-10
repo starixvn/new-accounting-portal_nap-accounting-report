@@ -51,13 +51,25 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
         [SpParam(SqlParamName = "currency")]
         public string Currency { get; set; }
 
+        [SpParam(SqlParamName = "TotalBetLess")]
+        public string TotalBetLess { get; set; }
+
+        [SpParam(SqlParamName = "TotalBetMore")]
+        public string TotalBetMore { get; set; }
+
+        [SpParam(SqlParamName = "TotalWinLess")]
+        public string TotalWinLess { get; set; }
+
+        [SpParam(SqlParamName = "TotalWinMore")]
+        public string TotalWinMore { get; set; }
+
         [SpParam(Ignored = true)]
         public int ReportType { get; set; }
 
         [SpParam(Ignored = true)]
         public bool IsChangedValue { get; set; }
 
-        [SpParam(Ignored = true)]
+        [SpParam(SqlParamName = "ShowRefund")]
         public bool ShowRefundColumn { get; set; }
 
         [SpParam(Ignored = true)]
@@ -87,8 +99,14 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
         [SpParam(Ignored = true)]
         public string Product { get; set; }
 
-        [SpParam(Ignored = true)]
+        [SpParam(SqlParamName = "IsDrillDown")]
         public bool IsDrillDown { get; set; }
+
+        [SpParam(SqlParamName = "IsGrandRM")]
+        public bool IsGrandRM { get; set; }
+
+        [SpParam(Ignored = true)]
+        public string EffectiveDate { get; set; }
 
         [SpParam(Ignored = true)]
         public bool IsExportGrandTotal { get; set; }

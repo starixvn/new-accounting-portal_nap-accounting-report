@@ -9,10 +9,8 @@
 
 namespace Fanex.AccountingReports.Gaming.Services.Interface.CasinoGameStatistic
 {
-    using System.Collections.Generic;
-    using Fanex.AccountingReports.Core.Criteria;
-    using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic;
+    using Fanex.AccountingReports.Gaming.Models;
     using Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic;
 
     public interface ICasinoGameStatisticService
@@ -23,8 +21,10 @@ namespace Fanex.AccountingReports.Gaming.Services.Interface.CasinoGameStatistic
 
         void ExportReport(GetReportByDailyCriteria criteria);
 
-        WinLossInfo GetReportByGrandTotal(GetReportByGrandRMCriteria criteria);
+        WinLossInfo GetReportByGrandTotal(GetReportByDailyCriteria criteria);
 
         Hourly GetReportByHourly(GetReportByHourlyCriteria criteria);
+
+        CompanyInfo GetLicenseeList(GetLicenseeListCriteria criteria);
     }
 }

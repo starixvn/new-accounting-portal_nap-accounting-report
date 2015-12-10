@@ -65,6 +65,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                         Id = gameTableWinLoss.Id,
                         Name = gameTableWinLoss.Name,
                         CurrencyName = data.CurrencyName,
+                        CurrencyId = data.CurrencyId,
                         NumberOfPlayers = data.NumberOfPlayers,
                         NumberOfGames = data.NumberOfGames,
 
@@ -73,16 +74,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                         TotalRefund = data.TotalRefund,
 
                         GameIncome = data.GameIncome,
+                        GamePayout = data.GamePayout,
 
                         CompanyTurnover = data.CompanyTurnover,
                         CompanyNetIncome = data.CompanyNetIncome,
                         CompanyCommission = data.CompanyCommission
                     };
-
-                    if (!IsCorrectFilteredInfo(criteria, info))
-                    {
-                        continue;
-                    }
 
                     info = WinLossInfo.Format(info);
                     gameTableWinLoss.ChildsInfo.Add(info);
@@ -164,7 +161,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
         {
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-            string sheetName = GamingResources.LiveCasinoGameStatistic_SheetName;
+            string sheetName = string.Format(Labels.CasinoGameStatistic_SheetName, criteria.Product);
             ExcelWorksheet workSheet = worksheets.Add(sheetName);
 
             int startRow = 0;
@@ -262,9 +259,10 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             }
 
             var reportName = string.Format(
-                GamingResources.LiveCasinoGameStatistic_ReportName,
-                Converter.ToDateTime(criteria.FromDate).ToShortFormatedDateWithSlash().Replace('/', '_'),
-                Converter.ToDateTime(criteria.ToDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
+               GamingResources.CasinoGameStatistic_ReportName,
+               criteria.Product.Replace(" ", "_"),
+               Converter.ToDateTime(criteria.FromDate).ToShortFormatedDateWithSlash().Replace('/', '_'),
+               Converter.ToDateTime(criteria.ToDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
             excelFile.ReponseStream(reportName);
         }
     }

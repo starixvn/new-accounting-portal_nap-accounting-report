@@ -181,13 +181,22 @@
     <value>Live Casino Game Statistic</value>
   </data>
   <data name="CasinoGameStatistic_ReportName" xml:space="preserve">
-    <value>Casino_Game_Statistic_Report_From_{0}_To_{1}</value>
+    <value>{0}_Game_Statistic_Report_From_{1}_To_{2}</value>
   </data>
   <data name="CasinoGameStatistic_ReportTitle" xml:space="preserve">
     <value>{0} Game Statistic Report From {1} To {2}</value>
   </data>
+  <data name="CasinoGameStatistic_UserName_ReportTitle" xml:space="preserve">
+    <value>{0} Game Statistic Report For {1} From {2} To {3}</value>
+  </data>
   <data name="CasinoGameStatisticOnDateByCurrency_ReportTitle" xml:space="preserve">
     <value>{0} Game Statistic Report On {1} By Currency</value>
+  </data>
+  <data name="CasinoGameStatistic_UserNameOnDateByCurrency_ReportTitle" xml:space="preserve">
+    <value>{0} Game Statistic Report For {1} On {2} By Currency</value>
+  </data>
+  <data name="CasinoGameStatisticInMonthByCurrency_ReportTitle" xml:space="preserve">
+    <value>{0} Game Statistic Report In {1} By Currency</value>
   </data>
   <data name="CasinoGameStatistic_MonthlyReportTitle" xml:space="preserve">
     <value>{0} Game Statistic Report From {1} To {2} By Currency</value>
@@ -299,5 +308,53 @@
   </data>
   <data name="NumberGameStatistic_SheetName" xml:space="preserve">
     <value>Number Game Statistic</value>
+  </data>
+  <data name="CasinoGameStatistic_Hourly_Title" xml:space="preserve">
+    <value>Hourly {0} Game Statistic Record {1} on {2} (GMT+8)</value>
+  </data>
+  <data name="CasinoGameStatistic_Accumulated_Title" xml:space="preserve">
+    <value>Accumulated Hourly {0} Game Statistic Record {1} on {2} (GMT+8)</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="OnlinePlayers" xml:space="preserve">
+    <value>Online Players</value>
+  </data>
+  <data name="BetCount" xml:space="preserve">
+    <value>Bet Count</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="TotalBets" xml:space="preserve">
+    <value>Total Bets</value>
+  </data>
+  <data name="TotalWins" xml:space="preserve">
+    <value>Total Wins</value>
+  </data>
+  <data name="GameIncome" xml:space="preserve">
+    <value>Game Income</value>
+  </data>
+  <data name="GamePayout" xml:space="preserve">
+    <value>Game Payout</value>
+  </data>
+  <data name="CompanyTurnover" xml:space="preserve">
+    <value>Company Turnover</value>
+  </data>
+  <data name="CompanyComm" xml:space="preserve">
+    <value>Company Comm</value>
+  </data>
+  <data name="CompanyNetIncome" xml:space="preserve">
+    <value>Company Net Income</value>
+  </data>
+  <data name="TotalRefund" xml:space="preserve">
+    <value>Total refund</value>
+  </data>
+  <data name="Average" xml:space="preserve">
+    <value>Average</value>
+  </data>
+  <data name="GameTable" xml:space="preserve">
+    <value>Game Table</value>
   </data>
 </root>
