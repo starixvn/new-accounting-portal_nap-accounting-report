@@ -78,7 +78,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             currentColumn = startColumn;
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Style = headerTextStyle;
-            currentCell.Value = Labels.Currency;
+            currentCell.Value = Labels.Grand_Total;
 
             currentColumn++;
 

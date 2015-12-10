@@ -213,6 +213,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByDailyRange = func
         AccReport.disableInput();
         var exportParams = reportManager.Params.globalVariable.CacheParam.Daily;
         exportParams.ViewReport = reportManager.Params.globalVariable.viewReport.Daily;
+        exportParams.IsExportGrandTotal = true;
         AccReport.downloadFile(window.rootUrl + "Gaming/CasinoGameStatistic/ExportReport", exportParams);
     };
 };

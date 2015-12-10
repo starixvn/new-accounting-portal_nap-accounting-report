@@ -168,7 +168,8 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
             SortDataType: null,
             ProductId: null,
             IsDrillDown: null,
-            Product: null
+            Product: null,
+            IsExportGrandTotal: null
         },
 
         globalVariable: {
@@ -185,7 +186,10 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
                 GameTable:9,
                 GameTableByCurrency: 10,
                 Company: 11,
-                CompanyByCurrency: 12
+                CompanyByCurrency: 12,
+                Currency: 13,
+                GrandTotal:14,
+                Hourly:15
             },
             gridOptionReport: {
                 Daily:null,
@@ -200,7 +204,10 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
                 GameTable: null,
                 GameTableByCurrency: null,
                 Company: null,
-                CompanyByCurrency: null
+                CompanyByCurrency: null,
+                Currency: null,
+                GrandTotal: null,
+                Hourly: null
             },
             CacheParam: {
                 Daily: null,
@@ -215,7 +222,10 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
                 GameTable: null,
                 GameTableByCurrency: null,
                 Company: null,
-                CompanyByCurrency: null
+                CompanyByCurrency: null,
+                Currency: null,
+                GrandTotal: null,
+                Hourly: null
             },
             CacheUserName: null,
             CurrentReportType: null,
@@ -301,7 +311,6 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
         self.Tables.btnGenerate = $("#btnGenerate");
         self.Tables.btnToday = $("#btnToday");
         self.Tables.btnYesterday = $("#btnYesterday");
-        //self.Tables.btnExport = $("#button-export");
 
         self.Tables.txtTotalBetLessThan = $("#txt-totalbet-lessthan");
         self.Tables.txtTotalBetMoreThan = $("#txt-totalbet-morethan");
@@ -843,6 +852,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
             SortDataType: reportManager.CachedData.sortDataType,
             ProductId: self.Tables.dropdown3rdParty.multiSelect('getCheckedItems').toString(),
             IsDrillDown: self.Params.globalVariable.IsDrillDown,
+            IsExportGrandTotal: false,
             Product: self.Tables.dropdownProduct.val()
         };
     };
@@ -869,6 +879,9 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
                 break;
             case self.Enums.ReportType.Company:
                 self.GetReportByCompany();
+                break;
+            case self.Enums.ReportType.Currency:
+                self.GetReportByCurrency();
                 break;
         }
     };
@@ -1293,6 +1306,40 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
             self.RenderReport,
             AccReport.enableInput);
     };
+
+    self.GetReportByCurrency = function () {
+        var self = this;
+        AccReport.disableInput();
+        self.CachedData.sortDirection = null;
+        self.CachedData.sortColName = null;
+        self.CachedData.sortDataType = null;
+
+        var selectParam = self.GetReportParams();
+        selectParam.ViewReport = self.Params.globalVariable.viewReport.Currency;
+        self.Params.globalVariable.PrevReportType = self.Params.globalVariable.CurrentReportType;
+        self.Params.globalVariable.CurrentReportType = self.Params.globalVariable.viewReport.Currency;
+
+        if (!self.CheckReportParams(selectParam)) {
+            AccReport.enableInput();
+            return;
+        }
+
+        if (selectParam.Currency === "-1") {
+            selectParam.Currency = "0";
+        }
+
+        selectParam.IsDrillDown = self.Params.globalVariable.IsDrillDown;
+        self.Params.globalVariable.CacheParam.Currency = selectParam;
+
+        self.CachedData.currentPage = 0;
+        self.Params.reportParams = selectParam;
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "Gaming/CasinoGameStatistic/GetReportByCurrency",
+            self.Params.reportParams,
+            self.RenderReport,
+            self.RenderReport,
+            AccReport.enableInput);
+    };
     
     self.CheckReportParams = function (selectParam) {
         AccReport.popUp.hide();
@@ -1369,15 +1416,10 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
                 gridOptions = self.ReportCompanyByCurrency.GetGridOptions(report);
                 gridOptionReport.CompanyByCurrency = gridOptions;
                 break;
-
-//            case reportTypeEnum.Company:
-//                gridOptions = self.ReportByCompany.GetGridOptions(report);
-//                break;
-//            case reportTypeEnum.Currency:
-//                gridOptions = self.ReportByCurrency.GetGridOptions(report);
-//                break;
-//            default:
-//                break;
+            case viewReport.Currency:
+                gridOptions = self.ReportByCurrency.GetGridOptions(report);
+                gridOptionReport.Currency = gridOptions;
+                break;
         }
 
         if (gridOptions != null) {

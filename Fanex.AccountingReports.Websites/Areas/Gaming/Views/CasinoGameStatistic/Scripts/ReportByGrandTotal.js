@@ -22,6 +22,11 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGrandTotal = func
     self.renderReport = function() {
         AccReport.disableInput();
         var selectParam = reportManager.GetReportParams();
+        selectParam.IsExportGrandTotal = false;
+        selectParam.ViewReport = reportManager.Params.globalVariable.viewReport.GrandTotal;
+
+        reportManager.Params.globalVariable.CacheParam.GrandTotal = selectParam;
+        
         AccReport.utility.CallAjax(this,
             window.rootUrl + "Gaming/CasinoGameStatistic/GetReportByGrandTotal",
             selectParam,
@@ -40,8 +45,9 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGrandTotal = func
 
     self.exportGrandTotal = function() {
         AccReport.disableInput();
-        var exportParams = reportManager.GetReportParams();
-        exportParams.IsExportExcel = true;
+        var exportParams = reportManager.Params.globalVariable.CacheParam.GrandTotal;
+        exportParams.IsExportGrandTotal = true;
+
         AccReport.downloadFile(window.rootUrl + "Gaming/CasinoGameStatistic/ExportGrandTotal", exportParams);
     };
 
@@ -103,7 +109,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGrandTotal = func
 
         var columnsHeader = [];
         columnsHeader.push({
-            HeaderText: viewResources.Date, Width: 80, Name: "ColName", HeaderAlign: "center", CellAlign: "center"
+            HeaderText: "Grand Total", Width: 80, Name: "ColName", HeaderAlign: "center", CellAlign: "center"
         });
         columnsHeader.push({
             HeaderText: viewResources.No_Players, Width: 80, Name: "ColNumberOfPlayers", HeaderAlign: "center", CellAlign: "right",

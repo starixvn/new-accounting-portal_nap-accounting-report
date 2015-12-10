@@ -63,6 +63,9 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
         [SpParam(Ignored = true)]
         public bool IsExportExcel { get; set; }
 
+        [SpParam(Ignored = true)]
+        public int ViewReport { get; set; }
+
         public override string GetSettingKey()
         {
             return "Acc_Rpt_CasinoGameStatistics_Hourly";

@@ -34,20 +34,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
     {
         private readonly ICasinoGameStatisticRepository _reportRepository;
 
-        private readonly string _reportSessionKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Report" +
-            (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-
-        private readonly string _reportDrillDownSessionKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.ReportDrillDown" +
-            (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-
         private int _timeCaching = 2;
-
-        private string _grandTotalSessionKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GrandTotal" +
-       (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-
-        private string _hourlySessionKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Hourly" +
-       (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-       
 
         public CasinoGameStatisticService()
             : this(null)
@@ -135,8 +122,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             catch (Exception ex)
             {
                 HandleException(ex);
-                CacheManager.Set<WinLossInfo>(_reportSessionKey, null);
-                CacheManager.Set<WinLossInfo>(_reportDrillDownSessionKey, null);
                 throw;
             }
         }
@@ -186,7 +171,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                     break;
             }
 
-            string key = criteria.IsDrillDown ? _reportDrillDownSessionKey : _reportSessionKey;
+            string key = Utilities.GetReportKey(criteria.ViewReport);
             var report = CacheManager.Get<WinLossInfo>(key);
 
             if (report == null)
@@ -708,11 +693,13 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 Currency = criteria.Currency,
                 ShowRefundColumn = criteria.ShowRefundColumn,
                 ProductId = criteria.ProductId,
-                Product = criteria.Product
+                Product = criteria.Product,
+                IsExportGrandTotal = criteria.IsExportGrandTotal,
+                ViewReport = criteria.ViewReport
             };
 
             List<WinLossInfo> totalList = new List<WinLossInfo>();
-            if (!criteria.IsDrillDown)
+            if (criteria.IsExportGrandTotal)
             {
                 totalList = _reportRepository.GetReportByGrandTotal(grandRMCriteria);
                 totalList.RemoveAt(totalList.Count - 1);
@@ -755,10 +742,10 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
         public WinLossInfo GetReportByGrandTotal(GetReportByGrandRMCriteria criteria)
         {
             WinLossInfo grandTotal = new WinLossInfo();
-
-            if (criteria.IsExportExcel)
+            string key = Utilities.GetReportKey(criteria.ViewReport);
+            if (criteria.IsExportGrandTotal)
             {
-                grandTotal = CacheManager.Get<WinLossInfo>(_grandTotalSessionKey);
+                grandTotal = CacheManager.Get<WinLossInfo>(key);
                 if (grandTotal == null)
                 {
                     grandTotal = new WinLossInfo();
@@ -768,7 +755,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             else
             {
                 grandTotal.ChildsInfo = _reportRepository.GetReportByGrandTotal(criteria);
-                CacheManager.Set<WinLossInfo>(_grandTotalSessionKey, grandTotal, DateTime.Now.AddHours(_timeCaching));
+                CacheManager.Set<WinLossInfo>(key, grandTotal, DateTime.Now.AddHours(_timeCaching));
             }
 
             return grandTotal;
@@ -777,14 +764,17 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
         public Hourly GetReportByHourly(GetReportByHourlyCriteria criteria)
         {
             Hourly hourly = new Hourly();
+
+            string key = Utilities.GetReportKey(criteria.ViewReport);
+
             if (criteria.IsExportExcel)
             {
-                hourly = CacheManager.Get<Hourly>(_hourlySessionKey) ?? _reportRepository.GetReportByHourly(criteria);
+                hourly = CacheManager.Get<Hourly>(key) ?? _reportRepository.GetReportByHourly(criteria);
             }
             else
             {
                 hourly = _reportRepository.GetReportByHourly(criteria);
-                CacheManager.Set<Hourly>(_hourlySessionKey, hourly, DateTime.Now.AddHours(_timeCaching));
+                CacheManager.Set<Hourly>(key, hourly, DateTime.Now.AddHours(_timeCaching));
             }
 
             return hourly;

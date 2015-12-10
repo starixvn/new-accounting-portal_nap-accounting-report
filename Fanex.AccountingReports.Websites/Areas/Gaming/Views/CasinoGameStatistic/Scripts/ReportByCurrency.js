@@ -31,14 +31,6 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByCurrency = functi
                 });
             }
 
-            var totalChildLength = report && report.GrandTotal ?
-                report.GrandTotal.ChildsInfo.length : 0;
-
-            for (var totalChildIndex = 0; totalChildIndex < totalChildLength - 1; totalChildIndex++) {
-                var currentChildTotal = report.GrandTotal.ChildsInfo[totalChildIndex];
-                self.AddChildTotalToBodyData(columns, currentChildTotal, bodyData);
-            }
-
             var footerColumns = [];
             var footerReportLength = report.GrandTotal.ChildsInfo.length;
             info = report.GrandTotal.ChildsInfo[footerReportLength - 1];
@@ -70,7 +62,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByCurrency = functi
              FormatNumber: FormatConstant.INT_NUMBER, Sort: true, SortDirection: reportManager.getSortDirection("NumberOfPlayers")
          });
          columnsHeader.push({
-             HeaderText: viewResources.No_Games, Width: 100, Name: "ColNumberOfGames", HeaderAlign: "center", CellAlign: "right",
+             HeaderText: "Bet Count", Width: 100, Name: "ColNumberOfGames", HeaderAlign: "center", CellAlign: "right",
              FormatNumber: FormatConstant.INT_NUMBER, Sort: true, SortDirection: reportManager.getSortDirection("NumberOfGames")
          });
          columnsHeader.push({
@@ -114,9 +106,11 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByCurrency = functi
             showTitle: true,
             showFooter: true,
             titleInfo: {
-                text: AccReport.utility.StringFormat(viewResources.LiveCasinoGameStatistic_ReportTitle,
-                    [reportManager.Params.reportParams.FromDate, reportManager.Params.reportParams.ToDate]),
-                showExcelButton: false
+                text: AccReport.utility.StringFormat(viewResources.CasinoGameStatistic_ReportTitle, [reportManager.Params.reportParams.Product, reportManager.Params.reportParams.FromDate, reportManager.Params.reportParams.ToDate]),
+                showExcelButton: true,
+                exportExcelFunction: function () {
+                    self.exportExcel();
+                }
             },
             bodyRows: bodyData,
             footerRows: footerData,
@@ -155,130 +149,6 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByCurrency = functi
         return gridOptions;
     };
 
-    self.GetGridOptions_MappingSortInfo = function (columnName, currentDirection) {
-        var self = this;
-        var sortDirectionEnums = reportManager.Enums.SortDirection;
-        var sortDataTypeEnums = reportManager.Enums.SortDataType;
-        var sortInfo = {
-            sortFactor: 0,
-            sortField: '',
-            sortDataType: sortDataTypeEnums.String
-        };
-
-        switch (currentDirection) {
-            case sortDirectionEnums.Asc:
-                sortInfo.sortFactor = 1;
-                break;
-            case sortDirectionEnums.Desc:
-                sortInfo.sortFactor = -1;
-                break;
-            default:
-                sortInfo.sortFactor = 0;
-                break;
-        };
-
-        switch (columnName) {
-            case "ColName":
-                sortInfo.sortField = "Name";
-                sortInfo.sortDataType = sortDataTypeEnums.String;
-                break;
-            case "ColNumberOfPlayers":
-                sortInfo.sortField = "NumberOfPlayers";
-                sortInfo.sortDataType = sortDataTypeEnums.Number;
-                break;
-            case "ColNumberOfGames":
-                sortInfo.sortField = "NumberOfGames";
-                sortInfo.sortDataType = sortDataTypeEnums.Number;
-                break;
-            case "ColCurrency":
-                sortInfo.sortField = "CurrencyName";
-                sortInfo.sortDataType = sortDataTypeEnums.String;
-                break;
-            case "ColTotalBets":
-                sortInfo.sortField = "TotalBets";
-                sortInfo.sortDataType = sortDataTypeEnums.Number;
-                break;
-            case "ColTotalWins":
-                sortInfo.sortField = "TotalWins";
-                sortInfo.sortDataType = sortDataTypeEnums.Number;
-                break;
-            case "ColGameIncome":
-                sortInfo.sortField = "GameIncome";
-                sortInfo.sortDataType = sortDataTypeEnums.Number;
-                break;
-            case "ColGamePayout":
-                sortInfo.sortField = "GamePayout";
-                sortInfo.sortDataType = sortDataTypeEnums.Number;
-                break;
-            case "ColTotalRefund":
-                sortInfo.sortField = "TotalRefund";
-                sortInfo.sortDataType = sortDataTypeEnums.Number;
-                break;
-            case "ColCompanyTurnover":
-                sortInfo.sortField = "CompanyTurnover";
-                sortInfo.sortDataType = sortDataTypeEnums.Number;
-                break;
-            case "CompanyCommission":
-                sortInfo.sortField = "CompanyCommission";
-                sortInfo.sortDataType = sortDataTypeEnums.Number;
-                break;
-            case "ColCompanyNetIncome":
-                sortInfo.sortField = "CompanyNetIncome";
-                sortInfo.sortDataType = sortDataTypeEnums.Number;
-                break;
-        }
-
-        return sortInfo;
-    };
-
-    self.GetGridOptions_SortedAndPagingData = function (sortInfo) {
-        var self = this;
-        reportManager.CachedData.currentReport.ChildsInfo = self.SortReport(sortInfo, reportManager.CachedData.currentReport);
-        var report = reportManager.CachedData.currentReport;
-
-        var bodyData = [];
-        var reportLength = report && report.ChildsInfo ?
-            report.ChildsInfo.length :
-            0;
-        if (reportLength > 0) {
-            var info;
-            var columns = [];
-
-            var indexRange = reportManager.GetPagingIndexRange(reportLength);
-            for (var i = indexRange.startIndex; i < indexRange.endIndex; i++) {
-                var currencyWinLoss = report.ChildsInfo[i];
-                columns = [];
-                columns.push({ Name: "ColName", Value: currencyWinLoss.Name });
-                columns.push({ Name: "ColNumberOfPlayers", Value: currencyWinLoss.NumberOfPlayers });
-                columns.push({ Name: "ColNumberOfGames", Value: currencyWinLoss.NumberOfGames });
-                columns.push({ Name: "ColTotalBets", Value: currencyWinLoss.TotalBets });
-                columns.push({ Name: "ColTotalWins", Value: currencyWinLoss.TotalWins });
-                columns.push({ Name: "ColGameIncome", Value: currencyWinLoss.GameIncome });
-                columns.push({ Name: "ColGamePayout", Value: currencyWinLoss.GamePayout });
-                if (reportManager.Params.reportParams.ShowRefundColumn) {
-                    columns.push({ Name: "ColTotalRefund", Value: currencyWinLoss.TotalRefund });
-                }
-
-                columns.push({ Name: "ColCompanyTurnover", Value: currencyWinLoss.CompanyTurnover });
-                columns.push({ Name: "CompanyCommission", Value: currencyWinLoss.CompanyCommission });
-                columns.push({ Name: "ColCompanyNetIncome", Value: currencyWinLoss.CompanyNetIncome });
-                bodyData.push({
-                    Columns: columns
-                });
-            }
-
-            var totalChildLength = report && report.GrandTotal ?
-                report.GrandTotal.ChildsInfo.length : 0;
-
-            for (var totalChildIndex = 0; totalChildIndex < totalChildLength - 1; totalChildIndex++) {
-                var currentChildTotal = report.GrandTotal.ChildsInfo[totalChildIndex];
-                self.AddChildTotalToBodyData(columns, currentChildTotal, bodyData);
-            }
-        }
-
-        return bodyData;
-    };
-
     self.SortReport = function (sortInfo, report) {
         var self = this;
 
@@ -296,24 +166,11 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByCurrency = functi
         return report.ChildsInfo;
     };
 
-    self.AddChildTotalToBodyData = function (columns, currentChildTotal, bodyData) {
-        columns = [];
-        columns.push({ Name: "ColName", Value: currentChildTotal.Name, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColNumberOfPlayers", Value: currentChildTotal.NumberOfPlayers, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColNumberOfGames", Value: currentChildTotal.NumberOfGames, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColTotalBets", Value: currentChildTotal.TotalBets, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColTotalWins", Value: currentChildTotal.TotalWins, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColGameIncome", Value: currentChildTotal.GameIncome, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColGamePayout", Value: currentChildTotal.GamePayout, TdClass: "subTotal bold" });
-        if (reportManager.Params.reportParams.ShowRefundColumn) {
-            columns.push({ Name: "ColTotalRefund", Value: currentChildTotal.TotalRefund, TdClass: "subTotal bold" });
-        }
-
-        columns.push({ Name: "ColCompanyTurnover", Value: currentChildTotal.CompanyTurnover, TdClass: "subTotal bold" });
-        columns.push({ Name: "CompanyCommission", Value: currentChildTotal.CompanyCommission, TdClass: "subTotal bold" });
-        columns.push({ Name: "ColCompanyNetIncome", Value: currentChildTotal.CompanyNetIncome, TdClass: "subTotal bold" });
-        bodyData.push({
-            Columns: columns
-        });
+    self.exportExcel = function () {
+        AccReport.disableInput();
+        var exportParams = reportManager.Params.globalVariable.CacheParam.Currency;
+        exportParams.ViewReport = reportManager.Params.globalVariable.viewReport.Currency;
+        AccReport.downloadFile(window.rootUrl + "Gaming/CasinoGameStatistic/ExportReport", exportParams);
     };
+ 
 };

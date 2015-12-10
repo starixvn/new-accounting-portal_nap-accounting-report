@@ -221,6 +221,17 @@ namespace Fanex.AccountingReports.Gaming.Controllers
 
         [HttpPost]
         [HandleAjaxError]
+        public JsonResult GetReportByCurrency(GetReportByDailyCriteria criteria)
+        {
+            var result = _reportService.GetReport(criteria);
+            var jsonResult = Json(result);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return jsonResult;
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
         public JsonResult SortReport(GetReportByDailyCriteria getReportCriteria)
         {
             var result = _reportService.SortReport(getReportCriteria);
@@ -262,7 +273,8 @@ namespace Fanex.AccountingReports.Gaming.Controllers
                 ShowRefundColumn = criteria.ShowRefundColumn,
                 ProductId = criteria.ProductId,
                 Product = criteria.Product,
-                IsExportExcel = criteria.IsExportExcel
+                IsExportGrandTotal = criteria.IsExportGrandTotal,
+                ViewReport = criteria.ViewReport
             };
 
             var total = _reportService.GetReportByGrandTotal(grandRMCriteria);

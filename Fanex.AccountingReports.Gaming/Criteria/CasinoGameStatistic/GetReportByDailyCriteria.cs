@@ -91,7 +91,7 @@ namespace Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic
         public bool IsDrillDown { get; set; }
 
         [SpParam(Ignored = true)]
-        public bool IsExportExcel { get; set; }
+        public bool IsExportGrandTotal { get; set; }
 
         [SpParam(Ignored = true)]
         public int ViewReport { get; set; }
