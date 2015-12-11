@@ -181,6 +181,7 @@
     <Compile Include="Controllers\NumberGameMonthlyWinLossController.cs" />
     <Compile Include="Controllers\NumberGameFinancialController.cs" />
     <Compile Include="Controllers\LiveCasinoGameStatisticController.cs" />
+    <Compile Include="Controllers\NumberGameStatisticController.cs" />
     <Compile Include="Controllers\NumberGameWinLossByBetTypeMatchController.cs" />
     <Compile Include="Controllers\NumberGameWinLossByCurrencyController.cs" />
     <Compile Include="Controllers\NumberGameWinlossByDateController.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="Criteria\LiveCasinoWinLossByAgency\GetGameTableListCriteria.cs" />
     <Compile Include="Criteria\LiveCasinoWinLossByAgency\GetGameTypeListCriteria.cs" />
     <Compile Include="Criteria\LiveCasinoWinLossByAgency\GetReportCriteria.cs" />
+    <Compile Include="Criteria\NumberGameStatistic\GetNumberGameStatisticCriteria.cs" />
     <Compile Include="Criteria\NumberGameWinLossByBetTypeMatch\GetWinLossByBetTypeDetailReportCriteria.cs" />
     <Compile Include="Criteria\NumberGameWinLossByBetTypeMatch\GetWinLossByBetTypeMainReportCriteria.cs" />
     <Compile Include="Criteria\NumberGameWinLossByBetTypeMatch\GetWinLossByMatchDetailReportCriteria.cs" />
@@ -239,6 +241,7 @@
     <Compile Include="Models\NumberGameFinancialReport\ProductGameType.cs" />
     <Compile Include="Models\NumberGameMonthlyWinLoss\NumberGameMonthlyWinLoss.cs" />
     <Compile Include="Models\NumberGameFinancialReport\NumberGameFinancial.cs" />
+    <Compile Include="Models\NumberGameStatistic\NumberGameStatistic.cs" />
     <Compile Include="Models\NumberGameWinLossByBetTypeMatch\WinLossByMatchDetailEntity.cs" />
     <Compile Include="Models\NumberGameWinLossByBetTypeMatch\WinLossDetailInfo.cs" />
     <Compile Include="Models\NumberGameWinLossByBetTypeMatch\WinLossInfo.cs" />
@@ -323,6 +326,7 @@
     <Compile Include="Services\Implement\LiveCasinoWinLossByAgency\LiveCasinoAgencyWinLossByUsernameService.cs" />
     <Compile Include="Services\Implement\LiveCasinoWinLossByAgency\LiveCasinoAgencyWinLossService.cs" />
     <Compile Include="Services\Implement\LiveCasinoGameStatistic\LiveCasinoGameStatisticServiceByUsername.cs" />
+    <Compile Include="Services\Implement\NumberGameStatisticService.cs" />
     <Compile Include="Services\Implement\NumberGameWinLossByBetTypeMatch\GroupTypeConstants.cs" />
     <Compile Include="Services\Implement\NumberGameWinLossByBetTypeMatch\NumberGameWinLossByBetTypeMatchService.cs" />
     <Compile Include="Services\Implement\NumberGameWinLossByBetTypeMatch\ReportLevelType.cs" />
@@ -345,6 +349,7 @@
     <Compile Include="Services\Interface\IGamingService.cs" />
     <Compile Include="Services\Interface\ILiveCasinoGameStatisticService.cs" />
     <Compile Include="Services\Interface\ILiveCasinoProductService.cs" />
+    <Compile Include="Services\Interface\INumberGameStatisticService.cs" />
     <Compile Include="Services\Interface\INumberGameWinlossByDateService.cs" />
     <Compile Include="Services\Interface\INumberGameWinLossByCurrencyService.cs" />
     <Compile Include="Services\Implement\NumberGameWinLossByCurrencyService.cs" />

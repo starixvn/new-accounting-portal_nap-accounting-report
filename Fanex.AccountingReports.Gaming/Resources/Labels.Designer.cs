@@ -601,6 +601,15 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company Net Income.
+        /// </summary>
+        public static string CompanyNetInCome {
+            get {
+                return ResourceManager.GetString("CompanyNetInCome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm Password cannot empty.
         /// </summary>
         public static string ConfirmPasswordCannotEmpty {
@@ -1110,6 +1119,15 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         public static string Game_type {
             get {
                 return ResourceManager.GetString("Game_type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game Income.
+        /// </summary>
+        public static string GameInCome {
+            get {
+                return ResourceManager.GetString("GameInCome", resourceCulture);
             }
         }
         
