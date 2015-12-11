@@ -142,8 +142,8 @@
     <Setting Key="Misc_MAMonitorTool_GetLeagueList" SpName="Acc_Rpt_MAMonitor_LeagueSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
       <Mapping DataField="leagueid" ObjectProperty="LeagueId" />
     </Setting>
-    <Setting Key="Misc_MAMonitorTool_GetReport" SpName="Acc_Rpt_MAMonitor_uat1" DbName="DBDWH.bodb_dwrs.bodbAdminNet"  TimeOut="0"></Setting>
-    <Setting Key="Misc_MAMonitorTool_GetReport_Archive" SpName="Acc_Rpt_MAMonitor_Archive_uat1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Misc_MAMonitorTool_GetReport" SpName="Acc_Rpt_MAMonitor" DbName="DBDWH.bodb_dwrs.bodbAdminNet"  TimeOut="0"></Setting>
+    <Setting Key="Misc_MAMonitorTool_GetReport_Archive" SpName="Acc_Rpt_MAMonitor_Archive" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
   </Function>
 
   <Function Name="2h - Keno">
