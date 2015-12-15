@@ -19,7 +19,7 @@ Fanex.AccountingReports.Misc.MAMonitorTool.ReportManager = function () {
             VirtualSport: 8,
             Keno: 9,
             GoldDeluxe: 10,
-            MetricGamingSuperLive: 11
+            MetricGamingSuperLive: -1
         },
 
         LeagueType: {

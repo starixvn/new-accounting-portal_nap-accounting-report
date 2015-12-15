@@ -8,7 +8,7 @@
     <Setting Key="Main_WinLossSummary_GetReport" SpName="Acc_Rpt_WinLostSummary" DbName="DBRPT.bodb_Report.bodbAdminNet" />
   </Function>
   <Function Name="Main - Win Loss Summary 3rd">
-    <Setting Key="Main_WinLossSummary3rd_GetReport" SpName="Acc_Rpt_WinlostSummary_Sporttype" DbName="DBRPT.bodb_Report.bodbAdminNet" />
+    <Setting Key="Main_WinLossSummary3rd_GetReport" SpName="Acc_Rpt_WinlostSummary_Sporttype_xtest" DbName="DBRPT.bodb_Report.bodbAdminNet" />
     <Setting Key="Main_WinLossSummary3rd_Get_Sporttype_SB" SpName="Acc_Rpt_WinlostSummary_Sporttype_SB" DbName="DBRPT.bodb_Report.bodbAdminNet" />
     <Setting Key="Main_WinLossSummary3rd_Get_Racing" SpName="Acc_Rpt_WinlostSummary_Sporttype_Racing" DbName="DBRPT.bodb_Report.bodbAdminNet" />
     <Setting Key="Main_WinLossSummary3rd_Get_VirtualSports" SpName="Acc_Rpt_WinLostSummary_Sporttype_VirtualSports" DbName="DBRPT.bodb_Report.bodbAdminNet" />
@@ -19,6 +19,6 @@
 		<Setting Key="Racing_WinLossGroup" SpName="Acc_Rpt_WinlostRacing_Group" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0"/>
 	</Function>
   <Function Name="Misc - Duplicate Tickets">
-    <Setting Key="Misc_DuplicateTickets_GetReport" SpName="Acc_Rpt_DuplicatedTicketsSel" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Misc_DuplicateTickets_GetReport" SpName="Acc_Rpt_DuplicatedTicketsSel_xtest" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0"/>
   </Function>
 </Functions>

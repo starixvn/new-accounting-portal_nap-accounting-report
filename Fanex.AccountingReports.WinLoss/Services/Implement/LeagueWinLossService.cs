@@ -389,11 +389,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                         4,
                         false);
                     leagueWinLoss.ChildsInfo.Add(info);
-                    info = this.RoundLeagueWinLossInfo(info);
                     leagueWinLoss.AddToTotal(info);
+                    leagueWinLoss.AddToGrandTotal(leagueWinLoss.Total);
+                    info = this.RoundLeagueWinLossInfo(info);
                 });
 
-                leagueWinLoss.AddToGrandTotal(leagueWinLoss.Total);
                 if (this._8rmConfig.IsActive)
                 {
                     leagueWinLoss.AddToGrandTotal(leagueWinLoss.EightRM);
