@@ -272,8 +272,8 @@
 </div>
 @{
     var noteMessage = Html.Raw(SpecialResources.PunterAnalysis_FilterNote);
-    var minDateDaily = DateTime.Now.AddDays(-1).AddMonths(-3);
-    var minDateWeekly = DateTime.Now.AddDays(-1).AddMonths(-3);
+    var minDateDaily = DateTime.Now.AddDays(-121);
+    var minDateWeekly = DateTime.Now.AddDays(-121);
 }
 @section scripts
 {
@@ -281,11 +281,9 @@
         var labelFrom = '@Labels.From';
         var labelTo = '@Labels.To';
         var today = '@DateTime.Today.ToShortDateString()';
-        var minDate = '@(new DateTime(2007, 1, 1).ToShortDateString())';
-        //        var minDateDaily = '@string.Format("{0}/{1}/{2}", minDateDaily.Month, 1, minDateDaily.Year)';
-        //        var minDateWeekly = '@string.Format("{0}/{1}/{2}", minDateWeekly.Month, 1, minDateWeekly.Year)';
-        var minDateDaily = '1/1/2007';
-        var minDateWeekly = '1/1/2007';
+        var minDate = '@DateTime.Today.AddDays(-121).ToShortDateString()';
+        var minDateDaily = '@DateTime.Today.AddDays(-121).ToShortDateString()';
+        var minDateWeekly = '@DateTime.Today.AddDays(-121).ToShortDateString()';
         var maxDate = '@DateTime.Today.AddDays(-1).ToShortDateString()';
         var noteMessage = '@noteMessage';
     </script>
