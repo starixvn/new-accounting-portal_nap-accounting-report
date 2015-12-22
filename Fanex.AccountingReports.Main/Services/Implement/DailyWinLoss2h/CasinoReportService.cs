@@ -120,18 +120,18 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 SiteType = Converter.ToInt(data.Site)
                             };
 
+                            productWinLoss.CreditTotal.BettypeId = info.BettypeId;
+                            productWinLoss.DepositTotal.BettypeId = info.BettypeId;
                             var rowType = _dailyWinLoss2hUtilityService.GetRowType(0, info.SiteType);
                             switch (rowType)
                             {
                                 case RowType._2hReportCredit:
                                     info.AliasName = Labels.Credit;
                                     productWinLoss.CreditTotal.Add(info);
-                                    productWinLoss.CreditTotal.BettypeId = info.BettypeId;
                                     break;
                                 case RowType._2hReportDeposit:
                                     info.AliasName = Labels.Deposit;
                                     productWinLoss.DepositTotal.Add(info);
-                                    productWinLoss.DepositTotal.BettypeId = info.BettypeId;
                                     break;
                             }
                         }

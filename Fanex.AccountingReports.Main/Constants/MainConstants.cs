@@ -21,8 +21,8 @@ namespace Fanex.AccountingReports.Main.Common
         public const int WinLossSummaryTotalBetTypeId = 19999;
 
         // Only for Web code (don't have this Id in DB)
-        public const int WinLossSummaryRacingSportId = -1;
-        public const int WinLossSummaryVirtualSportId = -2;
+        public const int WinLossSummaryRacingSportId = -100;
+        public const int WinLossSummaryVirtualSportId = -200;
 
         public const int WinLossSummaryMaxSportbookId = 99;
 
