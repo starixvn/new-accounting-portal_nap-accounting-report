@@ -185,6 +185,35 @@ namespace Fanex.AccountingReports.Core.Extensions
             return cellStyle;
         }
 
+        public static ICellStyle PercentStyle(
+           HSSFWorkbook excelFile,
+           short cellColor,
+           bool bold,
+           short fontColor = 8)
+        {
+            ICellStyle cellStyle = excelFile.CreateCellStyle();
+            IFont font = excelFile.CreateFont();
+            IDataFormat dataFormat = excelFile.CreateDataFormat();
+
+            font.FontHeightInPoints = FontSize;
+            font.FontName = FontName;
+            font.Color = fontColor;
+
+            if (bold)
+            {
+                font.Boldweight = (short)FontBoldWeight.Bold;
+            }
+
+            cellStyle.FillForegroundColor = cellColor;
+            cellStyle.FillPattern = FillPattern.SolidForeground;
+            cellStyle.Alignment = HorizontalAlignment.Right;
+            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
+            cellStyle.DataFormat = dataFormat.GetFormat(PercentFormat);
+            cellStyle.SetFont(font);
+            cellStyle = SetBorderToCell(cellStyle);
+            return cellStyle;
+        }
+
         public static ICellStyle PositiveDecimalStyle(
            HSSFWorkbook excelFile,
            short cellColor,

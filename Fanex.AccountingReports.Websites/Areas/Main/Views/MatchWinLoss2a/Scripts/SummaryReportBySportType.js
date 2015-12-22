@@ -15,7 +15,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.SummaryReportBySportType = function 
     };
 
     var _cacheData = {
-        DisplayLinkBetType: ["casino", "metric gaming - super live"]
+        DisplayLinkBetType: ["casino", "metric gaming - super live", "cockfighting"]
     };
 
     self.initPage = function () {
@@ -196,6 +196,11 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.SummaryReportBySportType = function 
 
                             if ($.inArray(currentCell.Value.Name.toLowerCase(), _cacheData.DisplayLinkBetType) == 1) {
                                 var clickEvent = ' onclick = "ViewMetricGamingReport(\'' + _params.reportParams.Winlostdate + "');\"";
+                                return '<div class="link" ' + clickEvent + '>' + currentCell.Value.Name + '</div>';
+                            }
+
+                            if ($.inArray(currentCell.Value.Name.toLowerCase(), _cacheData.DisplayLinkBetType) == 2) {
+                                var clickEvent = ' onclick = "ViewCockFightingReport(\'' + _params.reportParams.Winlostdate + "');\"";
                                 return '<div class="link" ' + clickEvent + '>' + currentCell.Value.Name + '</div>';
                             }
                         },

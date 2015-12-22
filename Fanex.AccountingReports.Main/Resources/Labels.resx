@@ -1225,6 +1225,9 @@
   <data name="Cockfighting" xml:space="preserve">
     <value>Cockfighting</value>
   </data>
+  <data name="Arena" xml:space="preserve">
+    <value>Arena</value>
+  </data>
   <data name="Fight_No" xml:space="preserve">
     <value>Fight No.</value>
   </data>

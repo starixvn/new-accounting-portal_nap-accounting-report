@@ -145,7 +145,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         {
             var report = InitWinLoss();
             report.GrandTotal.Name = Labels.All_Total;
-            report.EnableVirtual = _dailyWinLoss2hUtilityService.IsApplyVirtualRate(SportContants.Bettrade);
+            report.EnableVirtual = _dailyWinLoss2hUtilityService.IsApplyVirtualRate(SportContants.ColossusBet);
 
             var colosusBetWinLoss = InitWinLoss();
             colosusBetWinLoss.Id = SportContants.ColossusBet;

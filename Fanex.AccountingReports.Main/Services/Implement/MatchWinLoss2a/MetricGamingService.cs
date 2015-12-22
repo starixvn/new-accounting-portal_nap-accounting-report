@@ -67,7 +67,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         public string GetMetricGamingByBetypeReportName(GetMetricGamingCriteria criteria)
         {
             return string.Format(
-                MainResources.MatchWinLoss2aDetailBySportType_ReportName,
+                MainResources.MatchWinLoss2aDetailByBetType_ReportName,
                 criteria.WinlostDate.ToShortFormatedDateWithSlash().Replace("/", "_"));
         }
 

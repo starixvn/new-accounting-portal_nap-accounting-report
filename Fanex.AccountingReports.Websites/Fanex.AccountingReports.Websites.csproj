@@ -734,6 +734,7 @@
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\WinLossBySite_BetType.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Styles\Images\icon-collpase.png" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Styles\Images\icon-expand.png" />
+    <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\CockFightingReport.js" />
     <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\DetailReportByBetType.js" />
     <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\DetailReportBySportsType.js" />
     <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\ReportManager.js" />

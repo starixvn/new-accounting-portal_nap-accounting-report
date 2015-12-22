@@ -1,5 +1,3 @@
-
-
 Namespace.Register("Fanex.AccountingReports.Main.MatchWinLoss2a.ThirdPartyDetailReport");
 Fanex.AccountingReports.Main.MatchWinLoss2a.ThirdPartyDetailReport = function () {
     var self = this;
