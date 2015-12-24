@@ -404,7 +404,7 @@
   </data>
   <data name="DailyWinLoss2h_MainReportFooterNote" xml:space="preserve">
     <value>* Virtual All Total: Soccer + Metric Gaming - Super Live + Other Sports + Parlay
-* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P + Bettrade + Colossus Bets</value>
+* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P + Bettrade + Colossus Bets + Cockfighting</value>
   </data>
   <data name="DailyWinLoss2h_MetricGamingReport_ReportTitle" xml:space="preserve">
     <value>Metric Gaming - Super Live Win/Loss report</value>
@@ -441,5 +441,11 @@
   </data>
   <data name="Daily_WinLoss2h_Cockfighting_SheetName" xml:space="preserve">
     <value>Daily Win Loss 2h - Cockfighting</value>
+  </data>
+  <data name="WinLossSummary3rdCockFighting_ReportName" xml:space="preserve">
+    <value>CockfightingDetails_From_Date_{0}_To_Date_{1}</value>
+  </data>
+  <data name="WinLossSummary3rd_CockFightingReportTitle" xml:space="preserve">
+    <value>Cockfighting | Details report from {0} to {1}</value>
   </data>
 </root>

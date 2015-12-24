@@ -61,7 +61,7 @@
 
             string reportName = string.Format(
                    MainResources.MatchWinLoss2aDetailByArena_ReportName,
-                   criteria.WinLostDate.ToShortFormatedDateWithSlash());
+                   criteria.WinLostDate.ToShortFormatedDateWithSlash().Replace("/", "_"));
             NpoiExcelExtensions.ResponseStreamExcel(workbook, reportName);
         }
 
@@ -89,7 +89,7 @@
 
             string reportName = string.Format(
                    MainResources.MatchWinLoss2aDetailByMatch_ReportName,
-                   criteria.WinLostDate.ToShortFormatedDateWithSlash());
+                   criteria.WinLostDate.ToShortFormatedDateWithSlash().Replace("/", "_"));
             NpoiExcelExtensions.ResponseStreamExcel(workbook, reportName);
         }
 
@@ -444,8 +444,8 @@
             List<CockFightMatchDetail> reportContent)
         {
             ICellStyle textStyle = NpoiExcelExtensions.TextStyle(workbook, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Center);
-            ICellStyle leftTextStyle = NpoiExcelExtensions.TextStyle(workbook, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Center);
-            ICellStyle rightTextStyle = NpoiExcelExtensions.TextStyle(workbook, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Center);
+            ICellStyle leftTextStyle = NpoiExcelExtensions.TextStyle(workbook, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Left);
+            ICellStyle rightTextStyle = NpoiExcelExtensions.TextStyle(workbook, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Right);
             ICellStyle decimalNumberStyle = NpoiExcelExtensions.DecimalStyle(workbook, HSSFColor.White.Index, false);
             ICellStyle percentStyle = NpoiExcelExtensions.PercentStyle(workbook, HSSFColor.White.Index, false);
             IRow row = null;

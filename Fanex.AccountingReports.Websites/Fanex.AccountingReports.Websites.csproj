@@ -1219,6 +1219,9 @@
     <Content Include="Web.Configuration\MAMonitorSection.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Web.Configuration\TreeWinLossProduct.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.Configuration\TreeWinLossProduct.xml" />
     <Content Include="Web.Configuration\VirtualSportsWinLossSection.config" />
     <Content Include="Web.Configuration\LegendSection.config">

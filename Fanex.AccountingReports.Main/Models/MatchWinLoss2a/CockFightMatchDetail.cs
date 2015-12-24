@@ -42,7 +42,7 @@
         {
             get
             {
-                var margin = this.WinLoss == 0 ? 0 : (this.WinLoss / this.RealTurnover);
+                var margin = this.RealTurnover == 0 ? 0 : (this.RealLineTotal / this.RealTurnover);
                 return margin;
             }
         }
