@@ -7,7 +7,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head{
-     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />     
      <link rel="stylesheet" type="text/css" href="~/Areas/Gaming/Views/NumberGameStatistic/Styles/NumberGameStatistic.less" />
 }
 @section Headline {
@@ -59,11 +59,23 @@
         var minDate = '@DateTime.Today.AddDays(-2)';
         var shortFormattedYesterday = '@DateTime.Today.AddDays(-1).ToShortFormatedDate()';
         var shortFormattedToday = '@DateTime.Today.ToShortFormatedDate()';
+        var beginLast3Months = '@DateTime.Today.AddMonths(-3).FirstDayOfMonth().ToShortFormatedDate()';
+        var endLast3Months = '@DateTime.Today.AddMonths(-1).LastDayOfMonth().ToShortFormatedDate()';
+        var beginLast6Months = '@DateTime.Today.AddMonths(-6).FirstDayOfMonth().ToShortFormatedDate()';
+        var endLast6Months = '@DateTime.Today.AddMonths(-1).LastDayOfMonth().ToShortFormatedDate()';
+
+        var viewResources = {
+            Time_period: '@Labels.Time_period',
+            From_Date: '@Labels.From_Date',
+            To_Date: '@Labels.To_Date',
+            Options_LastMonthRange: '@Labels.Options_LastMonthRange'            
+        };
     </script>
 }
 @section Foot {
     <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
-    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>    
     <script type="text/javascript" src="~/Areas/Gaming/Views/NumberGameStatistic/Scripts/NumberGameStatistic.js"></script>
 
 }

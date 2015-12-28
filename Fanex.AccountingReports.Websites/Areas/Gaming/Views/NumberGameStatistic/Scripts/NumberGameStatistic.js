@@ -6,11 +6,27 @@ Namespace.Register("Fanex.AccountingReports.Gaming.NumberGameStatistic");
 Fanex.AccountingReports.Gaming.NumberGameStatistic = function () {
     var self = this;
 
+    var Enums = {
+        DateOption: {
+            Last3Months: 8,
+            Last6Months: 9,
+            Today: 0,
+            Yesterday: 1
+        }
+    };
+
     var _tables = {
         btnGenerate: null,
         btnToday: null,
         btnYesterday: null,
+
         datepickerplugin: null,
+        dateOptionSelector: null,
+        firstDatePickerId1: null,
+        secondDatePickerId1: null,
+        last3MonthsDatePicker: null,
+        last6MonthsDatePicker: null,
+
         reportContainer: null,
         reportContent: null,
         filterNote: null,
@@ -49,7 +65,7 @@ Fanex.AccountingReports.Gaming.NumberGameStatistic = function () {
 
     var renderDatePicker = function () {
         $('#datepickerplugin').nexDatePicker({
-            nexDatePickerType: "daterange",
+            nexDatePickerType: "quickchoose",
             datePickerFormat: {
                 changeMonth: true,
                 changeYear: true,
@@ -57,35 +73,49 @@ Fanex.AccountingReports.Gaming.NumberGameStatistic = function () {
             },
             dropDownList:
             {
-                Id: "dropDownListId",
-                Label: "Date ",
-                LabelCss: "lbl-field col_2",
-                OptionCss: "edit-field col_5"
+                Id: "dateOptionSelector",
+                Label: "Time period",
+                LabelCss: "lbl-field col_3 prefix_2",
+                OptionCss: "edit-field col_6"
             },
             firstDatePicker: {
                 Id: "firstDatePickerId1",
-                Label: labelFrom,
+                Label: "From Date",
                 InitDate: today,
-                LabelCss: "lbl-field col_2",
-                TextboxCss: "edit-field col_5"
+                LabelCss: "lbl-field col_5 align-left",
+                TextboxCss: "edit-field col_6"
             },
             secondDatePicker: {
                 Id: "secondDatePickerId1",
-                Label: labelTo,
+                Label: "To Date",
                 InitDate: today,
-                LabelCss: "lbl-field col_2",
+                LabelCss: "lbl-field col_3 align-left",
                 TextboxCss: "edit-field col_6"
             },
             selectedItem: 0,
             onSelectDatePicker: function () {
             },
-            minDate: new Date(minDate),
+            minDate: minDate,
             maxDate: new Date(today)
         });
 
         _tables.datepickerplugin = $("#datepickerplugin");
-        _tables.firstDatePicker = $("#firstDatePickerId1");
-        _tables.secondDatePicker = $("#secondDatePickerId1");
+        _tables.firstDatePickerId1 = $("#firstDatePickerId1");
+        _tables.secondDatePickerId1 = $("#secondDatePickerId1");
+        _tables.dateOptionSelector = $("#dateOptionSelector");
+
+        var dateOption = '<option value="' + Enums.DateOption.Last3Months +
+                        '" data-fDate="' + beginLast3Months + '" data-tDate="' + endLast3Months + '">' +
+        AccReport.utility.StringFormat(viewResources.Options_LastMonthRange, [3]) + '</option>';
+        _tables.dateOptionSelector.append(dateOption);
+
+        dateOption = '<option value="' + Enums.DateOption.Last6Months +
+                        '" data-fDate="' + beginLast6Months + '" data-tDate="' + endLast6Months + '">' +
+        AccReport.utility.StringFormat(viewResources.Options_LastMonthRange, [6]) + '</option>';
+        _tables.dateOptionSelector.append(dateOption);
+
+        _tables.last3MonthsDatePicker = $("#last3MonthsDatePicker");
+        _tables.last6MonthsDatePicker = $("#last6MonthsDatePicker");
     };
 
     var renderFilterNote = function (noteMessage) {
@@ -109,7 +139,7 @@ Fanex.AccountingReports.Gaming.NumberGameStatistic = function () {
             _tables.firstDatePicker.datepicker("option", "maxDate", new Date(today));
             _tables.firstDatePicker.datepicker("setDate", new Date(today));
             _tables.secondDatePicker.datepicker("setDate", new Date(today));
-          
+
             getReport();
         });
 
