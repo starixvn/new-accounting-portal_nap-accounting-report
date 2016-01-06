@@ -19,16 +19,26 @@ namespace Fanex.AccountingReports.Core.Extensions
     /// </summary>
     public static class NpoiExcelExtensions
     {
-        public const int FontWidth = 30;
-        public const int FontHeight = 20;
-        public const int FontSize = 8;
-        public const int MaxRowPerSheet = 20000;
-
         public const string FontName = "Tahoma";
         public const string IntNumberFormat = "#,##0";
         public const string TwoDecimalDigitNumber = "##,##0.00";
         public const string NegativeDecimalNumberFormat = "[>0]#,##0.00;[<0][Red]-#,##0.00;#,##0.00";
+        public const string PositiveDecimalNumberFormat = "[>0][Red]#,##0.00;[<0]-#,##0.00;#,##0.00";
+        public const string PercentFormat = "#,##0.00%;-#,##0.00%";
+        public const string NegativePercentFormat = "[>0]#,##0.00%;[<0][Red]-#,##0.00%;#,##0.00%";
+        public const string PositivePercentFormat = "[>0][Red]#,##0.00%;[<0]-#,##0.00%;#,##0.00%";
         public const string NormalPercentFormat = "#,##0.00%;-#,##0.00%";
+
+        private const int VerticalAlignTop = 0;
+        private const int VerticalAlignCenter = 1;
+        private const int VerticalAlignBottom = 2;
+        private const int VerticalAlignJustify = 3;
+        private const int VerticalAlignDistributed = 4;
+
+        public const int FontWidth = 30;
+        public const int FontHeight = 20;
+        public const int FontSize = 8;
+        public const int MaxRowPerSheet = 20000;
 
         public static readonly Color BackGroundColor = Color.White;
         public static readonly Color ReportTitleColor = Color.FromArgb(255, 217, 97);
@@ -44,12 +54,6 @@ namespace Fanex.AccountingReports.Core.Extensions
         public static readonly Color ChildColor = Color.FromArgb(194, 226, 236);
         public static readonly Color NoteInformationCellColor = Color.FromArgb(181, 196, 208);
         public static readonly Color BorderColor = Color.Gray;
-
-        private const int VerticalAlignTop = 0;
-        private const int VerticalAlignCenter = 1;
-        private const int VerticalAlignBottom = 2;
-        private const int VerticalAlignJustify = 3;
-        private const int VerticalAlignDistributed = 4;
 
         public enum Alignment
         {
@@ -176,6 +180,151 @@ namespace Fanex.AccountingReports.Core.Extensions
             cellStyle.Alignment = HorizontalAlignment.Right;
             cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
             cellStyle.DataFormat = dataFormat.GetFormat(TwoDecimalDigitNumber);
+            cellStyle.SetFont(font);
+            cellStyle = SetBorderToCell(cellStyle);
+            return cellStyle;
+        }
+
+        public static ICellStyle PositiveDecimalStyle(
+           HSSFWorkbook excelFile,
+           short cellColor,
+           bool bold,
+           short fontColor = 8)
+        {
+            ICellStyle cellStyle = excelFile.CreateCellStyle();
+            IFont font = excelFile.CreateFont();
+            IDataFormat dataFormat = excelFile.CreateDataFormat();
+
+            font.FontHeightInPoints = FontSize;
+            font.FontName = FontName;
+            font.Color = fontColor;
+
+            if (bold)
+            {
+                font.Boldweight = (short)FontBoldWeight.Bold;
+            }
+
+            cellStyle.FillForegroundColor = cellColor;
+            cellStyle.FillPattern = FillPattern.SolidForeground;
+            cellStyle.Alignment = HorizontalAlignment.Right;
+            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
+            cellStyle.DataFormat = dataFormat.GetFormat(PositiveDecimalNumberFormat);
+            cellStyle.SetFont(font);
+            cellStyle = SetBorderToCell(cellStyle);
+            return cellStyle;
+        }
+
+        public static ICellStyle NegativeDecimalStyle(
+           HSSFWorkbook excelFile,
+           short cellColor,
+           bool bold,
+           short fontColor = 8)
+        {
+            ICellStyle cellStyle = excelFile.CreateCellStyle();
+            IFont font = excelFile.CreateFont();
+            IDataFormat dataFormat = excelFile.CreateDataFormat();
+
+            font.FontHeightInPoints = FontSize;
+            font.FontName = FontName;
+            font.Color = fontColor;
+
+            if (bold)
+            {
+                font.Boldweight = (short)FontBoldWeight.Bold;
+            }
+
+            cellStyle.FillForegroundColor = cellColor;
+            cellStyle.FillPattern = FillPattern.SolidForeground;
+            cellStyle.Alignment = HorizontalAlignment.Right;
+            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
+            cellStyle.DataFormat = dataFormat.GetFormat(NegativeDecimalNumberFormat);
+            cellStyle.SetFont(font);
+            cellStyle = SetBorderToCell(cellStyle);
+            return cellStyle;
+        }
+
+        public static ICellStyle PercentStyle(
+           HSSFWorkbook excelFile,
+           short cellColor,
+           bool bold,
+           short fontColor = 8)
+        {
+            ICellStyle cellStyle = excelFile.CreateCellStyle();
+            IFont font = excelFile.CreateFont();
+            IDataFormat dataFormat = excelFile.CreateDataFormat();
+
+            font.FontHeightInPoints = FontSize;
+            font.FontName = FontName;
+            font.Color = fontColor;
+
+            if (bold)
+            {
+                font.Boldweight = (short)FontBoldWeight.Bold;
+            }
+
+            cellStyle.FillForegroundColor = cellColor;
+            cellStyle.FillPattern = FillPattern.SolidForeground;
+            cellStyle.Alignment = HorizontalAlignment.Right;
+            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
+            cellStyle.DataFormat = dataFormat.GetFormat(PercentFormat);
+            cellStyle.SetFont(font);
+            cellStyle = SetBorderToCell(cellStyle);
+            return cellStyle;
+        }
+
+        public static ICellStyle PositivePercentStyle(
+           HSSFWorkbook excelFile,
+           short cellColor,
+           bool bold,
+           short fontColor = 8)
+        {
+            ICellStyle cellStyle = excelFile.CreateCellStyle();
+            IFont font = excelFile.CreateFont();
+            IDataFormat dataFormat = excelFile.CreateDataFormat();
+
+            font.FontHeightInPoints = FontSize;
+            font.FontName = FontName;
+            font.Color = fontColor;
+
+            if (bold)
+            {
+                font.Boldweight = (short)FontBoldWeight.Bold;
+            }
+
+            cellStyle.FillForegroundColor = cellColor;
+            cellStyle.FillPattern = FillPattern.SolidForeground;
+            cellStyle.Alignment = HorizontalAlignment.Right;
+            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
+            cellStyle.DataFormat = dataFormat.GetFormat(PositivePercentFormat);
+            cellStyle.SetFont(font);
+            cellStyle = SetBorderToCell(cellStyle);
+            return cellStyle;
+        }
+
+        public static ICellStyle NegativePercentStyle(
+           HSSFWorkbook excelFile,
+           short cellColor,
+           bool bold,
+           short fontColor = 8)
+        {
+            ICellStyle cellStyle = excelFile.CreateCellStyle();
+            IFont font = excelFile.CreateFont();
+            IDataFormat dataFormat = excelFile.CreateDataFormat();
+
+            font.FontHeightInPoints = FontSize;
+            font.FontName = FontName;
+            font.Color = fontColor;
+
+            if (bold)
+            {
+                font.Boldweight = (short)FontBoldWeight.Bold;
+            }
+
+            cellStyle.FillForegroundColor = cellColor;
+            cellStyle.FillPattern = FillPattern.SolidForeground;
+            cellStyle.Alignment = HorizontalAlignment.Right;
+            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
+            cellStyle.DataFormat = dataFormat.GetFormat(NegativePercentFormat);
             cellStyle.SetFont(font);
             cellStyle = SetBorderToCell(cellStyle);
             return cellStyle;
@@ -376,9 +525,9 @@ namespace Fanex.AccountingReports.Core.Extensions
             cellStyle.BorderTop = BorderStyle.Thin;
 
             cellStyle.BottomBorderColor = HSSFColor.Grey80Percent.Index;
-            cellStyle.LeftBorderColor = HSSFColor.Grey80Percent.Index; 
-            cellStyle.RightBorderColor = HSSFColor.Grey80Percent.Index; 
-            cellStyle.TopBorderColor = HSSFColor.Grey80Percent.Index; 
+            cellStyle.LeftBorderColor = HSSFColor.Grey80Percent.Index;
+            cellStyle.RightBorderColor = HSSFColor.Grey80Percent.Index;
+            cellStyle.TopBorderColor = HSSFColor.Grey80Percent.Index;
 
             return cellStyle;
         }

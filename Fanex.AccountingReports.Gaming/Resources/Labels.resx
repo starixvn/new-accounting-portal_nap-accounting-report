@@ -1180,4 +1180,7 @@
   <data name="CasinoGameStatistic_SheetName" xml:space="preserve">
     <value>{0} Game Statistic</value>
   </data>
+  <data name="Player_ID" xml:space="preserve">
+    <value>Player ID</value>
+  </data>
 </root>

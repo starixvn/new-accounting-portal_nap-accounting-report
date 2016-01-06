@@ -357,4 +357,7 @@
   <data name="GameTable" xml:space="preserve">
     <value>Game Table</value>
   </data>
+  <data name="Bet_type" xml:space="preserve">
+    <value>Bet type</value>
+  </data>
 </root>

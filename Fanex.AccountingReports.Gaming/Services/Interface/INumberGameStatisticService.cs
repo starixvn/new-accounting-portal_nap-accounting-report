@@ -5,8 +5,12 @@
 
     public interface INumberGameStatisticService
     {
-        NumberGameStatistic GetReport(GetNumberGameStatisticCriteria criteria);
+        NumberGameStatisticByBettype GetNumberGameStatisticByBettype(GetNumberGameStatisticCriteria criteria);
 
-        void ExportReport(GetNumberGameStatisticCriteria criteria);
+        NumberGameStatisticByDaily GetNumberGameStatisticByDaily(GetNumberGameStatisticCriteria criteria);
+
+        NumberGameStatisticByLeague GetNumberGameStatisticByLeague(GetNumberGameStatisticCriteria criteria);
+
+        NumberGameStatisticByUserName GetNumberGameStatisticByUserName(GetNumberGameStatisticCriteria criteria);
     }
 }

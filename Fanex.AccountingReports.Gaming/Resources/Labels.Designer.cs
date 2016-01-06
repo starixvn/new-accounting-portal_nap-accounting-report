@@ -2222,6 +2222,15 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Player ID.
+        /// </summary>
+        public static string Player_ID {
+            get {
+                return ResourceManager.GetString("Player_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Position.
         /// </summary>
         public static string Position {
