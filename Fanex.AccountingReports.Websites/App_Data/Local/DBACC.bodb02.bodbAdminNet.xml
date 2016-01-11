@@ -29,8 +29,8 @@
     <Setting Key="Gaming_BingoWinLoss_GetReport" SpName="NAP_Rpt_WinlostBI_ByDateRange" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
   <Function Name="Gaming - Casino Win Loss">
-    <Setting Key="Gaming_WinLoss_CS_Detail_14" SpName="Acc_Rpt_WinlostCA_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Gaming_WinLoss_CS_Detail" SpName="Acc_Rpt_WinlostCA_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Gaming_WinLoss_CS_Detail_14" SpName="Acc_Rpt_WinlostCA_Details14_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Gaming_WinLoss_CS_Detail" SpName="Acc_Rpt_WinlostCA_Details_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
   <Function Name="Special - Special Match Analysis">
     <Setting Key="Special_SpecialMatchAnalysis_GetLeagues" SpName="Acc_LeagueSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
@@ -73,8 +73,8 @@
   <Function Name="Main - Match Win Loss (2a)">
     <Setting Key="Main_MatchWinLoss2a_GetMainReport" SpName="Acc_Rpt_MatchWinLoss2_New_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetMainReport_14" SpName="Acc_Rpt_MatchWinLoss2_New14_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
-    <Setting Key="Main_MatchWinLoss2a_GetThirdPartyCasinoReport" SpName="Acc_Rpt_WinlostCA_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
-    <Setting Key="Main_MatchWinLoss2a_GetThirdPartyCasinoReport_14" SpName="Acc_Rpt_WinlostCA_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_MatchWinLoss2a_GetThirdPartyCasinoReport" SpName="Acc_Rpt_WinlostCA_Details_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_MatchWinLoss2a_GetThirdPartyCasinoReport_14" SpName="Acc_Rpt_WinlostCA_Details14_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinloss2a_GetWinLossByBettype" SpName="Acc_Rpt_WinlossByBettype" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0"/>
     <Setting Key="Main_MatchWinloss2a_GetWinLossByBettype_14" SpName="Acc_Rpt_WinlossByBettype14" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetMetricGamingReport" SpName="Acc_Rpt_WinlostMG_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
@@ -89,8 +89,8 @@
     <Setting Key="Main_DailyWinLoss2h_Main2hReport" SpName="Acc_Rpt_DailyWLDirect_Sporttype_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_Main2hReport_14" SpName="Acc_Rpt_DailyWLDirect_Sporttype14_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
 
-    <Setting Key="Main_DailyWinLoss2h_GetCasinoReport" SpName="Acc_Rpt_DailyWLDirect_Casino" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetCasinoReport_14" SpName="Acc_Rpt_DailyWLDirect_Casino14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetCasinoReport" SpName="Acc_Rpt_DailyWLDirect_Casino_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetCasinoReport_14" SpName="Acc_Rpt_DailyWLDirect_Casino14_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
 
     <Setting Key="Main_DailyWinLoss2h_GetLiveCasinoReport" SpName="Acc_Rpt_DailyWLDirect_LiveCasino" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetLiveCasinoReport_14" SpName="Acc_Rpt_DailyWLDirect_LiveCasino14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
@@ -143,8 +143,8 @@
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_LiveCasino_14" SpName="Acc_Rpt_DailyWLDirect_LiveCasino_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Bingo" SpName="Acc_Rpt_DailyWLDirect_Bingo_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Bingo_14" SpName="Acc_Rpt_DailyWLDirect_Bingo_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Casino" SpName="Acc_Rpt_DailyWLDirect_Casino_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Casino_14" SpName="Acc_Rpt_DailyWLDirect_Casino_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Casino" SpName="Acc_Rpt_DailyWLDirect_Casino_Bettype_Site_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Casino_14" SpName="Acc_Rpt_DailyWLDirect_Casino_Bettype_Site14_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_VirtualSports" SpName="Acc_Rpt_DailyWLDirect_VirtualSports_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_VirtualSports_14" SpName="Acc_Rpt_DailyWLDirect_VirtualSports_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Keno" SpName="Acc_Rpt_DailyWLDirect_Keno_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
@@ -281,7 +281,7 @@
     <Setting Key="Acc_Rpt_EnableDisableAccount_ByProduct" SpName="Acc_Rpt_EnableDisableAccount_ByProduct_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Misc - Member Win Loss On RNG Casino">
-    <Setting Key="Misc_MemberWinLossOnRNGCasinoRecent" SpName="Acc_Rpt_RNGCasinoAutomail_Recent" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Misc_MemberWinLossOnRNGCasinoHistorical" SpName="Acc_Rpt_RNGCasinoAutomail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Misc_MemberWinLossOnRNGCasinoRecent" SpName="Acc_Rpt_RNGCasinoAutomail_Recent_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Misc_MemberWinLossOnRNGCasinoHistorical" SpName="Acc_Rpt_RNGCasinoAutomail_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
 </Functions>

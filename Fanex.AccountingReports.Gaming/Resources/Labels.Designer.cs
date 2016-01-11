@@ -466,6 +466,15 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Casino Games.
+        /// </summary>
+        public static string CasinoGames {
+            get {
+                return ResourceManager.GetString("CasinoGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} Game Statistic.
         /// </summary>
         public static string CasinoGameStatistic_SheetName {

@@ -199,7 +199,7 @@
     <value>Bingo</value>
   </data>
   <data name="Casino" xml:space="preserve">
-    <value>Casino</value>
+    <value>Casino Games</value>
   </data>
   <data name="ChangedPassword" xml:space="preserve">
     <value>Your Password has been changed successfully !</value>
@@ -1230,6 +1230,9 @@
   </data>
   <data name="Fight_No" xml:space="preserve">
     <value>Fight No.</value>
+  </data>
+  <data name="MBC_RNG_Casino" xml:space="preserve">
+    <value>MBC - RNG Casino</value>
   </data>
   <data name="MBC_RNG_Casino" xml:space="preserve">
     <value>MBC - RNG Casino</value>

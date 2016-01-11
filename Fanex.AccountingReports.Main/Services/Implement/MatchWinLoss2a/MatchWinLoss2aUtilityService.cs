@@ -84,7 +84,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     break;
 
                 case CoreConstants.BetTypeConstants.CasinoGames:
-                    betTypeName = Labels.Casino.ToUpper();
+                    betTypeName = Labels.Casino;
                     break;
 
                 case CoreConstants.BetTypeConstants.KickOff:
@@ -273,6 +273,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         {
             return !string.IsNullOrEmpty(betTypeName) &&
                    (string.Equals(betTypeName, Labels.Casino, StringComparison.OrdinalIgnoreCase) ||
+                   string.Equals(betTypeName, Labels.MBC_RNG_Casino, StringComparison.OrdinalIgnoreCase) ||
                    string.Equals(betTypeName, Labels.Racing, StringComparison.OrdinalIgnoreCase) ||
                    string.Equals(betTypeName, Labels.LiveCasino, StringComparison.OrdinalIgnoreCase) ||
                    string.Equals(betTypeName, Labels.Virtual_Sports, StringComparison.OrdinalIgnoreCase) ||

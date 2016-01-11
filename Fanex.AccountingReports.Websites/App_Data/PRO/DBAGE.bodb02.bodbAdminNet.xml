@@ -18,7 +18,7 @@
     <Setting Key="Special_ParlayWon_GetReport" SpName="Acc_Rpt_ParlayWon" DbName="DBAGE.bodb02.bodbAdminNet" />
   </Function>
   <Function Name="Gaming - Number Of Active Member">
-    <Setting Key="Gaming_NumberOfActiveMember_GetReport" SpName="Acc_Rpt_GamesActiveMember" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Gaming_NumberOfActiveMember_GetReport" SpName="Acc_Rpt_GamesActiveMember_uat1" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Gaming_NumberOfActiveMember_Products" SpName="Acc_Rpt_GamesActive_Products_uat1" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0">
       <Mapping DataField="ProductID" ObjectProperty="ProductId" />
       <Mapping DataField="ProductPrefix" ObjectProperty="ProductShortName" />
@@ -30,7 +30,7 @@
 	</Function>
 
 	<Function Name="Special - SMAs Turn Over">
-		<Setting Key="Special_SMAsTurnOver" SpName="Acc_Rpt_SMAs_TurnOver" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />
+		<Setting Key="Special_SMAsTurnOver" SpName="Acc_Rpt_SMAs_TurnOver_uat1" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />
 	</Function>
 
 	<Function Name="Special - Total Credit Account By Product">
