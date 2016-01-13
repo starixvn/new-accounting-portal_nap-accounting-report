@@ -64,9 +64,8 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGrandTotal = func
 
         var timeRangeLength = report && report.ChildsInfo ? report.ChildsInfo.length : 0;
         if (timeRangeLength > 0) {
-            var info;
-            var indexRange = reportManager.GetPagingIndexRange(timeRangeLength);
-            for (var i = indexRange.startIndex; i < indexRange.endIndex; i++) {
+            var info;            
+            for (var i = 0; i < report.ChildsInfo.length; i++) {
                 var timeRangeWinLoss = report.ChildsInfo[i];
                 var reportLength = timeRangeWinLoss.ChildsInfo.length;
                 for (var j = 0; j < reportLength; j++) {
@@ -152,9 +151,8 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportByGrandTotal = func
 
         var timeRangeLength = report && report.ChildsInfo ? report.ChildsInfo.length : 0;
         if (timeRangeLength > 0) {
-            var info;
-            var indexRange = reportManager.GetPagingIndexRange(timeRangeLength);
-            for (var i = indexRange.startIndex; i < indexRange.endIndex; i++) {
+            var info;            
+            for (var i = 0; i < report.ChildsInfo.length; i++) {
                 info = report.ChildsInfo[i];
                 columns = [];
                 columns.push({ Name: "ColName", Value: "Total " + info.CurrencyName });
