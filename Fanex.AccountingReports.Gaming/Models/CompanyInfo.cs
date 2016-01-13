@@ -22,6 +22,8 @@ namespace Fanex.AccountingReports.Gaming.Models
 
         public string Name { get; set; }
 
+        public string EffectiveDate { get; set; }
+
         public List<CompanyInfo> ChildInfo { get; set; }
     }
 }

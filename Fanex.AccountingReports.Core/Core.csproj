@@ -223,6 +223,7 @@
     <Compile Include="Exceptions\HandleAjaxErrorAttribute.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\NpoiExcelExtensions.cs" />
+    <Compile Include="Extensions\NpoiSetting.cs" />
     <Compile Include="Extensions\SessionExtension.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\WorkbookExtensions.cs" />

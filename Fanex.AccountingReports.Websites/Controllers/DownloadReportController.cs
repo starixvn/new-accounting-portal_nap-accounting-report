@@ -46,21 +46,20 @@ namespace Fanex.AccountingReports.Websites.Controllers
             string reportTimeString = Cryptography.CfsDeCrypt(time.Replace(" ", "+"));
             DateTime reportTime = Convert.ToDateTime(reportTimeString);
             DateTime nextMonthReportTime = reportTime.AddMonths(1);
-            string reportContainerFolder = reportTime.AddMonths(-1).Year.ToString();
+            string reportContainerFolder = reportTime.Year.ToString();
 
             string reportNameString = Cryptography.CfsDeCrypt(reportName.Replace(" ", "+"));
-            string reportNameWithExtension = string.Format("{0}.xlsx", reportNameString);
 
             if (AppSettings.IsAuthenticate)
             {
                 using (new NetworkConnection(@"\\" + _ip, _networkCredential))
                 {
-                    return GetExcelFile(currentTime, parentReportPath, reportTime, nextMonthReportTime, reportContainerFolder, reportNameWithExtension);
+                    return GetExcelFile(currentTime, parentReportPath, reportTime, nextMonthReportTime, reportContainerFolder, reportNameString);
                 }
             }
             else
             {
-                return GetExcelFile(currentTime, parentReportPath, reportTime, nextMonthReportTime, reportContainerFolder, reportNameWithExtension);
+                return GetExcelFile(currentTime, parentReportPath, reportTime, nextMonthReportTime, reportContainerFolder, reportNameString);
             }
         }
 
@@ -82,7 +81,7 @@ namespace Fanex.AccountingReports.Websites.Controllers
             {
                 byte[] fileBytes = System.IO.File.ReadAllBytes(reportPath);
                 string fileExtension = Path.GetExtension(reportPath);
-                var mimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                var mimeType = "application/x-zip-compressed";
                 var contentResult = File(fileBytes, mimeType, reportNameWithExtension);
                 return contentResult;
             }

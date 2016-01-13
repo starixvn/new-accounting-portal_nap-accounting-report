@@ -175,6 +175,7 @@
     <Compile Include="Controllers\BingoStatisticController.cs" />
     <Compile Include="Controllers\BingoWinLossController.cs" />
     <Compile Include="Controllers\CasinoWinLossController.cs" />
+    <Compile Include="Controllers\CasinoGameStatisticController.cs" />
     <Compile Include="Controllers\LiveCasinoAgencyWinLossController.cs" />
     <Compile Include="Controllers\LiveCasinoGameFinancialReportController.cs" />
     <Compile Include="Controllers\GamingController.cs" />
@@ -193,7 +194,13 @@
     <Compile Include="Criteria\BingoOutStanding\GetReportCriteria.cs" />
     <Compile Include="Criteria\BingoStatistic\GetReportCriteria.cs" />
     <Compile Include="Criteria\BingoWinLoss\GetReportCriteria.cs" />
+    <Compile Include="Criteria\CasinoGameStatistic\GetLicenseeListCriteria.cs" />
+    <Compile Include="Criteria\CasinoGameStatistic\GetReportByHourlyCriteria.cs" />
+    <Compile Include="Criteria\CasinoGameStatistic\GetProductListCriteria.cs" />
     <Compile Include="Criteria\CasinoWinLoss\GetCasinoWinLossCriteria.cs" />
+    <Compile Include="Criteria\CasinoGameStatistic\GetGameTableListCriteria.cs" />
+    <Compile Include="Criteria\CasinoGameStatistic\GetGameTypeListCriteria.cs" />
+    <Compile Include="Criteria\CasinoGameStatistic\GetReportByDailyCriteria.cs" />
     <Compile Include="Criteria\GetLicenseesByProductCriteria.cs" />
     <Compile Include="Criteria\GetLiveCasinoGameCompanyListCriteria.cs" />
     <Compile Include="Criteria\GetNumberGameBetTypeListCriteria.cs" />
@@ -228,9 +235,16 @@
     <Compile Include="Models\BingoOutStanding\WinLossInfo.cs" />
     <Compile Include="Models\BingoStatistic\WinLossInfo.cs" />
     <Compile Include="Models\BingoWinLoss\WinLossInfo.cs" />
+    <Compile Include="Models\CasinoGameStatistic\GameTypeItem.cs" />
+    <Compile Include="Models\CasinoGameStatistic\Hourly.cs" />
+    <Compile Include="Models\CasinoGameStatistic\ProductItem.cs" />
+    <Compile Include="Models\CasinoGameStatistic\ProductList.cs" />
     <Compile Include="Models\CasinoWinLoss\CasinoWinLoss.cs" />
     <Compile Include="Models\CompanyInfo.cs" />
     <Compile Include="Models\GamingType.cs" />
+    <Compile Include="Models\CasinoGameStatistic\ProductGameType.cs" />
+    <Compile Include="Models\CasinoGameStatistic\WinLossInfo.cs" />
+    <Compile Include="Models\CasinoGameStatistic\WinLossInfoEntity.cs" />
     <Compile Include="Models\LiveCasinoGameFinancialReport\FinancialReport.cs" />
     <Compile Include="Models\LiveCasinoGameStatistic\ProductGameType.cs" />
     <Compile Include="Models\LiveCasinoGameStatistic\WinLossInfo.cs" />
@@ -257,10 +271,12 @@
     <Compile Include="Models\VirtualSportsWinLoss\VirtualSportsWinLossDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Implement\CasinoWinLossRepository.cs" />
+    <Compile Include="Repositories\Implement\CasinoGameStatisticRepository.cs" />
     <Compile Include="Repositories\Implement\GamingRepository.cs" />
     <Compile Include="Repositories\Implement\LiveCasinoAgencyWinLossRepository.cs" />
     <Compile Include="Repositories\Implement\NumberGameFinancialRepository.cs" />
     <Compile Include="Repositories\Implement\NumberGameMonthlyWinLossRepository.cs" />
+    <Compile Include="Repositories\Interface\ICasinoGameStatisticRepository.cs" />
     <Compile Include="Repositories\Interface\IGamingRepository.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
@@ -302,8 +318,20 @@
     <Compile Include="Services\Implement\BingoWinLoss\BingoWinLossService.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Services\Implement\CasinoGameStatistic\Utilities.cs" />
+    <Compile Include="Services\Implement\CasinoGameStatistic\ExportExcelHourlyService.cs" />
+    <Compile Include="Services\Implement\CasinoGameStatistic\ExportExcelService.cs" />
+    <Compile Include="Services\Implement\CasinoGameStatistic\FilterSectionService.cs" />
     <Compile Include="Services\Implement\CasinoWinLoss\CasinoWinLossGetReportService.cs" />
     <Compile Include="Services\Implement\CasinoWinLoss\CasinoWinLossExportReportService.cs" />
+    <Compile Include="Services\Implement\CasinoGameStatistic\CasinoGameStatisticService.cs" />
+    <Compile Include="Services\Implement\CasinoGameStatistic\CasinoGameStatisticServiceByCompany.cs" />
+    <Compile Include="Services\Implement\CasinoGameStatistic\CasinoGameStatisticServiceByCurrency.cs" />
+    <Compile Include="Services\Implement\CasinoGameStatistic\CasinoGameStatisticServiceByDailyRange.cs" />
+    <Compile Include="Services\Implement\CasinoGameStatistic\CasinoGameStatisticServiceByGameTable.cs" />
+    <Compile Include="Services\Implement\CasinoGameStatistic\CasinoGameStatisticServiceByGameType.cs" />
+    <Compile Include="Services\Implement\CasinoGameStatistic\CasinoGameStatisticServiceByMonthlyRange.cs" />
+    <Compile Include="Services\Implement\CasinoGameStatistic\CasinoGameStatisticServiceByUsername.cs" />
     <Compile Include="Services\Implement\LiveCasinoGameFinancialReportService.cs" />
     <Compile Include="Services\Implement\GamingService.cs" />
     <Compile Include="Services\Implement\LiveCasinoProductService.cs" />
@@ -339,8 +367,14 @@
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Services\Implement\VirtualSportWinLoss\VirtualSportsWinLossGetReportService.cs" />
+    <Compile Include="Services\Interface\CasinoGameStatistic\IExportExcelHourlyService.cs" />
+    <Compile Include="Services\Interface\CasinoGameStatistic\IExportExcelService.cs" />
+    <Compile Include="Services\Interface\CasinoGameStatistic\IFilterSectionService.cs" />
     <Compile Include="Services\Interface\CasinoWinLoss\ICasinoWinLossGetReportService.cs" />
     <Compile Include="Services\Interface\CasinoWinLoss\ICasinoWinLossExportReportService.cs" />
+    <Compile Include="Services\Interface\CasinoGameStatistic\ICasinoGameStatisticService.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Services\Interface\IBingoWinLossService.cs" />
     <Compile Include="Services\Interface\ILiveCasinoAgencyWinLossService.cs" />
     <Compile Include="Services\Interface\ILiveCasinoGameFinancialReportService.cs" />
@@ -379,7 +413,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\GamingResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>GamingResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <LastGenOutput>GamingResources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Labels.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

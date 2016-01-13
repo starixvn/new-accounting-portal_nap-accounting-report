@@ -232,10 +232,10 @@
     <value>Company</value>
   </data>
   <data name="Company_comm" xml:space="preserve">
-    <value>Company comm</value>
+    <value>Company Comm</value>
   </data>
   <data name="Company_net_income" xml:space="preserve">
-    <value>Company net income</value>
+    <value>Company Net Income</value>
   </data>
   <data name="Company_Stake" xml:space="preserve">
     <value>Company Stake</value>
@@ -376,13 +376,13 @@
     <value>Game Type</value>
   </data>
   <data name="Game_income" xml:space="preserve">
-    <value>Game income</value>
+    <value>Game Income</value>
   </data>
   <data name="Game_Levy_to_pay" xml:space="preserve">
     <value>Game Levy to pay</value>
   </data>
   <data name="Game_payout" xml:space="preserve">
-    <value>Game payout</value>
+    <value>Game Payout</value>
   </data>
   <data name="Game_search" xml:space="preserve">
     <value>Game search</value>
@@ -1070,7 +1070,7 @@
     <value>None Live</value>
   </data>
   <data name="IBC_Group" xml:space="preserve">
-    <value>IBC Group</value>
+    <value>MBC Group</value>
   </data>
   <data name="Show_refund_column" xml:space="preserve">
     <value>Show refund column</value>
@@ -1168,10 +1168,16 @@
   <data name="CustId" xml:space="preserve">
     <value>Player ID</value>
   </data>
+  <data name="_3rdParty" xml:space="preserve">
+    <value>3rd Party</value>
+  </data>
   <data name="CompanyNetInCome" xml:space="preserve">
     <value>Company Net Income</value>
   </data>
   <data name="GameInCome" xml:space="preserve">
     <value>Game Income</value>
+  </data>
+  <data name="CasinoGameStatistic_SheetName" xml:space="preserve">
+    <value>{0} Game Statistic</value>
   </data>
 </root>

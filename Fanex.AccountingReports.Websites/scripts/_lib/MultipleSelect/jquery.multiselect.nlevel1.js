@@ -52,6 +52,14 @@
             }
             return tempArray;
         },
+        getCheckedItemsByLevel: function (level) {
+            var listChecked = $(this).next('div.ui-multiselect-options').find('label[data-level="' + level + '"]:not(.ui-multiselect-state-disabled)').find('input:not(#' + $(this).attr('id') + "HeaderCheckBox)").filter(':checked');
+            var tempArray = [];
+            for (var i = 0; i < listChecked.length; i++) {
+                tempArray.push(listChecked[i].value);
+            }
+            return tempArray;
+        },
         getMainParentCheckedItems: function () {
             var listChecked = $(this).attr('parent-checked-value').split(',');
             return listChecked;
@@ -194,7 +202,7 @@
             return tempHtml.join('');
         };
         //render Body
-        var InsertRow = function (tempData, index, isChild, isLastChildItem, isNoGroup, siblingGroup, currentParentGroupId, currentGroupId) {
+        var InsertRow = function (tempData, index, isChild, isLastChildItem, isNoGroup, siblingGroup, currentParentGroupId, currentGroupId, level) {
             var tempHtml = [];
             var title = tempData.Text || "",
             value = tempData.Value || "",
@@ -247,7 +255,7 @@
                 }
 
                 labelClasses += " ui-multiselect-corner-all";
-                tempHtml.push('<label for="' + inputID + '" class="' + labelClasses + '" style="' + tempData.CssClass + '">');
+                tempHtml.push('<label data-level="' + level + '" for="' + inputID + '" class="' + labelClasses + '" style="' + tempData.CssClass + '">');
                 tempHtml.push('<input id="' + inputID + '" type="' + (o.multiple ? 'checkbox' : 'radio') + '" name="' + value + '" value="' + value + '" title="' + title + '" childgroupid="' + currentParentGroupId + '"');
 
                 if (o.isCheckAll) {
@@ -271,12 +279,12 @@
                         || tempData.Items[j].Items == null
                         || tempData.Items[j].Items.length === 0) {
                             tempHtml.push(InsertRow(tempData.Items[j], j,
-                                true, (j === tempData.Items.length - 1 ? true : false), true, siblingGroup, groupIdAttr, currentGroupId));
+                                true, (j === tempData.Items.length - 1 ? true : false), true, siblingGroup, groupIdAttr, currentGroupId, level + 1));
                         }
                         else {
                             currentGroupId += "-" + j.toString();
                             tempHtml.push(InsertRow(tempData.Items[j], j,
-                                false, (j === tempData.Items.length - 1 ? true : false), false, siblingGroup, groupIdAttr, currentGroupId));
+                                false, (j === tempData.Items.length - 1 ? true : false), false, siblingGroup, groupIdAttr, currentGroupId, level + 1));
                         }
 
                         //tempHtml.push(InsertRow(tempData.Items[j], j, true, (j === tempData.Items.length - 1 ? true : false), false, false));
@@ -300,7 +308,7 @@
                 var siblingIsGroup = isShowGroup ? true : false;
                 var currentGroupId = "0-" + i.toString();
                 numGroup++;
-                tempHtml.push(InsertRow(tempGroup, i, isChild, isLastChildItem, isNoGroup, siblingIsGroup, groupIdAttr, currentGroupId));
+                tempHtml.push(InsertRow(tempGroup, i, isChild, isLastChildItem, isNoGroup, siblingIsGroup, groupIdAttr, currentGroupId, 0));
             }
             tempHtml.push('</ul>');
             return tempHtml.join('');
@@ -699,7 +707,7 @@
                 if ($(this).hasClass("ui-multiselect-icon-collapse")) {
                     $(this).removeClass("ui-multiselect-icon-collapse").addClass("ui-multiselect-icon-expand");
                     $options.find('ul.ui-multiselect-ul-group:not(.ui-multiselect-checkboxes):visible').hide();
-                    $options.find('span.collapseClass').removeClass('rtMinus').addClass('rtPlus'); ;
+                    $options.find('span.collapseClass').removeClass('rtMinus').addClass('rtPlus');
                     //$(this).text('Expande All');
                 }
                 else {

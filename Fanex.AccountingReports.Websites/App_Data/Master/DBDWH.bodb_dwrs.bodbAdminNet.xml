@@ -186,4 +186,18 @@
   <Function Name="Gaming - NumberGameStatistic">
     <Setting Key="NumberGameStatistics_GetReport" SpName="Acc_Rpt_NumberGameStatistics" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
+  <Function Name="Casino Games Statistic">
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_LicenseeSel" SpName="Acc_Rpt_CasinoGameStatistics_LicenseeSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_ProductSel" SpName="Acc_Rpt_CasinoGameStatistics_ProductSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_GameTypeSel" SpName="Acc_Rpt_CasinoGameStatistics_GameTypeSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_GameTableSel" SpName="Acc_Rpt_CasinoGameStatistics_GameTableSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_Daily" SpName="Acc_Rpt_CasinoGameStatistics_Daily" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_Hourly" SpName="Acc_Rpt_CasinoGameStatistics_Hourly" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_Monthly" SpName="Acc_Rpt_CasinoGameStatistics_Monthly" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_UserName" SpName="Acc_Rpt_CasinoGameStatistics_UserName" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_GameType" SpName="Acc_Rpt_CasinoGameStatistics_GameType" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_GameTable" SpName="Acc_Rpt_CasinoGameStatistics_GameTable" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_Company" SpName="Acc_Rpt_CasinoGameStatistics_Company" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_Currency" SpName="Acc_Rpt_CasinoGameStatistics_Currency" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+  </Function>
 </Functions>

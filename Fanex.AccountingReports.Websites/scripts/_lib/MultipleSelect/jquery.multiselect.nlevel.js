@@ -52,6 +52,14 @@
             }
             return tempArray;
         },
+        getCheckedItemsByLevel: function (level) {
+            var listChecked = $(this).next('div.ui-multiselect-options').find('label[data-level="' + level + '"]:not(.ui-multiselect-state-disabled)').find('input:not(#' + $(this).attr('id') + "HeaderCheckBox)").filter(':checked');
+            var tempArray = [];
+            for (var i = 0; i < listChecked.length; i++) {
+                tempArray.push(listChecked[i].value);
+            }
+            return tempArray;
+        },
         getCheckedItemsByText: function () {
             var listChecked = $(this).next('div.ui-multiselect-options').find('label:not(.ui-multiselect-state-disabled,.ui-multiselect-group-mark)').find('input:not(#' + $(this).attr('id') + "HeaderCheckBox)").filter('[checked]');
             var tempArray = [];
@@ -152,7 +160,7 @@
             return tempHtml.join('');
         };
         //render Body
-        var InsertRow = function (tempData, index, isChild, isLastChildItem, isNoGroup, siblingGroup, currentParentGroupId, currentGroupId) {
+        var InsertRow = function (tempData, index, isChild, isLastChildItem, isNoGroup, siblingGroup, currentParentGroupId, currentGroupId, level) {
             var tempHtml = [];
             var title = tempData.Text || "",
             value = tempData.Value || "",
@@ -205,7 +213,7 @@
                 }
 
                 labelClasses += " ui-multiselect-corner-all";
-                tempHtml.push('<label for="' + inputID + '" class="' + labelClasses + '" style="' + tempData.CssClass + '">');
+                tempHtml.push('<label data-level="' + level + '" for="' + inputID + '" class="' + labelClasses + '" style="' + tempData.CssClass + '">');
                 tempHtml.push('<input id="' + inputID + '" type="' + (o.multiple ? 'checkbox' : 'radio') + '" name="' + value + '" value="' + value + '" title="' + title + '" childgroupid="' + currentParentGroupId + '"');
 
                 if (o.isCheckAll) {
@@ -222,19 +230,19 @@
 
                 if (typeof tempData.Items !== 'undefined' && tempData.Items.length > 0) {
                     //var nextGroupIdAtt = "ui-multiselect-option-group-" + currentGroupId + "-" + index.toString();
-                    tempHtml.push('<ul class="ui-multiselect-ul-group custom-multi-select-rtUL" childgroupid="' + groupIdAttr + '">');
+                    tempHtml.push('<ul class="ui-multiselect-ul-group custom-multi-select-rtUL" childgroupid="' + groupIdAttr + '" parent-id="' + inputID + '">');
                     for (var j = 0; j < tempData.Items.length; j++) {
 
                         if (typeof tempData.Items[j].Items === 'undefined'
                         || tempData.Items[j].Items == null
                         || tempData.Items[j].Items.length === 0) {
                             tempHtml.push(InsertRow(tempData.Items[j], j,
-                                true, (j === tempData.Items.length - 1 ? true : false), true, siblingGroup, groupIdAttr, currentGroupId));
+                                true, (j === tempData.Items.length - 1 ? true : false), true, siblingGroup, groupIdAttr, currentGroupId, level + 1));
                         }
                         else {
                             currentGroupId += "-" + j.toString();
                             tempHtml.push(InsertRow(tempData.Items[j], j,
-                                false, (j === tempData.Items.length - 1 ? true : false), false, siblingGroup, groupIdAttr, currentGroupId));
+                                false, (j === tempData.Items.length - 1 ? true : false), false, siblingGroup, groupIdAttr, currentGroupId, level + 1));
                         }
 
                         //tempHtml.push(InsertRow(tempData.Items[j], j, true, (j === tempData.Items.length - 1 ? true : false), false, false));
@@ -258,7 +266,7 @@
                 var siblingIsGroup = isShowGroup ? true : false;
                 var currentGroupId = "0-" + i.toString();
                 numGroup++;
-                tempHtml.push(InsertRow(tempGroup, i, isChild, isLastChildItem, isNoGroup, siblingIsGroup, groupIdAttr, currentGroupId));
+                tempHtml.push(InsertRow(tempGroup, i, isChild, isLastChildItem, isNoGroup, siblingIsGroup, groupIdAttr, currentGroupId, 0));
             }
             tempHtml.push('</ul>');
             return tempHtml.join('');
@@ -562,14 +570,15 @@
             // checkbox click event handle
             $listItem.each(function () {
                 var $this = $(this);
+
+
                 //handle group checkbox click event
                 $this.prev().children().not('span.collapseClass').find('input').click(function () {
                     if ($(this).attr('checked') === 'checked') {
                         $(this).parent().parent().next().find('input:not(:disabled)').attr('checked', 'checked');
                         UpdateSelectedFromChild($this);
                         checkCheckAll();
-                    }
-                    else {
+                    } else {
                         $(this).parent().parent().next().find('input:not(:disabled)').removeAttr('checked');
                         $headerCheckbox.removeAttr('checked');
                     }
@@ -577,40 +586,37 @@
                     UpdateSelected();
                 });
 
-
                 //handler chilren checkbox event
                 var childrenNodes = $this.find('input[childgroupid="' + $this.attr("childgroupid") + '"]');
-                childrenNodes.click(function () {
-                    var parent = $this;
-                    var current = $(this);
-                    if (typeof (current.attr('checked')) === 'undefined') {
-                        current.removeAttr('checked');
-                        UpdateRemoveParentSelected(parent);
+                var childLength = childrenNodes.length;
+                for (var i = 0; i < childLength; i++) {
+                    var childrenNode = $(childrenNodes[i]);
+                    var childrenId = childrenNode.attr("id");
+                    var hasChildren = $this.find('ul[parent-id="' + childrenId + '"]').length > 0;
+                    if (!hasChildren) {
+                        childrenNode.click(function () {
+                            var parent = $this;
+                            var current = $(this);
+                            if (typeof (current.attr('checked')) === 'undefined') {
+                                current.removeAttr('checked');
+                                UpdateRemoveParentSelected(parent);
+                            } else if (current.attr('checked') === 'checked') {
+                                current.attr('checked', 'checked');
+                                var currentGroup = parent;
+                                var currentChildSelected = childrenNodes.filter('[checked]').length;
+                                var currentChildLength = childrenNodes.length;
+                                if (currentChildLength == currentChildSelected) {
+                                    currentGroup.prev().find('input').attr('checked', 'checked');
+                                    UpdateSelectedFromChild(current.parent().parent().parent().parent());
+                                }
+
+                                checkCheckAll();
+                            }
+                            o.onCheck.call(this);
+                            UpdateSelected();
+                        });
                     }
-                    else if (current.attr('checked') === 'checked') {
-                        current.attr('checked', 'checked');
-                        var currentGroup = parent;
-                        var currentChildSelected = childrenNodes.filter('[checked]').length;
-                        var currentChildLength = childrenNodes.length;
-                        if (currentChildLength == currentChildSelected) {
-                            currentGroup.prev().find('input').attr('checked', 'checked');
-                            UpdateSelectedFromChild(current.parent().parent().parent().parent());
-                        }
-
-                        //                        if (currentGroup.find('label').not('.ui-multiselect-state-disabled').not('.ui-multiselect-group-mark').find('input').not("#" + currentGroup.attr('id') + "HeaderCheckBox").filter('[checked]').length
-                        //                                === currentGroup.find('label').not('.ui-multiselect-state-disabled').not('.ui-multiselect-group-mark').find('input').not("#" + currentGroup.attr('id') + "HeaderCheckBox").length) {
-
-                        //                            currentGroup.prev().find('input').attr('checked', 'checked');
-                        //                        }
-                        //                        if (parent.find('input:not(:disabled)').length === (parent.find('input[checked]').length)) {
-                        //                            parent.prev().find('input').attr('checked', 'checked');
-                        //                        }
-
-                        checkCheckAll();
-                    }
-                    o.onCheck.call(this);
-                    UpdateSelected();
-                });
+                }
             });
             //handle collapse button
             $('#' + id + "CollapseButton").click(function () {
