@@ -54,8 +54,7 @@ Fanex.AccountingReports.Gaming.NumberGameStatistic = function () {
             UserName: '',
             LeagueId: null,
             BetType: '',
-            ReportBy: 0,
-            TotalPlayers: 0
+            ReportBy: 0
         }
     };
 
@@ -294,6 +293,7 @@ Fanex.AccountingReports.Gaming.NumberGameStatistic = function () {
         });
 
         _tables.btnToday.click(function () {
+            _tables.dateOptionSelector.val(Enums.DateOption.Today);
             _tables.secondDatePicker.datepicker("option", "minDate", new Date(today));
             _tables.firstDatePicker.datepicker("option", "maxDate", new Date(today));
             _tables.firstDatePicker.datepicker("setDate", new Date(today));
@@ -303,6 +303,7 @@ Fanex.AccountingReports.Gaming.NumberGameStatistic = function () {
         });
 
         _tables.btnYesterday.click(function () {
+            _tables.dateOptionSelector.val(Enums.DateOption.Yesterday);
             _tables.secondDatePicker.datepicker("option", "minDate", new Date(yesterday));
             _tables.firstDatePicker.datepicker("option", "maxDate", new Date(yesterday));
             _tables.firstDatePicker.datepicker("setDate", new Date(yesterday));
@@ -314,7 +315,9 @@ Fanex.AccountingReports.Gaming.NumberGameStatistic = function () {
 
     var getReport = function () {
         getReportParams();
-        getReportByType(parseInt(params.reportParams.ReportBy));
+        if (validateParams()) {
+            getReportByType(parseInt(params.reportParams.ReportBy));
+        }
     };
 
     var getReportParams = function () {
@@ -330,6 +333,28 @@ Fanex.AccountingReports.Gaming.NumberGameStatistic = function () {
         params.reportParams.ReportBy = _tables.reportBy.find("input[name='rdReportBy']:checked").val();
 
         return params.reportParams;
+    };
+
+    var validateParams = function () {
+        var isValid = true;
+        var message = '';
+        var notifyIds = [];
+        if (params.reportParams.BetType.length == 0) {
+            isValid = false;
+            if (message == '') {
+                message = "Please select at least one bet type!";
+            }
+            notifyIds.push("dropdown-bettype");
+        }
+
+        if (!isValid) {
+            AccReport.popUp.removeHighLight();
+            AccReport.popUp.show(message, notifyIds.join(","));
+        } else {
+            AccReport.popUp.removeHighLight();
+        }
+
+        return isValid;
     };
 
     var exportReport = function () {

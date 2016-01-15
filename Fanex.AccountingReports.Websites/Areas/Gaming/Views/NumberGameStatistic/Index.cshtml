@@ -2,16 +2,15 @@
 @using Fanex.AccountingReports.Core.Web;
 @using Fanex.AccountingReports.Core.Extensions;
 @using Fanex.AccountingReports.Gaming.Constants;
-
 @{
     ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head{
-     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
-     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Autocomplete/styles.css" />
-     <link rel="stylesheet" type="text/css" href="~/Areas/Gaming/Views/NumberGameStatistic/Styles/NumberGameStatistic.less" />
-     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MultipleSelect/jquery.multiselect.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Autocomplete/styles.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Gaming/Views/NumberGameStatistic/Styles/NumberGameStatistic.less" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MultipleSelect/jquery.multiselect.css" />
 }
 @section Headline {
     <div class="title">
@@ -59,8 +58,7 @@
                 </div>
             </div>
         </div>
-
-         <div class="filter-row">
+        <div class="filter-row">
             <div class="filter-cell">
                 <div class="lbl-field col_4 align-right bold">
                     @Labels.Report_by
@@ -82,24 +80,25 @@
                         <input type="radio" name="rdReportBy" id="rdReportByBettype" value="@PeriodTypeConstants.NumbeGameStatisticBettype" />
                         <label for="rdReportByBettype">
                             @GamingResources.Bet_type</label></div>
-            </div>
-        </div>
-        <div class="filter-row btnRow">
-            <div class="filter-cell prefix_6">
-                <div class="submit width-auto col_4">
-                    <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
-                </div>
-                 <div class="submit width-auto col_4">
-                    <input id="btnToday" name="btnToday" type="submit" value="" />
-                </div>
-                 <div class="submit width-auto col_4">
-                    <input id="btnYesterday" name="btnYesterday" type="submit" value="" />
                 </div>
             </div>
-        </div>
-        <div class="filter-row">
-            <div class="filter-cell">
-                <div id="ErrMsg" class="col_35 display-none width-auto">
+            <div class="filter-row btnRow">
+                <div class="filter-cell prefix_9">
+                    <div class="submit width-auto col_4">
+                        <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                    </div>
+                    <div class="submit width-auto col_4">
+                        <input id="btnToday" name="btnToday" type="submit" value="" />
+                    </div>
+                    <div class="submit width-auto col_4">
+                        <input id="btnYesterday" name="btnYesterday" type="submit" value="" />
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="ErrMsg" class="col_35 display-none width-auto">
+                    </div>
                 </div>
             </div>
         </div>
@@ -116,7 +115,7 @@
         var labelTo = '@Labels.To';
         var today = '@DateTime.Today.ToShortFormatedDate()';
         var yesterday = '@DateTime.Today.AddDays(-1).ToShortFormatedDate()';
-        var minDate = '@DateTime.Today.AddMonths(-6).ToShortFormatedDate()';
+        var minDate = '@DateTime.Today.AddMonths(-6).FirstDayOfMonth().ToShortFormatedDate()';
         var shortFormattedYesterday = '@DateTime.Today.AddDays(-1).ToShortFormatedDate()';
         var shortFormattedToday = '@DateTime.Today.ToShortFormatedDate()';
         var beginLast3Months = '@DateTime.Today.AddMonths(-3).FirstDayOfMonth().ToShortFormatedDate()';

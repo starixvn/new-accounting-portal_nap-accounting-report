@@ -161,7 +161,7 @@
 
         private void CalCulateTotalGamePayout(NumberGameStatisticDetail total)
         {
-            total.GamePayout = total.TotalBets == 0 ? 0 : total.TotalWins / total.TotalBets * 100;
+            total.GamePayout = total.TotalBets == 0 ? 0 : total.TotalWins / total.TotalBets;
         }
 
         private NumberGameStatisticDetail CreateNumberGameStatisticDetail(IDataReader reader)
@@ -172,7 +172,7 @@
                 TotalBets = Converter.ToDecimal(reader["TotalBets"]),
                 TotalWins = Converter.ToDecimal(reader["TotalWins"]),
                 GameIncome = Converter.ToDecimal(reader["GameIncome"]),
-                GamePayout = Converter.ToDecimal(reader["GamePayout"]),
+                GamePayout = Converter.ToDecimal(reader["GamePayout"]) / 100,
                 CompanyTurnover = Converter.ToDecimal(reader["CompanyTurnover"]),
                 NetIncome = Converter.ToDecimal(reader["NetIncome"])
             };

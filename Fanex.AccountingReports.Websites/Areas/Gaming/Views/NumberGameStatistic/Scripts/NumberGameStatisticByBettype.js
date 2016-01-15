@@ -40,7 +40,7 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByBettype = function () {
             { HeaderText: "Total Bets", Width: 120, Name: "TotalBets", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
             { HeaderText: "Total Wins", Width: 120, Name: "TotalWins", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$' },
             { HeaderText: "Game Income", Width: 120, Name: "GameIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$' },
-            { HeaderText: "Game Payout", Width: 120, Name: "GamePayout", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$' },
+            { HeaderText: "Game Payout", Width: 120, Name: "GamePayout", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER },
             { HeaderText: "Company Turnover", Width: 120, Name: "CompanyTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
             { HeaderText: "Comapny Net Income", Width: 150, Name: "CompanyNetIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$' }
         ];
@@ -53,6 +53,7 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByBettype = function () {
             for (var index = 0; index < reportLength; index++) {
                 var currentItem = result.ReportRows[index];
                 var currentDataRow = [];
+                var gamePayout = currentItem.NumberGameStatisticDetail.GamePayout;
                 currentDataRow.push(
                     { Name: "Bettype", Value: currentItem.Bettype },
                     { Name: "NumberPlayers", Value: currentItem.Players },
@@ -60,7 +61,7 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByBettype = function () {
                     { Name: "TotalBets", Value: currentItem.NumberGameStatisticDetail.TotalBets },
                     { Name: "TotalWins", Value: currentItem.NumberGameStatisticDetail.TotalWins },
                     { Name: "GameIncome", Value: currentItem.NumberGameStatisticDetail.GameIncome },
-                    { Name: "GamePayout", Value: currentItem.NumberGameStatisticDetail.GamePayout },
+                    { Name: "GamePayout", Value: gamePayout, CssClass: gamePayout > 1 ? 'format-positive' : '' },
                     { Name: "CompanyTurnover", Value: currentItem.NumberGameStatisticDetail.CompanyTurnover },
                     { Name: "CompanyNetIncome", Value: currentItem.NumberGameStatisticDetail.NetIncome }
                 );
@@ -70,6 +71,7 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByBettype = function () {
                 });
             }
 
+            var grandTotalGamePayout = result.GrandTotal.NumberGameStatisticDetail.GamePayout;
             footerData.push({
                 Columns: [
                     { Name: "Bettype", Value: "Grand Total" },
@@ -78,7 +80,7 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByBettype = function () {
                     { Name: "TotalBets", Value: result.GrandTotal.NumberGameStatisticDetail.TotalBets },
                     { Name: "TotalWins", Value: result.GrandTotal.NumberGameStatisticDetail.TotalWins },
                     { Name: "GameIncome", Value: result.GrandTotal.NumberGameStatisticDetail.GameIncome, TdClass: "highlight-column" },
-                    { Name: "GamePayout", Value: result.GrandTotal.NumberGameStatisticDetail.GamePayout },
+                    { Name: "GamePayout", Value: grandTotalGamePayout, CssClass: grandTotalGamePayout > 1 ? 'format-positive' : '' },
                     { Name: "CompanyTurnover", Value: result.GrandTotal.NumberGameStatisticDetail.CompanyTurnover },
                     { Name: "CompanyNetIncome", Value: result.GrandTotal.NumberGameStatisticDetail.NetIncome, TdClass: "highlight-column" }
                 ]

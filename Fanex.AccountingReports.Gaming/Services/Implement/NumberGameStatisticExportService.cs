@@ -23,15 +23,22 @@
         private ICellStyle intNumberStyle;
         private ICellStyle decimalNumberStyle;
         private ICellStyle decimalNegativeNumberStyle;
+        private ICellStyle percentStyle;
+        private ICellStyle moreThanHundressPercentStyle;
         private ICellStyle evenRowTextStyle;
         private ICellStyle evenRowIntNumberStyle;
         private ICellStyle evenRowDecimalNumberStyle;
         private ICellStyle evenRowDecimalNegativeNumberStyle;
+        private ICellStyle evenRowPercentStyle;
+        private ICellStyle moreThanHundressEvenRowPercentStyle;
+
         private ICellStyle grandTotalTextStyle;
         private ICellStyle grandTotalIntNumberStyle;
         private ICellStyle grandTotalDecimalNumberStyle;
         private ICellStyle grandTotalDecimalNegativeNumberStyle;
         private ICellStyle grandTotalHighLightDecimalNegativeNumberStyle;
+        private ICellStyle grandTotalPercentStyle;
+        private ICellStyle moreThanHundressGrandTotalPercentStyle;
 
         private INumberGameStatisticService _service;
 
@@ -196,10 +203,15 @@
             intNumberStyle = NpoiExcelExtensions.IntStyle(workbook, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Right);
             decimalNumberStyle = NpoiExcelExtensions.DecimalStyle(workbook, HSSFColor.White.Index, false);
             decimalNegativeNumberStyle = NpoiExcelExtensions.NegativeDecimalStyle(workbook, HSSFColor.White.Index, false);
+            percentStyle = NpoiExcelExtensions.PercentStyle(workbook, HSSFColor.White.Index, false);
+            moreThanHundressPercentStyle = NpoiExcelExtensions.PercentStyle(workbook, HSSFColor.White.Index, false, HSSFColor.Red.Index);
+
             evenRowTextStyle = NpoiExcelExtensions.TextStyle(workbook, EvenRowColorIndex, false, NpoiExcelExtensions.Alignment.Center);
             evenRowIntNumberStyle = NpoiExcelExtensions.IntStyle(workbook, EvenRowColorIndex, false, NpoiExcelExtensions.Alignment.Right);
             evenRowDecimalNumberStyle = NpoiExcelExtensions.DecimalStyle(workbook, EvenRowColorIndex, false);
             evenRowDecimalNegativeNumberStyle = NpoiExcelExtensions.NegativeDecimalStyle(workbook, EvenRowColorIndex, false);
+            evenRowPercentStyle = NpoiExcelExtensions.PercentStyle(workbook, EvenRowColorIndex, false);
+            moreThanHundressEvenRowPercentStyle = NpoiExcelExtensions.PercentStyle(workbook, EvenRowColorIndex, false, HSSFColor.Red.Index);
         }
 
         private void InitGrandTotalStyle(HSSFWorkbook workbook)
@@ -223,6 +235,14 @@
             grandTotalHighLightDecimalNegativeNumberStyle = NpoiExcelExtensions.NegativeDecimalStyle(workbook, HighLightColorIndex, true);
             grandTotalHighLightDecimalNegativeNumberStyle.BorderTop = BorderStyle.Medium;
             grandTotalHighLightDecimalNegativeNumberStyle.TopBorderColor = GrandTotalBorderColorIndex;
+
+            grandTotalPercentStyle = NpoiExcelExtensions.PercentStyle(workbook, GrandTotalColorIndex, true);
+            grandTotalPercentStyle.BorderTop = BorderStyle.Medium;
+            grandTotalPercentStyle.TopBorderColor = GrandTotalBorderColorIndex;
+
+            moreThanHundressGrandTotalPercentStyle = NpoiExcelExtensions.PercentStyle(workbook, GrandTotalColorIndex, true, HSSFColor.Red.Index);
+            moreThanHundressGrandTotalPercentStyle.BorderTop = BorderStyle.Medium;
+            moreThanHundressGrandTotalPercentStyle.TopBorderColor = GrandTotalBorderColorIndex;
         }
 
         private void InitColumnWith(ref ISheet worksheet)
@@ -501,15 +521,30 @@
               item.GameIncome,
               currentRow % 2 == 0 ? decimalNegativeNumberStyle : evenRowDecimalNegativeNumberStyle);
 
-            NpoiExcelExtensions.RenderCell(
-               ref worksheet,
-               ref row,
-               currentRow,
-               ref currentColumn,
-               currentRow,
-               currentColumn,
-               item.GamePayout,
-               currentRow % 2 == 0 ? decimalNegativeNumberStyle : evenRowDecimalNegativeNumberStyle);
+            if (item.GamePayout > 1)
+            {
+                NpoiExcelExtensions.RenderCell(
+                  ref worksheet,
+                  ref row,
+                  currentRow,
+                  ref currentColumn,
+                  currentRow,
+                  currentColumn,
+                  item.GamePayout,
+                  currentRow % 2 == 0 ? moreThanHundressPercentStyle : moreThanHundressEvenRowPercentStyle);
+            }
+            else
+            {
+                NpoiExcelExtensions.RenderCell(
+                  ref worksheet,
+                  ref row,
+                  currentRow,
+                  ref currentColumn,
+                  currentRow,
+                  currentColumn,
+                  item.GamePayout,
+                  currentRow % 2 == 0 ? percentStyle : evenRowPercentStyle);
+            }
 
             NpoiExcelExtensions.RenderCell(
               ref worksheet,
@@ -712,7 +747,7 @@
                currentRow,
                currentColumn,
                item.GamePayout,
-               grandTotalDecimalNegativeNumberStyle);
+               item.GamePayout > 1 ? moreThanHundressGrandTotalPercentStyle : grandTotalPercentStyle);
 
             NpoiExcelExtensions.RenderCell(
               ref worksheet,

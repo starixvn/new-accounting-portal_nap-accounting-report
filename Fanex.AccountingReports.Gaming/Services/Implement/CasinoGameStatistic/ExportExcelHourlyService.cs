@@ -4,22 +4,21 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using Fanex.AccountingReports.Core.Web;
-using Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic;
-using NPOI.HSSF.Util;
-using NPOI.SS.UserModel;
-
 namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 {
     using System.Collections.Generic;
     using System.Drawing;
     using Fanex.AccountingReports.Core.Extensions;
+    using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic;
+    using Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic;
     using Fanex.AccountingReports.Gaming.Repositories.Implement;
     using Fanex.AccountingReports.Gaming.Resources;
     using Fanex.AccountingReports.Gaming.Services.Interface.CasinoGameStatistic;
     using Fanex.Common;
     using NPOI.HSSF.UserModel;
+    using NPOI.HSSF.Util;
+    using NPOI.SS.UserModel;
 
     /// <summary>
     /// TODO: Update summary.
@@ -121,7 +120,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             ICellStyle textBoldRightStyle = NpoiExcelExtensions.CustomTextBackGroundCellStyle(excelFile, 220, 226, 188, HorizontalAlignment.Right);
 
             ICellStyle textCenterStyle = NpoiExcelExtensions.TextStyle(excelFile, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Center);
-            ICellStyle decimalStyle = NpoiExcelExtensions.DecimalStyle(excelFile, HSSFColor.White.Index, false);            
+            ICellStyle decimalStyle = NpoiExcelExtensions.DecimalStyle(excelFile, HSSFColor.White.Index, false);
             ICellStyle percentStyle = NpoiExcelExtensions.GetPercentageStyle(excelFile, HSSFColor.White.Index, false);
             ICellStyle numberStyle = NpoiExcelExtensions.IntStyle(excelFile, HSSFColor.White.Index, false);
             ICellStyle negativeDecimalNumberStyle = NpoiExcelExtensions.GetNegativeDecimalNumberStyle(excelFile, HSSFColor.White.Index, false);
@@ -166,7 +165,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 }
 
                 NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, hourly.Name, textBoldRightStyle);
-                
+
                 if (string.IsNullOrEmpty(hourly.NumberOfGames))
                 {
                     NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, string.Empty, numberStyle);
@@ -177,7 +176,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                     NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Converter.To<int>(hourly.OnlinePlayers), numberStyle);
                     NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Converter.To<int>(hourly.NumberOfGames), numberStyle);
                 }
-                
+
                 NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, hourly.Currency, textCenterStyle);
 
                 if (string.IsNullOrEmpty(hourly.TotalBets))
@@ -215,7 +214,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 {
                     NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Converter.To<double>(hourly.GamePayout), gamePayoutStyle);
                 }
-                
+
                 if (criteria.ShowRefundColumn)
                 {
                     if (string.IsNullOrEmpty(hourly.TotalRefund))
@@ -225,7 +224,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                     else
                     {
                         NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Converter.To<double>(hourly.TotalRefund), decimalStyle);
-                    }                    
+                    }
                 }
 
                 if (string.IsNullOrEmpty(hourly.CompanyTO))
@@ -250,7 +249,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 {
                     NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, string.Empty, negativeDecimalNumberStyle);
                 }
-                else 
+                else
                 {
                     NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Converter.To<double>(hourly.CompanyNetInCome), negativeDecimalNumberStyle);
                 }
