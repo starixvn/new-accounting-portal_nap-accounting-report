@@ -321,11 +321,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Content Include="App_Data\Dev\DBEXT.bk.bodbAdminNet.xml">
+    <Content Include="App_Data\Dev\DBBET.bk.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Local\DBEXT.bk.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBEXT.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBBET.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBBET.bk.bodbAdminNet.xml" />
     <Content Include="App_Data\Dev\DBPOLICY.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\Local\DBPOLICY.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\Master\DBPOLICY.bodb02.bodbAdminNet.xml" />
@@ -336,7 +336,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\MNL\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBEXT.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBBET.bk.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBEXT.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
@@ -436,7 +436,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\PRO\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBEXT.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBBET.bk.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBEXT.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
@@ -462,7 +462,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\UAT\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBEXT.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBBET.bk.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBEXT.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
