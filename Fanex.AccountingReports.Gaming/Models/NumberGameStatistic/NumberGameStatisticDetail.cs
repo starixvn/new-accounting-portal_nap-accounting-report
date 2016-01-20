@@ -1,10 +1,8 @@
 ﻿namespace Fanex.AccountingReports.Gaming.Models.NumberGameStatistic
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
+    [Serializable]
     public class NumberGameStatisticDetail
     {
         public int BetCount { get; set; }

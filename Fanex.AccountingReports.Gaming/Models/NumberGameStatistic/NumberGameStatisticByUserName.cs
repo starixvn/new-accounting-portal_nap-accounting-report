@@ -1,13 +1,9 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="NumberGameStatisticByUserName.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace Fanex.AccountingReports.Gaming.Models.NumberGameStatistic
+﻿namespace Fanex.AccountingReports.Gaming.Models.NumberGameStatistic
 {
+    using System;
     using System.Collections.Generic;
 
+    [Serializable]
     public class NumberGameStatisticByUserName
     {
         public NumberGameStatisticByUserName()
@@ -18,5 +14,7 @@ namespace Fanex.AccountingReports.Gaming.Models.NumberGameStatistic
         public List<NumberGameStatisticByUserNameDetail> ReportRows { get; set; }
 
         public NumberGameStatisticByUserNameDetail GrandTotal { get; set; }
+
+        public int TotalItems { get; set; }
     }
 }

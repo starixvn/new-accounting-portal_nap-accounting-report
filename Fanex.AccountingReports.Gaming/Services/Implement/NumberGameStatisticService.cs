@@ -1,6 +1,7 @@
 ﻿namespace Fanex.AccountingReports.Gaming.Services.Implement
 {
     using System;
+    using System.Linq;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Gaming.Constants;
@@ -79,13 +80,13 @@
             return report;
         }
 
-        public NumberGameStatisticByUserName GetNumberGameStatisticByUserName(GetNumberGameStatisticCriteria criteria)
+        public NumberGameStatisticByUserName GetNumberGameStatisticFullReportByUserName(GetNumberGameStatisticCriteria criteria)
         {
-            NumberGameStatisticByUserName report;
-
+            NumberGameStatisticByUserName fullReport;
             try
             {
-                report = _repository.GetNumberGameStatisticByUserName(criteria);
+                fullReport = _repository.GetNumberGameStatisticByUserName(criteria);
+                CacheManager.Set<NumberGameStatisticByUserName>(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey, fullReport, DateTime.Now.AddHours(ExtendCachedTimeOut));
             }
             catch (Exception ex)
             {
@@ -93,7 +94,38 @@
                 throw;
             }
 
-            CacheManager.Set<NumberGameStatisticByUserName>(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey, report, DateTime.Now.AddHours(ExtendCachedTimeOut));
+            return fullReport;
+        }
+
+        public NumberGameStatisticByUserName GetNumberGameStatisticByUserName(GetNumberGameStatisticCriteria criteria)
+        {
+            NumberGameStatisticByUserName report = new NumberGameStatisticByUserName();
+
+            try
+            {
+                NumberGameStatisticByUserName fullReport;
+                int pageIndex = criteria.PageIndex;
+                int pageSize = criteria.PageSize;
+
+                if (criteria.IsPagingCallBack)
+                {
+                    fullReport = CacheManager.Get<NumberGameStatisticByUserName>(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey) ?? GetNumberGameStatisticFullReportByUserName(criteria);
+                }
+                else
+                {
+                    fullReport = GetNumberGameStatisticFullReportByUserName(criteria);
+                }
+
+                report.ReportRows = fullReport.ReportRows.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+                report.GrandTotal = fullReport.GrandTotal;
+                report.TotalItems = fullReport.ReportRows.Count;
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+                throw;
+            }
+
             return report;
         }
     }

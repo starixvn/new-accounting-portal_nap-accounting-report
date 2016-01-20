@@ -87,7 +87,7 @@
 
             if (report == null)
             {
-                report = _service.GetNumberGameStatisticByUserName(criteria);
+                report = _service.GetNumberGameStatisticFullReportByUserName(criteria);
             }
 
             HSSFWorkbook workbook = new HSSFWorkbook();

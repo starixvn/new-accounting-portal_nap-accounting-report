@@ -42,7 +42,7 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByLeague = function () {
             { HeaderText: "Game Income", Width: 120, Name: "GameIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$' },
             { HeaderText: "Game Payout", Width: 120, Name: "GamePayout", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatNegative: '$' },
             { HeaderText: "Company Turnover", Width: 120, Name: "CompanyTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-            { HeaderText: "Comapny Net Income", Width: 150, Name: "CompanyNetIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$' }
+            { HeaderText: "Company Net Income", Width: 150, Name: "CompanyNetIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$' }
         ];
 
         var bodyData = [];

@@ -9,6 +9,12 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByUserName = function () {
 
     var cachedReportParams = null;
 
+    var cachedPagingInfo = {
+        currentPage: 0,
+        itemsPerPage: 50,
+        itemsPerPageArray: [50, 100, 200, 300, 500]
+    };
+
     self.initPage = function () {
         cachedDOMElements();
     };
@@ -42,7 +48,7 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByUserName = function () {
             { HeaderText: "Game Income", Width: 120, Name: "GameIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$' },
             { HeaderText: "Game Payout", Width: 120, Name: "GamePayout", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatNegative: '$' },
             { HeaderText: "Company Turnover", Width: 120, Name: "CompanyTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-            { HeaderText: "Comapny Net Income", Width: 150, Name: "CompanyNetIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$' }
+            { HeaderText: "Company Net Income", Width: 150, Name: "CompanyNetIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$' }
         ];
 
         var bodyData = [];
@@ -102,7 +108,25 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByUserName = function () {
                 exportExcelFunction: function () {
                     exportReport();
                 }
+            },
+
+            showPager: true,
+            customPager: true,
+            pagerOption: {
+                itemsPerPage: cachedReportParams.PageSize,
+                currentPage: cachedReportParams.PageIndex,
+                itemsPerPageArray: cachedPagingInfo.itemsPerPageArray,
+                totalItem: result.TotalItems,
+                pagerSelectCallBack: function (page_index, itemsPerPage, jq) {
+                    cachedPagingInfo.itemsPerPage = itemsPerPage;
+                    cachedPagingInfo.currentPage = page_index;
+                    cachedReportParams.PageSize = itemsPerPage;
+                    cachedReportParams.PageIndex = page_index;
+                    cachedReportParams.IsPagingCallBack = true;
+                    self.getReport(cachedReportParams);
+                }
             }
+
         };
 
         _tables.reportContent.removeClass("display-none").fanexGrid(gridOptions);

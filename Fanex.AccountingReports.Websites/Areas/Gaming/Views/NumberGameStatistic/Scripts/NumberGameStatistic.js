@@ -54,7 +54,10 @@ Fanex.AccountingReports.Gaming.NumberGameStatistic = function () {
             UserName: '',
             LeagueId: null,
             BetType: '',
-            ReportBy: 0
+            ReportBy: 0,
+            PageIndex: 0,
+            PageSize: 50,
+            IsPagingCallBack: false
         }
     };
 
@@ -314,6 +317,7 @@ Fanex.AccountingReports.Gaming.NumberGameStatistic = function () {
     };
 
     var getReport = function () {
+        resetParams();
         getReportParams();
         if (validateParams()) {
             getReportByType(parseInt(params.reportParams.ReportBy));
@@ -331,6 +335,21 @@ Fanex.AccountingReports.Gaming.NumberGameStatistic = function () {
         params.reportParams.LeagueId = leagueId == 0 ? null : leagueId;
         params.reportParams.BetType = _tables.ddlBettype.multiSelect('getCheckedItems').join(",");
         params.reportParams.ReportBy = _tables.reportBy.find("input[name='rdReportBy']:checked").val();
+
+        return params.reportParams;
+    };
+
+    var resetParams = function () {
+        params.reportParams.FromDate = new Date();
+        params.reportParams.ToDate = new Date();
+        params.reportParams.MoveBetsDay = new Date();
+        params.reportParams.UserName = '';
+        params.reportParams.LeagueId = null;
+        params.reportParams.BetType = '';
+        params.reportParams.ReportBy = 0;
+        params.reportParams.PageIndex = 0;
+        params.reportParams.PageSize = 50;
+        params.reportParams.IsPagingCallBack = false;
 
         return params.reportParams;
     };

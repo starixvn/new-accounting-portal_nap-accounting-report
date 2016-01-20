@@ -1,5 +1,8 @@
 ﻿namespace Fanex.AccountingReports.Gaming.Models.NumberGameStatistic
 {
+    using System;
+
+    [Serializable]
     public class NumberGameStatisticByLeagueDetail
     {
         public NumberGameStatisticByLeagueDetail()

@@ -21,6 +21,15 @@
 
         public int TotalPlayers { get; set; }
 
+        [SpParam(Ignored = true)]
+        public int PageIndex { get; set; }
+
+        [SpParam(Ignored = true)]
+        public int PageSize { get; set; }
+
+        [SpParam(Ignored = true)]
+        public bool IsPagingCallBack { get; set; }
+
         public override bool IsValid()
         {
             return true;

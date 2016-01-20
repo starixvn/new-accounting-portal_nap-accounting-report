@@ -11,6 +11,8 @@
 
         NumberGameStatisticByLeague GetNumberGameStatisticByLeague(GetNumberGameStatisticCriteria criteria);
 
+        NumberGameStatisticByUserName GetNumberGameStatisticFullReportByUserName(GetNumberGameStatisticCriteria criteria);
+
         NumberGameStatisticByUserName GetNumberGameStatisticByUserName(GetNumberGameStatisticCriteria criteria);
     }
 }
