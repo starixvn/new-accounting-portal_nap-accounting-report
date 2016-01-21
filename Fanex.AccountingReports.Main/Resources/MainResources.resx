@@ -425,7 +425,7 @@
     <value>Daily Win Loss 2h - Colossus Bets</value>
   </data>
   <data name="MatchWinLoss2aDetailByArena_ReportName" xml:space="preserve">
-    <value>MatchWinLoss2aDetailByArena_{0}.xls</value>
+    <value>MatchWinLoss2aDetailByArena_{0}</value>
   </data>
   <data name="CockFighting_ReportTitle" xml:space="preserve">
     <value>Cockfighting - Product Win/Loss report for {0}</value>
@@ -434,7 +434,7 @@
     <value>Cockfighting Product Arena {0} Win/Loss Report For {1}</value>
   </data>
   <data name="MatchWinLoss2aDetailByMatch_ReportName" xml:space="preserve">
-    <value>MatchWinLoss2aDetailByMatch_{0}.xls</value>
+    <value>MatchWinLoss2aDetailByMatch_{0}</value>
   </data>
   <data name="DailyWinLoss2h_CockfightingReport_Title" xml:space="preserve">
     <value>MAIN &gt; COCKFIGHTING PRODUCT WIN/LOSS REPORT</value>

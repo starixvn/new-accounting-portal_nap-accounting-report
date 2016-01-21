@@ -773,7 +773,7 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MatchWinLoss2aDetailByArena_{0}.xls.
+        ///   Looks up a localized string similar to MatchWinLoss2aDetailByArena_{0}.
         /// </summary>
         public static string MatchWinLoss2aDetailByArena_ReportName {
             get {
@@ -791,7 +791,7 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MatchWinLoss2aDetailByMatch_{0}.xls.
+        ///   Looks up a localized string similar to MatchWinLoss2aDetailByMatch_{0}.
         /// </summary>
         public static string MatchWinLoss2aDetailByMatch_ReportName {
             get {

@@ -53,7 +53,7 @@
             this.InitColumnWith(ref worksheet);
             int currentRow = 0;
             this.ExportReportTitle(workbook, ref worksheet, ref currentRow, criteria);
-            currentRow += 2;
+            currentRow += 3;
             this.ExportReportHeader(workbook, ref worksheet, ref currentRow);
             currentRow++;
             this.ExportReportContent(workbook, ref worksheet, ref currentRow, report.ReportRows);
@@ -81,11 +81,11 @@
             this.InitCockFightingMatchByArenaColumnWith(ref worksheet);
             int currentRow = 0;
             this.ExportCockFightingMatchByArenaReportTitle(workbook, ref worksheet, ref currentRow, criteria);
-            currentRow += 2;
+            currentRow += 3;
             this.ExportCockFightingMatchByArenaReportHeader(workbook, ref worksheet, ref currentRow);
             currentRow++;
             this.ExportCockFightingMatchByArenaReportContent(workbook, ref worksheet, ref currentRow, report.ReportRows);
-            this.ExportCockFightingMatchByArenaGrandTotal(workbook, ref worksheet, ref currentRow, report.GrandTotal);
+            this.ExportCockFightingMatchByArenaGrandTotal(workbook, ref worksheet, ref currentRow, report.GrandTotal, criteria);
 
             string reportName = string.Format(
                    MainResources.MatchWinLoss2aDetailByMatch_ReportName,
@@ -294,7 +294,7 @@
                    ref currentColumn,
                    currentRow,
                    currentColumn,
-                   Labels.Grand_Total,
+                   "Cockfighting Total",
                    grandTotalTextStyle);
 
             NpoiExcelExtensions.RenderCell(
@@ -494,7 +494,7 @@
                    currentRow,
                    currentColumn,
                    item.AwayOwner,
-                   textStyle);
+                   leftTextStyle);
 
                 NpoiExcelExtensions.RenderCell(
                    ref worksheet,
@@ -594,9 +594,10 @@
             HSSFWorkbook workbook,
             ref ISheet worksheet,
             ref int currentRow,
-            CockFightMatchDetail grandTotal)
+            CockFightMatchDetail grandTotal,
+            GetCockFightingMatchByArena criteria)
         {
-            ICellStyle grandTotalTextStyle = NpoiExcelExtensions.TextStyle(workbook, GrandTotalColorIndex, true, NpoiExcelExtensions.Alignment.Center);
+            ICellStyle grandTotalTextStyle = NpoiExcelExtensions.TextStyle(workbook, GrandTotalColorIndex, true, NpoiExcelExtensions.Alignment.Right);
             grandTotalTextStyle.BorderTop = BorderStyle.Medium;
             grandTotalTextStyle.TopBorderColor = GrandTotalBorderColorIndex;
 
@@ -618,7 +619,7 @@
                    ref currentColumn,
                    currentRow,
                    currentColumn + 3,
-                   Labels.Grand_Total,
+                   string.Format("{0} Total", criteria.ArenaName),
                    grandTotalTextStyle);
 
             NpoiExcelExtensions.RenderCell(
