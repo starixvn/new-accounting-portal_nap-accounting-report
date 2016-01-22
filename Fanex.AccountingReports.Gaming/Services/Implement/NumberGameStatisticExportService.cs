@@ -1,6 +1,7 @@
 ﻿namespace Fanex.AccountingReports.Gaming.Services.Implement
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Gaming.Constants;
@@ -18,6 +19,9 @@
         private const short GrandTotalColorIndex = 41;
         private const short GrandTotalBorderColorIndex = 47;
         private const short HighLightColorIndex = 49;
+
+        private const int RowsPerSheet = 30000;
+
         private ICellStyle headerStyle;
         private ICellStyle textStyle;
         private ICellStyle intNumberStyle;
@@ -94,17 +98,36 @@
             this.SetColorAtIndex(workbook);
             this.InitCellStyle(workbook);
 
-            string sheetName = GamingResources.NumberGameStatistic_SheetName;
-            ISheet worksheet = workbook.CreateSheet(sheetName);
+            int sheetIndex = 0;
+            int sheetZise = RowsPerSheet;
+            int totalSheet = (report.ReportRows.Count / sheetZise) + (report.ReportRows.Count % sheetZise > 0 ? 1 : 0);
 
-            this.InitColumnWith(ref worksheet);
-            int currentRow = 0;
-            this.ExportReportTitle(workbook, ref worksheet, ref currentRow, criteria);
-            currentRow += 2;
-            this.ExportReportByUserNameHeader(ref worksheet, ref currentRow);
-            currentRow++;
-            this.ExportReportByUserNameContent(ref worksheet, ref currentRow, report.ReportRows);
-            this.ExportReportByUserNameGrandTotal(ref worksheet, ref currentRow, report.GrandTotal);
+            for (sheetIndex = 0; sheetIndex < totalSheet; sheetIndex++)
+            {
+                var rows = report.ReportRows.Skip(sheetIndex * sheetZise).Take(sheetZise).ToList();
+
+                string sheetName = "";
+                //string sheetName = GamingResources.NumberGameStatistic_SheetNameByUser + " " + (totalSheet > 1 ? (sheetIndex + 1).ToString() : string.Empty);
+                //if (totalSheet > 1)
+                //{
+                //    sheetName = string.Format(sheetName, "(" + (sheetIndex + 1).ToString() + ")");
+                //}
+                //else 
+                //{
+                //    sheetName = string.Format(sheetName, string.Empty);
+                //}
+
+                ISheet worksheet = workbook.CreateSheet(sheetName);
+
+                this.InitColumnWith(ref worksheet);
+                int currentRow = 0;
+                this.ExportReportTitle(workbook, ref worksheet, ref currentRow, criteria);
+                currentRow += 2;
+                this.ExportReportByUserNameHeader(ref worksheet, ref currentRow);
+                currentRow++;
+                this.ExportReportByUserNameContent(ref worksheet, ref currentRow, rows);
+                this.ExportReportByUserNameGrandTotal(ref worksheet, ref currentRow, report.GrandTotal);
+            }           
 
             string reportName = this.CreateReportName(criteria);
             NpoiExcelExtensions.ResponseStreamExcel(workbook, reportName);
