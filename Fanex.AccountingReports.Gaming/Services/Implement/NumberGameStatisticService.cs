@@ -11,7 +11,6 @@
     using Fanex.AccountingReports.Gaming.Repositories.Interface;
     using Fanex.AccountingReports.Gaming.Services.Interface;
 
-
     public class NumberGameStatisticService : ServiceBase, INumberGameStatisticService
     {
         private const int ExtendCachedTimeOut = 2;

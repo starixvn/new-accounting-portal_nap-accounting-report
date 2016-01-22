@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="test" xml:space="preserve">
+    <value>ad</value>
+  </data>
   <data name="BingoOutStanding_ReportName" xml:space="preserve">
     <value>Bingo_OutStanding_Report</value>
   </data>
@@ -359,5 +362,8 @@
   </data>
   <data name="Bet_type" xml:space="preserve">
     <value>Bet type</value>
+  </data>
+  <data name="NumberGameStatistic_SheetNameByUser" xml:space="preserve">
+    <value>NG Statistic {0}</value>
   </data>
 </root>

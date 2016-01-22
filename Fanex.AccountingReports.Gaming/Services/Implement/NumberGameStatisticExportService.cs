@@ -75,7 +75,7 @@
             this.InitColumnWith(ref worksheet);
             int currentRow = 0;
             this.ExportReportTitle(workbook, ref worksheet, ref currentRow, criteria);
-            currentRow += 2;
+            currentRow += 3;
             this.ExportReportByDailyHeader(ref worksheet, ref currentRow);
             currentRow++;
             this.ExportReportByDailyContent(ref worksheet, ref currentRow, report.ReportRows);
@@ -106,27 +106,30 @@
             {
                 var rows = report.ReportRows.Skip(sheetIndex * sheetZise).Take(sheetZise).ToList();
 
-                string sheetName = "";
-                //string sheetName = GamingResources.NumberGameStatistic_SheetNameByUser + " " + (totalSheet > 1 ? (sheetIndex + 1).ToString() : string.Empty);
-                //if (totalSheet > 1)
-                //{
-                //    sheetName = string.Format(sheetName, "(" + (sheetIndex + 1).ToString() + ")");
-                //}
-                //else 
-                //{
-                //    sheetName = string.Format(sheetName, string.Empty);
-                //}
+                string sheetName = GamingResources.NumberGameStatistic_SheetNameByUser;
+                if (totalSheet > 1)
+                {
+                    sheetName = string.Format(sheetName, "(" + (sheetIndex + 1).ToString() + ")");
+                }
+                else
+                {
+                    sheetName = string.Format(sheetName, string.Empty);
+                }
 
                 ISheet worksheet = workbook.CreateSheet(sheetName);
 
                 this.InitColumnWith(ref worksheet);
                 int currentRow = 0;
                 this.ExportReportTitle(workbook, ref worksheet, ref currentRow, criteria);
-                currentRow += 2;
+                currentRow += 3;
                 this.ExportReportByUserNameHeader(ref worksheet, ref currentRow);
                 currentRow++;
                 this.ExportReportByUserNameContent(ref worksheet, ref currentRow, rows);
-                this.ExportReportByUserNameGrandTotal(ref worksheet, ref currentRow, report.GrandTotal);
+
+                if (sheetIndex == totalSheet - 1)
+                {
+                    this.ExportReportByUserNameGrandTotal(ref worksheet, ref currentRow, report.GrandTotal);
+                }
             }           
 
             string reportName = this.CreateReportName(criteria);
@@ -152,7 +155,7 @@
             this.InitColumnWith(ref worksheet);
             int currentRow = 0;
             this.ExportReportTitle(workbook, ref worksheet, ref currentRow, criteria);
-            currentRow += 2;
+            currentRow += 3;
             this.ExportReportByLeagueHeader(ref worksheet, ref currentRow);
             currentRow++;
             this.ExportReportByLeagueContent(ref worksheet, ref currentRow, report.ReportRows);
@@ -181,7 +184,7 @@
             this.InitColumnWith(ref worksheet);
             int currentRow = 0;
             this.ExportReportTitle(workbook, ref worksheet, ref currentRow, criteria);
-            currentRow += 2;
+            currentRow += 3;
             this.ExportReportByBettypeHeader(ref worksheet, ref currentRow);
             currentRow++;
             this.ExportReportByBettypeContent(ref worksheet, ref currentRow, report.ReportRows);

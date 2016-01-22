@@ -12,7 +12,7 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByUserName = function () {
     var cachedPagingInfo = {
         currentPage: 0,
         itemsPerPage: 50,
-        itemsPerPageArray: [50, 100, 200, 300, 500]
+        itemsPerPageArray: [50, 100, 200, 500]
     };
 
     self.initPage = function () {

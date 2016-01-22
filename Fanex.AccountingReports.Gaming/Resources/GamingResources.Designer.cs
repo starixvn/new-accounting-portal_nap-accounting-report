@@ -29,7 +29,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal GamingResources() {
+        public GamingResources() {
         }
         
         /// <summary>
@@ -61,20 +61,20 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bet type.
-        /// </summary>
-        public static string Bet_type {
-            get {
-                return ResourceManager.GetString("Bet_type", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Average.
         /// </summary>
         public static string Average {
             get {
                 return ResourceManager.GetString("Average", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bet type.
+        /// </summary>
+        public static string Bet_type {
+            get {
+                return ResourceManager.GetString("Bet_type", resourceCulture);
             }
         }
         
@@ -169,7 +169,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accumulated Hourly {0} Game Statistic Record {1} on {2} GMT+8.
+        ///   Looks up a localized string similar to Accumulated Hourly {0} Game Statistic Record {1} on {2} (GMT+8).
         /// </summary>
         public static string CasinoGameStatistic_Accumulated_Title {
             get {
@@ -178,7 +178,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hourly {0} Game Statistic Record {1} on {2} GMT+8.
+        ///   Looks up a localized string similar to Hourly {0} Game Statistic Record {1} on {2} (GMT+8).
         /// </summary>
         public static string CasinoGameStatistic_Hourly_Title {
             get {
@@ -565,6 +565,15 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NG Statistic {0}.
+        /// </summary>
+        public static string NumberGameStatistic_SheetNameByUser {
+            get {
+                return ResourceManager.GetString("NumberGameStatistic_SheetNameByUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number Game Product Win Loss By Bet Type Report {0} on {1}.
         /// </summary>
         public static string NumberGameWinLossByBetTypeMatch_ByBetTypeDetailReportTitle {
@@ -687,6 +696,15 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         public static string OnlinePlayers {
             get {
                 return ResourceManager.GetString("OnlinePlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ad.
+        /// </summary>
+        public static string test {
+            get {
+                return ResourceManager.GetString("test", resourceCulture);
             }
         }
         
