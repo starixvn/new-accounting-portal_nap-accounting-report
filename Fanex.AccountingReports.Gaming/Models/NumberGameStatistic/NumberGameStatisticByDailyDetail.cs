@@ -3,17 +3,10 @@
     using System;
 
     [Serializable]
-    public class NumberGameStatisticByDailyDetail
+    public class NumberGameStatisticByDailyDetail : NumberGameStatisticDetail
     {
-        public NumberGameStatisticByDailyDetail()
-        {
-            NumberGameStatisticDetail = new NumberGameStatisticDetail();
-        }
-
         public string Date { get; set; }
 
         public int Players { get; set; }
-
-        public NumberGameStatisticDetail NumberGameStatisticDetail { get; set; }
     }
 }

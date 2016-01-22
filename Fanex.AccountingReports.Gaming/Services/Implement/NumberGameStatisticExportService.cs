@@ -386,7 +386,7 @@
                    currentItem.Players,
                    currentRow % 2 == 0 ? intNumberStyle : evenRowIntNumberStyle);
 
-                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem.NumberGameStatisticDetail);
+                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem);
                 currentRow++;
             }
         }
@@ -423,7 +423,7 @@
                    currentItem.CustId,
                    currentRow % 2 == 0 ? textStyle : evenRowTextStyle);
 
-                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem.NumberGameStatisticDetail);
+                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem);
                 currentRow++;
             }
         }
@@ -460,7 +460,7 @@
                    currentItem.Players,
                    currentRow % 2 == 0 ? intNumberStyle : evenRowIntNumberStyle);
 
-                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem.NumberGameStatisticDetail);
+                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem);
                 currentRow++;
             }
         }
@@ -497,7 +497,7 @@
                    currentItem.Players,
                    currentRow % 2 == 0 ? intNumberStyle : evenRowIntNumberStyle);
 
-                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem.NumberGameStatisticDetail);
+                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem);
                 currentRow++;
             }
         }
@@ -621,7 +621,7 @@
                grandTotal.Players,
                grandTotalIntNumberStyle);
 
-            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal.NumberGameStatisticDetail);
+            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal);
         }
 
         private void ExportReportByUserNameGrandTotal(
@@ -652,7 +652,7 @@
                string.Empty,
                grandTotalTextStyle);
 
-            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal.NumberGameStatisticDetail);
+            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal);
         }
 
         private void ExportReportByLeagueGrandTotal(
@@ -683,7 +683,7 @@
                grandTotal.Players,
                grandTotalIntNumberStyle);
 
-            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal.NumberGameStatisticDetail);
+            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal);
         }
 
         private void ExportReportByBettypeGrandTotal(
@@ -714,7 +714,7 @@
                grandTotal.Players,
                grandTotalIntNumberStyle);
 
-            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal.NumberGameStatisticDetail);
+            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal);
         }
 
         private void ExportNumberGameStatisticGrandTotalDetail(

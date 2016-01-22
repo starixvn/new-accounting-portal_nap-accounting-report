@@ -30,6 +30,15 @@
         [SpParam(Ignored = true)]
         public bool IsPagingCallBack { get; set; }
 
+        [SpParam(Ignored = true)]
+        public string SortColumnName { get; set; }
+
+        [SpParam(Ignored = true)]
+        public string SortDirection { get; set; }
+
+        [SpParam(Ignored = true)]
+        public string SortDataType { get; set; }
+
         public override bool IsValid()
         {
             return true;

@@ -35,7 +35,15 @@
         [HandleAjaxError]
         public ActionResult GetReportByDaily(GetNumberGameStatisticCriteria criteria)
         {
-            var report = _service.GetNumberGameStatisticByDaily(criteria);
+            var report = _service.GetNumberGameStatisticByDaily(criteria);            
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public ActionResult GetReportSortByDaily(GetNumberGameStatisticCriteria criteria)
+        {
+            var report = _service.GetNumberGameStatisticSortByDaily(criteria);
             return Json(report, JsonRequestBehavior.AllowGet);
         }
 
@@ -49,6 +57,14 @@
 
         [HttpPost]
         [HandleAjaxError]
+        public ActionResult GetReportSortByUserName(GetNumberGameStatisticCriteria criteria)
+        {
+            var report = _service.GetNumberGameStatisticSortByUserName(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
         public ActionResult GetReportByLeague(GetNumberGameStatisticCriteria criteria)
         {
             var report = _service.GetNumberGameStatisticByLeague(criteria);
@@ -57,9 +73,25 @@
 
         [HttpPost]
         [HandleAjaxError]
+        public ActionResult GetReportSortByLeague(GetNumberGameStatisticCriteria criteria)
+        {
+            var report = _service.GetNumberGameStatisticSortByLeague(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
         public ActionResult GetReportByBettype(GetNumberGameStatisticCriteria criteria)
         {
             var report = _service.GetNumberGameStatisticByBettype(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public ActionResult GetReportSortByBettype(GetNumberGameStatisticCriteria criteria)
+        {
+            var report = _service.GetNumberGameStatisticSortByBettype(criteria);
             return Json(report, JsonRequestBehavior.AllowGet);
         }
 

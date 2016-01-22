@@ -38,3 +38,6 @@ StyleCop.Cache
 *.GhostDoc.xml
 *.csproj.user
 *.Publish.xml
+.vs/config/applicationhost.config
+Fanex.AccountingReports.sln
+Fanex.AccountingReports.sln

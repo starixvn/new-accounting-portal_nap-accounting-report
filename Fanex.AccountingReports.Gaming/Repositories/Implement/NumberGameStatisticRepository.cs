@@ -31,17 +31,23 @@
                     {
                         Bettype = Converter.ToString2(reader["Bettype"]),
                         Players = Converter.ToInt(reader["Players"]),
-                        NumberGameStatisticDetail = CreateNumberGameStatisticDetail(reader)
+                        BetCount = Converter.ToInt(reader["BetCount"]),
+                        TotalBets = Converter.ToDecimal(reader["TotalBets"]),
+                        TotalWins = Converter.ToDecimal(reader["TotalWins"]),
+                        GameIncome = Converter.ToDecimal(reader["GameIncome"]),
+                        GamePayout = Converter.ToDecimal(reader["GamePayout"]) / 100,
+                        CompanyTurnover = Converter.ToDecimal(reader["CompanyTurnover"]),
+                        NetIncome = Converter.ToDecimal(reader["NetIncome"])
                     };
 
-                    this.CalculateTotal(report.GrandTotal.NumberGameStatisticDetail, item.NumberGameStatisticDetail);
+                    this.CalculateTotal(report.GrandTotal, item);
                     report.ReportRows.Add(item);
                 }
 
                 reader.Close();
                 outputParams = objectDb.GetOuputParams();
                 report.GrandTotal.Players = Converter.ToInt(outputParams["totalplayers"]);
-                CalCulateTotalGamePayout(report.GrandTotal.NumberGameStatisticDetail);
+                CalCulateTotalGamePayout(report.GrandTotal);
             }
 
             return report;
@@ -66,17 +72,23 @@
                     {
                         Date = Converter.ToDateTime(reader["Date"]).ToShortFormatedDate(),
                         Players = Converter.ToInt(reader["Players"]),
-                        NumberGameStatisticDetail = CreateNumberGameStatisticDetail(reader)
+                        BetCount = Converter.ToInt(reader["BetCount"]),
+                        TotalBets = Converter.ToDecimal(reader["TotalBets"]),
+                        TotalWins = Converter.ToDecimal(reader["TotalWins"]),
+                        GameIncome = Converter.ToDecimal(reader["GameIncome"]),
+                        GamePayout = Converter.ToDecimal(reader["GamePayout"]) / 100,
+                        CompanyTurnover = Converter.ToDecimal(reader["CompanyTurnover"]),
+                        NetIncome = Converter.ToDecimal(reader["NetIncome"])
                     };
 
-                    this.CalculateTotal(report.GrandTotal.NumberGameStatisticDetail, item.NumberGameStatisticDetail);
+                    this.CalculateTotal(report.GrandTotal, item);
                     report.ReportRows.Add(item);
                 }
 
                 reader.Close();
                 outputParams = objectDb.GetOuputParams();
                 report.GrandTotal.Players = Converter.ToInt(outputParams["totalplayers"]);
-                CalCulateTotalGamePayout(report.GrandTotal.NumberGameStatisticDetail);
+                CalCulateTotalGamePayout(report.GrandTotal);
             }
 
             return report;
@@ -101,17 +113,23 @@
                     {
                         LeagueName = Converter.ToString2(reader["LeagueName"]),
                         Players = Converter.ToInt(reader["Players"]),
-                        NumberGameStatisticDetail = CreateNumberGameStatisticDetail(reader)
+                        BetCount = Converter.ToInt(reader["BetCount"]),
+                        TotalBets = Converter.ToDecimal(reader["TotalBets"]),
+                        TotalWins = Converter.ToDecimal(reader["TotalWins"]),
+                        GameIncome = Converter.ToDecimal(reader["GameIncome"]),
+                        GamePayout = Converter.ToDecimal(reader["GamePayout"]) / 100,
+                        CompanyTurnover = Converter.ToDecimal(reader["CompanyTurnover"]),
+                        NetIncome = Converter.ToDecimal(reader["NetIncome"])
                     };
 
-                    this.CalculateTotal(report.GrandTotal.NumberGameStatisticDetail, item.NumberGameStatisticDetail);
+                    this.CalculateTotal(report.GrandTotal, item);
                     report.ReportRows.Add(item);
                 }
 
                 reader.Close();
                 outputParams = objectDb.GetOuputParams();
                 report.GrandTotal.Players = Converter.ToInt(outputParams["totalplayers"]);
-                CalCulateTotalGamePayout(report.GrandTotal.NumberGameStatisticDetail);
+                CalCulateTotalGamePayout(report.GrandTotal);
             }
 
             return report;
@@ -135,17 +153,23 @@
                     {
                         UserName = Converter.ToString2(reader["UserName"]),
                         CustId = Converter.ToInt(reader["CustId"]),
-                        NumberGameStatisticDetail = CreateNumberGameStatisticDetail(reader)
+                        BetCount = Converter.ToInt(reader["BetCount"]),
+                        TotalBets = Converter.ToDecimal(reader["TotalBets"]),
+                        TotalWins = Converter.ToDecimal(reader["TotalWins"]),
+                        GameIncome = Converter.ToDecimal(reader["GameIncome"]),
+                        GamePayout = Converter.ToDecimal(reader["GamePayout"]) / 100,
+                        CompanyTurnover = Converter.ToDecimal(reader["CompanyTurnover"]),
+                        NetIncome = Converter.ToDecimal(reader["NetIncome"])
                     };
 
-                    this.CalculateTotal(report.GrandTotal.NumberGameStatisticDetail, item.NumberGameStatisticDetail);
+                    this.CalculateTotal(report.GrandTotal, item);
                     report.ReportRows.Add(item);
                 }
 
                 reader.Close();
             }
 
-            CalCulateTotalGamePayout(report.GrandTotal.NumberGameStatisticDetail);
+            CalCulateTotalGamePayout(report.GrandTotal);
             return report;
         }
 
