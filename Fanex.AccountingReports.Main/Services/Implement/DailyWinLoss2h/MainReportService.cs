@@ -591,8 +591,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 ref twoDecimalPositivePercentNumberStyle,
                                 true);
 
-                            if (isCasinoSport)
-                            {
+                            if (isCasinoSport){
                                 _dailyWinLoss2hUtilityService.ExportMainReportCasinoRow(
                                     ref workSheet,
                                     textStyle,

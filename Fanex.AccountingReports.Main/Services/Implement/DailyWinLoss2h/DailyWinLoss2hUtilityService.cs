@@ -118,7 +118,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 case CoreConstants.SportContants.MetricGamingSuperLive:
                     return Labels.Metric_Gaming_Super_Live;
                 case SportContants._2hLiveCasinoSport:
-                    return Labels.MBC_RNG_Casino;
+                    return Labels.SLI;
                 case SportContants._2hCasinoSport:
                     return Labels.MBC_RNG_Casino;
                 case SportContants._2hGoldDeluxeSport:

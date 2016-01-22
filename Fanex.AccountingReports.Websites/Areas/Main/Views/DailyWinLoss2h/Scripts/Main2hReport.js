@@ -115,7 +115,7 @@ Main2hReport.prototype.RenderReport = function (report) {
                         { Name: "ColVariance", Value: info.Variance },
                         { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
                         { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
-                        isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColRealMargin") : reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
+                        isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColRealMargin") :  reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
                         isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColVirtualMargin") : reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
                     CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                         showHideSiteTypeManager.Enums.RowType.InfoRow)
