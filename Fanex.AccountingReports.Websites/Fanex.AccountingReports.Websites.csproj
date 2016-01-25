@@ -586,6 +586,10 @@
     <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameFinancial\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameStatistic\Scripts\NumberGameStatistic.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameStatistic\Scripts\NumberGameStatisticByBettype.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameStatistic\Scripts\NumberGameStatisticByDaily.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameStatistic\Scripts\NumberGameStatisticByLeague.js" />
+    <Content Include="Areas\Gaming\Views\NumberGameStatistic\Scripts\NumberGameStatisticByUserName.js" />
     <Content Include="Areas\Gaming\Views\NumberGameStatistic\Styles\NumberGameStatistic.less">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

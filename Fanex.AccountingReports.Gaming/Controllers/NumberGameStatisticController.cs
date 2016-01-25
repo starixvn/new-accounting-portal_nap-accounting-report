@@ -12,15 +12,17 @@
     public class NumberGameStatisticController : BaseController
     {
         private INumberGameStatisticService _service;
+        private INumberGameStatisticExportService _exportService;
 
         public NumberGameStatisticController()
-            : this(null)
+            : this(null, null)
         {
         }
 
-        public NumberGameStatisticController(INumberGameStatisticService service)
+        public NumberGameStatisticController(INumberGameStatisticService service, INumberGameStatisticExportService exportService)
         {
             this._service = service ?? new NumberGameStatisticService();
+            this._exportService = exportService ?? new NumberGameStatisticExportService();
         }
 
         [NapAuth(FunctionKey = AccReportFunctionKeys.NumberGameStatistic, Policy = Constant.Policy.Read)]
@@ -31,15 +33,57 @@
 
         [HttpPost]
         [HandleAjaxError]
-        public ActionResult GetReport(GetNumberGameStatisticCriteria criteria)
+        public ActionResult GetReportByDaily(GetNumberGameStatisticCriteria criteria)
         {
-            var report = _service.GetReport(criteria);
+            var report = _service.GetNumberGameStatisticByDaily(criteria);
             return Json(report, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult ExportReport(GetNumberGameStatisticCriteria criteria)
+        [HttpPost]
+        [HandleAjaxError]
+        public ActionResult GetReportByUserName(GetNumberGameStatisticCriteria criteria)
         {
-            _service.ExportReport(criteria);
+            var report = _service.GetNumberGameStatisticByUserName(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public ActionResult GetReportByLeague(GetNumberGameStatisticCriteria criteria)
+        {
+            var report = _service.GetNumberGameStatisticByLeague(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public ActionResult GetReportByBettype(GetNumberGameStatisticCriteria criteria)
+        {
+            var report = _service.GetNumberGameStatisticByBettype(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ExportReportByDaily(GetNumberGameStatisticCriteria criteria)
+        {
+            _exportService.ExportReportByDaily(criteria);
+            return new EmptyResult();
+        }
+
+        public ActionResult ExportReportByUserName(GetNumberGameStatisticCriteria criteria)
+        {
+            _exportService.ExportReportByUserName(criteria);
+            return new EmptyResult();
+        }
+
+        public ActionResult ExportReportByLeague(GetNumberGameStatisticCriteria criteria)
+        {
+            _exportService.ExportReportByLeague(criteria);
+            return new EmptyResult();
+        }
+
+        public ActionResult ExportReportByBettype(GetNumberGameStatisticCriteria criteria)
+        {
+            _exportService.ExportReportByBettype(criteria);
             return new EmptyResult();
         }
     }

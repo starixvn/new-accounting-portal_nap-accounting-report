@@ -9,6 +9,8 @@
 
 namespace Fanex.AccountingReports.Gaming.Constants
 {
+    using Fanex.AccountingReports.Core.Web;
+
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -42,7 +44,7 @@ namespace Fanex.AccountingReports.Gaming.Constants
         /// <summary>
         /// Number Game Win Loss By Currency Member SessionKey.
         /// </summary>
-        public static readonly string NumberGameWinLossByCUrrencyMemberSessionKey = "Fanex.AccountingReports.Gaming.NumberGameWinlossByCurrencyMember";        
+        public static readonly string NumberGameWinLossByCUrrencyMemberSessionKey = "Fanex.AccountingReports.Gaming.NumberGameWinlossByCurrencyMember";
 
         /// <summary>
         /// Bingo Win Loss Report SessionKey.
@@ -65,7 +67,19 @@ namespace Fanex.AccountingReports.Gaming.Constants
         public static readonly string BingoOutstandingReportSessionKey = "Fanex.AccountingReports.Gaming.BingoOutStanding.Report";
 
         public static readonly int MaxRowsData = 65000;
-        
+
+        public static readonly string NumberGameStatisticReportByLeagueCachedDataKey = "Fanex.AccountingReports.Gaming.NumberGameStatisticReportByLeague." +
+         (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
+
+        public static readonly string NumberGameStatisticReportByDailyCachedDataKey = "Fanex.AccountingReports.Gaming.NumberGameStatisticReportByDaily." +
+           (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
+
+        public static readonly string NumberGameStatisticReportByUserNameCachedDataKey = "Fanex.AccountingReports.Gaming.NumberGameStatisticReportByUserName." +
+           (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
+
+        public static readonly string NumberGameStatisticReportByBettypeCachedDataKey = "Fanex.AccountingReports.Gaming.NumberGameStatisticReportByBettype." +
+           (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
+
         public enum ReportRowType
         {
             /// <summary>

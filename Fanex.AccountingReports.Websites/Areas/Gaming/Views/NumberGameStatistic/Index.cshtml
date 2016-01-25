@@ -1,14 +1,16 @@
 ﻿@using Fanex.AccountingReports.Gaming.Resources;
 @using Fanex.AccountingReports.Core.Web;
 @using Fanex.AccountingReports.Core.Extensions;
-
+@using Fanex.AccountingReports.Gaming.Constants;
 @{
     ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head{
-     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
-     <link rel="stylesheet" type="text/css" href="~/Areas/Gaming/Views/NumberGameStatistic/Styles/NumberGameStatistic.less" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Autocomplete/styles.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Gaming/Views/NumberGameStatistic/Styles/NumberGameStatistic.less" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MultipleSelect/jquery.multiselect.css" />
 }
 @section Headline {
     <div class="title">
@@ -22,24 +24,81 @@
     <div class="filter-form">
         <div class="filter-row">
             <div class="filter-cell">
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.Search_by
+                </div>
                 <div id="datepickerplugin" class="lbl-field col_22 align-right">
                 </div>
             </div>
         </div>
-        <div class="filter-row btnRow">
-            <div class="submit width-auto col_4">
-                <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
-            </div>
-             <div class="submit width-auto col_4">
-                <input id="btnToday" name="btnToday" type="submit" value="" />
-            </div>
-             <div class="submit width-auto col_4">
-                <input id="btnYesterday" name="btnYesterday" type="submit" value="" />
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_4 prefix_5 align-right">
+                    @Labels.League
+                </div>
+                <div class="edit-field col_6">
+                    <select id="dropdown-league" class="dropdown-league">
+                        <option value="0" title="Number Game">All</option>
+                        <option value="15223" title="Number Game">Number Game</option>
+                        <option value="50717" title="Turbo Number Game">Turbo Number Game</option>
+                    </select>
+                </div>
+                <div class="lbl-field col_4 align-right">
+                    @GamingResources.Bet_type
+                </div>
+                <div class="edit-field col_6">
+                    <select id="dropdown-bettype" class="dropdown-bettype">
+                    </select>
+                </div>
+                <div class="lbl-field col_3 align-right">
+                    @Labels.UserName
+                </div>
+                <div class="edit-field col_6">
+                    <input type="text" id="txtUserName" class="defaultSuggestionBox" maxlength="50" value="@Labels.Search_All"/>
+                </div>
             </div>
         </div>
         <div class="filter-row">
             <div class="filter-cell">
-                <div id="ErrMsg" class="col_35 display-none width-auto">
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.Report_by
+                </div>
+                <div id="reportBy" class="lbl-field col_29 prefix_5 align-left">
+                    <div class="col_3 alpha">
+                        <input type="radio" name="rdReportBy" id="rdReportByDaily" value="@PeriodTypeConstants.NumberGameStatisticDaily" />
+                        <label for="rdReportByDaily">
+                            @Labels.Daily</label></div>
+                    <div class="col_5">
+                        <input type="radio" name="rdReportBy" id="rdReportByUserName" value="@PeriodTypeConstants.NumberGameStatisticUsername" />
+                        <label for="rdReportByUserName">
+                            @Labels.UserName</label></div>
+                    <div class="col_4">
+                        <input type="radio" name="rdReportBy" id="rdReportByLeague" checked="checked" value="@PeriodTypeConstants.NumberGameStatisticLeague" />
+                        <label for="rdReportByLeague">
+                            @Labels.League</label></div>
+                    <div class="col_4">
+                        <input type="radio" name="rdReportBy" id="rdReportByBettype" value="@PeriodTypeConstants.NumbeGameStatisticBettype" />
+                        <label for="rdReportByBettype">
+                            @GamingResources.Bet_type</label></div>
+                </div>
+            </div>
+            <div class="filter-row btnRow">
+                <div class="filter-cell prefix_9">
+                    <div class="submit width-auto col_4">
+                        <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
+                    </div>
+                    <div class="submit width-auto col_4">
+                        <input id="btnToday" name="btnToday" type="submit" value="" />
+                    </div>
+                    <div class="submit width-auto col_4">
+                        <input id="btnYesterday" name="btnYesterday" type="submit" value="" />
+                    </div>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-cell">
+                    <div id="ErrMsg" class="col_35 display-none width-auto">
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,16 +113,34 @@
     <script type="text/javascript">
         var labelFrom = '@Labels.From';
         var labelTo = '@Labels.To';
-        var today = '@DateTime.Today.ToShortDateString()';
-        var yesterday = '@DateTime.Today.AddDays(-1).ToShortDateString()';
-        var minDate = '@DateTime.Today.AddDays(-2)';
+        var today = '@DateTime.Today.ToShortFormatedDate()';
+        var yesterday = '@DateTime.Today.AddDays(-1).ToShortFormatedDate()';
+        var minDate = '@DateTime.Today.AddMonths(-6).FirstDayOfMonth().ToShortFormatedDate()';
         var shortFormattedYesterday = '@DateTime.Today.AddDays(-1).ToShortFormatedDate()';
         var shortFormattedToday = '@DateTime.Today.ToShortFormatedDate()';
+        var beginLast3Months = '@DateTime.Today.AddMonths(-3).FirstDayOfMonth().ToShortFormatedDate()';
+        var endLast3Months = '@DateTime.Today.AddMonths(-1).LastDayOfMonth().ToShortFormatedDate()';
+        var beginLast6Months = '@DateTime.Today.AddMonths(-6).FirstDayOfMonth().ToShortFormatedDate()';
+        var endLast6Months = '@DateTime.Today.AddMonths(-1).LastDayOfMonth().ToShortFormatedDate()';
+
+        var viewResources = {
+            Time_period: '@Labels.Time_period',
+            From_Date: '@Labels.From_Date',
+            To_Date: '@Labels.To_Date',
+            Options_LastMonthRange: '@Labels.Options_LastMonthRange',
+            Search_All: '@Labels.Search_All'
+        };
     </script>
 }
 @section Foot {
     <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Autocomplete/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MultipleSelect/jquery.multiselect.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/NumberGameStatistic/Scripts/NumberGameStatisticByDaily.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/NumberGameStatistic/Scripts/NumberGameStatisticByUserName.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/NumberGameStatistic/Scripts/NumberGameStatisticByLeague.js"></script>
+    <script type="text/javascript" src="~/Areas/Gaming/Views/NumberGameStatistic/Scripts/NumberGameStatisticByBettype.js"></script>
     <script type="text/javascript" src="~/Areas/Gaming/Views/NumberGameStatistic/Scripts/NumberGameStatistic.js"></script>
-
 }

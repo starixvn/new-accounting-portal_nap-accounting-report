@@ -6,8 +6,8 @@
 
 namespace Fanex.AccountingReports.Core.Extensions
 {
+    using System.Drawing;
     using NPOI.SS.UserModel;
-using System.Drawing;
 
     /// <summary>
     /// TODO: Update summary.

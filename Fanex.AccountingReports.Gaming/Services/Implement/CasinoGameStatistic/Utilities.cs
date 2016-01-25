@@ -4,16 +4,15 @@
 // </copyright>
 // -----------------------------------------------------------------------
 
-using Fanex.AccountingReports.Core.Extensions;
-using Fanex.AccountingReports.Core.Web;
-using Fanex.AccountingReports.Gaming.Constants;
-using Fanex.AccountingReports.Gaming.Resources;
-
 namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 {
     using System;
+    using Fanex.AccountingReports.Core.Extensions;
+    using Fanex.AccountingReports.Core.Web;
+    using Fanex.AccountingReports.Gaming.Constants;
     using Fanex.AccountingReports.Gaming.Criteria.CasinoGameStatistic;
     using Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic;
+    using Fanex.AccountingReports.Gaming.Resources;
     using Fanex.Common;
 
     /// <summary>
@@ -126,6 +125,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 case PeriodTypeConstants.CasinoGameStatisticMonthlyToDaily:
                     name = dateTime.ToShortFormatedDate();
                     break;
+
                 case PeriodTypeConstants.CasinoGameStatisticMonthly:
                     name = dateTime.ToMonthYearWithSlash();
                     break;
@@ -142,45 +142,59 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 case (int)ViewReport.Daily:
                     key = _reportDailyKey;
                     break;
+
                 case (int)ViewReport.DailyByCurrency:
                     key = _reportDailyByCurrencyKey;
                     break;
+
                 case (int)ViewReport.Monthly:
                     key = _reportMonthlyKey;
                     break;
+
                 case (int)ViewReport.MonthlyByCurrency:
                     key = _reportMonthlyByCurrencyKey;
                     break;
+
                 case (int)ViewReport.UserName:
                     key = _reportUserNameKey;
                     break;
+
                 case (int)ViewReport.DailyByUserName:
                     key = _reportDailyByUserNameKey;
                     break;
+
                 case (int)ViewReport.GameType:
                     key = _reportGameTypeKey;
                     break;
+
                 case (int)ViewReport.GameTypeByCurrency:
                     key = _reportGameTypeByCurrencyKey;
                     break;
+
                 case (int)ViewReport.GameTable:
                     key = _reportGameTableKey;
                     break;
+
                 case (int)ViewReport.GameTableByCurrency:
                     key = _reportGameTableByCurrencyKey;
                     break;
+
                 case (int)ViewReport.Company:
                     key = _reportCompanyKey;
                     break;
+
                 case (int)ViewReport.CompanyByCurrency:
                     key = _reportCompanyByCurrencyKey;
                     break;
+
                 case (int)ViewReport.Currency:
                     key = _reportCurrencyKey;
                     break;
+
                 case (int)ViewReport.GrandTotal:
                     key = _reportGrandTotalKey;
                     break;
+
                 case (int)ViewReport.Hourly:
                     key = _reportHourlyKey;
                     break;

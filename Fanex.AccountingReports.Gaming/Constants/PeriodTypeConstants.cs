@@ -35,6 +35,11 @@ namespace Fanex.AccountingReports.Gaming.Constants
         public const int LiveCasinoGameStatisticCompany = 5;
         public const int LiveCasinoGameStatisticCurrency = 6;
 
+        public const int NumberGameStatisticDaily = 1;
+        public const int NumberGameStatisticUsername = 2;
+        public const int NumberGameStatisticLeague = 0;
+        public const int NumbeGameStatisticBettype = 3;
+        
         public const int CasinoAgencyWinLossDaily = 0;
         public const int CasinoAgencyWinLossMonthly = 1;
         public const int CasinoAgencyWinLossUsername = 2;
