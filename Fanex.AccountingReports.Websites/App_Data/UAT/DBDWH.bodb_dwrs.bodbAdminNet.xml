@@ -190,7 +190,7 @@
     <Setting Key="Core_GetDWH_DateRange" SpName="BI_GetDWStatusByCube" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Gaming - NumberGameStatistic">
-    <Setting Key="NumberGameStatistics_GetReport" SpName="Acc_Rpt_NumberGameStatistics_xtest" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="NumberGameStatistics_GetReport" SpName="Acc_Rpt_NumberGameStatistics" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Casino Games Statistic">
     <Setting Key="Acc_Rpt_CasinoGameStatistics_LicenseeSel" SpName="Acc_Rpt_CasinoGameStatistics_LicenseeSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
