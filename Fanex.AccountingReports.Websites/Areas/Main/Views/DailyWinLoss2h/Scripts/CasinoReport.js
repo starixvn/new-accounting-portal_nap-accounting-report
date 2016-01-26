@@ -1,10 +1,6 @@
 CasinoReport = function () {
     var self = this;
 
-    self.enums = {
-        SLICasino: 6
-    };
-
     self.Tables = {
         btnGenerate: null,
         btnToday: null,
@@ -112,7 +108,6 @@ CasinoReport.prototype.RenderReport = function (report) {
         var tableId = "casinoReportBySportType";
         for (var i = 0; i < reportLength; i++) {
             var betType = nonLiveReport.ChildsInfo[i];
-            var isSLICasino = betType.Id == self.enums.SLICasino;
             groupdId = tableId + "_BetType" + betType.Id +
                                  "_Hedge0_Live0";
             info = betType.GrandTotal;
@@ -129,7 +124,7 @@ CasinoReport.prototype.RenderReport = function (report) {
                     { Name: "ColPosition", Value: info.Position },
                     { Name: "ColCommission", Value: info.Commission },
                     { Name: "ColRealLineTotal", Value: info.LineTotal },
-                    { Name: "ColRealTurnover", Value: info.IsHideRealTurnover || isSLICasino ? viewResources.NotAvailable : info.Turnover },
+                    { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
                     reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")],
                 CssClass: "freegrid-even"
             });
@@ -158,7 +153,7 @@ CasinoReport.prototype.RenderReport = function (report) {
                     { Name: "ColPosition", Value: info.Position },
                     { Name: "ColCommission", Value: info.Commission },
                     { Name: "ColRealLineTotal", Value: info.LineTotal },
-                    { Name: "ColRealTurnover", Value: info.IsHideRealTurnover || isSLICasino ? viewResources.NotAvailable : info.Turnover },
+                    { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
                     reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")],
                 CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                     showHideSiteTypeManager.Enums.RowType.InfoRow)
@@ -188,7 +183,7 @@ CasinoReport.prototype.RenderReport = function (report) {
                     { Name: "ColPosition", Value: info.Position },
                     { Name: "ColCommission", Value: info.Commission },
                     { Name: "ColRealLineTotal", Value: info.LineTotal },
-                    { Name: "ColRealTurnover", Value: info.IsHideRealTurnover || isSLICasino ? viewResources.NotAvailable : info.Turnover },
+                    { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
                     reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")],
                 CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                     showHideSiteTypeManager.Enums.RowType.InfoRow)
@@ -226,7 +221,7 @@ CasinoReport.prototype.RenderReport = function (report) {
                 { Name: "ColCommission", Value: info.Commission },
                 { Name: "ColRealLineTotal", Value: info.LineTotal },
                 { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
-                { Name: "ColRealMargin", Value: viewResources.NotAvailable }],
+                { Name: "ColRealMargin", Value: viewResources.NotAvailable}],
             CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                 showHideSiteTypeManager.Enums.RowType.InfoRow)
         });

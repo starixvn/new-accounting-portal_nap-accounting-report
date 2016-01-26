@@ -80,6 +80,7 @@
     @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/LiveCasinoWinLossByProductReport.cshtml")
     @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/Bettrade.cshtml")
     @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/ColossusBet.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/CockFighting.cshtml")
 </div>
 @section scripts
 {
@@ -136,7 +137,9 @@
             SMA_WinLoss: '@Labels.SMA_Win_Loss',
             Company_Income: '@Labels.Company_Income',
             Company_Turnover: '@Labels.Company_Turnover'
-        }; 
+        };
+
+        var casinoSingleWalletLaunchDate = '@AppSettings.CasinoSingleWalletLaunchDate.ToShortFormatedDate()'; 
     </script>
 }
 @section Foot {
@@ -176,7 +179,9 @@
     <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/MainLiveCasinoReport.js"></script>
     <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/LiveCasinoWinLossByProductReport.js"></script>
     <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Bettrade.js"></script>
-          <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ColossusBet.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ColossusBet.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/CockFighting.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/CockFightingArena.js"></script>
     <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/WinLossBySite_BetType.js"></script>
     <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ShowHideSiteTypeManager.js"></script>
     <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ReportManager.js"></script>

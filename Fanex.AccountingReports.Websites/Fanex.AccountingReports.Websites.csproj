@@ -690,6 +690,8 @@
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Bettrade.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\BingoReport.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\CasinoReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\CockFighting.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\CockFightingArena.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\ColossusBet.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\KenoReport.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\LiveCasinoWinLossByProductReport.js" />
@@ -737,6 +739,7 @@
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Styles\TraderPerformanceOtherSports.less" />
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Scripts\TraderPerformanceOtherSports.js" />
     <Content Include="Areas\Main\Views\TraderPerformanceSoccer\Scripts\TraderPerformanceSoccer.js" />
+    <Content Include="Areas\Main\Views\WinLossSummary3rd\Scripts\CockFighting.js" />
     <Content Include="Areas\Main\Views\WinLossSummary3rd\Scripts\GameMatchDetails.js" />
     <Content Include="Areas\Main\Views\WinLossSummary3rd\Scripts\ReportManager.js" />
     <Content Include="Areas\Main\Views\WinLossSummary3rd\Scripts\WinLossSummary.js" />
@@ -1208,6 +1211,7 @@
     <Content Include="Web.Configuration\MAMonitorSection.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Web.Configuration\TreeWinLossProduct.xml" />
     <Content Include="Web.Configuration\VirtualSportsWinLossSection.config" />
     <Content Include="Web.Configuration\LegendSection.config">
       <SubType>Designer</SubType>
@@ -2153,6 +2157,7 @@
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisSporting\_TennisSportting.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameStatistic\Index.cshtml" />
     <Content Include="Areas\Special\Views\PunterAnalysis\Index.cshtml" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\CockFighting.cshtml" />
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>

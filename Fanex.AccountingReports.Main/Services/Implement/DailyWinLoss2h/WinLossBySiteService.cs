@@ -13,6 +13,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using ExcelUtil.Spreadsheet;
+    using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -42,13 +43,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             {
                 var enableVirtual = _dailyWinLoss2hUtilityService.IsApplyVirtualRate(criteria.SportGroupId) ||
                      criteria.ProductId != MainSportConstants.SportContants._2hCasinoSport;
-                var isShowVirtualTurnover = enableVirtual ||
-                    criteria.SportGroupId == SportContants.LiveCasino ||
-                    criteria.SportGroupId == SportContants.Keno ||
-                    criteria.SportGroupId == SportContants.VirtualSportGroup;
+                var isShowVirtualTurnover = enableVirtual;
 
-                var convertCriteria = WinlossBySiteCriteria(criteria);
-                var report = WinlossBySiteInfo(convertCriteria, enableVirtual, isShowVirtualTurnover, criteria.Site, criteria.SportGroupId, criteria.ProductId);
+                var report = WinlossBySiteInfo(criteria);
 
                 SessionManager.Set<WinLossInfo>(MainConstants.DailyWinLoss2hWinLossBySiteBetTypeReportSessionKey, report);
                 return report;
@@ -150,13 +147,28 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         WinLostDate = criteria.WinLostDate,
                         Site = criteria.Site
                     };
+                case CoreConstants.SportContants.CockFighting:
+                    return new GetWinLossBySite_CockFightingCriteria
+                    {
+                        WinLostDate = criteria.WinLostDate,
+                        Site = criteria.Site
+                    };
             }
 
             return criteria;
         }
 
-        private WinLossInfo WinlossBySiteInfo(CriteriaBase criteria, bool enableVirtual, bool isShowVirtualTurnover, int site, int sportGroupId, int productId)
+        private WinLossInfo WinlossBySiteInfo(GetWinLossBySite_BetTypeCriteria criteria)
         {
+            int sportGroupId = criteria.SportGroupId;
+            var convertCriteria = WinlossBySiteCriteria(criteria);
+            bool isHideCasinoTurnover = criteria.ProductId == MainSportConstants.SportContants._2hCasinoSport && DateTime.Compare(criteria.WinLostDate, AppSettings.CasinoSingleWalletLaunchDate) < 0;
+            var enableVirtual = _dailyWinLoss2hUtilityService.IsApplyVirtualRate(criteria.SportGroupId) ||
+                                !isHideCasinoTurnover ||
+                                sportGroupId == CoreConstants.SportContants.LiveCasino ||
+                                sportGroupId == CoreConstants.SportContants.Keno ||
+                                sportGroupId == CoreConstants.SportContants.VirtualSportGroup;
+
             WinLossInfo report = new WinLossInfo
             {
                 GrandTotal = new WinLossInfo
@@ -165,14 +177,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     EnableVirtual = enableVirtual
                 },
                 ChildsInfo = new List<WinLossInfo>(),
-                Name = ReportService.GetSiteTypeName(site),
+                Name = ReportService.GetSiteTypeName(criteria.Site),
                 EnableVirtual = enableVirtual,
-                IsHideRealTurnover = _dailyWinLoss2hUtilityService.IsHideRealTurnover(sportGroupId) ||
-                    productId == MainSportConstants.SportContants._2hCasinoSport
+                IsHideRealTurnover = _dailyWinLoss2hUtilityService.IsHideRealTurnover(criteria.SportGroupId) || isHideCasinoTurnover
             };
 
             report.GrandTotal.IsHideRealTurnover = report.IsHideRealTurnover;
-            var rawData = this.GetReportData<dynamic>(criteria);
+            var rawData = this.GetReportData<dynamic>(convertCriteria);
             if (rawData != null)
             {
                 foreach (var data in rawData)
@@ -196,7 +207,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         info.Turnover = 0;
                     }
 
-                    if (!isShowVirtualTurnover)
+                    if (!enableVirtual)
                     {
                         info.VirtualTurnover = 0;
                     }

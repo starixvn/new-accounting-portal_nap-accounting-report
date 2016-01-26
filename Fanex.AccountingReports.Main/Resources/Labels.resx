@@ -1222,4 +1222,13 @@
   <data name="Microgaming_RNGCasino" xml:space="preserve">
     <value>Microgaming - RNG Casino</value>
   </data>
+  <data name="Cockfighting" xml:space="preserve">
+    <value>Cockfighting</value>
+  </data>
+  <data name="Fight_No" xml:space="preserve">
+    <value>Fight No.</value>
+  </data>
+  <data name="MBC_RNG_Casino" xml:space="preserve">
+    <value>MBC - RNG Casino</value>
+  </data>
 </root>

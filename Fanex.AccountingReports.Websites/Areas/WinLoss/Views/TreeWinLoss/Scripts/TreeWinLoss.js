@@ -17,36 +17,23 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             rngCasino: null,
             bingo: null,
             poker: null
-        }
+        },
+        ddlProduct: null
     };
 
     self.Params = {
         reportParams: {
             FromDate: new Date(),
             ToDate: new Date(),
-            ShowSB: true,
-            ShowNG: true,
-            ShowRB: true,
-            ShowBI: true,
-            ShowCasino: true,
-            ShowLiveCasino: true,
-            ShowP2P: true,
-            ShowVS: true,
-            ShowKeno: true,
-            ShowGD: true,
-            ShowMGSL: true,
-            ShowAGCS: true,
-            ShowVG: true,
-            ShowMGCLC: true,
-            ShowMGCRNG: true,
-            ShowCB: true
+            ProductSelection: null,
+            Products: null
         }
     };
 
     self.initPage = function () {
         cachedDOMElements();
         renderDatePicker();
-        renderProductsDropdown();
+        getProduct();
         renderFilterNote(noteMessage);
         bindingEvent();
     };
@@ -56,6 +43,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         _tables.reportContainer = $("#treeWinLossByProductContainer");
         _tables.report = $("#treeWinLossByProduct");
         _tables.filterNote = $("#notemessage");
+        _tables.ddlProduct = $("#ddlProduct");
     };
 
     var renderDatePicker = function () {
@@ -107,34 +95,27 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         });
     };
 
-    var renderProductsDropdown = function () {
-        var noItemText = 'No product found.';
-        var products = [{ Id: 'chbSport', Text: 'Sportsbook' },
-                        { Id: 'chbNG', Text: 'Number Game' },
-                        { Id: 'chbRacing', Text: 'Racing' },
-                        { Id: 'chbBingo', Text: 'Bingo' },
-                        { Id: 'chbRNGCasino', Text: 'Casino' },
-                        { Id: 'chbMacau', Text: 'Macau' },
-                        { Id: 'chbLiveCasino', Text: 'Live Casino' },
-                        { Id: 'chbGoldDeluxe', Text: 'Gold Deluxe' },
-                        { Id: 'chbAGCasino', Text: 'AG Casino' },
-                        { Id: 'chbPoker', Text: 'Poker' },
-                        { Id: 'chbVirtualSports', Text: 'Virtual Sports' },
-                        { Id: 'chbKeno', Text: 'Keno' },
-                        { Id: 'chbMetricGamingSuperLive', Text: 'Metric Gaming - Super Live' },
-                        { Id: 'chbMicroGamingLiveCasino', Text: 'Microgaming - Live Casino' },
-                        { Id: 'chbMicroGamingRNGCasino', Text: 'Microgaming - RNG Casino' },
-                        { Id: 'chbColossusBets', Text: 'Colossus Bets'}];
+    var getProduct = function () {
+        AccReport.disableInput();
+        AccReport.utility.CallAjax(this,
+        window.rootUrl + "WinLoss/TreeWinLoss/GetProduct",
+        null,
+        renderProductsDropdown,
+        renderProductsDropdown,
+        AccReport.enableInput);
+    }
 
+    var renderProductsDropdown = function (products) {
+        var noItemText = 'No product found.';
         var len = products.length;
         var ddwnProducts = [];
         var prefixId = 'ddlProduct_';
         for (var i = 0; i < len; i++) {
             var product = products[i];
             ddwnProducts.push({
-                Id: prefixId + product.Id,
-                Value: product.Id,
-                Text: product.Text,
+                Id: prefixId + product.ProductId,
+                Value: product.ProductId,
+                Text: product.ProductName,
                 Checked: true,
                 Enable: true,
                 CssClass: "",
@@ -158,24 +139,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             listData: ddwnProducts
         });
 
-        _tables.productsList = {
-            sportsbook: $('#ddlProduct_chbSport'),
-            racing: $('#ddlProduct_chbRacing'),
-            numbergame: $('#ddlProduct_chbNG'),
-            liveCasino: $('#ddlProduct_chbLiveCasino'),
-            goldDeluxe: $('#ddlProduct_chbGoldDeluxe'),
-            virtualSports: $('#ddlProduct_chbVirtualSports'),
-            rngCasino: $('#ddlProduct_chbRNGCasino'),
-            bingo: $('#ddlProduct_chbBingo'),
-            poker: $('#ddlProduct_chbPoker'),
-            keno: $('#ddlProduct_chbKeno'),
-            metricGamingSuperLive: $('#ddlProduct_chbMetricGamingSuperLive'),
-            microgamingLiveCasino: $('#ddlProduct_chbMicroGamingLiveCasino'),
-            microgamingRNGCasino: $('#ddlProduct_chbMicroGamingRNGCasino'),
-            agCasino: $('#ddlProduct_chbAGCasino'),
-            macau: $('#ddlProduct_chbMacau'),
-            colossusBets: $('#ddlProduct_chbColossusBets')
-        };
+        _tables.ddlProduct = $("#ddlProduct");
     };
 
     var checkBoxIsChecked = function (checkBox) {
@@ -228,22 +192,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         var dateRange = _tables.datepickerplugin.nexDatePicker("getDateRange");
         self.Params.reportParams.FromDate = dateRange.FromDate;
         self.Params.reportParams.ToDate = dateRange.ToDate;
-        self.Params.reportParams.ShowSB = checkBoxIsChecked(_tables.productsList.sportsbook);
-        self.Params.reportParams.ShowNG = checkBoxIsChecked(_tables.productsList.numbergame);
-        self.Params.reportParams.ShowRB = checkBoxIsChecked(_tables.productsList.racing);
-        self.Params.reportParams.ShowBI = checkBoxIsChecked(_tables.productsList.bingo);
-        self.Params.reportParams.ShowCasino = checkBoxIsChecked(_tables.productsList.rngCasino);
-        self.Params.reportParams.ShowLiveCasino = checkBoxIsChecked(_tables.productsList.liveCasino);
-        self.Params.reportParams.ShowP2P = checkBoxIsChecked(_tables.productsList.poker);
-        self.Params.reportParams.ShowVS = checkBoxIsChecked(_tables.productsList.virtualSports);
-        self.Params.reportParams.ShowKeno = checkBoxIsChecked(_tables.productsList.keno);
-        self.Params.reportParams.ShowGD = checkBoxIsChecked(_tables.productsList.goldDeluxe);
-        self.Params.reportParams.ShowMGSL = checkBoxIsChecked(_tables.productsList.metricGamingSuperLive);
-        self.Params.reportParams.ShowMGCLC = checkBoxIsChecked(_tables.productsList.microgamingLiveCasino);
-        self.Params.reportParams.ShowMGCRNG = checkBoxIsChecked(_tables.productsList.microgamingRNGCasino);
-        self.Params.reportParams.ShowAGCS = checkBoxIsChecked(_tables.productsList.agCasino);
-        self.Params.reportParams.ShowVG = checkBoxIsChecked(_tables.productsList.macau);
-        self.Params.reportParams.ShowCB = checkBoxIsChecked(_tables.productsList.colossusBets);
+        self.Params.reportParams.ProductSelection = _tables.ddlProduct.multiSelect("getCheckedItems").join(',');
     };
 
     var validateParams = function () {
@@ -251,22 +200,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         var message = '';
         var notifyIds = [];
 
-        if (self.Params.reportParams.ShowSB == false &&
-            self.Params.reportParams.ShowRB == false &&
-            self.Params.reportParams.ShowNG == false &&
-            self.Params.reportParams.ShowBI == false &&
-            self.Params.reportParams.ShowLiveCasino == false &&
-            self.Params.reportParams.ShowCasino == false &&
-            self.Params.reportParams.ShowVS == false &&
-            self.Params.reportParams.ShowKeno == false &&
-            self.Params.reportParams.ShowP2P == false &&
-            self.Params.reportParams.ShowGD == false &&
-            self.Params.reportParams.ShowMGSL == false &&
-            self.Params.reportParams.ShowMGCLC == false &&
-            self.Params.reportParams.ShowMGCRNG == false &&
-            self.Params.reportParams.ShowVG == false &&
-            self.Params.reportParams.ShowAGCS == false &&
-            self.Params.reportParams.ShowCB == false) {
+        if (self.Params.reportParams.ProductSelection.length == 0) {
             if (message == '') {
                 message = "Please select at least one product!";
             }
@@ -328,22 +262,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         _tables.report.addClass("display-none");
         var bodyData = [];
         var footerData = [];
-        var isShowNA = false;
-        if ((!self.Params.reportParams.ShowSB &&
-                !self.Params.reportParams.ShowNG &&
-                !self.Params.reportParams.ShowKeno &&
-                !self.Params.reportParams.ShowRB &&
-                !self.Params.reportParams.ShowLiveCasino &&
-                !self.Params.reportParams.ShowVS &&
-                !self.Params.reportParams.ShowGD &&
-                !self.Params.reportParams.ShowMGSL &&
-                !self.Params.reportParams.ShowVG &&
-                !self.Params.reportParams.ShowAGCS &&
-                !self.Params.reportParams.ShowMGCLC &&
-                !self.Params.reportParams.ShowMGCRNG &&
-                !self.Params.reportParams.ShowCB) && (self.Params.reportParams.ShowCasino || self.Params.reportParams.ShowBI || self.Params.reportParams.ShowP2P)) {
-            isShowNA = true;
-        }
+        var isShowNA = report.IsShowNotAvailableTurnover;
         if (report && report.ChildsInfo.length > 0) {
             var len = report.ChildsInfo.length;
             var info = null;

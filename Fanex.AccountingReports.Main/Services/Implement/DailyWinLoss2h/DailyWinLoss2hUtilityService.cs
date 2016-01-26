@@ -6,6 +6,7 @@
 
 namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using ExcelUtil.Spreadsheet;
@@ -117,8 +118,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 case CoreConstants.SportContants.MetricGamingSuperLive:
                     return Labels.Metric_Gaming_Super_Live;
                 case SportContants._2hLiveCasinoSport:
-                case SportContants._2hCasinoSport:
                     return Labels.SLI;
+                case SportContants._2hCasinoSport:
+                    return Labels.MBC_RNG_Casino;
                 case SportContants._2hGoldDeluxeSport:
                     return Labels.Gold_Deluxe;
                 case SportContants._2hMicroGamingLiveCasinoSport:
@@ -778,14 +780,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
             if (!isHideMargin)
             {
-                if (info.Id == SportContants._2hReportCasino)
-                {
-                    currentCell.Value = Labels.NotAvailable;
-                }
-                else
-                {
-                    this.ExportColumnTurnover(info.Margin, info.Turnover, ref currentCell);
-                }
+                this.ExportColumnTurnover(info.Margin, info.Turnover, ref currentCell);
             }
 
             currentColumn++;
@@ -794,16 +789,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             {
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Style = twoDecimalPositivePercentNumberStyle;
+
                 if (!isHideMargin)
                 {
-                    if (info.Id == SportContants._2hReportCasino)
-                    {
-                        currentCell.Value = Labels.NotAvailable;
-                    }
-                    else
-                    {
-                        this.ExportColumnTurnover(info.VirtualMargin, info.VirtualTurnover, ref currentCell);
-                    }
+                    this.ExportColumnTurnover(info.VirtualMargin, info.VirtualTurnover, ref currentCell);
                 }
 
                 currentColumn++;
@@ -825,6 +814,104 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             {
                 currentCell.Value = Labels.NotAvailable;
             }
+        }
+
+        public void ExportMainReportCasinoRow(
+            ref ExcelWorksheet workSheet,
+            CellStyle textStyle,
+            CellStyle twoDecimalNumberStyle,
+            CellStyle twoDecimalPositiveNumberStyle,
+            CellStyle twoDecimalPositivePercentNumberStyle,
+            WinLossInfo info,
+            int startColumn,
+            ref int currentRow,
+            DateTime winLossDate,
+            int rowType)
+        {
+            ExcelCell currentCell;
+            var currentColumn = startColumn;
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Name;
+            currentCell.Style = textStyle;
+            currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+
+            currentCell.Style.HorizontalAlignment = rowType == RowType.Normal ? HorizontalAlignmentStyle.Left : HorizontalAlignmentStyle.Right;
+
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.WinLoss;
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Position;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Commission;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.LineTotal;
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            currentCell.Value = info.VirtualLineTotal;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            currentCell.Value = info.Variance;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalNumberStyle;
+            currentCell.Value = info.Turnover;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalNumberStyle;
+            currentCell.Value = info.VirtualTurnover;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            bool isBeforeCasinoSingleWalletLaunchDate = DateTime.Compare(winLossDate, AppSettings.CasinoSingleWalletLaunchDate) < 0;
+
+            if (isBeforeCasinoSingleWalletLaunchDate)
+            {
+                currentCell.Style = textStyle;
+                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                currentCell.Value = Labels.NotAvailable;
+            }
+            else
+            {
+                currentCell.Style = twoDecimalPositivePercentNumberStyle;
+                this.ExportColumnTurnover(info.Margin, info.Turnover, ref currentCell);
+            }
+
+            currentColumn++;
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalPositivePercentNumberStyle;
+
+            if (isBeforeCasinoSingleWalletLaunchDate)
+            {
+                currentCell.Style = textStyle;
+                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                currentCell.Value = Labels.NotAvailable;
+            }
+            else
+            {
+                currentCell.Style = twoDecimalPositivePercentNumberStyle;
+                this.ExportColumnTurnover(info.VirtualMargin, info.VirtualTurnover, ref currentCell);
+            }
+
+            currentColumn++;
+            currentRow++;
         }
     }
 }

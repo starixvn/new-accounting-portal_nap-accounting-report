@@ -107,6 +107,8 @@
     <Setting Key="Main_DailyWinLoss2h_GetMetricGamingBettypeReport_WH" SpName="Acc_Rpt_DailyWLDirect_MetricGaming" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetBettradeReport_WH" SpName="Acc_Rpt_DailyWLDirect_BetTrade" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_DailyWinLoss2h_GetColossusBetReport_WH" SpName="Acc_Rpt_DailyWLDirect_ColossusBets" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_DailyWinLoss2h_GetCockFightingReport_WH" SpName="Acc_Rpt_DailyWLDirect_CockFighting_uat1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_DailyWinLoss2h_GetCockFightingByArenaReport_WH" SpName="Acc_Rpt_DailyWLDirect_CockFighting_Details_uat1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
   </Function>
   <Function Name="Main Report - Daily Win Loss (2h) Soccer">
     <Setting Key="Main_DailyWinLoss2hSoccer_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />

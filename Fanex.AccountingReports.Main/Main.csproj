@@ -185,9 +185,12 @@
     <Compile Include="Criteria\DailyWinLoss2hSoccerMinorBettype\GetSoccerReportCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2hSoccer\GetMain2hReportCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetBettradeCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetCockFightingArenaCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetCockFightingCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetColossusBetCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_BettradeCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_BetTypeWHCriteria.cs" />
+    <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_CockFightingCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_ColossusBetCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_MetricGamingCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_VirtualSportsCriteria.cs" />
@@ -227,6 +230,7 @@
     <Compile Include="Criteria\TraderPerformance\GetReportCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetMatchGameDetailsCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetRecalculateWinLossCriteria.cs" />
+    <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdCockFightingCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdRacingSportTypeCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdSportbookSportTypeCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdVirtualRacingSportTypeCriteria.cs" />
@@ -238,6 +242,9 @@
     <Compile Include="Models\CreditTerm\CreditTerm.cs" />
     <Compile Include="Models\CreditTerm\EditedRemarkResult.cs" />
     <Compile Include="Models\CreditTerm\InstallAmount.cs" />
+    <Compile Include="Models\DailyWinLoss2h\CockFightingArena.cs" />
+    <Compile Include="Models\DailyWinLoss2h\CockFightingArenaDetail.cs" />
+    <Compile Include="Models\DailyWinLoss2h\CockFightingMatchDetail.cs" />
     <Compile Include="Models\DailyWinLoss2h\ProductWinLoss.cs" />
     <Compile Include="Models\DailyWinLoss2h\WinLossInfo.cs" />
     <Compile Include="Models\DailyWinLoss2h\LiveAndNoneLiveReport.cs" />
@@ -249,6 +256,9 @@
     <Compile Include="Models\TraderPerformanceSoccer\TraderPerformanceSoccer.cs" />
     <Compile Include="Models\TraderPerformanceSoccer\TraderPerformanceSoccerDetail.cs" />
     <Compile Include="Models\WinLossSummary3rd\BetTypeWinLossInfo.cs" />
+    <Compile Include="Models\WinLossSummary3rd\CockFightingArena.cs" />
+    <Compile Include="Models\WinLossSummary3rd\CockFightingArenaDetail.cs" />
+    <Compile Include="Models\WinLossSummary3rd\CockFightingMatchDetail.cs" />
     <Compile Include="Models\WinLossSummary3rd\MatchGame3rdInfo.cs" />
     <Compile Include="Models\WinLossSummary3rd\MatchGameBetTypeInfo.cs" />
     <Compile Include="Models\WinLossSummary3rd\MatchGameLeagueInfo.cs" />
@@ -306,6 +316,7 @@
     <Compile Include="Services\Implement\DailyWinLoss2h\BettypeReportService.cs" />
     <Compile Include="Services\Implement\DailyWinLoss2h\BingoReportService.cs" />
     <Compile Include="Services\Implement\DailyWinLoss2h\CasinoReportService.cs" />
+    <Compile Include="Services\Implement\DailyWinLoss2h\CockFightingService.cs" />
     <Compile Include="Services\Implement\DailyWinLoss2h\ColossusBetService.cs" />
     <Compile Include="Services\Implement\DailyWinLoss2h\DailyWinLoss2hService.cs" />
     <Compile Include="Services\Implement\DailyWinLoss2h\DailyWinLoss2hUtilityService.cs" />
@@ -352,6 +363,7 @@
     <Compile Include="Services\Interface\CreditTerm\IInstallmentAmountService.cs" />
     <Compile Include="Services\Interface\CreditTerm\ICreditTermExcelUtil.cs" />
     <Compile Include="Services\Interface\DailyWinLoss2h\IBettradeService.cs" />
+    <Compile Include="Services\Interface\DailyWinLoss2h\ICockFightingService.cs" />
     <Compile Include="Services\Interface\DailyWinLoss2h\IColossusBetService.cs" />
     <Compile Include="Services\Interface\DailyWinLoss2h\IMetricGamingService.cs" />
     <Compile Include="Services\Interface\IDailyWinLoss2hOtherSportsService.cs" />

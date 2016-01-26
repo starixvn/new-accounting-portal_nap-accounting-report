@@ -11,22 +11,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossBySuper = function () {
         reportParams: {
             FromDate: new Date(),
             ToDate: new Date(),
-            ShowSB: true,
-            ShowNG: true,
-            ShowRB: true,
-            ShowBI: true,
-            ShowCasino: true,
-            ShowLiveCasino: true,
-            ShowP2P: true,
-            ShowVS: true,
-            ShowKeno: true,
-            ShowGD: true,
-            ShowMGSL: true,
-            ShowAGCS: true,
-            ShowVG: true,
-            ShowMGCLC: true,
-            ShowMGCRNG: true,
-            ShowCB: true,
+            ProductSelection: null,
+            Products: null,
             RoleId: 0
         }
     };
@@ -120,22 +106,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossBySuper = function () {
         _tables.report.addClass("display-none");
         var bodyData = [];
         var footerData = [];
-        var isShowNA = false;
-        if ((!self.Params.reportParams.ShowSB &&
-                !self.Params.reportParams.ShowNG &&
-                !self.Params.reportParams.ShowKeno &&
-                !self.Params.reportParams.ShowRB &&
-                !self.Params.reportParams.ShowLiveCasino &&
-                !self.Params.reportParams.ShowVS &&
-                !self.Params.reportParams.ShowGD &&
-                !self.Params.reportParams.ShowMGSL &&
-                !self.Params.reportParams.ShowVG &&
-                !self.Params.reportParams.ShowAGCS &&
-                !self.Params.reportParams.ShowMGCLC &&
-                !self.Params.reportParams.ShowMGCRNG &&
-                !self.Params.reportParams.ShowCB) && (self.Params.reportParams.ShowCasino || self.Params.reportParams.ShowBI || self.Params.reportParams.ShowP2P)) {
-            isShowNA = true;
-        }
+        var isShowNA = report.IsShowNotAvailableTurnover;
         var totalItems = report.ChildsInfo.length;
         if (report && report.ChildsInfo.length > 0) {
             var len = report.ChildsInfo.length;
@@ -236,7 +207,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossBySuper = function () {
                 { HeaderText: "Margin(%)", Name: "ColBaseRMMargin", MergeRowNumber: 2}]
             }],
             columns: [{ HeaderText: "No", Width: 50, Name: "ColNo", HeaderAlign: "center", CellAlign: "center" },
-                { HeaderText: "Username", Width: 120, Name: "ColUserName", HeaderAlign: "center", CellAlign: "center"},
+                { HeaderText: "Username", Width: 120, Name: "ColUserName", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "WinLoss", Width: 120, Name: "ColWinLoss", HeaderAlign: "center", CellAlign: "right", FormatPositive: '$', FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "Comm", Width: 120, Name: "ColCommission", HeaderAlign: "center", CellAlign: "right", FormatPositive: '$', FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },

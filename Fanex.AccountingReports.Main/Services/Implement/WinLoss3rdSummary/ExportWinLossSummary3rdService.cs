@@ -10,6 +10,7 @@
 namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using ExcelUtil.Spreadsheet;
@@ -21,12 +22,20 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
     using Fanex.AccountingReports.Main.Models.WinLossSummary3rd;
     using Fanex.AccountingReports.Main.Resources;
     using Fanex.AccountingReports.Main.Services.Interface;
+    using NPOI.HSSF.UserModel;
+    using NPOI.HSSF.Util;
+    using NPOI.SS.UserModel;
+    using spreadsheetLineStyle = ExcelUtil.Spreadsheet;
 
     /// <summary>
     /// Export win loss summary 3rd service.
     /// </summary>
     public partial class WinLossSummary3rdService : IWinLossSummary3rdService
     {
+        private const short ArenaColorIndex = 45;
+        private const short GrandTotalColorIndex = 47;
+        private const short GrandTotalBorderColorIndex = 49;
+
         /// <summary>
         /// Exports the report.
         /// </summary>
@@ -70,7 +79,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 // Grand total style
                 var grandTotalRowTextStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true, HorizontalAlignmentStyle.Right);
                 var grandTotalRowTextStyleWithBorder = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true, HorizontalAlignmentStyle.Right);
-                grandTotalRowTextStyleWithBorder.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                grandTotalRowTextStyleWithBorder.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, spreadsheetLineStyle.LineStyle.Medium);
 
                 // fomular
                 var fomularStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false, HorizontalAlignmentStyle.Left);
@@ -280,8 +289,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                             }
 
                             if (
-                                betWinLoss.EightRM != null || 
-                                betWinLoss.BARM != null || 
+                                betWinLoss.EightRM != null ||
+                                betWinLoss.BARM != null ||
                                 betWinLoss.Hedge != null)
                             {
                                 // Total of each Bet type
@@ -476,6 +485,35 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             }
         }
 
+        public void ExportCockFightingReport(GetWinLossSummary3rdCockFightingCriteria criteria)
+        {
+            var report = CacheManager.Get<CockFightingArena>(_winlossSummary3rdCacheCockFightingArenaReportKey);
+
+            if (report == null)
+            {
+                report = this.GetCockFightingReport(criteria);
+            }
+
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            string sheetName = MainResources.WinLossSummary3rd_SheetName;
+            ISheet worksheet = workbook.CreateSheet(sheetName);
+            this.SetColorAtIndex(workbook);
+            this.InitColumnWith(ref worksheet);
+            int currentRow = 0;
+            this.ExportCockFightingReportTitle(workbook, ref worksheet, ref currentRow, criteria);
+            currentRow += 2;
+            this.ExportCockFightingReportHeader(workbook, ref worksheet, ref currentRow);
+            currentRow++;
+            this.ExportCockFightingReportContent(workbook, ref worksheet, ref currentRow, report.ReportRows);
+            this.ExportCockFightingReportGrandTotal(workbook, ref worksheet, ref currentRow, report.GrandTotal);
+
+            string reportName = string.Format(
+                   MainResources.WinLossSummary3rdCockFighting_ReportName,
+                   criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "_"),
+                   criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "_"));
+            NpoiExcelExtensions.ResponseStreamExcel(workbook, reportName);
+        }
+
         /// <summary>
         /// Writes the win loss summary.
         /// </summary>
@@ -635,9 +673,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             var twoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitPercentFormat, backgroundColor, isBold, true, false);
             if (topBorder)
             {
-                twoDecimalNumberStyle.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                twoDecimalNumberStyleWithColor.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                twoDecimalPercentNumberStyle.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                twoDecimalNumberStyle.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, spreadsheetLineStyle.LineStyle.Medium);
+                twoDecimalNumberStyleWithColor.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, spreadsheetLineStyle.LineStyle.Medium);
+                twoDecimalPercentNumberStyle.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, spreadsheetLineStyle.LineStyle.Medium);
             }
 
             // WinLoss
@@ -782,7 +820,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             var titleStyle_TotalByBetType = ExcelExtensions.GetCellTextStyle(ExcelExtensions.TotalRowColor, true, HorizontalAlignmentStyle.Right);
 
             var grandTotalRowTextStyleWithBorder = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true, HorizontalAlignmentStyle.Right);
-            grandTotalRowTextStyleWithBorder.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+            grandTotalRowTextStyleWithBorder.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, spreadsheetLineStyle.LineStyle.Medium);
 
             var currentColumn = startColumn;
             CellRange currentCellRange;
@@ -1045,7 +1083,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             var titleStyle_TotalByBetType = ExcelExtensions.GetCellTextStyle(ExcelExtensions.TotalRowColor, true, HorizontalAlignmentStyle.Right);
 
             var grandTotalRowTextStyleWithBorder = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true, HorizontalAlignmentStyle.Right);
-            grandTotalRowTextStyleWithBorder.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+            grandTotalRowTextStyleWithBorder.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, spreadsheetLineStyle.LineStyle.Medium);
 
             var currentColumn = startColumn;
             CellRange currentCellRange;
@@ -1378,6 +1416,540 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 backgroundColorValue,
                 false,
                 false);
+        }
+
+        private void SetColorAtIndex(HSSFWorkbook excelFile)
+        {
+            HSSFPalette palette = excelFile.GetCustomPalette();
+            palette.SetColorAtIndex(ArenaColorIndex, (byte)228, (byte)242, (byte)253);
+            palette.SetColorAtIndex(GrandTotalColorIndex, (byte)219, (byte)225, (byte)187);
+            palette.SetColorAtIndex(GrandTotalBorderColorIndex, (byte)255, (byte)102, (byte)0);
+        }
+
+        private void InitColumnWith(ref ISheet worksheet)
+        {
+            for (int i = 0; i < 14; i++)
+            {
+                worksheet.SetColumnWidth(i, 150 * ExcelExtensions.FontWidth);
+            }
+
+            worksheet.SetColumnWidth(1, 220 * ExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(2, 60 * ExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(3, 220 * ExcelExtensions.FontWidth);
+        }
+
+        private void ExportCockFightingReportTitle(
+            HSSFWorkbook workbook,
+            ref ISheet worksheet,
+            ref int currentRow,
+            GetWinLossSummary3rdCockFightingCriteria criteria)
+        {
+            ICellStyle headerStyle = NpoiExcelExtensions.HeaderStyle(workbook);
+            int currentColumn = 0;
+            string reportTitle = string.Format(
+                MainResources.WinLossSummary3rd_CockFightingReportTitle,
+                criteria.FromDate.ToShortFormatedDate(),
+                criteria.ToDate.ToShortFormatedDate());
+            IRow row = worksheet.CreateRow(currentRow);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn + 13, reportTitle, headerStyle);
+        }
+
+        private void ExportCockFightingReportHeader(
+            HSSFWorkbook workbook,
+            ref ISheet worksheet,
+            ref int currentRow)
+        {
+            int currentColumn = 0;
+            IRow row = worksheet.GetRow(currentRow) ?? worksheet.CreateRow(currentRow);
+            ICellStyle headerStyle = NpoiExcelExtensions.HeaderStyle(workbook);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Fight_No, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn + 2, Labels.Event, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Win_Loss, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Position, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Comm, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn + 1, Labels.Line_Total, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Variance, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn + 1, Labels.Turnover, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn + 1, Labels.Turnover, headerStyle);
+
+            currentRow++;
+            row = worksheet.GetRow(currentRow) ?? worksheet.CreateRow(currentRow);
+            currentColumn = 7;
+
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Real, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Virtual, headerStyle);
+            currentColumn++;
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Real, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Virtual, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Real, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Virtual, headerStyle);
+        }
+
+        private void ExportCockFightingReportContent(
+            HSSFWorkbook workbook,
+            ref ISheet worksheet,
+            ref int currentRow,
+            List<CockFightingArenaDetail> reportRows)
+        {
+            ICellStyle cockFightingTextStyle = NpoiExcelExtensions.TextStyle(workbook, ArenaColorIndex, true, NpoiExcelExtensions.Alignment.Center);
+            ICellStyle arenaTextStyle = NpoiExcelExtensions.TextStyle(workbook, HSSFColor.White.Index, true, NpoiExcelExtensions.Alignment.Left);
+            ICellStyle totalTextStyle = NpoiExcelExtensions.TextStyle(workbook, HSSFColor.White.Index, true, NpoiExcelExtensions.Alignment.Right);
+
+            ICellStyle textStyle = NpoiExcelExtensions.TextStyle(workbook, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Center);
+            ICellStyle leftTextStyle = NpoiExcelExtensions.TextStyle(workbook, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Left);
+            ICellStyle rightTextStyle = NpoiExcelExtensions.TextStyle(workbook, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Right);
+
+            ICellStyle evenRowTextStyle = NpoiExcelExtensions.TextStyle(workbook, ArenaColorIndex, false, NpoiExcelExtensions.Alignment.Center);
+            ICellStyle evenRowLeftTextStyle = NpoiExcelExtensions.TextStyle(workbook, ArenaColorIndex, false, NpoiExcelExtensions.Alignment.Left);
+            ICellStyle evenRowRightTextStyle = NpoiExcelExtensions.TextStyle(workbook, ArenaColorIndex, false, NpoiExcelExtensions.Alignment.Right);
+
+            ICellStyle decimalNumberStyle = NpoiExcelExtensions.DecimalStyle(workbook, HSSFColor.White.Index, false);
+            ICellStyle positiveDecimalNumberStyle = NpoiExcelExtensions.PositiveDecimalStyle(workbook, HSSFColor.White.Index, false);
+            ICellStyle positivePercentStyle = NpoiExcelExtensions.PositivePercentStyle(workbook, HSSFColor.White.Index, false);
+
+            ICellStyle evenRowDecimalNumberStyle = NpoiExcelExtensions.DecimalStyle(workbook, ArenaColorIndex, false);
+            ICellStyle evenRowPositiveDecimalNumberStyle = NpoiExcelExtensions.PositiveDecimalStyle(workbook, ArenaColorIndex, false);
+            ICellStyle evenRowPositivePercentStyle = NpoiExcelExtensions.PositivePercentStyle(workbook, ArenaColorIndex, false);
+
+            IRow row = null;
+            int currentColumn = 0;
+
+            row = worksheet.GetRow(currentRow) ?? worksheet.CreateRow(currentRow);
+            NpoiExcelExtensions.RenderCell(
+                       ref worksheet,
+                       ref row,
+                       currentRow,
+                       ref currentColumn,
+                       currentRow,
+                       currentColumn + 13,
+                       "Cockfighting",
+                       cockFightingTextStyle);
+            currentRow++;
+
+            foreach (var arena in reportRows)
+            {
+                row = worksheet.GetRow(currentRow) ?? worksheet.CreateRow(currentRow);
+                currentColumn = 0;
+                NpoiExcelExtensions.RenderCell(
+                       ref worksheet,
+                       ref row,
+                       currentRow,
+                       ref currentColumn,
+                       currentRow,
+                       currentColumn,
+                       string.Empty,
+                       arenaTextStyle);
+                NpoiExcelExtensions.RenderCell(
+                       ref worksheet,
+                       ref row,
+                       currentRow,
+                       ref currentColumn,
+                       currentRow,
+                       currentColumn + 12,
+                       arena.ArenaName,
+                       arenaTextStyle);
+                currentRow++;
+
+                var numberMatch = arena.CockFightingMatchs.Count;
+                for (int i = 0; i < numberMatch; i++)
+                {
+                    var item = arena.CockFightingMatchs[i];
+                    row = worksheet.GetRow(currentRow) ?? worksheet.CreateRow(currentRow);
+                    currentColumn = 0;
+                    NpoiExcelExtensions.RenderCell(
+                        ref worksheet,
+                        ref row,
+                        currentRow,
+                        ref currentColumn,
+                        currentRow,
+                        currentColumn,
+                        item.FightNo,
+                        i % 2 == 0 ? textStyle : evenRowTextStyle);
+
+                    NpoiExcelExtensions.RenderCell(
+                        ref worksheet,
+                        ref row,
+                        currentRow,
+                        ref currentColumn,
+                        currentRow,
+                        currentColumn,
+                        item.HomeOwner,
+                        i % 2 == 0 ? rightTextStyle : evenRowRightTextStyle);
+
+                    NpoiExcelExtensions.RenderCell(
+                        ref worksheet,
+                        ref row,
+                        currentRow,
+                        ref currentColumn,
+                        currentRow,
+                        currentColumn,
+                        Labels.Vs,
+                        i % 2 == 0 ? textStyle : evenRowTextStyle);
+
+                    NpoiExcelExtensions.RenderCell(
+                        ref worksheet,
+                        ref row,
+                        currentRow,
+                        ref currentColumn,
+                        currentRow,
+                        currentColumn,
+                        item.AwayOwner,
+                        i % 2 == 0 ? leftTextStyle : evenRowLeftTextStyle);
+
+                    NpoiExcelExtensions.RenderCell(
+                       ref worksheet,
+                       ref row,
+                       currentRow,
+                       ref currentColumn,
+                       currentRow,
+                       currentColumn,
+                       item.RealWinLoss,
+                       i % 2 == 0 ? positiveDecimalNumberStyle : evenRowPositiveDecimalNumberStyle);
+
+                    NpoiExcelExtensions.RenderCell(
+                       ref worksheet,
+                       ref row,
+                       currentRow,
+                       ref currentColumn,
+                       currentRow,
+                       currentColumn,
+                       item.RealPosition,
+                       i % 2 == 0 ? decimalNumberStyle : evenRowDecimalNumberStyle);
+
+                    NpoiExcelExtensions.RenderCell(
+                      ref worksheet,
+                      ref row,
+                      currentRow,
+                      ref currentColumn,
+                      currentRow,
+                      currentColumn,
+                      item.RealCommission,
+                      i % 2 == 0 ? decimalNumberStyle : evenRowDecimalNumberStyle);
+
+                    NpoiExcelExtensions.RenderCell(
+                       ref worksheet,
+                       ref row,
+                       currentRow,
+                       ref currentColumn,
+                       currentRow,
+                       currentColumn,
+                       item.RealLineTotal,
+                       i % 2 == 0 ? positiveDecimalNumberStyle : evenRowPositiveDecimalNumberStyle);
+
+                    NpoiExcelExtensions.RenderCell(
+                      ref worksheet,
+                      ref row,
+                      currentRow,
+                      ref currentColumn,
+                      currentRow,
+                      currentColumn,
+                      item.VirtualLineTotal,
+                      i % 2 == 0 ? positiveDecimalNumberStyle : evenRowPositiveDecimalNumberStyle);
+
+                    NpoiExcelExtensions.RenderCell(
+                       ref worksheet,
+                       ref row,
+                       currentRow,
+                       ref currentColumn,
+                       currentRow,
+                       currentColumn,
+                       item.Variance,
+                       i % 2 == 0 ? positiveDecimalNumberStyle : evenRowPositiveDecimalNumberStyle);
+
+                    NpoiExcelExtensions.RenderCell(
+                      ref worksheet,
+                      ref row,
+                      currentRow,
+                      ref currentColumn,
+                      currentRow,
+                      currentColumn,
+                      item.RealTurnover,
+                      i % 2 == 0 ? decimalNumberStyle : evenRowDecimalNumberStyle);
+
+                    NpoiExcelExtensions.RenderCell(
+                      ref worksheet,
+                      ref row,
+                      currentRow,
+                      ref currentColumn,
+                      currentRow,
+                      currentColumn,
+                      item.VirtualTurnover,
+                      i % 2 == 0 ? decimalNumberStyle : evenRowDecimalNumberStyle);
+
+                    NpoiExcelExtensions.RenderCell(
+                      ref worksheet,
+                      ref row,
+                      currentRow,
+                      ref currentColumn,
+                      currentRow,
+                      currentColumn,
+                      item.RealMargin,
+                      i % 2 == 0 ? positivePercentStyle : evenRowPositivePercentStyle);
+
+                    NpoiExcelExtensions.RenderCell(
+                      ref worksheet,
+                      ref row,
+                      currentRow,
+                      ref currentColumn,
+                      currentRow,
+                      currentColumn,
+                      item.VirtualMargin,
+                       i % 2 == 0 ? positivePercentStyle : evenRowPositivePercentStyle);
+
+                    currentRow++;
+                }
+
+                row = worksheet.GetRow(currentRow) ?? worksheet.CreateRow(currentRow);
+                currentColumn = 0;
+
+                NpoiExcelExtensions.RenderCell(
+                        ref worksheet,
+                        ref row,
+                        currentRow,
+                        ref currentColumn,
+                        currentRow,
+                        currentColumn + 3,
+                        Labels.Total,
+                        totalTextStyle);
+
+                NpoiExcelExtensions.RenderCell(
+                   ref worksheet,
+                   ref row,
+                   currentRow,
+                   ref currentColumn,
+                   currentRow,
+                   currentColumn,
+                   arena.ArenaTotal.RealWinLoss,
+                   positiveDecimalNumberStyle);
+
+                NpoiExcelExtensions.RenderCell(
+                   ref worksheet,
+                   ref row,
+                   currentRow,
+                   ref currentColumn,
+                   currentRow,
+                   currentColumn,
+                   arena.ArenaTotal.RealPosition,
+                   decimalNumberStyle);
+
+                NpoiExcelExtensions.RenderCell(
+                  ref worksheet,
+                  ref row,
+                  currentRow,
+                  ref currentColumn,
+                  currentRow,
+                  currentColumn,
+                  arena.ArenaTotal.RealCommission,
+                  decimalNumberStyle);
+
+                NpoiExcelExtensions.RenderCell(
+                   ref worksheet,
+                   ref row,
+                   currentRow,
+                   ref currentColumn,
+                   currentRow,
+                   currentColumn,
+                   arena.ArenaTotal.RealLineTotal,
+                   positiveDecimalNumberStyle);
+
+                NpoiExcelExtensions.RenderCell(
+                  ref worksheet,
+                  ref row,
+                  currentRow,
+                  ref currentColumn,
+                  currentRow,
+                  currentColumn,
+                  arena.ArenaTotal.VirtualLineTotal,
+                  positiveDecimalNumberStyle);
+
+                NpoiExcelExtensions.RenderCell(
+                   ref worksheet,
+                   ref row,
+                   currentRow,
+                   ref currentColumn,
+                   currentRow,
+                   currentColumn,
+                   arena.ArenaTotal.Variance,
+                   positiveDecimalNumberStyle);
+
+                NpoiExcelExtensions.RenderCell(
+                  ref worksheet,
+                  ref row,
+                  currentRow,
+                  ref currentColumn,
+                  currentRow,
+                  currentColumn,
+                  arena.ArenaTotal.RealTurnover,
+                  decimalNumberStyle);
+
+                NpoiExcelExtensions.RenderCell(
+                  ref worksheet,
+                  ref row,
+                  currentRow,
+                  ref currentColumn,
+                  currentRow,
+                  currentColumn,
+                  arena.ArenaTotal.VirtualTurnover,
+                  decimalNumberStyle);
+
+                NpoiExcelExtensions.RenderCell(
+                  ref worksheet,
+                  ref row,
+                  currentRow,
+                  ref currentColumn,
+                  currentRow,
+                  currentColumn,
+                  arena.ArenaTotal.RealMargin,
+                  positivePercentStyle);
+
+                NpoiExcelExtensions.RenderCell(
+                  ref worksheet,
+                  ref row,
+                  currentRow,
+                  ref currentColumn,
+                  currentRow,
+                  currentColumn,
+                  arena.ArenaTotal.VirtualMargin,
+                  positivePercentStyle);
+
+                currentRow++;
+            }
+        }
+
+        private void ExportCockFightingReportGrandTotal(
+            HSSFWorkbook workbook,
+            ref ISheet worksheet,
+            ref int currentRow,
+            CockFightingMatchDetail grandTotal)
+        {
+            ICellStyle grandTotalTextStyle = NpoiExcelExtensions.TextStyle(workbook, GrandTotalColorIndex, true, NpoiExcelExtensions.Alignment.Center);
+            grandTotalTextStyle.BorderTop = BorderStyle.Medium;
+            grandTotalTextStyle.TopBorderColor = GrandTotalBorderColorIndex;
+
+            ICellStyle grandTotalDecimalNumberStyle = NpoiExcelExtensions.DecimalStyle(workbook, GrandTotalColorIndex, true);
+            grandTotalDecimalNumberStyle.BorderTop = BorderStyle.Medium;
+            grandTotalDecimalNumberStyle.TopBorderColor = GrandTotalBorderColorIndex;
+
+            ICellStyle grandTotalPositiveDecimalNumberStyle = NpoiExcelExtensions.PositiveDecimalStyle(workbook, GrandTotalColorIndex, true);
+            grandTotalPositiveDecimalNumberStyle.BorderTop = BorderStyle.Medium;
+            grandTotalPositiveDecimalNumberStyle.TopBorderColor = GrandTotalBorderColorIndex;
+
+            ICellStyle grandTotalPositivePercentStyle = NpoiExcelExtensions.PercentStyle(workbook, GrandTotalColorIndex, true);
+            grandTotalPositivePercentStyle.BorderTop = BorderStyle.Medium;
+            grandTotalPositivePercentStyle.TopBorderColor = GrandTotalBorderColorIndex;
+
+            IRow row = worksheet.CreateRow(currentRow);
+            int currentColumn = 0;
+
+            NpoiExcelExtensions.RenderCell(
+                   ref worksheet,
+                   ref row,
+                   currentRow,
+                   ref currentColumn,
+                   currentRow,
+                   currentColumn + 3,
+                   Labels.Grand_Total,
+                   grandTotalTextStyle);
+
+            NpoiExcelExtensions.RenderCell(
+               ref worksheet,
+               ref row,
+               currentRow,
+               ref currentColumn,
+               currentRow,
+               currentColumn,
+               grandTotal.RealWinLoss,
+               grandTotalPositiveDecimalNumberStyle);
+
+            NpoiExcelExtensions.RenderCell(
+               ref worksheet,
+               ref row,
+               currentRow,
+               ref currentColumn,
+               currentRow,
+               currentColumn,
+               grandTotal.RealPosition,
+               grandTotalDecimalNumberStyle);
+
+            NpoiExcelExtensions.RenderCell(
+              ref worksheet,
+              ref row,
+              currentRow,
+              ref currentColumn,
+              currentRow,
+              currentColumn,
+              grandTotal.RealCommission,
+              grandTotalDecimalNumberStyle);
+
+            NpoiExcelExtensions.RenderCell(
+               ref worksheet,
+               ref row,
+               currentRow,
+               ref currentColumn,
+               currentRow,
+               currentColumn,
+               grandTotal.RealLineTotal,
+               grandTotalPositiveDecimalNumberStyle);
+
+            NpoiExcelExtensions.RenderCell(
+              ref worksheet,
+              ref row,
+              currentRow,
+              ref currentColumn,
+              currentRow,
+              currentColumn,
+              grandTotal.VirtualLineTotal,
+              grandTotalPositiveDecimalNumberStyle);
+
+            NpoiExcelExtensions.RenderCell(
+               ref worksheet,
+               ref row,
+               currentRow,
+               ref currentColumn,
+               currentRow,
+               currentColumn,
+               grandTotal.Variance,
+               grandTotalPositivePercentStyle);
+
+            NpoiExcelExtensions.RenderCell(
+              ref worksheet,
+              ref row,
+              currentRow,
+              ref currentColumn,
+              currentRow,
+              currentColumn,
+              grandTotal.RealTurnover,
+              grandTotalDecimalNumberStyle);
+
+            NpoiExcelExtensions.RenderCell(
+              ref worksheet,
+              ref row,
+              currentRow,
+              ref currentColumn,
+              currentRow,
+              currentColumn,
+              grandTotal.VirtualTurnover,
+              grandTotalDecimalNumberStyle);
+
+            NpoiExcelExtensions.RenderCell(
+            ref worksheet,
+            ref row,
+            currentRow,
+            ref currentColumn,
+            currentRow,
+            currentColumn,
+            grandTotal.RealMargin,
+            grandTotalPositivePercentStyle);
+
+            NpoiExcelExtensions.RenderCell(
+            ref worksheet,
+            ref row,
+            currentRow,
+            ref currentColumn,
+            currentRow,
+            currentColumn,
+            grandTotal.VirtualMargin,
+            grandTotalPositivePercentStyle);
         }
     }
 }

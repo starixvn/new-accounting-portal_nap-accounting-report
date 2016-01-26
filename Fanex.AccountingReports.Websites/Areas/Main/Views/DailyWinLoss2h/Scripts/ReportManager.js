@@ -24,6 +24,8 @@ ReportManager = function () {
     self.LiveCasinoWinLossByProductReport = new LiveCasinoWinLossByProductReport();
     self.Bettrade = new Bettrade();
     self.ColossusBet = new ColossusBet();
+    self.CockFighting = new CockFighting();
+    self.CockFightingArena = new CockFightingArena();
 
     self.Enum = {
         DrillDownLevel: {
@@ -206,7 +208,7 @@ ReportManager.prototype.EnableGenerateButton = function () {
     self.Tables.datePickerInput.attr("disabled", null);
 };
 
-ReportManager.prototype.GetCasinoMarginColumn = function(columnName) {
+ReportManager.prototype.GetCasinoMarginColumn = function (columnName) {
     return {
         Name: columnName,
         Value: viewResources.NotAvailable

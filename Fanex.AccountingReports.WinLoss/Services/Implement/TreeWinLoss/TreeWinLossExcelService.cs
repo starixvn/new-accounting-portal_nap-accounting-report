@@ -113,7 +113,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 ExcelWorksheetCollection workSheets = excelFile.Worksheets;
                 string sheetName = WinLossResources.TreeWinLoss_SheetName;
                 ExcelWorksheet workSheet = workSheets.Add(sheetName);
-                var isShowNA = false;
+                var isShowNA = report.IsShowNotAvailableTurnover;
                 int startRow = 0;
                 int startColumn = 0;
                 int maxColumnIndex = 17;
@@ -141,17 +141,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 currentRow++;
                 workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex - 1);
                 this.ExportTreeWinLossByProductHeader(ref workSheet, ref currentRow, startColumn);
-                if ((!criteria.ShowSB &&
-                    !criteria.ShowNG &&
-                    !criteria.ShowRB &&
-                    !criteria.ShowLiveCasino &&
-                    !criteria.ShowVS) &&
-                    (criteria.ShowCasino ||
-                    criteria.ShowBI ||
-                    criteria.ShowP2P))
-                {
-                    isShowNA = true;
-                }
 
                 var childsInfoLength = report.ChildsInfo.Count;
                 if (report != null && childsInfoLength > 0)
@@ -271,18 +260,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
 
             this.ExportTreeWinLossByLevelHeader(ref workSheet, ref currentRow, startColumn);
-            if ((!criteria.ShowSB &&
-                !criteria.ShowNG &&
-                !criteria.ShowRB &&
-                !criteria.ShowLiveCasino &&
-                !criteria.ShowVS) &&
-                (criteria.ShowCasino ||
-                criteria.ShowBI ||
-                criteria.ShowP2P))
-            {
-                isShowNA = true;
-            }
-
+            isShowNA = report.TreeWinLoss.IsShowNotAvailableTurnover;
             var childsInfoLength = report.TreeWinLoss.ChildsInfo.Count;
             if (report != null && childsInfoLength > 0)
             {
@@ -301,7 +279,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// <param name="report">The report.</param>
         /// <param name="criteria">The criteria.</param>
         /// <param name="workSheets">The work sheets.</param>
-        private void ExportVirtualRateInfo(TreeWinLossVirtualRate report, GetTreeWinLossByLevelCriteria criteria,  ExcelWorksheetCollection workSheets)
+        private void ExportVirtualRateInfo(TreeWinLossVirtualRate report, GetTreeWinLossByLevelCriteria criteria, ExcelWorksheetCollection workSheets)
         {
             int maxUserPerSheet = _MaxUserPerSheet;
             int redundancyUsers = report.NumberUserEnabledVirtualRate % maxUserPerSheet;
@@ -322,7 +300,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 worksheet.Columns[2].Width = 200 * ExcelExtensions.FontWidth;
                 worksheet.Columns[9].Width = 180 * ExcelExtensions.FontWidth;
                 worksheet.Columns[10].Width = 180 * ExcelExtensions.FontWidth;
-                worksheet.Columns[11].Width = 180 * ExcelExtensions.FontWidth;                
+                worksheet.Columns[11].Width = 180 * ExcelExtensions.FontWidth;
 
                 int currentRow = 0;
                 string title = GetReportTitleByLevel(criteria);

@@ -213,7 +213,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 info.Id != CoreConstants.SportContants.Keno &&
                                 info.Id != CoreConstants.SportContants.VirtualSportGroup &&
                                 info.Id != SportContants._2hReportCasino &&
-                                info.Id != CoreConstants.SportContants.ColossusBet)
+                                info.Id != CoreConstants.SportContants.ColossusBet &&
+                                info.Id != CoreConstants.SportContants.CockFighting)
                             {
                                 info.VirtualTurnover = 0;
                             }
@@ -578,6 +579,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 sportWinLoss.Id == SportContants._2hReportCasino ||
                                 sportWinLoss.Id == CoreConstants.SportContants.ColossusBet;
 
+                            bool isCasinoSport = sportWinLoss.Id == SportContants._2hReportCasino;
+
                             var len = sportWinLoss.ChildsInfo.Count;
 
                             info = sportWinLoss.NormalTotal;
@@ -588,18 +591,35 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 ref twoDecimalPositivePercentNumberStyle,
                                 true);
 
-                            _dailyWinLoss2hUtilityService.ExportNormalRow(
-                                ref workSheet,
-                                textStyle,
-                                twoDecimalNumberStyle,
-                                twoDecimalPositiveNumberStyle,
-                                twoDecimalPositivePercentNumberStyle,
-                                info,
-                                startColumn,
-                                ref currentRow,
-                                RowType.Normal,
-                                report.EnableVirtual,
-                                isShowVirtualTurnover);
+                            if (isCasinoSport)
+                            {
+                                _dailyWinLoss2hUtilityService.ExportMainReportCasinoRow(
+                                    ref workSheet,
+                                    textStyle,
+                                    twoDecimalNumberStyle,
+                                    twoDecimalPositiveNumberStyle,
+                                    twoDecimalPositivePercentNumberStyle,
+                                    info,
+                                    startColumn,
+                                    ref currentRow,
+                                    criteria.Winlostdate,
+                                    RowType.Normal);
+                            }
+                            else
+                            {
+                                _dailyWinLoss2hUtilityService.ExportNormalRow(
+                                    ref workSheet,
+                                    textStyle,
+                                    twoDecimalNumberStyle,
+                                    twoDecimalPositiveNumberStyle,
+                                    twoDecimalPositivePercentNumberStyle,
+                                    info,
+                                    startColumn,
+                                    ref currentRow,
+                                    RowType.Normal,
+                                    report.EnableVirtual,
+                                    isShowVirtualTurnover);
+                            }
 
                             _dailyWinLoss2hUtilityService.SetOddEvenColor_ExportExcel(
                                 ref textStyle,
@@ -609,32 +629,68 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 false);
 
                             info = sportWinLoss.CreditTotal;
-                            _dailyWinLoss2hUtilityService.ExportNormalRow(
-                                ref workSheet,
-                                textStyle,
-                                twoDecimalNumberStyle,
-                                twoDecimalPositiveNumberStyle,
-                                twoDecimalPositivePercentNumberStyle,
-                                info,
-                                startColumn,
-                                ref currentRow,
-                                RowType._2hReportCredit,
-                                report.EnableVirtual,
-                                isShowVirtualTurnover);
+
+                            if (isCasinoSport)
+                            {
+                                _dailyWinLoss2hUtilityService.ExportMainReportCasinoRow(
+                                    ref workSheet,
+                                    textStyle,
+                                    twoDecimalNumberStyle,
+                                    twoDecimalPositiveNumberStyle,
+                                    twoDecimalPositivePercentNumberStyle,
+                                    info,
+                                    startColumn,
+                                    ref currentRow,
+                                    criteria.Winlostdate,
+                                    RowType._2hReportCredit);
+                            }
+                            else
+                            {
+                                _dailyWinLoss2hUtilityService.ExportNormalRow(
+                                    ref workSheet,
+                                    textStyle,
+                                    twoDecimalNumberStyle,
+                                    twoDecimalPositiveNumberStyle,
+                                    twoDecimalPositivePercentNumberStyle,
+                                    info,
+                                    startColumn,
+                                    ref currentRow,
+                                    RowType._2hReportCredit,
+                                    report.EnableVirtual,
+                                    isShowVirtualTurnover);
+                            }
 
                             info = sportWinLoss.DepositTotal;
-                            _dailyWinLoss2hUtilityService.ExportNormalRow(
-                                ref workSheet,
-                                textStyle,
-                                twoDecimalNumberStyle,
-                                twoDecimalPositiveNumberStyle,
-                                twoDecimalPositivePercentNumberStyle,
-                                info,
-                                startColumn,
-                                ref currentRow,
-                                RowType._2hReportDeposit,
-                                report.EnableVirtual,
-                                isShowVirtualTurnover);
+
+                            if (isCasinoSport)
+                            {
+                                _dailyWinLoss2hUtilityService.ExportMainReportCasinoRow(
+                                    ref workSheet,
+                                    textStyle,
+                                    twoDecimalNumberStyle,
+                                    twoDecimalPositiveNumberStyle,
+                                    twoDecimalPositivePercentNumberStyle,
+                                    info,
+                                    startColumn,
+                                    ref currentRow,
+                                    criteria.Winlostdate,
+                                    RowType._2hReportDeposit);
+                            }
+                            else
+                            {
+                                _dailyWinLoss2hUtilityService.ExportNormalRow(
+                                    ref workSheet,
+                                    textStyle,
+                                    twoDecimalNumberStyle,
+                                    twoDecimalPositiveNumberStyle,
+                                    twoDecimalPositivePercentNumberStyle,
+                                    info,
+                                    startColumn,
+                                    ref currentRow,
+                                    RowType._2hReportDeposit,
+                                    report.EnableVirtual,
+                                    isShowVirtualTurnover);
+                            }
 
                             if (this._8rmConfig.IsActive && sportWinLoss.EightRMTotal.LineTotal != 0)
                             {

@@ -20,5 +20,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Interface.TreeWinLoss
         TreeWinLossVirtualRate GetTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria);
 
         VirtualRateInfo GetVirtualRate(int custId);
+
+        List<TreeWinLossProduct> GetProduct();
     }
 }

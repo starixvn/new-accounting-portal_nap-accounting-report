@@ -39,22 +39,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             ToDate: _treeWinLoss.Params.reportParams.ToDate,
             Currency: currencyId,
             Name: currencyName,
-            ShowSB: _treeWinLoss.Params.reportParams.ShowSB,
-            ShowNG: _treeWinLoss.Params.reportParams.ShowNG,
-            ShowRB: _treeWinLoss.Params.reportParams.ShowRB,
-            ShowLiveCasino: _treeWinLoss.Params.reportParams.ShowLiveCasino,
-            ShowCasino: _treeWinLoss.Params.reportParams.ShowCasino,
-            ShowP2P: _treeWinLoss.Params.reportParams.ShowP2P,
-            ShowBI: _treeWinLoss.Params.reportParams.ShowBI,
-            ShowVS: _treeWinLoss.Params.reportParams.ShowVS,
-            ShowKeno: _treeWinLoss.Params.reportParams.ShowKeno,
-            ShowGD: _treeWinLoss.Params.reportParams.ShowGD,
-            ShowMGSL: _treeWinLoss.Params.reportParams.ShowMGSL,
-            ShowAGCS: _treeWinLoss.Params.reportParams.ShowAGCS,
-            ShowVG: _treeWinLoss.Params.reportParams.ShowVG,
-            ShowMGCLC: _treeWinLoss.Params.reportParams.ShowMGCLC,
-            ShowMGCRNG: _treeWinLoss.Params.reportParams.ShowMGCRNG,
-            ShowCB: _treeWinLoss.Params.reportParams.ShowCB
+            ProductSelection: _treeWinLoss.Params.reportParams.ProductSelection,
+            Products: _treeWinLoss.Params.reportParams.Products
         });
     };
 
@@ -66,22 +52,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             ToDate: _treeWinLoss.Params.reportParams.ToDate,
             SRecommend: custId,
             Name: Username,
-            ShowSB: _treeWinLoss.Params.reportParams.ShowSB,
-            ShowNG: _treeWinLoss.Params.reportParams.ShowNG,
-            ShowRB: _treeWinLoss.Params.reportParams.ShowRB,
-            ShowLiveCasino: _treeWinLoss.Params.reportParams.ShowLiveCasino,
-            ShowCasino: _treeWinLoss.Params.reportParams.ShowCasino,
-            ShowP2P: _treeWinLoss.Params.reportParams.ShowP2P,
-            ShowBI: _treeWinLoss.Params.reportParams.ShowBI,
-            ShowVS: _treeWinLoss.Params.reportParams.ShowVS,
-            ShowKeno: _treeWinLoss.Params.reportParams.ShowKeno,
-            ShowGD: _treeWinLoss.Params.reportParams.ShowGD,
-            ShowMGSL: _treeWinLoss.Params.reportParams.ShowMGSL,
-            ShowAGCS: _treeWinLoss.Params.reportParams.ShowAGCS,
-            ShowVG: _treeWinLoss.Params.reportParams.ShowVG,
-            ShowMGCLC: _treeWinLoss.Params.reportParams.ShowMGCLC,
-            ShowMGCRNG: _treeWinLoss.Params.reportParams.ShowMGCRNG,
-            ShowCB: _treeWinLoss.Params.reportParams.ShowCB
+            ProductSelection: _treeWinLoss.Params.reportParams.ProductSelection,
+            Products: _treeWinLoss.Params.reportParams.Products
         });
     };
 
@@ -93,22 +65,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             ToDate: _treeWinLoss.Params.reportParams.ToDate,
             MRecommend: custId,
             Name: Username,
-            ShowSB: _treeWinLoss.Params.reportParams.ShowSB,
-            ShowNG: _treeWinLoss.Params.reportParams.ShowNG,
-            ShowRB: _treeWinLoss.Params.reportParams.ShowRB,
-            ShowLiveCasino: _treeWinLoss.Params.reportParams.ShowLiveCasino,
-            ShowCasino: _treeWinLoss.Params.reportParams.ShowCasino,
-            ShowP2P: _treeWinLoss.Params.reportParams.ShowP2P,
-            ShowBI: _treeWinLoss.Params.reportParams.ShowBI,
-            ShowVS: _treeWinLoss.Params.reportParams.ShowVS,
-            ShowKeno: _treeWinLoss.Params.reportParams.ShowKeno,
-            ShowGD: _treeWinLoss.Params.reportParams.ShowGD,
-            ShowMGSL: _treeWinLoss.Params.reportParams.ShowMGSL,
-            ShowAGCS: _treeWinLoss.Params.reportParams.ShowAGCS,
-            ShowVG: _treeWinLoss.Params.reportParams.ShowVG,
-            ShowMGCLC: _treeWinLoss.Params.reportParams.ShowMGCLC,
-            ShowMGCRNG: _treeWinLoss.Params.reportParams.ShowMGCRNG,
-            ShowCB: _treeWinLoss.Params.reportParams.ShowCB
+            ProductSelection: _treeWinLoss.Params.reportParams.ProductSelection,
+            Products: _treeWinLoss.Params.reportParams.Products
         });
     };
 
@@ -120,22 +78,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             ToDate: _treeWinLoss.Params.reportParams.ToDate,
             Recommend: custId,
             Name: Username,
-            ShowSB: _treeWinLoss.Params.reportParams.ShowSB,
-            ShowNG: _treeWinLoss.Params.reportParams.ShowNG,
-            ShowRB: _treeWinLoss.Params.reportParams.ShowRB,
-            ShowLiveCasino: _treeWinLoss.Params.reportParams.ShowLiveCasino,
-            ShowCasino: _treeWinLoss.Params.reportParams.ShowCasino,
-            ShowP2P: _treeWinLoss.Params.reportParams.ShowP2P,
-            ShowBI: _treeWinLoss.Params.reportParams.ShowBI,
-            ShowVS: _treeWinLoss.Params.reportParams.ShowVS,
-            ShowKeno: _treeWinLoss.Params.reportParams.ShowKeno,
-            ShowGD: _treeWinLoss.Params.reportParams.ShowGD,
-            ShowMGSL: _treeWinLoss.Params.reportParams.ShowMGSL,
-            ShowAGCS: _treeWinLoss.Params.reportParams.ShowAGCS,
-            ShowVG: _treeWinLoss.Params.reportParams.ShowVG,
-            ShowMGCLC: _treeWinLoss.Params.reportParams.ShowMGCLC,
-            ShowMGCRNG: _treeWinLoss.Params.reportParams.ShowMGCRNG,
-            ShowCB: _treeWinLoss.Params.reportParams.ShowCB
+            ProductSelection: _treeWinLoss.Params.reportParams.ProductSelection,
+            Products: _treeWinLoss.Params.reportParams.Products
         });
     };
 
