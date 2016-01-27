@@ -15,8 +15,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using ExcelUtil.Spreadsheet;
+    using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Extensions;
-    using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Main.Common;
     using Fanex.AccountingReports.Main.Constants;
@@ -24,7 +24,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
     using Fanex.AccountingReports.Main.Models.DailyWinLoss2h;
     using Fanex.AccountingReports.Main.Resources;
     using Fanex.Common;
-    using CoreConstants = Fanex.AccountingReports.Core.Constants;
 
     /// <summary>
     /// TODO: Update summary.
@@ -38,12 +37,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// <returns>The casino report.</returns>
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
             "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")] 
+            Justification = "Reviewed. Suppression is OK here.")]
         public LiveAndNoneLiveReport GetCasinoReport(GetCasinoReportCriteria criteria)
         {
             try
             {
-                var isHideRealTurnover = _dailyWinLoss2hUtilityService.IsHideRealTurnover(SportContants._2hReportCasino);
+                var isHideRealTurnover = false;
                 var report = new LiveAndNoneLiveReport
                 {
                     NoneLiveReport = new WinLossInfo
@@ -82,24 +81,24 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     foreach (var productGroup in productGroups)
                     {
                         int productId = Converter.ToInt(productGroup.Key);
-                        bool hideRealTurnover = productId == SportContants._2hCasinoSport ? true : isHideRealTurnover;
+                        isHideRealTurnover = productId == SportContants._2hCasinoSport && DateTime.Compare(criteria.Winlostdate, AppSettings.CasinoSingleWalletLaunchDate) < 0 ? true : false;
                         var productWinLoss = new WinLossInfo
                         {
                             Id = productId,
                             ChildsInfo = new List<WinLossInfo>(),
                             GrandTotal = new WinLossInfo
                             {
-                                IsHideRealTurnover = hideRealTurnover
+                                IsHideRealTurnover = isHideRealTurnover
                             },
                             CreditTotal = new WinLossInfo
                             {
                                 Name = Labels.Credit,
-                                IsHideRealTurnover = hideRealTurnover
+                                IsHideRealTurnover = isHideRealTurnover
                             },
                             DepositTotal = new WinLossInfo
                             {
                                 Name = Labels.Deposit,
-                                IsHideRealTurnover = hideRealTurnover
+                                IsHideRealTurnover = isHideRealTurnover
                             }
                         };
 
@@ -128,10 +127,21 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 case RowType._2hReportCredit:
                                     info.AliasName = Labels.Credit;
                                     productWinLoss.CreditTotal.Add(info);
+                                    if (isHideRealTurnover)
+                                    {
+                                        productWinLoss.CreditTotal.Turnover -= info.Turnover;
+                                    }
+
                                     break;
+
                                 case RowType._2hReportDeposit:
                                     info.AliasName = Labels.Deposit;
                                     productWinLoss.DepositTotal.Add(info);
+                                    if (isHideRealTurnover)
+                                    {
+                                        productWinLoss.DepositTotal.Turnover -= info.Turnover;
+                                    }
+
                                     break;
                             }
                         }
@@ -166,7 +176,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// <param name="criteria">The criteria.</param>
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
             "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")] 
+            Justification = "Reviewed. Suppression is OK here.")]
         public void ExportCasinoReport(GetCasinoReportCriteria criteria)
         {
             try

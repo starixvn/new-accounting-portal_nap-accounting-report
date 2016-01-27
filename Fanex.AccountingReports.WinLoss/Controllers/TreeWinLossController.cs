@@ -38,11 +38,19 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
 
         [HttpPost]
         [HandleAjaxError]
+        public JsonResult GetProduct()
+        {
+            var result = this.TreeWinLossService.GetProduct();
+            return Json(result);
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
         public JsonResult GetTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria)
         {
             var report = this.TreeWinLossService.GetTreeWinLossByProduct(criteria);
             var jsonResult = Json(report, JsonRequestBehavior.AllowGet);
-            jsonResult.MaxJsonLength = int.MaxValue; 
+            jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
         }
 

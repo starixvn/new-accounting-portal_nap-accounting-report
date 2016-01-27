@@ -183,6 +183,7 @@
     <Compile Include="Models\TreeWinLoss\SMAVirtualRate.cs" />
     <Compile Include="Models\TreeWinLoss\TreeWinLoss.cs" />
     <Compile Include="Models\TreeWinLoss\TreeWinLossInfo.cs" />
+    <Compile Include="Models\TreeWinLoss\TreeWinLossProduct.cs" />
     <Compile Include="Models\TreeWinLoss\TreeWinLossVirtualRate.cs" />
     <Compile Include="Models\TreeWinLoss\VirtualRateByBettypeInfo.cs" />
     <Compile Include="Models\TreeWinLoss\VirtualRateInfo.cs" />

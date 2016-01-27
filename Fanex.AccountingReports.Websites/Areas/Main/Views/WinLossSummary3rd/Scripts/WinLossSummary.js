@@ -145,13 +145,19 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
         var sportType = {
             Columns: [{ Name: 'ColView', CellAlign: 'center', CustomCellRender: function () {
                 if (sportDrillDown) {
-                    return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
+                    if (id == AccReportData.Constants.SportType.CockFighting) {
+                        return '<div class="viewicon" onclick="ViewCockFightingArena(\'' +
+											_params.reportParams.FromDate + '\',\'' +
+											_params.reportParams.ToDate + '\')">&nbsp;</div>';
+                    } else {
+                        return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
 											_params.reportParams.FromDate + '\',\'' +
 											_params.reportParams.ToDate + '\',' +
 											id + ',0,0' +
 											',\'' +
 											sportName + '\',' +
                                             drillDownByType.bySport + ')">&nbsp;</div>';
+                    }
                 }
                 else {
                     return '<div>&nbsp;</div>';
@@ -215,7 +221,12 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                 TdClass: cssClass,
                 CustomCellRender: function () {
                     if (showDetailLink) {
-                        return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
+                        if (sportId == AccReportData.Constants.SportType.CockFighting) {
+                            return '<div class="viewicon" onclick="ViewCockFightingArena(\'' +
+											_params.reportParams.FromDate + '\',\'' +
+											_params.reportParams.ToDate + '\')">&nbsp;</div>';
+                        } else {
+                            return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
 										_params.reportParams.FromDate + '\',\'' +
 										_params.reportParams.ToDate + '\',' +
 										sportId + ',' +
@@ -223,6 +234,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 										winloss.LiveIndicator + ',\'' +
 										sportName + '\',' +
                                         drillDownByType.byBettype + ')">&nbsp;</div>';
+                        }
                     }
                     else {
                         return '<div>&nbsp;</div>';

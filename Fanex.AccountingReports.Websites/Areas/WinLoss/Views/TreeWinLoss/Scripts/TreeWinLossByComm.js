@@ -11,24 +11,10 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByComm = function () {
         reportParams: {
             FromDate: new Date(),
             ToDate: new Date(),
-            ShowSB: true,
-            ShowNG: true,
-            ShowRB: true,
-            ShowBI: true,
-            ShowCasino: true,
-            ShowLiveCasino: true,
-            ShowP2P: true,
-            ShowVS: true,
-            ShowKeno: true,
-            ShowGD: true,
-            ShowMGSL: true,
             RoleId: 0,
             Currency: 0,
-            ShowAGCS: true,
-            ShowVG: true,
-            ShowMGCLC: true,
-            ShowMGCRNG: true,
-            ShowCB: true,
+            ProductSelection: null,
+            Products: null,
             CurrencyName: null
         }
     };
@@ -122,22 +108,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByComm = function () {
         _tables.report.addClass("display-none");
         var bodyData = [];
         var footerData = [];
-        var isShowNA = false;
-        if ((!self.Params.reportParams.ShowSB &&
-                !self.Params.reportParams.ShowNG &&
-                !self.Params.reportParams.ShowKeno &&
-                !self.Params.reportParams.ShowRB &&
-                !self.Params.reportParams.ShowLiveCasino &&
-                !self.Params.reportParams.ShowVS &&
-                !self.Params.reportParams.ShowGD &&
-                !self.Params.reportParams.ShowMGSL &&
-                !self.Params.reportParams.ShowVG &&
-                !self.Params.reportParams.ShowAGCS &&
-                !self.Params.reportParams.ShowMGCLC &&
-                !self.Params.reportParams.ShowMGCRNG &&
-                !self.Params.reportParams.ShowCB) && (self.Params.reportParams.ShowCasino || self.Params.reportParams.ShowBI || self.Params.reportParams.ShowP2P)) {
-            isShowNA = true;
-        }
+        var isShowNA = report.IsShowNotAvailableTurnover;
         var totalItems = report.ChildsInfo.length;
         if (report && report.ChildsInfo.length > 0) {
             var len = report.ChildsInfo.length;

@@ -29,18 +29,20 @@ namespace Fanex.AccountingReports.Main.Controllers
         private readonly IMetricGamingService _metricGamingService;
         private readonly IBettradeService _bettradeService;
         private readonly IColossusBetService _colossusBetService;
+        private readonly ICockFightingService _cockFightingService;
 
         public DailyWinLoss2hController()
-            : this(null, null, null, null)
+            : this(null, null, null, null, null)
         {
         }
 
-        public DailyWinLoss2hController(IDailyWinLoss2hService reportService, IMetricGamingService metricGamingService, IBettradeService bettradeService, IColossusBetService colossusBetService)
+        public DailyWinLoss2hController(IDailyWinLoss2hService reportService, IMetricGamingService metricGamingService, IBettradeService bettradeService, IColossusBetService colossusBetService, ICockFightingService cockFightingService)
         {
             this._reportService = reportService ?? new DailyWinLoss2hService();
             this._metricGamingService = metricGamingService ?? new MetricGamingService();
             this._bettradeService = bettradeService ?? new BettradeService();
             this._colossusBetService = colossusBetService ?? new ColossusBetService();
+            this._cockFightingService = cockFightingService ?? new CockFightingService();
         }
 
         [HttpGet]
@@ -260,6 +262,22 @@ namespace Fanex.AccountingReports.Main.Controllers
             return Json(report);
         }
 
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetCockFightingReport(GetCockFightingCriteria criteria)
+        {
+            var report = _cockFightingService.GetCockFightingReport(criteria);
+            return Json(report);
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetCockFightingArenaReport(GetCockFightingArenaCriteria criteria)
+        {
+            var report = _cockFightingService.GetCockFightingArenaReport(criteria);
+            return Json(report);
+        }
+
         //// ExportExcel
 
         public ActionResult ExportMain2hReport(GetMain2hReportCriteria criteria)
@@ -427,6 +445,18 @@ namespace Fanex.AccountingReports.Main.Controllers
         public ActionResult ExportColossusBetReport(GetColossusBetCriteria criteria)
         {
             this._colossusBetService.ExportColossusBetReport(criteria);
+            return new EmptyResult();
+        }
+
+        public ActionResult ExportCockFightingReport(GetCockFightingCriteria criteria)
+        {
+            this._cockFightingService.ExportCockFightingReport(criteria);
+            return new EmptyResult();
+        }
+
+        public ActionResult ExportCockFightingArenaReport(GetCockFightingArenaCriteria criteria)
+        {
+            this._cockFightingService.ExportCockFightingArenaReport(criteria);
             return new EmptyResult();
         }
 

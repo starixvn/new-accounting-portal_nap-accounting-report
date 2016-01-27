@@ -59,11 +59,12 @@ var AccReportData = {
             VirtualSpeedway: 183,
             VirtualMotorsports: 184,
             VirtualCycling: 185,
-            Keno:202,
+            Keno: 202,
             SoccerMajorBetType: 1,
             SoccerMinorBetType: 2,
             Bettrade: -2,
-            ColossusBet: 204
+            ColossusBet: 204,
+            CockFighting: 206
         },
 
         BetType: {
@@ -227,7 +228,7 @@ var AccReport = function ($) {
                         iframe.appendTo('body');
                     }
 
-                    iframe.attr('src', downloadUrl); 
+                    iframe.attr('src', downloadUrl);
                 }
             }
         },

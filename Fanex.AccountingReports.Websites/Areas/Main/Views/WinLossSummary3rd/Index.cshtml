@@ -74,6 +74,9 @@
 		<div id="scoreInformationContainer">
 			<div class="freegrid display-none" id="scoreInformation"></div>
 		</div>
+        <div id="cockFightingContainer">
+			<div class="freegrid display-none" id="cockFightingContent"></div>
+		</div>
 	</div>
 	@Html.Partial("~/Areas/BetList/Views/ScoreInformation/ScoreInformation.cshtml")
 </div>
@@ -84,42 +87,42 @@
 @section scripts
 {
     <script type="text/javascript">
-    	var today = '@today.ToShortDateString()';
-    	var calToday = '@today.ToShortFormatedDate()';
-    	var yesterday = '@yesterday.ToShortDateString()';
-    	var calYesterday = '@yesterday.ToShortFormatedDate()';
-    	var minDate = '@today.AddMonths(-3).ToShortDateString()';
-    	var minDateHistory = '@today.AddYears(-2).ToShortDateString()';
-    	var balanceUp = '@ReportService.BalanceUp.BalanceUpDay';
-    	var viewResources = {
-			From: '@Labels.From',
-			To: '@Labels.To',
-			Today: '@Labels.Today',
-			Yesterday: '@Labels.Yesterday',
-			NoFunctionPermission: '@Labels.You_have_no_function_permission',
-			// grid columns
-			Code: '@Labels.Code',
-			Event: '@Labels.Event',
-			BetType: '@Labels.Bettype',
-			WinLoss: '@Labels.WinLoss',
-			Position: '@Labels.Position',
-			Comm: '@Labels.Comm',
-			LineTotal: '@Labels.LineTotal',
-			Variance: '@Labels.Variance',
-			Turnover: '@Labels.Turnover',
-			Margin: '@Labels.Margin',
-			Real: '@Labels.Real',
-			Virtual: '@Labels.Virtual',
-			Total: '@Labels.Total' + ':',
-			_8RM_BARM: '@Labels._8RM_BARM' + ':',
-			AllTotal: '@Labels.All_Total' + ':',
-			GrandTotal: '@Labels.Grand_Total.ToUpper()' + ':',
-			GrandTotal_Lower: '@Labels.Grand_Total' + ':',
-			IBCTotal: '@Labels.IBCTotal' + ':',
-			Vs: '@Labels.Vs',
+        var today = '@today.ToShortDateString()';
+        var calToday = '@today.ToShortFormatedDate()';
+        var yesterday = '@yesterday.ToShortDateString()';
+        var calYesterday = '@yesterday.ToShortFormatedDate()';
+        var minDate = '@today.AddMonths(-3).ToShortDateString()';
+        var minDateHistory = '@today.AddYears(-2).ToShortDateString()';
+        var balanceUp = '@ReportService.BalanceUp.BalanceUpDay';
+        var viewResources = {
+            From: '@Labels.From',
+            To: '@Labels.To',
+            Today: '@Labels.Today',
+            Yesterday: '@Labels.Yesterday',
+            NoFunctionPermission: '@Labels.You_have_no_function_permission',
+            // grid columns
+            Code: '@Labels.Code',
+            Event: '@Labels.Event',
+            BetType: '@Labels.Bettype',
+            WinLoss: '@Labels.WinLoss',
+            Position: '@Labels.Position',
+            Comm: '@Labels.Comm',
+            LineTotal: '@Labels.LineTotal',
+            Variance: '@Labels.Variance',
+            Turnover: '@Labels.Turnover',
+            Margin: '@Labels.Margin',
+            Real: '@Labels.Real',
+            Virtual: '@Labels.Virtual',
+            Total: '@Labels.Total' + ':',
+            _8RM_BARM: '@Labels._8RM_BARM' + ':',
+            AllTotal: '@Labels.All_Total' + ':',
+            GrandTotal: '@Labels.Grand_Total.ToUpper()' + ':',
+            GrandTotal_Lower: '@Labels.Grand_Total' + ':',
+            IBCTotal: '@Labels.IBCTotal' + ':',
+            Vs: '@Labels.Vs',
             HedgeTotal: '@Labels.Hedge_title' + ':',
             LiveIndicator: '@Labels.LiveIndicator'
-		};
+        };
     </script>
 }
 @section Foot {
@@ -131,4 +134,5 @@
     <script type="text/javascript" src="~/Areas/Main/Views/WinLossSummary3rd/Scripts/ReportManager.js"></script>
 	<script type="text/javascript" src="~/Areas/Main/Views/WinLossSummary3rd/Scripts/WinLossSummary.js"></script>
 	<script type="text/javascript" src="~/Areas/Main/Views/WinLossSummary3rd/Scripts/GameMatchDetails.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/WinLossSummary3rd/Scripts/CockFighting.js"></script>
 }

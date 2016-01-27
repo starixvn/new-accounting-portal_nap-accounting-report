@@ -80,6 +80,7 @@
     @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/LiveCasinoWinLossByProductReport.cshtml")
     @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/Bettrade.cshtml")
     @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/ColossusBet.cshtml")
+    @Html.Partial("~/Areas/Main/Views/DailyWinLoss2h/CockFighting.cshtml")
 </div>
 @section scripts
 {
@@ -136,7 +137,9 @@
             SMA_WinLoss: '@Labels.SMA_Win_Loss',
             Company_Income: '@Labels.Company_Income',
             Company_Turnover: '@Labels.Company_Turnover'
-        }; 
+        };
+
+        var casinoSingleWalletLaunchDate = '@AppSettings.CasinoSingleWalletLaunchDate.ToShortFormatedDate()'; 
     </script>
 }
 @section Foot {
@@ -145,40 +148,42 @@
     <script type="text/javascript" src="~/scripts/_lib/PopUp/dialogbox.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Main2hReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/CasinoReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/SystemParlayReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Racing/RacingReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Racing/RacingReport_Summary.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Racing/RacingReport_BySportType.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Racing/RacingReport_ByBetType.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/LiveCasinoReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/KenoReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/MixParlayReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/NumberGame/NumberGameReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/NumberGame/NumberGameReport_Summary.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/NumberGame/NumberGameReport_ByBetType.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/OtherSports/OtherSportReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/OtherSports/OtherSportReport_Summary.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/OtherSports/OtherSportReport_BySportType.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/OtherSports/OtherSportReport_ByBetType.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Soccer/SoccerReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Soccer/SoccerReport_Summary.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Soccer/SoccerReport_ByBetType.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/BingoReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSports_VirtualHorseRacingReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSportsReport_Summary.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSportsReport_BySportType.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSportsReport_ByBetType.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSportsReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ParlayReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/MetricGamingReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/MainLiveCasinoReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/LiveCasinoWinLossByProductReport.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Bettrade.js"></script>
-          <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ColossusBet.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/WinLossBySite_BetType.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ShowHideSiteTypeManager.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ReportManager.js"></script>
-    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ShowHideReportManager.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Main2hReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/CasinoReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/SystemParlayReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Racing/RacingReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Racing/RacingReport_Summary.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Racing/RacingReport_BySportType.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Racing/RacingReport_ByBetType.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/LiveCasinoReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/KenoReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/MixParlayReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/NumberGame/NumberGameReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/NumberGame/NumberGameReport_Summary.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/NumberGame/NumberGameReport_ByBetType.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/OtherSports/OtherSportReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/OtherSports/OtherSportReport_Summary.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/OtherSports/OtherSportReport_BySportType.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/OtherSports/OtherSportReport_ByBetType.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Soccer/SoccerReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Soccer/SoccerReport_Summary.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Soccer/SoccerReport_ByBetType.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/BingoReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSports_VirtualHorseRacingReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSportsReport_Summary.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSportsReport_BySportType.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSportsReport_ByBetType.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/VirtualSports/VirtualSportsReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ParlayReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/MetricGamingReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/MainLiveCasinoReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/LiveCasinoWinLossByProductReport.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/Bettrade.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ColossusBet.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/CockFighting.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/CockFightingArena.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/WinLossBySite_BetType.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ShowHideSiteTypeManager.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ReportManager.js?ver=1"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/DailyWinLoss2h/Scripts/ShowHideReportManager.js?ver=1"></script>
 }

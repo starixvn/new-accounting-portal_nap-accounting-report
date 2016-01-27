@@ -16,37 +16,12 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
 
         public DateTime ToDate { get; set; }
 
-        public bool ShowSB { get; set; }
-
-        public bool ShowNG { get; set; }
-
-        public bool ShowRB { get; set; }
-
-        public bool ShowLiveCasino { get; set; }
-
-        public bool ShowCasino { get; set; }
-
-        public bool ShowP2P { get; set; }
-
-        public bool ShowBI { get; set; }
-
-        public bool ShowVS { get; set; }
-
-        public bool ShowKeno { get; set; }
-
         public int Currency { get; set; }
 
-        public bool ShowGD { get; set; }
+        [SpParam(Ignored = true)]
+        public string ProductSelection { get; set; }
 
-        public bool ShowMGSL { get; set; }
-
-        public bool ShowMGCLC { get; set; }
-
-        public bool ShowMGCRNG { get; set; }
-
-        public bool ShowVG { get; set; }
-
-        public bool ShowAGCS { get; set; }
+        public string Products { get; set; }
 
         public override bool IsValid()
         {

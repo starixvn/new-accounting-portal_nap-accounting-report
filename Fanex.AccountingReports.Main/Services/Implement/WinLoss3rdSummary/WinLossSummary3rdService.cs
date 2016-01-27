@@ -33,10 +33,15 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
     public partial class WinLossSummary3rdService : ServiceBase, IWinLossSummary3rdService
     {
         private readonly IWinlossSummary3rdRepository _reportRepository;
+        private readonly int _casinoSportType = 251;
+
         private Dictionary<object, string> _sportTypeNameCache;
         private Dictionary<object, string> _betTypeNameCache;
         private Dictionary<object, string> _leagueNameCache;
         private Dictionary<object, string> _teamNameCache;
+
+        private string _winlossSummary3rdCacheCockFightingArenaReportKey = "Fanex.AccountingReports.Main.WinLossSummary3rd.CockFightingArenaReport" +
+          (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
 
         public WinLossSummary3rdService()
             : this(null)
@@ -89,6 +94,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
                 // get name of sport types
                 CacheRef.SaveCacheRefResponse(sportTypeHash.Values.ToList(), CacheRef.GetSportName, ref this._sportTypeNameCache);
+                if (_sportTypeNameCache.ContainsKey(_casinoSportType))
+                {
+                    _sportTypeNameCache[_casinoSportType] = Labels.MBC_RNG_Casino;
+                }
 
                 // get name of bet types
                 CacheRef.SaveCacheRefResponse(betTypeHash.Values.ToList(), CacheRef.GetBettype, ref this._betTypeNameCache);
@@ -406,6 +415,16 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             }
 
             return report;
+        }
+
+        public CockFightingArena GetCockFightingReport(GetWinLossSummary3rdCockFightingCriteria criteria)
+        {
+            var cockFightingArena = new CockFightingArena();
+            var rawData = GetReportData<CockFightingMatchDetail>(criteria).ToList();
+            cockFightingArena.ReportRows = GetCockFightingArena(rawData);
+            cockFightingArena.GrandTotal = GetCockFightingArenaGrandTotal(rawData);
+            CacheManager.Set<CockFightingArena>(_winlossSummary3rdCacheCockFightingArenaReportKey, cockFightingArena, DateTime.Now.AddHours(2));
+            return cockFightingArena;
         }
 
         //// Private methods
@@ -808,6 +827,49 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 ToDate = criteria.ToDate,
                 SportType = criteria.SportType
             };
+        }
+
+        private List<CockFightingArenaDetail> GetCockFightingArena(List<CockFightingMatchDetail> reportData)
+        {
+            List<CockFightingArenaDetail> arena = new List<CockFightingArenaDetail>();
+            var arenaGroup = reportData.GroupBy(x => x.ArenaId);
+            foreach (var group in arenaGroup)
+            {
+                var arenaMatchs = group.ToList();
+                CockFightingArenaDetail arenaDetail = new CockFightingArenaDetail()
+                {
+                    ArenaName = CacheRef.GetLeagueName(Converter.ToInt(group.Key)),
+                    CockFightingMatchs = new List<CockFightingMatchDetail>(),
+                    ArenaTotal = GetCockFightingArenaGrandTotal(arenaMatchs)
+                };
+
+                foreach (var data in arenaMatchs)
+                {
+                    arenaDetail.CockFightingMatchs.Add(data);
+                }
+
+                arena.Add(arenaDetail);
+            }
+
+            return arena;
+        }
+
+        private CockFightingMatchDetail GetCockFightingArenaGrandTotal(List<CockFightingMatchDetail> cockFightingMatchs)
+        {
+            CockFightingMatchDetail grandTotal = new CockFightingMatchDetail();
+
+            foreach (var item in cockFightingMatchs)
+            {
+                grandTotal.RealWinLoss += item.RealWinLoss;
+                grandTotal.RealPosition += item.RealPosition;
+                grandTotal.RealCommission += item.RealCommission;
+                grandTotal.RealTurnover += item.RealTurnover;
+                grandTotal.RealLineTotal += item.RealLineTotal;
+                grandTotal.VirtualTurnover += item.VirtualTurnover;
+                grandTotal.VirtualLineTotal += item.VirtualLineTotal;
+            }
+
+            return grandTotal;
         }
     }
 }

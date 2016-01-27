@@ -68,6 +68,18 @@ namespace Fanex.AccountingReports.Main.Controllers
         }
 
         [HttpPost]
+        [NapAuth(FunctionKey = AccReportFunctionKeys.WinLossSummary, Policy = Constant.Policy.Read)]
+        [HandleAjaxError]
+        public JsonResult ViewCockFightingReport(GetWinLossSummary3rdCockFightingCriteria criteria)
+        {
+            var details = this._reportService.GetCockFightingReport(criteria);
+            var jsonResult = Json(details, JsonRequestBehavior.DenyGet);
+            jsonResult.MaxJsonLength = CommonConstants.MaxJsonLength;
+
+            return jsonResult;
+        }
+
+        [HttpPost]
         [NapAuth(FunctionKey = AccReportFunctionKeys.WinLossSummary, Policy = Constant.Policy.Host)]
         [HandleAjaxError]
         public JsonResult RecalculateWinLoss(GetRecalculateWinLossCriteria criteria)
@@ -94,6 +106,15 @@ namespace Fanex.AccountingReports.Main.Controllers
         {
             this._reportService.ExportDetails(criteria);
 
+            return new EmptyResult();
+        }
+
+        [HttpGet]
+        [NapAuth(FunctionKey = AccReportFunctionKeys.WinLossSummary, Policy = Constant.Policy.Read)]
+        [HandleAjaxError]
+        public ActionResult ExportCockFightingReport(GetWinLossSummary3rdCockFightingCriteria criteria)
+        {
+            this._reportService.ExportCockFightingReport(criteria);
             return new EmptyResult();
         }
     }

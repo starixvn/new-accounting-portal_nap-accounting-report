@@ -66,6 +66,8 @@ namespace Fanex.AccountingReports.Core.Configurations
         private static int _unit3UserGroupId;
         private static string _unit3GroupName;
 
+        private static DateTime _casinoSigleWalletLaunchDate;
+
         static AppSettings()
         {
             LbServiceUrl = ConfigurationManager.AppSettings["LBUrl"];
@@ -104,6 +106,7 @@ namespace Fanex.AccountingReports.Core.Configurations
 
             _unit3UserGroupId = Converter.To<int>(ConfigurationManager.AppSettings["U3AccountGroupId"]);
             _unit3GroupName = ConfigurationManager.AppSettings["U3AccountGroupName"];
+            _casinoSigleWalletLaunchDate = Converter.ToDateTime(ConfigurationManager.AppSettings["CasinoSingleWalletLaunchDate"]);
         }
 
         /// <summary>
@@ -372,6 +375,14 @@ namespace Fanex.AccountingReports.Core.Configurations
             get
             {
                 return _unit3GroupName;
+            }
+        }
+
+        public static DateTime CasinoSingleWalletLaunchDate
+        {
+            get
+            {
+                return _casinoSigleWalletLaunchDate;
             }
         }
 

@@ -13,6 +13,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Xml.Linq;
+    using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Resources;
@@ -32,6 +33,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
     /// </summary>
     public class TreeWinLossService : ServiceBase, ITreeWinLossService
     {
+        private const string TreeWinLossProductPath = @"Web.Configuration\TreeWinLossProduct.xml";
         private ITreeWinLossRepository _treeWinLossRepository;
         private Dictionary<int, int> _bettype = new Dictionary<int, int>();
 
@@ -44,6 +46,25 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         {
             this._treeWinLossRepository = treeWinLossRepository ?? new TreeWinLossRepository();
             InitBettype();
+        }
+
+        public List<TreeWinLossProduct> GetProduct()
+        {
+            var product = new List<TreeWinLossProduct>();
+            var root = AppDomain.CurrentDomain.BaseDirectory;
+            var productFilePath = root + TreeWinLossProductPath;
+            XDocument productDocument = XDocument.Load(productFilePath);
+
+            foreach (var profileElement in productDocument.Descendants("Product").ToList())
+            {
+                product.Add(new TreeWinLossProduct()
+                {
+                    ProductId = Converter.ToInt(profileElement.Attribute("ProductID").Value),
+                    ProductName = Converter.ToString2(profileElement.Attribute("ProductName").Value)
+                });
+            }
+
+            return product;
         }
 
         /// <summary>
@@ -59,12 +80,15 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             try
             {
                 var currencies = ReportService.ExchangeCurrencies;
-
+                var isShowNotAvailableTurnover = IsShowAvailableTurnoverByProduct(criteria);
+                criteria.Products = GetProductParams(criteria.ProductSelection);
                 var treeWinLoss = new TreeWinLoss
                 {
                     ChildsInfo = new List<TreeWinLossInfo>(),
-                    TotalInfo = new List<TreeWinLossInfo>()
+                    TotalInfo = new List<TreeWinLossInfo>(),
+                    IsShowNotAvailableTurnover = isShowNotAvailableTurnover
                 };
+
                 DateTime moveBetsDay = ReportService.BalanceUp.MoveBetsDay;
                 if (criteria.FromDate <= moveBetsDay && criteria.ToDate > moveBetsDay)
                 {
@@ -146,11 +170,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         {
             try
             {
+                bool isShowNotAvailableTurnover = IsShowAvailableTurnoverByLevel(criteria);
+                criteria.Products = GetProductParams(criteria.ProductSelection);
                 TreeWinLossVirtualRate treeWinLossVirtualRate = new TreeWinLossVirtualRate();
                 var winLossByComm = new TreeWinLoss
                 {
                     ChildsInfo = new List<TreeWinLossInfo>(),
-                    TotalInfo = new List<TreeWinLossInfo>()
+                    TotalInfo = new List<TreeWinLossInfo>(),
+                    IsShowNotAvailableTurnover = isShowNotAvailableTurnover
                 };
                 DateTime moveBetsDay = ReportService.BalanceUp.MoveBetsDay;
                 if (criteria.FromDate <= moveBetsDay && criteria.ToDate > moveBetsDay)
@@ -218,6 +245,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
                 treeWinLossVirtualRate.NumberUserEnabledVirtualRate = treeWinLossVirtualRate.SMAVirtualRate.ReportRows.Count;
                 treeWinLossVirtualRate.EnabledVirtualRateUser = MapEnabledVirtualRateUserData(treeWinLossVirtualRate.TreeWinLoss.ChildsInfo);
+                treeWinLossVirtualRate.TreeWinLoss.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
 
                 switch (criteria.RoleId)
                 {
@@ -294,10 +322,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         Justification = "Reviewed. Suppression is OK here.")]
         private TreeWinLoss GetTreeWinLossDateRangeByProduct(GetTreeWinLossByProductCriteria criteria)
         {
+            var isShowNotAvailableTurnover = IsShowAvailableTurnoverByProduct(criteria);
             var treeWinLoss = new TreeWinLoss
             {
                 ChildsInfo = new List<TreeWinLossInfo>(),
-                TotalInfo = new List<TreeWinLossInfo>()
+                TotalInfo = new List<TreeWinLossInfo>(),
+                IsShowNotAvailableTurnover = isShowNotAvailableTurnover
             };
             try
             {
@@ -383,104 +413,52 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private TreeWinLossVirtualRate GetTreeWinLossDateRangeByLevel(GetTreeWinLossByLevelCriteria criteria)
-        {            
+        {
             switch (criteria.RoleId)
             {
                 case 5:
                     return GetTreeWinlossData(
                         new GetTreeWinLossByComCriteria
-                    {
-                        Currency = criteria.Currency,
-                        FromDate = criteria.FromDate,
-                        ToDate = criteria.ToDate,
-                        ShowBI = criteria.ShowBI,
-                        ShowCasino = criteria.ShowCasino,
-                        ShowKeno = criteria.ShowKeno,
-                        ShowLiveCasino = criteria.ShowLiveCasino,
-                        ShowNG = criteria.ShowNG,
-                        ShowP2P = criteria.ShowP2P,
-                        ShowRB = criteria.ShowRB,
-                        ShowSB = criteria.ShowSB,
-                        ShowVS = criteria.ShowVS,
-                        ShowGD = criteria.ShowGD,
-                        ShowMGSL = criteria.ShowMGSL,
-                        ShowMGCLC = criteria.ShowMGCLC,
-                        ShowMGCRNG = criteria.ShowMGCRNG,
-                        ShowVG = criteria.ShowVG,
-                        ShowAGCS = criteria.ShowAGCS
-                    }, 
+                        {
+                            Currency = criteria.Currency,
+                            FromDate = criteria.FromDate,
+                            ToDate = criteria.ToDate,
+                            ProductSelection = criteria.ProductSelection,
+                            Products = criteria.Products
+                        },
                     criteria.RoleId);
                 case 4:
                     return GetTreeWinlossData(
                         new GetTreeWinLossBySuperCriteria
-                    {
-                        SRecommend = criteria.SRecommend,
-                        FromDate = criteria.FromDate,
-                        ToDate = criteria.ToDate,
-                        ShowBI = criteria.ShowBI,
-                        ShowCasino = criteria.ShowCasino,
-                        ShowKeno = criteria.ShowKeno,
-                        ShowLiveCasino = criteria.ShowLiveCasino,
-                        ShowNG = criteria.ShowNG,
-                        ShowP2P = criteria.ShowP2P,
-                        ShowRB = criteria.ShowRB,
-                        ShowSB = criteria.ShowSB,
-                        ShowVS = criteria.ShowVS,
-                        ShowGD = criteria.ShowGD,
-                        ShowMGSL = criteria.ShowMGSL,
-                        ShowMGCLC = criteria.ShowMGCLC,
-                        ShowMGCRNG = criteria.ShowMGCRNG,
-                        ShowVG = criteria.ShowVG,
-                        ShowAGCS = criteria.ShowAGCS
-                    }, 
+                        {
+                            SRecommend = criteria.SRecommend,
+                            FromDate = criteria.FromDate,
+                            ToDate = criteria.ToDate,
+                            ProductSelection = criteria.ProductSelection,
+                            Products = criteria.Products
+                        },
                     criteria.RoleId);
                 case 3:
                     return GetTreeWinlossData(
                         new GetTreeWinLossByMasterCriteria
-                    {
-                        MRecommend = criteria.MRecommend,
-                        FromDate = criteria.FromDate,
-                        ToDate = criteria.ToDate,
-                        ShowBI = criteria.ShowBI,
-                        ShowCasino = criteria.ShowCasino,
-                        ShowKeno = criteria.ShowKeno,
-                        ShowLiveCasino = criteria.ShowLiveCasino,
-                        ShowNG = criteria.ShowNG,
-                        ShowP2P = criteria.ShowP2P,
-                        ShowRB = criteria.ShowRB,
-                        ShowSB = criteria.ShowSB,
-                        ShowVS = criteria.ShowVS,
-                        ShowGD = criteria.ShowGD,
-                        ShowMGSL = criteria.ShowMGSL,
-                        ShowMGCLC = criteria.ShowMGCLC,
-                        ShowMGCRNG = criteria.ShowMGCRNG,
-                        ShowVG = criteria.ShowVG,
-                        ShowAGCS = criteria.ShowAGCS
-                    }, 
+                        {
+                            MRecommend = criteria.MRecommend,
+                            FromDate = criteria.FromDate,
+                            ToDate = criteria.ToDate,
+                            ProductSelection = criteria.ProductSelection,
+                            Products = criteria.Products
+                        },
                     criteria.RoleId);
                 case 2:
                     return GetTreeWinlossData(
                         new GetTreeWinLossByAgentCriteria
-                    {
-                        Recommend = criteria.Recommend,
-                        FromDate = criteria.FromDate,
-                        ToDate = criteria.ToDate,
-                        ShowBI = criteria.ShowBI,
-                        ShowCasino = criteria.ShowCasino,
-                        ShowKeno = criteria.ShowKeno,
-                        ShowLiveCasino = criteria.ShowLiveCasino,
-                        ShowNG = criteria.ShowNG,
-                        ShowP2P = criteria.ShowP2P,
-                        ShowRB = criteria.ShowRB,
-                        ShowSB = criteria.ShowSB,
-                        ShowVS = criteria.ShowVS,
-                        ShowGD = criteria.ShowGD,
-                        ShowMGSL = criteria.ShowMGSL,
-                        ShowMGCLC = criteria.ShowMGCLC,
-                        ShowMGCRNG = criteria.ShowMGCRNG,
-                        ShowVG = criteria.ShowVG,
-                        ShowAGCS = criteria.ShowAGCS
-                    }, 
+                        {
+                            Recommend = criteria.Recommend,
+                            FromDate = criteria.FromDate,
+                            ToDate = criteria.ToDate,
+                            ProductSelection = criteria.ProductSelection,
+                            Products = criteria.Products
+                        },
                     criteria.RoleId);
             }
 
@@ -655,7 +633,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             this._bettype.Add(4, BetTypeConstants._1stOverUnder);
             this._bettype.Add(5, BetTypeConstants._1stOddEvenBetType);
             this._bettype.Add(6, BetTypeConstants.MoneyLineBettype);
-            this._bettype.Add(7, BetTypeConstants._1stMoneyLineBettype);                   
+            this._bettype.Add(7, BetTypeConstants._1stMoneyLineBettype);
             this._bettype.Add(8, BetTypeConstants.SetXGameYWinner);
         }
 
@@ -843,15 +821,19 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 case 2:
                     recommend = "custid";
                     break;
+
                 case 3:
                     recommend = "recommend";
                     break;
+
                 case 4:
                     recommend = "mrecommend";
                     break;
+
                 case 5:
                     recommend = "srecommend";
                     break;
+
                 default:
                     break;
             }
@@ -926,6 +908,112 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
 
             return enabledVirtualRateUser;
+        }
+
+        private string GetProductParams(string productSelection)
+        {
+            XDocument productDocument = new XDocument(new XElement("ROOT"));
+            var root = AppDomain.CurrentDomain.BaseDirectory;
+            var productFilePath = root + TreeWinLossProductPath;
+            XDocument treeWinLossProductDocument = XDocument.Load(productFilePath);
+
+            var products = productSelection.Split(',');
+
+            foreach (var item in products)
+            {
+                foreach (var profileElement in treeWinLossProductDocument.Descendants("Product").ToList())
+                {
+                    if (Converter.ToInt(profileElement.Attribute("ProductID").Value) == Converter.ToInt(item))
+                    {
+                        productDocument.Root.Add(profileElement);
+                        break;
+                    }
+                }
+            }
+
+            return productDocument.ToString();
+        }
+
+        private bool IshowNotAvailableTurnover(string productSelection)
+        {
+            bool isShowNotAvailable = false;
+            List<bool> isShowTurnover = new List<bool>();
+
+            var products = productSelection.Split(',');
+            var root = AppDomain.CurrentDomain.BaseDirectory;
+            var productFilePath = root + TreeWinLossProductPath;
+            XDocument productDocument = XDocument.Load(productFilePath);
+
+            foreach (var item in products)
+            {
+                foreach (var profileElement in productDocument.Descendants("Product").ToList())
+                {
+                    if (Converter.ToInt(profileElement.Attribute("ProductID").Value) == Converter.ToInt(item))
+                    {
+                        isShowTurnover.Add(Converter.ToInt(profileElement.Attribute("IsNoTurnover").Value) == 1);
+                        break;
+                    }
+                }
+            }
+
+            isShowNotAvailable = isShowTurnover.All(x => x == true);
+            return isShowNotAvailable;
+        }
+
+        private bool IsShowAvailableTurnoverByProduct(GetTreeWinLossByProductCriteria criteria)
+        {
+            bool isShowNotAvailableTurnover = false;
+            int compareCasinoSingleWalletLaunchDate = DateTime.Compare(criteria.FromDate, AppSettings.CasinoSingleWalletLaunchDate);
+            if (criteria.ProductSelection == "6" && compareCasinoSingleWalletLaunchDate < 0)
+            {
+                isShowNotAvailableTurnover = true;
+            }
+            else if (criteria.ProductSelection == "7,6" && compareCasinoSingleWalletLaunchDate < 0)
+            {
+                isShowNotAvailableTurnover = true;
+            }
+            else if (criteria.ProductSelection == "6,9" && compareCasinoSingleWalletLaunchDate < 0)
+            {
+                isShowNotAvailableTurnover = true;
+            }
+            else if (criteria.ProductSelection == "7,6,9" && compareCasinoSingleWalletLaunchDate < 0)
+            {
+                isShowNotAvailableTurnover = true;
+            }
+            else
+            {
+                isShowNotAvailableTurnover = IshowNotAvailableTurnover(criteria.ProductSelection);
+            }
+
+            return isShowNotAvailableTurnover;
+        }
+
+        private bool IsShowAvailableTurnoverByLevel(GetTreeWinLossByLevelCriteria criteria)
+        {
+            bool isShowNotAvailableTurnover = false;
+            int compareCasinoSingleWalletLaunchDate = DateTime.Compare(criteria.FromDate, AppSettings.CasinoSingleWalletLaunchDate);
+            if (criteria.ProductSelection == "6" && compareCasinoSingleWalletLaunchDate < 0)
+            {
+                isShowNotAvailableTurnover = true;
+            }
+            else if (criteria.ProductSelection == "7,6" && compareCasinoSingleWalletLaunchDate < 0)
+            {
+                isShowNotAvailableTurnover = true;
+            }
+            else if (criteria.ProductSelection == "6,9" && compareCasinoSingleWalletLaunchDate < 0)
+            {
+                isShowNotAvailableTurnover = true;
+            }
+            else if (criteria.ProductSelection == "7,6,9" && compareCasinoSingleWalletLaunchDate < 0)
+            {
+                isShowNotAvailableTurnover = true;
+            }
+            else
+            {
+                isShowNotAvailableTurnover = IshowNotAvailableTurnover(criteria.ProductSelection);
+            }
+
+            return isShowNotAvailableTurnover;
         }
     }
 }

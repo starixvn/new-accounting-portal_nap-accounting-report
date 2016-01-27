@@ -57,6 +57,7 @@ Main2hReport.prototype.RenderReport = function (report) {
     var bodyData = [];
     var footerData = [];
     var maxColIndex = 11;
+    var isBeforeCasinoSingleWalletLaunchDate = moment(this.Params.reportParams.Winlostdate).diff(casinoSingleWalletLaunchDate, "days") < 0;
     if (report && report.ChildsInfo && report.ChildsInfo.length > 0) {
         var productLength = report.ChildsInfo.length;
         var info = null;
@@ -78,7 +79,8 @@ Main2hReport.prototype.RenderReport = function (report) {
                     sportWinLoss.Id == AccReportData.Constants.SportType.Keno ||
                     isCasinoSport ||
                     sportWinLoss.Id == AccReportData.Constants.SportType.Bettrade ||
-                    sportWinLoss.Id == AccReportData.Constants.SportType.ColossusBet;
+                    sportWinLoss.Id == AccReportData.Constants.SportType.ColossusBet ||
+                    sportWinLoss.Id == AccReportData.Constants.SportType.CockFighting;
                 var len = sportWinLoss.ChildsInfo.length;
                 info = sportWinLoss.NormalTotal;
                 groupdId = tableId + "_Product" + product.Id + "_Sport" + sportWinLoss.Id;
@@ -97,8 +99,8 @@ Main2hReport.prototype.RenderReport = function (report) {
                     { Name: "ColVariance", Value: info.Variance },
                     { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
                     { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
-                    isCasinoSport ? reportManager.GetCasinoMarginColumn("ColRealMargin") : reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
-                    isCasinoSport ? reportManager.GetCasinoMarginColumn("ColVirtualMargin") : reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
+                    isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColRealMargin") : reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
+                    isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColVirtualMargin") : reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
                     CssClass: "freegrid-even"
                 });
 
@@ -113,8 +115,8 @@ Main2hReport.prototype.RenderReport = function (report) {
                         { Name: "ColVariance", Value: info.Variance },
                         { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
                         { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
-                        isCasinoSport ? reportManager.GetCasinoMarginColumn("ColRealMargin") : reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
-                        isCasinoSport ? reportManager.GetCasinoMarginColumn("ColVirtualMargin") : reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
+                        isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColRealMargin") : reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
+                        isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColVirtualMargin") : reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
                     CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                         showHideSiteTypeManager.Enums.RowType.InfoRow)
                 });
@@ -130,8 +132,8 @@ Main2hReport.prototype.RenderReport = function (report) {
                         { Name: "ColVariance", Value: info.Variance },
                         { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
                         { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
-                        isCasinoSport ? reportManager.GetCasinoMarginColumn("ColRealMargin") : reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
-                        isCasinoSport ? reportManager.GetCasinoMarginColumn("ColVirtualMargin") : reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
+                        isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColRealMargin") : reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
+                        isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColVirtualMargin") : reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
                     CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                         showHideSiteTypeManager.Enums.RowType.InfoRow)
                 });
@@ -337,7 +339,7 @@ Main2hReport.prototype.RenderReport = function (report) {
             });
 
             var reportNote = "* Virtual All Total: Soccer + Metric Gaming - Super Live + Other Sports + Parlay" +
-                             "<br/>* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing +  Bingo + P2P + Bettrade + Colossus Bets";
+                             "<br/>* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing +  Bingo + P2P + Bettrade + Colossus Bets + Cockfighting";
             footerData.push({
                 Columns: [{
                     Name: "ColSportType",
@@ -534,6 +536,13 @@ Main2hReport.prototype.GetSportLink = function (winLossInfo) {
             break;
         case AccReportData.Constants.SportType.ColossusBet: //204
             sportLink = "<span class='report2h-link bold' onclick=\"showHideReportManager.ShowColossusBet('" +
+                            winLossInfo.Id + "','" +
+                            winLossInfo.Name + "','" +
+                            reportManager.Main2hReport.Params.reportParams.Winlostdate + "'); return;\">" +
+                            winLossInfo.Name + '</span>';
+            break;
+        case AccReportData.Constants.SportType.CockFighting: //204
+            sportLink = "<span class='report2h-link bold' onclick=\"showHideReportManager.ShowCockFighting('" +
                             winLossInfo.Id + "','" +
                             winLossInfo.Name + "','" +
                             reportManager.Main2hReport.Params.reportParams.Winlostdate + "'); return;\">" +
