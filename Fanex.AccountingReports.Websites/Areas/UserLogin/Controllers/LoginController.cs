@@ -336,7 +336,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                     {
                         return Json(new
                         {
-                            IsKickedOut = "3"
+                            IsKickedOut = "-1"
                         });
                     }
 
@@ -346,7 +346,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                     {
                         return Json(new
                         {
-                            IsKickedOut = "2"
+                            IsKickedOut = "1"
                         });
                     }
 

@@ -23,7 +23,7 @@ var Recheckin = function ($) {
                         alert('Another session has been logged in or your session is expired. Forced to logout!');
                         window.location.href = AccReport.accReportRoot + "UserLogin/Login/LogOut";
                     }
-                    if (result == "-1") {
+                    if (result.IsKickedOut == "-1") {
                         window.location.href = Recheckin.root + "UserLogin/Common/Offline";
                     }
                 },
