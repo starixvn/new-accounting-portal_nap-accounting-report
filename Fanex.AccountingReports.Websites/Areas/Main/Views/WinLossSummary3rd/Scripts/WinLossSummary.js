@@ -1,11 +1,30 @@
 Namespace.Register('Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary');
 Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
     var self = this;
+    self.Enums = {
+        ShowHideCss: {
+            Collapse: "collapse",
+            Expand: "expand"
+        },
+        RowType: {
+            InfoRow: 1,
+            PaddingRow: 2
+        }
+    };
+    self.CachedData = {
+        maxGridHeight: 10000,
+        isShowSiteTypeInfo: false
+    };
+
+    self.CachedData = {
+        showHideSiteTypeIconTitle: viewResources.Collapse + "/" + viewResources.Expand
+    };
 
     var _tables = {
         winlossSumReport: null,
         gameMatchDetailContainer: null,
-        isShowDetail: false
+        isShowDetail: false,
+        btnShowHideSiteTypeInfo: null
     };
     var _params = {
         reportParams: {
@@ -21,13 +40,23 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 
     self.initPage = function () {
         cachedDOMElements();
+        bindingEvent();
     };
+    var bindingEvent = function () {
+        _tables.btnShowHideSiteTypeInfo.unbind("click");
+        _tables.btnShowHideSiteTypeInfo.click(function () {
+            showHideSiteTypeInfo();
+        });
+    };
+
     var cachedDOMElements = function () {
         _tables.winlossSumReport = $('#winlossSumReport');
         _tables.gameMatchDetailContainer = $('#gameMatchDetailContainer');
+        _tables.btnShowHideSiteTypeInfo = $("#btnShowHideSiteTypeInfo");
     };
     self.getReport = function (params) {
         AccReport.disableInput();
+        _tables.btnShowHideSiteTypeInfo.attr("disabled", null);
         getParams(params);
         $.ajax({
             type: 'POST',
@@ -93,7 +122,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 						  { HeaderText: viewResources.LineTotal, Name: 'ColRealLineTotal', MergeColNumber: 2 },
 						  { HeaderText: viewResources.Variance, Name: 'ColVariance', MergeRowNumber: 2 },
 						  { HeaderText: viewResources.Turnover, Name: 'ColRealTurnover', MergeColNumber: 2 },
-						  { HeaderText: viewResources.Margin, Name: 'ColRealMargin', MergeColNumber: 2}]
+						  { HeaderText: viewResources.Margin, Name: 'ColRealMargin', MergeColNumber: 2 }]
             }],
             columns: [{ HeaderText: '', Width: 50, Name: 'ColView', HeaderAlign: 'center', CellAlign: 'center', ShowCollapseExpand: false },
                       { HeaderText: viewResources.BetType, Width: 150, Name: 'ColBetType', HeaderAlign: 'center', CellAlign: 'left' },
@@ -109,7 +138,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 					  { HeaderText: viewResources.Real, Width: 110, Name: 'ColRealTurnover', HeaderAlign: 'center', CellAlign: 'right' },
 					  { HeaderText: viewResources.Virtual, Width: 110, Name: 'ColVirtualTurnover', HeaderAlign: 'center', CellAlign: 'right' },
 					  { HeaderText: viewResources.Real, Width: 60, Name: 'ColRealMargin', HeaderAlign: 'center', CellAlign: 'right' },
-					  { HeaderText: viewResources.Virtual, Width: 60, Name: 'ColVirtualMargin', HeaderAlign: 'center', CellAlign: 'right'}],
+					  { HeaderText: viewResources.Virtual, Width: 60, Name: 'ColVirtualMargin', HeaderAlign: 'center', CellAlign: 'right' }],
             showTitle: true,
             titleInfo:
             {
@@ -143,28 +172,29 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
         var sportDrillDown = _tables.isShowDetail && sportWinloss.CanShowDetailLink && id > 0;
         // SportType (header)
         var sportType = {
-            Columns: [{ Name: 'ColView', CellAlign: 'center', CustomCellRender: function () {
-                if (sportDrillDown) {
+            Columns: [{
+                Name: 'ColView', CellAlign: 'center', CustomCellRender: function () {
+                    if (sportDrillDown) {
                     if (id == AccReportData.Constants.SportType.CockFighting) {
                         return '<div class="viewicon" onclick="ViewCockFightingArena(\'' +
 											_params.reportParams.FromDate + '\',\'' +
 											_params.reportParams.ToDate + '\')">&nbsp;</div>';
                     } else {
                         return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
-											_params.reportParams.FromDate + '\',\'' +
-											_params.reportParams.ToDate + '\',' +
-											id + ',0,0' +
-											',\'' +
-											sportName + '\',' +
-                                            drillDownByType.bySport + ')">&nbsp;</div>';
+                                                _params.reportParams.FromDate + '\',\'' +
+                                                _params.reportParams.ToDate + '\',' +
+                                                id + ',0,0' +
+                                                ',\'' +
+                                                sportName + '\',' +
+                                                drillDownByType.bySport + ')">&nbsp;</div>';
                     }
                 }
-                else {
-                    return '<div>&nbsp;</div>';
+                    else {
+                        return '<div>&nbsp;</div>';
+                    }
                 }
-            }
             },
-					  { Name: 'ColBetType', Value: sportName, MergeColNumber: 11, CellAlign: 'center'}],
+					  { Name: 'ColBetType', Value: sportName, MergeColNumber: 11, CellAlign: 'center' }],
             SubRows: []
         }
         // BetType (body)
@@ -216,8 +246,10 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
     var renderWinLoss = function (winloss, ibc, sportId, sportName, showDetailLink, bettypeIndex) {
         var cssClass = bettypeIndex % 2 == 0 ? 'evenRow' : 'oddRow';
         var betType = ibc ? ((winloss.LiveIndicator == 1 ? '<span class="live">Live!</span> ' : '') + winloss.Name) : winloss.Name;
+        var groupdId = '';
         return {
-            Columns: [{ Name: 'ColView',
+            Columns: [{
+                Name: 'ColView',
                 TdClass: cssClass,
                 CustomCellRender: function () {
                     if (showDetailLink) {
@@ -251,11 +283,13 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 						{ Name: 'ColRealTurnover', Value: winloss.RealTurnoverStr, TdClass: cssClass },
 						{ Name: 'ColVirtualTurnover', Value: winloss.VirtualTurnoverStr, TdClass: cssClass },
 						{ Name: 'ColRealMargin', Value: formatNumberCell(winloss.RealMarginStr, true, false, true), TdClass: cssClass },
-						{ Name: 'ColVirtualMargin', Value: formatNumberCell(winloss.VirtualMarginStr, true, false, true), TdClass: cssClass}]
+						{ Name: 'ColVirtualMargin', Value: formatNumberCell(winloss.VirtualMarginStr, true, false, true), TdClass: cssClass }],
+            CssClass: winLossSummary.GetSiteTypeRowCss(groupdId, winLossSummary.Enums.RowType.InfoRow)
         }
     };
     var renderTotal = function (total, css, title) {
-        return { CssClass: css,
+        return {
+            CssClass: css,
             Columns: [{ Name: 'ColView', Value: title, MergeColNumber: 2, CellAlign: 'right', CssClass: 'bold', TdClass: css },
 						{ Name: 'ColWinLoss', Value: formatNumberCell(total.WinLossStr, true, false, false) },
 						{ Name: 'ColPosition', Value: total.PositionStr },
@@ -266,7 +300,8 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 						{ Name: 'ColRealTurnover', Value: total.RealTurnoverStr },
 						{ Name: 'ColVirtualTurnover', Value: total.VirtualTurnoverStr },
 						{ Name: 'ColRealMargin', Value: formatNumberCell(total.RealMarginStr, true, false, true) },
-						{ Name: 'ColVirtualMargin', Value: formatNumberCell(total.VirtualMarginStr, true, false, true)}]
+						{ Name: 'ColVirtualMargin', Value: formatNumberCell(total.VirtualMarginStr, true, false, true) }]
+
         }
     };
     var renderTotalFooter = function (totalStr, total) {
@@ -281,7 +316,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 					{ Name: 'ColRealTurnover', Value: total.RealTurnoverStr },
 					{ Name: 'ColVirtualTurnover', Value: total.VirtualTurnoverStr },
 					{ Name: 'ColRealMargin', Value: formatNumberCell(total.RealMarginStr, true, false, true) },
-					{ Name: 'ColVirtualMargin', Value: formatNumberCell(total.VirtualMarginStr, true, false, true)}]
+					{ Name: 'ColVirtualMargin', Value: formatNumberCell(total.VirtualMarginStr, true, false, true) }]
         }
     }
     var formatNumberCell = function (cellValue, isPositive, isNegative, isPercent) {
@@ -304,4 +339,40 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
     var exportReport = function () {
         AccReport.downloadFile(window.rootUrl + "Main/WinLossSummary3rd/ExportWinLossSummary3rd", _params.reportParams);
     };
+
+    var showHideSiteTypeInfo = function () {
+        var showHideCssEnum = winLossSummary.Enums.ShowHideCss;
+        if (winLossSummary.CachedData.isShowSiteTypeInfo) {
+            // Hide all site type row
+            $(".siteTypeRow.infoRow").addClass("display-none");
+            $(".siteTypeRow.paddingRow").removeClass("display-none");
+            $(".showHideSiteType.showHideIcon").removeClass(showHideCssEnum.Expand)
+                                               .addClass(showHideCssEnum.Collapse);
+            _tables.btnShowHideSiteTypeInfo.val(viewResources.Expand);
+        } else {
+            $(".siteTypeRow.paddingRow").addClass("display-none");
+            $(".siteTypeRow.infoRow").removeClass("display-none");
+            $(".showHideSiteType.showHideIcon").removeClass(showHideCssEnum.Collapse)
+                                               .addClass(showHideCssEnum.Expand);
+            _tables.btnShowHideSiteTypeInfo.val(viewResources.Collapse);
+        }
+        winLossSummary.CachedData.isShowSiteTypeInfo = !winLossSummary.CachedData.isShowSiteTypeInfo;
+    };
+    self.GetSiteTypeRowCss = function (groupdId, rowType) {
+        var rowTypeEnum = winLossSummary.Enums.RowType;
+        var rowCss = "";
+        switch (rowType) {
+            case rowTypeEnum.InfoRow:
+                rowCss = "siteTypeRow infoRow " + groupdId +
+                         (winLossSummary.CachedData.isShowSiteTypeInfo ? "" : " display-none");
+                break;
+            case rowTypeEnum.PaddingRow:
+                rowCss = "siteTypeRow paddingRow " + groupdId +
+                         (winLossSummary.CachedData.isShowSiteTypeInfo ? "display-none " : "");
+                break;
+        }
+
+        return rowCss;
+    };
 }
+var winLossSummary = new Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary();
