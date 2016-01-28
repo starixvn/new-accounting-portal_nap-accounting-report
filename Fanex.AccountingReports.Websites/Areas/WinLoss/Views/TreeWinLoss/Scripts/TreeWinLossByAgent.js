@@ -115,6 +115,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByAgent = function () {
                 info = report.ChildsInfo[i];
                 info.BaseRMTurnover = isShowNA ? "N/A" : info.BaseRMTurnover;
                 info.BaseRMVirtualTurnover = isShowNA ? "N/A" : info.BaseRMVirtualTurnover;
+                info.BaseRMMargin = isShowNA ? "N/A" : info.BaseRMMargin;
                 bodyData.push({
                     Columns: [{ Name: "ColNo", Value: i + 1 },
                         { Name: "ColUserName", Value: info.Name },
@@ -153,6 +154,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByAgent = function () {
                 info = report.TotalInfo[j];
                 info.BaseRMTurnover = isShowNA ? "N/A" : info.BaseRMTurnover;
                 info.BaseRMVirtualTurnover = isShowNA ? "N/A" : info.BaseRMVirtualTurnover;
+                info.BaseRMMargin = isShowNA ? "N/A" : info.BaseRMMargin;
                 footerData.push({
                     Columns: [{ Name: "ColNo", Value: info.Name, MergeColNumber: 6, CellAlign: "right" },
                         { Name: "ColBaseRMTurnover", Value: info.BaseRMTurnover },
