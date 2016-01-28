@@ -571,9 +571,21 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 currentCell.Style = twoDecimalPositiveNumberStyle;
                 currentColumn++;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Converter.ToDecimal(info.BaseRMVarianceMargin);
-                currentCell.Style = twoDecimalPositiveNumberStyle;
+                if (isShowNA || info.BaseRMVarianceMargin == Labels.NotAvailable)
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Labels.NotAvailable;
+                    currentCell.Style = textStyle;
+                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                }
+                else
+                {
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Converter.ToDecimal(info.BaseRMVarianceMargin);
+                    currentCell.Style = twoDecimalPositiveNumberStyle;
+                }
+
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -586,10 +598,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 currentCell.Style = twoDecimalPositiveNumberStyle;
                 currentColumn++;
 
-                if (info.BaseRMMargin == Labels.NotAvailable)
+                if (isShowNA || info.BaseRMMargin == Labels.NotAvailable)
                 {
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.BaseRMMargin;
+                    currentCell.Value = Labels.NotAvailable;
                     currentCell.Style = textStyle;
                     currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                 }
@@ -693,9 +705,20 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                 currentColumn++;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Converter.ToDecimal(info.BaseRMVarianceMargin);
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                if (isShowNA || info.BaseRMVarianceMargin == Labels.NotAvailable)
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Labels.NotAvailable;
+                    currentCell.Style = grandTotalRowTextStyle;
+                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                }
+                else
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Converter.ToDecimal(info.BaseRMVarianceMargin);
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                }
+
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -708,10 +731,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                 currentColumn++;
 
-                if (info.BaseRMMargin == Labels.NotAvailable)
+                if (isShowNA || info.BaseRMMargin == Labels.NotAvailable)
                 {
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.BaseRMMargin;
+                    currentCell.Value = Labels.NotAvailable;
                     currentCell.Style = grandTotalRowTextStyle;
                     currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                 }
@@ -998,9 +1021,20 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 currentCell.Style = twoDecimalPositiveNumberStyle;
                 currentColumn++;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Converter.ToDecimal(info.BaseRMVarianceMargin);
-                currentCell.Style = twoDecimalPositiveNumberStyle;
+                if (isShowNA || info.BaseRMVarianceMargin == Labels.NotAvailable)
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Labels.NotAvailable;
+                    currentCell.Style = textStyle;
+                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                }
+                else
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Converter.ToDecimal(info.BaseRMVarianceMargin);
+                    currentCell.Style = twoDecimalPositiveNumberStyle;
+                }
+
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -1013,7 +1047,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 currentCell.Style = twoDecimalPositiveNumberStyle;
                 currentColumn++;
 
-                if (isShowNA)
+                if (isShowNA || info.BaseRMMargin == Labels.NotAvailable)
                 {
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = Labels.NotAvailable;
@@ -1128,9 +1162,20 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                 currentColumn++;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Converter.ToDecimal(info.BaseRMVarianceMargin);
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                if (isShowNA || info.BaseRMVarianceMargin == Labels.NotAvailable)
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Labels.NotAvailable;
+                    currentCell.Style = grandTotalRowTextStyle;
+                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                }
+                else
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Converter.ToDecimal(info.BaseRMVarianceMargin);
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                }
+
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -1143,7 +1188,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                 currentColumn++;
 
-                if (isShowNA)
+                if (isShowNA || info.BaseRMMargin == Labels.NotAvailable)
                 {
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = Labels.NotAvailable;

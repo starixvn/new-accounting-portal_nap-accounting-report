@@ -466,7 +466,9 @@
     <Content Include="App_Data\UAT\DBONUSER.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBONUSER.ON_USER.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBPOLICY.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBRPT.bodb_Report.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBRPT.bodb_Report.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\UAT\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBCUST.CustDB.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBCUST.IPDB.bodbAdminNet.xml" />
