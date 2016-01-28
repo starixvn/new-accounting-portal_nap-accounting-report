@@ -580,7 +580,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 }
                 else
                 {
-
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = Converter.ToDecimal(info.BaseRMVarianceMargin);
                     currentCell.Style = twoDecimalPositiveNumberStyle;

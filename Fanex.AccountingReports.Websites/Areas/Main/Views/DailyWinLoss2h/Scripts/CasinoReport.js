@@ -23,7 +23,8 @@ CasinoReport = function () {
 
     self.CacheData = {
         SportId: null,
-        SportName: ''
+        SportName: '',
+        MBCCasinoProductId: 6
     };
 };
 
@@ -101,6 +102,7 @@ CasinoReport.prototype.RenderReport = function (report) {
     var footerData = [];
     var maxColIndex = 7;
     var nonLiveReport = report ? report.NoneLiveReport : null;
+    var isBeforeCasinoSingleWalletLaunchDate = moment(this.Params.reportParams.Winlostdate).diff(casinoSingleWalletLaunchDate, "days") < 0;
     if (nonLiveReport && nonLiveReport.ChildsInfo && nonLiveReport.ChildsInfo.length > 0) {
         var reportLength = nonLiveReport.ChildsInfo.length;
         var info = null;
@@ -108,6 +110,7 @@ CasinoReport.prototype.RenderReport = function (report) {
         var tableId = "casinoReportBySportType";
         for (var i = 0; i < reportLength; i++) {
             var betType = nonLiveReport.ChildsInfo[i];
+
             groupdId = tableId + "_BetType" + betType.Id +
                                  "_Hedge0_Live0";
             info = betType.GrandTotal;
@@ -204,7 +207,7 @@ CasinoReport.prototype.RenderReport = function (report) {
                 { Name: "ColCommission", Value: info.Commission },
                 { Name: "ColRealLineTotal", Value: info.LineTotal, TdClass: "colNote" },
                 { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
-                { Name: "ColRealMargin", Value: viewResources.NotAvailable}]
+                { Name: "ColRealMargin", Value: isBeforeCasinoSingleWalletLaunchDate || info.Margin == 0 ? viewResources.NotAvailable : info.Margin }]
         });
 
         info = nonLiveReport.CreditTotal;
@@ -221,7 +224,7 @@ CasinoReport.prototype.RenderReport = function (report) {
                 { Name: "ColCommission", Value: info.Commission },
                 { Name: "ColRealLineTotal", Value: info.LineTotal },
                 { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
-                { Name: "ColRealMargin", Value: viewResources.NotAvailable}],
+                { Name: "ColRealMargin", Value: isBeforeCasinoSingleWalletLaunchDate || info.Margin == 0 ? viewResources.NotAvailable : info.Margin }],
             CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                 showHideSiteTypeManager.Enums.RowType.InfoRow)
         });
@@ -240,7 +243,7 @@ CasinoReport.prototype.RenderReport = function (report) {
                 { Name: "ColCommission", Value: info.Commission },
                 { Name: "ColRealLineTotal", Value: info.LineTotal },
                 { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
-                { Name: "ColRealMargin", Value: viewResources.NotAvailable}],
+                { Name: "ColRealMargin", Value: isBeforeCasinoSingleWalletLaunchDate || info.Margin == 0 ? viewResources.NotAvailable : info.Margin }],
             CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                 showHideSiteTypeManager.Enums.RowType.InfoRow)
         });
