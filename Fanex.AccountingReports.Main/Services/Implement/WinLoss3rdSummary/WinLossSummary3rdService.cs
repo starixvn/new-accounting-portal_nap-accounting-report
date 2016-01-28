@@ -26,6 +26,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
     using Fanex.AccountingReports.Main.Services.Interface;
     using Fanex.Common;
     using Fanex.Data.Repository;
+    using Fanex.AccountingReports.Core.Configurations;
 
     /// <summary>
     /// TODO: Update summary.
@@ -63,7 +64,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        public WinLoss3rdInfo GetReport(CriteriaBase criteria)
+        public WinLoss3rdInfo GetReport(GetReportCriteria criteria)
         {
             WinLoss3rdInfo report = null;
             SportTypeWinLossInfo sportInfo = null;
@@ -72,6 +73,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             try
             {
                 var rawData = GetReportData<dynamic>(criteria).ToList();
+                bool isBeforeSingleWalletCasinoLaunchDate = DateTime.Compare(criteria.Fromdate, AppSettings.CasinoSingleWalletLaunchDate) < 0;
                 report = new WinLoss3rdInfo();
 
                 Dictionary<int, object> sportTypeHash = new Dictionary<int, object>();
@@ -113,6 +115,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         Name = this.GetSportName(sportId) // get name by SportType
                     };
 
+                    bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeSingleWalletCasinoLaunchDate;
                     // group by BetType & LiveIndicator
                     var betTypeGroup = sportTypeGroup.GroupBy(data => new { data.bettype, data.liveindicator });
                     foreach (var data in betTypeGroup)
@@ -132,8 +135,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                                 Commission = Converter.ToDecimal(item.realCommission),
                                 RealLineTotal = ToDecimal(item.realLineTotal),
                                 VirtualLineTotal = ToDecimal(item.virtualLineTotal),
-                                RealTurnover = ToDecimal(item.realTurnover),
-                                VirtualTurnover = ToDecimal(item.virtualTurnover)
+                                RealTurnover = isShowNotAvalable ? 0 : ToDecimal(item.realTurnover),
+                                VirtualTurnover = isShowNotAvalable ? 0 : ToDecimal(item.virtualTurnover)
                             };
 
                             if (winloss.IBC == RowType.EightRM)

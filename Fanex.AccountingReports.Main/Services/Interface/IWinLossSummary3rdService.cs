@@ -15,7 +15,7 @@ namespace Fanex.AccountingReports.Main.Services.Interface
 
     public interface IWinLossSummary3rdService
     {
-        WinLoss3rdInfo GetReport(CriteriaBase criteria);
+        WinLoss3rdInfo GetReport(GetReportCriteria criteria);
 
         void ExportReport(GetReportCriteria criteria);
 
