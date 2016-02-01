@@ -7,6 +7,8 @@ OtherSportReport = function () {
 
     self.OtherSportReport_ByBetType = new OtherSportReport_ByBetType();
 
+    self.OtherSportsForNewCricket = new OtherSportsForNewCricket();
+
     self.Tables = {
         btnGenerate: null,
         btnToday: null,

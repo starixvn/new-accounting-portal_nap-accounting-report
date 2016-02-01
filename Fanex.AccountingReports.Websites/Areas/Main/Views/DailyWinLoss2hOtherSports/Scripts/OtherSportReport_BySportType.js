@@ -103,7 +103,18 @@ OtherSportReport_BySportType.prototype.GetGridOptions_BySportTypeReport = functi
     var bodyData = [];
     var footerData = [];
     var maxColIndex = 11;
-    if (report && report.ChildsInfo && report.ChildsInfo.length > 0) {
+    var isSportTypeCricket = false;
+    var reportLengthNew = report.ChildsInfo.length;
+
+    for (var index = 0; index < reportLengthNew; index++) {
+        if (report.ChildsInfo[index].Id == 500) {
+            isSportTypeCricket = true;
+        }
+    }
+    if ((report && report.ChildsInfo && report.ChildsInfo.length > 0) && (isSportTypeCricket == true)) {
+        return OtherSportsForNewCricket(report, isLive, self.CacheData, self.Params);
+    }
+    if ((report && report.ChildsInfo && report.ChildsInfo.length > 0) && (isSportTypeCricket == false)) {
         var reportLength = report.ChildsInfo.length;
         var info = null;
         var groupdId = '';
