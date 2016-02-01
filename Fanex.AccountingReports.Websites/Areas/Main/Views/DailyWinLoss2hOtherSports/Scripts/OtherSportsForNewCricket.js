@@ -187,7 +187,7 @@ OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
 
         // for Total
         info = report.GrandTotal;
-        info.Margin = this.MarginCaculator(grandTotal[3],grandTotal[6]);
+        info.Margin = this.MarginCaculator(grandTotal[3], grandTotal[6]);
         info.VirtualMargin = this.MarginCaculator(grandTotal[4], grandTotal[7]);
         groupdId = tableId + "_BetType0_Hedge0" +
                              "_Live" + (isLive ? 1 : 0);
@@ -281,7 +281,7 @@ OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
                     SportType: self.Params.reportParams.SportType,
                     SportGroupId: self.CacheData.parentController.CacheData.SportId,
                     WinLossDate: self.Params.reportParams.Winlostdate,
-                    BetType: betType.Id,
+                    BetType: betTypeChargeCommission.Id,
                     BetTypeName: betType.AliasName,
                     IsLive: report.IsLive,
                     IsHedge: betType.Hedge && betType.Hedge != "" ? true : false,
@@ -314,7 +314,7 @@ OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
                     SportType: self.Params.reportParams.SportType,
                     SportGroupId: self.CacheData.parentController.CacheData.SportId,
                     WinLossDate: self.Params.reportParams.Winlostdate,
-                    BetType: betType.Id,
+                    BetType: betTypeChargeCommission.Id,
                     BetTypeName: betType.AliasName,
                     IsLive: report.IsLive,
                     IsHedge: betType.Hedge && betType.Hedge != "" ? true : false,

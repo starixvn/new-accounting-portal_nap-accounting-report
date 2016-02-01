@@ -111,7 +111,7 @@ OtherSportReport_BySportType.prototype.GetGridOptions_BySportTypeReport = functi
             isSportTypeCricket = true;
         }
     }
-    if ((report && report.ChildsInfo && report.ChildsInfo.length > 0) && (isSportTypeCricket == true)) {
+    if ((report && report.ChildsInfo && report.ChildsInfo.length > 0) && (isSportTypeCricket == true)) { 
         return OtherSportsForNewCricket(report, isLive, self.CacheData, self.Params);
     }
     if ((report && report.ChildsInfo && report.ChildsInfo.length > 0) && (isSportTypeCricket == false)) {
