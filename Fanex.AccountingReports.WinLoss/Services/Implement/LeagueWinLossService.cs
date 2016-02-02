@@ -172,6 +172,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 leagueWinLoss.GrandTotal.Margin = this.GetWinLossMargin(
                     leagueWinLoss.GrandTotal.TurnOver,
                     leagueWinLoss.GrandTotal.LineTotal,
+                chargedCommisionTotal.WinLoss += Converter.ToDecimal(info.WinLost);
+                chargedCommisionTotal.Position += Converter.ToDecimal(info.Position);
+                chargedCommisionTotal.Commission += Converter.ToDecimal(info.Commission);
+                chargedCommisionTotal.LineTotal += Converter.ToDecimal(info.LineTotal);
+                chargedCommisionTotal.TurnOver += Converter.ToDecimal(info.Turnover);
                     4,
                     false);
                 leagueWinLoss.GrandTotal = this.RoundLeagueWinLossInfo(leagueWinLoss.GrandTotal);
