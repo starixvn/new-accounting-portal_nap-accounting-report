@@ -1,67 +1,4 @@
 ﻿
-var GrandTotalCalculator = function (report) {
-    var reportLength = report.ChildsInfo.length;
-    var dataTotal = [0, 0, 0, 0, 0, 0, 0, 0];
-    for (var i = 0; i < reportLength; i++) {
-
-        if (report.ChildsInfo[i].Id == 500) {
-            continue;
-        }
-        dataTotal[0] += report.ChildsInfo[i].GrandTotal.WinLoss;
-        dataTotal[1] += report.ChildsInfo[i].GrandTotal.Position;
-        dataTotal[2] += report.ChildsInfo[i].GrandTotal.Commission;
-        dataTotal[3] += report.ChildsInfo[i].GrandTotal.LineTotal;
-        dataTotal[4] += report.ChildsInfo[i].GrandTotal.VirtualLineTotal;
-        dataTotal[5] += report.ChildsInfo[i].GrandTotal.Variance;
-        dataTotal[6] += report.ChildsInfo[i].GrandTotal.Turnover;
-        dataTotal[7] += report.ChildsInfo[i].GrandTotal.VirtualTurnover;
-    }
-    return dataTotal;
-}
-
-var CreditTotalCalculator = function (report) {
-    var reportLength = report.ChildsInfo.length;
-    var dataTotal = [0, 0, 0, 0, 0, 0, 0, 0];
-    for (var i = 0; i < reportLength; i++) {
-
-        if (report.ChildsInfo[i].Id == 500) {
-            continue;
-        }
-        dataTotal[0] += report.ChildsInfo[i].CreditTotal.WinLoss;
-        dataTotal[1] += report.ChildsInfo[i].CreditTotal.Position;
-        dataTotal[2] += report.ChildsInfo[i].CreditTotal.Commission;
-        dataTotal[3] += report.ChildsInfo[i].CreditTotal.LineTotal;
-        dataTotal[4] += report.ChildsInfo[i].CreditTotal.VirtualLineTotal;
-        dataTotal[5] += report.ChildsInfo[i].CreditTotal.Variance;
-        dataTotal[6] += report.ChildsInfo[i].CreditTotal.Turnover;
-        dataTotal[7] += report.ChildsInfo[i].CreditTotal.VirtualTurnover;
-    }
-    return dataTotal;
-}
-
-var DepositTotalCalculator = function (report) {
-    var reportLength = report.ChildsInfo.length;
-    var dataTotal = [0, 0, 0, 0, 0, 0, 0, 0];
-    for (var i = 0; i < reportLength; i++) {
-
-        if (report.ChildsInfo[i].Id == 500) {
-            continue;
-        }
-        dataTotal[0] += report.ChildsInfo[i].DepositTotal.WinLoss;
-        dataTotal[1] += report.ChildsInfo[i].DepositTotal.Position;
-        dataTotal[2] += report.ChildsInfo[i].DepositTotal.Commission;
-        dataTotal[3] += report.ChildsInfo[i].DepositTotal.LineTotal;
-        dataTotal[4] += report.ChildsInfo[i].DepositTotal.VirtualLineTotal;
-        dataTotal[5] += report.ChildsInfo[i].DepositTotal.Variance;
-        dataTotal[6] += report.ChildsInfo[i].DepositTotal.Turnover;
-        dataTotal[7] += report.ChildsInfo[i].DepositTotal.VirtualTurnover;
-    }
-    return dataTotal;
-}
-
-var MarginCaculator = function (lineTotal, virtualLineTotal) {
-    return lineTotal / virtualLineTotal;
-}
 OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
     var self = this;
     self.Params = Params;
@@ -83,9 +20,6 @@ OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
 
             if (report.ChildsInfo[i].Id == 500) {
                 betTypeChargeCommission = report.ChildsInfo[i];
-                grandTotal = this.GrandTotalCalculator(report);
-                creditTotal = this.CreditTotalCalculator(report);
-                depositTotal = this.DepositTotalCalculator(report);
                 continue;
             }
             var betType = report.ChildsInfo[i];
@@ -184,11 +118,9 @@ OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
                     showHideSiteTypeManager.Enums.RowType.InfoRow)
             });
         }
-
-        // for Total
-        info = report.GrandTotal;
-        info.Margin = this.MarginCaculator(grandTotal[3], grandTotal[6]);
-        info.VirtualMargin = this.MarginCaculator(grandTotal[4], grandTotal[7]);
+        //
+        // demo for New Cricket
+        info = report.Total;
         groupdId = tableId + "_BetType0_Hedge0" +
                              "_Live" + (isLive ? 1 : 0);
         footerData.push({
@@ -196,57 +128,54 @@ OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
                 {
                     Name: "ColBetType",
                     Value: showHideSiteTypeManager.GetShowHideSiteTypeIcon(groupdId) +
-                           '<span class="right float-right">' + "Total" + '</span>'
+                           '<span class="right float-right">' + info.Name + '</span>'
                 },
-                { Name: "ColWinloss", Value: grandTotal[0] },
-                { Name: "ColPosition", Value: grandTotal[1] },
-                { Name: "ColCommission", Value: grandTotal[2] },
-                { Name: "ColRealLineTotal", Value: grandTotal[3], TdClass: "colNote" },
-                { Name: "ColVirtualLineTotal", Value: grandTotal[4], TdClass: "colNote" },
-                { Name: "ColVariance", Value: grandTotal[5], TdClass: "colNote" },
-                { Name: "ColRealTurnover", Value: grandTotal[6] },
-                { Name: "ColVirtualTurnover", Value: grandTotal[7] },
-                reportManager.GetColumnTurnover(info.Margin, grandTotal[6], "ColRealMargin"),
-                reportManager.GetColumnTurnover(info.VirtualMargin, grandTotal[7], "ColVirtualMargin")]
+                { Name: "ColWinloss", Value: info.WinLoss },
+                { Name: "ColPosition", Value: info.Position },
+                { Name: "ColCommission", Value: info.Commission },
+                { Name: "ColRealLineTotal", Value: info.LineTotal, TdClass: "colNote" },
+                { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal, TdClass: "colNote" },
+                { Name: "ColVariance", Value: info.Variance, TdClass: "colNote" },
+                { Name: "ColRealTurnover", Value: info.Turnover },
+                { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
+                reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
+                reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")]
         });
 
-        info = report.CreditTotal;
-        info.Margin = this.MarginCaculator(creditTotal[3], creditTotal[6]);
-        info.VirtualMargin = this.MarginCaculator(creditTotal[4], creditTotal[7]);
+        info = report.CreditTotalNewCricket;
         footerData.push({
             Columns: [{ Name: "ColBetType", Value: info.Name, CellAlign: "right", CssClass: "bold" },
-                        { Name: "ColWinloss", Value: creditTotal[0] },
-                        { Name: "ColPosition", Value: creditTotal[1] },
-                        { Name: "ColCommission", Value: creditTotal[2] },
-                        { Name: "ColRealLineTotal", Value: creditTotal[3] },
-                        { Name: "ColVirtualLineTotal", Value: creditTotal[4] },
-                        { Name: "ColVariance", Value: creditTotal[5] },
-                        { Name: "ColRealTurnover", Value: creditTotal[6] },
-                        { Name: "ColVirtualTurnover", Value: creditTotal[7] },
+                        { Name: "ColWinloss", Value: info.WinLoss },
+                        { Name: "ColPosition", Value: info.Position },
+                        { Name: "ColCommission", Value: info.Commission },
+                        { Name: "ColRealLineTotal", Value: info.LineTotal },
+                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                        { Name: "ColVariance", Value: info.Variance },
+                        { Name: "ColRealTurnover", Value: info.Turnover },
+                        { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
                         reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
                         reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
             CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                 showHideSiteTypeManager.Enums.RowType.InfoRow)
         });
 
-        info = report.DepositTotal;
-        info.Margin = this.MarginCaculator(depositTotal[3], depositTotal[6]);
-        info.VirtualMargin = this.MarginCaculator(depositTotal[4], depositTotal[7]);
+        info = report.DepositTotalNewCricket;
         footerData.push({
             Columns: [{ Name: "ColBetType", Value: info.Name, CellAlign: "right", CssClass: "bold" },
-                        { Name: "ColWinloss", Value: depositTotal[0] },
-                        { Name: "ColPosition", Value: depositTotal[1] },
-                        { Name: "ColCommission", Value: depositTotal[2] },
-                        { Name: "ColRealLineTotal", Value: depositTotal[3] },
-                        { Name: "ColVirtualLineTotal", Value: depositTotal[4] },
-                        { Name: "ColVariance", Value: depositTotal[5] },
-                        { Name: "ColRealTurnover", Value: depositTotal[6] },
-                        { Name: "ColVirtualTurnover", Value: depositTotal[7] },
-                        reportManager.GetColumnTurnover(info.Margin, depositTotal[0], "ColRealMargin"),
-                        reportManager.GetColumnTurnover(info.VirtualMargin, depositTotal[0], "ColVirtualMargin")],
+                        { Name: "ColWinloss", Value: info.WinLoss },
+                        { Name: "ColPosition", Value: info.Position },
+                        { Name: "ColCommission", Value: info.Commission },
+                        { Name: "ColRealLineTotal", Value: info.LineTotal },
+                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                        { Name: "ColVariance", Value: info.Variance },
+                        { Name: "ColRealTurnover", Value: info.Turnover },
+                        { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
+                        reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
+                        reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
             CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                 showHideSiteTypeManager.Enums.RowType.InfoRow)
         });
+        //
 
         // for Charge Commision
         info = betTypeChargeCommission.GrandTotal;
@@ -339,11 +268,7 @@ OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
                 showHideSiteTypeManager.Enums.RowType.InfoRow)
         });
 
-        // for All Total
-        info = betTypeChargeCommission.GrandTotal;
-        info.Margin = this.MarginCaculator(info.LineTotal + grandTotal[3], info.Turnover + grandTotal[6]);
-        info.VirtualMargin = this.MarginCaculator(info.LineTotal + grandTotal[4], info.Turnover + grandTotal[7]);
-
+        info = report.GrandTotal;
         groupdId = tableId + "_BetType0_Hedge0" +
                              "_Live" + (isLive ? 1 : 0);
         footerData.push({
@@ -351,59 +276,87 @@ OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
                 {
                     Name: "ColBetType",
                     Value: showHideSiteTypeManager.GetShowHideSiteTypeIcon(groupdId) +
-                           '<span class="right float-right">' + "All Total" + '</span>'
+                           '<span class="right float-right">' + info.Name + '</span>'
                 },
-                { Name: "ColWinloss", Value: info.WinLoss + grandTotal[0] },
-                { Name: "ColPosition", Value: info.Position + grandTotal[1] },
-                { Name: "ColCommission", Value: info.Commission + grandTotal[2] },
-                { Name: "ColRealLineTotal", Value: info.LineTotal + grandTotal[3], TdClass: "colNote" },
-                { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal + grandTotal[4], TdClass: "colNote" },
-                { Name: "ColVariance", Value: info.Variance + grandTotal[5], TdClass: "colNote" },
-                { Name: "ColRealTurnover", Value: info.Turnover + grandTotal[6] },
-                { Name: "ColVirtualTurnover", Value: info.VirtualTurnover + grandTotal[7] },
-                reportManager.GetColumnTurnover(info.Margin, info.Turnover + grandTotal[6], "ColRealMargin"),
-                reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover + grandTotal[7], "ColVirtualMargin")]
+                { Name: "ColWinloss", Value: info.WinLoss },
+                { Name: "ColPosition", Value: info.Position },
+                { Name: "ColCommission", Value: info.Commission },
+                { Name: "ColRealLineTotal", Value: info.LineTotal, TdClass: "colNote" },
+                { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal, TdClass: "colNote" },
+                { Name: "ColVariance", Value: info.Variance, TdClass: "colNote" },
+                { Name: "ColRealTurnover", Value: info.Turnover },
+                { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
+                reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
+                reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")]
         });
 
-        info = betTypeChargeCommission.CreditTotal;
-        info.Margin = this.MarginCaculator(info.LineTotal + creditTotal[3], info.Turnover + creditTotal[6]);
-        info.VirtualMargin = this.MarginCaculator(info.LineTotal + creditTotal[4], info.Turnover + creditTotal[7]);
-
+        info = report.CreditTotal;
         footerData.push({
             Columns: [{ Name: "ColBetType", Value: info.Name, CellAlign: "right", CssClass: "bold" },
-                        { Name: "ColWinloss", Value: info.WinLoss + creditTotal[0] },
-                        { Name: "ColPosition", Value: info.Position + creditTotal[1] },
-                        { Name: "ColCommission", Value: info.Commission + creditTotal[2] },
-                        { Name: "ColRealLineTotal", Value: info.LineTotal + creditTotal[3] },
-                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal + creditTotal[4] },
-                        { Name: "ColVariance", Value: info.Variance + creditTotal[5] },
-                        { Name: "ColRealTurnover", Value: info.Turnover + creditTotal[6] },
-                        { Name: "ColVirtualTurnover", Value: info.VirtualTurnover + creditTotal[7] },
-                        reportManager.GetColumnTurnover(info.Margin, info.Turnover + creditTotal[6], "ColRealMargin"),
-                        reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover + creditTotal[7], "ColVirtualMargin")],
+                        { Name: "ColWinloss", Value: info.WinLoss },
+                        { Name: "ColPosition", Value: info.Position },
+                        { Name: "ColCommission", Value: info.Commission },
+                        { Name: "ColRealLineTotal", Value: info.LineTotal },
+                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                        { Name: "ColVariance", Value: info.Variance },
+                        { Name: "ColRealTurnover", Value: info.Turnover },
+                        { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
+                        reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
+                        reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
             CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                 showHideSiteTypeManager.Enums.RowType.InfoRow)
         });
 
-        info = betTypeChargeCommission.DepositTotal;
-        info.Margin = this.MarginCaculator(info.LineTotal + depositTotal[3], info.Turnover + depositTotal[6]);
-        info.VirtualMargin = this.MarginCaculator(info.LineTotal + depositTotal[4], info.Turnover + depositTotal[7]);
-
+        info = report.DepositTotal;
         footerData.push({
             Columns: [{ Name: "ColBetType", Value: info.Name, CellAlign: "right", CssClass: "bold" },
-                        { Name: "ColWinloss", Value: info.WinLoss + depositTotal[0] },
-                        { Name: "ColPosition", Value: info.Position + depositTotal[1] },
-                        { Name: "ColCommission", Value: info.Commission + depositTotal[2] },
-                        { Name: "ColRealLineTotal", Value: info.LineTotal + depositTotal[3] },
-                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal + depositTotal[4] },
-                        { Name: "ColVariance", Value: info.Variance + depositTotal[5] },
-                        { Name: "ColRealTurnover", Value: info.Turnover + depositTotal[6] },
-                        { Name: "ColVirtualTurnover", Value: info.VirtualTurnover + depositTotal[7] },
-                        reportManager.GetColumnTurnover(info.Margin, info.Turnover + depositTotal[6], "ColRealMargin"),
-                        reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover + depositTotal[7], "ColVirtualMargin")],
+                        { Name: "ColWinloss", Value: info.WinLoss },
+                        { Name: "ColPosition", Value: info.Position },
+                        { Name: "ColCommission", Value: info.Commission },
+                        { Name: "ColRealLineTotal", Value: info.LineTotal },
+                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                        { Name: "ColVariance", Value: info.Variance },
+                        { Name: "ColRealTurnover", Value: info.Turnover },
+                        { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
+                        reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
+                        reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
             CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                 showHideSiteTypeManager.Enums.RowType.InfoRow)
         });
+
+        info = report.EightRMTotal;
+        if (info.WinLoss != 0) {
+            footerData.push({
+                Columns: [{ Name: "ColBetType", Value: info.Name, CellAlign: "right", CssClass: "bold" },
+                        { Name: "ColWinloss", Value: info.WinLoss },
+                        { Name: "ColPosition", Value: info.Position },
+                        { Name: "ColCommission", Value: info.Commission },
+                        { Name: "ColRealLineTotal", Value: info.LineTotal },
+                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                        { Name: "ColVariance", Value: info.Variance },
+                        { Name: "ColRealTurnover", Value: info.Turnover },
+                        { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
+                        reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
+                        reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")]
+            });
+        }
+
+        info = report.BARMTotal;
+        if (info.WinLoss != 0) {
+            footerData.push({
+                Columns: [{ Name: "ColBetType", Value: info.Name, CellAlign: "right", CssClass: "bold" },
+                        { Name: "ColWinloss", Value: info.WinLoss },
+                        { Name: "ColPosition", Value: info.Position },
+                        { Name: "ColCommission", Value: info.Commission },
+                        { Name: "ColRealLineTotal", Value: info.LineTotal },
+                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                        { Name: "ColVariance", Value: info.Variance },
+                        { Name: "ColRealTurnover", Value: info.Turnover },
+                        { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
+                        reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
+                        reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")]
+            });
+        }
 
 
         var gridOptions = {

@@ -359,9 +359,17 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
                 WinLossInfo info;
                 var betTypeGroupLength = report.ChildsInfo.Count;
+                var betTypeForNewCricket = report.ChildsInfo[0];
+                var isNewCricket = false;
                 for (var i = 0; i < betTypeGroupLength; i++)
                 {
                     var betTypeGroup = report.ChildsInfo[i];
+                    if (betTypeGroup.Id == 500)
+                    {
+                        betTypeForNewCricket = report.ChildsInfo[i];
+                        isNewCricket = true;
+                        continue;
+                    }
                     info = betTypeGroup.GrandTotal;
                     this.ExportNormalRow(
                         ref workSheet,
@@ -404,7 +412,94 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         report.EnableVirtual,
                         isShowVirtualTurnover);
                 }
+                // for *cricket
+                if (isNewCricket == true)
+                {
+                    info = report.Total;
+                    this.ExportNormalRow(
+                        ref workSheet,
+                        grandTotalRowTextStyle_FirstRow,
+                        grandTotalRowTwoDecimalNumberStyle_FirstRow,
+                        grandTotalRowTwoDecimalPositiveNumberStyle_FirstRow,
+                        gtrPercentNumberStyle_FirstRow,
+                        info,
+                        startColumn,
+                        ref currentRow,
+                        RowType._2hReportGrandTotal,
+                        report.EnableVirtual,
+                        isShowVirtualTurnover);
 
+                    info = report.CreditTotalNewCricket;
+                    this.ExportNormalRow(
+                        ref workSheet,
+                        grandTotalRowTextStyle,
+                        grandTotalRowTwoDecimalNumberStyle,
+                        grandTotalTwoDecimalPositiveNumberStyle,
+                        grandTotalTwoDecimalPositivePercentNumberStyle,
+                        info,
+                        startColumn,
+                        ref currentRow,
+                        RowType._2hReportCredit,
+                        report.EnableVirtual,
+                        isShowVirtualTurnover);
+
+                    info = report.DepositTotalNewCricket;
+                    this.ExportNormalRow(
+                        ref workSheet,
+                        grandTotalRowTextStyle,
+                        grandTotalRowTwoDecimalNumberStyle,
+                        grandTotalTwoDecimalPositiveNumberStyle,
+                        grandTotalTwoDecimalPositivePercentNumberStyle,
+                        info,
+                        startColumn,
+                        ref currentRow,
+                        RowType._2hReportDeposit,
+                        report.EnableVirtual,
+                        isShowVirtualTurnover);
+                    // for charge commission
+                    info = betTypeForNewCricket.GrandTotal;
+                    this.ExportNormalRow(
+                        ref workSheet,
+                        grandTotalRowTextStyle_FirstRow,
+                        grandTotalRowTwoDecimalNumberStyle_FirstRow,
+                        grandTotalRowTwoDecimalPositiveNumberStyle_FirstRow,
+                        gtrPercentNumberStyle_FirstRow,
+                        info,
+                        startColumn,
+                        ref currentRow,
+                        RowType._2hReportGrandTotal,
+                        report.EnableVirtual,
+                        isShowVirtualTurnover);
+
+                    info = betTypeForNewCricket.CreditTotal;
+                    this.ExportNormalRow(
+                        ref workSheet,
+                        grandTotalRowTextStyle,
+                        grandTotalRowTwoDecimalNumberStyle,
+                        grandTotalTwoDecimalPositiveNumberStyle,
+                        grandTotalTwoDecimalPositivePercentNumberStyle,
+                        info,
+                        startColumn,
+                        ref currentRow,
+                        RowType._2hReportCredit,
+                        report.EnableVirtual,
+                        isShowVirtualTurnover);
+
+                    info = betTypeForNewCricket.DepositTotal;
+                    this.ExportNormalRow(
+                        ref workSheet,
+                        grandTotalRowTextStyle,
+                        grandTotalRowTwoDecimalNumberStyle,
+                        grandTotalTwoDecimalPositiveNumberStyle,
+                        grandTotalTwoDecimalPositivePercentNumberStyle,
+                        info,
+                        startColumn,
+                        ref currentRow,
+                        RowType._2hReportDeposit,
+                        report.EnableVirtual,
+                        isShowVirtualTurnover);
+                }
+                //
                 info = report.GrandTotal;
                 this.ExportNormalRow(
                     ref workSheet,

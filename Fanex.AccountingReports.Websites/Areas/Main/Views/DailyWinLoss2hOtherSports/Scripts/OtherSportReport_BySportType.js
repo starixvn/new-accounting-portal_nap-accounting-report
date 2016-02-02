@@ -105,7 +105,6 @@ OtherSportReport_BySportType.prototype.GetGridOptions_BySportTypeReport = functi
     var maxColIndex = 11;
     var isSportTypeCricket = false;
     var reportLengthNew = report.ChildsInfo.length;
-
     for (var index = 0; index < reportLengthNew; index++) {
         if (report.ChildsInfo[index].Id == 500) {
             isSportTypeCricket = true;
@@ -319,7 +318,7 @@ OtherSportReport_BySportType.prototype.GetGridOptions_BySportTypeReport = functi
                       { HeaderText: viewResources.Company_Income, Name: "ColRealLineTotal", MergeColNumber: 2 },
                       { HeaderText: viewResources.Variance, Name: "ColVariance", MergeRowNumber: 2 },
                       { HeaderText: viewResources.Company_Turnover, Name: "ColRealTurnover", MergeColNumber: 2 },
-                      { HeaderText: viewResources.Margin, Name: "ColRealMargin", MergeColNumber: 2}]
+                      { HeaderText: viewResources.Margin, Name: "ColRealMargin", MergeColNumber: 2 }]
         }],
 
         columns: [
@@ -338,7 +337,7 @@ OtherSportReport_BySportType.prototype.GetGridOptions_BySportTypeReport = functi
             { HeaderText: viewResources.Real, Width: 100, Name: "ColRealTurnover", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
             { HeaderText: viewResources.Virtual, Width: 100, Name: "ColVirtualTurnover", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
             { HeaderText: viewResources.Real, Width: 100, Name: "ColRealMargin", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
-            { HeaderText: viewResources.Virtual, Width: 100, Name: "ColVirtualMargin", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, CellAlign: "right", FormatPositive: '$'}],
+            { HeaderText: viewResources.Virtual, Width: 100, Name: "ColVirtualMargin", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, CellAlign: "right", FormatPositive: '$' }],
         showTitle: true,
         showFooter: true,
         titleInfo: {

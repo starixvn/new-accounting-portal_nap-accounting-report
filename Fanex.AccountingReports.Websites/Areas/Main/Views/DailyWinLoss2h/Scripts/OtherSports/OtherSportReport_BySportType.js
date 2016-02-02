@@ -111,7 +111,7 @@ OtherSportReport_BySportType.prototype.GetGridOptions_BySportTypeReport = functi
             isSportTypeCricket = true;
         }
     }
-    if ((report && report.ChildsInfo && report.ChildsInfo.length > 0) && (isSportTypeCricket == true)) { 
+    if ((report && report.ChildsInfo && report.ChildsInfo.length > 0) && (isSportTypeCricket == true)) {
         return OtherSportsForNewCricket(report, isLive, self.CacheData, self.Params);
     }
     if ((report && report.ChildsInfo && report.ChildsInfo.length > 0) && (isSportTypeCricket == false)) {
@@ -308,62 +308,62 @@ OtherSportReport_BySportType.prototype.GetGridOptions_BySportTypeReport = functi
         }
     }
 
-        var gridOptions = {
-            customizeHeader: true,
-            groupHeaderRows: [{
-                Columns: [{ HeaderText: viewResources.Bet_Type, Name: "ColBetType", MergeRowNumber: 2 },
-                          { HeaderText: viewResources.Member_WinLoss, Name: "ColWinloss", MergeRowNumber: 2 },
-                          { HeaderText: viewResources.SMA_WinLoss, Name: "ColPosition", MergeRowNumber: 2 },
-                          { HeaderText: viewResources.Commission, Name: "ColCommission", MergeRowNumber: 2 },
-                          { HeaderText: viewResources.Company_Income, Name: "ColRealLineTotal", MergeColNumber: 2 },
-                          { HeaderText: viewResources.Variance, Name: "ColVariance", MergeRowNumber: 2 },
-                          { HeaderText: viewResources.Company_Turnover, Name: "ColRealTurnover", MergeColNumber: 2 },
-                          { HeaderText: viewResources.Margin, Name: "ColRealMargin", MergeColNumber: 2 }]
-            }],
+    var gridOptions = {
+        customizeHeader: true,
+        groupHeaderRows: [{
+            Columns: [{ HeaderText: viewResources.Bet_Type, Name: "ColBetType", MergeRowNumber: 2 },
+                      { HeaderText: viewResources.Member_WinLoss, Name: "ColWinloss", MergeRowNumber: 2 },
+                      { HeaderText: viewResources.SMA_WinLoss, Name: "ColPosition", MergeRowNumber: 2 },
+                      { HeaderText: viewResources.Commission, Name: "ColCommission", MergeRowNumber: 2 },
+                      { HeaderText: viewResources.Company_Income, Name: "ColRealLineTotal", MergeColNumber: 2 },
+                      { HeaderText: viewResources.Variance, Name: "ColVariance", MergeRowNumber: 2 },
+                      { HeaderText: viewResources.Company_Turnover, Name: "ColRealTurnover", MergeColNumber: 2 },
+                      { HeaderText: viewResources.Margin, Name: "ColRealMargin", MergeColNumber: 2 }]
+        }],
 
-            columns: [
-                {
-                    HeaderText: viewResources.Bet_Type,
-                    Width: 170, Name: "ColBetType",
-                    HeaderAlign: "center",
-                    CellAlign: "left"
-                },
-                { HeaderText: viewResources.Member_WinLoss, Width: 100, Name: "ColWinloss", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
-                { HeaderText: viewResources.SMA_WinLoss, Width: 100, Name: "ColPosition", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
-                { HeaderText: viewResources.Commission, Width: 100, Name: "ColCommission", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
-                { HeaderText: viewResources.Real, Width: 100, Name: "ColRealLineTotal", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
-                { HeaderText: viewResources.Virtual, Width: 100, Name: "ColVirtualLineTotal", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
-                { HeaderText: viewResources.Variance, Width: 100, Name: "ColVariance", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
-                { HeaderText: viewResources.Real, Width: 100, Name: "ColRealTurnover", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
-                { HeaderText: viewResources.Virtual, Width: 100, Name: "ColVirtualTurnover", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
-                { HeaderText: viewResources.Real, Width: 100, Name: "ColRealMargin", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
-                { HeaderText: viewResources.Virtual, Width: 100, Name: "ColVirtualMargin", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, CellAlign: "right", FormatPositive: '$' }],
-            showTitle: true,
-            showFooter: true,
-            titleInfo: {
-                text: "<a class='breadcrumbs-link' onclick='showHideReportManager.BackToMainReport();'>" + viewResources.Main + "</a> >" +
-                      " <a class='breadcrumbs-link' onclick='reportManager.OtherSportReport.ShowSummaryReport();'>" + self.CacheData.parentController.CacheData.SportName + "</a> |" +
-                      " " + self.Params.reportParams.SportTypeName +
-                      " \"" + (isLive ? viewResources.Live : viewResources.Symbol_Sparse_Non_Live) + "\"" +
-                      " " + viewResources.DailyWinLoss2h_ReportTitleSuffix,
-                showExcelButton: false
+        columns: [
+            {
+                HeaderText: viewResources.Bet_Type,
+                Width: 170, Name: "ColBetType",
+                HeaderAlign: "center",
+                CellAlign: "left"
             },
-            bodyRows: bodyData,
-            footerRows: footerData,
-            numberOfFrozenColumn: 0,
-            gridWidth: 1400,
-            gridExpandHeight: 200,
-            fullWidth: true,
-            fullHeight: false,
-            gridHeight: reportManager.CachedData.maxGridHeight,
-            showDistinctRow: false,
-            showHighlightRow: false,
-            noDataText: viewResources.EmptyReportMessage,
-            headerColumnHeight: 17
-        };
+            { HeaderText: viewResources.Member_WinLoss, Width: 100, Name: "ColWinloss", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
+            { HeaderText: viewResources.SMA_WinLoss, Width: 100, Name: "ColPosition", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
+            { HeaderText: viewResources.Commission, Width: 100, Name: "ColCommission", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
+            { HeaderText: viewResources.Real, Width: 100, Name: "ColRealLineTotal", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
+            { HeaderText: viewResources.Virtual, Width: 100, Name: "ColVirtualLineTotal", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
+            { HeaderText: viewResources.Variance, Width: 100, Name: "ColVariance", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
+            { HeaderText: viewResources.Real, Width: 100, Name: "ColRealTurnover", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
+            { HeaderText: viewResources.Virtual, Width: 100, Name: "ColVirtualTurnover", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
+            { HeaderText: viewResources.Real, Width: 100, Name: "ColRealMargin", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
+            { HeaderText: viewResources.Virtual, Width: 100, Name: "ColVirtualMargin", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, CellAlign: "right", FormatPositive: '$' }],
+        showTitle: true,
+        showFooter: true,
+        titleInfo: {
+            text: "<a class='breadcrumbs-link' onclick='showHideReportManager.BackToMainReport();'>" + viewResources.Main + "</a> >" +
+                  " <a class='breadcrumbs-link' onclick='reportManager.OtherSportReport.ShowSummaryReport();'>" + self.CacheData.parentController.CacheData.SportName + "</a> |" +
+                  " " + self.Params.reportParams.SportTypeName +
+                  " \"" + (isLive ? viewResources.Live : viewResources.Symbol_Sparse_Non_Live) + "\"" +
+                  " " + viewResources.DailyWinLoss2h_ReportTitleSuffix,
+            showExcelButton: false
+        },
+        bodyRows: bodyData,
+        footerRows: footerData,
+        numberOfFrozenColumn: 0,
+        gridWidth: 1400,
+        gridExpandHeight: 200,
+        fullWidth: true,
+        fullHeight: false,
+        gridHeight: reportManager.CachedData.maxGridHeight,
+        showDistinctRow: false,
+        showHighlightRow: false,
+        noDataText: viewResources.EmptyReportMessage,
+        headerColumnHeight: 17
+    };
 
-        return gridOptions;
-        
+    return gridOptions;
+
 };
 
 OtherSportReport_BySportType.prototype.ExportReport = function () {

@@ -24,5 +24,7 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
         public WinLossInfo MixLiveAndNoneLiveReport { get; set; }
 
         public WinLossInfo GrandTotal { get; set; }
+
+        public WinLossInfo Total { get; set; }
     }
 }
