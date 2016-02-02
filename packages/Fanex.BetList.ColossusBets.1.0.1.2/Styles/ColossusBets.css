@@ -1,0 +1,50 @@
+﻿/* File Created: September 4, 2015 */
+.bet-details-container table,
+.bet-details-container tr,
+.bet-details-container td,
+.bet-details-container th,
+.bet-details-container thead,
+.bet-details-container tbody {
+	border-collapse: collapse;
+    border-spacing: 0;
+    cursor: default;
+    border-color: #7C98A4;
+    border-width: 1px;
+}
+
+.bet-details-container th {
+	background: none repeat scroll 0 0 transparent;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 700;
+    color: #000;
+    background-color: #CDDEF3;
+    border-style: solid;
+    padding: 5px;
+}
+
+.bet-details-container td {
+	background-color: #fff;
+    line-height: inherit;
+    overflow: hidden;
+    vertical-align: middle;
+    white-space: normal;
+    border-style: solid;
+    padding: 5px;
+}
+
+.bet-details-container .negative-win-loss {
+    color: #ff0000;
+}
+
+.c {
+    text-align: center;
+}
+.r {
+    text-align: right;
+}
+.l {
+    text-align: left;
+}
+
