@@ -96,6 +96,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                                          .GroupBy(rawWinLossInfo => rawWinLossInfo.sporttype);
                 foreach (var sportGroup in sportGroups)
                 {
+                    sportWinLoss.Id = Converter.ToInt(sportGroup.Key);
                     var sportWinLoss = new LeagueWinLossInfo
                     {
                         Id = Converter.ToInt(sportGroup.Key),
@@ -659,43 +660,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                         }
 
                         info = sport.GrandTotal;
-                        currentColumn = startColumn;
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Name;
-                        currentCell.Style = subRowTextStyle;
-                        currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                        currentColumn++;
+                        const int NewCricketSportType = 50;
+                        var sportTotalRowCount = sport.Id != NewCricketSportType
+                            ? ExportNormalSportsTotal(startColumn, currentRow, info, workSheet, subRowTextStyle, subRowPositiveTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle)
+                        : ExportNewCricketTotal(startColumn, currentRow, info, workSheet, subRowTextStyle, subRowPositiveTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle);
 
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.WinLoss;
-                        currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Position;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Commission;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.LineTotal;
-                        currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.TurnOver;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = Converter.ToDecimal(info.Margin);
-                        currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
-                        currentColumn++;
-                        currentRow++;
+                        currentRow += sportTotalRowCount;
                     }
 
                     info = report.Total;
@@ -827,6 +797,110 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             {
                 HandleException(ex);
             }
+        }
+
+        private int ExportNewCricketTotal(
+            int startColumn,
+            int currentRow,
+            LeagueWinLossInfo cricketGrandTotalInfo,
+            ExcelWorksheet workSheet,
+            CellStyle subRowTextStyle,
+            CellStyle subRowPositiveTwoDecimalNumberStyle,
+            CellStyle subRowTwoDecimalNumberStyle,
+            CellStyle subRowPositiveTwoDecimalPercentNumberStyle)
+        {
+            for (var i = 0; i < cricketGrandTotalInfo.ChildsInfo.Count; i++)
+            {
+                var info = cricketGrandTotalInfo.ChildsInfo[i];
+                var currentColumn = startColumn;
+                var currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.Name;
+                currentCell.Style = subRowTextStyle;
+                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.WinLoss;
+                currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.Position;
+                currentCell.Style = subRowTwoDecimalNumberStyle;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.Commission;
+                currentCell.Style = subRowTwoDecimalNumberStyle;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.LineTotal;
+                currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.TurnOver;
+                currentCell.Style = subRowTwoDecimalNumberStyle;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = Converter.ToDecimal(info.Margin);
+                currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
+                currentRow++;
+            }
+
+            return cricketGrandTotalInfo.ChildsInfo.Count;
+        }
+
+        private int ExportNormalSportsTotal(
+            int startColumn,
+            int currentRow,
+            LeagueWinLossInfo info,
+            ExcelWorksheet workSheet,
+            CellStyle subRowTextStyle,
+            CellStyle subRowPositiveTwoDecimalNumberStyle,
+            CellStyle subRowTwoDecimalNumberStyle,
+            CellStyle subRowPositiveTwoDecimalPercentNumberStyle)
+        {
+            var currentColumn = startColumn;
+            var currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Name;
+            currentCell.Style = subRowTextStyle;
+            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.WinLoss;
+            currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Position;
+            currentCell.Style = subRowTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Commission;
+            currentCell.Style = subRowTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.LineTotal;
+            currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.TurnOver;
+            currentCell.Style = subRowTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Converter.ToDecimal(info.Margin);
+            currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
+            currentColumn++;
+
+            return 1;
         }
 
         /// <summary>
