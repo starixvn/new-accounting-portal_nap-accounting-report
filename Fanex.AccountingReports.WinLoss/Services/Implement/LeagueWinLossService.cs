@@ -1001,7 +1001,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
         {
-            decimal tempDecimal;
             try
             {
                 var report = SessionManager.Get<LeagueWinLossInfo>(WinLossContants.LeagueWinLossByBetTypeSessionKey);
@@ -1188,14 +1187,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        if (decimal.TryParse(info.Margin, out tempDecimal))
-                        {
-                            currentCell.Value = Converter.ToDecimal(info.Margin);
-                        }
-                        else
-                        {
-                            currentCell.Value = info.Margin;
-                        }
+                        AssignMargin(currentCell, info);
                         currentCell.Style = positiveTwoDecimalPercentNumberStyle;
                         currentColumn++;
                         currentRow++;
@@ -1242,14 +1234,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    if (decimal.TryParse(info.Margin, out tempDecimal))
-                    {
-                        currentCell.Value = Converter.ToDecimal(info.Margin);
-                    }
-                    else
-                    {
-                        currentCell.Value = info.Margin;
-                    }
+                    AssignMargin(currentCell, info);
 
                     currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
@@ -1680,6 +1665,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
+            AssignMargin(currentCell, info);
+
+            currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+        }
+
+        private void AssignMargin(ExcelCell currentCell, LeagueWinLossInfo info)
+        {
             decimal tempDecimal;
             if (decimal.TryParse(info.Margin, out tempDecimal))
             {
@@ -1689,9 +1682,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             {
                 currentCell.Value = info.Margin;
             }
-
-            currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
-            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
         }
                 #endregion ExportExcel
 
