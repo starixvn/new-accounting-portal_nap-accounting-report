@@ -2,7 +2,7 @@
 <Functions>
   <Function Name="Misc - Bet Count">
     <Setting Key="Misc_BetCount_GetAllProductsForBetCountReport" SpName="Acc_Rpt_BetCount_SelSports" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
-    <Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Gaming - Number Game Win Loss By Date">
     <Setting Key="Gaming_NumberGameWinlossByDate_GetReport" SpName="Acc_Rpt_NumberGameWinlossByDate" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
@@ -140,8 +140,8 @@
     <Setting Key="Misc_MAMonitorTool_GetLeagueList" SpName="Acc_Rpt_MAMonitor_LeagueSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
       <Mapping DataField="leagueid" ObjectProperty="LeagueId" />
     </Setting>
-    <Setting Key="Misc_MAMonitorTool_GetReport" SpName="Acc_Rpt_MAMonitor" DbName="DBDWH.bodb_dwrs.bodbAdminNet"  TimeOut="0"></Setting>
-    <Setting Key="Misc_MAMonitorTool_GetReport_Archive" SpName="Acc_Rpt_MAMonitor_Archive" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Misc_MAMonitorTool_GetReport" SpName="Acc_Rpt_MAMonitor_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet"  TimeOut="0"></Setting>
+    <Setting Key="Misc_MAMonitorTool_GetReport_Archive" SpName="Acc_Rpt_MAMonitor_Archive_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
   </Function>
 
   <Function Name="2h - Keno">
@@ -159,22 +159,22 @@
   </Function>
 
   <Function Name="Special - Punter Analysis">
-    <Setting Key="Special_PunterAnalysis_GetProducts" SpName="Acc_SelBettypesbySports_DW" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Special_PunterAnalysis_GetProducts" SpName="Acc_SelBettypesbySports_DW_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Special_PunterAnalysis_GetLeaguesBySport" SpName="Acc_TopPunterSelLeagues" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
-    <Setting Key="Special_PunterAnalysis_GetTopPunterReport" SpName="Acc_SelTopPunterSummary" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunterByUser" SpName="Acc_SelTopPunterByCustID" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunterBetCountByUser" SpName="Acc_SelBetCountByCustomer" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Special_PunterAnalysis_GetTopPunterReport" SpName="Acc_SelTopPunterSummary_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Special_PunterAnalysis_GetTopPunterByUser" SpName="Acc_SelTopPunterByCustID_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Special_PunterAnalysis_GetTopPunterBetCountByUser" SpName="Acc_SelBetCountByCustomer_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="Special_PunterAnalysis_GetTopPunterBetCountIPByUser" SpName="Acc_SelIPByCustomer" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunter_ByUser_SportType" SpName="Acc_SelTopPunterBySporttype" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
+    <Setting Key="Special_PunterAnalysis_GetTopPunter_ByUser_SportType" SpName="Acc_SelTopPunterBySporttype_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
       <Mapping DataField="Betcount" ObjectProperty="betcount" />
       <Mapping DataField="Margin" ObjectProperty="margin" />
     </Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunterBetCount_ByUser_BetType" SpName="Acc_SelBetCountByCustomer_Detail" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunter_ByUser_BetType" SpName="Acc_SelTopPunterByBettype" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunter_ByLeague" SpName="Acc_SelTopPunterSummaryByLeague" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
+    <Setting Key="Special_PunterAnalysis_GetTopPunterBetCount_ByUser_BetType" SpName="Acc_SelBetCountByCustomer_Detail_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Special_PunterAnalysis_GetTopPunter_ByUser_BetType" SpName="Acc_SelTopPunterByBettype_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Special_PunterAnalysis_GetTopPunter_ByLeague" SpName="Acc_SelTopPunterSummaryByLeague_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
       <Mapping DataField="Betcount" ObjectProperty="BetCount" />
     </Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunter_ByLeague_User" SpName="Acc_SelTopPunterBySporttypeSum" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Special_PunterAnalysis_GetTopPunter_ByLeague_User" SpName="Acc_SelTopPunterBySporttypeSum_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
 
   <Function Name="Gaming - Casino Win Loss">
