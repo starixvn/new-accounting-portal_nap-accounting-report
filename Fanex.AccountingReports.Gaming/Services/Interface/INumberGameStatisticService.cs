@@ -14,5 +14,13 @@
         NumberGameStatisticByUserName GetNumberGameStatisticFullReportByUserName(GetNumberGameStatisticCriteria criteria);
 
         NumberGameStatisticByUserName GetNumberGameStatisticByUserName(GetNumberGameStatisticCriteria criteria);
+
+        NumberGameStatisticByUserName GetNumberGameStatisticSortByUserName(GetNumberGameStatisticCriteria criteria);
+
+        NumberGameStatisticByDaily GetNumberGameStatisticSortByDaily(GetNumberGameStatisticCriteria criteria);
+
+        NumberGameStatisticByLeague GetNumberGameStatisticSortByLeague(GetNumberGameStatisticCriteria criteria);
+
+        NumberGameStatisticByBettype GetNumberGameStatisticSortByBettype(GetNumberGameStatisticCriteria criteria);
     }
 }

@@ -58,7 +58,7 @@
 
         public void ExportReportByDaily(GetNumberGameStatisticCriteria criteria)
         {
-            var report = CacheManager.Get<NumberGameStatisticByDaily>(GamingConstants.NumberGameStatisticReportByDailyCachedDataKey);
+            var report = CacheExtension.Get<NumberGameStatisticByDaily>(GamingConstants.NumberGameStatisticReportByDailyCachedDataKey);
 
             if (report == null)
             {
@@ -87,7 +87,7 @@
 
         public void ExportReportByUserName(GetNumberGameStatisticCriteria criteria)
         {
-            var report = CacheManager.Get<NumberGameStatisticByUserName>(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey);
+            var report = CacheExtension.Get<NumberGameStatisticByUserName>(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey);
 
             if (report == null)
             {
@@ -138,7 +138,7 @@
 
         public void ExportReportByLeague(GetNumberGameStatisticCriteria criteria)
         {
-            var report = CacheManager.Get<NumberGameStatisticByLeague>(GamingConstants.NumberGameStatisticReportByLeagueCachedDataKey);
+            var report = CacheExtension.Get<NumberGameStatisticByLeague>(GamingConstants.NumberGameStatisticReportByLeagueCachedDataKey);
 
             if (report == null)
             {
@@ -167,7 +167,7 @@
 
         public void ExportReportByBettype(GetNumberGameStatisticCriteria criteria)
         {
-            var report = CacheManager.Get<NumberGameStatisticByBettype>(GamingConstants.NumberGameStatisticReportByBettypeCachedDataKey);
+            var report = CacheExtension.Get<NumberGameStatisticByBettype>(GamingConstants.NumberGameStatisticReportByBettypeCachedDataKey);
 
             if (report == null)
             {
@@ -386,7 +386,7 @@
                    currentItem.Players,
                    currentRow % 2 == 0 ? intNumberStyle : evenRowIntNumberStyle);
 
-                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem.NumberGameStatisticDetail);
+                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem);
                 currentRow++;
             }
         }
@@ -423,7 +423,7 @@
                    currentItem.CustId,
                    currentRow % 2 == 0 ? textStyle : evenRowTextStyle);
 
-                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem.NumberGameStatisticDetail);
+                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem);
                 currentRow++;
             }
         }
@@ -460,7 +460,7 @@
                    currentItem.Players,
                    currentRow % 2 == 0 ? intNumberStyle : evenRowIntNumberStyle);
 
-                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem.NumberGameStatisticDetail);
+                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem);
                 currentRow++;
             }
         }
@@ -497,7 +497,7 @@
                    currentItem.Players,
                    currentRow % 2 == 0 ? intNumberStyle : evenRowIntNumberStyle);
 
-                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem.NumberGameStatisticDetail);
+                this.ExportNumberGameStatisticDetail(ref worksheet, currentRow, currentItem);
                 currentRow++;
             }
         }
@@ -621,7 +621,7 @@
                grandTotal.Players,
                grandTotalIntNumberStyle);
 
-            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal.NumberGameStatisticDetail);
+            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal);
         }
 
         private void ExportReportByUserNameGrandTotal(
@@ -652,7 +652,7 @@
                string.Empty,
                grandTotalTextStyle);
 
-            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal.NumberGameStatisticDetail);
+            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal);
         }
 
         private void ExportReportByLeagueGrandTotal(
@@ -683,7 +683,7 @@
                grandTotal.Players,
                grandTotalIntNumberStyle);
 
-            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal.NumberGameStatisticDetail);
+            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal);
         }
 
         private void ExportReportByBettypeGrandTotal(
@@ -714,7 +714,7 @@
                grandTotal.Players,
                grandTotalIntNumberStyle);
 
-            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal.NumberGameStatisticDetail);
+            this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal);
         }
 
         private void ExportNumberGameStatisticGrandTotalDetail(

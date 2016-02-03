@@ -68,7 +68,16 @@ Fanex.AccountingReports.Gaming.NumberGameStatistic = function () {
         isOnAuto: false,
         last3Months: 3,
         last6Months: 6,
-        reportType: null
+        reportType: null        
+    };
+
+    self.sortSetting = {
+        sortColName: null,
+        sortDirection: null,
+    };
+
+    self.getSortDirection = function (columnName) {
+        return columnName == self.sortSetting.sortColName ? self.sortSetting.sortDirection : '';
     };
 
     self.initPage = function () {
@@ -397,6 +406,18 @@ Fanex.AccountingReports.Gaming.NumberGameStatistic = function () {
             default:
                 reportByLeague.getReport(params.reportParams);
                 break;
+        }
+    };
+
+    var customSort = function (col1Value, col2Value, sortDirection) {
+        var parsedCol1Value = parseFloat(col1Value),
+        parsedCol2Value = parseFloat(col2Value);
+
+        if (sortDirection.toLowerCase() === 'asc') {
+            return parsedCol1Value > parsedCol2Value ? 1 : -1;
+        }
+        else {
+            return parsedCol1Value < parsedCol2Value ? 1 : -1;
         }
     };
 }

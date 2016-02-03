@@ -25,6 +25,9 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByUserName = function () {
     };
 
     self.getReport = function (reportParams) {
+        reportManager.sortSetting.sortColName = null;
+        reportManager.sortSetting.sortDirection = null;
+
         AccReport.disableInput();
         cachedReportParams = reportParams;
         AccReport.utility.CallAjax(this,
@@ -35,20 +38,30 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByUserName = function () {
                                     AccReport.enableInput);
     };
 
+    self.sortReport = function () {
+        AccReport.disableInput();
+        AccReport.utility.CallAjax(this,
+                                    window.rootUrl + "Gaming/NumberGameStatistic/GetReportSortByUserName",
+                                    cachedReportParams,
+                                    renderReport,
+                                    renderReport,
+                                    AccReport.enableInput);
+    };
+
     var renderReport = function (result) {
         _tables.reportContainer.removeClass("display-none");
         _tables.reportContent.addClass("display-none");
         var title = "Number Game Statistic Report From " + cachedReportParams.FromDate + " To " + cachedReportParams.ToDate;
         var columns = [
-            { HeaderText: "Username", Width: 200, Name: "Username", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Player ID", Width: 100, Name: "PlayerId", HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: "Bet Count", Width: 100, Name: "BetCounts", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.INT_NUMBER },
-            { HeaderText: "Total Bets", Width: 120, Name: "TotalBets", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-            { HeaderText: "Total Wins", Width: 120, Name: "TotalWins", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$' },
-            { HeaderText: "Game Income", Width: 120, Name: "GameIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$' },
-            { HeaderText: "Game Payout", Width: 120, Name: "GamePayout", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatNegative: '$' },
-            { HeaderText: "Company Turnover", Width: 120, Name: "CompanyTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-            { HeaderText: "Company Net Income", Width: 150, Name: "CompanyNetIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$' }
+            { HeaderText: "Username", Width: 200, Name: "Username", HeaderAlign: "center", CellAlign: "center", Sort: true, SortDirection: reportManager.getSortDirection("UserName") },
+            { HeaderText: "Player ID", Width: 100, Name: "PlayerId", HeaderAlign: "center", CellAlign: "right", Sort: true, SortDirection: reportManager.getSortDirection("CustId") },
+            { HeaderText: "Bet Count", Width: 100, Name: "BetCounts", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.INT_NUMBER, Sort: true, SortDirection: reportManager.getSortDirection("BetCount")},
+            { HeaderText: "Total Bets", Width: 120, Name: "TotalBets", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true, SortDirection: reportManager.getSortDirection("TotalBets") },
+            { HeaderText: "Total Wins", Width: 120, Name: "TotalWins", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$', Sort: true, SortDirection: reportManager.getSortDirection("TotalWins") },
+            { HeaderText: "Game Income", Width: 120, Name: "GameIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$', Sort: true, SortDirection: reportManager.getSortDirection("GameIncome") },
+            { HeaderText: "Game Payout", Width: 120, Name: "GamePayout", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatNegative: '$', Sort: true, SortDirection: reportManager.getSortDirection("GamePayout") },
+            { HeaderText: "Company Turnover", Width: 140, Name: "CompanyTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true, SortDirection: reportManager.getSortDirection("CompanyTurnover") },
+            { HeaderText: "Company Net Income", Width: 160, Name: "CompanyNetIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatNegative: '$', Sort: true, SortDirection: reportManager.getSortDirection("NetIncome") }
         ];
 
         var bodyData = [];
@@ -59,17 +72,17 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByUserName = function () {
             for (var index = 0; index < reportLength; index++) {
                 var currentItem = result.ReportRows[index];
                 var currentDataRow = [];
-                var gamePayout = currentItem.NumberGameStatisticDetail.GamePayout;
+                var gamePayout = currentItem.GamePayout;
                 currentDataRow.push(
                     { Name: "Username", Value: currentItem.UserName },
                     { Name: "PlayerId", Value: currentItem.CustId },
-                    { Name: "BetCounts", Value: currentItem.NumberGameStatisticDetail.BetCount },
-                    { Name: "TotalBets", Value: currentItem.NumberGameStatisticDetail.TotalBets },
-                    { Name: "TotalWins", Value: currentItem.NumberGameStatisticDetail.TotalWins },
-                    { Name: "GameIncome", Value: currentItem.NumberGameStatisticDetail.GameIncome },
+                    { Name: "BetCounts", Value: currentItem.BetCount },
+                    { Name: "TotalBets", Value: currentItem.TotalBets },
+                    { Name: "TotalWins", Value: currentItem.TotalWins },
+                    { Name: "GameIncome", Value: currentItem.GameIncome },
                     { Name: "GamePayout", Value: gamePayout, CssClass: gamePayout > 1 ? 'format-positive' : '' },
-                    { Name: "CompanyTurnover", Value: currentItem.NumberGameStatisticDetail.CompanyTurnover },
-                    { Name: "CompanyNetIncome", Value: currentItem.NumberGameStatisticDetail.NetIncome }
+                    { Name: "CompanyTurnover", Value: currentItem.CompanyTurnover },
+                    { Name: "CompanyNetIncome", Value: currentItem.NetIncome }
                 );
 
                 bodyData.push({
@@ -77,18 +90,18 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByUserName = function () {
                 });
             }
 
-            var grandTotalGamePayout = result.GrandTotal.NumberGameStatisticDetail.GamePayout;
+            var grandTotalGamePayout = result.GrandTotal.GamePayout;
             footerData.push({
                 Columns: [
                     { Name: "Username", Value: "Grand Total" },
                     { Name: "PlayerId", Value: "" },
-                    { Name: "BetCounts", Value: result.GrandTotal.NumberGameStatisticDetail.BetCount },
-                    { Name: "TotalBets", Value: result.GrandTotal.NumberGameStatisticDetail.TotalBets },
-                    { Name: "TotalWins", Value: result.GrandTotal.NumberGameStatisticDetail.TotalWins },
-                    { Name: "GameIncome", Value: result.GrandTotal.NumberGameStatisticDetail.GameIncome, TdClass: "highlight-column" },
+                    { Name: "BetCounts", Value: result.GrandTotal.BetCount },
+                    { Name: "TotalBets", Value: result.GrandTotal.TotalBets },
+                    { Name: "TotalWins", Value: result.GrandTotal.TotalWins },
+                    { Name: "GameIncome", Value: result.GrandTotal.GameIncome, TdClass: "highlight-column" },
                     { Name: "GamePayout", Value: grandTotalGamePayout, CssClass: grandTotalGamePayout > 1 ? 'format-positive' : '' },
-                    { Name: "CompanyTurnover", Value: result.GrandTotal.NumberGameStatisticDetail.CompanyTurnover },
-                    { Name: "CompanyNetIncome", Value: result.GrandTotal.NumberGameStatisticDetail.NetIncome, TdClass: "highlight-column" }
+                    { Name: "CompanyTurnover", Value: result.GrandTotal.CompanyTurnover },
+                    { Name: "CompanyNetIncome", Value: result.GrandTotal.NetIncome, TdClass: "highlight-column" }
                 ]
             });
         }
@@ -125,8 +138,38 @@ Fanex.AccountingReports.Gaming.NumberGameStatisticByUserName = function () {
                     cachedReportParams.IsPagingCallBack = true;
                     self.getReport(cachedReportParams);
                 }
-            }
+            },
+            sortOption: {
+                serverSortFunction: function (sortColumnName, sortDirection) {
+                    var sortDataType = "number";
 
+                    switch (sortColumnName) {
+                        case "Username":
+                            sortColumnName = "UserName";
+                            sortDataType = "string";
+                            break;
+                        case "PlayerId":
+                            sortColumnName = "CustId";
+                            break;
+                        case "BetCounts":
+                            sortColumnName = "BetCount";
+                            break;
+                        case "CompanyNetIncome":
+                            sortColumnName = "NetIncome";
+                            break;                        
+                    }
+
+                    cachedReportParams.IsPagingCallBack = true;
+                    cachedReportParams.SortColumnName = sortColumnName;
+                    cachedReportParams.SortDirection = sortDirection;
+                    cachedReportParams.SortDataType = sortDataType;
+                    
+                    reportManager.sortSetting.sortColName = sortColumnName;
+                    reportManager.sortSetting.sortDirection = sortDirection;
+
+                    self.sortReport();                    
+                }
+            }
         };
 
         _tables.reportContent.removeClass("display-none").fanexGrid(gridOptions);

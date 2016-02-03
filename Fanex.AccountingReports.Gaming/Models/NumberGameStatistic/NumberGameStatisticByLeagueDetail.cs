@@ -3,17 +3,10 @@
     using System;
 
     [Serializable]
-    public class NumberGameStatisticByLeagueDetail
+    public class NumberGameStatisticByLeagueDetail : NumberGameStatisticDetail
     {
-        public NumberGameStatisticByLeagueDetail()
-        {
-            NumberGameStatisticDetail = new NumberGameStatisticDetail();
-        }
-
         public string LeagueName { get; set; }
 
         public int Players { get; set; }
-
-        public NumberGameStatisticDetail NumberGameStatisticDetail { get; set; }
     }
 }
