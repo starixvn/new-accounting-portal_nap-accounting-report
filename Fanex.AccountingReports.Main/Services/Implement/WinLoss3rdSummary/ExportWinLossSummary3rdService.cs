@@ -487,7 +487,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
         public void ExportCockFightingReport(GetWinLossSummary3rdCockFightingCriteria criteria)
         {
-            var report = CacheManager.Get<CockFightingArena>(_winlossSummary3rdCacheCockFightingArenaReportKey);
+            var report = CacheExtension.Get<CockFightingArena>(_winlossSummary3rdCacheCockFightingArenaReportKey);
 
             if (report == null)
             {

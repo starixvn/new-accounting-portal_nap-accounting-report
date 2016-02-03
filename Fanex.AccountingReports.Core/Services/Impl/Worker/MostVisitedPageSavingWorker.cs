@@ -66,7 +66,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl.Worker
             {
                 lock (CommonConstants.MostVisitedPageLockObject)
                 {
-                    List<MostVisitedPage> mostVisitedPages = CacheManager.Get<List<MostVisitedPage>>(CommonConstants.MistVisitedPageCacheKey);
+                    List<MostVisitedPage> mostVisitedPages = CacheExtension.Get<List<MostVisitedPage>>(CommonConstants.MistVisitedPageCacheKey);
                     if (mostVisitedPages != null && mostVisitedPages.Count > 0)
                     {
                         //// Save to Database
@@ -85,7 +85,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl.Worker
                         repository.UpdateCount(criteria);
 
                         //// Update Cache
-                        CacheManager.Set<List<MostVisitedPage>>(CommonConstants.MistVisitedPageCacheKey, new List<MostVisitedPage>());
+                        CacheExtension.Set(CommonConstants.MistVisitedPageCacheKey, new List<MostVisitedPage>());
                     }
                 }
             }

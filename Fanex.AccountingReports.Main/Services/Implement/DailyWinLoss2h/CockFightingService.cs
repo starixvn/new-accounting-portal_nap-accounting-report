@@ -45,7 +45,7 @@
         {
             var rawData = this.GetReportData<dynamic>(criteria);
             WinLossInfo report = BuildCockFightingReport(rawData.ToList());
-            CacheManager.Set<WinLossInfo>(_dailyWinLoss2hCacheCockFightingReportKey, report, DateTime.Now.AddHours(2));
+            CacheExtension.Set(_dailyWinLoss2hCacheCockFightingReportKey, report);
             return report;
         }
 
@@ -55,7 +55,7 @@
             var rawData = _repository.Fetch<CockFightingMatchDetail>(criteria).ToList();
             cockFightingArena.ReportRows = this.GetCockFightingArena(rawData);
             cockFightingArena.GrandTotal = this.GetCockFightingArenaGrandTotal(rawData);
-            CacheManager.Set<CockFightingArena>(_dailyWinLoss2hCacheCockFightingArenaReportKey, cockFightingArena, DateTime.Now.AddHours(2));
+            CacheExtension.Set(_dailyWinLoss2hCacheCockFightingArenaReportKey, cockFightingArena);
             return cockFightingArena;
         }
 
@@ -131,7 +131,7 @@
 
         public void ExportCockFightingArenaReport(GetCockFightingArenaCriteria criteria)
         {
-            var report = CacheManager.Get<CockFightingArena>(_dailyWinLoss2hCacheCockFightingArenaReportKey);
+            var report = CacheExtension.Get<CockFightingArena>(_dailyWinLoss2hCacheCockFightingArenaReportKey);
 
             if (report == null)
             {

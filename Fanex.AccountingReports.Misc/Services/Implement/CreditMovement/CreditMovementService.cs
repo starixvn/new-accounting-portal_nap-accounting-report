@@ -64,7 +64,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
         public GridOptions GetFullReportFromCache(GetCreditMovementCriteria criteria)
         {
             GridOptions gridOptions = null;
-            gridOptions = CacheManager.Get<GridOptions>(_creditMovementDataCachedKey);
+            gridOptions = CacheExtension.Get<GridOptions>(_creditMovementDataCachedKey);
 
             if (gridOptions == null)
             {
@@ -119,7 +119,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
                 reader.Close();
             }
 
-            CacheManager.Set<GridOptions>(_creditMovementDataCachedKey, gridOptions, DateTime.Now.AddHours(ExtendCachedTimeOut));
+            CacheExtension.Set(_creditMovementDataCachedKey, gridOptions);
             return gridOptions;
         }
 

@@ -65,7 +65,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
         {            
             Dictionary<string, object> data = new Dictionary<string, object>();
             data.Add("NextTimeRefreshed", _service.GetNextRefreshTime().ToString("HH:mm") + " GMT-4");
-            data.Add("NumOfMember", CacheManager.Get<int>(MemberWinLossOnRNGCasinoService.NumOfMemberKey));
+            data.Add("NumOfMember", CacheExtension.Get<int>(MemberWinLossOnRNGCasinoService.NumOfMemberKey));
 
             return new JsonNetResult(data);
         }

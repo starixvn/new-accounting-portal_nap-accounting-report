@@ -107,7 +107,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl
                 lock (CommonConstants.MostVisitedPageLockObject)
                 {
                     ////Update to Memory
-                    List<MostVisitedPage> mostVisitedPages = CacheManager.Get<List<MostVisitedPage>>(CommonConstants.MistVisitedPageCacheKey);
+                    List<MostVisitedPage> mostVisitedPages = CacheExtension.Get<List<MostVisitedPage>>(CommonConstants.MistVisitedPageCacheKey);
                     if (mostVisitedPages == null)
                     {
                         mostVisitedPages = new List<MostVisitedPage>();
@@ -136,7 +136,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl
                     }
 
                     // Save to cache.
-                    CacheManager.Set<List<MostVisitedPage>>(CommonConstants.MistVisitedPageCacheKey, mostVisitedPages);
+                    CacheExtension.Set(CommonConstants.MistVisitedPageCacheKey, mostVisitedPages);
                 }
             }
             catch (Exception ex)

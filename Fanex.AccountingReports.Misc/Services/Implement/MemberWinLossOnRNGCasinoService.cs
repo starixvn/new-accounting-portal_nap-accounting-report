@@ -59,7 +59,7 @@
                         memberWinLosses.Add(winLoss);
                     }
 
-                    CacheManager.Set<int>(NumOfMemberKey, memberWinLosses.Count);
+                    CacheExtension.Set(NumOfMemberKey, memberWinLosses.Count, 24);
 
                     reader.Close();
 
@@ -202,7 +202,7 @@
                 throw;
             }
 
-            CacheManager.Set<GridOptions>(_recentReportCachedDataKey, gridOptions, DateTime.Now.AddHours(ExtendCachedTimeOut));
+            CacheExtension.Set(_recentReportCachedDataKey, gridOptions, ExtendCachedTimeOut);
             return gridOptions;
         }
 
@@ -221,13 +221,13 @@
                 throw;
             }
 
-            CacheManager.Set<GridOptions>(_historyReportCachedDataKey, gridOptions, DateTime.Now.AddHours(ExtendCachedTimeOut));
+            CacheExtension.Set(_historyReportCachedDataKey, gridOptions, ExtendCachedTimeOut);
             return gridOptions;
         }
 
         public IWorkbook GetRecentReportWorkbook(IMemberWinLossOnRNGCasinoCriteria criteria)
         {
-            var gridOptions = CacheManager.Get<GridOptions>(_recentReportCachedDataKey);
+            var gridOptions = CacheExtension.Get<GridOptions>(_recentReportCachedDataKey);
             if (gridOptions == null)
             {
                 gridOptions = this.GetRecentReport(criteria);
@@ -240,7 +240,7 @@
 
         public IWorkbook GetHistoryReportWorkbook(IMemberWinLossOnRNGCasinoCriteria criteria)
         {
-            var gridOptions = CacheManager.Get<GridOptions>(_historyReportCachedDataKey);
+            var gridOptions = CacheExtension.Get<GridOptions>(_historyReportCachedDataKey);
             if (gridOptions == null)
             {
                 gridOptions = this.GetHistoryReport(criteria);
@@ -439,7 +439,7 @@
                 criteria.FromDate = lastRefreshTime;
             }
 
-            CacheManager.Set<DateTime>(_nextRefreshTimeKey, criteria.ToDate.AddHours(1).AddSeconds(1));
+            CacheExtension.Set(_nextRefreshTimeKey, criteria.ToDate.AddHours(1).AddSeconds(1));
 
             if (criteria.IsAutoRefresh)
             {
@@ -449,19 +449,19 @@
 
         public DateTime GetNextRefreshTime()
         {
-            return CacheManager.Get<DateTime>(_nextRefreshTimeKey);
+            return CacheExtension.Get<DateTime>(_nextRefreshTimeKey);
         }
 
         public DateTime GetLastRefreshTime()
         {
-            return CacheManager.Get<DateTime>(_lastRefreshTimeKey);
+            return CacheExtension.Get<DateTime>(_lastRefreshTimeKey);
         }
 
         public void SetLastRefreshTime(DateTime? time)
         {            
             DateTime now = DateTime.Now;
             var lastTime = time.HasValue ? time.Value : ReportService.ConvertTimeZone(new DateTime(now.Year, now.Month, now.Day, now.Hour, 0, 0).AddHours(-1));
-            CacheManager.Set<DateTime>(_lastRefreshTimeKey, lastTime, DateTime.Now.AddHours(ExtendCachedTimeOut));
+            CacheExtension.Set(_lastRefreshTimeKey, lastTime, ExtendCachedTimeOut);
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             var bettypes = rawData.Select(x => x.bettype).Distinct().ToList();
             _dailyWinLoss2hUtilityService.SaveBetTypeCacheRef(bettypes, ref _cachedBettypesName);
             WinLossInfo report = BuildMetricGamingBettypeReport(rawData.ToList());
-            CacheManager.Set<WinLossInfo>(_dailyWinLoss2hCacheMetricGamingBettypeDataKey, report);
+            CacheExtension.Set(_dailyWinLoss2hCacheMetricGamingBettypeDataKey, report);
             return report;
         }
 
