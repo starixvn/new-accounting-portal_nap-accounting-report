@@ -426,7 +426,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             var rawData = GetReportData<CockFightingMatchDetail>(criteria).ToList();
             cockFightingArena.ReportRows = GetCockFightingArena(rawData);
             cockFightingArena.GrandTotal = GetCockFightingArenaGrandTotal(rawData);
-            CacheManager.Set<CockFightingArena>(_winlossSummary3rdCacheCockFightingArenaReportKey, cockFightingArena, DateTime.Now.AddHours(2));
+            CacheExtension.Set(_winlossSummary3rdCacheCockFightingArenaReportKey, cockFightingArena);
             return cockFightingArena;
         }
 

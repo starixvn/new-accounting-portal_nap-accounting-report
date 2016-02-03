@@ -41,7 +41,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         {
             var rawData = this.GetReportData<dynamic>(criteria);
             WinLossInfo report = BuildBettradeReport(rawData.ToList());
-            CacheManager.Set<WinLossInfo>(_dailyWinLoss2hCacheBettradeKey, report);
+            CacheExtension.Set(_dailyWinLoss2hCacheBettradeKey, report);
             return report;
         }
 

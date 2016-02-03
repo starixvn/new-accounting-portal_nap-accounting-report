@@ -118,7 +118,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
                 reader.Close();
             }
 
-            CacheManager.Set<GridOptions>(_dataCachedKey, gridOptions, DateTime.Now.AddHours(ExtendCachedTimeOut));
+            CacheExtension.Set(_dataCachedKey, gridOptions);
 
             return gridOptions;
         }
@@ -126,7 +126,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
         public GridOptions GetFullReportFromCache(CompanyWinLossCriteria criteria)
         {
             GridOptions gridOptions = null;
-            gridOptions = CacheManager.Get<GridOptions>(_dataCachedKey);
+            gridOptions = CacheExtension.Get<GridOptions>(_dataCachedKey);
 
             if (gridOptions == null)
             {

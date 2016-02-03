@@ -279,7 +279,6 @@
     <Compile Include="Utilities\CellStyles\BaseSubTotalCellStyles.cs" />
     <Compile Include="Utilities\CellStyles\CustomColor.cs" />
     <Compile Include="Web\CacheExtension.cs" />
-    <Compile Include="Web\CacheManager.cs" />
     <Compile Include="Services\Impl\MailService.cs" />
     <Compile Include="Services\Impl\PermissionService.cs" />
     <Compile Include="Services\Impl\ReportService.cs" />
