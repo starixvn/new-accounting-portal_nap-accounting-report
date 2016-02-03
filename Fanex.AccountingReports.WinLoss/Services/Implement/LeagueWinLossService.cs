@@ -393,7 +393,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                         info.TurnOver,
                         info.LineTotal,
                         4,
-                        false);
+                        true);
                     leagueWinLoss.ChildsInfo.Add(info);
                     leagueWinLoss.AddToTotal(info);
                     leagueWinLoss.AddToGrandTotal(leagueWinLoss.Total);
@@ -416,14 +416,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     leagueWinLoss.Total.TurnOver,
                     leagueWinLoss.Total.LineTotal,
                     4,
-                    false);
+                    true);
                 leagueWinLoss.Total = this.RoundLeagueWinLossInfo(leagueWinLoss.Total);
 
                 leagueWinLoss.GrandTotal.Margin = this.GetWinLossMargin(
                     leagueWinLoss.GrandTotal.TurnOver,
                     leagueWinLoss.GrandTotal.LineTotal,
                     4,
-                    false);
+                    true);
                 leagueWinLoss.GrandTotal = this.RoundLeagueWinLossInfo(leagueWinLoss.GrandTotal);
 
                 SessionManager.Set<LeagueWinLossInfo>(WinLossContants.LeagueWinLossByBetTypeSessionKey, leagueWinLoss);
@@ -667,8 +667,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                         info = sport.GrandTotal;
                         const int NewCricketSportType = 50;
                         var sportTotalRowCount = sport.Id != NewCricketSportType
-                            ? ExportNormalSportsTotal(startColumn, currentRow, info, workSheet, subRowTextStyle, subRowPositiveTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle)
-                        : ExportNewCricketTotal(startColumn, currentRow, info, workSheet, subRowTextStyle, subRowPositiveTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle);
+                            ? ExportLeagueWinLossNormalSportsTotal(startColumn, currentRow, info, workSheet, subRowTextStyle, subRowPositiveTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle)
+                        : ExportLeagueWinLossNewCricketTotal(startColumn, currentRow, info, workSheet, subRowTextStyle, subRowPositiveTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle);
 
                         currentRow += sportTotalRowCount;
                     }
@@ -804,7 +804,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             }
         }
 
-        private int ExportNewCricketTotal(
+        private int ExportLeagueWinLossNewCricketTotal(
             int startColumn,
             int currentRow,
             LeagueWinLossInfo cricketGrandTotalInfo,
@@ -858,7 +858,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             return cricketGrandTotalInfo.ChildsInfo.Count;
         }
 
-        private int ExportNormalSportsTotal(
+        private int ExportLeagueWinLossNormalSportsTotal(
             int startColumn,
             int currentRow,
             LeagueWinLossInfo info,
@@ -1001,6 +1001,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
         {
+            decimal tempDecimal;
             try
             {
                 var report = SessionManager.Get<LeagueWinLossInfo>(WinLossContants.LeagueWinLossByBetTypeSessionKey);
@@ -1187,7 +1188,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = Converter.ToDecimal(info.Margin);
+                        if (decimal.TryParse(info.Margin, out tempDecimal))
+                        {
+                            currentCell.Value = Converter.ToDecimal(info.Margin);
+                        }
+                        else
+                        {
+                            currentCell.Value = info.Margin;
+                        }
                         currentCell.Style = positiveTwoDecimalPercentNumberStyle;
                         currentColumn++;
                         currentRow++;
@@ -1234,7 +1242,15 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = Converter.ToDecimal(info.Margin);
+                    if (decimal.TryParse(info.Margin, out tempDecimal))
+                    {
+                        currentCell.Value = Converter.ToDecimal(info.Margin);
+                    }
+                    else
+                    {
+                        currentCell.Value = info.Margin;
+                    }
+
                     currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                     currentColumn++;
@@ -1446,7 +1462,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             currentCell.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
             currentColumn++;
             currentRow++;
-
+            LeagueWinLossInfo chargedCommissionTotal = null;
             if (this.IsShowReport(report))
             {
                 var len = report.ChildsInfo.Count;
@@ -1454,104 +1470,26 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 for (var i = 0; i < len; i++)
                 {
                     info = report.ChildsInfo[i];
-                    if (i % 2 == 0)
+                    const int ChargedCommissionBetType = 500;
+                    if (info.Id != ChargedCommissionBetType)
                     {
-                        textStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
-                        twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
-                        positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
-                        positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+                        ExportLeagueWinLossByBetTypeNormalBetType(i, currentRow, startColumn, info, workSheet, textStyle, twoDecimalNumberStyle, positiveTwoDecimalNumberStyle, positiveTwoDecimalPercentNumberStyle);
+                        currentRow++;
                     }
                     else
                     {
-                        textStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
-                        twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
-                        positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
-                        positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+                        chargedCommissionTotal = info;
                     }
-
-                    currentColumn = startColumn;
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Name;
-                    currentCell.Style = textStyle;
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.WinLoss;
-                    currentCell.Style = positiveTwoDecimalNumberStyle;
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Position;
-                    currentCell.Style = twoDecimalNumberStyle;
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Commission;
-                    currentCell.Style = twoDecimalNumberStyle;
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.LineTotal;
-                    currentCell.Style = positiveTwoDecimalNumberStyle;
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.TurnOver;
-                    currentCell.Style = twoDecimalNumberStyle;
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = Converter.ToDecimal(info.Margin);
-                    currentCell.Style = positiveTwoDecimalPercentNumberStyle;
-                    currentColumn++;
-                    currentRow++;
                 }
 
                 info = report.Total;
-                currentColumn = startColumn;
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.Name;
-                currentCell.Style = grandTotalRowTextStyle;
-                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.WinLoss;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.Position;
-                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.Commission;
-                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.LineTotal;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.TurnOver;
-                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Converter.ToDecimal(info.Margin);
-                currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
-                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                currentColumn++;
+                ExportLeaguWinLossByBetTypeTotal(currentRow, startColumn, info, workSheet, grandTotalRowTextStyle, grandTotalRowPositiveTwoDecimalNumberStyle, grandTotalRowTwoDecimalNumberStyle, grandTotalRowPositiveTwoDecimalPercentNumberStyle);
                 currentRow++;
+                if (chargedCommissionTotal != null)
+                {
+                    ExportLeaguWinLossByBetTypeTotal(currentRow, startColumn, chargedCommissionTotal, workSheet, grandTotalRowTextStyle, grandTotalRowPositiveTwoDecimalNumberStyle, grandTotalRowTwoDecimalNumberStyle, grandTotalRowPositiveTwoDecimalPercentNumberStyle);
+                    currentRow++;
+                }
 
                 if (this._8rmConfig.IsActive)
                 {
@@ -1628,6 +1566,133 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             }
         }
 
+        private int ExportLeagueWinLossByBetTypeNormalBetType(
+            int i,
+            int currentRow,
+            int startColumn,
+            LeagueWinLossInfo info,
+            ExcelWorksheet workSheet,
+            CellStyle textStyle,
+            CellStyle twoDecimalNumberStyle,
+            CellStyle positiveTwoDecimalNumberStyle,
+            CellStyle positiveTwoDecimalPercentNumberStyle)
+        {
+
+
+            if (i % 2 == 0)
+            {
+                textStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+                twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+                positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+                positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+            }
+            else
+            {
+                textStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+                twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+                positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+                positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+            }
+
+            var currentColumn = startColumn;
+            var currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Name;
+            currentCell.Style = textStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.WinLoss;
+            currentCell.Style = positiveTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Position;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Commission;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.LineTotal;
+            currentCell.Style = positiveTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.TurnOver;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Converter.ToDecimal(info.Margin);
+            currentCell.Style = positiveTwoDecimalPercentNumberStyle;
+            currentColumn++;
+            return 1;
+        }
+
+        private void ExportLeaguWinLossByBetTypeTotal(int currentRow,
+            int startColumn,
+            LeagueWinLossInfo info,
+            ExcelWorksheet workSheet,
+            CellStyle grandTotalRowTextStyle,
+            CellStyle grandTotalRowPositiveTwoDecimalNumberStyle,
+            CellStyle grandTotalRowTwoDecimalNumberStyle,
+            CellStyle grandTotalRowPositiveTwoDecimalPercentNumberStyle)
+        {
+            var currentColumn = startColumn;
+            var currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Name;
+            currentCell.Style = grandTotalRowTextStyle;
+            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.WinLoss;
+            currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Position;
+            currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Commission;
+            currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.LineTotal;
+            currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.TurnOver;
+            currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            decimal tempDecimal;
+            if (decimal.TryParse(info.Margin, out tempDecimal))
+            {
+                currentCell.Value = Converter.ToDecimal(info.Margin);
+            }
+            else
+            {
+                currentCell.Value = info.Margin;
+            }
+
+            currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+        }
                 #endregion ExportExcel
 
         private string GetSportName(int sportId)
