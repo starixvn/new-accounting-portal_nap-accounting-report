@@ -13,8 +13,7 @@
     using Fanex.AccountingReports.Gaming.Services.Interface;
 
     public class NumberGameStatisticService : ServiceBase, INumberGameStatisticService
-    {
-        private const int ExtendCachedTimeOut = 2;
+    {        
         private INumberGameStatisticRepository _repository;
 
         public NumberGameStatisticService()
@@ -41,7 +40,7 @@
                 throw;
             }
 
-            CacheManager.Set<NumberGameStatisticByBettype>(GamingConstants.NumberGameStatisticReportByBettypeCachedDataKey, report, DateTime.Now.AddHours(ExtendCachedTimeOut));
+            CacheExtension.Set(GamingConstants.NumberGameStatisticReportByBettypeCachedDataKey, report);
             return report;
         }
 
@@ -59,7 +58,7 @@
                 throw;
             }
 
-            CacheManager.Set<NumberGameStatisticByDaily>(GamingConstants.NumberGameStatisticReportByDailyCachedDataKey, report, DateTime.Now.AddHours(ExtendCachedTimeOut));
+            CacheExtension.Set(GamingConstants.NumberGameStatisticReportByDailyCachedDataKey, report);
             return report;
         }
 
@@ -77,7 +76,7 @@
                 throw;
             }
 
-            CacheManager.Set<NumberGameStatisticByLeague>(GamingConstants.NumberGameStatisticReportByLeagueCachedDataKey, report, DateTime.Now.AddHours(ExtendCachedTimeOut));
+            CacheExtension.Set(GamingConstants.NumberGameStatisticReportByLeagueCachedDataKey, report);
             return report;
         }
 
@@ -87,7 +86,7 @@
             try
             {
                 fullReport = _repository.GetNumberGameStatisticByUserName(criteria);
-                CacheManager.Set<NumberGameStatisticByUserName>(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey, fullReport, DateTime.Now.AddHours(ExtendCachedTimeOut));
+                CacheExtension.Set(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey, fullReport);
             }
             catch (Exception ex)
             {
@@ -110,7 +109,7 @@
 
                 if (criteria.IsPagingCallBack)
                 {
-                    fullReport = CacheManager.Get<NumberGameStatisticByUserName>(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey) ?? GetNumberGameStatisticFullReportByUserName(criteria);
+                    fullReport = CacheExtension.Get<NumberGameStatisticByUserName>(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey) ?? GetNumberGameStatisticFullReportByUserName(criteria);
                 }
                 else
                 {
@@ -142,7 +141,7 @@
 
                 if (criteria.IsPagingCallBack)
                 {
-                    fullReport = CacheManager.Get<NumberGameStatisticByUserName>(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey) ?? GetNumberGameStatisticFullReportByUserName(criteria);
+                    fullReport = CacheExtension.Get<NumberGameStatisticByUserName>(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey) ?? GetNumberGameStatisticFullReportByUserName(criteria);
                 }
                 else
                 {
@@ -150,7 +149,7 @@
                 }
 
                 ListExtensions.SortDataByProperty<NumberGameStatisticByUserNameDetail>(fullReport.ReportRows, criteria.SortDirection, criteria.SortColumnName, criteria.SortDataType);
-                CacheManager.Set<NumberGameStatisticByUserName>(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey, fullReport);
+                CacheExtension.Set(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey, fullReport);
 
                 report.ReportRows = fullReport.ReportRows.Skip(pageIndex * pageSize).Take(pageSize).ToList();
                 report.GrandTotal = fullReport.GrandTotal;
@@ -170,7 +169,7 @@
 
             try
             {
-                report = CacheManager.Get<NumberGameStatisticByDaily>(GamingConstants.NumberGameStatisticReportByDailyCachedDataKey) ?? _repository.GetNumberGameStatisticByDaily(criteria);
+                report = CacheExtension.Get<NumberGameStatisticByDaily>(GamingConstants.NumberGameStatisticReportByDailyCachedDataKey) ?? _repository.GetNumberGameStatisticByDaily(criteria);
                 ListExtensions.SortDataByProperty<NumberGameStatisticByDailyDetail>(report.ReportRows, criteria.SortDirection, criteria.SortColumnName, criteria.SortDataType);
             }
             catch (Exception ex)
@@ -179,7 +178,7 @@
                 throw;
             }
 
-            CacheManager.Set<NumberGameStatisticByDaily>(GamingConstants.NumberGameStatisticReportByDailyCachedDataKey, report, DateTime.Now.AddHours(ExtendCachedTimeOut));
+            CacheExtension.Set(GamingConstants.NumberGameStatisticReportByDailyCachedDataKey, report);
             return report;
         }
         public NumberGameStatisticByLeague GetNumberGameStatisticSortByLeague(GetNumberGameStatisticCriteria criteria)
@@ -188,7 +187,7 @@
 
             try
             {
-                report = CacheManager.Get<NumberGameStatisticByLeague>(GamingConstants.NumberGameStatisticReportByLeagueCachedDataKey) ?? _repository.GetNumberGameStatisticByLeague(criteria);
+                report = CacheExtension.Get<NumberGameStatisticByLeague>(GamingConstants.NumberGameStatisticReportByLeagueCachedDataKey) ?? _repository.GetNumberGameStatisticByLeague(criteria);
                 ListExtensions.SortDataByProperty<NumberGameStatisticByLeagueDetail>(report.ReportRows, criteria.SortDirection, criteria.SortColumnName, criteria.SortDataType);
             }
             catch (Exception ex)
@@ -197,7 +196,7 @@
                 throw;
             }
 
-            CacheManager.Set<NumberGameStatisticByLeague>(GamingConstants.NumberGameStatisticReportByLeagueCachedDataKey, report, DateTime.Now.AddHours(ExtendCachedTimeOut));
+            CacheExtension.Set(GamingConstants.NumberGameStatisticReportByLeagueCachedDataKey, report);
             return report;
         }
         public NumberGameStatisticByBettype GetNumberGameStatisticSortByBettype(GetNumberGameStatisticCriteria criteria)
@@ -206,7 +205,7 @@
 
             try
             {
-                report = CacheManager.Get<NumberGameStatisticByBettype>(GamingConstants.NumberGameStatisticReportByBettypeCachedDataKey) ??_repository.GetNumberGameStatisticByBettype(criteria);
+                report = CacheExtension.Get<NumberGameStatisticByBettype>(GamingConstants.NumberGameStatisticReportByBettypeCachedDataKey) ??_repository.GetNumberGameStatisticByBettype(criteria);
                 ListExtensions.SortDataByProperty<NumberGameStatisticByBettypeDetail>(report.ReportRows, criteria.SortDirection, criteria.SortColumnName, criteria.SortDataType);
             }
             catch (Exception ex)
@@ -215,7 +214,7 @@
                 throw;
             }
 
-            CacheManager.Set<NumberGameStatisticByBettype>(GamingConstants.NumberGameStatisticReportByBettypeCachedDataKey, report, DateTime.Now.AddHours(ExtendCachedTimeOut));
+            CacheExtension.Set(GamingConstants.NumberGameStatisticReportByBettypeCachedDataKey, report);
             return report;
         }
     }

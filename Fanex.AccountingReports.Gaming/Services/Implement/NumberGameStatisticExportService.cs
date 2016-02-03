@@ -58,7 +58,7 @@
 
         public void ExportReportByDaily(GetNumberGameStatisticCriteria criteria)
         {
-            var report = CacheManager.Get<NumberGameStatisticByDaily>(GamingConstants.NumberGameStatisticReportByDailyCachedDataKey);
+            var report = CacheExtension.Get<NumberGameStatisticByDaily>(GamingConstants.NumberGameStatisticReportByDailyCachedDataKey);
 
             if (report == null)
             {
@@ -87,7 +87,7 @@
 
         public void ExportReportByUserName(GetNumberGameStatisticCriteria criteria)
         {
-            var report = CacheManager.Get<NumberGameStatisticByUserName>(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey);
+            var report = CacheExtension.Get<NumberGameStatisticByUserName>(GamingConstants.NumberGameStatisticReportByUserNameCachedDataKey);
 
             if (report == null)
             {
@@ -138,7 +138,7 @@
 
         public void ExportReportByLeague(GetNumberGameStatisticCriteria criteria)
         {
-            var report = CacheManager.Get<NumberGameStatisticByLeague>(GamingConstants.NumberGameStatisticReportByLeagueCachedDataKey);
+            var report = CacheExtension.Get<NumberGameStatisticByLeague>(GamingConstants.NumberGameStatisticReportByLeagueCachedDataKey);
 
             if (report == null)
             {
@@ -167,7 +167,7 @@
 
         public void ExportReportByBettype(GetNumberGameStatisticCriteria criteria)
         {
-            var report = CacheManager.Get<NumberGameStatisticByBettype>(GamingConstants.NumberGameStatisticReportByBettypeCachedDataKey);
+            var report = CacheExtension.Get<NumberGameStatisticByBettype>(GamingConstants.NumberGameStatisticReportByBettypeCachedDataKey);
 
             if (report == null)
             {
