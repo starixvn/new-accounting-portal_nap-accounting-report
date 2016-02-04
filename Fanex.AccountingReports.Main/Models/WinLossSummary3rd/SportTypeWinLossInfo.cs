@@ -31,6 +31,13 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                 RealTurnover = 0,
                 VirtualTurnover = 0,
             };
+            TotalForNewCricket = new WinLossInfo
+            {
+                RealLineTotal = 0,
+                VirtualLineTotal = 0,
+                RealTurnover = 0,
+                VirtualTurnover = 0,
+            };
         }
 
         public int Id { get; set; }
@@ -77,7 +84,29 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 
         public WinLossInfo Total { get; set; }
 
+        public WinLossInfo TotalForNewCricket { get; set; }
+
         public WinLossInfo HedgeTotal { get; set; }
+
+        /// <summary>
+        /// Calculates the total.
+        /// </summary>
+        /// <param name="item">The item value.</param>
+        public void CalculateTotalNewCricket(WinLossInfo item)
+        {
+            if (item == null)
+            {
+                return;
+            }
+
+            this.TotalForNewCricket.WinLoss += item.WinLoss;
+            this.TotalForNewCricket.Position += item.Position;
+            this.TotalForNewCricket.Commission += item.Commission;
+            this.TotalForNewCricket.RealLineTotal += item.RealLineTotal;
+            this.TotalForNewCricket.VirtualLineTotal += item.VirtualLineTotal;
+            this.TotalForNewCricket.RealTurnover += item.RealTurnover;
+            this.TotalForNewCricket.VirtualTurnover += item.VirtualTurnover;
+        }
 
         /// <summary>
         /// Calculates the total.

@@ -118,9 +118,20 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                     bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeSingleWalletCasinoLaunchDate;
                     // group by BetType & LiveIndicator
                     var betTypeGroup = sportTypeGroup.GroupBy(data => new { data.bettype, data.liveindicator });
+
+                    var isNewCricket = false;
+                    var dataForNewCricket = betTypeGroup.First();
+
                     foreach (var data in betTypeGroup)
                     {
                         betInfo = new BetTypeWinLossInfo();
+                        betInfo.Id = data.Key.bettype;
+                        if (data.Key.bettype == 500)
+                        {
+                            dataForNewCricket = data;
+                            isNewCricket = true;
+                            continue;
+                        }
                         foreach (var item in data)
                         {
                             winloss = new WinLossInfo
@@ -199,12 +210,15 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                             }
 
                             sportInfo.CalculateTotal(winloss);
+                            sportInfo.CalculateTotalNewCricket(winloss);
                             report.CalculateAllTotal(sportId, winloss);
                         }
-
                         sportInfo.BetTypeWinLosses.Add(betInfo);
                     }
-
+                    if (isNewCricket == true)
+                    {
+                        sportInfo = CalculatorForNewCricket(dataForNewCricket, isShowNotAvalable, sportInfo, sportId, report);
+                    }
                     if (MainConstants.WinLossSummaryRacingSportIds.Contains(sportInfo.Id))
                     {
                         SportTypeWinLossInfo racingSport = report.SportTypeWinLosses.FirstOrDefault(sport => sport.Id == MainConstants.WinLossSummaryRacingSportId);
@@ -254,6 +268,96 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             return report;
         }
 
+
+        public SportTypeWinLossInfo CalculatorForNewCricket(dynamic data, bool isShowNotAvalable,
+                                            SportTypeWinLossInfo sportInfo, int sportId, WinLoss3rdInfo report)
+        {
+            BetTypeWinLossInfo betInfo = new BetTypeWinLossInfo();
+            //betInfo.Id = data.Key.bettype;
+            foreach (var item in data)
+            {
+                betInfo.Id = item.bettype;
+                WinLossInfo winloss = new WinLossInfo
+                {
+                    Id = Converter.ToInt(item.bettype),
+                    LiveIndicator = Converter.ToBool(item.liveindicator) ? 1 : 0,
+                    IBC = Converter.ToInt(item.ibc),
+                    IsHedge = Converter.ToBool(item.IsHedge),
+                    Status = Converter.ToString2(item.status),
+                    WinLoss = Converter.ToDecimal(item.realWinlost),
+                    Position = Converter.ToDecimal(item.realPosition),
+                    Commission = Converter.ToDecimal(item.realCommission),
+                    RealLineTotal = ToDecimal(item.realLineTotal),
+                    VirtualLineTotal = ToDecimal(item.virtualLineTotal),
+                    RealTurnover = isShowNotAvalable ? 0 : ToDecimal(item.realTurnover),
+                    VirtualTurnover = isShowNotAvalable ? 0 : ToDecimal(item.virtualTurnover)
+                };
+
+                if (winloss.IBC == RowType.EightRM)
+                {
+                    winloss.Name = Labels.EightRM;
+                    betInfo.EightRM = winloss;
+
+                    // IBC Total by BetType
+                    sportInfo.CalculateIBCTotal(winloss);
+
+                    // Footer: IBC Total
+                    report.CalculateTempIBCTotal(winloss);
+                }
+                else if (winloss.IBC == RowType.BARM)
+                {
+                    winloss.Name = Labels.BARM;
+                    betInfo.BARM = winloss;
+
+                    // IBC Total by BetType
+                    sportInfo.CalculateIBCTotal(winloss);
+
+                    // Footer: IBC Total
+                    report.CalculateTempIBCTotal(winloss);
+                }
+                else
+                {
+                    if (MainConstants.WinLossSummaryRacingSportIds.Contains(sportInfo.Id))
+                    {
+                        // Horse Racing, Greyhounds, Harness are grouped by Racing
+                        winloss.Name = sportInfo.Name;
+                        sportInfo.Name = Labels.Racing;
+                        winloss.Id = sportId;
+                    }
+                    else if (sportInfo.Id >= MainConstants.WinLossSummaryBeginVirtualSportId &&
+                        sportInfo.Id <= MainConstants.WinLossSummaryEndVirtualSportId)
+                    {
+                        winloss.Name = sportInfo.Name;
+                        sportInfo.Name = Labels.VirtualSport;
+                        winloss.Id = sportId;
+                    }
+                    else
+                    {
+                        winloss.Name = this.GetBetType(winloss.Id);
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(winloss.Status))
+                    {
+                        winloss.Name += " (" + winloss.Status + ")";
+                    }
+
+                    if (winloss.IsHedge)
+                    {
+                        winloss.Name = Labels.Hedge_title;
+                        betInfo.Hedge = winloss;
+                    }
+                    else
+                    {
+                        betInfo.IBCs.Add(winloss);
+                    }
+                }
+
+                sportInfo.CalculateTotal(winloss);
+                report.CalculateAllTotal(sportId, winloss);
+            }
+            sportInfo.BetTypeWinLosses.Add(betInfo);
+            return sportInfo;
+        }
         /// <summary>
         /// Recalculates the report.
         /// </summary>

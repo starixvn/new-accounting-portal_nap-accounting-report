@@ -97,8 +97,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
             var sportTypeWinLosses = report.SportTypeWinLosses;
             if (sportTypeWinLosses && (len = sportTypeWinLosses.length) > 0) {
                 for (var i = 0; i < len; i++) {
-                    currentRow = sportTypeWinLosses[i];
-                    bodyData.push(renderSportTypeWinLoss(currentRow));
+                    bodyData.push(renderSportTypeWinLoss(sportTypeWinLosses[i]));
                 }
 
                 // footer: Grand Total
@@ -175,20 +174,20 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
             Columns: [{
                 Name: 'ColView', CellAlign: 'center', CustomCellRender: function () {
                     if (sportDrillDown) {
-                    if (id == AccReportData.Constants.SportType.CockFighting) {
-                        return '<div class="viewicon" onclick="ViewCockFightingArena(\'' +
-											_params.reportParams.FromDate + '\',\'' +
-											_params.reportParams.ToDate + '\')">&nbsp;</div>';
-                    } else {
-                        return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
+                        if (id == AccReportData.Constants.SportType.CockFighting) {
+                            return '<div class="viewicon" onclick="ViewCockFightingArena(\'' +
                                                 _params.reportParams.FromDate + '\',\'' +
-                                                _params.reportParams.ToDate + '\',' +
-                                                id + ',0,0' +
-                                                ',\'' +
-                                                sportName + '\',' +
-                                                drillDownByType.bySport + ')">&nbsp;</div>';
+                                                _params.reportParams.ToDate + '\')">&nbsp;</div>';
+                        } else {
+                            return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
+                                                    _params.reportParams.FromDate + '\',\'' +
+                                                    _params.reportParams.ToDate + '\',' +
+                                                    id + ',0,0' +
+                                                    ',\'' +
+                                                    sportName + '\',' +
+                                                    drillDownByType.bySport + ')">&nbsp;</div>';
+                        }
                     }
-                }
                     else {
                         return '<div>&nbsp;</div>';
                     }
@@ -202,16 +201,34 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
         if (betTypeWinLosses) {
             var betTypeDrillDown = _tables.isShowDetail && sportWinloss.CanShowDetailLink;
             var betType = null;
+            var betTypeNewCricket = null;
+            var isNewCricket = false;
             var len = betTypeWinLosses.length;
             for (var i = 0; i < len; i++) {
                 betType = betTypeWinLosses[i];
                 // ibcs
                 var IBCs = betType.IBCs;
-                if (IBCs) {
-                    $.each(IBCs, function (index, value) {
-                        sportType.SubRows.push(renderWinLoss(value, true, sportWinloss.Id, id > 0 ? sportName : value.Name, betTypeDrillDown, i));
-                    });
+
+                //for new *Cricket
+                if (id == 50) {
+                    for (var j = 0; j < IBCs.length; j++) {
+                        if (IBCs[j].Id == 500) {
+                            isNewCricket = true;
+                            betTypeNewCricket = IBCs[j];
+                            continue;
+                        }
+                        sportType.SubRows.push(renderWinLossCricket(IBCs[j], true, id, id > 0 ? sportName : IBCs[j].Name, betTypeDrillDown, i));
+                    }
                 }
+                else {
+
+                    if (IBCs) {
+                        $.each(IBCs, function (index, value) {
+                            sportType.SubRows.push(renderWinLoss(value, true, sportWinloss.Id, id > 0 ? sportName : value.Name, betTypeDrillDown, i));
+                        });
+                    }
+                }
+
                 if (betType.EightRM) { // 8RM
                     sportType.SubRows.push(renderWinLoss(betType.EightRM, false, sportWinloss.Id, id > 0 ? sportName : betType.EightRM.Name, false, i));
                 }
@@ -227,6 +244,16 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                     sportType.SubRows.push(renderTotal(total, 'total', 'Total:'));
                 }
             }
+
+            // Total for New Cricket
+            if (id == 50) {
+                var footerTotal = sportWinloss.TotalForNewCricket;
+                sportType.SubRows.push(renderTotal(footerTotal, 'subTotal', viewResources.Total));
+            }
+            if (isNewCricket == true) {
+                sportType.SubRows.push(renderTotalWinLossCricket(betTypeNewCricket, 'subTotal', betTypeNewCricket.Name, betTypeDrillDown, i, id > 0 ? sportName : IBCs[j].Name));
+            }
+
             // Total (footer)
             var footerTotal = sportWinloss.Total;
             sportType.SubRows.push(renderTotal(footerTotal, 'subTotal', sportName + ' ' + viewResources.Total));
@@ -243,6 +270,94 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
         }
         return sportType;
     };
+
+    var renderWinLossCricket = function (winloss, ibc, sportId, sportName, showDetailLink, bettypeIndex) {
+        var cssClass = bettypeIndex % 2 == 0 ? 'evenRow' : 'oddRow';
+        var betType = ibc ? ((winloss.LiveIndicator == 1 ? '<span class="live">Live!</span> ' : '') + winloss.Name) : winloss.Name;
+        var groupdId = '';
+        return {
+            Columns: [{
+                Name: 'ColView',
+                TdClass: cssClass,
+                CustomCellRender: function () {
+                    if (showDetailLink) {
+                        if (sportId == AccReportData.Constants.SportType.CockFighting) {
+                            return '<div class="viewicon" onclick="ViewCockFightingArena(\'' +
+											_params.reportParams.FromDate + '\',\'' +
+											_params.reportParams.ToDate + '\')">&nbsp;</div>';
+                        } else {
+                            return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
+										_params.reportParams.FromDate + '\',\'' +
+										_params.reportParams.ToDate + '\',' +
+										sportId + ',' +
+										winloss.Id + ',' +
+										winloss.LiveIndicator + ',\'' +
+										sportName + '\',' +
+                                        drillDownByType.byBettype + ')">&nbsp;</div>';
+                        }
+                    }
+                    else {
+                        return '<div>&nbsp;</div>';
+                    }
+                }
+            },
+						{ Name: 'ColBetType', Value: betType, CellAlign: ibc ? 'left' : 'center', CssClass: ibc ? 'bold' : '', TdClass: cssClass },
+						{ Name: 'ColWinLoss', Value: formatNumberCell(winloss.WinLossStr, true, false, false), TdClass: cssClass },
+						{ Name: 'ColPosition', Value: winloss.PositionStr, TdClass: cssClass },
+						{ Name: 'ColComm', Value: winloss.CommissionStr, TdClass: cssClass },
+						{ Name: 'ColRealLineTotal', Value: formatNumberCell(winloss.RealLineTotalStr, true, false, false), TdClass: cssClass },
+						{ Name: 'ColVirtualLineTotal', Value: formatNumberCell(winloss.VirtualLineTotalStr, true, false, false), TdClass: cssClass },
+						{ Name: 'ColVariance', Value: formatNumberCell(winloss.VarianceStr, true, false, false), TdClass: cssClass },
+						{ Name: 'ColRealTurnover', Value: winloss.RealTurnoverStr, TdClass: cssClass },
+						{ Name: 'ColVirtualTurnover', Value: winloss.VirtualTurnoverStr, TdClass: cssClass },
+						{ Name: 'ColRealMargin', Value: formatNumberCell(winloss.RealMarginStr, true, false, true), TdClass: cssClass },
+						{ Name: 'ColVirtualMargin', Value: formatNumberCell(winloss.VirtualMarginStr, true, false, true), TdClass: cssClass }],
+            CssClass: winLossSummary.GetSiteTypeRowCss(groupdId, winLossSummary.Enums.RowType.InfoRow)
+        }
+    };
+
+    var renderTotalWinLossCricket = function (total, css, title, showDetailLink, sportId, sportName) {
+        return {
+            CssClass: css,
+            Columns: [{
+                Name: 'ColView',
+                TdClass: css,
+                CustomCellRender: function () {
+                    if (showDetailLink) {
+                        if (sportId == AccReportData.Constants.SportType.CockFighting) {
+                            return '<div class="viewicon" onclick="ViewCockFightingArena(\'' +
+											_params.reportParams.FromDate + '\',\'' +
+											_params.reportParams.ToDate + '\')">&nbsp;</div>';
+                        } else {
+                            return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
+										_params.reportParams.FromDate + '\',\'' +
+										_params.reportParams.ToDate + '\',' +
+										sportId + ',' +
+										total.Id + ',' +
+										total.LiveIndicator + ',\'' +
+										sportName + '\',' +
+                                        drillDownByType.byBettype + ')">&nbsp;</div>';
+                        }
+                    }
+                    else {
+                        return '<div>&nbsp;</div>';
+                    }
+                }
+            },
+                        { Name: 'ColBetType', Value: total.Name, CellAlign: 'right', CssClass: 'bold', TdClass: css },
+						{ Name: 'ColWinLoss', Value: formatNumberCell(total.WinLossStr, true, false, false) },
+						{ Name: 'ColPosition', Value: total.PositionStr },
+						{ Name: 'ColComm', Value: total.CommissionStr },
+						{ Name: 'ColRealLineTotal', Value: formatNumberCell(total.RealLineTotalStr, true, false, false) },
+						{ Name: 'ColVirtualLineTotal', Value: formatNumberCell(total.VirtualLineTotalStr, true, false, false) },
+						{ Name: 'ColVariance', Value: formatNumberCell(total.VarianceStr, true, false, false) },
+						{ Name: 'ColRealTurnover', Value: total.RealTurnoverStr },
+						{ Name: 'ColVirtualTurnover', Value: total.VirtualTurnoverStr },
+						{ Name: 'ColRealMargin', Value: formatNumberCell(total.RealMarginStr, true, false, true) },
+						{ Name: 'ColVirtualMargin', Value: formatNumberCell(total.VirtualMarginStr, true, false, true) }]
+
+        }
+    }
     var renderWinLoss = function (winloss, ibc, sportId, sportName, showDetailLink, bettypeIndex) {
         var cssClass = bettypeIndex % 2 == 0 ? 'evenRow' : 'oddRow';
         var betType = ibc ? ((winloss.LiveIndicator == 1 ? '<span class="live">Live!</span> ' : '') + winloss.Name) : winloss.Name;

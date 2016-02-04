@@ -25,6 +25,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 
         public List<WinLossInfo> IBCs { get; set; }
 
+        public int Id { get; set; }
+
         public WinLossInfo EightRM { get; set; }
 
         public WinLossInfo BARM { get; set; }
