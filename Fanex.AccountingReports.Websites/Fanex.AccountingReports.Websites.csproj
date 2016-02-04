@@ -676,6 +676,7 @@
     <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportReport_ByBetType.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportReport_BySportType.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportReport_Summary.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportsForNewCricket.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\ReportManager.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\ShowHideReportManager.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\WinLossBySite_BetType.js" />
@@ -714,6 +715,7 @@
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportReport_ByBetType.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportReport_BySportType.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportReport_Summary.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportsForNewCricket.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\ParlayReport.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Racing\RacingReport.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Racing\RacingReport_BySportType.js" />

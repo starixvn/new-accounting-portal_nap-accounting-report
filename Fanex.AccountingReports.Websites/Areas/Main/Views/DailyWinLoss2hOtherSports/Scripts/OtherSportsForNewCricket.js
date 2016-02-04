@@ -119,7 +119,6 @@ OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
             });
         }
         //
-        // demo for New Cricket
         info = report.Total;
         groupdId = tableId + "_BetType0_Hedge0" +
                              "_Live" + (isLive ? 1 : 0);
@@ -211,9 +210,9 @@ OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
                     SportGroupId: self.CacheData.parentController.CacheData.SportId,
                     WinLossDate: self.Params.reportParams.Winlostdate,
                     BetType: betTypeChargeCommission.Id,
-                    BetTypeName: betType.AliasName,
+                    BetTypeName: betTypeChargeCommission.AliasName,
                     IsLive: report.IsLive,
-                    IsHedge: betType.Hedge && betType.Hedge != "" ? true : false,
+                    IsHedge: betTypeChargeCommission.Hedge && betTypeChargeCommission.Hedge != "" ? true : false,
                     SiteType: AccReportData.Constants.SiteType.Credit,
                     SiteTypeName: info.Name,
                     SportTypeName: self.Params.reportParams.SportTypeName
@@ -244,9 +243,9 @@ OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
                     SportGroupId: self.CacheData.parentController.CacheData.SportId,
                     WinLossDate: self.Params.reportParams.Winlostdate,
                     BetType: betTypeChargeCommission.Id,
-                    BetTypeName: betType.AliasName,
+                    BetTypeName: betTypeChargeCommission.AliasName,
                     IsLive: report.IsLive,
-                    IsHedge: betType.Hedge && betType.Hedge != "" ? true : false,
+                    IsHedge: betTypeChargeCommission.Hedge && betTypeChargeCommission.Hedge != "" ? true : false,
                     SiteType: AccReportData.Constants.SiteType.Deposit,
                     SiteTypeName: info.Name,
                     SportTypeName: self.Params.reportParams.SportTypeName

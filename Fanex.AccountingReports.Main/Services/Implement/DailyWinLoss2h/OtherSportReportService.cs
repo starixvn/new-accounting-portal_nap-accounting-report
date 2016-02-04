@@ -403,7 +403,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         IsHedge = data.IsHedge
                     });
                     var isbetTypeNewCricket = false;
-                    var betTypeNewCricket = betTypeGroups.First();
+                    var betTypeNewCricket = betTypeGroups.FirstOrDefault();
                     foreach (var betTypeGroup in betTypeGroups)
                     {
                         if (betTypeGroup.Key.Bettype == 500)
