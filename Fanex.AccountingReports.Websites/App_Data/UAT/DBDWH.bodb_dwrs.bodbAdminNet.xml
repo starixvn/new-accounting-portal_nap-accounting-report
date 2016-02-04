@@ -185,9 +185,9 @@
     <Setting Key="Gaming_WinLoss_CS_Detail_WH" SpName="Acc_Rpt_WinlostCA_Details_Old_uat1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
   </Function>
   <Function Name="SMA Turn Over">
-    <Setting Key="SMA_TurnOver_ReportByDate" SpName="Acc_Rpt_SMAs_TurnOverByDate_uat1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="SMA_TurnOver_ReportByMonth" SpName="Acc_Rpt_SMAs_TurnOverByMonth_uat1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="SMA_TurnOver_ReportByYear" SpName="Acc_Rpt_SMAs_TurnOverByYear_uat1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="SMA_TurnOver_ReportByDate" SpName="Acc_Rpt_SMAs_TurnOverByDate" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="SMA_TurnOver_ReportByMonth" SpName="Acc_Rpt_SMAs_TurnOverByMonth" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="SMA_TurnOver_ReportByYear" SpName="Acc_Rpt_SMAs_TurnOverByYear" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Core - Get DWH Date Range">
     <Setting Key="Core_GetDWH_DateRange" SpName="BI_GetDWStatusByCube" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />

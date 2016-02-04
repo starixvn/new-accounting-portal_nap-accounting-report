@@ -39,7 +39,7 @@
 
         public void ExportCockFightingReport(GetCockFightingCriteria criteria)
         {
-            var report = CacheManager.Get<CockFighting>(_cockFightingReportCachedDataKey);
+            var report = CacheExtension.Get<CockFighting>(_cockFightingReportCachedDataKey);
 
             if (report == null)
             {
@@ -67,7 +67,7 @@
 
         public void ExportCockFightingMatchByArenaReport(GetCockFightingMatchByArena criteria)
         {
-            var report = CacheManager.Get<CockFightingMatchByArena>(_cockFightingMatchByArenaReportCachedDataKey);
+            var report = CacheExtension.Get<CockFightingMatchByArena>(_cockFightingMatchByArenaReportCachedDataKey);
 
             if (report == null)
             {

@@ -42,7 +42,7 @@
             report.ReportRows = _repository.Fetch<CockFightingDetail>(criteria).ToList();
             report.GrandTotal = this.CalculateGrandTotal(report.ReportRows);
 
-            CacheManager.Set<CockFighting>(_cockFightingReportCachedDataKey, report, DateTime.Now.AddHours(ExtendCachedTimeOut));
+            CacheExtension.Set(_cockFightingReportCachedDataKey, report);
             return report;
         }
 
@@ -75,7 +75,7 @@
             report.ReportRows = _repository.Fetch<CockFightMatchDetail>(criteria).ToList();
             report.GrandTotal = this.CalculateGrandTotalByArena(report.ReportRows);
 
-            CacheManager.Set<CockFightingMatchByArena>(_cockFightingMatchByArenaReportCachedDataKey, report, DateTime.Now.AddHours(ExtendCachedTimeOut));
+            CacheExtension.Set(_cockFightingMatchByArenaReportCachedDataKey, report);
             return report;
         }
 
