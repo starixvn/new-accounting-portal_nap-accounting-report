@@ -104,6 +104,11 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
                     var currencyID = Converter.ToInt(parentRow["currency"]);
                     var currencyName = currencies.Where(s => s.Id == currencyID)
                                                  .Select(s => s.Name).FirstOrDefault();
+
+                    if (currencyName == null)
+                    {
+                        currencyName = currencyID == 20 ? "UUS" : string.Empty;
+                    }
                     
                     var parentMember = new CreditTerm
                     {
@@ -133,6 +138,11 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
                                 var memberCurrencyId = Converter.ToInt(memberRow["currency"]);
                                 var memberCurrencyName = currencies.Where(s => s.Id == memberCurrencyId)
                                                                    .Select(s => s.Name).FirstOrDefault();
+
+                                if (memberCurrencyName == null)
+                                {
+                                    memberCurrencyName = memberCurrencyId == 20 ? "UUS" : string.Empty;
+                                }
 
                                 var member = new CreditTerm
                                 {
