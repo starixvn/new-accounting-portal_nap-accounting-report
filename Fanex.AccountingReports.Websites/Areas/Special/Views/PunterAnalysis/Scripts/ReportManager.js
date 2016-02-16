@@ -300,11 +300,11 @@ ReportManager.prototype.RenderDropdownProducts = function (products) {
         if (productGroup.Name.toLowerCase() == "mbc-rng casino") {
             var values = '';
 
-            for (var i = 0; i < productGroup.ChildsInfo.length; i++) {
-                var mbcGroup = productGroup.ChildsInfo[i];
+            for (var currentProduct = 0; currentProduct < productGroup.ChildsInfo.length; currentProduct++) {
+                var mbcGroup = productGroup.ChildsInfo[currentProduct];
                 var mbcGroupId = mbcGroup.Id;
-                for (var j = 0; j < mbcGroup.ChildsInfo.length; j++) {
-                    var bettype = mbcGroup.ChildsInfo[j];
+                for (var currentGameType = 0; currentGameType < mbcGroup.ChildsInfo.length; currentGameType++) {
+                    var bettype = mbcGroup.ChildsInfo[currentGameType];
                     var bettypeId = bettype.Id;
                     values += mbcGroupId + '_' + bettypeId + ',';
                 }

@@ -153,13 +153,13 @@
   </Function>
 
   <Function Name="Main - Match Win Loss (2a)">
-    <Setting Key="Main_MatchWinLoss2a_GetMainReport_WH" SpName="Acc_Rpt_MatchWinLoss2_New_Old_uat1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
-    <Setting Key="Main_MatchWinLoss2a_GetThirdPartyCasinoReport_WH" SpName="Acc_Rpt_WinlostCA_Details_Old_uat1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
-    <Setting Key="Main_MatchWinloss2a_GetWinLossByBettype_WH" SpName="Acc_Rpt_WinlossByBettype_Old_uat1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_MatchWinLoss2a_GetMainReport_WH" SpName="Acc_Rpt_MatchWinLoss2_New_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_MatchWinLoss2a_GetThirdPartyCasinoReport_WH" SpName="Acc_Rpt_WinlostCA_Details_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_MatchWinloss2a_GetWinLossByBettype_WH" SpName="Acc_Rpt_WinlossByBettype_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetWinLossDetailReportByBetType_WH" SpName="Acc_Rpt_MatchWinLoss2_Sporttype_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetAllDetailReportBySportsType_WH" SpName="Acc_Rpt_MatchWinLoss2_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetMetricGamingReport_WH" SpName="Acc_Rpt_WinlostMG_Details_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
-    <Setting Key="Main_MatchWinLoss2a_GetCockFightingReport_WH" SpName="Acc_Rpt_WinlostCF_Details_Old_uat1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_MatchWinLoss2a_GetCockFightingReport_WH" SpName="Acc_Rpt_WinlostCF_Details_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
   </Function>
 
   <Function Name="Special - Punter Analysis">
@@ -182,7 +182,7 @@
   </Function>
 
   <Function Name="Gaming - Casino Win Loss">
-    <Setting Key="Gaming_WinLoss_CS_Detail_WH" SpName="Acc_Rpt_WinlostCA_Details_Old_uat1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Gaming_WinLoss_CS_Detail_WH" SpName="Acc_Rpt_WinlostCA_Details_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
   </Function>
   <Function Name="SMA Turn Over">
     <Setting Key="SMA_TurnOver_ReportByDate" SpName="Acc_Rpt_SMAs_TurnOverByDate" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
