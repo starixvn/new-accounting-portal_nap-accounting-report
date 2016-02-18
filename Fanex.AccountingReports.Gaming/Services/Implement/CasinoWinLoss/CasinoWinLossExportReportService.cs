@@ -267,7 +267,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoWinLoss
             }
 
             row = worksheet.GetRow(currentRow) ?? worksheet.CreateRow(currentRow);
-            string betTypeNameTotal = betType.Name + " " + Labels.Total;
+            string betTypeNameTotal = Labels.Total;
             NpoiExcelExtensions.RenderCell(
                 ref worksheet, 
                 ref row, 

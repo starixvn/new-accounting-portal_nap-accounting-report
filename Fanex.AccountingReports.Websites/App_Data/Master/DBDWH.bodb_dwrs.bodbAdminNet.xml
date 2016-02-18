@@ -22,6 +22,7 @@
     <Setting Key="Gaming_NumberGameWinlossByCurrency_GetReport" SpName="Acc_Rpt_NumberGameWinlossByCurrency" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Gaming_NumberGameWinlossByCurrency_GetReportDetail" SpName="Acc_Rpt_NumberGameWinlossByCurrency_detail" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
+    <Setting Key="Main_MatchWinLoss2a_GetCockFightingReport_WH" SpName="Acc_Rpt_WinlostCF_Details_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
   <Function Name="Misc - Credit Site Bet Count">
     <Setting Key="Misc_CreditSiteBetCount_GetReport" SpName="GET_Acc_CreditSite_BetCount" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
@@ -75,7 +76,7 @@
     <Setting Key="Main_DailyWinLoss2h_GetColossusBetReport_WH" SpName="Acc_Rpt_DailyWLDirect_ColossusBets" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_DailyWinLoss2h_GetCockFightingReport_WH" SpName="Acc_Rpt_DailyWLDirect_CockFighting" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_DailyWinLoss2h_GetCockFightingByArenaReport_WH" SpName="Acc_Rpt_DailyWLDirect_CockFighting_Details" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
-  </Function>
+    </Function>
   <Function Name="Main Report - Daily Win Loss (2h) Soccer">
     <Setting Key="Main_DailyWinLoss2hSoccer_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
   </Function>

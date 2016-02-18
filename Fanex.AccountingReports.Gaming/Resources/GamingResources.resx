@@ -295,13 +295,13 @@
     <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ This report is using OANDA exchange rate for currency conversion&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;</value>
   </data>
   <data name="CasinoWinLoss_ReportName" xml:space="preserve">
-    <value>Casino_Daily_Report_{0}</value>
+    <value>MBC_RNG_Casino_Daily_Report_{0}</value>
   </data>
   <data name="CasinoWinLoss_ReportTitle" xml:space="preserve">
-    <value>Casino Daily Report: {0}</value>
+    <value>MBC - RNG Casino Daily Report: {0}</value>
   </data>
   <data name="CasinoWinLoss_SheetName" xml:space="preserve">
-    <value>Casino Daily Report</value>
+    <value>MBC - RNG Casino Daily Report</value>
   </data>
   <data name="NumberGameStatistic_ReportName" xml:space="preserve">
     <value>Number_Game_Statistic_Report_From_{0}_To_{1}</value>

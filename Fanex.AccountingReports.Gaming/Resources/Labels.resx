@@ -201,6 +201,9 @@
   <data name="Casino" xml:space="preserve">
     <value>Casino</value>
   </data>
+  <data name="CasinoGames" xml:space="preserve">
+    <value>Casino Games</value>
+  </data>
   <data name="ChangedPassword" xml:space="preserve">
     <value>Your Password has been changed successfully !</value>
   </data>

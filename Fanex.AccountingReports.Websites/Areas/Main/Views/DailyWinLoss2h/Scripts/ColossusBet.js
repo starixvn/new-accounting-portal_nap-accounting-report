@@ -339,7 +339,7 @@ ColossusBet.prototype.SetActiveReportManager = function () {
 };
 
 ColossusBet.prototype.ShowHideSiteTypeInfo = function () {
-    if (!this.Tables.bettradeReport.hasClass("display-none")) {
-        this.Tables.bettradeReportContent.fanexGrid("resizeGrid");
+    if (!this.Tables.colossusBetReport.hasClass("display-none")) {
+        this.Tables.colossusBetReportContent.fanexGrid("resizeGrid");
     }
 };

@@ -136,7 +136,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoWinLoss
             switch (betTypeId)
             {
                 case 71:
-                    betTypeName = Labels.Casino;
+                    betTypeName = Labels.CasinoGames;
                     break;
             }
 

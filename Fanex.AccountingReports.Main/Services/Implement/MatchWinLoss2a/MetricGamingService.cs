@@ -67,7 +67,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         public string GetMetricGamingByBetypeReportName(GetMetricGamingCriteria criteria)
         {
             return string.Format(
-                MainResources.MatchWinLoss2aDetailBySportType_ReportName,
+                MainResources.MatchWinLoss2aDetailByBetType_ReportName,
                 criteria.WinlostDate.ToShortFormatedDateWithSlash().Replace("/", "_"));
         }
 
@@ -81,7 +81,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                 ShowDistinctRow = false,
                 ShowHighlightRow = false,
                 TitleInfoText = string.Format(
-                "Metric Gaming - Super Live Win/Loss report for {0}",
+                "Metric Gaming - Super Live Win/Loss Report for {0}",
                 criteria.WinlostDate.ToShortFormatedDate()),
                 TitleType = TitleType.TwoLineBlue
             };

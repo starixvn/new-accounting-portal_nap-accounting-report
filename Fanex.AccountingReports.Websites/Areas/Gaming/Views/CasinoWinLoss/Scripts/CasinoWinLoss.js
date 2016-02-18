@@ -104,7 +104,7 @@ Fanex.AccountingReports.Gaming.CasinoWinLoss = function () {
     };
 
     var renderReport = function (report) {
-        var reportTitle = "Casino Daily Report: " + _params.winLostDate;
+        var reportTitle = "MBC - RNG Casino Daily Report: " + _params.winLostDate;
 
         if (report != null && report.Rows != null && report.Rows.length > 0) {
             var bodyData = [];
@@ -167,7 +167,7 @@ Fanex.AccountingReports.Gaming.CasinoWinLoss = function () {
             bodyData = renderBetTypeDetail(betType.Rows, betType.Name, bodyData, "");
 
             currentColumn = [
-            { Name: "Currency", Value: betType.Name + " Total", TdClass: "bold" }
+            { Name: "Currency", Value: " Total", TdClass: "bold" }
             ];
             currentColumn = renderRow(betType, currentColumn, "bold");
 

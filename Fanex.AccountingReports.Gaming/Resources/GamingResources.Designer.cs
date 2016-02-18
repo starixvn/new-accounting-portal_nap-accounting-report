@@ -169,7 +169,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accumulated Hourly {0} Game Statistic Record {1} on {2} (GMT+8).
+        ///   Looks up a localized string similar to MBC_RNG_Casino_Daily_Report_{0}.
         /// </summary>
         public static string CasinoGameStatistic_Accumulated_Title {
             get {
@@ -259,7 +259,6 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Casino_Daily_Report_{0}.
         /// </summary>
         public static string CasinoWinLoss_ReportName {
             get {
@@ -268,7 +267,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Casino Daily Report: {0}.
+        ///   Looks up a localized string similar to MBC - RNG Casino Daily Report: {0}.
         /// </summary>
         public static string CasinoWinLoss_ReportTitle {
             get {
@@ -277,7 +276,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Casino Daily Report.
+        ///   Looks up a localized string similar to MBC - RNG Casino Daily Report.
         /// </summary>
         public static string CasinoWinLoss_SheetName {
             get {

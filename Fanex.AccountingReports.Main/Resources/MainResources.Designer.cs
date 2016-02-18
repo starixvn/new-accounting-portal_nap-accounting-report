@@ -61,6 +61,24 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cockfighting - Product Win/Loss report for {0}.
+        /// </summary>
+        public static string CockFighting_ReportTitle {
+            get {
+                return ResourceManager.GetString("CockFighting_ReportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cockfighting Product Arena {0} Win/Loss Report For {1}.
+        /// </summary>
+        public static string CockFightingMatchByArena_ReportTitle {
+            get {
+                return ResourceManager.GetString("CockFightingMatchByArena_ReportTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credit_Term_Install_Amount_Report_{0}.
         /// </summary>
         public static string CreditTermInstallAmount_ReportName {
@@ -251,7 +269,7 @@ namespace Fanex.AccountingReports.Main.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to * Virtual All Total: Soccer + Metric Gaming - Super Live + Other Sports + Parlay
-        ///* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P + Bettrade + Colossus Bets.
+        ///* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P + Bettrade + Colossus Bets + Cockfighting.
         /// </summary>
         public static string DailyWinLoss2h_MainReportFooterNote {
             get {
@@ -755,11 +773,29 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MatchWinLoss2aDetailByArena_{0}.
+        /// </summary>
+        public static string MatchWinLoss2aDetailByArena_ReportName {
+            get {
+                return ResourceManager.GetString("MatchWinLoss2aDetailByArena_ReportName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MatchWinLoss2aDetailByBetType_{0}.
         /// </summary>
         public static string MatchWinLoss2aDetailByBetType_ReportName {
             get {
                 return ResourceManager.GetString("MatchWinLoss2aDetailByBetType_ReportName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MatchWinLoss2aDetailByMatch_{0}.
+        /// </summary>
+        public static string MatchWinLoss2aDetailByMatch_ReportName {
+            get {
+                return ResourceManager.GetString("MatchWinLoss2aDetailByMatch_ReportName", resourceCulture);
             }
         }
         

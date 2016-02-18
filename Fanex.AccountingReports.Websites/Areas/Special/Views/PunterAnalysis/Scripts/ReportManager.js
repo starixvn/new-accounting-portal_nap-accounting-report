@@ -297,6 +297,32 @@ ReportManager.prototype.RenderDropdownProducts = function (products) {
             continue;
         }
 
+        if (productGroup.Name.toLowerCase() == "mbc-rng casino") {
+            var values = '';
+
+            for (var currentProduct = 0; currentProduct < productGroup.ChildsInfo.length; currentProduct++) {
+                var mbcGroup = productGroup.ChildsInfo[currentProduct];
+                var mbcGroupId = mbcGroup.Id;
+                for (var currentGameType = 0; currentGameType < mbcGroup.ChildsInfo.length; currentGameType++) {
+                    var bettype = mbcGroup.ChildsInfo[currentGameType];
+                    var bettypeId = bettype.Id;
+                    values += mbcGroupId + '_' + bettypeId + ',';
+                }
+            }
+
+
+            ddProduct.push({
+                Id: "#" + ddId + "_Product251",
+                Value: values,
+                Text: productGroup.Name,
+                Checked: true,
+                Enable: true,
+                CssClass: "bold"
+            });
+
+            continue;
+        }
+
         var sportLength = productGroup.ChildsInfo.length;
         for (var j = 0; j < sportLength; j++) {
             var sportGroup = productGroup.ChildsInfo[j];

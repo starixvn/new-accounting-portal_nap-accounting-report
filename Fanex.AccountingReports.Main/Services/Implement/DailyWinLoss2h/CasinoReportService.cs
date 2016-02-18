@@ -25,7 +25,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
     using Fanex.AccountingReports.Main.Resources;
     using Fanex.Common;
     using CoreConstants = Fanex.AccountingReports.Core.Constants;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>

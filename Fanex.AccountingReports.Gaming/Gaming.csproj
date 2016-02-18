@@ -427,6 +427,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>GamingResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Labels.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

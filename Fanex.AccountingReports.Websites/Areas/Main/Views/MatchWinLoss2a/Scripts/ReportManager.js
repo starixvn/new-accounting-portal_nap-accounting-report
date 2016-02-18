@@ -13,6 +13,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.ReportManager = function () {
     var _detailReportByBetType = new Fanex.AccountingReports.Main.MatchWinLoss2a.DetailReportByBetType();
     var _detailReportBySportsType = new Fanex.AccountingReports.Main.MatchWinLoss2a.DetailReportBySportsType();
     var _thirdPartyDetailReport = new Fanex.AccountingReports.Main.MatchWinLoss2a.ThirdPartyDetailReport();
+    var cockFightingReport = new Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport();
     var _tables = {
         btnGenerate: null,
         btnToday: null,
@@ -49,6 +50,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.ReportManager = function () {
         _detailReportByBetType.initPage();
         _detailReportBySportsType.initPage();
         _thirdPartyDetailReport.initPage();
+        cockFightingReport.initPage();
         _tables.btnToday.val(moment(shortFormattedToday).format("MMM DD, YYYY"));
         _tables.btnYesterday.val(moment(shortFormattedYesterday).format("MMM DD, YYYY"));
         bindingEvent();
@@ -344,6 +346,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.ReportManager = function () {
     ViewThirdPartyDetailReport = function (reportDate, sportTypeName) {
         _detailReportByBetType.closeDialog();
         _detailReportBySportsType.closeDialog();
+        _thirdPartyDetailReport.closeDialog();
         _thirdPartyDetailReport.getReport({
             Winlostdate: reportDate,
             SportName: sportTypeName
@@ -353,6 +356,9 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.ReportManager = function () {
     ViewMetricGamingReport = function (reportDate) {
         _detailReportByBetType.closeDialog();
         _detailReportBySportsType.closeDialog();
+        _thirdPartyDetailReport.closeDialog();
+        cockFightingReport.closeDialog();
+        cockFightingReport.closeCockFightingByArenaDialog();
         _thirdPartyDetailReport.getMetricGamingReport({
             Winlostdate: reportDate
         });
@@ -362,5 +368,29 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.ReportManager = function () {
         var oldParam = _summaryReportByBetType.getParams();
         _params.reportParams.Winlostdate = oldParam.Winlostdate;
         AccReport.downloadFile(window.rootUrl + "Main/MatchWinLoss2a/ExportAllDetailReport", _params.reportParams);
+    };
+
+    ViewCockFightingReport = function (reportDate) {
+        _detailReportByBetType.closeDialog();
+        _detailReportBySportsType.closeDialog();
+        _thirdPartyDetailReport.closeDialog();
+        cockFightingReport.closeDialog();
+        cockFightingReport.closeCockFightingByArenaDialog();
+        cockFightingReport.getCockFightingReport({
+            Winlostdate: reportDate
+        });
+    };
+
+    ViewCockFightingDetailReport = function (reportDate, arenaId, arenaName) {
+        _detailReportByBetType.closeDialog();
+        _detailReportBySportsType.closeDialog();
+        _thirdPartyDetailReport.closeDialog();
+        cockFightingReport.closeDialog();
+        cockFightingReport.closeCockFightingByArenaDialog();
+        cockFightingReport.getCockFightingMatchByArenaReport({
+            Winlostdate: reportDate,
+            ArenaId: arenaId,
+            ArenaName: arenaName
+        });
     };
 }
