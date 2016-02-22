@@ -619,8 +619,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         betTypeWinLoss.Name :
                         this._betTypeNameCache[betTypeWinLoss.Id] + betTypeWinLoss.Hedge;
                     betTypeWinLoss.GrandTotal.Id = betTypeWinLoss.Id;
-                    betTypeWinLoss.GrandTotal.Name = betTypeWinLoss.Name;
-                    betTypeWinLoss.GrandTotal.AliasName = betTypeWinLoss.AliasName;
+                    betTypeWinLoss.GrandTotal.Name = "Charged Commission";
+                    betTypeWinLoss.GrandTotal.AliasName = "Charged Commission";
                     betTypeWinLoss.GrandTotal.Hedge = betTypeWinLoss.Hedge;
                     foreach (var data in betTypeGroup)
                     {
