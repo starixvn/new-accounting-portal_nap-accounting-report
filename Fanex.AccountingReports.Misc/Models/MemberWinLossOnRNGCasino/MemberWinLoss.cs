@@ -32,7 +32,7 @@
 
         public decimal WinLossRM { get; set; }
 
-        public int NumberOfBet { get; set; }
+        public int NumOfMembers { get; set; }
 
         public string TransactionTime { get; set; }
     }

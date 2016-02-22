@@ -140,7 +140,7 @@
                                 Agent = row.Agent,
                                 CurrencyName = row.CurrencyName,
                                 TransactionTime = beginBlockTime.ToString("yyyy-MM-dd HH:mm:ss"),
-                                NumberOfBet = 1,
+                                NumOfMembers = 1,
                                 WinLoss = listMembersInBlockTime.Where(s => s.Member == member).Sum(s => s.WinLoss),
                                 WinLossRM = listMembersInBlockTime.Where(s => s.Member == member).Sum(s => s.WinLossRM),
                             });
@@ -269,7 +269,7 @@
                 Agent = Converter.ToString2(reader["agent"]),
                 WinLoss = Converter.ToDecimal(reader["winlost"]),
                 WinLossRM = Converter.ToDecimal(reader["winlost_rm"]),                
-                NumberOfBet = isRecent ? Converter.ToInt(reader["NumOfBets"]) : 0,
+                NumOfMembers = isRecent ? Converter.ToInt(reader["NumOfMembers"]) : 0,
                 TransactionTime = isRecent ? Converter.ToString2(reader["Truncate"]) : Converter.ToString2(reader["TransDate"])
             };
         }
@@ -348,7 +348,7 @@
                 if (numOfMembers == 1)
                 {
                     var wl = transactionGroup.FirstOrDefault();
-                    numOfMembers = wl.NumberOfBet;
+                    numOfMembers = wl.NumOfMembers;
                 }
 
                 string blockTime = fromTime + " - " + toTime + " (" + numOfMembers + " member" + (numOfMembers > 1 ? "s" : string.Empty) + ")";
@@ -384,7 +384,7 @@
                 if (numOfMembers == 1)
                 {
                     var wl = transactionGroup.FirstOrDefault();
-                    numOfMembers = wl.NumberOfBet;
+                    numOfMembers = wl.NumOfMembers;
                 }
 
                 string blockTime = fromTime + " - " + toTime + " (" + numOfMembers + " member" + (numOfMembers > 1 ? "s" : string.Empty) + ")";
@@ -406,7 +406,7 @@
             int columnIndex = 0;
             GridDataRow dataRow = new GridDataRow();
 
-            if (winLoss.NumberOfBet == 0)
+            if (winLoss.NumOfMembers == 0)
             {
                 dataRow.CreateColumns(new Columns() { Name = Labels.Member, Value = Labels.nodata, MergeColNumber = 5, CellAlignment = HAlignment.Center, CssClass = "nodata" });
             }
