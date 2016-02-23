@@ -117,11 +117,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossBySport = function ()
                 Name: "ColBetType", Value: info, CssClass: "align-right",
                 CustomCellRender: function (currentCell) {
                     var clickEvent = ' onclick = "viewLeagueWinLossByBetType(' + currentCell.Value.Id
-                                + ',\'' + currentCell.Value.Name
+                                + ',\'' + "Charged Commission"
                                 + '\',' + currentCell.Value.IsLive
                                 + ',\'' + currentCell.Value.Hedge
                                  + "');\"";
-                    var html = '<div class="link" ' + clickEvent + '>' + currentCell.Value.Name + currentCell.Value.Hedge + '</div>';
+                    var html = '<div class="link" ' + clickEvent + '>' + "Charged Commission" + currentCell.Value.Hedge + '</div>';
                     return html;
                 }
             },
@@ -152,7 +152,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossBySport = function ()
         var bodyData = [];
         var footerData = [];
 
-        if (isShowReport(report)) {
+        if (report.ChildsInfo.length > 0) {
             var len = report.ChildsInfo.length;
             var currentRow = null;
             var info = null;

@@ -59,7 +59,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
         var bodyData = [];
         var footerData = [];
 
-        if (isShowReport(report)) {
+        if (report.ChildsInfo.length > 0) {
             var len = report.ChildsInfo.length;
             var currentRow = null;
             var info = null;

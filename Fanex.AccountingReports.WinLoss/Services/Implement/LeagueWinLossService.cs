@@ -172,6 +172,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 leagueWinLoss.GrandTotal.Margin = this.GetWinLossMargin(
                     leagueWinLoss.GrandTotal.TurnOver,
                     leagueWinLoss.GrandTotal.LineTotal,
+                Name = "Charged Commission"
                 chargedCommisionTotal.WinLoss += Converter.ToDecimal(info.WinLost);
                 chargedCommisionTotal.Position += Converter.ToDecimal(info.Position);
                 chargedCommisionTotal.Commission += Converter.ToDecimal(info.Commission);
@@ -286,12 +287,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     ChildsInfo = new List<LeagueWinLossInfo>()
                 };
 
-                if (this.IsShowReport(liveReport))
+                if (liveReport.ChildsInfo.Count > 0)
                 {
                     leagueWinLoss.ChildsInfo.Add(liveReport);
                 }
 
-                if (this.IsShowReport(nonLiveReport))
+                if (nonLiveReport.ChildsInfo.Count > 0)
                 {
                     leagueWinLoss.ChildsInfo.Add(nonLiveReport);
                 }
@@ -591,7 +592,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 currentColumn++;
                 currentRow++;
 
-                if (this.IsShowReport(report))
+                if (report.ChildsInfo.Count > 0)
                 {
                     var len = report.ChildsInfo.Count;
                     LeagueWinLossInfo info;
@@ -667,8 +668,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                         info = sport.GrandTotal;
                         const int NewCricketSportType = 50;
                         var sportTotalRowCount = sport.Id != NewCricketSportType
-                            ? ExportLeagueWinLossNormalSportsTotal(startColumn, currentRow, info, workSheet, subRowTextStyle, subRowPositiveTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle)
-                        : ExportLeagueWinLossNewCricketTotal(startColumn, currentRow, info, workSheet, subRowTextStyle, subRowPositiveTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle);
+                            ? ExportLeagueWinLossNormalSportsTotal(startColumn, currentRow, info, workSheet, textStyle, positiveTwoDecimalNumberStyle, twoDecimalNumberStyle, positiveTwoDecimalPercentNumberStyle)
+                            : ExportLeagueWinLossNewCricketTotal(startColumn, currentRow, info, workSheet, textStyle, positiveTwoDecimalNumberStyle, twoDecimalNumberStyle, positiveTwoDecimalPercentNumberStyle);
 
                         currentRow += sportTotalRowCount;
                     }
@@ -1127,7 +1128,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 currentColumn++;
                 currentRow++;
 
-                if (this.IsShowReport(report))
+                if (report.ChildsInfo.Count > 0)
                 {
                     var len = report.ChildsInfo.Count;
                     LeagueWinLossInfo info;
@@ -1401,7 +1402,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 WinLossResources.LeagueWinLossBySport_ReportTitle,
                 criteria.SportName,
                 criteria.LeagueName,
-                this.IsShowReport(report) ? " - " + report.Name : string.Empty);
+                (report.ChildsInfo.Count > 0) ? " - " + report.Name : string.Empty);
 
             currentColumn = startColumn;
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
@@ -1448,7 +1449,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             currentColumn++;
             currentRow++;
             LeagueWinLossInfo chargedCommissionTotal = null;
-            if (this.IsShowReport(report))
+            if (report.ChildsInfo.Count > 0)
             {
                 var len = report.ChildsInfo.Count;
                 LeagueWinLossInfo info;
