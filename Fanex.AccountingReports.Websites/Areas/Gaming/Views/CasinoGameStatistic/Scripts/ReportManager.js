@@ -1104,6 +1104,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
         var selectParam = self.GetReportParams();
 
         selectParam.ViewReport = self.Params.globalVariable.viewReport.UserName;
+        selectParam.IsDrillDown = true;
 
         self.Params.globalVariable.PrevReportType = self.Params.globalVariable.CurrentReportType;
         self.Params.globalVariable.CurrentReportType = self.Params.globalVariable.viewReport.UserName;
@@ -1153,12 +1154,13 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
             selectParam.TotalBetMore = "";
             selectParam.TotalWinLess = "";
             selectParam.TotalWinMore = "";
+            selectParam.IsDrillDown = true;
         } else {
             self.Params.globalVariable.IsDrillDown = false;
             self.Params.globalVariable.CacheUserName = null;
+            selectParam.IsDrillDown = false;
         }
-
-        selectParam.IsDrillDown = false;
+        
         self.Params.globalVariable.CacheParam.Daily = selectParam;
         self.Params.globalVariable.DrillReportType = reportType;
 
@@ -1417,7 +1419,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
             return;
         }
 
-        selectParam.IsDrillDown = self.Params.globalVariable.IsDrillDown;
+        selectParam.IsDrillDown = true;
         self.Params.globalVariable.CacheParam.Currency = selectParam;
 
         self.CachedData.currentPage = 0;
