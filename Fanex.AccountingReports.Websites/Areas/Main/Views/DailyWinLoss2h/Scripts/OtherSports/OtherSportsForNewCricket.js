@@ -119,8 +119,9 @@ OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
             });
         }
         //
+
         info = report.Total;
-        groupdId = tableId + "_BetType0_Hedge0" +
+        groupdId = tableId + "_BetType" + "Total"
                              "_Live" + (isLive ? 1 : 0);
         footerData.push({
             Columns: [
@@ -178,7 +179,7 @@ OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
 
         // for Charge Commision
         info = betTypeChargeCommission.GrandTotal;
-        groupdId = tableId + "_BetType0_Hedge0" +
+        groupdId = tableId + "_BetType" + "ChargeCommision"
                              "_Live" + (isLive ? 1 : 0);
         footerData.push({
             Columns: [
@@ -268,7 +269,7 @@ OtherSportsForNewCricket = function (report, isLive, CacheData, Params) {
         });
 
         info = report.GrandTotal;
-        groupdId = tableId + "_BetType0_Hedge0" +
+        groupdId = tableId + "_BetType" + "GrandTotal"
                              "_Live" + (isLive ? 1 : 0);
         footerData.push({
             Columns: [
