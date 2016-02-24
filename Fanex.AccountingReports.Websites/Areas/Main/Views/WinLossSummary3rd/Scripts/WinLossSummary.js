@@ -217,7 +217,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                             betTypeNewCricket = IBCs[j];
                             continue;
                         }
-                        sportType.SubRows.push(renderWinLossCricket(IBCs[j], true, id, id > 0 ? sportName : IBCs[j].Name, betTypeDrillDown, i));
+                        sportType.SubRows.push(renderWinLossCricket(IBCs[j], true, sportWinloss.Id, id > 0 ? sportName : IBCs[j].Name, betTypeDrillDown, i));
                     }
                 }
                 else {
@@ -251,7 +251,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                 sportType.SubRows.push(renderTotal(footerTotal, 'subTotal', viewResources.Total));
             }
             if (isNewCricket == true) {
-                sportType.SubRows.push(renderTotalWinLossCricket(betTypeNewCricket, 'subTotal', betTypeNewCricket.Name, betTypeDrillDown, i, id > 0 ? sportName : IBCs[j].Name));
+                sportType.SubRows.push(renderTotalWinLossCricket(betTypeNewCricket, 'subTotal', betTypeNewCricket.Name, betTypeDrillDown, id, id > 0 ? sportName : IBCs[j].Name));
             }
 
             // Total (footer)

@@ -333,7 +333,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                     }
                     else
                     {
-                        winloss.Name = this.GetBetType(winloss.Id);
+                        winloss.Name = "Charged Commission";
                     }
 
                     if (!string.IsNullOrWhiteSpace(winloss.Status))
