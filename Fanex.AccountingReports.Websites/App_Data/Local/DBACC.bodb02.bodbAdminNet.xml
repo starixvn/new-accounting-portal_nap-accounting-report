@@ -86,14 +86,14 @@
     <Setting Key="Main_DailyWinLoss2h_GetReportByBetType" SpName="Acc_Rpt_DailyWLDirect_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetReportByBetType_14" SpName="Acc_Rpt_DailyWLDirect_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
 
-    <Setting Key="Main_DailyWinLoss2h_Main2hReport" SpName="Acc_Rpt_DailyWLDirect_Sporttype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_Main2hReport_14" SpName="Acc_Rpt_DailyWLDirect_Sporttype14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_Main2hReport" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_Main2hReport_14" SpName="Acc_Rpt_DailyWLDirect_Sporttype14_Xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
 
     <Setting Key="Main_DailyWinLoss2h_GetCasinoReport" SpName="Acc_Rpt_DailyWLDirect_Casino" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetCasinoReport_14" SpName="Acc_Rpt_DailyWLDirect_Casino14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
 
-    <Setting Key="Main_DailyWinLoss2h_GetLiveCasinoReport" SpName="Acc_Rpt_DailyWLDirect_LiveCasino" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetLiveCasinoReport_14" SpName="Acc_Rpt_DailyWLDirect_LiveCasino14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetLiveCasinoReport" SpName="Acc_Rpt_DailyWLDirect_LiveCasino_Xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetLiveCasinoReport_14" SpName="Acc_Rpt_DailyWLDirect_LiveCasino14_Xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
 
     <Setting Key="Main_DailyWinLoss2h_GetKenoReport" SpName="Acc_Rpt_DailyWLDirect_Keno_Bettype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetKenoReport_14" SpName="Acc_Rpt_DailyWLDirect_Keno_Bettype14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
@@ -139,8 +139,8 @@
 
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Racing" SpName="Acc_Rpt_DailyWLDirect_RacingBySport_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Racing_14" SpName="Acc_Rpt_DailyWLDirect_RacingBySport_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_LiveCasino" SpName="Acc_Rpt_DailyWLDirect_LiveCasino_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_LiveCasino_14" SpName="Acc_Rpt_DailyWLDirect_LiveCasino_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_LiveCasino" SpName="Acc_Rpt_DailyWLDirect_LiveCasino_Bettype_Site_Xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_LiveCasino_14" SpName="Acc_Rpt_DailyWLDirect_LiveCasino_Bettype_Site14_Xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Bingo" SpName="Acc_Rpt_DailyWLDirect_Bingo_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Bingo_14" SpName="Acc_Rpt_DailyWLDirect_Bingo_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Casino" SpName="Acc_Rpt_DailyWLDirect_Casino_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
