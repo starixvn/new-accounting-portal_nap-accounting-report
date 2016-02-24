@@ -1988,7 +1988,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             }
             if (ischargedCommission == true)
             {
-                chargedCommission.Name = this._betTypeNameCache[chargedCommission.Id];
+                chargedCommission.Name = "Charged Commission";
                 chargedCommission.Margin = this.GetWinLossMargin(chargedCommission.TurnOver, chargedCommission.LineTotal, 4, true);
                 report.ChildsInfo.Add(chargedCommission);
                 report.AddToGrandTotal(chargedCommission);
