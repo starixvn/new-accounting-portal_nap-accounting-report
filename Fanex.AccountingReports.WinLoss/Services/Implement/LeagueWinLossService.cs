@@ -193,7 +193,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 sportWinLoss.GrandTotal.TurnOver,
                 sportWinLoss.GrandTotal.LineTotal,
                 4,
-                false);
+                true);
 
             sportWinLoss.GrandTotal = this.RoundLeagueWinLossInfo(sportWinLoss.GrandTotal);
 
@@ -274,7 +274,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                    matchWinnerTotal.TurnOver,
                    matchWinnerTotal.LineTotal,
                    4,
-                   false);
+                   true);
             return RoundLeagueWinLossInfo(matchWinnerTotal);
         }
 
@@ -319,7 +319,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                    grandTotal.TurnOver,
                    grandTotal.LineTotal,
                    4,
-                   false);
+                   true);
             return this.RoundLeagueWinLossInfo(grandTotal);
 
         }
@@ -381,6 +381,19 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                         }
                     });
                 }
+                liveReport.Total.Margin = this.GetWinLossMargin(
+                    liveReport.Total.TurnOver,
+                    liveReport.Total.LineTotal,
+                    4,
+                    true);
+                liveReport.Total = this.RoundLeagueWinLossInfo(liveReport.Total);
+
+                nonLiveReport.Total.Margin = this.GetWinLossMargin(
+                    nonLiveReport.Total.TurnOver,
+                    nonLiveReport.Total.LineTotal,
+                    4,
+                    true);
+                nonLiveReport.Total = this.RoundLeagueWinLossInfo(nonLiveReport.Total);
 
                 if (this._8rmConfig.IsActive)
                 {
@@ -402,14 +415,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     liveReport.GrandTotal.TurnOver,
                     liveReport.GrandTotal.LineTotal,
                     4,
-                    false);
+                    true);
                 liveReport.GrandTotal = this.RoundLeagueWinLossInfo(liveReport.GrandTotal);
 
                 nonLiveReport.GrandTotal.Margin = this.GetWinLossMargin(
                     nonLiveReport.GrandTotal.TurnOver,
                     nonLiveReport.GrandTotal.LineTotal,
                     4,
-                    false);
+                    true);
                 nonLiveReport.GrandTotal = this.RoundLeagueWinLossInfo(nonLiveReport.GrandTotal);
 
                 var leagueWinLoss = new LeagueWinLossInfo
@@ -789,7 +802,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = Converter.ToDecimal(info.Margin);
+                            if (info.TurnOver > 0)
+                            {
+                                currentCell.Value = Converter.ToDecimal(info.Margin);
+                            }
+                            else
+                            {
+                                currentCell.Value = info.Margin.ToString();
+                            }
                             currentCell.Style = positiveTwoDecimalPercentNumberStyle;
                             currentColumn++;
                             currentRow++;
@@ -844,7 +864,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = Converter.ToDecimal(info.Margin);
+                    if (info.TurnOver > 0)
+                    {
+                        currentCell.Value = Converter.ToDecimal(info.Margin);
+                    }
+                    else
+                    {
+                        currentCell.Value = info.Margin.ToString();
+                    }
                     currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                     currentColumn++;
@@ -981,7 +1008,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Converter.ToDecimal(info.Margin);
+                if (info.TurnOver > 0)
+                {
+                    currentCell.Value = Converter.ToDecimal(info.Margin);
+                }
+                else
+                {
+                    currentCell.Value = info.Margin.ToString();
+                }
                 currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
                 currentRow++;
             }
@@ -1032,7 +1066,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Converter.ToDecimal(info.Margin);
+            if (info.TurnOver > 0)
+            {
+                currentCell.Value = Converter.ToDecimal(info.Margin);
+            }
+            else
+            {
+                currentCell.Value = info.Margin.ToString();
+            }
             currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
             currentColumn++;
 
@@ -1742,7 +1783,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Converter.ToDecimal(info.Margin);
+            if(info.TurnOver > 0)
+            {
+                currentCell.Value = Converter.ToDecimal(info.Margin);
+            }
+            else
+            {
+                currentCell.Value = info.Margin.ToString();
+            }
             currentCell.Style = positiveTwoDecimalPercentNumberStyle;
             currentColumn++;
             return 1;
@@ -1796,7 +1844,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            AssignMargin(currentCell, info);
+            if (info.TurnOver > 0)
+            {
+                currentCell.Value = Converter.ToDecimal(info.Margin);
+            }
+            else
+            {
+                currentCell.Value = info.Margin.ToString();
+            }
 
             currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
             currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
@@ -1903,7 +1958,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var betTypeList = rawData.Select(rawWinLossInfo => Converter.ToInt(rawWinLossInfo.Bettype))
                                                      .ToList();
             CacheRef.SaveCacheRefResponse(betTypeList, CacheRef.GetBettype, ref this._betTypeNameCache);
-
+            var chargedCommission = rawData.FirstOrDefault();
+            var ischargedCommission = false;
             foreach (var row in rawData)
             {
                 var info = new LeagueWinLossInfo
@@ -1917,13 +1973,25 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     TurnOver = Converter.ToDecimal(row.Turnover),
                     IsLive = Converter.ToBool(row.liveindicator)
                 };
-
+                if(info.Id == 500)
+                {
+                    chargedCommission = info;
+                    ischargedCommission = true;
+                    continue;
+                }
                 info.Name = this._betTypeNameCache[info.Id];
                 info.Margin = this.GetWinLossMargin(info.TurnOver, info.LineTotal, 4, true);
 
                 report.AddToTotal(info);
                 info = this.RoundLeagueWinLossInfo(info);
                 report.ChildsInfo.Add(info);
+            }
+            if (ischargedCommission == true)
+            {
+                chargedCommission.Name = this._betTypeNameCache[chargedCommission.Id];
+                chargedCommission.Margin = this.GetWinLossMargin(chargedCommission.TurnOver, chargedCommission.LineTotal, 4, true);
+                report.ChildsInfo.Add(chargedCommission);
+                report.AddToGrandTotal(chargedCommission);
             }
 
             report.Total.Margin = this.GetWinLossMargin(report.Total.TurnOver, report.Total.LineTotal, 4, false);
