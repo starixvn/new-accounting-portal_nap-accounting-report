@@ -210,6 +210,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             {
                 ChildsInfo = new List<LeagueWinLossInfo> { matchWinnerTotal, chargedCommisionTotal, grandTotal }
             };
+            sportWinLoss.AddToGrandTotal(grandTotal);
 
             return sportWinLoss;
         }
