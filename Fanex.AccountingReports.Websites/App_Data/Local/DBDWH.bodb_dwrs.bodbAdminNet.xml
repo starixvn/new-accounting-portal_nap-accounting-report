@@ -155,7 +155,7 @@
     <Setting Key="WinLoss_TreeWinLoss_GetDataByProduct_WH" SpName="Acc_Rpt_TreeWinlostByProduct_Old_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="WinLoss_TreeWinLoss_GetDataByCom_WH" SpName="Acc_Rpt_TreeWinlostByCom_Old_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
     </Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetDataBySuper_WH" SpName="Acc_Rpt_TreeWinlostBySAg_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
+    <Setting Key="WinLoss_TreeWinLoss_GetDataBySuper_WH" SpName="Acc_Rpt_TreeWinlostBySAg_Old_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
     </Setting>
     <Setting Key="WinLoss_TreeWinLoss_GetDataByMaster_WH" SpName="Acc_Rpt_TreeWinlostByMAg_Old_Xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
     </Setting>
