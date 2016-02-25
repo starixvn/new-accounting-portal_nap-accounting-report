@@ -1246,4 +1246,7 @@
   <data name="Extra_PT" xml:space="preserve">
     <value>Extra PT</value>
   </data>
+  <data name="AllBet" xml:space="preserve">
+    <value>AllBet</value>
+  </data>
 </root>

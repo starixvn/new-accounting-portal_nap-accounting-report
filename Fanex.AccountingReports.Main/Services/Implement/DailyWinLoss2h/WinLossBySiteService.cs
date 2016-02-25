@@ -92,6 +92,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 case MainSportConstants.SportContants._2hGoldDeluxeSport:
                 case MainSportConstants.SportContants._2hLiveCasinoSport:
                 case MainSportConstants.SportContants._2hAGCasinoSport:
+                case MainSportConstants.SportContants._2hAllbet:
                 case MainSportConstants.SportContants._2hMicroGamingLiveCasinoSport:
                     return new GetWinLossBySite_LiveCasinoCriteria
                     {

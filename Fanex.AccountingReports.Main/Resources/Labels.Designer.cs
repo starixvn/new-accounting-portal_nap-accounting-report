@@ -366,6 +366,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AllBet.
+        /// </summary>
+        public static string AllBet {
+            get {
+                return ResourceManager.GetString("AllBet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount Due To.
         /// </summary>
         public static string AmountDueTo {
