@@ -9,6 +9,10 @@
 
 namespace Fanex.AccountingReports.Websites
 {
+    using Fanex.AccountingReports.Core.Services.Impl;
+    using Fanex.AccountingReports.Core.Services.Impl.Worker;
+    using Fanex.AccountingReports.Websites.App_Start;
+    using Fanex.Data.Configuration;
     using System;
     using System.Data.SqlClient;
     using System.Diagnostics.CodeAnalysis;
@@ -17,10 +21,6 @@ namespace Fanex.AccountingReports.Websites
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
-    using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.AccountingReports.Core.Services.Impl.Worker;
-    using Fanex.AccountingReports.Websites.App_Start;
-    using Fanex.Data.Configuration;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode,
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -35,6 +35,8 @@ namespace Fanex.AccountingReports.Websites
         /// </summary>
         protected void Application_Start()
         {
+            ChangeApplicationName();
+
             DbSettingProviderManager.Current.Start();
 
             AreaRegistration.RegisterAllAreas();
@@ -124,14 +126,14 @@ namespace Fanex.AccountingReports.Websites
             }
         }
 
-        private void CheatApplicationName()
+        private void ChangeApplicationName()
         {
-            string applicationName = "AlphaSite";
+            string applicationName = "NAP_ACC_REPORT";
 
             // Change the Application Name in runtime.
             var runtimeInfo = typeof(HttpRuntime).GetField("_theRuntime", BindingFlags.Static | BindingFlags.NonPublic);
-            var theRuntime = (HttpRuntime)runtimeInfo.GetValue(null);
             var appNameInfo = typeof(HttpRuntime).GetField("_appDomainAppId", BindingFlags.Instance | BindingFlags.NonPublic);
+            var theRuntime = runtimeInfo.GetValue(null);
 
             appNameInfo.SetValue(theRuntime, applicationName);
         }

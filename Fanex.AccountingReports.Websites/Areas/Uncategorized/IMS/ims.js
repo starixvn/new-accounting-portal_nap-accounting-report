@@ -4,7 +4,8 @@
 
     var iframe = document.getElementById("centerFr");
     var d = new Date().getMilliseconds();
-    iframe.src = menuUrl + '&d=' + d;
+    var parameters = menuUrl.indexOf('?') >= 0 ? '&d=' + d : '?d=' + d;
+    iframe.src = menuUrl + parameters;
     var fullheight = $(".fullsize").height();
     var contentheight = fullheight - 44;
     $('#centerFr').height(contentheight + "px");
