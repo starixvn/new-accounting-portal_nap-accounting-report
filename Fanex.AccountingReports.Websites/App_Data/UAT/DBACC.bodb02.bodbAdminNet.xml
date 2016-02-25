@@ -56,7 +56,7 @@
     <Setting Key="Main_DailyWinLoss2h_GetReportByBetType_14" SpName="Acc_Rpt_DailyWLDirect_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
 
     <Setting Key="Main_DailyWinLoss2h_Main2hReport" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Xpre" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_Main2hReport_14" SpName="Acc_Rpt_DailyWLDirect_Sporttype14" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_Main2hReport_14" SpName="Acc_Rpt_DailyWLDirect_Sporttype14_Xpre" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" />
 
     <Setting Key="Main_DailyWinLoss2h_GetCasinoReport" SpName="Acc_Rpt_DailyWLDirect_Casino" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetCasinoReport_14" SpName="Acc_Rpt_DailyWLDirect_Casino14" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" />
