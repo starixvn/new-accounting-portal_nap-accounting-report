@@ -183,11 +183,11 @@
     <Setting Key="WinLoss_TreeWinLoss_GetDataByProduct" SpName="Acc_Rpt_TreeWinlostByProduct" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" />
     <Setting Key="WinLoss_TreeWinLoss_GetDataByCom" SpName="Acc_Rpt_TreeWinlostByCom" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" >
     </Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetDataBySuper" SpName="Acc_Rpt_TreeWinlostBySAg" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" >
+    <Setting Key="WinLoss_TreeWinLoss_GetDataBySuper" SpName="Acc_Rpt_TreeWinlostBySAg_Xtest" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" >
     </Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetDataByMaster" SpName="Acc_Rpt_TreeWinlostByMAg" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" >
+    <Setting Key="WinLoss_TreeWinLoss_GetDataByMaster" SpName="Acc_Rpt_TreeWinlostByMAg_Xtest" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" >
     </Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetDataByAgent" SpName="Acc_Rpt_TreeWinlostByAg" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" >
+    <Setting Key="WinLoss_TreeWinLoss_GetDataByAgent" SpName="Acc_Rpt_TreeWinlostByAg_Xtest" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" >
     </Setting>
     <Setting Key="WinLoss_TreeWinLoss_GetVirtualRate" SpName="Acc_CustomerSelVirtualMultiplier" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
@@ -201,7 +201,7 @@
   </Function>
 
   <Function Name="Gaming / Live Casino Game Statistic">
-    <Setting Key="Gaming_LiveCasinoGameStatistics_GetGameTypeList" SpName="Acc_Rpt_LiveCasino_GameStatistics_GameTypeSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0">
+    <Setting Key="Gaming_LiveCasinoGameStatistics_GetGameTypeList" SpName="Acc_Rpt_LiveCasino_GameStatistics_GameTypeSel_Xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0">
       <Mapping DataField="typeID" ObjectProperty="Id" />
       <Mapping DataField="typenamee" ObjectProperty="Name" />
     </Setting>
@@ -212,7 +212,7 @@
   </Function>
 
   <Function Name="Gaming - Live Casino Agency Win Loss">
-    <Setting Key="Gaming_LiveCasinoAgencyWinLoss_GetReport" SpName="Acc_Rpt_LiveCasino_AgencyWinLoss" TimeOut="0" DbName="DBACC.bodb02.bodbAdminNet" />
+    <Setting Key="Gaming_LiveCasinoAgencyWinLoss_GetReport" SpName="Acc_Rpt_LiveCasino_AgencyWinLoss_Xtest" TimeOut="0" DbName="DBACC.bodb02.bodbAdminNet" />
   </Function>
 
   <Function Name="WinLoss - Match Win Loss By Bettype">

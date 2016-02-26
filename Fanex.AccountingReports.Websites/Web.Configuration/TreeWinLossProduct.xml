@@ -17,4 +17,5 @@
   <Product ProductID="17" ProductName ="Microgaming - RNG Casino" IsNoTurnover="0" IsNoVirtual="1"/>
   <Product ProductID="15" ProductName ="Colossus Bets" IsNoTurnover="0" IsNoVirtual="1"/>
   <Product ProductID="19" ProductName ="Cockfighting" IsNoTurnover="0" IsNoVirtual="1"/>
+  <Product ProductID="21" ProductName ="AllBet" IsNoTurnover="0" IsNoVirtual="1"/>
 </ROOT>
