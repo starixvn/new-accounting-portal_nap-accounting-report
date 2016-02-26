@@ -24,7 +24,7 @@
   <Function Name="Special - Special Match Analysis">
     <Setting Key="Special_SpecialMatchAnalysis_GetLeagues" SpName="Acc_LeagueSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Special_SpecialMatchAnalysis_GetMatches" SpName="Acc_MatchSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetBetTypeByMatch" SpName="Acc_BettypeSelFromMatch" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetBetTypeByMatch" SpName="Acc_BettypeSelFromMatch_Xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Special_SpecialMatchAnalysis_GetReportByCurrency" SpName="Acc_Rpt_MatchAnalysisByCurrency_Xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Special_SpecialMatchAnalysis_GetReportByBetType" SpName="Acc_Rpt_MatchAnalysisByBettype_Xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper" SpName="Acc_Rpt_MatchAnalysisBySuper_Xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />

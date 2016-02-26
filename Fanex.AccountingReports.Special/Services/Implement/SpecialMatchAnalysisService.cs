@@ -9,6 +9,7 @@
 
 namespace Fanex.AccountingReports.Special.Services.Implement
 {
+    using Common;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
@@ -241,6 +242,8 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     if (row.Id == chargedComissionBetType && criteria.Reporttype == ReportType.Bettype)
                     {
                         chargedCommission = row;
+                        chargedCommission.Name = "Charged Commission";
+                        chargedCommission.BetCount = "0";
                     }
                     else {
                         matchAnalysis.Rows.Add(row);
@@ -262,27 +265,43 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     BetCount = data.Sum(s => (int)s.betcount).Format(0),
                     Name = Labels.Total
                 };
-                matchAnalysis.Total = new List<MatchAnalysis> { total };
+                matchAnalysis.Total = new List<MatchAnalysis> { total};
 
                 if (chargedCommission != null)
                 {
                     matchAnalysis.Total.Add(chargedCommission);
+
                     var grandTotal = new MatchAnalysis
                     {
                         Name = "All Total",
-                        SMAWL = total.SMAWL + chargedCommission.SMAWL,
-                        SMATO = total.SMATO + chargedCommission.SMATO,
-                        HouseWL = total.HouseWL + chargedCommission.HouseWL,
-                        HouseTO = total.HouseTO + chargedCommission.HouseTO,
-                        MemberWL = total.MemberWL + chargedCommission.MemberWL,
-                        MemberTO = total.MemberTO + chargedCommission.MemberTO,
-                        BetCount = total.BetCount + chargedCommission.BetCount,
+                        SMAWL = total.SMAWL,
+                        SMATO = total.SMATO,
+                        HouseWL = total.HouseWL,
+                        HouseTO = total.HouseTO,
+                        MemberWL = total.MemberWL,
+                        MemberTO = total.MemberTO,
+                        BetCount = total.BetCount,
                     };
 
                     matchAnalysis.Total.Add(grandTotal);
-                }
+                    matchAnalysis.Total.First().SMAWL = Converter.ToString2(Converter.ToDecimal(total.SMAWL)
+                                   - Converter.ToDecimal(chargedCommission.SMAWL));
+                    matchAnalysis.Total.First().SMATO = Converter.ToString2(Converter.ToDecimal(total.SMATO)
+                                   - Converter.ToDecimal(chargedCommission.SMATO));
 
+                    matchAnalysis.Total.First().HouseWL = Converter.ToString2(Converter.ToDecimal(total.HouseWL)
+                                   - Converter.ToDecimal(chargedCommission.HouseWL));
+                    matchAnalysis.Total.First().HouseTO = Converter.ToString2(Converter.ToDecimal(total.HouseTO)
+                                   - Converter.ToDecimal(chargedCommission.HouseTO));
 
+                    matchAnalysis.Total.First().MemberWL = Converter.ToString2(Converter.ToDecimal(total.MemberWL)
+                                    - Converter.ToDecimal(chargedCommission.MemberWL));
+                    matchAnalysis.Total.First().MemberTO = Converter.ToString2(Converter.ToDecimal(total.MemberTO)
+                                    - Converter.ToDecimal(chargedCommission.MemberTO));
+
+                    matchAnalysis.Total.First().BetCount = Converter.ToString2(Converter.ToDecimal(total.BetCount)
+                                    - Converter.ToDecimal(chargedCommission.BetCount));
+                };
                 SessionManager.Set(SpecialConstants.MatchAnalysisSessionKey + GetReportTypeName(criteria.Reporttype), matchAnalysis);
             }
             catch (Exception ex)
