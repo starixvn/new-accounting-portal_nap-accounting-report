@@ -270,9 +270,9 @@ Rad tree view css
 }
 .RadTreeView_Office2010Silver_rtl .rtLines .rtBot {
     background-image: url("images/BottomLine_rtl.png");
-}
+}/* 
 .RadTreeView_Office2010Silver .rtLines .rtLast .rtTop {
-    background-image: url("images/SingleLine.png");
+    background-image: url("images/SingleLine.png"); */
 }
 .RadTreeView_Office2010Silver_rtl .rtLines .rtLast .rtTop {
     background-image: url("images/SingleLine_rtl.png");

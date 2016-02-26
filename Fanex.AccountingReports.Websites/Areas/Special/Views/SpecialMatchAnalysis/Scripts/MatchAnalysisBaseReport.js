@@ -115,7 +115,8 @@ Fanex.AccountingReports.Special.SpecialMatchAnalysis.MatchAnalysisBaseReport = f
 
         return cssClass;
     };
-    self.renderReportTotalRow = function (row) {
+    self.renderReportTotalRow = function (rawRow) {
+        var row = rawRow[0];
         var frozenHtml = '';
         frozenHtml = '<th><div class="col160 align-center">' + row.Name + '</div></th>'
         self.TempHtml.footerFrozenHtml += '<tr>' + frozenHtml + ' </tr>';
