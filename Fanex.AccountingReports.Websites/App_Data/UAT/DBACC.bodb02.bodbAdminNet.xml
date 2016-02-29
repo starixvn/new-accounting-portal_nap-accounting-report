@@ -40,8 +40,8 @@
     <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossBySport" SpName="Acc_Rpt_LeagueWL_Bettype_Xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossBySport_14" SpName="Acc_Rpt_LeagueWL_Bettype14_Xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
 
-    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossByBetType" SpName="Acc_Rpt_LeagueWL_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossByBetType_14" SpName="Acc_Rpt_LeagueWL_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossByBetType" SpName="Acc_Rpt_LeagueWL_Details_Xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossByBetType_14" SpName="Acc_Rpt_LeagueWL_Details14_Xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
 
     <Setting Key="WinLoss_AllCustomerTurnOver_GetReport" SpName="Acc_Rpt_CustomerTurnoverBySite" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
   </Function>
