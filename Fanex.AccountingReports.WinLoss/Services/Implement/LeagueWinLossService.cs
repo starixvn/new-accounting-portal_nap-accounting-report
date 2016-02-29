@@ -540,7 +540,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                         true);
                     leagueWinLoss.ChildsInfo.Add(info);
                     leagueWinLoss.AddToTotal(info);
-                    leagueWinLoss.AddToGrandTotal(leagueWinLoss.Total);
+                    leagueWinLoss.AddToGrandTotal(info);
                     info = this.RoundLeagueWinLossInfo(info);
                 });
 
