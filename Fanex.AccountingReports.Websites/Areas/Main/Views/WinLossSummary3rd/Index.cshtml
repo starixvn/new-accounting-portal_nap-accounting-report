@@ -29,12 +29,32 @@
                     <div id="datepickerplugin" class="lbl-field col_15 align-right">
                     </div>
                 </div>
+                <div class="submit col_4">
+                    <input id="btnGenerate" name="btnGenerate" type="submit" value="@Labels.Generate" />
+                </div>
+				<div class="submit col_4">
+                    <input id="btnHistoryReport" name="btnHistoryReport" type="submit" value="@Labels.History_Report" />
+                </div>
+                <div class="submit" style="margin-left: 40px">
+                    <input id="btnShowHideSiteTypeInfo" name="btnShowHideSiteTypeInfo" type="submit" value="@Labels.Expand" title="@Labels.Collapse/@Labels.Expand" disabled="disabled"/>
+                </div>
+            </div>
+        </div>
+		<div id="winlossSummaryReportFilter-history" class="">
+            <div class="filter-row">
                 <div class="filter-cell">
-                    <div class="submit width-auto col_4">
-                        <input id="btnGenerate" name="btnGenerate" type="submit" value="@Labels.Generate" />
-                        <input id="btnHistoryReport" name="btnHistoryReport" type="submit" value="@Labels.History_Report" />
-                        <input id="btnShowHideSiteTypeInfo" name="btnShowHideSiteTypeInfo" type="submit" value="@Labels.Expand" title="@Labels.Collapse/@Labels.Expand" disabled="disabled" />
-                    </div>
+                    <div class="lbl-field col_2">
+                        <div>@Labels.Month</div>
+					</div>
+					<div class="edit-field col_15">
+						<div id="ddlMonth"></div>
+					</div>
+				</div>
+                <div class="submit col_4">
+                    <input id="btnGenerate-history" name="btnGenerate-history" type="submit" value="@Labels.Generate" />
+                </div>
+				<div class="submit col_4">
+                    <input id="btnBack" name="btnBack" type="submit" value="@Labels.Back" />
                 </div>
             </div>
         </div>

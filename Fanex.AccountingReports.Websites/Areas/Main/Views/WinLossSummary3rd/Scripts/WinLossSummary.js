@@ -15,6 +15,9 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
         maxGridHeight: 10000,
         isShowSiteTypeInfo: false
     };
+    self.CacheData = {
+        currentReport: winLossSummary
+    };
 
     self.CachedData = {
         showHideSiteTypeIconTitle: viewResources.Collapse + "/" + viewResources.Expand
@@ -312,7 +315,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 						{ Name: 'ColVirtualTurnover', Value: winloss.VirtualTurnoverStr, TdClass: cssClass },
 						{ Name: 'ColRealMargin', Value: formatNumberCell(winloss.RealMarginStr, true, false, true), TdClass: cssClass },
 						{ Name: 'ColVirtualMargin', Value: formatNumberCell(winloss.VirtualMarginStr, true, false, true), TdClass: cssClass }],
-            CssClass: winLossSummary.GetSiteTypeRowCss(groupdId, winLossSummary.Enums.RowType.InfoRow)
+            CssClass: GetSiteTypeRowCss(groupdId, winLossSummary.Enums.RowType.InfoRow)
         }
     };
 
@@ -399,7 +402,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 						{ Name: 'ColVirtualTurnover', Value: winloss.VirtualTurnoverStr, TdClass: cssClass },
 						{ Name: 'ColRealMargin', Value: formatNumberCell(winloss.RealMarginStr, true, false, true), TdClass: cssClass },
 						{ Name: 'ColVirtualMargin', Value: formatNumberCell(winloss.VirtualMarginStr, true, false, true), TdClass: cssClass }],
-            CssClass: winLossSummary.GetSiteTypeRowCss(groupdId, winLossSummary.Enums.RowType.InfoRow)
+            CssClass: GetSiteTypeRowCss(groupdId, winLossSummary.Enums.RowType.InfoRow)
         }
     };
     var renderTotal = function (total, css, title) {
@@ -471,9 +474,12 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                                                .addClass(showHideCssEnum.Expand);
             _tables.btnShowHideSiteTypeInfo.val(viewResources.Collapse);
         }
+
+        _tables.winlossSumReport.removeClass("display-none").fanexGrid("resizeGrid");
+
         winLossSummary.CachedData.isShowSiteTypeInfo = !winLossSummary.CachedData.isShowSiteTypeInfo;
     };
-    self.GetSiteTypeRowCss = function (groupdId, rowType) {
+    var GetSiteTypeRowCss = function (groupdId, rowType) {
         var rowTypeEnum = winLossSummary.Enums.RowType;
         var rowCss = "";
         switch (rowType) {
