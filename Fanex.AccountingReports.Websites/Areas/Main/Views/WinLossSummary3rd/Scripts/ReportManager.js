@@ -176,6 +176,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.ReportManager = function () {
     };
     var showHistoryReport = function () {
         // Filter: hide Current
+        _winLossSummary.resetCollapseExpand();
         _tables.filterContainer.removeClass('display-none');
         _tables.filterContainer.addClass('display-none');
         // Filter: show History
@@ -185,6 +186,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.ReportManager = function () {
         invisibleReports();
     };
     var showCurrentReport = function () {
+        _winLossSummary.resetCollapseExpand();
         // Filter: hide History
         _tables.filterContainerHistory.removeClass('display-none');
         _tables.filterContainerHistory.addClass('display-none');

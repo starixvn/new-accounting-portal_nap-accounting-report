@@ -27,7 +27,8 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
         winlossSumReport: null,
         gameMatchDetailContainer: null,
         isShowDetail: false,
-        btnShowHideSiteTypeInfo: null
+        btnShowHideSiteTypeInfo: null,
+        btnShowHideSiteTypeInfoHistory: null
     };
     var _params = {
         reportParams: {
@@ -50,16 +51,28 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
         _tables.btnShowHideSiteTypeInfo.click(function () {
             showHideSiteTypeInfo();
         });
+
+        _tables.btnShowHideSiteTypeInfoHistory.unbind("click");
+        _tables.btnShowHideSiteTypeInfoHistory.click(function () {
+            showHideSiteTypeInfo();
+        });
     };
 
     var cachedDOMElements = function () {
         _tables.winlossSumReport = $('#winlossSumReport');
         _tables.gameMatchDetailContainer = $('#gameMatchDetailContainer');
         _tables.btnShowHideSiteTypeInfo = $("#btnShowHideSiteTypeInfo");
+        _tables.btnShowHideSiteTypeInfoHistory = $("#btnShowHideSiteTypeInfoHistory");
     };
+    self.resetCollapseExpand = function () {
+        _tables.btnShowHideSiteTypeInfo.attr("disabled", true);
+        _tables.btnShowHideSiteTypeInfoHistory.attr("disabled", true);
+    }
+
     self.getReport = function (params) {
         AccReport.disableInput();
         _tables.btnShowHideSiteTypeInfo.attr("disabled", null);
+        _tables.btnShowHideSiteTypeInfoHistory.attr("disabled", null);
         getParams(params);
         $.ajax({
             type: 'POST',
@@ -467,12 +480,14 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
             $(".showHideSiteType.showHideIcon").removeClass(showHideCssEnum.Expand)
                                                .addClass(showHideCssEnum.Collapse);
             _tables.btnShowHideSiteTypeInfo.val(viewResources.Expand);
+            _tables.btnShowHideSiteTypeInfoHistory.val(viewResources.Expand);
         } else {
             $(".siteTypeRow.paddingRow").addClass("display-none");
             $(".siteTypeRow.infoRow").removeClass("display-none");
             $(".showHideSiteType.showHideIcon").removeClass(showHideCssEnum.Collapse)
                                                .addClass(showHideCssEnum.Expand);
             _tables.btnShowHideSiteTypeInfo.val(viewResources.Collapse);
+            _tables.btnShowHideSiteTypeInfoHistory.val(viewResources.Collapse);
         }
 
         _tables.winlossSumReport.removeClass("display-none").fanexGrid("resizeGrid");
