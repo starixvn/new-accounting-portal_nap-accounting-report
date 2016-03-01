@@ -601,7 +601,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     {
                         winLoss.Turnover = Converter.ToDecimal(info.IBCTurnover);
                     }
-
                     winLoss.Name = isKenoBetType ?
                         Labels.Keno :
                         this._betTypeNameCache[winLoss.Id] +
@@ -609,6 +608,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     winLoss.Name_Suffix = isKenoBetType ?
                         string.Empty :
                         this._matchWinLoss2aUtilityService.BetTypeNameSuffixCache[winLoss.Id];
+
+                    // for AllBet
+                    if ((winLoss.Id >= 2401) && (winLoss.Id <= 2405))
+                    {
+                        winLoss.Name = winLoss.Name +" "+ "(AllBet)";
+                    }
 
                     winLoss.LineTotalReal = winLoss.LineTotal_Soccer_Live +
                         winLoss.LineTotal_Soccer_Non_Live +
