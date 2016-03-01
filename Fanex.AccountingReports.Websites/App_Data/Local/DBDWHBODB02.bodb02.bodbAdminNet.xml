@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Functions>
   <Function Name="Gaming - Live Casino Game Statistic">
-    <Setting Key="Gaming_LiveCasinoGameStatistic_GetReport" SpName="Acc_Rpt_LiveCasino_GameStatistics_DW" DbName="DBDWHBODB02.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Gaming_LiveCasinoGameStatistic_GetReport" SpName="Acc_Rpt_LiveCasino_GameStatistics_DW_Xtest" DbName="DBDWHBODB02.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
 
   <Function Name="Misc - MA Monitor Tool">
