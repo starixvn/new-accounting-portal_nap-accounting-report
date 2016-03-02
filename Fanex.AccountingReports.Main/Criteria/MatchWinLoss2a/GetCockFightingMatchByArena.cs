@@ -20,7 +20,7 @@
 
         public override string GetSettingKey()
         {
-            return "Main_DailyWinLoss2h_GetCockFightingByArenaReport" + ReportService.GetStoreMappingSuffix(this.WinLostDate);
+            return "Main_DailyWinLoss2a_GetCockFightingByArenaReport" + ReportService.GetStoreMappingSuffix(this.WinLostDate);
         }
     }
 }

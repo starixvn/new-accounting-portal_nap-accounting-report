@@ -8,8 +8,9 @@
     using Fanex.AccountingReports.Main.Models.MatchWinLoss2a;
     using Fanex.AccountingReports.Main.Services.Interface.MatchWinLoss2a;
     using Fanex.Data.Repository;
-
-    public class CockFightingService : ICockFightingService
+    using Core.Services.Impl;
+    using Fanex.Common;
+    public class CockFightingService : ServiceBase,ICockFightingService
     {
         private const int ExtendCachedTimeOut = 2;
 
@@ -38,8 +39,22 @@
                 ReportRows = new List<CockFightingDetail>(),
                 GrandTotal = new CockFightingDetail()
             };
-
-            report.ReportRows = _repository.Fetch<CockFightingDetail>(criteria).ToList();
+            var rawData = this.GetReportData<dynamic>(criteria);
+            foreach (var data in rawData)
+            {
+                var row = new CockFightingDetail
+                {
+                    ArenaId = Converter.ToInt(data.ArenaID),
+                    WinLoss = Converter.ToDecimal(data.winlost),
+                    Position = Converter.ToDecimal(data.pos),
+                    Commission = Converter.ToDecimal(data.comm),
+                    VirtualCommission = Converter.ToDecimal(data.VirtualComm),
+                    RealLineTotal = Converter.ToDecimal(data.LineTotal),
+                    VirtualLineTotal = Converter.ToDecimal(data.VirtualLineTotal),
+                    RealTurnover = Converter.ToDecimal(data.IBCTurnover)
+                };
+                report.ReportRows.Add(row);
+            }
             report.GrandTotal = this.CalculateGrandTotal(report.ReportRows);
 
             CacheExtension.Set(_cockFightingReportCachedDataKey, report);
@@ -71,8 +86,23 @@
                 ReportRows = new List<CockFightMatchDetail>(),
                 GrandTotal = new CockFightMatchDetail()
             };
-
-            report.ReportRows = _repository.Fetch<CockFightMatchDetail>(criteria).ToList();
+            var rawData = this.GetReportData<dynamic>(criteria);
+            foreach (var data in rawData)
+            {
+                var row = new CockFightMatchDetail
+                {
+                    FightNo = Converter.ToInt(data.FightNo),
+                    HomeOwner = Converter.ToString2(data.HomeOwner),
+                    AwayOwner = Converter.ToString2(data.AwayOwner),
+                    WinLoss = Converter.ToDecimal(data.winlost),
+                    Position = Converter.ToDecimal(data.pos),
+                    Commission = Converter.ToDecimal(data.comm),
+                    RealLineTotal = Converter.ToDecimal(data.LineTotal),
+                    VirtualLineTotal = Converter.ToDecimal(data.VirtualLineTotal),
+                    RealTurnover = Converter.ToDecimal(data.IBCTurnover)
+                };
+                report.ReportRows.Add(row);
+            }
             report.GrandTotal = this.CalculateGrandTotalByArena(report.ReportRows);
 
             CacheExtension.Set(_cockFightingMatchByArenaReportCachedDataKey, report);

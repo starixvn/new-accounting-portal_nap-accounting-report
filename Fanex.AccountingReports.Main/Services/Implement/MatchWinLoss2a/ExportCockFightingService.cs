@@ -120,7 +120,7 @@
             int currentColumn = 0;
             string reportTitle = string.Format(
                    MainResources.CockFighting_ReportTitle,
-                   criteria.WinLostDate.ToShortFormatedDate());
+                   criteria.WinLostDate.ToShortFormatedDate().ToUpper().ToString());
             IRow row = worksheet.CreateRow(currentRow);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn + 9, reportTitle, headerStyle);
         }
@@ -294,7 +294,7 @@
                    ref currentColumn,
                    currentRow,
                    currentColumn,
-                   "Cockfighting Total",
+                   "COCK FIGHTING TOTAL",
                    grandTotalTextStyle);
 
             NpoiExcelExtensions.RenderCell(
@@ -411,7 +411,7 @@
             string reportTitle = string.Format(
                    MainResources.CockFightingMatchByArena_ReportTitle,
                    criteria.ArenaName,
-                   criteria.WinLostDate.ToShortFormatedDate());
+                   criteria.WinLostDate.ToShortFormatedDate().ToUpper().ToString());
             IRow row = worksheet.CreateRow(currentRow);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn + 12, reportTitle, headerStyle);
         }
@@ -619,7 +619,7 @@
                    ref currentColumn,
                    currentRow,
                    currentColumn + 3,
-                   string.Format("{0} Total", criteria.ArenaName),
+                   string.Format("{0} TOTAL", criteria.ArenaName),
                    grandTotalTextStyle);
 
             NpoiExcelExtensions.RenderCell(

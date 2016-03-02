@@ -13,7 +13,6 @@
                 return CacheRef.GetLeagueName(this.ArenaId);
             }
         }
-
         public decimal WinLoss { get; set; }
 
         public decimal Position { get; set; }

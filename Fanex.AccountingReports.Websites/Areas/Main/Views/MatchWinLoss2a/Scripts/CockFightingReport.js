@@ -89,7 +89,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
             var grandTotal = rs.GrandTotal;
             currentRow =
                 {
-                    Columns: [{ Name: "ColArena", Value: "Cockfighting Total" },
+                    Columns: [{ Name: "ColArena", Value: "COCK FIGHTING TOTAL" },
                                 { Name: "ColWinLoss", Value: grandTotal.WinLoss },
                                 { Name: "ColPosition", Value: grandTotal.Position },
                                 { Name: "ColCommission", Value: grandTotal.Commission },
@@ -119,7 +119,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
             showFooter: true,
             titleInfo:
             {
-                text: 'Cockfighting Product Win/Loss Report For ' + moment(new Date(_params.getCockFightingParams.WinLostDate)).format(FormatConstant.MMM_DD_YYYY_STRING_MOMENT),
+                text: 'COCK FIGHTING PRODUCT WIN/LOSS REPORT FOR ' + moment(new Date(_params.getCockFightingParams.WinLostDate)).format(FormatConstant.MMM_DD_YYYY_STRING_MOMENT).toUpperCase(),
                 showExcelButton: true,
                 exportExcelFunction: function () {
                     exportCockFightReport();
@@ -214,7 +214,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
             var grandTotal = rs.GrandTotal;
             currentRow =
                 {
-                    Columns: [{ Name: "ColFightNo", Value: _params.getCockFightingMatchByArenaParams.ArenaName + " Total", MergeColNumber: 4, CellAlign: "right" },
+                    Columns: [{ Name: "ColFightNo", Value: _params.getCockFightingMatchByArenaParams.ArenaName + " TOTAL", MergeColNumber: 4, CellAlign: "right" },
                                 { Name: "ColWinLoss", Value: grandTotal.WinLoss },
                                 { Name: "ColPosition", Value: grandTotal.Position },
                                 { Name: "ColCommission", Value: grandTotal.Commission },
@@ -265,7 +265,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
             showFooter: true,
             titleInfo:
             {
-                text: 'Cockfighting Product Arena ' + _params.getCockFightingMatchByArenaParams.ArenaName + ' Win/Loss Report For ' + moment(new Date(_params.getCockFightingMatchByArenaParams.WinLostDate)).format(FormatConstant.MMM_DD_YYYY_STRING_MOMENT),
+                text: 'COCK FIGHTING PRODUCT ARENA ' + " " + _params.getCockFightingMatchByArenaParams.ArenaName + ' WIN/LOSS REPORT FOR' + " " + moment(new Date(_params.getCockFightingMatchByArenaParams.WinLostDate)).format(FormatConstant.MMM_DD_YYYY_STRING_MOMENT).toUpperCase(),
                 showExcelButton: true,
                 exportExcelFunction: function () {
                     exportCockFightMatchByArenaReport();
