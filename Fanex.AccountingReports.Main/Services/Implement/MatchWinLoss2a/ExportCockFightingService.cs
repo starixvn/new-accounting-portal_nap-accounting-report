@@ -259,7 +259,7 @@
                    ref currentColumn,
                    currentRow,
                    currentColumn,
-                   item.Margin,
+                   item.Margin_Str,
                    percentStyle);
 
                 currentRow++;
@@ -384,7 +384,7 @@
                ref currentColumn,
                currentRow,
                currentColumn,
-               grandTotal.Margin,
+               grandTotal.Margin_Str,
                grandTotalPercentStyle);
         }
 
@@ -583,7 +583,7 @@
                    ref currentColumn,
                    currentRow,
                    currentColumn,
-                   item.Margin,
+                   item.Margin_Str,
                    percentStyle);
 
                 currentRow++;
@@ -709,7 +709,7 @@
                ref currentColumn,
                currentRow,
                currentColumn,
-               grandTotal.Margin,
+               grandTotal.Margin_Str,
                grandTotalPercentStyle);
         }
     }

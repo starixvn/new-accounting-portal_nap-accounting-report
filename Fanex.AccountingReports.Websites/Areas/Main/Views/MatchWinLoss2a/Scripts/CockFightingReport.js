@@ -80,7 +80,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
                                 { Name: "ColVirtualLineTotal", Value: item.VirtualLineTotal },
                                 { Name: "ColVariance", Value: item.Variance },
                                 { Name: "ColTurnover", Value: item.RealTurnover },
-                                { Name: "ColMargin", Value: item.Margin}]
+                                { Name: "ColMargin", Value: item.Margin_Str}]
                 };
 
                 bodyData.push(currentRow);
@@ -98,7 +98,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
                                 { Name: "ColVirtualLineTotal", Value: grandTotal.VirtualLineTotal },
                                 { Name: "ColVariance", Value: grandTotal.Variance },
                                 { Name: "ColTurnover", Value: grandTotal.RealTurnover },
-                                { Name: "ColMargin", Value: grandTotal.Margin}]
+                                { Name: "ColMargin", Value: grandTotal.Margin_Str}]
                 };
 
             footerData.push(currentRow);
@@ -205,7 +205,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
                                 { Name: "ColVirtualLineTotal", Value: item.VirtualLineTotal },
                                 { Name: "ColVariance", Value: item.Variance },
                                 { Name: "ColTurnover", Value: item.RealTurnover },
-                                { Name: "ColMargin", Value: item.Margin}]
+                                { Name: "ColMargin", Value: item.Margin_Str}]
                 };
 
                 bodyData.push(currentRow);
@@ -223,7 +223,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
                                 { Name: "ColVirtualLineTotal", Value: grandTotal.VirtualLineTotal },
                                 { Name: "ColVariance", Value: grandTotal.Variance },
                                 { Name: "ColTurnover", Value: grandTotal.RealTurnover },
-                                { Name: "ColMargin", Value: grandTotal.Margin}]
+                                { Name: "ColMargin", Value: grandTotal.Margin_Str}]
                 };
 
             footerData.push(currentRow);
