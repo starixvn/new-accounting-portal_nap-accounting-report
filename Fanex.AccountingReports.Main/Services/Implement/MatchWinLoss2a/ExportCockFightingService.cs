@@ -119,7 +119,7 @@
             ICellStyle headerStyle = NpoiExcelExtensions.HeaderStyle(workbook);
             int currentColumn = 0;
             string reportTitle = string.Format(
-                   MainResources.CockFighting_ReportTitle,
+                   MainResources.CockFighting_ReportTitle.ToUpper().ToString(),
                    criteria.WinLostDate.ToShortFormatedDate().ToUpper().ToString());
             IRow row = worksheet.CreateRow(currentRow);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn + 9, reportTitle, headerStyle);
@@ -409,7 +409,7 @@
             ICellStyle headerStyle = NpoiExcelExtensions.HeaderStyle(workbook);
             int currentColumn = 0;
             string reportTitle = string.Format(
-                   MainResources.CockFightingMatchByArena_ReportTitle,
+                   MainResources.CockFightingMatchByArena_ReportTitle.ToUpper().ToString(),
                    criteria.ArenaName,
                    criteria.WinLostDate.ToShortFormatedDate().ToUpper().ToString());
             IRow row = worksheet.CreateRow(currentRow);
