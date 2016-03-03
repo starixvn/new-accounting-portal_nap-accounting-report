@@ -156,7 +156,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.DetailReportByBetType = function () 
         _tables.reportContainer.dialog({
             title: "",
             autoOpen: false,
-            width: 1190,
+            width: "auto",
             modal: false,
             resizable: false,
             close: function (event, ui) {
