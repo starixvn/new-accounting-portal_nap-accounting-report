@@ -245,7 +245,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.ThirdPartyDetailReport = function ()
         _tables.reportContainer.dialog({
             title: "",
             autoOpen: false,
-            width: 852,
+            width: "auto",
             modal: false,
             resizable: false,
             close: function (event, ui) {
