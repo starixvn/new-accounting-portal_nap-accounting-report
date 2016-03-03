@@ -347,6 +347,14 @@ namespace Fanex.AccountingReports.Main.Resources {
                 return ResourceManager.GetString("All_Total", resourceCulture);
             }
         }
+
+        public static string TotalNewCricket
+        {
+            get
+            {
+                return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Amount Due To.

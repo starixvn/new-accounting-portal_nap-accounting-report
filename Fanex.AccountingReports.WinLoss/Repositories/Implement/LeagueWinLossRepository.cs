@@ -47,6 +47,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                     leagueWinLoss.Add(new
                     {
                         sporttype = row["sporttype"],
+                        bettype = row["bettype"],
                         leagueid = row["leagueid"],
                         WinLost = row["WinLost"],
                         Position = row["Position"],

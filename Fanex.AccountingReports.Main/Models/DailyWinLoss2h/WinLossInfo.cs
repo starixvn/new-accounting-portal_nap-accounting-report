@@ -109,6 +109,12 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
 
         public WinLossInfo GrandTotal { get; set; }
 
+        public WinLossInfo Total { get; set; }
+
+        public WinLossInfo CreditTotalNewCricket { get; set; }
+
+        public WinLossInfo DepositTotalNewCricket { get; set; }
+
         /// <summary>
         /// Formats the specified win loss.
         /// </summary>
@@ -149,6 +155,9 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
             winLoss.DepositTotal = WinLossInfo.Format(winLoss.DepositTotal);
             winLoss.NormalTotal = WinLossInfo.Format(winLoss.NormalTotal);
             winLoss.GrandTotal = WinLossInfo.Format(winLoss.GrandTotal);
+            winLoss.Total = WinLossInfo.Format(winLoss.Total);
+            winLoss.CreditTotalNewCricket = WinLossInfo.Format(winLoss.CreditTotalNewCricket);
+            winLoss.DepositTotalNewCricket = WinLossInfo.Format(winLoss.DepositTotalNewCricket);
             return winLoss;
         }
 

@@ -354,8 +354,12 @@ Fanex.AccountingReports.Special.SpecialMatchAnalysis.MatchAnalysisNormal = funct
                 renderReportRow(reportItem, i % 2 ? 'even' : '');
             }
 
-            renderReportTotalRow(report.Total);
-
+            len = report.Total.length;
+            for (var i = 0; i < len; i++) {
+                var reportItem = report.Total[i];
+                renderReportTotalRow(reportItem);
+            }
+            
             self.removeSpaceIE9TempHtml();
             _tables.reportRowHeader.empty().append(self.TempHtml.frozenHtml);
             _tables.reportContent.empty().append(self.TempHtml.contentHtml);

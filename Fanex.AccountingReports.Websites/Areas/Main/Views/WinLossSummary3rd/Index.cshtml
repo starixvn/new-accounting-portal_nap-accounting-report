@@ -7,10 +7,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
-	@Styles.Render("~/scripts/_lib/MultipleSelect/style", "~/scripts/_lib/MonthPicker/style")
-	<link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
+    @Styles.Render("~/scripts/_lib/MultipleSelect/style", "~/scripts/_lib/MonthPicker/style")
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
-	<link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less" />
     <link rel="stylesheet" type="text/css" href="~/Areas/Main/Views/WinLossSummary3rd/Styles/WinLossSummary.less">
 }
@@ -35,6 +35,9 @@
 				<div class="submit col_4">
                     <input id="btnHistoryReport" name="btnHistoryReport" type="submit" value="@Labels.History_Report" />
                 </div>
+                <div class="submit" style="margin-left: 40px">
+                    <input id="btnShowHideSiteTypeInfo" name="btnShowHideSiteTypeInfo" type="submit" value="@Labels.Expand" title="@Labels.Collapse/@Labels.Expand" disabled="disabled"/>
+                </div>
             </div>
         </div>
 		<div id="winlossSummaryReportFilter-history" class="">
@@ -53,32 +56,35 @@
 				<div class="submit col_4">
                     <input id="btnBack" name="btnBack" type="submit" value="@Labels.Back" />
                 </div>
+                <div class="submit col_4">
+                    <input id="btnShowHideSiteTypeInfoHistory" name="btnShowHideSiteTypeInfoHistory" type="submit" value="@Labels.Expand" title="@Labels.Collapse/@Labels.Expand" disabled="disabled" />
+                </div>
             </div>
         </div>
     </div>
 </div>
 <div class="report-note">
-	<span id="note-title" class="note-title">@Labels.Note</span>
-	<div id="note-content">
-		@Html.Raw(MainResources.WinLossSummary_FilterNote)
-	</div>
+    <span id="note-title" class="note-title">@Labels.Note</span>
+    <div id="note-content">
+        @Html.Raw(MainResources.WinLossSummary_FilterNote)
+    </div>
 </div>
 <div id="parentContainer" class="content-grid">
-	<div id="reportContainer">
-		<div id="winlossSumReportContainer">
-			<div class="freegrid display-none" id="winlossSumReport"></div>
-		</div>
-		<div id="gameMatchDetailContainer">
-			<div class="freegrid display-none" id="gameMatchDetail"></div>
-		</div>
-		<div id="scoreInformationContainer">
-			<div class="freegrid display-none" id="scoreInformation"></div>
-		</div>
+    <div id="reportContainer">
+        <div id="winlossSumReportContainer">
+            <div class="freegrid display-none" id="winlossSumReport"></div>
+        </div>
+        <div id="gameMatchDetailContainer">
+            <div class="freegrid display-none" id="gameMatchDetail"></div>
+        </div>
+        <div id="scoreInformationContainer">
+            <div class="freegrid display-none" id="scoreInformation"></div>
+        </div>
         <div id="cockFightingContainer">
 			<div class="freegrid display-none" id="cockFightingContent"></div>
 		</div>
-	</div>
-	@Html.Partial("~/Areas/BetList/Views/ScoreInformation/ScoreInformation.cshtml")
+    </div>
+    @Html.Partial("~/Areas/BetList/Views/ScoreInformation/ScoreInformation.cshtml")
 </div>
 @{
     var today = DateTime.Today;
@@ -121,7 +127,9 @@
             IBCTotal: '@Labels.IBCTotal' + ':',
             Vs: '@Labels.Vs',
             HedgeTotal: '@Labels.Hedge_title' + ':',
-            LiveIndicator: '@Labels.LiveIndicator'
+            LiveIndicator: '@Labels.LiveIndicator',
+            Expand: '@Labels.Expand',
+            Collapse: '@Labels.Collapse'
         };
     </script>
 }
@@ -129,10 +137,10 @@
     <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
-	<script type="text/javascript" src="~/scripts/_lib/MonthPicker/monPickr-0.0.3.min.js?ver=10"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MonthPicker/monPickr-0.0.3.min.js?ver=10"></script>
     <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
     <script type="text/javascript" src="~/Areas/Main/Views/WinLossSummary3rd/Scripts/ReportManager.js"></script>
-	<script type="text/javascript" src="~/Areas/Main/Views/WinLossSummary3rd/Scripts/WinLossSummary.js"></script>
-	<script type="text/javascript" src="~/Areas/Main/Views/WinLossSummary3rd/Scripts/GameMatchDetails.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/WinLossSummary3rd/Scripts/WinLossSummary.js"></script>
+    <script type="text/javascript" src="~/Areas/Main/Views/WinLossSummary3rd/Scripts/GameMatchDetails.js"></script>
     <script type="text/javascript" src="~/Areas/Main/Views/WinLossSummary3rd/Scripts/CockFighting.js"></script>
 }

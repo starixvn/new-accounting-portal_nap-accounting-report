@@ -72,7 +72,7 @@ namespace Fanex.BetList.Accounting.Services
             return new ResultSetting
             {
                 SportType = (SportType)criteria.SportType,
-                IsOutRight = false,
+                IsOutright = false,
                 IsParlayPopUp = false,
                 IsPopUp = true,
                 LanguageCode = "en-US"

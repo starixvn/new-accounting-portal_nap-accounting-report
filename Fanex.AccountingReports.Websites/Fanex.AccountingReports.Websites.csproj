@@ -116,16 +116,16 @@
       <HintPath>..\packages\Fanex.NAP.Core.2.0.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.Result.Core, Version=2.0.1.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.1.7\lib\net40\Fanex.Result.Core.dll</HintPath>
+    <Reference Include="Fanex.Result.Core, Version=2.0.1.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.2.6\lib\net40\Fanex.Result.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Result.Core.AGCasino, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Result.Core.AGCasino.1.0.0.1\lib\net40\Fanex.Result.Core.AGCasino.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.Result.Core.Base, Version=1.0.1.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.1.7\lib\net40\Fanex.Result.Core.Base.dll</HintPath>
+    <Reference Include="Fanex.Result.Core.Base, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.2.6\lib\net40\Fanex.Result.Core.Base.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Result.Core.GoldDeluxe, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
@@ -152,8 +152,8 @@
       <HintPath>..\packages\Fanex.Result.Core-Racing.1.0.0.3\lib\net40\Fanex.Result.Core.Racing.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.Result.Core.Sportsbook, Version=1.0.1.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Result.Core-Sportsbook.1.0.1.4\lib\net40\Fanex.Result.Core.Sportsbook.dll</HintPath>
+    <Reference Include="Fanex.Result.Core.Sportsbook, Version=1.0.2.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Result.Core-Sportsbook.1.0.2.2\lib\net40\Fanex.Result.Core.Sportsbook.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -321,11 +321,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Content Include="App_Data\Dev\DBEXT.bk.bodbAdminNet.xml">
+    <Content Include="App_Data\Dev\DBBET.bk.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Local\DBEXT.bk.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBEXT.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\Local\DBBET.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\Master\DBBET.bk.bodbAdminNet.xml" />
     <Content Include="App_Data\Dev\DBPOLICY.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\Local\DBPOLICY.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\Master\DBPOLICY.bodb02.bodbAdminNet.xml" />
@@ -336,7 +336,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\MNL\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBEXT.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBBET.bk.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBEXT.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
@@ -436,7 +436,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\PRO\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBEXT.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBBET.bk.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBEXT.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
@@ -462,7 +462,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\UAT\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBEXT.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBBET.bk.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBEXT.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
@@ -676,6 +676,7 @@
     <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportReport_ByBetType.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportReport_BySportType.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportReport_Summary.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportsForNewCricket.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\ReportManager.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\ShowHideReportManager.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\WinLossBySite_BetType.js" />
@@ -714,6 +715,7 @@
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportReport_ByBetType.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportReport_BySportType.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportReport_Summary.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportsForNewCricket.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\ParlayReport.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Racing\RacingReport.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Racing\RacingReport_BySportType.js" />

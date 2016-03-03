@@ -219,10 +219,18 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         currentCellRange.Style = parentStyle;
 
                         // Bet type
+                        var isNewCricket = false;
+                        var betWinLossNewCricket = sportWinLoss.BetTypeWinLosses[0];
                         betLen = sportWinLoss.BetTypeWinLosses.Count;
                         for (int j = 0; j < betLen; j++)
                         {
                             betWinLoss = sportWinLoss.BetTypeWinLosses[j];
+                            if(betWinLoss.Id == 500)
+                            {
+                                isNewCricket = true;
+                                betWinLossNewCricket = betWinLoss;
+                                continue;
+                            }
                             var backgroundColor = j % 2 == 0 ? ExcelExtensions.BackGroundColor : ExcelExtensions.EvenRowColor;
                             textStyle.FillPattern.SetSolid(backgroundColor);
                             text8RM_BARMStyle.FillPattern.SetSolid(backgroundColor);
@@ -306,8 +314,41 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                                     betWinLoss.Total,
                                     soccerTotalStyle);
                             }
+                            
                         }
 
+                        // for NewCricket
+                        if (isNewCricket == true)
+                        {
+                            // for Total
+                            currentRow++;
+                            currentColumn = startColumn;
+                            this.WriteWinLossSummaryTotal(
+                                workSheet,
+                                currentRow,
+                                currentColumn,
+                                "Total:",
+                                titleStyle_Total,
+                                numberOfGroupColumnsTotal,
+                                sportWinLoss.TotalForNewCricket,
+                                ExcelExtensions.TotalRowColor);
+                            // for Charge Commisson
+                            foreach (var winloss in betWinLossNewCricket.IBCs)
+                            {
+                                currentRow++;
+                                currentColumn = startColumn;
+                                this.WriteWinLossSummaryTotal(
+                                    workSheet,
+                                    currentRow,
+                                    currentColumn,
+                                    winloss.Name,
+                                    titleStyle_Total,
+                                    numberOfGroupColumnsTotal,
+                                    winloss,
+                                    ExcelExtensions.TotalRowColor);
+                            }
+
+                        }
                         // Total of Sport
                         currentRow++;
                         currentColumn = startColumn;

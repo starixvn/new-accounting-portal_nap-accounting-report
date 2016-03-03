@@ -9,12 +9,6 @@
 
 namespace Fanex.AccountingReports.WinLoss.Services.Implement
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Drawing;
-    using System.Linq;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
@@ -30,12 +24,20 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
     using Fanex.AccountingReports.WinLoss.Resources;
     using Fanex.AccountingReports.WinLoss.Services.Interface;
     using Fanex.Common;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class LeagueWinLossService : ServiceBase, ILeagueWinLossService
     {
+        private const int CHARGE_COMMISSION = 500;
+
         private ILeagueWinLossRepository _reportRepository;
         private RMElement _8rmConfig;
         private RMElement _barmConfig;
@@ -96,53 +98,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                                          .GroupBy(rawWinLossInfo => rawWinLossInfo.sporttype);
                 foreach (var sportGroup in sportGroups)
                 {
-                    var sportWinLoss = new LeagueWinLossInfo
-                    {
-                        Id = Converter.ToInt(sportGroup.Key),
-                        ChildsInfo = new List<LeagueWinLossInfo>(),
-                        GrandTotal = new LeagueWinLossInfo()
-                    };
-
-                    sportWinLoss.Name = this.GetSportName(sportWinLoss.Id);
-                    sportWinLoss.GrandTotal.Name = sportWinLoss.Name + " " + Labels.Total;
-                    var leagueList = sportGroup.Select(rawWinLossInfo => Converter.ToInt(rawWinLossInfo.leagueid))
-                                               .ToList();
-                    CacheRef.SaveCacheRefResponse(leagueList, CacheRef.GetLeagueName, ref this._leagueNameCache);
-                    var orderedSportGroup = sportGroup.OrderBy(rawWinLossInfo => this._leagueNameCache[rawWinLossInfo.leagueid]);
-
-                    foreach (var info in orderedSportGroup)
-                    {
-                        var winLoss = new LeagueWinLossInfo
-                        {
-                            Id = Converter.ToInt(info.leagueid),
-                            WinLoss = Converter.ToDecimal(info.WinLost),
-                            Position = Converter.ToDecimal(info.Position),
-                            Commission = Converter.ToDecimal(info.Commission),
-                            LineTotal = Converter.ToDecimal(info.LineTotal),
-                            TurnOver = Converter.ToDecimal(info.Turnover)
-                        };
-
-                        winLoss.Name = this._leagueNameCache[winLoss.Id];
-                        winLoss.Margin = this.GetWinLossMargin(
-                            winLoss.TurnOver,
-                            winLoss.LineTotal,
-                            4,
-                            true);
-
-                        sportWinLoss.AddToGrandTotal(winLoss);
-                        winLoss = this.RoundLeagueWinLossInfo(winLoss);
-                        sportWinLoss.ChildsInfo.Add(winLoss);
-                    }
-
-                    sportWinLoss.ChildsInfo = sportWinLoss.ChildsInfo.OrderBy(winLossInfo => winLossInfo.Name).ToList();
-                    sportWinLoss.GrandTotal.Margin = this.GetWinLossMargin(
-                        sportWinLoss.GrandTotal.TurnOver,
-                        sportWinLoss.GrandTotal.LineTotal,
-                        4,
-                        false);
-
+                    const int NewCricketSportstype = 50;
+                    var sportWinLoss = Converter.ToInt(sportGroup.Key) == NewCricketSportstype
+                        ? CalculateNewCricket(sportGroup)
+                        : CalculateNormalSports(sportGroup);
+                    sportWinLoss.Id = Converter.ToInt(sportGroup.Key);
                     leagueWinLoss.AddToTotal(sportWinLoss.GrandTotal);
-                    sportWinLoss.GrandTotal = this.RoundLeagueWinLossInfo(sportWinLoss.GrandTotal);
                     leagueWinLoss.ChildsInfo.Add(sportWinLoss);
                 }
 
@@ -185,6 +146,182 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             SessionManager.Set<LeagueWinLossInfo>(WinLossContants.LeagueWinLossSessionKey, null);
             return null;
+        }
+
+        private LeagueWinLossInfo CalculateNormalSports(IGrouping<dynamic, dynamic> sportGroup)
+        {
+            var sportWinLoss = new LeagueWinLossInfo
+            {
+                Id = Converter.ToInt(sportGroup.Key),
+                ChildsInfo = new List<LeagueWinLossInfo>(),
+                GrandTotal = new LeagueWinLossInfo()
+            };
+
+            sportWinLoss.Name = this.GetSportName(sportWinLoss.Id);
+            sportWinLoss.GrandTotal.Name = sportWinLoss.Name + " " + Labels.Total;
+            var leagueList = sportGroup.Select(rawWinLossInfo => Converter.ToInt(rawWinLossInfo.leagueid))
+                                       .ToList();
+            CacheRef.SaveCacheRefResponse(leagueList, CacheRef.GetLeagueName, ref this._leagueNameCache);
+            var orderedSportGroup = sportGroup.OrderBy(rawWinLossInfo => this._leagueNameCache[rawWinLossInfo.leagueid]);
+
+            foreach (var info in orderedSportGroup)
+            {
+                var winLoss = new LeagueWinLossInfo
+                {
+                    Id = Converter.ToInt(info.leagueid),
+                    WinLoss = Converter.ToDecimal(info.WinLost),
+                    Position = Converter.ToDecimal(info.Position),
+                    Commission = Converter.ToDecimal(info.Commission),
+                    LineTotal = Converter.ToDecimal(info.LineTotal),
+                    TurnOver = Converter.ToDecimal(info.Turnover)
+                };
+
+                winLoss.Name = this._leagueNameCache[winLoss.Id];
+                winLoss.Margin = this.GetWinLossMargin(
+                    winLoss.TurnOver,
+                    winLoss.LineTotal,
+                    4,
+                    true);
+
+                sportWinLoss.AddToGrandTotal(winLoss);
+                winLoss = this.RoundLeagueWinLossInfo(winLoss);
+                sportWinLoss.ChildsInfo.Add(winLoss);
+            }
+
+            sportWinLoss.ChildsInfo = sportWinLoss.ChildsInfo.OrderBy(winLossInfo => winLossInfo.Name).ToList();
+            sportWinLoss.GrandTotal.Margin = this.GetWinLossMargin(
+                sportWinLoss.GrandTotal.TurnOver,
+                sportWinLoss.GrandTotal.LineTotal,
+                4,
+                true);
+
+            sportWinLoss.GrandTotal = this.RoundLeagueWinLossInfo(sportWinLoss.GrandTotal);
+
+            return sportWinLoss;
+        }
+
+        private LeagueWinLossInfo CalculateNewCricket(IGrouping<dynamic, dynamic> sportGroup)
+        {
+            var sportWinLoss = CalculateNewCricketLeagueWinLoss(sportGroup);
+            var matchWinnerTotal = CalculateNewCricketNonChargeCommissionTotal(sportGroup);
+            var chargedCommisionTotal = CalculateNewCricketChargedCommissionTotal(sportGroup);
+            var grandTotal = CalculateNewCricketGrandTotal(sportGroup);
+            sportWinLoss.GrandTotal = new LeagueWinLossInfo
+            {
+                ChildsInfo = new List<LeagueWinLossInfo> { matchWinnerTotal, chargedCommisionTotal, grandTotal }
+            };
+            sportWinLoss.AddToGrandTotal(grandTotal);
+
+            return sportWinLoss;
+        }
+
+        private LeagueWinLossInfo CalculateNewCricketLeagueWinLoss(IGrouping<dynamic, dynamic> sportGroup)
+        {
+            var leagueWinLosses = sportGroup.Where(r => r.bettype != CHARGE_COMMISSION).ToList();
+            var sportWinLoss = new LeagueWinLossInfo
+            {
+                Id = Converter.ToInt(sportGroup.Key),
+                ChildsInfo = new List<LeagueWinLossInfo>(),
+            };
+
+            sportWinLoss.Name = this.GetSportName(sportWinLoss.Id);
+
+            var leagueList = leagueWinLosses
+                                       .Select(rawWinLossInfo => Converter.ToInt(rawWinLossInfo.leagueid))
+                                       .ToList();
+            CacheRef.SaveCacheRefResponse(leagueList, CacheRef.GetLeagueName, ref this._leagueNameCache);
+            var orderedSportGroup = leagueWinLosses
+                                    .OrderBy(rawWinLossInfo => this._leagueNameCache[rawWinLossInfo.leagueid])
+                                    .ToList();
+            foreach (var info in orderedSportGroup)
+            {
+                var winLoss = new LeagueWinLossInfo { Id = Converter.ToInt(info.leagueid) };
+                winLoss.WinLoss = Converter.ToDecimal(info.WinLost);
+                winLoss.Position = Converter.ToDecimal(info.Position);
+                winLoss.Commission = Converter.ToDecimal(info.Commission);
+                winLoss.LineTotal = Converter.ToDecimal(info.LineTotal);
+                winLoss.TurnOver = Converter.ToDecimal(info.Turnover);
+
+                winLoss.Name = this._leagueNameCache[winLoss.Id];
+                winLoss.Margin = this.GetWinLossMargin(
+                    winLoss.TurnOver,
+                    winLoss.LineTotal,
+                    4,
+                    true);
+
+                winLoss = RoundLeagueWinLossInfo(winLoss);
+                sportWinLoss.ChildsInfo.Add(winLoss);
+            }
+
+            sportWinLoss.ChildsInfo = sportWinLoss.ChildsInfo.OrderBy(winLossInfo => winLossInfo.Name).ToList();
+
+            return sportWinLoss;
+        }
+        private LeagueWinLossInfo CalculateNewCricketNonChargeCommissionTotal(IGrouping<dynamic, dynamic> sportGroup)
+        {
+            var matchWinner = sportGroup.Where(r => r.bettype != CHARGE_COMMISSION).ToList();
+            var matchWinnerTotal = new LeagueWinLossInfo { Name = "Total" };
+            foreach (var info in matchWinner)
+            {
+                matchWinnerTotal.WinLoss += Converter.ToDecimal(info.WinLost);
+                matchWinnerTotal.Position += Converter.ToDecimal(info.Position);
+                matchWinnerTotal.Commission += Converter.ToDecimal(info.Commission);
+                matchWinnerTotal.LineTotal += Converter.ToDecimal(info.LineTotal);
+                matchWinnerTotal.TurnOver += Converter.ToDecimal(info.Turnover);
+            };
+
+            matchWinnerTotal.Margin = this.GetWinLossMargin(
+                   matchWinnerTotal.TurnOver,
+                   matchWinnerTotal.LineTotal,
+                   4,
+                   true);
+            return RoundLeagueWinLossInfo(matchWinnerTotal);
+        }
+
+        private LeagueWinLossInfo CalculateNewCricketChargedCommissionTotal(IGrouping<dynamic, dynamic> sportGroup)
+        {
+            var chargedCommision = sportGroup.Where(r => r.bettype == CHARGE_COMMISSION).ToList();
+            var chargedCommisionTotal = new LeagueWinLossInfo
+            {
+                Name = "Charged Commission"
+            };
+            foreach (var info in chargedCommision)
+            {
+                chargedCommisionTotal.WinLoss += Converter.ToDecimal(info.WinLost);
+                chargedCommisionTotal.Position += Converter.ToDecimal(info.Position);
+                chargedCommisionTotal.Commission += Converter.ToDecimal(info.Commission);
+                chargedCommisionTotal.LineTotal += Converter.ToDecimal(info.LineTotal);
+                chargedCommisionTotal.TurnOver += Converter.ToDecimal(info.Turnover);
+            }
+            chargedCommisionTotal.Margin = this.GetWinLossMargin(
+                   chargedCommisionTotal.TurnOver,
+                   chargedCommisionTotal.LineTotal,
+                   4,
+                   true);
+            return RoundLeagueWinLossInfo(chargedCommisionTotal);
+        }
+
+        private LeagueWinLossInfo CalculateNewCricketGrandTotal(IGrouping<dynamic, dynamic> sportGroup)
+        {
+            var grandTotal = new LeagueWinLossInfo
+            {
+                Name = this.GetSportName(Convert.ToInt32(sportGroup.Key)) + " " + Labels.Total
+            };
+            foreach (var info in sportGroup)
+            {
+                grandTotal.WinLoss += Converter.ToDecimal(info.WinLost);
+                grandTotal.Position += Converter.ToDecimal(info.Position);
+                grandTotal.Commission += Converter.ToDecimal(info.Commission);
+                grandTotal.LineTotal += Converter.ToDecimal(info.LineTotal);
+                grandTotal.TurnOver += Converter.ToDecimal(info.Turnover);
+            }
+            grandTotal.Margin = this.GetWinLossMargin(
+                   grandTotal.TurnOver,
+                   grandTotal.LineTotal,
+                   4,
+                   true);
+            return this.RoundLeagueWinLossInfo(grandTotal);
+
         }
 
         /// <summary>
@@ -244,6 +381,19 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                         }
                     });
                 }
+                liveReport.Total.Margin = this.GetWinLossMargin(
+                    liveReport.Total.TurnOver,
+                    liveReport.Total.LineTotal,
+                    4,
+                    true);
+                liveReport.Total = this.RoundLeagueWinLossInfo(liveReport.Total);
+
+                nonLiveReport.Total.Margin = this.GetWinLossMargin(
+                    nonLiveReport.Total.TurnOver,
+                    nonLiveReport.Total.LineTotal,
+                    4,
+                    true);
+                nonLiveReport.Total = this.RoundLeagueWinLossInfo(nonLiveReport.Total);
 
                 if (this._8rmConfig.IsActive)
                 {
@@ -265,14 +415,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     liveReport.GrandTotal.TurnOver,
                     liveReport.GrandTotal.LineTotal,
                     4,
-                    false);
+                    true);
                 liveReport.GrandTotal = this.RoundLeagueWinLossInfo(liveReport.GrandTotal);
 
                 nonLiveReport.GrandTotal.Margin = this.GetWinLossMargin(
                     nonLiveReport.GrandTotal.TurnOver,
                     nonLiveReport.GrandTotal.LineTotal,
                     4,
-                    false);
+                    true);
                 nonLiveReport.GrandTotal = this.RoundLeagueWinLossInfo(nonLiveReport.GrandTotal);
 
                 var leagueWinLoss = new LeagueWinLossInfo
@@ -280,12 +430,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     ChildsInfo = new List<LeagueWinLossInfo>()
                 };
 
-                if (this.IsShowReport(liveReport))
+                if (liveReport.ChildsInfo.Count > 0)
                 {
                     leagueWinLoss.ChildsInfo.Add(liveReport);
                 }
 
-                if (this.IsShowReport(nonLiveReport))
+                if (nonLiveReport.ChildsInfo.Count > 0)
                 {
                     leagueWinLoss.ChildsInfo.Add(nonLiveReport);
                 }
@@ -387,10 +537,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                         info.TurnOver,
                         info.LineTotal,
                         4,
-                        false);
+                        true);
                     leagueWinLoss.ChildsInfo.Add(info);
                     leagueWinLoss.AddToTotal(info);
-                    leagueWinLoss.AddToGrandTotal(leagueWinLoss.Total);
+                    leagueWinLoss.AddToGrandTotal(info);
                     info = this.RoundLeagueWinLossInfo(info);
                 });
 
@@ -410,14 +560,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     leagueWinLoss.Total.TurnOver,
                     leagueWinLoss.Total.LineTotal,
                     4,
-                    false);
+                    true);
                 leagueWinLoss.Total = this.RoundLeagueWinLossInfo(leagueWinLoss.Total);
 
                 leagueWinLoss.GrandTotal.Margin = this.GetWinLossMargin(
                     leagueWinLoss.GrandTotal.TurnOver,
                     leagueWinLoss.GrandTotal.LineTotal,
                     4,
-                    false);
+                    true);
                 leagueWinLoss.GrandTotal = this.RoundLeagueWinLossInfo(leagueWinLoss.GrandTotal);
 
                 SessionManager.Set<LeagueWinLossInfo>(WinLossContants.LeagueWinLossByBetTypeSessionKey, leagueWinLoss);
@@ -459,7 +609,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 int startRow = 0;
                 int startColumn = 0;
                 var currentRow = startRow;
-                
+
                 var titleColor = ExcelExtensions.HeaderTitleColor;
                 var headerColor = ExcelExtensions.HeaderTitleColor;
                 var groupHeadLineColor = ExcelExtensions.SubTotalRowColor;
@@ -585,7 +735,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 currentColumn++;
                 currentRow++;
 
-                if (this.IsShowReport(report))
+                if (report.ChildsInfo.Count > 0)
                 {
                     var len = report.ChildsInfo.Count;
                     LeagueWinLossInfo info;
@@ -652,50 +802,26 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = Converter.ToDecimal(info.Margin);
+                            if (info.TurnOver > 0)
+                            {
+                                currentCell.Value = Converter.ToDecimal(info.Margin);
+                            }
+                            else
+                            {
+                                currentCell.Value = info.Margin.ToString();
+                            }
                             currentCell.Style = positiveTwoDecimalPercentNumberStyle;
                             currentColumn++;
                             currentRow++;
                         }
 
                         info = sport.GrandTotal;
-                        currentColumn = startColumn;
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Name;
-                        currentCell.Style = subRowTextStyle;
-                        currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                        currentColumn++;
+                        const int NewCricketSportType = 50;
+                        var sportTotalRowCount = sport.Id != NewCricketSportType
+                            ? ExportLeagueWinLossNormalSportsTotal(startColumn, currentRow, info, workSheet, textStyle, positiveTwoDecimalNumberStyle, twoDecimalNumberStyle, positiveTwoDecimalPercentNumberStyle)
+                            : ExportLeagueWinLossNewCricketTotal(startColumn, currentRow, info, workSheet, textStyle, positiveTwoDecimalNumberStyle, twoDecimalNumberStyle, positiveTwoDecimalPercentNumberStyle);
 
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.WinLoss;
-                        currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Position;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Commission;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.LineTotal;
-                        currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.TurnOver;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = Converter.ToDecimal(info.Margin);
-                        currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
-                        currentColumn++;
-                        currentRow++;
+                        currentRow += sportTotalRowCount;
                     }
 
                     info = report.Total;
@@ -738,7 +864,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = Converter.ToDecimal(info.Margin);
+                    if (info.TurnOver > 0)
+                    {
+                        currentCell.Value = Converter.ToDecimal(info.Margin);
+                    }
+                    else
+                    {
+                        currentCell.Value = info.Margin.ToString();
+                    }
                     currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                     currentColumn++;
@@ -827,6 +960,124 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             {
                 HandleException(ex);
             }
+        }
+
+        private int ExportLeagueWinLossNewCricketTotal(
+            int startColumn,
+            int currentRow,
+            LeagueWinLossInfo cricketGrandTotalInfo,
+            ExcelWorksheet workSheet,
+            CellStyle subRowTextStyle,
+            CellStyle subRowPositiveTwoDecimalNumberStyle,
+            CellStyle subRowTwoDecimalNumberStyle,
+            CellStyle subRowPositiveTwoDecimalPercentNumberStyle)
+        {
+            for (var i = 0; i < cricketGrandTotalInfo.ChildsInfo.Count; i++)
+            {
+                var info = cricketGrandTotalInfo.ChildsInfo[i];
+                var currentColumn = startColumn;
+                var currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.Name;
+                currentCell.Style = subRowTextStyle;
+                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.WinLoss;
+                currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.Position;
+                currentCell.Style = subRowTwoDecimalNumberStyle;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.Commission;
+                currentCell.Style = subRowTwoDecimalNumberStyle;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.LineTotal;
+                currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.TurnOver;
+                currentCell.Style = subRowTwoDecimalNumberStyle;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                if (info.TurnOver > 0)
+                {
+                    currentCell.Value = Converter.ToDecimal(info.Margin);
+                }
+                else
+                {
+                    currentCell.Value = info.Margin.ToString();
+                }
+                currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
+                currentRow++;
+            }
+
+            return cricketGrandTotalInfo.ChildsInfo.Count;
+        }
+
+        private int ExportLeagueWinLossNormalSportsTotal(
+            int startColumn,
+            int currentRow,
+            LeagueWinLossInfo info,
+            ExcelWorksheet workSheet,
+            CellStyle subRowTextStyle,
+            CellStyle subRowPositiveTwoDecimalNumberStyle,
+            CellStyle subRowTwoDecimalNumberStyle,
+            CellStyle subRowPositiveTwoDecimalPercentNumberStyle)
+        {
+            var currentColumn = startColumn;
+            var currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Name;
+            currentCell.Style = subRowTextStyle;
+            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.WinLoss;
+            currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Position;
+            currentCell.Style = subRowTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Commission;
+            currentCell.Style = subRowTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.LineTotal;
+            currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.TurnOver;
+            currentCell.Style = subRowTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            if (info.TurnOver > 0)
+            {
+                currentCell.Value = Converter.ToDecimal(info.Margin);
+            }
+            else
+            {
+                currentCell.Value = info.Margin.ToString();
+            }
+            currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
+            currentColumn++;
+
+            return 1;
         }
 
         /// <summary>
@@ -1048,7 +1299,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 currentColumn++;
                 currentRow++;
 
-                if (this.IsShowReport(report))
+                if (report.ChildsInfo.Count > 0)
                 {
                     var len = report.ChildsInfo.Count;
                     LeagueWinLossInfo info;
@@ -1108,7 +1359,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = Converter.ToDecimal(info.Margin);
+                        AssignMargin(currentCell, info);
                         currentCell.Style = positiveTwoDecimalPercentNumberStyle;
                         currentColumn++;
                         currentRow++;
@@ -1155,7 +1406,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = Converter.ToDecimal(info.Margin);
+                    AssignMargin(currentCell, info);
+
                     currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                     currentColumn++;
@@ -1321,7 +1573,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 WinLossResources.LeagueWinLossBySport_ReportTitle,
                 criteria.SportName,
                 criteria.LeagueName,
-                this.IsShowReport(report) ? " - " + report.Name : string.Empty);
+                (report.ChildsInfo.Count > 0) ? " - " + report.Name : string.Empty);
 
             currentColumn = startColumn;
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
@@ -1367,112 +1619,34 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             currentCell.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
             currentColumn++;
             currentRow++;
-
-            if (this.IsShowReport(report))
+            LeagueWinLossInfo chargedCommissionTotal = null;
+            if (report.ChildsInfo.Count > 0)
             {
                 var len = report.ChildsInfo.Count;
                 LeagueWinLossInfo info;
                 for (var i = 0; i < len; i++)
                 {
                     info = report.ChildsInfo[i];
-                    if (i % 2 == 0)
+                    const int ChargedCommissionBetType = 500;
+                    if (info.Id != ChargedCommissionBetType)
                     {
-                        textStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
-                        twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
-                        positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
-                        positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+                        ExportLeagueWinLossByBetTypeNormalBetType(i, currentRow, startColumn, info, workSheet, textStyle, twoDecimalNumberStyle, positiveTwoDecimalNumberStyle, positiveTwoDecimalPercentNumberStyle);
+                        currentRow++;
                     }
                     else
                     {
-                        textStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
-                        twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
-                        positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
-                        positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+                        chargedCommissionTotal = info;
                     }
-
-                    currentColumn = startColumn;
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Name;
-                    currentCell.Style = textStyle;
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.WinLoss;
-                    currentCell.Style = positiveTwoDecimalNumberStyle;
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Position;
-                    currentCell.Style = twoDecimalNumberStyle;
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Commission;
-                    currentCell.Style = twoDecimalNumberStyle;
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.LineTotal;
-                    currentCell.Style = positiveTwoDecimalNumberStyle;
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.TurnOver;
-                    currentCell.Style = twoDecimalNumberStyle;
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = Converter.ToDecimal(info.Margin);
-                    currentCell.Style = positiveTwoDecimalPercentNumberStyle;
-                    currentColumn++;
-                    currentRow++;
                 }
 
                 info = report.Total;
-                currentColumn = startColumn;
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.Name;
-                currentCell.Style = grandTotalRowTextStyle;
-                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.WinLoss;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.Position;
-                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.Commission;
-                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.LineTotal;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.TurnOver;
-                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Converter.ToDecimal(info.Margin);
-                currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
-                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                currentColumn++;
+                ExportLeaguWinLossByBetTypeTotal(currentRow, startColumn, info, workSheet, grandTotalRowTextStyle, grandTotalRowPositiveTwoDecimalNumberStyle, grandTotalRowTwoDecimalNumberStyle, grandTotalRowPositiveTwoDecimalPercentNumberStyle);
                 currentRow++;
+                if (chargedCommissionTotal != null)
+                {
+                    ExportLeaguWinLossByBetTypeTotal(currentRow, startColumn, chargedCommissionTotal, workSheet, grandTotalRowTextStyle, grandTotalRowPositiveTwoDecimalNumberStyle, grandTotalRowTwoDecimalNumberStyle, grandTotalRowPositiveTwoDecimalPercentNumberStyle);
+                    currentRow++;
+                }
 
                 if (this._8rmConfig.IsActive)
                 {
@@ -1549,7 +1723,153 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             }
         }
 
-                #endregion ExportExcel
+        private int ExportLeagueWinLossByBetTypeNormalBetType(
+            int i,
+            int currentRow,
+            int startColumn,
+            LeagueWinLossInfo info,
+            ExcelWorksheet workSheet,
+            CellStyle textStyle,
+            CellStyle twoDecimalNumberStyle,
+            CellStyle positiveTwoDecimalNumberStyle,
+            CellStyle positiveTwoDecimalPercentNumberStyle)
+        {
+
+
+            if (i % 2 == 0)
+            {
+                textStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+                twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+                positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+                positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+            }
+            else
+            {
+                textStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+                twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+                positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+                positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+            }
+
+            var currentColumn = startColumn;
+            var currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Name;
+            currentCell.Style = textStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.WinLoss;
+            currentCell.Style = positiveTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Position;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Commission;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.LineTotal;
+            currentCell.Style = positiveTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.TurnOver;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            if(info.TurnOver > 0)
+            {
+                currentCell.Value = Converter.ToDecimal(info.Margin);
+            }
+            else
+            {
+                currentCell.Value = info.Margin.ToString();
+            }
+            currentCell.Style = positiveTwoDecimalPercentNumberStyle;
+            currentColumn++;
+            return 1;
+        }
+
+        private void ExportLeaguWinLossByBetTypeTotal(int currentRow,
+            int startColumn,
+            LeagueWinLossInfo info,
+            ExcelWorksheet workSheet,
+            CellStyle grandTotalRowTextStyle,
+            CellStyle grandTotalRowPositiveTwoDecimalNumberStyle,
+            CellStyle grandTotalRowTwoDecimalNumberStyle,
+            CellStyle grandTotalRowPositiveTwoDecimalPercentNumberStyle)
+        {
+            var currentColumn = startColumn;
+            var currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Name;
+            currentCell.Style = grandTotalRowTextStyle;
+            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.WinLoss;
+            currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Position;
+            currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Commission;
+            currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.LineTotal;
+            currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.TurnOver;
+            currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            if (info.TurnOver > 0)
+            {
+                currentCell.Value = Converter.ToDecimal(info.Margin);
+            }
+            else
+            {
+                currentCell.Value = info.Margin.ToString();
+            }
+
+            currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+        }
+
+        private void AssignMargin(ExcelCell currentCell, LeagueWinLossInfo info)
+        {
+            decimal tempDecimal;
+            if (decimal.TryParse(info.Margin, out tempDecimal))
+            {
+                currentCell.Value = Converter.ToDecimal(info.Margin);
+            }
+            else
+            {
+                currentCell.Value = info.Margin;
+            }
+        }
+        #endregion ExportExcel
 
         private string GetSportName(int sportId)
         {
@@ -1638,7 +1958,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var betTypeList = rawData.Select(rawWinLossInfo => Converter.ToInt(rawWinLossInfo.Bettype))
                                                      .ToList();
             CacheRef.SaveCacheRefResponse(betTypeList, CacheRef.GetBettype, ref this._betTypeNameCache);
-
+            var chargedCommission = rawData.FirstOrDefault();
+            var ischargedCommission = false;
             foreach (var row in rawData)
             {
                 var info = new LeagueWinLossInfo
@@ -1652,13 +1973,25 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     TurnOver = Converter.ToDecimal(row.Turnover),
                     IsLive = Converter.ToBool(row.liveindicator)
                 };
-
+                if(info.Id == 500)
+                {
+                    chargedCommission = info;
+                    ischargedCommission = true;
+                    continue;
+                }
                 info.Name = this._betTypeNameCache[info.Id];
                 info.Margin = this.GetWinLossMargin(info.TurnOver, info.LineTotal, 4, true);
 
                 report.AddToTotal(info);
                 info = this.RoundLeagueWinLossInfo(info);
                 report.ChildsInfo.Add(info);
+            }
+            if (ischargedCommission == true)
+            {
+                chargedCommission.Name = "Charged Commission";
+                chargedCommission.Margin = this.GetWinLossMargin(chargedCommission.TurnOver, chargedCommission.LineTotal, 4, true);
+                report.ChildsInfo.Add(chargedCommission);
+                report.AddToGrandTotal(chargedCommission);
             }
 
             report.Total.Margin = this.GetWinLossMargin(report.Total.TurnOver, report.Total.LineTotal, 4, false);

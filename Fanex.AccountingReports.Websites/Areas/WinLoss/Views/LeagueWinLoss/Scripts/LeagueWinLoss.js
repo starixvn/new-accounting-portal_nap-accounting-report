@@ -81,6 +81,40 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
     var getParams = function () {
         self.Params.reportParams.Winlostdate = _tables.datepickerplugin.nexDatePicker("getSingleDate");
     };
+    function showNormalSportsTotal(grandTotal, currentRow) {
+
+        var totalRow = {
+            Columns: [{ Name: "ColLeague", Value: grandTotal.Name, CssClass: "colLeague align-right" },
+                      { Name: "ColWinLoss", Value: grandTotal.WinLoss },
+                      { Name: "ColPosition", Value: grandTotal.Position },
+                      { Name: "ColCommision", Value: grandTotal.Commission },
+                      { Name: "ColLineTotal", Value: grandTotal.LineTotal },
+                      { Name: "ColTurnOver", Value: grandTotal.TurnOver },
+                      { Name: "ColMargin", Value: grandTotal.Margin }],
+            CssClass: " subTotal"
+        };
+
+        currentRow.SubRows.push(totalRow);
+    };
+
+    function showNewCritketTotal(grandTotal, currentRow) {
+        var childTotals = grandTotal.ChildsInfo;
+        var grandTotalLength = childTotals.length;
+        for (var k = 0; k < grandTotalLength; k++) {
+            var info = childTotals[k];
+            var totalRow = {
+                Columns: [{ Name: "ColLeague", Value: info.Name, CssClass: "colLeague align-right" },
+                          { Name: "ColWinLoss", Value: info.WinLoss },
+                          { Name: "ColPosition", Value: info.Position },
+                          { Name: "ColCommision", Value: info.Commission },
+                          { Name: "ColLineTotal", Value: info.LineTotal },
+                          { Name: "ColTurnOver", Value: info.TurnOver },
+                          { Name: "ColMargin", Value: info.Margin }],
+                CssClass: " subTotal"
+            };
+            currentRow.SubRows.push(totalRow);
+        }
+    };
     var renderLeagueWinLoss = function (report) {
         self.showReport();
         _tables.reportContainer.removeClass("display-none");
@@ -88,7 +122,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         var bodyData = [];
         var footerData = [];
 
-        if (isShowReport(report)) {
+        if (report.ChildsInfo.length > 0) {
             var len = report.ChildsInfo.length;
             var currentSubRow = null;
             var info = null;
@@ -96,7 +130,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 var sport = report.ChildsInfo[i];
                 var currentRow =
                 {
-                    Columns: [{ Name: "ColLeague", Value: sport.Name, MergeColNumber: 7}],
+                    Columns: [{ Name: "ColLeague", Value: sport.Name, MergeColNumber: 7 }],
                     SubRows: []
                 };
 
@@ -105,12 +139,13 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                     info = sport.ChildsInfo[j];
                     currentSubRow =
                     {
-                        Columns: [{ Name: "ColLeague", Value: {
-                            sportId: sport.Id,
-                            sportName: sport.Name,
-                            leagueId: info.Id,
-                            leagueName: info.Name
-                        }, CssClass: "colLeague",
+                        Columns: [{
+                            Name: "ColLeague", Value: {
+                                sportId: sport.Id,
+                                sportName: sport.Name,
+                                leagueId: info.Id,
+                                leagueName: info.Name
+                            }, CssClass: "colLeague",
                             CustomCellRender: function (currentCell) {
                                 var clickEvent = ' onclick = "viewLeagueWinLossBySport(' + currentCell.Value.sportId + ', ' + currentCell.Value.leagueId + ',\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
                                 var html = '<div class="link " ' + clickEvent + '>' + currentCell.Value.leagueName + '</div>';
@@ -122,27 +157,20 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                   { Name: "ColCommision", Value: info.Commission },
                                   { Name: "ColLineTotal", Value: info.LineTotal },
                                   { Name: "ColTurnOver", Value: info.TurnOver },
-                                  { Name: "ColMargin", Value: info.Margin}],
+                                  { Name: "ColMargin", Value: info.Margin }],
                         CssClass: j % 2 == 0 ? "even" : ""
                     };
 
                     currentRow.SubRows.push(currentSubRow);
                 }
 
-                info = sport.GrandTotal;
-                currentSubRow =
-                {
-                    Columns: [{ Name: "ColLeague", Value: info.Name, CssClass: "colLeague align-right" },
-                              { Name: "ColWinLoss", Value: info.WinLoss },
-                              { Name: "ColPosition", Value: info.Position },
-                              { Name: "ColCommision", Value: info.Commission },
-                              { Name: "ColLineTotal", Value: info.LineTotal },
-                              { Name: "ColTurnOver", Value: info.TurnOver },
-                              { Name: "ColMargin", Value: info.Margin}],
-                    CssClass: " subTotal"
-                };
+                if (sport.Id == 50) {
+                    showNewCritketTotal(sport.GrandTotal, currentRow);
+                }
+                else {
+                    showNormalSportsTotal(sport.GrandTotal, currentRow);
+                }
 
-                currentRow.SubRows.push(currentSubRow);
                 bodyData.push(currentRow);
             }
 
@@ -155,7 +183,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                           { Name: "ColCommision", Value: info.Commission },
                           { Name: "ColLineTotal", Value: info.LineTotal },
                           { Name: "ColTurnOver", Value: info.TurnOver },
-                          { Name: "ColMargin", Value: info.Margin}]
+                          { Name: "ColMargin", Value: info.Margin }]
             };
 
             footerData.push(currentRow);
@@ -166,7 +194,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 {
                     Columns: [{ Name: "ColLeague", Value: info.Name, CssClass: "align-right", MergeColNumber: 4 },
                               { Name: "ColLineTotal", Value: info.LineTotal },
-                              { Name: "ColTurnOver", Value: "", MergeColNumber: 2}]
+                              { Name: "ColTurnOver", Value: "", MergeColNumber: 2 }]
                 };
 
                 footerData.push(currentRow);
@@ -178,7 +206,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 {
                     Columns: [{ Name: "ColLeague", Value: info.Name, CssClass: "align-right", MergeColNumber: 4 },
                               { Name: "ColLineTotal", Value: info.LineTotal },
-                              { Name: "ColTurnOver", Value: "&nbsp;", MergeColNumber: 2}]
+                              { Name: "ColTurnOver", Value: "&nbsp;", MergeColNumber: 2 }]
                 };
 
                 footerData.push(currentRow);
@@ -189,10 +217,12 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             {
                 Columns: [{ Name: "ColLeague", Value: info.Name, CssClass: "align-right", MergeColNumber: 4 },
                           { Name: "ColLineTotal", Value: info.LineTotal },
-                          { Name: "ColTurnOver", Value: "", MergeColNumber: 2}]
+                          { Name: "ColTurnOver", Value: "", MergeColNumber: 2 }]
             };
 
             footerData.push(currentRow);
+
+
         }
 
         var gridOptions = {
@@ -202,7 +232,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                       { HeaderText: "Comm", Width: 100, Name: "ColCommision", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                       { HeaderText: "Line Total", Width: 100, Name: "ColLineTotal", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                       { HeaderText: "Turnover", Width: 100, Name: "ColTurnOver", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-                      { HeaderText: "Margin", Width: 100, Name: "ColMargin", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$'}],
+                      { HeaderText: "Margin", Width: 100, Name: "ColMargin", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$' }],
             showTitle: true,
             showFooter: true,
             titleInfo:

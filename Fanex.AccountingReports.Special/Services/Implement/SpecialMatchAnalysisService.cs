@@ -9,13 +9,9 @@
 
 namespace Fanex.AccountingReports.Special.Services.Implement
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
+    using Common;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
-    using Fanex.AccountingReports.Core.Criteria;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
@@ -24,7 +20,11 @@ namespace Fanex.AccountingReports.Special.Services.Implement
     using Fanex.AccountingReports.Special.Models.SpecialMatchAnalysis;
     using Fanex.AccountingReports.Special.Resources;
     using Fanex.AccountingReports.Special.Services.Interface;
-using Fanex.Data.Repository;
+    using Fanex.Data.Repository;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -174,7 +174,7 @@ using Fanex.Data.Repository;
             {
                 var getMatchAnalysisCriteria = GetMatchAnalysisCriteria(criteria);
                 var data = GetReportData<dynamic>(getMatchAnalysisCriteria);
-
+                MatchAnalysis chargedCommission = null;
                 //// Assign Rows
                 foreach (var d in data)
                 {
@@ -194,6 +194,7 @@ using Fanex.Data.Repository;
 
                     //// Reporttype
 
+                    #region criteria.Reporttype
                     switch (criteria.Reporttype)
                     {
                         case ReportType.Currency:
@@ -235,12 +236,22 @@ using Fanex.Data.Repository;
                             row.Name = d.username;
                             break;
                     }
+                    #endregion
 
-                    matchAnalysis.Rows.Add(row);
+                    const int chargedComissionBetType = 500;
+                    if (row.Id == chargedComissionBetType && criteria.Reporttype == ReportType.Bettype)
+                    {
+                        chargedCommission = row;
+                        chargedCommission.Name = "Charged Commission";
+                        chargedCommission.BetCount = "0";
+                    }
+                    else {
+                        matchAnalysis.Rows.Add(row);
+                    }
                 }
 
                 //// Total
-                matchAnalysis.Total = new MatchAnalysis()
+                var total = new MatchAnalysis()
                 {
                     SMAWL = data.Sum(s => (double)s.SMAWinLost).Format(2),
                     SMATO = data.Sum(s => (double)s.SMATurnover).Format(2),
@@ -254,8 +265,44 @@ using Fanex.Data.Repository;
                     BetCount = data.Sum(s => (int)s.betcount).Format(0),
                     Name = Labels.Total
                 };
+                matchAnalysis.Total = new List<MatchAnalysis> { total};
 
-                SessionManager.Set<MatchAnalysisView>(SpecialConstants.MatchAnalysisSessionKey + GetReportTypeName(criteria.Reporttype), matchAnalysis);
+                if (chargedCommission != null)
+                {
+                    matchAnalysis.Total.Add(chargedCommission);
+
+                    var grandTotal = new MatchAnalysis
+                    {
+                        Name = "All Total",
+                        SMAWL = total.SMAWL,
+                        SMATO = total.SMATO,
+                        HouseWL = total.HouseWL,
+                        HouseTO = total.HouseTO,
+                        MemberWL = total.MemberWL,
+                        MemberTO = total.MemberTO,
+                        BetCount = total.BetCount,
+                    };
+
+                    matchAnalysis.Total.Add(grandTotal);
+                    matchAnalysis.Total.First().SMAWL = Converter.ToString2(Converter.ToDecimal(total.SMAWL)
+                                   - Converter.ToDecimal(chargedCommission.SMAWL));
+                    matchAnalysis.Total.First().SMATO = Converter.ToString2(Converter.ToDecimal(total.SMATO)
+                                   - Converter.ToDecimal(chargedCommission.SMATO));
+
+                    matchAnalysis.Total.First().HouseWL = Converter.ToString2(Converter.ToDecimal(total.HouseWL)
+                                   - Converter.ToDecimal(chargedCommission.HouseWL));
+                    matchAnalysis.Total.First().HouseTO = Converter.ToString2(Converter.ToDecimal(total.HouseTO)
+                                   - Converter.ToDecimal(chargedCommission.HouseTO));
+
+                    matchAnalysis.Total.First().MemberWL = Converter.ToString2(Converter.ToDecimal(total.MemberWL)
+                                    - Converter.ToDecimal(chargedCommission.MemberWL));
+                    matchAnalysis.Total.First().MemberTO = Converter.ToString2(Converter.ToDecimal(total.MemberTO)
+                                    - Converter.ToDecimal(chargedCommission.MemberTO));
+
+                    matchAnalysis.Total.First().BetCount = Converter.ToString2(Converter.ToDecimal(total.BetCount)
+                                    - Converter.ToDecimal(chargedCommission.BetCount));
+                };
+                SessionManager.Set(SpecialConstants.MatchAnalysisSessionKey + GetReportTypeName(criteria.Reporttype), matchAnalysis);
             }
             catch (Exception ex)
             {
@@ -445,10 +492,10 @@ using Fanex.Data.Repository;
             GetMatchAnalysisCriteria criteria)
         {
             ////init default value
-            criteria.Home  = criteria.Home ?? string.Empty;
+            criteria.Home = criteria.Home ?? string.Empty;
             criteria.Away = criteria.Away ?? string.Empty;
             criteria.Bettypes = criteria.Bettypes ?? string.Empty;
-            criteria.League = criteria.League ?? string.Empty; 
+            criteria.League = criteria.League ?? string.Empty;
 
             //// ExcelTypes
             var titleColor = ExcelExtensions.HeaderTitleColor;
@@ -719,83 +766,91 @@ using Fanex.Data.Repository;
                 }
 
                 //// Total
-                intStyle = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.GrandTotalRowColor, true, false, false);
-                intStyle.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, ExcelExtensions.GrandTotalRowColor, true, false, false);
-                twoDecimalNumberStyle.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                twoDecimalNumberStyleNegative = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    ExcelExtensions.GrandTotalRowColor,
-                    true,
-                    false,
-                    true);
-                twoDecimalNumberStyleNegative.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-
-                currentColumn = startColumn;
-                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = matchAnalysis.Total.Name;
-                currentCellRange.Style = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true, HorizontalAlignmentStyle.Center);
-                currentCellRange.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-
-                currentColumn++;
-                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Convert.ToDecimal(matchAnalysis.Total.MemberTO);
-                currentCellRange.Style = twoDecimalNumberStyle;
-
-                currentColumn++;
-                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Convert.ToDecimal(matchAnalysis.Total.MemberWL);
-                currentCellRange.Style = twoDecimalNumberStyle;
-
-                currentColumn++;
-                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Convert.ToDecimal(matchAnalysis.Total.BetCount);
-                currentCellRange.Style = intStyle;
-
-                currentColumn++;
-                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Convert.ToDecimal(matchAnalysis.Total.HouseTO);
-                currentCellRange.Style = twoDecimalNumberStyle;
-
-                currentColumn++;
-                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Convert.ToDecimal(matchAnalysis.Total.HouseWL);
-                currentCellRange.Style = twoDecimalNumberStyleNegative;
-
-                currentColumn++;
-                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Convert.ToDecimal(matchAnalysis.Total.SMATO);
-                currentCellRange.Style = twoDecimalNumberStyle;
-
-                currentColumn++;
-                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Convert.ToDecimal(matchAnalysis.Total.SMAWL);
-                currentCellRange.Style = twoDecimalNumberStyle;
-
-                if (isAddMoreCurrencyColumn)
+                foreach (var total in matchAnalysis.Total)
                 {
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = string.Empty;
-                    currentCellRange.Style = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true, HorizontalAlignmentStyle.Center);
-                    currentCellRange.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    ExportReportTotalContent(currentRow, startColumn, isAddMoreCurrencyColumn, worksheet, total);
+                    currentRow++;
                 }
-
-                // currentRow++;
             }
             catch (Exception ex)
             {
                 HandleException(ex);
             }
+        }
+
+        private void ExportReportTotalContent(int currentRow, int startColumn, bool isAddMoreCurrencyColumn, ExcelWorksheet worksheet, MatchAnalysis matchAnalysis)
+        {
+            var intStyle = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.GrandTotalRowColor, true, false, false);
+            intStyle.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+            var twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, ExcelExtensions.GrandTotalRowColor, true, false, false);
+            twoDecimalNumberStyle.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+            var twoDecimalNumberStyleNegative = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                ExcelExtensions.GrandTotalRowColor,
+                true,
+                false,
+                true);
+            twoDecimalNumberStyleNegative.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+
+            var currentColumn = startColumn;
+            var currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = matchAnalysis.Name;
+            currentCellRange.Style = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true, HorizontalAlignmentStyle.Center);
+            currentCellRange.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+
+            currentColumn++;
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Convert.ToDecimal(matchAnalysis.MemberTO);
+            currentCellRange.Style = twoDecimalNumberStyle;
+
+            currentColumn++;
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Convert.ToDecimal(matchAnalysis.MemberWL);
+            currentCellRange.Style = twoDecimalNumberStyle;
+
+            currentColumn++;
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Convert.ToDecimal(matchAnalysis.BetCount);
+            currentCellRange.Style = intStyle;
+
+            currentColumn++;
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Convert.ToDecimal(matchAnalysis.HouseTO);
+            currentCellRange.Style = twoDecimalNumberStyle;
+
+            currentColumn++;
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Convert.ToDecimal(matchAnalysis.HouseWL);
+            currentCellRange.Style = twoDecimalNumberStyleNegative;
+
+            currentColumn++;
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Convert.ToDecimal(matchAnalysis.SMATO);
+            currentCellRange.Style = twoDecimalNumberStyle;
+
+            currentColumn++;
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Convert.ToDecimal(matchAnalysis.SMAWL);
+            currentCellRange.Style = twoDecimalNumberStyle;
+
+            if (isAddMoreCurrencyColumn)
+            {
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = string.Empty;
+                currentCellRange.Style = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true, HorizontalAlignmentStyle.Center);
+                currentCellRange.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+            }
+
         }
 
         private string GetReportTypeName(ReportType reportType)
