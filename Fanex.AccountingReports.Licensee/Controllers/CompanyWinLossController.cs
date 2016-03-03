@@ -67,8 +67,10 @@ namespace Fanex.AccountingReports.Licensee.Controllers
 
         public EmptyResult ExportReport(CompanyWinLossCriteria criteria)
         {
+            string sheetName = Labels.Company_Win_Loss;
+            string reportName = this._reportService.GetReportName(criteria);
             FanexExcel result = new FanexExcel(this._reportService.GetFullReportFromCache(criteria));
-            NpoiExcelExtensions.ResponseStreamExcel(result.ToExcel2003(Labels.Company_Win_Loss), this._reportService.GetReportName(criteria));
+            NpoiExcelExtensions.ResponseStreamExcel(result.ToExcel2003(sheetName), reportName);
 
             return new EmptyResult();
         }

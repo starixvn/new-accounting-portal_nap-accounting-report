@@ -202,7 +202,9 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
 
         public string GetReportName(CompanyWinLossCriteria criteria)
         {
-            string reportName = Labels.Company_Win_Loss.Replace(" ", string.Empty) + " From " + criteria.FromDate.ToShortFormatedDateWithSlash().Replace(@"\", "_") + " To " + criteria.ToDate.ToShortFormatedDateWithSlash().Replace(@"\", "_");
+            string reportName = string.Format(string.Format(Labels.Company_Win_Loss.Replace(" ", string.Empty)) 
+                + "_From_" + string.Format(criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "_")) 
+                + "_To_" + string.Format(criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "_")));
 
             return reportName;
         }
