@@ -257,7 +257,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.SummaryReportBySportType = function 
             bodyRows: bodyData,
             showDistinctRow: false,
             footerRows: footerData,
-            gridExpandHeight: isShowMainAndDetailReport ? 0.63 * $(window).height() : 200,
+            gridExpandHeight: isShowMainAndDetailReport ? 0.68 * $(window).height() : 200,
             gridWidth: 800,
             numberOfFrozenColumn: 0
         };
