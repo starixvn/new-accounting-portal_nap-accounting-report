@@ -31,6 +31,15 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
     using System.Text;
     using System.Web;
     using System.Web.Mvc;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Security.Cryptography;
+    using System.Text;
+    using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Security;
     using System.Web.Security;
     using ONEbookUMService = ONEbook.UM.Services;
     using ONEbookUMServiceImp = ONEbook.UM.Services.Impl;
@@ -400,7 +409,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
             {
                 HttpOnly = true,
-                Path = currentDomain.Path,
+                Path = "/",
                 Name = FormsAuthentication.FormsCookieName
             };
 
