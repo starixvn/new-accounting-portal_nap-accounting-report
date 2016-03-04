@@ -268,6 +268,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to After Extra PT.
+        /// </summary>
+        public static string After_Extra_PT {
+            get {
+                return ResourceManager.GetString("After_Extra_PT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AG Casino.
         /// </summary>
         public static string AG_Casino {
@@ -1118,6 +1127,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         public static string Export {
             get {
                 return ResourceManager.GetString("Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extra PT.
+        /// </summary>
+        public static string Extra_PT {
+            get {
+                return ResourceManager.GetString("Extra_PT", resourceCulture);
             }
         }
         
@@ -2104,6 +2122,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Non-Sports Total.
+        /// </summary>
+        public static string Non_Sports_Total {
+            get {
+                return ResourceManager.GetString("Non_Sports_Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
         public static string None {
@@ -2802,6 +2829,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         public static string Sportsbook {
             get {
                 return ResourceManager.GetString("Sportsbook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sportsbook Total.
+        /// </summary>
+        public static string Sportsbook_Total {
+            get {
+                return ResourceManager.GetString("Sportsbook_Total", resourceCulture);
             }
         }
         

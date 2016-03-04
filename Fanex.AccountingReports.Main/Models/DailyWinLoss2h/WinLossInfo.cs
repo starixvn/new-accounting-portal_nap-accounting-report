@@ -95,6 +95,10 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
 
         public int DisplayOrder { get; set; }
 
+        public decimal ExtraPositionTaking { get; set; }
+
+        public decimal AfterExtraPositionTaking { get; set; }
+
         public List<WinLossInfo> ChildsInfo { get; set; }
 
         public WinLossInfo EightRMTotal { get; set; }
@@ -134,6 +138,8 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
             winLoss.VirtualLineTotal = Math.Round(winLoss.VirtualLineTotal, 2);
             winLoss.Turnover = Math.Round(winLoss.Turnover, 2);
             winLoss.VirtualTurnover = Math.Round(winLoss.VirtualTurnover, 2);
+            winLoss.ExtraPositionTaking = Math.Round(winLoss.ExtraPositionTaking, 2);
+            winLoss.AfterExtraPositionTaking = Math.Round(winLoss.AfterExtraPositionTaking, 2);
             return winLoss;
         }
 
@@ -170,6 +176,8 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
             this.VirtualLineTotal += winLoss.VirtualLineTotal;
             this.Turnover += winLoss.Turnover;
             this.VirtualTurnover += winLoss.VirtualTurnover;
+            this.ExtraPositionTaking += winLoss.ExtraPositionTaking;
+            this.AfterExtraPositionTaking += winLoss.AfterExtraPositionTaking;
         }
     }
 }

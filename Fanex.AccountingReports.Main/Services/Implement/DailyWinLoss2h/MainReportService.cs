@@ -9,11 +9,7 @@
 
 namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
+    using Core.Configurations;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web;
@@ -23,8 +19,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
     using Fanex.AccountingReports.Main.Models.DailyWinLoss2h;
     using Fanex.AccountingReports.Main.Resources;
     using Fanex.Common;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using CoreConstants = Fanex.AccountingReports.Core.Constants;
-
+    
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -96,7 +97,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     },
                     NormalTotal = new WinLossInfo
                     {
-                        Name = Labels.Virtual_All_Total,
+                        Name = Labels.Sportsbook_Total,
                         EnableVirtual = true
                     },
                     CreditTotal = new WinLossInfo
@@ -130,7 +131,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     },
                     NormalTotal = new WinLossInfo
                     {
-                        Name = Labels.Virtual_All_Total
+                        Name = Labels.Non_Sports_Total
                     },
                     CreditTotal = new WinLossInfo
                     {
@@ -204,7 +205,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 VirtualTurnover = Converter.ToDecimal(data.VirtualTurnover),
                                 IBC = Converter.ToInt(data.ibc),
                                 SiteType = Converter.ToInt(data.Site),
-                                DisplayOrder = Convert.ToInt32(data.DisplayOrder)
+                                DisplayOrder = Convert.ToInt32(data.DisplayOrder),
+                                ExtraPositionTaking = Converter.ToDecimal(data.ExtraPositionTaking),
+                                AfterExtraPositionTaking = Converter.ToDecimal(data.AfterExtraPositionTaking)
                             };
 
                             var rowType = _dailyWinLoss2hUtilityService.GetRowType(info.IBC, info.SiteType);
@@ -318,6 +321,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     ibcReport.NormalTotal.Add(ibcReport.CreditTotal);
                     ibcReport.NormalTotal.Add(ibcReport.DepositTotal);
                     ibcReport.ChildsInfo = ibcReport.ChildsInfo.OrderBy(info => info.DisplayOrder).ToList();
+                    thirdPartyReport.NormalTotal.Add(thirdPartyReport.CreditTotal);
+                    thirdPartyReport.NormalTotal.Add(thirdPartyReport.DepositTotal);
                     thirdPartyReport.ChildsInfo = thirdPartyReport.ChildsInfo.OrderBy(info => info.DisplayOrder).ToList();
 
                     report.EightRMTotal.Add(ibcReport.EightRMTotal);
@@ -383,7 +388,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
                 int startRow = 0;
                 int startColumn = 0;
-                int maxColumnIndex = 10;
+                int maxColumnIndex = 12;
                 var currentRow = startRow;
 
                 var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
@@ -496,17 +501,11 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 currentCellRange.Style = headerTextStyle;
                 currentColumn++;
 
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 4);
                 currentCellRange.Merged = true;
                 currentCellRange.Value = Labels.Company_Income;
                 currentCellRange.Style = headerTextStyle;
-                currentColumn += 2;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.Variance;
-                currentCellRange.Style = headerTextStyle;
-                currentColumn++;
+                currentColumn += 5;
 
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
                 currentCellRange.Merged = true;
@@ -525,19 +524,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 currentColumn = startColumn + 4;
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Style = headerTextStyle;
-                currentCell.Value = Labels.Real;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Style = headerTextStyle;
-                currentCell.Value = Labels.Virtual;
-                currentColumn++;
-
-                currentColumn++; // VarianceColumn
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Style = headerTextStyle;
-                currentCell.Value = Labels.Real;
+                currentCell.Value = Labels.Variance;
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -552,8 +539,34 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Style = headerTextStyle;
+                currentCell.Value = Labels.Extra_PT;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Style = headerTextStyle;
+                currentCell.Value = Labels.After_Extra_PT;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Style = headerTextStyle;
                 currentCell.Value = Labels.Virtual;
                 currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Style = headerTextStyle;
+                currentCell.Value = Labels.Real;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Style = headerTextStyle;
+                currentCell.Value = Labels.Virtual;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Style = headerTextStyle;
+                currentCell.Value = Labels.Real;
+                currentColumn++;
+
                 currentRow++;
 
                 //// Header
@@ -591,8 +604,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 ref twoDecimalPositivePercentNumberStyle,
                                 true);
 
-                            if (isCasinoSport){
-                                _dailyWinLoss2hUtilityService.ExportMainReportCasinoRow(
+                            if (isCasinoSport)
+                            {
+                                this.ExportMainReportCasinoRow(
                                     ref workSheet,
                                     textStyle,
                                     twoDecimalNumberStyle,
@@ -606,7 +620,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                             }
                             else
                             {
-                                _dailyWinLoss2hUtilityService.ExportNormalRow(
+                                this.ExportMainDataRow(
                                     ref workSheet,
                                     textStyle,
                                     twoDecimalNumberStyle,
@@ -631,7 +645,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
                             if (isCasinoSport)
                             {
-                                _dailyWinLoss2hUtilityService.ExportMainReportCasinoRow(
+                                this.ExportMainReportCasinoRow(
                                     ref workSheet,
                                     textStyle,
                                     twoDecimalNumberStyle,
@@ -645,7 +659,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                             }
                             else
                             {
-                                _dailyWinLoss2hUtilityService.ExportNormalRow(
+                                this.ExportMainDataRow(
                                     ref workSheet,
                                     textStyle,
                                     twoDecimalNumberStyle,
@@ -663,7 +677,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
                             if (isCasinoSport)
                             {
-                                _dailyWinLoss2hUtilityService.ExportMainReportCasinoRow(
+                                this.ExportMainReportCasinoRow(
                                     ref workSheet,
                                     textStyle,
                                     twoDecimalNumberStyle,
@@ -677,7 +691,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                             }
                             else
                             {
-                                _dailyWinLoss2hUtilityService.ExportNormalRow(
+                                this.ExportMainDataRow(
                                     ref workSheet,
                                     textStyle,
                                     twoDecimalNumberStyle,
@@ -740,11 +754,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                             }
                         }
 
-                        if (ibcWinLoss.Name == Labels.Sportsbook &&
-                            ibcWinLoss.ChildsInfo.Count > 0)
+                        if (ibcWinLoss.ChildsInfo.Count > 0)
                         {
                             info = ibcWinLoss.NormalTotal;
-                            _dailyWinLoss2hUtilityService.ExportNormalRow(
+                            this.ExportMainDataRow(
                                 ref workSheet,
                                 subTotalTextStyle,
                                 subTotalTwoDecimalNumberStyle,
@@ -755,10 +768,11 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 ref currentRow,
                                 RowType._2hReportVirtualAllTotal,
                                 report.EnableVirtual,
-                                true);
+                                true,
+                                i != 0);
 
                             info = ibcWinLoss.CreditTotal;
-                            _dailyWinLoss2hUtilityService.ExportNormalRow(
+                            this.ExportMainDataRow(
                                 ref workSheet,
                                 subTotalTextStyle,
                                 subTotalTwoDecimalNumberStyle,
@@ -769,10 +783,11 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 ref currentRow,
                                 RowType._2hReportCredit,
                                 report.EnableVirtual,
-                                true);
+                                true,
+                                i != 0);
 
                             info = ibcWinLoss.DepositTotal;
-                            _dailyWinLoss2hUtilityService.ExportNormalRow(
+                            this.ExportMainDataRow(
                                 ref workSheet,
                                 subTotalTextStyle,
                                 subTotalTwoDecimalNumberStyle,
@@ -783,27 +798,33 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 ref currentRow,
                                 RowType._2hReportDeposit,
                                 report.EnableVirtual,
-                                true);
+                                true,
+                                i != 0);
+                        }
 
-                            var infoRMLength = infoRMList.Count;
-                            for (var k = 0; k < infoRMLength; k++)
+                            if (ibcWinLoss.Name == Labels.Sportsbook &&
+                            ibcWinLoss.ChildsInfo.Count > 0)
                             {
-                                info = infoRMList[k];
-                                this.ExportRMRow(
-                                    ref workSheet,
-                                    subTotalTextStyle,
-                                    subTotalTwoDecimalNumberStyle,
-                                    subTotalTwoDecimalPositiveNumberStyle,
-                                    subTotalTwoDecimalPositivePercentNumberStyle,
-                                    info,
-                                    startColumn,
-                                    maxColumnIndex,
-                                    ref currentRow);
+
+                                var infoRMLength = infoRMList.Count;
+                                for (var k = 0; k < infoRMLength; k++)
+                                {
+                                    info = infoRMList[k];
+                                    this.ExportRMRow(
+                                        ref workSheet,
+                                        subTotalTextStyle,
+                                        subTotalTwoDecimalNumberStyle,
+                                        subTotalTwoDecimalPositiveNumberStyle,
+                                        subTotalTwoDecimalPositivePercentNumberStyle,
+                                        info,
+                                        startColumn,
+                                        maxColumnIndex,
+                                        ref currentRow);
+                                }
                             }
 
                             workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
                         }
-                    }
 
                     _dailyWinLoss2hUtilityService.SetOddEvenColor_ExportExcel(
                         ref textStyle,
@@ -844,7 +865,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.LineTotal;
+                    currentCell.Value = info.Variance;
                     currentCell.Style = grandTotalTwoDecimalPositiveNumberStyle;
                     currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, grandTotalSeparatorColor, LineStyle.Medium);
@@ -858,7 +879,21 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Variance;
+                    currentCell.Value = info.LineTotal;
+                    currentCell.Style = grandTotalTwoDecimalPositiveNumberStyle;
+                    currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, grandTotalSeparatorColor, LineStyle.Medium);
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.ExtraPositionTaking;
+                    currentCell.Style = grandTotalTwoDecimalPositiveNumberStyle;
+                    currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, grandTotalSeparatorColor, LineStyle.Medium);
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.AfterExtraPositionTaking;
                     currentCell.Style = grandTotalTwoDecimalPositiveNumberStyle;
                     currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, grandTotalSeparatorColor, LineStyle.Medium);
@@ -867,13 +902,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, grandTotalSeparatorColor, LineStyle.Medium);
-                    currentCell.Value = info.Turnover;
+                    currentCell.Value = info.VirtualTurnover;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, grandTotalSeparatorColor, LineStyle.Medium);
-                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Value = info.Turnover;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -888,7 +923,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     currentRow++;
 
                     info = report.CreditTotal;
-                    _dailyWinLoss2hUtilityService.ExportNormalRow(
+                    this.ExportMainDataRow(
                         ref workSheet,
                         grandTotalRowTextStyle,
                         grandTotalRowTwoDecimalNumberStyle,
@@ -903,7 +938,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         true);
 
                     info = report.DepositTotal;
-                    _dailyWinLoss2hUtilityService.ExportNormalRow(
+                    this.ExportMainDataRow(
                         ref workSheet,
                         grandTotalRowTextStyle,
                         grandTotalRowTwoDecimalNumberStyle,
@@ -1024,7 +1059,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.LineTotal;
+            currentCell.Value = info.Variance;
             currentCell.Style = twoDecimalPositiveNumberStyle;
             currentColumn++;
 
@@ -1034,13 +1069,18 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.Variance;
+            currentCell.Value = info.LineTotal;
             currentCell.Style = twoDecimalPositiveNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.Turnover;
-            currentCell.Style = twoDecimalNumberStyle;
+            currentCell.Value = info.ExtraPositionTaking;
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.AfterExtraPositionTaking;
+            currentCell.Style = twoDecimalPositiveNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -1049,13 +1089,340 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Style = twoDecimalPositivePercentNumberStyle;
-            _dailyWinLoss2hUtilityService.ExportColumnTurnover(info.Margin, info.Turnover, ref currentCell);
+            currentCell.Value = info.Turnover;
+            currentCell.Style = twoDecimalNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Style = twoDecimalPositivePercentNumberStyle;
             _dailyWinLoss2hUtilityService.ExportColumnTurnover(info.VirtualMargin, info.VirtualTurnover, ref currentCell);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalPositivePercentNumberStyle;
+            _dailyWinLoss2hUtilityService.ExportColumnTurnover(info.Margin, info.Turnover, ref currentCell);
+            currentColumn++;
+            currentRow++;
+        }
+
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
+        public void ExportMainReportCasinoRow(
+            ref ExcelWorksheet workSheet,
+            CellStyle textStyle,
+            CellStyle twoDecimalNumberStyle,
+            CellStyle twoDecimalPositiveNumberStyle,
+            CellStyle twoDecimalPositivePercentNumberStyle,
+            WinLossInfo info,
+            int startColumn,
+            ref int currentRow,
+            DateTime winLossDate,
+            int rowType)
+        {
+            ExcelCell currentCell;
+            var currentColumn = startColumn;
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Name;
+            currentCell.Style = textStyle;
+            currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+
+            currentCell.Style.HorizontalAlignment = rowType == RowType.Normal ? HorizontalAlignmentStyle.Left : HorizontalAlignmentStyle.Right;
+
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.WinLoss;
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Position;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Commission;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            currentCell.Value = info.Variance;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            currentCell.Value = info.VirtualLineTotal;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.LineTotal;
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.ExtraPositionTaking;
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.AfterExtraPositionTaking;
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalNumberStyle;
+            currentCell.Value = info.VirtualTurnover;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalNumberStyle;
+            currentCell.Value = info.Turnover;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalPositivePercentNumberStyle;
+            bool isBeforeCasinoSingleWalletLaunchDate = DateTime.Compare(winLossDate, AppSettings.CasinoSingleWalletLaunchDate) < 0;
+
+            if (isBeforeCasinoSingleWalletLaunchDate)
+            {
+                currentCell.Style = textStyle;
+                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                currentCell.Value = Labels.NotAvailable;
+            }
+            else
+            {
+                currentCell.Style = twoDecimalPositivePercentNumberStyle;
+                _dailyWinLoss2hUtilityService.ExportColumnTurnover(info.VirtualMargin, info.VirtualTurnover, ref currentCell);
+            }
+
+            currentColumn++;
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalPositivePercentNumberStyle;
+
+            if (isBeforeCasinoSingleWalletLaunchDate)
+            {
+                currentCell.Style = textStyle;
+                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                currentCell.Value = Labels.NotAvailable;
+            }
+            else
+            {
+                currentCell.Style = twoDecimalPositivePercentNumberStyle;
+                _dailyWinLoss2hUtilityService.ExportColumnTurnover(info.Margin, info.Turnover, ref currentCell);
+            }
+
+            currentColumn++;
+            currentRow++;
+        }
+
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        public void ExportMainDataRow(
+            ref ExcelWorksheet workSheet,
+            CellStyle textStyle,
+            CellStyle twoDecimalNumberStyle,
+            CellStyle twoDecimalPositiveNumberStyle,
+            CellStyle twoDecimalPositivePercentNumberStyle,
+            WinLossInfo info,
+            int startColumn,
+            ref int currentRow,
+            int rowType,
+            bool isEnableVirtual,
+            bool isShowVirtualTurnover = false,
+            bool isHideMargin = false)
+        {
+            ExcelCell currentCell;
+            var currentColumn = startColumn;
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Name;
+            currentCell.Style = textStyle;
+            currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+            switch (rowType)
+            {
+                case RowType._2hReportCredit:
+                case RowType._2hReportDeposit:
+                case RowType._2hReportVirtualAllTotal:
+                case RowType._2hReportGrandTotal:
+                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    break;
+            }
+
+            currentColumn++;
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.WinLoss;
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Position;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.Commission;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            if (isEnableVirtual)
+            {
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Style = twoDecimalPositiveNumberStyle;
+                currentCell.Value = info.Variance;
+                switch (rowType)
+                {
+                    case RowType._2hReportVirtualAllTotal:
+                        currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                        break;
+
+                    case RowType._2hReportGrandTotal:
+                        currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                        currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
+                        break;
+                }
+
+                currentColumn++;
+            }
+
+            if (isEnableVirtual)
+            {
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Style = twoDecimalPositiveNumberStyle;
+                currentCell.Value = info.VirtualLineTotal;
+
+                switch (rowType)
+                {
+                    case RowType._2hReportVirtualAllTotal:
+                        currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                        break;
+
+                    case RowType._2hReportGrandTotal:
+                        currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                        currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
+                        break;
+                }
+
+                currentColumn++;
+            }
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.LineTotal;
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            switch (rowType)
+            {
+                case RowType._2hReportVirtualAllTotal:
+                    currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                    break;
+
+                case RowType._2hReportGrandTotal:
+                    currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                    currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
+                    break;
+            }
+
+            currentColumn++;
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.ExtraPositionTaking;
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            switch (rowType)
+            {
+                case RowType._2hReportVirtualAllTotal:
+                    currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                    break;
+
+                case RowType._2hReportGrandTotal:
+                    currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                    currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
+                    break;
+            }
+
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.AfterExtraPositionTaking;
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+            switch (rowType)
+            {
+                case RowType._2hReportVirtualAllTotal:
+                    currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                    break;
+
+                case RowType._2hReportGrandTotal:
+                    currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                    currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
+                    break;
+            }
+
+            currentColumn++;
+
+            if (isEnableVirtual)
+            {
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Style = twoDecimalNumberStyle;
+                if (isShowVirtualTurnover)
+                {
+                    currentCell.Value = info.VirtualTurnover;
+                }
+                else
+                {
+                    currentCell.Value = Labels.NotAvailable;
+                }
+
+                switch (rowType)
+                {
+                    case RowType._2hReportVirtualAllTotal:
+                    case RowType._2hReportGrandTotal:
+                        currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                        break;
+                }
+
+                currentColumn++;
+            }
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalNumberStyle;
+            if (info.IsHideRealTurnover)
+            {
+                currentCell.Value = Labels.NotAvailable;
+            }
+            else
+            {
+                currentCell.Value = info.Turnover;
+            }
+
+            switch (rowType)
+            {
+                case RowType._2hReportVirtualAllTotal:
+                case RowType._2hReportGrandTotal:
+                    currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                    break;
+            }
+
+            currentColumn++;
+
+            if (isEnableVirtual)
+            {
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Style = twoDecimalPositivePercentNumberStyle;
+
+                if (!isHideMargin)
+                {
+                    _dailyWinLoss2hUtilityService.ExportColumnTurnover(info.VirtualMargin, info.VirtualTurnover, ref currentCell);
+                }
+
+                currentColumn++;
+            }
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalPositivePercentNumberStyle;
+
+            if (!isHideMargin)
+            {
+                _dailyWinLoss2hUtilityService.ExportColumnTurnover(info.Margin, info.Turnover, ref currentCell);
+            }
+
             currentColumn++;
             currentRow++;
         }
