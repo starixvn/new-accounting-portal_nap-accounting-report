@@ -593,10 +593,18 @@ Main2hReport.prototype.ShowHideSiteTypeInfo = function () {
     var self = this;
     if (reportManager.CachedData.isShowSiteTypeInfo) {
         this.Tables.report.fanexGrid("hideColumns", self.gridOptions, [1, 2]);
+        this.Tables.report.find(".showHideSiteType.showHideIcon").click(function () {
+            var btnIcon = $(this);
+            showHideSiteTypeManager.ShowHideSiteTypeInfo_ByGroup(btnIcon, self.Tables.report);
+        });
     }
     else
     {
         this.Tables.report.fanexGrid("hideColumns", self.gridOptions, []);
+        this.Tables.report.find(".showHideSiteType.showHideIcon").click(function () {
+            var btnIcon = $(this);
+            showHideSiteTypeManager.ShowHideSiteTypeInfo_ByGroup(btnIcon, self.Tables.report);
+        });
     }
 
     self.Tables.report.removeClass("display-none").fanexGrid("resizeGrid");

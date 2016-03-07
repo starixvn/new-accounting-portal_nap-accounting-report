@@ -280,10 +280,7 @@ MainLiveCasinoReport.prototype.RenderReport = function (report) {
             showDistinctRow: false,
             showHighlightRow: false,
             noDataText: viewResources.EmptyReportMessage,
-            headerColumnHeight: 29,
-            hiddenColumns: [1, 2],
-            enableHiddenColumns: false,
-            columnsNeedHide: []
+            headerColumnHeight: 29
         };
         
         self.gridOptions = gridOptions;
@@ -352,13 +349,6 @@ MainLiveCasinoReport.prototype.ShowHideSiteTypeInfo = function () {
     var self = this;
     if (!this.Tables.mainLiveCasinoReport.hasClass("display-none")) {
         this.Tables.mainLiveCasinoContentReport.fanexGrid("resizeGrid");
-    }
-
-    if (reportManager.CachedData.isShowSiteTypeInfo) {
-        this.Tables.mainLiveCasinoContentReport.fanexGrid("hideColumns", self.gridOptions, [1, 2]);
-    }
-    else {
-        this.Tables.mainLiveCasinoContentReport.fanexGrid("hideColumns", self.gridOptions, []);
     }
 };
 

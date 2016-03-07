@@ -65,8 +65,8 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
                             true,
                         Site = row["Site"],
                         DisplayOrder = Converter.ToInt(row["DisplayOrder"]),
-                        ExtraPositionTaking = row["ExtraPT_ActualRate"],
-                        AfterExtraPositionTaking = row["AfterExtraPT_ActualRate"]
+                        ExtraPositionTaking = row["ExtraPT"],
+                        AfterExtraPositionTaking = row["AfterExtraPT"]
                     });
                 }
             }

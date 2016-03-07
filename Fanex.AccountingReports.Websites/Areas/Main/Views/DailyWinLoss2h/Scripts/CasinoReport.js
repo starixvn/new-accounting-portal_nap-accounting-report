@@ -309,10 +309,10 @@ CasinoReport.prototype.RenderReport = function (report) {
         showDistinctRow: false,
         showHighlightRow: false,
         noDataText: viewResources.EmptyReportMessage,
-        headerColumnHeight: 29,
-        hiddenColumns: [1, 2],
-        enableHiddenColumns: false,
-        columnsNeedHide: []
+        headerColumnHeight: 29
+        //hiddenColumns: [1, 2],
+        //enableHiddenColumns: false,
+        //columnsNeedHide: []
     };
 
     self.gridOptions = gridOptions;
@@ -379,12 +379,5 @@ CasinoReport.prototype.ShowHideSiteTypeInfo = function () {
     var self = this;
     if (!this.Tables.casinoReportBySportTypeContainer.hasClass("display-none")) {
         this.Tables.casinoReportBySportType.fanexGrid("resizeGrid");
-    }
-
-    if (reportManager.CachedData.isShowSiteTypeInfo) {
-        this.Tables.casinoReportBySportType.fanexGrid("hideColumns", self.gridOptions, [1, 2]);
-    }
-    else {
-        this.Tables.casinoReportBySportType.fanexGrid("hideColumns", self.gridOptions, []);
     }
 };
