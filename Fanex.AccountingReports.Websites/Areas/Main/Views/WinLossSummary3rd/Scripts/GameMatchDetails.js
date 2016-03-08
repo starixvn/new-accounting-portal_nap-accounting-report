@@ -1,5 +1,6 @@
 Namespace.Register('Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails');
 Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
+    var _winLossSummary = new Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary();
     var self = this;
 
     var _tables = {
@@ -35,6 +36,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
         _tables.winlossSumReportContainer = $('#winlossSumReportContainer');
         _tables.gameMatchDetailContainer = $('#gameMatchDetailContainer');
         _tables.gameMatchDetail = $('#gameMatchDetail');
+        _tables.btnShowHideSiteTypeInfoHistory = $("#btnShowHideSiteTypeInfoHistory");
     };
     self.getReport = function (params, parentName) {
         AccReport.disableInput();
@@ -71,6 +73,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
         _params.reportParams.DrillDownByType = params.reportParams.DrillDownByType;
     };
     var renderReport = function (report) {
+        _tables.btnShowHideSiteTypeInfoHistory.attr("disabled", true);
         _tables.winlossSumReportContainer.removeClass('display-none');
         _tables.winlossSumReportContainer.addClass('display-none');
 
@@ -451,6 +454,8 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
         return cellValue + (isNumber && isPercent ? '%' : '');
     };
     var back2Main = function () {
+        _tables.btnShowHideSiteTypeInfoHistory.attr("disabled", null);
+        _tables.btnShowHideSiteTypeInfo.attr("disabled", null);
         scoreInfoManager.ClosePopup();
         // show summary
         _tables.winlossSumReportContainer.removeClass('display-none');

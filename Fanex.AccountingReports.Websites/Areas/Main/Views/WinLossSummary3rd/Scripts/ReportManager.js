@@ -112,6 +112,8 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.ReportManager = function () {
         _tables.noteTitle = $('#note-title');
         _tables.noteContent = $('#note-content');
         _tables.cockFightingContainer = $("#cockFightingContainer");
+        _tables.btnShowHideSiteTypeInfoHistory = $("#btnShowHideSiteTypeInfoHistory");
+        _tables.btnShowHideSiteTypeInfo = $("#btnShowHideSiteTypeInfo");
     };
     var bindingEvent = function () {
         _tables.btnGenerate.unbind('click');
