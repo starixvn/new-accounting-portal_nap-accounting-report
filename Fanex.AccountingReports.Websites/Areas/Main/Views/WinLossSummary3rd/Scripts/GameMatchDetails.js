@@ -37,6 +37,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
         _tables.gameMatchDetailContainer = $('#gameMatchDetailContainer');
         _tables.gameMatchDetail = $('#gameMatchDetail');
         _tables.btnShowHideSiteTypeInfoHistory = $("#btnShowHideSiteTypeInfoHistory");
+        _tables.btnShowHideSiteTypeInfo = $("#btnShowHideSiteTypeInfo");
     };
     self.getReport = function (params, parentName) {
         AccReport.disableInput();
@@ -74,6 +75,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
     };
     var renderReport = function (report) {
         _tables.btnShowHideSiteTypeInfoHistory.attr("disabled", true);
+        _tables.btnShowHideSiteTypeInfo.attr("disabled", true);
         _tables.winlossSumReportContainer.removeClass('display-none');
         _tables.winlossSumReportContainer.addClass('display-none');
 
