@@ -257,7 +257,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                 // total
                 var total = betType.Total;
                 if (betType.EightRM || betType.BARM || betType.Hedge) {
-                    sportType.SubRows.push(renderTotal(total, 'total', 'Total:'));
+                    sportType.SubRows.push(renderTotalNew(total, 'total', 'Total:'));
                 }
             }
 
@@ -432,6 +432,25 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 						{ Name: 'ColVirtualTurnover', Value: total.VirtualTurnoverStr },
 						{ Name: 'ColRealMargin', Value: formatNumberCell(total.RealMarginStr, true, false, true) },
 						{ Name: 'ColVirtualMargin', Value: formatNumberCell(total.VirtualMarginStr, true, false, true) }]
+
+        }
+    };
+    var renderTotalNew = function (total, css, title) {
+        var groupdId = '';
+        return {
+            CssClass: css,
+            Columns: [{ Name: 'ColView', Value: title, MergeColNumber: 2, CellAlign: 'right', CssClass: 'bold', TdClass: css },
+						{ Name: 'ColWinLoss', Value: formatNumberCell(total.WinLossStr, true, false, false), TdClass: css },
+						{ Name: 'ColPosition', Value: total.PositionStr, TdClass: css },
+						{ Name: 'ColComm', Value: total.CommissionStr, TdClass: css },
+						{ Name: 'ColRealLineTotal', Value: formatNumberCell(total.RealLineTotalStr, true, false, false), TdClass: css },
+						{ Name: 'ColVirtualLineTotal', Value: formatNumberCell(total.VirtualLineTotalStr, true, false, false), TdClass: css },
+						{ Name: 'ColVariance', Value: formatNumberCell(total.VarianceStr, true, false, false), TdClass: css },
+						{ Name: 'ColRealTurnover', Value: total.RealTurnoverStr, TdClass: css },
+						{ Name: 'ColVirtualTurnover', Value: total.VirtualTurnoverStr, TdClass: css },
+						{ Name: 'ColRealMargin', Value: formatNumberCell(total.RealMarginStr, true, false, true), TdClass: css },
+						{ Name: 'ColVirtualMargin', Value: formatNumberCell(total.VirtualMarginStr, true, false, true), TdClass: css }],
+            CssClass: GetSiteTypeRowCss(groupdId, winLossSummary.Enums.RowType.InfoRow)
 
         }
     };
