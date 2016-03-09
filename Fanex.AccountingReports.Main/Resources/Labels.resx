@@ -1232,10 +1232,10 @@
     <value>Fight No.</value>
   </data>
   <data name="MBC_RNG_Casino" xml:space="preserve">
-    <value>MBC - RNG Casino</value>
+    <value>MBC-RNG Casino</value>
   </data>
   <data name="Non_Sports_Total" xml:space="preserve">
-    <value>Non-Sports Total</value>
+    <value>MBC - RNG Casino</value>
   </data>
   <data name="Sportsbook_Total" xml:space="preserve">
     <value>Sportsbook Total</value>
@@ -1248,5 +1248,8 @@
   </data>
   <data name="AllBet" xml:space="preserve">
     <value>AllBet</value>
+  </data>
+    <data name="Total_New_Cricket" xml:space="preserve">
+    <value>Total</value>
   </data>
 </root>

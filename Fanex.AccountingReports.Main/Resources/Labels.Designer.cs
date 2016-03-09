@@ -356,14 +356,6 @@ namespace Fanex.AccountingReports.Main.Resources {
                 return ResourceManager.GetString("All_Total", resourceCulture);
             }
         }
-
-        public static string TotalNewCricket
-        {
-            get
-            {
-                return ResourceManager.GetString("Total", resourceCulture);
-            }
-        }
         
         /// <summary>
         ///   Looks up a localized string similar to AllBet.
@@ -636,7 +628,7 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cockfighting.
+        ///   Looks up a localized string similar to Cock fighting.
         /// </summary>
         public static string Cockfighting {
             get {
@@ -1806,7 +1798,7 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MBC - RNG Casino.
+        ///   Looks up a localized string similar to MBC-RNG Casino.
         /// </summary>
         public static string MBC_RNG_Casino {
             get {
@@ -3081,6 +3073,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         public static string Total_Bookings {
             get {
                 return ResourceManager.GetString("Total_Bookings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        public static string Total_New_Cricket {
+            get {
+                return ResourceManager.GetString("Total_New_Cricket", resourceCulture);
             }
         }
         
