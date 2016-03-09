@@ -1798,7 +1798,7 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MBC-RNG Casino.
+        ///   Looks up a localized string similar to MBC - RNG Casino.
         /// </summary>
         public static string MBC_RNG_Casino {
             get {
