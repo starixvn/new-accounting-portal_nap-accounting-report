@@ -61,7 +61,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                     Id == SportContants.MicrogamingRNGCasino ||
                     Id == SportContants.AGCasino ||
                     Id == SportContants.Macau ||
-                    Id == MainSportConstants.SportContants._2dBettrade ||
+                    Id == SportContants.Bettrade ||
                     Id == SportContants.ColossusBet ||
                     Id == SportContants.CockFighting)
                 {
