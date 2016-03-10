@@ -117,8 +117,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 LineTotal = Converter.ToDecimal(data.LineTotal),
                                 Turnover = Converter.ToDecimal(data.Turnover),
                                 SiteType = Converter.ToInt(data.Site),
-                                ExtraPositionTaking = Converter.ToDecimal(data.ExtraPositionTaking),
-                                AfterExtraPositionTaking = Converter.ToDecimal(data.AfterExtraPositionTaking),
+                                ExtraPositionTaking = Converter.ToDecimal(data.ExtraPositionTaking)
                             };
 
                             productWinLoss.CreditTotal.BettypeId = info.BettypeId;

@@ -206,8 +206,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 IBC = Converter.ToInt(data.ibc),
                                 SiteType = Converter.ToInt(data.Site),
                                 DisplayOrder = Convert.ToInt32(data.DisplayOrder),
-                                ExtraPositionTaking = Converter.ToDecimal(data.ExtraPositionTaking),
-                                AfterExtraPositionTaking = Converter.ToDecimal(data.AfterExtraPositionTaking)
+                                ExtraPositionTaking = Converter.ToDecimal(data.ExtraPositionTaking)
                             };
 
                             var rowType = _dailyWinLoss2hUtilityService.GetRowType(info.IBC, info.SiteType);

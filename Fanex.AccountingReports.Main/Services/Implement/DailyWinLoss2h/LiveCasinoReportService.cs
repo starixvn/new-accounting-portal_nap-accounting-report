@@ -676,8 +676,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 Commission = Converter.ToDecimal(productWinLoss.Commission),
                 LineTotal = Converter.ToDecimal(productWinLoss.LineTotal),
                 Turnover = Converter.ToDecimal(productWinLoss.Turnover),
-                ExtraPositionTaking = Converter.ToDecimal(productWinLoss.ExtraPositionTaking),
-                AfterExtraPositionTaking = Converter.ToDecimal(productWinLoss.AfterExtraPositionTaking)
+                ExtraPositionTaking = Converter.ToDecimal(productWinLoss.ExtraPositionTaking)
             };
 
             return winLoss;

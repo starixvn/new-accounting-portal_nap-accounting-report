@@ -65,8 +65,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
                             true,
                         Site = row["Site"],
                         DisplayOrder = Converter.ToInt(row["DisplayOrder"]),
-                        ExtraPositionTaking = row["ExtraPT"],
-                        AfterExtraPositionTaking = row["AfterExtraPT"]
+                        ExtraPositionTaking = row["ExtraPT"]
                     });
                 }
             }
@@ -115,8 +114,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
                         LineTotal = row["LineTotal"],
                         Turnover = row["Turnover"],
                         Site = row["Site"],
-                        ExtraPositionTaking = row["ExtraPT"],
-                        AfterExtraPositionTaking = row["AfterExtraPT"]
+                        ExtraPositionTaking = row["ExtraPT"]
                     });
                 }
             }
@@ -686,8 +684,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
                         Commission = Converter.ToDecimal(reader["Commission"]),
                         LineTotal = Converter.ToDecimal(reader["LineTotal"]),
                         Turnover = Converter.ToDecimal(reader["Turnover"]),
-                        ExtraPositionTaking = Converter.ToDecimal(reader["ExtraPT"]),
-                        AfterExtraPositionTaking = Converter.ToDecimal(reader["AfterExtraPT"])
+                        ExtraPositionTaking = Converter.ToDecimal(reader["ExtraPT"])
                     });
                 }
 
