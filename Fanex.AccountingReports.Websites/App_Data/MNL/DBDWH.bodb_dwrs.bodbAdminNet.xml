@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Functions>
-
-
   <Function Name="Misc - Bet Count">
     <Setting Key="Misc_BetCount_GetAllProductsForBetCountReport" SpName="Acc_Rpt_BetCount_SelSports" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
     <Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
@@ -73,7 +71,8 @@
     
     <Setting Key="Main_DailyWinLoss2h_GetParlayReport_WH" SpName="Acc_Rpt_DailyWLDirect_Parlay" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetMetricGamingBettypeReport_WH" SpName="Acc_Rpt_DailyWLDirect_MetricGaming" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetBettradeReport_WH" SpName="Acc_Rpt_DailyWLDirect_BetTrade" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="Main_DailyWinLoss2h_GetBettradeReport_WH" SpName="Acc_Rpt_DailyWLDirect_BetTrade" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetColossusBetReport_WH" SpName="Acc_Rpt_DailyWLDirect_ColossusBets" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
   </Function>
   <Function Name="Main Report - Daily Win Loss (2h) Soccer">
     <Setting Key="Main_DailyWinLoss2hSoccer_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>

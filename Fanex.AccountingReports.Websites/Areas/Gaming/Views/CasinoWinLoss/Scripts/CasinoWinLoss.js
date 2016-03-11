@@ -16,7 +16,7 @@ Fanex.AccountingReports.Gaming.CasinoWinLoss = function () {
     };
 
     var _params = {
-        winLostDate: null
+        WinLostDate: null
     };
 
     self.initPage = function () {
@@ -96,7 +96,7 @@ Fanex.AccountingReports.Gaming.CasinoWinLoss = function () {
     };
 
     var getParams = function () {
-        _params.winLostDate = _table.datePickerPlugin.nexDatePicker("getSingleDate");
+        _params.WinLostDate = _table.datePickerPlugin.nexDatePicker("getSingleDate");
     };
 
     var validateParams = function () {
@@ -104,7 +104,7 @@ Fanex.AccountingReports.Gaming.CasinoWinLoss = function () {
     };
 
     var renderReport = function (report) {
-        var reportTitle = "MBC - RNG Casino Daily Report: " + _params.winLostDate;
+        var reportTitle = "MBC - RNG Casino Daily Report: " + _params.WinLostDate;
 
         if (report != null && report.Rows != null && report.Rows.length > 0) {
             var bodyData = [];

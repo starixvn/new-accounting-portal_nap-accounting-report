@@ -6,6 +6,7 @@
 
 namespace Fanex.AccountingReports.Gaming.Repositories.Implement
 {
+    using System.Collections;
     using System.Data;
     using Fanex.AccountingReports.Gaming.Criteria.CasinoWinLoss;
     using Fanex.AccountingReports.Gaming.Repositories.Interface;
@@ -27,12 +28,15 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
 
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
             {
-                db.AssignParamValues(criteria.GetSpParams());
+                Hashtable param = new Hashtable();
+                param.Add("winlostdate", criteria.WinLostDate);
+
+                db.AssignParamValues(param);
                 var result = db.ExecuteDataSet();
                 if (result != null && result.Tables.Count > 0)
                 {
                     dataTable = result.Tables[0];
-                }               
+                }
             }
 
             return dataTable;
