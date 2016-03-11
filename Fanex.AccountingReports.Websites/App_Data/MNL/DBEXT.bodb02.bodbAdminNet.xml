@@ -11,7 +11,7 @@
   <Function Name="Licensee - Core">
     <Setting Key="Licensee_Core_GetAllLicensees" SpName="Acc_LicenseeSelAll" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="Licensee_Core_GetCurrencies" SpName="Acc_SelCurrencyByLicensee" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Acc_PlaytechCS_LicenseeSelAll" SpName="Acc_PlaytechCS_LicenseeSelAll" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+	  <Setting Key="Acc_PlaytechCS_LicenseeSelAll" SpName="Acc_PlaytechCS_LicenseeSelAll" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="Acc_GetProductListByLicenseId" SpName="Acc_GetProductListByLicenseId" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
   <Function Name="Licensee - Virtual Sport Win Loss">
