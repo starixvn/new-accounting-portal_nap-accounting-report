@@ -99,7 +99,7 @@ Main2hReport.prototype.RenderReport = function (report) {
                     { Name: "ColVariance", Value: info.Variance },
                     { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
                     { Name: "ColRealLineTotal", Value: info.LineTotal },
-                    { Name: "ColExtraPT", Value: info.ExtraPositionTaking },
+                    { Name: "ColExtraPT", Value: info.IsShowAvailableExtraPositionTaking ? info.ExtraPositionTaking : viewResources.NotAvailable },
                     { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                     { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
                     { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
@@ -117,7 +117,7 @@ Main2hReport.prototype.RenderReport = function (report) {
                         { Name: "ColVariance", Value: info.Variance },
                         { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
                         { Name: "ColRealLineTotal", Value: info.LineTotal },
-                        { Name: "ColExtraPT", Value: info.ExtraPositionTaking },
+                        { Name: "ColExtraPT", Value: info.IsShowAvailableExtraPositionTaking ? info.ExtraPositionTaking : viewResources.NotAvailable },
                         { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                         { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
                         { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
@@ -136,7 +136,7 @@ Main2hReport.prototype.RenderReport = function (report) {
                         { Name: "ColVariance", Value: info.Variance },
                         { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
                         { Name: "ColRealLineTotal", Value: info.LineTotal },
-                        { Name: "ColExtraPT", Value: info.ExtraPositionTaking },
+                        { Name: "ColExtraPT", Value: info.IsShowAvailableExtraPositionTaking ? info.ExtraPositionTaking : viewResources.NotAvailable },
                         { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                         { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
                         { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
@@ -169,7 +169,7 @@ Main2hReport.prototype.RenderReport = function (report) {
                                     { Name: "ColVariance", Value: info.Variance },
                                     { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
                                     { Name: "ColRealLineTotal", Value: info.LineTotal },
-                                    { Name: "ColExtraPT", Value: info.ExtraPositionTaking },
+                                    { Name: "ColExtraPT", Value: viewResources.NotAvailable },
                                     { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                                     { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
                                     { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
@@ -195,7 +195,7 @@ Main2hReport.prototype.RenderReport = function (report) {
                                 { Name: "ColVariance", Value: info.Variance },
                                 { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
                                 { Name: "ColRealLineTotal", Value: info.LineTotal },
-                                { Name: "ColExtraPT", Value: info.ExtraPositionTaking },
+                                { Name: "ColExtraPT", Value: viewResources.NotAvailable },
                                 { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                                 { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
                                 { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
@@ -287,7 +287,7 @@ Main2hReport.prototype.RenderReport = function (report) {
                                 { Name: "ColVariance", Value: info.Variance },
                                 { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
                                 { Name: "ColRealLineTotal", Value: info.LineTotal },
-                                { Name: "ColExtraPT", Value: info.ExtraPositionTaking },
+                                { Name: "ColExtraPT", Value: viewResources.NotAvailable },
                                 { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                                 { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
                                 { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
@@ -427,7 +427,6 @@ Main2hReport.prototype.RenderReport = function (report) {
         numberOfFrozenColumn: 0,
         gridWidth: 1400,
         gridExpandHeight: 168,
-        //gridHeight: reportManager.CachedData.maxGridHeight,
         showDistinctRow: false,
         showHighlightRow: false,
         headerColumnHeight: 17,
@@ -591,21 +590,22 @@ Main2hReport.prototype.GetSportLink = function (winLossInfo) {
 
 Main2hReport.prototype.ShowHideSiteTypeInfo = function () {
     var self = this;
+    var showHideCssEnum = showHideSiteTypeManager.Enums.ShowHideCss;
     if (reportManager.CachedData.isShowSiteTypeInfo) {
         this.Tables.report.fanexGrid("hideColumns", self.gridOptions, [1, 2]);
-        this.Tables.report.find(".showHideSiteType.showHideIcon").click(function () {
-            var btnIcon = $(this);
-            showHideSiteTypeManager.ShowHideSiteTypeInfo_ByGroup(btnIcon, self.Tables.report);
-        });
     }
     else
     {
         this.Tables.report.fanexGrid("hideColumns", self.gridOptions, []);
-        this.Tables.report.find(".showHideSiteType.showHideIcon").click(function () {
-            var btnIcon = $(this);
-            showHideSiteTypeManager.ShowHideSiteTypeInfo_ByGroup(btnIcon, self.Tables.report);
-        });
+        $(".siteTypeRow.infoRow").removeClass("display-none");
+        $(".showHideSiteType.showHideIcon").removeClass(showHideCssEnum.Collapse)
+                                              .addClass(showHideCssEnum.Expand);
     }
+
+    this.Tables.report.find(".showHideSiteType.showHideIcon").click(function () {
+        var btnIcon = $(this);
+        showHideSiteTypeManager.ShowHideSiteTypeInfo_ByGroup(btnIcon, self.Tables.report);
+    });
 
     self.Tables.report.removeClass("display-none").fanexGrid("resizeGrid");
 }; 

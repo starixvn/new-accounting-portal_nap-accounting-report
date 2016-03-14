@@ -162,6 +162,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 var winLossBySport = InitWinLoss();
                 int sportId = Converter.ToInt(sportGroup.Key);
                 winLossBySport.Id = sportId;
+                winLossBySport.CreditTotal.Id = sportId;
+                winLossBySport.DepositTotal.Id = sportId;
                 winLossBySport.GrandTotal.Id = sportId;
                 winLossBySport.GrandTotal.Name = _dailyWinLoss2hUtilityService.GetSportName(sportId);
                 var sportBySiteGroups = sportGroup.GroupBy(x => x.Site);

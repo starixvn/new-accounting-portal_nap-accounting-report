@@ -155,9 +155,11 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     var isIBC = false;
                     foreach (var sportGroup in sportGroups)
                     {
+                        int groupId = Converter.ToInt(sportGroup.Key);
+
                         var sportWinLoss = new WinLossInfo
                         {
-                            Id = Converter.ToInt(sportGroup.Key),
+                            Id = groupId,
                             ChildsInfo = new List<WinLossInfo>(),
                             GrandTotal = new WinLossInfo(),
                             EightRMTotal = new WinLossInfo
@@ -170,10 +172,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                             },
                             CreditTotal = new WinLossInfo
                             {
-                                Name = Labels.Credit,
+                                Id = groupId,
+                                Name = Labels.Credit
                             },
                             DepositTotal = new WinLossInfo
                             {
+                                Id = groupId,
                                 Name = Labels.Deposit
                             },
                             NormalTotal = new WinLossInfo(),
@@ -1073,7 +1077,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.ExtraPositionTaking;
+            currentCell.Value = Labels.NotAvailable;
             currentCell.Style = twoDecimalPositiveNumberStyle;
             currentColumn++;
 
@@ -1323,7 +1327,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
             currentColumn++;
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.ExtraPositionTaking;
+            currentCell.Value = info.IsShowAvailableExtraPositionTaking ? info.ExtraPositionTaking : (object)Labels.NotAvailable;
             currentCell.Style = twoDecimalPositiveNumberStyle;
             switch (rowType)
             {

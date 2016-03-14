@@ -92,11 +92,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                             },
                             CreditTotal = new WinLossInfo
                             {
+                                Id = productId,
                                 Name = Labels.Credit,
                                 IsHideRealTurnover = isHideRealTurnover
                             },
                             DepositTotal = new WinLossInfo
                             {
+                                Id = productId,
                                 Name = Labels.Deposit,
                                 IsHideRealTurnover = isHideRealTurnover
                             }

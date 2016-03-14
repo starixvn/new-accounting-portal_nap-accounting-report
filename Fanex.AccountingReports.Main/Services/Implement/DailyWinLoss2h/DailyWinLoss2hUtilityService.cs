@@ -1253,7 +1253,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
             currentColumn++;
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.ExtraPositionTaking;
+            currentCell.Value = info.IsShowAvailableExtraPositionTaking ? info.ExtraPositionTaking : (object)Labels.NotAvailable;
             currentCell.Style = twoDecimalPositiveNumberStyle;
 
             currentColumn++;
