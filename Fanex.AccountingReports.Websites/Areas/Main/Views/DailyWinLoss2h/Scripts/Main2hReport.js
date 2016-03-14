@@ -430,13 +430,21 @@ Main2hReport.prototype.RenderReport = function (report) {
         showDistinctRow: false,
         showHighlightRow: false,
         headerColumnHeight: 17,
-        hiddenColumns: [1, 2],
+        hiddenColumns: reportManager.CachedData.isShowSiteTypeInfo ? [] : [1, 2],
         enableHiddenColumns: false,
         columnsNeedHide: []
     };
 
     self.gridOptions = gridOptions;
     this.Tables.report.removeClass("display-none").fanexGrid(gridOptions);
+
+    if (reportManager.CachedData.isShowSiteTypeInfo) {
+        $(".siteTypeRow.paddingRow").addClass("display-none");
+    }
+    else {
+        $(".siteTypeRow.paddingRow").removeClass("display-none");
+    }
+
     this.Tables.report.find(".showHideSiteType.showHideIcon").click(function () {
         var btnIcon = $(this);
         showHideSiteTypeManager.ShowHideSiteTypeInfo_ByGroup(btnIcon, self.Tables.report);
@@ -593,19 +601,24 @@ Main2hReport.prototype.ShowHideSiteTypeInfo = function () {
     var showHideCssEnum = showHideSiteTypeManager.Enums.ShowHideCss;
     if (reportManager.CachedData.isShowSiteTypeInfo) {
         this.Tables.report.fanexGrid("hideColumns", self.gridOptions, [1, 2]);
+        $(".siteTypeRow.paddingRow").removeClass("display-none");
+        $(".siteTypeRow.infoRow").addClass("display-none");
+        $(".showHideSiteType.showHideIcon").removeClass(showHideCssEnum.Expand)
+                                             .addClass(showHideCssEnum.Collapse);
     }
     else
     {
         this.Tables.report.fanexGrid("hideColumns", self.gridOptions, []);
+        $(".siteTypeRow.paddingRow").addClass("display-none");
         $(".siteTypeRow.infoRow").removeClass("display-none");
         $(".showHideSiteType.showHideIcon").removeClass(showHideCssEnum.Collapse)
                                               .addClass(showHideCssEnum.Expand);
     }
 
+    self.Tables.report.removeClass("display-none").fanexGrid("resizeGrid");
+
     this.Tables.report.find(".showHideSiteType.showHideIcon").click(function () {
         var btnIcon = $(this);
         showHideSiteTypeManager.ShowHideSiteTypeInfo_ByGroup(btnIcon, self.Tables.report);
     });
-
-    self.Tables.report.removeClass("display-none").fanexGrid("resizeGrid");
 }; 
