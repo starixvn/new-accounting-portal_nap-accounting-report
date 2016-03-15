@@ -54,6 +54,8 @@ Main2hReport.prototype.IsCasinoSport = function (Id) {
 
 Main2hReport.prototype.RenderReport = function (report) {
     var self = this;
+    reportManager.CachedData.isShowSiteTypeInfo = false;
+    reportManager.Tables.btnShowHideSiteTypeInfo.val(viewResources.Expand);
     this.Tables.reportContainer.removeClass("display-none");
     this.Tables.report.addClass("display-none");
     var bodyData = [];
@@ -600,7 +602,7 @@ Main2hReport.prototype.ShowHideSiteTypeInfo = function () {
     var self = this;
     var showHideCssEnum = showHideSiteTypeManager.Enums.ShowHideCss;
     if (reportManager.CachedData.isShowSiteTypeInfo) {
-        this.Tables.report.fanexGrid("hideColumns", self.gridOptions, [1, 2]);
+        self.Tables.report.fanexGrid("hideColumns", self.gridOptions, [1, 2]);
         $(".siteTypeRow.paddingRow").removeClass("display-none");
         $(".siteTypeRow.infoRow").addClass("display-none");
         $(".showHideSiteType.showHideIcon").removeClass(showHideCssEnum.Expand)
@@ -608,17 +610,17 @@ Main2hReport.prototype.ShowHideSiteTypeInfo = function () {
     }
     else
     {
-        this.Tables.report.fanexGrid("hideColumns", self.gridOptions, []);
+        self.Tables.report.fanexGrid("hideColumns", self.gridOptions, []);
         $(".siteTypeRow.paddingRow").addClass("display-none");
         $(".siteTypeRow.infoRow").removeClass("display-none");
         $(".showHideSiteType.showHideIcon").removeClass(showHideCssEnum.Collapse)
                                               .addClass(showHideCssEnum.Expand);
     }
 
-    self.Tables.report.removeClass("display-none").fanexGrid("resizeGrid");
-
-    this.Tables.report.find(".showHideSiteType.showHideIcon").click(function () {
+    self.Tables.report.find(".showHideSiteType.showHideIcon").click(function () {
         var btnIcon = $(this);
         showHideSiteTypeManager.ShowHideSiteTypeInfo_ByGroup(btnIcon, self.Tables.report);
     });
+
+    self.Tables.report.removeClass("display-none").fanexGrid("resizeGrid");
 }; 

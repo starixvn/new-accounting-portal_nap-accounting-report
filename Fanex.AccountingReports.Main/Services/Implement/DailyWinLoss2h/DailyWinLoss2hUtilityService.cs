@@ -989,7 +989,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Style = headerTextStyle;
-            currentCell.Value = Labels.After_Extra_PT;
+            currentCell.Value = Labels.Extra_PT;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
