@@ -37,9 +37,9 @@
   <Function Name="Main - Daily Win Loss (2h)">
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_WH" SpName="Acc_Rpt_DailyWLDirect_Bettype_Site_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetReportByBetType_WH" SpName="Acc_Rpt_DailyWLDirect_Details" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Old_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetCasinoReport_WH" SpName="Acc_Rpt_DailyWLDirect_Casino_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetLiveCasinoReport_WH" SpName="Acc_Rpt_DailyWLDirect_LiveCasino_xpre" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetCasinoReport_WH" SpName="Acc_Rpt_DailyWLDirect_Casino" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetLiveCasinoReport_WH" SpName="Acc_Rpt_DailyWLDirect_LiveCasino" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetMixParlayReport_WH" SpName="Acc_Rpt_DailyWLDirect_MixParlay" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetSummaryRacingReport_WH" SpName="Acc_Rpt_DailyWLDirect_Racing" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" >
       <Mapping DataField="Site" ObjectProperty="site" />
