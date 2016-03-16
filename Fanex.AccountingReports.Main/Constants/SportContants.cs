@@ -37,5 +37,26 @@ namespace Fanex.AccountingReports.Main.Constants
         public const int _2hBettrade = -2;
 
         public const int _2dReportCasino = 251;
+
+
+
+
+        public const int _2hSoccer = 1;
+        public const int _2hSoccerMajorBetType = 1;
+        public const int _2hSoccerMinorBetType = 2;
+        public const int _2hMetricGamingSuperLive = -1;
+        public const int _2hOtherSports = 3;
+        public const int _2hParlay = 99;
+        public const int _2hNumberGame = 161;
+        public const int _2hLiveCasino = 162;
+        public const int _2hCasino = 251;
+        public const int _2hVirtualSports = 180;
+        public const int _2hKeno = 202;
+        public const int _2hBingo = 252;
+        public const int _2hNoneSportGroup = 0;
+
+        public const int _2hLiveCasinoSLI = 4;
+        public const int _2hLiveCasinoGoldDeluxe = 12;
+        public const int _2hCasinoMBCRNG = 6;
     }
 }

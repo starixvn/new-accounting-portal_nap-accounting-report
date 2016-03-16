@@ -17,6 +17,8 @@ Main2hReport = function () {
         MixParlay: 9,
         SystemParlay: 29
     };
+
+    self.gridOptions = null;
 };
 
 Main2hReport.prototype.InitPage = function () {
@@ -52,11 +54,13 @@ Main2hReport.prototype.IsCasinoSport = function (Id) {
 
 Main2hReport.prototype.RenderReport = function (report) {
     var self = this;
+    reportManager.CachedData.isShowSiteTypeInfo = false;
+    reportManager.Tables.btnShowHideSiteTypeInfo.val(viewResources.Expand);
     this.Tables.reportContainer.removeClass("display-none");
     this.Tables.report.addClass("display-none");
     var bodyData = [];
     var footerData = [];
-    var maxColIndex = 11;
+    var maxColIndex = 13;
     var isBeforeCasinoSingleWalletLaunchDate = moment(this.Params.reportParams.Winlostdate).diff(casinoSingleWalletLaunchDate, "days") < 0;
     if (report && report.ChildsInfo && report.ChildsInfo.length > 0) {
         var productLength = report.ChildsInfo.length;
@@ -94,13 +98,15 @@ Main2hReport.prototype.RenderReport = function (report) {
                     { Name: "ColWinloss", Value: info.WinLoss },
                     { Name: "ColPosition", Value: info.Position },
                     { Name: "ColCommission", Value: info.Commission },
-                    { Name: "ColRealLineTotal", Value: info.LineTotal },
-                    { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
                     { Name: "ColVariance", Value: info.Variance },
-                    { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
+                    { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                    { Name: "ColRealLineTotal", Value: info.LineTotal },
+                    { Name: "ColExtraPT", Value: info.IsShowAvailableExtraPositionTaking ? info.ExtraPositionTaking : viewResources.NotAvailable },
+                    { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                     { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
-                    isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColRealMargin") : reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
-                    isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColVirtualMargin") : reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
+                    { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
+                    isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColVirtualMargin") : reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin"),
+                    isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColRealMargin") : reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")],
                     CssClass: "freegrid-even"
                 });
 
@@ -110,13 +116,15 @@ Main2hReport.prototype.RenderReport = function (report) {
                         { Name: "ColWinloss", Value: info.WinLoss },
                         { Name: "ColPosition", Value: info.Position },
                         { Name: "ColCommission", Value: info.Commission },
-                        { Name: "ColRealLineTotal", Value: info.LineTotal },
-                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
                         { Name: "ColVariance", Value: info.Variance },
-                        { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
+                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                        { Name: "ColRealLineTotal", Value: info.LineTotal },
+                        { Name: "ColExtraPT", Value: info.IsShowAvailableExtraPositionTaking ? info.ExtraPositionTaking : viewResources.NotAvailable },
+                        { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                         { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
-                        isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColRealMargin") :  reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
-                        isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColVirtualMargin") : reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
+                        { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
+                        isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColVirtualMargin") : reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin"),
+                        isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColRealMargin") : reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")],
                     CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                         showHideSiteTypeManager.Enums.RowType.InfoRow)
                 });
@@ -127,13 +135,15 @@ Main2hReport.prototype.RenderReport = function (report) {
                         { Name: "ColWinloss", Value: info.WinLoss },
                         { Name: "ColPosition", Value: info.Position },
                         { Name: "ColCommission", Value: info.Commission },
-                        { Name: "ColRealLineTotal", Value: info.LineTotal },
-                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
                         { Name: "ColVariance", Value: info.Variance },
-                        { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
+                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                        { Name: "ColRealLineTotal", Value: info.LineTotal },
+                        { Name: "ColExtraPT", Value: info.IsShowAvailableExtraPositionTaking ? info.ExtraPositionTaking : viewResources.NotAvailable },
+                        { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                         { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
-                        isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColRealMargin") : reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
-                        isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColVirtualMargin") : reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
+                        { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
+                        isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColVirtualMargin") : reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin"),
+                        isCasinoSport && isBeforeCasinoSingleWalletLaunchDate ? reportManager.GetCasinoMarginColumn("ColRealMargin") : reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")],
                     CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                         showHideSiteTypeManager.Enums.RowType.InfoRow)
                 });
@@ -155,16 +165,18 @@ Main2hReport.prototype.RenderReport = function (report) {
                         sportWinLoss.Id != AccReportData.Constants.SportType._2hReport_OtherSports) {
                         bodyData.push({
                             Columns: [{ Name: "ColSportType", Value: info.Name, CellAlign: "right", CssClass: "bold" },
-                                { Name: "ColWinloss", Value: info.WinLoss },
-                                { Name: "ColPosition", Value: info.Position },
-                                { Name: "ColCommission", Value: info.Commission },
-                                { Name: "ColRealLineTotal", Value: info.LineTotal },
-                                { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
-                                { Name: "ColVariance", Value: info.Variance },
-                                { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
-                                { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
-                                reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
-                                reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")]
+                                    { Name: "ColWinloss", Value: info.WinLoss },
+                                    { Name: "ColPosition", Value: info.Position },
+                                    { Name: "ColCommission", Value: info.Commission },
+                                    { Name: "ColVariance", Value: info.Variance },
+                                    { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                                    { Name: "ColRealLineTotal", Value: info.LineTotal },
+                                    { Name: "ColExtraPT", Value: viewResources.NotAvailable },
+                                    { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
+                                    { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
+                                    { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
+                                    reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin"),
+                                    reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")]
                         });
                     } else {
                         rmInfoList.push(info);
@@ -182,13 +194,15 @@ Main2hReport.prototype.RenderReport = function (report) {
                                 { Name: "ColWinloss", Value: info.WinLoss },
                                 { Name: "ColPosition", Value: info.Position },
                                 { Name: "ColCommission", Value: info.Commission },
-                                { Name: "ColRealLineTotal", Value: info.LineTotal },
-                                { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
                                 { Name: "ColVariance", Value: info.Variance },
-                                { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
+                                { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                                { Name: "ColRealLineTotal", Value: info.LineTotal },
+                                { Name: "ColExtraPT", Value: viewResources.NotAvailable },
+                                { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                                 { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
-                                reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
-                                reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")]
+                                { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
+                                reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin"),
+                                reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")]
                         });
                     } else {
                         rmInfoList.push(info);
@@ -196,10 +210,9 @@ Main2hReport.prototype.RenderReport = function (report) {
                 }
             }
 
-            if (i == 0 &&
-                product.ChildsInfo &&
+            if (product.ChildsInfo &&
                 product.ChildsInfo.length > 0) {
-                info = report.NormalTotal;
+                info = product.NormalTotal;
                 groupdId = tableId + "_Product" + product.Id + "_Sport0";
                 bodyData.push({
                     Columns: [
@@ -211,29 +224,33 @@ Main2hReport.prototype.RenderReport = function (report) {
                         { Name: "ColWinloss", Value: info.WinLoss },
                         { Name: "ColPosition", Value: info.Position },
                         { Name: "ColCommission", Value: info.Commission },
-                        { Name: "ColRealLineTotal", Value: info.LineTotal, CssClass: "bold" },
-                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal, CssClass: "bold" },
                         { Name: "ColVariance", Value: info.Variance, CssClass: "bold" },
-                        { Name: "ColRealTurnover", Value: info.Turnover, CssClass: "bold" },
+                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal, CssClass: "bold" },
+                        { Name: "ColRealLineTotal", Value: info.LineTotal, CssClass: "bold" },
+                        { Name: "ColExtraPT", Value: info.ExtraPositionTaking, CssClass: "bold" },
+                        { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking, CssClass: "bold" },
                         { Name: "ColVirtualTurnover", Value: info.VirtualTurnover, CssClass: "bold" },
-                        reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
-                        reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
+                        { Name: "ColRealTurnover", Value: info.Turnover, CssClass: "bold" },
+                        i == 0 ? reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin") :  { Name: "ColVirtualMargin", Value: ''},
+                        i == 0 ? reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin") : { Name: "ColRealMargin", Value: ''}],
                     CssClass: "subTotalRow"
                 });
 
                 info = product.CreditTotal;
                 bodyData.push({
                     Columns: [{ Name: "ColSportType", Value: info.Name, CellAlign: "right", CssClass: "bold" },
-                        { Name: "ColWinloss", Value: info.WinLoss },
-                        { Name: "ColPosition", Value: info.Position },
-                        { Name: "ColCommission", Value: info.Commission },
-                        { Name: "ColRealLineTotal", Value: info.LineTotal },
-                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
-                        { Name: "ColVariance", Value: info.Variance },
-                        { Name: "ColRealTurnover", Value: info.Turnover },
-                        { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
-                        reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
-                        reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
+                            { Name: "ColWinloss", Value: info.WinLoss },
+                            { Name: "ColPosition", Value: info.Position },
+                            { Name: "ColCommission", Value: info.Commission },
+                            { Name: "ColVariance", Value: info.Variance },
+                            { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                            { Name: "ColRealLineTotal", Value: info.LineTotal },
+                            { Name: "ColExtraPT", Value: info.ExtraPositionTaking },
+                            { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
+                            { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
+                            { Name: "ColRealTurnover", Value: info.Turnover },
+                             i == 0 ? reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin") :  { Name: "ColVirtualMargin", Value: ''},
+                             i == 0 ? reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin") : { Name: "ColRealMargin", Value: ''}],
                     CssClass: "subTotalRow " + showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                         showHideSiteTypeManager.Enums.RowType.InfoRow)
                 });
@@ -241,43 +258,51 @@ Main2hReport.prototype.RenderReport = function (report) {
                 info = product.DepositTotal;
                 bodyData.push({
                     Columns: [{ Name: "ColSportType", Value: info.Name, CellAlign: "right", CssClass: "bold" },
-                        { Name: "ColWinloss", Value: info.WinLoss },
-                        { Name: "ColPosition", Value: info.Position },
-                        { Name: "ColCommission", Value: info.Commission },
-                        { Name: "ColRealLineTotal", Value: info.LineTotal },
-                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
-                        { Name: "ColVariance", Value: info.Variance },
-                        { Name: "ColRealTurnover", Value: info.Turnover },
-                        { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
-                        reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
-                        reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
+                            { Name: "ColWinloss", Value: info.WinLoss },
+                            { Name: "ColPosition", Value: info.Position },
+                            { Name: "ColCommission", Value: info.Commission },
+                            { Name: "ColVariance", Value: info.Variance },
+                            { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                            { Name: "ColRealLineTotal", Value: info.LineTotal },
+                            { Name: "ColExtraPT", Value: info.ExtraPositionTaking },
+                            { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
+                            { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
+                            { Name: "ColRealTurnover", Value: info.Turnover },
+                            i == 0 ? reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin") :  { Name: "ColVirtualMargin", Value: ''},
+                            i == 0 ? reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin") : { Name: "ColRealMargin", Value: ''}],
                     CssClass: "subTotalRow " + showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                         showHideSiteTypeManager.Enums.RowType.InfoRow)
                 });
+            }
 
+            if (i == 0 &&
+                product.ChildsInfo &&
+                product.ChildsInfo.length > 0) {
                 var rmInfoLength = rmInfoList.length;
                 for (var k = 0; k < rmInfoLength; k++) {
                     info = rmInfoList[k];
                     bodyData.push({
                         Columns: [{ Name: "ColSportType", Value: info.Name, CellAlign: "right", CssClass: "bold" },
-                            { Name: "ColWinloss", Value: info.WinLoss },
-                            { Name: "ColPosition", Value: info.Position },
-                            { Name: "ColCommission", Value: info.Commission },
-                            { Name: "ColRealLineTotal", Value: info.LineTotal },
-                            { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
-                            { Name: "ColVariance", Value: info.Variance },
-                            { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
-                            { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
-                            reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin"),
-                            reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin")],
+                                { Name: "ColWinloss", Value: info.WinLoss },
+                                { Name: "ColPosition", Value: info.Position },
+                                { Name: "ColCommission", Value: info.Commission },
+                                { Name: "ColVariance", Value: info.Variance },
+                                { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                                { Name: "ColRealLineTotal", Value: info.LineTotal },
+                                { Name: "ColExtraPT", Value: viewResources.NotAvailable },
+                                { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
+                                { Name: "ColVirtualTurnover", Value: isShowVirtualTurnover ? info.VirtualTurnover : viewResources.NotAvailable },
+                                { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
+                                reportManager.GetColumnTurnover(info.VirtualMargin, info.VirtualTurnover, "ColVirtualMargin"),
+                                reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")],
                         CssClass: "subTotalRow"
                     });
                 }
-
-                bodyData.push({
-                    Columns: [{ Name: "ColSportType", MergeColNumber: maxColIndex}]
-                });
             }
+
+            bodyData.push({
+                Columns: [{ Name: "ColSportType", MergeColNumber: maxColIndex}]
+            });
         }
 
         if (report && report.ChildsInfo.length >= 2 &&
@@ -295,28 +320,32 @@ Main2hReport.prototype.RenderReport = function (report) {
                     { Name: "ColWinloss", Value: info.WinLoss },
                     { Name: "ColPosition", Value: info.Position },
                     { Name: "ColCommission", Value: info.Commission },
-                    { Name: "ColRealLineTotal", Value: info.LineTotal },
-                    { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
                     { Name: "ColVariance", Value: info.Variance },
-                    { Name: "ColRealTurnover", Value: info.Turnover },
+                    { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                    { Name: "ColRealLineTotal", Value: info.LineTotal },
+                    { Name: "ColExtraPT", Value: info.ExtraPositionTaking },
+                    { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                     { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
-                    { Name: "ColRealMargin" },
-                    { Name: "ColVirtualMargin"}]
+                    { Name: "ColRealTurnover", Value: info.Turnover },
+                    { Name: "ColVirtualMargin" },
+                    { Name: "ColRealMargin"}]
             });
 
             info = report.CreditTotal;
             footerData.push({
                 Columns: [{ Name: "ColSportType", Value: info.Name, CellAlign: "right" },
-                      { Name: "ColWinloss", Value: info.WinLoss },
-                      { Name: "ColPosition", Value: info.Position },
-                      { Name: "ColCommission", Value: info.Commission },
-                      { Name: "ColRealLineTotal", Value: info.LineTotal },
-                      { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
-                      { Name: "ColVariance", Value: info.Variance },
-                      { Name: "ColRealTurnover", Value: info.Turnover },
-                      { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
-                      { Name: "ColRealMargin" },
-                      { Name: "ColVirtualMargin"}],
+                                              { Name: "ColWinloss", Value: info.WinLoss },
+                        { Name: "ColPosition", Value: info.Position },
+                        { Name: "ColCommission", Value: info.Commission },
+                        { Name: "ColVariance", Value: info.Variance },
+                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                        { Name: "ColRealLineTotal", Value: info.LineTotal },
+                        { Name: "ColExtraPT", Value: info.ExtraPositionTaking },
+                        { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
+                        { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
+                        { Name: "ColRealTurnover", Value: info.Turnover },
+                        { Name: "ColVirtualMargin" },
+                        { Name: "ColRealMargin"}],
                 CssClass: "subTotalRow " + showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                         showHideSiteTypeManager.Enums.RowType.InfoRow)
             });
@@ -324,16 +353,18 @@ Main2hReport.prototype.RenderReport = function (report) {
             info = report.DepositTotal;
             footerData.push({
                 Columns: [{ Name: "ColSportType", Value: info.Name, CellAlign: "right" },
-                      { Name: "ColWinloss", Value: info.WinLoss },
-                      { Name: "ColPosition", Value: info.Position },
-                      { Name: "ColCommission", Value: info.Commission },
-                      { Name: "ColRealLineTotal", Value: info.LineTotal },
-                      { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
-                      { Name: "ColVariance", Value: info.Variance },
-                      { Name: "ColRealTurnover", Value: info.Turnover },
-                      { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
-                      { Name: "ColRealMargin" },
-                      { Name: "ColVirtualMargin"}],
+                        { Name: "ColWinloss", Value: info.WinLoss },
+                        { Name: "ColPosition", Value: info.Position },
+                        { Name: "ColCommission", Value: info.Commission },
+                        { Name: "ColVariance", Value: info.Variance },
+                        { Name: "ColVirtualLineTotal", Value: info.VirtualLineTotal },
+                        { Name: "ColRealLineTotal", Value: info.LineTotal },
+                        { Name: "ColExtraPT", Value: info.ExtraPositionTaking },
+                        { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
+                        { Name: "ColVirtualTurnover", Value: info.VirtualTurnover },
+                        { Name: "ColRealTurnover", Value: info.Turnover },
+                        { Name: "ColVirtualMargin" },
+                        { Name: "ColRealMargin"}],
                 CssClass: "subTotalRow " + showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
                         showHideSiteTypeManager.Enums.RowType.InfoRow)
             });
@@ -356,13 +387,12 @@ Main2hReport.prototype.RenderReport = function (report) {
         customizeHeader: true,
         groupHeaderRows: [{
             Columns: [{ HeaderText: viewResources.Sport_Type, Name: "ColSportType", MergeRowNumber: 2 },
-                          { HeaderText: viewResources.Member_WinLoss, Name: "ColWinloss", MergeRowNumber: 2 },
-                          { HeaderText: viewResources.SMA_WinLoss, Name: "ColPosition", MergeRowNumber: 2 },
-                          { HeaderText: viewResources.Commission, Name: "ColCommission", MergeRowNumber: 2 },
-                          { HeaderText: viewResources.Company_Income, Name: "ColRealLineTotal", MergeColNumber: 2 },
-                          { HeaderText: viewResources.Variance, Name: "ColVariance", MergeRowNumber: 2 },
-                          { HeaderText: viewResources.Company_Turnover, Name: "ColRealTurnover", MergeColNumber: 2 },
-                          { HeaderText: viewResources.Margin, Name: "ColRealMargin", MergeColNumber: 2}]
+                    { HeaderText: viewResources.Member_WinLoss, Name: "ColWinloss", MergeRowNumber: 2 },
+                    { HeaderText: viewResources.SMA_WinLoss, Name: "ColPosition", MergeRowNumber: 2 },
+                    { HeaderText: viewResources.Commission, Name: "ColCommission", MergeRowNumber: 2 },
+                    { HeaderText: viewResources.Company_Income, Name: "ColVariance", MergeColNumber: 5, MergeRowNumber: 1 },
+                    { HeaderText: viewResources.Company_Turnover, Name: "ColVirtualTurnover", MergeColNumber: 2, MergeRowNumber: 1 },
+                    { HeaderText: viewResources.Margin, Name: "ColVirtualMargin", MergeColNumber: 2, MergeRowNumber: 1}]
         }],
 
         columns: [
@@ -375,13 +405,15 @@ Main2hReport.prototype.RenderReport = function (report) {
             { HeaderText: viewResources.Member_WinLoss, Width: 100, Name: "ColWinloss", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
             { HeaderText: viewResources.SMA_WinLoss, Width: 100, Name: "ColPosition", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
             { HeaderText: viewResources.Commission, Width: 100, Name: "ColCommission", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: viewResources.Real, Width: 100, Name: "ColRealLineTotal", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
-            { HeaderText: viewResources.Virtual, Width: 100, Name: "ColVirtualLineTotal", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
             { HeaderText: viewResources.Variance, Width: 100, Name: "ColVariance", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
-            { HeaderText: viewResources.Real, Width: 100, Name: "ColRealTurnover", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
+            { HeaderText: viewResources.Virtual, Width: 100, Name: "ColVirtualLineTotal", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
+            { HeaderText: viewResources.Real, Width: 100, Name: "ColRealLineTotal", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
+            { HeaderText: viewResources.ExtraPT, Width: 100, Name: "ColExtraPT", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
+            { HeaderText: viewResources.AfterExtraPT, Width: 100, Name: "ColAfterExtraPT", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
             { HeaderText: viewResources.Virtual, Width: 100, Name: "ColVirtualTurnover", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
-            { HeaderText: viewResources.Real, Width: 100, Name: "ColRealMargin", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
-            { HeaderText: viewResources.Virtual, Width: 100, Name: "ColVirtualMargin", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, CellAlign: "right", FormatPositive: '$'}],
+            { HeaderText: viewResources.Real, Width: 100, Name: "ColRealTurnover", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
+            { HeaderText: viewResources.Virtual, Width: 100, Name: "ColVirtualMargin", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, CellAlign: "right", FormatPositive: '$' },
+            { HeaderText: viewResources.Real, Width: 100, Name: "ColRealMargin", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$'}],
         showTitle: true,
         showFooter: true,
         noDataText: viewResources.EmptyReportMessage,
@@ -397,13 +429,24 @@ Main2hReport.prototype.RenderReport = function (report) {
         numberOfFrozenColumn: 0,
         gridWidth: 1400,
         gridExpandHeight: 168,
-        //gridHeight: reportManager.CachedData.maxGridHeight,
         showDistinctRow: false,
         showHighlightRow: false,
-        headerColumnHeight: 17
+        headerColumnHeight: 17,
+        hiddenColumns: reportManager.CachedData.isShowSiteTypeInfo ? [] : [1, 2],
+        enableHiddenColumns: false,
+        columnsNeedHide: []
     };
 
+    self.gridOptions = gridOptions;
     this.Tables.report.removeClass("display-none").fanexGrid(gridOptions);
+
+    if (reportManager.CachedData.isShowSiteTypeInfo) {
+        $(".siteTypeRow.paddingRow").addClass("display-none");
+    }
+    else {
+        $(".siteTypeRow.paddingRow").removeClass("display-none");
+    }
+
     this.Tables.report.find(".showHideSiteType.showHideIcon").click(function () {
         var btnIcon = $(this);
         showHideSiteTypeManager.ShowHideSiteTypeInfo_ByGroup(btnIcon, self.Tables.report);
@@ -557,5 +600,27 @@ Main2hReport.prototype.GetSportLink = function (winLossInfo) {
 
 Main2hReport.prototype.ShowHideSiteTypeInfo = function () {
     var self = this;
+    var showHideCssEnum = showHideSiteTypeManager.Enums.ShowHideCss;
+    if (reportManager.CachedData.isShowSiteTypeInfo) {
+        self.Tables.report.fanexGrid("hideColumns", self.gridOptions, [1, 2]);
+        $(".siteTypeRow.paddingRow").removeClass("display-none");
+        $(".siteTypeRow.infoRow").addClass("display-none");
+        $(".showHideSiteType.showHideIcon").removeClass(showHideCssEnum.Expand)
+                                             .addClass(showHideCssEnum.Collapse);
+    }
+    else
+    {
+        self.Tables.report.fanexGrid("hideColumns", self.gridOptions, []);
+        $(".siteTypeRow.paddingRow").addClass("display-none");
+        $(".siteTypeRow.infoRow").removeClass("display-none");
+        $(".showHideSiteType.showHideIcon").removeClass(showHideCssEnum.Collapse)
+                                              .addClass(showHideCssEnum.Expand);
+    }
+
+    self.Tables.report.find(".showHideSiteType.showHideIcon").click(function () {
+        var btnIcon = $(this);
+        showHideSiteTypeManager.ShowHideSiteTypeInfo_ByGroup(btnIcon, self.Tables.report);
+    });
+
     self.Tables.report.removeClass("display-none").fanexGrid("resizeGrid");
 }; 

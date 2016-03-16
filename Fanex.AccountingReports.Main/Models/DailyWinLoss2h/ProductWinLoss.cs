@@ -36,6 +36,10 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
 
         public decimal Turnover { get; set; }
 
+        public decimal ExtraPositionTaking { get; set; }
+
+        public decimal AfterExtraPositionTaking { get; set; }
+
         public List<ProductWinLoss> ReportRows { get; set; }
     } 
 }

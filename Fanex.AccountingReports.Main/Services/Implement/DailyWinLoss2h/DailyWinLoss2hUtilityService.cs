@@ -911,17 +911,296 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
         }
 
-        public void ExportMainReportCasinoRow(
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2101:MethodMustNotContainMoreLinesThan",
+           Justification = "Reviewed. Suppression is OK here.")]
+        public void ExportMainCasinoHeader(
+           ref ExcelWorksheet workSheet,
+           ref int currentRow,
+           int startRow,
+           int startColumn)
+        {
+            //// ExcelTypes
+
+            var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
+            int maxColumnIndex = 8;
+            var currentColumn = startColumn;
+            CellRange currentCellRange;
+            ExcelCell currentCell;
+
+            //// ExcelTypes
+
+            workSheet.Columns[startColumn].Width = 190 * ExcelExtensions.FontWidth;
+            for (int colIndex = 1; colIndex <= maxColumnIndex; colIndex++)
+            {
+                workSheet.Columns[startColumn + colIndex].Width = 130 * ExcelExtensions.FontWidth;
+            }
+
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Sport_Type;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Member_Win_Loss;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.SMA_Winloss;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Commission;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 2);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Company_Income;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn += 3;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Company_Turnover;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Margin;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+            currentRow++;
+
+            // SecondRow
+            currentColumn = startColumn + 4;
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = headerTextStyle;
+            currentCell.Value = Labels.Real;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = headerTextStyle;
+            currentCell.Value = Labels.Extra_PT;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = headerTextStyle;
+            currentCell.Value = Labels.After_Extra_PT;
+            currentColumn++;
+            currentRow++;
+        }
+
+        /// <param name="sportId">The sport identifier.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        public void ExportMainCasinoContent(
             ref ExcelWorksheet workSheet,
-            CellStyle textStyle,
-            CellStyle twoDecimalNumberStyle,
-            CellStyle twoDecimalPositiveNumberStyle,
-            CellStyle twoDecimalPositivePercentNumberStyle,
-            WinLossInfo info,
-            int startColumn,
             ref int currentRow,
-            DateTime winLossDate,
-            int rowType)
+            int startRow,
+            int startColumn,
+            WinLossInfo report)
+        {
+            int maxColumnIndex = 8;
+            var currentColumn = startColumn;
+
+            var backgroundColor = ExcelExtensions.BackGroundColor;
+            var textStyle = ExcelExtensions.GetCellTextStyle(backgroundColor, false);
+            var twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(CoreConstants.NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, false, false, false);
+            var twoDecimalPositiveNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                CoreConstants.NumberFormatConstants.TwoDecimalDigitFormat,
+                backgroundColor,
+                false,
+                true,
+                false);
+            var twoDecimalPositivePercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                CoreConstants.NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                backgroundColor,
+                false,
+                true,
+                false);
+
+            var grandTotalRowColor = ExcelExtensions.GrandTotalRowColor;
+            var grandTotalRowTextStyle = ExcelExtensions.GetCellTextStyle(grandTotalRowColor, true);
+            var grandTotalRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                CoreConstants.NumberFormatConstants.TwoDecimalDigitFormat,
+                grandTotalRowColor,
+                true,
+                false,
+                false);
+            var grandTotalTwoDecimalPositiveNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                CoreConstants.NumberFormatConstants.TwoDecimalDigitFormat,
+                grandTotalRowColor,
+                true,
+                true,
+                false);
+            var grandTotalTwoDecimalPositivePercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                CoreConstants.NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                grandTotalRowColor,
+                true,
+                true,
+                false);
+
+            var subTotalRowColor = ExcelExtensions.BackGroundColor;
+            var subTotalTextStyle = ExcelExtensions.GetCellTextStyle(subTotalRowColor, false);
+            var subTotalTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                CoreConstants.NumberFormatConstants.TwoDecimalDigitFormat,
+                subTotalRowColor,
+                false,
+                false,
+                false);
+            var subTotalTwoDecimalPositiveNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                CoreConstants.NumberFormatConstants.TwoDecimalDigitFormat,
+                subTotalRowColor,
+                false,
+                true,
+                false);
+            var subTotalTwoDecimalPositivePercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                CoreConstants.NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                subTotalRowColor,
+                false,
+                true,
+                false);
+
+            var grandTotalRowTextStyle_FirstRow = ExcelExtensions.GetCellTextStyle(grandTotalRowColor, true);
+            grandTotalRowTextStyle_FirstRow.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+            var grandTotalRowTwoDecimalNumberStyle_FirstRow = ExcelExtensions.GetCellNumberStyle(
+                CoreConstants.NumberFormatConstants.TwoDecimalDigitFormat,
+                grandTotalRowColor,
+                true,
+                false,
+                false);
+            grandTotalRowTwoDecimalNumberStyle_FirstRow.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+            var grandTotalRowTwoDecimalPositiveNumberStyle_FirstRow = ExcelExtensions.GetCellNumberStyle(
+                CoreConstants.NumberFormatConstants.TwoDecimalDigitFormat,
+                grandTotalRowColor,
+                true,
+                true,
+                false);
+            grandTotalRowTwoDecimalPositiveNumberStyle_FirstRow.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+            var gtrPercentNumberStyle_FirstRow = ExcelExtensions.GetCellNumberStyle(
+                CoreConstants.NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                grandTotalRowColor,
+                true,
+                true,
+                false);
+            gtrPercentNumberStyle_FirstRow.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+
+            if (report != null && report.ChildsInfo.Count > 0)
+            {
+                this.SetOddEvenColor_ExportExcel(
+                    ref textStyle,
+                    ref twoDecimalNumberStyle,
+                    ref twoDecimalPositiveNumberStyle,
+                    ref twoDecimalPositivePercentNumberStyle,
+                    true);
+
+                WinLossInfo info;
+                var betTypeGroupLength = report.ChildsInfo.Count;
+                for (var i = 0; i < betTypeGroupLength; i++)
+                {
+                    var betTypeGroup = report.ChildsInfo[i];
+                    info = betTypeGroup.GrandTotal;
+                    this.ExportMainCasinoRow(
+                        ref workSheet,
+                         textStyle,
+                         twoDecimalNumberStyle,
+                         twoDecimalPositiveNumberStyle,
+                         twoDecimalPositivePercentNumberStyle,
+                         info,
+                         startColumn,
+                         ref currentRow,
+                         RowType.Normal);
+
+                    info = betTypeGroup.CreditTotal;
+                    this.ExportMainCasinoRow(
+                        ref workSheet,
+                        subTotalTextStyle,
+                        subTotalTwoDecimalNumberStyle,
+                        subTotalTwoDecimalPositiveNumberStyle,
+                        subTotalTwoDecimalPositivePercentNumberStyle,
+                        info,
+                        startColumn,
+                        ref currentRow,
+                        RowType._2hReportCredit);
+
+                    info = betTypeGroup.DepositTotal;
+                    this.ExportMainCasinoRow(
+                        ref workSheet,
+                        subTotalTextStyle,
+                        subTotalTwoDecimalNumberStyle,
+                        subTotalTwoDecimalPositiveNumberStyle,
+                        subTotalTwoDecimalPositivePercentNumberStyle,
+                        info,
+                        startColumn,
+                        ref currentRow,
+                        RowType._2hReportDeposit);
+                }
+
+                info = report.GrandTotal;
+                this.ExportMainCasinoRow(
+                    ref workSheet,
+                    grandTotalRowTextStyle_FirstRow,
+                    grandTotalRowTwoDecimalNumberStyle_FirstRow,
+                    grandTotalRowTwoDecimalPositiveNumberStyle_FirstRow,
+                    gtrPercentNumberStyle_FirstRow,
+                    info,
+                    startColumn,
+                    ref currentRow,
+                    RowType._2hReportGrandTotal);
+
+                info = report.CreditTotal;
+                this.ExportMainCasinoRow(
+                    ref workSheet,
+                    grandTotalRowTextStyle,
+                    grandTotalRowTwoDecimalNumberStyle,
+                    grandTotalTwoDecimalPositiveNumberStyle,
+                    grandTotalTwoDecimalPositivePercentNumberStyle,
+                    info,
+                    startColumn,
+                    ref currentRow,
+                    RowType._2hReportCredit);
+
+                info = report.DepositTotal;
+                this.ExportMainCasinoRow(
+                    ref workSheet,
+                    grandTotalRowTextStyle,
+                    grandTotalRowTwoDecimalNumberStyle,
+                    grandTotalTwoDecimalPositiveNumberStyle,
+                    grandTotalTwoDecimalPositivePercentNumberStyle,
+                    info,
+                    startColumn,
+                    ref currentRow,
+                    RowType._2hReportDeposit);
+            }
+            else
+            {
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
+            }
+        }
+
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2101:MethodMustNotContainMoreLinesThan",
+           Justification = "Reviewed. Suppression is OK here.")]
+        public void ExportMainCasinoRow(
+           ref ExcelWorksheet workSheet,
+           CellStyle textStyle,
+           CellStyle twoDecimalNumberStyle,
+           CellStyle twoDecimalPositiveNumberStyle,
+           CellStyle twoDecimalPositivePercentNumberStyle,
+           WinLossInfo info,
+           int startColumn,
+           ref int currentRow,
+           int rowType)
         {
             ExcelCell currentCell;
             var currentColumn = startColumn;
@@ -929,8 +1208,15 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             currentCell.Value = info.Name;
             currentCell.Style = textStyle;
             currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
-
-            currentCell.Style.HorizontalAlignment = rowType == RowType.Normal ? HorizontalAlignmentStyle.Left : HorizontalAlignmentStyle.Right;
+            switch (rowType)
+            {
+                case RowType._2hReportCredit:
+                case RowType._2hReportDeposit:
+                case RowType._2hReportVirtualAllTotal:
+                case RowType._2hReportGrandTotal:
+                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    break;
+            }
 
             currentColumn++;
 
@@ -952,59 +1238,53 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.LineTotal;
             currentCell.Style = twoDecimalPositiveNumberStyle;
-            currentColumn++;
 
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Style = twoDecimalPositiveNumberStyle;
-            currentCell.Value = info.VirtualLineTotal;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Style = twoDecimalPositiveNumberStyle;
-            currentCell.Value = info.Variance;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Style = twoDecimalNumberStyle;
-            currentCell.Value = info.Turnover;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Style = twoDecimalNumberStyle;
-            currentCell.Value = info.VirtualTurnover;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            bool isBeforeCasinoSingleWalletLaunchDate = DateTime.Compare(winLossDate, AppSettings.CasinoSingleWalletLaunchDate) < 0;
-
-            if (isBeforeCasinoSingleWalletLaunchDate)
+            switch (rowType)
             {
-                currentCell.Style = textStyle;
-                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                case RowType._2hReportVirtualAllTotal:
+                    currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                    break;
+
+                case RowType._2hReportGrandTotal:
+                    currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                    currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
+                    break;
+            }
+
+            currentColumn++;
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.IsShowAvailableExtraPositionTaking ? info.ExtraPositionTaking : (object)Labels.NotAvailable;
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+
+            currentColumn++;
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.AfterExtraPositionTaking;
+            currentCell.Style = twoDecimalPositiveNumberStyle;
+
+            currentColumn++;
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = twoDecimalNumberStyle;
+            if (info.IsHideRealTurnover)
+            {
                 currentCell.Value = Labels.NotAvailable;
             }
             else
             {
-                currentCell.Style = twoDecimalPositivePercentNumberStyle;
-                this.ExportColumnTurnover(info.Margin, info.Turnover, ref currentCell);
+                currentCell.Value = info.Turnover;
+            }
+
+            switch (rowType)
+            {
+                case RowType._2hReportVirtualAllTotal:
+                case RowType._2hReportGrandTotal:
+                    currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                    break;
             }
 
             currentColumn++;
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Style = twoDecimalPositivePercentNumberStyle;
-
-            if (isBeforeCasinoSingleWalletLaunchDate)
-            {
-                currentCell.Style = textStyle;
-                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentCell.Value = Labels.NotAvailable;
-            }
-            else
-            {
-                currentCell.Style = twoDecimalPositivePercentNumberStyle;
-                this.ExportColumnTurnover(info.VirtualMargin, info.VirtualTurnover, ref currentCell);
-            }
-
+            this.ExportColumnTurnover(info.Margin, info.Turnover, ref currentCell);
             currentColumn++;
             currentRow++;
         }

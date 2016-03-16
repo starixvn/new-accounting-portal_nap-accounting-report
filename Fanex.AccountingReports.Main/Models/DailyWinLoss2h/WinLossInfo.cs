@@ -12,7 +12,7 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
     using System;
     using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Services.Impl;
-
+    using Constants;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -95,6 +95,40 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
 
         public int DisplayOrder { get; set; }
 
+        public decimal ExtraPositionTaking { get; set; }
+
+        public decimal AfterExtraPositionTaking
+        {
+            get
+            {
+                return Math.Round(this.LineTotal - this.ExtraPositionTaking, 2);
+            }
+        }
+
+        public bool IsShowAvailableExtraPositionTaking
+        {
+            get
+            {
+                return this.Id == SportContants._2hSoccer ||
+                    this.Id == SportContants._2hSoccerMajorBetType ||
+                    this.Id == SportContants._2hSoccerMinorBetType ||
+                    this.Id == SportContants._2hMetricGamingSuperLive ||
+                    this.Id == SportContants._2hOtherSports ||
+                    this.Id == SportContants._2hParlay ||
+                    this.Id == SportContants._2hNumberGame ||
+                    this.Id == SportContants._2hLiveCasino ||
+                    this.Id == SportContants._2hCasino ||
+                    this.Id == SportContants._2hVirtualSports ||
+                    this.Id == SportContants._2hKeno ||
+                    this.Id == SportContants._2hBingo ||
+                    this.Id == SportContants._2hNoneSportGroup ||
+                    this.Id == SportContants._2hLiveCasinoSLI ||
+                    this.Id == SportContants._2hLiveCasinoGoldDeluxe ||
+                    this.Id == SportContants._2hCasinoMBCRNG;
+
+            }
+        }
+
         public List<WinLossInfo> ChildsInfo { get; set; }
 
         public WinLossInfo EightRMTotal { get; set; }
@@ -134,6 +168,7 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
             winLoss.VirtualLineTotal = Math.Round(winLoss.VirtualLineTotal, 2);
             winLoss.Turnover = Math.Round(winLoss.Turnover, 2);
             winLoss.VirtualTurnover = Math.Round(winLoss.VirtualTurnover, 2);
+            winLoss.ExtraPositionTaking = Math.Round(winLoss.ExtraPositionTaking, 2);
             return winLoss;
         }
 
@@ -170,6 +205,7 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
             this.VirtualLineTotal += winLoss.VirtualLineTotal;
             this.Turnover += winLoss.Turnover;
             this.VirtualTurnover += winLoss.VirtualTurnover;
+            this.ExtraPositionTaking += winLoss.ExtraPositionTaking;
         }
     }
 }

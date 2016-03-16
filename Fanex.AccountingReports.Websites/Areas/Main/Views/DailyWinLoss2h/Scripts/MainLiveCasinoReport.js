@@ -25,6 +25,8 @@
         SportId: null,
         SportName: ''
     };
+
+    self.gridOptions = null;
 };
 
 MainLiveCasinoReport.prototype.InitPage = function () {
@@ -93,12 +95,11 @@ MainLiveCasinoReport.prototype.GetReport = function (params) {
 };
 
 MainLiveCasinoReport.prototype.RenderReport = function (report) {
-    console.log(report);
     var self = this;
     this.Tables.reportView.addClass("display-none");
     var bodyData = [];
     var footerData = [];
-    var maxColIndex = 7;
+    var maxColIndex = 9;
 
         if (report && report.ChildsInfo && report.ChildsInfo.length > 0) {
             var reportLength = report.ChildsInfo.length;
@@ -122,6 +123,8 @@ MainLiveCasinoReport.prototype.RenderReport = function (report) {
                         { Name: "ColPosition", Value: info.Position },
                         { Name: "ColCommission", Value: info.Commission },
                         { Name: "ColRealLineTotal", Value: info.LineTotal },
+                        { Name: "ColExtraPT", Value: info.IsShowAvailableExtraPositionTaking ? info.ExtraPositionTaking : viewResources.NotAvailable },
+                        { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                         { Name: "ColRealTurnover", Value: info.Turnover },
                         reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")],
                     CssClass: "freegrid-even"
@@ -140,6 +143,8 @@ MainLiveCasinoReport.prototype.RenderReport = function (report) {
                         { Name: "ColPosition", Value: info.Position },
                         { Name: "ColCommission", Value: info.Commission },
                         { Name: "ColRealLineTotal", Value: info.LineTotal },
+                        { Name: "ColExtraPT", Value: info.IsShowAvailableExtraPositionTaking ? info.ExtraPositionTaking : viewResources.NotAvailable },
+                        { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                         { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
                         reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")],
                         CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
@@ -159,6 +164,8 @@ MainLiveCasinoReport.prototype.RenderReport = function (report) {
                         { Name: "ColPosition", Value: info.Position },
                         { Name: "ColCommission", Value: info.Commission },
                         { Name: "ColRealLineTotal", Value: info.LineTotal },
+                        { Name: "ColExtraPT", Value: info.IsShowAvailableExtraPositionTaking ? info.ExtraPositionTaking : viewResources.NotAvailable },
+                        { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                         { Name: "ColRealTurnover", Value: info.IsHideRealTurnover ? viewResources.NotAvailable : info.Turnover },
                         reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")],
                         CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
@@ -179,6 +186,8 @@ MainLiveCasinoReport.prototype.RenderReport = function (report) {
                     { Name: "ColPosition", Value: info.Position },
                     { Name: "ColCommission", Value: info.Commission },
                     { Name: "ColRealLineTotal", Value: info.LineTotal, TdClass: "colNote" },
+                    { Name: "ColExtraPT", Value: info.ExtraPositionTaking },
+                    { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                     { Name: "ColRealTurnover", Value: info.Turnover },
                     reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")]
             });
@@ -196,6 +205,8 @@ MainLiveCasinoReport.prototype.RenderReport = function (report) {
                     { Name: "ColPosition", Value: info.Position },
                     { Name: "ColCommission", Value: info.Commission },
                     { Name: "ColRealLineTotal", Value: info.LineTotal },
+                    { Name: "ColExtraPT", Value: info.ExtraPositionTaking },
+                    { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                     { Name: "ColRealTurnover", Value: info.Turnover },
                     reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")],
                     CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
@@ -215,6 +226,8 @@ MainLiveCasinoReport.prototype.RenderReport = function (report) {
                     { Name: "ColPosition", Value: info.Position },
                     { Name: "ColCommission", Value: info.Commission },
                     { Name: "ColRealLineTotal", Value: info.LineTotal },
+                    { Name: "ColExtraPT", Value: info.ExtraPositionTaking },
+                    { Name: "ColAfterExtraPT", Value: info.AfterExtraPositionTaking },
                     { Name: "ColRealTurnover", Value: info.Turnover },
                     reportManager.GetColumnTurnover(info.Margin, info.Turnover, "ColRealMargin")],
                     CssClass: showHideSiteTypeManager.GetSiteTypeRowCss(groupdId,
@@ -223,6 +236,16 @@ MainLiveCasinoReport.prototype.RenderReport = function (report) {
         }
 
         var gridOptions = {
+            customizeHeader: true,
+            groupHeaderRows: [{
+                Columns: [{ HeaderText: viewResources.Sport_Type, Name: "ColSportType", MergeRowNumber: 2 },
+                        { HeaderText: viewResources.Member_WinLoss, Name: "ColWinloss", MergeRowNumber: 2 },
+                        { HeaderText: viewResources.SMA_WinLoss, Name: "ColPosition", MergeRowNumber: 2 },
+                        { HeaderText: viewResources.Commission, Name: "ColCommission", MergeRowNumber: 2 },
+                        { HeaderText: viewResources.Company_Income, Name: "ColRealLineTotal", MergeColNumber: 3, MergeRowNumber: 1 },
+                        { HeaderText: viewResources.Company_Turnover, Name: "ColRealTurnover", MergeRowNumber: 2 },
+                        { HeaderText: viewResources.Margin, Name: "ColRealMargin", MergeRowNumber: 2 }]
+            }],
             columns: [
                 {
                     HeaderText: viewResources.Sport_Type,
@@ -233,7 +256,9 @@ MainLiveCasinoReport.prototype.RenderReport = function (report) {
                 { HeaderText: viewResources.Member_WinLoss, Width: 100, Name: "ColWinloss", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
                 { HeaderText: viewResources.SMA_WinLoss, Width: 100, Name: "ColPosition", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: viewResources.Commission, Width: 100, Name: "ColCommission", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
-                { HeaderText: viewResources.Company_Income, Width: 100, Name: "ColRealLineTotal", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
+                { HeaderText: viewResources.Real, Width: 100, Name: "ColRealLineTotal", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
+                { HeaderText: viewResources.ExtraPT, Width: 100, Name: "ColExtraPT", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
+                { HeaderText: viewResources.AfterExtraPT, Width: 100, Name: "ColAfterExtraPT", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$' },
                 { HeaderText: viewResources.Company_Turnover, Width: 100, Name: "ColRealTurnover", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
                 { HeaderText: viewResources.Margin, Width: 100, Name: "ColRealMargin", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, HeaderAlign: "center", CellAlign: "right", FormatPositive: '$'}],
             showTitle: true,
@@ -257,7 +282,8 @@ MainLiveCasinoReport.prototype.RenderReport = function (report) {
             noDataText: viewResources.EmptyReportMessage,
             headerColumnHeight: 29
         };
-
+        
+        self.gridOptions = gridOptions;
         this.Tables.reportView.removeClass("display-none");
         this.Tables.mainLiveCasinoReport.removeClass("display-none");
         this.Tables.mainLiveCasinoContentReport.removeClass("display-none").fanexGrid(gridOptions);
@@ -320,8 +346,9 @@ MainLiveCasinoReport.prototype.SetActiveReportManager = function () {
 };
 
 MainLiveCasinoReport.prototype.ShowHideSiteTypeInfo = function () {
+    var self = this;
     if (!this.Tables.mainLiveCasinoReport.hasClass("display-none")) {
-        this.Tables.liveCasinoAndGoldDeluxeContentReport.fanexGrid("resizeGrid");
+        this.Tables.mainLiveCasinoContentReport.fanexGrid("resizeGrid");
     }
 };
 

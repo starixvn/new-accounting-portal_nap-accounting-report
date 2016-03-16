@@ -1,5 +1,4 @@
-﻿
-namespace Fanex.AccountingReports.Core.Web
+﻿namespace Fanex.AccountingReports.Core.Web
 {
     using System;
     using Couchbase;

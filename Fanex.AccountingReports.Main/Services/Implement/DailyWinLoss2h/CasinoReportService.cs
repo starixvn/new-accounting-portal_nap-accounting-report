@@ -92,11 +92,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                             },
                             CreditTotal = new WinLossInfo
                             {
+                                Id = productId,
                                 Name = Labels.Credit,
                                 IsHideRealTurnover = isHideRealTurnover
                             },
                             DepositTotal = new WinLossInfo
                             {
+                                Id = productId,
                                 Name = Labels.Deposit,
                                 IsHideRealTurnover = isHideRealTurnover
                             }
@@ -116,7 +118,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 Commission = Converter.ToDecimal(data.Commission),
                                 LineTotal = Converter.ToDecimal(data.LineTotal),
                                 Turnover = Converter.ToDecimal(data.Turnover),
-                                SiteType = Converter.ToInt(data.Site)
+                                SiteType = Converter.ToInt(data.Site),
+                                ExtraPositionTaking = Converter.ToDecimal(data.ExtraPositionTaking)
                             };
 
                             productWinLoss.CreditTotal.BettypeId = info.BettypeId;
@@ -196,7 +199,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
                 int startRow = 0;
                 int startColumn = 0;
-                int maxColumnIndex = 6;
+                int maxColumnIndex = 8;
                 var currentRow = startRow;
 
                 var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
@@ -215,20 +218,18 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 currentRow += 2;
 
                 workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
-                this.ExportHeaderColumns_SportReport_NotApplyVirtualRate(
+                _dailyWinLoss2hUtilityService.ExportMainCasinoHeader(
                     ref workSheet,
                     ref currentRow,
                     startRow,
-                    startColumn,
-                    false);
+                    startColumn);
 
-                this.ExportCasinoProductReport(
+                _dailyWinLoss2hUtilityService.ExportMainCasinoContent(
                     ref workSheet,
                     ref currentRow,
                     startRow,
                     startColumn,
-                    report.NoneLiveReport,
-                    criteria);
+                    report.NoneLiveReport);
 
                 //// MakeExcelFile
 

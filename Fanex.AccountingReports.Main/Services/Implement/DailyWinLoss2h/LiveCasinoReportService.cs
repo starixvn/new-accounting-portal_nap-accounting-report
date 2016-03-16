@@ -162,6 +162,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 var winLossBySport = InitWinLoss();
                 int sportId = Converter.ToInt(sportGroup.Key);
                 winLossBySport.Id = sportId;
+                winLossBySport.CreditTotal.Id = sportId;
+                winLossBySport.DepositTotal.Id = sportId;
                 winLossBySport.GrandTotal.Id = sportId;
                 winLossBySport.GrandTotal.Name = _dailyWinLoss2hUtilityService.GetSportName(sportId);
                 var sportBySiteGroups = sportGroup.GroupBy(x => x.Site);
@@ -509,6 +511,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         public void ExportMainLiveCasinoReport(GetLiveCasinoReportCriteria criteria)
         {
             try
@@ -528,7 +533,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
                 int startRow = 0;
                 int startColumn = 0;
-                int maxColumnIndex = 6;
+                int maxColumnIndex = 8;
                 var currentRow = startRow;
 
                 //// ExcelTypes
@@ -549,22 +554,20 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 currentRow += 2;
 
                 workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
-                this.ExportHeaderColumns_SportReport_NotApplyVirtualRate(
+                _dailyWinLoss2hUtilityService.ExportMainCasinoHeader(
                     ref workSheet,
                     ref currentRow,
                     startRow,
-                    startColumn,
-                    true);
+                    startColumn);
 
                 //// Header
 
-                _dailyWinLoss2hUtilityService.ExportContent_SportReport(
+                _dailyWinLoss2hUtilityService.ExportMainCasinoContent(
                     ref workSheet,
                     ref currentRow,
                     startRow,
                     startColumn,
-                    report,
-                    SportContants.LiveCasino);
+                    report);
 
                 //// MakeExcelFile
 
@@ -579,6 +582,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        "SP2101:MethodMustNotContainMoreLinesThan",
+        Justification = "Reviewed. Suppression is OK here.")]
         public void ExportGetLiveCasinoWinLossByProductReport(GetLiveCasinoWinLossByProductCriteria criteria)
         {
             try
@@ -671,7 +677,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 Position = Converter.ToDecimal(productWinLoss.Position),
                 Commission = Converter.ToDecimal(productWinLoss.Commission),
                 LineTotal = Converter.ToDecimal(productWinLoss.LineTotal),
-                Turnover = Converter.ToDecimal(productWinLoss.Turnover)
+                Turnover = Converter.ToDecimal(productWinLoss.Turnover),
+                ExtraPositionTaking = Converter.ToDecimal(productWinLoss.ExtraPositionTaking)
             };
 
             return winLoss;
