@@ -1235,7 +1235,10 @@
     <value>MBC - RNG Casino</value>
   </data>
   <data name="Non_Sports_Total" xml:space="preserve">
-    <value>MBC - RNG Casino</value>
+    <value>Non-Sports Total</value>
+  </data>
+  <data name="Sportsbook_Total" xml:space="preserve">
+	<value>Sportsbook Total</value>
   </data>
   <data name="AllBet" xml:space="preserve">
     <value>AllBet</value>
