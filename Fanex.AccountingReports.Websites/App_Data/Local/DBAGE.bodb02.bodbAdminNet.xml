@@ -29,7 +29,7 @@
     <Setting Key="Special_SMAsTurnOver" SpName="Acc_Rpt_SMAs_TurnOver" DbName="DBAGE.bodb02.bodbAdminNet"  />
   </Function>
   <Function Name="Special - Total Credit Account By Product">
-    <Setting Key="Acc_Rpt_BetCount_ByProduct_Super" SpName="Acc_Rpt_BetCount_ByProduct_Super" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_BetCount_ByProduct_Super" SpName="Acc_Rpt_BetCount_ByProduct_Super_Xtest" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>   
 
 </Functions>
