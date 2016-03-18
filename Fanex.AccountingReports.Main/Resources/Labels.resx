@@ -1246,4 +1246,10 @@
     <data name="Total_New_Cricket" xml:space="preserve">
     <value>Total</value>
   </data>
+    <data name="Extra_PT" xml:space="preserve">
+    <value>Extra_PT</value>
+  </data>
+    <data name="After_Extra_PT" xml:space="preserve">
+    <value>After_Extra_PT</value>
+  </data>
 </root>
