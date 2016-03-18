@@ -57,6 +57,10 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 };
 
                 gameTypeWinLoss.Name = this.GetGameTypeName(Converter.ToInt(gameTypeWinLoss.Id));
+                if ((Converter.ToInt(gameTypeWinLoss.Id) >= 2401) && (Converter.ToInt(gameTypeWinLoss.Id) <= 2499))
+                {
+                    gameTypeWinLoss.Name = gameTypeWinLoss.Name + " " + "(AllBet)";
+                }
                 foreach (var data in gameTypeGroup)
                 {
                     info = new WinLossInfo
@@ -65,7 +69,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                         Name = gameTypeWinLoss.Name,
                         CurrencyName = data.CurrencyName,
                         CurrencyId = data.CurrencyId,
-                        
+
                         NumberOfPlayers = data.NumberOfPlayers,
                         NumberOfGames = data.NumberOfGames,
 

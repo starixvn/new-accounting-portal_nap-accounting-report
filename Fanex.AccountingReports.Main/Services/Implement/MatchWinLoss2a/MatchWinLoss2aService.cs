@@ -610,7 +610,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                         this._matchWinLoss2aUtilityService.BetTypeNameSuffixCache[winLoss.Id];
 
                     // for AllBet
-                    if ((winLoss.Id >= 2401) && (winLoss.Id <= 2405))
+                    if ((winLoss.Id >= 2401) && (winLoss.Id <= 2499))
                     {
                         winLoss.Name = winLoss.Name +" "+ "(AllBet)";
                     }
