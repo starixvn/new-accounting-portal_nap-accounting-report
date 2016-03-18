@@ -36,7 +36,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         ColossusBets: 204,
         Cockfighting: 206,
         AllBet: 211,
-        MetricGamingSuperLive: 1
+        MetricGamingSuperLive: -1
     };
 
     var cachedData = {
