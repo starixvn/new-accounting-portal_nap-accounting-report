@@ -347,7 +347,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                         ChildsInfo = new List<WinLossInfo>(),
                         GrandTotal = new WinLossInfo
                         {
-                            Name = criteria.SportName + " " + Labels.Total
+                            Name = /*criteria.SportName + " " + */Labels.Total
                         }
                     };
 
