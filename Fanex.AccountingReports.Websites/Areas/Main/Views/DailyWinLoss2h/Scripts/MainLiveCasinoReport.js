@@ -341,6 +341,9 @@ MainLiveCasinoReport.prototype.GetPlainPreviousBreadCrumbs = function (drillDown
 MainLiveCasinoReport.prototype.SetActiveReportManager = function () {
     if (showHideReportManager.CacheData.currentReport != this) {
         showHideReportManager.CacheData.currentReport.HideReportView();
+        if (!this.Tables.mainLiveCasinoReport.hasClass("display-none")) {
+            this.Tables.mainLiveCasinoContentReport.fanexGrid("resizeGrid");
+        }
         showHideReportManager.CacheData.currentReport = this;
     }
 };
