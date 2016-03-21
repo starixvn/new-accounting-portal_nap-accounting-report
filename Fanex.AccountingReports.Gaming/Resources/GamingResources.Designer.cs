@@ -230,7 +230,51 @@ namespace Fanex.AccountingReports.Gaming.Resources {
                 return ResourceManager.GetString("CasinoGameStatistic_UserName_ReportTitle", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Game Statistic Report For {1} From {2} To {3}.
+        /// </summary>
+        public static string CasinoGameStatistic_GameType_ReportTitle
+        {
+            get
+            {
+                return ResourceManager.GetString("CasinoGameStatistic_GameType_ReportTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Game Statistic Report For {1} From {2} To {3}.
+        /// </summary>
+        public static string CasinoGameStatistic_GameTable_ReportTitle
+        {
+            get
+            {
+                return ResourceManager.GetString("CasinoGameStatistic_GameTable_ReportTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Game Statistic Report For {1} From {2} To {3}.
+        /// </summary>
+        public static string CasinoGameStatistic_Company_ReportTitle
+        {
+            get
+            {
+                return ResourceManager.GetString("CasinoGameStatistic_Company_ReportTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Game Statistic Report For {1} From {2} To {3}.
+        /// </summary>
+        public static string CasinoGameStatistic_Currency_ReportTitle
+        {
+            get
+            {
+                return ResourceManager.GetString("CasinoGameStatistic_Currency_ReportTitle", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to {0} Game Statistic Report For {1} On {2} By Currency.
         /// </summary>
