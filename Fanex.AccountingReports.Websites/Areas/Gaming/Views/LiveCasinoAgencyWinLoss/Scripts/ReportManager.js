@@ -57,6 +57,11 @@ Fanex.AccountingReports.Gaming.LiveCasinoAgencyWinLoss.ReportManager = function 
             MaxBettypeValue: 1703
         },
 
+        AllBetBettypeRange:{
+            MinBettypeValue: 2401,
+            MaxBettypeValue: 2499
+        },
+
         SLIBettypeRange: {
             MinBettypeValue: 1101,
             MaxBettypeValue: 1199
@@ -1008,19 +1013,19 @@ Fanex.AccountingReports.Gaming.LiveCasinoAgencyWinLoss.ReportManager = function 
             self.CachedData.isSelectOtherSLIProducts = true;
             self.GetGameTypeList();
             self.Tables.gameTableContainer.addClass("display-none");
-            self.Tables.rdGameTable.removeAttr("checked");
-            self.Tables.rdDaily.attr("checked", "checked");
+            //self.Tables.rdGameTable.removeAttr("checked");
+            //self.Tables.rdDaily.attr("checked", "checked");
             self.Tables.rdGameTableContainer.addClass("display-none");
         }
     };
-
     self.isSLIProductBettype = function (bettype) {
         var isSLIProductBettype = false;
-        if (bettype < self.Enums.SLIBettypeRange.MinBettypeValue || bettype > self.Enums.SLIBettypeRange.MaxBettypeValue) {
-            isSLIProductBettype = false;
+        if ((bettype >= self.Enums.SLIBettypeRange.MinBettypeValue && bettype <= self.Enums.SLIBettypeRange.MaxBettypeValue)||
+            (bettype >= self.Enums.AllBetBettypeRange.MinBettypeValue && bettype <= self.Enums.AllBetBettypeRange.MaxBettypeValue)){
+            isSLIProductBettype = true;
         }
         else {
-            isSLIProductBettype = true;
+            isSLIProductBettype = false;
         }
 
         return isSLIProductBettype;
