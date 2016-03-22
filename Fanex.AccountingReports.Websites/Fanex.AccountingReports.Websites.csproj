@@ -205,6 +205,10 @@
       <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ONEbook.UM, Version=1.0.1.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ONEbook.UM.1.0.1.2\lib\net40\ONEbook.UM.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="RazorEngine, Version=3.7.3.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RazorEngine.3.7.3\lib\net40\RazorEngine.dll</HintPath>
@@ -227,6 +231,10 @@
     </Reference>
     <Reference Include="RemotingRef, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RemotingRef.1.0.0.3\lib\net40\RemotingRef.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net4\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SPSRemoting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

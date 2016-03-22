@@ -9,15 +9,6 @@
 
 namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using System.Security.Cryptography;
-    using System.Text;
-    using System.Web;
-    using System.Web.Mvc;
-    using System.Web.Security;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Resources;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -32,6 +23,18 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
+    using ONEbook.UM.Filters;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Security.Cryptography;
+    using System.Text;
+    using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Security;
+    using ONEbookUMService = ONEbook.UM.Services;
+    using ONEbookUMServiceImp = ONEbook.UM.Services.Impl;
 
     /// <summary>
     /// TODO: Update summary.
@@ -47,7 +50,8 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         private IMenuItemService _menuItemService;
         private ICurrentSession _currentSession;
         private IFunctionService _functionService;
-        private IMaintenanceService _maintenanceService;
+        private ONEbookUMService.IMaintenanceService _maintenanceService;
+
         private HashAlgorithm _hashAlgorithm;
 
         #endregion members
@@ -66,7 +70,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
             IMenuItemService menuItemService,
             ICurrentSession currentSession,
             IFunctionService functionService,
-            IMaintenanceService maintenanceService)
+            ONEbookUMService.IMaintenanceService maintenanceService)
         {
             _userService = userService ?? new UserService();
             _groupService = groupService ?? new GroupService();
@@ -74,7 +78,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
             _menuItemService = menuItemService ?? new MenuItemService();
             _currentSession = currentSession ?? new CurrentSession();
             _functionService = functionService ?? new FunctionService();
-            _maintenanceService = maintenanceService ?? new MaintenanceService();
+            _maintenanceService = maintenanceService ?? new ONEbookUMServiceImp.MaintenanceService();
             _hashAlgorithm = new SHA256Managed();
         }
 
@@ -105,15 +109,10 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         /// </summary>
         /// <returns>The index page.</returns>
         [HttpGet]
+        [UMBackdoorFilter]
         public ActionResult Index(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            var maintenanceInfo = _maintenanceService.GetDowntimeInfo();
-            if (maintenanceInfo.IsDowntime)
-            {
-                return RedirectToAction("Offline", "Common");
-            }
-
             GenerateToken();
             return View();
         }
@@ -330,9 +329,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 
                 if (!AppSettings.IsLocalTest)
                 {
-                    var maintenanceInfo = _maintenanceService.GetDowntimeInfo();
-
-                    if (maintenanceInfo.IsDowntime)
+                    if (!_maintenanceService.IsPassUnderMaintenance())
                     {
                         return Json(new
                         {
