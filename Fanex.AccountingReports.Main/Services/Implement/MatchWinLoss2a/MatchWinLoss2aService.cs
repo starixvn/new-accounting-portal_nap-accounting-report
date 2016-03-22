@@ -315,7 +315,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         {
             try
             {
-                var rawData = GetReportData<dynamic>(criteria);
+                //var rawData = GetReportData<dynamic>(criteria);
                 var thirdPartyCasinoData = _reportRepository.GetThirdPartyCasinoReport(criteria);
 
                 WinLossInfo report = new WinLossInfo
