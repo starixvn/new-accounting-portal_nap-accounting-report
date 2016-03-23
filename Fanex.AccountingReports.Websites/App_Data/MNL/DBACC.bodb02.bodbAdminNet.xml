@@ -131,6 +131,12 @@
     <Setting Key="Main_DailyWinLoss2h_GetColossusBetReport_14" SpName="Acc_Rpt_DailyWLDirect_ColosussBets14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_ColossusBet" SpName="Acc_Rpt_DailyWLDirect_ColosussBets_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_ColossusBet_14" SpName="Acc_Rpt_DailyWLDirect_ColosussBets_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetCockFightingReport" SpName="Acc_Rpt_DailyWLDirect_CockFighting"  DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_DailyWinLoss2h_GetCockFightingReport_14" SpName="Acc_Rpt_DailyWLDirect_CockFighting14"  DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_DailyWinLoss2h_GetCockFightingByArenaReport" SpName="Acc_Rpt_WinlostCF_Arena_Details"  DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_DailyWinLoss2h_GetCockFightingByArenaReport_14" SpName="Acc_Rpt_WinlostCF_Arena_Details14"  DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_CockFighting" SpName="Acc_Rpt_DailyWLDirect_CockFighting_Bettype_Site"  DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_CockFighting_14" SpName="Acc_Rpt_DailyWLDirect_CockFighting_Bettype_Site14"  DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
   </Function>
   <Function Name="Main Report - Daily Win Loss (2h) Soccer">
     <Setting Key="Main_DailyWinLoss2hSoccer_Main2hReport" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer" DbName="DBACC.bodb02.bodbAdminNet"  TimeOut="0" />
