@@ -36,6 +36,7 @@ namespace Fanex.AccountingReports.Main.Constants
         public const int _2hVegasGamesSport = 14;
         public const int _2hBettrade = -2;
         public const int _2hAllbet = 21;
+        public const int _2hColossusBets = 204;
 
         public const int _2dReportCasino = 251;
 

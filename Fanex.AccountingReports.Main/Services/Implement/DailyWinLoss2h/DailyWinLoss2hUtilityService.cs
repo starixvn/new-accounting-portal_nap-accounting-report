@@ -133,9 +133,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     return Labels.Macau;
                 case SportContants._2hBettrade:
                     return Labels.Bettrade;
-
+                case SportContants._2hColossusBets:
+                    return Labels.Colossus_Bets;
                 case SportContants._2hAllbet:
-                    return Labels.AllBet;
+                    return Labels.Allbet;
                 default:
                     return CacheRef.GetSportName(sportId);
             }

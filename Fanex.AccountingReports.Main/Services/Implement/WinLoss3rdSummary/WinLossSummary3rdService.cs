@@ -565,8 +565,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 case SportContants.Bettrade:
                     sportName = Labels.Bettrade;
                     break;
-                case SportContants.AllBet:
-                    sportName = Labels.AllBet;
+                case SportContants.Allbet:
+                    sportName = Labels.Allbet;
                     break;
 
                 default:
