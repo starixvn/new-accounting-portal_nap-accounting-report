@@ -44,14 +44,14 @@
             {
                 var row = new CockFightingDetail
                 {
-                    ArenaId = Converter.ToInt(data.ArenaID),
-                    WinLoss = Converter.ToDecimal(data.winlost),
-                    Position = Converter.ToDecimal(data.pos),
-                    Commission = Converter.ToDecimal(data.comm),
-                    VirtualCommission = Converter.ToDecimal(data.VirtualComm),
-                    RealLineTotal = Converter.ToDecimal(data.LineTotal),
+                    ArenaId = Converter.ToInt(data.ArenaId),
+                    WinLoss = Converter.ToDecimal(data.WinLoss),
+                    Position = Converter.ToDecimal(data.Position),
+                    Commission = Converter.ToDecimal(data.Commission),
+                    VirtualCommission = Converter.ToDecimal(data.VirtualCommission),
+                    RealLineTotal = Converter.ToDecimal(data.RealLineTotal),
                     VirtualLineTotal = Converter.ToDecimal(data.VirtualLineTotal),
-                    RealTurnover = Converter.ToDecimal(data.IBCTurnover)
+                    RealTurnover = Converter.ToDecimal(data.RealTurnover)
                 };
                 report.ReportRows.Add(row);
             }
@@ -94,12 +94,12 @@
                     FightNo = Converter.ToInt(data.FightNo),
                     HomeOwner = Converter.ToString2(data.HomeOwner),
                     AwayOwner = Converter.ToString2(data.AwayOwner),
-                    WinLoss = Converter.ToDecimal(data.winlost),
-                    Position = Converter.ToDecimal(data.pos),
-                    Commission = Converter.ToDecimal(data.comm),
-                    RealLineTotal = Converter.ToDecimal(data.LineTotal),
+                    WinLoss = Converter.ToDecimal(data.WinLoss),
+                    Position = Converter.ToDecimal(data.Position),
+                    Commission = Converter.ToDecimal(data.Commission),
+                    RealLineTotal = Converter.ToDecimal(data.RealLineTotal),
                     VirtualLineTotal = Converter.ToDecimal(data.VirtualLineTotal),
-                    RealTurnover = Converter.ToDecimal(data.IBCTurnover)
+                    RealTurnover = Converter.ToDecimal(data.RealTurnover)
                 };
                 report.ReportRows.Add(row);
             }

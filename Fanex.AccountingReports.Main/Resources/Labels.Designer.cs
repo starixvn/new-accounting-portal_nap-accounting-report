@@ -628,7 +628,7 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cock fighting.
+        ///   Looks up a localized string similar to Cockfighting.
         /// </summary>
         public static string Cockfighting {
             get {
