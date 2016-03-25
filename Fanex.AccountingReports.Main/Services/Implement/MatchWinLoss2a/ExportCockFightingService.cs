@@ -294,7 +294,7 @@
                    ref currentColumn,
                    currentRow,
                    currentColumn,
-                   "COCK FIGHTING TOTAL",
+                   "COCKFIGHTING TOTAL",
                    grandTotalTextStyle);
 
             NpoiExcelExtensions.RenderCell(

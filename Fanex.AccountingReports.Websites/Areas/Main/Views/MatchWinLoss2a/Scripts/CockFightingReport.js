@@ -89,7 +89,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
             var grandTotal = rs.GrandTotal;
             currentRow =
                 {
-                    Columns: [{ Name: "ColArena", Value: "COCK FIGHTING TOTAL" },
+                    Columns: [{ Name: "ColArena", Value: "COCKFIGHTING TOTAL" },
                                 { Name: "ColWinLoss", Value: grandTotal.WinLoss },
                                 { Name: "ColPosition", Value: grandTotal.Position },
                                 { Name: "ColCommission", Value: grandTotal.Commission },
@@ -119,7 +119,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
             showFooter: true,
             titleInfo:
             {
-                text: 'COCK FIGHTING PRODUCT WIN/LOSS REPORT FOR ' + moment(new Date(_params.getCockFightingParams.WinLostDate)).format(FormatConstant.MMM_DD_YYYY_STRING_MOMENT).toUpperCase(),
+                text: 'COCKFIGHTING PRODUCT WIN/LOSS REPORT FOR ' + moment(new Date(_params.getCockFightingParams.WinLostDate)).format(FormatConstant.MMM_DD_YYYY_STRING_MOMENT).toUpperCase(),
                 showExcelButton: true,
                 exportExcelFunction: function () {
                     exportCockFightReport();
@@ -265,7 +265,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
             showFooter: true,
             titleInfo:
             {
-                text: 'COCK FIGHTING PRODUCT ARENA ' + " " + _params.getCockFightingMatchByArenaParams.ArenaName + ' WIN/LOSS REPORT FOR' + " " + moment(new Date(_params.getCockFightingMatchByArenaParams.WinLostDate)).format(FormatConstant.MMM_DD_YYYY_STRING_MOMENT).toUpperCase(),
+                text: 'COCKFIGHTING PRODUCT ARENA ' + " " + _params.getCockFightingMatchByArenaParams.ArenaName + ' WIN/LOSS REPORT FOR' + " " + moment(new Date(_params.getCockFightingMatchByArenaParams.WinLostDate)).format(FormatConstant.MMM_DD_YYYY_STRING_MOMENT).toUpperCase(),
                 showExcelButton: true,
                 exportExcelFunction: function () {
                     exportCockFightMatchByArenaReport();

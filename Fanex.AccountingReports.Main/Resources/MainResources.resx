@@ -428,10 +428,10 @@
     <value>MatchWinLoss2aDetailByArena_{0}</value>
   </data>
   <data name="CockFighting_ReportTitle" xml:space="preserve">
-    <value>Cock fighting - Product Win/Loss report for {0}</value>
+    <value>Cockfighting - Product Win/Loss report for {0}</value>
   </data>
   <data name="CockFightingMatchByArena_ReportTitle" xml:space="preserve">
-    <value>Cock fighting Product Arena {0} Win/Loss Report For {1}</value>
+    <value>Cockfighting Product Arena {0} Win/Loss Report For {1}</value>
   </data>
   <data name="MatchWinLoss2aDetailByMatch_ReportName" xml:space="preserve">
     <value>MatchWinLoss2aDetailByMatch_{0}</value>
@@ -443,9 +443,9 @@
     <value>Daily Win Loss 2h - Cockfighting</value>
   </data>
   <data name="WinLossSummary3rdCockFighting_ReportName" xml:space="preserve">
-    <value>Cock fightingDetails_From_Date_{0}_To_Date_{1}</value>
+    <value>CockfightingDetails_From_Date_{0}_To_Date_{1}</value>
   </data>
   <data name="WinLossSummary3rd_CockFightingReportTitle" xml:space="preserve">
-    <value>Cock fighting | Details report from {0} to {1}</value>
+    <value>Cockfighting | Details report from {0} to {1}</value>
   </data>
 </root>
