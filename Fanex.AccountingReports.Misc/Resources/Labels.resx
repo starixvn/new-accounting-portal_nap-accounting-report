@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="test" xml:space="preserve">
+    <value>test</value>
+  </data>
   <data name="Active" xml:space="preserve">
     <value>Active</value>
   </data>
@@ -199,7 +202,7 @@
     <value>Bingo</value>
   </data>
   <data name="Casino" xml:space="preserve">
-    <value>Casino</value>
+    <value>MBC - RNG Casino</value>
   </data>
   <data name="ChangedPassword" xml:space="preserve">
     <value>Your Password has been changed successfully !</value>
@@ -1149,5 +1152,14 @@
   </data>
   <data name="ColossusBets" xml:space="preserve">
     <value>Colossus Bets</value>
+  </data>
+  <data name="Allbet" xml:space="preserve">
+    <value>Allbet</value>
+  </data>
+  <data name="Cockfighting" xml:space="preserve">
+    <value>Cockfighting</value>
+  </data>
+  <data name="MetricGamingSuperLive" xml:space="preserve">
+    <value>Metric Gaming - Superlive</value>
   </data>
 </root>

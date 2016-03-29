@@ -8,14 +8,14 @@
     {
         public DateTime WinLostDate { get; set; }
 
-        public override bool IsValid()
-        {
-            return true;
-        }
-
         public override string GetSettingKey()
         {
             return "Main_MatchWinLoss2a_GetCockFightingReport" + ReportService.GetStoreMappingSuffix(this.WinLostDate);
+        }
+
+        public override bool IsValid()
+        {
+            return true;
         }
     }
 }

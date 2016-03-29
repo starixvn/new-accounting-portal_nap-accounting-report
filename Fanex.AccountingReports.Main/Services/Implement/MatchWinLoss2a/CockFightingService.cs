@@ -10,6 +10,8 @@
     using Fanex.Data.Repository;
     using Core.Services.Impl;
     using Fanex.Common;
+    using Data;
+    using System.Data;
     public class CockFightingService : ServiceBase,ICockFightingService
     {
         private const int ExtendCachedTimeOut = 2;
@@ -39,22 +41,29 @@
                 ReportRows = new List<CockFightingDetail>(),
                 GrandTotal = new CockFightingDetail()
             };
-            var rawData = this.GetReportData<dynamic>(criteria);
-            foreach (var data in rawData)
+
+            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
             {
-                var row = new CockFightingDetail
+                db.AssignParamValues(criteria.GetSpParams());
+                var reader = db.ExecuteReader();
+                while (reader.Read())                
                 {
-                    ArenaId = Converter.ToInt(data.ArenaId),
-                    WinLoss = Converter.ToDecimal(data.WinLoss),
-                    Position = Converter.ToDecimal(data.Position),
-                    Commission = Converter.ToDecimal(data.Commission),
-                    VirtualCommission = Converter.ToDecimal(data.VirtualCommission),
-                    RealLineTotal = Converter.ToDecimal(data.RealLineTotal),
-                    VirtualLineTotal = Converter.ToDecimal(data.VirtualLineTotal),
-                    RealTurnover = Converter.ToDecimal(data.RealTurnover)
-                };
-                report.ReportRows.Add(row);
+                    var row = new CockFightingDetail
+                    {
+                        ArenaId = Converter.ToInt(reader["ArenaId"]),
+                        WinLoss = Converter.ToDecimal(reader["WinLoss"]),
+                        Position = Converter.ToDecimal(reader["Position"]),
+                        Commission = Converter.ToDecimal(reader["Commission"]),
+                        VirtualCommission = Converter.ToDecimal(reader["VirtualCommission"]),
+                        RealLineTotal = Converter.ToDecimal(reader["RealLineTotal"]),
+                        VirtualLineTotal = Converter.ToDecimal(reader["VirtualLineTotal"]),
+                        RealTurnover = Converter.ToDecimal(reader["RealTurnover"])
+                    };
+
+                    report.ReportRows.Add(row);
+                }
             }
+            
             report.GrandTotal = this.CalculateGrandTotal(report.ReportRows);
 
             CacheExtension.Set(_cockFightingReportCachedDataKey, report);

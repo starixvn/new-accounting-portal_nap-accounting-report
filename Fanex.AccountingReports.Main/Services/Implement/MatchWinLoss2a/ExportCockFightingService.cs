@@ -1,5 +1,6 @@
 ﻿namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
 {
+    using System;
     using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web;
@@ -252,6 +253,7 @@
                    item.RealTurnover,
                    decimalNumberStyle);
 
+                var margin = item.RealTurnover == 0 ? item.Margin_Str : (object)item.Margin;
                 NpoiExcelExtensions.RenderCell(
                    ref worksheet,
                    ref row,
@@ -259,7 +261,7 @@
                    ref currentColumn,
                    currentRow,
                    currentColumn,
-                   item.Margin_Str,
+                   margin,
                    percentStyle);
 
                 currentRow++;
@@ -377,6 +379,7 @@
                grandTotal.RealTurnover,
                grandTotalDecimalNumberStyle);
 
+            var margin = grandTotal.RealTurnover == 0 ? grandTotal.Margin_Str : (object)grandTotal.Margin;
             NpoiExcelExtensions.RenderCell(
                ref worksheet,
                ref row,
@@ -384,7 +387,7 @@
                ref currentColumn,
                currentRow,
                currentColumn,
-               grandTotal.Margin_Str,
+               margin,
                grandTotalPercentStyle);
         }
 
@@ -576,6 +579,7 @@
                    item.RealTurnover,
                    decimalNumberStyle);
 
+                var margin = item.RealTurnover == 0 ? item.Margin_Str : (object)item.Margin;
                 NpoiExcelExtensions.RenderCell(
                    ref worksheet,
                    ref row,
@@ -583,7 +587,7 @@
                    ref currentColumn,
                    currentRow,
                    currentColumn,
-                   item.Margin_Str,
+                   margin,
                    percentStyle);
 
                 currentRow++;
@@ -702,6 +706,7 @@
                grandTotal.RealTurnover,
                grandTotalDecimalNumberStyle);
 
+            var margin = grandTotal.RealTurnover == 0 ? grandTotal.Margin_Str : (object)grandTotal.Margin;
             NpoiExcelExtensions.RenderCell(
                ref worksheet,
                ref row,
@@ -709,7 +714,7 @@
                ref currentColumn,
                currentRow,
                currentColumn,
-               grandTotal.Margin_Str,
+               margin,
                grandTotalPercentStyle);
         }
     }

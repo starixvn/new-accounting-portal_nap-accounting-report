@@ -472,7 +472,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 productName = "Cockfighting";
                 break;
             case productEnums.AllBet:
-                productName = "AllBet";
+                productName = "Allbet";
                 break;
             case productEnums.MetricGamingSuperLive:
                 productName = "Metric Gaming - Superlive";

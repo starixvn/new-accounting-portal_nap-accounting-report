@@ -289,7 +289,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
         _tables.reportByArenaContainer.dialog({
             title: "",
             autoOpen: false,
-            width: "auto",
+            width: 1120,
             modal: false,
             resizable: false,
             close: function (event, ui) {
@@ -325,7 +325,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
         _tables.reportContainer.dialog({
             title: "",
             autoOpen: false,
-            width: 920,
+            width: 935,
             modal: false,
             resizable: false,
             close: function (event, ui) {

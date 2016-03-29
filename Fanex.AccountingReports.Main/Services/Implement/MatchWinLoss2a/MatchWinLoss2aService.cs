@@ -592,8 +592,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     bool isKenoBetType = this._matchWinLoss2aUtilityService.IsKenoBetType(winLoss.Id);
                     bool isBettradeBettype = _matchWinLoss2aUtilityService.IsBetTrade(betType);
 
-                    if (winLoss.Id == CoreConstants.SportContants.Bingo ||
-                        winLoss.Id == CoreConstants.SportContants.Casino)
+                    if (winLoss.Id == CoreConstants.SportContants.Bingo)
                     {
                         winLoss.Turnover = 0;
                     }
@@ -612,7 +611,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     // for AllBet
                     if ((winLoss.Id >= 2401) && (winLoss.Id <= 2499))
                     {
-                        winLoss.Name = winLoss.Name +" "+ "(AllBet)";
+                        winLoss.Name = winLoss.Name +" (Allbet)";
                     }
 
                     winLoss.LineTotalReal = winLoss.LineTotal_Soccer_Live +
