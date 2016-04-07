@@ -661,6 +661,9 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
 
             this.Tables.dropdownGameTable = $("#dropdown-gametable");
         }
+        else {
+            self.Tables.gameTableContainer.addClass("display-none");
+        }
 
         $('.tipsy-sw').hide();
 
