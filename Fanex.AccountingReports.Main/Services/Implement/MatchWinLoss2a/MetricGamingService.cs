@@ -138,7 +138,14 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             GridDataRow dataRow = new GridDataRow();
             decimal lineTotal = Converter.ToDecimal(bettypeDataRow.LineTotal);
             decimal turnover = Converter.ToDecimal(bettypeDataRow.Turnover);
-            dataRow.CreateColumns(new Columns { Name = Labels.Bet_Type, Value = _cachedBettypesName[bettypeDataRow.bettype] });
+            bool liveIndicator = Converter.ToBool(bettypeDataRow.liveindicator);
+            string liveIndicatorTitle = liveIndicator ? "!Live" : string.Empty;
+            dataRow.CreateColumns(
+                new Columns
+                {
+                    Name = Labels.Bet_Type,
+                    Value = $"{liveIndicatorTitle} - {_cachedBettypesName[bettypeDataRow.bettype]}",
+                    CustomAttributes = $"{liveIndicator},{bettypeDataRow.bettype}"});
             dataRow.CreateColumns(new Columns { Name = Labels.Comm, Value = Converter.ToDecimal(bettypeDataRow.comm) });
             dataRow.CreateColumns(new Columns { Name = Labels.Virtual_Comm, Value = Labels.NotAvailable });
             dataRow.CreateColumns(new Columns { Name = Labels.Line_Total, Value = lineTotal });

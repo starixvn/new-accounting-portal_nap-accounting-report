@@ -296,7 +296,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.ReportManager = function () {
         sportTypeId,
         sportTypeName,
         liveIndicatorId) {
-        _thirdPartyDetailReport.closeDialog();
+       // _thirdPartyDetailReport.closeDialog();
         _detailReportBySportsType.closeDialog();
         if (new Date(reportDate) >= new Date(balanceUpDay)) {
             _detailReportByBetType.getReport({

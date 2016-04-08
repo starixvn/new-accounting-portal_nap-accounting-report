@@ -128,7 +128,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.DetailReportByBetType = function () 
             showFooter: true,
             titleInfo:
             {
-                text: (_params.reportDetailParams.Sporttype + ' PRODUCT ' +
+                text: (getSportTypeNameByBetType(_params.reportDetailParams.Bettype) + ' PRODUCT ' +
                       getBetTypeName(_params.reportDetailParams.LiveIndicator, _params.reportDetailParams.BetTypeName) +
                       ' BETTYPE WIN/LOSS REPORT FOR ' + moment(new Date(_params.reportDetailParams.Winlostdate)).format(FormatConstant.MMM_DD_YYYY_STRING_MOMENT)).toUpperCase(),
                 showExcelButton: true,
@@ -205,6 +205,21 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.DetailReportByBetType = function () 
         }
         catch (e) {
         }
+    };
+
+    var getSportTypeNameByBetType = function (betType, sportTypeName) {
+        var sport = '';
+
+        if(betType > 800 && betType < 900)
+        {
+            sport = "Metric Gaming - Superlive"
+        }
+        else
+        {
+            sport = sportTypeName;
+        }
+
+        return sport;
     };
 
     exportDetailReportByBetType = function () {
