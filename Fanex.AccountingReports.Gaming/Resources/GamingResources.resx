@@ -190,7 +190,7 @@
     <value>{0} Game Statistic Report From {1} To {2}</value>
   </data>
   <data name="CasinoGameStatistic_UserName_ReportTitle" xml:space="preserve">
-    <value>{0} Game Statistic Report For {1} From {2} To {3}</value>
+    <value>{0} Game Statistic Report From {1} To {2} by UserName</value>
   </data>
   <data name="CasinoGameStatisticOnDateByCurrency_ReportTitle" xml:space="preserve">
     <value>{0} Game Statistic Report On {1} By Currency</value>
@@ -202,8 +202,22 @@
     <value>{0} Game Statistic Report In {1} By Currency</value>
   </data>
   <data name="CasinoGameStatistic_MonthlyReportTitle" xml:space="preserve">
+    <value>{0} Game Statistic Report From {1} To {2} By Monthly</value>
+  </data>
+  
+    <data name="CasinoGameStatistic_GameType_ReportTitle" xml:space="preserve">
+    <value>{0} Game Statistic Report From {1} To {2} By GameType</value>
+  </data>
+    <data name="CasinoGameStatistic_GameTable_ReportTitle" xml:space="preserve">
+    <value>{0} Game Statistic Report From {1} To {2} By GameTable</value>
+  </data>
+    <data name="CasinoGameStatistic_Company_ReportTitle" xml:space="preserve">
+    <value>{0} Game Statistic Report From {1} To {2} By Company</value>
+  </data>
+    <data name="CasinoGameStatistic_Currency_ReportTitle" xml:space="preserve">
     <value>{0} Game Statistic Report From {1} To {2} By Currency</value>
   </data>
+  
   <data name="CasinoGameStatistic_SheetName" xml:space="preserve">
     <value>Casino Game Statistic</value>
   </data>

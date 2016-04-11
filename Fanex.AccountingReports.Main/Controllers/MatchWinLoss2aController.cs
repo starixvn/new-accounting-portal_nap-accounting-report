@@ -27,7 +27,7 @@ namespace Fanex.AccountingReports.Main.Controllers
     /// </summary>
     public class MatchWinLoss2aController : BaseController
     {
-        private readonly IDynamicRepository repository;
+        private readonly IDynamicRepository repository = new DynamicRepository();
         private readonly IMatchWinLoss2aService _reportService;
         private readonly IMetricGamingService _metricGamingService;
         private readonly ICockFightingService _cockFightingService;

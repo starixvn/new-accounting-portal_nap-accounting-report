@@ -1240,10 +1240,16 @@
   <data name="Sportsbook_Total" xml:space="preserve">
     <value>Sportsbook Total</value>
   </data>
-  <data name="After_Extra_PT" xml:space="preserve">
-    <value>After Extra PT</value>
+  <data name="Allbet" xml:space="preserve">
+    <value>Allbet</value>
+  </data>
+  <data name="Total_New_Cricket" xml:space="preserve">
+    <value>Total</value>
   </data>
   <data name="Extra_PT" xml:space="preserve">
     <value>Extra PT</value>
+  </data>
+  <data name="After_Extra_PT" xml:space="preserve">
+    <value>After Extra PT</value>
   </data>
 </root>

@@ -301,10 +301,14 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         ChildsInfo = new List<WinLossInfo>(),
                         Total = new WinLossInfo
                         {
-                            Name = Labels.TotalNewCricket,
+                            Name = Labels.Total_New_Cricket,
                             EnableVirtual = enableVirtual
                         },
-
+                        //NewCricketTotal = new WinLossInfo
+                        //{
+                        //    Name = Labels.TotalNewCricket,
+                        //    EnableVirtual = enableVirtual
+                        //},                       
                         CreditTotalNewCricket = new WinLossInfo
                         {
                             Name = Labels.Credit,
@@ -347,7 +351,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         ChildsInfo = new List<WinLossInfo>(),
                         Total = new WinLossInfo
                         {
-                            Name = Labels.TotalNewCricket,
+                            Name = Labels.Total_New_Cricket,
                             EnableVirtual = enableVirtual
                         },
 

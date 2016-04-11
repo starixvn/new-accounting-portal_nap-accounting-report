@@ -52,9 +52,11 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
 
             this.InitTotalCreditAccountByProductColumn(worksheet);
             this.ExportTotalCreditAccountByProductTitle(excelFile, ref worksheet, ref currentRow, criteria);
-            currentRow += 2;
+            currentRow += 3;
+
+
             this.ExportTotalCreditAccountByProductHeader(excelFile, ref worksheet, ref currentRow);
-            currentRow = 4;
+            currentRow = 5;
             this.ExportTotalCreditAccountByProductContent(excelFile, ref worksheet, ref currentRow, report);
             this.ExportTotalCreditAccountByProductFooter(excelFile, ref worksheet, ref currentRow, report.Total);
             string reportTitleFormat = this.GetTotalCreditAccountByProductReportTitleFormat(criteria);
@@ -85,7 +87,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
 
             this.InitBetCountDetailColumn(worksheet);
             this.ExportBetCountDetailTitle(excelFile, ref worksheet, ref currentRow, criteria);
-            currentRow += 2;
+            currentRow += 3;
             this.ExportBetCountDetailHeader(excelFile, ref worksheet, ref currentRow);
             currentRow++;
             this.ExportBetCountDetailContent(excelFile, ref worksheet, ref currentRow, report);
@@ -161,7 +163,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Disabled, headerStyle);
 
             currentColumn = 0;
-            currentRow = 2;
+            currentRow = 3;
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, "#", headerStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Super, headerStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Status, headerStyle);
@@ -434,6 +436,17 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     product = Labels.ColossusBets;
                     break;
 
+                case ProductContants.Allbet:
+                    product = Labels.Allbet;
+                    break;
+
+                case ProductContants.Cockfighting:
+                    product = Labels.Cockfighting;
+                    break;
+
+                case ProductContants.MetricGamingSuperlive:
+                    product = Labels.MetricGamingSuperLive;
+                    break;
                 default:
                     break;
             }

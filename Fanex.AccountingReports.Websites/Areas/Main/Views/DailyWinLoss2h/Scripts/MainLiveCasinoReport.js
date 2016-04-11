@@ -115,7 +115,7 @@ MainLiveCasinoReport.prototype.RenderReport = function (report) {
                         {
                             Name: "ColSportType",
                             Value: showHideSiteTypeManager.GetShowHideSiteTypeIcon(groupdId) +
-                            this.GetSportLink(info),
+                            this.GetSportLink(info, self.Params.reportParams.Winlostdate),
                             CellAlign: "left",
                             CssClass: "bold"
                         },
@@ -341,6 +341,9 @@ MainLiveCasinoReport.prototype.GetPlainPreviousBreadCrumbs = function (drillDown
 MainLiveCasinoReport.prototype.SetActiveReportManager = function () {
     if (showHideReportManager.CacheData.currentReport != this) {
         showHideReportManager.CacheData.currentReport.HideReportView();
+        if (!this.Tables.mainLiveCasinoReport.hasClass("display-none")) {
+            this.Tables.mainLiveCasinoContentReport.fanexGrid("resizeGrid");
+        }
         showHideReportManager.CacheData.currentReport = this;
     }
 };
@@ -352,11 +355,11 @@ MainLiveCasinoReport.prototype.ShowHideSiteTypeInfo = function () {
     }
 };
 
-MainLiveCasinoReport.prototype.GetSportLink = function (winLossInfo) {
+MainLiveCasinoReport.prototype.GetSportLink = function (winLossInfo, winlostdate) {
     sportLink = "<span class='report2h-link bold' onclick=\"showHideReportManager.ShowLiveCasinoWinLossByProductReport('" +
                     winLossInfo.Id + "','" +
                     winLossInfo.Name + "','" +
-                    reportManager.Main2hReport.Params.reportParams.Winlostdate + "'); return;\">" +
+                    winlostdate + "'); return;\">" +
                     winLossInfo.Name + '</span>';
 
     return sportLink;

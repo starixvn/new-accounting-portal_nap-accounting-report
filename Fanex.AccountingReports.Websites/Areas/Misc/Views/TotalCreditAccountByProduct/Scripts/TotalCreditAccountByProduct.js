@@ -33,7 +33,10 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         LiveCasiono: 162,
         VirtualSport: 180,
         Keno: 202,
-        ColossusBets: 204
+        ColossusBets: 204,
+        Cockfighting: 206,
+        AllBet: 211,
+        MetricGamingSuperLive: -1
     };
 
     var cachedData = {
@@ -465,7 +468,16 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
             case productEnums.ColossusBets:
                 productName = "Colossus Bets";
                 break;
-            default:
+            case productEnums.Cockfighting:
+                productName = "Cockfighting";
+                break;
+            case productEnums.AllBet:
+                productName = "Allbet";
+                break;
+            case productEnums.MetricGamingSuperLive:
+                productName = "Metric Gaming - Superlive";
+                break;
+            default: MetricGamingSuperLive
                 break;
         }
 

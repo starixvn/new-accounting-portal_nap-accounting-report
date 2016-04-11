@@ -1,5 +1,6 @@
 ﻿namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
 {
+    using System;
     using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web;
@@ -119,8 +120,8 @@
             ICellStyle headerStyle = NpoiExcelExtensions.HeaderStyle(workbook);
             int currentColumn = 0;
             string reportTitle = string.Format(
-                   MainResources.CockFighting_ReportTitle,
-                   criteria.WinLostDate.ToShortFormatedDate());
+                   MainResources.CockFighting_ReportTitle.ToUpper().ToString(),
+                   criteria.WinLostDate.ToShortFormatedDate().ToUpper().ToString());
             IRow row = worksheet.CreateRow(currentRow);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn + 9, reportTitle, headerStyle);
         }
@@ -252,6 +253,7 @@
                    item.RealTurnover,
                    decimalNumberStyle);
 
+                var margin = item.RealTurnover == 0 ? item.Margin_Str : (object)item.Margin;
                 NpoiExcelExtensions.RenderCell(
                    ref worksheet,
                    ref row,
@@ -259,7 +261,7 @@
                    ref currentColumn,
                    currentRow,
                    currentColumn,
-                   item.Margin,
+                   margin,
                    percentStyle);
 
                 currentRow++;
@@ -294,7 +296,7 @@
                    ref currentColumn,
                    currentRow,
                    currentColumn,
-                   "Cockfighting Total",
+                   "COCKFIGHTING TOTAL",
                    grandTotalTextStyle);
 
             NpoiExcelExtensions.RenderCell(
@@ -377,6 +379,7 @@
                grandTotal.RealTurnover,
                grandTotalDecimalNumberStyle);
 
+            var margin = grandTotal.RealTurnover == 0 ? grandTotal.Margin_Str : (object)grandTotal.Margin;
             NpoiExcelExtensions.RenderCell(
                ref worksheet,
                ref row,
@@ -384,7 +387,7 @@
                ref currentColumn,
                currentRow,
                currentColumn,
-               grandTotal.Margin,
+               margin,
                grandTotalPercentStyle);
         }
 
@@ -409,9 +412,9 @@
             ICellStyle headerStyle = NpoiExcelExtensions.HeaderStyle(workbook);
             int currentColumn = 0;
             string reportTitle = string.Format(
-                   MainResources.CockFightingMatchByArena_ReportTitle,
+                   MainResources.CockFightingMatchByArena_ReportTitle.ToUpper().ToString(),
                    criteria.ArenaName,
-                   criteria.WinLostDate.ToShortFormatedDate());
+                   criteria.WinLostDate.ToShortFormatedDate().ToUpper().ToString());
             IRow row = worksheet.CreateRow(currentRow);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn + 12, reportTitle, headerStyle);
         }
@@ -576,6 +579,7 @@
                    item.RealTurnover,
                    decimalNumberStyle);
 
+                var margin = item.RealTurnover == 0 ? item.Margin_Str : (object)item.Margin;
                 NpoiExcelExtensions.RenderCell(
                    ref worksheet,
                    ref row,
@@ -583,7 +587,7 @@
                    ref currentColumn,
                    currentRow,
                    currentColumn,
-                   item.Margin,
+                   margin,
                    percentStyle);
 
                 currentRow++;
@@ -619,7 +623,7 @@
                    ref currentColumn,
                    currentRow,
                    currentColumn + 3,
-                   string.Format("{0} Total", criteria.ArenaName),
+                   string.Format("{0} TOTAL", criteria.ArenaName),
                    grandTotalTextStyle);
 
             NpoiExcelExtensions.RenderCell(
@@ -702,6 +706,7 @@
                grandTotal.RealTurnover,
                grandTotalDecimalNumberStyle);
 
+            var margin = grandTotal.RealTurnover == 0 ? grandTotal.Margin_Str : (object)grandTotal.Margin;
             NpoiExcelExtensions.RenderCell(
                ref worksheet,
                ref row,
@@ -709,7 +714,7 @@
                ref currentColumn,
                currentRow,
                currentColumn,
-               grandTotal.Margin,
+               margin,
                grandTotalPercentStyle);
         }
     }

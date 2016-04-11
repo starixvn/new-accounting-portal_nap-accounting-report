@@ -315,7 +315,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         {
             try
             {
-                var rawData = GetReportData<dynamic>(criteria);
+                //var rawData = GetReportData<dynamic>(criteria);
                 var thirdPartyCasinoData = _reportRepository.GetThirdPartyCasinoReport(criteria);
 
                 WinLossInfo report = new WinLossInfo
@@ -347,7 +347,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                         ChildsInfo = new List<WinLossInfo>(),
                         GrandTotal = new WinLossInfo
                         {
-                            Name = criteria.SportName + " " + Labels.Total
+                            Name = /*criteria.SportName + " " + */Labels.Total
                         }
                     };
 
@@ -592,8 +592,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     bool isKenoBetType = this._matchWinLoss2aUtilityService.IsKenoBetType(winLoss.Id);
                     bool isBettradeBettype = _matchWinLoss2aUtilityService.IsBetTrade(betType);
 
-                    if (winLoss.Id == CoreConstants.SportContants.Bingo ||
-                        winLoss.Id == CoreConstants.SportContants.Casino)
+                    if (winLoss.Id == CoreConstants.SportContants.Bingo)
                     {
                         winLoss.Turnover = 0;
                     }
@@ -601,7 +600,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     {
                         winLoss.Turnover = Converter.ToDecimal(info.IBCTurnover);
                     }
-
                     winLoss.Name = isKenoBetType ?
                         Labels.Keno :
                         this._betTypeNameCache[winLoss.Id] +
@@ -609,6 +607,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     winLoss.Name_Suffix = isKenoBetType ?
                         string.Empty :
                         this._matchWinLoss2aUtilityService.BetTypeNameSuffixCache[winLoss.Id];
+
+                    // for AllBet
+                    if ((winLoss.Id >= 2401) && (winLoss.Id <= 2499))
+                    {
+                        winLoss.Name = winLoss.Name +" (Allbet)";
+                    }
 
                     winLoss.LineTotalReal = winLoss.LineTotal_Soccer_Live +
                         winLoss.LineTotal_Soccer_Non_Live +

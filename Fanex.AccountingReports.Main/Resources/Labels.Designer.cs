@@ -356,12 +356,13 @@ namespace Fanex.AccountingReports.Main.Resources {
                 return ResourceManager.GetString("All_Total", resourceCulture);
             }
         }
-
-        public static string TotalNewCricket
-        {
-            get
-            {
-                return ResourceManager.GetString("Total", resourceCulture);
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allbet.
+        /// </summary>
+        public static string Allbet {
+            get {
+                return ResourceManager.GetString("Allbet", resourceCulture);
             }
         }
         
@@ -3072,6 +3073,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         public static string Total_Bookings {
             get {
                 return ResourceManager.GetString("Total_Bookings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        public static string Total_New_Cricket {
+            get {
+                return ResourceManager.GetString("Total_New_Cricket", resourceCulture);
             }
         }
         

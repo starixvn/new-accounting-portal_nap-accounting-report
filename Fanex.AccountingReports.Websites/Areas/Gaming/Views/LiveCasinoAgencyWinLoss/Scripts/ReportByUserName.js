@@ -97,7 +97,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoAgencyWinLoss.ReportByUserName = functi
                     { HeaderText: viewResources.Company, Name: "ColCompanyWinLoss", MergeRowNumber: 2}]
             }],
             columns: [
-                { HeaderText: viewResources.UserName, Width: 100, Name: "ColName", HeaderAlign: "center", CellAlign: "center",
+                { HeaderText: viewResources.UserName, Width: 120, Name: "ColName", HeaderAlign: "center", CellAlign: "center",
                     Sort: true, SortDirection: reportManager.getSortDirection("Name")
                 },
                 { HeaderText: viewResources.Currency, Width: 80, Name: "ColCurrency", HeaderAlign: "center", CellAlign: "center" },
@@ -148,7 +148,7 @@ Fanex.AccountingReports.Gaming.LiveCasinoAgencyWinLoss.ReportByUserName = functi
             bodyRows: bodyData,
             footerRows: footerData,
             numberOfFrozenColumn: 6,
-            gridWidth: 1400,
+            gridWidth: 1420,
             gridExpandHeight: 300,
             fullWidth: true,
             showDistinctRow: false,

@@ -75,6 +75,43 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                             Converter.ToDateTime(criteria.FromDate).ToShortFormatedDate(),
                             Converter.ToDateTime(criteria.ToDate).ToShortFormatedDate());
                     break;
+                case PeriodTypeConstants.CasinoGameStatisticUsername:
+                    title = string.Format(
+                            GamingResources.CasinoGameStatistic_UserName_ReportTitle,
+                            criteria.Product,
+                            Converter.ToDateTime(criteria.FromDate).ToShortFormatedDate(),
+                            Converter.ToDateTime(criteria.ToDate).ToShortFormatedDate());
+                    break;
+                case PeriodTypeConstants.CasinoGameStatisticGameType:
+                    title = string.Format(
+                            GamingResources.CasinoGameStatistic_GameType_ReportTitle,
+                            criteria.Product,
+                            Converter.ToDateTime(criteria.FromDate).ToShortFormatedDate(),
+                            Converter.ToDateTime(criteria.ToDate).ToShortFormatedDate());
+                    break;
+                case PeriodTypeConstants.CasinoGameStatisticGameTable:
+                    title = string.Format(
+                            GamingResources.CasinoGameStatistic_GameTable_ReportTitle,
+                            criteria.Product,
+                            Converter.ToDateTime(criteria.FromDate).ToShortFormatedDate(),
+                            Converter.ToDateTime(criteria.ToDate).ToShortFormatedDate());
+                    break;
+                case PeriodTypeConstants.CasinoGameStatisticCompany:
+                    title = string.Format(
+                            GamingResources.CasinoGameStatistic_Company_ReportTitle,
+                            criteria.Product,
+                            Converter.ToDateTime(criteria.FromDate).ToShortFormatedDate(),
+                            Converter.ToDateTime(criteria.ToDate).ToShortFormatedDate());
+                    break;
+                case PeriodTypeConstants.CasinoGameStatisticCurrency:
+                    title = string.Format(
+                            GamingResources.CasinoGameStatistic_Currency_ReportTitle,
+                            criteria.Product,
+                            Converter.ToDateTime(criteria.FromDate).ToShortFormatedDate(),
+                            Converter.ToDateTime(criteria.ToDate).ToShortFormatedDate());
+                    break;
+
+
             }
 
             return title;

@@ -80,7 +80,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
                                 { Name: "ColVirtualLineTotal", Value: item.VirtualLineTotal },
                                 { Name: "ColVariance", Value: item.Variance },
                                 { Name: "ColTurnover", Value: item.RealTurnover },
-                                { Name: "ColMargin", Value: item.Margin}]
+                                { Name: "ColMargin", Value: item.Margin_Str}]
                 };
 
                 bodyData.push(currentRow);
@@ -89,7 +89,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
             var grandTotal = rs.GrandTotal;
             currentRow =
                 {
-                    Columns: [{ Name: "ColArena", Value: "Cockfighting Total" },
+                    Columns: [{ Name: "ColArena", Value: "COCKFIGHTING TOTAL" },
                                 { Name: "ColWinLoss", Value: grandTotal.WinLoss },
                                 { Name: "ColPosition", Value: grandTotal.Position },
                                 { Name: "ColCommission", Value: grandTotal.Commission },
@@ -98,7 +98,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
                                 { Name: "ColVirtualLineTotal", Value: grandTotal.VirtualLineTotal },
                                 { Name: "ColVariance", Value: grandTotal.Variance },
                                 { Name: "ColTurnover", Value: grandTotal.RealTurnover },
-                                { Name: "ColMargin", Value: grandTotal.Margin}]
+                                { Name: "ColMargin", Value: grandTotal.Margin_Str}]
                 };
 
             footerData.push(currentRow);
@@ -119,7 +119,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
             showFooter: true,
             titleInfo:
             {
-                text: 'Cockfighting Product Win/Loss Report For ' + moment(new Date(_params.getCockFightingParams.WinLostDate)).format(FormatConstant.MMM_DD_YYYY_STRING_MOMENT),
+                text: 'COCKFIGHTING PRODUCT WIN/LOSS REPORT FOR ' + moment(new Date(_params.getCockFightingParams.WinLostDate)).format(FormatConstant.MMM_DD_YYYY_STRING_MOMENT).toUpperCase(),
                 showExcelButton: true,
                 exportExcelFunction: function () {
                     exportCockFightReport();
@@ -205,7 +205,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
                                 { Name: "ColVirtualLineTotal", Value: item.VirtualLineTotal },
                                 { Name: "ColVariance", Value: item.Variance },
                                 { Name: "ColTurnover", Value: item.RealTurnover },
-                                { Name: "ColMargin", Value: item.Margin}]
+                                { Name: "ColMargin", Value: item.Margin_Str}]
                 };
 
                 bodyData.push(currentRow);
@@ -214,7 +214,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
             var grandTotal = rs.GrandTotal;
             currentRow =
                 {
-                    Columns: [{ Name: "ColFightNo", Value: _params.getCockFightingMatchByArenaParams.ArenaName + " Total", MergeColNumber: 4, CellAlign: "right" },
+                    Columns: [{ Name: "ColFightNo", Value: _params.getCockFightingMatchByArenaParams.ArenaName + " TOTAL", MergeColNumber: 4, CellAlign: "right" },
                                 { Name: "ColWinLoss", Value: grandTotal.WinLoss },
                                 { Name: "ColPosition", Value: grandTotal.Position },
                                 { Name: "ColCommission", Value: grandTotal.Commission },
@@ -223,7 +223,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
                                 { Name: "ColVirtualLineTotal", Value: grandTotal.VirtualLineTotal },
                                 { Name: "ColVariance", Value: grandTotal.Variance },
                                 { Name: "ColTurnover", Value: grandTotal.RealTurnover },
-                                { Name: "ColMargin", Value: grandTotal.Margin}]
+                                { Name: "ColMargin", Value: grandTotal.Margin_Str}]
                 };
 
             footerData.push(currentRow);
@@ -265,7 +265,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
             showFooter: true,
             titleInfo:
             {
-                text: 'Cockfighting Product Arena ' + _params.getCockFightingMatchByArenaParams.ArenaName + ' Win/Loss Report For ' + moment(new Date(_params.getCockFightingMatchByArenaParams.WinLostDate)).format(FormatConstant.MMM_DD_YYYY_STRING_MOMENT),
+                text: 'COCKFIGHTING PRODUCT ARENA ' + " " + _params.getCockFightingMatchByArenaParams.ArenaName + ' WIN/LOSS REPORT FOR' + " " + moment(new Date(_params.getCockFightingMatchByArenaParams.WinLostDate)).format(FormatConstant.MMM_DD_YYYY_STRING_MOMENT).toUpperCase(),
                 showExcelButton: true,
                 exportExcelFunction: function () {
                     exportCockFightMatchByArenaReport();
@@ -289,7 +289,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
         _tables.reportByArenaContainer.dialog({
             title: "",
             autoOpen: false,
-            width: "auto",
+            width: 1120,
             modal: false,
             resizable: false,
             close: function (event, ui) {
@@ -325,7 +325,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.CockFightingReport = function () {
         _tables.reportContainer.dialog({
             title: "",
             autoOpen: false,
-            width: 920,
+            width: 935,
             modal: false,
             resizable: false,
             close: function (event, ui) {

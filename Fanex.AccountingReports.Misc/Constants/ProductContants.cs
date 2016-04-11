@@ -34,5 +34,11 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int Keno = 202;
 
         public const int ColossusBets = 204;
+
+        public const int Allbet = 211;
+
+        public const int Cockfighting = 206;
+
+        public const int MetricGamingSuperlive = -1;
     }
 }
