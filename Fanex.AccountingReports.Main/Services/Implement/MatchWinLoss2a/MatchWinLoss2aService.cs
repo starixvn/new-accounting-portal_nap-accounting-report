@@ -71,6 +71,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         private string _matchWinLoss2aCacheDataSetResultSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.CacheDataSetReult" +
             (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
 
+        private string _matchWinLoss2aMetricGamingDetailReportByBetTypeSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.MetricGamingDetailReportByBetType" +
+            (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
+
         private MatchWinLoss2aUtilityService _matchWinLoss2aUtilityService;
 
         public MatchWinLoss2aService()
@@ -455,6 +458,23 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             }
         }
 
+        public WinLossInfo GetMetricGamingDetailByBetType(GetMetricGamingDetailByBetTypeCriteria criteria)
+        {
+            try
+            {
+                var rawData = this._reportRepository.GetMetricGamingDetailByBetType(criteria);
+                WinLossInfo report = this.GetMetricGamingDetailReportInfoByBetType(rawData.ChildsInfo, criteria);
+                SessionManager.Set<WinLossInfo>(_matchWinLoss2aMetricGamingDetailReportByBetTypeSessionKey, report);
+                return report;
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+                throw;
+            }
+
+        }
+
         /// <summary>
         /// Formats the summary report by bet type.
         /// </summary>
@@ -611,7 +631,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     // for AllBet
                     if ((winLoss.Id >= 2401) && (winLoss.Id <= 2499))
                     {
-                        winLoss.Name = winLoss.Name +" (Allbet)";
+                        winLoss.Name = winLoss.Name + " (Allbet)";
                     }
 
                     winLoss.LineTotalReal = winLoss.LineTotal_Soccer_Live +
@@ -1360,6 +1380,71 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     }
                 }
 
+                var info = new WinLossInfo
+                {
+                    Commission = Converter.ToDecimal(rawInfo.Commission),
+                    VirtualComm = Converter.ToDecimal(rawInfo.VirtualComm),
+                    LineTotal = Converter.ToDecimal(rawInfo.LineTotal),
+                    VirtualLineTotal = Converter.ToDecimal(rawInfo.VirtualLineTotal),
+                    HomeTeamId = Converter.ToInt(rawInfo.HomeTeamId),
+                    AwayTeamId = Converter.ToInt(rawInfo.AwayTeamId),
+                    Position = Converter.ToDecimal(rawInfo.Position),
+                    WinLoss = Converter.ToDecimal(rawInfo.WinLoss),
+                    Turnover = Converter.ToDecimal(rawInfo.Turnover),
+                    Margin = this._matchWinLoss2aUtilityService.CalculateMargin(rawInfo.LineTotal, rawInfo.Turnover),
+
+                    Id = Converter.ToInt(rawInfo.Id),
+                    LiveIndicatorId = Converter.ToBool(rawInfo.LiveIndicatorId),
+                    MatchCode = Converter.ToString2(rawInfo.MatchCode),
+                    KickOffTime = Converter.ToDateTime(rawInfo.KickOffTime).ToShortTimeString(),
+                    IsNeutral = Converter.ToBool(rawInfo.IsNeutral)
+                };
+
+                info.Variance = info.LineTotal - info.VirtualLineTotal;
+                info.HomeTeamName = this._teamNameCache[info.HomeTeamId];
+                info.AwayTeamName = this._teamNameCache[info.AwayTeamId];
+                info.Name = this._betTypeNameCache[info.Id];
+
+                report.AddToGrandTotal(info);
+                info = this.FormatWinLossInfo(info);
+                report.ChildsInfo.Add(info);
+            }
+
+            report.GrandTotal.Margin = this._matchWinLoss2aUtilityService.CalculateMargin(
+                report.GrandTotal.LineTotal,
+                report.GrandTotal.Turnover);
+            report.GrandTotal = this.FormatWinLossInfo(report.GrandTotal);
+
+            return report;
+        }
+
+        private WinLossInfo GetMetricGamingDetailReportInfoByBetType(List<WinLossInfo> rawData, GetMetricGamingDetailByBetTypeCriteria criteria)
+        {
+            WinLossInfo report = new WinLossInfo
+            {
+                ChildsInfo = new List<WinLossInfo>(),
+                Name = criteria.Sporttype,
+                GrandTotal = new WinLossInfo()
+            };
+
+            if (criteria.Bettype == 0)
+            {
+                report.GrandTotal.Name = (criteria.Sporttype + " " + Labels.Total).ToUpper();
+            }
+            else
+            {
+                report.GrandTotal.Name = (criteria.BetTypeName + " " + Labels.Total).ToUpper();
+            }
+
+            var homeTeamIdList = rawData.Select(info => info.HomeTeamId as dynamic).Distinct().ToList();
+            var awayTeamIdList = rawData.Select(info => info.AwayTeamId as dynamic).Distinct().ToList();
+            var betTypeIdList = rawData.Select(info => info.Id as dynamic).Distinct().ToList();
+            CacheRef.SaveCacheRefResponse(homeTeamIdList, CacheRef.GetTeamName, ref this._teamNameCache);
+            CacheRef.SaveCacheRefResponse(awayTeamIdList, CacheRef.GetTeamName, ref this._teamNameCache);
+            this._matchWinLoss2aUtilityService.SaveBetTypeCacheRef(betTypeIdList, ref this._betTypeNameCache);
+
+            foreach (var rawInfo in rawData)
+            {
                 var info = new WinLossInfo
                 {
                     Commission = Converter.ToDecimal(rawInfo.Commission),

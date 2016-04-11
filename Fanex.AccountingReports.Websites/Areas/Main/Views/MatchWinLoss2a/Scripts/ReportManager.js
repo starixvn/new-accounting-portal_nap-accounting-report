@@ -296,7 +296,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.ReportManager = function () {
         sportTypeId,
         sportTypeName,
         liveIndicatorId) {
-       // _thirdPartyDetailReport.closeDialog();
+       _thirdPartyDetailReport.closeDialog();
         _detailReportBySportsType.closeDialog();
         if (new Date(reportDate) >= new Date(balanceUpDay)) {
             _detailReportByBetType.getReport({
@@ -391,6 +391,23 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.ReportManager = function () {
             Winlostdate: reportDate,
             ArenaId: arenaId,
             ArenaName: arenaName
+        });
+    };
+
+    ViewMetricGamingDetailByBetType = function (reportDate,
+        betTypeId,
+        betTypeName,
+        sportTypeId,
+        sportTypeName,
+        liveIndicatorId) {
+        // _thirdPartyDetailReport.closeDialog();
+        _detailReportBySportsType.closeDialog();
+        _detailReportByBetType.getMetricGamingDetailByBetType({
+            Winlostdate: reportDate,
+            Sporttype: sportTypeName,
+            Bettype: betTypeId,
+            BetTypeName: betTypeName,
+            LiveIndicator: liveIndicatorId
         });
     };
 }

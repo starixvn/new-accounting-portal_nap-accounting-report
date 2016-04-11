@@ -166,6 +166,17 @@ namespace Fanex.AccountingReports.Main.Controllers
             return Json(result);
         }
 
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetMetricGamingDetailByBetType(GetMetricGamingDetailByBetTypeCriteria criteria)
+        {
+            var result = this._reportService.GetMetricGamingDetailByBetType(criteria);
+            var jsonResult = Json(result);
+            jsonResult.MaxJsonLength = int.MaxValue;
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return jsonResult;
+        }
+
         public ActionResult ExportSummaryReportByBetType(GetMainReportCriteria criteria)
         {
             this._reportService.ExportSummaryReportByBetType(criteria);
@@ -213,6 +224,12 @@ namespace Fanex.AccountingReports.Main.Controllers
         public ActionResult ExportCockFightingMatchByArenaReport(GetCockFightingMatchByArena criteria)
         {
             this._exportCockFightingService.ExportCockFightingMatchByArenaReport(criteria);
+            return new EmptyResult();
+        }
+
+        public ActionResult ExportMetricGamingDetailByBetTypeReport(GetMetricGamingDetailByBetTypeCriteria criteria)
+        {
+            this._reportService.ExportMetricGamingDetailReportByBetType(criteria);
             return new EmptyResult();
         }
     }

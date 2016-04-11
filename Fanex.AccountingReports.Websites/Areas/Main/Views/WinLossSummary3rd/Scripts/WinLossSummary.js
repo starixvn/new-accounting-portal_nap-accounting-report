@@ -184,7 +184,21 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
     var renderSportTypeWinLoss = function (sportWinloss) {
         var id = sportWinloss.Id;
         var sportName = sportWinloss.Name;
+        var sportDrillDown = false;
+        var subProduct = '';
+
+        if (id == AccReportData.Constants.SportType.MetricGamingSuperLive)
+        {
+            id = AccReportData.Constants.SportType.Soccer;
+            subProduct = 'MG-SuperLive';
+        }
+        else
+        {
+            subProduct = '';
+        }
+       
         var sportDrillDown = _tables.isShowDetail && sportWinloss.CanShowDetailLink && id > 0;
+
         // SportType (header)
         var sportType = {
             Columns: [{
@@ -201,7 +215,8 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                                                     id + ',0,0' +
                                                     ',\'' +
                                                     sportName + '\',' +
-                                                    drillDownByType.bySport + ')">&nbsp;</div>';
+                                                    drillDownByType.bySport + '\,\'' +
+                                                    subProduct +'\')">&nbsp;</div>';
                         }
                     }
                     else {
@@ -378,6 +393,11 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
         var cssClass = bettypeIndex % 2 == 0 ? 'evenRow' : 'oddRow';
         var betType = ibc ? ((winloss.LiveIndicator == 1 ? '<span class="live">Live!</span> ' : '') + winloss.Name) : winloss.Name;
         var groupdId = '';
+        if (sportId == AccReportData.Constants.SportType.MetricGamingSuperLive)
+        {
+            sportId = AccReportData.Constants.SportType.Soccer;
+        }
+
         return {
             Columns: [{
                 Name: 'ColView',

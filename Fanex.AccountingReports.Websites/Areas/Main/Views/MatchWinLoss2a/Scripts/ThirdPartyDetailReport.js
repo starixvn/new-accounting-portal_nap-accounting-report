@@ -273,7 +273,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.ThirdPartyDetailReport = function ()
             var betTypeName = gridOptions.bodyRows[i].Columns[0].Value;
             var metricGamingSportType = 1;
 
-            var clickEvent = ' onclick = "ViewDetailReportByBetType(\'' + _params.metricGamingParams.Winlostdate
+            var clickEvent = ' onclick = "ViewMetricGamingDetailByBetType(\'' + _params.metricGamingParams.Winlostdate
                                                                         + '\',' + betType
                                                                         + ',\'' + betTypeName
                                                                         + '\',' + metricGamingSportType

@@ -302,6 +302,44 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             return result;
         }
 
+        public WinLossInfo GetMetricGamingDetailByBetType(GetMetricGamingDetailByBetTypeCriteria criteria)
+        {
+            var result = new WinLossInfo
+            {
+                ChildsInfo = new List<WinLossInfo>()
+            };
+
+            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            {
+                var reader = objectDb.ExecuteReader(criteria.GetSpParams());
+
+                while (reader.Read())
+                {
+                    var winLossInfo = new WinLossInfo
+                    {
+                        MatchCode = Converter.ToString2(reader["matchcode"]),
+                        KickOffTime = Converter.ToString2(reader["kickofftime"]),
+                        LiveIndicatorId = Converter.ToBool(reader["liveindicator"]),
+                        HomeTeamId = Converter.ToInt(reader["homeid"]),
+                        AwayTeamId = Converter.ToInt(reader["awayid"]),
+                        IsNeutral = Converter.ToBool(reader["isneutral"]),
+                        WinLoss = Converter.ToDecimal(reader["winlost"]),
+                        Position = Converter.ToDecimal(reader["pos"]),
+                        Commission = Converter.ToDecimal(reader["comm"]),
+                        VirtualComm = Converter.ToDecimal(reader["virtualcomm"]),
+                        LineTotal = Converter.ToDecimal(reader["linetotal"]),
+                        VirtualLineTotal = Converter.ToDecimal(reader["virtuallinetotal"]),
+                        Turnover = Converter.ToDecimal(reader["IBCTurnOver"]),
+                        Id = Converter.ToInt(reader["bettype"])
+                    };
+
+                    result.ChildsInfo.Add(winLossInfo);
+                }
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Assigns the data non3rd party win loss report.
         /// </summary>

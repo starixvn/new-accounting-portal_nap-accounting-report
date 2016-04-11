@@ -213,11 +213,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                 result = true;
             }
 
-            if (this.IsMetricGamingSuperLiveBetType(betType))
-            {
-                result = true;
-            }
-            
             if (this.IsMicroGamingLiveCasinoBetType(betType))
             {
                 result = true;
@@ -280,7 +275,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                    string.Equals(betTypeName, Labels.Bingo, StringComparison.OrdinalIgnoreCase) ||
                    string.Equals(betTypeName, Labels.P2P, StringComparison.OrdinalIgnoreCase) ||
                    string.Equals(betTypeName, Labels.Keno, StringComparison.OrdinalIgnoreCase) ||
-                   string.Equals(betTypeName, Labels.Metric_Gaming_Super_Live, StringComparison.OrdinalIgnoreCase) ||
                    string.Equals(betTypeName, Labels.Gold_Deluxe, StringComparison.OrdinalIgnoreCase) ||
                    string.Equals(betTypeName, Labels.MicroGaming_LiveCasino, StringComparison.OrdinalIgnoreCase) ||
                    string.Equals(betTypeName, Labels.Microgaming_RNGCasino, StringComparison.OrdinalIgnoreCase) ||

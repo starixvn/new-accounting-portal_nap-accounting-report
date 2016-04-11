@@ -64,7 +64,8 @@ var AccReportData = {
             SoccerMinorBetType: 2,
             Bettrade: -2,
             ColossusBet: 204,
-            CockFighting: 206
+            CockFighting: 206,
+            MetricGamingSuperLive: -1
         },
 
         BetType: {

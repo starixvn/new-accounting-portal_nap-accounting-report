@@ -18,6 +18,8 @@
         [SpParam(SqlParamName = "drilldownbytype")]
         public int DrillDownByType { get; set; }
 
+        public string SubProduct { get; set; }
+
         public override string GetSettingKey()
         {
             return "Main_WinLossSummary3rd_Get_Sporttype_SB";
