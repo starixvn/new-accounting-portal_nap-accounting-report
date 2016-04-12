@@ -633,6 +633,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     {
                         winLoss.Name = winLoss.Name + " (Allbet)";
                     }
+                    else if ((winLoss.Id >= 4001) && (winLoss.Id <= 7999))
+                    {
+                        winLoss.Name = winLoss.Name + " (Voidbridge)";
+                    }
 
                     winLoss.LineTotalReal = winLoss.LineTotal_Soccer_Live +
                         winLoss.LineTotal_Soccer_Non_Live +
