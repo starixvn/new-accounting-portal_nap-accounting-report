@@ -129,6 +129,7 @@ MetricGamingReport.prototype.ShowSummaryReport = function () {
     this.Tables.metricGamingLiveContainer.removeClass("display-none");
     this.Tables.metricGamingNonLiveContainer.removeClass("display-none");
     this.SetActiveReportManager();
+    this.ShowHideSiteTypeInfo();
 };
 
 MetricGamingReport.prototype.HideSummaryReport = function () {

@@ -151,8 +151,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     false,
                     report.NoneLiveReport,
                     MainResources.DailyWinLoss2h_MetricGamingNonLiveReportBySport_Title,
-                    true,
-                    1);
+                    false,
+                    Constants.SportContants._2hSoccer);
 
                 workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
 
@@ -164,8 +164,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     false,
                     report.LiveReport,
                     MainResources.DailyWinLoss2h_MetricGamingLiveReportBySport_Title,
-                    true,
-                    1);
+                    false,
+                    Constants.SportContants._2hSoccer);
 
                 //// MakeExcelFile
 

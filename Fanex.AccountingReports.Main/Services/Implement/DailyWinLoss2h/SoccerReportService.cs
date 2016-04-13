@@ -408,7 +408,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     false,
                     report.NoneLiveReport,
                     MainResources.DailyWinLoss2h_SoccerNonLiveReportBySport_Title,
-                    true,
+                    false,
                     criteria.SoccerType);
 
                 workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
@@ -421,7 +421,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     false,
                     report.LiveReport,
                     MainResources.DailyWinLoss2h_SoccerLiveReportBySport_Title,
-                    true,
+                    false,
                     criteria.SoccerType);
 
                 var reportName = string.Format(
@@ -458,9 +458,19 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 int startColumn = 0;
                 var currentRow = startRow;
 
+                string sportName = string.Empty;
+                if(criteria.Bettype >= MainConstants.MinMetricGamingSuperLiveBetType && criteria.Bettype <= MainConstants.MaxMetricGamingSuperLiveBetType)
+                {
+                    sportName = Labels.MetricGaming_Superlive;
+                }
+                else
+                {
+                    sportName = Labels.Soccer;
+                }
+
                 var title = string.Format(
                     MainResources.DailyWinLoss2h_ReportByBetType_Title,
-                    Labels.Soccer,
+                    sportName,
                     criteria.BetTypeName,
                     criteria.Liveindicator ? " \"" + Labels.Live + "\"" : " \"" + Labels.Symbol_Sparse_Non_Live + "\"");
                 this.ExportReportByBetType(

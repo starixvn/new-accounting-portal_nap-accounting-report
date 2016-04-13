@@ -64,7 +64,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                    sportId == SoccerBetTypeConstants.SoccerMinorBetType ||
                    sportId == SportContants._2hReportMixParlay ||
                    sportId == CoreConstants.SportContants.CombinationMixParlay ||
-                   sportId == CoreConstants.SportContants.NumberGame;
+                   sportId == CoreConstants.SportContants.NumberGame ||
+                   sportId == CoreConstants.SportContants.MetricGamingSuperLive;
         }
 
         public Dictionary<object, string> SaveBetTypeCacheRef(
@@ -116,7 +117,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 case CoreConstants.SportContants.VirtualSoccer:
                     return Labels.VirtualSports;
                 case CoreConstants.SportContants.MetricGamingSuperLive:
-                    return Labels.Metric_Gaming_Super_Live;
+                    return Labels.MetricGaming_Superlive;
                 case SportContants._2hLiveCasinoSport:
                     return Labels.SLI;
                 case SportContants._2hCasinoSport:
