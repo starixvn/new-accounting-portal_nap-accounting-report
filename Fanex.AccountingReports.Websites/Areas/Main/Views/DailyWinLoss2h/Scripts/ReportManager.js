@@ -173,11 +173,20 @@ ReportManager.prototype.GetIBCTotalLabel = function () {
 };
 
 ReportManager.prototype.GetWinlossBySiteLink = function (selectParams) {
+    var betTypeName = '';
+    if (selectParams.betTypeName != null) {
+        betTypeName = selectParams.BetTypeName.replace("'", "\\'")
+    }
+    else
+    {
+        betTypeName = '';
+    }
+
     var evt = "showHideReportManager.ShowWinlossBySite('" + selectParams.WinLossDate + "','" +
         selectParams.SportType + "','" +
         selectParams.SportGroupId + "','" +
         selectParams.BetType + "','" +
-        selectParams.BetTypeName.replace("'", "\\'") + "'," +
+        betTypeName + "'," +
         selectParams.IsLive + "," +
         selectParams.IsHedge + "," +
         selectParams.SiteType + ",'" +

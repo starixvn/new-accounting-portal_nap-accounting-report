@@ -256,7 +256,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 currentRow++;
             }
 
-            this.ExportHeaderColumns_SportReport(
+            _dailyWinLoss2hUtilityService.ExportHeaderColumns_SportReport(
                 ref workSheet,
                 ref currentRow,
                 startRow,
@@ -283,135 +283,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     report,
                     sportId);
             }
-        }
-
-        /// <summary>
-        /// Exports the header columns sport report.
-        /// </summary>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="isSportSummary">If set to <c>true</c> [is sport summary].</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
-        private void ExportHeaderColumns_SportReport(
-            ref ExcelWorksheet workSheet,
-            ref int currentRow,
-            int startRow,
-            int startColumn,
-            bool isSportSummary)
-        {
-            //// ExcelTypes
-
-            var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
-            int maxColumnIndex = 10;
-            var currentColumn = startColumn;
-            CellRange currentCellRange;
-            ExcelCell currentCell;
-
-            //// ExcelTypes
-
-            workSheet.Columns[startColumn].Width = 190 * ExcelExtensions.FontWidth;
-            for (int colIndex = 1; colIndex <= maxColumnIndex; colIndex++)
-            {
-                workSheet.Columns[startColumn + colIndex].Width = 130 * ExcelExtensions.FontWidth;
-            }
-
-            // FirstRow
-            currentColumn = startColumn;
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-            currentCellRange.Merged = true;
-            if (isSportSummary)
-            {
-                currentCellRange.Value = Labels.Sport_Type;
-            }
-            else
-            {
-                currentCellRange.Value = Labels.Bet_Type;
-            }
-
-            currentCellRange.Style = headerTextStyle;
-            currentColumn++;
-
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-            currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Member_Win_Loss;
-            currentCellRange.Style = headerTextStyle;
-            currentColumn++;
-
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-            currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.SMA_Win_Loss;
-            currentCellRange.Style = headerTextStyle;
-            currentColumn++;
-
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-            currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Commission;
-            currentCellRange.Style = headerTextStyle;
-            currentColumn++;
-
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
-            currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Company_Income;
-            currentCellRange.Style = headerTextStyle;
-            currentColumn += 2;
-
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-            currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Variance;
-            currentCellRange.Style = headerTextStyle;
-            currentColumn++;
-
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
-            currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Company_Turnover;
-            currentCellRange.Style = headerTextStyle;
-            currentColumn += 2;
-
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
-            currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Margin;
-            currentCellRange.Style = headerTextStyle;
-            currentColumn += 2;
-            currentRow++;
-
-            // SecondRow
-            currentColumn = startColumn + 4;
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Style = headerTextStyle;
-            currentCell.Value = Labels.Real;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Style = headerTextStyle;
-            currentCell.Value = Labels.Virtual;
-            currentColumn++;
-
-            currentColumn++; // VarianceColumn
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Style = headerTextStyle;
-            currentCell.Value = Labels.Real;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Style = headerTextStyle;
-            currentCell.Value = Labels.Virtual;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Style = headerTextStyle;
-            currentCell.Value = Labels.Real;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Style = headerTextStyle;
-            currentCell.Value = Labels.Virtual;
-            currentColumn++;
-            currentRow++;
         }
 
         /// <summary>

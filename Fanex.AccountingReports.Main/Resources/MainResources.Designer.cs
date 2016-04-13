@@ -278,6 +278,24 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to METRIC GAMING - SUPERLIVE &quot;LIVE&quot; PRODUCT WIN/LOSS REPORT.
+        /// </summary>
+        public static string DailyWinLoss2h_MetricGamingLiveReportBySport_Title {
+            get {
+                return ResourceManager.GetString("DailyWinLoss2h_MetricGamingLiveReportBySport_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to METRIC GAMING - SUPERLIVE  &quot;NONE - LIVE&quot; PRODUCT WIN/LOSS REPORT.
+        /// </summary>
+        public static string DailyWinLoss2h_MetricGamingNonLiveReportBySport_Title {
+            get {
+                return ResourceManager.GetString("DailyWinLoss2h_MetricGamingNonLiveReportBySport_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Metric Gaming - Super Live Win/Loss report.
         /// </summary>
         public static string DailyWinLoss2h_MetricGamingReport_ReportTitle {
