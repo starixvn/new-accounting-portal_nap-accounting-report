@@ -359,7 +359,9 @@
     <Compile Include="Services\Implement\TraderPerformanceSoccer\ExportDetailReportService.cs" />
     <Compile Include="Services\Implement\TraderPerformanceSoccer\ExportReportService.cs" />
     <Compile Include="Services\Implement\TraderPerformanceSoccer\TraderPerformanceSoccerService.cs" />
-    <Compile Include="Services\Implement\WinLoss3rdSummary\ExportWinLossSummary3rdService.cs" />
+    <Compile Include="Services\Implement\WinLoss3rdSummary\ExportWinLossSummary3rdService.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Services\Implement\WinLoss3rdSummary\WinLossSummary3rdService.cs" />
     <Compile Include="Services\Implement\WinLossSummary\WinLossSummaryService.cs" />
     <Compile Include="Services\Interface\DailyWinLoss2hSoccerMinorBettype\IBettypeReportService.cs" />

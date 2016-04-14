@@ -11,6 +11,7 @@ namespace Fanex.AccountingReports.Special.Controllers
 {
     using System;
     using System.IO;
+    using System.Net;
     using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Exceptions;
@@ -30,6 +31,10 @@ namespace Fanex.AccountingReports.Special.Controllers
     public class SaveBetReportController : BaseController
     {
         private readonly ISaveBetReportService _saveBetReportService;
+        private NetworkCredential _networkCredential;
+        private string ip = AppSettings.IP;
+        private string username = AppSettings.UserName;
+        private string password = AppSettings.Password;
 
         public SaveBetReportController()
             : this(null)
@@ -38,16 +43,17 @@ namespace Fanex.AccountingReports.Special.Controllers
 
         public SaveBetReportController(ISaveBetReportService saveBetReportService)
         {
-            string ip = AppSettings.IP;
-            string username = AppSettings.UserName;
-            string password = AppSettings.Password;
-
-            if (AppSettings.IsEncryptPassword)
+            if (AppSettings.IsAuthenticate)
             {
-                password = Cryptography.CfsDeCrypt(password);
+                if (AppSettings.IsEncryptPassword)
+                {
+                    password = Cryptography.CfsDeCrypt(password);
+                }
+
+                _networkCredential = new NetworkCredential(username, password);
             }
 
-            this._saveBetReportService = saveBetReportService ?? new SaveBetReportService(ip, username, password);
+            this._saveBetReportService = saveBetReportService ?? new SaveBetReportService();
         }
 
         [HttpGet]
@@ -102,7 +108,14 @@ namespace Fanex.AccountingReports.Special.Controllers
             string filePath = _saveBetReportService.GetFilePath(criteria);
             bool exists = false;
 
-            using (new NetworkConnection(@"\\" + this._saveBetReportService.IP, this._saveBetReportService.NetworkCredential))
+            if (AppSettings.IsAuthenticate)
+            {
+                using (new NetworkConnection(@"\\" + ip, _networkCredential))
+                {
+                    exists = System.IO.File.Exists(filePath);
+                }
+            }
+            else
             {
                 exists = System.IO.File.Exists(filePath);
             }
@@ -130,15 +143,16 @@ namespace Fanex.AccountingReports.Special.Controllers
         {
             try
             {
-                using (new NetworkConnection(@"\\" + this._saveBetReportService.IP, this._saveBetReportService.NetworkCredential))
+                if (AppSettings.IsAuthenticate)
                 {
-                    string filePath = _saveBetReportService.GetFilePath(criteria);
-                    byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
-                    string fileExtension = Path.GetExtension(filePath);
-                    var mimeType = this._saveBetReportService.GetMimeType(fileExtension);
-                    string fileName = _saveBetReportService.GetFileName(criteria);
-                    var contentResult = File(fileBytes, mimeType, fileName);
-                    return contentResult;
+                    using (new NetworkConnection(@"\\" + ip, _networkCredential))
+                    {
+                        return DownloadExcelFiles(criteria);
+                    }
+                }
+                else
+                {
+                    return DownloadExcelFiles(criteria);
                 }
             }
             catch (Exception ex)
@@ -148,6 +162,17 @@ namespace Fanex.AccountingReports.Special.Controllers
             }
 
             return new EmptyResult();
+        }
+
+        private ActionResult DownloadExcelFiles(DownloadReportCriteria criteria)
+        {
+            string filePath = _saveBetReportService.GetFilePath(criteria);
+            byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+            string fileExtension = Path.GetExtension(filePath);
+            var mimeType = this._saveBetReportService.GetMimeType(fileExtension);
+            string fileName = _saveBetReportService.GetFileName(criteria);
+            var contentResult = File(fileBytes, mimeType, fileName);
+            return contentResult;
         }
     }
 }
