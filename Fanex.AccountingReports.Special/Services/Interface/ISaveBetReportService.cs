@@ -15,10 +15,6 @@ namespace Fanex.AccountingReports.Special.Services.Interface
 
     public interface ISaveBetReportService
     {
-        NetworkCredential NetworkCredential { get; }
-
-        string IP { get; }
-
         Sport GetSports(GetSportsCriteria criteria);
 
         League GetLeagues(GetLeaguesCriteria criteria);

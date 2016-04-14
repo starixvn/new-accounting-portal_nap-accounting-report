@@ -9,10 +9,10 @@
 
 namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 {
+    using ONEbook.UM.Services;
+    using ONEbook.UM.Services.Impl;
     using System.Web.Mvc;
     using System.Web.Security;
-    using Fanex.NAP.Core.Service.Impl;
-    using Fanex.NAP.Core.Service.Interface;
 
     /// <summary>
     /// TODO: Update summary.
@@ -37,9 +37,9 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         /// <returns>Goes offline result.</returns>
         public ActionResult Offline()
         {
-            var downTime = _maintenanceService.GetDowntimeInfo();
+            var downTime = _maintenanceService.GetUnderMaintenanceTime();
 
-            if (!downTime.IsDowntime)
+            if (!downTime.IsUnderMaintenanceTime)
             {
                 FormsAuthentication.RedirectToLoginPage();
             }

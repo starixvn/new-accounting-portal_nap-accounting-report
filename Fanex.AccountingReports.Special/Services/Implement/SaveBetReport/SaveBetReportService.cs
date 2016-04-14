@@ -24,35 +24,8 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
     /// </summary>
     public class SaveBetReportService : ServiceBase, ISaveBetReportService
     {
-        private Impersonate _impersonate;
-        private NetworkCredential _networkCredential;
-        private string _ip;
-        private string _userName;
-        private string _password;
-
-        public SaveBetReportService(string ip, string username, string password)
+        public SaveBetReportService()
         {
-            this._ip = ip;
-            this._userName = username;
-            this._password = password;
-            this._networkCredential = new NetworkCredential(username, password);
-            this._impersonate = new Impersonate(string.Empty, this._userName, this._password);
-        }
-
-        public NetworkCredential NetworkCredential
-        {
-            get
-            {
-                return _networkCredential;
-            }
-        }
-
-        public string IP
-        {
-            get
-            {
-                return _ip;
-            }
         }
 
         /// <summary>
