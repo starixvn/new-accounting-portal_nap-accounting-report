@@ -235,13 +235,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 bettypeWinLoss.GrandTotal.Add(bettypeWinLoss.DepositTotal);
                 report.CreditTotal.Add(bettypeWinLoss.CreditTotal);
                 report.DepositTotal.Add(bettypeWinLoss.DepositTotal);
+                report.GrandTotal.Add(bettypeWinLoss.CreditTotal);
+                report.GrandTotal.Add(bettypeWinLoss.DepositTotal);
                 bettypeWinLoss = WinLossInfo.Format_Total(bettypeWinLoss);
                 report.ChildsInfo.Add(bettypeWinLoss);
             }
 
             report.ChildsInfo = report.ChildsInfo.OrderBy(sportGroup => sportGroup.Id).ToList();
-            report.GrandTotal.Add(report.CreditTotal);
-            report.GrandTotal.Add(report.DepositTotal);
             report = WinLossInfo.Format_Total(report);
             return report;
         }

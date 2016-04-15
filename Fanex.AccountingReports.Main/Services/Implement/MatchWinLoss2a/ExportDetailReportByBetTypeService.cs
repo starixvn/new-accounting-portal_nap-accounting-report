@@ -133,6 +133,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     report = this.GetMetricGamingDetailByBetType(criteria);
                 }
 
+                getDetailReportByBetTypeCriteria.Sporttype = Labels.MetricGaming_Superlive.ToUpper();
                 HSSFWorkbook excelFile = new HSSFWorkbook();
                 string sheetName = MainResources.MatchWinLoss2a_SheetName;
                 ISheet worksheet = excelFile.CreateSheet(sheetName);
