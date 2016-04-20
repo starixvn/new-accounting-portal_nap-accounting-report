@@ -2257,6 +2257,7 @@
     <Content Include="Content\Fanex.Result\fanex.result.less" />
     <Content Include="Web.Configuration\Web.MNL.AppSettings.config" />
     <Content Include="Web.Configuration\Web.MNL.ConnectionString.config">
+    </Content>
       <SubType>Designer</SubType>
     </Content>
     <None Include="scripts\_lib\Fanex.Grid\images\Thumbs.db" />
@@ -2324,7 +2325,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>63738</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63739/NAP-Reports</IISUrl>
+          <IISUrl>http://localhost:63740/NAP-Reports</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
