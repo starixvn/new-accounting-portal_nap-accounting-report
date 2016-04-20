@@ -195,6 +195,16 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     var rejectTicketList = new List<RejectTicketDetail>();
                     foreach (var row in rawData)
                     {
+                        int oddStyle = 0;
+                        if(row.oddstype == null)
+                        {
+                            oddStyle = 0;
+                        }
+                        else
+                        {
+                            oddStyle = (int)row.oddstype;
+                        }
+
                         var transid = (long)row.transid;
                         var transdate = (DateTime)row.transdate;
                         var currency = (string)row.CurrencyName;
@@ -205,7 +215,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                         var odds = (decimal)row.odds;
                         var betteam = BetTeam.GetBetTeam((string)row.betteam, bettype, "e");
                         var totalPT = (decimal)row.tpositiontaking;
-                        var oddstype = CalcOdds.GetOddsType(bettype, (int)row.oddstype);
+                        var oddstype = CalcOdds.GetOddsType(bettype, oddStyle);
                         var newStatus = (string)row.NewStatus;
                         var oldStatus = (string)row.OldStatus;
                         var home = CacheRef.GetTeamName(row.homeid);

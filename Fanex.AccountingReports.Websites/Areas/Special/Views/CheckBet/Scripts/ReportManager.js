@@ -41,7 +41,7 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
     getBetList = function (refno) {
 
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: window.rootUrl + "BetList/BetList/GetBetListReportByRefNo",
             data: 'refno=' + refno,
             success: function (result) {

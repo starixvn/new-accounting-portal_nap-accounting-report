@@ -24,7 +24,7 @@
                 windOdds = "-";
                 break;
             case 2:
-                windOdds = IBCUtils.FormatHandler.FormatNumber20(betdetail.Ticket.Handicap1).TrimEnd('0', '.');
+                windOdds = Math.Round(betdetail.Ticket.Handicap1, 2).TrimEnd('0', '.');
                 break;
             case 4:
                 windOdds = "0";
@@ -33,7 +33,7 @@
         switch (_liveAwayScore)
         {
             case 2:
-                placeOdds = IBCUtils.FormatHandler.FormatNumber20(betdetail.Ticket.Handicap2).TrimEnd('0', '.');
+                placeOdds = Math.Round(betdetail.Ticket.Handicap2, 2).TrimEnd('0', '.');
                 break;
             case 0:
                 placeOdds = "-";
@@ -42,7 +42,7 @@
                 placeOdds = "0";
                 break;
         }
-                                            
+
     <div>
         <div class="blue ">
             <span>Win: </span><span class="b">@windOdds</span>
@@ -59,7 +59,7 @@ else if (betdetail.Ticket.BetTypeId == 1233)
     string placeOdds = string.Empty;
     if (betdetail.Ticket.Handicap1 != 0)
     {
-        windOdds = IBCUtils.FormatHandler.FormatNumber20(betdetail.Ticket.Handicap1).TrimEnd('0', '.');
+        windOdds = Math.Round(betdetail.Ticket.Handicap1, 2).TrimEnd('0', '.');
     }
     else
     {
@@ -68,7 +68,7 @@ else if (betdetail.Ticket.BetTypeId == 1233)
 
     if (betdetail.Ticket.Handicap2 != 0)
     {
-        placeOdds = IBCUtils.FormatHandler.FormatNumber20(betdetail.Ticket.Handicap2).TrimEnd('0', '.');
+        placeOdds = Math.Round(betdetail.Ticket.Handicap2, 2).TrimEnd('0', '.');
     }
     else
     {
