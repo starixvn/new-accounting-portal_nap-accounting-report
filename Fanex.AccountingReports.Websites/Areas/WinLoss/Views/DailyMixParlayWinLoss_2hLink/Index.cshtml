@@ -100,7 +100,8 @@
                     <div class="filter-cell">
                         <div class="lbl-field col_3">
                             <div>
-                                @Labels.Month</div>
+                                @Labels.Month
+                            </div>
                         </div>
                         <div class="edit-field col_16">
                             <div id="ddlMonth">
@@ -113,7 +114,7 @@
                 <div class="filter-cell">
                     <div class="submit col_4 prefix_3">
                         <input id="btnGenerate_HistoryReport" name="btnGenerate_HistoryReport" type="submit"
-                            value="@Labels.Generate" />
+                               value="@Labels.Generate" />
                     </div>
                     <div class="submit col_4">
                         <input id="btnBack_HistoryReport" name="btnBack_HistoryReport" type="submit" value="@Labels.Back" />
@@ -146,20 +147,25 @@
     </div>
 </div>
 @{
-    string reportDate = DateTime.Today.ToShortFormatedDate();
+    string startDate = DateTime.Today.ToShortFormatedDate();
+    string endDate = DateTime.Today.ToShortFormatedDate();
     string betType = string.Empty;
     bool isRedirect = false;
     if (Request["IsRedirect"] != null)
     {
         isRedirect = Converter.ToBool(Request["IsRedirect"]);
     }
-    if (Request["reportDate"] != null)
+    if (Request["startDate"] != null)
     {
-        reportDate = Converter.ToString2(Request["reportDate"]);
+        startDate = Converter.ToString2(Request["startDate"]);
+    }
+    if (Request["endDate"] != null)
+    {
+        endDate = Converter.ToString2(Request["endDate"]);
     }
 
     var noteMessage = Html.Raw(string.Format(WinLossResources.DailyMixParlayWinLoss_FilterNote,
-        ReportService.BalanceUp.MoveBetsDay.ToShortFormatedDate()));
+ReportService.BalanceUp.MoveBetsDay.ToShortFormatedDate()));
 }
 @section scripts
 {
@@ -171,7 +177,8 @@
         var minDate = '@ReportService.BalanceUp.MoveBetsDay.AddDays(1).ToShortDateString()';
         var noteMessage = '@noteMessage'; var minHistoryReportDate = '@(new DateTime(2011, 1, 1))';
         var maxHistoryReportDate = '@DateTime.Today.AddDays(-2).ToShortFormatedDate()';
-        var reportDate = '@reportDate';
+        var startDate = '@startDate';
+        var endDate = '@endDate';
         var isredirect = '@isRedirect';
         var movebetday = '@ReportService.BalanceUp.MoveBetsDay.ToShortDateString()';
         var viewResources = {

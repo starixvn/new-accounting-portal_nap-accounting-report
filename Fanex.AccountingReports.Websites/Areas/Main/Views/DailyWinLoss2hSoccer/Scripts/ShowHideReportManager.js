@@ -23,7 +23,8 @@ ShowHideReportManager = function () {
 
     self.ShowAdvanceMixParlayReport = function (sportId, sportName, winLossDate) {
         var param = {
-            reportDate: winLossDate,
+            startDate: winLossDate,
+            endDate: winLossDate,
             SportId: sportId,
             IsRedirect: true,
             BetType: 9
