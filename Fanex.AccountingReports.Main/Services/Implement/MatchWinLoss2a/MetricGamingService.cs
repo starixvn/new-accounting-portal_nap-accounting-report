@@ -81,7 +81,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                 ShowDistinctRow = false,
                 ShowHighlightRow = false,
                 TitleInfoText = string.Format(
-                "Metric Gaming - Super Live Win/Loss Report for {0}",
+                "Metric Gaming - Superlive Win/Loss Report for {0}",
                 criteria.WinlostDate.ToShortFormatedDate()),
                 TitleType = TitleType.TwoLineBlue
             };
@@ -90,12 +90,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         private List<HeaderColumns> MetricGamingByBettypeHeader()
         {
             List<HeaderColumns> header = new List<HeaderColumns>();
-            header.Add(new HeaderColumns() { HeaderText = Labels.Bet_Type, Name = Labels.Bet_Type, Width = 150, CellAlignment = HAlignment.Left });
+            header.Add(new HeaderColumns() { HeaderText = Labels.Bet_Type, Name = Labels.Bet_Type, Width = 180, CellAlignment = HAlignment.Left });
             header.Add(new HeaderColumns() { HeaderText = Labels.Comm, Name = Labels.Comm, Width = 100, CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Double });
-            header.Add(new HeaderColumns() { HeaderText = Labels.Virtual_Comm, Name = Labels.Virtual_Comm, Width = 80, CellAlignment = HAlignment.Right });
+            header.Add(new HeaderColumns() { HeaderText = Labels.Virtual_Comm, Name = Labels.Virtual_Comm, Width = 80, CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Double });
             header.Add(new HeaderColumns() { HeaderText = Labels.Line_Total, Name = Labels.Line_Total, Width = 100, CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Double });
-            header.Add(new HeaderColumns() { HeaderText = Labels.Virtual_Line_Total, Name = Labels.Virtual_Line_Total, Width = 80, CellAlignment = HAlignment.Right });
-            header.Add(new HeaderColumns() { HeaderText = Labels.Variance, Name = Labels.Variance, Width = 80, CellAlignment = HAlignment.Right });
+            header.Add(new HeaderColumns() { HeaderText = Labels.Virtual_Line_Total, Name = Labels.Virtual_Line_Total, Width = 80, CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Double });
+            header.Add(new HeaderColumns() { HeaderText = Labels.Variance, Name = Labels.Variance, Width = 80, CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Double });
             header.Add(new HeaderColumns() { HeaderText = Labels.Turnover, Name = Labels.Turnover, Width = 100, CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Double });
             header.Add(new HeaderColumns() { HeaderText = Labels.Margin_Percent, Name = Labels.Margin_Percent, Width = 80, CellAlignment = HAlignment.Right, CustomCellType = ExcelCellType.Double });
             return header;
@@ -137,13 +137,22 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         {
             GridDataRow dataRow = new GridDataRow();
             decimal lineTotal = Converter.ToDecimal(bettypeDataRow.LineTotal);
+            decimal virtualLineTotal = Converter.ToDecimal(bettypeDataRow.VirtualLineTotal);
+            decimal variance = lineTotal - virtualLineTotal;
             decimal turnover = Converter.ToDecimal(bettypeDataRow.Turnover);
-            dataRow.CreateColumns(new Columns { Name = Labels.Bet_Type, Value = _cachedBettypesName[bettypeDataRow.bettype] });
+            bool liveIndicator = Converter.ToBool(bettypeDataRow.liveindicator);
+            string liveIndicatorTitle = liveIndicator ? "!Live -" : string.Empty;
+            dataRow.CreateColumns(
+                new Columns
+                {
+                    Name = Labels.Bet_Type,
+                    Value = $"{liveIndicatorTitle} {_cachedBettypesName[bettypeDataRow.bettype]}",
+                    CustomAttributes = $"{liveIndicator},{bettypeDataRow.bettype}"});
             dataRow.CreateColumns(new Columns { Name = Labels.Comm, Value = Converter.ToDecimal(bettypeDataRow.comm) });
-            dataRow.CreateColumns(new Columns { Name = Labels.Virtual_Comm, Value = Labels.NotAvailable });
+            dataRow.CreateColumns(new Columns { Name = Labels.Virtual_Comm, Value = Converter.ToDecimal(bettypeDataRow.VirtualCommission) });
             dataRow.CreateColumns(new Columns { Name = Labels.Line_Total, Value = lineTotal });
-            dataRow.CreateColumns(new Columns { Name = Labels.Virtual_Line_Total, Value = Labels.NotAvailable });
-            dataRow.CreateColumns(new Columns { Name = Labels.Variance, Value = Labels.NotAvailable });
+            dataRow.CreateColumns(new Columns { Name = Labels.Virtual_Line_Total, Value = virtualLineTotal});
+            dataRow.CreateColumns(new Columns { Name = Labels.Variance, Value = variance });
             dataRow.CreateColumns(new Columns { Name = Labels.Turnover, Value = turnover });
             dataRow.CreateColumns(new Columns { Name = Labels.Margin_Percent, Value = turnover == 0 ? (object)Labels.NotAvailable : lineTotal / turnover * 100 });
             return dataRow;
@@ -153,7 +162,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         {
             decimal lineTotal = Converter.ToDecimal(totalRow.Columns[MetricGamingByBettypeLineTotalColumnIndex].Value);
             decimal turnOver = Converter.ToDecimal(totalRow.Columns[MetricGamingByBettypeTurnoverColumnIndex].Value);
-            totalRow.Columns[MetricGamingByBettypeTotalLabelColumnIndex].Value = "Metric Gaming - Super Live Total";
+            totalRow.Columns[MetricGamingByBettypeTotalLabelColumnIndex].Value = "Metric Gaming - Superlive Total";
             totalRow.Columns[MetricGamingByBettypeMarginColumnIndex].Value = turnOver == 0 ? (object)Labels.NotAvailable : lineTotal / turnOver * 100;
             return totalRow;
         }

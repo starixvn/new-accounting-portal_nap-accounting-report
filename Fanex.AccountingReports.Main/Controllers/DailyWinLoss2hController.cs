@@ -226,7 +226,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         [HandleAjaxError]
         public JsonResult GetMetricGamingBettypeReport(GetMetricGamingBettypeCriteria criteria)
         {
-            var report = _metricGamingService.GetMetricGamingBettypeReport(criteria);
+            var report = _metricGamingService.GetMetricGamingBetTypes(criteria);
             return Json(report);
         }
 

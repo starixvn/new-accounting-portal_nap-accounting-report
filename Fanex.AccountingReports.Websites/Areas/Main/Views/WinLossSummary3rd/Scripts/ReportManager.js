@@ -209,7 +209,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.ReportManager = function () {
         _tables.cockFightingContainer.removeClass('display-none');
         _tables.cockFightingContainer.addClass('display-none');
     };
-    ViewMatchGameDetails = function (fromDate, toDate, sportId, betId, live, parentName, drillDownByType) {
+    ViewMatchGameDetails = function (fromDate, toDate, sportId, betId, live, parentName, drillDownByType, subProduct) {
         if (sportId < 0) {
             sportId = betId;
             betId = 0;
@@ -221,7 +221,8 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.ReportManager = function () {
                 SportType: sportId,
                 BetType: betId,
                 LiveIndicator: live,
-                DrillDownByType: drillDownByType
+                DrillDownByType: drillDownByType,
+                SubProduct: subProduct
             }
         }, parentName);
     };

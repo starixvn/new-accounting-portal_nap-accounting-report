@@ -56,7 +56,6 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                     Id == MainConstants.WinLossSummarySystemParlaySportId ||
                     Id == MainConstants.WinLossSummaryKenoSportId ||
                     Id == SportContants.GoldDeluxe ||
-                    Id == SportContants.MetricGamingSuperLive ||
                     Id == SportContants.MicrogamingLiveCasino ||
                     Id == SportContants.MicrogamingRNGCasino ||
                     Id == SportContants.AGCasino ||

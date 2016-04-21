@@ -30,6 +30,8 @@ namespace Fanex.AccountingReports.Main.Services.Interface
 
         WinLossInfo GetThirdPartyCasinoReport(GetThirdPartyCasinoReportCriteria criteria);
 
+        WinLossInfo GetMetricGamingDetailByBetType(GetMetricGamingDetailByBetTypeCriteria criteria);
+
         void ExportSummaryReportByBetType(GetMainReportCriteria criteria);
 
         void ExportSummaryReportBySportType(GetMainReportCriteria criteria);
@@ -39,5 +41,7 @@ namespace Fanex.AccountingReports.Main.Services.Interface
         void ExportDetailReportBySportsType(GetDetailReportByBetTypeCriteria criteria);
 
         void ExportAllDetailReport(GetMainReportCriteria criteria);
+
+        void ExportMetricGamingDetailReportByBetType(GetMetricGamingDetailByBetTypeCriteria criteria);
     }
 }

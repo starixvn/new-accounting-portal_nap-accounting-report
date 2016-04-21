@@ -268,12 +268,30 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to * Virtual All Total: Soccer + Metric Gaming - Super Live + Other Sports + Parlay
+        ///   Looks up a localized string similar to * Virtual All Total: Soccer + Metric Gaming - Superlive+ Other Sports + Parlay
         ///* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P + Bettrade + Colossus Bets + Cockfighting.
         /// </summary>
         public static string DailyWinLoss2h_MainReportFooterNote {
             get {
                 return ResourceManager.GetString("DailyWinLoss2h_MainReportFooterNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to METRIC GAMING - SUPERLIVE &quot;LIVE&quot; PRODUCT WIN/LOSS REPORT.
+        /// </summary>
+        public static string DailyWinLoss2h_MetricGamingLiveReportBySport_Title {
+            get {
+                return ResourceManager.GetString("DailyWinLoss2h_MetricGamingLiveReportBySport_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to METRIC GAMING - SUPERLIVE  &quot;NONE - LIVE&quot; PRODUCT WIN/LOSS REPORT.
+        /// </summary>
+        public static string DailyWinLoss2h_MetricGamingNonLiveReportBySport_Title {
+            get {
+                return ResourceManager.GetString("DailyWinLoss2h_MetricGamingNonLiveReportBySport_Title", resourceCulture);
             }
         }
         

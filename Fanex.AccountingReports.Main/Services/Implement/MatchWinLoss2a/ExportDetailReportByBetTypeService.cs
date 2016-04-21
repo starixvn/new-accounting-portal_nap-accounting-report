@@ -114,6 +114,84 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             }
         }
 
+        public void ExportMetricGamingDetailReportByBetType(GetMetricGamingDetailByBetTypeCriteria criteria)
+        {
+            try
+            {
+                var getDetailReportByBetTypeCriteria = new GetDetailReportByBetTypeCriteria
+                {
+                    Bettype = criteria.Bettype,
+                    BetTypeName = criteria.BetTypeName,
+                    LiveIndicator = criteria.LiveIndicator,
+                    Sporttype = criteria.Sporttype,
+                    Winlostdate = criteria.Winlostdate
+                };
+
+                var report = SessionManager.Get<WinLossInfo>(_matchWinLoss2aMetricGamingDetailReportByBetTypeSessionKey);
+                if (report == null)
+                {
+                    report = this.GetMetricGamingDetailByBetType(criteria);
+                }
+
+                getDetailReportByBetTypeCriteria.Sporttype = Labels.MetricGaming_Superlive.ToUpper();
+                HSSFWorkbook excelFile = new HSSFWorkbook();
+                string sheetName = MainResources.MatchWinLoss2a_SheetName;
+                ISheet worksheet = excelFile.CreateSheet(sheetName);
+                var currentRow = 0;
+                var reportLength = report.ChildsInfo.Count;
+
+                this.ExportDetailReportByBetTypeHeader(
+                    excelFile,
+                    ref worksheet,
+                    ref currentRow,
+                    getDetailReportByBetTypeCriteria);
+
+                currentRow++;
+
+                if (report != null && reportLength > 0)
+                {
+                    this.SetColorIndex(excelFile);
+                    IDataFormat dataFormat = excelFile.CreateDataFormat();
+                    ReportCellStyle reportCellStyle = new ReportCellStyle(ref excelFile);
+                    ICellStyle grandTotalTextStyle = NpoiExcelExtensions.TextStyle(excelFile, GrandTotalColorIndex, true, NpoiExcelExtensions.Alignment.Right);
+                    grandTotalTextStyle.BorderTop = BorderStyle.Medium;
+                    grandTotalTextStyle.TopBorderColor = GrandTotalBorderColorIndex;
+                    ICellStyle grandTotalDecimalNumberStyle = NpoiExcelExtensions.DecimalStyle(excelFile, GrandTotalColorIndex, true);
+                    grandTotalDecimalNumberStyle.BorderTop = BorderStyle.Medium;
+                    grandTotalDecimalNumberStyle.TopBorderColor = GrandTotalBorderColorIndex;
+                    grandTotalDecimalNumberStyle.DataFormat = dataFormat.GetFormat(NumberFormatConstants.NegativeNumberFormat);
+
+                    for (var rowIndex = 0; rowIndex < reportLength; rowIndex++)
+                    {
+                        var winLossInfo = report.ChildsInfo[rowIndex];
+                        this.ExportDetailReportRow_ByBetType(
+                            ref worksheet,
+                            ref currentRow,
+                            winLossInfo,
+                            reportCellStyle);
+                        currentRow++;
+                    }
+
+                    this.ExportDetailReportTotal_ByBetType(
+                        ref worksheet,
+                        ref currentRow,
+                        report.GrandTotal.Name,
+                        report.GrandTotal,
+                        grandTotalTextStyle,
+                        grandTotalDecimalNumberStyle);
+                }
+
+                var reportName = string.Format(
+                    MainResources.MatchWinLoss2aDetailByBetType_ReportName,
+                    criteria.Winlostdate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+                NpoiExcelExtensions.ResponseStreamExcel(excelFile, reportName);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+        }
+
         /// <summary>
         /// Exports the detail report by bet type header.
         /// </summary>

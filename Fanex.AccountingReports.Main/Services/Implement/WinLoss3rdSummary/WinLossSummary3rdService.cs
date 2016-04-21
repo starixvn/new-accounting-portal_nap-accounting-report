@@ -555,7 +555,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                     break;
 
                 case SportContants.MetricGamingSuperLive:
-                    sportName = Labels.Metric_Gaming_Super_Live;
+                    sportName = Labels.MetricGaming_Superlive;
                     break;
 
                 case SportContants.Macau:
@@ -905,7 +905,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 SportType = criteria.SportType,
                 BetType = criteria.BetType,
                 LiveIndicator = criteria.LiveIndicator,
-                DrillDownByType = criteria.DrillDownByType
+                DrillDownByType = criteria.DrillDownByType,
+                SubProduct = criteria.SubProduct
             };
         }
 

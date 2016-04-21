@@ -369,7 +369,7 @@ Main2hReport.prototype.RenderReport = function (report) {
                         showHideSiteTypeManager.Enums.RowType.InfoRow)
             });
 
-            var reportNote = "* Virtual All Total: Soccer + Metric Gaming - Super Live + Other Sports + Parlay" +
+            var reportNote = "* Virtual All Total: Soccer + Metric Gaming - Superlive + Other Sports + Parlay" +
                              "<br/>* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing +  Bingo + P2P + Bettrade + Colossus Bets + Cockfighting";
             footerData.push({
                 Columns: [{

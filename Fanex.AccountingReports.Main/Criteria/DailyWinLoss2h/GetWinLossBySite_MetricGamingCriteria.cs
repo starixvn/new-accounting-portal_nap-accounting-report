@@ -14,6 +14,8 @@
 
         public int Site { get; set; }
 
+        public bool LiveIndicator { get; set; }
+
         /// <summary>
         /// Gets the setting key.
         /// </summary>

@@ -1843,6 +1843,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Metric Gaming - Superlive.
+        /// </summary>
+        public static string MetricGaming_Superlive {
+            get {
+                return ResourceManager.GetString("MetricGaming-Superlive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Microgaming.
         /// </summary>
         public static string Microgaming {

@@ -17,7 +17,8 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
             BetType: null,
             LiveIndicator: null,
             ParentName: null,
-            DrillDownByType: null
+            DrillDownByType: null,
+            SubProduct: null
         }
     };
     var _type = {
@@ -72,6 +73,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
         _params.reportParams.LiveIndicator = params.reportParams.LiveIndicator;
         _params.reportParams.ParentName = _tables.parentName;
         _params.reportParams.DrillDownByType = params.reportParams.DrillDownByType;
+        _params.reportParams.SubProduct = params.reportParams.SubProduct;
     };
     var renderReport = function (report) {
         _tables.btnShowHideSiteTypeInfoHistory.attr("disabled", true);

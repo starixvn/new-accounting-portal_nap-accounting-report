@@ -134,7 +134,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     {
                         Site = criteria.Site,
                         WinLostDate = criteria.WinLostDate,
-                        BetType = criteria.BetType
+                        BetType = criteria.BetType,
+                        LiveIndicator = criteria.LiveIndicator
                     };
                 case CoreConstants.SportContants.Bettrade:
                     return new GetWinLossBySite_BettradeCriteria

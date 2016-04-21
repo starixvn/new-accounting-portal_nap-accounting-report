@@ -38,6 +38,8 @@ namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd
         [SpParam(SqlParamName = "drilldownbytype")]
         public int DrillDownByType { get; set; }
 
+        public string SubProduct { get; set; }
+
         public SportTypeWinLoss Type
         {
             get
@@ -47,6 +49,10 @@ namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd
                     if (SportType <= MainConstants.WinLossSummaryMaxSportbookId ||
                         SportType == SportContants.NumberGame ||
                         SportType == SportContants.HorseRacingFixedOdds)
+                    {
+                        _type = SportTypeWinLoss.SportBook;
+                    }
+                    else if(SportType >= MainConstants.MinMetricGamingSuperLiveBetType && SportType <= MainConstants.MaxMetricGamingSuperLiveBetType)
                     {
                         _type = SportTypeWinLoss.SportBook;
                     }

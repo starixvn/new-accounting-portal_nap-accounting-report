@@ -711,7 +711,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     true,
                     report.NoneLiveReport,
                     MainResources.DailyWinLoss2h_OtherSportNonLiveReport_Title,
-                    true,
+                    false,
                     SportContants._2hReportOtherSport);
 
                 workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
@@ -724,7 +724,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     true,
                     report.LiveReport,
                     MainResources.DailyWinLoss2h_OtherSportLiveReport_Title,
-                    true,
+                    false,
                     SportContants._2hReportOtherSport);
 
                 var reportName = string.Format(
@@ -772,7 +772,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     false,
                     report.NoneLiveReport,
                     string.Format(MainResources.DailyWinLoss2h_OtherSportNonLiveReportBySport_Title, criteria.SportTypeName).ToUpper(),
-                    true,
+                    false,
                     SportContants._2hReportOtherSport);
 
                 workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
@@ -785,7 +785,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     false,
                     report.LiveReport,
                     string.Format(MainResources.DailyWinLoss2h_OtherSportLiveReportBySport_Title, criteria.SportTypeName).ToUpper(),
-                    true,
+                    false,
                     SportContants._2hReportOtherSport);
 
                 var reportName = string.Format(

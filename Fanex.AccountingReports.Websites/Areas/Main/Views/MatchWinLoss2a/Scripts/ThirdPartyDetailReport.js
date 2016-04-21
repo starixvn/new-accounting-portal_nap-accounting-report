@@ -241,6 +241,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.ThirdPartyDetailReport = function ()
 
         gridOptions.titleInfo = titleInfo;
         gridOptions.numberOfFrozenColumn = 0;
+        createMetricGamingReportLinks(gridOptions);
         _tables.report.removeClass("display-none").fanexGrid(gridOptions);
         _tables.reportContainer.dialog({
             title: "",
@@ -260,6 +261,28 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.ThirdPartyDetailReport = function ()
         });
 
         _tables.reportContainer.dialog("open");
+    };
+
+    var createMetricGamingReportLinks = function (gridOptions) {
+        for(var i = 0; i < gridOptions.bodyRows.length; i++)
+        {
+            var customAttribute = gridOptions.bodyRows[i].Columns[0].CustomAttr;
+            var customAttributeValues = customAttribute.split("\,");
+            var liveIndicator = customAttributeValues[0].toLowerCase() == 'true';
+            var betType = customAttributeValues[1];
+            var betTypeName = gridOptions.bodyRows[i].Columns[0].Value;
+            var metricGamingSportType = 1;
+
+            var clickEvent = ' onclick = "ViewMetricGamingDetailByBetType(\'' + _params.metricGamingParams.Winlostdate
+                                                                        + '\',' + betType
+                                                                        + ',\'' + betTypeName
+                                                                        + '\',' + metricGamingSportType
+                                                                        + ',\'' + "Soccer"
+                                                                        + '\',' + liveIndicator
+                                                                        + ");\"";
+
+            gridOptions.bodyRows[i].Columns[0].Value = '<div class="link colBetType" ' + clickEvent + '>' + betTypeName + '</div>';
+        }
     };
 
     var exportMetricGamingByBettypeReport = function () {

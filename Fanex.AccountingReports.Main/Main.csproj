@@ -226,6 +226,7 @@
     <Compile Include="Criteria\MatchWinLoss2a\GetDetailReportByBetTypeCriteria.cs" />
     <Compile Include="Criteria\MatchWinLoss2a\GetMainReportCriteria.cs" />
     <Compile Include="Criteria\MatchWinLoss2a\GetMetricGamingCriteria.cs" />
+    <Compile Include="Criteria\MatchWinLoss2a\GetMetricGamingDetailByBetTypeCriteria.cs" />
     <Compile Include="Criteria\MatchWinLoss2a\GetThirdPartyCasinoReportCriteria.cs" />
     <Compile Include="Criteria\MatchWinLoss2a\GetWinLossByBetTypeCriteria.cs" />
     <Compile Include="Criteria\TraderPerformance\GetDetailReportCriteria.cs" />

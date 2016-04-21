@@ -30,5 +30,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Interface
         List<dynamic> GetAllDetailReportBySportsBeforeBalanceUpDay(GetAllDetailReportBySportsCriteria criteria, ref Hashtable outputParam);
 
         WinLossInfo GetThirdPartyCasinoReport(GetThirdPartyCasinoReportCriteria criteria);
+
+        WinLossInfo GetMetricGamingDetailByBetType(GetMetricGamingDetailByBetTypeCriteria criteria);
     }
 }

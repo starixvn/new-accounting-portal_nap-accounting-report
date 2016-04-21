@@ -714,6 +714,7 @@
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\MainLiveCasinoReport.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\LiveCasinoReport.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Main2hReport.js" />
+    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\MetricGamingByBetType.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\MetricGamingReport.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\MixParlayReport.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\NumberGame\NumberGameReport.js" />
@@ -1228,7 +1229,7 @@
     <Content Include="Web.Configuration\RMSection.config" />
     <Content Include="Web.Configuration\MAMonitorSection.config">
       <SubType>Designer</SubType>
-    </Content>    
+    </Content>
     <Content Include="Web.Configuration\TreeWinLossProduct.xml" />
     <Content Include="Web.Configuration\VirtualSportsWinLossSection.config" />
     <Content Include="Web.Configuration\LegendSection.config">

@@ -403,7 +403,7 @@
     <value>PARLAY PRODUCT WIN/LOSS REPORT</value>
   </data>
   <data name="DailyWinLoss2h_MainReportFooterNote" xml:space="preserve">
-    <value>* Virtual All Total: Soccer + Metric Gaming - Super Live + Other Sports + Parlay
+    <value>* Virtual All Total: Soccer + Metric Gaming - Superlive+ Other Sports + Parlay
 * Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P + Bettrade + Colossus Bets + Cockfighting</value>
   </data>
   <data name="DailyWinLoss2h_MetricGamingReport_ReportTitle" xml:space="preserve">
@@ -447,5 +447,11 @@
   </data>
   <data name="WinLossSummary3rd_CockFightingReportTitle" xml:space="preserve">
     <value>Cockfighting | Details report from {0} to {1}</value>
+  </data>
+  <data name="DailyWinLoss2h_MetricGamingLiveReportBySport_Title" xml:space="preserve">
+    <value>METRIC GAMING - SUPERLIVE "LIVE" PRODUCT WIN/LOSS REPORT</value>
+  </data>
+  <data name="DailyWinLoss2h_MetricGamingNonLiveReportBySport_Title" xml:space="preserve">
+    <value>METRIC GAMING - SUPERLIVE  "NONE - LIVE" PRODUCT WIN/LOSS REPORT</value>
   </data>
 </root>

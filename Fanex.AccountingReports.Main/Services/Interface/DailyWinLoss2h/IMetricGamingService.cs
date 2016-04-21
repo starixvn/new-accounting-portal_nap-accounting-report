@@ -14,7 +14,7 @@ namespace Fanex.AccountingReports.Main.Services.Interface.DailyWinLoss2h
     /// </summary>
     public interface IMetricGamingService
     {
-        WinLossInfo GetMetricGamingBettypeReport(GetMetricGamingBettypeCriteria criteria);
+        LiveAndNoneLiveReport GetMetricGamingBetTypes(GetMetricGamingBettypeCriteria criteria);
 
         void ExportMetricGamingBettypeReport(GetMetricGamingBettypeCriteria criteria);
     }
