@@ -447,6 +447,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                 case ProductContants.MetricGamingSuperlive:
                     product = Labels.MetricGamingSuperLive;
                     break;
+
+                case ProductContants.Voidbridge:
+                    product = Labels.Voidbridge;
+                    break;
                 default:
                     break;
             }

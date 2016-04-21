@@ -24,11 +24,11 @@ namespace Fanex.AccountingReports.Misc.Resources {
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Labels {
         
-        private static global::System.Resources.ResourceManager resourceMan;
+        public static global::System.Resources.ResourceManager resourceMan;
         
-        private static global::System.Globalization.CultureInfo resourceCulture;
+        public static global::System.Globalization.CultureInfo resourceCulture;
         
-        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledpublicCode")]
         public Labels() {
         }
         
@@ -3046,6 +3046,15 @@ namespace Fanex.AccountingReports.Misc.Resources {
         public static string VirtualTotal {
             get {
                 return ResourceManager.GetString("VirtualTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Voidbridge.
+        /// </summary>
+        public static string Voidbridge {
+            get {
+                return ResourceManager.GetString("Voidbridge", resourceCulture);
             }
         }
         
