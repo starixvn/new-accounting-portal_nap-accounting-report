@@ -255,7 +255,7 @@ namespace Fanex.BetList.Accounting.Services
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        public IList<TicketDetail> GetMixParlayTickets(MixParlayDetailCriteria criteria)
+        public IList<TicketDetail> GetMixParlayTickets(MixParlayDetailCriteria criteria, string handicap1, string handicap2, string betcheck, string betteam)
         {
             Func<DataRow, TicketDetail> mapTicketObjectFunction = r => new TicketDetail
             {
@@ -278,7 +278,9 @@ namespace Fanex.BetList.Accounting.Services
                     HomeId = Converter.To<long>(r["HomeID"]),
                     AwayId = Converter.To<long>(r["AwayID"]),
                     IsNeutral = Converter.ToBool(r["isNeutral"]),
-                    BetCheck = Converter.ToString2(r["BetCheck"])
+                    BetCheck = Converter.ToString2(r["BetCheck"]),
+                    Stake = Converter.ToDecimal(r["Stake"]),
+                    Currency = Converter.ToString2(r["Currency"])
                 },
                 ChoiceHtml = string.Empty,
                 OddHtml = string.Empty,
@@ -291,6 +293,16 @@ namespace Fanex.BetList.Accounting.Services
                 IList<TicketDetail> betDetails = _betListRepository.Fetch<TicketDetail>(criteria, mapTicketObjectFunction);
                 StringBuilder content = new StringBuilder();
                 DataTable commandData = new DataTable();
+                string comboParlayDetail = string.Empty;
+
+                if (!string.IsNullOrEmpty(handicap1))
+                {
+                    int hdp1 = Converter.ToInt(Math.Round(Convert.ToDouble(handicap1)));
+                    int hdp2 = Converter.ToInt(Math.Round(Convert.ToDouble(handicap2)));
+                    string[] comboParlay = RemotingRef.RefData.GetCombinationTypeCombo(betteam, betcheck, hdp1, hdp2, "en");
+                    comboParlayDetail = GetComboParlayDetail(hdp1, comboParlay, betDetails);
+                }
+
                 if (betDetails != null)
                 {
                     BetListHTMLFactory factory = new BetListHTMLFactory();
@@ -308,6 +320,11 @@ namespace Fanex.BetList.Accounting.Services
                                 + (totalItem > 0 ?
                                 "</div>" + "<div class=\"line\"></div>" :
                                 "</div>");
+                    }
+
+                    if (!string.IsNullOrEmpty(comboParlayDetail))
+                    {
+                        betDetails[0].ChoiceHtml = comboParlayDetail + betDetails[0].ChoiceHtml;
                     }
 
                     return betDetails;
@@ -1721,6 +1738,41 @@ namespace Fanex.BetList.Accounting.Services
         {
             return betTypeId == BetTypeContants.MixParlay ||
                 betTypeId == BetTypeContants.SystemParlay;
+        }
+
+        private string GetComboParlayDetail(int handicap1, string[] comboParlay, IList<TicketDetail> ticketDetails)
+        {
+            string comboParlayDetail = string.Empty;
+
+            if (handicap1 == 0)
+            {
+                comboParlayDetail = GetOneComboParlayDetail(comboParlay, ticketDetails);
+            }
+            else
+            {
+                comboParlayDetail = GetMultipleComboParlayDetail(comboParlay, ticketDetails);
+            }
+
+            return comboParlayDetail;
+        }
+
+        private string GetOneComboParlayDetail(string[] comboParlay, IList<TicketDetail> ticketDetails)
+        {
+            string firstComboParlay = comboParlay.FirstOrDefault();
+            var firstTicketDetail = ticketDetails.Select(x => x.Ticket).Where(y => y.Stake != 0).FirstOrDefault();
+            return $"<div class='comboParlay'>{firstComboParlay} x <span class='currency'>{firstTicketDetail.Currency} </span> <span class='stake'>{firstTicketDetail.Stake}</span></div>";
+        }
+
+        private string GetMultipleComboParlayDetail(string[] comboParlay, IList<TicketDetail> ticketDetails)
+        {
+            string comboParlayDetail = string.Empty;
+            var ticketDetailWithNoneZeroStakes = ticketDetails.Select(t => t.Ticket).Where(s => s.Stake != 0).OrderBy(m => m.MatchId).ToList();
+            for (int i = 0; i < comboParlay.Length; i++)
+            {
+                comboParlayDetail += $"<div class='comboParlay'>{comboParlay[i]} x <span class='currency'>{ticketDetailWithNoneZeroStakes[i].Currency}</span> <span class='stake'>{ticketDetailWithNoneZeroStakes[i].Stake}</span><br/></div>";
+            }
+
+            return comboParlayDetail;
         }
     }
 }

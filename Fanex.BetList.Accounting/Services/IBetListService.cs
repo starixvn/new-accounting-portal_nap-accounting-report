@@ -28,7 +28,7 @@ namespace Fanex.BetList.Accounting.Services
             string userName,
             CurrencyContants baseCurrency);
 
-        IList<TicketDetail> GetMixParlayTickets(MixParlayDetailCriteria mixParlayDetailCriteria);
+        IList<TicketDetail> GetMixParlayTickets(MixParlayDetailCriteria mixParlayDetailCriteria, string handicap1, string handicap2, string betcheck, string betteam);
 
         IList<TicketDetail> GetBetListByRefNoTickets(BetListByRefNoCriteria betListByRefNoCriteria);
 

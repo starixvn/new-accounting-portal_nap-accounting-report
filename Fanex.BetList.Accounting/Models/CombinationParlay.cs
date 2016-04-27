@@ -20,7 +20,5 @@ namespace Fanex.BetList.Accounting.Models
         public IList<GroupParlayEvent> GroupParlayEvents { get; set; }
 
         public ParlayEvent Total { get; set; }
-
-        public decimal OutStanding { get; set; }
     }
 }

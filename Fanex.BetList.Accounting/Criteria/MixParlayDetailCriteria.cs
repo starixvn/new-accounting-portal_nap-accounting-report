@@ -19,6 +19,8 @@ namespace Fanex.BetList.Accounting.Criteria
         [SpParam(SqlParamName = "refno")]
         public string RefNo { get; set; }
 
+        public string TransId { get; set; }
+
         public string GetSettingKey()
         {
             return "BetList_MixParlayBetsSel";

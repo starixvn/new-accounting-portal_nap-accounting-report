@@ -2,181 +2,147 @@
 @using Fanex.BetList.Accounting.Extensions;
 @using Fanex.BetList.Accounting.App_GlobalResources
 @model CombinationParlay
-<div id="divContainer" style="border-right: 1px solid #7C98A4">
-    <div id="divHeader">
-        <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-            <thead>
-                <tr class="gridtitle">
-                    <th>
-                        <div style="width: 70px">@BetList.date</div>
-                    </th>
-                    <th>
-                        <div style="width: 322px">@BetList.Event</div>
-                    </th>
-                    <th>
-                        <div style="width: 80px">@BetList.odds</div>
-                    </th>
-                    <th>
-                        <div style="width: 80px">@BetList.stake</div>
-                    </th>
-                    <th>
-                        <div style="width: 100px;">@BetList.winloss</div>
-                    </th>
-                    <th>
-                        <div style="width: 50px">@BetList.status</div>
-                    </th>
-                    <th style="border-right: 0px none">
-                        <div style="width: 18px;" barcol="true">
-                        </div>
-                    </th>
-                </tr>
-            </thead>
-        </table>
-    </div>
-    <div id="divBody" style="overflow-y: auto; overflow-x: hidden; max-height: 300px;
-        border-bottom: 1px solid #7C98A4">
-        <table border="0" cellpadding='0' cellspacing='0' style='border-collapse: collapse'>
-            <tbody id="tbodyData" class="gridrow">
-                @if (Model == null || Model.GroupParlayEvents.Count == 0)
-                {
-                    <tr>
-                        <td rowspan="6" style="width: 695px; text-align: center; color: red; font-weight: bold;">
-                            There is no data.
-                        </td>
+<div id="combineMixParlayDetail" class="freegrid display-none">
+    <div id="combineMixParlayDetailHeader" class="col_header row-headers-background scroll-y">
+        <div class="header-container">
+            <table class="grid-fixed-table col_header_content">
+                <thead>
+                    <tr class="gridtitle">
+                        <th>
+                            <div class="width100 height34 table-cell">@BetList.date</div>
+                        </th>
+                        <th>
+                            <div class="width300 height34 table-cell">@BetList.Event</div>
+                        </th>
+                        <th>
+                            <div class="width100 height34 table-cell">@BetList.odds</div>
+                        </th>
+                        <th>
+                            <div class="width100 height34 table-cell">@BetList.stake</div>
+                        </th>
+                        <th>
+                            <div class="width100 height34 table-cell">@BetList.winloss</div>
+                        </th>
+                        <th>
+                            <div class="width50 height34 table-cell">@BetList.status</div>
+                        </th>
                     </tr>
-                }
-                else
-                {
-                    foreach (var group in Model.GroupParlayEvents)
-                    {
-                        bool isFirstRow = true;
-                        foreach (var item in group.ParlayEvents)
-                        {
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="grid-container container">
+        <div class="content-container">
+            <table id="tblContent" class="grid-fixed-table col_header_content ">
+                <thead>
                     <tr>
-                        @if (isFirstRow)
+                        <th>
+                            <div class="width100 height34 table-cell">@BetList.date</div>
+                        </th>
+                        <th>
+                            <div class="width300 height34 table-cell">@BetList.Event</div>
+                        </th>
+                        <th>
+                            <div class="width100 height34 table-cell">@BetList.odds</div>
+                        </th>
+                        <th>
+                            <div class="width100 height34 table-cell">@BetList.stake</div>
+                        </th>
+                        <th>
+                            <div class="width100 height34 table-cell">@BetList.winloss</div>
+                        </th>
+                        <th>
+                            <div class="width50 height34 table-cell">@BetList.status</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model == null || Model.GroupParlayEvents.Count == 0)
+                    {
+                        <tr>
+                            <td rowspan="6" style="width: 750px; text-align: center; color: red; font-weight: bold;">
+                                There is no data.
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var group in Model.GroupParlayEvents)
                         {
-                            isFirstRow = false;
-                            <td rowspan="@group.ParlayEvents.Count">
-                                <div style="width: 70px">
-                                    @group.WinLossDate.ToShortFormatedDateWithSlash()
+                            bool isFirstRow = true;
+                            foreach (var item in group.ParlayEvents)
+                            {
+                                <tr>
+                                    @if (isFirstRow)
+                                    {
+                                        isFirstRow = false;
+                                        <td rowspan="@group.ParlayEvents.Count">
+                                            <div class="width100  align-center">
+                                                @group.WinLossDate.ToShortFormatedDateWithSlash()
+                                            </div>
+                                        </td>
+                                    }
+                                    <td>
+                                        <div class="width300  align-center">
+                                            @foreach (var match in item.MatchList)
+                                            {
+                                                <span>@match.Event</span><br />
+                                            }
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="width100  align-right">
+                                            <span>@(item.Status.Contains("RUNNING") || item.Status.Contains("LOSE") ? "-" : string.Format("{0:#,##0.####}", item.Odds))</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="width100  align-right">
+                                            <span>@item.Stake.Format(2)</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="width100  align-right">
+                                            <span style="@(item.WinLoss >= 0 ? "" : "color:red;")">@item.WinLoss.Format(2)</span>
+                                            <br />
+                                            <span>@item.Comm.Format(2)</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="width50  align-center">@item.Status</div>
+                                    </td>
+                                </tr>
+                            }
+
+                            <tr class="subTotal">
+                                <td colspan="4">
+                                    Sub total
+                                </td>
+                                <td>
+                                    <span style="@(group.SubTotal.WinLoss >= 0 ? "" : "color:red;")">@group.SubTotal.WinLoss.Format(2)</span>
+                                </td>
+                                <td></td>
+                            </tr>
+                        }
+                    }
+                    @if (Model != null && Model.GroupParlayEvents.Count > 0)
+                    {
+                        <tr class="total">
+                            <td colspan="4">
+                                Total
+                            </td>
+                            <td>
+                                <div class="width100">
+                                    <span style="@(Model.Total.WinLoss >= 0 ? "" : "color:red;")">@Model.Total.WinLoss.Format(2)</span>
                                 </div>
                             </td>
-                        }
-                        <td>
-                            <div style="width: 320px; padding-top: 3px; padding-bottom: 3px; text-align: left;
-                                padding-left: 2px; overflow-x: hidden;">
-                                @foreach (var match in item.MatchList)
-                                {
-                                    <span>@match.Event</span><br />
-                                }
-                            </div>
-                        </td>
-                        <td>
-                            <div style="width: 80px; font-weight: bold; text-align: right">
-                                <span style="margin-right: 3px">@(item.Status.Contains("RUNNING") || item.Status.Contains("LOSE") ? "-" : string.Format("{0:#,##0.####}", item.Odds))</span></div>
-                        </td>
-                        <td>
-                            <div style="width: 80px; font-weight: bold; text-align: right">
-                                <span style="margin-right: 3px">@item.Stake.Format(2)</span></div>
-                        </td>
-                        <td>
-                            <div style="width: 100px; font-weight: bold; text-align: right">
-                                <span style="margin-right:3px;@(item.WinLoss >= 0 ? "" : "color:red;")">@item.WinLoss.Format(2)</span>
-                                <br />
-                                <span style="margin-right: 3px">@item.Comm.Format(2)</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div style="width: 50px; font-weight: bold">@item.Status</div>
-                        </td>
-                    </tr>
-                        }
-						
-                    <tr style="font-weight: bold; text-align: right; background-color: #DFEAFF;">
-                        <td colspan="4">
-                            Sub total&nbsp;
-                        </td>
-                        <td>
-                            <span style="margin-right:3px;@(group.SubTotal.WinLoss >= 0 ? "" : "color:red;")">@group.SubTotal.WinLoss.Format(2)</span>
-                        </td>
-                        <td>
-                        </td>
-                    </tr>
+                            <td>
+                                <div class="width50">
+                                </div>
+                            </td>
+                        </tr>
                     }
-                }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-    @if (Model != null && Model.GroupParlayEvents.Count > 0)
-    {
-        <div id="divFooter" style="font-weight: bold; text-align: center; padding-top: 4px;
-            padding-bottom: 4px; border-left: 1px solid #7C98A4; background-color: #CAB447;
-            border-bottom: 1px solid #7C98A4">
-            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-                <tbody>
-                    <tr>
-                        <td>
-                            <div style="width: 70px">
-                            </div>
-                        </td>
-                        <td>
-                            <div style="width: 320px;">
-                            </div>
-                        </td>
-                        <td>
-                            <div style="width: 80px;">
-                            </div>
-                        </td>
-                        <td>
-                            <div style="width: 80px; text-align: right; font-weight: bold">
-                                Outstanding:</div>
-                        </td>
-                        <td>
-                            <div style="width: 105px; text-align: right; font-weight: bold">
-                                <span>@Model.OutStanding.Format(2)</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div style="width: 50px;">
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div id="div1" style="font-weight: bold; text-align: center; padding-top: 4px; padding-bottom: 4px;
-            border-left: 1px solid #7C98A4; background-color: #B6C4D1; border-bottom: 1px solid #7C98A4">
-            <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse">
-                <tbody>
-                    <tr>
-                        <td>
-                            <div style="width: 70px">
-                            </div>
-                        </td>
-                        <td>
-                            <div style="width: 320px;">
-                            </div>
-                        </td>
-                        <td>
-                            <div style="width: 80px;">
-                            </div>
-                        </td>
-                        <td>
-                            <div style="width: 80px; text-align: right; font-weight: bold">
-                                Total:</div>
-                        </td>
-                        <td>
-                            <div style="width: 105px; text-align: right; font-weight: bold">
-                                <span style="@(Model.Total.WinLoss >= 0 ? "" : "color:red;")">@Model.Total.WinLoss.Format(2)</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div style="width: 50px;">
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    }
 </div>
