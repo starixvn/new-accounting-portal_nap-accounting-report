@@ -36,7 +36,8 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         ColossusBets: 204,
         Cockfighting: 206,
         AllBet: 211,
-        MetricGamingSuperLive: -1
+        MetricGamingSuperLive: -1,
+        Voidbridge: 212
     };
 
     var cachedData = {
@@ -477,7 +478,11 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
             case productEnums.MetricGamingSuperLive:
                 productName = "Metric Gaming - Superlive";
                 break;
-            default: MetricGamingSuperLive
+            case productEnums.Voidbridge:
+                productName = "Voidbridge";
+                break;
+            default:
+                productName = "Unknown";
                 break;
         }
 

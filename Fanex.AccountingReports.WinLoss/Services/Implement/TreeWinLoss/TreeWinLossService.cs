@@ -687,7 +687,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
             else
             {
-                int userId = Converter.ToInt(xmlTrackingValue.Attribute("UserID").Value);
                 foreach (XElement element in xmlTrackingValue.Nodes())
                 {
                     int sportId = Converter.ToInt(element.Attribute("SportType").Value);

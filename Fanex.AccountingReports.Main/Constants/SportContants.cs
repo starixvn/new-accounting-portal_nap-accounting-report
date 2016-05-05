@@ -60,5 +60,6 @@ namespace Fanex.AccountingReports.Main.Constants
         public const int _2hLiveCasinoSLI = 4;
         public const int _2hLiveCasinoGoldDeluxe = 12;
         public const int _2hCasinoMBCRNG = 6;
+        public const int _2hVoidbridge = 22;
     }
 }
