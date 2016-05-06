@@ -1760,7 +1760,7 @@ namespace Fanex.BetList.Accounting.Services
         {
             string firstComboParlay = comboParlay.FirstOrDefault();
             var firstTicketDetail = ticketDetails.Select(x => x.Ticket).Where(y => y.Stake != 0).FirstOrDefault();
-            return $"<div class='comboParlay'>{firstComboParlay} x <span class='currency'>{firstTicketDetail.Currency} </span> <span class='stake'>{firstTicketDetail.Stake}</span></div>";
+            return $"<div class='comboParlay'>{firstComboParlay} x <span class='currency'>{firstTicketDetail.Currency} </span> <span class='stake'>{Convert.ToInt32(firstTicketDetail.Stake).ToString("#,##0")}</span></div>";
         }
 
         private string GetMultipleComboParlayDetail(string[] comboParlay, IList<TicketDetail> ticketDetails)
@@ -1769,7 +1769,7 @@ namespace Fanex.BetList.Accounting.Services
             var ticketDetailWithNoneZeroStakes = ticketDetails.Select(t => t.Ticket).Where(s => s.Stake != 0).OrderBy(m => m.MatchId).ToList();
             for (int i = 0; i < comboParlay.Length; i++)
             {
-                comboParlayDetail += $"<div class='comboParlay'>{comboParlay[i]} x <span class='currency'>{ticketDetailWithNoneZeroStakes[i].Currency}</span> <span class='stake'>{ticketDetailWithNoneZeroStakes[i].Stake}</span><br/></div>";
+                comboParlayDetail += $"<div class='comboParlay'>{comboParlay[i]} x <span class='currency'>{ticketDetailWithNoneZeroStakes[i].Currency}</span> <span class='stake'>{Convert.ToInt32(ticketDetailWithNoneZeroStakes[i].Stake).ToString("#,##0")}</span><br/></div>";
             }
 
             return comboParlayDetail;

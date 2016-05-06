@@ -32,7 +32,7 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
         isShowPager: false,
         fullWidth: true,
         fullHeight: false,
-        gridWidth: 1010, //=totalColumnWidth + totalColumn*4 +totalColumn
+        gridWidth: 1230, //=totalColumnWidth + totalColumn*4 +totalColumn
         gridHeight: 'auto',
         freezeWidth: 0, //=totalColumnWidth + (totalColumn-1)*4 + (totalColumn-1)
         numberFreezeCol: 0
@@ -44,13 +44,21 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
         fullWidth: true,
         fullHeight: false,
         gridWidth: 850, //=totalColumnWidth + totalColumn*4 +totalColumn
-        gridHeight: 'auto',
+        gridHeight: 400,
         freezeWidth: 0, //=totalColumnWidth + (totalColumn-1)*4 + (totalColumn-1)
         numberFreezeCol: 0
     };
 
     var betlistContent = $('#betListContent');
     getBetList = function (refno) {
+        if ($('#betlistContainer').length > 0) {
+            $('.ui-dialog-content').dialog('close');
+        }
+
+        if ($('#combineParlayContainer').length > 0) {
+            $('.ui-dialog-content').dialog('close');
+        }
+
         $.ajax({
             type: "GET",
             url: window.rootUrl + "BetList/BetList/GetBetListReportByRefNo",
@@ -63,7 +71,7 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
                         title: "Bet list of " + refno,
                         autoOpen: false,
                         height: 'auto',
-                        width: 1000,
+                        width: 1200,
                         modal: false,
                         resizable: false,
                         close: function (event, ui) {
@@ -150,10 +158,38 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
     };
 
     showNewCombMP = function (transId, transIndex, refNo, handicap1, handicap2, betcheck, betteam) {
-        showMP(transId, refNo, handicap1, handicap2, betcheck, betteam)
+        showSystemParlay(transId, refNo, handicap1, handicap2, betcheck, betteam)
     };
 
-    showMP = function (transid, refno, handicap1, handicap2, betcheck, betteam) {
+    showMP = function (transid, refno) {
+        var grid = $('#BetlistByRefNo');
+        var parlayContent = $("div[id^='divEvent']")
+        $.ajax({
+            type: 'GET',
+            url: window.rootUrl + 'BetList/BetList/GetMixParlayDetail?refno=' + refno + '&transId=' + transid,
+            beforeSend: function () {
+                AccReport.disableInput();
+            },
+            success: function (rs) {
+                if (rs) {
+                    parlayContent.css("display", "block").html(rs);
+                    self.betlistgridOpts.isResetScroller = false;
+                    grid.gridScroller(self.betlistgridOpts);
+                }
+                AccReport.enableInput();
+            },
+            error: function (event, jqXHR, ajaxSettings) {
+                AccReport.enableInput();
+            },
+            complete: function () { }
+        });
+    };
+
+    showCombMP = function(transId, transIndex, refNo) {
+        showSystemParlay(transId, refNo, '', '', '', '');
+    };
+
+    showSystemParlay = function (transid, refno, handicap1, handicap2, betcheck, betteam) {
         var grid = $('#BetlistByRefNo');
         var parlayContent = $("div[id^='divEvent']")
         if (parlayContent.html() == '') {
@@ -165,8 +201,7 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
                 },
                 success: function (rs) {
                     if (rs) {
-                        if (handicap1 != '')
-                        {
+                        if (handicap1 != '') {
                             $("div[id^='combinationOfferName']").addClass("display-none");
                         }
 
@@ -182,8 +217,7 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
                 complete: function () { }
             });
         }
-        else
-        {
+        else {
             parlayContent.toggle();
 
             if (parlayContent.css("display") == "block") {
@@ -194,10 +228,6 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
 
             grid.gridScroller(self.betlistgridOpts);
         }
-    };
-
-    showCombMP = function(transId, transIndex, refNo) {
-        showMP(transId, refNo, '', '', '', '');
     };
 
 }

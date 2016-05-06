@@ -92,7 +92,7 @@
 {
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~")';
-        minDate = '@Fanex.AccountingReports.Core.Services.Impl.ReportService.BalanceUp.MoveBetsDay.ToShortDateString()';
+        minDate = '@Fanex.AccountingReports.Core.Services.Impl.ReportService.BalanceUp.MoveBetsDay.AddDays(1).ToShortDateString()';
         currentDate = '@DateTime.Now.ToShortDateString()';
     </script>
 }

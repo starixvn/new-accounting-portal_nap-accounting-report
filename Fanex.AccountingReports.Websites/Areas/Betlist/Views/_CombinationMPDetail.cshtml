@@ -77,13 +77,13 @@
                                     {
                                         isFirstRow = false;
                                         <td rowspan="@group.ParlayEvents.Count">
-                                            <div class="width100  align-center">
+                                            <div class="align-center">
                                                 @group.WinLossDate.ToShortFormatedDateWithSlash()
                                             </div>
                                         </td>
                                     }
                                     <td>
-                                        <div class="width300  align-center">
+                                        <div class="align-center">
                                             @foreach (var match in item.MatchList)
                                             {
                                                 <span>@match.Event</span><br />
@@ -91,24 +91,24 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="width100  align-right">
+                                        <div class="align-right">
                                             <span>@(item.Status.Contains("RUNNING") || item.Status.Contains("LOSE") ? "-" : string.Format("{0:#,##0.####}", item.Odds))</span>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="width100  align-right">
+                                        <div class="align-right">
                                             <span>@item.Stake.Format(2)</span>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="width100  align-right">
+                                        <div class="align-right">
                                             <span style="@(item.WinLoss >= 0 ? "" : "color:red;")">@item.WinLoss.Format(2)</span>
                                             <br />
                                             <span>@item.Comm.Format(2)</span>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="width50  align-center">@item.Status</div>
+                                        <div class="align-center">@item.Status</div>
                                     </td>
                                 </tr>
                             }
@@ -131,12 +131,12 @@
                                 Total
                             </td>
                             <td>
-                                <div class="width100">
+                                <div>
                                     <span style="@(Model.Total.WinLoss >= 0 ? "" : "color:red;")">@Model.Total.WinLoss.Format(2)</span>
                                 </div>
                             </td>
                             <td>
-                                <div class="width50">
+                                <div>
                                 </div>
                             </td>
                         </tr>
