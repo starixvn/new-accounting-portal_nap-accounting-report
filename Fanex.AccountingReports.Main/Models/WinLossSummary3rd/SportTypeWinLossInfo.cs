@@ -64,7 +64,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                     Id == SportContants.ColossusBet ||
                     Id == SportContants.CockFighting||
                     Id == SportContants.Allbet ||
-                    Id == SportContants.Voidbridge)
+                    Id == SportContants.MacauGames)
                 {
                     return false;
                 }

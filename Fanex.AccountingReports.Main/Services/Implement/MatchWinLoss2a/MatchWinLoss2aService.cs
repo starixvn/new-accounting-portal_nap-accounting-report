@@ -635,7 +635,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     }
                     else if ((winLoss.Id >= 4001) && (winLoss.Id <= 7999))
                     {
-                        winLoss.Name = winLoss.Name + " (Voidbridge)";
+                        winLoss.Name = winLoss.Name + " (Macau Games)";
                     }
 
                     winLoss.LineTotalReal = winLoss.LineTotal_Soccer_Live +

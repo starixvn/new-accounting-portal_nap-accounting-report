@@ -448,8 +448,8 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     product = Labels.MetricGamingSuperLive;
                     break;
 
-                case ProductContants.Voidbridge:
-                    product = Labels.Voidbridge;
+                case ProductContants.MacauGames:
+                    product = Labels.MacauGames;
                     break;
                 default:
                     break;

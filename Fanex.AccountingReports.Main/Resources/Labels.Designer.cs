@@ -1717,6 +1717,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Macau Games.
+        /// </summary>
+        public static string MacauGames {
+            get {
+                return ResourceManager.GetString("MacauGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Main.
         /// </summary>
         public static string Main {
@@ -3352,15 +3361,6 @@ namespace Fanex.AccountingReports.Main.Resources {
         public static string VirtualTotal {
             get {
                 return ResourceManager.GetString("VirtualTotal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Voidbridge.
-        /// </summary>
-        public static string Voidbridge {
-            get {
-                return ResourceManager.GetString("Voidbridge", resourceCulture);
             }
         }
         
