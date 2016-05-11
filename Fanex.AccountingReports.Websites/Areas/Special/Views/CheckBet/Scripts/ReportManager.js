@@ -33,7 +33,7 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
         fullWidth: true,
         fullHeight: false,
         gridWidth: 1230, //=totalColumnWidth + totalColumn*4 +totalColumn
-        gridHeight: 'auto',
+        gridHeight: 400,
         freezeWidth: 0, //=totalColumnWidth + (totalColumn-1)*4 + (totalColumn-1)
         numberFreezeCol: 0
     };
