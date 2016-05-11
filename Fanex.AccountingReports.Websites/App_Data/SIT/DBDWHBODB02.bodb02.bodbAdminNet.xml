@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Functions>
+	<Function Name="Gaming - Live Casino Game Statistic">
+		<Setting Key="Gaming_LiveCasinoGameStatistic_GetReport" SpName="Acc_Rpt_LiveCasino_GameStatistics_DW" DbName="DBDWHBODB02.bodb02.bodbAdminNet" TimeOut="0" />
+	</Function>
+
+	<Function Name="MA Monitor Tool">
+		<Setting Key="Misc_MAMonitorTool_GetBetTypeList" SpName="Acc_Rpt_MAMonitor_BettypeSel" DbName="DBDWHBODB02.bodb02.bodbAdminNet" TimeOut="0" >
+      <Mapping DataField="productid" ObjectProperty="ProductId" />
+      <Mapping DataField="typeid" ObjectProperty="TypeId" />
+			<Mapping DataField="typenamee" ObjectProperty="TypeName" />
+		</Setting>
+		<Setting Key="Misc_MAMonitorTool_GetSportList" SpName="Acc_Rpt_MAMonitor_SportSel" DbName="DBDWHBODB02.bodb02.bodbAdminNet" TimeOut="0" >
+			<Mapping DataField="sporttype" ObjectProperty="SportType" />
+			<Mapping DataField="sportname" ObjectProperty="SportName" />
+		</Setting>
+	</Function>
+</Functions>
