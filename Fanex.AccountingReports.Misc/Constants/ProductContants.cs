@@ -37,7 +37,7 @@ namespace Fanex.AccountingReports.Misc.Constants
 
         public const int Allbet = 211;
 
-        public const int Voidbridge = 212;
+        public const int MacauGames = 212;
 
         public const int Cockfighting = 206;
 

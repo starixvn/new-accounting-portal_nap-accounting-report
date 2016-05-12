@@ -24,11 +24,11 @@ namespace Fanex.AccountingReports.Misc.Resources {
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Labels {
         
-        public static global::System.Resources.ResourceManager resourceMan;
+        private static global::System.Resources.ResourceManager resourceMan;
         
-        public static global::System.Globalization.CultureInfo resourceCulture;
+        private static global::System.Globalization.CultureInfo resourceCulture;
         
-        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledpublicCode")]
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         public Labels() {
         }
         
@@ -1524,6 +1524,15 @@ namespace Fanex.AccountingReports.Misc.Resources {
         public static string Lose {
             get {
                 return ResourceManager.GetString("Lose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Macau Games.
+        /// </summary>
+        public static string MacauGames {
+            get {
+                return ResourceManager.GetString("MacauGames", resourceCulture);
             }
         }
         
@@ -3046,15 +3055,6 @@ namespace Fanex.AccountingReports.Misc.Resources {
         public static string VirtualTotal {
             get {
                 return ResourceManager.GetString("VirtualTotal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Voidbridge.
-        /// </summary>
-        public static string Voidbridge {
-            get {
-                return ResourceManager.GetString("Voidbridge", resourceCulture);
             }
         }
         

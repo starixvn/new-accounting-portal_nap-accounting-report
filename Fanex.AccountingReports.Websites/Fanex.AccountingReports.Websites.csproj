@@ -459,6 +459,24 @@
     <Content Include="App_Data\PRO\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBCUST.CustDB.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBCUST.IPDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBACC.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBACC.bodb_ACC.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBAGE.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBBET.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBCUST.CustDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBCUST.IPDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBDWH.bodb_dwrs.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBEXT.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBNAP.bodb_NAP.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBONUSER.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBPOLICY.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBRPT.bodb_Report.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBACC.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -2273,6 +2291,9 @@
     <Content Include="Web.uat.ConnectionString.config" />
     <Content Include="Areas\UserLogin\Views\Common\ExpiredNotification.cshtml" />
     <Content Include="Web.Configuration\LiveCasinoProductSection.config" />
+    <Content Include="Web.sit.AppSettings.config" />
+    <Content Include="Web.sit.config" />
+    <Content Include="Web.sit.ConnectionString.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
