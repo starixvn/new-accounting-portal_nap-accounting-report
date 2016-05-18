@@ -1,0 +1,256 @@
+<#@ import namespace="System" #>
+<#
+    var sites = new SiteInfo[]{
+		new SiteInfo
+        {
+            Environment = SiteEnvironment.DEV
+        },
+        new SiteInfo
+        {
+            Environment = SiteEnvironment.LOCAL
+        },
+		new SiteInfo
+        {
+            Environment = SiteEnvironment.MASTER
+        },
+        new SiteInfo
+        {
+            Environment = SiteEnvironment.SIT
+        },
+        new SiteInfo
+        {
+            Environment = SiteEnvironment.UAT
+        },
+        new SiteInfo
+        {
+            Environment = SiteEnvironment.MNL
+        },
+        new SiteInfo
+        {
+            Environment = SiteEnvironment.PRO
+        }
+    };
+#>
+<#+
+    enum SiteEnvironment
+    {
+		DEV,
+        LOCAL,
+		MASTER,
+        SIT,
+        UAT,
+        MNL,
+        PRO
+    }
+    class SiteInfo
+    {
+        public SiteEnvironment Environment { get; set; }
+                
+        #region For Webconfig file
+
+		public string EnvironmentSettings
+        {
+            get
+            {
+                switch(Environment)
+                {
+                    case SiteEnvironment.PRO:
+                    case SiteEnvironment.MNL:
+                        return "LIVE";
+
+                    default:
+                        return "UAT";
+                }
+            }
+        }
+
+        public string SiteIdSettings
+        {
+            get
+            {
+                switch(Environment)
+                {
+                    case SiteEnvironment.UAT:
+                    case SiteEnvironment.SIT:
+                    case SiteEnvironment.PRO:
+                    case SiteEnvironment.MNL:
+                        return "4";                    
+                    default:
+                        return "3";
+                }
+            }
+        }
+
+		public string HubUrl
+        {
+            get
+            {
+                switch(Environment)
+                {
+                    default:
+                        return string.Empty;
+                }
+            }
+        }
+
+		public string AuthorizeDomain
+        {
+            get
+            {
+                switch(Environment)
+                {
+                    case SiteEnvironment.PRO:
+                    case SiteEnvironment.MNL:
+                        return "<add Name=\"58.86.55.10\" Path=\"/AccReport\"></add>";
+                    default:
+                        return "<add Name=\"localhost:52738\" Path=\"/\" />";
+                }
+            }
+        }
+
+		public string ONEbookUMAddress
+        {
+            get
+            {
+                switch(Environment)
+                {
+                    case SiteEnvironment.UAT:                    
+                    case SiteEnvironment.PRO:
+                    case SiteEnvironment.MNL:
+                        return "http://10.40.40.22:8889/api";                    
+					case SiteEnvironment.SIT:
+						return "http://172.16.4.106:8889/api";
+                    default:
+                        return "http://10.18.200.124:8889/api";
+                }
+            }
+        }
+
+        public string EnableCheckUM
+        {
+            get
+            {
+                switch(Environment)
+                {
+					case SiteEnvironment.PRO:
+                    case SiteEnvironment.MNL:					
+						return "true";					
+                    default:
+                        return "false";
+                }
+            }
+        }
+
+		public string LoggingMsmqPath
+        {
+            get
+            {
+                switch(Environment)
+                {
+                    case SiteEnvironment.UAT:
+                        return @"FormatName:DIRECT=tcp:10.40.40.73\private$\entlib";
+					case SiteEnvironment.SIT:
+                        return @"FormatName:DIRECT=tcp:172.16.4.106\private$\entlib";
+                    case SiteEnvironment.PRO:
+                        return @"FormatName:DIRECT=http://10.40.40.127/msmq/Private$/entlib";
+                    case SiteEnvironment.MNL:
+                        return @"FormatName:DIRECT=tcp:10.2.98.3\private$\entlib";
+                    default:
+                        return @"FormatName:DIRECT=tcp:10.18.200.124\private$\entlib";
+                }
+            }
+        }
+        
+        public string LoggingDefaultCategory
+        {
+            get
+            {
+                switch(Environment)
+                {
+                    case SiteEnvironment.UAT:
+                        return "NAP-Report-UAT";
+                    case SiteEnvironment.SIT:
+						return "NAP-Report-SIT";
+					case SiteEnvironment.PRO:
+                    case SiteEnvironment.MNL:
+                        return "NAP-Report";
+                    default:
+                        return "NAP-Report-LOCAL";
+                }
+            }
+        }
+
+		public string CouchBase
+        {
+            get
+            {
+                switch(Environment)
+                {
+                    case SiteEnvironment.UAT:
+					case SiteEnvironment.SIT:
+                    case SiteEnvironment.PRO:
+                        return "http://10.40.40.135:8091/pools/default";
+                    case SiteEnvironment.MNL:
+						return "http://10.2.98.3:8091/pools/default";
+
+                    default:
+                        return "http://10.18.200.124:8091/pools/default";
+                }
+            }
+        }
+       
+        public string DebugMode
+        {
+            get
+            {
+                switch(Environment)
+                {
+					case SiteEnvironment.PRO:
+                    case SiteEnvironment.MNL:
+						return "false";
+                    default:
+                        return "true";
+                }
+            }
+        }
+
+		public string ErrorMode
+        {
+            get
+            {
+                switch(Environment)
+                {
+				case SiteEnvironment.PRO:
+                    case SiteEnvironment.MNL:
+					case SiteEnvironment.LOCAL:
+						return "On";					
+                    default:
+                        return "Off";
+                }
+            }
+        }
+
+        public string StateConnectionString
+        {
+            get
+            {
+                switch(Environment)
+                {
+                    case SiteEnvironment.UAT:
+                        return "stateConnectionString=\"tcpip=10.40.40.135:42424\"";						
+                    case SiteEnvironment.SIT:
+                        return "stateConnectionString=\"tcpip=172.16.4.107:42424\"";
+                    case SiteEnvironment.PRO:
+                        return "stateConnectionString=\"tcpip=10.40.40.135:42424\"";
+                    case SiteEnvironment.MNL:
+                        return "stateConnectionString=\"tcpip=10.2.12.10:42424\"";
+
+                    default:
+                        return string.Empty;
+                }
+            }
+        }
+	        
+        #endregion End for Webconfig file
+    }
+#>

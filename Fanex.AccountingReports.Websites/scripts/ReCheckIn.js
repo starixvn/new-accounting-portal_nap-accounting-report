@@ -23,11 +23,12 @@ var Recheckin = function ($) {
                         alert('Another session has been logged in or your session is expired. Forced to logout!');
                         window.location.href = AccReport.accReportRoot + "UserLogin/Login/LogOut";
                     }
-                    if (result.IsKickedOut == "-1") {
-                        window.location.href = Recheckin.root + "UserLogin/Common/Offline";
-                    }
                 },
                 error: function (request, status, error) {
+                    var result = $.parseJSON(request.responseText);
+                    if (result.code == 999999) {
+                        window.location.href = Recheckin.root + "UserLogin/Common/Offline";
+                    }
                 }
             });
         },

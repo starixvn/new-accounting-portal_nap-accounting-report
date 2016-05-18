@@ -15,7 +15,7 @@
     <AssemblyName>Fanex.AccountingReports.Websites</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <IISExpressSSLPort />
@@ -42,19 +42,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Couchbase, Version=1.2.6.0, Culture=neutral, PublicKeyToken=05e9c6b5a9ec94c2, processorArchitecture=MSIL">
-      <HintPath>..\packages\CouchbaseNetClient.1.2.6\lib\net40\Couchbase.dll</HintPath>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="dotless.Core">
-      <HintPath>..\packages\dotless.1.3.1.0\lib\dotless.Core.dll</HintPath>
+    <Reference Include="BundleTransformer.Core, Version=1.9.92.0, Culture=neutral, PublicKeyToken=973c344c93aac60d, processorArchitecture=MSIL">
+      <HintPath>..\packages\BundleTransformer.Core.1.9.92\lib\net40\BundleTransformer.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Enyim.Caching, Version=2.12.0.0, Culture=neutral, PublicKeyToken=05e9c6b5a9ec94c2, processorArchitecture=MSIL">
-      <HintPath>..\packages\CouchbaseNetClient.1.2.6\lib\net40\Enyim.Caching.dll</HintPath>
+    <Reference Include="BundleTransformer.Less, Version=1.9.107.0, Culture=neutral, PublicKeyToken=973c344c93aac60d, processorArchitecture=MSIL">
+      <HintPath>..\packages\BundleTransformer.Less.1.9.107\lib\net40\BundleTransformer.Less.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Couchbase, Version=1.0.0.0, Culture=neutral, PublicKeyToken=81137140da4e57ef, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Couchbase.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="dotless.Core, Version=1.3.1.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
+      <HintPath>..\packages\dotless.1.3.1.0\lib\dotless.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Enyim.Caching, Version=2.12.0.0, Culture=neutral, PublicKeyToken=81137140da4e57ef, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Enyim.Caching.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ExcelUtil, Version=29.3.0.1000, Culture=neutral, processorArchitecture=MSIL">
@@ -112,8 +121,8 @@
       <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.2\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.NAP.Core, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.2.0.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
+    <Reference Include="Fanex.NAP.Core, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.NAP.Core.2.1.0.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Result.Core, Version=2.0.1.6, Culture=neutral, processorArchitecture=MSIL">
@@ -164,6 +173,10 @@
       <HintPath>..\packages\NPOI.2.0.6\lib\net40\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="JavaScriptEngineSwitcher.Core, Version=1.5.0.0, Culture=neutral, PublicKeyToken=c608b2a8cc9e4472, processorArchitecture=MSIL">
+      <HintPath>..\packages\JavaScriptEngineSwitcher.Core.1.5.0\lib\net40\JavaScriptEngineSwitcher.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Caching, Version=5.0.414.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\EnterpriseLibrary.Caching.5.0.414.0\lib\net40\Microsoft.Practices.EnterpriseLibrary.Caching.dll</HintPath>
@@ -193,25 +206,17 @@
       <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.Interception.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MvcPager, Version=1.5.0.28157, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvcPager.1.5.0.28157\lib\net40\MvcPager.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ONEbook.UM, Version=1.0.1.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ONEbook.UM.1.0.1.2\lib\net40\ONEbook.UM.dll</HintPath>
+    <Reference Include="ONEbook.UM, Version=2.0.2.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ONEbook.UM.2.0.2.6\lib\net40\ONEbook.UM.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="RazorEngine, Version=3.7.3.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RazorEngine.3.7.3\lib\net40\RazorEngine.dll</HintPath>
     </Reference>
     <Reference Include="NPOI.OOXML, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOIExtention.1.0.0.1\lib\NPOI.OOXML.dll</HintPath>
@@ -227,6 +232,10 @@
     </Reference>
     <Reference Include="OfficeOpenXmlCrypto, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOIExtention.1.0.0.1\lib\OfficeOpenXmlCrypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.8.2.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.8.2\lib\net40\RazorEngine.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RemotingRef, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
@@ -248,19 +257,79 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks, Version=2.6.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.40804.0\lib\net40\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.2\lib\net40\System.Web.Optimization.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.30506.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
@@ -275,50 +344,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20505.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20505.0\lib\net40\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20505.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20505.0\lib\net40\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Providers">
-      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.0\lib\net40\System.Web.Providers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20505.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="UMControllerLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UMControllerLibrary.1.0.0.1\lib\net40\UMControllerLibrary.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
@@ -329,14 +354,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Content Include="App_Data\Dev\DBBET.bk.bodbAdminNet.xml">
+    <Content Include="App_Data\DEV\DBBET.bk.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Local\DBBET.bk.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBBET.bk.bodbAdminNet.xml" />
-    <Content Include="App_Data\Dev\DBPOLICY.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\Local\DBPOLICY.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBPOLICY.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\LOCAL\DBBET.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBBET.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\DEV\DBPOLICY.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\LOCAL\DBPOLICY.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBPOLICY.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBACC.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBACC.bodb_ACC.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBAGE.bodb02.bodbAdminNet.xml" />
@@ -357,82 +382,82 @@
     <Content Include="App_Data\MNL\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBCUST.CustDB.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBCUST.IPDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\Dev\DBACC.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\DEV\DBACC.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Dev\DBACC.bodb_ACC.bodbAdminNet.xml" />
-    <Content Include="App_Data\Dev\DBAGE.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\DEV\DBACC.bodb_ACC.bodbAdminNet.xml" />
+    <Content Include="App_Data\DEV\DBAGE.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Dev\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+    <Content Include="App_Data\DEV\DBDWH.bodb_dwrs.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Dev\DBDWHBODB02.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\DEV\DBDWHBODB02.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Dev\DBEXT.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\Dev\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
-    <Content Include="App_Data\Dev\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
-    <Content Include="App_Data\Dev\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\Dev\DBNAP.bodb_NAP.bodbAdminNet.xml" />
-    <Content Include="App_Data\Dev\DBONUSER.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\DEV\DBEXT.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\DEV\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
+    <Content Include="App_Data\DEV\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
+    <Content Include="App_Data\DEV\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
+    <Content Include="App_Data\DEV\DBNAP.bodb_NAP.bodbAdminNet.xml" />
+    <Content Include="App_Data\DEV\DBONUSER.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Dev\DBONUSER.ON_USER.bodbAdminNet.xml" />
-    <Content Include="App_Data\Dev\DBRPT.bodb_Report.bodbAdminNet.xml">
+    <Content Include="App_Data\DEV\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\DEV\DBRPT.bodb_Report.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Dev\DBTXN.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\Dev\DBCUST.CustDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\Dev\DBCUST.IPDB.bodbAdminNet.xml">
+    <Content Include="App_Data\DEV\DBTXN.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\DEV\DBCUST.CustDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\DEV\DBCUST.IPDB.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Local\DBONUSER.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBACC.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBACC.bodb_ACC.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBAGE.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+    <Content Include="App_Data\LOCAL\DBONUSER.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBACC.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBACC.bodb_ACC.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBAGE.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBDWH.bodb_dwrs.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Master\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBEXT.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBNAP.bodb_NAP.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBONUSER.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBONUSER.ON_USER.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBRPT.bodb_Report.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBTXN.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBCUST.CustDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\Master\DBCUST.IPDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\Local\DBACC.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\MASTER\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBEXT.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBNAP.bodb_NAP.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBONUSER.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBRPT.bodb_Report.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBTXN.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBCUST.CustDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\MASTER\DBCUST.IPDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\LOCAL\DBACC.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Local\DBACC.bodb_ACC.bodbAdminNet.xml" />
-    <Content Include="App_Data\Local\DBAGE.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\LOCAL\DBACC.bodb_ACC.bodbAdminNet.xml" />
+    <Content Include="App_Data\LOCAL\DBAGE.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Local\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+    <Content Include="App_Data\LOCAL\DBDWH.bodb_dwrs.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Local\DBDWHBODB02.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\LOCAL\DBDWHBODB02.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Local\DBEXT.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\Local\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
-    <Content Include="App_Data\Local\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
-    <Content Include="App_Data\Local\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\Local\DBNAP.bodb_NAP.bodbAdminNet.xml" />
-    <Content Include="App_Data\Local\DBONUSER.ON_USER.bodbAdminNet.xml" />
-    <Content Include="App_Data\Local\DBRPT.bodb_Report.bodbAdminNet.xml">
+    <Content Include="App_Data\LOCAL\DBEXT.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\LOCAL\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
+    <Content Include="App_Data\LOCAL\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
+    <Content Include="App_Data\LOCAL\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
+    <Content Include="App_Data\LOCAL\DBNAP.bodb_NAP.bodbAdminNet.xml" />
+    <Content Include="App_Data\LOCAL\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\LOCAL\DBRPT.bodb_Report.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Local\DBTXN.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\Local\DBCUST.CustDB.bodbAdminNet.xml">
+    <Content Include="App_Data\LOCAL\DBTXN.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\LOCAL\DBCUST.CustDB.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Local\DBCUST.IPDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\LOCAL\DBCUST.IPDB.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBACC.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -2195,9 +2220,6 @@
     <Content Include="Areas\Gaming\Views\NumberGameStatistic\Index.cshtml" />
     <Content Include="Areas\Special\Views\PunterAnalysis\Index.cshtml" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\CockFighting.cshtml" />
-    <None Include="BundleTransformer.Configuration.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Views\Test\Style\TotalTransactions.less" />
     <Content Include="Areas\Licensee\Views\TotalTransactions\Index.cshtml" />
     <Content Include="Areas\Licensee\Views\TotalTransactions\TotalTransactions.less" />
@@ -2223,10 +2245,19 @@
     <Content Include="Areas\UserLogin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\UserLogin\Views\SSO\SSOIndex.cshtml" />
     <Content Include="Areas\UserLogin\Views\UserSite\Site.cshtml" />
-    <Content Include="Web.ConnectionString.config">
+    <Content Include="Web.Configuration\Web.Config.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Web.Config.txt</LastGenOutput>
+    </Content>
+    <Content Include="Web.Configuration\Web.Config.txt">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Web.Config.tt</DependentUpon>
+    </Content>
+    <Content Include="Web.Configuration\Web.DEV.ConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.AppSettings.config">
+    <Content Include="Web.Configuration\Web.DEV.AppSettings.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Home\Index.cshtml" />
@@ -2239,28 +2270,21 @@
     <Content Include="themes\base\jqueryuicustom.less" />
     <Content Include="themes\base\style.less" />
     <Content Include="themes\base\themes.less" />
-    <Content Include="Web.master.AppSettings.config">
+    <Content Include="Web.Configuration\Web.MASTER.AppSettings.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.master.config">
+    <Content Include="Web.Configuration\Web.MASTER.ConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.master.ConnectionString.config">
+    <Content Include="Web.Configuration\Web.LOCAL.AppSettings.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.local.AppSettings.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.local.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.local.ConnectionString.config">
+    <Content Include="Web.Configuration\Web.LOCAL.ConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\Fanex.Result\fanex.result.less" />
-    <Content Include="Web.backupMNL.AppSettings.config" />
-    <Content Include="Web.backupMNL.config" />
-    <Content Include="Web.backupMNL.ConnectionString.config">
+    <Content Include="Web.Configuration\Web.MNL.AppSettings.config" />
+    <Content Include="Web.Configuration\Web.MNL.ConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
     <None Include="scripts\_lib\Fanex.Grid\images\Thumbs.db" />
@@ -2279,21 +2303,41 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Test\Index.cshtml" />
-    <Content Include="Web.pro.AppSettings.config" />
-    <Content Include="Web.pro.config" />
-    <Content Include="Web.pro.ConnectionString.config">
+    <Content Include="Web.Configuration\Web.PRO.AppSettings.config" />
+    <Content Include="Web.Configuration\Web.PRO.ConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.uat.AppSettings.config" />
-    <Content Include="Web.uat.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.uat.ConnectionString.config" />
+    <Content Include="Web.Configuration\Web.UAT.AppSettings.config" />
+    <Content Include="Web.Configuration\Web.UAT.ConnectionString.config" />
     <Content Include="Areas\UserLogin\Views\Common\ExpiredNotification.cshtml" />
     <Content Include="Web.Configuration\LiveCasinoProductSection.config" />
-    <Content Include="Web.sit.AppSettings.config" />
-    <Content Include="Web.sit.config" />
-    <Content Include="Web.sit.ConnectionString.config" />
+    <Content Include="Web.Configuration\Web.SIT.AppSettings.config" />
+    <Content Include="Web.Configuration\Web.SIT.ConnectionString.config" />
+    <Content Include="Web.Configuration\Configuration.ttinclude" />
+    <Content Include="Web.Configuration\Web.DEV.config">
+      <DependentUpon>Web.Config.tt</DependentUpon>
+    </Content>
+    <Content Include="Web.Configuration\Web.LOCAL.config">
+      <DependentUpon>Web.Config.tt</DependentUpon>
+    </Content>
+    <Content Include="Web.Configuration\Web.MASTER.config">
+      <DependentUpon>Web.Config.tt</DependentUpon>
+    </Content>
+    <Content Include="Web.Configuration\Web.MNL.config">
+      <DependentUpon>Web.Config.tt</DependentUpon>
+    </Content>
+    <Content Include="Web.Configuration\Web.PRO.config">
+      <DependentUpon>Web.Config.tt</DependentUpon>
+    </Content>
+    <Content Include="Web.Configuration\Web.SIT.config">
+      <DependentUpon>Web.Config.tt</DependentUpon>
+    </Content>
+    <Content Include="Web.Configuration\Web.UAT.config">
+      <DependentUpon>Web.Config.tt</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -2309,12 +2353,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>63738</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost:52738/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -2330,6 +2373,11 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
+    <Error Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
