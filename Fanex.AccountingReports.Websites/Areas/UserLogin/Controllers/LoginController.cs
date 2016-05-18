@@ -23,7 +23,6 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
-    using ONEbook.UM.Filters;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -109,7 +108,6 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         /// </summary>
         /// <returns>The index page.</returns>
         [HttpGet]
-        [UMBackdoorFilter]
         public ActionResult Index(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -214,7 +212,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                                             }
                                         }
 
-        #endregion sign in
+                                        #endregion sign in
 
                                         if (userIsActiveOnThisSite)
                                         {
@@ -320,6 +318,13 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         [HttpPost]
         public ActionResult ReCheckLogin()
         {
+            if (AppSettings.IsLocalTest)
+            {
+                return Json(new
+                {
+                    IsKickedOut = "0"
+                });
+            }
             try
             {
                 AppSession.RoleAccess = PermissionService.GetRoleAccess(_functionService.GetByUserAndSiteIncludeGroup(
@@ -327,43 +332,27 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                                     NapSettings.Settings.SiteId,
                                     NapSettings.Settings.Environment));
 
-                if (!AppSettings.IsLocalTest)
+
+                var siteStatus = _siteService.GetStatusById(this.SiteId);
+                if (!siteStatus)
                 {
-                    if (!_maintenanceService.IsPassUnderMaintenance())
-                    {
-                        return Json(new
-                        {
-                            IsKickedOut = "-1"
-                        });
-                    }
-
-                    var siteStatus = _siteService.GetStatusById(this.SiteId);
-
-                    if (!siteStatus)
-                    {
-                        return Json(new
-                        {
-                            IsKickedOut = "1"
-                        });
-                    }
-
-                    UserReCheckInUserCriteria criteria = new UserReCheckInUserCriteria();
-                    criteria.OnUserId = Convert.ToInt32(_currentSession.OnUserId);
-                    _userService.ReUserCheckIn(criteria);
-
                     return Json(new
                     {
-                        OnUserId = Convert.ToInt32(_currentSession.OnUserId),
-                        IsKickedOut = criteria.IsKickedOut ? "1" : "0"
+                        IsKickedOut = "1"
                     });
-                }                
+                }
+
+                UserReCheckInUserCriteria criteria = new UserReCheckInUserCriteria();
+                criteria.OnUserId = Convert.ToInt32(_currentSession.OnUserId);
+                _userService.ReUserCheckIn(criteria);
 
                 return Json(new
                 {
-                    IsKickedOut = "0"
+                    OnUserId = Convert.ToInt32(_currentSession.OnUserId),
+                    IsKickedOut = criteria.IsKickedOut ? "1" : "0"
                 });
             }
-            catch 
+            catch
             {
             }
 

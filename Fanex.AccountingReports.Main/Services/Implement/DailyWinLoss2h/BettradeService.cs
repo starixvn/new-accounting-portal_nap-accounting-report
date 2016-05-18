@@ -56,7 +56,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         {
             try
             {
-                var report = SessionManager.Get<WinLossInfo>(_dailyWinLoss2hCacheBettradeKey);
+                var report = CacheExtension.Get<WinLossInfo>(_dailyWinLoss2hCacheBettradeKey);
                 if (report == null)
                 {
                     report = this.GetBettradeReport(criteria);

@@ -9,6 +9,7 @@
 
 namespace Fanex.AccountingReports.Websites
 {
+    using ONEbook.UM.Filters;
     using System.Web.Mvc;
 
     /// <summary>
@@ -19,6 +20,7 @@ namespace Fanex.AccountingReports.Websites
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new CheckUMFilter());
         }
     }
 }
