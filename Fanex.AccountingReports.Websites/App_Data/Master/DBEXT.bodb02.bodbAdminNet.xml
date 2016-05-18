@@ -1,29 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
-  <Function Name="Licensee - Total Transaction">
-    <Setting Key="Licensee_TotalTransaction_GetTotalTicket" SpName="Acc_Rpt_LicGetTotalTicket" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Licensee_NumberGameWinloss_GetReport" SpName="Acc_Rpt_LicNumberGameWinloss" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
-  </Function>
-  <Function Name="Licensee - Live Casino Win Loss">
-    <Setting Key="Licensee_LiveCasinoWinLoss_GetGameType" SpName="Acc_LiveCasinoGetGameType" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Licensee_LiveCasinoWinloss_GetReport" SpName="Acc_Rpt_LicLiveCasinoWinloss" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
-  </Function>
   <Function Name="Licensee - Core">
     <Setting Key="Licensee_Core_GetAllLicensees" SpName="Acc_LicenseeSelAll" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
     <Setting Key="Licensee_Core_GetCurrencies" SpName="Acc_SelCurrencyByLicensee" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
-    <Setting Key="Acc_PlaytechCS_LicenseeSelAll" SpName="Acc_PlaytechCS_LicenseeSelAll" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
     <Setting Key="Acc_GetProductListByLicenseId" SpName="Acc_GetProductListByLicenseId" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-  </Function>
-  <Function Name="Licensee - Virtual Sport Win Loss">
-    <Setting Key="Licensee_VirtualSportWinLoss_GetReportBySport" SpName="Acc_SporttypeGetVirtualSport" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Licensee_VirtualSportWinloss_GetReport" SpName="Acc_Rpt_LicVirtualSportWinloss" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
-  </Function>
-  <Function Name="Licensee - Win Loss By Licensee">
-    <Setting Key="Licensee_WinLossByLicensee_GetCurrencyReport" SpName="Acc_Rpt_LicWinloss2" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
-    <Setting Key="Licensee_WinLossByLicensee_GetWinLossAgent" SpName="Acc_Rpt_LicWinlossDetail_Ag2" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
-    <Setting Key="Licensee_WinLossByLicensee_GetWinLossSuper" SpName="Acc_Rpt_LicWinlossDetail_SAg2" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
-    <Setting Key="Licensee_WinLossByLicensee_GetWinLossMaster" SpName="Acc_Rpt_LicWinlossDetail_MAg2" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
-    <Setting Key="Licensee_WinLossByLicensee_GetWinLossMember" SpName="Acc_Rpt_LicWinlossDetail2" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
   </Function>
   <Function Name="Licensee - Negative Balance">
     <Setting Key="Licensee_NegativeBalance_GetReport" SpName="Acc_Rpt_NegativeBalanceMember_Dep" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
@@ -45,15 +25,6 @@
     <Setting Key="Balance_MasterBalance_AgentDownline" SpName="Acc_Rpt_Balance_Agent" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
     <Setting Key="Balance_MasterBalance_MemberDownline" SpName="Acc_Rpt_Balance_Member" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
   </Function>
-
-  <Function Name="Licensee - Keno Win Loss">
-    <Setting Key="Licensee_KenoWinLoss_Bettype" SpName="Acc_KenoBettypeSel" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
-  </Function>
-
-  <Function Name="Licensee - AG Casino Winloss">
-    <Setting Key="Licensee_AGCasinoWinloss_GetCurrencyByLicensee" SpName="Acc_SelCurrencyByLicensee" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0" />
-  </Function>
-
   <Function Name="Licensee - Company Win Loss">
     <Setting Key="Acc_Rpt_CompanyWinloss" SpName="Acc_Rpt_CompanyWinloss" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"  />
   </Function>

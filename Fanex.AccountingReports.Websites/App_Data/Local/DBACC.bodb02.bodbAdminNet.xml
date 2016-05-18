@@ -249,9 +249,6 @@
   <Function Name="WinLoss - Match Win Loss By Bettype">
     <Setting Key="MatchWinLossByBetType" SpName="Acc_Rpt_MatchWinLossByBetType" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
-  <Function Name="Licensee - Play tech casino win loss">
-    <Setting Key="Licensee_PlaytechCasinoWinLoss_GetWinLossReport" SpName="Acc_Rpt_PlaytechWinloss2" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-  </Function>
   <Function Name="Racing - Racing Win Lost By Licensee">
     <Setting Key="Racing_RacingWinLostLicensee_Detail" SpName="Acc_Rpt_WinlostRacingLicensee_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Racing_RacingWinLostLicensee_DetailBetList" SpName="Acc_Rpt_WinlostRacingLicensee_BetList_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
@@ -269,14 +266,6 @@
   </Function>
   <Function Name="Racing - Win Lost Group Daily">
     <Setting Key="Racing_WinLostGroupDaily" SpName="Acc_Rpt_WinlostRacing_Group_Daily" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-  </Function>
-
-  <Function Name="Licensee - AG Casino Winloss">
-    <Setting Key="Licensee_AGCasinoWinloss_GetMainReport" SpName="Acc_Rpt_AGCasinoWinloss" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Licensee_AGCasinoWinloss_GetSuperReport" SpName="Acc_Rpt_AGCasinoWinloss_SAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Licensee_AGCasinoWinloss_GetMasterReport" SpName="Acc_Rpt_AGCasinoWinloss_MAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Licensee_AGCasinoWinloss_GetAgentReport" SpName="Acc_Rpt_AGCasinoWinloss_Ag" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Licensee_AGCasinoWinloss_GetMemberReport" SpName="Acc_Rpt_AGCasinoWinloss_Mem" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Misc - Credit Movement">
     <Setting Key="Misc_CreditMovement_GetSites" SpName="SiteSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>

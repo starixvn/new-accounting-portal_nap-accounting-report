@@ -29,8 +29,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Misc", "Fanex.AccountingRep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Fanex.AccountingReports.Core\Core.csproj", "{A5608298-26C2-4F05-A7FD-AA8C0700ED38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{37848609-0CA3-4723-93E9-06DD93A17473}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetList", "Fanex.BetList.Accounting\BetList.csproj", "{DCEA602C-2786-45B3-B3C4-1D3241F40F09}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module", "Module", "{B055800A-814C-454C-80BD-1F01884D910B}"
@@ -50,6 +48,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{02C0ED
 	EndProjectSection
 EndProject
 Global
+	GlobalSection(JSLint) = preSolution
+		SolutionConfigurationLocation = JSLintOptions.xml
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -159,16 +160,6 @@ Global
 		{A5608298-26C2-4F05-A7FD-AA8C0700ED38}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A5608298-26C2-4F05-A7FD-AA8C0700ED38}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A5608298-26C2-4F05-A7FD-AA8C0700ED38}.Release|x86.ActiveCfg = Release|Any CPU
-		{37848609-0CA3-4723-93E9-06DD93A17473}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{37848609-0CA3-4723-93E9-06DD93A17473}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{37848609-0CA3-4723-93E9-06DD93A17473}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{37848609-0CA3-4723-93E9-06DD93A17473}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{37848609-0CA3-4723-93E9-06DD93A17473}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{37848609-0CA3-4723-93E9-06DD93A17473}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{37848609-0CA3-4723-93E9-06DD93A17473}.Release|Any CPU.Build.0 = Release|Any CPU
-		{37848609-0CA3-4723-93E9-06DD93A17473}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{37848609-0CA3-4723-93E9-06DD93A17473}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{37848609-0CA3-4723-93E9-06DD93A17473}.Release|x86.ActiveCfg = Release|Any CPU
 		{DCEA602C-2786-45B3-B3C4-1D3241F40F09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DCEA602C-2786-45B3-B3C4-1D3241F40F09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCEA602C-2786-45B3-B3C4-1D3241F40F09}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -204,12 +195,8 @@ Global
 		{A58769CB-55CB-4741-B1FA-ACF437D12701} = {B055800A-814C-454C-80BD-1F01884D910B}
 		{F4EB0A2C-2271-48FA-8DC2-3B220B78F890} = {B055800A-814C-454C-80BD-1F01884D910B}
 		{A5608298-26C2-4F05-A7FD-AA8C0700ED38} = {955BB30D-ED74-4C08-B01A-1D019A50052F}
-		{37848609-0CA3-4723-93E9-06DD93A17473} = {B055800A-814C-454C-80BD-1F01884D910B}
 		{DCEA602C-2786-45B3-B3C4-1D3241F40F09} = {B055800A-814C-454C-80BD-1F01884D910B}
 		{B055800A-814C-454C-80BD-1F01884D910B} = {955BB30D-ED74-4C08-B01A-1D019A50052F}
 		{9036948C-3231-42CF-8AF5-0AF601DFB199} = {B055800A-814C-454C-80BD-1F01884D910B}
-	EndGlobalSection
-	GlobalSection(JSLint) = preSolution
-		SolutionConfigurationLocation = JSLintOptions.xml
 	EndGlobalSection
 EndGlobal

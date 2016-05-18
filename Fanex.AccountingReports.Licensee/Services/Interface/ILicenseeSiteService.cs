@@ -22,7 +22,5 @@ namespace Fanex.AccountingReports.Licensee.Services.Interface
         List<Licensee> GetLicenseeSiteList();
 
         List<Currency> GetCurrenciesByLicensee(GetCurrenciesByLicenseeCriteria criteria);
-
-        List<Licensee> GetPlaytechCasino();
     }
 }

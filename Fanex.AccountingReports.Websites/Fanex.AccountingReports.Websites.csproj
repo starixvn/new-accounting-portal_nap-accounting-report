@@ -370,8 +370,12 @@
     </Content>
     <Content Include="App_Data\MNL\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBBET.bk.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBEXT.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
+    <Content Include="App_Data\MNL\DBEXT.bodb02.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\MNL\DBLIC.bodb_Licensee.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\MNL\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBNAP.bodb_NAP.bodbAdminNet.xml" />
@@ -470,8 +474,12 @@
     </Content>
     <Content Include="App_Data\PRO\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBBET.bk.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBEXT.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
+    <Content Include="App_Data\PRO\DBEXT.bodb02.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\PRO\DBLIC.bodb_Licensee.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\PRO\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBNAP.bodb_NAP.bodbAdminNet.xml" />
@@ -484,7 +492,9 @@
     <Content Include="App_Data\PRO\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBCUST.CustDB.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBCUST.IPDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBACC.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBACC.bodb02.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\SIT\DBACC.bodb_ACC.bodbAdminNet.xml" />
     <Content Include="App_Data\SIT\DBAGE.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\SIT\DBBET.bk.bodbAdminNet.xml" />
@@ -492,8 +502,12 @@
     <Content Include="App_Data\SIT\DBCUST.IPDB.bodbAdminNet.xml" />
     <Content Include="App_Data\SIT\DBDWH.bodb_dwrs.bodbAdminNet.xml" />
     <Content Include="App_Data\SIT\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBEXT.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
+    <Content Include="App_Data\SIT\DBEXT.bodb02.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\SIT\DBLIC.bodb_Licensee.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\SIT\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
     <Content Include="App_Data\SIT\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
     <Content Include="App_Data\SIT\DBNAP.bodb_NAP.bodbAdminNet.xml" />
@@ -514,8 +528,12 @@
     </Content>
     <Content Include="App_Data\UAT\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBBET.bk.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBEXT.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBLIC.bodb_Licensee.bodbAdminNet.xml" />
+    <Content Include="App_Data\UAT\DBEXT.bodb02.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\UAT\DBLIC.bodb_Licensee.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\UAT\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBNAP.bodb_NAP.bodbAdminNet.xml" />
@@ -705,20 +723,11 @@
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Styles\Images\SubTabHeadLineIcon-Expand.png" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Styles\Images\ui-bg_gloss-wave_75_2191c0_500x100.png" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Styles\Images\upload-image-icon.png" />
-    <Content Include="Areas\Licensee\Views\AGCasinoWinloss\Scripts\Index.js" />
-    <Content Include="Areas\Licensee\Views\AGCasinoWinloss\Styles\Index.less" />
     <Content Include="Areas\Licensee\Views\CompanyWinLoss\Scripts\Index.js" />
-    <Content Include="Areas\Licensee\Views\KenoWinLoss\Scripts\KenoWinLoss.js" />
-    <Content Include="Areas\Licensee\Views\PlaytechCasinoWinLoss\Scripts\PlaytechCasinoWinLoss.js" />
-    <Content Include="Areas\Licensee\Views\KenoWinLoss\Index.cshtml" />
-    <Content Include="Areas\Licensee\Views\KenoWinLoss\Styles\KenoWinLoss.less" />
-    <Content Include="Areas\Licensee\Views\PlaytechCasinoWinLoss\Styles\PlaytechCasinoWinLoss.less" />
     <Content Include="Areas\LegendManagement\Views\Web.config" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Index.cshtml" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Styles\LegendManagement.less" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Styles\UploadImagePopup.less" />
-    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Scripts\MasterReport.js" />
-    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Scripts\SuperReport.js" />
     <Content Include="Areas\Main\Views\CreditTerm\Scripts\CreditTerm.js" />
     <Content Include="Areas\Main\Views\CreditTerm\Scripts\InstallAmount.js" />
     <Content Include="Areas\Main\Views\CreditTerm\Scripts\ReportManager.js" />
@@ -797,7 +806,6 @@
     <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\ThirdPartyDetailReport.js" />
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Index.cshtml" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\KenoReport.cshtml" />
-    <Content Include="Areas\Licensee\Views\PlaytechCasinoWinLoss\Index.cshtml" />
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Styles\TraderPerformanceOtherSports.less" />
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Scripts\TraderPerformanceOtherSports.js" />
     <Content Include="Areas\Main\Views\TraderPerformanceSoccer\Scripts\TraderPerformanceSoccer.js" />
@@ -1291,19 +1299,9 @@
     <Content Include="Areas\Balance\Views\DirectBalance\Scripts\DirectBalanceDownline.js" />
     <Content Include="Areas\Balance\Views\DirectBalance\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\NumberGameWinlossByDate\Scripts\NumberGameWinlossByDate.js" />
-    <Content Include="Areas\Licensee\Views\LiveCasinoWinLoss\LiveCasinoWinLoss.js" />
     <Content Include="Areas\Licensee\Views\NegativeBalance\NegativeBalance.js" />
-    <Content Include="Areas\Licensee\Views\NumberGameWinLoss\NumberGameWinLoss.js" />
     <Content Include="Areas\Licensee\Views\PeakConcurrentUsers\PeakConcurrentUser.js" />
-    <Content Include="Areas\Licensee\Views\TotalTransactions\ReportManager.js" />
-    <Content Include="Areas\Licensee\Views\TotalTransactions\TotalTransactions.js" />
-    <Content Include="Areas\Licensee\Views\VirtualSportWinLoss\VirtualSportWinLoss.js" />
     <Content Include="Areas\Licensee\Views\Web.config" />
-    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Scripts\AgentReport.js" />
-    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Scripts\BaseReport.js" />
-    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Scripts\CurrencyReport.js" />
-    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Scripts\MemberReport.js" />
-    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Scripts\ReportManager.js" />
     <Content Include="Areas\Misc\Views\BetCount\Scripts\BaseReport.js" />
     <Content Include="Areas\Misc\Views\CreditSitesBetCounts\CreditSitesBetCounts.js" />
     <Content Include="Areas\Misc\Views\DailyCreatedCustomers\DailyCreatedCustomers.js" />
@@ -2000,10 +1998,6 @@
       <Project>{9036948C-3231-42CF-8AF5-0AF601DFB199}</Project>
       <Name>LegendManagement</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Test\Test.csproj">
-      <Project>{37848609-0CA3-4723-93E9-06DD93A17473}</Project>
-      <Name>Test</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\UserControl\Views\Web.config" />
@@ -2012,8 +2006,6 @@
     <Content Include="Areas\UserLogin\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Licensee\Views\NumberGameWinLoss\Index.cshtml" />
-    <Content Include="Areas\Licensee\Views\LiveCasinoWinLoss\Index.cshtml" />
     <Content Include="Areas\Test\Views\Web.config" />
     <Content Include="Areas\Test\Views\ExternalReport\Index.cshtml" />
     <Content Include="Areas\Balance\Views\DirectBalance\Index.cshtml" />
@@ -2026,10 +2018,8 @@
     <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Styles\VirtualSportsWinLoss.less" />
-    <Content Include="Areas\Licensee\Views\LiveCasinoWinLoss\LiveCasinoWinLoss.less" />
     <Content Include="Areas\Licensee\Views\NegativeBalance\Index.cshtml" />
     <Content Include="Areas\Licensee\Views\NegativeBalance\NegativeBalance.less" />
-    <Content Include="Areas\Licensee\Views\NumberGameWinLoss\NumberGameWinLoss.less" />
     <Content Include="Areas\Licensee\Views\PeakConcurrentUsers\Index.cshtml" />
     <Content Include="Areas\Licensee\Views\PeakConcurrentUsers\PeakConcurrentUser.less" />
     <Content Include="Areas\Test\Views\ExternalReport\IndexRazor.cshtml" />
@@ -2045,8 +2035,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Main\Views\MatchWinLoss2a\Index.cshtml" />
-    <Content Include="Areas\Licensee\Views\WinLossByLicensee\WinLossByLicensee_SuperReport.cshtml" />
-    <Content Include="Areas\Licensee\Views\WinLossByLicensee\WinLossByLicensee_MasterReport.cshtml" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\BingoReport.cshtml" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\CasinoReport.cshtml" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\LiveCasinoReport.cshtml" />
@@ -2174,7 +2162,6 @@
     <Content Include="Areas\LegendManagement\Views\LegendManagement\UploadImagePopup.cshtml" />
     <Content Include="Areas\WinLoss\Views\MatchWinLossByBettype\Styles\MatchWinLossByBettype.less" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\ParlayReport.cshtml" />
-    <Content Include="Areas\Licensee\Views\AGCasinoWinloss\Index.cshtml" />
     <Content Include="Areas\WinLoss\Views\MatchWinLossSingleBet\Styles\MatchWinLossSingleBet.less" />
     <Content Include="Areas\Uncategorized\IMS\ims.less" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\BettypeReport.cshtml" />
@@ -2221,17 +2208,8 @@
     <Content Include="Areas\Special\Views\PunterAnalysis\Index.cshtml" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\CockFighting.cshtml" />
     <Content Include="Views\Test\Style\TotalTransactions.less" />
-    <Content Include="Areas\Licensee\Views\TotalTransactions\Index.cshtml" />
-    <Content Include="Areas\Licensee\Views\TotalTransactions\TotalTransactions.less" />
     <Content Include="Areas\UserControl\Views\User\ChangePassword.cshtml" />
     <Content Include="Areas\UserControl\Views\User\UserProfile.cshtml" />
-    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Index.cshtml" />
-    <Content Include="Areas\Licensee\Views\VirtualSportWinLoss\Index.cshtml" />
-    <Content Include="Areas\Licensee\Views\VirtualSportWinLoss\VirtualSportWinLoss.less" />
-    <Content Include="Areas\Licensee\Views\WinLossByLicensee\Styles\WinLossByLicensee.less" />
-    <Content Include="Areas\Licensee\Views\WinLossByLicensee\WinLossByLicensee_CurrencyReport.cshtml" />
-    <Content Include="Areas\Licensee\Views\WinLossByLicensee\WinLossByLicensee_AgentReport.cshtml" />
-    <Content Include="Areas\Licensee\Views\WinLossByLicensee\WinLossByLicensee_MemberReport.cshtml" />
     <Content Include="Areas\Misc\Views\Web.config" />
     <Content Include="Areas\Misc\Views\BetCount\Index.cshtml" />
     <Content Include="Areas\Misc\Views\BetCount\Styles\BetCount.less" />
@@ -2287,6 +2265,9 @@
     <Content Include="Web.Configuration\Web.MNL.ConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Web.backupMNL.ConnectionString.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="scripts\_lib\Fanex.Grid\images\Thumbs.db" />
     <None Include="themes\easyui\default\images\Thumbs.db" />
     <None Include="themes\easyui\gray\images\Thumbs.db" />
@@ -2296,15 +2277,19 @@
     <Content Include="Views\Common\AccessDenied.cshtml" />
     <Content Include="Views\Common\UnderMaintenance.cshtml" />
     <Content Include="Views\Home\MostVisitedPages\Styles\MostVisitedPages.less" />
-    <Content Include="Web.Configuration\LicenseeReportSection.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Web.Configuration\LicenseeEmailSection.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Web.Configuration\Web.PRO.AppSettings.config" />
-    <Content Include="Web.Configuration\Web.PRO.ConnectionString.config">
+    <Content Include="Web.pro.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.pro.ConnectionString.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.uat.AppSettings.config" />
+    <Content Include="Web.uat.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Configuration\Web.UAT.AppSettings.config" />

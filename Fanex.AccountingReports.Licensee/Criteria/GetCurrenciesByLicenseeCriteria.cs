@@ -14,7 +14,7 @@ namespace Fanex.AccountingReports.Licensee.Criteria
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class GetCurrenciesByLicenseeCriteria : CriteriaBase, ICriteria
+    public class GetCurrenciesByLicenseeCriteria: CriteriaBase, ICriteria
     {
         public int LicenseeID { get; set; }
 

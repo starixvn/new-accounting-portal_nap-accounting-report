@@ -10,16 +10,15 @@
 
 namespace Fanex.AccountingReports.Licensee.Services.Implement
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Licensee.Criteria;
-    using Fanex.AccountingReports.Licensee.Criteria.PlaytechCasinoWinLoss;
     using Fanex.AccountingReports.Licensee.Models;
     using Fanex.AccountingReports.Licensee.Services.Interface;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -90,42 +89,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             }
 
             return null;
-        }
-
-        /// <summary>
-        /// Gets the licensee site list.
-        /// </summary>
-        /// <returns>The licensee site list.</returns>
-        public List<Licensee> GetPlaytechCasino()
-        {
-            var licenseeSiteCriteria = new GetPlaytechCasinoLicenseeCriteria();
-            var licenseeSiteList = new List<Licensee>();
-            try
-            {
-                var rawData = GetReportData<dynamic>(licenseeSiteCriteria);
-                if (rawData != null)
-                {
-                    foreach (var row in rawData)
-                    {
-                        var licenseeSite = new Licensee()
-                        {
-                            LicenseeName = row.LicenseeName,
-                            BrandName = row.Brandname,
-                            LicenseeId = row.LicenseeID,
-                            IsEnabledBA = row.EnableBA,
-                            IsMultiAgent = AppSettings.MultiAgentLicensses.Contains(row.LicenseeName)
-                        };
-
-                        licenseeSiteList.Add(licenseeSite);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            return licenseeSiteList;
         }
     }
 }
