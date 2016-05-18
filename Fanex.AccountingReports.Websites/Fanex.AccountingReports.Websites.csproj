@@ -2250,9 +2250,6 @@
     <Content Include="Web.Configuration\Web.MNL.ConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.backupMNL.ConnectionString.config">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="scripts\_lib\Fanex.Grid\images\Thumbs.db" />
     <None Include="themes\easyui\default\images\Thumbs.db" />
     <None Include="themes\easyui\gray\images\Thumbs.db" />
@@ -2267,16 +2264,6 @@
     </Content>
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="Web.Configuration\Web.PRO.AppSettings.config" />
-    <Content Include="Web.pro.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.pro.ConnectionString.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Web.uat.AppSettings.config" />
-    <Content Include="Web.uat.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Web.Configuration\Web.UAT.AppSettings.config" />
     <Content Include="Web.Configuration\Web.UAT.ConnectionString.config" />
     <Content Include="Areas\UserLogin\Views\Common\ExpiredNotification.cshtml" />
@@ -2305,6 +2292,7 @@
     <Content Include="Web.Configuration\Web.UAT.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
     </Content>
+    <None Include="Web.Configuration\Web.PRO.ConnectionString.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
