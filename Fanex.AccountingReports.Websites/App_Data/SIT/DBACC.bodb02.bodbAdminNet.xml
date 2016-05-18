@@ -15,12 +15,6 @@
   <Function Name="Gaming - Number Game Win Loss By Date">
     <Setting Key="Gaming_NumberGameWinLossByDate_GetBetType" SpName="Acc_BetTypeSel_NumberGame" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
-  <Function Name="Gaming - Bingo Outstanding">
-    <Setting Key="Gaming_BingoOutStanding_GetReport" SpName="Acc_Rpt_BingoOutstanding" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-  </Function>
-  <Function Name="Gaming - Bingo Win Loss">
-    <Setting Key="Gaming_BingoWinLoss_GetReport" SpName="NAP_Rpt_WinlostBI_ByDateRange" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" ></Setting>
-  </Function>
   <Function Name="Special - Special Match Analysis">
     <Setting Key="Special_SpecialMatchAnalysis_GetLeagues" SpName="Acc_LeagueSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Special_SpecialMatchAnalysis_GetMatches" SpName="Acc_MatchSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />

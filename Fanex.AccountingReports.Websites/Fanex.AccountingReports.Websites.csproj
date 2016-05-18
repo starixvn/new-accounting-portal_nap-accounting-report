@@ -582,15 +582,6 @@
     <Content Include="Areas\Betlist\Views\Style\Images\loading.gif" />
     <Content Include="Areas\Betlist\Views\Style\Images\q_Icon2_1.png" />
     <Content Include="Areas\Betlist\Views\Style\Images\q_Icon_2.png" />
-    <Content Include="Areas\Gaming\Views\BingoOutStanding\Scripts\ReportManager.js" />
-    <Content Include="Areas\Gaming\Views\BingoStatistic\Scripts\ReportByAgent.js" />
-    <Content Include="Areas\Gaming\Views\BingoStatistic\Scripts\ReportByCompany.js" />
-    <Content Include="Areas\Gaming\Views\BingoStatistic\Scripts\ReportByCurrency.js" />
-    <Content Include="Areas\Gaming\Views\BingoStatistic\Scripts\ReportByDailyRange.js" />
-    <Content Include="Areas\Gaming\Views\BingoStatistic\Scripts\ReportByMonthlyRange.js" />
-    <Content Include="Areas\Gaming\Views\BingoStatistic\Scripts\ReportByUserName.js" />
-    <Content Include="Areas\Gaming\Views\BingoStatistic\Scripts\ReportManager.js" />
-    <Content Include="Areas\Gaming\Views\BingoWinLoss\Index.cshtml" />
     <Content Include="Areas\Betlist\Views\BetlistReport\Index.cshtml" />
     <Content Include="Areas\Betlist\Views\BetlistReport\_BetListByRefNo.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\BadmintonInfo.cshtml" />
@@ -622,14 +613,9 @@
     <Content Include="Areas\Betlist\Views\_LicenseeWinLoss.cshtml" />
     <Content Include="Areas\Betlist\Views\_StatusMember.cshtml" />
     <Content Include="Areas\Betlist\Views\_CombinationMPDetail.cshtml" />
-    <Content Include="Areas\Gaming\Views\BingoOutStanding\Index.cshtml" />
     <Content Include="Areas\Betlist\Views\_RacingToteWinLoss.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Areas\Gaming\Views\BingoOutStanding\Styles\BingoOutStanding.less" />
-    <Content Include="Areas\Gaming\Views\BingoStatistic\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\BingoStatistic\Styles\BingoStatistic.less" />
-    <Content Include="Areas\Gaming\Views\BingoWinLoss\Styles\BingoWinLoss.less" />
     <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportCompanyByCurrency.js" />
     <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportGameTableByCurrency.js" />
     <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportGameTypeByCurrency.js" />
@@ -685,7 +671,6 @@
     <Compile Include="Areas\UserLogin\Controllers\LoginController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\SSOController.cs" />
     <Compile Include="Areas\UserLogin\UserLoginAreaRegistration.cs" />
-    <Content Include="Areas\Gaming\Views\BingoWinLoss\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoGameFinancialReport\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoGameFinancialReport\Styles\LiveCasinoGameFinancialReport.css" />
     <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Scripts\NumberGameMonthlyWinLoss.js" />

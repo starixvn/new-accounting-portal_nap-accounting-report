@@ -120,33 +120,6 @@
   <data name="test" xml:space="preserve">
     <value>ad</value>
   </data>
-  <data name="BingoOutStanding_ReportName" xml:space="preserve">
-    <value>Bingo_OutStanding_Report</value>
-  </data>
-  <data name="BingoOutStanding_ReportTitle" xml:space="preserve">
-    <value>Bingo OutStanding Report</value>
-  </data>
-  <data name="BingoOutStanding_SheetName" xml:space="preserve">
-    <value>Bingo OutStanding</value>
-  </data>
-  <data name="BingoStatistic_ReportName" xml:space="preserve">
-    <value>Bingo_Statistic_Report_From_{0}_To_{1}</value>
-  </data>
-  <data name="BingoStatistic_ReportTitle" xml:space="preserve">
-    <value>Bingo Statistic Report From {0} To {1}</value>
-  </data>
-  <data name="BingoStatistic_SheetName" xml:space="preserve">
-    <value>Bingo Statistic</value>
-  </data>
-  <data name="BingoWinLoss_ReportName" xml:space="preserve">
-    <value>Bingo_WinLoss_Report_From_{0}_To_{1}</value>
-  </data>
-  <data name="BingoWinLoss_ReportTitle" xml:space="preserve">
-    <value>Bingo Win Loss Report From {0} To {1}</value>
-  </data>
-  <data name="BingoWinLoss_SheetName" xml:space="preserve">
-    <value>Bingo Win Loss</value>
-  </data>
   <data name="DirectBalance_SheetName" xml:space="preserve">
     <value>DirectBalance</value>
   </data>
@@ -204,20 +177,18 @@
   <data name="CasinoGameStatistic_MonthlyReportTitle" xml:space="preserve">
     <value>{0} Game Statistic Report From {1} To {2} By Monthly</value>
   </data>
-  
-    <data name="CasinoGameStatistic_GameType_ReportTitle" xml:space="preserve">
+  <data name="CasinoGameStatistic_GameType_ReportTitle" xml:space="preserve">
     <value>{0} Game Statistic Report From {1} To {2} By GameType</value>
   </data>
-    <data name="CasinoGameStatistic_GameTable_ReportTitle" xml:space="preserve">
+  <data name="CasinoGameStatistic_GameTable_ReportTitle" xml:space="preserve">
     <value>{0} Game Statistic Report From {1} To {2} By GameTable</value>
   </data>
-    <data name="CasinoGameStatistic_Company_ReportTitle" xml:space="preserve">
+  <data name="CasinoGameStatistic_Company_ReportTitle" xml:space="preserve">
     <value>{0} Game Statistic Report From {1} To {2} By Company</value>
   </data>
-    <data name="CasinoGameStatistic_Currency_ReportTitle" xml:space="preserve">
+  <data name="CasinoGameStatistic_Currency_ReportTitle" xml:space="preserve">
     <value>{0} Game Statistic Report From {1} To {2} By Currency</value>
   </data>
-  
   <data name="CasinoGameStatistic_SheetName" xml:space="preserve">
     <value>Casino Game Statistic</value>
   </data>
