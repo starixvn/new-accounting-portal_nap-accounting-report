@@ -6,7 +6,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
-    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MultipleSelect/jquery.multiselect.css?ver=10" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Multiselect/fanex.multiSelect.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MultipleSelect/jquery.multiselect.css" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less" />
@@ -34,8 +35,15 @@
                     <div class="lbl-field col_2 align-right">
                         @Labels.Product
                     </div>
-                    <div class="edit-field  col_6 align-left ddlProductContainer">
+                    <div class="edit-field  col_7 align-left ddlProductContainer">
                         <select id="ddlProduct">
+                        </select>
+                    </div>
+                    <div class="lbl-field col_3 align-right">
+                        @Labels.Sport
+                    </div>
+                    <div class="edit-field col_7 align-left">
+                        <select id="ddlSport">
                         </select>
                     </div>
                     <div class="submit col_6 prefix_2">
@@ -54,15 +62,22 @@
                         <div>
                             @Labels.Month</div>
                     </div>
-                    <div class="edit-field col_15">
+                    <div class="edit-field col_14">
                         <div id="ddlMonth">
                         </div>
                     </div>
                     <div class="lbl-field col_2 align-right">
                         @Labels.Product
                     </div>
-                    <div class="edit-field  col_6 align-left ddlProductContainer_HistoryReport">
+                    <div class="edit-field  col_7 align-left ddlProductContainer_HistoryReport">
                         <select id="ddlProduct_HistoryReport">
+                        </select>
+                    </div>
+                    <div class="lbl-field col_2 align-right">
+                        @Labels.Sport
+                    </div>
+                    <div class="edit-field col_7 align-left">
+                        <select id="ddlSport_HistoryReport">
                         </select>
                     </div>
                     <div class="submit col_4 prefix_1">
@@ -103,6 +118,7 @@
 @section Foot {
     <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/MultipleSelect/jquery.multiselect.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Fanex.Multiselect/fanex.multiSelect.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
