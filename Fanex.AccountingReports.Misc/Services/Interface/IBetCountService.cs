@@ -9,11 +9,11 @@
 
 namespace Fanex.AccountingReports.Misc.Services.Interface
 {
-    using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Misc.Criteria.BetCount;
     using Fanex.AccountingReports.Misc.Models;
-
+    using Models.BetCount;
+    using System.Collections.Generic;
     public interface IBetCountService
     {
         List<EntityBase<int, string>> GetAllProducts();
@@ -23,5 +23,9 @@ namespace Fanex.AccountingReports.Misc.Services.Interface
         Transaction SortReport(GetBetCountReportCriteria criteria);
 
         void ExportReport(GetBetCountReportCriteria criteria);
+
+        List<ProductInfo> GetSports(GetProductsCriteria criteria);
+
+        List<ProductInfo> GetProducts(GetProductsCriteria crteria);
     }
 }

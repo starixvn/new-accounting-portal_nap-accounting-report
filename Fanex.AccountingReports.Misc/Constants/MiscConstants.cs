@@ -17,13 +17,24 @@ namespace Fanex.AccountingReports.Misc.Constants
         public static readonly string BetCountSessionKey = "Fanex.AccountingReports.Misc.BetCount.BetCountReport";
         public static readonly string BetCountHistoryReportSessionKey = "Fanex.AccountingReports.Misc.BetCount.HistoryBetCountReport";
         public static readonly string CreditSiteBetCountsSessionKey = "Fanex.AccountingReports.Misc.CreditSitesBetCounts.CreditSitesBetCountsReport";
-        
+
         // Total SMA & Member Active
         public static readonly string TotalSMAMemberActiveSessionKey = "Fanex.AccountingReports.Misc.TotalSMAMemberActive.TotalSMAMemberActiveReport";
         public static readonly string TotalSMAMemberActiveDetailSessionKey = "Fanex.AccountingReports.Misc.TotalSMAMemberActive.TotalSMAMemberActiveDetailReport";
 
         public static readonly string DuplicateTicketsPrefixSessionKey = "Fanex.AccountingReports.Misc.DuplicateTickets.";
-        
+
+
+        public const int MiscSoccerGroupId = 1;
+        public const int MiscParLayGroupId = -9;
+        public const int MiscOtherSportId = 999;
+        public const int MiscParLaySportId = -9;
+        public const int MiscVirtualSportsId = 5;
+        public const int MiscSportbookId = 1;
+
+
+        public static readonly string MiscSportsSessionKey = "Fanex.AccountingReports.Misc.BetCount.Sports";
+
         /// <summary>
         /// The one sheet can has only 65000 rows.
         /// </summary>
@@ -53,6 +64,6 @@ namespace Fanex.AccountingReports.Misc.Constants
             /// The normal odd row.
             /// </summary>
             NormalOddRow = 4
-        } 
+        }
     }
 }

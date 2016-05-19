@@ -9,8 +9,8 @@
 
 namespace Fanex.AccountingReports.Misc.Criteria.BetCount
 {
-    using System;
     using Fanex.Data.Repository;
+    using System;
 
     /// <summary>
     /// TODO: Update summary.
@@ -27,7 +27,7 @@ namespace Fanex.AccountingReports.Misc.Criteria.BetCount
 
         public DateTime Dateend { get; set; }
 
-        public string Product { get; set; }
+        public string SportBettype { get; set; }
 
         [SpParam(Ignored = true)]
         public string SortBy { get; set; }
