@@ -2,14 +2,15 @@
 Namespace.Register("Fanex.AccountingReports.Misc.BetCount.NormalReport");
 Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
     var self = this;
+    //var _historyBetCountReport = new Fanex.AccountingReports.Misc.BetCount.HistoryReport();
 
     var _tables = {
         reportFilter: null,
         filterNote: null,
         ddlProduct: null,
+        ddlSport: null,
         datepickerplugin: null,
         btnGenerate: null,
-
         report: null,
         reportContent: null,
         reportTitle: null,
@@ -48,6 +49,8 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
             FromDate: null,
             ToDate: null,
             Products: null,
+            SportBettype: null,
+            BettypeId: null,
             SortBy: null,
             SortDirection: null
         }
@@ -55,7 +58,15 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
 
     var _cachedData = {
         betCountReport: null,
-        lastSorterBy: null
+        lastSorterBy: null,
+        products: null,
+        sports: null,
+        isFirstLoad: true,
+        Sportbook_ProductId: "1_0",
+        VirtualSport_GroupId: "5_0",
+        Sports: [],
+        Sportbook_SportID: [1, 999, -9],
+        SelectedSportBettype: []
     };
 
     self.initPage = function () {
@@ -88,7 +99,6 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         _tables.reportDivSorter = _tables.report.find(".divSorter");
     };
     var renderFilterNote = function (noteMessage) {
-        //// Assign Title for tooltip
         _tables.filterNote.attr("title", noteMessage);
         _tables.filterNote.tipsy(_options.filterNote);
     };
@@ -112,14 +122,14 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                 Id: "firstDatePickerId1",
                 Label: labelFrom,
                 InitDate: today,
-                LabelCss: "lbl-field col_2",
+                LabelCss: "lbl-field col_4",
                 TextboxCss: "edit-field col_6"
             },
             secondDatePicker: {
                 Id: "secondDatePickerId1",
                 Label: labelTo,
                 InitDate: today,
-                LabelCss: "lbl-field col_1",
+                LabelCss: "lbl-field col_3",
                 TextboxCss: "edit-field col_6"
             },
             selectedItem: 1,
@@ -130,43 +140,276 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
 
         _tables.datepickerplugin = $("#datepickerplugin");
     };
+
+    self.getDropdownSport = function () {
+        var self = this;
+        $.ajax({
+            type: "POST",
+            url: window.rootUrl + "Misc/BetCount/GetSports",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: null,
+            beforeSend: function () {
+                AccReport.disableInput();
+            },
+            success: function (rs) {
+                self.renderDropdownSport(rs);
+            },
+            error: function (event, jqXHR, ajaxSettings) {
+                self.renderDropdownSport([]);
+            },
+            complete: function () {
+                AccReport.enableInput();
+            }
+        })
+    }
+
     self.renderDropdownProduct = function (products) {
+        _cachedData.products = products;
+        var self = this;
+        var ddProduct = [];
+        var ddId = "ddlProduct";
         var noItemText = 'No product found.';
-        var len = products.length;
-        var ddwnProducts = [];
-        var prefixId = 'ddlProduct_';
-        for (var i = 0; i < len; i++) {
-            var product = products[i];
-            var checked = product.Id == 1 ? true : false;
-            ddwnProducts.push({
-                Id: prefixId + product.Id,
-                Value: product.Id,
-                Text: product.Name,
-                Checked: checked,
-                Enable: true,
-                CssClass: "",
-                Items: []
-            });
+        var productLength = products ? products.length : 0;
+        for (var i = 0; i < productLength; i++) {
+            var productGroup = products[i];
+            if (productGroup.Name.toLowerCase() == "sportsbook") {
+                ddProduct.push({
+                    id: "#" + ddId + "_Product1",
+                    value: "1_0",
+                    text: productGroup.Name,
+                    checked: true,
+                    enable: true,
+                    cssClass: "bold"
+                });
+
+                continue;
+            }
+            if (productGroup.Name.toLowerCase() == "virtual sports") {
+                ddProduct.push({
+                    id: "#" + ddId + "_Product5",
+                    value: "5_0",
+                    text: productGroup.Name,
+                    checked: false,
+                    enable: true,
+                    cssClass: "bold"
+                });
+
+                continue;
+            }
+
+            if (productGroup.Name.toLowerCase() == "mbc-rng casino") {
+                var values = '';
+
+                for (var currentProduct = 0; currentProduct < productGroup.ChildsInfo.length; currentProduct++) {
+                    var mbcGroup = productGroup.ChildsInfo[currentProduct];
+                    var mbcGroupId = mbcGroup.Id;
+                    for (var currentGameType = 0; currentGameType < mbcGroup.ChildsInfo.length; currentGameType++) {
+                        var bettype = mbcGroup.ChildsInfo[currentGameType];
+                        var bettypeId = bettype.Id;
+                        values += mbcGroupId + '_' + bettypeId + ',';
+                    }
+                }
+
+
+                ddProduct.push({
+                    id: "#" + ddId + "_Product251",
+                    value: values,
+                    text: productGroup.Name,
+                    checked: false,
+                    enable: true,
+                    cssClass: "bold"
+                });
+
+                continue;
+            }
+
+            var sportLength = productGroup.ChildsInfo.length;
+            for (var j = 0; j < sportLength; j++) {
+                var sportGroup = productGroup.ChildsInfo[j];
+                var betTypeLength = sportGroup.ChildsInfo.length;
+                var betTypeList = [];
+
+                for (var k = 0; k < betTypeLength; k++) {
+                    var betType = sportGroup.ChildsInfo[k];
+                    betTypeList.push({
+                        id: "#" + ddId + "_Product_Sport" + sportGroup.Id + "_BetType" + betType.Id,
+                        value: sportGroup.Id + "_" + betType.Id,
+                        text: betType.Name,
+                        checked: false,
+                        enable: true
+                    });
+                }
+
+                ddProduct.push({
+                    id: "#" + ddId + "_Product_Sport" + sportGroup.Id,
+                    value: sportGroup.Id,
+                    text: productGroup.Name,
+                    checked: false,
+                    enable: true,
+                    items: betTypeList
+                });
+            }
+
         }
 
-        $("#ddlProduct").multiSelect(
+        $("#ddlProduct").fanexMultiSelect(
         {
-            minWidth: 140,
+            minWidth: 176,
             maxHeight: 450,
+            showFilter: true,
             shadow: true,
             showHeader: true,
             isCheckAll: false,
             showFooter: false,
-            checkAllText: 'All Products',
+            checkAllText: 'All',
             isUsedCustomCheckAllText: true,
-            customCheckAllText: 'All Products',
+            customCheckAllText: 'All',
             noItemText: noItemText,
-            selectedList: 3,
-            listData: ddwnProducts
+            listData: ddProduct,
+            onCheck: function () {
+                if (this.value == _cachedData.Sportbook_ProductId
+                    || this.value == _cachedData.VirtualSport_GroupId
+                    || this.id == 'ddlProductHeaderCheckBox') {
+                    self.getDropdownSport();
+                }
+            }
         });
 
         _tables.ddlProduct = $("#ddlProduct");
     };
+
+    self.renderDropdownSport = function (sports) {
+        _cachedData.sports = sports;
+        var ddSport = [];
+        var ddId = "ddlSport";
+        var selectedProducts = _tables.ddlProduct.fanexMultiSelect('getItems', true);
+        var isExistsSportbook = $.inArray(_cachedData.Sportbook_ProductId, selectedProducts) != -1;
+        var isExistsVirtualSports = $.inArray(_cachedData.VirtualSport_GroupId, selectedProducts) != -1;
+        if (isExistsSportbook || isExistsVirtualSports) {
+            var sportGrouplength = sports ? sports.length : 0;
+            for (var i = 0; i < sportGrouplength; i++) {
+                var sportGroup = sports[i];
+                var sportLength = sportGroup.ChildsInfo ? sportGroup.ChildsInfo.length : 0;
+                var ddSportGroup = [];
+                if (_cachedData.Sportbook_SportID.contains(sportGroup.Id)) {
+                    for (var j = 0; j < sportLength; j++) {
+                        var sport = sportGroup.ChildsInfo[j];
+                        var betTypeLength = sport.ChildsInfo ? sport.ChildsInfo.length : 0;
+                        var ddBetType = [];
+                        for (var k = 0; k < betTypeLength; k++) {
+                            var betType = sport.ChildsInfo[k];
+                            ddBetType.push({
+                                id: "#" + ddId + "SportGroup" + sportGroup.Id +
+                                                        "_Sport" + sport.Id +
+                                                        "_BetType" + betType.Id,
+                                value: sport.Id + "_" + betType.Id,
+                                text: betType.Name,
+                                checked: isExistsSportbook == true? true: false,
+                                enable: true,
+                                cssClass: ""
+                            });
+                        }
+
+                        ddSportGroup.push({
+                            id: "#" + ddId + "SportGroup" + sportGroup.Id + "_Sport" + sport.Id,
+                            value: (sportGroup.Name != "Parlay" ? sportGroup.Id : "0") + "_" + sport.Id,
+                            text: sport.Name,
+                            checked: isExistsSportbook == true ? true : false,
+                            enable: true,
+                            cssClass: "",
+                            items: ddBetType,
+                            show: true
+                        });
+                    }
+                    if (sportGroup.Name != "Parlay" ||
+                    (sportGroup.ChildsInfo && sportGroup.ChildsInfo.length > 0)) {
+                        ddSport.push({
+                            id: "#" + ddId + "SportGroup" + sportGroup.Id.toString(),
+                            value: sportGroup.Id.toString(),
+                            text: sportGroup.Name,
+                            checked: isExistsSportbook == true ? true : false,
+                            enable: true,
+                            cssClass: "",
+                            show: true,
+                            items: ddSportGroup
+                        });
+                    }
+                }
+                if (sportGroup.Id <= 186 && sportGroup.Id >= 180) {
+                    for (var j = 0; j < sportLength; j++) {
+                        var sport = sportGroup.ChildsInfo[j];
+                        var betTypeLength = sport.ChildsInfo ? sport.ChildsInfo.length : 0;
+                        var ddBetType = [];
+                        for (var k = 0; k < betTypeLength; k++) {
+                            var betType = sport.ChildsInfo[k];
+                            ddBetType.push({
+                                id: "#" + ddId + "SportGroup" + sportGroup.Id +
+                                                        "_Sport" + sport.Id +
+                                                        "_BetType" + betType.Id,
+                                value: sport.Id + "_" + betType.Id,
+                                text: betType.Name,
+                                checked: isExistsVirtualSports == true? true :false,
+                                enable: true,
+                                cssClass: ""
+                            });
+                        }
+
+                        ddSportGroup.push({
+                            id: "#" + ddId + "SportGroup" + sportGroup.Id + "_Sport" + sport.Id,
+                            value: (sportGroup.Name != "Parlay" ? sportGroup.Id : "0") + "_" + sport.Id,
+                            text: sport.Name,
+                            checked: isExistsVirtualSports == true? true :false,
+                            enable: true,
+                            cssClass: "",
+                            items: ddBetType,
+                            show: true
+                        });
+                    }
+                    if (sportGroup.Name != "Parlay" ||
+                    (sportGroup.ChildsInfo && sportGroup.ChildsInfo.length > 0)) {
+                        ddSport.push({
+                            id: "#" + ddId + "SportGroup" + sportGroup.Id.toString(),
+                            value: sportGroup.Id.toString(),
+                            text: sportGroup.Name,
+                            checked: isExistsVirtualSports == true ? true : false,
+                            enable: true,
+                            cssClass: "",
+                            show: true,
+                            items: ddSportGroup
+                        });
+                    }
+                }
+
+            }
+        }
+
+        $("#ddlSport").fanexMultiSelect({
+            minWidth: 176,
+            maxHeight: 350,
+            showFilter: true,
+            shadow: true,
+            showHeader: true,
+            isCheckAll: false,
+            showFooter: false,
+            checkAllText: 'All',
+            isUsedCustomCheckAllText: true,
+            customCheckAllText: 'All',
+            noneSelectedText: 'Select an option',
+            noItemText: 'No sport found.',
+            disabled: (!isExistsSportbook && !isExistsVirtualSports),
+            listData: ddSport,
+            onCheck: function () {
+            }
+        });
+
+        _tables.ddlSport = $("#ddlSport");
+        if (!isExistsSportbook && !isExistsVirtualSports) {
+            _tables.ddlSport.fanexMultiSelect('setCheckAll', false);
+            _tables.ddlSport.children('input').eq(0).val('Not applicable');
+        }
+    };
+
     var bindingEvent = function () {
         _tables.btnGenerate.click(function () {
             self.btnGenerateClick();
@@ -199,7 +442,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                 data: JSON.stringify({
                     Datestart: _params.betCountReport.FromDate,
                     Dateend: _params.betCountReport.ToDate,
-                    Product: _params.betCountReport.Products,
+                    SportBettype: _params.betCountReport.SportBettype,
                     IsHistoryReport: false,
                     SortBy: _params.betCountReport.SortBy,
                     SortDirection: ''
@@ -226,14 +469,17 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         var dateRange = _tables.datepickerplugin.nexDatePicker("getDateRange");
         _params.betCountReport.FromDate = dateRange.FromDate;
         _params.betCountReport.ToDate = dateRange.ToDate;
-        _params.betCountReport.Products = _tables.ddlProduct.multiSelect("getCheckedItems").join(',');
+        var selectedProducts = _tables.ddlProduct.fanexMultiSelect('getItems', true);
+        var selectedSports = _tables.ddlSport.fanexMultiSelect('getItems', true);
+        _params.betCountReport.SportBettype = selectedSports.join(',') + "," + selectedProducts.join(',');
+        _cachedData.SelectedSportBettype = selectedSports;
         _params.betCountReport.SortBy = '';
     };
     var validateParams = function () {
         var isValid = true;
         var message = '';
         var notifyIds = [];
-        if (_params.betCountReport.Products.length == 0) {
+        if (_params.betCountReport.SportBettype.length == 0) {
             if (message == '') {
                 message = "Please select at least one product!";
             }
@@ -336,6 +582,9 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                 break;
             case 'colHeaderSuperWinLoss':
                 sortBy = self.Enums.sortBy.SuperWinLoss;
+                break;
+            case 'colHeaderTotalWinloss':
+                sortBy = self.Enums.sortBy.TotalWinLoss;
                 break;
             case 'colHeaderCompanyWinLoss':
                 sortBy = self.Enums.sortBy.CompanyWinLoss;
