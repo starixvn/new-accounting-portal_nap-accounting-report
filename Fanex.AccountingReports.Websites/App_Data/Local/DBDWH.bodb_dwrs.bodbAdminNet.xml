@@ -4,8 +4,8 @@
     <Setting Key="NAP_ExchangeCurrencySel" SpName="NAP_ExchangeCurrencySel" DbName="DBDWH.bodb_dwrs.bodbAdminNet"></Setting>
   </Function>
   <Function Name="Misc - Bet Count">
-    <Setting Key="Misc_BetCount_GetAllProductsForBetCountReport" SpName="Acc_Rpt_BetCount_SelSports" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
-    <Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="Misc_Bet_Count_GetProducts" SpName="Acc_Rpt_BetCount_SelProductSportBettypes_Xtest" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount_Xtest" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
   </Function>
   <Function Name="Gaming - Number Game Win Loss By Date">
     <Setting Key="Gaming_NumberGameWinlossByDate_GetReport" SpName="Acc_Rpt_NumberGameWinlossByDate" DbName="DBDWH.bodb_dwrs.bodbAdminNet" ></Setting>
@@ -48,6 +48,7 @@
     <Setting Key="Main_MatchWinLoss2a_GetWinLossDetailReportByBetType_WH" SpName="Acc_Rpt_MatchWinLoss2_Sporttype_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetAllDetailReportBySportsType_WH" SpName="Acc_Rpt_MatchWinLoss2_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetMetricGamingReport_WH" SpName="Acc_Rpt_WinlostMG_Details_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+  <Setting Key="Main_DailyWinLoss2a_GetCockFightingByArenaReport_WH" SpName="Acc_Rpt_DailyWLDirect_CockFighting_Details" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_MatchWinLoss2a_GetMetricGamingDetailByBetType_WH" SpName="Acc_Rpt_MatchWinLoss2_Sporttype_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
   </Function>
   <Function Name="Misc - Credit Site Bet Count">
@@ -192,12 +193,12 @@
     <Setting Key="Acc_Rpt_CasinoGameStatistics_GameTypeSel" SpName="Acc_Rpt_CasinoGameStatistics_GameTypeSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Acc_Rpt_CasinoGameStatistics_GameTableSel" SpName="Acc_Rpt_CasinoGameStatistics_GameTableSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Acc_Rpt_CasinoGameStatistics_Daily" SpName="Acc_Rpt_CasinoGameStatistics_Daily" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Acc_Rpt_CasinoGameStatistics_Hourly" SpName="Acc_Rpt_CasinoGameStatistics_Hourly" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Acc_Rpt_CasinoGameStatistics_Monthly" SpName="Acc_Rpt_CasinoGameStatistics_Monthly" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Acc_Rpt_CasinoGameStatistics_UserName" SpName="Acc_Rpt_CasinoGameStatistics_UserName" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Acc_Rpt_CasinoGameStatistics_GameType" SpName="Acc_Rpt_CasinoGameStatistics_GameType" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Acc_Rpt_CasinoGameStatistics_GameTable" SpName="Acc_Rpt_CasinoGameStatistics_GameTable" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Acc_Rpt_CasinoGameStatistics_Company" SpName="Acc_Rpt_CasinoGameStatistics_Company" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Acc_Rpt_CasinoGameStatistics_Currency" SpName="Acc_Rpt_CasinoGameStatistics_Currency" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_Hourly" SpName="Acc_Rpt_CasinoGameStatistics_Hourly_UAT2" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_Monthly" SpName="Acc_Rpt_CasinoGameStatistics_Monthly_UAT2" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_UserName" SpName="Acc_Rpt_CasinoGameStatistics_UserName_UAT2" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_GameType" SpName="Acc_Rpt_CasinoGameStatistics_GameType_UAT2" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_GameTable" SpName="Acc_Rpt_CasinoGameStatistics_GameTable_UAT2" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_Company" SpName="Acc_Rpt_CasinoGameStatistics_Company_UAT2" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_Currency" SpName="Acc_Rpt_CasinoGameStatistics_Currency_UAT2" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
 </Functions>

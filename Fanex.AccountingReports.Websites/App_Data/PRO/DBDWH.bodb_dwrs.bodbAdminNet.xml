@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Functions>
   <Function Name="Misc - Bet Count">
-    <Setting Key="Misc_BetCount_GetAllProductsForBetCountReport" SpName="Acc_Rpt_BetCount_SelSports" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
-    <Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Misc_Bet_Count_GetProducts" SpName="Acc_Rpt_BetCount_SelProductSportBettypes_Xtest" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount_Xtest" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Gaming - Number Game Win Loss By Date">
     <Setting Key="Gaming_NumberGameWinlossByDate_GetReport" SpName="Acc_Rpt_NumberGameWinlossByDate" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
