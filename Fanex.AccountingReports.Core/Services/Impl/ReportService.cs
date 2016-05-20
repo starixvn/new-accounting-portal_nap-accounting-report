@@ -9,17 +9,16 @@
 
 namespace Fanex.AccountingReports.Core.Services.Impl
 {
-    using System;
-    using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Criteria;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Repository.Impl;
     using Fanex.AccountingReports.Core.Repository.Interface;
     using Fanex.AccountingReports.Core.Resources;
-    using Fanex.AccountingReports.Core.Web;
     using Fanex.Common;
     using Fanex.Data.Repository;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.
@@ -60,9 +59,9 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             get
             {
                 var exchangeCurrencies = GetExchangeCurrencies(new GetExchangeCurrenciesCriteria
-                    {
-                        ExcludeTest = false
-                    });
+                {
+                    ExcludeTest = false
+                });
                 return exchangeCurrencies;
             }
         }
@@ -100,6 +99,18 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             else
             {
                 return WarehouseSPSuffix;
+            }
+        }
+
+        public static bool isRequestDataWH(DateTime reportDate)
+        {
+            if (reportDate >= BalanceUp.BalanceUpDay)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 
@@ -368,7 +379,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         }
 
         public static DateTime ConvertTimeZone(DateTime dateTime)
-        { 
+        {
             TimeZoneInfo timeZone = TimeZoneInfo.FindSystemTimeZoneById("SA Western Standard Time");
             DateTime newDateTime = TimeZoneInfo.ConvertTime(dateTime, timeZone);
 
