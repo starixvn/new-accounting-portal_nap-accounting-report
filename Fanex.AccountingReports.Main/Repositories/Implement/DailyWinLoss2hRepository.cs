@@ -45,7 +45,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
                 {
                     param.Add("linetotal", 0);
                 }
-                result = objectDb.ExecuteDataSet(criteria.GetSpParams());
+                result = objectDb.ExecuteDataSet(param);
                 outputParam = objectDb.GetOuputParams();
             }
 
