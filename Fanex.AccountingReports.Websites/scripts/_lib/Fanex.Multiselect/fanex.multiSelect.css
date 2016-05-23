@@ -76,11 +76,15 @@ important
     vertical-align: middle;
 }
 
-    .fanex-multiselect-div label:hover {
-        color: #0062ad;
-        cursor: pointer;
-        font-weight: bold !important;
-    }
+.fanex-multiselect-div {
+    width: 100%;
+}
+
+.fanex-multiselect-div label:hover {
+    color: #0062ad;
+    cursor: pointer;
+    font-weight: bold !important;
+}
 
 .fanex-multiselect-state-hover, .fanex-multiselect-widget-content .fanex-multiselect-state-hover, .fanex-multiselect-widget-header .fanex-multiselect-state-hover, .fanex-multiselect-state-focus, .fanex-multiselect-widget-content .fanex-multiselect-state-focus, .fanex-multiselect-widget-header .fanex-multiselect-state-focus {
     /* border: 1px solid #00cccc; background: #ffffcc; */
@@ -504,4 +508,7 @@ Rad tree view css
 
 .fanex-multiselect-filter .delete-button:hover {
     background-position: -79px -26px;
+}
+.rtLI {
+    width: 250px;
 }
