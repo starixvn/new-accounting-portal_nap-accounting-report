@@ -19,9 +19,6 @@ namespace Fanex.BetList.Accounting.Controllers
     using Fanex.BetList.Accounting.Models;
     using Fanex.BetList.Accounting.Services;
     using Fanex.Common;
-    using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Web.Attribute;
-    using SmartPunterFilter = AuthenticationFilter.AuthenticateSmartPunterAction;
 
     /// <summary>
     /// TODO: Update summary.
@@ -68,11 +65,12 @@ namespace Fanex.BetList.Accounting.Controllers
         /// <returns>The mix parlay detail.</returns>
         public ActionResult GetMixParlayDetail(string refno, string transId, string handicap1, string handicap2, string betcheck, string betteam)
         {
-            var result = _betListService.GetMixParlayTickets(new MixParlayDetailCriteria
-            {
-                RefNo = refno,
-                TransId = transId
-            }, handicap1, handicap2, betcheck, betteam);
+            var result = _betListService.GetMixParlayTickets(
+                new MixParlayDetailCriteria { RefNo = refno, TransId = transId },
+                handicap1,
+                handicap2,
+                betcheck,
+                betteam);
 
             return PartialView("~/Areas/BetList/Views/MemberBetListReport/_MixParlayDetail.cshtml", result);
         }
@@ -88,9 +86,9 @@ namespace Fanex.BetList.Accounting.Controllers
             if (BetListHelper.IsNumeric(refno.Trim()))
             {
                 result = _betListService.GetBetListByRefNoTickets(new BetListByRefNoCriteria
-               {
-                   TransId = Converter.To<long>(refno)
-               });
+                {
+                    TransId = Converter.To<long>(refno)
+                });
             }
 
             Hashtable paramHastable = new Hashtable();
@@ -151,7 +149,7 @@ namespace Fanex.BetList.Accounting.Controllers
             paramHastable.Add("custId", customerId);
 
             TempData["paramHastable"] = paramHastable;
-           
+
             ViewBag.Quantity = 1;
             ViewBag.NumberBegining = 1;
             return PartialView("~/Views/BetList/BetlistByCustInfo/Betlist/_BetList.cshtml", result);

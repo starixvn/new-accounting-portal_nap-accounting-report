@@ -10,7 +10,6 @@
 namespace Fanex.BetList.Accounting.Services
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Configuration;
     using System.Data;
@@ -40,6 +39,7 @@ namespace Fanex.BetList.Accounting.Services
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("6DF0115C-60E5-4182-BEF3-AC61F09BAF0A")]
     public class BetListService : IBetListService
     {
         public const string BetListSessionKey = "Fanex.BetList.Accounting.WinLossByLicensee";
@@ -1760,7 +1760,10 @@ namespace Fanex.BetList.Accounting.Services
         {
             string firstComboParlay = comboParlay.FirstOrDefault();
             var firstTicketDetail = ticketDetails.Select(x => x.Ticket).Where(y => y.Stake != 0).FirstOrDefault();
-            return $"<div class='comboParlay'>{firstComboParlay} x <span class='currency'>{firstTicketDetail.Currency} </span> <span class='stake'>{Convert.ToInt32(firstTicketDetail.Stake).ToString("#,##0")}</span></div>";
+            var stakeInInteger = Convert.ToInt32(firstTicketDetail.Stake);
+            return $"<div class='comboParlay'>{firstComboParlay} x" +
+                $"<span class='currency'>{firstTicketDetail.Currency} </span>" +
+                $"<span class='stake'>{stakeInInteger:#,##0}</span></div>";
         }
 
         private string GetMultipleComboParlayDetail(string[] comboParlay, IList<TicketDetail> ticketDetails)
@@ -1769,7 +1772,10 @@ namespace Fanex.BetList.Accounting.Services
             var ticketDetailWithNoneZeroStakes = ticketDetails.Select(t => t.Ticket).Where(s => s.Stake != 0).OrderBy(m => m.MatchId).ToList();
             for (int i = 0; i < comboParlay.Length; i++)
             {
-                comboParlayDetail += $"<div class='comboParlay'>{comboParlay[i]} x <span class='currency'>{ticketDetailWithNoneZeroStakes[i].Currency}</span> <span class='stake'>{Convert.ToInt32(ticketDetailWithNoneZeroStakes[i].Stake).ToString("#,##0")}</span><br/></div>";
+                var stakeInInteger = Convert.ToInt32(ticketDetailWithNoneZeroStakes[i].Stake);
+                comboParlayDetail += $"<div class='comboParlay'>{comboParlay[i]} x " +
+                    $"<span class='currency'>{ticketDetailWithNoneZeroStakes[i].Currency}</span>" +
+                    $"<span class='stake'>{stakeInInteger:#,##0}</span><br/></div>";
             }
 
             return comboParlayDetail;
