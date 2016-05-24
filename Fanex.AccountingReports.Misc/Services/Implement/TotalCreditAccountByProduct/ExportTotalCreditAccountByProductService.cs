@@ -8,7 +8,6 @@
 // </history>
 namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByProduct
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web;
@@ -19,6 +18,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
     using NPOI.HSSF.UserModel;
     using NPOI.HSSF.Util;
     using NPOI.SS.UserModel;
+    using System;
 
     /// <summary>
     /// TODO: Update summary.
@@ -436,10 +436,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
 
                 case ProductContants.Allbet:
                     product = Labels.Allbet;
-                    break;
-
-                case ProductContants.Cockfighting:
-                    product = Labels.Cockfighting;
                     break;
 
                 case ProductContants.MetricGamingSuperlive:

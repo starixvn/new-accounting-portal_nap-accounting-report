@@ -219,8 +219,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 info.Id != CoreConstants.SportContants.Keno &&
                                 info.Id != CoreConstants.SportContants.VirtualSportGroup &&
                                 info.Id != SportContants._2hReportCasino &&
-                                info.Id != CoreConstants.SportContants.ColossusBet &&
-                                info.Id != CoreConstants.SportContants.CockFighting)
+                                info.Id != CoreConstants.SportContants.ColossusBet)
                             {
                                 info.VirtualTurnover = 0;
                             }

@@ -16,7 +16,6 @@
   <Product ProductID="13" ProductName ="Microgaming - Live Casino" IsNoTurnover="0" IsNoVirtual="1"/>
   <Product ProductID="17" ProductName ="Microgaming - RNG Casino" IsNoTurnover="0" IsNoVirtual="1"/>
   <Product ProductID="15" ProductName ="Colossus Bets" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="19" ProductName ="Cockfighting" IsNoTurnover="0" IsNoVirtual="1"/>
   <Product ProductID="21" ProductName ="Allbet" IsNoTurnover="0" IsNoVirtual="1"/>
   <Product ProductID="22" ProductName ="Macau Games" IsNoTurnover="0" IsNoVirtual="1"/>
 </ROOT>

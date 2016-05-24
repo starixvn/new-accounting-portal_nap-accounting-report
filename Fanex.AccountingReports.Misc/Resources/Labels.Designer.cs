@@ -22,21 +22,21 @@ namespace Fanex.AccountingReports.Misc.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Labels {
+    internal class Labels {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public Labels() {
+        internal Labels() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Fanex.AccountingReports.Misc.Resources.Labels", typeof(Labels).Assembly);
@@ -51,7 +51,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 15mins O/U.
         /// </summary>
-        public static string _15mins_OU {
+        internal static string _15mins_OU {
             get {
                 return ResourceManager.GetString("_15mins_OU", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1st 1x2.
         /// </summary>
-        public static string _1st_1x2 {
+        internal static string _1st_1x2 {
             get {
                 return ResourceManager.GetString("_1st_1x2", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1st CS.
         /// </summary>
-        public static string _1st_CS {
+        internal static string _1st_CS {
             get {
                 return ResourceManager.GetString("_1st_CS", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1st HDP.
         /// </summary>
-        public static string _1st_HDP {
+        internal static string _1st_HDP {
             get {
                 return ResourceManager.GetString("_1st_HDP", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1st No. of Corner.
         /// </summary>
-        public static string _1st_No_of_Corner {
+        internal static string _1st_No_of_Corner {
             get {
                 return ResourceManager.GetString("_1st_No_of_Corner", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1st No. of Yellow Card.
         /// </summary>
-        public static string _1st_No_of_Yellow_Card {
+        internal static string _1st_No_of_Yellow_Card {
             get {
                 return ResourceManager.GetString("_1st_No_of_Yellow_Card", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1st O/E.
         /// </summary>
-        public static string _1st_OE {
+        internal static string _1st_OE {
             get {
                 return ResourceManager.GetString("_1st_OE", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1st OU.
         /// </summary>
-        public static string _1st_OU {
+        internal static string _1st_OU {
             get {
                 return ResourceManager.GetString("_1st_OU", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 1x2.
         /// </summary>
-        public static string _1x2 {
+        internal static string _1x2 {
             get {
                 return ResourceManager.GetString("_1x2", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 8RM.
         /// </summary>
-        public static string _8RM {
+        internal static string _8RM {
             get {
                 return ResourceManager.GetString("_8RM", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to IBC(8RM + BARM).
         /// </summary>
-        public static string _8RM_BARM {
+        internal static string _8RM_BARM {
             get {
                 return ResourceManager.GetString("_8RM_BARM", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to VS.
         /// </summary>
-        public static string _VS {
+        internal static string _VS {
             get {
                 return ResourceManager.GetString("_VS", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Account Status.
         /// </summary>
-        public static string AccountStatus {
+        internal static string AccountStatus {
             get {
                 return ResourceManager.GetString("AccountStatus", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
-        public static string Active {
+        internal static string Active {
             get {
                 return ResourceManager.GetString("Active", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Agency.
         /// </summary>
-        public static string Agency {
+        internal static string Agency {
             get {
                 return ResourceManager.GetString("Agency", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Agency Turnover.
         /// </summary>
-        public static string Agency_Turnover {
+        internal static string Agency_Turnover {
             get {
                 return ResourceManager.GetString("Agency_Turnover", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Agency Win Loss.
         /// </summary>
-        public static string Agency_Win_Loss {
+        internal static string Agency_Win_Loss {
             get {
                 return ResourceManager.GetString("Agency_Win_Loss", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Agent.
         /// </summary>
-        public static string Agent {
+        internal static string Agent {
             get {
                 return ResourceManager.GetString("Agent", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
-        public static string All {
+        internal static string All {
             get {
                 return ResourceManager.GetString("All", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to All Companies.
         /// </summary>
-        public static string All_Companies {
+        internal static string All_Companies {
             get {
                 return ResourceManager.GetString("All_Companies", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to All Leagues.
         /// </summary>
-        public static string All_Leagues {
+        internal static string All_Leagues {
             get {
                 return ResourceManager.GetString("All_Leagues", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to All Sites.
         /// </summary>
-        public static string All_Sites {
+        internal static string All_Sites {
             get {
                 return ResourceManager.GetString("All_Sites", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to All Total.
         /// </summary>
-        public static string All_Total {
+        internal static string All_Total {
             get {
                 return ResourceManager.GetString("All_Total", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Allbet.
         /// </summary>
-        public static string Allbet {
+        internal static string Allbet {
             get {
                 return ResourceManager.GetString("Allbet", resourceCulture);
             }
@@ -279,7 +279,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Amount.
         /// </summary>
-        public static string Amount {
+        internal static string Amount {
             get {
                 return ResourceManager.GetString("Amount", resourceCulture);
             }
@@ -288,7 +288,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Amount Due To.
         /// </summary>
-        public static string AmountDueTo {
+        internal static string AmountDueTo {
             get {
                 return ResourceManager.GetString("AmountDueTo", resourceCulture);
             }
@@ -297,7 +297,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Amount Due To Inspired.
         /// </summary>
-        public static string AmountDueToInspired {
+        internal static string AmountDueToInspired {
             get {
                 return ResourceManager.GetString("AmountDueToInspired", resourceCulture);
             }
@@ -306,7 +306,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Annualy.
         /// </summary>
-        public static string Annualy {
+        internal static string Annualy {
             get {
                 return ResourceManager.GetString("Annualy", resourceCulture);
             }
@@ -315,7 +315,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Ascending.
         /// </summary>
-        public static string Ascending {
+        internal static string Ascending {
             get {
                 return ResourceManager.GetString("Ascending", resourceCulture);
             }
@@ -324,7 +324,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to BA.
         /// </summary>
-        public static string BA {
+        internal static string BA {
             get {
                 return ResourceManager.GetString("BA", resourceCulture);
             }
@@ -333,7 +333,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
-        public static string Back {
+        internal static string Back {
             get {
                 return ResourceManager.GetString("Back", resourceCulture);
             }
@@ -342,7 +342,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to BA Comm.
         /// </summary>
-        public static string BAComm {
+        internal static string BAComm {
             get {
                 return ResourceManager.GetString("BAComm", resourceCulture);
             }
@@ -351,7 +351,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Balance.
         /// </summary>
-        public static string Balance {
+        internal static string Balance {
             get {
                 return ResourceManager.GetString("Balance", resourceCulture);
             }
@@ -360,7 +360,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Balance Before Bet.
         /// </summary>
-        public static string BalanceBeforeBet {
+        internal static string BalanceBeforeBet {
             get {
                 return ResourceManager.GetString("BalanceBeforeBet", resourceCulture);
             }
@@ -369,7 +369,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to BARM.
         /// </summary>
-        public static string BARM {
+        internal static string BARM {
             get {
                 return ResourceManager.GetString("BARM", resourceCulture);
             }
@@ -378,7 +378,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Base Currency.
         /// </summary>
-        public static string Base_Currency {
+        internal static string Base_Currency {
             get {
                 return ResourceManager.GetString("Base_Currency", resourceCulture);
             }
@@ -387,7 +387,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Base (RM).
         /// </summary>
-        public static string BaseRM {
+        internal static string BaseRM {
             get {
                 return ResourceManager.GetString("BaseRM", resourceCulture);
             }
@@ -396,7 +396,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Bet Count.
         /// </summary>
-        public static string Bet_Count {
+        internal static string Bet_Count {
             get {
                 return ResourceManager.GetString("Bet_Count", resourceCulture);
             }
@@ -405,7 +405,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Bet Status.
         /// </summary>
-        public static string Bet_Status {
+        internal static string Bet_Status {
             get {
                 return ResourceManager.GetString("Bet_Status", resourceCulture);
             }
@@ -414,7 +414,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Bet Type.
         /// </summary>
-        public static string Bet_Type {
+        internal static string Bet_Type {
             get {
                 return ResourceManager.GetString("Bet_Type", resourceCulture);
             }
@@ -423,7 +423,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Bet team.
         /// </summary>
-        public static string Betteam {
+        internal static string Betteam {
             get {
                 return ResourceManager.GetString("Betteam", resourceCulture);
             }
@@ -432,7 +432,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to BetTime.
         /// </summary>
-        public static string BetTime {
+        internal static string BetTime {
             get {
                 return ResourceManager.GetString("BetTime", resourceCulture);
             }
@@ -441,7 +441,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Bet Type.
         /// </summary>
-        public static string Bettype {
+        internal static string Bettype {
             get {
                 return ResourceManager.GetString("Bettype", resourceCulture);
             }
@@ -450,7 +450,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to (Virtual Sports).
         /// </summary>
-        public static string BetTypeSuffix {
+        internal static string BetTypeSuffix {
             get {
                 return ResourceManager.GetString("BetTypeSuffix", resourceCulture);
             }
@@ -459,7 +459,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Bingo.
         /// </summary>
-        public static string Bingo {
+        internal static string Bingo {
             get {
                 return ResourceManager.GetString("Bingo", resourceCulture);
             }
@@ -468,7 +468,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to MBC - RNG Casino.
         /// </summary>
-        public static string Casino {
+        internal static string Casino {
             get {
                 return ResourceManager.GetString("Casino", resourceCulture);
             }
@@ -477,7 +477,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Your Password has been changed successfully !.
         /// </summary>
-        public static string ChangedPassword {
+        internal static string ChangedPassword {
             get {
                 return ResourceManager.GetString("ChangedPassword", resourceCulture);
             }
@@ -486,7 +486,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Your Profile has been changed successfully !.
         /// </summary>
-        public static string ChangedProfile {
+        internal static string ChangedProfile {
             get {
                 return ResourceManager.GetString("ChangedProfile", resourceCulture);
             }
@@ -495,7 +495,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Check Time.
         /// </summary>
-        public static string CheckTime {
+        internal static string CheckTime {
             get {
                 return ResourceManager.GetString("CheckTime", resourceCulture);
             }
@@ -504,25 +504,16 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Closed.
         /// </summary>
-        public static string Closed {
+        internal static string Closed {
             get {
                 return ResourceManager.GetString("Closed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cockfighting.
-        /// </summary>
-        public static string Cockfighting {
-            get {
-                return ResourceManager.GetString("Cockfighting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Code.
         /// </summary>
-        public static string Code {
+        internal static string Code {
             get {
                 return ResourceManager.GetString("Code", resourceCulture);
             }
@@ -531,7 +522,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Collapse.
         /// </summary>
-        public static string Collapse {
+        internal static string Collapse {
             get {
                 return ResourceManager.GetString("Collapse", resourceCulture);
             }
@@ -540,7 +531,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Colossus Bets.
         /// </summary>
-        public static string ColossusBets {
+        internal static string ColossusBets {
             get {
                 return ResourceManager.GetString("ColossusBets", resourceCulture);
             }
@@ -549,7 +540,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Combinations.
         /// </summary>
-        public static string Combinations {
+        internal static string Combinations {
             get {
                 return ResourceManager.GetString("Combinations", resourceCulture);
             }
@@ -558,7 +549,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Comm.
         /// </summary>
-        public static string Comm {
+        internal static string Comm {
             get {
                 return ResourceManager.GetString("Comm", resourceCulture);
             }
@@ -567,7 +558,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Commission.
         /// </summary>
-        public static string Commission {
+        internal static string Commission {
             get {
                 return ResourceManager.GetString("Commission", resourceCulture);
             }
@@ -576,7 +567,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Company.
         /// </summary>
-        public static string Company {
+        internal static string Company {
             get {
                 return ResourceManager.GetString("Company", resourceCulture);
             }
@@ -585,7 +576,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Company comm.
         /// </summary>
-        public static string Company_comm {
+        internal static string Company_comm {
             get {
                 return ResourceManager.GetString("Company_comm", resourceCulture);
             }
@@ -594,7 +585,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Company net income.
         /// </summary>
-        public static string Company_net_income {
+        internal static string Company_net_income {
             get {
                 return ResourceManager.GetString("Company_net_income", resourceCulture);
             }
@@ -603,7 +594,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Company Stake.
         /// </summary>
-        public static string Company_Stake {
+        internal static string Company_Stake {
             get {
                 return ResourceManager.GetString("Company_Stake", resourceCulture);
             }
@@ -612,7 +603,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Company Turnover.
         /// </summary>
-        public static string Company_Turnover {
+        internal static string Company_Turnover {
             get {
                 return ResourceManager.GetString("Company_Turnover", resourceCulture);
             }
@@ -621,7 +612,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Company Win Loss.
         /// </summary>
-        public static string Company_Win_Loss {
+        internal static string Company_Win_Loss {
             get {
                 return ResourceManager.GetString("Company_Win_Loss", resourceCulture);
             }
@@ -630,7 +621,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Confirm Password cannot empty.
         /// </summary>
-        public static string ConfirmPasswordCannotEmpty {
+        internal static string ConfirmPasswordCannotEmpty {
             get {
                 return ResourceManager.GetString("ConfirmPasswordCannotEmpty", resourceCulture);
             }
@@ -639,7 +630,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Convert figures to.
         /// </summary>
-        public static string ConvertFiguresTo {
+        internal static string ConvertFiguresTo {
             get {
                 return ResourceManager.GetString("ConvertFiguresTo", resourceCulture);
             }
@@ -648,7 +639,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Country.
         /// </summary>
-        public static string Country {
+        internal static string Country {
             get {
                 return ResourceManager.GetString("Country", resourceCulture);
             }
@@ -657,7 +648,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Created By.
         /// </summary>
-        public static string Created_By {
+        internal static string Created_By {
             get {
                 return ResourceManager.GetString("Created_By", resourceCulture);
             }
@@ -666,7 +657,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Created Date.
         /// </summary>
-        public static string Created_Date {
+        internal static string Created_Date {
             get {
                 return ResourceManager.GetString("Created_Date", resourceCulture);
             }
@@ -675,7 +666,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Created Time.
         /// </summary>
-        public static string CreatedTime {
+        internal static string CreatedTime {
             get {
                 return ResourceManager.GetString("CreatedTime", resourceCulture);
             }
@@ -684,7 +675,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Creator.
         /// </summary>
-        public static string Creator {
+        internal static string Creator {
             get {
                 return ResourceManager.GetString("Creator", resourceCulture);
             }
@@ -693,7 +684,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Credit.
         /// </summary>
-        public static string Credit {
+        internal static string Credit {
             get {
                 return ResourceManager.GetString("Credit", resourceCulture);
             }
@@ -702,7 +693,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Credit Movement.
         /// </summary>
-        public static string Credit_Movement {
+        internal static string Credit_Movement {
             get {
                 return ResourceManager.GetString("Credit_Movement", resourceCulture);
             }
@@ -711,7 +702,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Credit Site.
         /// </summary>
-        public static string Credit_Site {
+        internal static string Credit_Site {
             get {
                 return ResourceManager.GetString("Credit_Site", resourceCulture);
             }
@@ -720,7 +711,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to CS.
         /// </summary>
-        public static string CS {
+        internal static string CS {
             get {
                 return ResourceManager.GetString("CS", resourceCulture);
             }
@@ -729,7 +720,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Currency.
         /// </summary>
-        public static string Currency {
+        internal static string Currency {
             get {
                 return ResourceManager.GetString("Currency", resourceCulture);
             }
@@ -738,7 +729,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Current Month.
         /// </summary>
-        public static string CurrentMonth {
+        internal static string CurrentMonth {
             get {
                 return ResourceManager.GetString("CurrentMonth", resourceCulture);
             }
@@ -747,7 +738,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Current Week.
         /// </summary>
-        public static string CurrentWeek {
+        internal static string CurrentWeek {
             get {
                 return ResourceManager.GetString("CurrentWeek", resourceCulture);
             }
@@ -756,7 +747,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to CustId.
         /// </summary>
-        public static string CustomerID {
+        internal static string CustomerID {
             get {
                 return ResourceManager.GetString("CustomerID", resourceCulture);
             }
@@ -765,7 +756,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Customer Turnover.
         /// </summary>
-        public static string CustomerTurnover {
+        internal static string CustomerTurnover {
             get {
                 return ResourceManager.GetString("CustomerTurnover", resourceCulture);
             }
@@ -774,7 +765,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Customer Win Loss.
         /// </summary>
-        public static string CustomerWinLoss {
+        internal static string CustomerWinLoss {
             get {
                 return ResourceManager.GetString("CustomerWinLoss", resourceCulture);
             }
@@ -783,7 +774,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Daily.
         /// </summary>
-        public static string Daily {
+        internal static string Daily {
             get {
                 return ResourceManager.GetString("Daily", resourceCulture);
             }
@@ -792,7 +783,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
-        public static string Date {
+        internal static string Date {
             get {
                 return ResourceManager.GetString("Date", resourceCulture);
             }
@@ -801,7 +792,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Deposit.
         /// </summary>
-        public static string Deposit {
+        internal static string Deposit {
             get {
                 return ResourceManager.GetString("Deposit", resourceCulture);
             }
@@ -810,7 +801,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Deposit Site.
         /// </summary>
-        public static string Deposit_Site {
+        internal static string Deposit_Site {
             get {
                 return ResourceManager.GetString("Deposit_Site", resourceCulture);
             }
@@ -819,7 +810,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Descending.
         /// </summary>
-        public static string Descending {
+        internal static string Descending {
             get {
                 return ResourceManager.GetString("Descending", resourceCulture);
             }
@@ -828,7 +819,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Detail.
         /// </summary>
-        public static string Detail {
+        internal static string Detail {
             get {
                 return ResourceManager.GetString("Detail", resourceCulture);
             }
@@ -837,7 +828,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Details.
         /// </summary>
-        public static string Details {
+        internal static string Details {
             get {
                 return ResourceManager.GetString("Details", resourceCulture);
             }
@@ -846,7 +837,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Direct Agent.
         /// </summary>
-        public static string Direct_Agent {
+        internal static string Direct_Agent {
             get {
                 return ResourceManager.GetString("Direct_Agent", resourceCulture);
             }
@@ -855,7 +846,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Direct Master.
         /// </summary>
-        public static string Direct_Master {
+        internal static string Direct_Master {
             get {
                 return ResourceManager.GetString("Direct_Master", resourceCulture);
             }
@@ -864,7 +855,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Disabled.
         /// </summary>
-        public static string Disabled {
+        internal static string Disabled {
             get {
                 return ResourceManager.GetString("Disabled", resourceCulture);
             }
@@ -873,7 +864,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Distributor&apos;s revenue.
         /// </summary>
-        public static string DistributorRevenue {
+        internal static string DistributorRevenue {
             get {
                 return ResourceManager.GetString("DistributorRevenue", resourceCulture);
             }
@@ -882,7 +873,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Draw.
         /// </summary>
-        public static string Draw {
+        internal static string Draw {
             get {
                 return ResourceManager.GetString("Draw", resourceCulture);
             }
@@ -891,7 +882,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Draw Count.
         /// </summary>
-        public static string Draw_Count {
+        internal static string Draw_Count {
             get {
                 return ResourceManager.GetString("Draw_Count", resourceCulture);
             }
@@ -900,7 +891,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Draw Filter.
         /// </summary>
-        public static string DrawFilter {
+        internal static string DrawFilter {
             get {
                 return ResourceManager.GetString("DrawFilter", resourceCulture);
             }
@@ -909,7 +900,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to 8RM.
         /// </summary>
-        public static string EightRM {
+        internal static string EightRM {
             get {
                 return ResourceManager.GetString("EightRM", resourceCulture);
             }
@@ -918,7 +909,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to There is no information available..
         /// </summary>
-        public static string EmptyReportMessage {
+        internal static string EmptyReportMessage {
             get {
                 return ResourceManager.GetString("EmptyReportMessage", resourceCulture);
             }
@@ -927,7 +918,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Enabled.
         /// </summary>
-        public static string Enabled {
+        internal static string Enabled {
             get {
                 return ResourceManager.GetString("Enabled", resourceCulture);
             }
@@ -936,7 +927,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Method isn&apos;t implemented..
         /// </summary>
-        public static string Error_MethodNotImplemented {
+        internal static string Error_MethodNotImplemented {
             get {
                 return ResourceManager.GetString("Error_MethodNotImplemented", resourceCulture);
             }
@@ -945,7 +936,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to EUR.
         /// </summary>
-        public static string EUR {
+        internal static string EUR {
             get {
                 return ResourceManager.GetString("EUR", resourceCulture);
             }
@@ -954,7 +945,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Event.
         /// </summary>
-        public static string Event {
+        internal static string Event {
             get {
                 return ResourceManager.GetString("Event", resourceCulture);
             }
@@ -963,7 +954,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Event Date.
         /// </summary>
-        public static string Event_Date {
+        internal static string Event_Date {
             get {
                 return ResourceManager.GetString("Event_Date", resourceCulture);
             }
@@ -972,7 +963,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Exchange.
         /// </summary>
-        public static string Exchange {
+        internal static string Exchange {
             get {
                 return ResourceManager.GetString("Exchange", resourceCulture);
             }
@@ -981,7 +972,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Exclude test accounts.
         /// </summary>
-        public static string Exclude_test_accounts {
+        internal static string Exclude_test_accounts {
             get {
                 return ResourceManager.GetString("Exclude_test_accounts", resourceCulture);
             }
@@ -990,7 +981,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Expand.
         /// </summary>
-        public static string Expand {
+        internal static string Expand {
             get {
                 return ResourceManager.GetString("Expand", resourceCulture);
             }
@@ -999,7 +990,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Export.
         /// </summary>
-        public static string Export {
+        internal static string Export {
             get {
                 return ResourceManager.GetString("Export", resourceCulture);
             }
@@ -1008,7 +999,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to FG/LG.
         /// </summary>
-        public static string FG_LG {
+        internal static string FG_LG {
             get {
                 return ResourceManager.GetString("FG_LG", resourceCulture);
             }
@@ -1017,7 +1008,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to BetTime (1st ticket).
         /// </summary>
-        public static string FirstBetTime {
+        internal static string FirstBetTime {
             get {
                 return ResourceManager.GetString("FirstBetTime", resourceCulture);
             }
@@ -1026,7 +1017,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Refno (1st ticket).
         /// </summary>
-        public static string FirstRefNumber {
+        internal static string FirstRefNumber {
             get {
                 return ResourceManager.GetString("FirstRefNumber", resourceCulture);
             }
@@ -1035,7 +1026,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to From.
         /// </summary>
-        public static string From {
+        internal static string From {
             get {
                 return ResourceManager.GetString("From", resourceCulture);
             }
@@ -1044,7 +1035,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to From Date.
         /// </summary>
-        public static string From_Date {
+        internal static string From_Date {
             get {
                 return ResourceManager.GetString("From_Date", resourceCulture);
             }
@@ -1053,7 +1044,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to FT.
         /// </summary>
-        public static string FT {
+        internal static string FT {
             get {
                 return ResourceManager.GetString("FT", resourceCulture);
             }
@@ -1062,7 +1053,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Game.
         /// </summary>
-        public static string Game {
+        internal static string Game {
             get {
                 return ResourceManager.GetString("Game", resourceCulture);
             }
@@ -1071,7 +1062,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Game income.
         /// </summary>
-        public static string Game_income {
+        internal static string Game_income {
             get {
                 return ResourceManager.GetString("Game_income", resourceCulture);
             }
@@ -1080,7 +1071,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Game Levy to pay.
         /// </summary>
-        public static string Game_Levy_to_pay {
+        internal static string Game_Levy_to_pay {
             get {
                 return ResourceManager.GetString("Game_Levy_to_pay", resourceCulture);
             }
@@ -1089,7 +1080,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Game No.
         /// </summary>
-        public static string Game_No {
+        internal static string Game_No {
             get {
                 return ResourceManager.GetString("Game_No", resourceCulture);
             }
@@ -1098,7 +1089,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Game payout.
         /// </summary>
-        public static string Game_payout {
+        internal static string Game_payout {
             get {
                 return ResourceManager.GetString("Game_payout", resourceCulture);
             }
@@ -1107,7 +1098,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Game search.
         /// </summary>
-        public static string Game_search {
+        internal static string Game_search {
             get {
                 return ResourceManager.GetString("Game_search", resourceCulture);
             }
@@ -1116,7 +1107,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Game table.
         /// </summary>
-        public static string Game_table {
+        internal static string Game_table {
             get {
                 return ResourceManager.GetString("Game_table", resourceCulture);
             }
@@ -1125,7 +1116,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Game type.
         /// </summary>
-        public static string Game_type {
+        internal static string Game_type {
             get {
                 return ResourceManager.GetString("Game_type", resourceCulture);
             }
@@ -1134,7 +1125,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Game Payout.
         /// </summary>
-        public static string GamePayout {
+        internal static string GamePayout {
             get {
                 return ResourceManager.GetString("GamePayout", resourceCulture);
             }
@@ -1143,7 +1134,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Game Type.
         /// </summary>
-        public static string GameType {
+        internal static string GameType {
             get {
                 return ResourceManager.GetString("GameType", resourceCulture);
             }
@@ -1152,7 +1143,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Gaming.
         /// </summary>
-        public static string Gaming {
+        internal static string Gaming {
             get {
                 return ResourceManager.GetString("Gaming", resourceCulture);
             }
@@ -1161,7 +1152,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Generate.
         /// </summary>
-        public static string Generate {
+        internal static string Generate {
             get {
                 return ResourceManager.GetString("Generate", resourceCulture);
             }
@@ -1170,7 +1161,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Grand Total.
         /// </summary>
-        public static string Grand_Total {
+        internal static string Grand_Total {
             get {
                 return ResourceManager.GetString("Grand_Total", resourceCulture);
             }
@@ -1179,7 +1170,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Gross Income.
         /// </summary>
-        public static string Gross_Income {
+        internal static string Gross_Income {
             get {
                 return ResourceManager.GetString("Gross_Income", resourceCulture);
             }
@@ -1188,7 +1179,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to GrossComm.
         /// </summary>
-        public static string GrossComm {
+        internal static string GrossComm {
             get {
                 return ResourceManager.GetString("GrossComm", resourceCulture);
             }
@@ -1197,7 +1188,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Gross Income.
         /// </summary>
-        public static string GrossIncome {
+        internal static string GrossIncome {
             get {
                 return ResourceManager.GetString("GrossIncome", resourceCulture);
             }
@@ -1206,7 +1197,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Gross Win.
         /// </summary>
-        public static string GrossWin {
+        internal static string GrossWin {
             get {
                 return ResourceManager.GetString("GrossWin", resourceCulture);
             }
@@ -1215,7 +1206,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Group Headline.
         /// </summary>
-        public static string GroupHeadline {
+        internal static string GroupHeadline {
             get {
                 return ResourceManager.GetString("GroupHeadline", resourceCulture);
             }
@@ -1224,7 +1215,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to HDP.
         /// </summary>
-        public static string HDP {
+        internal static string HDP {
             get {
                 return ResourceManager.GetString("HDP", resourceCulture);
             }
@@ -1233,7 +1224,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to hedge.
         /// </summary>
-        public static string Hedge {
+        internal static string Hedge {
             get {
                 return ResourceManager.GetString("Hedge", resourceCulture);
             }
@@ -1242,7 +1233,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Hide filter.
         /// </summary>
-        public static string Hide_filter {
+        internal static string Hide_filter {
             get {
                 return ResourceManager.GetString("Hide_filter", resourceCulture);
             }
@@ -1251,7 +1242,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to History Report.
         /// </summary>
-        public static string History_Report {
+        internal static string History_Report {
             get {
                 return ResourceManager.GetString("History_Report", resourceCulture);
             }
@@ -1260,7 +1251,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to House Turnover.
         /// </summary>
-        public static string House_Turnover {
+        internal static string House_Turnover {
             get {
                 return ResourceManager.GetString("House_Turnover", resourceCulture);
             }
@@ -1269,7 +1260,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to House Win Loss.
         /// </summary>
-        public static string House_Win_Loss {
+        internal static string House_Win_Loss {
             get {
                 return ResourceManager.GetString("House_Win_Loss", resourceCulture);
             }
@@ -1278,7 +1269,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to HT.
         /// </summary>
-        public static string HT {
+        internal static string HT {
             get {
                 return ResourceManager.GetString("HT", resourceCulture);
             }
@@ -1287,7 +1278,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to IBC.
         /// </summary>
-        public static string IBC {
+        internal static string IBC {
             get {
                 return ResourceManager.GetString("IBC", resourceCulture);
             }
@@ -1296,7 +1287,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to IBCbet Bingo.
         /// </summary>
-        public static string IBCbet_Bingo {
+        internal static string IBCbet_Bingo {
             get {
                 return ResourceManager.GetString("IBCbet_Bingo", resourceCulture);
             }
@@ -1305,7 +1296,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to IBC(8RM + BARM) Total.
         /// </summary>
-        public static string IBCTotal {
+        internal static string IBCTotal {
             get {
                 return ResourceManager.GetString("IBCTotal", resourceCulture);
             }
@@ -1314,7 +1305,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Invalid Email!.
         /// </summary>
-        public static string InvalidEmail {
+        internal static string InvalidEmail {
             get {
                 return ResourceManager.GetString("InvalidEmail", resourceCulture);
             }
@@ -1323,7 +1314,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to IP.
         /// </summary>
-        public static string IP {
+        internal static string IP {
             get {
                 return ResourceManager.GetString("IP", resourceCulture);
             }
@@ -1332,7 +1323,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to (N).
         /// </summary>
-        public static string IsNeutral {
+        internal static string IsNeutral {
             get {
                 return ResourceManager.GetString("IsNeutral", resourceCulture);
             }
@@ -1341,7 +1332,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Keno.
         /// </summary>
-        public static string Keno {
+        internal static string Keno {
             get {
                 return ResourceManager.GetString("Keno", resourceCulture);
             }
@@ -1350,7 +1341,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Kick Off.
         /// </summary>
-        public static string Kick_Off {
+        internal static string Kick_Off {
             get {
                 return ResourceManager.GetString("Kick_Off", resourceCulture);
             }
@@ -1359,7 +1350,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Last Month.
         /// </summary>
-        public static string LastMonth {
+        internal static string LastMonth {
             get {
                 return ResourceManager.GetString("LastMonth", resourceCulture);
             }
@@ -1368,7 +1359,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Last Week.
         /// </summary>
-        public static string LastWeek {
+        internal static string LastWeek {
             get {
                 return ResourceManager.GetString("LastWeek", resourceCulture);
             }
@@ -1377,7 +1368,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to LC.
         /// </summary>
-        public static string LC {
+        internal static string LC {
             get {
                 return ResourceManager.GetString("LC", resourceCulture);
             }
@@ -1386,7 +1377,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to League.
         /// </summary>
-        public static string League {
+        internal static string League {
             get {
                 return ResourceManager.GetString("League", resourceCulture);
             }
@@ -1395,7 +1386,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Licensee.
         /// </summary>
-        public static string Licensee {
+        internal static string Licensee {
             get {
                 return ResourceManager.GetString("Licensee", resourceCulture);
             }
@@ -1404,7 +1395,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Licensee Win Loss.
         /// </summary>
-        public static string LicenseeWinLoss {
+        internal static string LicenseeWinLoss {
             get {
                 return ResourceManager.GetString("LicenseeWinLoss", resourceCulture);
             }
@@ -1413,7 +1404,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Line Total.
         /// </summary>
-        public static string Line_Total {
+        internal static string Line_Total {
             get {
                 return ResourceManager.GetString("Line_Total", resourceCulture);
             }
@@ -1422,7 +1413,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Line Total.
         /// </summary>
-        public static string LineTotal {
+        internal static string LineTotal {
             get {
                 return ResourceManager.GetString("LineTotal", resourceCulture);
             }
@@ -1431,7 +1422,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Live.
         /// </summary>
-        public static string Live {
+        internal static string Live {
             get {
                 return ResourceManager.GetString("Live", resourceCulture);
             }
@@ -1440,7 +1431,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Live Bet Count.
         /// </summary>
-        public static string Live_Bet_Count {
+        internal static string Live_Bet_Count {
             get {
                 return ResourceManager.GetString("Live_Bet_Count", resourceCulture);
             }
@@ -1449,7 +1440,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Live Casino Game Financial Report.
         /// </summary>
-        public static string Live_Casino_Game_Financial_Report {
+        internal static string Live_Casino_Game_Financial_Report {
             get {
                 return ResourceManager.GetString("Live_Casino_Game_Financial_Report", resourceCulture);
             }
@@ -1458,7 +1449,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Live Status.
         /// </summary>
-        public static string Live_Status {
+        internal static string Live_Status {
             get {
                 return ResourceManager.GetString("Live_Status", resourceCulture);
             }
@@ -1467,7 +1458,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Live Casino.
         /// </summary>
-        public static string LiveCasino {
+        internal static string LiveCasino {
             get {
                 return ResourceManager.GetString("LiveCasino", resourceCulture);
             }
@@ -1476,7 +1467,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Game Levy ({0}%).
         /// </summary>
-        public static string LiveCasinoGameFinancialReport_GameLevy {
+        internal static string LiveCasinoGameFinancialReport_GameLevy {
             get {
                 return ResourceManager.GetString("LiveCasinoGameFinancialReport_GameLevy", resourceCulture);
             }
@@ -1485,7 +1476,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Game Payout %.
         /// </summary>
-        public static string LiveCasinoGameFinancialReport_GamePayout {
+        internal static string LiveCasinoGameFinancialReport_GamePayout {
             get {
                 return ResourceManager.GetString("LiveCasinoGameFinancialReport_GamePayout", resourceCulture);
             }
@@ -1494,7 +1485,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to # Games.
         /// </summary>
-        public static string LiveCasinoGameFinancialReport_Games {
+        internal static string LiveCasinoGameFinancialReport_Games {
             get {
                 return ResourceManager.GetString("LiveCasinoGameFinancialReport_Games", resourceCulture);
             }
@@ -1503,7 +1494,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to # Players.
         /// </summary>
-        public static string LiveCasinoGameFinancialReport_Players {
+        internal static string LiveCasinoGameFinancialReport_Players {
             get {
                 return ResourceManager.GetString("LiveCasinoGameFinancialReport_Players", resourceCulture);
             }
@@ -1512,7 +1503,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to LC.
         /// </summary>
-        public static string LiveCasinoProductCode {
+        internal static string LiveCasinoProductCode {
             get {
                 return ResourceManager.GetString("LiveCasinoProductCode", resourceCulture);
             }
@@ -1521,7 +1512,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Lose.
         /// </summary>
-        public static string Lose {
+        internal static string Lose {
             get {
                 return ResourceManager.GetString("Lose", resourceCulture);
             }
@@ -1530,7 +1521,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Macau Games.
         /// </summary>
-        public static string MacauGames {
+        internal static string MacauGames {
             get {
                 return ResourceManager.GetString("MacauGames", resourceCulture);
             }
@@ -1539,7 +1530,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Main.
         /// </summary>
-        public static string Main {
+        internal static string Main {
             get {
                 return ResourceManager.GetString("Main", resourceCulture);
             }
@@ -1548,7 +1539,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Margin.
         /// </summary>
-        public static string Margin {
+        internal static string Margin {
             get {
                 return ResourceManager.GetString("Margin", resourceCulture);
             }
@@ -1557,7 +1548,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Margin %.
         /// </summary>
-        public static string Margin_Percent {
+        internal static string Margin_Percent {
             get {
                 return ResourceManager.GetString("Margin_Percent", resourceCulture);
             }
@@ -1566,7 +1557,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Master.
         /// </summary>
-        public static string Master {
+        internal static string Master {
             get {
                 return ResourceManager.GetString("Master", resourceCulture);
             }
@@ -1575,7 +1566,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Match.
         /// </summary>
-        public static string Match {
+        internal static string Match {
             get {
                 return ResourceManager.GetString("Match", resourceCulture);
             }
@@ -1584,7 +1575,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Match Code.
         /// </summary>
-        public static string Match_Code {
+        internal static string Match_Code {
             get {
                 return ResourceManager.GetString("Match_Code", resourceCulture);
             }
@@ -1593,7 +1584,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Member.
         /// </summary>
-        public static string Member {
+        internal static string Member {
             get {
                 return ResourceManager.GetString("Member", resourceCulture);
             }
@@ -1602,7 +1593,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Member Turnover.
         /// </summary>
-        public static string Member_Turnover {
+        internal static string Member_Turnover {
             get {
                 return ResourceManager.GetString("Member_Turnover", resourceCulture);
             }
@@ -1611,7 +1602,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Member Win Loss.
         /// </summary>
-        public static string Member_Win_Loss {
+        internal static string Member_Win_Loss {
             get {
                 return ResourceManager.GetString("Member_Win_Loss", resourceCulture);
             }
@@ -1620,7 +1611,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Member Total.
         /// </summary>
-        public static string MemberTotal {
+        internal static string MemberTotal {
             get {
                 return ResourceManager.GetString("MemberTotal", resourceCulture);
             }
@@ -1629,7 +1620,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Metric Gaming - Superlive.
         /// </summary>
-        public static string MetricGamingSuperLive {
+        internal static string MetricGamingSuperLive {
             get {
                 return ResourceManager.GetString("MetricGamingSuperLive", resourceCulture);
             }
@@ -1638,7 +1629,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Misc.
         /// </summary>
-        public static string Misc {
+        internal static string Misc {
             get {
                 return ResourceManager.GetString("Misc", resourceCulture);
             }
@@ -1647,7 +1638,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Mix Live and Non-Live.
         /// </summary>
-        public static string Mix_Live_and_Non_Live {
+        internal static string Mix_Live_and_Non_Live {
             get {
                 return ResourceManager.GetString("Mix_Live_and_Non_Live", resourceCulture);
             }
@@ -1656,7 +1647,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Mix Parlay.
         /// </summary>
-        public static string Mix_Parlay {
+        internal static string Mix_Parlay {
             get {
                 return ResourceManager.GetString("Mix_Parlay", resourceCulture);
             }
@@ -1665,7 +1656,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Month.
         /// </summary>
-        public static string Month {
+        internal static string Month {
             get {
                 return ResourceManager.GetString("Month", resourceCulture);
             }
@@ -1674,7 +1665,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Month Range.
         /// </summary>
-        public static string Month_Range {
+        internal static string Month_Range {
             get {
                 return ResourceManager.GetString("Month_Range", resourceCulture);
             }
@@ -1683,7 +1674,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Monthly.
         /// </summary>
-        public static string Monthly {
+        internal static string Monthly {
             get {
                 return ResourceManager.GetString("Monthly", resourceCulture);
             }
@@ -1692,7 +1683,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Most Visited Pages.
         /// </summary>
-        public static string Most_Visited_Pages {
+        internal static string Most_Visited_Pages {
             get {
                 return ResourceManager.GetString("Most_Visited_Pages", resourceCulture);
             }
@@ -1701,7 +1692,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Multi.
         /// </summary>
-        public static string Multi {
+        internal static string Multi {
             get {
                 return ResourceManager.GetString("Multi", resourceCulture);
             }
@@ -1710,7 +1701,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Multi Sports.
         /// </summary>
-        public static string Multi_Sports {
+        internal static string Multi_Sports {
             get {
                 return ResourceManager.GetString("Multi_Sports", resourceCulture);
             }
@@ -1719,7 +1710,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to MYR.
         /// </summary>
-        public static string MYR {
+        internal static string MYR {
             get {
                 return ResourceManager.GetString("MYR", resourceCulture);
             }
@@ -1728,7 +1719,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Net Income.
         /// </summary>
-        public static string Net_Income {
+        internal static string Net_Income {
             get {
                 return ResourceManager.GetString("Net_Income", resourceCulture);
             }
@@ -1737,7 +1728,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
-        public static string New {
+        internal static string New {
             get {
                 return ResourceManager.GetString("New", resourceCulture);
             }
@@ -1746,7 +1737,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to New Accounting Portal.
         /// </summary>
-        public static string New_Accounting_Portal {
+        internal static string New_Accounting_Portal {
             get {
                 return ResourceManager.GetString("New_Accounting_Portal", resourceCulture);
             }
@@ -1755,7 +1746,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to New Created.
         /// </summary>
-        public static string NewCreated {
+        internal static string NewCreated {
             get {
                 return ResourceManager.GetString("NewCreated", resourceCulture);
             }
@@ -1765,7 +1756,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         ///   Looks up a localized string similar to 
         ///.
         /// </summary>
-        public static string NewLine {
+        internal static string NewLine {
             get {
                 return ResourceManager.GetString("NewLine", resourceCulture);
             }
@@ -1774,7 +1765,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to New Password cannot empty !.
         /// </summary>
-        public static string NewPasswordConnotEmpty {
+        internal static string NewPasswordConnotEmpty {
             get {
                 return ResourceManager.GetString("NewPasswordConnotEmpty", resourceCulture);
             }
@@ -1783,7 +1774,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Next Corner.
         /// </summary>
-        public static string Next_Corner {
+        internal static string Next_Corner {
             get {
                 return ResourceManager.GetString("Next_Corner", resourceCulture);
             }
@@ -1792,7 +1783,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to NG.
         /// </summary>
-        public static string NG {
+        internal static string NG {
             get {
                 return ResourceManager.GetString("NG", resourceCulture);
             }
@@ -1801,7 +1792,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
-        public static string No {
+        internal static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
             }
@@ -1810,7 +1801,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No company found.
         /// </summary>
-        public static string No_company_found {
+        internal static string No_company_found {
             get {
                 return ResourceManager.GetString("No_company_found", resourceCulture);
             }
@@ -1819,7 +1810,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No league found..
         /// </summary>
-        public static string No_league_found {
+        internal static string No_league_found {
             get {
                 return ResourceManager.GetString("No_league_found", resourceCulture);
             }
@@ -1828,7 +1819,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No. of Corner.
         /// </summary>
-        public static string No_of_Corner {
+        internal static string No_of_Corner {
             get {
                 return ResourceManager.GetString("No_of_Corner", resourceCulture);
             }
@@ -1837,7 +1828,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No. of Yellow Card.
         /// </summary>
-        public static string No_of_Yellow_Card {
+        internal static string No_of_Yellow_Card {
             get {
                 return ResourceManager.GetString("No_of_Yellow_Card", resourceCulture);
             }
@@ -1846,7 +1837,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No.Players.
         /// </summary>
-        public static string No_Players {
+        internal static string No_Players {
             get {
                 return ResourceManager.GetString("No_Players", resourceCulture);
             }
@@ -1855,7 +1846,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to There is no data.
         /// </summary>
-        public static string nodata {
+        internal static string nodata {
             get {
                 return ResourceManager.GetString("nodata", resourceCulture);
             }
@@ -1864,7 +1855,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Non-Live.
         /// </summary>
-        public static string Non_Live {
+        internal static string Non_Live {
             get {
                 return ResourceManager.GetString("Non_Live", resourceCulture);
             }
@@ -1873,7 +1864,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
-        public static string None {
+        internal static string None {
             get {
                 return ResourceManager.GetString("None", resourceCulture);
             }
@@ -1882,7 +1873,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to None-live.
         /// </summary>
-        public static string None_live {
+        internal static string None_live {
             get {
                 return ResourceManager.GetString("None_live", resourceCulture);
             }
@@ -1891,7 +1882,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
-        public static string NoneLicensee {
+        internal static string NoneLicensee {
             get {
                 return ResourceManager.GetString("NoneLicensee", resourceCulture);
             }
@@ -1900,7 +1891,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Normal Tickets.
         /// </summary>
-        public static string NormalTicket {
+        internal static string NormalTicket {
             get {
                 return ResourceManager.GetString("NormalTicket", resourceCulture);
             }
@@ -1909,7 +1900,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to N/A.
         /// </summary>
-        public static string NotAvailable {
+        internal static string NotAvailable {
             get {
                 return ResourceManager.GetString("NotAvailable", resourceCulture);
             }
@@ -1918,7 +1909,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Note.
         /// </summary>
-        public static string Note {
+        internal static string Note {
             get {
                 return ResourceManager.GetString("Note", resourceCulture);
             }
@@ -1927,7 +1918,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Number Game.
         /// </summary>
-        public static string NumberGame {
+        internal static string NumberGame {
             get {
                 return ResourceManager.GetString("NumberGame", resourceCulture);
             }
@@ -1936,7 +1927,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Odds.
         /// </summary>
-        public static string Odds {
+        internal static string Odds {
             get {
                 return ResourceManager.GetString("Odds", resourceCulture);
             }
@@ -1945,7 +1936,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to O/E.
         /// </summary>
-        public static string OE {
+        internal static string OE {
             get {
                 return ResourceManager.GetString("OE", resourceCulture);
             }
@@ -1954,7 +1945,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Old/.
         /// </summary>
-        public static string Old {
+        internal static string Old {
             get {
                 return ResourceManager.GetString("Old", resourceCulture);
             }
@@ -1963,7 +1954,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Old Password cannot empty !.
         /// </summary>
-        public static string OldPasswordCannotEmpty {
+        internal static string OldPasswordCannotEmpty {
             get {
                 return ResourceManager.GetString("OldPasswordCannotEmpty", resourceCulture);
             }
@@ -1972,7 +1963,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to ONEWorks&apos; Income.
         /// </summary>
-        public static string ONEworkIncome {
+        internal static string ONEworkIncome {
             get {
                 return ResourceManager.GetString("ONEworkIncome", resourceCulture);
             }
@@ -1981,7 +1972,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Last {0} Months.
         /// </summary>
-        public static string Options_LastMonthRange {
+        internal static string Options_LastMonthRange {
             get {
                 return ResourceManager.GetString("Options_LastMonthRange", resourceCulture);
             }
@@ -1990,7 +1981,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Order by.
         /// </summary>
-        public static string Order_by {
+        internal static string Order_by {
             get {
                 return ResourceManager.GetString("Order_by", resourceCulture);
             }
@@ -1999,7 +1990,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Original Currency.
         /// </summary>
-        public static string Original_Currency {
+        internal static string Original_Currency {
             get {
                 return ResourceManager.GetString("Original_Currency", resourceCulture);
             }
@@ -2008,7 +1999,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Other Live.
         /// </summary>
-        public static string Other_Live {
+        internal static string Other_Live {
             get {
                 return ResourceManager.GetString("Other_Live", resourceCulture);
             }
@@ -2017,7 +2008,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Other Non-Live.
         /// </summary>
-        public static string Other_Non_Live {
+        internal static string Other_Non_Live {
             get {
                 return ResourceManager.GetString("Other_Non_Live", resourceCulture);
             }
@@ -2026,7 +2017,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Other Sports.
         /// </summary>
-        public static string Other_Sports {
+        internal static string Other_Sports {
             get {
                 return ResourceManager.GetString("Other_Sports", resourceCulture);
             }
@@ -2035,7 +2026,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Others.
         /// </summary>
-        public static string Others {
+        internal static string Others {
             get {
                 return ResourceManager.GetString("Others", resourceCulture);
             }
@@ -2044,7 +2035,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to OU.
         /// </summary>
-        public static string OU {
+        internal static string OU {
             get {
                 return ResourceManager.GetString("OU", resourceCulture);
             }
@@ -2053,7 +2044,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Outright.
         /// </summary>
-        public static string Outright {
+        internal static string Outright {
             get {
                 return ResourceManager.GetString("Outright", resourceCulture);
             }
@@ -2062,7 +2053,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Outstanding.
         /// </summary>
-        public static string Outstanding {
+        internal static string Outstanding {
             get {
                 return ResourceManager.GetString("Outstanding", resourceCulture);
             }
@@ -2071,7 +2062,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Overall.
         /// </summary>
-        public static string Overall {
+        internal static string Overall {
             get {
                 return ResourceManager.GetString("Overall", resourceCulture);
             }
@@ -2080,7 +2071,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to P2P.
         /// </summary>
-        public static string P2P {
+        internal static string P2P {
             get {
                 return ResourceManager.GetString("P2P", resourceCulture);
             }
@@ -2089,7 +2080,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Parlay.
         /// </summary>
-        public static string Parlay {
+        internal static string Parlay {
             get {
                 return ResourceManager.GetString("Parlay", resourceCulture);
             }
@@ -2098,7 +2089,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Parlay Combination Win Loss.
         /// </summary>
-        public static string Parlay_Combination_Win_Loss {
+        internal static string Parlay_Combination_Win_Loss {
             get {
                 return ResourceManager.GetString("Parlay_Combination_Win_Loss", resourceCulture);
             }
@@ -2107,7 +2098,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Parlay Win Loss by Product.
         /// </summary>
-        public static string Parlay_Win_Loss_by_Product {
+        internal static string Parlay_Win_Loss_by_Product {
             get {
                 return ResourceManager.GetString("Parlay_Win_Loss_by_Product", resourceCulture);
             }
@@ -2116,7 +2107,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Confirm Password and New Password do not match..
         /// </summary>
-        public static string PasswordDoesNotMatch {
+        internal static string PasswordDoesNotMatch {
             get {
                 return ResourceManager.GetString("PasswordDoesNotMatch", resourceCulture);
             }
@@ -2125,7 +2116,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to NewPass connot less than 5 characters..
         /// </summary>
-        public static string PassWordMinLengthError {
+        internal static string PassWordMinLengthError {
             get {
                 return ResourceManager.GetString("PassWordMinLengthError", resourceCulture);
             }
@@ -2134,7 +2125,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Period type.
         /// </summary>
-        public static string Period_type {
+        internal static string Period_type {
             get {
                 return ResourceManager.GetString("Period_type", resourceCulture);
             }
@@ -2143,7 +2134,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Period Type.
         /// </summary>
-        public static string PeriodType {
+        internal static string PeriodType {
             get {
                 return ResourceManager.GetString("PeriodType", resourceCulture);
             }
@@ -2152,7 +2143,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Pin to Dashboard.
         /// </summary>
-        public static string PinToDashboard {
+        internal static string PinToDashboard {
             get {
                 return ResourceManager.GetString("PinToDashboard", resourceCulture);
             }
@@ -2161,7 +2152,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Position.
         /// </summary>
-        public static string Position {
+        internal static string Position {
             get {
                 return ResourceManager.GetString("Position", resourceCulture);
             }
@@ -2170,7 +2161,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Product.
         /// </summary>
-        public static string Product {
+        internal static string Product {
             get {
                 return ResourceManager.GetString("Product", resourceCulture);
             }
@@ -2179,7 +2170,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Race.
         /// </summary>
-        public static string Race {
+        internal static string Race {
             get {
                 return ResourceManager.GetString("Race", resourceCulture);
             }
@@ -2188,7 +2179,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Racing.
         /// </summary>
-        public static string Racing {
+        internal static string Racing {
             get {
                 return ResourceManager.GetString("Racing", resourceCulture);
             }
@@ -2197,7 +2188,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Racing Revenue.
         /// </summary>
-        public static string RacingRevenue {
+        internal static string RacingRevenue {
             get {
                 return ResourceManager.GetString("RacingRevenue", resourceCulture);
             }
@@ -2206,7 +2197,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Real.
         /// </summary>
-        public static string Real {
+        internal static string Real {
             get {
                 return ResourceManager.GetString("Real", resourceCulture);
             }
@@ -2215,7 +2206,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Ref No.
         /// </summary>
-        public static string Ref_No {
+        internal static string Ref_No {
             get {
                 return ResourceManager.GetString("Ref_No", resourceCulture);
             }
@@ -2224,7 +2215,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Refno.
         /// </summary>
-        public static string Reference_Number {
+        internal static string Reference_Number {
             get {
                 return ResourceManager.GetString("Reference_Number", resourceCulture);
             }
@@ -2233,7 +2224,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Ref No.
         /// </summary>
-        public static string RefNo {
+        internal static string RefNo {
             get {
                 return ResourceManager.GetString("RefNo", resourceCulture);
             }
@@ -2242,7 +2233,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Void/Reject Tickets.
         /// </summary>
-        public static string RejectTicket {
+        internal static string RejectTicket {
             get {
                 return ResourceManager.GetString("RejectTicket", resourceCulture);
             }
@@ -2251,7 +2242,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Report.
         /// </summary>
-        public static string Report {
+        internal static string Report {
             get {
                 return ResourceManager.GetString("Report", resourceCulture);
             }
@@ -2260,7 +2251,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Report by.
         /// </summary>
-        public static string Report_by {
+        internal static string Report_by {
             get {
                 return ResourceManager.GetString("Report_by", resourceCulture);
             }
@@ -2269,7 +2260,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Report Name.
         /// </summary>
-        public static string Report_Name {
+        internal static string Report_Name {
             get {
                 return ResourceManager.GetString("Report_Name", resourceCulture);
             }
@@ -2278,7 +2269,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Reset.
         /// </summary>
-        public static string Reset {
+        internal static string Reset {
             get {
                 return ResourceManager.GetString("Reset", resourceCulture);
             }
@@ -2287,7 +2278,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to RM.
         /// </summary>
-        public static string RM {
+        internal static string RM {
             get {
                 return ResourceManager.GetString("RM", resourceCulture);
             }
@@ -2296,7 +2287,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Running Bet Count.
         /// </summary>
-        public static string RunningBetCount {
+        internal static string RunningBetCount {
             get {
                 return ResourceManager.GetString("RunningBetCount", resourceCulture);
             }
@@ -2305,7 +2296,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Your change(s) were saved!.
         /// </summary>
-        public static string SavedChanges {
+        internal static string SavedChanges {
             get {
                 return ResourceManager.GetString("SavedChanges", resourceCulture);
             }
@@ -2314,7 +2305,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to SB.
         /// </summary>
-        public static string SB {
+        internal static string SB {
             get {
                 return ResourceManager.GetString("SB", resourceCulture);
             }
@@ -2323,7 +2314,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Score.
         /// </summary>
-        public static string Score {
+        internal static string Score {
             get {
                 return ResourceManager.GetString("Score", resourceCulture);
             }
@@ -2332,7 +2323,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Search All.
         /// </summary>
-        public static string Search_All {
+        internal static string Search_All {
             get {
                 return ResourceManager.GetString("Search_All", resourceCulture);
             }
@@ -2341,7 +2332,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Search by.
         /// </summary>
-        public static string Search_by {
+        internal static string Search_by {
             get {
                 return ResourceManager.GetString("Search_by", resourceCulture);
             }
@@ -2350,7 +2341,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to BetTime (2nd ticket).
         /// </summary>
-        public static string SecondBetTime {
+        internal static string SecondBetTime {
             get {
                 return ResourceManager.GetString("SecondBetTime", resourceCulture);
             }
@@ -2359,7 +2350,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Refno (2nd ticket).
         /// </summary>
-        public static string SecondRefNumber {
+        internal static string SecondRefNumber {
             get {
                 return ResourceManager.GetString("SecondRefNumber", resourceCulture);
             }
@@ -2368,7 +2359,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Selection.
         /// </summary>
-        public static string Selection {
+        internal static string Selection {
             get {
                 return ResourceManager.GetString("Selection", resourceCulture);
             }
@@ -2377,7 +2368,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Month.
         /// </summary>
-        public static string SelectMonth {
+        internal static string SelectMonth {
             get {
                 return ResourceManager.GetString("SelectMonth", resourceCulture);
             }
@@ -2386,7 +2377,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Send Mail Fail..
         /// </summary>
-        public static string SendMailFail {
+        internal static string SendMailFail {
             get {
                 return ResourceManager.GetString("SendMailFail", resourceCulture);
             }
@@ -2395,7 +2386,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to ,.
         /// </summary>
-        public static string SeperateChar {
+        internal static string SeperateChar {
             get {
                 return ResourceManager.GetString("SeperateChar", resourceCulture);
             }
@@ -2404,7 +2395,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Settled Bet Count.
         /// </summary>
-        public static string SettledBetCount {
+        internal static string SettledBetCount {
             get {
                 return ResourceManager.GetString("SettledBetCount", resourceCulture);
             }
@@ -2413,7 +2404,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Show filter.
         /// </summary>
-        public static string Show_filter {
+        internal static string Show_filter {
             get {
                 return ResourceManager.GetString("Show_filter", resourceCulture);
             }
@@ -2422,7 +2413,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Show outstanding column.
         /// </summary>
-        public static string Show_outstanding_column {
+        internal static string Show_outstanding_column {
             get {
                 return ResourceManager.GetString("Show_outstanding_column", resourceCulture);
             }
@@ -2431,7 +2422,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Show Score Information.
         /// </summary>
-        public static string Show_Score_Information {
+        internal static string Show_Score_Information {
             get {
                 return ResourceManager.GetString("Show_Score_Information", resourceCulture);
             }
@@ -2440,7 +2431,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Since Last Month.
         /// </summary>
-        public static string SinceLastMonth {
+        internal static string SinceLastMonth {
             get {
                 return ResourceManager.GetString("SinceLastMonth", resourceCulture);
             }
@@ -2449,7 +2440,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Site.
         /// </summary>
-        public static string Site {
+        internal static string Site {
             get {
                 return ResourceManager.GetString("Site", resourceCulture);
             }
@@ -2458,7 +2449,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to SMA Turnover.
         /// </summary>
-        public static string SMA_Turnover {
+        internal static string SMA_Turnover {
             get {
                 return ResourceManager.GetString("SMA_Turnover", resourceCulture);
             }
@@ -2467,7 +2458,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to SMA Win Loss.
         /// </summary>
-        public static string SMA_Win_Loss {
+        internal static string SMA_Win_Loss {
             get {
                 return ResourceManager.GetString("SMA_Win_Loss", resourceCulture);
             }
@@ -2476,7 +2467,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to SMA Winloss.
         /// </summary>
-        public static string SMA_Winloss {
+        internal static string SMA_Winloss {
             get {
                 return ResourceManager.GetString("SMA_Winloss", resourceCulture);
             }
@@ -2485,7 +2476,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Soccer.
         /// </summary>
-        public static string Soccer {
+        internal static string Soccer {
             get {
                 return ResourceManager.GetString("Soccer", resourceCulture);
             }
@@ -2494,7 +2485,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Soccer Live.
         /// </summary>
-        public static string Soccer_Live {
+        internal static string Soccer_Live {
             get {
                 return ResourceManager.GetString("Soccer_Live", resourceCulture);
             }
@@ -2503,7 +2494,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Soccer Non-Live.
         /// </summary>
-        public static string Soccer_Non_Live {
+        internal static string Soccer_Non_Live {
             get {
                 return ResourceManager.GetString("Soccer_Non_Live", resourceCulture);
             }
@@ -2512,7 +2503,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Soccer Sport.
         /// </summary>
-        public static string Soccer_Sport {
+        internal static string Soccer_Sport {
             get {
                 return ResourceManager.GetString("Soccer_Sport", resourceCulture);
             }
@@ -2521,7 +2512,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Special.
         /// </summary>
-        public static string Special {
+        internal static string Special {
             get {
                 return ResourceManager.GetString("Special", resourceCulture);
             }
@@ -2530,7 +2521,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Specific Date.
         /// </summary>
-        public static string SpecificDate {
+        internal static string SpecificDate {
             get {
                 return ResourceManager.GetString("SpecificDate", resourceCulture);
             }
@@ -2539,7 +2530,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Sport.
         /// </summary>
-        public static string Sport {
+        internal static string Sport {
             get {
                 return ResourceManager.GetString("Sport", resourceCulture);
             }
@@ -2548,7 +2539,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Sport Type.
         /// </summary>
-        public static string Sport_Type {
+        internal static string Sport_Type {
             get {
                 return ResourceManager.GetString("Sport_Type", resourceCulture);
             }
@@ -2557,7 +2548,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Sportsbook.
         /// </summary>
-        public static string Sportsbook {
+        internal static string Sportsbook {
             get {
                 return ResourceManager.GetString("Sportsbook", resourceCulture);
             }
@@ -2566,7 +2557,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Stake.
         /// </summary>
-        public static string Stake {
+        internal static string Stake {
             get {
                 return ResourceManager.GetString("Stake", resourceCulture);
             }
@@ -2575,7 +2566,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
-        public static string Status {
+        internal static string Status {
             get {
                 return ResourceManager.GetString("Status", resourceCulture);
             }
@@ -2584,7 +2575,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Sub Total.
         /// </summary>
-        public static string Sub_Total {
+        internal static string Sub_Total {
             get {
                 return ResourceManager.GetString("Sub_Total", resourceCulture);
             }
@@ -2593,7 +2584,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Sum.
         /// </summary>
-        public static string Sum {
+        internal static string Sum {
             get {
                 return ResourceManager.GetString("Sum", resourceCulture);
             }
@@ -2602,7 +2593,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Super.
         /// </summary>
-        public static string Super {
+        internal static string Super {
             get {
                 return ResourceManager.GetString("Super", resourceCulture);
             }
@@ -2611,7 +2602,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Super/Master/Agent/Member.
         /// </summary>
-        public static string Super_Master_Agent_Member {
+        internal static string Super_Master_Agent_Member {
             get {
                 return ResourceManager.GetString("Super_Master_Agent_Member", resourceCulture);
             }
@@ -2620,7 +2611,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Suspended.
         /// </summary>
-        public static string Suspended {
+        internal static string Suspended {
             get {
                 return ResourceManager.GetString("Suspended", resourceCulture);
             }
@@ -2629,7 +2620,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to #.
         /// </summary>
-        public static string Symbol_Index {
+        internal static string Symbol_Index {
             get {
                 return ResourceManager.GetString("Symbol_Index", resourceCulture);
             }
@@ -2638,7 +2629,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to (N).
         /// </summary>
-        public static string Symbol_NeutralSuffix {
+        internal static string Symbol_NeutralSuffix {
             get {
                 return ResourceManager.GetString("Symbol_NeutralSuffix", resourceCulture);
             }
@@ -2647,7 +2638,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to %.
         /// </summary>
-        public static string Symbol_Percent {
+        internal static string Symbol_Percent {
             get {
                 return ResourceManager.GetString("Symbol_Percent", resourceCulture);
             }
@@ -2656,7 +2647,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Non - Live.
         /// </summary>
-        public static string Symbol_Sparse_Non_Live {
+        internal static string Symbol_Sparse_Non_Live {
             get {
                 return ResourceManager.GetString("Symbol_Sparse_Non_Live", resourceCulture);
             }
@@ -2665,7 +2656,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to System Parlay.
         /// </summary>
-        public static string System_Parlay {
+        internal static string System_Parlay {
             get {
                 return ResourceManager.GetString("System_Parlay", resourceCulture);
             }
@@ -2674,7 +2665,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Table.
         /// </summary>
-        public static string Table {
+        internal static string Table {
             get {
                 return ResourceManager.GetString("Table", resourceCulture);
             }
@@ -2683,7 +2674,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to test.
         /// </summary>
-        public static string test {
+        internal static string test {
             get {
                 return ResourceManager.GetString("test", resourceCulture);
             }
@@ -2692,7 +2683,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to TG.
         /// </summary>
-        public static string TG {
+        internal static string TG {
             get {
                 return ResourceManager.GetString("TG", resourceCulture);
             }
@@ -2701,7 +2692,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to There is no data..
         /// </summary>
-        public static string There_is_no_data {
+        internal static string There_is_no_data {
             get {
                 return ResourceManager.GetString("There_is_no_data", resourceCulture);
             }
@@ -2710,7 +2701,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Third Party.
         /// </summary>
-        public static string Third_Party {
+        internal static string Third_Party {
             get {
                 return ResourceManager.GetString("Third_Party", resourceCulture);
             }
@@ -2719,7 +2710,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Time period.
         /// </summary>
-        public static string Time_period {
+        internal static string Time_period {
             get {
                 return ResourceManager.GetString("Time_period", resourceCulture);
             }
@@ -2728,7 +2719,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Time Diff (millisecond).
         /// </summary>
-        public static string TimeDifference {
+        internal static string TimeDifference {
             get {
                 return ResourceManager.GetString("TimeDifference", resourceCulture);
             }
@@ -2737,7 +2728,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
-        public static string Title {
+        internal static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
             }
@@ -2746,7 +2737,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to To.
         /// </summary>
-        public static string To {
+        internal static string To {
             get {
                 return ResourceManager.GetString("To", resourceCulture);
             }
@@ -2755,7 +2746,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to To Date.
         /// </summary>
-        public static string To_Date {
+        internal static string To_Date {
             get {
                 return ResourceManager.GetString("To_Date", resourceCulture);
             }
@@ -2764,7 +2755,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Today.
         /// </summary>
-        public static string Today {
+        internal static string Today {
             get {
                 return ResourceManager.GetString("Today", resourceCulture);
             }
@@ -2773,7 +2764,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Today Report(s).
         /// </summary>
-        public static string Today_Reports {
+        internal static string Today_Reports {
             get {
                 return ResourceManager.GetString("Today_Reports", resourceCulture);
             }
@@ -2782,7 +2773,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Top rows.
         /// </summary>
-        public static string Top_rows {
+        internal static string Top_rows {
             get {
                 return ResourceManager.GetString("Top_rows", resourceCulture);
             }
@@ -2791,7 +2782,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Total.
         /// </summary>
-        public static string Total {
+        internal static string Total {
             get {
                 return ResourceManager.GetString("Total", resourceCulture);
             }
@@ -2800,7 +2791,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Total Bets.
         /// </summary>
-        public static string Total_Bets {
+        internal static string Total_Bets {
             get {
                 return ResourceManager.GetString("Total_Bets", resourceCulture);
             }
@@ -2809,7 +2800,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Total Turnover.
         /// </summary>
-        public static string Total_Turnover {
+        internal static string Total_Turnover {
             get {
                 return ResourceManager.GetString("Total_Turnover", resourceCulture);
             }
@@ -2818,7 +2809,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Total Wins.
         /// </summary>
-        public static string Total_Wins {
+        internal static string Total_Wins {
             get {
                 return ResourceManager.GetString("Total_Wins", resourceCulture);
             }
@@ -2827,7 +2818,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Total Balance.
         /// </summary>
-        public static string TotalBalance {
+        internal static string TotalBalance {
             get {
                 return ResourceManager.GetString("TotalBalance", resourceCulture);
             }
@@ -2836,7 +2827,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Total Position Taking.
         /// </summary>
-        public static string TotalPT {
+        internal static string TotalPT {
             get {
                 return ResourceManager.GetString("TotalPT", resourceCulture);
             }
@@ -2845,7 +2836,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Total Trans.
         /// </summary>
-        public static string TotalTrans {
+        internal static string TotalTrans {
             get {
                 return ResourceManager.GetString("TotalTrans", resourceCulture);
             }
@@ -2854,7 +2845,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Total Transactions.
         /// </summary>
-        public static string TotalTransactions {
+        internal static string TotalTransactions {
             get {
                 return ResourceManager.GetString("TotalTransactions", resourceCulture);
             }
@@ -2863,7 +2854,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Trader.
         /// </summary>
-        public static string Trader {
+        internal static string Trader {
             get {
                 return ResourceManager.GetString("Trader", resourceCulture);
             }
@@ -2872,7 +2863,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Trans Date.
         /// </summary>
-        public static string TransDate {
+        internal static string TransDate {
             get {
                 return ResourceManager.GetString("TransDate", resourceCulture);
             }
@@ -2881,7 +2872,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Turnover.
         /// </summary>
-        public static string Turnover {
+        internal static string Turnover {
             get {
                 return ResourceManager.GetString("Turnover", resourceCulture);
             }
@@ -2890,7 +2881,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Turnover(RM).
         /// </summary>
-        public static string TurnoverRM {
+        internal static string TurnoverRM {
             get {
                 return ResourceManager.GetString("TurnoverRM", resourceCulture);
             }
@@ -2899,7 +2890,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
-        public static string Type {
+        internal static string Type {
             get {
                 return ResourceManager.GetString("Type", resourceCulture);
             }
@@ -2908,7 +2899,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Unassigned.
         /// </summary>
-        public static string Unassigned {
+        internal static string Unassigned {
             get {
                 return ResourceManager.GetString("Unassigned", resourceCulture);
             }
@@ -2917,7 +2908,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Unknow.
         /// </summary>
-        public static string Unknow {
+        internal static string Unknow {
             get {
                 return ResourceManager.GetString("Unknow", resourceCulture);
             }
@@ -2926,7 +2917,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to USD.
         /// </summary>
-        public static string USD {
+        internal static string USD {
             get {
                 return ResourceManager.GetString("USD", resourceCulture);
             }
@@ -2935,7 +2926,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to User.
         /// </summary>
-        public static string User {
+        internal static string User {
             get {
                 return ResourceManager.GetString("User", resourceCulture);
             }
@@ -2944,7 +2935,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to User Name.
         /// </summary>
-        public static string User_Name {
+        internal static string User_Name {
             get {
                 return ResourceManager.GetString("User_Name", resourceCulture);
             }
@@ -2953,7 +2944,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to User search.
         /// </summary>
-        public static string User_search {
+        internal static string User_search {
             get {
                 return ResourceManager.GetString("User_search", resourceCulture);
             }
@@ -2962,7 +2953,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Username.
         /// </summary>
-        public static string UserName {
+        internal static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
             }
@@ -2971,7 +2962,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Variance.
         /// </summary>
-        public static string Variance {
+        internal static string Variance {
             get {
                 return ResourceManager.GetString("Variance", resourceCulture);
             }
@@ -2980,7 +2971,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to view by ip.
         /// </summary>
-        public static string view_by_ip {
+        internal static string view_by_ip {
             get {
                 return ResourceManager.GetString("view_by_ip", resourceCulture);
             }
@@ -2989,7 +2980,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Virtual.
         /// </summary>
-        public static string Virtual {
+        internal static string Virtual {
             get {
                 return ResourceManager.GetString("Virtual", resourceCulture);
             }
@@ -2998,7 +2989,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Virtual All Total.
         /// </summary>
-        public static string Virtual_All_Total {
+        internal static string Virtual_All_Total {
             get {
                 return ResourceManager.GetString("Virtual_All_Total", resourceCulture);
             }
@@ -3007,7 +2998,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Virtual Comm.
         /// </summary>
-        public static string Virtual_Comm {
+        internal static string Virtual_Comm {
             get {
                 return ResourceManager.GetString("Virtual_Comm", resourceCulture);
             }
@@ -3016,7 +3007,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Virtual Line Total.
         /// </summary>
-        public static string Virtual_Line_Total {
+        internal static string Virtual_Line_Total {
             get {
                 return ResourceManager.GetString("Virtual_Line_Total", resourceCulture);
             }
@@ -3025,7 +3016,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Virtual Sports.
         /// </summary>
-        public static string Virtual_Sports {
+        internal static string Virtual_Sports {
             get {
                 return ResourceManager.GetString("Virtual_Sports", resourceCulture);
             }
@@ -3034,7 +3025,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Virtual Sport.
         /// </summary>
-        public static string VirtualSport {
+        internal static string VirtualSport {
             get {
                 return ResourceManager.GetString("VirtualSport", resourceCulture);
             }
@@ -3043,7 +3034,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Virtual Sports.
         /// </summary>
-        public static string VirtualSports {
+        internal static string VirtualSports {
             get {
                 return ResourceManager.GetString("VirtualSports", resourceCulture);
             }
@@ -3052,7 +3043,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Virtual Total.
         /// </summary>
-        public static string VirtualTotal {
+        internal static string VirtualTotal {
             get {
                 return ResourceManager.GetString("VirtualTotal", resourceCulture);
             }
@@ -3061,7 +3052,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to -vs-.
         /// </summary>
-        public static string Vs {
+        internal static string Vs {
             get {
                 return ResourceManager.GetString("Vs", resourceCulture);
             }
@@ -3070,7 +3061,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Weekly.
         /// </summary>
-        public static string Weekly {
+        internal static string Weekly {
             get {
                 return ResourceManager.GetString("Weekly", resourceCulture);
             }
@@ -3079,7 +3070,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Win Count.
         /// </summary>
-        public static string Win_Count {
+        internal static string Win_Count {
             get {
                 return ResourceManager.GetString("Win_Count", resourceCulture);
             }
@@ -3088,7 +3079,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Win Loss.
         /// </summary>
-        public static string Win_Loss {
+        internal static string Win_Loss {
             get {
                 return ResourceManager.GetString("Win_Loss", resourceCulture);
             }
@@ -3097,7 +3088,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Win Odds.
         /// </summary>
-        public static string Win_Odds {
+        internal static string Win_Odds {
             get {
                 return ResourceManager.GetString("Win_Odds", resourceCulture);
             }
@@ -3106,7 +3097,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Win Loss.
         /// </summary>
-        public static string WinLoss {
+        internal static string WinLoss {
             get {
                 return ResourceManager.GetString("WinLoss", resourceCulture);
             }
@@ -3115,7 +3106,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Win Loss in Member Currency.
         /// </summary>
-        public static string WinLossInMemberCurrency {
+        internal static string WinLossInMemberCurrency {
             get {
                 return ResourceManager.GetString("WinLossInMemberCurrency", resourceCulture);
             }
@@ -3124,7 +3115,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Win Loss(RM).
         /// </summary>
-        public static string WinLossRM {
+        internal static string WinLossRM {
             get {
                 return ResourceManager.GetString("WinLossRM", resourceCulture);
             }
@@ -3133,7 +3124,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Winlostdate.
         /// </summary>
-        public static string WinLostDate {
+        internal static string WinLostDate {
             get {
                 return ResourceManager.GetString("WinLostDate", resourceCulture);
             }
@@ -3142,7 +3133,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Won.
         /// </summary>
-        public static string Won {
+        internal static string Won {
             get {
                 return ResourceManager.GetString("Won", resourceCulture);
             }
@@ -3151,7 +3142,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Year.
         /// </summary>
-        public static string Year {
+        internal static string Year {
             get {
                 return ResourceManager.GetString("Year", resourceCulture);
             }
@@ -3160,7 +3151,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Yesterday.
         /// </summary>
-        public static string Yesterday {
+        internal static string Yesterday {
             get {
                 return ResourceManager.GetString("Yesterday", resourceCulture);
             }
@@ -3169,7 +3160,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Yesterday&apos;s Balance.
         /// </summary>
-        public static string YesterdayBalance {
+        internal static string YesterdayBalance {
             get {
                 return ResourceManager.GetString("YesterdayBalance", resourceCulture);
             }
@@ -3178,7 +3169,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You have no authorization on this system.
         /// </summary>
-        public static string You_have_no_authorization {
+        internal static string You_have_no_authorization {
             get {
                 return ResourceManager.GetString("You_have_no_authorization", resourceCulture);
             }
@@ -3187,7 +3178,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You do not have permission to view this directory or page using the credentials that you supplied!.
         /// </summary>
-        public static string You_have_no_function_permission {
+        internal static string You_have_no_function_permission {
             get {
                 return ResourceManager.GetString("You_have_no_function_permission", resourceCulture);
             }
@@ -3196,7 +3187,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You have no permission on any Menu.
         /// </summary>
-        public static string You_have_no_menu_permission {
+        internal static string You_have_no_menu_permission {
             get {
                 return ResourceManager.GetString("You_have_no_menu_permission", resourceCulture);
             }

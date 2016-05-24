@@ -34,7 +34,6 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         VirtualSport: 180,
         Keno: 202,
         ColossusBets: 204,
-        Cockfighting: 206,
         AllBet: 211,
         MetricGamingSuperLive: -1,
         MacauGames: 212
@@ -468,9 +467,6 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 break;
             case productEnums.ColossusBets:
                 productName = "Colossus Bets";
-                break;
-            case productEnums.Cockfighting:
-                productName = "Cockfighting";
                 break;
             case productEnums.AllBet:
                 productName = "Allbet";

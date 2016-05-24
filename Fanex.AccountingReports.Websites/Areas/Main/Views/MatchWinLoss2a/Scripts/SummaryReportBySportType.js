@@ -15,7 +15,7 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.SummaryReportBySportType = function 
     };
 
     var _cacheData = {
-        DisplayLinkBetType: ["mbc - rng casino", "metric gaming - superlive", "cockfighting"]
+        DisplayLinkBetType: ["mbc - rng casino", "metric gaming - superlive"]
     };
 
     self.initPage = function () {

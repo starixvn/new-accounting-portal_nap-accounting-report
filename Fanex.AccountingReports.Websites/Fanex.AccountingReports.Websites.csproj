@@ -791,7 +791,6 @@
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Styles\TraderPerformanceOtherSports.less" />
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Scripts\TraderPerformanceOtherSports.js" />
     <Content Include="Areas\Main\Views\TraderPerformanceSoccer\Scripts\TraderPerformanceSoccer.js" />
-    <Content Include="Areas\Main\Views\WinLossSummary3rd\Scripts\CockFighting.js" />
     <Content Include="Areas\Main\Views\WinLossSummary3rd\Scripts\GameMatchDetails.js" />
     <Content Include="Areas\Main\Views\WinLossSummary3rd\Scripts\ReportManager.js" />
     <Content Include="Areas\Main\Views\WinLossSummary3rd\Scripts\WinLossSummary.js" />

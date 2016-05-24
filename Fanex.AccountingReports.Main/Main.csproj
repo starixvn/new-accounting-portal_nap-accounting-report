@@ -98,7 +98,6 @@
     <Compile Include="Criteria\DailyWinLoss2h\GetColossusBetCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_BettradeCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_BetTypeWHCriteria.cs" />
-    <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_CockFightingCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_ColossusBetCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_MetricGamingCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_VirtualSportsCriteria.cs" />
@@ -139,7 +138,6 @@
     <Compile Include="Criteria\TraderPerformance\GetReportCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetMatchGameDetailsCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetRecalculateWinLossCriteria.cs" />
-    <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdCockFightingCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdRacingSportTypeCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdSportbookSportTypeCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdVirtualRacingSportTypeCriteria.cs" />
@@ -162,9 +160,6 @@
     <Compile Include="Models\TraderPerformanceSoccer\TraderPerformanceSoccer.cs" />
     <Compile Include="Models\TraderPerformanceSoccer\TraderPerformanceSoccerDetail.cs" />
     <Compile Include="Models\WinLossSummary3rd\BetTypeWinLossInfo.cs" />
-    <Compile Include="Models\WinLossSummary3rd\CockFightingArena.cs" />
-    <Compile Include="Models\WinLossSummary3rd\CockFightingArenaDetail.cs" />
-    <Compile Include="Models\WinLossSummary3rd\CockFightingMatchDetail.cs" />
     <Compile Include="Models\WinLossSummary3rd\MatchGame3rdInfo.cs" />
     <Compile Include="Models\WinLossSummary3rd\MatchGameBetTypeInfo.cs" />
     <Compile Include="Models\WinLossSummary3rd\MatchGameLeagueInfo.cs" />

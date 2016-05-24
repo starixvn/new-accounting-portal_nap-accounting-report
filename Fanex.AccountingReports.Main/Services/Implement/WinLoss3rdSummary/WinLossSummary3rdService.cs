@@ -9,10 +9,7 @@
 
 namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
+    using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Models;
@@ -27,6 +24,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
     using Fanex.AccountingReports.Main.Services.Interface;
     using Fanex.Common;
     using Fanex.Data.Repository;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -40,9 +41,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
         private Dictionary<object, string> _betTypeNameCache;
         private Dictionary<object, string> _leagueNameCache;
         private Dictionary<object, string> _teamNameCache;
-
-        private string _winlossSummary3rdCacheCockFightingArenaReportKey = "Fanex.AccountingReports.Main.WinLossSummary3rd.CockFightingArenaReport" +
-          (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
 
         public WinLossSummary3rdService()
             : this(null)
@@ -527,15 +525,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             return report;
         }
 
-        public CockFightingArena GetCockFightingReport(GetWinLossSummary3rdCockFightingCriteria criteria)
-        {
-            var cockFightingArena = new CockFightingArena();
-            var rawData = GetReportData<CockFightingMatchDetail>(criteria).ToList();
-            cockFightingArena.ReportRows = GetCockFightingArena(rawData);
-            cockFightingArena.GrandTotal = GetCockFightingArenaGrandTotal(rawData);
-            CacheExtension.Set(_winlossSummary3rdCacheCockFightingArenaReportKey, cockFightingArena);
-            return cockFightingArena;
-        }
 
         //// Private methods
 
@@ -946,49 +935,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 ToDate = criteria.ToDate,
                 SportType = criteria.SportType
             };
-        }
-
-        private List<CockFightingArenaDetail> GetCockFightingArena(List<CockFightingMatchDetail> reportData)
-        {
-            List<CockFightingArenaDetail> arena = new List<CockFightingArenaDetail>();
-            var arenaGroup = reportData.GroupBy(x => x.ArenaId);
-            foreach (var group in arenaGroup)
-            {
-                var arenaMatchs = group.ToList();
-                CockFightingArenaDetail arenaDetail = new CockFightingArenaDetail()
-                {
-                    ArenaName = CacheRef.GetLeagueName(Converter.ToInt(group.Key)),
-                    CockFightingMatchs = new List<CockFightingMatchDetail>(),
-                    ArenaTotal = GetCockFightingArenaGrandTotal(arenaMatchs)
-                };
-
-                foreach (var data in arenaMatchs)
-                {
-                    arenaDetail.CockFightingMatchs.Add(data);
-                }
-
-                arena.Add(arenaDetail);
-            }
-
-            return arena;
-        }
-
-        private CockFightingMatchDetail GetCockFightingArenaGrandTotal(List<CockFightingMatchDetail> cockFightingMatchs)
-        {
-            CockFightingMatchDetail grandTotal = new CockFightingMatchDetail();
-
-            foreach (var item in cockFightingMatchs)
-            {
-                grandTotal.RealWinLoss += item.RealWinLoss;
-                grandTotal.RealPosition += item.RealPosition;
-                grandTotal.RealCommission += item.RealCommission;
-                grandTotal.RealTurnover += item.RealTurnover;
-                grandTotal.RealLineTotal += item.RealLineTotal;
-                grandTotal.VirtualTurnover += item.VirtualTurnover;
-                grandTotal.VirtualLineTotal += item.VirtualLineTotal;
-            }
-
-            return grandTotal;
         }
     }
 }

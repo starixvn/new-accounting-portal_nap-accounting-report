@@ -181,21 +181,7 @@ ShowHideReportManager = function () {
     self.ShowColossusBet = function (sportId, sportName, winLossDate) {
         self.CacheData.currentReport = reportManager.ColossusBet;
         self.ShowDrilldownReport(sportId, sportName, winLossDate);
-    };
-
-    self.ShowCockFighting = function (sportId, sportName, winLossDate) {
-        self.CacheData.currentReport = reportManager.CockFighting;
-        self.ShowDrilldownReport(sportId, sportName, winLossDate);
-    };
-
-    self.ShowCockFightingArena = function (winLossDate) {
-        reportManager.CockFighting.Tables.reportView.addClass("display-none");
-        self.CacheData.currentReport = reportManager.CockFightingArena;
-        self.CacheData.currentReport.InitPage();
-        self.CacheData.currentReport.GetReport({
-            Winlostdate: winLossDate
-        });
-    };
+    };   
 };
 
 var showHideReportManager = new ShowHideReportManager();

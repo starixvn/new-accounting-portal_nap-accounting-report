@@ -9,11 +9,6 @@
 
 namespace Fanex.AccountingReports.Misc.Constants
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -38,8 +33,6 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int Allbet = 211;
 
         public const int MacauGames = 212;
-
-        public const int Cockfighting = 206;
 
         public const int MetricGamingSuperlive = -1;
     }

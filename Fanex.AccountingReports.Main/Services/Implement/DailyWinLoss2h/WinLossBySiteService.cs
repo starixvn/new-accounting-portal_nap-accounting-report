@@ -9,9 +9,6 @@
 
 namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
@@ -24,6 +21,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
     using Fanex.AccountingReports.Main.Resources;
     using Fanex.Common;
     using Fanex.Data.Repository;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using CoreConstants = Fanex.AccountingReports.Core.Constants;
     using MainSportConstants = Fanex.AccountingReports.Main.Constants;
 
@@ -145,12 +145,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     };
                 case CoreConstants.SportContants.ColossusBet:
                     return new GetWinLossBySite_ColossusBetCriteria
-                    {
-                        WinLostDate = criteria.WinLostDate,
-                        Site = criteria.Site
-                    };
-                case CoreConstants.SportContants.CockFighting:
-                    return new GetWinLossBySite_CockFightingCriteria
                     {
                         WinLostDate = criteria.WinLostDate,
                         Site = criteria.Site

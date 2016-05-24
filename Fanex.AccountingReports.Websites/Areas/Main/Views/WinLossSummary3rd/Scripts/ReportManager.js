@@ -9,7 +9,6 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.ReportManager = function () {
     // Summary & Detail
     var _winLossSummary = new Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary();
     var _gameMatchDetails = new Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails();
-    var _cockFighting = new Fanex.AccountingReports.Main.WinLossSummary3rd.CockFighting();
 
     var _tables = {
         filterContainer: null,
@@ -30,8 +29,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.ReportManager = function () {
         // note
         noteTitle: null,
         noteContent: null,
-        showing: true,
-        cockFightingContainer: null
+        showing: true
     };
     var _params = {
         reportParams: {
@@ -51,7 +49,6 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.ReportManager = function () {
         // init Summary & Detail
         _winLossSummary.initPage();
         _gameMatchDetails.initPage();
-        _cockFighting.initPage();
         _tables.filterContainerHistory.addClass('display-none');
         scoreInfoManager.InitPage();
     };
@@ -111,7 +108,6 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.ReportManager = function () {
         // note
         _tables.noteTitle = $('#note-title');
         _tables.noteContent = $('#note-content');
-        _tables.cockFightingContainer = $("#cockFightingContainer");
     };
     var bindingEvent = function () {
         _tables.btnGenerate.unbind('click');
@@ -205,9 +201,6 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.ReportManager = function () {
 
         _tables.scoreInformationContainer.removeClass('display-none');
         _tables.scoreInformationContainer.addClass('display-none');
-
-        _tables.cockFightingContainer.removeClass('display-none');
-        _tables.cockFightingContainer.addClass('display-none');
     };
     ViewMatchGameDetails = function (fromDate, toDate, sportId, betId, live, parentName, drillDownByType, subProduct) {
         if (sportId < 0) {
@@ -253,15 +246,6 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.ReportManager = function () {
             },
             complete: function () {
                 AccReport.enableInput();
-            }
-        });
-    };
-
-    ViewCockFightingArena = function (fromDate, toDate) {
-        _cockFighting.getReport({
-            reportParams: {
-                FromDate: fromDate,
-                ToDate: toDate
             }
         });
     };
