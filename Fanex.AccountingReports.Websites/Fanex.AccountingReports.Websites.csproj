@@ -743,8 +743,6 @@
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Bettrade.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\BingoReport.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\CasinoReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\CockFighting.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\CockFightingArena.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\ColossusBet.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\KenoReport.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\LiveCasinoWinLossByProductReport.js" />
@@ -782,7 +780,6 @@
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\WinLossBySite_BetType.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Styles\Images\icon-collpase.png" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Styles\Images\icon-expand.png" />
-    <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\CockFightingReport.js" />
     <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\DetailReportByBetType.js" />
     <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\DetailReportBySportsType.js" />
     <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\ReportManager.js" />
@@ -2178,7 +2175,6 @@
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisSporting\_TennisSportting.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameStatistic\Index.cshtml" />
     <Content Include="Areas\Special\Views\PunterAnalysis\Index.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\CockFighting.cshtml" />
     <Content Include="Views\Test\Style\TotalTransactions.less" />
     <Content Include="Areas\UserControl\Views\User\ChangePassword.cshtml" />
     <Content Include="Areas\UserControl\Views\User\UserProfile.cshtml" />

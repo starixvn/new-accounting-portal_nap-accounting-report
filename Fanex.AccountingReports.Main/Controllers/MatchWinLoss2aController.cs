@@ -27,11 +27,8 @@ namespace Fanex.AccountingReports.Main.Controllers
     /// </summary>
     public class MatchWinLoss2aController : BaseController
     {
-        private readonly IDynamicRepository repository = new DynamicRepository();
         private readonly IMatchWinLoss2aService _reportService;
         private readonly IMetricGamingService _metricGamingService;
-        private readonly ICockFightingService _cockFightingService;
-        private readonly IExportCockFightingService _exportCockFightingService;
 
         public MatchWinLoss2aController()
             : this(null, null)
@@ -42,8 +39,6 @@ namespace Fanex.AccountingReports.Main.Controllers
         {
             this._reportService = reportService ?? new MatchWinLoss2aService();
             this._metricGamingService = metricGamingService ?? new MetricGamingService();
-            this._cockFightingService = new CockFightingService(repository);
-            this._exportCockFightingService = new ExportCockFightingService(_cockFightingService);
         }
 
         [HttpGet]
@@ -152,22 +147,6 @@ namespace Fanex.AccountingReports.Main.Controllers
 
         [HttpPost]
         [HandleAjaxError]
-        public ActionResult GetCockFightingReport(GetCockFightingCriteria criteria)
-        {
-            var result = this._cockFightingService.GetCockFightingReport(criteria);
-            return Json(result);
-        }
-
-        [HttpPost]
-        [HandleAjaxError]
-        public ActionResult GetCockFightingMatchByArenaReport(GetCockFightingMatchByArena criteria)
-        {
-            var result = this._cockFightingService.GetCockFightingMatchByArenaReport(criteria);
-            return Json(result);
-        }
-
-        [HttpPost]
-        [HandleAjaxError]
         public JsonResult GetMetricGamingDetailByBetType(GetMetricGamingDetailByBetTypeCriteria criteria)
         {
             var result = this._reportService.GetMetricGamingDetailByBetType(criteria);
@@ -212,18 +191,6 @@ namespace Fanex.AccountingReports.Main.Controllers
             var workbook = _metricGamingService.GetMetricGamingByBettypeReportWorkboook(criteria);
             string reportName = _metricGamingService.GetMetricGamingByBetypeReportName(criteria);
             NpoiExcelExtensions.ResponseStreamExcel(workbook, reportName);
-            return new EmptyResult();
-        }
-
-        public ActionResult ExportCockFightingReport(GetCockFightingCriteria criteria)
-        {
-            this._exportCockFightingService.ExportCockFightingReport(criteria);
-            return new EmptyResult();
-        }
-
-        public ActionResult ExportCockFightingMatchByArenaReport(GetCockFightingMatchByArena criteria)
-        {
-            this._exportCockFightingService.ExportCockFightingMatchByArenaReport(criteria);
             return new EmptyResult();
         }
 

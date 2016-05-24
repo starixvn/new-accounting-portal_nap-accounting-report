@@ -198,11 +198,6 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.SummaryReportBySportType = function 
                                 var clickEvent = ' onclick = "ViewMetricGamingReport(\'' + _params.reportParams.Winlostdate + "');\"";
                                 return '<div class="link" ' + clickEvent + '>' + currentCell.Value.Name + '</div>';
                             }
-
-                            if ($.inArray(currentCell.Value.Name.toLowerCase(), _cacheData.DisplayLinkBetType) == 2) {
-                                var clickEvent = ' onclick = "ViewCockFightingReport(\'' + _params.reportParams.Winlostdate + "');\"";
-                                return '<div class="link" ' + clickEvent + '>' + currentCell.Value.Name + '</div>';
-                            }
                         },
                         CssClass: "align-center"
                     },

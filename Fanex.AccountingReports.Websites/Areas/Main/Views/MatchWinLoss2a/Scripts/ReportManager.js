@@ -370,30 +370,6 @@ Fanex.AccountingReports.Main.MatchWinLoss2a.ReportManager = function () {
         AccReport.downloadFile(window.rootUrl + "Main/MatchWinLoss2a/ExportAllDetailReport", _params.reportParams);
     };
 
-    ViewCockFightingReport = function (reportDate) {
-        _detailReportByBetType.closeDialog();
-        _detailReportBySportsType.closeDialog();
-        _thirdPartyDetailReport.closeDialog();
-        cockFightingReport.closeDialog();
-        cockFightingReport.closeCockFightingByArenaDialog();
-        cockFightingReport.getCockFightingReport({
-            Winlostdate: reportDate
-        });
-    };
-
-    ViewCockFightingDetailReport = function (reportDate, arenaId, arenaName) {
-        _detailReportByBetType.closeDialog();
-        _detailReportBySportsType.closeDialog();
-        _thirdPartyDetailReport.closeDialog();
-        cockFightingReport.closeDialog();
-        cockFightingReport.closeCockFightingByArenaDialog();
-        cockFightingReport.getCockFightingMatchByArenaReport({
-            Winlostdate: reportDate,
-            ArenaId: arenaId,
-            ArenaName: arenaName
-        });
-    };
-
     ViewMetricGamingDetailByBetType = function (reportDate,
         betTypeId,
         betTypeName,
