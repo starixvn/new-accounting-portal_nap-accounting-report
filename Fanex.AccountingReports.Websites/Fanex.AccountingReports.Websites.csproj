@@ -74,25 +74,13 @@
       <HintPath>..\packages\Fanex.BetList.Core.2.6.0.0\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.BetList.ColossusBets, Version=1.0.1.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.ColossusBets.1.0.1.2\lib\net40\Fanex.BetList.ColossusBets.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Fanex.BetList.Core, Version=2.2.9.5, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.BetList.Core.2.6.0.0\lib\net40\Fanex.BetList.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.GoldDeluxe, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.6.0.0\lib\net40\Fanex.BetList.GoldDeluxe.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.BetList.MetricGaming, Version=1.0.4.2, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Fanex.BetList.MetricGaming.1.0.4.2\lib\net40\Fanex.BetList.MetricGaming.dll</HintPath>
-    </Reference>
-    <Reference Include="Fanex.BetList.Microgaming, Version=2.0.0.6, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Fanex.BetList.Microgaming.2.0.0.6\lib\net40\Fanex.BetList.Microgaming.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.BetList.MyanmarOdds, Version=1.0.1.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.BetList.MyanmarOdds.1.0.1.4\lib\net40\Fanex.BetList.MyanmarOdds.dll</HintPath>
@@ -923,8 +911,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Content Include="Areas\WinLoss\Views\MatchWinLossByBettype\Scripts\MatchWinLossByBettype.js" />
-    <Content Include="Areas\WinLoss\Views\MatchWinLossSingleBet\Scripts\MatchWinLossSingleBet.js" />
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\Scripts\ReportManager.js" />
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\Scripts\TreeWinLoss.js" />
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\Scripts\TreeWinLossByAgent.js" />
@@ -2117,7 +2103,6 @@
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Styles\DailyMixParlayWinLoss.less" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Styles\MixParlayPopup.less" />
     <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Styles\LeagueWinLoss.less" />
-    <Content Include="Areas\WinLoss\Views\MatchWinLossSingleBet\Index.cshtml" />
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\Index.cshtml" />
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\TreeWinLossByAgent.cshtml" />
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\TreeWinLossByComm.cshtml" />
@@ -2125,14 +2110,11 @@
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\TreeWinLossByProduct.cshtml" />
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\TreeWinLossBySuper.cshtml" />
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\VirtualRateHistory.cshtml" />
-    <Content Include="Areas\WinLoss\Views\MatchWinLossByBettype\Index.cshtml" />
     <Content Include="Areas\Misc\Views\SMATurnover\Index.cshtml" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\CopyLegend.cshtml" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\InputedLegendReport.cshtml" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\UploadImagePopup.cshtml" />
-    <Content Include="Areas\WinLoss\Views\MatchWinLossByBettype\Styles\MatchWinLossByBettype.less" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\ParlayReport.cshtml" />
-    <Content Include="Areas\WinLoss\Views\MatchWinLossSingleBet\Styles\MatchWinLossSingleBet.less" />
     <Content Include="Areas\Uncategorized\IMS\ims.less" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\BettypeReport.cshtml" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\Index.cshtml" />

@@ -755,15 +755,6 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MatchWinLoss2aDetailByArena_{0}.
-        /// </summary>
-        public static string MatchWinLoss2aDetailByArena_ReportName {
-            get {
-                return ResourceManager.GetString("MatchWinLoss2aDetailByArena_ReportName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to MatchWinLoss2aDetailByBetType_{0}.
         /// </summary>
         public static string MatchWinLoss2aDetailByBetType_ReportName {

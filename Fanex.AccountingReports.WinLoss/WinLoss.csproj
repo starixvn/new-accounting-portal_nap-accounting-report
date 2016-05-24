@@ -149,8 +149,6 @@
     <Compile Include="Controllers\DailyMixParlayWinLossController.cs" />
     <Compile Include="Controllers\DailyMixParlayWinLoss_2hLinkController.cs" />
     <Compile Include="Controllers\LeagueWinLossController.cs" />
-    <Compile Include="Controllers\MatchWinLossByBettypeController.cs" />
-    <Compile Include="Controllers\MatchWinLossSingleBetController.cs" />
     <Compile Include="Controllers\TreeWinLossController.cs" />
     <Compile Include="Criteria\AllCustomerTurnOver\GetAllCustomerTurnOverCriteria.cs" />
     <Compile Include="Criteria\DailyMixParlayWinLoss\GetAdvanceMixParlayReportCriteria.cs" />
@@ -159,8 +157,6 @@
     <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossByBetTypeCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossBySportCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossCriteria.cs" />
-    <Compile Include="Criteria\MatchWinLossByBettype\MatchWinLossByBettypeCriteria.cs" />
-    <Compile Include="Criteria\MatchWinLossSingleBet\GetMatchWinLossSingleBetCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetTreeWinLossByAgentCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetTreeWinLossByMasterCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetTreeWinLossByComCriteria.cs" />
@@ -173,8 +169,6 @@
     <Compile Include="Models\AllCustomerTurnOver\CustomerTurnoverBySiteDetail.cs" />
     <Compile Include="Models\DailyMixParlayWinLoss\WinLossInfo.cs" />
     <Compile Include="Models\LeagueWinLoss\LeagueWinLossInfo.cs" />
-    <Compile Include="Models\MatchWinLossByBettype\MatchWinLossByBettype.cs" />
-    <Compile Include="Models\MatchWinLossSingleBet\MatchWinLossSingleBet.cs" />
     <Compile Include="Models\TreeWinLoss\SMAVirtualRate.cs" />
     <Compile Include="Models\TreeWinLoss\TreeWinLoss.cs" />
     <Compile Include="Models\TreeWinLoss\TreeWinLossInfo.cs" />
@@ -206,9 +200,6 @@
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Services\Implement\LeagueWinLoss\LeagueWinLossExportExcel.cs" />
-    <Compile Include="Services\Implement\MatchWinLossByBettype\MatchWinLossByBettypeExportDataService.cs" />
-    <Compile Include="Services\Implement\MatchWinLossByBettype\MatchWinLossByBettypeService.cs" />
-    <Compile Include="Services\Implement\MatchWinLossSingleBet\MatchWinLossSingleBetService.cs" />
     <Compile Include="Services\Implement\TreeWinLoss\TreeWinLossExcelService.cs" />
     <Compile Include="Services\Implement\TreeWinLoss\TreeWinLossService.cs" />
     <Compile Include="Services\Implement\TreeWinLoss\TreeWinLossUtil.cs" />
@@ -217,9 +208,6 @@
     <Compile Include="Services\Interface\DailyMixParlayWinLoss\IDailyMixParlayWinLossService.cs" />
     <Compile Include="Services\Interface\LeagueWinLoss\ILeagueWinLossService.cs" />
     <Compile Include="Services\Interface\LeagueWinLoss\ILeagueWinLossExportExcel.cs" />
-    <Compile Include="Services\Interface\MatchWinLossByBettype\IMatchWinLossByBettypeExportDataService.cs" />
-    <Compile Include="Services\Interface\MatchWinLossByBettype\IMatchWinLossByBettypeService.cs" />
-    <Compile Include="Services\Interface\MatchWinLossSingleBet\IMatchWinLossSingleBetService.cs" />
     <Compile Include="Services\Interface\TreeWinLoss\ITreeWinLossExcelService.cs" />
     <Compile Include="Services\Interface\TreeWinLoss\ITreeWinLossService.cs" />
     <Compile Include="WinLossAreaRegistration.cs" />

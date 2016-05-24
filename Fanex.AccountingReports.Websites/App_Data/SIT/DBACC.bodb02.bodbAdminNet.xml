@@ -203,10 +203,6 @@
     <Setting Key="Gaming_LiveCasinoAgencyWinLoss_GetReport" SpName="Acc_Rpt_LiveCasino_AgencyWinLoss" TimeOut="0" DbName="DBACC.bodb02.bodbAdminNet"/>
   </Function>
 
-  <Function Name="WinLoss - Match Win Loss By Bettype">
-    <Setting Key="MatchWinLossByBetType" SpName="Acc_Rpt_MatchWinLossByBetType" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-  </Function>
-
   <Function Name="Main - Credit Term">
     <Setting Key="CreditTerm" SpName="Acc_Rpt_CreditTerm" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="InstallAmount" SpName="Acc_Rpt_InstallAmount" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />

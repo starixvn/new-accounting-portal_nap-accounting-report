@@ -30,7 +30,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
     /// </summary>
     public partial class WinLossSummary3rdService : IWinLossSummary3rdService
     {
-        private const short ArenaColorIndex = 45;
         private const short GrandTotalColorIndex = 47;
         private const short GrandTotalBorderColorIndex = 49;
 
@@ -1431,7 +1430,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
         private void SetColorAtIndex(HSSFWorkbook excelFile)
         {
             HSSFPalette palette = excelFile.GetCustomPalette();
-            palette.SetColorAtIndex(ArenaColorIndex, (byte)228, (byte)242, (byte)253);
             palette.SetColorAtIndex(GrandTotalColorIndex, (byte)219, (byte)225, (byte)187);
             palette.SetColorAtIndex(GrandTotalBorderColorIndex, (byte)255, (byte)102, (byte)0);
         }

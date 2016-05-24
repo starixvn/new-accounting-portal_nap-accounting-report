@@ -424,9 +424,6 @@
   <data name="Daily_WinLoss2h_ColossusBets_SheetName" xml:space="preserve">
     <value>Daily Win Loss 2h - Colossus Bets</value>
   </data>
-  <data name="MatchWinLoss2aDetailByArena_ReportName" xml:space="preserve">
-    <value>MatchWinLoss2aDetailByArena_{0}</value>
-  </data>
   
   <data name="MatchWinLoss2aDetailByMatch_ReportName" xml:space="preserve">
     <value>MatchWinLoss2aDetailByMatch_{0}</value>
