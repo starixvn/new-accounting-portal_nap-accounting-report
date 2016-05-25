@@ -251,5 +251,5 @@
     }
     manager.Process();
 	var currentDirectory = Path.GetDirectoryName(Host.TemplateFile);
-    File.Copy(currentDirectory + "\\Web.DEV.config", currentDirectory + "\\..\\Web.config", true);
+    File.Copy(currentDirectory + "\\Web.Local.config", currentDirectory + "\\..\\Web.config", true);
 #>

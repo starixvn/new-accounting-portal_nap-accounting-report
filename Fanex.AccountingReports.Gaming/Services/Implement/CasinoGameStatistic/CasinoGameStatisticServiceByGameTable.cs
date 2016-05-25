@@ -81,7 +81,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                         CompanyCommission = data.CompanyCommission
                     };
 
-                    info = WinLossInfo.Format(info);
                     gameTableWinLoss.ChildsInfo.Add(info);
                 }
 

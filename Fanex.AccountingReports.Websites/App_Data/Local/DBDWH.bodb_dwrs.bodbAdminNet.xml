@@ -202,7 +202,7 @@
     <Setting Key="Acc_Rpt_CasinoGameStatistics_ProductSel" SpName="Acc_Rpt_CasinoGameStatistics_ProductSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Acc_Rpt_CasinoGameStatistics_GameTypeSel" SpName="Acc_Rpt_CasinoGameStatistics_GameTypeSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Acc_Rpt_CasinoGameStatistics_GameTableSel" SpName="Acc_Rpt_CasinoGameStatistics_GameTableSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Acc_Rpt_CasinoGameStatistics_Daily" SpName="Acc_Rpt_CasinoGameStatistics_Daily_UAT2" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_CasinoGameStatistics_Daily" SpName="Acc_Rpt_CasinoGameStatistics_Daily_xtest" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Acc_Rpt_CasinoGameStatistics_Hourly" SpName="Acc_Rpt_CasinoGameStatistics_Hourly_UAT2" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Acc_Rpt_CasinoGameStatistics_Monthly" SpName="Acc_Rpt_CasinoGameStatistics_Monthly_UAT2" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Acc_Rpt_CasinoGameStatistics_UserName" SpName="Acc_Rpt_CasinoGameStatistics_UserName_UAT2" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
