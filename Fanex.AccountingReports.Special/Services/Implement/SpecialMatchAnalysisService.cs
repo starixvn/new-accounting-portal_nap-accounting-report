@@ -9,6 +9,10 @@
 
 namespace Fanex.AccountingReports.Special.Services.Implement
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using Common;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
@@ -21,10 +25,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
     using Fanex.AccountingReports.Special.Resources;
     using Fanex.AccountingReports.Special.Services.Interface;
     using Fanex.Data.Repository;
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -175,7 +175,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                 var getMatchAnalysisCriteria = GetMatchAnalysisCriteria(criteria);
                 var data = GetReportData<dynamic>(getMatchAnalysisCriteria);
                 MatchAnalysis chargedCommission = null;
-                //// Assign Rows
                 foreach (var d in data)
                 {
                     MatchAnalysis row = new MatchAnalysis()
@@ -192,9 +191,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                         BetCount = ((int)d.betcount).Format(0),
                     };
 
-                    //// Reporttype
-
-                    #region criteria.Reporttype
                     switch (criteria.Reporttype)
                     {
                         case ReportType.Currency:
@@ -236,21 +232,20 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                             row.Name = d.username;
                             break;
                     }
-                    #endregion
 
-                    const int chargedComissionBetType = 500;
+                    int chargedComissionBetType = 500;
                     if (row.Id == chargedComissionBetType && criteria.Reporttype == ReportType.Bettype)
                     {
                         chargedCommission = row;
                         chargedCommission.Name = "Charged Commission";
                         chargedCommission.BetCount = "0";
                     }
-                    else {
+                    else
+                    {
                         matchAnalysis.Rows.Add(row);
                     }
                 }
 
-                //// Total
                 var total = new MatchAnalysis()
                 {
                     SMAWL = data.Sum(s => (double)s.SMAWinLost).Format(2),
@@ -265,7 +260,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     BetCount = data.Sum(s => (int)s.betcount).Format(0),
                     Name = Labels.Total
                 };
-                matchAnalysis.Total = new List<MatchAnalysis> { total};
+                matchAnalysis.Total = new List<MatchAnalysis> { total };
 
                 if (chargedCommission != null)
                 {
@@ -301,7 +296,8 @@ namespace Fanex.AccountingReports.Special.Services.Implement
 
                     matchAnalysis.Total.First().BetCount = Converter.ToString2(Converter.ToDecimal(total.BetCount)
                                     - Converter.ToDecimal(chargedCommission.BetCount));
-                };
+                }
+
                 SessionManager.Set(SpecialConstants.MatchAnalysisSessionKey + GetReportTypeName(criteria.Reporttype), matchAnalysis);
             }
             catch (Exception ex)
@@ -778,6 +774,13 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+
         private void ExportReportTotalContent(int currentRow, int startColumn, bool isAddMoreCurrencyColumn, ExcelWorksheet worksheet, MatchAnalysis matchAnalysis)
         {
             var intStyle = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.GrandTotalRowColor, true, false, false);
@@ -850,7 +853,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                 currentCellRange.Style = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true, HorizontalAlignmentStyle.Center);
                 currentCellRange.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
             }
-
         }
 
         private string GetReportTypeName(ReportType reportType)
@@ -859,6 +861,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             {
                 case ReportType.Bettype:
                     return Labels.Bet_Type;
+
                 default:
                     return reportType.ToString();
             }
@@ -881,6 +884,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                         CustId = criteria.CustId,
                         Reporttype = criteria.Reporttype
                     };
+
                 default:
                     return criteria;
             }

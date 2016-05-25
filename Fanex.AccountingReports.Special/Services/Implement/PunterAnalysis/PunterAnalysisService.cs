@@ -267,11 +267,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
             return null;
         }
 
-        /// <summary>
-        /// Gets the bet types by sport.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The bet types by sport.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public List<EntityBase<int, string>> GetBetTypesBySport(GetBetTypesBySportCriteria criteria)
         {
             try

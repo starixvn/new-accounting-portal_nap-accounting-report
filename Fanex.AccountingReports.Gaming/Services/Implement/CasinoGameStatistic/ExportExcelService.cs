@@ -6,6 +6,7 @@
 
 namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Extensions;
@@ -22,6 +23,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
     /// </summary>
     public class ExportExcelService : IExportExcelService
     {
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_Header(ref ExcelWorksheet workSheet, int startRow, int startColumn, ref int currentRow, int periodType, int maxColumnIndex, GetReportByDailyCriteria criteria)
         {
             var currentColumn = startColumn;
@@ -151,6 +158,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             currentRow++;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_WinLossRow(ref ExcelWorksheet workSheet, int startColumn, ref int currentRow, CellStyle intNumberStyle, CellStyle textStyle, CellStyle twoDecimalNumberStyle, CellStyle twoDecimalNegativeNumberStyle, CellStyle twoDecimalNegativePercentNumberStyle, GetReportByDailyCriteria criteria, WinLossInfo info)
         {
             ExcelCell currentCell;
@@ -233,6 +246,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             currentColumn++;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_GrandTotal(WinLossInfo grandTotal, ref ExcelWorksheet workSheet, int startColumn, ref int currentRow, GetReportByDailyCriteria criteria)
         {
             var grandTotalColor = ExcelExtensions.GrandTotalRowColor;
@@ -277,7 +296,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                 info.Name = "Grand Total RM";
                 info.CurrencyName = "RM";
             }
-            
+
             currentColumn = startColumn;
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.Name;
@@ -300,6 +319,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             currentRow++;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public void ExportReport(WinLossInfo report, GetReportByDailyCriteria criteria)
         {
             ExcelFile excelFile = new ExcelFile();

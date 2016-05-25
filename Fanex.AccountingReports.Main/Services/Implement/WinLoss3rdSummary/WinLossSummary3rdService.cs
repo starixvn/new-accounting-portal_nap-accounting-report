@@ -13,6 +13,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -26,7 +27,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
     using Fanex.AccountingReports.Main.Services.Interface;
     using Fanex.Common;
     using Fanex.Data.Repository;
-    using Fanex.AccountingReports.Core.Configurations;
 
     /// <summary>
     /// TODO: Update summary.
@@ -94,17 +94,14 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                     }
                 });
 
-                // get name of sport types
                 CacheRef.SaveCacheRefResponse(sportTypeHash.Values.ToList(), CacheRef.GetSportName, ref this._sportTypeNameCache);
                 if (_sportTypeNameCache.ContainsKey(_casinoSportType))
                 {
                     _sportTypeNameCache[_casinoSportType] = Labels.MBC_RNG_Casino;
                 }
 
-                // get name of bet types
                 CacheRef.SaveCacheRefResponse(betTypeHash.Values.ToList(), CacheRef.GetBettype, ref this._betTypeNameCache);
 
-                // group by SportType
                 var sportTypeGroups = rawData.GroupBy(data => data.sporttype);
                 foreach (var sportTypeGroup in sportTypeGroups)
                 {
@@ -112,11 +109,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                     sportInfo = new SportTypeWinLossInfo
                     {
                         Id = sportId,
-                        Name = this.GetSportName(sportId) // get name by SportType
+                        Name = this.GetSportName(sportId)
                     };
 
-                    bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeSingleWalletCasinoLaunchDate;
-                    // group by BetType & LiveIndicator
+                    bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeSingleWalletCasinoLaunchDate;                    
                     var betTypeGroup = sportTypeGroup.GroupBy(data => new { data.bettype, data.liveindicator });
 
                     var isNewCricket = false;
@@ -132,6 +128,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                             isNewCricket = true;
                             continue;
                         }
+
                         foreach (var item in data)
                         {
                             winloss = new WinLossInfo
@@ -213,12 +210,15 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                             sportInfo.CalculateTotalNewCricket(winloss);
                             report.CalculateAllTotal(sportId, winloss);
                         }
+
                         sportInfo.BetTypeWinLosses.Add(betInfo);
                     }
+
                     if (isNewCricket == true)
                     {
                         sportInfo = CalculatorForNewCricket(dataForNewCricket, isShowNotAvalable, sportInfo, sportId, report);
                     }
+
                     if (MainConstants.WinLossSummaryRacingSportIds.Contains(sportInfo.Id))
                     {
                         SportTypeWinLossInfo racingSport = report.SportTypeWinLosses.FirstOrDefault(sport => sport.Id == MainConstants.WinLossSummaryRacingSportId);
@@ -268,12 +268,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             return report;
         }
 
-
-        public SportTypeWinLossInfo CalculatorForNewCricket(dynamic data, bool isShowNotAvalable,
-                                            SportTypeWinLossInfo sportInfo, int sportId, WinLoss3rdInfo report)
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        public SportTypeWinLossInfo CalculatorForNewCricket(dynamic data, bool isShowNotAvalable, SportTypeWinLossInfo sportInfo, int sportId, WinLoss3rdInfo report)
         {
             BetTypeWinLossInfo betInfo = new BetTypeWinLossInfo();
-            //betInfo.Id = data.Key.bettype;
+
             foreach (var item in data)
             {
                 betInfo.Id = item.bettype;
@@ -355,9 +356,11 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 sportInfo.CalculateTotal(winloss);
                 report.CalculateAllTotal(sportId, winloss);
             }
+
             sportInfo.BetTypeWinLosses.Add(betInfo);
             return sportInfo;
         }
+
         /// <summary>
         /// Recalculates the report.
         /// </summary>
@@ -565,6 +568,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 case SportContants.Bettrade:
                     sportName = Labels.Bettrade;
                     break;
+
                 case SportContants.Allbet:
                     sportName = Labels.Allbet;
                     break;
@@ -884,12 +888,16 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             {
                 case SportTypeWinLoss.SportBook:
                     return CreateWinLossSummary3rdSportbookSportTypeCriteria(criteria);
+
                 case SportTypeWinLoss.Racing:
                     return CreateWinLossSummary3rdRacingSportTypeCriteria(criteria);
+
                 case SportTypeWinLoss.VirtualSports:
                     return CreateWinLossSummary3rdVirtualSportSportTypeCriteria(criteria);
+
                 case SportTypeWinLoss.VirtualRacing:
                     return CreateWinLossSummary3rdVirtualRacingSportTypeCriteria(criteria);
+
                 case SportTypeWinLoss.Unknown:
                 default:
                     return criteria;

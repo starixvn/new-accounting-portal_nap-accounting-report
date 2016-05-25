@@ -318,7 +318,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         {
             try
             {
-                //var rawData = GetReportData<dynamic>(criteria);
                 var thirdPartyCasinoData = _reportRepository.GetThirdPartyCasinoReport(criteria);
 
                 WinLossInfo report = new WinLossInfo
@@ -472,7 +471,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                 HandleException(ex);
                 throw;
             }
-
         }
 
         /// <summary>
@@ -620,6 +618,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     {
                         winLoss.Turnover = Converter.ToDecimal(info.IBCTurnover);
                     }
+
                     winLoss.Name = isKenoBetType ?
                         Labels.Keno :
                         this._betTypeNameCache[winLoss.Id] +
@@ -628,7 +627,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                         string.Empty :
                         this._matchWinLoss2aUtilityService.BetTypeNameSuffixCache[winLoss.Id];
 
-                    // for AllBet
                     if ((winLoss.Id >= 2401) && (winLoss.Id <= 2499))
                     {
                         winLoss.Name = winLoss.Name + " (Allbet)";
@@ -1422,6 +1420,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             return report;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private WinLossInfo GetMetricGamingDetailReportInfoByBetType(List<WinLossInfo> rawData, GetMetricGamingDetailByBetTypeCriteria criteria)
         {
             WinLossInfo report = new WinLossInfo

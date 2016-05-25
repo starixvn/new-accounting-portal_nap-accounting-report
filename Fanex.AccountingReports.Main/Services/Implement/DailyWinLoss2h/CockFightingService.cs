@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
@@ -59,6 +60,9 @@
             return cockFightingArena;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public void ExportCockFightingReport(GetCockFightingCriteria criteria)
         {
             try
@@ -68,8 +72,6 @@
                 {
                     report = this.GetCockFightingReport(criteria);
                 }
-
-                //// ExcelTypes
 
                 ExcelFile excelFile = new ExcelFile();
                 ExcelWorksheetCollection worksheets = excelFile.Worksheets;
@@ -81,14 +83,9 @@
                 int maxColumnIndex = 6;
                 var currentRow = startRow;
 
-                //// ExcelTypes
-                //// MakeExcelFile
-
                 var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
                 var currentColumn = startColumn;
                 CellRange currentCellRange;
-
-                //// Header
 
                 var title = MainResources.DailyWinLoss2h_CockfightingReport_Title;
                 currentColumn = startColumn;
@@ -106,8 +103,6 @@
                     startColumn,
                     false);
 
-                //// Header
-
                 _dailyWinLoss2hUtilityService.ExportContent_SportReport(
                     ref workSheet,
                     ref currentRow,
@@ -115,8 +110,6 @@
                     startColumn,
                     report,
                     SportContants.CockFighting);
-
-                //// MakeExcelFile
 
                 var reportName = string.Format(
                     MainResources.DailyWinLoss2h_ReportName,
@@ -334,6 +327,9 @@
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Margin, headerStyle);
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportCockFightingArenaReportContent(
             HSSFWorkbook workbook,
             ref ISheet worksheet,
@@ -491,6 +487,9 @@
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportCockFightingArenaGrandTotal(
             HSSFWorkbook workbook,
             ref ISheet worksheet,

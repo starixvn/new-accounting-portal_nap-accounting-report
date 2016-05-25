@@ -202,7 +202,10 @@
     <Compile Include="Services\Implement\AllCustomerTurnOver\AllCustomerTurnOverExportReportService.cs" />
     <Compile Include="Services\Implement\AllCustomerTurnOver\AllCustomerTurnOverGetReportService.cs" />
     <Compile Include="Services\Implement\DailyMixParlayWinLoss\DailyMixParlayWinLossService.cs" />
-    <Compile Include="Services\Implement\LeagueWinLossService.cs" />
+    <Compile Include="Services\Implement\LeagueWinLoss\LeagueWinLossService.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Services\Implement\LeagueWinLoss\LeagueWinLossExportExcel.cs" />
     <Compile Include="Services\Implement\MatchWinLossByBettype\MatchWinLossByBettypeExportDataService.cs" />
     <Compile Include="Services\Implement\MatchWinLossByBettype\MatchWinLossByBettypeService.cs" />
     <Compile Include="Services\Implement\MatchWinLossSingleBet\MatchWinLossSingleBetService.cs" />
@@ -212,7 +215,8 @@
     <Compile Include="Services\Interface\AllCustomerTurnOver\IAllCustomerTurnOverExportReportService.cs" />
     <Compile Include="Services\Interface\AllCustomerTurnOver\IAllCustomerTurnOverGetReportService.cs" />
     <Compile Include="Services\Interface\DailyMixParlayWinLoss\IDailyMixParlayWinLossService.cs" />
-    <Compile Include="Services\Interface\ILeagueWinLossService.cs" />
+    <Compile Include="Services\Interface\LeagueWinLoss\ILeagueWinLossService.cs" />
+    <Compile Include="Services\Interface\LeagueWinLoss\ILeagueWinLossExportExcel.cs" />
     <Compile Include="Services\Interface\MatchWinLossByBettype\IMatchWinLossByBettypeExportDataService.cs" />
     <Compile Include="Services\Interface\MatchWinLossByBettype\IMatchWinLossByBettypeService.cs" />
     <Compile Include="Services\Interface\MatchWinLossSingleBet\IMatchWinLossSingleBetService.cs" />

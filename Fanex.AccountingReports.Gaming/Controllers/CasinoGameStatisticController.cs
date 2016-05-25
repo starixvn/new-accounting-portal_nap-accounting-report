@@ -9,6 +9,7 @@
 
 namespace Fanex.AccountingReports.Gaming.Controllers
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Criteria;
     using Fanex.AccountingReports.Core.Exceptions;
@@ -34,6 +35,9 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         {
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         public CasinoGameStatisticController(ICasinoGameStatisticService reportService, IFilterSectionService filterService, IExportExcelService excelService, IExportExcelHourlyService excelHourlyService)
         {
             _reportService = reportService ?? new CasinoGameStatisticService();

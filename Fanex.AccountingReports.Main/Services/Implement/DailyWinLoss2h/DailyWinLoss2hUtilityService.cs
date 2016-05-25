@@ -377,6 +377,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         isNewCricket = true;
                         continue;
                     }
+
                     info = betTypeGroup.GrandTotal;
                     this.ExportNormalRow(
                         ref workSheet,
@@ -419,7 +420,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         report.EnableVirtual,
                         isShowVirtualTurnover);
                 }
-                // for *cricket
+                
                 if (isNewCricket == true)
                 {
                     info = report.Total;
@@ -463,7 +464,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         RowType._2hReportDeposit,
                         report.EnableVirtual,
                         isShowVirtualTurnover);
-                    // for charge commission
+                    
                     info = betTypeForNewCricket.GrandTotal;
                     this.ExportNormalRow(
                         ref workSheet,
@@ -506,7 +507,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         report.EnableVirtual,
                         isShowVirtualTurnover);
                 }
-                //
+                
                 info = report.GrandTotal;
                 this.ExportNormalRow(
                     ref workSheet,

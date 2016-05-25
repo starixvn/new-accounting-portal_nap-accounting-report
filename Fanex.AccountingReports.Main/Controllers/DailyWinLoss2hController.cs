@@ -9,6 +9,7 @@
 
 namespace Fanex.AccountingReports.Main.Controllers
 {
+    using System.Diagnostics.CodeAnalysis;
     using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web;
@@ -36,6 +37,9 @@ namespace Fanex.AccountingReports.Main.Controllers
         {
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         public DailyWinLoss2hController(IDailyWinLoss2hService reportService, IMetricGamingService metricGamingService, IBettradeService bettradeService, IColossusBetService colossusBetService, ICockFightingService cockFightingService)
         {
             this._reportService = reportService ?? new DailyWinLoss2hService();

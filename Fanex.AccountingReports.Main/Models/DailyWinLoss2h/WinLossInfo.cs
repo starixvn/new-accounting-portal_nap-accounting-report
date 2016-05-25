@@ -11,8 +11,9 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
 {
     using System;
     using System.Collections.Generic;
-    using Fanex.AccountingReports.Core.Services.Impl;
     using Constants;
+    using Fanex.AccountingReports.Core.Services.Impl;
+
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -125,7 +126,6 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
                     this.Id == SportContants._2hLiveCasinoSLI ||
                     this.Id == SportContants._2hLiveCasinoGoldDeluxe ||
                     this.Id == SportContants._2hCasinoMBCRNG;
-
             }
         }
 

@@ -20,7 +20,6 @@ namespace Fanex.AccountingReports.Main.Criteria.DailyWinLoss2h
     {
         public DateTime Winlostdate { get; set; }
 
-
         public override string GetSettingKey()
         {
             return "Main_DailyWinLoss2h_Main2hReport" + ReportService.GetStoreMappingSuffix(this.Winlostdate);

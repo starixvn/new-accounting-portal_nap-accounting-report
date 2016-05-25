@@ -38,6 +38,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             _dailyWinLoss2hUtilityService = new DailyWinLoss2hUtilityService();
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public LiveAndNoneLiveReport GetMetricGamingBetTypes(GetMetricGamingBettypeCriteria criteria)
         {
             var report = InitMetricGamingBetTypesLiveAndNonLive();

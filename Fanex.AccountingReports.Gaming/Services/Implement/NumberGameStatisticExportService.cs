@@ -1,6 +1,7 @@
 ﻿namespace Fanex.AccountingReports.Gaming.Services.Implement
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web;
@@ -130,7 +131,7 @@
                 {
                     this.ExportReportByUserNameGrandTotal(ref worksheet, ref currentRow, report.GrandTotal);
                 }
-            }           
+            }
 
             string reportName = this.CreateReportName(criteria);
             NpoiExcelExtensions.ResponseStreamExcel(workbook, reportName);
@@ -502,6 +503,9 @@
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportNumberGameStatisticDetail(ref ISheet worksheet, int currentRow, NumberGameStatisticDetail item)
         {
             int currentColumn = 2;
@@ -717,6 +721,9 @@
             this.ExportNumberGameStatisticGrandTotalDetail(ref worksheet, currentRow, grandTotal);
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportNumberGameStatisticGrandTotalDetail(
             ref ISheet worksheet,
             int currentRow,

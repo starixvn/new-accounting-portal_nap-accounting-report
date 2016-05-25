@@ -435,10 +435,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
         }
 
-        /// <summary>
-        /// Exports the type of the soccer report by bet.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public void ExportSoccerReportByBetType(GetReportByBetTypeCriteria criteria)
         {
             try
@@ -459,7 +458,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 var currentRow = startRow;
 
                 string sportName = string.Empty;
-                if(criteria.Bettype >= MainConstants.MinMetricGamingSuperLiveBetType && criteria.Bettype <= MainConstants.MaxMetricGamingSuperLiveBetType)
+                if (criteria.Bettype >= MainConstants.MinMetricGamingSuperLiveBetType && criteria.Bettype <= MainConstants.MaxMetricGamingSuperLiveBetType)
                 {
                     sportName = Labels.MetricGaming_Superlive;
                 }

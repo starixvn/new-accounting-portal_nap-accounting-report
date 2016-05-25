@@ -22,6 +22,7 @@ namespace Fanex.AccountingReports.Main.Common
 
         // Only for Web code (don't have this Id in DB)
         public const int WinLossSummaryRacingSportId = -100;
+
         public const int WinLossSummaryVirtualSportId = -200;
 
         public const int WinLossSummaryMaxSportbookId = 99;
@@ -30,15 +31,20 @@ namespace Fanex.AccountingReports.Main.Common
 
         // Range ID of Virtual Sport
         public const int WinLossSummaryBeginVirtualSportId = 180;
+
         public const int WinLossSummaryEndVirtualSportId = 190;
 
         // Sport Ids that don't need to show detail link
         public const int WinLossSumamryCasinoSportId = 251;
+
         public const int WinLossSummaryLiveCasinoSportId = 162;
         public const int WinLossSummaryBingoSportId = 252;
         public const int WinLossSummaryP2PSportId = 253;
 
         public const int Bettrade = 903;
+
+        public const int MinMetricGamingSuperLiveBetType = 801;
+        public const int MaxMetricGamingSuperLiveBetType = 899;
 
         public static readonly string MatchWinLoss2aSummaryReportByBetTypeSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.SummaryReportByBetType";
         public static readonly string MatchWinLoss2aSummaryReportBySportTypeSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.SummaryReportBySportType";
@@ -67,6 +73,7 @@ namespace Fanex.AccountingReports.Main.Common
 
         public static readonly string DailyWinLoss2hVirtualSportReportSessionKey = "Fanex.AccountingReports.Main.DailyWinLoss2h.VirtualSportReport";
         public static readonly string DailyWinLoss2hVirtualSportReportBySportSessionKey = "Fanex.AccountingReports.Main.DailyWinLoss2h.VirtualSportReportBySport";
+
         public static readonly string DailyWinLoss2hVirtualSportsVirtualHorseRacingReportSessionKey =
             "Fanex.AccountingReports.Main.DailyWinLoss2h.VirtualSportsVirtualHorseRacingReport";
 
@@ -97,9 +104,6 @@ namespace Fanex.AccountingReports.Main.Common
         public static readonly string TwoDecimalDigitNumber = "##,##0.00";
         private const string NegativeNumberFormat = "[>=0]#,##0{0}_);[RED][<0]-#,##0{1}";
         private const string NormalNumberFormat = "#,##0{0}_);-#,##0{1}";
-        private const string PositiveNumberFormat = "[RED][>0]#,##0{0}_);[<0]-#,##0{1};#,##0{2}";
-
-        public const int MinMetricGamingSuperLiveBetType = 801;
-        public const int MaxMetricGamingSuperLiveBetType = 899;
+        private const string PositiveNumberFormat = "[RED][>0]#,##0{0}_);[<0]-#,##0{1};#,##0{2}";        
     }
 }

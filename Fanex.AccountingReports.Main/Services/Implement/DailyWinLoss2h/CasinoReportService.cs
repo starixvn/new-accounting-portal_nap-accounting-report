@@ -25,6 +25,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
     using Fanex.AccountingReports.Main.Resources;
     using Fanex.Common;
     using CoreConstants = Fanex.AccountingReports.Core.Constants;
+
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -38,6 +39,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         public LiveAndNoneLiveReport GetCasinoReport(GetCasinoReportCriteria criteria)
         {
             try
@@ -442,6 +446,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public void ExportTotalRow(
             ref ExcelWorksheet workSheet,
             CellStyle textStyle,

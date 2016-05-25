@@ -48,6 +48,7 @@ namespace Fanex.AccountingReports.Main.Models.MatchWinLoss2a
                 return margin;
             }
         }
+
         public string Margin_Str
         {
             get

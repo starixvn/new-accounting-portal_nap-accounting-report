@@ -11,6 +11,7 @@ namespace Fanex.AccountingReports.Websites
 {
     using System;
     using System.Data.SqlClient;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     using System.Web;
     using System.Web.Mvc;
@@ -62,14 +63,17 @@ namespace Fanex.AccountingReports.Websites
             AuthConfig.RegisterAuth(Context);
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         protected void Application_Error(object sender, EventArgs e)
         {
             try
             {
                 DbSettingProviderManager.Current.Restart();
-                
+
                 Exception ex = Server.GetLastError().GetBaseException();
-                
+
                 if (ex is HttpException)
                 {
                     return;

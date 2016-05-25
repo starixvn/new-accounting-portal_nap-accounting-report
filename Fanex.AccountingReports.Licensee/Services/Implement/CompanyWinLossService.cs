@@ -6,9 +6,9 @@
 
 namespace Fanex.AccountingReports.Licensee.Services.Implement
 {
-    using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Models;
@@ -31,7 +31,10 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     public class CompanyWinLossService : ICompanyWinLossService
     {
         private const int ExtendCachedTimeOut = 2;
-        private readonly string _dataCachedKey = "Fanex.AccountingReports.Misc.CompanyWinLoss." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
+
+        private readonly string _dataCachedKey = "Fanex.AccountingReports.Misc.CompanyWinLoss."
+            + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
+
         private ICompanyWinLossRepository _repository;
 
         public CompanyWinLossService(ICompanyWinLossRepository repository)
@@ -167,6 +170,9 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             return groupHeader;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private List<HeaderColumns> CreateHeaderColumns()
         {
             var header = new List<HeaderColumns>();
@@ -202,8 +208,8 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
 
         public string GetReportName(CompanyWinLossCriteria criteria)
         {
-            string reportName = string.Format(string.Format(Labels.Company_Win_Loss.Replace(" ", string.Empty)) 
-                + "_From_" + string.Format(criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "_")) 
+            string reportName = string.Format(string.Format(Labels.Company_Win_Loss.Replace(" ", string.Empty))
+                + "_From_" + string.Format(criteria.FromDate.ToShortFormatedDateWithSlash().Replace("/", "_"))
                 + "_To_" + string.Format(criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "_")));
 
             return reportName;

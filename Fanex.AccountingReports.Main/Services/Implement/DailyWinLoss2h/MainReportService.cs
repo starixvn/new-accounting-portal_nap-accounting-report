@@ -9,6 +9,11 @@
 
 namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using Core.Configurations;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Extensions;
@@ -19,13 +24,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
     using Fanex.AccountingReports.Main.Models.DailyWinLoss2h;
     using Fanex.AccountingReports.Main.Resources;
     using Fanex.Common;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using CoreConstants = Fanex.AccountingReports.Core.Constants;
-    
+
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -248,6 +248,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
                                     sportWinLoss.EightRMTotal.Add(info);
                                     break;
+
                                 case RowType.BARM:
                                     info.AliasName = info.Name + " " + Labels.BARM;
                                     if (isIBC)
@@ -261,11 +262,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
                                     sportWinLoss.BARMTotal.Add(info);
                                     break;
+
                                 case RowType._2hReportCredit:
                                     info.AliasName = Labels.Credit;
                                     sportWinLoss.CreditTotal.Id = info.Id;
                                     sportWinLoss.CreditTotal.Add(info);
                                     break;
+
                                 case RowType._2hReportDeposit:
                                     info.AliasName = Labels.Deposit;
                                     sportWinLoss.DepositTotal.Id = info.Id;
@@ -805,29 +808,28 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 i != 0);
                         }
 
-                            if (ibcWinLoss.Name == Labels.Sportsbook &&
-                            ibcWinLoss.ChildsInfo.Count > 0)
+                        if (ibcWinLoss.Name == Labels.Sportsbook &&
+                        ibcWinLoss.ChildsInfo.Count > 0)
+                        {
+                            var infoRMLength = infoRMList.Count;
+                            for (var k = 0; k < infoRMLength; k++)
                             {
-
-                                var infoRMLength = infoRMList.Count;
-                                for (var k = 0; k < infoRMLength; k++)
-                                {
-                                    info = infoRMList[k];
-                                    this.ExportRMRow(
-                                        ref workSheet,
-                                        subTotalTextStyle,
-                                        subTotalTwoDecimalNumberStyle,
-                                        subTotalTwoDecimalPositiveNumberStyle,
-                                        subTotalTwoDecimalPositivePercentNumberStyle,
-                                        info,
-                                        startColumn,
-                                        maxColumnIndex,
-                                        ref currentRow);
-                                }
+                                info = infoRMList[k];
+                                this.ExportRMRow(
+                                    ref workSheet,
+                                    subTotalTextStyle,
+                                    subTotalTwoDecimalNumberStyle,
+                                    subTotalTwoDecimalPositiveNumberStyle,
+                                    subTotalTwoDecimalPositivePercentNumberStyle,
+                                    info,
+                                    startColumn,
+                                    maxColumnIndex,
+                                    ref currentRow);
                             }
-
-                            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
                         }
+
+                        workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
+                    }
 
                     _dailyWinLoss2hUtilityService.SetOddEvenColor_ExportExcel(
                         ref textStyle,

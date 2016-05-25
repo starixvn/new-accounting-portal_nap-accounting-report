@@ -202,7 +202,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             winLosses.GrandTotal.Name = Labels.All_Total;
 
             var rawData = SessionManager.Get<ProductWinLoss>(_liveCasinoByBettypeReportKey);
-            if (rawData == null) SessionManager.Set<ProductWinLoss>(_liveCasinoByBettypeReportKey, rawData);
+            if (rawData == null)
             {
                 var getLiveCasinoReportCriteria = new GetLiveCasinoReportCriteria
                 {
@@ -244,8 +244,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
                 winLosses.ChildsInfo.Add(winLossByBettype);
             }
-
-            //SessionManager.Set<WinLossInfo>(_liveCasinoWinLossByProductReportKey, winLosses);
+            
             return winLosses;
         }
 

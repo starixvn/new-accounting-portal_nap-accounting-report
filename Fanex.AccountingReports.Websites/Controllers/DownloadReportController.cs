@@ -7,6 +7,7 @@
 namespace Fanex.AccountingReports.Websites.Controllers
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Net;
     using System.Web.Mvc;
@@ -63,6 +64,9 @@ namespace Fanex.AccountingReports.Websites.Controllers
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private ActionResult GetExcelFile(DateTime currentTime, string parentReportPath, DateTime reportTime, DateTime nextMonthReportTime, string reportContainerFolder, string reportNameWithExtension)
         {
             string reportPath = Path.Combine(new string[] { parentReportPath, reportContainerFolder, reportNameWithExtension });

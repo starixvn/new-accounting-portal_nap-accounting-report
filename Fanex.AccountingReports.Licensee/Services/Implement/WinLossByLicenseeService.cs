@@ -198,6 +198,9 @@ using Fanex.Data.Repository;
             return null;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public CriteriaBase GetLevelCriteria(GetLevelReportByCustIdCriteria criteria)
         {
             switch (criteria.LevelReport)
@@ -537,12 +540,9 @@ using Fanex.Data.Repository;
             };
         }
 
-        /// <summary>
-        /// Gets winLoss data by specified base currency.
-        /// </summary>
-        /// <param name="rawData">The raw data.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>WinLoss data by specified base currency.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private WinLossByLicensee GetWinLossDataByConvertCurrency(DataRow rawData, GetCurrencyReportCriteria criteria)
         {
             WinLossByLicensee winLossData = null;
@@ -870,6 +870,9 @@ using Fanex.Data.Repository;
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportHeader(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -878,18 +881,12 @@ using Fanex.Data.Repository;
             WinLossByLicenseeCriteria criteria,
             ReportDrilldownLevel drilldownLevel)
         {
-            //// ExcelTypes
-
             var titleColor = ExcelExtensions.HeaderTitleColor;
             var headerColor = ExcelExtensions.HeaderTitleColor;
             var currentColumn = startColumn;
 
             ExcelCell currentCell;
             CellRange currentCellRange;
-
-            //// ExcelTypes
-
-            //// Filter
 
             var title = string.Empty;
             var fistColumnText = string.Empty;
@@ -1468,18 +1465,9 @@ using Fanex.Data.Repository;
             return Labels.LicenseeWinLoss;
         }
 
-        /// <summary>
-        /// Get suffix of column Licensee Win Loss (SB+NG+LC+VS+CS).
-        /// </summary>
-        /// <param name="showSB">If set to <c>true</c> [show SB].</param>
-        /// <param name="showNG">If set to <c>true</c> [show NG].</param>
-        /// <param name="showLC">If set to <c>true</c> [show LC].</param>
-        /// <param name="showVS">If set to <c>true</c> [show VS].</param>
-        /// <param name="showCS">If set to <c>true</c> [show CS].</param>
-        /// <param name="showKN">If set to <c>true</c> [show KN].</param>
-        /// <returns>
-        /// Suffix of column Licensee Win Loss.
-        /// </returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private string GetColLicenseeWinLossTitleSuffix(bool showSB, bool showNG, bool showLC, bool showVS, bool showCS, bool showKN, bool showAGC, bool showGD)
         {
             var products = new List<string>();

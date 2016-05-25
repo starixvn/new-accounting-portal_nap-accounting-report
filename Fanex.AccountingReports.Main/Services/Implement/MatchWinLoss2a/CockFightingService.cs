@@ -1,18 +1,16 @@
 ﻿namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
+    using Core.Services.Impl;
+    using Data;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Main.Criteria.MatchWinLoss2a;
     using Fanex.AccountingReports.Main.Models.MatchWinLoss2a;
     using Fanex.AccountingReports.Main.Services.Interface.MatchWinLoss2a;
-    using Fanex.Data.Repository;
-    using Core.Services.Impl;
     using Fanex.Common;
-    using Data;
-    using System.Data;
-    public class CockFightingService : ServiceBase,ICockFightingService
+    using Fanex.Data.Repository;
+
+    public class CockFightingService : ServiceBase, ICockFightingService
     {
         private const int ExtendCachedTimeOut = 2;
 
@@ -46,7 +44,7 @@
             {
                 db.AssignParamValues(criteria.GetSpParams());
                 var reader = db.ExecuteReader();
-                while (reader.Read())                
+                while (reader.Read())
                 {
                     var row = new CockFightingDetail
                     {
@@ -63,7 +61,7 @@
                     report.ReportRows.Add(row);
                 }
             }
-            
+
             report.GrandTotal = this.CalculateGrandTotal(report.ReportRows);
 
             CacheExtension.Set(_cockFightingReportCachedDataKey, report);
@@ -112,6 +110,7 @@
                 };
                 report.ReportRows.Add(row);
             }
+
             report.GrandTotal = this.CalculateGrandTotalByArena(report.ReportRows);
 
             CacheExtension.Set(_cockFightingMatchByArenaReportCachedDataKey, report);

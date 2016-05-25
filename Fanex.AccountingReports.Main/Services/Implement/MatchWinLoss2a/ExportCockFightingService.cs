@@ -1,7 +1,7 @@
 ﻿namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
 {
-    using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Main.Criteria.MatchWinLoss2a;
@@ -146,6 +146,9 @@
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Margin_Percent, headerStyle);
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportContent(
             HSSFWorkbook workbook,
             ref ISheet worksheet,
@@ -268,6 +271,9 @@
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportGrandTotal(
             HSSFWorkbook workbook,
             ref ISheet worksheet,
@@ -440,6 +446,9 @@
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Margin_Percent, headerStyle);
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportCockFightingMatchByArenaReportContent(
             HSSFWorkbook workbook,
             ref ISheet worksheet,
@@ -594,6 +603,9 @@
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportCockFightingMatchByArenaGrandTotal(
             HSSFWorkbook workbook,
             ref ISheet worksheet,

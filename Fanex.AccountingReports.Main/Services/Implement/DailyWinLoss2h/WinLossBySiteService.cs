@@ -160,6 +160,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             return criteria;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private WinLossInfo WinlossBySiteInfo(GetWinLossBySite_BetTypeCriteria criteria)
         {
             int sportGroupId = criteria.SportGroupId;
