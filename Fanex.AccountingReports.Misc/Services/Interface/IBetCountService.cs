@@ -14,6 +14,7 @@ namespace Fanex.AccountingReports.Misc.Services.Interface
     using Fanex.AccountingReports.Misc.Models;
     using Models.BetCount;
     using System.Collections.Generic;
+
     public interface IBetCountService
     {
         List<EntityBase<int, string>> GetAllProducts();

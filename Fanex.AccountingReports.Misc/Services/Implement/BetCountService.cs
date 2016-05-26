@@ -34,6 +34,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
     public class BetCountService : ServiceBase, IBetCountService
     {
         private static Dictionary<object, string> _sportTypeNameCache;
+
         private enum ReportRowType
         {
             /// <summary>
@@ -675,7 +676,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             {
                 var rawData = this.GetReportData<dynamic>(criteria);
                 List<ProductInfo> products = new List<ProductInfo>();
-
                 var productGroups = rawData.GroupBy(rawInfo => rawInfo.ProductName);
 
                 foreach (var productGroup in productGroups)
@@ -693,12 +693,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                         continue;
                     }
 
-                    var sportGroups = productGroup.GroupBy(rawInfo =>
-                        new
-                        {
-                            rawInfo.SportID,
-                            rawInfo.SportName
-                        });
+                    var sportGroups = productGroup.GroupBy(rawInfo => new { rawInfo.SportID, rawInfo.SportName });
 
                     foreach (var sportGroup in sportGroups)
                     {
@@ -707,16 +702,20 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                         {
                             sport.ChildsInfo.Add(CreateProductInfo(data));
                         }
+
                         product.ChildsInfo.Add(sport);
                     }
+
                     products.Add(product);
                 }
+
                 return products;
             }
             catch (Exception ex)
             {
                 HandleException(ex);
             }
+
             return null;
         }
 
@@ -733,6 +732,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             {
                 indGroup.ChildsInfo.Add(CreateProductInfo(data));
             }
+
             return indGroup;
         }
 
@@ -745,6 +745,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 case MiscConstants.MiscParLayGroupId:
                     return MiscConstants.MiscParLayGroupId;
             }
+
             return -111;
         }
 
@@ -752,13 +753,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         {
             var indGroup = CreateGroupInfo(MiscConstants.MiscOtherSportId);
             indGroup.Name = Labels.Others;
-            var sportGroups = rawData.GroupBy(rawinfo =>
-               new
-               {
-                   rawinfo.SportID,
-                   rawinfo.SportName
-               }
-            );
+            var sportGroups = rawData.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
             foreach (var sportGroup in sportGroups)
             {
                 var sport = CreateSportInfo(sportGroup.Key);
@@ -766,8 +761,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 {
                     sport.ChildsInfo.Add(CreateProductInfo(data));
                 }
+
                 indGroup.ChildsInfo.Add(sport);
             }
+
             return indGroup;
         }
 
@@ -780,6 +777,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 ChildsInfo = new List<ProductInfo>()
             };
         }
+
         public ProductInfo CreateProductInfo(dynamic data)
         {
             return new ProductInfo
@@ -788,6 +786,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 Name = Converter.ToString2(data.BettypeName)
             };
         }
+
         public ProductInfo CreateGroupInfo(dynamic key)
         {
             return new ProductInfo
@@ -805,6 +804,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             {
                 indGroup.ChildsInfo.Add(CreateProductInfo(data));
             }
+
             return indGroup;
         }
 
@@ -816,15 +816,16 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 r.SportID != MiscConstants.MiscSoccerGroupId && r.SportID != MiscConstants.MiscParLaySportId);
             var parlayGroupData = sportbookRaw.Where(r => r.SportID == MiscConstants.MiscParLaySportId);
             var virtualsportRaw = rawData.Where(r => r.ProductID == MiscConstants.MiscVirtualSportsId);
-            var vSGroups = virtualsportRaw.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
+            var virtualsportGroups = virtualsportRaw.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
 
             sports.Add(GenerateSports(soccerGroupData));
             sports.Add(GenerateOtherSports(otherSportGroupData));
             sports.Add(GenerateSports(parlayGroupData));
-            foreach (var vSGroup in vSGroups)
+            foreach (var virtualsportGroup in virtualsportGroups)
             {
-                sports.Add(GenerateVirtualSports(vSGroup));
+                sports.Add(GenerateVirtualSports(virtualsportGroup));
             }
+
             return sports;
         }
 
@@ -835,8 +836,8 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 var rawData = this.GetReportData<dynamic>(criteria);
                 List<ProductInfo> sports = new List<ProductInfo>();
                 var sportTypeList = rawData.Select(info => info.SportID as dynamic).Distinct().ToList();
-                BetCountService._sportTypeNameCache = CacheRef.SaveCacheRefResponse(sportTypeList, CacheRef.GetSportName
-                    , ref BetCountService._sportTypeNameCache);
+                BetCountService._sportTypeNameCache = CacheRef.SaveCacheRefResponse(
+                    sportTypeList, CacheRef.GetSportName, ref BetCountService._sportTypeNameCache);
                 CalculateSportData(rawData, sports);
                 SessionManager.Set<List<ProductInfo>>(MiscConstants.MiscSportsSessionKey, sports);
                 return sports;
@@ -845,6 +846,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             {
                 HandleException(ex);
             }
+
             SessionManager.Set<List<ProductInfo>>(MiscConstants.MiscSportsSessionKey, null);
             return null;
         }
@@ -858,6 +860,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 case MiscConstants.MiscParLayGroupId:
                     return Labels.Parlay;
             }
+
             return string.Empty;
         }
     }

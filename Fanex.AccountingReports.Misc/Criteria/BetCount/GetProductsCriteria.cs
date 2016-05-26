@@ -4,8 +4,6 @@ namespace Fanex.AccountingReports.Misc.Criteria.BetCount
 {
     public class GetProductsCriteria : CriteriaBase
     {
-        //public bool IsSB { get; set; }
-
         public int IMode { get; set; } = 3;
 
         public override string GetSettingKey()
