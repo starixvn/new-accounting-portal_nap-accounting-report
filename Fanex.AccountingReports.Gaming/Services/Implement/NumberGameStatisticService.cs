@@ -1,6 +1,7 @@
 ﻿namespace Fanex.AccountingReports.Gaming.Services.Implement
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -13,7 +14,7 @@
     using Fanex.AccountingReports.Gaming.Services.Interface;
 
     public class NumberGameStatisticService : ServiceBase, INumberGameStatisticService
-    {        
+    {
         private INumberGameStatisticRepository _repository;
 
         public NumberGameStatisticService()
@@ -97,6 +98,9 @@
             return fullReport;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         public NumberGameStatisticByUserName GetNumberGameStatisticByUserName(GetNumberGameStatisticCriteria criteria)
         {
             NumberGameStatisticByUserName report = new NumberGameStatisticByUserName();
@@ -129,6 +133,9 @@
             return report;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         public NumberGameStatisticByUserName GetNumberGameStatisticSortByUserName(GetNumberGameStatisticCriteria criteria)
         {
             NumberGameStatisticByUserName report = new NumberGameStatisticByUserName();
@@ -163,6 +170,10 @@
 
             return report;
         }
+
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         public NumberGameStatisticByDaily GetNumberGameStatisticSortByDaily(GetNumberGameStatisticCriteria criteria)
         {
             NumberGameStatisticByDaily report;
@@ -181,6 +192,10 @@
             CacheExtension.Set(GamingConstants.NumberGameStatisticReportByDailyCachedDataKey, report);
             return report;
         }
+
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         public NumberGameStatisticByLeague GetNumberGameStatisticSortByLeague(GetNumberGameStatisticCriteria criteria)
         {
             NumberGameStatisticByLeague report;
@@ -199,13 +214,17 @@
             CacheExtension.Set(GamingConstants.NumberGameStatisticReportByLeagueCachedDataKey, report);
             return report;
         }
+
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         public NumberGameStatisticByBettype GetNumberGameStatisticSortByBettype(GetNumberGameStatisticCriteria criteria)
         {
             NumberGameStatisticByBettype report;
 
             try
             {
-                report = CacheExtension.Get<NumberGameStatisticByBettype>(GamingConstants.NumberGameStatisticReportByBettypeCachedDataKey) ??_repository.GetNumberGameStatisticByBettype(criteria);
+                report = CacheExtension.Get<NumberGameStatisticByBettype>(GamingConstants.NumberGameStatisticReportByBettypeCachedDataKey) ?? _repository.GetNumberGameStatisticByBettype(criteria);
                 ListExtensions.SortDataByProperty<NumberGameStatisticByBettypeDetail>(report.ReportRows, criteria.SortDirection, criteria.SortColumnName, criteria.SortDataType);
             }
             catch (Exception ex)

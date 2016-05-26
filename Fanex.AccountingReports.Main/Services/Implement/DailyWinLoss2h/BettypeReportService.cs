@@ -95,13 +95,11 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 
                             info.HomeTeamName = this._teamNameCache[info.HomeTeamId];
                             info.AwayTeamName = this._teamNameCache[info.AwayTeamId];
-                            leagueWinLoss.GrandTotal.Add(info);
-                            //info = WinLossInfo.Format(info);
+                            leagueWinLoss.GrandTotal.Add(info);                            
                             leagueWinLoss.ChildsInfo.Add(info);
                         }
 
-                        report.GrandTotal.Add(leagueWinLoss.GrandTotal);
-                        //leagueWinLoss = WinLossInfo.Format_Total(leagueWinLoss);
+                        report.GrandTotal.Add(leagueWinLoss.GrandTotal);                        
                         report.ChildsInfo.Add(leagueWinLoss);
                     }
 
@@ -151,8 +149,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     {
                         return this.SortWinLossInfoByLeague(infoA, infoB);
                     });
-
-                    //report = WinLossInfo.Format_Total(report);
                 }
 
                 SessionManager.Set<WinLossInfo>(MainConstants.DailyWinLoss2hReportByBetTypeSessionKey, report);

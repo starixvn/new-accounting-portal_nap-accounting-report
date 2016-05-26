@@ -82,6 +82,12 @@
             return memberWinLosses;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private static List<MemberWinLoss> RefineHistoricalData(IMemberWinLossOnRNGCasinoCriteria criteria, List<MemberWinLoss> memberWinLosses)
         {
             List<MemberWinLoss> result = new List<MemberWinLoss>();
@@ -401,6 +407,9 @@
             return dataRows;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private GridDataRow BuildMemberWinLossDataRow(MemberWinLoss winLoss, bool isRecent)
         {
             int columnIndex = 0;

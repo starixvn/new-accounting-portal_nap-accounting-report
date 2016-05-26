@@ -7,6 +7,7 @@
 namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -30,9 +31,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         private const int MetricGamingByBettypeTurnoverColumnIndex = 6;
         private const int MetricGamingByBettypeMarginColumnIndex = 7;
         private readonly MatchWinLoss2aUtilityService _matchWinLoss2aUtilityService;
+
         private string _matchWinLoss2aCacheMetricGamingDataKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.MetricGaming" +
         (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
-        
+
         private Dictionary<object, string> _cachedBettypesName;
 
         public MetricGamingService()
@@ -87,6 +89,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             };
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private List<HeaderColumns> MetricGamingByBettypeHeader()
         {
             List<HeaderColumns> header = new List<HeaderColumns>();
@@ -147,11 +152,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                 {
                     Name = Labels.Bet_Type,
                     Value = $"{liveIndicatorTitle} {_cachedBettypesName[bettypeDataRow.bettype]}",
-                    CustomAttributes = $"{liveIndicator},{bettypeDataRow.bettype}"});
+                    CustomAttributes = $"{liveIndicator},{bettypeDataRow.bettype}"
+                });
             dataRow.CreateColumns(new Columns { Name = Labels.Comm, Value = Converter.ToDecimal(bettypeDataRow.comm) });
             dataRow.CreateColumns(new Columns { Name = Labels.Virtual_Comm, Value = Converter.ToDecimal(bettypeDataRow.VirtualCommission) });
             dataRow.CreateColumns(new Columns { Name = Labels.Line_Total, Value = lineTotal });
-            dataRow.CreateColumns(new Columns { Name = Labels.Virtual_Line_Total, Value = virtualLineTotal});
+            dataRow.CreateColumns(new Columns { Name = Labels.Virtual_Line_Total, Value = virtualLineTotal });
             dataRow.CreateColumns(new Columns { Name = Labels.Variance, Value = variance });
             dataRow.CreateColumns(new Columns { Name = Labels.Turnover, Value = turnover });
             dataRow.CreateColumns(new Columns { Name = Labels.Margin_Percent, Value = turnover == 0 ? (object)Labels.NotAvailable : lineTotal / turnover * 100 });

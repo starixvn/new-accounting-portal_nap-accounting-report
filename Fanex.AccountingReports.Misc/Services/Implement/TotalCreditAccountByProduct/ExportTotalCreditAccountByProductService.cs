@@ -9,6 +9,7 @@
 namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByProduct
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Misc.Constants;
@@ -53,7 +54,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
             this.InitTotalCreditAccountByProductColumn(worksheet);
             this.ExportTotalCreditAccountByProductTitle(excelFile, ref worksheet, ref currentRow, criteria);
             currentRow += 3;
-
 
             this.ExportTotalCreditAccountByProductHeader(excelFile, ref worksheet, ref currentRow);
             currentRow = 5;
@@ -394,11 +394,9 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
             palette.SetColorAtIndex(GrandTotalBorderColorIndex, (byte)255, (byte)102, (byte)0);
         }
 
-        /// <summary>
-        /// Gets the type of the product by sport.
-        /// </summary>
-        /// <param name="id">The product identify.</param>
-        /// <returns>The product name.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private string GetProductBySportType(int id)
         {
             string product = string.Empty;
@@ -451,6 +449,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                 case ProductContants.MacauGames:
                     product = Labels.MacauGames;
                     break;
+
                 default:
                     break;
             }

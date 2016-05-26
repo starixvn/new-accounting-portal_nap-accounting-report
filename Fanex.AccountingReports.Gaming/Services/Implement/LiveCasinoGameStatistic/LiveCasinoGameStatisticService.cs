@@ -52,6 +52,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
         {
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         public LiveCasinoGameStatisticService(ILiveCasinoGameStatisticRepository reportRepository, ILiveCasinoProductService liveCasinoProductService, IUserGroupService userGroupService)
         {
             _reportRepository = reportRepository ?? new LiveCasinoGameStatisticRepository();

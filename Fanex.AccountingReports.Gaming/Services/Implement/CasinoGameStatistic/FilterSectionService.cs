@@ -8,6 +8,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.AccountingReports.Core.Criteria;
     using Fanex.AccountingReports.Core.Models;
@@ -66,6 +67,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             return product3rdParty;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public List<EntityBase<int, string>> GetCurrencyList(GetExchangeCurrenciesCriteria criteria)
         {
             var result = new List<EntityBase<int, string>>();

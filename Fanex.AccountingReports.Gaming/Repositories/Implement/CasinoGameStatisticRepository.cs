@@ -12,6 +12,7 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Models;
@@ -29,6 +30,9 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
     /// </summary>
     public class CasinoGameStatisticRepository : ICasinoGameStatisticRepository
     {
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public List<List<WinLossInfoEntity>> GetReport(GetReportByDailyCriteria criteria)
         {
             DataSet result = null;
@@ -289,6 +293,9 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
             return totaList;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public Hourly GetReportByHourly(GetReportByHourlyCriteria criteria)
         {
             Hourly hourly = new Hourly();
@@ -378,6 +385,9 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
             return hourly;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public CompanyInfo GetLicenseeList(GetLicenseeListCriteria criteria)
         {
             CompanyInfo result = new CompanyInfo();

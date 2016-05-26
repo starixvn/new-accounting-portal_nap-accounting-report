@@ -52,7 +52,7 @@ namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd
                     {
                         _type = SportTypeWinLoss.SportBook;
                     }
-                    else if(SportType >= MainConstants.MinMetricGamingSuperLiveBetType && SportType <= MainConstants.MaxMetricGamingSuperLiveBetType)
+                    else if (SportType >= MainConstants.MinMetricGamingSuperLiveBetType && SportType <= MainConstants.MaxMetricGamingSuperLiveBetType)
                     {
                         _type = SportTypeWinLoss.SportBook;
                     }

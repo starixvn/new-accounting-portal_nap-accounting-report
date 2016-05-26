@@ -40,9 +40,6 @@ namespace Fanex.AccountingReports.Main.Constants
 
         public const int _2dReportCasino = 251;
 
-
-
-
         public const int _2hSoccer = 1;
         public const int _2hSoccerMajorBetType = 1;
         public const int _2hSoccerMinorBetType = 2;

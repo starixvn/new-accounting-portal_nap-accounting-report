@@ -102,7 +102,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             }
         }
 
-        public static bool isRequestDataWH(DateTime reportDate)
+        public static bool IsRequestDataWH(DateTime reportDate)
         {
             if (reportDate >= BalanceUp.BalanceUpDay)
             {

@@ -46,6 +46,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             _reportRepository = reportRepository ?? new CasinoGameStatisticRepository();
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetReport(GetReportByDailyCriteria criteria)
         {
             try
@@ -129,11 +132,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             throw new Exception(Labels.Error_MethodNotImplemented);
         }
 
-        /// <summary>
-        /// Sorts the report.
-        /// </summary>
-        /// <param name="criteria">The get report criteria.</param>
-        /// <returns>Report data after sort.</returns>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo SortReport(GetReportByDailyCriteria criteria)
         {
             CasinoGameStatisticService reportManager = null;
@@ -641,6 +642,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             currentRow++;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public void ExportReport_ChildTotal(
             WinLossInfo grandTotal,
             ref ExcelWorksheet workSheet,

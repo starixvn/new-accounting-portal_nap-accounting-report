@@ -7,6 +7,7 @@
 namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web;
@@ -85,6 +86,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             currentRow++;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportHeader(HSSFWorkbook excelFile, ref ISheet worksheet, ref int currentRow, GetReportByHourlyCriteria criteria)
         {
             IRow row = worksheet.CreateRow(currentRow);
@@ -113,6 +117,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             currentRow++;
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private void ExportBodyData(HSSFWorkbook excelFile, ref ISheet worksheet, ref int currentRow, List<Hourly> data, GetReportByHourlyCriteria criteria)
         {
             currentRow++;
@@ -258,6 +268,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private void ExportAverage(HSSFWorkbook excelFile, ref ISheet worksheet, ref int currentRow, Hourly hourly, GetReportByHourlyCriteria criteria)
         {
             NpoiSetting setting = new NpoiSetting()

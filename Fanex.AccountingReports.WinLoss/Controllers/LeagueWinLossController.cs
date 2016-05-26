@@ -16,6 +16,8 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     using Fanex.AccountingReports.WinLoss.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+    using Services.Implement.LeagueWinLoss;
+    using Services.Interface.LeagueWinLoss;
 
     /// <summary>
     /// TODO: Update summary.
@@ -23,15 +25,17 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     public class LeagueWinLossController : BaseController
     {
         private readonly ILeagueWinLossService _reportService;
+        private readonly ILeagueWinLossExportExcel _excelService;
 
         public LeagueWinLossController()
-            : this(null)
+            : this(null, null)
         {
         }
 
-        public LeagueWinLossController(ILeagueWinLossService reportService)
+        public LeagueWinLossController(ILeagueWinLossService reportService, ILeagueWinLossExportExcel excelService)
         {
-            this._reportService = reportService ?? new LeagueWinLossService();
+            _reportService = reportService ?? new LeagueWinLossService();
+            _excelService = excelService ?? new LeagueWinLossExportExcel(_reportService);
         }
 
         [HttpGet]
@@ -64,19 +68,19 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
 
         public ActionResult ExportLeagueWinLoss(GetLeagueWinLossCriteria criteria)
         {
-            this._reportService.ExportLeagueWinLoss(criteria);
+            this._excelService.ExportLeagueWinLoss(criteria);
             return new EmptyResult();
         }
 
         public ActionResult ExportLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria)
         {
-            this._reportService.ExportLeagueWinLossBySport(criteria);
+            this._excelService.ExportLeagueWinLossBySport(criteria);
             return new EmptyResult();
         }
 
         public ActionResult ExportLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
         {
-            this._reportService.ExportLeagueWinLossByBetType(criteria);
+            this._excelService.ExportLeagueWinLossByBetType(criteria);
             return new EmptyResult();
         }
     }

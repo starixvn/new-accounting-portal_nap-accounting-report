@@ -325,13 +325,13 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                     IsKickedOut = "0"
                 });
             }
+
             try
             {
                 AppSession.RoleAccess = PermissionService.GetRoleAccess(_functionService.GetByUserAndSiteIncludeGroup(
                                     AppSession.CurrentUser.Id,
                                     NapSettings.Settings.SiteId,
                                     NapSettings.Settings.Environment));
-
 
                 var siteStatus = _siteService.GetStatusById(this.SiteId);
                 if (!siteStatus)

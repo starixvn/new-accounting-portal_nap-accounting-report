@@ -32,6 +32,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
         private readonly string _reportSessionKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Report" +
             (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public override WinLossInfo GetReport(List<WinLossInfoEntity> winLossInfoTable, WinLossInfoEntity grandTotal, GetReportByDailyCriteria criteria)
         {
             var report = new WinLossInfo
@@ -84,7 +87,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                         CompanyCommission = data.CompanyCommission
                     };
 
-                    info = WinLossInfo.Format(info);
                     companyWinLoss.ChildsInfo.Add(info);
                 }
 

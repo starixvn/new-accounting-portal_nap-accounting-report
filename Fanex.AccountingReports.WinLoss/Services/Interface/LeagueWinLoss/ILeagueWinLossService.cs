@@ -18,12 +18,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Interface
 
         LeagueWinLossInfo GetLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria);
 
-        LeagueWinLossInfo GetLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria);
-
-        void ExportLeagueWinLoss(GetLeagueWinLossCriteria criteria);
-
-        void ExportLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria);
-
-        void ExportLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria);
+        LeagueWinLossInfo GetLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria);        
     }
 }

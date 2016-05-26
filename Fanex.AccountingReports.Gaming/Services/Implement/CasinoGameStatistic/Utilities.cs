@@ -7,6 +7,7 @@
 namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Gaming.Constants;
@@ -20,21 +21,21 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
     /// </summary>
     public class Utilities
     {
-        private static string _reportDailyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Daily." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportDailyByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.DailyByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportMonthlyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Monthly." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportMonthlyByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.MonthlyByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportUserNameKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.UserName." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportDailyByUserNameKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.DailyByUserName." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportGameTypeKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameType." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportGameTypeByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTypeByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportGameTableKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTable." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportGameTableByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GameTableByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportCompanyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Company." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportCompanyByCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.CompanyByCurrency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportCurrencyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Currency." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportGrandTotalKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.GrandTotal." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
-        private static string _reportHourlyKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Hourly." + (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
+        private static string _reportDailyKey = "Gaming.CasinoGameStatistic.Daily." + AppSession.CurrentUser.Id;
+        private static string _reportDailyByCurrencyKey = "Gaming.CasinoGameStatistic.DailyByCurrency." + AppSession.CurrentUser.Id;
+        private static string _reportMonthlyKey = "Gaming.CasinoGameStatistic.Monthly." + AppSession.CurrentUser.Id;
+        private static string _reportMonthlyByCurrencyKey = "Gaming.CasinoGameStatistic.MonthlyByCurrency." + AppSession.CurrentUser.Id;
+        private static string _reportUserNameKey = "Gaming.CasinoGameStatistic.UserName." + AppSession.CurrentUser.Id;
+        private static string _reportDailyByUserNameKey = "Gaming.CasinoGameStatistic.DailyByUserName." + AppSession.CurrentUser.Id;
+        private static string _reportGameTypeKey = "Gaming.CasinoGameStatistic.GameType." + AppSession.CurrentUser.Id;
+        private static string _reportGameTypeByCurrencyKey = "Gaming.CasinoGameStatistic.GameTypeByCurrency." + AppSession.CurrentUser.Id;
+        private static string _reportGameTableKey = "Gaming.CasinoGameStatistic.GameTable." + AppSession.CurrentUser.Id;
+        private static string _reportGameTableByCurrencyKey = "Gaming.CasinoGameStatistic.GameTableByCurrency." + AppSession.CurrentUser.Id;
+        private static string _reportCompanyKey = "Gaming.CasinoGameStatistic.Company." + AppSession.CurrentUser.Id;
+        private static string _reportCompanyByCurrencyKey = "Gaming.CasinoGameStatistic.CompanyByCurrency." + AppSession.CurrentUser.Id;
+        private static string _reportCurrencyKey = "Gaming.CasinoGameStatistic.Currency." + AppSession.CurrentUser.Id;
+        private static string _reportGrandTotalKey = "Gaming.CasinoGameStatistic.GrandTotal." + AppSession.CurrentUser.Id;
+        private static string _reportHourlyKey = "Gaming.CasinoGameStatistic.Hourly." + AppSession.CurrentUser.Id;
 
         public enum ViewReport
         {
@@ -55,6 +56,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             Hourly = 15
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public static string GetTitleExcelFileWhenDrilDown(GetReportByDailyCriteria criteria)
         {
             string title = string.Empty;
@@ -75,6 +79,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                             Converter.ToDateTime(criteria.FromDate).ToShortFormatedDate(),
                             Converter.ToDateTime(criteria.ToDate).ToShortFormatedDate());
                     break;
+
                 case PeriodTypeConstants.CasinoGameStatisticUsername:
                     title = string.Format(
                             GamingResources.CasinoGameStatistic_UserName_ReportTitle,
@@ -82,6 +87,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                             Converter.ToDateTime(criteria.FromDate).ToShortFormatedDate(),
                             Converter.ToDateTime(criteria.ToDate).ToShortFormatedDate());
                     break;
+
                 case PeriodTypeConstants.CasinoGameStatisticGameType:
                     title = string.Format(
                             GamingResources.CasinoGameStatistic_GameType_ReportTitle,
@@ -89,6 +95,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                             Converter.ToDateTime(criteria.FromDate).ToShortFormatedDate(),
                             Converter.ToDateTime(criteria.ToDate).ToShortFormatedDate());
                     break;
+
                 case PeriodTypeConstants.CasinoGameStatisticGameTable:
                     title = string.Format(
                             GamingResources.CasinoGameStatistic_GameTable_ReportTitle,
@@ -96,6 +103,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                             Converter.ToDateTime(criteria.FromDate).ToShortFormatedDate(),
                             Converter.ToDateTime(criteria.ToDate).ToShortFormatedDate());
                     break;
+
                 case PeriodTypeConstants.CasinoGameStatisticCompany:
                     title = string.Format(
                             GamingResources.CasinoGameStatistic_Company_ReportTitle,
@@ -103,6 +111,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                             Converter.ToDateTime(criteria.FromDate).ToShortFormatedDate(),
                             Converter.ToDateTime(criteria.ToDate).ToShortFormatedDate());
                     break;
+
                 case PeriodTypeConstants.CasinoGameStatisticCurrency:
                     title = string.Format(
                             GamingResources.CasinoGameStatistic_Currency_ReportTitle,
@@ -110,8 +119,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                             Converter.ToDateTime(criteria.FromDate).ToShortFormatedDate(),
                             Converter.ToDateTime(criteria.ToDate).ToShortFormatedDate());
                     break;
-
-
             }
 
             return title;
@@ -170,6 +177,10 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
 
             return name;
         }
+
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
 
         public static string GetReportKey(int viewReport)
         {

@@ -28,6 +28,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
     /// </summary>
     public class CasinoGameStatisticServiceByDailyRange : CasinoGameStatisticService
     {
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public override WinLossInfo GetReport(List<WinLossInfoEntity> winLossInfoTable, WinLossInfoEntity grandTotal, GetReportByDailyCriteria criteria)
         {
             var report = new WinLossInfo
@@ -82,7 +85,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
                         CompanyCommission = data.CompanyCommission
                     };
 
-                    info = WinLossInfo.Format(info);
                     timeRangeWinLoss.ChildsInfo.Add(info);
                 }
 

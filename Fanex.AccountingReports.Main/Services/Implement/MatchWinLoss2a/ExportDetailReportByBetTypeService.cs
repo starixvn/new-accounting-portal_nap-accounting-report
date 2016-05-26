@@ -114,6 +114,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             }
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public void ExportMetricGamingDetailReportByBetType(GetMetricGamingDetailByBetTypeCriteria criteria)
         {
             try

@@ -172,6 +172,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                     info.AliasName = Labels.Credit;
                                     sportTypeWinLoss.CreditTotal.Add(info);
                                     break;
+
                                 case RowType._2hReportDeposit:
                                     info.AliasName = Labels.Deposit;
                                     sportTypeWinLoss.DepositTotal.Add(info);
@@ -304,11 +305,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                             Name = Labels.Total_New_Cricket,
                             EnableVirtual = enableVirtual
                         },
-                        //NewCricketTotal = new WinLossInfo
-                        //{
-                        //    Name = Labels.TotalNewCricket,
-                        //    EnableVirtual = enableVirtual
-                        //},                       
+
                         CreditTotalNewCricket = new WinLossInfo
                         {
                             Name = Labels.Credit,
@@ -416,6 +413,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                             betTypeNewCricket = betTypeGroup;
                             continue;
                         }
+
                         var betTypeWinLoss = new WinLossInfo
                         {
                             Id = Converter.ToInt(betTypeGroup.Key.Bettype),
@@ -470,6 +468,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                     info.AliasName = Labels.Credit;
                                     betTypeWinLoss.CreditTotal.Add(info);
                                     break;
+
                                 case RowType._2hReportDeposit:
                                     info.AliasName = Labels.Deposit;
                                     betTypeWinLoss.DepositTotal.Add(info);
@@ -551,7 +550,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                             }
                         }
                     }
-                    // for New Cricket
+                    
                     if (isbetTypeNewCricket == true)
                     {
                         report.LiveReport.Total.Add(report.LiveReport.CreditTotal);
@@ -582,8 +581,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
         }
 
-        public LiveAndNoneLiveReport OtherSportForNewCricket(LiveAndNoneLiveReport report,
-                                                             List<dynamic> rawReport, bool enableVirtual)
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        public LiveAndNoneLiveReport OtherSportForNewCricket(LiveAndNoneLiveReport report, List<dynamic> rawReport, bool enableVirtual)
         {
             var betTypeGroups = rawReport.GroupBy(data => new
             {
@@ -595,7 +596,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             {
                 if (betTypeGroup.Key.Bettype == 500)
                 {
-
                     var betTypeWinLoss = new WinLossInfo
                     {
                         Id = Converter.ToInt(betTypeGroup.Key.Bettype),
@@ -650,6 +650,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 info.AliasName = Labels.Credit;
                                 betTypeWinLoss.CreditTotal.Add(info);
                                 break;
+
                             case RowType._2hReportDeposit:
                                 info.AliasName = Labels.Deposit;
                                 betTypeWinLoss.DepositTotal.Add(info);
@@ -675,8 +676,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     }
                 }
             }
+
             return report;
         }
+
         /// <summary>
         /// Exports the summary other sport report.
         /// </summary>

@@ -54,25 +54,6 @@ namespace Fanex.AccountingReports.Gaming.Models.CasinoGameStatistic
 
         public List<WinLossInfo> ChildsInfo { get; set; }
 
-        public static WinLossInfo Format(WinLossInfo winLoss)
-        {
-            if (winLoss == null)
-            {
-                return winLoss;
-            }
-
-            winLoss.TotalBets = Math.Round(winLoss.TotalBets, 2);
-            winLoss.TotalWins = Math.Round(winLoss.TotalWins, 2);
-            winLoss.TotalRefund = Math.Round(winLoss.TotalRefund, 2);
-
-            winLoss.GameIncome = Math.Round(winLoss.GameIncome, 2);
-
-            winLoss.CompanyTurnover = Math.Round(winLoss.CompanyTurnover, 2);
-            winLoss.CompanyNetIncome = Math.Round(winLoss.CompanyNetIncome, 2);
-            winLoss.CompanyCommission = Math.Round(winLoss.CompanyCommission, 2);
-            return winLoss;
-        }
-
         /// <summary>
         /// Sums the specified win loss.
         /// </summary>

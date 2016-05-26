@@ -13,7 +13,6 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
     using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Main.Common;
-    using MainSportConstants = Fanex.AccountingReports.Main.Constants;
 
     /// <summary>
     /// TODO: Update summary.
@@ -62,7 +61,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                     Id == SportContants.Macau ||
                     Id == SportContants.Bettrade ||
                     Id == SportContants.ColossusBet ||
-                    Id == SportContants.CockFighting||
+                    Id == SportContants.CockFighting ||
                     Id == SportContants.Allbet ||
                     Id == SportContants.MacauGames)
                 {

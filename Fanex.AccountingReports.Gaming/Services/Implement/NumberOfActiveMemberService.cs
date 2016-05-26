@@ -8,6 +8,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -204,6 +205,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             };
         }
 
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+           "SP2100:CodeLineMustNotBeLongerThan",
+           Justification = "Reviewed. Suppression is OK here.")]
         private List<HeaderColumns> CreateReportHeader()
         {
             var header = new List<HeaderColumns>();
