@@ -9,12 +9,13 @@
 
 namespace Fanex.AccountingReports.Main.Repositories.Implement
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Data;
+    using Core.Services.Impl;
     using Fanex.AccountingReports.Main.Criteria.DailyWinLoss2hOtherSports;
     using Fanex.AccountingReports.Main.Repositories.Interface;
     using Fanex.Data;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Data;
 
     /// <summary>
     /// TODO: Update summary.
@@ -35,7 +36,14 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             var settingKey = criteria.GetSettingKey();
             using (var objectDb = new ObjectDb(settingKey))
             {
-                result = objectDb.ExecuteDataSet(criteria.GetSpParams());
+                Hashtable param = criteria.GetSpParams();
+
+                if (ReportService.IsRequestDataWH(criteria.Winlostdate))
+                {
+                    param.Add("linetotal", 0);
+                }
+
+                result = objectDb.ExecuteDataSet(param);
                 outputParam = objectDb.GetOuputParams();
             }
 

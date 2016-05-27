@@ -9,9 +9,9 @@
 
 namespace Fanex.AccountingReports.Main.Criteria.DailyWinLoss2hSoccer
 {
-    using System;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.Data.Repository;
+    using System;
 
     /// <summary>
     /// TODO: Update summary.
@@ -19,8 +19,6 @@ namespace Fanex.AccountingReports.Main.Criteria.DailyWinLoss2hSoccer
     public class GetMain2hReportCriteria : CriteriaBase
     {
         public DateTime Winlostdate { get; set; }
-
-        public double LineTotal { get; set; }
 
         public override string GetSettingKey()
         {

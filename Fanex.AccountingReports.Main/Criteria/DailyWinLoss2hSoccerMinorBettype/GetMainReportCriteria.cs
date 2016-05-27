@@ -6,10 +6,9 @@
 
 namespace Fanex.AccountingReports.Main.Criteria.DailyWinLoss2hSoccerMinorBettype
 {
-    using System;
-    using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.Data.Repository;
+    using System;
 
     /// <summary>
     /// TODO: Update summary.
@@ -18,21 +17,11 @@ namespace Fanex.AccountingReports.Main.Criteria.DailyWinLoss2hSoccerMinorBettype
     {
         public DateTime WinlostDate { get; set; }
 
-        public double LineTotal { get; set; }
-
         public int SoccerType
         {
             get
             {
                 return 2;
-            }
-        }
-
-        public string IncludeBetType
-        {
-            get
-            {
-                return AppSettings.Main2hSoccerMinorBettypes;
             }
         }
 
