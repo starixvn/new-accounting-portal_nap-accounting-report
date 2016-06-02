@@ -9,8 +9,6 @@
 
 namespace Fanex.AccountingReports.Main.Controllers
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Core.Web.Controllers;
@@ -20,6 +18,7 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.AccountingReports.Main.Services.Interface.DailyWinLoss2h;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -37,8 +36,6 @@ namespace Fanex.AccountingReports.Main.Controllers
         }
 
         public DailyWinLoss2hController(IDailyWinLoss2hService reportService, IMetricGamingService metricGamingService, IBettradeService bettradeService, IColossusBetService colossusBetService)
-           "SP2100:CodeLineMustNotBeLongerThan",
-           Justification = "Reviewed. Suppression is OK here.")]
         {
             this._reportService = reportService ?? new DailyWinLoss2hService();
             this._metricGamingService = metricGamingService ?? new MetricGamingService();
