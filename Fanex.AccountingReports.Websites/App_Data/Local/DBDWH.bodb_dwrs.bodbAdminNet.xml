@@ -19,7 +19,7 @@
   <Function Name="Gaming - Live Casino Game Financial">
     <Setting Key="Gaming_LiveCasinoGameFinancial_GetGameType" SpName="Acc_Rpt_CasinoGameStatistics_GameTypeSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Gaming_LiveCasinoGameFinancial_GetGameTable" SpName="Acc_Rpt_LiveCasinoFinance_GameTable" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
-    <Setting Key="Gaming_LiveCasinoGameFinancial_GetReport" SpName="Acc_Rpt_LiveCasinoFinance" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Gaming_LiveCasinoGameFinancial_GetReport" SpName="Acc_Rpt_LiveCasinoFinance_Xtest" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
   </Function>
   <Function Name="Gaming - Number Game Win Loss By Currency">
     <Setting Key="Gaming_NumberGameWinlossByCurrency_GetReport" SpName="Acc_Rpt_NumberGameWinlossByCurrency" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
