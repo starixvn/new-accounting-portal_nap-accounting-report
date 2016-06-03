@@ -70,6 +70,24 @@ namespace Fanex.AccountingReports.Licensee.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bet Type.
+        /// </summary>
+        public static string Bettype {
+            get {
+                return ResourceManager.GetString("Bettype", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company.
+        /// </summary>
+        public static string Company {
+            get {
+                return ResourceManager.GetString("Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company Win Loss.
         /// </summary>
         public static string Company_Win_Loss {
@@ -102,6 +120,24 @@ namespace Fanex.AccountingReports.Licensee.Resources {
         public static string Date {
             get {
                 return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        public static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gaming.
+        /// </summary>
+        public static string Gaming {
+            get {
+                return ResourceManager.GetString("Gaming", resourceCulture);
             }
         }
         
@@ -183,6 +219,15 @@ namespace Fanex.AccountingReports.Licensee.Resources {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
             }
         }
         

@@ -149,5 +149,14 @@ namespace Fanex.AccountingReports.Licensee.Resources {
                 return ResourceManager.GetString("Site", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;ul class=&quot;filter-note&quot;&gt;&lt;li&gt;+ This report is using OANDA exchange rate for currency conversion&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class=&quot;bold-tip&quot;&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;.
+        /// </summary>
+        public static string WinLossByLicensee_FilterNote {
+            get {
+                return ResourceManager.GetString("WinLossByLicensee_FilterNote", resourceCulture);
+            }
+        }
     }
 }

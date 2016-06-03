@@ -147,4 +147,7 @@
   <data name="Site" xml:space="preserve">
     <value>Site</value>
   </data>
+  <data name="WinLossByLicensee_FilterNote" xml:space="preserve">
+    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ This report is using OANDA exchange rate for currency conversion&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;</value>
+  </data>
 </root>
