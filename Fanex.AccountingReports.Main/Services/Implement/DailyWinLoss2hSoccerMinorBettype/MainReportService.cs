@@ -6,9 +6,8 @@
 
 namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMinorBettype
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    using Core.Configurations;
+    using Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Main.Common;
     using Fanex.AccountingReports.Main.Criteria.DailyWinLoss2hSoccerMinorBettype;
@@ -18,6 +17,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
     using Fanex.Data;
     using Fanex.Excel.Enums;
     using Fanex.Excel.Models;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -40,8 +43,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
         /// <param name="criteria">The criteria.</param>
         /// <param name="isCached">If set to <c>true</c> [is cached].</param>
         /// <returns>
-        /// Grid Options.
-        /// </returns>
+        /// Grid Options
         public GridOptions GetReport(GetMainReportCriteria criteria, bool isCached = false)
         {
             if (isCached)
@@ -70,7 +72,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
             this._gridOptions.TitleInfoText = MainResources.DailyWinLoss2h_SoccerReport_MainReport_Title;
             using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
             {
-                db.AssignParamValues(criteria.GetSpParams());
+                Hashtable param = GetParam(criteria.GetSpParams(), criteria.WinlostDate);
+                db.AssignParamValues(param);
                 this.Reader = db.ExecuteReader();
                 while (this.Reader.Read())
                 {
@@ -87,6 +90,17 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
             this.RefineData();
             SessionManager.Set<GridOptions>(MainConstants.DailyWinLoss2hSoccerMinorMainSessionKey, this._gridOptions);
             return this._gridOptions;
+        }
+
+        public Hashtable GetParam(Hashtable param, DateTime winlossDate)
+        {
+            if (ReportService.IsRequestDataWH(winlossDate))
+            {
+                param.Add("linetotal", 0);
+                param.Add("IncludeBetType", AppSettings.Main2hSoccerMinorBettypes);
+            }
+
+            return param;
         }
 
         /// <summary>

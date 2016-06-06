@@ -6,10 +6,6 @@
 
 namespace Fanex.AccountingReports.Licensee.Services.Implement
 {
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -24,6 +20,10 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using Fanex.Data.Repository;
     using Fanex.Excel.Enums;
     using Fanex.Excel.Models;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.

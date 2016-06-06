@@ -9,8 +9,6 @@
 
 namespace Fanex.AccountingReports.Main.Controllers
 {
-    using System;
-    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -23,6 +21,8 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.Excel.Extensions;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+    using System;
+    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
