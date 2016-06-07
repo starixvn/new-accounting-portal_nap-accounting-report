@@ -39,7 +39,7 @@
     <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper_Ag" SpName="Acc_Rpt_MatchAnalysisBySuper_Ag" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
   </Function>
   <Function Name="Special - Daily Turnover">
-    <Setting Key="Special_DailyTurnover_GetReport" SpName="Acc_Rpt_DailyTurnover" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Special_DailyTurnover_GetReport" SpName="Acc_Rpt_DailyTurnover_Xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Special_DailyTurnoverChangedDetail_GetReport" SpName="Acc_Rpt_DailyTurnover_ChangedDetail_Xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Win Loss - League Win Loss">
