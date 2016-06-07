@@ -147,6 +147,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 case CoreConstants.BetTypeConstants.Bingo:
                     result = Labels.IBCbet_Bingo;
                     break;
+                default:
+                    result = this._betTypeNameCache[winLoss.Id];
+                    break;
             }
 
             if (CoreConstants.BetTypeConstants.MinMicroGamingLiveCasinoBetType < winLoss.Id &&

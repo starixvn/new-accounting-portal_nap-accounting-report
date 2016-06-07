@@ -20,6 +20,12 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
     [Serializable]
     public class WinLossInfo
     {
+        public WinLossInfo()
+        {
+            Name = string.Empty;
+            ChildsInfo = new List<WinLossInfo>();           
+        }
+
         public string Name { get; set; }
 
         public string AliasName { get; set; }

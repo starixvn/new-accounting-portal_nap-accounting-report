@@ -36,6 +36,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         private WinLossInfo _fourthBettypeGroup;
         private WinLossInfo _handicapAndOverUnderBettypesTotal;
         private WinLossInfo _otherBettypesTotal;
+        private WinLossInfo _hedgeTotal;
 
         /// <summary>
         /// Gets the soccer report.
@@ -90,6 +91,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     _otherBettypesTotal = new WinLossInfo
                     {
                         Name = Labels.Other_Bettypes_Total
+                    };
+                    _hedgeTotal = new WinLossInfo
+                    {
+                        Name = "Hedge Total"
                     };
                 }
 
@@ -254,7 +259,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                             if (criteria.SoccerType == SoccerBetTypeConstants.SoccerMajorBetType)
                             {
                                 MapSoccerMajorBettypeToGroup(betTypeWinLoss, report);
-                                CalculateTotalGroupByBettype(betTypeWinLoss, report);
+                                CalculateTotalGroupByBettype(betTypeWinLoss);
                             }
                             else
                             {
@@ -330,6 +335,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         report.NoneLiveReport.ChildsInfo.Add(_fourthBettypeGroup);
                         report.NoneLiveReport.GrandTotal.ChildsInfo.Add(_handicapAndOverUnderBettypesTotal);
                         report.NoneLiveReport.GrandTotal.ChildsInfo.Add(_otherBettypesTotal);
+                        report.NoneLiveReport.GrandTotal.ChildsInfo.Add(_hedgeTotal);
                     }
 
                     report.LiveReport.GrandTotal.Add(report.LiveReport.CreditTotal);
@@ -549,15 +555,20 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// </summary>
         /// <param name="info">The information.</param>
         /// <param name="report">The report.</param>
-        private void CalculateTotalGroupByBettype(WinLossInfo info, LiveAndNoneLiveReport report)
+        private void CalculateTotalGroupByBettype(WinLossInfo info)
         {
-            if (info.Id == CoreConstants.BetTypeConstants.Handicap ||
+            if ((info.Id == CoreConstants.BetTypeConstants.Handicap ||
                 info.Id == CoreConstants.BetTypeConstants._1stHandicap ||
                 info.Id == CoreConstants.BetTypeConstants.OverUnder2 ||
-                info.Id == CoreConstants.BetTypeConstants._1stOverUnder)
+                info.Id == CoreConstants.BetTypeConstants._1stOverUnder) && !info.Hedge.Contains("hedge"))
             {
                 _handicapAndOverUnderBettypesTotal.Add(info.CreditTotal);
                 _handicapAndOverUnderBettypesTotal.Add(info.DepositTotal);
+            }
+            else if (info.Hedge.Contains("hedge"))
+            {
+                _hedgeTotal.Add(info.CreditTotal);
+                _hedgeTotal.Add(info.DepositTotal);
             }
             else
             {
