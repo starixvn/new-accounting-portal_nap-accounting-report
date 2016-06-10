@@ -9,10 +9,6 @@
 
 namespace Fanex.AccountingReports.Gaming.Repositories.Implement
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Data;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -20,6 +16,10 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
     using Fanex.AccountingReports.Gaming.Models.LiveCasinoGameFinancialReport;
     using Fanex.AccountingReports.Gaming.Repositories.Interface;
     using Fanex.Data;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Data;
 
     /// <summary>
     /// TODO: Update summary.
