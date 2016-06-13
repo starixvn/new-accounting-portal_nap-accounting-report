@@ -108,7 +108,7 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
         {
             get
             {
-                return Math.Round(this.LineTotal - this.ExtraPositionTaking, 2);
+                return Math.Round(this.LineTotal + this.ExtraPositionTaking, 2);
             }
         }
 
