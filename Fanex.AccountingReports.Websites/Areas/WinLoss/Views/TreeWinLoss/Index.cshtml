@@ -84,7 +84,11 @@
         var labelFrom = '@Labels.From';
         var labelTo = '@Labels.To';
         var today = '@DateTime.Today.ToShortDateString()';
-        var minDate = '@DateTime.Today.AddMonths(-3)';
+        @{
+
+            var dt = DateTime.Today.AddDays(-121);
+        }
+        var minDate = '@dt';
     </script>
 }
 @section Foot {
