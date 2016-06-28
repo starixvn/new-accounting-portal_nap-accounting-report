@@ -9,7 +9,10 @@
 
 namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 {
-    using Fanex.AccountingReports.Core.Configurations;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Models;
@@ -24,10 +27,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
     using Fanex.AccountingReports.Main.Services.Interface;
     using Fanex.Common;
     using Fanex.Data.Repository;
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -110,7 +109,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         Name = this.GetSportName(sportId)
                     };
 
-                    bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeSingleWalletCasinoLaunchDate;                    
+                    bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeSingleWalletCasinoLaunchDate;
                     var betTypeGroup = sportTypeGroup.GroupBy(data => new { data.bettype, data.liveindicator });
 
                     var isNewCricket = false;
@@ -524,7 +523,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
             return report;
         }
-
 
         //// Private methods
 

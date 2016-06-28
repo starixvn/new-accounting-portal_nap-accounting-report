@@ -35,7 +35,11 @@ namespace Fanex.AccountingReports.Main.Controllers
         {
         }
 
-        public DailyWinLoss2hController(IDailyWinLoss2hService reportService, IMetricGamingService metricGamingService, IBettradeService bettradeService, IColossusBetService colossusBetService)
+        public DailyWinLoss2hController(
+            IDailyWinLoss2hService reportService, 
+            IMetricGamingService metricGamingService, 
+            IBettradeService bettradeService, 
+            IColossusBetService colossusBetService)
         {
             this._reportService = reportService ?? new DailyWinLoss2hService();
             this._metricGamingService = metricGamingService ?? new MetricGamingService();

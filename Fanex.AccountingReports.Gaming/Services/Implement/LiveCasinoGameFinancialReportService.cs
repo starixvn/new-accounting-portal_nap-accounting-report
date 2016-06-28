@@ -9,6 +9,12 @@
 
 namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Web;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
@@ -24,12 +30,6 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
     using Fanex.AccountingReports.Gaming.Resources;
     using Fanex.Common;
     using Fanex.Logging;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using System.Web;
 
     /// <summary>
     /// TODO: Update summary.
@@ -266,6 +266,7 @@ namespace Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport
                     {
                         grandTotalNetIncome += data.NetIncome;
                     }
+
                     if (criteria.DateStart < DateTime.Parse("2016-05-01"))
                     {
                         info.GameLevyToPay = info.IsGameTable ? Math.Max(gameLevyToPay, info.GameLevy) : 0;
