@@ -83,8 +83,7 @@ Main2hReport.prototype.RenderReport = function (report) {
                     sportWinLoss.Id == AccReportData.Constants.SportType.Keno ||
                     isCasinoSport ||
                     sportWinLoss.Id == AccReportData.Constants.SportType.Bettrade ||
-                    sportWinLoss.Id == AccReportData.Constants.SportType.ColossusBet ||
-                    sportWinLoss.Id == AccReportData.Constants.SportType.CockFighting;
+                    sportWinLoss.Id == AccReportData.Constants.SportType.ColossusBet;
                 var len = sportWinLoss.ChildsInfo.length;
                 info = sportWinLoss.NormalTotal;
                 groupdId = tableId + "_Product" + product.Id + "_Sport" + sportWinLoss.Id;
@@ -370,7 +369,7 @@ Main2hReport.prototype.RenderReport = function (report) {
             });
 
             var reportNote = "* Virtual All Total: Soccer + Metric Gaming - Superlive + Other Sports + Parlay" +
-                             "<br/>* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing +  Bingo + P2P + Bettrade + Colossus Bets + Cockfighting";
+                             "<br/>* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing +  Bingo + P2P + Bettrade + Colossus Bets";
             footerData.push({
                 Columns: [{
                     Name: "ColSportType",
@@ -579,13 +578,6 @@ Main2hReport.prototype.GetSportLink = function (winLossInfo) {
             break;
         case AccReportData.Constants.SportType.ColossusBet: //204
             sportLink = "<span class='report2h-link bold' onclick=\"showHideReportManager.ShowColossusBet('" +
-                            winLossInfo.Id + "','" +
-                            winLossInfo.Name + "','" +
-                            reportManager.Main2hReport.Params.reportParams.Winlostdate + "'); return;\">" +
-                            winLossInfo.Name + '</span>';
-            break;
-        case AccReportData.Constants.SportType.CockFighting: //204
-            sportLink = "<span class='report2h-link bold' onclick=\"showHideReportManager.ShowCockFighting('" +
                             winLossInfo.Id + "','" +
                             winLossInfo.Name + "','" +
                             reportManager.Main2hReport.Params.reportParams.Winlostdate + "'); return;\">" +

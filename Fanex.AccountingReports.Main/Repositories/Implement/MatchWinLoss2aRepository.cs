@@ -68,7 +68,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
         /// <param name="criteria">The criteria.</param>
         /// <param name="outputParam">The output parameter.</param>
         /// <returns>All detail report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public List<dynamic> GetAllDetailReport(GetMainReportCriteria criteria, ref Hashtable outputParam)

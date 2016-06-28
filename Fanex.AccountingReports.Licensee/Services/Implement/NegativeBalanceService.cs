@@ -47,7 +47,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
         /// </summary>
         /// <param name="negativeBalanceCriteria">The negative balance criteria.</param>
         /// <returns>The negative balance.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public NegativeBalanceModel GetNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria)
@@ -202,7 +202,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
         /// <param name="isSendMail">If set to <c>true</c> [is send mail].</param>
         /// <param name="site">The site value.</param>
         /// <returns>The excel negative balance.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public ExcelFile GetExcelNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria, bool isSendMail, string site)

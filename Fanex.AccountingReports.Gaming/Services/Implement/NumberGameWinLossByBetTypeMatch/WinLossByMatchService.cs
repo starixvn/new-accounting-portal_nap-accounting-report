@@ -57,7 +57,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The main report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
              "SP2101:MethodMustNotContainMoreLinesThan",
              Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetMainReport(GetWinLossByMatchMainReportCriteria criteria)
@@ -157,7 +157,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The detail report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
              "SP2101:MethodMustNotContainMoreLinesThan",
              Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetDetailReport(GetWinLossByMatchDetailReportCriteria criteria)
@@ -334,7 +334,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// Exports the detail report.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportDetailReport(GetWinLossByMatchDetailReportCriteria criteria)
@@ -393,7 +393,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <param name="currentRow">The current row.</param>
         /// <param name="maxColumnIndex">Maximum index of the column.</param>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2101:MethodMustNotContainMoreLinesThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_WinLossByMatchMainReportHeader(
@@ -501,7 +501,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <param name="maxColumnIndex">Maximum index of the column.</param>
         /// <param name="criteria">The criteria.</param>
         /// <param name="report">The report.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2101:MethodMustNotContainMoreLinesThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_WinLossByMatchMainReportContent(
@@ -692,7 +692,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <param name="twoDecimalPositivePercentNumberStyle">The two decimal positive percent number style.</param>
         /// <param name="info">The information.</param>
         /// <param name="groupType">Type of the group.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_WinLossByMatchMainReport_WinLossRow(
@@ -796,7 +796,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <param name="twoDecimalPositiveNumberStyle">The two decimal positive number style.</param>
         /// <param name="twoDecimalPositivePercentNumberStyle">The two decimal positive percent number style.</param>
         /// <param name="info">The information.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
           "SP2101:MethodMustNotContainMoreLinesThan",
           Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_WinLossByMatchMainReport_GrandTotalRow(
@@ -875,7 +875,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <param name="currentRow">The current row.</param>
         /// <param name="maxColumnIndex">Maximum index of the column.</param>
         /// <param name="reportName">Name of the report.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2101:MethodMustNotContainMoreLinesThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_WinLossByMatchDetailReportHeader(
@@ -989,7 +989,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <param name="maxColumnIndex">Maximum index of the column.</param>
         /// <param name="criteria">The criteria.</param>
         /// <param name="report">The report.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_WinLossByMatchDetailReportContent(
@@ -1134,7 +1134,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <param name="info">The information.</param>
         /// <param name="rowType">Type of the row.</param>
         /// <param name="roleIndex">Index of the role.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_WinLossByMatchDetailReport_WinLossRow(

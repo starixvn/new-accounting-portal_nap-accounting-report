@@ -312,7 +312,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.RacingWinLossByLicen
         /// <param name="numberRacesPerPage">The number races per page.</param>
         /// <param name="numberCurrencies">The number currencies.</param>
         /// <returns>RacingDailyReport paging report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private RacingDailyReport LoopAndGetPagingReport(

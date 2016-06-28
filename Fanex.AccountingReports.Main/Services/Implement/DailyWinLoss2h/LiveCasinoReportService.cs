@@ -45,7 +45,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The live casino report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetLiveCasinoReport(GetLiveCasinoReportCriteria criteria)
@@ -253,7 +253,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The live casino report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetKenoReport(GetKenoReportCriteria criteria)
@@ -361,7 +361,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// Exports the live casino report.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportLiveCasinoReport(GetLiveCasinoReportCriteria criteria)
@@ -438,7 +438,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// Exports the keno report.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportKenoReport(GetKenoReportCriteria criteria)
@@ -511,7 +511,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public void ExportMainLiveCasinoReport(GetLiveCasinoReportCriteria criteria)
@@ -582,7 +582,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public void ExportGetLiveCasinoWinLossByProductReport(GetLiveCasinoWinLossByProductCriteria criteria)

@@ -31,7 +31,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// Exports all detail report.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportAllDetailReport(GetMainReportCriteria criteria)
@@ -207,7 +207,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="decimalNumberStyle">The decimal number style.</param>
         /// <param name="title">The title.</param>
         /// <param name="winLossInfo">The win loss information.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportAllDetailReportTotalRow(
@@ -289,7 +289,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="decimalNumberStyle">The decimal number style.</param>
         /// <param name="title">The title.</param>
         /// <param name="winLossInfo">The win loss information.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportAllDetailReportRMRow(
@@ -359,7 +359,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="decimalNumberStyle">The decimal number style.</param>
         /// <param name="title">The title.</param>
         /// <param name="winLossInfo">The win loss information.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportAllDetailReportRow(

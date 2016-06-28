@@ -83,7 +83,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
         /// <param name="multipleResult">The data set.</param>
         /// <param name="report">The report.</param>
         /// <returns>The list CreditTerm.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private List<CreditTerm> LoopAndConvertDataIntoReport(

@@ -7,8 +7,6 @@
 //   <change who="" date="2012.12.07">Created</change>
 // </history>
 
-using System.Diagnostics.CodeAnalysis;
-
 /// <summary>
 /// TODO: Update summary.
 /// </summary>
@@ -109,10 +107,6 @@ public static class AccReportFunctionKeys
     public const string MasterBalance = "MasterBalance";
 
     public const string MatchWinLoss2a = "MatchWinLoss_2a_";
-
-    public const string MatchWinLossByBetType = "MatchWinLossByBetType";
-
-    public const string MatchWinLossSingleBet = "MatchWinLossSingleBet";
 
     public const string MiscReports = "MiscReports";
 

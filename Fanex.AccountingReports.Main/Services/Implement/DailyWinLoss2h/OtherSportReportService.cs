@@ -34,7 +34,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The summary other sport report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public LiveAndNoneLiveReport GetSummaryOtherSportReport(GetSummaryOtherSportReportCriteria criteria)
@@ -287,7 +287,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The other sport report by sport.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public LiveAndNoneLiveReport GetOtherSportReportBySport(GetOtherSportReportBySportCriteria criteria)
@@ -581,7 +581,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public LiveAndNoneLiveReport OtherSportForNewCricket(LiveAndNoneLiveReport report, List<dynamic> rawReport, bool enableVirtual)
@@ -684,7 +684,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// Exports the summary other sport report.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportSummaryOtherSportReport(GetSummaryOtherSportReportCriteria criteria)
@@ -745,7 +745,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// Exports the other sport report by sport.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportOtherSportReportBySport(GetOtherSportReportBySportCriteria criteria)

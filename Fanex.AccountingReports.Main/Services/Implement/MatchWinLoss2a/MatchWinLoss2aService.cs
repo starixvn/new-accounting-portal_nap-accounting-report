@@ -311,7 +311,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The third party casino report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetThirdPartyCasinoReport(GetThirdPartyCasinoReportCriteria criteria)
@@ -564,7 +564,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="criteria">The criteria.</param>
         /// <param name="rawData">The raw data.</param>
         /// <returns>The summary report by bet type.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private SummaryReportByBetType GetSummaryReportByBetType(
@@ -752,7 +752,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="_3rdPartyWinLossReportRaw">The _3RD party win loss report raw.</param>
         /// <param name="outParams">The out parameters.</param>
         /// <returns>The summary report by sport type.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private WinLossInfo GetSummaryReportBySportType(
@@ -980,7 +980,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>All detail report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private WinLossInfo GetAllDetailReport(GetMainReportCriteria criteria)
@@ -1075,7 +1075,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>All detail report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private WinLossInfo GetAllDetailReportBeforeBalanceUpDay(GetAllDetailReportBySportsCriteria criteria)
@@ -1169,7 +1169,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="_3rdPartyWinLossReport">The _3RD party win loss report.</param>
         /// <param name="report">The report.</param>
         /// <returns>All detail report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private WinLossInfo GetAllDetailReportInfo(
@@ -1333,7 +1333,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="rawData">The raw data.</param>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Win Loss Info object.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private WinLossInfo GetDetailReportInfoByBetType(List<WinLossInfo> rawData, GetDetailReportByBetTypeCriteria criteria)
@@ -1420,7 +1420,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             return report;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private WinLossInfo GetMetricGamingDetailReportInfoByBetType(List<WinLossInfo> rawData, GetMetricGamingDetailByBetTypeCriteria criteria)
@@ -1494,7 +1494,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="winLossByBetType">Type of the win loss by bet.</param>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Win Loss Info object.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private WinLossInfo GetAllBetTypeDetailBySports(WinLossInfo winLossByBetType, GetDetailReportByBetTypeCriteria criteria)

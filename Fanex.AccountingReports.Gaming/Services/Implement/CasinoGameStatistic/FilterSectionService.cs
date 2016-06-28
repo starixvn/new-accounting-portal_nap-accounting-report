@@ -67,7 +67,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             return product3rdParty;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public List<EntityBase<int, string>> GetCurrencyList(GetExchangeCurrenciesCriteria criteria)

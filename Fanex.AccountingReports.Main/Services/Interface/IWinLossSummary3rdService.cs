@@ -24,9 +24,5 @@ namespace Fanex.AccountingReports.Main.Services.Interface
         MatchGame3rdInfo GetDetails(GetMatchGameDetailsCriteria criteria);
 
         void ExportDetails(GetMatchGameDetailsCriteria criteria);
-
-        CockFightingArena GetCockFightingReport(GetWinLossSummary3rdCockFightingCriteria criteria);
-
-        void ExportCockFightingReport(GetWinLossSummary3rdCockFightingCriteria criteria);
     }
 }

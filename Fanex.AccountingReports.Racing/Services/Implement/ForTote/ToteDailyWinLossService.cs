@@ -27,7 +27,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement
         /// </summary>
         /// <param name="criteria">The racing for tote main criteria.</param>
         /// <returns>The daily win loss.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public override IDailyWinLoss GetRacingDailyWinLossMain(GetMainForToteCriteria criteria)
@@ -212,7 +212,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement
         /// </summary>
         /// <param name="criteria">The racing for tote detail criteria.</param>
         /// <returns>The daily win loss detail.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public override IDailyWinLossDetail GetRacingDailyWinLossDetail(GetDetailForToteCriteria criteria)

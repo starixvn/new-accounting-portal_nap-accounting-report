@@ -32,7 +32,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// Exports the type of the summary report by bet.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportSummaryReportByBetType(GetMainReportCriteria criteria)
@@ -202,7 +202,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="report">The report.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportSummaryReportByBetTypeContent(
@@ -341,7 +341,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="currentRow">The current row.</param>
         /// <param name="currentColumn">The current column.</param>
         /// <param name="grandTotal">The grand total.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportSummaryReportTotal(

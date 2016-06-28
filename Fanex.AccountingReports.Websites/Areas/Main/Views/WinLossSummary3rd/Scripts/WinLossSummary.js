@@ -187,16 +187,14 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
         var sportDrillDown = false;
         var subProduct = '';
 
-        if (id == AccReportData.Constants.SportType.MetricGamingSuperLive)
-        {
+        if (id == AccReportData.Constants.SportType.MetricGamingSuperLive) {
             id = AccReportData.Constants.SportType.Soccer;
             subProduct = 'MG-SuperLive';
         }
-        else
-        {
+        else {
             subProduct = '';
         }
-       
+
         var sportDrillDown = _tables.isShowDetail && sportWinloss.CanShowDetailLink && id > 0;
 
         // SportType (header)
@@ -204,20 +202,16 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
             Columns: [{
                 Name: 'ColView', CellAlign: 'center', CustomCellRender: function () {
                     if (sportDrillDown) {
-                        if (id == AccReportData.Constants.SportType.CockFighting) {
-                            return '<div class="viewicon" onclick="ViewCockFightingArena(\'' +
+
+                        return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
                                                 _params.reportParams.FromDate + '\',\'' +
-                                                _params.reportParams.ToDate + '\')">&nbsp;</div>';
-                        } else {
-                            return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
-                                                    _params.reportParams.FromDate + '\',\'' +
-                                                    _params.reportParams.ToDate + '\',' +
-                                                    id + ',0,0' +
-                                                    ',\'' +
-                                                    sportName + '\',' +
-                                                    drillDownByType.bySport + '\,\'' +
-                                                    subProduct +'\')">&nbsp;</div>';
-                        }
+                                                _params.reportParams.ToDate + '\',' +
+                                                id + ',0,0' +
+                                                ',\'' +
+                                                sportName + '\',' +
+                                                drillDownByType.bySport + '\,\'' +
+                                                subProduct + '\')">&nbsp;</div>';
+
                     }
                     else {
                         return '<div>&nbsp;</div>';
@@ -312,20 +306,15 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                 TdClass: cssClass,
                 CustomCellRender: function () {
                     if (showDetailLink) {
-                        if (sportId == AccReportData.Constants.SportType.CockFighting) {
-                            return '<div class="viewicon" onclick="ViewCockFightingArena(\'' +
-											_params.reportParams.FromDate + '\',\'' +
-											_params.reportParams.ToDate + '\')">&nbsp;</div>';
-                        } else {
-                            return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
-										_params.reportParams.FromDate + '\',\'' +
-										_params.reportParams.ToDate + '\',' +
-										sportId + ',' +
-										winloss.Id + ',' +
-										winloss.LiveIndicator + ',\'' +
-										sportName + '\',' +
-                                        drillDownByType.byBettype + ')">&nbsp;</div>';
-                        }
+                        return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
+                                    _params.reportParams.FromDate + '\',\'' +
+                                    _params.reportParams.ToDate + '\',' +
+                                    sportId + ',' +
+                                    winloss.Id + ',' +
+                                    winloss.LiveIndicator + ',\'' +
+                                    sportName + '\',' +
+                                    drillDownByType.byBettype + ')">&nbsp;</div>';
+
                     }
                     else {
                         return '<div>&nbsp;</div>';
@@ -355,20 +344,15 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                 TdClass: css,
                 CustomCellRender: function () {
                     if (showDetailLink) {
-                        if (sportId == AccReportData.Constants.SportType.CockFighting) {
-                            return '<div class="viewicon" onclick="ViewCockFightingArena(\'' +
-											_params.reportParams.FromDate + '\',\'' +
-											_params.reportParams.ToDate + '\')">&nbsp;</div>';
-                        } else {
-                            return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
-										_params.reportParams.FromDate + '\',\'' +
-										_params.reportParams.ToDate + '\',' +
-										sportId + ',' +
-										total.Id + ',' +
-										total.LiveIndicator + ',\'' +
-										sportName + '\',' +
-                                        drillDownByType.byBettype + ')">&nbsp;</div>';
-                        }
+
+                        return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
+                                    _params.reportParams.FromDate + '\',\'' +
+                                    _params.reportParams.ToDate + '\',' +
+                                    sportId + ',' +
+                                    total.Id + ',' +
+                                    total.LiveIndicator + ',\'' +
+                                    sportName + '\',' +
+                                    drillDownByType.byBettype + ')">&nbsp;</div>';
                     }
                     else {
                         return '<div>&nbsp;</div>';
@@ -393,8 +377,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
         var cssClass = bettypeIndex % 2 == 0 ? 'evenRow' : 'oddRow';
         var betType = ibc ? ((winloss.LiveIndicator == 1 ? '<span class="live">Live!</span> ' : '') + winloss.Name) : winloss.Name;
         var groupdId = '';
-        if (sportId == AccReportData.Constants.SportType.MetricGamingSuperLive)
-        {
+        if (sportId == AccReportData.Constants.SportType.MetricGamingSuperLive) {
             sportId = AccReportData.Constants.SportType.Soccer;
         }
 
@@ -404,20 +387,16 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                 TdClass: cssClass,
                 CustomCellRender: function () {
                     if (showDetailLink) {
-                        if (sportId == AccReportData.Constants.SportType.CockFighting) {
-                            return '<div class="viewicon" onclick="ViewCockFightingArena(\'' +
-											_params.reportParams.FromDate + '\',\'' +
-											_params.reportParams.ToDate + '\')">&nbsp;</div>';
-                        } else {
-                            return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
-										_params.reportParams.FromDate + '\',\'' +
-										_params.reportParams.ToDate + '\',' +
-										sportId + ',' +
-										winloss.Id + ',' +
-										winloss.LiveIndicator + ',\'' +
-										sportName + '\',' +
-                                        drillDownByType.byBettype + ')">&nbsp;</div>';
-                        }
+
+                        return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
+                                    _params.reportParams.FromDate + '\',\'' +
+                                    _params.reportParams.ToDate + '\',' +
+                                    sportId + ',' +
+                                    winloss.Id + ',' +
+                                    winloss.LiveIndicator + ',\'' +
+                                    sportName + '\',' +
+                                    drillDownByType.byBettype + ')">&nbsp;</div>';
+
                     }
                     else {
                         return '<div>&nbsp;</div>';

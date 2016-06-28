@@ -34,7 +34,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The summary number game report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public LiveAndNoneLiveReport GetSummaryNumberGameReport(GetSummaryNumberGameReportCriteria criteria)
@@ -215,7 +215,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// Exports the number game report.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportNumberGameReport(GetSummaryNumberGameReportCriteria criteria)

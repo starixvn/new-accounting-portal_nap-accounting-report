@@ -137,7 +137,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Trader performance detail data.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public TraderPerformanceOtherSportsDetail GetDetailReport(GetDetailReportCriteria criteria)
@@ -553,7 +553,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
         /// <param name="report">The report.</param>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Report data after sort.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private TraderPerformanceOtherSports SortReportData(TraderPerformanceOtherSports report, GetReportCriteria criteria)
@@ -641,7 +641,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
         /// <param name="report">The report.</param>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Second sub level data of report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private TraderPerformanceOtherSportsDetail SortSecondSubLevelReport(TraderPerformanceOtherSportsDetail report, GetDetailReportCriteria criteria)

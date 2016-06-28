@@ -387,7 +387,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The name of the report type.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public string GetReportTypeName(GetReportCriteria criteria)
@@ -440,7 +440,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The full report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private WinLossInfo GetAndConvertFullReport(GetReportCriteria criteria)
@@ -617,7 +617,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
         /// <param name="criteria">The criteria.</param>
         /// <param name="dataRow">The row of data  table.</param>
         /// <returns>The win loss information.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private WinLossInfo GetWinLossInfo(GetReportCriteria criteria, DataRow dataRow)

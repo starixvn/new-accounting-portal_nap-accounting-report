@@ -24,8 +24,6 @@ ReportManager = function () {
     self.LiveCasinoWinLossByProductReport = new LiveCasinoWinLossByProductReport();
     self.Bettrade = new Bettrade();
     self.ColossusBet = new ColossusBet();
-    self.CockFighting = new CockFighting();
-    self.CockFightingArena = new CockFightingArena();
 
     self.Enum = {
         DrillDownLevel: {

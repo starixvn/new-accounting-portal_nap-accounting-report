@@ -69,7 +69,7 @@ namespace Fanex.BetList.Accounting.Extensions
         /// <param name="ticketDetail">The ticket detail.</param>
         /// <param name="ticketHelper">The ticket helper.</param>
         /// <returns>The status statement.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public static BetListExcelBuilder AddStatusStatement(
@@ -187,7 +187,7 @@ namespace Fanex.BetList.Accounting.Extensions
         /// <param name="isShowAgentPT">If set to <c>true</c> [is show agent position taking].</param>
         /// <param name="isShowMember">If set to <c>true</c> [is show member].</param>
         /// <returns>The header statement.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public static BetListExcelBuilder AddHeaderStatement(

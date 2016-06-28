@@ -55,7 +55,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
         /// <returns>
         /// List Grid Options.
         /// </returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public List<GridOptions> GetReport(GetSoccerReportCriteria criteria, bool isCached = false)
@@ -234,7 +234,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
         /// Maps the SP to data row.
         /// </summary>
         /// <returns>The Data row.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2100:CodeLineMustNotBeLongerThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private GridDataRow MapSPToDataRow()
@@ -344,7 +344,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
         /// Gets the win loss 8RM row.
         /// </summary>
         /// <returns>The win loss 8RM data.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private GridDataRow GetWinLoss8RMRow()
@@ -370,7 +370,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
         /// Gets the win loss BARM row.
         /// </summary>
         /// <returns>The win loss BARM data.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private GridDataRow GetWinLossBARMRow()
@@ -420,7 +420,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
         /// <returns>
         /// The name of the bet type.
         /// </returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private string GetBetTypeName(int bettype, string hedge)

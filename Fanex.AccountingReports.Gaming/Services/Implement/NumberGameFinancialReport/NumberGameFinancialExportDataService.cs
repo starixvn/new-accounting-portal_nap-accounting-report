@@ -97,7 +97,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameFinancial
         /// <param name="startColumn">The start column.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="getNumberGameFinancialCriteria">The get number game financial criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportHeader(
@@ -236,7 +236,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameFinancial
         /// <param name="startColumn">The start column.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="reportDateList">The report date list.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportDetail(
@@ -497,7 +497,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameFinancial
         /// <param name="startColumn">The start column.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="grandTotal">The grand total.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportFooterReport(

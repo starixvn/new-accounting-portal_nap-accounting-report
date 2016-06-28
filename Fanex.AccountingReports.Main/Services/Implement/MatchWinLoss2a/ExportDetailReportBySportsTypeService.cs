@@ -31,7 +31,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// Exports the type of the detail report by sports.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportDetailReportBySportsType(GetDetailReportByBetTypeCriteria criteria)

@@ -96,7 +96,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// Export Excel for Tree Win Loss by product.
         /// </summary>
         /// <param name="criteria">The Tree Win Loss Product Criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public void ExportExcelTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria)
@@ -169,7 +169,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// Export excel for tree win loss all levels.
         /// </summary>
         /// <param name="criteria">The Tree Win Loss Level Criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public void ExportExcelTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
@@ -225,7 +225,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// <param name="report">The report.</param>
         /// <param name="criteria">The criteria.</param>
         /// <param name="workSheets">The work sheets.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportTreeWinLossInfo(TreeWinLossVirtualRate report, GetTreeWinLossByLevelCriteria criteria, ExcelWorksheetCollection workSheets)
@@ -328,7 +328,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// <param name="workSheet">The worksheet.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="currentColumn">The current column.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportTreeWinLossByProductHeader(ref ExcelWorksheet workSheet, ref int currentRow, int currentColumn)
@@ -458,7 +458,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// <param name="report">The list items.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="startColumn">The current column.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportTreeWinLossByProductAssignBodyData(
@@ -624,7 +624,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// <param name="totalInfo">The list total items.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="startColumn">The current column.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportTreeWinLossByProductAssignFooterData(
@@ -755,7 +755,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// <param name="workSheet">The worksheet.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="startColumn">The start column.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportTreeWinLossByLevelHeader(ref ExcelWorksheet workSheet, ref int currentRow, int startColumn)
@@ -898,7 +898,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// <param name="report">The report.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="startColumn">The start column.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportTreeWinLossByLevelAssignBodyData(
@@ -1080,7 +1080,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// <param name="totalInfo">The list total items.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="startColumn">The current column.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportTreeWinLossByLevelAssignFooterData(
@@ -1215,7 +1215,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// </summary>
         /// <param name="workSheet">The work sheet.</param>
         /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportVirtualRateReportHeader(ExcelWorksheet workSheet, ref int currentRow)
@@ -1304,7 +1304,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// <param name="userIndex">Index of the user.</param>
         /// <param name="virtualRateByUser">The virtual rate by user.</param>
         /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportVirtualRateByUser(ExcelWorksheet workSheet, int userIndex, SMAVirtualRate virtualRateByUser, ref int currentRow)

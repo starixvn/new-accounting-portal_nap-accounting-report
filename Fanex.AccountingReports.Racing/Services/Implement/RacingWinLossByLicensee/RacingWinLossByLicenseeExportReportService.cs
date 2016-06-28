@@ -154,7 +154,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.RacingWinLossByLicen
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportHeader(
@@ -469,7 +469,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.RacingWinLossByLicen
         /// <param name="currentColumn">The current column.</param>
         /// <param name="raceWinLoss">The win loss of race.</param>
         /// <param name="decimalStyle">The decimal style.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void RenderRowWinLoss(

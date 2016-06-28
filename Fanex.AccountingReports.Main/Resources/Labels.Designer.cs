@@ -394,15 +394,6 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Arena.
-        /// </summary>
-        public static string Arena {
-            get {
-                return ResourceManager.GetString("Arena", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Ascending.
         /// </summary>
         public static string Ascending {
@@ -624,15 +615,6 @@ namespace Fanex.AccountingReports.Main.Resources {
         public static string Closed {
             get {
                 return ResourceManager.GetString("Closed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cockfighting.
-        /// </summary>
-        public static string Cockfighting {
-            get {
-                return ResourceManager.GetString("Cockfighting", resourceCulture);
             }
         }
         
@@ -1146,15 +1128,6 @@ namespace Fanex.AccountingReports.Main.Resources {
         public static string FG_LG {
             get {
                 return ResourceManager.GetString("FG_LG", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fight No..
-        /// </summary>
-        public static string Fight_No {
-            get {
-                return ResourceManager.GetString("Fight_No", resourceCulture);
             }
         }
         

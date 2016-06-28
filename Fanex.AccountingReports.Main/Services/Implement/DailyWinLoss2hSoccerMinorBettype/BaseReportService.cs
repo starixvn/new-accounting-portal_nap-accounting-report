@@ -49,7 +49,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
         /// Headers the row.
         /// </summary>
         /// <returns>Header row.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         protected virtual List<HeaderColumns> HeaderRow()

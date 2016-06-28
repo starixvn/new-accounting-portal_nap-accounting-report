@@ -233,7 +233,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
         /// <param name="criteria">The criteria.</param>
         /// <returns>The company list.</returns>
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1306:FieldNamesMustBeginWithLowerCaseLetter", Justification = "Reviewed.")]
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public CompanyInfo GetLicenseesByProduct(GetLicenseesByProductCriteria criteria)

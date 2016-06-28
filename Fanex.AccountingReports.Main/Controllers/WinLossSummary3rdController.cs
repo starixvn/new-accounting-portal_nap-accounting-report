@@ -9,7 +9,6 @@
 
 namespace Fanex.AccountingReports.Main.Controllers
 {
-    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
@@ -19,6 +18,7 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.AccountingReports.Main.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -68,18 +68,6 @@ namespace Fanex.AccountingReports.Main.Controllers
         }
 
         [HttpPost]
-        [NapAuth(FunctionKey = AccReportFunctionKeys.WinLossSummary, Policy = Constant.Policy.Read)]
-        [HandleAjaxError]
-        public JsonResult ViewCockFightingReport(GetWinLossSummary3rdCockFightingCriteria criteria)
-        {
-            var details = this._reportService.GetCockFightingReport(criteria);
-            var jsonResult = Json(details, JsonRequestBehavior.DenyGet);
-            jsonResult.MaxJsonLength = CommonConstants.MaxJsonLength;
-
-            return jsonResult;
-        }
-
-        [HttpPost]
         [NapAuth(FunctionKey = AccReportFunctionKeys.WinLossSummary, Policy = Constant.Policy.Host)]
         [HandleAjaxError]
         public JsonResult RecalculateWinLoss(GetRecalculateWinLossCriteria criteria)
@@ -106,15 +94,6 @@ namespace Fanex.AccountingReports.Main.Controllers
         {
             this._reportService.ExportDetails(criteria);
 
-            return new EmptyResult();
-        }
-
-        [HttpGet]
-        [NapAuth(FunctionKey = AccReportFunctionKeys.WinLossSummary, Policy = Constant.Policy.Read)]
-        [HandleAjaxError]
-        public ActionResult ExportCockFightingReport(GetWinLossSummary3rdCockFightingCriteria criteria)
-        {
-            this._reportService.ExportCockFightingReport(criteria);
             return new EmptyResult();
         }
     }

@@ -87,7 +87,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// </summary>
         /// <param name="winLoss">The win loss.</param>
         /// <returns>The name of the bet type.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public string GetBetTypeNameFromWinLossDetail(WinLossInfo winLoss)
@@ -217,7 +217,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// <param name="title">The title.</param>
         /// <param name="isPartOfReport">If set to <c>true</c> [is part of report].</param>
         /// <param name="sportId">The sport identifier.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportSportReport(
@@ -300,7 +300,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// <param name="startColumn">The start column.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="maxColumnIndex">Maximum index of the column.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportIBCRow_SportReport(
@@ -426,7 +426,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// <param name="startRow">The start row.</param>
         /// <param name="startColumn">The start column.</param>
         /// <param name="isSportSummary">If set to <c>true</c> [is sport summary].</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportHeaderColumns_SportReport_NotApplyVirtualRate(
@@ -506,7 +506,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// <param name="startColumn">The start column.</param>
         /// <param name="report">The report.</param>
         /// <param name="sportId">The sport identifier.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportContent_MajorSoccerReport(

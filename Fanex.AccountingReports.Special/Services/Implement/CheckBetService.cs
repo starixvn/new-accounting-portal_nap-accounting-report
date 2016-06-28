@@ -57,7 +57,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         /// </summary>
         /// <param name="checkBetCriteria">The check bet criteria.</param>
         /// <returns>The normal changed ticket.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public NormalTickets GetNormalChangedTicket(CheckBetCriteria checkBetCriteria)
@@ -181,7 +181,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         /// </summary>
         /// <param name="checkBetCriteria">The check bet criteria.</param>
         /// <returns>The reject changed ticket.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public RejectTickets GetRejectChangedTicket(CheckBetCriteria checkBetCriteria)
@@ -276,7 +276,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         /// <param name="betTeam">The bet team.</param>
         /// <param name="hdp1">The HDP1 value.</param>
         /// <returns>The bet team result.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private string GetBetTeam(

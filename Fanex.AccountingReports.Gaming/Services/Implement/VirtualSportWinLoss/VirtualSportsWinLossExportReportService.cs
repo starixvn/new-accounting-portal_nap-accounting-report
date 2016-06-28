@@ -134,7 +134,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.VirtualSportWinLoss
         /// <param name="date">The date contain currency.</param>
         /// <param name="totalRows">The total rows.</param>
         /// <param name="currentIndex">The current index.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportDate(

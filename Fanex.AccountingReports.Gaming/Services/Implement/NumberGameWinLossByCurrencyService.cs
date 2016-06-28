@@ -43,7 +43,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The number game win loss by currency main.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public List<NumberGameWinLossByCurrencyMain> GetNumberGameWinLossByCurrencyMain(NumberGameWinLossByCurrencyMainCriteria criteria)
@@ -127,7 +127,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The number game win loss by currency detail.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public List<NumberGameWinLossByCurrencyDetail> GetNumberGameWinLossByCurrencyDetail(NumberGameWinLossByCurrencyDetailCriteria criteria)
@@ -380,7 +380,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
         /// <param name="startCol">The start col.</param>
         /// <param name="workSheetReport">The work sheet report.</param>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportNumberGameWinLossByCurMainAssignHeader(
@@ -453,7 +453,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
         /// <param name="excelFile">The excel file.</param>
         /// <param name="dataList">The data list.</param>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportNumberGameWinLossByCurMain(
@@ -599,7 +599,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
         /// <param name="startCol">The start col.</param>
         /// <param name="workSheetReport">The work sheet report.</param>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportExcelNumberGameWinLossByCurDetailAssignHeader(
@@ -699,7 +699,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
         /// <param name="excelFile">The excel file.</param>
         /// <param name="dataList">The data list.</param>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportNumberGameWinLossByCurDetail(

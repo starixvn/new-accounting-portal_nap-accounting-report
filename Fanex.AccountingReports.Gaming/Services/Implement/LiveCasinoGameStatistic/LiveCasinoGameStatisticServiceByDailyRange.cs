@@ -34,7 +34,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
         /// <param name="winLossInfoTable">The win loss information table.</param>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The report by daily range.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public override WinLossInfo GetReport(
@@ -192,7 +192,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoGameStatis
         /// </summary>
         /// <param name="report">The report.</param>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public override void ExportReport(

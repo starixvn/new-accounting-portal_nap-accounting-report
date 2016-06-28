@@ -83,7 +83,7 @@ namespace Fanex.BetList.Accounting.Core
         /// </summary>
         /// <param name="ticketDetail">The ticket detail.</param>
         /// <returns>The reference no.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public string StatusRefNo(TicketDetail ticketDetail)
@@ -242,7 +242,7 @@ namespace Fanex.BetList.Accounting.Core
         /// </summary>
         /// <param name="ticketDetail">The ticket detail.</param>
         /// <returns>The status statement.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public string StatusStatement(TicketDetail ticketDetail)

@@ -41,9 +41,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
         private Dictionary<object, string> _leagueNameCache;
         private Dictionary<object, string> _teamNameCache;
 
-        private string _winlossSummary3rdCacheCockFightingArenaReportKey = "Fanex.AccountingReports.Main.WinLossSummary3rd.CockFightingArenaReport" +
-          (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
-
         public WinLossSummary3rdService()
             : this(null)
         {
@@ -61,7 +58,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public WinLoss3rdInfo GetReport(GetReportCriteria criteria)
@@ -112,7 +109,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         Name = this.GetSportName(sportId)
                     };
 
-                    bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeSingleWalletCasinoLaunchDate;                    
+                    bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeSingleWalletCasinoLaunchDate;
                     var betTypeGroup = sportTypeGroup.GroupBy(data => new { data.bettype, data.liveindicator });
 
                     var isNewCricket = false;
@@ -268,7 +265,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             return report;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public SportTypeWinLossInfo CalculatorForNewCricket(dynamic data, bool isShowNotAvalable, SportTypeWinLossInfo sportInfo, int sportId, WinLoss3rdInfo report)
@@ -383,7 +380,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The details.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public MatchGame3rdInfo GetDetails(GetMatchGameDetailsCriteria criteria)
@@ -527,16 +524,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             return report;
         }
 
-        public CockFightingArena GetCockFightingReport(GetWinLossSummary3rdCockFightingCriteria criteria)
-        {
-            var cockFightingArena = new CockFightingArena();
-            var rawData = GetReportData<CockFightingMatchDetail>(criteria).ToList();
-            cockFightingArena.ReportRows = GetCockFightingArena(rawData);
-            cockFightingArena.GrandTotal = GetCockFightingArenaGrandTotal(rawData);
-            CacheExtension.Set(_winlossSummary3rdCacheCockFightingArenaReportKey, cockFightingArena);
-            return cockFightingArena;
-        }
-
         //// Private methods
 
         /// <summary>
@@ -631,7 +618,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The match game details.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private IEnumerable<dynamic> GetMatchGameDetails(GetMatchGameDetailsCriteria criteria)
@@ -946,49 +933,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 ToDate = criteria.ToDate,
                 SportType = criteria.SportType
             };
-        }
-
-        private List<CockFightingArenaDetail> GetCockFightingArena(List<CockFightingMatchDetail> reportData)
-        {
-            List<CockFightingArenaDetail> arena = new List<CockFightingArenaDetail>();
-            var arenaGroup = reportData.GroupBy(x => x.ArenaId);
-            foreach (var group in arenaGroup)
-            {
-                var arenaMatchs = group.ToList();
-                CockFightingArenaDetail arenaDetail = new CockFightingArenaDetail()
-                {
-                    ArenaName = CacheRef.GetLeagueName(Converter.ToInt(group.Key)),
-                    CockFightingMatchs = new List<CockFightingMatchDetail>(),
-                    ArenaTotal = GetCockFightingArenaGrandTotal(arenaMatchs)
-                };
-
-                foreach (var data in arenaMatchs)
-                {
-                    arenaDetail.CockFightingMatchs.Add(data);
-                }
-
-                arena.Add(arenaDetail);
-            }
-
-            return arena;
-        }
-
-        private CockFightingMatchDetail GetCockFightingArenaGrandTotal(List<CockFightingMatchDetail> cockFightingMatchs)
-        {
-            CockFightingMatchDetail grandTotal = new CockFightingMatchDetail();
-
-            foreach (var item in cockFightingMatchs)
-            {
-                grandTotal.RealWinLoss += item.RealWinLoss;
-                grandTotal.RealPosition += item.RealPosition;
-                grandTotal.RealCommission += item.RealCommission;
-                grandTotal.RealTurnover += item.RealTurnover;
-                grandTotal.RealLineTotal += item.RealLineTotal;
-                grandTotal.VirtualTurnover += item.VirtualTurnover;
-                grandTotal.VirtualLineTotal += item.VirtualLineTotal;
-            }
-
-            return grandTotal;
         }
     }
 }

@@ -56,7 +56,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             Hourly = 15
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public static string GetTitleExcelFileWhenDrilDown(GetReportByDailyCriteria criteria)
@@ -178,7 +178,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             return name;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
 

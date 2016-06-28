@@ -35,7 +35,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccer
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The main2h report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetMain2hReport(GetMain2hReportCriteria criteria)
@@ -237,7 +237,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccer
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <param name="report">The report.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportMain2hReport(
@@ -638,7 +638,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccer
         /// <param name="startColumn">The start column.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="rowType">Type of the row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportNormalRow(
@@ -731,7 +731,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccer
         /// <param name="startColumn">The start column.</param>
         /// <param name="maxColumnIndex">Maximum index of the column.</param>
         /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportRMRow(

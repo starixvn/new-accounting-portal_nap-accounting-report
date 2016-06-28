@@ -13,7 +13,6 @@
     <Setting Key="Main_WinLossSummary3rd_Get_Racing" SpName="Acc_Rpt_WinlostSummary_Sporttype_Racing" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_WinLossSummary3rd_Get_VirtualSports" SpName="Acc_Rpt_WinLostSummary_Sporttype_VirtualSports" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Main_WinLossSummary3rd_Get_VirtualRacing" SpName="Acc_Rpt_WinLostSummary_Sporttype_VirtualRacing" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0"/>
-    <Setting Key="Main_WinLossSummary3rd_GetCockFightingReport" SpName="Acc_Rpt_WinLostSummary_Sporttype_CockFighting" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0"/>
   </Function>
 
 	<Function Name="Racing - Racing Win Lost Group">

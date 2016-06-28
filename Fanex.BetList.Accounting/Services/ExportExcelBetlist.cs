@@ -41,7 +41,7 @@ namespace Fanex.BetList.Accounting.Services
         /// <param name="fromDate">From date.</param>
         /// <param name="fileName">Name of the file.</param>
         /// <returns>The excel bet list statement.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public MemoryStream ExportExcelBetListStatement(
@@ -242,7 +242,7 @@ namespace Fanex.BetList.Accounting.Services
         /// <param name="criteria">The criteria parameter.</param>
         /// <param name="fileName">File name.</param>
         /// <returns>The excel bet list statement.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public IWorkbook ExportExcelBetList(

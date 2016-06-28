@@ -71,7 +71,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         /// <returns>Return result.</returns>
         [AllowAnonymous]
         [HttpGet]
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public ActionResult Index(string userId, string onuserId, string time, Uri redirectUrl = null)
@@ -150,7 +150,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         /// <returns>The login result page.</returns>
         [AllowAnonymous]
         [HttpGet]
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public ActionResult AccountingLogin(string username, string onlineUserId, string redirectUrl)

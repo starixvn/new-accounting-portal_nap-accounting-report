@@ -74,7 +74,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.RacingWinLossByLicen
         /// <param name="report">The report.</param>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The list DetailBetList.</returns>
-         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private List<DetailBetList> GetAndConvertData(

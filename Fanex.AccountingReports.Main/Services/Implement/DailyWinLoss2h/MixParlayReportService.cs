@@ -35,7 +35,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The mix parlay report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetMixParlayReport(GetMixParlayReportCriteria criteria)
@@ -113,7 +113,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// Exports the system parlay report.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportSystemParlayReport(GetMixParlayReportCriteria criteria)
@@ -424,7 +424,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// Exports the mix parlay report.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportMixParlayReport(GetMixParlayReportCriteria criteria)

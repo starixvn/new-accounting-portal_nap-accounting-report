@@ -30,7 +30,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
         /// Exports the type of the top punter by user bet.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportTopPunter_ByUser_BetType(GetTopPunter_ByUser_BetTypeCriteria criteria)

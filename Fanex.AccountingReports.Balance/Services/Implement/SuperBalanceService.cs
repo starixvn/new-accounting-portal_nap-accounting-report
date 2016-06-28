@@ -99,7 +99,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// </summary>
         /// <param name="superBalanceCriteria">The super balance criteria.</param>
         /// <returns>The super balance.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public SuperBalance GetSuperBalance(GetSuperBalanceCriteria superBalanceCriteria)
@@ -197,7 +197,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// </summary>
         /// <param name="superBalanceSuperDownlineCriteria">The super balance super down line criteria.</param>
         /// <returns>The super balance super down line.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public SuperBalance GetSuperBalanceSuperDownLine(GetSuperBalanceSuperDownlineCriteria superBalanceSuperDownlineCriteria)
@@ -261,7 +261,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// </summary>
         /// <param name="superBalanceMasterDownlineCriteria">The super balance master down line criteria.</param>
         /// <returns>The super balance master down line.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public SuperBalance GetSuperBalanceMasterDownLine(GetSuperBalanceMasterDownlineCriteria superBalanceMasterDownlineCriteria)
@@ -325,7 +325,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// </summary>
         /// <param name="superBalanceAgentDownlineCriteria">The super balance agent down line criteria.</param>
         /// <returns>The super balance agent down line.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public SuperBalance GetSuperBalanceAgentDownLine(GetSuperBalanceAgentDownlineCriteria superBalanceAgentDownlineCriteria)
@@ -389,7 +389,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// </summary>
         /// <param name="superBalanceCriteria">The super balance criteria.</param>
         /// <returns> The super balance report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public SuperBalance ExportSuperBalanceReport(GetSuperBalanceCriteria superBalanceCriteria)
@@ -449,7 +449,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// </summary>
         /// <param name="getSuperBalanceSuperCriteria">The get super balance super criteria.</param>
         /// <returns>The balance super down line report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public SuperBalance ExportBalanceSuperDownLineReport(GetSuperBalanceSuperDownlineCriteria getSuperBalanceSuperCriteria)
@@ -508,7 +508,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// </summary>
         /// <param name="getSuperBalanceMasterCriteria">The get super balance master criteria.</param>
         /// <returns>The balance master down line report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public SuperBalance ExportBalanceMasterDownLineReport(GetSuperBalanceMasterDownlineCriteria getSuperBalanceMasterCriteria)
@@ -568,7 +568,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// </summary>
         /// <param name="getSuperBalanceAgentCriteria">The get super balance agent criteria.</param>
         /// <returns>The balance agent down line report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public SuperBalance ExportBalanceAgentDownLineReport(GetSuperBalanceAgentDownlineCriteria getSuperBalanceAgentCriteria)
@@ -677,7 +677,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// <param name="currentRow">The current row.</param>
         /// <param name="roleId">The role identifier.</param>
         /// <param name="superBalanceCriteria">The super balance criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportReportHeader(
@@ -880,7 +880,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// <param name="currentRow">The current row.</param>
         /// <param name="detail">The detail.</param>
         /// <param name="rowType">Type of the row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportSuperBalanceDetail(

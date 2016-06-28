@@ -26,7 +26,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
     /// </summary>
     public class CasinoGameStatisticServiceByUsername : CasinoGameStatisticService
     {
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
 
@@ -95,7 +95,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
             return report;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
 

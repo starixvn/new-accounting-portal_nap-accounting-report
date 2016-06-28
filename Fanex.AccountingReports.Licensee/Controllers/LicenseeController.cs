@@ -44,13 +44,6 @@ namespace Fanex.AccountingReports.Licensee.Controllers
         {
             var licensees = this._licenseeSiteService.GetLicenseeSiteList();
             return Json(licensees, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public JsonResult GetPlaytechCasino()
-        {
-            var licensees = this._licenseeSiteService.GetPlaytechCasino();
-            return Json(licensees, JsonRequestBehavior.AllowGet);
-        }
+        }  
     }
 }

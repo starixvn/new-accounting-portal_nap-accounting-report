@@ -82,7 +82,7 @@ namespace Fanex.BetList.Accounting.Repositories
         /// <param name="criteria">The criteria.</param>
         /// <param name="baseCurrency">The base currency.</param>
         /// <returns>The specified data.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public IList<TicketDetail> Fetch(dynamic criteria, CurrencyContants baseCurrency)
@@ -295,7 +295,7 @@ namespace Fanex.BetList.Accounting.Repositories
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The system parlay.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public SystemParlayModel FetchSystemParlay(BetListSystemParlayByRefnoCriteria criteria)
@@ -425,7 +425,7 @@ namespace Fanex.BetList.Accounting.Repositories
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The list select detail combination mix parlay.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public CombinationParlay BetList_SelDetailCombinationMP(ICriteria criteria)

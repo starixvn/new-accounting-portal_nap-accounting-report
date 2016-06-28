@@ -47,7 +47,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The products.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public List<ProductInfo> GetProducts(GetProductsCriteria criteria)
@@ -140,7 +140,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The sports.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public List<ProductInfo> GetSports(GetProductsCriteria criteria)
@@ -267,7 +267,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
             return null;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public List<EntityBase<int, string>> GetBetTypesBySport(GetBetTypesBySportCriteria criteria)
@@ -447,7 +447,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The top punter bet count by user.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public PunterWinLossInfo GetTopPunterBetCount_ByUser(GetTopPunterBetCountByUserCriteria criteria)
@@ -553,7 +553,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The type of the top punter by user sport.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public PunterWinLossInfo GetTopPunter_ByUser_SportType(GetTopPunter_ByUser_SportTypeCriteria criteria)
@@ -761,7 +761,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
         /// <param name="criteria">The criteria.</param>
         /// <param name="orderedData">The ordered data.</param>
         /// <returns>The top punter by user bet type non daily.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public PunterWinLossInfo GetTopPunter_ByUser_BetType_NonDaily(
@@ -890,7 +890,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
         /// <param name="criteria">The criteria.</param>
         /// <param name="orderedData">The ordered data.</param>
         /// <returns>The top punter by user bet type daily.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public PunterWinLossInfo GetTopPunter_ByUser_BetType_Daily(

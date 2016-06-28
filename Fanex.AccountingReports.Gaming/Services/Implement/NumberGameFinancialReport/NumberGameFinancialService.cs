@@ -49,7 +49,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameFinancial
         /// </summary>
         /// <param name="getNumberGameFinancialCriteria">The get number game financial criteria.</param>
         /// <returns>Number Game Financial Report Data.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public NumberGameFinancial GetNumberGameFinancial(GetNumberGameFinancialCriteria getNumberGameFinancialCriteria)

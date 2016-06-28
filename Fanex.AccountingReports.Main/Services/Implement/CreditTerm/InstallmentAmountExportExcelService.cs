@@ -156,7 +156,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="roleName">The role name.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportHeader(
@@ -328,7 +328,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
         /// <param name="excelFile">The excel file.</param>
         /// <param name="styleCell">The style of cell.</param>
         /// <param name="rowClass">The class of row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void InitCellStyle(

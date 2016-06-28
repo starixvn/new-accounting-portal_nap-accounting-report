@@ -404,7 +404,7 @@
   </data>
   <data name="DailyWinLoss2h_MainReportFooterNote" xml:space="preserve">
     <value>* Virtual All Total: Soccer + Metric Gaming - Superlive+ Other Sports + Parlay
-* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P + Bettrade + Colossus Bets + Cockfighting</value>
+* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P + Bettrade + Colossus Bets</value>
   </data>
   <data name="DailyWinLoss2h_MetricGamingReport_ReportTitle" xml:space="preserve">
     <value>Metric Gaming - Super Live Win/Loss report</value>
@@ -424,29 +424,9 @@
   <data name="Daily_WinLoss2h_ColossusBets_SheetName" xml:space="preserve">
     <value>Daily Win Loss 2h - Colossus Bets</value>
   </data>
-  <data name="MatchWinLoss2aDetailByArena_ReportName" xml:space="preserve">
-    <value>MatchWinLoss2aDetailByArena_{0}</value>
-  </data>
-  <data name="CockFighting_ReportTitle" xml:space="preserve">
-    <value>Cockfighting - Product Win/Loss report for {0}</value>
-  </data>
-  <data name="CockFightingMatchByArena_ReportTitle" xml:space="preserve">
-    <value>Cockfighting Product Arena {0} Win/Loss Report For {1}</value>
-  </data>
+  
   <data name="MatchWinLoss2aDetailByMatch_ReportName" xml:space="preserve">
     <value>MatchWinLoss2aDetailByMatch_{0}</value>
-  </data>
-  <data name="DailyWinLoss2h_CockfightingReport_Title" xml:space="preserve">
-    <value>MAIN &gt; COCKFIGHTING PRODUCT WIN/LOSS REPORT</value>
-  </data>
-  <data name="Daily_WinLoss2h_Cockfighting_SheetName" xml:space="preserve">
-    <value>Daily Win Loss 2h - Cockfighting</value>
-  </data>
-  <data name="WinLossSummary3rdCockFighting_ReportName" xml:space="preserve">
-    <value>CockfightingDetails_From_Date_{0}_To_Date_{1}</value>
-  </data>
-  <data name="WinLossSummary3rd_CockFightingReportTitle" xml:space="preserve">
-    <value>Cockfighting | Details report from {0} to {1}</value>
   </data>
   <data name="DailyWinLoss2h_MetricGamingLiveReportBySport_Title" xml:space="preserve">
     <value>METRIC GAMING - SUPERLIVE "LIVE" PRODUCT WIN/LOSS REPORT</value>

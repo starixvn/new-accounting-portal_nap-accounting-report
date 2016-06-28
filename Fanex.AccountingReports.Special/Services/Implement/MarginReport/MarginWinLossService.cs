@@ -72,7 +72,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
         /// Export excel for margin report.
         /// </summary>
         /// <param name="criteria">The get margin win loss criteria. </param>
-         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
        public void ExcelReport(GetMarginWinLossCriteria criteria)
@@ -193,7 +193,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
         /// <param name="childsInfo">The list margin win loss.</param>
         /// <param name="startColumn">The start column.</param>
         /// <param name="currentRow">The current row.</param>
-         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void MarginReportExportBody(ref ExcelWorksheet workSheet, List<MarginWinLoss> childsInfo, int startColumn, ref int currentRow)

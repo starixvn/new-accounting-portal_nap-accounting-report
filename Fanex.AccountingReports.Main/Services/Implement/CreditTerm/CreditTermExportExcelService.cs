@@ -289,7 +289,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
         /// <param name="parentMember">The parent member.</param>
         /// <param name="styleCell">The style of cell.</param>
         /// <param name="cssClass">The class of row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void RenderParentRow(
@@ -518,7 +518,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
         /// <param name="fontRedColor">The red color.</param>
         /// <param name="cellColor">The color of cell.</param>
         /// <returns>The CustomStyleCell.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private CustomStyleCell InitCellStyleDetail(

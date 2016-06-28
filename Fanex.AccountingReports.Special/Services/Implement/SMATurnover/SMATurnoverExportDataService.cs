@@ -127,7 +127,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SMATurnover
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="report">The report.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportContent(

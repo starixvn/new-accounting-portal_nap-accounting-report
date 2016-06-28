@@ -170,7 +170,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             return groupHeader;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private List<HeaderColumns> CreateHeaderColumns()

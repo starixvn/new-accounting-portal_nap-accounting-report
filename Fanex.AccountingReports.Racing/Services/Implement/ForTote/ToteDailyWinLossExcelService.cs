@@ -113,7 +113,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement
         /// Export excel for racing daily detail.
         /// </summary>
         /// <param name="criteria">The racing for tote detail criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public override void ExportExcelRacingDailyDetail(GetDetailForToteCriteria criteria)
@@ -209,7 +209,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement
         /// <param name="nameContainer">The name container.</param>
         /// <param name="name">The name(currency or race).</param>
         /// <param name="headerStyle">Style for header.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public void RenderReportHeaderDetail(ref ISheet worksheet, ref int currentRow, string nameContainer, string name, ICellStyle headerStyle)
@@ -386,7 +386,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement
         /// <param name="worksheet">The work sheet.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="report">The list win loss tote detail.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public void RenderRacingWLDetailContent(HSSFWorkbook excelFile, ref ISheet worksheet, ref int currentRow, List<WinLossToteDetail> report)
@@ -622,7 +622,7 @@ namespace Fanex.AccountingReports.Racing.Services.Implement
         /// <param name="excelFile">The excel file.</param>
         /// <param name="styleCell">The style of cell.</param>
         /// <param name="rowClass">The class of row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void InitCellStyle(

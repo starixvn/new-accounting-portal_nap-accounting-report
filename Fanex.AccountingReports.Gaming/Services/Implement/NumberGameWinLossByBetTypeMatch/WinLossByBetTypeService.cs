@@ -101,7 +101,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The win loss by bet type detail report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetDetailReport(GetWinLossByBetTypeDetailReportCriteria criteria)
@@ -231,7 +231,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// Exports the win loss by bet type detail report.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportDetailReport(GetWinLossByBetTypeDetailReportCriteria criteria)
@@ -298,7 +298,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <param name="maxColumnIndex">Maximum index of the column.</param>
         /// <param name="reportTitle">The report title.</param>
         /// <param name="reportLevelType">Type of the report level.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_WinLossByBetTypeHeader(
@@ -413,7 +413,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <param name="maxColumnIndex">Maximum index of the column.</param>
         /// <param name="criteria">The criteria.</param>
         /// <param name="report">The report.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_WinLossByBetTypeMainReportContent(
@@ -534,7 +534,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <param name="twoDecimalPositiveNumberStyle">The two decimal positive number style.</param>
         /// <param name="twoDecimalPositivePercentNumberStyle">The two decimal positive percent number style.</param>
         /// <param name="info">The information.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_WinLossByBetType_WinLossRow(
@@ -617,7 +617,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <param name="twoDecimalPositiveNumberStyle">The two decimal positive number style.</param>
         /// <param name="twoDecimalPositivePercentNumberStyle">The two decimal positive percent number style.</param>
         /// <param name="info">The information.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
           "SP2101:MethodMustNotContainMoreLinesThan",
           Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_WinLossByBetType_GrandTotalRow(
@@ -697,7 +697,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <param name="maxColumnIndex">Maximum index of the column.</param>
         /// <param name="criteria">The criteria.</param>
         /// <param name="report">The report.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReport_WinLossByBetTypeDetailReportContent(

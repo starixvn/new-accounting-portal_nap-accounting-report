@@ -179,7 +179,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// <param name="startRow">The start row.</param>
         /// <param name="startColumn">The start column.</param>
         /// <param name="isSportSummary">If set to <c>true</c> [is sport summary].</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportHeaderColumns_SportReport_NotApplyVirtualRate(
@@ -251,7 +251,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         }
 
         /// <param name="sportId">The sport identifier.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportContent_SportReport(
@@ -627,7 +627,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
        "SP2101:MethodMustNotContainMoreLinesThan",
        Justification = "Reviewed. Suppression is OK here.")]
         public void ExportIBCRow_SportReport(
@@ -726,7 +726,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// <param name="isEnableVirtual">If set to <c>true</c> [is enable virtual].</param>
         /// <param name="isShowVirtualTurnover">If set to <c>true</c> [is show virtual turnover].</param>
         /// <param name="isHideMargin">If set to <c>true</c> [is hide margin].</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportNormalRow(
@@ -919,7 +919,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2101:MethodMustNotContainMoreLinesThan",
            Justification = "Reviewed. Suppression is OK here.")]
         public void ExportMainCasinoHeader(
@@ -1008,7 +1008,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         }
 
         /// <param name="sportId">The sport identifier.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportMainCasinoContent(
@@ -1196,7 +1196,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2101:MethodMustNotContainMoreLinesThan",
            Justification = "Reviewed. Suppression is OK here.")]
         public void ExportMainCasinoRow(
@@ -1305,7 +1305,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// <param name="startRow">The start row.</param>
         /// <param name="startColumn">The start column.</param>
         /// <param name="isSportSummary">If set to <c>true</c> [is sport summary].</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportHeaderColumns_SportReport(

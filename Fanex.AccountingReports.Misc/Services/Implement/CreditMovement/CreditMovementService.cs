@@ -150,7 +150,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
         /// Groups the header rows.
         /// </summary>
         /// <returns>The group header.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2100:CodeLineMustNotBeLongerThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private List<GroupHeaderRows> GroupHeaderRows()
@@ -174,7 +174,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
         /// Headers the columns.
         /// </summary>
         /// <returns>The header columns.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2100:CodeLineMustNotBeLongerThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private List<HeaderColumns> HeaderColumns()

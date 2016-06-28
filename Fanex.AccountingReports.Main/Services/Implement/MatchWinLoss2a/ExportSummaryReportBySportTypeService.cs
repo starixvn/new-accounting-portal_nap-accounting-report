@@ -205,7 +205,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="report">The report.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportNonThirdPartyBySportType(
@@ -333,7 +333,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="reportCellStyle">The report cell style.</param>
         /// <param name="reportRowType">The report row type.</param>
         /// <param name="reportGroupType">Type of the report group.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportRow_SummaryReportBySportType(
@@ -426,7 +426,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="totalTextStyle">The total text style.</param>
         /// <param name="totalDecimalNumberStyle">The total decimal number style.</param>
         /// <param name="reportRowType">Type of the report row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportRowTotal_SummaryReportBySportType(

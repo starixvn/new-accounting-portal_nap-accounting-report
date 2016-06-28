@@ -28,7 +28,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
         /// </summary>
         /// <param name="duplicateTicketByUserName">Duplicate ticket by user name.</param>
         /// <returns>Return tickets list.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public List<TicketInfo> AssignSubTicketInfo(IGrouping<dynamic, dynamic> duplicateTicketByUserName)

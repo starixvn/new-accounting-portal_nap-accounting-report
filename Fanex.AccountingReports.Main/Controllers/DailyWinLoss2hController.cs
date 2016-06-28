@@ -9,8 +9,6 @@
 
 namespace Fanex.AccountingReports.Main.Controllers
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Core.Web.Controllers;
@@ -20,6 +18,7 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.AccountingReports.Main.Services.Interface.DailyWinLoss2h;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -30,23 +29,22 @@ namespace Fanex.AccountingReports.Main.Controllers
         private readonly IMetricGamingService _metricGamingService;
         private readonly IBettradeService _bettradeService;
         private readonly IColossusBetService _colossusBetService;
-        private readonly ICockFightingService _cockFightingService;
 
         public DailyWinLoss2hController()
-            : this(null, null, null, null, null)
+            : this(null, null, null, null)
         {
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
-           "SP2100:CodeLineMustNotBeLongerThan",
-           Justification = "Reviewed. Suppression is OK here.")]
-        public DailyWinLoss2hController(IDailyWinLoss2hService reportService, IMetricGamingService metricGamingService, IBettradeService bettradeService, IColossusBetService colossusBetService, ICockFightingService cockFightingService)
+        public DailyWinLoss2hController(
+            IDailyWinLoss2hService reportService, 
+            IMetricGamingService metricGamingService, 
+            IBettradeService bettradeService, 
+            IColossusBetService colossusBetService)
         {
             this._reportService = reportService ?? new DailyWinLoss2hService();
             this._metricGamingService = metricGamingService ?? new MetricGamingService();
             this._bettradeService = bettradeService ?? new BettradeService();
             this._colossusBetService = colossusBetService ?? new ColossusBetService();
-            this._cockFightingService = cockFightingService ?? new CockFightingService();
         }
 
         [HttpGet]
@@ -266,24 +264,7 @@ namespace Fanex.AccountingReports.Main.Controllers
             return Json(report);
         }
 
-        [HttpPost]
-        [HandleAjaxError]
-        public JsonResult GetCockFightingReport(GetCockFightingCriteria criteria)
-        {
-            var report = _cockFightingService.GetCockFightingReport(criteria);
-            return Json(report);
-        }
-
-        [HttpPost]
-        [HandleAjaxError]
-        public JsonResult GetCockFightingArenaReport(GetCockFightingArenaCriteria criteria)
-        {
-            var report = _cockFightingService.GetCockFightingArenaReport(criteria);
-            return Json(report);
-        }
-
         //// ExportExcel
-
         public ActionResult ExportMain2hReport(GetMain2hReportCriteria criteria)
         {
             this._reportService.ExportMain2hReport(criteria);
@@ -451,19 +432,6 @@ namespace Fanex.AccountingReports.Main.Controllers
             this._colossusBetService.ExportColossusBetReport(criteria);
             return new EmptyResult();
         }
-
-        public ActionResult ExportCockFightingReport(GetCockFightingCriteria criteria)
-        {
-            this._cockFightingService.ExportCockFightingReport(criteria);
-            return new EmptyResult();
-        }
-
-        public ActionResult ExportCockFightingArenaReport(GetCockFightingArenaCriteria criteria)
-        {
-            this._cockFightingService.ExportCockFightingArenaReport(criteria);
-            return new EmptyResult();
-        }
-
         //// ExportExcel
     }
 }

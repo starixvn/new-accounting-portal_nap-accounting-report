@@ -32,7 +32,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
         private readonly string _reportSessionKey = "Fanex.AccountingReports.Gaming.CasinoGameStatistic.Report" +
             (AppSession.CurrentUser != null ? AppSession.CurrentUser.Id : 0);
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public override WinLossInfo GetReport(List<WinLossInfoEntity> winLossInfoTable, WinLossInfoEntity grandTotal, GetReportByDailyCriteria criteria)
@@ -157,7 +157,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.CasinoGameStatistic
         /// </summary>
         /// <param name="report">The report.</param>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public override void ExportReport(

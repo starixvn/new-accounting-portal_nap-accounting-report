@@ -87,7 +87,7 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceOtherSports
         /// </summary>
         /// <param name="winLossInfo">The win loss information.</param>
         /// <param name="turnOverInfo">The turn over information.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void CalculateMarginTotal(TraderPerformanceOtherSports winLossInfo, TraderPerformanceOtherSports turnOverInfo)

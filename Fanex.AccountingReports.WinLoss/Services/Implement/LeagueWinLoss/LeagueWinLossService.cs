@@ -55,7 +55,7 @@
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The league win loss.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public LeagueWinLossInfo GetLeagueWinLoss(GetLeagueWinLossCriteria criteria)
@@ -322,7 +322,7 @@
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The league win loss by sport.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public LeagueWinLossInfo GetLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria)
@@ -451,7 +451,7 @@
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The league win loss by bet type.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public LeagueWinLossInfo GetLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
@@ -636,7 +636,7 @@
         /// </summary>
         /// <param name="rawData">The raw data.</param>
         /// <returns>The league win loss by sport.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private LeagueWinLossInfo GetLeagueWinLossBySport(IEnumerable<dynamic> rawData)

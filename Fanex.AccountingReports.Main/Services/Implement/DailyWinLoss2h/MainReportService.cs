@@ -36,7 +36,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The main2h report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetMain2hReport(GetMain2hReportCriteria criteria)
@@ -219,8 +219,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 info.Id != CoreConstants.SportContants.Keno &&
                                 info.Id != CoreConstants.SportContants.VirtualSportGroup &&
                                 info.Id != SportContants._2hReportCasino &&
-                                info.Id != CoreConstants.SportContants.ColossusBet &&
-                                info.Id != CoreConstants.SportContants.CockFighting)
+                                info.Id != CoreConstants.SportContants.ColossusBet)
                             {
                                 info.VirtualTurnover = 0;
                             }
@@ -371,7 +370,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// Exports the main2h report.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportMain2hReport(GetMain2hReportCriteria criteria)
@@ -1025,7 +1024,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// <param name="startColumn">The start column.</param>
         /// <param name="maxColumnIndex">Maximum index of the column.</param>
         /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportRMRow(
@@ -1110,7 +1109,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public void ExportMainReportCasinoRow(
@@ -1222,7 +1221,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportMainDataRow(

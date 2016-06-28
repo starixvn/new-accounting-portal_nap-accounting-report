@@ -58,7 +58,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// </summary>
         /// <param name="directBalanceCriteria">The direct balance criteria.</param>
         /// <returns>The direct balance.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public DirectBalance GetDirectBalance(GetDirectBalanceCriteria directBalanceCriteria)
@@ -401,7 +401,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// <param name="startColumn">The start column.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="roleId">The role identifier.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportHeaderDownLine(
@@ -469,7 +469,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// <param name="startColumn">The start column.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportHeader(
@@ -589,7 +589,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// <param name="currentRow">The current row.</param>
         /// <param name="detail">The detail.</param>
         /// <param name="rowType">Type of the row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportDirectBalanceDetail(

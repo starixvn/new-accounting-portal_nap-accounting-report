@@ -66,7 +66,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             return currentStorage;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public string GetBetTypeName(int betTypeId)
@@ -144,7 +144,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             return betTypeName;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public bool IsExcludeVirtualLineTotal(int betType)

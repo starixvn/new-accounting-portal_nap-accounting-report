@@ -32,7 +32,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
         /// <returns>
         /// Grid Options.
         /// </returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public GridOptions GetReport(GetWinLossBySite_BetTypeCriteria criteria, bool isCached = false)
@@ -96,7 +96,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
         /// Maps the SP to data row.
         /// </summary>
         /// <returns>Grid Data Row.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private GridDataRow MapSPToDataRow()

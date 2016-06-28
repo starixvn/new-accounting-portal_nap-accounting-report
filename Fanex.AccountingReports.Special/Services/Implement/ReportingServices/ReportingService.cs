@@ -36,7 +36,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.ReportingServices
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Get files and folders of report directory.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public Report GetReport(GetReportCriteria criteria)

@@ -118,7 +118,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="fromDate">The from date.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportDetailDifferenceReport(string index, string fromDate)

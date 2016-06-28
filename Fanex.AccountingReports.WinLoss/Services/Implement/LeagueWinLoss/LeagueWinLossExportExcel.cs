@@ -40,10 +40,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
         /// Exports the league win loss.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         public void ExportLeagueWinLoss(GetLeagueWinLossCriteria criteria)
@@ -420,7 +420,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private int ExportLeagueWinLossNewCricketTotal(
@@ -547,7 +547,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
         /// Exports the league win loss by sport.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria)
@@ -631,7 +631,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
         /// Exports the type of the league win loss by bet.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
@@ -970,10 +970,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
         /// <param name="currentRow">The current row.</param>
         /// <param name="report">The report.</param>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportLeagueWinLossBySport(
@@ -1189,7 +1189,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private int ExportLeagueWinLossByBetTypeNormalBetType(
@@ -1264,7 +1264,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             return 1;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportLeaguWinLossByBetTypeTotal(

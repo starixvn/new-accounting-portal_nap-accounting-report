@@ -119,7 +119,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoWinLossByA
         /// </summary>
         /// <param name="report">The report.</param>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public override void ExportReport(

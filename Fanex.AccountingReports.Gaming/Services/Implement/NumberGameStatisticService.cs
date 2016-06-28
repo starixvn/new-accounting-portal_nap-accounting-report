@@ -98,7 +98,7 @@
             return fullReport;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         public NumberGameStatisticByUserName GetNumberGameStatisticByUserName(GetNumberGameStatisticCriteria criteria)
@@ -133,7 +133,7 @@
             return report;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         public NumberGameStatisticByUserName GetNumberGameStatisticSortByUserName(GetNumberGameStatisticCriteria criteria)
@@ -171,7 +171,7 @@
             return report;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         public NumberGameStatisticByDaily GetNumberGameStatisticSortByDaily(GetNumberGameStatisticCriteria criteria)
@@ -193,7 +193,7 @@
             return report;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         public NumberGameStatisticByLeague GetNumberGameStatisticSortByLeague(GetNumberGameStatisticCriteria criteria)
@@ -215,7 +215,7 @@
             return report;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         public NumberGameStatisticByBettype GetNumberGameStatisticSortByBettype(GetNumberGameStatisticCriteria criteria)

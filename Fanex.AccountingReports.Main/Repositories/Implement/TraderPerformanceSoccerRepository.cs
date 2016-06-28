@@ -30,7 +30,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Trader performance for soccer data.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public TraderPerformanceSoccer GetTraderPerformanceSoccerReport(GetReportCriteria criteria)
@@ -133,7 +133,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Trader performance for soccer detail data.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public TraderPerformanceSoccerDetail GetTraderPerformanceSoccerDetailReport(GetDetailReportCriteria criteria)

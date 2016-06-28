@@ -40,7 +40,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>List duplicate ticket by user.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public DuplicateTicketsInfo GetDuplicateTicketByUserName(GetDuplicateTicketsCriteria criteria)
@@ -207,7 +207,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
         /// <param name="excelFile">The excel file.</param>
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportContent(

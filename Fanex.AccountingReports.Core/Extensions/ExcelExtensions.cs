@@ -365,7 +365,7 @@ namespace Fanex.AccountingReports.Core.Extensions
         /// <param name="oneLineText">The one line text.</param>
         /// <param name="maxCharPerRow">The maximum character per row.</param>
         /// <returns>Expand row number.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public static int AnalyseOneLineText(string oneLineText, int maxCharPerRow)

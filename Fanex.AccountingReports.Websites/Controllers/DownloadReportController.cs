@@ -64,7 +64,7 @@ namespace Fanex.AccountingReports.Websites.Controllers
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private ActionResult GetExcelFile(DateTime currentTime, string parentReportPath, DateTime reportTime, DateTime nextMonthReportTime, string reportContainerFolder, string reportNameWithExtension)

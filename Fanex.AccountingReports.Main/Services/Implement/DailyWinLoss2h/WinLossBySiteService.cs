@@ -9,9 +9,6 @@
 
 namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
@@ -24,6 +21,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
     using Fanex.AccountingReports.Main.Resources;
     using Fanex.Common;
     using Fanex.Data.Repository;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using CoreConstants = Fanex.AccountingReports.Core.Constants;
     using MainSportConstants = Fanex.AccountingReports.Main.Constants;
 
@@ -58,7 +58,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private CriteriaBase WinlossBySiteCriteria(GetWinLossBySite_BetTypeCriteria criteria)
@@ -149,21 +149,15 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         WinLostDate = criteria.WinLostDate,
                         Site = criteria.Site
                     };
-                case CoreConstants.SportContants.CockFighting:
-                    return new GetWinLossBySite_CockFightingCriteria
-                    {
-                        WinLostDate = criteria.WinLostDate,
-                        Site = criteria.Site
-                    };
             }
 
             return criteria;
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private WinLossInfo WinlossBySiteInfo(GetWinLossBySite_BetTypeCriteria criteria)
@@ -235,7 +229,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// Exports the win loss by site bet type.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportWinLossBySite_BetType(GetWinLossBySite_BetTypeCriteria criteria)
@@ -496,7 +490,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// <param name="currentRow">The current row.</param>
         /// <param name="rowType">Type of the row.</param>
         /// <param name="isShowVirtualTurnover">If set to <c>true</c> [is show virtual turnover].</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportNormalRow_WinLossBySite_BetType(

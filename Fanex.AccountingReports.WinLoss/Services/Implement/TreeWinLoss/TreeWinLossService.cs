@@ -72,7 +72,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// </summary>
         /// <param name="criteria">Tree Win Loss By Product Criteria.</param>
         /// <returns>The Tree Win Loss.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public TreeWinLoss GetTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria)
@@ -163,7 +163,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// </summary>
         /// <param name="criteria">The Tree win loss by level.</param>
         /// <returns>The tree win loss.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         public TreeWinLossVirtualRate GetTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
@@ -317,7 +317,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// </summary>
         /// <param name="criteria">The tree win loss by product criteria.</param>
         /// <returns>The tree win loss.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private TreeWinLoss GetTreeWinLossDateRangeByProduct(GetTreeWinLossByProductCriteria criteria)
@@ -409,7 +409,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// </summary>
         /// <param name="criteria">The tree win loss by level criteria.</param>
         /// <returns>The tree win loss.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private TreeWinLossVirtualRate GetTreeWinLossDateRangeByLevel(GetTreeWinLossByLevelCriteria criteria)
@@ -512,7 +512,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Virtual rate by sport and live status.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private VirtualRateInfo GetVirtualRateBySportAndLiveStatus(GetVirtualRateCriteria criteria)
@@ -669,7 +669,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// <param name="actionId">The action identifier.</param>
         /// <param name="xmlTrackingValue">The XML tracking value.</param>
         /// <returns>The virtual rate log history.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private VirtualRateInfo GetVirtualRateLogHistory(int actionId, XElement xmlTrackingValue)
@@ -733,7 +733,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// </summary>
         /// <param name="reader">The reader.</param>
         /// <returns>SMA virtual rate.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2101:MethodMustNotContainMoreLinesThan",
            Justification = "Reviewed. Suppression is OK here.")]
         private SMAVirtualRate MapSMAVirtualRateData(IDataReader reader)

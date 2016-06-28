@@ -54,7 +54,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoWinLossByA
         {
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
         public LiveCasinoAgencyWinLossService(ILiveCasinoAgencyWinLossRepository reportRepository, ILiveCasinoProductService liveCasinoProductService, IUserGroupService userGroupService)
@@ -141,7 +141,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoWinLossByA
         /// Gets the currency list.
         /// </summary>
         /// <returns>The currency list.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public List<EntityBase<int, string>> GetCurrencyList(GetExchangeCurrenciesCriteria criteria)
@@ -246,7 +246,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoWinLossByA
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetReport(GetReportCriteria criteria)
@@ -368,7 +368,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoWinLossByA
         /// <param name="report">The report.</param>
         /// <param name="getReportCriteria">The get report criteria.</param>
         /// <returns>First sub level of report data after sort.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public virtual WinLossInfo SortFirstSubLevelReport(WinLossInfo report, GetReportCriteria getReportCriteria)
@@ -485,7 +485,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoWinLossByA
         /// </summary>
         /// <param name="data">The data information.</param>
         /// <returns>The win loss information.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetWinLossInfo(WinLossInfoEntity data)
@@ -562,7 +562,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoWinLossByA
         /// <param name="periodType">Type of the period.</param>
         /// <param name="maxColumnIndex">Maximum index of the column.</param>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportReport_Header(
@@ -739,7 +739,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoWinLossByA
         /// <param name="twoDecimalNegativeNumberStyle">The two decimal negative number style.</param>
         /// <param name="criteria">The criteria.</param>
         /// <param name="info">The information.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportReport_WinLossRow(
@@ -817,7 +817,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoWinLossByA
         /// <param name="startColumn">The start column.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportReport_GrandTotal(
@@ -913,7 +913,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.LiveCasinoWinLossByA
         /// <param name="twoDecimalNegativeNumberStyle">The two decimal negative number style.</param>
         /// <param name="criteria">The criteria.</param>
         /// <param name="info">The information.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportReport_WinLossRow_GrandTotal(

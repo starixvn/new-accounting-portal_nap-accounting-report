@@ -29,7 +29,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
         /// <param name="startRow">The start row.</param>
         /// <param name="startColumn">The start column.</param>
         /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportTopPunter_ByUser_BetType_Daily(

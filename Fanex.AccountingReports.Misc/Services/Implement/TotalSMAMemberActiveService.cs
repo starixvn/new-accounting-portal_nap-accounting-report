@@ -52,7 +52,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// Exports the report.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportReport(GetTotalSMAMemberActiveCriteria criteria)
@@ -274,7 +274,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The report.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public IList<SMASummaryInfo> GetReport(GetTotalSMAMemberActiveCriteria criteria)
@@ -469,7 +469,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// <param name="status">The status.</param>
         /// <param name="sheetNo">The sheet no.</param>
         /// <param name="siteNames">The site names.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportStatusDetails(

@@ -123,7 +123,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         /// <param name="loginToken">The loginToken.</param>
         /// <returns>The index page.</returns>
         [HttpPost]
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public ActionResult Index(string username, string password, string loginToken, string returnUrl)

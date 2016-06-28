@@ -152,7 +152,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         /// Exports the report.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportReport(GetParlayWonReportCriteria criteria)
@@ -508,7 +508,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The full report from data.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private ParlayWonTransaction GetFullReportFromDatabase(GetParlayWonReportCriteria criteria)
@@ -598,7 +598,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         /// <param name="startColumn">The start column.</param>
         /// <param name="currentRow">The current row.</param>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportReportHeader(
@@ -754,7 +754,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         /// <param name="intStyle">The INT style.</param>
         /// <param name="twoDecimalNumberStyle">The two decimal number style.</param>
         /// <param name="fourDecimalNumberStyle">The four decimal number style.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportTransactionRow(

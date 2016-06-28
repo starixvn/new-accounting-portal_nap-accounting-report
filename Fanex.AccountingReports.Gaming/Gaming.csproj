@@ -82,9 +82,6 @@
     <Compile Include="Constants\LiveCasinoProductConstants.cs" />
     <Compile Include="Constants\PeriodTypeConstants.cs" />
     <Compile Include="Constants\RowTypeConstants.cs" />
-    <Compile Include="Controllers\BingoOutStandingController.cs" />
-    <Compile Include="Controllers\BingoStatisticController.cs" />
-    <Compile Include="Controllers\BingoWinLossController.cs" />
     <Compile Include="Controllers\CasinoWinLossController.cs" />
     <Compile Include="Controllers\CasinoGameStatisticController.cs" />
     <Compile Include="Controllers\LiveCasinoAgencyWinLossController.cs" />
@@ -102,9 +99,6 @@
     <Compile Include="Core\Configurations\VirtualSportsWinLossSection\VirtualSportsCollection.cs" />
     <Compile Include="Core\Configurations\VirtualSportsWinLossSection\VirtualSportsElement.cs" />
     <Compile Include="Core\Configurations\VirtualSportsWinLossSection\VirtualSportsWinLossSection.cs" />
-    <Compile Include="Criteria\BingoOutStanding\GetReportCriteria.cs" />
-    <Compile Include="Criteria\BingoStatistic\GetReportCriteria.cs" />
-    <Compile Include="Criteria\BingoWinLoss\GetReportCriteria.cs" />
     <Compile Include="Criteria\CasinoGameStatistic\GetLicenseeListCriteria.cs" />
     <Compile Include="Criteria\CasinoGameStatistic\GetReportByHourlyCriteria.cs" />
     <Compile Include="Criteria\CasinoGameStatistic\GetProductListCriteria.cs" />
@@ -143,9 +137,6 @@
     <Compile Include="Criteria\VirtualSportsWinLoss\GetVirtualSportsWinLossCriteria.cs" />
     <Compile Include="Criteria\VirtualSportsWinLoss\GetVirtualSportsWinLossDetailCriteria.cs" />
     <Compile Include="GamingAreaRegistration.cs" />
-    <Compile Include="Models\BingoOutStanding\WinLossInfo.cs" />
-    <Compile Include="Models\BingoStatistic\WinLossInfo.cs" />
-    <Compile Include="Models\BingoWinLoss\WinLossInfo.cs" />
     <Compile Include="Models\CasinoGameStatistic\GameTypeItem.cs" />
     <Compile Include="Models\CasinoGameStatistic\Hourly.cs" />
     <Compile Include="Models\CasinoGameStatistic\ProductItem.cs" />
@@ -208,10 +199,6 @@
     <Compile Include="Repositories\Implement\VirtualSportsWinLossRepository.cs" />
     <Compile Include="Repositories\Interface\ILiveCasinoGameFinancialReportRepository.cs" />
     <Compile Include="Repositories\Implement\LiveCasinoGameFinancialReportRepository.cs" />
-    <Compile Include="Repositories\Implement\BingoOutStandingRepository.cs" />
-    <Compile Include="Repositories\Implement\BingoStatisticRepository.cs" />
-    <Compile Include="Repositories\Interface\IBingoOutStandingRepository.cs" />
-    <Compile Include="Repositories\Interface\IBingoStatisticRepository.cs" />
     <Compile Include="Repositories\Interface\INumberGameMonthlyWinLossRepository.cs" />
     <Compile Include="Repositories\Interface\INumberGameFinancialRepository.cs" />
     <Compile Include="Repositories\Interface\ILiveCasinoGameStatisticRepository.cs" />
@@ -233,11 +220,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Services\Implement\BingoOutStanding\BingoOutStandingService.cs" />
-    <Compile Include="Services\Implement\BingoStatistic\BingoStatisticService.cs" />
-    <Compile Include="Services\Implement\BingoWinLoss\BingoWinLossService.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Services\Implement\CasinoGameStatistic\Utilities.cs" />
     <Compile Include="Services\Implement\CasinoGameStatistic\ExportExcelHourlyService.cs" />
@@ -297,11 +279,8 @@
     <Compile Include="Services\Interface\CasinoGameStatistic\ICasinoGameStatisticService.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Services\Interface\IBingoWinLossService.cs" />
     <Compile Include="Services\Interface\ILiveCasinoAgencyWinLossService.cs" />
     <Compile Include="Services\Interface\ILiveCasinoGameFinancialReportService.cs" />
-    <Compile Include="Services\Interface\IBingoOutStandingService.cs" />
-    <Compile Include="Services\Interface\IBingoStatisticService.cs" />
     <Compile Include="Services\Interface\IGamingService.cs" />
     <Compile Include="Services\Interface\ILiveCasinoGameStatisticService.cs" />
     <Compile Include="Services\Interface\ILiveCasinoProductService.cs" />

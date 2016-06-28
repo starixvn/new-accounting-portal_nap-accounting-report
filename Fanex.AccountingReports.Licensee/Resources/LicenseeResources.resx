@@ -117,33 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AmountDueONEWorks" xml:space="preserve">
-    <value>Amount Due To ONEWorks</value>
-  </data>
-  <data name="CACHE_ALL_RESELLERS" xml:space="preserve">
-    <value>CACHE_ALL_RESELLERS</value>
-  </data>
-  <data name="CACHE_LICENSEE_BY_RESELLER" xml:space="preserve">
-    <value>Fanex.AccountingReports.Licensee.TotalTransactionsByLicensee.ResellerByLicensee</value>
-  </data>
-  <data name="CACHE_TOTAL_TRANSACTIONS_BY_LICENSEE" xml:space="preserve">
-    <value>Fanex.AccountingReports.Licensee.TotalTransactionsByLicensee.TotalTransactionsByLicensee</value>
-  </data>
-  <data name="DistributorRevenue" xml:space="preserve">
-    <value>Distributor's Revenue</value>
-  </data>
-  <data name="LiveCasinoWinLoss" xml:space="preserve">
-    <value>Live Casino Win Loss</value>
-  </data>
-  <data name="LiveCasinoWL_NoteMessage" xml:space="preserve">
-    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ All figures are displayed in EUR&lt;/li&gt;&lt;li&gt;+ Data is only available up to yesterday (after 5AM GMT-4)&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;</value>
-  </data>
-  <data name="LiveCasinoWL_ReportFileName" xml:space="preserve">
-    <value>Licensee-LiveCasinoWinLoss</value>
-  </data>
-  <data name="LupineRevenue" xml:space="preserve">
-    <value>Lupine's Revenue</value>
-  </data>
   <data name="NegativeBalance" xml:space="preserve">
     <value>Negative Balance</value>
   </data>
@@ -152,15 +125,6 @@
   </data>
   <data name="NegativeBalance_ReportFileName" xml:space="preserve">
     <value>Licensee-NegativeBalance</value>
-  </data>
-  <data name="NumberGameWL_NoteMessage" xml:space="preserve">
-    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ All figures are displayed in EUR&lt;/li&gt;&lt;li&gt;+ Data is only available up to yesterday (after 5AM GMT-4)&lt;/li&gt;&lt;li&gt;+ Licensing fee for 12bet has been dropped from 17% to 15% effective from 19th September 2012.&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;</value>
-  </data>
-  <data name="NumberGameWL_NumberGameWinloss" xml:space="preserve">
-    <value>NumberGame Win Loss</value>
-  </data>
-  <data name="NumberGameWL_ReportFileName" xml:space="preserve">
-    <value>Licensee-NumberGameWinLoss</value>
   </data>
   <data name="PeakConcurrentUser" xml:space="preserve">
     <value>Peak Concurrent Users</value>
@@ -180,92 +144,10 @@
   <data name="PeakConcurrentUser_Total" xml:space="preserve">
     <value>Total Peak Concurrent Users</value>
   </data>
-  <data name="PleaseSelectALicensee" xml:space="preserve">
-    <value>Please select a Licensee!</value>
-  </data>
   <data name="Site" xml:space="preserve">
     <value>Site</value>
   </data>
-  <data name="StarExpressRevenue" xml:space="preserve">
-    <value>Star Express's Revenue</value>
-  </data>
-  <data name="TotalTransactionByLicensee_EURCost" xml:space="preserve">
-    <value>Transaction Cost (EUR)</value>
-  </data>
-  <data name="TotalTransactionByLicensee_FilterNote" xml:space="preserve">
-    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ Data is only available up to yesterday (after 5AM GMT-4).&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;li&gt;- View in full month range for accurate Total Costs of &lt;span class="bold-weight-tip"&gt;PIH/FDL&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;</value>
-  </data>
-  <data name="TotalTransactionByLicensee_Header" xml:space="preserve">
-    <value>Total Transactions by Licensee on {0}</value>
-  </data>
-  <data name="TotalTransactionByLicensee_ReportFilterText" xml:space="preserve">
-    <value>Licensee: 
-     Normal: {0}
-     Starlit: {1}
-     Month: {2}
-     Products: {3}</value>
-  </data>
-  <data name="TotalTransactionByLicensee_ReportName" xml:space="preserve">
-    <value>Total_Transactions_By_Licensee</value>
-  </data>
-  <data name="TotalTransactionByLicensee_ReportTitle" xml:space="preserve">
-    <value>Total Transactions by Licensee</value>
-  </data>
-  <data name="TotalTransactionByLicensee_SheetName" xml:space="preserve">
-    <value>Total Transactions</value>
-  </data>
-  <data name="TotalTransactions" xml:space="preserve">
-    <value>Total Transactions</value>
-  </data>
-  <data name="VirtualSports_Report" xml:space="preserve">
-    <value>Virtual Sports Win Loss</value>
-  </data>
-  <data name="VirtualSports_ReportFileName" xml:space="preserve">
-    <value>Licensee-VirtualSportsWinLoss</value>
-  </data>
-  <data name="VirtualSportWL_NoteMessage" xml:space="preserve">
-    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ All figures are displayed in EUR&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;</value>
-  </data>
-  <data name="WinLossByLicensee_AgentReportTitle" xml:space="preserve">
-    <value>Win Loss By Licensee for {0} from {1} to {2} in {3}{4}</value>
-  </data>
-  <data name="WinLossByLicensee_CurrencyReportTitle" xml:space="preserve">
-    <value>Win Loss By Licensee for {0} from {1} to {2} in {3}{4}</value>
-  </data>
   <data name="WinLossByLicensee_FilterNote" xml:space="preserve">
     <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ This report is using OANDA exchange rate for currency conversion&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;</value>
-  </data>
-  <data name="WinLossByLicensee_MemberReportTitle" xml:space="preserve">
-    <value>Win Loss By Licensee for {0} from {1} to {2} in {3}{4}</value>
-  </data>
-  <data name="WinLossByLicensee_ReportName" xml:space="preserve">
-    <value>Win_Loss_By_Licensee_For_{0}_From_{1}_To_{2}</value>
-  </data>
-  <data name="WinLossByLicensee_ReportTitle_BaseCurrency" xml:space="preserve">
-    <value> (Base {0})</value>
-  </data>
-  <data name="WinLossByLicensee_SheetName" xml:space="preserve">
-    <value>Win Loss By Licensee</value>
-  </data>
-  <data name="PlaytechCasinoWinLoss_ReportName" xml:space="preserve">
-    <value>Playtech_Casino_Win_Loss_From_{0}_To_{1}</value>
-  </data>
-  <data name="PlaytechCasinoWinLoss_ReportTitle" xml:space="preserve">
-    <value>Playtech Casino Win Loss From {0} To {1}</value>
-  </data>
-  <data name="PlaytechCasinoWinLoss_SheetName" xml:space="preserve">
-    <value>Playtech Casino Win Loss</value>
-  </data>
-  <data name="KenoWinLossReportInformation" xml:space="preserve">
-    <value>&lt;ul class="filter-note"&gt;&lt;li&gt;+ This report is using OANDA exchange rate for currency conversion&lt;/li&gt;&lt;li&gt;+ Data is only available up to yesterday (after 5AM GMT-4)&lt;/li&gt;&lt;li&gt;+ For data accuracy:&lt;ul&gt;&lt;li&gt;- Generate the billing report &lt;span class="bold-tip"&gt;5 days after month-end.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/ul&gt;</value>
-  </data>
-  <data name="KenoWinLoss_ExcelFileName" xml:space="preserve">
-    <value>KenoWinLoss_for_{0}_from_{1}_to_{2}_in_{3}-{4}_Country/Market</value>
-  </data>
-  <data name="KenoWinLoss_ReportTitle" xml:space="preserve">
-    <value>Keno Win Loss Report for {0} from {1} to {2} in {3} - {4} Country/Market</value>
-  </data>
-  <data name="KenoWinLoss_SheetName" xml:space="preserve">
-    <value>KenoWinLoss</value>
   </data>
 </root>

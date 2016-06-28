@@ -70,7 +70,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
         /// <param name="eightRMTable">The eight RM table.</param>
         /// <param name="barmTable">The BARM table.</param>
         /// <returns>The league win loss by sport.</returns>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public List<dynamic> GetLeagueWinLossBySport(

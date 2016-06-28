@@ -61,24 +61,6 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cockfighting - Product Win/Loss report for {0}.
-        /// </summary>
-        public static string CockFighting_ReportTitle {
-            get {
-                return ResourceManager.GetString("CockFighting_ReportTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cockfighting Product Arena {0} Win/Loss Report For {1}.
-        /// </summary>
-        public static string CockFightingMatchByArena_ReportTitle {
-            get {
-                return ResourceManager.GetString("CockFightingMatchByArena_ReportTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Credit_Term_Install_Amount_Report_{0}.
         /// </summary>
         public static string CreditTermInstallAmount_ReportName {
@@ -142,15 +124,6 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Daily Win Loss 2h - Cockfighting.
-        /// </summary>
-        public static string Daily_WinLoss2h_Cockfighting_SheetName {
-            get {
-                return ResourceManager.GetString("Daily_WinLoss2h_Cockfighting_SheetName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Daily Win Loss 2h - Colossus Bets.
         /// </summary>
         public static string Daily_WinLoss2h_ColossusBets_SheetName {
@@ -201,15 +174,6 @@ namespace Fanex.AccountingReports.Main.Resources {
         public static string DailyWinLoss2h_CasinoReport_Title {
             get {
                 return ResourceManager.GetString("DailyWinLoss2h_CasinoReport_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to MAIN &gt; COCKFIGHTING PRODUCT WIN/LOSS REPORT.
-        /// </summary>
-        public static string DailyWinLoss2h_CockfightingReport_Title {
-            get {
-                return ResourceManager.GetString("DailyWinLoss2h_CockfightingReport_Title", resourceCulture);
             }
         }
         
@@ -269,7 +233,7 @@ namespace Fanex.AccountingReports.Main.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to * Virtual All Total: Soccer + Metric Gaming - Superlive+ Other Sports + Parlay
-        ///* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P + Bettrade + Colossus Bets + Cockfighting.
+        ///* Grand Total: Virtual All Total + 8RM + BARM + Number Game + Live Casino + Casino + Virtual Sports + Keno + Racing + Bingo + P2P + Bettrade + Colossus Bets.
         /// </summary>
         public static string DailyWinLoss2h_MainReportFooterNote {
             get {
@@ -791,15 +755,6 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MatchWinLoss2aDetailByArena_{0}.
-        /// </summary>
-        public static string MatchWinLoss2aDetailByArena_ReportName {
-            get {
-                return ResourceManager.GetString("MatchWinLoss2aDetailByArena_ReportName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to MatchWinLoss2aDetailByBetType_{0}.
         /// </summary>
         public static string MatchWinLoss2aDetailByBetType_ReportName {
@@ -989,15 +944,6 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cockfighting | Details report from {0} to {1}.
-        /// </summary>
-        public static string WinLossSummary3rd_CockFightingReportTitle {
-            get {
-                return ResourceManager.GetString("WinLossSummary3rd_CockFightingReportTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The Virtual Rate is applied for Sportsbook and Number Game products. Other products are based on Actual Rate.
         /// </summary>
         public static string WinLossSummary3rd_Note {
@@ -1039,15 +985,6 @@ namespace Fanex.AccountingReports.Main.Resources {
         public static string WinLossSummary3rd_SummaryReportTitle {
             get {
                 return ResourceManager.GetString("WinLossSummary3rd_SummaryReportTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CockfightingDetails_From_Date_{0}_To_Date_{1}.
-        /// </summary>
-        public static string WinLossSummary3rdCockFighting_ReportName {
-            get {
-                return ResourceManager.GetString("WinLossSummary3rdCockFighting_ReportName", resourceCulture);
             }
         }
         

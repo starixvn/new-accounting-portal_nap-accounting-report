@@ -32,7 +32,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// Exports the type of the detail report by bet.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportDetailReportByBetType(GetDetailReportByBetTypeCriteria criteria)
@@ -114,7 +114,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportMetricGamingDetailReportByBetType(GetMetricGamingDetailByBetTypeCriteria criteria)
@@ -255,7 +255,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="currentRow">The current row.</param>
         /// <param name="winLossInfo">The win loss information.</param>
         /// <param name="reportCellStyle">The report cell style.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportDetailReportRow_ByBetType(
@@ -347,7 +347,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
         /// <param name="grandTotal">The grand total.</param>
         /// <param name="totalTextStyle">The total text style.</param>
         /// <param name="totalDecimalNumberStyle">The total decimal number style.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportDetailReportTotal_ByBetType(

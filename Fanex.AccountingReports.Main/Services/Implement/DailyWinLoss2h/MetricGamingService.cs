@@ -38,7 +38,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
             _dailyWinLoss2hUtilityService = new DailyWinLoss2hUtilityService();
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public LiveAndNoneLiveReport GetMetricGamingBetTypes(GetMetricGamingBettypeCriteria criteria)
@@ -124,7 +124,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         /// Exports the live casino report.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportMetricGamingBettypeReport(GetMetricGamingBettypeCriteria criteria)

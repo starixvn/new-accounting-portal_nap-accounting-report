@@ -394,7 +394,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
             palette.SetColorAtIndex(GrandTotalBorderColorIndex, (byte)255, (byte)102, (byte)0);
         }
 
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private string GetProductBySportType(int id)
@@ -436,10 +436,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
 
                 case ProductContants.Allbet:
                     product = Labels.Allbet;
-                    break;
-
-                case ProductContants.Cockfighting:
-                    product = Labels.Cockfighting;
                     break;
 
                 case ProductContants.MetricGamingSuperlive:
