@@ -144,7 +144,8 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                     text: productGroup.Name,
                     checked: true,
                     enable: true,
-                    cssClass: "bold"
+                    cssClass: "bold",
+                    show: false
                 });
 
                 continue;
@@ -156,7 +157,8 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                     text: productGroup.Name,
                     checked: false,
                     enable: true,
-                    cssClass: "bold"
+                    cssClass: "bold",
+                    show: false
                 });
 
                 continue;
@@ -181,7 +183,8 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                     text: productGroup.Name,
                     checked: false,
                     enable: true,
-                    cssClass: "bold"
+                    cssClass: "bold",
+                    show: false
                 });
 
                 continue;
@@ -200,7 +203,8 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                         value: sportGroup.Id + "_" + betType.Id,
                         text: betType.Name,
                         checked: false,
-                        enable: true
+                        enable: true,
+                        show: false
                     });
                 }
 
@@ -210,6 +214,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                     text: productGroup.Name,
                     checked: false,
                     enable: true,
+                    show: false,
                     items: betTypeList
                 });
             }
@@ -226,7 +231,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
             showFooter: false,
             checkAllText: 'All',
             isUsedCustomCheckAllText: true,
-            customCheckAllText: 'All',
+            useCustomCheckAllText: 'All',
             noItemText: noItemText,
             listData: ddProduct,
             onCheck: function () {
@@ -254,7 +259,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                 var sportGroup = sports[i];
                 var sportLength = sportGroup.ChildsInfo ? sportGroup.ChildsInfo.length : 0;
                 var ddSportGroup = [];
-                if (_cachedData.Sportbook_SportID.contains(sportGroup.Id)) {
+                if (_cachedData.Sportbook_SportID.contains(sportGroup.Id) && isExistsSportbook == true) {
                     for (var j = 0; j < sportLength; j++) {
                         var sport = sportGroup.ChildsInfo[j];
                         var betTypeLength = sport.ChildsInfo ? sport.ChildsInfo.length : 0;
@@ -281,7 +286,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                             enable: true,
                             cssClass: "",
                             items: ddBetType,
-                            show: true
+                            show: false
                         });
                     }
                     if (sportGroup.Name != "Parlay" ||
@@ -293,11 +298,12 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                             checked: isExistsSportbook == true ? true : false,
                             enable: true,
                             cssClass: "",
-                            items: ddSportGroup
+                            items: ddSportGroup,
+                            show: false
                         });
                     }
                 }
-                if (sportGroup.Id <= 186 && sportGroup.Id >= 180) {
+                if (sportGroup.Id <= 186 && sportGroup.Id >= 180 && isExistsVirtualSports == true) {
                     for (var j = 0; j < sportLength; j++) {
                         var sport = sportGroup.ChildsInfo[j];
                         var betTypeLength = sport.ChildsInfo ? sport.ChildsInfo.length : 0;
@@ -310,7 +316,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                                                                 "_BetType" + betType.Id,
                                 value: sport.Id + "_" + betType.Id,
                                 text: betType.Name,
-                                checked: isExistsVirtualSports == true ? true : false,
+                                checked: true,
                                 enable: true,
                                 cssClass: ""
                             });
@@ -324,7 +330,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                             enable: true,
                             cssClass: "",
                             items: ddBetType,
-                            show: true
+                            show: false
                         });
                     }
                     if (sportGroup.Name != "Parlay" ||
@@ -336,7 +342,8 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                             checked: isExistsVirtualSports == true ? true : false,
                             enable: true,
                             cssClass: "",
-                            items: ddSportGroup
+                            items: ddSportGroup,
+                            show: false
                         });
                     }
                 }
@@ -352,7 +359,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
             showFooter: false,
             checkAllText: 'All',
             isUsedCustomCheckAllText: true,
-            customCheckAllText: 'All',
+            useCustomCheckAllText: 'All',
             noneSelectedText: 'Select an option',
             noItemText: 'No sport found.',
             disabled: (!isExistsSportbook && !isExistsVirtualSports),
