@@ -442,10 +442,21 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
         _params.historyBetCountReport.ToDate = _tables.monthPicker.monPickr("getToDate", FormatConstant.MMM_DD_YY_STRING_MONTH_PICKER);
         var selectedProducts = _tables.ddlProduct.fanexMultiSelect('getItems', true);
         var selectedSports = _tables.ddlSport.fanexMultiSelect('getItems', true);
+        selectedProducts = checkParlay(selectedProducts);
         _params.historyBetCountReport.SportBettype = selectedSports.join(',') + "," + selectedProducts.join(',');
         _cachedData.SelectedSportBettype = selectedSports;
         _params.historyBetCountReport.SortBy = '';
     };
+
+    var checkParlay = function (selectedProducts) {
+        for (var i = selectedProducts.length ; i--;) {
+            if (selectedProducts[i] === "1_0" || selectedProducts[i] === "5_0") {
+                selectedProducts.splice(i, 1);
+            }
+        }
+        return selectedProducts;
+    }
+
     var validateParams = function () {
         var isValid = true;
         var message = '';
