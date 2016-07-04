@@ -135,6 +135,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
         var noItemText = 'No product found.';
         var ddId = "ddlProduct_HistoryReport_";
         var productLength = products ? products.length : 0;
+        var isSetDefaultCollapse = true;
         for (var i = 0; i < productLength; i++) {
             var productGroup = products[i];
             if (productGroup.Name.toLowerCase() == "sportsbook") {
@@ -144,8 +145,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                     text: productGroup.Name,
                     checked: true,
                     enable: true,
-                    cssClass: "bold",
-                    show: false
+                    cssClass: "bold"
                 });
 
                 continue;
@@ -157,8 +157,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                     text: productGroup.Name,
                     checked: false,
                     enable: true,
-                    cssClass: "bold",
-                    show: false
+                    cssClass: "bold"
                 });
 
                 continue;
@@ -183,8 +182,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                     text: productGroup.Name,
                     checked: false,
                     enable: true,
-                    cssClass: "bold",
-                    show: false
+                    cssClass: "bold"
                 });
 
                 continue;
@@ -203,8 +201,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                         value: sportGroup.Id + "_" + betType.Id,
                         text: betType.Name,
                         checked: false,
-                        enable: true,
-                        show: false
+                        enable: true
                     });
                 }
 
@@ -214,7 +211,6 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                     text: productGroup.Name,
                     checked: false,
                     enable: true,
-                    show: false,
                     items: betTypeList
                 });
             }
@@ -240,6 +236,12 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                     this.id == 'ddlProduct_HistoryReportHeaderCheckBox') {
                     self.getDropdownSport();
                 }
+            },
+            onOpen: function () {
+                if (isSetDefaultCollapse) {
+                    $('#ddlProduct_HistoryReportCollapseButton').trigger('click')
+                    isSetDefaultCollapse = false;
+                }
             }
         });
 
@@ -253,6 +255,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
         var selectedProducts = _tables.ddlProduct.fanexMultiSelect('getItems', true);
         var isExistsSportbook = $.inArray(_cachedData.Sportbook_ProductId, selectedProducts) != -1;
         var isExistsVirtualSports = $.inArray(_cachedData.VirtualSport_GroupId, selectedProducts) != -1;
+        var isSetDefaultCollapse = true;
         if (isExistsSportbook || isExistsVirtualSports) {
             var sportGrouplength = sports ? sports.length : 0;
             for (var i = 0; i < sportGrouplength; i++) {
@@ -285,8 +288,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                             checked: isExistsSportbook == true ? true : false,
                             enable: true,
                             cssClass: "",
-                            items: ddBetType,
-                            show: false
+                            items: ddBetType
                         });
                     }
                     if (sportGroup.Name != "Parlay" ||
@@ -298,8 +300,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                             checked: isExistsSportbook == true ? true : false,
                             enable: true,
                             cssClass: "",
-                            items: ddSportGroup,
-                            show: false
+                            items: ddSportGroup
                         });
                     }
                 }
@@ -329,8 +330,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                             checked: isExistsVirtualSports == true ? true : false,
                             enable: true,
                             cssClass: "",
-                            items: ddBetType,
-                            show: false
+                            items: ddBetType
                         });
                     }
                     if (sportGroup.Name != "Parlay" ||
@@ -342,8 +342,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                             checked: isExistsVirtualSports == true ? true : false,
                             enable: true,
                             cssClass: "",
-                            items: ddSportGroup,
-                            show: false
+                            items: ddSportGroup
                         });
                     }
                 }
@@ -365,6 +364,12 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
             disabled: (!isExistsSportbook && !isExistsVirtualSports),
             listData: ddSport,
             onCheck: function () {
+            },
+            onOpen: function () {
+                if (isSetDefaultCollapse) {
+                    $('#ddlSport_HistoryReportCollapseButton').trigger('click')
+                    isSetDefaultCollapse = false;
+                }
             }
         });
 
