@@ -342,7 +342,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Company;
+            currentCellRange.Value = Labels.Company_Income;
             currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
             currentRow++;

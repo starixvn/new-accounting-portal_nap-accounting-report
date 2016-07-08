@@ -29,7 +29,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public Labels() {
+        internal Labels() {
         }
         
         /// <summary>
@@ -511,15 +511,6 @@ namespace Fanex.AccountingReports.Misc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cockfighting.
-        /// </summary>
-        public static string Cockfighting {
-            get {
-                return ResourceManager.GetString("Cockfighting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Code.
         /// </summary>
         public static string Code {
@@ -588,6 +579,15 @@ namespace Fanex.AccountingReports.Misc.Resources {
         public static string Company_comm {
             get {
                 return ResourceManager.GetString("Company_comm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Income.
+        /// </summary>
+        public static string Company_Income {
+            get {
+                return ResourceManager.GetString("Company_Income", resourceCulture);
             }
         }
         
