@@ -561,7 +561,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
         _cachedData.lastSorterBy = column;
         var sortBy = self.Enums.sortBy.None;
         switch (columnId) {
-            case 'colHeaderTotalTurnover_HistoryReport':
+            case 'colHeaderTurnover_HistoryReport':
                 sortBy = self.Enums.sortBy.TotalTurnover;
                 break;
             case 'colHeaderMemberWinLoss_HistoryReport':
