@@ -4,7 +4,7 @@
     </div>
     <div class="grid-toolbox">
         <input id="betCountReport_ExportExcel" class="btnExcel" type="button" title="Export to Excel"
-            value="" name="btnExcel" />
+               value="" name="btnExcel" />
     </div>
 </div>
 <div id="betCountReport" class="freegrid display-none">
@@ -33,8 +33,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>
@@ -50,42 +49,23 @@
                         </th>
                         <th rowspan="2">
                             <div class="table-cell col120 height55">
-                                @Labels.Bet_Count</div>
-                        </th>
-                        <th rowspan="2">
-                            <div class="table-cell col140 height55 colSorter">
-                                <div class="display-inline-block">
-                                    @Labels.Total_Turnover</div>
-                                <div id="colHeaderTotalTurnover" class="divSorter">
-                                </div>
-                            </div>
-                        </th>
-                        <th rowspan="2">
-                            <div class="table-cell col150 height55 colSorter">
-                                <div class="display-inline-block">
-                                    @Labels.Member_Win_Loss</div>
-                                <div id="colHeaderMemberWinLoss" class="divSorter">
-                                </div>
-                            </div>
-                        </th>
-                        <th rowspan="2">
-                            <div class="table-cell col140 height55 colSorter">
-                                <div class="display-inline-block">
-                                    @Labels.Margin_Percent
-                                </div>
-                                <div id="colHeaderMarginPercent" class="divSorter">
-                                </div>
+                                @Labels.Bet_Count
                             </div>
                         </th>
                         <th colspan="3">
                             <div class="table-cell col430 height25">
+                                @Labels.Member
+                            </div>
+                        </th>
+                        <th colspan="4">
+                            <div class="table-cell col530 height25">
                                 @Labels.SMA_Winloss
                             </div>
                         </th>
                         <th rowspan="2">
                             <div class="table-cell col140 height55 colSorter">
                                 <div class="display-inline-block">
-                                    @Labels.Company
+                                    @Labels.Company_Income
                                 </div>
                                 <div id="colHeaderCompanyWinLoss" class="divSorter">
                                 </div>
@@ -95,7 +75,35 @@
                     <tr>
                         <th>
                             <div class="table-cell col140 table-cell height25 colSorter">
-                                <div class="display-inline-block">@Labels.Agent
+                                <div class="display-inline-block">
+                                    @Labels.Turnover
+                                </div>
+                                <div id="colHeaderTurnover" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col150 height25 colSorter">
+                                <div class="display-inline-block">
+                                    @Labels.WinLoss
+                                </div>
+                                <div id="colHeaderMemberWinLoss" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col80 height25 colSorter">
+                                <div class="display-inline-block">
+                                    @Labels.Margin_Percent
+                                </div>
+                                <div id="colHeaderMarginPercent" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 table-cell height25 colSorter">
+                                <div class="display-inline-block">
+                                    @Labels.Agent
                                 </div>
                                 <div id="colHeaderAgentWinLoss" class="divSorter">
                                 </div>
@@ -119,10 +127,18 @@
                                 </div>
                             </div>
                         </th>
+                        <th>
+                            <div class="table-cell col140 height25 colSorter">
+                                <div class="display-inline-block">
+                                    @Labels.Total
+                                </div>
+                                <div id="colHeaderTotalWinloss" class="divSorter">
+                                </div>
+                            </div>
+                        </th>
                     </tr>
                 </thead>
-                <tbody>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>
@@ -138,48 +154,64 @@
                         </th>
                         <th rowspan="2">
                             <div class="table-cell col120 height55">
-                                @Labels.Bet_Count</div>
-                        </th>
-                        <th rowspan="2">
-                            <div class="table-cell col140 height55">
-                                @Labels.Total_Turnover</div>
-                        </th>
-                        <th rowspan="2">
-                            <div class="table-cell col150 height55">
-                                @Labels.Member_Win_Loss</div>
-                        </th>
-                        <th rowspan="2">
-                            <div class="table-cell col140 height55">
-                                @Labels.Margin_Percent</div>
+                                @Labels.Bet_Count
+                            </div>
                         </th>
                         <th colspan="3">
                             <div class="table-cell col430 height25">
+                                @Labels.Member
+                            </div>
+                        </th>
+                        <th colspan="4">
+                            <div class="table-cell col530 height25">
                                 @Labels.SMA_Winloss
                             </div>
                         </th>
                         <th rowspan="2">
                             <div class="table-cell col140 height55">
-                                @Labels.Company
+                                @Labels.Company_Income
                             </div>
                         </th>
                     </tr>
                     <tr>
                         <th>
                             <div class="table-cell col140 table-cell height25">
-                                @Labels.Agent</div>
+                                @Labels.Turnover
+                            </div>
                         </th>
                         <th>
                             <div class="table-cell col140 height25">
-                                @Labels.Master</div>
+                                @Labels.WinLoss
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col80 height25">
+                                @Labels.Margin_Percent
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 table-cell height25">
+                                @Labels.Agent
+                            </div>
                         </th>
                         <th>
                             <div class="table-cell col140 height25">
-                                @Labels.Super</div>
+                                @Labels.Master
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25">
+                                @Labels.Super
+                            </div>
+                        </th>
+                        <th>
+                            <div class="table-cell col140 height25">
+                                @Labels.Total
+                            </div>
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>

@@ -9,11 +9,6 @@
 
 namespace Fanex.AccountingReports.Misc.Services.Implement
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Drawing;
-    using System.Linq;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
@@ -26,12 +21,20 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
     using Fanex.AccountingReports.Misc.Resources;
     using Fanex.AccountingReports.Misc.Services.Interface;
     using Fanex.Common;
+    using Models.BetCount;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class BetCountService : ServiceBase, IBetCountService
     {
+        private static Dictionary<object, string> _sportTypeNameCache;
+
         private enum ReportRowType
         {
             /// <summary>
@@ -133,7 +136,8 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                                                AgentWinLoss = Converter.ToDecimal(transaction.AgentWL),
                                                MasterWinLoss = Converter.ToDecimal(transaction.MasterWL),
                                                SuperWinLoss = Converter.ToDecimal(transaction.SuperWL),
-                                               CompanyWinLoss = Converter.ToDecimal(transaction.Company)
+                                               CompanyWinLoss = Converter.ToDecimal(transaction.Company),
+                                               TotalWinLoss = Converter.ToDecimal(transaction.SMAWL)
                                            };
 
                                            transactionData.MarginPercent = CalculateMargin(transactionData.MemberWinLoss, transactionData.Turnover);
@@ -291,9 +295,9 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             CellRange currentCellRange;
 
             currentColumn = startColumn;
-            for (int colIndex = 0; colIndex < 9; colIndex++)
+            for (int colIndex = 0; colIndex < 10; colIndex++)
             {
-                worksheet.Columns[startColumn + colIndex].Width = 140 * ExcelExtensions.FontWidth;
+                worksheet.Columns[startColumn + colIndex].Width = 150 * ExcelExtensions.FontWidth;
             }
 
             var title = string.Format(
@@ -302,13 +306,13 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 criteria.Dateend.ToShortFormatedDate());
 
             currentColumn = startColumn;
-            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 8);
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 9);
             currentCellRange.Merged = true;
             currentCellRange.Value = title;
             currentCellRange.Style.FormatTitleCell(titleColor);
             currentRow += 2;
 
-            worksheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 8);
+            worksheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 9);
 
             //// First Row
             currentColumn = startColumn;
@@ -324,39 +328,45 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
 
-            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-            currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Total_Turnover;
-            currentCellRange.Style.FormatTitleCell(headerColor);
-            currentColumn++;
-
-            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-            currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Member_Win_Loss;
-            currentCellRange.Style.FormatTitleCell(headerColor);
-            currentColumn++;
-
-            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-            currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Margin_Percent;
-            currentCellRange.Style.FormatTitleCell(headerColor);
-            currentColumn++;
-
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 2);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.SMA_Winloss;
+            currentCellRange.Value = Labels.Member;
             currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn += 3;
 
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 3);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.SMA_Winloss;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn += 4;
+
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Company;
+            currentCellRange.Value = Labels.Company_Income;
             currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
             currentRow++;
 
             //// Second Row
-            currentColumn = startColumn + 5;
+            currentColumn = startColumn + 2;
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Total_Turnover;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Member_Win_Loss;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Margin_Percent;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
             currentCellRange.Merged = true;
             currentCellRange.Value = Labels.Agent;
@@ -372,6 +382,12 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
             currentCellRange.Merged = true;
             currentCellRange.Value = Labels.Super;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Total;
             currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
             currentRow++;
@@ -434,7 +450,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             }
             else
             {
-                worksheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 8);
+                worksheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 9);
             }
         }
 
@@ -590,6 +606,12 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
             currentCellRange.Merged = true;
+            currentCellRange.Value = transaction.TotalWinLoss;
+            currentCellRange.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
             currentCellRange.Value = transaction.CompanyWinLoss;
             currentCellRange.Style = twoDecimalPositiveNumberStyle;
             currentColumn++;
@@ -637,12 +659,209 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 case "SuperWinLoss":
                     columnName = "SuperWinLoss";
                     break;
+                case "TotalWinLoss":
+                    columnName = "TotalWinLoss";
+                    break;
                 case "CompanyWinLoss":
                     columnName = "CompanyWinLoss";
                     break;
             }
 
             return columnName;
+        }
+
+        public List<ProductInfo> GetProducts(GetProductsCriteria criteria)
+        {
+            try
+            {
+                var rawData = this.GetReportData<dynamic>(criteria);
+                List<ProductInfo> products = new List<ProductInfo>();
+                var productGroups = rawData.GroupBy(rawInfo => rawInfo.ProductName);
+
+                foreach (var productGroup in productGroups)
+                {
+                    var product = new ProductInfo
+                    {
+                        Name = Converter.ToString2(productGroup.Key),
+                        ChildsInfo = new List<ProductInfo>()
+                    };
+
+                    if (string.Compare(product.Name, Labels.Sportsbook, true) == 0
+                        || string.Compare(product.Name, Labels.Virtual_Sports, true) == 0)
+                    {
+                        products.Add(product);
+                        continue;
+                    }
+
+                    var sportGroups = productGroup.GroupBy(rawInfo => new { rawInfo.SportID, rawInfo.SportName });
+
+                    foreach (var sportGroup in sportGroups)
+                    {
+                        var sport = CreateSportInfo(sportGroup.Key);
+                        foreach (var data in sportGroup)
+                        {
+                            sport.ChildsInfo.Add(CreateProductInfo(data));
+                        }
+
+                        product.ChildsInfo.Add(sport);
+                    }
+
+                    products.Add(product);
+                }
+
+                return products;
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+
+            return null;
+        }
+
+        public ProductInfo GenerateSports(IEnumerable<dynamic> rawData)
+        {
+            var indGroup = new ProductInfo
+            {
+                Id = Converter.ToInt(rawData.FirstOrDefault().SportID),
+                ChildsInfo = new List<ProductInfo>()
+            };
+            indGroup.Name = this.GetSportName(indGroup.Id);
+            indGroup.Id = GetGroupId(indGroup.Id);
+            foreach (var data in rawData)
+            {
+                indGroup.ChildsInfo.Add(CreateProductInfo(data));
+            }
+
+            return indGroup;
+        }
+
+        public int GetGroupId(int id)
+        {
+            switch (id)
+            {
+                case MiscConstants.MiscSoccerGroupId:
+                    return MiscConstants.MiscSoccerGroupId;
+                case MiscConstants.MiscParLayGroupId:
+                    return MiscConstants.MiscParLayGroupId;
+            }
+
+            return -111;
+        }
+
+        public ProductInfo GenerateOtherSports(IEnumerable<dynamic> rawData)
+        {
+            var indGroup = CreateGroupInfo(MiscConstants.MiscOtherSportId);
+            indGroup.Name = Labels.Others;
+            var sportGroups = rawData.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
+            foreach (var sportGroup in sportGroups)
+            {
+                var sport = CreateSportInfo(sportGroup.Key);
+                foreach (var data in sportGroup)
+                {
+                    sport.ChildsInfo.Add(CreateProductInfo(data));
+                }
+
+                indGroup.ChildsInfo.Add(sport);
+            }
+
+            return indGroup;
+        }
+
+        public ProductInfo CreateSportInfo(dynamic sportGroup)
+        {
+            return new ProductInfo
+            {
+                Id = Converter.ToInt(sportGroup.SportID),
+                Name = Converter.ToString2(sportGroup.SportName),
+                ChildsInfo = new List<ProductInfo>()
+            };
+        }
+
+        public ProductInfo CreateProductInfo(dynamic data)
+        {
+            return new ProductInfo
+            {
+                Id = Converter.ToInt(data.Bettype),
+                Name = Converter.ToString2(data.BettypeName)
+            };
+        }
+
+        public ProductInfo CreateGroupInfo(dynamic key)
+        {
+            return new ProductInfo
+            {
+                Id = Converter.ToInt(key),
+                ChildsInfo = new List<ProductInfo>()
+            };
+        }
+
+        public ProductInfo GenerateVirtualSports(IGrouping<dynamic, dynamic> rawData)
+        {
+            var indGroup = CreateGroupInfo(rawData.Key.SportID);
+            indGroup.Name = Converter.ToString2(rawData.Key.SportName);
+            foreach (var data in rawData)
+            {
+                indGroup.ChildsInfo.Add(CreateProductInfo(data));
+            }
+
+            return indGroup;
+        }
+
+        public List<ProductInfo> CalculateSportData(IEnumerable<dynamic> rawData, List<ProductInfo> sports)
+        {
+            var sportbookRaw = rawData.Where(r => r.ProductID == MiscConstants.MiscSportbookId);
+            var soccerGroupData = sportbookRaw.Where(r => r.SportID == MiscConstants.MiscSoccerGroupId);
+            var otherSportGroupData = sportbookRaw.Where(r =>
+                r.SportID != MiscConstants.MiscSoccerGroupId && r.SportID != MiscConstants.MiscParLaySportId);
+            var parlayGroupData = sportbookRaw.Where(r => r.SportID == MiscConstants.MiscParLaySportId);
+            var virtualsportRaw = rawData.Where(r => r.ProductID == MiscConstants.MiscVirtualSportsId);
+            var virtualsportGroups = virtualsportRaw.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
+
+            sports.Add(GenerateSports(soccerGroupData));
+            sports.Add(GenerateOtherSports(otherSportGroupData));
+            sports.Add(GenerateSports(parlayGroupData));
+            foreach (var virtualsportGroup in virtualsportGroups)
+            {
+                sports.Add(GenerateVirtualSports(virtualsportGroup));
+            }
+
+            return sports;
+        }
+
+        public List<ProductInfo> GetSports(GetProductsCriteria criteria)
+        {
+            try
+            {
+                var rawData = this.GetReportData<dynamic>(criteria);
+                List<ProductInfo> sports = new List<ProductInfo>();
+                var sportTypeList = rawData.Select(info => info.SportID as dynamic).Distinct().ToList();
+                BetCountService._sportTypeNameCache = CacheRef.SaveCacheRefResponse(
+                    sportTypeList, CacheRef.GetSportName, ref BetCountService._sportTypeNameCache);
+                CalculateSportData(rawData, sports);
+                SessionManager.Set<List<ProductInfo>>(MiscConstants.MiscSportsSessionKey, sports);
+                return sports;
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+
+            SessionManager.Set<List<ProductInfo>>(MiscConstants.MiscSportsSessionKey, null);
+            return null;
+        }
+
+        public string GetSportName(int sportId)
+        {
+            switch (sportId)
+            {
+                case MiscConstants.MiscSoccerGroupId:
+                    return CacheRef.GetSportName(SportContants.Soccer);
+                case MiscConstants.MiscParLayGroupId:
+                    return Labels.Parlay;
+            }
+
+            return string.Empty;
         }
     }
 }

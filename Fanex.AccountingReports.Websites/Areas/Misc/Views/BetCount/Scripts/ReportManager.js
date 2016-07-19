@@ -24,6 +24,7 @@ Fanex.AccountingReports.Misc.BetCount.ReportManager = function () {
     self.initPage = function () {
         cachedDOMElements();
         getDropdownProduct();
+        getDropdownSport();
         bindingEvent();
 
         _normalBetCountReport.initPage();
@@ -36,7 +37,8 @@ Fanex.AccountingReports.Misc.BetCount.ReportManager = function () {
     getDropdownProduct = function () {
         $.ajax({
             type: "POST",
-            url: window.rootUrl + "Misc/BetCount/GetAllProducts",
+            async: false,
+            url: window.rootUrl + "Misc/BetCount/GetProducts",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: null,
@@ -56,6 +58,33 @@ Fanex.AccountingReports.Misc.BetCount.ReportManager = function () {
             }
         });
     };
+
+    getDropdownSport = function () {
+        var self = this;
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: window.rootUrl + "Misc/BetCount/GetSports",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: null,
+            beforeSend: function () {
+                AccReport.disableInput();
+            },
+            success: function (rs) {
+                _normalBetCountReport.renderDropdownSport(rs);
+                _historyBetCountReport.renderDropdownSport(rs);
+            },
+            error: function (event, jqXHR, ajaxSettings) {
+                _normalBetCountReport.renderDropdownSport([]);
+                _historyBetCountReport.renderDropdownSport([]);
+            },
+            complete: function () {
+                AccReport.enableInput();
+            }
+        })
+    }
+
     bindingEvent = function () {
         _tables.btnHistoryReport.click(function () {
             btnHistoryReportClick();

@@ -36,6 +36,8 @@ namespace Fanex.AccountingReports.Misc.Models
 
         public decimal CompanyWinLoss { get; set; }
 
+        public decimal TotalWinLoss { get; set; }
+
         public List<Transaction> TransactionList { get; set; }
 
         public Transaction Total { get; set; }
@@ -58,6 +60,7 @@ namespace Fanex.AccountingReports.Misc.Models
             this.Total.MasterWinLoss += transaction.MasterWinLoss;
             this.Total.SuperWinLoss += transaction.SuperWinLoss;
             this.Total.CompanyWinLoss += transaction.CompanyWinLoss;
+            this.Total.TotalWinLoss += transaction.TotalWinLoss;
         }
     }
 }

@@ -9,14 +9,13 @@
 
 namespace Fanex.AccountingReports.Misc.Controllers
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Misc.Criteria.BetCount;
     using Fanex.AccountingReports.Misc.Services.Implement;
     using Fanex.AccountingReports.Misc.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -47,6 +46,20 @@ namespace Fanex.AccountingReports.Misc.Controllers
         {
             var licensees = this._reportService.GetAllProducts();
             return Json(licensees, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetProducts(GetProductsCriteria criteria)
+        {
+            var listProducts = this._reportService.GetProducts(criteria);
+            return Json(listProducts, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetSports(GetProductsCriteria criteria)
+        {
+            var listSports = this._reportService.GetSports(criteria);
+            return Json(listSports, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

@@ -951,6 +951,38 @@
     <Content Include="scripts\_lib\Fanex.Grid\images\go-hover-icon.png" />
     <Content Include="scripts\_lib\Fanex.Grid\images\icon_page.gif" />
     <Content Include="scripts\_lib\Fanex.Grid\images\seperations.png" />
+    <Content Include="scripts\_lib\Fanex.Multiselect\fanex.multiSelect.css" />
+    <Content Include="scripts\_lib\Fanex.Multiselect\fanex.multiSelect.js" />
+    <Content Include="scripts\_lib\Fanex.Multiselect\images\BottomLine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\_lib\Fanex.Multiselect\images\FirstNodeSpan.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\_lib\Fanex.Multiselect\images\MiddleLine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\_lib\Fanex.Multiselect\images\NodeSpan.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\_lib\Fanex.Multiselect\images\PlusMinus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\_lib\Fanex.Multiselect\images\sprites.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\_lib\Fanex.Multiselect\images\TopLine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\_lib\Fanex.Multiselect\images\ui-icons_2e83ff_256x240-1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\_lib\Fanex.Multiselect\images\ui-icons_2e83ff_256x240-2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="scripts\_lib\Fanex.Multiselect\images\ui-icons_2e83ff_256x240.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="scripts\_lib\FileUpload\ajaxFileUpload.js" />
     <Content Include="scripts\_lib\jquery.fileDownload.js" />
     <Content Include="scripts\_lib\NumericTextBox\jquery.caret.1.02.js" />
