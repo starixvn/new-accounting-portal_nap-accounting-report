@@ -23,8 +23,8 @@ namespace Fanex.BetList.Accounting.Criteria
         [SpParam(SqlParamName = "transid")]
         public long TransId { get; set; }
 
-        [SpParam(SqlParamName = "betdid")]
-        public long BetdId { get; set; }
+        [SpParam(SqlParamName = "betid")]
+        public long BetId { get; set; }
 
         [SpParam(SqlParamName = "custid")]
         public int CustId { get; set; }

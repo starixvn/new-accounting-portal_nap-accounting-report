@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less?ver=2" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/GridScroller/gridscroller.css" />
     <link rel="stylesheet" type="text/css" href="~/Areas/BetList/Views/Style/BetList.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Special/Views/CheckBet/Style/CheckBet.less" />
 }
 @section Headline{
     <div class="title">
@@ -83,13 +84,15 @@
     <div class="content-grid" id="betListContent" style="margin-top: 10px;">
     </div>
 </div>
-
-
+<div id="combineParlayContainer" class="">
+    <div class="content-grid" id="combineParlayContent" style="margin-top: 10px;">
+    </div>
+</div>
 @section scripts
 {
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~")';
-        minDate = '@Fanex.AccountingReports.Core.Services.Impl.ReportService.BalanceUp.MoveBetsDay.ToShortDateString()';
+        minDate = '@Fanex.AccountingReports.Core.Services.Impl.ReportService.BalanceUp.MoveBetsDay.AddDays(1).ToShortDateString()';
         currentDate = '@DateTime.Now.ToShortDateString()';
     </script>
 }

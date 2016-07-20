@@ -195,6 +195,16 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     var rejectTicketList = new List<RejectTicketDetail>();
                     foreach (var row in rawData)
                     {
+                        int oddStyle = 0;
+                        if (row.oddstype == null)
+                        {
+                            oddStyle = 0;
+                        }
+                        else
+                        {
+                            oddStyle = (int)row.oddstype;
+                        }
+
                         var transid = (long)row.transid;
                         var transdate = (DateTime)row.transdate;
                         var currency = (string)row.CurrencyName;
@@ -205,7 +215,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                         var odds = (decimal)row.odds;
                         var betteam = BetTeam.GetBetTeam((string)row.betteam, bettype, "e");
                         var totalPT = (decimal)row.tpositiontaking;
-                        var oddstype = CalcOdds.GetOddsType(bettype, (int)row.oddstype);
+                        var oddstype = CalcOdds.GetOddsType(bettype, oddStyle);
                         var newStatus = (string)row.NewStatus;
                         var oldStatus = (string)row.OldStatus;
                         var home = CacheRef.GetTeamName(row.homeid);
@@ -219,10 +229,10 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                             betypeName = liveindicator ? "Next " + betypeName : "FT." + betypeName;
                         }
 
-                        if (bettype == 31 || 
-                            bettype == 32 || 
-                            bettype == 33 || 
-                            bettype == 41 || 
+                        if (bettype == 31 ||
+                            bettype == 32 ||
+                            bettype == 33 ||
+                            bettype == 41 ||
                             bettype == 42 ||
                             bettype == 43)
                         {
@@ -299,15 +309,18 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                 case 1201:
                     result = betTeam == "h" ? homeTeam : awayTeam;
                     break;
+
                 case 2:
                 case 12:
                     result = betTeam == "h" ? "ODD" : "EVEN";
                     break;
+
                 case 3:
                 case 8:
                 case 1203:
                     result = betTeam == "h" ? "OVER" : "UNDER";
                     break;
+
                 case 4:
                 case 30:
                 case 1204:
@@ -318,32 +331,40 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     }
 
                     break;
+
                 case 5:
                 case 1205:
                     result = "FT." + betTeam;
                     break;
+
                 case 15:
                     result = "HT." + betTeam;
                     break;
+
                 case 6:
                 case 14:
                 case 16:
                 case 1206:
                     result = betTeam;
                     break;
+
                 case 10:
                     result = betTeam;
 
                     break;
+
                 case 121:
                     result = betTeam == "h" ? "Draw" : awayTeam;
                     break;
+
                 case 122:
                     result = betTeam == "h" ? homeTeam : "Draw";
                     break;
+
                 case 123:
                     result = betTeam == "h" ? "Draw" : "No Draw";
                     break;
+
                 case 31:
                 case 32:
                 case 33:
@@ -352,6 +373,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                 case 43:
                     result = awayTeam;
                     break;
+
                 case 81: ////Number Game
                 case 82:
                 case 83:
@@ -385,15 +407,19 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                             case "1:1":
                                 result = "Over/Odd ";
                                 break;
+
                             case "1:2":
                                 result = "Over/Even ";
                                 break;
+
                             case "2:1":
                                 result = "Under/Odd ";
                                 break;
+
                             case "2:2":
                                 result = "Under/Even ";
                                 break;
+
                             default:
                                 result = "Over/Odd ";
                                 break;
@@ -405,6 +431,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     }
 
                     break;
+
                 case 24:
                 case 1224:
                     if (betTeam.ToLower().Equals("1x"))
@@ -421,9 +448,11 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     }
 
                     break;
+
                 case 25:
                     result = betTeam == "h" ? homeTeam : awayTeam;
                     break;
+
                 case 26:
                     if (betTeam.ToLower().Equals("b"))
                     {
@@ -439,6 +468,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     }
 
                     break;
+
                 case 27:
                     if (betTeam.ToLower().Equals("h"))
                     {
@@ -450,6 +480,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     }
 
                     break;
+
                 case 13:
                     if (betTeam.ToLower().Equals("hy"))
                     {
@@ -469,6 +500,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     }
 
                     break;
+
                 case 28:
                     if (betTeam.ToLower().Equals("1"))
                     {
@@ -480,10 +512,12 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     }
 
                     break;
+
                 case 9:
                     result = "Mix Parlay";
 
                     break;
+
                 case 29:
                     result = "System Parlay";
 

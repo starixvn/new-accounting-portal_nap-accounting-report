@@ -32,16 +32,35 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
         isShowPager: false,
         fullWidth: true,
         fullHeight: false,
-        gridWidth: 1010, //=totalColumnWidth + totalColumn*4 +totalColumn
-        gridHeight: 140,
+        gridWidth: 1230, //=totalColumnWidth + totalColumn*4 +totalColumn
+        gridHeight: 400,
         freezeWidth: 0, //=totalColumnWidth + (totalColumn-1)*4 + (totalColumn-1)
         numberFreezeCol: 0
     };
+    self.combineParlayDetailGridOptions = {
+        tblContentId: 'tblContent',
+        manualCopyHeader: true,
+        isShowPager: false,
+        fullWidth: true,
+        fullHeight: false,
+        gridWidth: 850, //=totalColumnWidth + totalColumn*4 +totalColumn
+        gridHeight: 400,
+        freezeWidth: 0, //=totalColumnWidth + (totalColumn-1)*4 + (totalColumn-1)
+        numberFreezeCol: 0
+    };
+
     var betlistContent = $('#betListContent');
     getBetList = function (refno) {
+        if ($('#betlistContainer').length > 0) {
+            $('.ui-dialog-content').dialog('close');
+        }
+
+        if ($('#combineParlayContainer').length > 0) {
+            $('.ui-dialog-content').dialog('close');
+        }
 
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: window.rootUrl + "BetList/BetList/GetBetListReportByRefNo",
             data: 'refno=' + refno,
             success: function (result) {
@@ -51,8 +70,8 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
                     $('#betlistContainer').dialog({
                         title: "Bet list of " + refno,
                         autoOpen: false,
-                        height: 200,
-                        width: 1000,
+                        height: 'auto',
+                        width: 1200,
                         modal: false,
                         resizable: false,
                         close: function (event, ui) {
@@ -98,4 +117,117 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
         _normalTicket.hideReport();
         _rejectTicket.hideReport();
     };
+
+    var combineParlayContent = $("#combineParlayContent");
+    showCombMPDetail = function (refno, date, tranid, betid, custId) {
+        $.ajax({
+            type: 'GET',
+            url: window.rootUrl + 'BetList/BetList/GetCombinationMP?refNo='
+            + refno + '&transId=' + tranid + '&betId=' + betid + '&custId=' + custId,
+            beforeSend: function () {
+                AccReport.disableInput();
+            },
+            success: function (rs) {
+                if (rs) {
+                    combineParlayContent.empty().html(rs);
+                    var dlgContainer = $('#combineParlayContainer');
+                    dlgContainer.dialog({
+                        title: "System Parlay",
+                        autoOpen: false,
+                        height: 'auto',
+                        width: 850,
+                        modal: false,
+                        resizable: false,
+                        close: function (event, ui) {
+
+                        }
+                    });
+                    dlgContainer.dialog("open");
+
+                    var grid = combineParlayContent.find("#combineMixParlayDetail");
+                    grid.initGrid(self.combineParlayDetailGridOptions);
+                    grid.removeClass("display-none").gridScroller(self.combineParlayDetailGridOptions);
+                }
+            },
+            error: function (event, jqXHR, ajaxSettings) {
+            },
+            complete: function () {
+                AccReport.enableInput();
+            }
+        });
+    };
+
+    showNewCombMP = function (transId, transIndex, refNo, handicap1, handicap2, betcheck, betteam) {
+        showSystemParlay(transId, refNo, handicap1, handicap2, betcheck, betteam)
+    };
+
+    showMP = function (transid, refno) {
+        var grid = $('#BetlistByRefNo');
+        var parlayContent = $("div[id^='divEvent']")
+        $.ajax({
+            type: 'GET',
+            url: window.rootUrl + 'BetList/BetList/GetMixParlayDetail?refno=' + refno + '&transId=' + transid,
+            beforeSend: function () {
+                AccReport.disableInput();
+            },
+            success: function (rs) {
+                if (rs) {
+                    parlayContent.css("display", "block").html(rs);
+                    self.betlistgridOpts.isResetScroller = false;
+                    grid.gridScroller(self.betlistgridOpts);
+                }
+                AccReport.enableInput();
+            },
+            error: function (event, jqXHR, ajaxSettings) {
+                AccReport.enableInput();
+            },
+            complete: function () { }
+        });
+    };
+
+    showCombMP = function(transId, transIndex, refNo) {
+        showSystemParlay(transId, refNo, '', '', '', '');
+    };
+
+    showSystemParlay = function (transid, refno, handicap1, handicap2, betcheck, betteam) {
+        var grid = $('#BetlistByRefNo');
+        var parlayContent = $("div[id^='divEvent']")
+        if (parlayContent.html() == '') {
+            $.ajax({
+                type: 'GET',
+                url: window.rootUrl + 'BetList/BetList/GetMixParlayDetail?refno=' + refno + '&transId=' + transid + '&handicap1=' + handicap1 + '&handicap2=' + handicap2 + '&betcheck=' + betcheck + '&betteam=' + betteam,
+                beforeSend: function () {
+                    AccReport.disableInput();
+                },
+                success: function (rs) {
+                    if (rs) {
+                        if (handicap1 != '') {
+                            $("div[id^='combinationOfferName']").addClass("display-none");
+                        }
+
+                        parlayContent.css("display", "block").html(rs);
+                        self.betlistgridOpts.isResetScroller = false;
+                        grid.gridScroller(self.betlistgridOpts);
+                    }
+                    AccReport.enableInput();
+                },
+                error: function (event, jqXHR, ajaxSettings) {
+                    AccReport.enableInput();
+                },
+                complete: function () { }
+            });
+        }
+        else {
+            parlayContent.toggle();
+
+            if (parlayContent.css("display") == "block") {
+                $("div[id^='combinationOfferName']").addClass("display-none");
+            } else {
+                $("div[id^='combinationOfferName']").removeClass("display-none");
+            }
+
+            grid.gridScroller(self.betlistgridOpts);
+        }
+    };
+
 }

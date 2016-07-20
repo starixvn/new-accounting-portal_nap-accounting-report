@@ -441,7 +441,6 @@ namespace Fanex.BetList.Accounting.Repositories
                     CombinationParlay result = new CombinationParlay
                     {
                         GroupParlayEvents = new List<GroupParlayEvent>(),
-                        OutStanding = Converter.ToDecimal(db.GetParameterValue("outstanding")),
                         Total = new ParlayEvent()
                     };
 

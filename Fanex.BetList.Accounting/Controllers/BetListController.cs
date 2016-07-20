@@ -19,9 +19,6 @@ namespace Fanex.BetList.Accounting.Controllers
     using Fanex.BetList.Accounting.Models;
     using Fanex.BetList.Accounting.Services;
     using Fanex.Common;
-    using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Web.Attribute;
-    using SmartPunterFilter = AuthenticationFilter.AuthenticateSmartPunterAction;
 
     /// <summary>
     /// TODO: Update summary.
@@ -44,7 +41,6 @@ namespace Fanex.BetList.Accounting.Controllers
         /// <param name="criteria">The criteria.</param>
         /// <returns>The licensee win loss report member bet list.</returns>
         [HttpPost]
-        [SmartPunterFilter(SmartPunterFilter.AuthenticationType.Read)]
         public ActionResult GetWinLossMemberBetList(WinLossMemberBetListCriteria criteria)
         {
             Hashtable paramHastable = new Hashtable();
@@ -67,12 +63,14 @@ namespace Fanex.BetList.Accounting.Controllers
         /// </summary>
         /// <param name="refno">The ref no.</param>
         /// <returns>The mix parlay detail.</returns>
-        public ActionResult GetMixParlayDetail(string refno)
+        public ActionResult GetMixParlayDetail(string refno, string transId, string handicap1, string handicap2, string betcheck, string betteam)
         {
-            var result = _betListService.GetMixParlayTickets(new MixParlayDetailCriteria
-            {
-                RefNo = refno
-            });
+            var result = _betListService.GetMixParlayTickets(
+                new MixParlayDetailCriteria { RefNo = refno, TransId = transId },
+                handicap1,
+                handicap2,
+                betcheck,
+                betteam);
 
             return PartialView("~/Areas/BetList/Views/MemberBetListReport/_MixParlayDetail.cshtml", result);
         }
@@ -82,16 +80,15 @@ namespace Fanex.BetList.Accounting.Controllers
         /// </summary>
         /// <param name="refno">The ref no.</param>
         /// <returns>The bet list by reference no.</returns>
-        [SmartPunterFilter(SmartPunterFilter.AuthenticationType.Read)]
         public ActionResult GetBetListByRefNo(string refno)
         {
             IList<TicketDetail> result = new List<TicketDetail>();
             if (BetListHelper.IsNumeric(refno.Trim()))
             {
                 result = _betListService.GetBetListByRefNoTickets(new BetListByRefNoCriteria
-               {
-                   TransId = Converter.To<long>(refno)
-               });
+                {
+                    TransId = Converter.To<long>(refno)
+                });
             }
 
             Hashtable paramHastable = new Hashtable();
@@ -140,7 +137,6 @@ namespace Fanex.BetList.Accounting.Controllers
         /// <param name="transactionId">The transaction identifier.</param>
         /// <param name="customerId">The customer identifier.</param>
         /// <returns>The bet list by customer info ref no.</returns>
-        [SmartPunterFilter(SmartPunterFilter.AuthenticationType.Read)]
         public ActionResult GetBetListByCustInfo_Refno(string transactionId, int customerId)
         {
             IList<TicketDetail> result = new List<TicketDetail>();
@@ -153,7 +149,7 @@ namespace Fanex.BetList.Accounting.Controllers
             paramHastable.Add("custId", customerId);
 
             TempData["paramHastable"] = paramHastable;
-           
+
             ViewBag.Quantity = 1;
             ViewBag.NumberBegining = 1;
             return PartialView("~/Views/BetList/BetlistByCustInfo/Betlist/_BetList.cshtml", result);
@@ -165,7 +161,6 @@ namespace Fanex.BetList.Accounting.Controllers
         /// <param name="transactionId">Transaction ID.</param>
         /// <param name="customerId">Customer ID.</param>
         /// <returns>Partial for SystemParlay Tab - Customer Info.</returns>
-         [SmartPunterFilter(SmartPunterFilter.AuthenticationType.Read)]
         public ActionResult GetBetListByCustInfo_SystemParLayTab(string transactionId, int customerId)
         {
             SystemParlayModel result = new SystemParlayModel();
@@ -237,7 +232,6 @@ namespace Fanex.BetList.Accounting.Controllers
         /// <param name="pageSize">Size of the page.</param>
         /// <param name="pageIndex">Index of the page.</param>
         /// <returns>The bet list by IP soccer.</returns>
-        [SmartPunterFilter(SmartPunterFilter.AuthenticationType.Read)]
         public ActionResult GetBetListByIP_Soccer(
             int customerId,
             string ip,
@@ -280,7 +274,6 @@ namespace Fanex.BetList.Accounting.Controllers
         /// <param name="transType">Type of the trans.</param>
         /// <param name="fromDate">From date.</param>
         /// <returns>The bet list statement.</returns>
-        [SmartPunterFilter(SmartPunterFilter.AuthenticationType.Read)]
         public ActionResult GetBetListStatement(string username, int transType, DateTime fromDate)
         {
             Hashtable paramHastable = new Hashtable();
@@ -338,14 +331,13 @@ namespace Fanex.BetList.Accounting.Controllers
         /// <param name="custId">The customer identifier.</param>
         /// <returns>The combination mix parlay.</returns>
         [HttpGet]
-        [SmartPunterFilter(SmartPunterFilter.AuthenticationType.Read)]
         public ActionResult GetCombinationMP(long refNo, long transId, long betId, int custId)
         {
             var result = this._betListService.GetCombinationMP(new CombinationParlayDetailCriteria
             {
                 RefNo = refNo,
                 TransId = transId,
-                BetdId = betId,
+                BetId = betId,
                 CustId = custId,
                 BalanceUpDay = ReportService.BalanceUp.BalanceUpDay,
                 MoveBetDay = ReportService.BalanceUp.MoveBetsDay
