@@ -99,7 +99,6 @@
     <Compile Include="Controllers\SMATurnoverController.cs" />
     <Compile Include="Controllers\TotalCreditAccountByProductController.cs" />
     <Compile Include="Controllers\TotalSMAMemberActiveController.cs" />
-    <Compile Include="Criteria\BetCount\GetAllProductsCriteria.cs" />
     <Compile Include="Criteria\BetCount\GetBetCountReportCriteria.cs" />
     <Compile Include="Criteria\BetCount\GetProductsCriteria.cs" />
     <Compile Include="Criteria\CreditMovement\GetCreditMovementCriteria.cs" />
