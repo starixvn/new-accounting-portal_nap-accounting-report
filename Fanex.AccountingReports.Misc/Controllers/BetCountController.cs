@@ -42,13 +42,6 @@ namespace Fanex.AccountingReports.Misc.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetAllProducts()
-        {
-            var licensees = this._reportService.GetAllProducts();
-            return Json(licensees, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
         public JsonResult GetProducts(GetProductsCriteria criteria)
         {
             var listProducts = this._reportService.GetProducts(criteria);
