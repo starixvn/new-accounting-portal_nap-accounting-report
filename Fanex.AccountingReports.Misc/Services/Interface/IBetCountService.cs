@@ -9,7 +9,6 @@
 
 namespace Fanex.AccountingReports.Misc.Services.Interface
 {
-    using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Misc.Criteria.BetCount;
     using Fanex.AccountingReports.Misc.Models;
     using Models.BetCount;
@@ -17,8 +16,6 @@ namespace Fanex.AccountingReports.Misc.Services.Interface
 
     public interface IBetCountService
     {
-        List<EntityBase<int, string>> GetAllProducts();
-
         Transaction GetReport(GetBetCountReportCriteria criteria);
 
         Transaction SortReport(GetBetCountReportCriteria criteria);

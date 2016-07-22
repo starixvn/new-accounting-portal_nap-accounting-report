@@ -3,7 +3,6 @@
 
 
   <Function Name="Misc - Bet Count">
-    <Setting Key="Misc_BetCount_GetAllProductsForBetCountReport" SpName="Acc_Rpt_BetCount_SelSports" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Gaming - Number Game Win Loss By Date">

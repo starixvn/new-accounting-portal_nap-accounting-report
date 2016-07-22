@@ -12,7 +12,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
-    using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Misc.Constants;
@@ -51,36 +50,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             /// The grand total.
             /// </summary>
             GrandTotal = 3
-        }
-
-        /// <summary>
-        /// Gets all products.
-        /// </summary>
-        /// <returns>All products.</returns>
-        public List<EntityBase<int, string>> GetAllProducts()
-        {
-            try
-            {
-                var products = new List<EntityBase<int, string>>();
-                var rawData = GetReportData<dynamic>(new GetAllProductsCriteria());
-
-                rawData.ToList().ForEach(product =>
-                {
-                    products.Add(new EntityBase<int, string>
-                    {
-                        Id = product.SportID,
-                        Name = product.SportName
-                    });
-                });
-
-                return products;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            return null;
         }
 
         /// <summary>
