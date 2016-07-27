@@ -136,7 +136,7 @@ Fanex.AccountingReports.Special.CheckBet.RejectChangedTickets = function () {
             self.TempHtml.contentHtml += '<tr>' + frozenHtml + 
                                                 '<td><div class="table-cell col80 two-row-text align-center">' + row.TransDate + '</div></td>\
                                                 <td><div class="col60 table-cell align-center">' + row.Currency + '</div></td>\
-                                                <td><div class="col100 table-cell align-center">' + row.Bettype + '</div></td>\
+                                                <td><div class="col140 table-cell align-center">' + row.Bettype + '</div></td>\
                                                 <td><div class="col140 table-cell align-center">' + row.Username + '</div></td>\
                                                 <td><div class="col80 table-cell align-center">' + row.Stake + '</div></td>\
                                                 <td><div class="col80 table-cell align-center">' + row.Odds + '</div></td>\
@@ -156,7 +156,7 @@ Fanex.AccountingReports.Special.CheckBet.RejectChangedTickets = function () {
                                             frozenHtml +
                                             '<th><div class="col80 align-center">&nbsp</div></th>\
                                             <th><div class="col60 align-center">&nbsp</div></th>\
-                                            <th><div class="col100 align-center">&nbsp</div></th>\
+                                            <th><div class="col140 align-center">&nbsp</div></th>\
                                             <th><div class="col140 align-center">&nbsp</div></th>\
                                             <th><div class="col80 align-center">&nbsp</div></th>\
                                             <th><div class="col80 align-center">&nbsp</div></th>\
