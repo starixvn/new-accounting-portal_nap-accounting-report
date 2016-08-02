@@ -9,8 +9,6 @@
 
 namespace Fanex.AccountingReports.LegendManagement.Controllers
 {
-    using System.Collections.Generic;
-    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.LegendManagement.Criteria;
@@ -18,6 +16,8 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
     using Fanex.AccountingReports.LegendManagement.Services.Interfaces;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -61,7 +61,6 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
         }
 
         [HttpPost]
-        [NapAuth(FunctionKey = AccReportFunctionKeys.LegendManagement, Policy = Constant.Policy.Read)]
         public JsonResult GetReportLegend(GetReportLegendCriteria criteria)
         {
             var legendContent = this._legendService.GetReportLegend(criteria);
