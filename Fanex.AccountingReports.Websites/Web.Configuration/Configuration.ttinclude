@@ -237,7 +237,7 @@
                 switch(Environment)
                 {
                     case SiteEnvironment.UAT:
-                        return "stateConnectionString=\"tcpip=10.40.40.135:42424\"";						
+						return "stateConnectionString=\"tcpip=127.0.0.1:42424\"";                        
                     case SiteEnvironment.SIT:
                         return "stateConnectionString=\"tcpip=172.16.4.107:42424\"";
                     case SiteEnvironment.PRO:
