@@ -11,6 +11,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         public string GetStringFollowBetType(string homeTeam, string awayTeam, int betType, string betTeam, decimal hdp1)
         {
             var betTypeName = new Dictionary<int, string>();
+            betTeam = betTeam.ToUpper();
 
             betTypeName.Add(401, GetStringBetTypeFrom401to404(betTeam, hdp1));
             betTypeName.Add(402, GetStringBetTypeFrom401to404(betTeam, hdp1));
@@ -125,55 +126,13 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         private string GetStringBetType415(string betTeam, string homeTeam, string awayTeam)
         {
             var team = new Dictionary<string, string>();
-            team.Add("HH", homeTeam + "/" + awayTeam);
-            team.Add("DH", "Draw" + "/" + awayTeam);
+            team.Add("HH", homeTeam + "/" + homeTeam);
+            team.Add("DH", "Draw" + "/" + homeTeam);
             team.Add("AH", awayTeam + "/" + homeTeam);
             team.Add("HA", homeTeam + "/" + awayTeam);
             team.Add("DA", "Draw" + "/" + awayTeam);
             team.Add("AA", awayTeam + "/" + awayTeam);
             team.Add("NO", "None");
-
-            return team.ContainsKey(betTeam) == true ? team[betTeam] : string.Empty;
-        }
-
-        private string GetStringBetTypeYesNo(string betTeam)
-        {
-            return betTeam == "Y" ? "Yes" : "No";
-        }
-
-        private string GetStringBetTypeOddEven(string betTeam)
-        {
-            return betTeam == "O" ? "Odd" : "Even";
-        }
-
-        private string GetStringBetTypeDoubleChance(string betTeam, string homeTeam, string awayTeam)
-        {
-            var team = new Dictionary<string, string>();
-            team.Add("HD", homeTeam + "/" + "Draw");
-            team.Add("HA", homeTeam + "/" + awayTeam);
-            team.Add("H", homeTeam);
-            team.Add("A", awayTeam);
-
-            return team.ContainsKey(betTeam) == true ? team[betTeam] : string.Empty;
-        }
-
-        private string GetStringBetType442To444(string betTeam)
-        {
-            var team = new Dictionary<string, string>();
-            team.Add("1H", "First Half");
-            team.Add("2H", "Second Half");
-            team.Add("Tie", "Tie");
-
-            return team.ContainsKey(betTeam) == true ? team[betTeam] : string.Empty;
-        }
-
-        private string GetStringBetType412And429(string betTeam)
-        {
-            var team = new Dictionary<string, string>();
-            team.Add("0", "0 Goals");
-            team.Add("1", "1 Goal");
-            team.Add("2", "2 Goals");
-            team.Add("3-Over", "3 Goals &Over");
 
             return team.ContainsKey(betTeam) == true ? team[betTeam] : string.Empty;
         }
@@ -248,6 +207,27 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             return team.ContainsKey(betTeam) == true ? team[betTeam] : string.Empty;
         }
 
+        private string GetStringBetType412And429(string betTeam)
+        {
+            var team = new Dictionary<string, string>();
+            team.Add("0", "0 Goals");
+            team.Add("1", "1 Goal");
+            team.Add("2", "2 Goals");
+            team.Add("3-OVER", "3 Goals &Over");
+
+            return team.ContainsKey(betTeam) == true ? team[betTeam] : string.Empty;
+        }
+
+        private string GetStringBetType442To444(string betTeam)
+        {
+            var team = new Dictionary<string, string>();
+            team.Add("1H", "First Half");
+            team.Add("2H", "Second Half");
+            team.Add("TIE", "Tie");
+
+            return team.ContainsKey(betTeam) == true ? team[betTeam] : string.Empty;
+        }
+
         private string GetStringBetType445To447(string betTeam)
         {
             var team = new Dictionary<string, string>();
@@ -255,6 +235,27 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             team.Add("YN", "Yes/No");
             team.Add("NY", "No/Yes");
             team.Add("NN", "No/No");
+
+            return team.ContainsKey(betTeam) == true ? team[betTeam] : string.Empty;
+        }
+
+        private string GetStringBetTypeYesNo(string betTeam)
+        {
+            return betTeam == "Y" ? "Yes" : "No";
+        }
+
+        private string GetStringBetTypeOddEven(string betTeam)
+        {
+            return betTeam == "O" ? "Odd" : "Even";
+        }
+
+        private string GetStringBetTypeDoubleChance(string betTeam, string homeTeam, string awayTeam)
+        {
+            var team = new Dictionary<string, string>();
+            team.Add("HD", homeTeam + "/" + "Draw");
+            team.Add("HA", homeTeam + "/" + awayTeam);
+            team.Add("H", homeTeam);
+            team.Add("A", awayTeam);
 
             return team.ContainsKey(betTeam) == true ? team[betTeam] : string.Empty;
         }

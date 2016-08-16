@@ -47,10 +47,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{02C0ED
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BackendTests", "BackendTests", "{3CE5D5C3-B509-42D6-8B70-73AEF1F6B3A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fanex.AccountingReports.UnitTests", "Fanex.AccountingReports.UnitTests", "{71FE56EB-2E92-4D3F-8B8B-504A0743147A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module", "Module", "{A63FE358-F055-4C46-9791-45C6F8F98137}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Special", "Special\Special.csproj", "{009F5133-120B-43C8-B701-1FD76E54A9DD}"
+EndProject
 Global
-	GlobalSection(JSLint) = preSolution
-		SolutionConfigurationLocation = JSLintOptions.xml
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -180,6 +185,18 @@ Global
 		{9036948C-3231-42CF-8AF5-0AF601DFB199}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9036948C-3231-42CF-8AF5-0AF601DFB199}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9036948C-3231-42CF-8AF5-0AF601DFB199}.Release|x86.ActiveCfg = Release|Any CPU
+		{009F5133-120B-43C8-B701-1FD76E54A9DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{009F5133-120B-43C8-B701-1FD76E54A9DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{009F5133-120B-43C8-B701-1FD76E54A9DD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{009F5133-120B-43C8-B701-1FD76E54A9DD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{009F5133-120B-43C8-B701-1FD76E54A9DD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{009F5133-120B-43C8-B701-1FD76E54A9DD}.Debug|x86.Build.0 = Debug|Any CPU
+		{009F5133-120B-43C8-B701-1FD76E54A9DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{009F5133-120B-43C8-B701-1FD76E54A9DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{009F5133-120B-43C8-B701-1FD76E54A9DD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{009F5133-120B-43C8-B701-1FD76E54A9DD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{009F5133-120B-43C8-B701-1FD76E54A9DD}.Release|x86.ActiveCfg = Release|Any CPU
+		{009F5133-120B-43C8-B701-1FD76E54A9DD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -198,5 +215,11 @@ Global
 		{DCEA602C-2786-45B3-B3C4-1D3241F40F09} = {B055800A-814C-454C-80BD-1F01884D910B}
 		{B055800A-814C-454C-80BD-1F01884D910B} = {955BB30D-ED74-4C08-B01A-1D019A50052F}
 		{9036948C-3231-42CF-8AF5-0AF601DFB199} = {B055800A-814C-454C-80BD-1F01884D910B}
+		{71FE56EB-2E92-4D3F-8B8B-504A0743147A} = {3CE5D5C3-B509-42D6-8B70-73AEF1F6B3A5}
+		{A63FE358-F055-4C46-9791-45C6F8F98137} = {71FE56EB-2E92-4D3F-8B8B-504A0743147A}
+		{009F5133-120B-43C8-B701-1FD76E54A9DD} = {A63FE358-F055-4C46-9791-45C6F8F98137}
+	EndGlobalSection
+	GlobalSection(JSLint) = preSolution
+		SolutionConfigurationLocation = JSLintOptions.xml
 	EndGlobalSection
 EndGlobal

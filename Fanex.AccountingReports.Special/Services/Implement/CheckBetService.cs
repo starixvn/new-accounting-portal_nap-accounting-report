@@ -525,7 +525,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     break;
 
                 default:
-                    result = getBetTeamEnhanced.GetStringFollowBetType(homeTeam, awayTeam, betType, betTeam.ToUpper(), hdp1);
+                    result = getBetTeamEnhanced.GetStringFollowBetType(homeTeam, awayTeam, betType, betTeam, hdp1);
 
                     break;
             }
