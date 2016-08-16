@@ -100,7 +100,7 @@
     <add key="PreserveLoginUrl" value="true" />
     <add key="ClientValidationEnabled" value="true" />
     <add key="UnobtrusiveJavaScriptEnabled" value="true" />
-  </appSettings>
+  </appSettings>	
   <system.web>
     <compilation debug="<#= site.DebugMode #>" targetFramework="4.0" />
 	<customErrors mode="<#=site.ErrorMode#>" defaultRedirect="~/Views/Errors/GeneralError.htm">
