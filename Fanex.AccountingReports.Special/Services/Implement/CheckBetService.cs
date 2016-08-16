@@ -9,15 +9,15 @@
 
 namespace Fanex.AccountingReports.Special.Services.Implement
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Helper.SportHelper;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Special.Criteria.CheckBet;
     using Fanex.AccountingReports.Special.Models;
     using Fanex.AccountingReports.Special.Services.Interface;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
@@ -297,6 +297,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             decimal hdp1)
         {
             string result = string.Empty;
+            var getBetTeamEnhanced = new GetBetTeamEnhanced();
             switch (betType)
             {
                 case 1:
@@ -520,6 +521,11 @@ namespace Fanex.AccountingReports.Special.Services.Implement
 
                 case 29:
                     result = "System Parlay";
+
+                    break;
+
+                default:
+                    result = getBetTeamEnhanced.GetStringFollowBetType(homeTeam, awayTeam, betType, betTeam.ToUpper(), hdp1);
 
                     break;
             }

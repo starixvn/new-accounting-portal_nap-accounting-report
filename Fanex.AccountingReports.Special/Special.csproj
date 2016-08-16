@@ -140,6 +140,7 @@
       <DependentUpon>SpecialResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\Implement\DailyTurnover\DailyDetailChangedTurnoverExportReportService.cs" />
+    <Compile Include="Services\Implement\GetBetTeamEnhanced.cs" />
     <Compile Include="Services\Implement\MarginReport\MarginWinLossService.cs" />
     <Compile Include="Services\Implement\DailyTurnover\DailyDetailChangedTurnoverService.cs" />
     <Compile Include="Services\Implement\DailyTurnover\ExcelUtil.cs" />
