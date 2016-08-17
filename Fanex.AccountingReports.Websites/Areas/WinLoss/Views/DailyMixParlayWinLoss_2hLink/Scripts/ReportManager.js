@@ -6,18 +6,19 @@ $(document).ready(function () {
         reportManager.HideCombinationWinLossReport();
         reportManager.WinLossByProduct.BindingEvent();
         reportManager.HistoryReportManager.HideCombinationWinLossReport_HistoryReport();
-        reportManager.HistoryReportManager.WinLossByProduct_HistoryReport.BindingEvent();  
-        if (new Date(reportDate) <= new Date(movebetday)) {
-            var date = new Date(reportDate);
-            reportManager.ChangeToHistoryReport();         
-            reportManager.HistoryReportManager.Tables.monthPicker.monPickr("setMonth", date);
-            reportManager.HistoryReportManager.Tables.monthPicker.monPickr("setFromDay", date.getDate());
-            reportManager.HistoryReportManager.Tables.monthPicker.monPickr("setToDay", date.getDate());     
+        reportManager.HistoryReportManager.WinLossByProduct_HistoryReport.BindingEvent();
+        startDate = new Date(startDate);
+        endDate = new Date(endDate);
+        if (startDate <= new Date(movebetday)) {
+            reportManager.ChangeToHistoryReport();
+            reportManager.HistoryReportManager.Tables.monthPicker.monPickr("setMonth", startDate);
+            reportManager.HistoryReportManager.Tables.monthPicker.monPickr("setFromDay", startDate.getDate());
+            reportManager.HistoryReportManager.Tables.monthPicker.monPickr("setToDay", endDate.getDate());
             reportManager.HistoryReportManager.WinLossByProduct_HistoryReport.GetReport();
         }
         else {
-            reportManager.Tables.fromDatepicker.datepicker("setDate", new Date(reportDate));
-            reportManager.Tables.toDatepicker.datepicker("setDate", new Date(reportDate));
+            reportManager.Tables.fromDatepicker.datepicker("setDate", new Date(startDate));
+            reportManager.Tables.toDatepicker.datepicker("setDate", new Date(endDate));
             reportManager.WinLossByProduct.GetReport(reportManager.Enum.DateType.SpecifyDay);
         }
     }

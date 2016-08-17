@@ -400,7 +400,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
             {
                 HttpOnly = true,
-                Path = currentDomain.Path,
+                Path = "/",
                 Name = FormsAuthentication.FormsCookieName
             };
 
