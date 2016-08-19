@@ -12,6 +12,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         {
             var betTypeName = new Dictionary<int, string>();
             betTeam = betTeam.ToUpper();
+            hdp1 = decimal.Round(hdp1, 2, System.MidpointRounding.AwayFromZero);
 
             betTypeName.Add(401, GetStringBetTypeFrom401to404(betTeam, hdp1));
             betTypeName.Add(402, GetStringBetTypeFrom401to404(betTeam, hdp1));
