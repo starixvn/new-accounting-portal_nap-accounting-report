@@ -22,7 +22,7 @@ Fanex.AccountingReports.Special.CheckBet.NormalChangedTickets = function () {
             manualCopyHeader: true,
             fullHeight: true,
             gridHeight: 280,
-            column:[100,80,60,100,140,80,80,140,140,60,140],
+            column:[100,80,60,100,140,80,80,190,140,60,140],
             numberFreezeCol: 1
         }
     };
@@ -139,20 +139,20 @@ Fanex.AccountingReports.Special.CheckBet.NormalChangedTickets = function () {
         {
             var row = report[i]
             var frozenHtml = '';
-            frozenHtml = '<td><div class="table-cell col100 two-row-text align-center link" onclick="getBetList(\'' + row.RefNo + '\')">' + row.RefNo + '</div></td>';            
+            frozenHtml = '<td><div class="table-cell col100 three-row-text align-center link" onclick="getBetList(\'' + row.RefNo + '\')">' + row.RefNo + '</div></td>';
             self.TempHtml.frozenHtml += '<tr>'+ frozenHtml + '</tr>';
             var colStake = parseFloat(row.OldStake) == parseFloat(row.NewStake) ? row.NewStake : '<span>' + row.OldStake + '<br/></span><span style="color:#d47800">' + row.NewStake + '</span>';
             var colOdds =   parseFloat(row.OldOdds) == parseFloat(row.NewOdds) ? row.NewOdds : '<span>' + row.OldOdds + '<br/></span><span style="color:#d47800">' + row.NewOdds + '</span>';
             var colBetteam =   row.OldBetteam == row.NewBetteam ? row.NewBetteam : '<span>' + row.OldBetteam + '<br/></span><span style="color:#d47800">' + row.NewBetteam + '</span>';
             var colTotalPT =   parseFloat(row.OldTotalPT) == parseFloat(row.NewTotalPT) ? row.NewTotalPT : '<span>' + row.OldTotalPT + '<br/></span><span style="color:#d47800">' + row.NewTotalPT + '</span>';
-            self.TempHtml.contentHtml += '<tr><td><div class="table-cell col100 two-row-text align-center link" onclick="getBetList(\'' + row.RefNo + '\')">' + row.RefNo + '</div></td>\
+            self.TempHtml.contentHtml += '<tr><td><div class="table-cell col100 three-row-text align-center link" onclick="getBetList(\'' + row.RefNo + '\')">' + row.RefNo + '</div></td>\
                                                 <td><div class="table-cell col80 align-center">' + row.TransDate + '</div></td>\
                                                 <td><div class="table-cell col60 align-center">' + row.CurrencyName + '</div></td>\
                                                 <td><div class="table-cell col140 align-center">' + row.Bettype + '</div></td>\
                                                 <td><div class="table-cell col140 align-center">' + row.Username + '</div></td>\
                                                 <td><div class="table-cell col80 align-center">' + colStake + '</div></td>\
                                                 <td><div class="table-cell col80 align-center">' + colOdds + '</div></td>\
-                                                <td><div class="table-cell col140 align-center">' + colBetteam + '</div></td>\
+                                                <td><div class="table-cell col190 align-center">' + colBetteam + '</div></td>\
                                                 <td><div class="table-cell col140 align-center">' + colTotalPT + '</div></td>\
                                                 <td><div class="table-cell col60 align-center">' + row.Status + '</div></td>\
                                                 <td><div class="table-cell col140 align-center">' + row.Creator + '</div></td>\
@@ -171,7 +171,7 @@ Fanex.AccountingReports.Special.CheckBet.NormalChangedTickets = function () {
                                             <th><div class="col140 align-center">&nbsp</div></th>\
                                             <th><div class="col80 align-center">' + TotalChangedStake + '</div></th>\
                                             <th><div class="col80 align-center">' + TotalChangedOdds + '</div></th>\
-                                            <th><div class="col140 align-center">' + TotalChangedBetteam + '</div></th>\
+                                            <th><div class="col190 align-center">' + TotalChangedBetteam + '</div></th>\
                                             <th><div class="col140 align-center">' + TotalChangedPT + '</div></th>\
                                             <th><div class="col60 align-center">&nbsp</div></th>\
                                             <th><div class="col140 align-center">&nbsp</div></th>\
