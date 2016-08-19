@@ -9,6 +9,7 @@
 
 namespace Fanex.AccountingReports.Special.Services.Implement
 {
+    using Checkbet;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Helper.SportHelper;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -297,7 +298,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             decimal hdp1)
         {
             string result = string.Empty;
-            var getBetTeamEnhanced = new GetBetTeamEnhanced();
+            var getBetTeamEnhanced = new ContentChoiceBuilder();
             switch (betType)
             {
                 case 1:
@@ -525,7 +526,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     break;
 
                 default:
-                    result = getBetTeamEnhanced.GetStringFollowBetType(homeTeam, awayTeam, betType, betTeam, hdp1);
+                    result = getBetTeamEnhanced.GetContentBetchoiceToShowOf(homeTeam, awayTeam, betType, betTeam, hdp1);
 
                     break;
             }
