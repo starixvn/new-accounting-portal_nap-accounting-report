@@ -21,7 +21,6 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 Hdp1 = decimal.Round(hdp1, 2, MidpointRounding.AwayFromZero)
             };
 
-
             var bettypeMapper = new ContentBetTypeMapper();
             string bettypeContentClass = bettypeMapper.GetContentBetchoiceToShowOf(model.BetType);
             if (!string.IsNullOrWhiteSpace(bettypeContentClass))
