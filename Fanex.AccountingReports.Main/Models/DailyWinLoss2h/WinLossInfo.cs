@@ -131,7 +131,8 @@ namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
                     this.Id == SportContants._2hNoneSportGroup ||
                     this.Id == SportContants._2hLiveCasinoSLI ||
                     this.Id == SportContants._2hLiveCasinoGoldDeluxe ||
-                    this.Id == SportContants._2hCasinoMBCRNG;
+                    this.Id == SportContants._2hCasinoMBCRNG ||
+                    this.Id == SportContants._2hMacauGames;
             }
         }
 

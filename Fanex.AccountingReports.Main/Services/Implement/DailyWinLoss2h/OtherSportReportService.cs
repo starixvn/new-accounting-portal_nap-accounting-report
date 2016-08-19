@@ -9,10 +9,6 @@
 
 namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -23,6 +19,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
     using Fanex.AccountingReports.Main.Models.DailyWinLoss2h;
     using Fanex.AccountingReports.Main.Resources;
     using Fanex.Common;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -550,13 +550,19 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                             }
                         }
                     }
-                    
+
                     if (isbetTypeNewCricket == true)
                     {
                         report.LiveReport.Total.Add(report.LiveReport.CreditTotal);
                         report.LiveReport.Total.Add(report.LiveReport.DepositTotal);
+                        report.LiveReport.CreditTotalNewCricket.Add(report.LiveReport.CreditTotal);
+                        report.LiveReport.DepositTotalNewCricket.Add(report.LiveReport.DepositTotal);
+
                         report.NoneLiveReport.Total.Add(report.NoneLiveReport.CreditTotal);
                         report.NoneLiveReport.Total.Add(report.NoneLiveReport.DepositTotal);
+                        report.NoneLiveReport.CreditTotalNewCricket.Add(report.NoneLiveReport.CreditTotal);
+                        report.NoneLiveReport.DepositTotalNewCricket.Add(report.NoneLiveReport.DepositTotal);
+
                         report.LiveReport = WinLossInfo.Format_Total(report.LiveReport);
                         report.NoneLiveReport = WinLossInfo.Format_Total(report.NoneLiveReport);
                         OtherSportForNewCricket(report, rawReport, enableVirtual);
