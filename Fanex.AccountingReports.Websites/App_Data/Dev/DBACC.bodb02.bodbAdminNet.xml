@@ -107,7 +107,7 @@
     <Setting Key="Main_DailyWinLoss2h_GetSummaryNumberGameReport" SpName="Acc_Rpt_DailyWLDirect_NumberGame" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetSummaryNumberGameReport_14" SpName="Acc_Rpt_DailyWLDirect_NumberGame14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
 
-    <Setting Key="Main_DailyWinLoss2h_GetSummaryOtherSportReport" SpName="Acc_Rpt_DailyWLDirect_OtherSport" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetSummaryOtherSportReport" SpName="Acc_Rpt_DailyWLDirect_OtherSport_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetSummaryOtherSportReport_14" SpName="Acc_Rpt_DailyWLDirect_OtherSport14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
 
     <Setting Key="Main_DailyWinLoss2h_GetOtherSportReportBySport" SpName="Acc_Rpt_DailyWLDirect_OtherSport_Bettype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />

@@ -119,7 +119,7 @@
     <Setting Key="Main_DailyWinLoss2h_GetBettradeReport" SpName="Acc_Rpt_DailyWLDirect_Bettrade" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetBettradeReport_14" SpName="Acc_Rpt_DailyWLDirect_Bettrade14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Bettrade" SpName="Acc_Rpt_DailyWLDirect_Bettrade_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Bettrade_14" SpName="Acc_Rpt_DailyWLDirect_Bettrade_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Bettrade_14" SpName="Acc_Rpt_DailyWLDirect_Bettrade_Site14_uat1" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
 
     <Setting Key="Main_DailyWinLoss2h_GetColossusBetReport" SpName="Acc_Rpt_DailyWLDirect_ColosussBets" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetColossusBetReport_14" SpName="Acc_Rpt_DailyWLDirect_ColosussBets14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />

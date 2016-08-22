@@ -26,6 +26,6 @@
     <Setting Key="Balance_MasterBalance_MemberDownline" SpName="Acc_Rpt_Balance_Member" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
   <Function Name="Licensee - Company Win Loss">
-    <Setting Key="Acc_Rpt_CompanyWinloss" SpName="Acc_Rpt_CompanyWinloss" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"  />
+    <Setting Key="Acc_Rpt_CompanyWinloss" SpName="Acc_Rpt_CompanyWinloss_uat1" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="0"  />
   </Function>
 </Functions>
