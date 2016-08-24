@@ -924,6 +924,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     winLoss.Margin = this._matchWinLoss2aUtilityService.CalculateMargin(winLoss.LineTotal, winLoss.Turnover);
                     report.ThirdPartyInfo.AddToGrandTotal(winLoss);
                     winLoss = this.FormatWinLossInfo(winLoss);
+
+                    if (string.Equals(winLoss.Name, Labels.Bettrade, StringComparison.OrdinalIgnoreCase))
+                    {
+                        winLoss.Commission_Str = Labels.NotAvailable;
+                    }
+
                     report.ThirdPartyInfo.ChildsInfo.Add(winLoss);
                 }
 
@@ -1316,6 +1322,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     report.ThirdPartyInfo.GrandTotal.Turnover);
                 report.ThirdPartyInfo.AddToGrandTotal(winLoss);
                 winLoss = this.FormatWinLossInfo(winLoss);
+
+                if (string.Equals(winLoss.Name, Labels.Bettrade, StringComparison.OrdinalIgnoreCase))
+                {
+                    winLoss.Commission_Str = Labels.NotAvailable;
+                }
+
                 report.ThirdPartyInfo.ChildsInfo.Add(winLoss);
             }
 

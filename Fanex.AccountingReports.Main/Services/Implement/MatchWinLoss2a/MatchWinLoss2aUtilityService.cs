@@ -279,7 +279,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                    string.Equals(betTypeName, Labels.MicroGaming_LiveCasino, StringComparison.OrdinalIgnoreCase) ||
                    string.Equals(betTypeName, Labels.Microgaming_RNGCasino, StringComparison.OrdinalIgnoreCase) ||
                    string.Equals(betTypeName, Labels.Macau, StringComparison.OrdinalIgnoreCase) ||
-                   string.Equals(betTypeName, Labels.AG_Casino, StringComparison.OrdinalIgnoreCase));
+                   string.Equals(betTypeName, Labels.AG_Casino, StringComparison.OrdinalIgnoreCase) ||
+                   string.Equals(betTypeName, Labels.Bettrade, StringComparison.OrdinalIgnoreCase));
         }
 
         public decimal CalculateMargin(decimal lineTotal, decimal turnover)
