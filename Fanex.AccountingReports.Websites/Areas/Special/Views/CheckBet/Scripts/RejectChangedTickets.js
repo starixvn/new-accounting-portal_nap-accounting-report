@@ -21,7 +21,7 @@ Fanex.AccountingReports.Special.CheckBet.RejectChangedTickets = function () {
             fullHeight: true,
             freezeHeight: 600,
             gridHeight: 280,
-            column:[100,80,60,100,140,80,80,140,140,60,140],
+            column:[100,80,60,100,140,80,80,190,140,60,140],
             numberFreezeCol: 1
         }
     };
@@ -130,17 +130,17 @@ Fanex.AccountingReports.Special.CheckBet.RejectChangedTickets = function () {
         {
             var row = report[i]
             var frozenHtml = '';
-            frozenHtml = '<td><div class="table-cell col100 two-row-text align-center link" onclick="getBetList(\'' + row.RefNo + '\')">' + row.RefNo + '</div></td>';
+            frozenHtml = '<td><div class="table-cell col100 three-row-text align-center link" onclick="getBetList(\'' + row.RefNo + '\')">' + row.RefNo + '</div></td>';
             self.TempHtml.frozenHtml += '<tr>'+ frozenHtml + '</tr>';
             var colStatus = row.OldStake == row.NewStatus ? row.NewStatus : '<span>' + row.OldStatus + '<br/></span><span style="color:#d47800">' + row.NewStatus + '</span>';
             self.TempHtml.contentHtml += '<tr>' + frozenHtml + 
-                                                '<td><div class="table-cell col80 two-row-text align-center">' + row.TransDate + '</div></td>\
+                                                '<td><div class="table-cell col80 three-row-text align-center">' + row.TransDate + '</div></td>\
                                                 <td><div class="col60 table-cell align-center">' + row.Currency + '</div></td>\
-                                                <td><div class="col100 table-cell align-center">' + row.Bettype + '</div></td>\
+                                                <td><div class="col140 table-cell align-center">' + row.Bettype + '</div></td>\
                                                 <td><div class="col140 table-cell align-center">' + row.Username + '</div></td>\
                                                 <td><div class="col80 table-cell align-center">' + row.Stake + '</div></td>\
                                                 <td><div class="col80 table-cell align-center">' + row.Odds + '</div></td>\
-                                                <td><div class="col140 table-cell align-center">' + row.Betteam + '</div></td>\
+                                                <td><div class="col190 table-cell align-center">' + row.Betteam + '</div></td>\
                                                 <td><div class="col140 table-cell align-center">' + row.TotalPT + '</div></td>\
                                                 <td><div class="col60 table-cell align-center">' + colStatus + '</div></td>\
                                                 <td><div class="col140 table-cell align-center">' + row.Creator + '</div></td>\
@@ -156,11 +156,11 @@ Fanex.AccountingReports.Special.CheckBet.RejectChangedTickets = function () {
                                             frozenHtml +
                                             '<th><div class="col80 align-center">&nbsp</div></th>\
                                             <th><div class="col60 align-center">&nbsp</div></th>\
-                                            <th><div class="col100 align-center">&nbsp</div></th>\
+                                            <th><div class="col140 align-center">&nbsp</div></th>\
                                             <th><div class="col140 align-center">&nbsp</div></th>\
                                             <th><div class="col80 align-center">&nbsp</div></th>\
                                             <th><div class="col80 align-center">&nbsp</div></th>\
-                                            <th><div class="col140 align-center">&nbsp</div></th>\
+                                            <th><div class="col190 align-center">&nbsp</div></th>\
                                             <th><div class="col140 align-center">&nbsp</div></th>\
                                             <th><div class="col60 align-center">' + TotalChangedStatus + '</div></th>\
                                             <th><div class="col140 align-center">&nbsp</div></th>\

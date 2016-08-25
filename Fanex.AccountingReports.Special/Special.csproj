@@ -64,6 +64,31 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Checkbet\BetTeamModel.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType401To404.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetTypeAsBetTeam.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetTypeOddEven.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetTypeDoubleChance.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetTypeNA.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetTypeYesNo.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType445To447.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType442To444.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType412And429.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType426.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType424.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType422To423.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType419To421.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType418.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType417.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType415.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType411.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType410.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType408.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType407.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType406.cs" />
+    <Compile Include="Checkbet\ContentBetTeam.cs" />
+    <Compile Include="Checkbet\ContentBetTypeMapper.cs" />
+    <Compile Include="Checkbet\ContentChoiceBuilder.cs" />
     <Compile Include="Constants\RoleConstants.cs" />
     <Compile Include="Constants\SpecialConstants.cs" />
     <Compile Include="Constants\ProductContants.cs" />
@@ -202,6 +227,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

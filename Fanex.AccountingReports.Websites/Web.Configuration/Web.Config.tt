@@ -112,7 +112,7 @@
 	  name=".REPORTASPXAUTH"
 	  ticketCompatibilityMode="Framework40" 
 	  loginUrl="~/UserLogin/Login" 
-	  timeout="2880" 
+	  timeout="30" 
 	  defaultUrl="~/Home" />
     </authentication>
     <pages>
@@ -128,7 +128,7 @@
     </pages>
     <sessionState 
 	cookieName=".Report_ASP.NET_SessionId"
-	mode="StateServer" timeout="10" <#=site.StateConnectionString#> cookieless="false" />
+	mode="StateServer" timeout="40" <#=site.StateConnectionString#> cookieless="false" />
 	<machineKey validationKey="82DD5F7E8AEE17163191F82D6E74F88716B3A834BD6D1DC5F32CB2F613222E36144B019843C69D711C8EE551F341FDFD60B1AB77F943B02A00467A0D2D632EEB"
         decryptionKey="436E102A02B3582E206F1111DC137F5F2BFC57EBFB8ECD6736596ABDA63B9A65"
         validation="SHA1" decryption="AES" />

@@ -9,13 +9,12 @@
 
 namespace Fanex.AccountingReports.Special.Controllers
 {
-    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Core.Web.Security;
     using Fanex.AccountingReports.Special.Criteria.CheckBet;
     using Fanex.AccountingReports.Special.Services.Implement;
     using Fanex.AccountingReports.Special.Services.Interface;
-    using Fanex.NAP.Core.Web.Attribute;
+    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
