@@ -493,6 +493,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
             }
             else
             {
+                winLoss.LineTotal_Others_Live_Str = winLoss.LineTotal_Others_Live.Format(2);
+                winLoss.VirtualLineTotal_Others_Live_Str = winLoss.VirtualLineTotal_Others_Live.Format(2);
                 winLoss.LineTotalReal_Str = winLoss.LineTotalReal.Format(2);
                 winLoss.LineTotalVirtual_Str = winLoss.LineTotalVirtual.Format(2);
                 winLoss.Variance_Str = winLoss.Variance.Format(2);
@@ -655,31 +657,32 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
 
                     if (this._matchWinLoss2aUtilityService.IsExcludeVirtualLineTotal(betType))
                     {
-                        if (isBettradeBettype)
-                        {
-                            winLoss.Name = Labels.Bettrade;
-                            winLoss.LineTotal_Soccer_Live_Str = Labels.NotAvailable;
-                            winLoss.LineTotal_Soccer_Non_Live_Str = Labels.NotAvailable;
-                            winLoss.LineTotal_Others_Live_Str = Labels.NotAvailable;
-                            winLoss.LineTotal_Others_Non_Live_Str = Labels.NotAvailable;
-                            winLoss.Variance = 0;
-                            winLoss.Turnover = 0;
-                            winLoss.Margin = 0;
-                            winLoss.Margin_Str = Labels.NotAvailable;
-                            winLoss.LineTotalVirtual = Converter.ToDecimal(info.VirtualLineTotal_soccer_live) +
-                                Converter.ToDecimal(info.VirtualLineTotal_soccer) +
-                                Converter.ToDecimal(info.VirtualLineTotal_others_live) +
-                                Converter.ToDecimal(info.VirtualLineTotal_others);
-                            summaryReport.GrandTotal.LineTotalVirtual += winLoss.LineTotalVirtual;
-                            summaryReport.GrandTotal.Variance += winLoss.Variance;
-                        }
-
                         winLoss.VirtualLineTotal_Soccer_Live_Str = Labels.NotAvailable;
                         winLoss.VirtualLineTotal_Soccer_Non_Live_Str = Labels.NotAvailable;
                         winLoss.VirtualLineTotal_Others_Live_Str = Labels.NotAvailable;
                         winLoss.VirtualLineTotal_Others_Non_Live_Str = Labels.NotAvailable;
                         winLoss.LineTotalVirtual_Str = Labels.NotAvailable;
                         winLoss.Variance_Str = Labels.NotAvailable;
+
+                        if (isBettradeBettype)
+                        {
+                            winLoss.Name = Labels.Bettrade;
+                            winLoss.LineTotal_Soccer_Live_Str = Labels.NotAvailable;
+                            winLoss.LineTotal_Soccer_Non_Live_Str = Labels.NotAvailable;
+                            winLoss.LineTotal_Others_Non_Live_Str = Labels.NotAvailable;
+                            winLoss.VirtualLineTotal_Others_Live = Converter.ToDecimal(info.VirtualLineTotal_others_live);
+                            winLoss.Turnover = 0;
+                            winLoss.Margin = 0;
+                            winLoss.LineTotalVirtual = Converter.ToDecimal(info.VirtualLineTotal_soccer_live) +
+                                Converter.ToDecimal(info.VirtualLineTotal_soccer) +
+                                Converter.ToDecimal(info.VirtualLineTotal_others_live) +
+                                Converter.ToDecimal(info.VirtualLineTotal_others);
+                            summaryReport.GrandTotal.LineTotal_Others_Live += winLoss.LineTotal_Others_Live;
+                            summaryReport.GrandTotal.VirtualLineTotal_Others_Live += winLoss.VirtualLineTotal_Others_Live;
+                            summaryReport.GrandTotal.LineTotalVirtual += winLoss.LineTotalVirtual;
+                            summaryReport.GrandTotal.Variance += winLoss.Variance;
+                        }
+
                         winLoss = this.FormatSummaryReportByBetType(winLoss, true);
                     }
                     else
@@ -924,12 +927,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     winLoss.Margin = this._matchWinLoss2aUtilityService.CalculateMargin(winLoss.LineTotal, winLoss.Turnover);
                     report.ThirdPartyInfo.AddToGrandTotal(winLoss);
                     winLoss = this.FormatWinLossInfo(winLoss);
-
-                    if (string.Equals(winLoss.Name, Labels.Bettrade, StringComparison.OrdinalIgnoreCase))
-                    {
-                        winLoss.Commission_Str = Labels.NotAvailable;
-                    }
-
                     report.ThirdPartyInfo.ChildsInfo.Add(winLoss);
                 }
 
@@ -1322,12 +1319,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
                     report.ThirdPartyInfo.GrandTotal.Turnover);
                 report.ThirdPartyInfo.AddToGrandTotal(winLoss);
                 winLoss = this.FormatWinLossInfo(winLoss);
-
-                if (string.Equals(winLoss.Name, Labels.Bettrade, StringComparison.OrdinalIgnoreCase))
-                {
-                    winLoss.Commission_Str = Labels.NotAvailable;
-                }
-
                 report.ThirdPartyInfo.ChildsInfo.Add(winLoss);
             }
 

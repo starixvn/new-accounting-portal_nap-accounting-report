@@ -19,6 +19,6 @@
 		<Setting Key="Racing_WinLossGroup" SpName="Acc_Rpt_WinlostRacing_Group" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0"/>
 	</Function>
   <Function Name="Misc - Duplicate Tickets">
-    <Setting Key="Misc_DuplicateTickets_GetReport" SpName="Acc_Rpt_DuplicatedTicketsSel" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Misc_DuplicateTickets_GetReport" SpName="Acc_Rpt_DuplicatedTicketsSel_uat1" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0"/>
   </Function>
 </Functions>
