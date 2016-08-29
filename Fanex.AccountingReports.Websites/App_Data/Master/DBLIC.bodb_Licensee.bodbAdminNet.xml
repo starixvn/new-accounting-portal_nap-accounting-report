@@ -1,4 +1,4 @@
-﻿<Functions>
+<Functions>
   <Function Name="Licensee - Core">
     <Setting Key="Licensee_Core_GetReseller" SpName="Acc_LicenseeByResellerSel" DbName="DBLIC.bodb_Licensee.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="Licensee_Core_GetResellerRates" SpName="OA_ResellerTransactionSel" DbName="DBLIC.bodb_Licensee.bodbAdminNet" TimeOut="0"></Setting>
@@ -6,7 +6,7 @@
   <Function Name="Core - Report Service">
     <Setting Key="Core_ReportService_GetLicenseeSupportByProduct" SpName="Acc_Licensee_Product3rdSel" DbName="DBLIC.bodb_Licensee.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
-  <Function Name="Racing - Get Racing Licensee">
-    <Setting Key="WinlostRacingLicensee_SiteSel" SpName="Acc_LicenseeProduct3rdSel" DbName="DBLIC.bodb_Licensee.bodbAdminNet" TimeOut="0" />
-  </Function>
+	<Function Name="Racing - Get Racing Licensee">
+		<Setting Key="WinlostRacingLicensee_SiteSel" SpName="Acc_LicenseeProduct3rdSel" DbName="DBLIC.bodb_Licensee.bodbAdminNet" TimeOut="0" />
+	</Function>
 </Functions>

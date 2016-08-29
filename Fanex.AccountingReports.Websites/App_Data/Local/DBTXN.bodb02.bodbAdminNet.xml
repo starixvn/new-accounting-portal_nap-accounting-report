@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Functions>
-  <Function Name="Special - Margin Report">
-    <Setting Key ="Special_MarginReport_BetRatioByUser" SpName="Acc_Rpt_BetRatioByUser" DbName="DBTXN.bodb02.bodbAdminNet"></Setting>
-  </Function>
+	<Function Name="Special - Margin Report">
+		<Setting Key ="Special_MarginReport_BetRatioByUser" SpName="Acc_Rpt_BetRatioByUser" DbName="DBTXN.bodb02.bodbAdminNet"></Setting>
+	</Function>
 </Functions>

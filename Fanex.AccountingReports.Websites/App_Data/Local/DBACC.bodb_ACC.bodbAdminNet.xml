@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
   <Function Name="Special - Save Bet Report">
     <Setting Key="Special_SaveBet_GetListSport" SpName="NAP_SaveBet_ListSportByDate" DbName="DBACC.bodb_ACC.bodbAdminNet"></Setting>

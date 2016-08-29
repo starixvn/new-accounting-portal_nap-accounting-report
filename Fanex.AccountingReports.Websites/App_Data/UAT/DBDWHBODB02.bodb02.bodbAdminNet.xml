@@ -14,5 +14,5 @@
 			<Mapping DataField="sporttype" ObjectProperty="SportType" />
 			<Mapping DataField="sportname" ObjectProperty="SportName" />
 		</Setting>
-	</Function>
+	</Function> 
 </Functions>

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Functions>
   <Function Name="Misc - Bet Count">
+    <Setting Key="Misc_Bet_Count_GetProducts" SpName="Acc_Rpt_BetCount_SelProductSportBettypes" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
     <Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Gaming - Number Game Win Loss By Date">
     <Setting Key="Gaming_NumberGameWinlossByDate_GetReport" SpName="Acc_Rpt_NumberGameWinlossByDate" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
   <Function Name="Gaming - Live Casino Game Financial">
-    <Setting Key="Gaming_LiveCasinoGameFinancial_GetGameType" SpName="Acc_Rpt_CasinoGameStatistics_GameTypeSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
-    <Setting Key="Gaming_LiveCasinoGameFinancial_GetGameTable" SpName="Acc_Rpt_LiveCasinoFinance_GameTable" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="Gaming_LiveCasinoGameFinancial_GetGameType" SpName="Acc_Rpt_CasinoGameStatistics_GameTypeSel" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Gaming_LiveCasinoGameFinancial_GetGameTable" SpName="Acc_Rpt_LiveCasinoFinance_GameTable" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Gaming_LiveCasinoGameFinancial_GetReport" SpName="Acc_Rpt_LiveCasinoFinance" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
   </Function>
   <Function Name="Gaming - Number Game Win Loss By Currency">
