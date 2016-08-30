@@ -595,7 +595,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 sportWinLoss.Id == CoreConstants.SportContants.Keno ||
                                 sportWinLoss.Id == CoreConstants.SportContants.VirtualSportGroup ||
                                 sportWinLoss.Id == SportContants._2hReportCasino ||
-                                sportWinLoss.Id == CoreConstants.SportContants.ColossusBet;
+                                sportWinLoss.Id == CoreConstants.SportContants.ColossusBet ||
+                                sportWinLoss.Id == SportContants._2hBettrade;
 
                             bool isCasinoSport = sportWinLoss.Id == SportContants._2hReportCasino;
 
