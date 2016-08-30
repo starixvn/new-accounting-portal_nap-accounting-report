@@ -286,14 +286,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                     int id = Converter.ToInt(sportIdInfo);
                     switch (id)
                     {
-                        case WinLossContants.DailyMixParlayNormalSoccerSportId:
-                            name = Labels.Soccer_Sport;
+                        case -1:
+                            name = "Mixed Sports";
                             break;
-                        case WinLossContants.DailyMixParlayNormalOtherSportsId:
-                            name = Labels.Other_Sports;
+                        case -2:
+                            name = "Mixed Other Sports";
                             break;
-                        case WinLossContants.DailyMixParlayNormalMultiSportId:
-                            name = Labels.Multi_Sports;
+                        default:
+                            name = CacheRef.GetSportName(id);
                             break;
                     }
 
@@ -903,7 +903,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                 workSheet.Columns[startColumn + 8].Width = 120 * ExcelExtensions.FontWidth;
 
                 var title = string.Format(
-                    WinLossResources.DailyMixParlayWinLoss_AdvanceMixParlay_ReportTitle,
+                    "Parlay Win Loss by Product by {0}  - From {1} To {2}",
                     ReportService.GetSiteTypeName(criteria.Site),
                     criteria.FromDate.ToShortFormatedDate(),
                     criteria.ToDate.ToShortFormatedDate());

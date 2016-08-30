@@ -24,6 +24,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.DailyMixParlayWinLoss
 
         public int Site { get; set; }
 
+        [SpParam(Ignored = true)]
         public int Bettype
         {
             get

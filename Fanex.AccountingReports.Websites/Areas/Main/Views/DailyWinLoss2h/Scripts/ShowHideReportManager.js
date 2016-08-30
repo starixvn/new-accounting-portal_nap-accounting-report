@@ -3,7 +3,8 @@ ShowHideReportManager = function () {
 
     self.ReportManager = reportManager;
     self.CacheData = {
-        currentReport: reportManager.Main2hReport
+        currentReport: reportManager.Main2hReport,
+        winLossDate: null
     };
 
     self.ShowCasinoReport = function (sportId, sportName, winLossDate) {
@@ -104,6 +105,10 @@ ShowHideReportManager = function () {
         AccReport.popUp.hide();
         scoreInfoManager.ClosePopup();
         self.CacheData.currentReport.HideReportView();
+        if (self.CacheData.winLossDate != null)
+        {
+            reportManager.Main2hReport.Params.reportParams.Winlostdate = self.CacheData.winLossDate;
+        }
         reportManager.Tables.datepicker.datepicker("setDate", reportManager.Main2hReport.Params.reportParams.Winlostdate);
         reportManager.RebindingEvent();
         reportManager.Main2hReport.Tables.reportContainer.removeClass("display-none");
@@ -145,6 +150,7 @@ ShowHideReportManager = function () {
 
     self.ShowParlayReport = function (sportId, sportName, winLossDate) {
         self.CacheData.currentReport = reportManager.ParlayReport;
+        self.CacheData.winLossDate = winLossDate;
         self.ShowDrilldownReport(sportId, sportName, winLossDate);
     };
 
