@@ -314,80 +314,83 @@ namespace Fanex.AccountingReports.Main.Services.Implement.MatchWinLoss2a
 
             foreach (var sportType in thirdPartyReport.ChildsInfo)
             {
-                IRow row = worksheet.CreateRow(currentRow);
-                var currentColumn = 0;
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, sportType.Name, centerTextStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, sportType.EventDate, textStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
-                var startMergeColumn = currentColumn - 3;
-                this.RenderMergeCell(ref worksheet, ref row, currentRow, ref startMergeColumn, currentRow, currentColumn - 1, string.Empty, textStyle);
-                this.RenderSpecialCell(
-                    ref row,
-                    ref currentColumn,
-                    sportType.WinLoss_Str,
-                    sportType.WinLoss,
-                    textStyle,
-                    decimalNumberStyle);
-                this.RenderSpecialCell(
-                    ref row,
-                    ref currentColumn,
-                    sportType.Position_Str,
-                    sportType.Position,
-                    textStyle,
-                    decimalNumberStyle);
-                this.RenderSpecialCell(
-                    ref row,
-                    ref currentColumn,
-                    sportType.Commission_Str,
-                    sportType.Commission,
-                    textStyle,
-                    decimalNumberStyle);
-                this.RenderSpecialCell(
-                    ref row,
-                    ref currentColumn,
-                    sportType.VirtualComm_Str,
-                    sportType.VirtualComm,
-                    textStyle,
-                    decimalNumberStyle);
-                this.RenderSpecialCell(
-                    ref row,
-                    ref currentColumn,
-                    sportType.LineTotal_Str,
-                    sportType.LineTotal,
-                    boldTextStyle,
-                    boldDecimalNumberStyle);
-                this.RenderSpecialCell(
-                    ref row,
-                    ref currentColumn,
-                    sportType.VirtualLineTotal_Str,
-                    sportType.VirtualLineTotal,
-                    boldTextStyle,
-                    boldDecimalNumberStyle);
-                this.RenderSpecialCell(
-                    ref row,
-                    ref currentColumn,
-                    sportType.Variance_Str,
-                    sportType.Variance,
-                    textStyle,
-                    decimalNumberStyle);
-                this.RenderSpecialCell(
-                    ref row,
-                    ref currentColumn,
-                    sportType.Turnover_Str,
-                    sportType.Turnover,
-                    textStyle,
-                    decimalNumberStyle);
-                this.RenderSpecialCell(
-                    ref row,
-                    ref currentColumn,
-                    sportType.Margin_Str,
-                    sportType.Margin,
-                    textStyle,
-                    decimalNumberStyle);
+                if (sportType.Name == "Bettrade")
+                {
+                    IRow row = worksheet.CreateRow(currentRow);
+                    var currentColumn = 0;
+                    this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, sportType.Name, centerTextStyle);
+                    this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, sportType.EventDate, textStyle);
+                    this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
+                    this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
+                    this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
+                    var startMergeColumn = currentColumn - 3;
+                    this.RenderMergeCell(ref worksheet, ref row, currentRow, ref startMergeColumn, currentRow, currentColumn - 1, string.Empty, textStyle);
+                    this.RenderSpecialCell(
+                        ref row,
+                        ref currentColumn,
+                        sportType.WinLoss_Str,
+                        sportType.WinLoss,
+                        textStyle,
+                        decimalNumberStyle);
+                    this.RenderSpecialCell(
+                        ref row,
+                        ref currentColumn,
+                        sportType.Position_Str,
+                        sportType.Position,
+                        textStyle,
+                        decimalNumberStyle);
+                    this.RenderSpecialCell(
+                        ref row,
+                        ref currentColumn,
+                        sportType.Commission_Str,
+                        sportType.Commission,
+                        textStyle,
+                        decimalNumberStyle);
+                    this.RenderSpecialCell(
+                        ref row,
+                        ref currentColumn,
+                        sportType.VirtualComm_Str,
+                        sportType.VirtualComm,
+                        textStyle,
+                        decimalNumberStyle);
+                    this.RenderSpecialCell(
+                        ref row,
+                        ref currentColumn,
+                        sportType.LineTotal_Str,
+                        sportType.LineTotal,
+                        boldTextStyle,
+                        boldDecimalNumberStyle);
+                    this.RenderSpecialCell(
+                        ref row,
+                        ref currentColumn,
+                        sportType.VirtualLineTotal_Str,
+                        sportType.VirtualLineTotal,
+                        boldTextStyle,
+                        boldDecimalNumberStyle);
+                    this.RenderSpecialCell(
+                        ref row,
+                        ref currentColumn,
+                        sportType.Variance_Str,
+                        sportType.Variance,
+                        textStyle,
+                        decimalNumberStyle);
+                    this.RenderSpecialCell(
+                        ref row,
+                        ref currentColumn,
+                        sportType.Turnover_Str,
+                        sportType.Turnover,
+                        textStyle,
+                        decimalNumberStyle);
+                    this.RenderSpecialCell(
+                        ref row,
+                        ref currentColumn,
+                        sportType.Margin_Str,
+                        sportType.Margin,
+                        textStyle,
+                        decimalNumberStyle);
 
-                currentRow++;
+                    currentRow++;
+                }
             }
         }
 
