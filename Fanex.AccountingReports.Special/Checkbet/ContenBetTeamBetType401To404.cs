@@ -4,7 +4,7 @@
     {
         public string ContentBetTeamBuilder(BetTeamModel model)
         {
-            return model.BetTeam == "O" ? "Over " + model.Hdp1.ToString() : "Under " + model.Hdp1.ToString();
+            return model.BetTeam == "O" ? "Over" : "Under";
         }
     }
 }

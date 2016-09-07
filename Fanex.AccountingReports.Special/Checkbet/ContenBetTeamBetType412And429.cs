@@ -7,7 +7,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
         public string ContentBetTeamBuilder(BetTeamModel model)
         {
             var team = new Dictionary<string, string>();
-            team.Add("0", "0 Goals");
+            team.Add("0", "No Goal");
             team.Add("1", "1 Goal");
             team.Add("2", "2 Goals");
             team.Add("3-OVER", "3 Goals &Over");
