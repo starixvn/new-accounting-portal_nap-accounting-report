@@ -46,15 +46,6 @@ namespace Fanex.AccountingReports.Main.Common
         public const int MinMetricGamingSuperLiveBetType = 801;
         public const int MaxMetricGamingSuperLiveBetType = 899;
 
-        public static readonly string MatchWinLoss2aSummaryReportByBetTypeSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.SummaryReportByBetType";
-        public static readonly string MatchWinLoss2aSummaryReportBySportTypeSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.SummaryReportBySportType";
-        public static readonly string MatchWinLoss2aDetailReportByBetTypeSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.DetailReportBetType";
-        public static readonly string MatchWinLoss2aDetailReportBySportTypeSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.DetailReportSportType";
-        public static readonly string MatchWinLoss2aThirdPartyCasinoReportSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.ThirdPartyCasino";
-        public static readonly string MatchWinLoss2aAllDetailReportSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.AllDetailReport";
-        public static readonly string MatchWinLoss2aCacheDataSetResultSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.CacheDataSetReult";
-        public static readonly string MatchWinLoss2aCacheOutputParamSessionKey = "Fanex.AccountingReports.Main.MatchWinLoss2a.CacheOutputResult";
-
         public static readonly string DailyWinLoss2hMain2hReportSessionKey = "Fanex.AccountingReports.Main.DailyWinLoss2h.Main2hReport";
         public static readonly string DailyWinLoss2hCasinoReportSessionKey = "Fanex.AccountingReports.Main.DailyWinLoss2h.CasinoReport";
         public static readonly string DailyWinLoss2hLiveCasinoReportSessionKey = "Fanex.AccountingReports.Main.DailyWinLoss2h.LiveCasinoReport";
@@ -104,6 +95,6 @@ namespace Fanex.AccountingReports.Main.Common
         public static readonly string TwoDecimalDigitNumber = "##,##0.00";
         private const string NegativeNumberFormat = "[>=0]#,##0{0}_);[RED][<0]-#,##0{1}";
         private const string NormalNumberFormat = "#,##0{0}_);-#,##0{1}";
-        private const string PositiveNumberFormat = "[RED][>0]#,##0{0}_);[<0]-#,##0{1};#,##0{2}";        
+        private const string PositiveNumberFormat = "[RED][>0]#,##0{0}_);[<0]-#,##0{1};#,##0{2}";
     }
 }
