@@ -765,7 +765,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             };
         }
 
-        public ProductInfo GenerateVirtualSports(IGrouping<dynamic, dynamic> rawData)
+        public ProductInfo AddSportGroup(IGrouping<dynamic, dynamic> rawData)
         {
             var indGroup = CreateGroupInfo(rawData.Key.SportID);
             indGroup.Name = Converter.ToString2(rawData.Key.SportName);
@@ -779,20 +779,47 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
         public List<ProductInfo> CalculateSportData(IEnumerable<dynamic> rawData, List<ProductInfo> sports)
         {
+            CreateSportBookGroups(rawData, sports);
+            CreateVirtualSportGroup(rawData, sports);
+            CreateNG2SportGroup(rawData, sports);
+
+            return sports;
+        }
+
+        public List<ProductInfo> CreateSportBookGroups(IEnumerable<dynamic> rawData, List<ProductInfo> sports)
+        {
             var sportbookRaw = rawData.Where(r => r.ProductID == MiscConstants.MiscSportbookId);
             var soccerGroupData = sportbookRaw.Where(r => r.SportID == MiscConstants.MiscSoccerGroupId);
             var otherSportGroupData = sportbookRaw.Where(r =>
                 r.SportID != MiscConstants.MiscSoccerGroupId && r.SportID != MiscConstants.MiscParLaySportId);
             var parlayGroupData = sportbookRaw.Where(r => r.SportID == MiscConstants.MiscParLaySportId);
-            var virtualsportRaw = rawData.Where(r => r.ProductID == MiscConstants.MiscVirtualSportsId);
-            var virtualsportGroups = virtualsportRaw.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
 
             sports.Add(GenerateSports(soccerGroupData));
             sports.Add(GenerateOtherSports(otherSportGroupData));
             sports.Add(GenerateSports(parlayGroupData));
+
+            return sports;
+        }
+
+        public List<ProductInfo> CreateVirtualSportGroup(IEnumerable<dynamic> rawData, List<ProductInfo> sports)
+        {
+            var virtualsportRaw = rawData.Where(r => r.ProductID == MiscConstants.MiscVirtualSportsId);
+            var virtualsportGroups = virtualsportRaw.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
             foreach (var virtualsportGroup in virtualsportGroups)
             {
-                sports.Add(GenerateVirtualSports(virtualsportGroup));
+                sports.Add(AddSportGroup(virtualsportGroup));
+            }
+
+            return sports;
+        }
+
+        public List<ProductInfo> CreateNG2SportGroup(IEnumerable<dynamic> rawData, List<ProductInfo> sports)
+        {
+            var numberGame2sportRaw = rawData.Where(r => r.ProductID == MiscConstants.MiscNG2ProductID);
+            var numberGame2sportGroups = numberGame2sportRaw.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
+            foreach (var numberGame2sportGroup in numberGame2sportGroups)
+            {
+                sports.Add(AddSportGroup(numberGame2sportGroup));
             }
 
             return sports;
