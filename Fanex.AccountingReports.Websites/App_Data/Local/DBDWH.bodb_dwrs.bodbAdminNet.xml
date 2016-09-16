@@ -140,7 +140,7 @@
   </Function>
 
   <Function Name="Special - Punter Analysis">
-    <Setting Key="Special_PunterAnalysis_GetProducts" SpName="Acc_SelBettypesbySports_DW" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="Special_PunterAnalysis_GetProducts" SpName="Acc_SelBettypesbySports_DW_xtest" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Special_PunterAnalysis_GetLeaguesBySport" SpName="Acc_TopPunterSelLeagues" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
     <Setting Key="Special_PunterAnalysis_GetTopPunterReport" SpName="Acc_SelTopPunterSummary" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="Special_PunterAnalysis_GetTopPunterByUser" SpName="Acc_SelTopPunterByCustID" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
