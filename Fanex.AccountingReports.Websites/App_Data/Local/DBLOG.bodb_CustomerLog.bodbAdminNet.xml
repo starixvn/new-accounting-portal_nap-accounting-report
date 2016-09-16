@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Functions>
   <Function Name="Balance - Company Balance Difference">
-    <Setting Key="Balance_CompanyBalanceDifference_GetReport" SpName="Acc_Rpt_Balance_Company_History" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet"></Setting>
+    <Setting Key="Balance_CompanyBalanceDifference_GetReport" SpName="Acc_Rpt_Balance_Company_History" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
-  <Function Name="Main - Credit Term">
-    <Setting Key="WriteLog_UserLog_RunSP" SpName="WriteLog_UserLog_RunSP" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet"  />
-   </Function>
+
   <Function Name="WinLoss - Tree Win Loss">
-    <Setting Key="WinLoss_TreeWinLoss_VirtualRateHistory" SpName="Acc_CustomerSelVirtualRateHistory" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet"></Setting>
+    <Setting Key="WinLoss_TreeWinLoss_VirtualRateHistory" SpName="Acc_CustomerSelVirtualRateHistory" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
   <Function Name="Misc - Credit movement">
     <Setting Key="Misc_CreditMovement_GetReport" SpName="Acc_Rpt_CreditMovement" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" TimeOut="0" />

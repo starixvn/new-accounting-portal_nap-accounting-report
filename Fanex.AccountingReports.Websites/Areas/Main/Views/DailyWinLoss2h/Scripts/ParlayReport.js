@@ -94,7 +94,7 @@ ParlayReport.prototype.GetReport = function (params) {
     var self = this;
     AccReport.disableInput();
     this.reportParams = params;
-
+    reportManager.Main2hReport.Params.reportParams.Winlostdate = reportManager.Tables.datepickerplugin.nexDatePicker("getSingleDate");
     AccReport.utility.CallAjax(this,
         window.rootUrl + "Main/DailyWinLoss2h/GetParlayReport",
         self.reportParams,

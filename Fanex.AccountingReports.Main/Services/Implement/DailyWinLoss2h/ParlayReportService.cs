@@ -31,6 +31,15 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
         private readonly string _parlaySessionKey = "Fanex.AccountingReports.Main.DailyWinLoss2h.ParlayReport" +
            (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
 
+        private Dictionary<string, int> InitialParlayType()
+        {
+            return new Dictionary<string, int>
+            {
+                { "System Parlay", 29 },
+                { "Mix Parlay", 9 }
+            };
+        }        
+
         /// <summary>
         /// Gets the parlay report.
         /// </summary>
@@ -61,14 +70,15 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 };
 
                 var rawData = _reportRepository.GetParlayReport(criteria);
-
-                var parlayGroup = rawData.GroupBy(r => r.Bettype).ToList();
+                var parlayType = InitialParlayType();
+                var parlayGroup = rawData.OrderByDescending(s => s.SportName).GroupBy(s => new { s.SportName }).ToList();
 
                 foreach (var group in parlayGroup)
                 {
+                    var id = parlayType.ContainsKey(group.Key.SportName) ? parlayType[group.Key.SportName] : 0;
                     var parlayWinLossByBetType = new WinLossInfo
                     {
-                        Id = Converter.ToInt(group.Key),
+                        Id = id,
                         CreditTotal = new WinLossInfo
                         {
                             Name = Labels.Credit
@@ -80,13 +90,11 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         GrandTotal = new WinLossInfo()
                     };
 
-                    int parlayTypeId = Converter.ToInt(group.Key);
-
                     foreach (var data in group)
                     {
                         var info = new WinLossInfo
                         {
-                            Id = parlayTypeId,
+                            Id = id,
                             WinLoss = Converter.ToDecimal(data.Winlost),
                             Position = Converter.ToDecimal(data.Position),
                             Commission = Converter.ToDecimal(data.Commission),
@@ -116,7 +124,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 break;
                         }
 
-                        parlayWinLossByBetType.GrandTotal.Id = parlayTypeId;
+                        parlayWinLossByBetType.GrandTotal.Id = id;
                         parlayWinLossByBetType.GrandTotal.Name = info.Name;
                         parlayWinLossByBetType.GrandTotal.Add(info);
                         report.GrandTotal.Add(info);

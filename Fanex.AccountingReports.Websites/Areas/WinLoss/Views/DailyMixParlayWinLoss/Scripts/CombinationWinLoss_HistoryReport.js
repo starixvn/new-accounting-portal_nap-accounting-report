@@ -179,14 +179,14 @@ CombinationWinLoss_HistoryReport.prototype.RenderReport = function (report) {
     var gridOptions = {
         customizeHeader: true,
         groupHeaderRows: [{
-            Columns: [{ HeaderText: "Combination", Name: "ColCombination", MergeRowNumber: 2 },
+            Columns: [{ HeaderText: "Combinations", Name: "ColCombination", MergeRowNumber: 2 },
                 { HeaderText: "Type", Name: "ColType", MergeRowNumber: 2 },
                 { HeaderText: "Bet Type", Name: "ColBetType", MergeRowNumber: 2 },
                 { HeaderText: viewResources.Member, Name: "ColWinLoss", MergeColNumber: 3 },
                 { HeaderText: viewResources.Agency, Name: "ColPosition", MergeColNumber: 2 },
                 { HeaderText: viewResources.Company, Name: "ColLineTotal", MergeColNumber: 3}]
         }],
-        columns: [{ HeaderText: "Combination", Width: 140, Name: "ColCombination", HeaderAlign: "center", CellAlign: "center" },
+        columns: [{ HeaderText: "Combinations", Width: 140, Name: "ColCombination", HeaderAlign: "center", CellAlign: "center" },
                       { HeaderText: "Type", Width: 140, Name: "ColType", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Bet Type", Width: 120, Name: "ColBetType", HeaderAlign: "center", CellAlign: "left" },
                       { HeaderText: "Win Loss", Width: 120, Name: "ColWinLoss", HeaderAlign: "center", CellAlign: "right" },
