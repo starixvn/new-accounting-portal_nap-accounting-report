@@ -655,8 +655,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                         ChildsInfo = new List<ProductInfo>()
                     };
 
-                    if (string.Compare(product.Name, Labels.Sportsbook, true) == 0
-                        || string.Compare(product.Name, Labels.Virtual_Sports, true) == 0)
+                    if (MiscConstants.ProductsHaveSports.Contains(product.Name.ToLower()))
                     {
                         products.Add(product);
                         continue;

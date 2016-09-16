@@ -1096,13 +1096,13 @@
   <data name="MemberTotal" xml:space="preserve">
     <value>Member Total</value>
   </data>
-   <data name="Enabled" xml:space="preserve">
+  <data name="Enabled" xml:space="preserve">
     <value>Enabled</value>
   </data>
   <data name="TurnoverRM" xml:space="preserve">
     <value>Turnover(RM)</value>
   </data>
-   <data name="Keno" xml:space="preserve">
+  <data name="Keno" xml:space="preserve">
     <value>Keno</value>
   </data>
   <data name="RunningBetCount" xml:space="preserve">
@@ -1114,7 +1114,7 @@
   <data name="There_are_no_sports_and_leagues" xml:space="preserve">
     <value>There are no sport events opened on</value>
   </data>
-  <data name="There_are_no_sports_and_leagues" xml:space="preserve">
-    <value>There are no sport events opened on</value>
+  <data name="NG2" xml:space="preserve">
+    <value>NG2</value>
   </data>
 </root>

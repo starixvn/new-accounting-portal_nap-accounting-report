@@ -7,6 +7,8 @@
 //   <change who="Louis.Nguyen" date="2012.12.07">Created</change>
 // </history>
 
+using System.Collections.Generic;
+
 namespace Fanex.AccountingReports.Misc.Constants
 {
     /// <summary>
@@ -31,6 +33,13 @@ namespace Fanex.AccountingReports.Misc.Constants
         public static readonly string TotalSMAMemberActiveDetailSessionKey = "Fanex.AccountingReports.Misc.TotalSMAMemberActive.TotalSMAMemberActiveDetailReport";
         public static readonly string DuplicateTicketsPrefixSessionKey = "Fanex.AccountingReports.Misc.DuplicateTickets.";
         public static readonly string MiscSportsSessionKey = "Fanex.AccountingReports.Misc.BetCount.Sports";
+
+        public static readonly List<string> ProductsHaveSports = new List<string>
+        {
+            "sportsbook",
+            "virtual sports",
+            "ng2"
+        };
 
         /// <summary>
         /// The one sheet can has only 65000 rows.

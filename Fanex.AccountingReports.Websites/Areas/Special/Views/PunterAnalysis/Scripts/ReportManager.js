@@ -110,6 +110,8 @@ ReportManager = function () {
         SearchBy: 0,
         CurrentDatePickerContainer: null,
         Sportbook_ProductId: "1_0",
+        NG2_ProductId: "23_0",
+        Sportbook_SportID: [1, 999, 0],
         Sports: [],
         SearchByType: self.Enum.SearchByType.User,
         SelectedSportBetTypes: []
@@ -297,6 +299,19 @@ ReportManager.prototype.RenderDropdownProducts = function (products) {
             continue;
         }
 
+        if (productGroup.Name.toLowerCase() == "ng2") {
+            ddProduct.push({
+                Id: "#" + ddId + "_Product1",
+                Value: "23_0",
+                Text: productGroup.Name,
+                Checked: true,
+                Enable: true,
+                CssClass: "bold"
+            });
+
+            continue;
+        }
+
         if (productGroup.Name.toLowerCase() == "mbc-rng casino") {
             var values = '';
 
@@ -367,6 +382,7 @@ ReportManager.prototype.RenderDropdownProducts = function (products) {
         onCheck: function () {
             //if sportsbook seleted then load sports
             if (this.value == reportManager.CacheData.Sportbook_ProductId ||
+                this.value == reportManager.CacheData.NG2_ProductId ||
                 this.id == 'ddlProductHeaderCheckBox') {
                 self.GetSports();
             }
@@ -660,7 +676,7 @@ ReportManager.prototype.GetSports = function () {
     var self = this;
 
     AccReport.disableInput();
-    self.Params.getSports.IsSB = true;
+    self.Params.getSports.IsSB = false;
     $.ajax({
         type: "POST",
         url: window.rootUrl + "PunterAnalysis/GetSports",
@@ -686,54 +702,16 @@ ReportManager.prototype.RenderDropdownSports = function (sports) {
     var ddId = "ddlSport";
     var selectedProducts = this.GetSelectedProducts();
     var isExistsSportbook = $.inArray(this.CacheData.Sportbook_ProductId, selectedProducts) != -1;
-    if (isExistsSportbook) {
+    var isExistsNG2 = $.inArray(this.CacheData.NG2_ProductId, selectedProducts) != -1;
+    if (isExistsSportbook || isExistsNG2) {
         var sportGroupLength = sports ? sports.length : 0;
         for (var i = 0; i < sportGroupLength; i++) {
             var sportGroup = sports[i];
             var sportLength = sportGroup.ChildsInfo ? sportGroup.ChildsInfo.length : 0;
             var ddSportGroup = [];
-            for (var j = 0; j < sportLength; j++) {
-                var sport = sportGroup.ChildsInfo[j];
-                var betTypeLength = sport.ChildsInfo ? sport.ChildsInfo.length : 0;
-                var ddBetType = [];
-                for (var k = 0; k < betTypeLength; k++) {
-                    var betType = sport.ChildsInfo[k];
-
-                    ddBetType.push({
-                        Id: "#" + ddId + "SportGroup" + sportGroup.Id +
-                                         "_Sport" + sport.Id +
-                                         "_BetType" + betType.Id,
-                        Value: sport.Id + "_" + betType.Id,
-                        Text: betType.Name,
-                        Checked: true,
-                        Enable: true,
-                        CssClass: ""
-                    });
-                }
-
-                ddSportGroup.push({
-                    Id: "#" + ddId + "SportGroup" + sportGroup.Id + "_Sport" + sport.Id,
-                    Value: (sportGroup.Name != "Parlay" ? sportGroup.Id : "0") + "_" + sport.Id,
-                    Text: sport.Name,
-                    Checked: true,
-                    Enable: true,
-                    CssClass: "",
-                    Items: ddBetType,
-                    Show: false
-                });
-            }
-
-            if (sportGroup.Name != "Parlay" ||
-                (sportGroup.ChildsInfo && sportGroup.ChildsInfo.length > 0)) {
-                ddSport.push({
-                    Id: "#" + ddId + "SportGroup" + sportGroup.Id.toString(),
-                    Value: sportGroup.Id,
-                    Text: sportGroup.Name,
-                    Checked: true,
-                    Enable: true,
-                    CssClass: "",
-                    Items: ddSportGroup
-                });
+            if ((this.CacheData.Sportbook_SportID.contains(sportGroup.Id) && isExistsSportbook == true) ||
+                (sportGroup.Id <= 220 && sportGroup.Id >= 213 && isExistsNG2 == true)) {
+                this.GenerateSportbyProduct(sportGroup, sportLength, ddSportGroup, ddSport, ddId);
             }
         }
     }
@@ -750,18 +728,62 @@ ReportManager.prototype.RenderDropdownSports = function (sports) {
         customCheckAllText: 'All',
         noneSelectedText: 'Select an option',
         noItemText: 'No sport found.',
-        disabled: !isExistsSportbook,
+        disabled: (!isExistsSportbook && !isExistsNG2),
         listData: ddSport,
         onCheck: function () {
         }
     });
 
     this.Tables.ddlSport = $("#ddlSport");
-    if (!isExistsSportbook) {
+    if (!isExistsSportbook && !isExistsNG2) {
         this.Tables.ddlSport.multiSelect("unCheckAllItems");
         this.Tables.ddlSport.children('input').eq(0).val('Not applicable');
     }
 };
+
+ReportManager.prototype.GenerateSportbyProduct = function (sportGroup, sportLength, ddSportGroup, ddSport, ddId) {
+    for (var j = 0; j < sportLength; j++) {
+        var sport = sportGroup.ChildsInfo[j];
+        var betTypeLength = sport.ChildsInfo ? sport.ChildsInfo.length : 0;
+        var ddBetType = [];
+        for (var k = 0; k < betTypeLength; k++) {
+            var betType = sport.ChildsInfo[k];
+
+            ddBetType.push({
+                Id: "#" + ddId + "SportGroup" + sportGroup.Id +
+                                 "_Sport" + sport.Id +
+                                 "_BetType" + betType.Id,
+                Value: sport.Id + "_" + betType.Id,
+                Text: betType.Name,
+                Checked: true,
+                Enable: true,
+                CssClass: ""
+            });
+        }
+
+        ddSportGroup.push({
+            Id: "#" + ddId + "SportGroup" + sportGroup.Id + "_Sport" + sport.Id,
+            Value: (sportGroup.Name != "Parlay" ? sportGroup.Id : "0") + "_" + sport.Id,
+            Text: sport.Name,
+            Checked: true,
+            Enable: true,
+            CssClass: "",
+            Items: ddBetType
+        });
+    }
+    if (sportGroup.ChildsInfo && sportGroup.ChildsInfo.length > 0) {
+        ddSport.push({
+            Id: "#" + ddId + "SportGroup" + sportGroup.Id.toString(),
+            Value: sportGroup.Id,
+            Text: sportGroup.Name,
+            Checked: true,
+            Enable: true,
+            CssClass: "",
+            Items: ddSportGroup
+        });
+    }
+};
+
 ReportManager.prototype.GetSelectedProducts = function () {
     return this.Tables.ddlProduct.multiSelect('getCheckedItems');
 };
@@ -1092,7 +1114,7 @@ ReportManager.prototype.RenderReport = function (report) {
                       { Name: "ColTurnover", Value: info.Turnover_Str },
                       { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, false, true, false) },
                       { Name: "ColBetCount", Value: info.BetCount_Str },
-                      { Name: "ColIP"}]
+                      { Name: "ColIP" }]
         });
     }
 
@@ -1103,7 +1125,7 @@ ReportManager.prototype.RenderReport = function (report) {
                   { HeaderText: "Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right" },
                   { HeaderText: "Margin", Width: 80, Name: "ColMargin", HeaderAlign: "center", CellAlign: "right" },
                   { HeaderText: "Bet Count", Width: 100, Name: "ColBetCount", HeaderAlign: "center", CellAlign: "right" },
-                  { HeaderText: "IP", Width: 100, Name: "ColIP", HeaderAlign: "center", CellAlign: "center"}],
+                  { HeaderText: "IP", Width: 100, Name: "ColIP", HeaderAlign: "center", CellAlign: "center" }],
         showTitle: true,
         showFooter: true,
         titleInfo:
