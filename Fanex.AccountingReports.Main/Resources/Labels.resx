@@ -1222,7 +1222,6 @@
   <data name="Microgaming_RNGCasino" xml:space="preserve">
     <value>Microgaming - RNG Casino</value>
   </data>
-  
   <data name="MBC_RNG_Casino" xml:space="preserve">
     <value>MBC - RNG Casino</value>
   </data>
@@ -1249,5 +1248,11 @@
   </data>
   <data name="MacauGames" xml:space="preserve">
     <value>Macau Games</value>
+  </data>
+  <data name="House_Income" xml:space="preserve">
+    <value>House Income</value>
+  </data>
+  <data name="House_Tunover" xml:space="preserve">
+    <value>House Tunover</value>
   </data>
 </root>
