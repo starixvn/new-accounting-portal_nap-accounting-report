@@ -33,6 +33,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 
         public WinLossInfo Hedge { get; set; }
 
+        public string Name { get; set; }
+
         public WinLossInfo Total
         {
             get

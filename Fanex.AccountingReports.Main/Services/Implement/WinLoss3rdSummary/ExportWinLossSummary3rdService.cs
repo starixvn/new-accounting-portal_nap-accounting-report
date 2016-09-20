@@ -87,7 +87,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
                 var maxColumIndex = 10;
                 workSheet.Columns[0].Width = 200 * ExcelExtensions.FontWidth;
-                for (int colIndex = 1; colIndex <= maxColumIndex; colIndex++)
+                workSheet.Columns[1].Width = 150 * ExcelExtensions.FontWidth;
+                for (int colIndex = 2; colIndex <= maxColumIndex; colIndex++)
                 {
                     workSheet.Columns[startColumn + colIndex].Width = 120 * ExcelExtensions.FontWidth;
                 }
@@ -118,13 +119,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
                 currentCellRange.Merged = true;
                 currentCellRange.Style = headerTextStyle;
-                currentCellRange.Value = Labels.WinLoss;
+                currentCellRange.Value = Labels.Member_Win_Loss;
                 currentColumn++;
 
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
                 currentCellRange.Merged = true;
                 currentCellRange.Style = headerTextStyle;
-                currentCellRange.Value = Labels.Position;
+                currentCellRange.Value = Labels.SMA_Win_Loss;
                 currentColumn++;
 
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
@@ -136,7 +137,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
                 currentCellRange.Merged = true;
                 currentCellRange.Style = headerTextStyle;
-                currentCellRange.Value = Labels.LineTotal;
+                currentCellRange.Value = Labels.House_Income;
                 currentColumn += 2;
 
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
@@ -148,7 +149,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
                 currentCellRange.Merged = true;
                 currentCellRange.Style = headerTextStyle;
-                currentCellRange.Value = Labels.Turnover;
+                currentCellRange.Value = Labels.House_Turnover;
                 currentColumn += 2;
 
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -233,6 +234,22 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                             text8RM_BARMStyle.FillPattern.SetSolid(backgroundColor);
                             foreach (var winloss in betWinLoss.IBCs)
                             {
+                                if (betWinLoss.Id < 221 && betWinLoss.Id > 212)
+                                {
+                                    // Total of each total sport type
+                                    currentRow++;
+                                    currentColumn = startColumn;
+                                    this.WriteWinLossSummaryTotal(
+                                        workSheet,
+                                        currentRow,
+                                        currentColumn,
+                                        winloss.Name + " " + Labels.Total + ":",
+                                        subTotalTitleStyle,
+                                        numberOfGroupColumnsTotal,
+                                        betWinLoss.Total,
+                                        soccerTotalStyle);
+                                    continue;
+                                }
                                 currentRow++;
                                 currentColumn = startColumn;
                                 betTypeName = winloss.Name;

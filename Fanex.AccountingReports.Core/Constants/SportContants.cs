@@ -75,5 +75,6 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int ColossusBet = 204;
         public const int Allbet = 211;
         public const int MacauGames = 212;
+        public const int NG2 = 23;
     }
 }
