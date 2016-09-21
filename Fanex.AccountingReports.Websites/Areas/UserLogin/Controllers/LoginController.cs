@@ -9,6 +9,7 @@
 
 namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 {
+    using Core.Constants;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Resources;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -315,6 +316,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         /// Recheck login.
         /// </summary>
         /// <returns>Recheck login result.</returns>
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         [HttpPost]
         public ActionResult ReCheckLogin()
         {
@@ -323,6 +325,14 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                 return Json(new
                 {
                     IsKickedOut = "0"
+                });
+            }
+
+            if (HttpContext.Session[CommonConstants.CurrentLogInUser] == null)
+            {
+                return Json(new
+                {
+                    IsKickedOut = "1"
                 });
             }
 
