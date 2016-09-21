@@ -854,12 +854,6 @@
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\WinLossBySite_BetType.js" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Styles\Images\icon-collpase.png" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\Styles\Images\icon-expand.png" />
-    <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\DetailReportByBetType.js" />
-    <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\DetailReportBySportsType.js" />
-    <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\ReportManager.js" />
-    <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\SummaryReportByBetType.js" />
-    <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\SummaryReportBySportType.js" />
-    <Content Include="Areas\Main\Views\MatchWinLoss2a\Scripts\ThirdPartyDetailReport.js" />
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Index.cshtml" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\KenoReport.cshtml" />
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Styles\TraderPerformanceOtherSports.less" />
@@ -2109,7 +2103,6 @@
     <Content Include="Areas\Main\Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Main\Views\MatchWinLoss2a\Index.cshtml" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\BingoReport.cshtml" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\CasinoReport.cshtml" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\LiveCasinoReport.cshtml" />
@@ -2136,7 +2129,6 @@
     <Content Include="Areas\Main\Views\DailyWinLoss2h\VirtualSportsReport.cshtml" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\VirtualSports_VirtualHorseRacingReport.cshtml" />
     <Content Include="Areas\Main\Views\DailyWinLoss2h\WinLossBySite_BetType.cshtml" />
-    <Content Include="Areas\Main\Views\MatchWinLoss2a\Styles\MatchWinLoss2a.less" />
     <Content Include="Areas\Main\Views\WinLossSummary\Index.cshtml" />
     <Content Include="Areas\Main\Views\WinLossSummary3rd\Index.cshtml" />
     <Content Include="Areas\Main\Views\TraderPerformanceSoccer\Index.cshtml" />

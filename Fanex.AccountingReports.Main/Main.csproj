@@ -82,7 +82,6 @@
     <Compile Include="Controllers\DailyWinLoss2hSoccerController.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controllers\MatchWinLoss2aController.cs" />
     <Compile Include="Controllers\TraderPerformanceOtherSportsController.cs" />
     <Compile Include="Controllers\TraderPerformanceSoccerController.cs" />
     <Compile Include="Controllers\WinLossSummary3rdController.cs" />
@@ -127,13 +126,6 @@
     <Compile Include="Criteria\DailyWinLoss2h\GetVirtualSportReportBySportCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetVirtualSports_VirtualHorseRacingReportCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_BetTypeCriteria.cs" />
-    <Compile Include="Criteria\MatchWinLoss2a\GetAllDetailReportBySportsCriteria.cs" />
-    <Compile Include="Criteria\MatchWinLoss2a\GetDetailReportByBetTypeCriteria.cs" />
-    <Compile Include="Criteria\MatchWinLoss2a\GetMainReportCriteria.cs" />
-    <Compile Include="Criteria\MatchWinLoss2a\GetMetricGamingCriteria.cs" />
-    <Compile Include="Criteria\MatchWinLoss2a\GetMetricGamingDetailByBetTypeCriteria.cs" />
-    <Compile Include="Criteria\MatchWinLoss2a\GetThirdPartyCasinoReportCriteria.cs" />
-    <Compile Include="Criteria\MatchWinLoss2a\GetWinLossByBetTypeCriteria.cs" />
     <Compile Include="Criteria\TraderPerformance\GetDetailReportCriteria.cs" />
     <Compile Include="Criteria\TraderPerformance\GetReportCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetMatchGameDetailsCriteria.cs" />
@@ -152,9 +144,6 @@
     <Compile Include="Models\DailyWinLoss2h\ProductWinLoss.cs" />
     <Compile Include="Models\DailyWinLoss2h\WinLossInfo.cs" />
     <Compile Include="Models\DailyWinLoss2h\LiveAndNoneLiveReport.cs" />
-    <Compile Include="Models\MatchWinLoss2a\MetricGaming.cs" />
-    <Compile Include="Models\MatchWinLoss2a\SummaryReportByBetType.cs" />
-    <Compile Include="Models\MatchWinLoss2a\WinLossInfo.cs" />
     <Compile Include="Models\TraderPerformanceOtherSports\TraderPerformanceOtherSports.cs" />
     <Compile Include="Models\TraderPerformanceOtherSports\TraderPerformanceOtherSportsDetail.cs" />
     <Compile Include="Models\TraderPerformanceSoccer\TraderPerformanceSoccer.cs" />
@@ -176,13 +165,11 @@
     <Compile Include="Repositories\Implement\TraderPerformanceOtherSportsRepository.cs" />
     <Compile Include="Repositories\Implement\TraderPerformanceSoccerRepository.cs" />
     <Compile Include="Repositories\Implement\WinlossSummary3rdRepository.cs" />
-    <Compile Include="Repositories\Implement\MatchWinLoss2aRepository.cs" />
     <Compile Include="Repositories\Implement\WinLossSummaryRepository.cs" />
     <Compile Include="Repositories\Interface\ICreditTermRepository.cs" />
     <Compile Include="Repositories\Interface\IDailyWinLoss2hOtherSportsRepository.cs" />
     <Compile Include="Repositories\Interface\IDailyWinLoss2hRepository.cs" />
     <Compile Include="Repositories\Interface\IDailyWinLoss2hSoccerRepository.cs" />
-    <Compile Include="Repositories\Interface\IMatchWinLoss2aRepository.cs" />
     <Compile Include="Repositories\Interface\ITraderPerformanceOtherSportsRepository.cs" />
     <Compile Include="Repositories\Interface\ITraderPerformanceSoccerRepository.cs" />
     <Compile Include="Repositories\Interface\IWinlossSummary3rdRepository.cs" />
@@ -232,19 +219,6 @@
     <Compile Include="Services\Implement\DailyWinLoss2h\VirtualSportReportService.cs" />
     <Compile Include="Services\Implement\DailyWinLoss2h\VirtualSport_VirtualHorseRacingReportService.cs" />
     <Compile Include="Services\Implement\DailyWinLoss2h\WinLossBySiteService.cs" />
-    <Compile Include="Services\Implement\MatchWinLoss2a\MatchWinLoss2aUtilityService.cs" />
-    <Compile Include="Services\Implement\MatchWinLoss2a\MetricGamingService.cs" />
-    <Compile Include="Services\Implement\MatchWinLoss2a\ReportCellStyle.cs" />
-    <Compile Include="Services\Implement\MatchWinLoss2a\ExportAllDetailReportBySportService.cs" />
-    <Compile Include="Services\Implement\MatchWinLoss2a\ExportAllDetailReportService.cs" />
-    <Compile Include="Services\Implement\MatchWinLoss2a\ExportDetailReportByBetTypeService.cs" />
-    <Compile Include="Services\Implement\MatchWinLoss2a\ExportDetailReportBySportsTypeService.cs" />
-    <Compile Include="Services\Implement\MatchWinLoss2a\ExportSummaryReportByBetTypeService.cs" />
-    <Compile Include="Services\Implement\MatchWinLoss2a\ExportSummaryReportBySportTypeService.cs" />
-    <Compile Include="Services\Implement\MatchWinLoss2a\MatchWinLoss2aService.cs">
-      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Services\Implement\MatchWinLoss2a\RowType.cs" />
     <Compile Include="Services\Implement\TraderPerformanceOtherSports\ExportDetailReportService.cs" />
     <Compile Include="Services\Implement\TraderPerformanceOtherSports\ExportReportService.cs" />
     <Compile Include="Services\Implement\TraderPerformanceOtherSports\TraderPerformanceOtherSportsService.cs" />
@@ -270,12 +244,10 @@
     <Compile Include="Services\Interface\IDailyWinLoss2hOtherSportsService.cs" />
     <Compile Include="Services\Interface\IDailyWinLoss2hService.cs" />
     <Compile Include="Services\Interface\IDailyWinLoss2hSoccerService.cs" />
-    <Compile Include="Services\Interface\IMatchWinLoss2aService.cs" />
     <Compile Include="Services\Interface\ITraderPerformanceOtherSportsService.cs" />
     <Compile Include="Services\Interface\ITraderPerformanceSoccerService.cs" />
     <Compile Include="Services\Interface\IWinLossSummary3rdService.cs" />
     <Compile Include="Services\Interface\IWinLossSummaryService.cs" />
-    <Compile Include="Services\Interface\MatchWinLoss2a\IMetricGamingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">
