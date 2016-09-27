@@ -404,6 +404,7 @@ namespace Fanex.BetList.Accounting.Services
                     UserName = Converter.ToString2(r["username"]),
                     Winlost = Converter.ToDecimal(r["winlost"]),
                     WinlostDate = Convert.ToDateTime(r["winlostdate"]),
+                    TransDesc = Converter.To<string>(r["TransDesc"]),
 
                     BetCheck = Convert.ToString(r["betcheck"])
                 },

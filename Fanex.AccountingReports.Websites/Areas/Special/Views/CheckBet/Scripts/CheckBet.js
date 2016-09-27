@@ -85,7 +85,9 @@ Fanex.AccountingReports.Special.CheckBet.CheckBet = function () {
     };
 
     self.getCheckBetReport = function(){
-        hideReport();
+        hideReport();       
+        $('.ui-dialog').hide();
+
         var date = _tables.datepickerplugin.nexDatePicker("getSingleDate");
         _params.checkBetReport.WinLossDate = date;
         _params.checkBetReport.TicketType = 0;
@@ -128,7 +130,8 @@ Fanex.AccountingReports.Special.CheckBet.CheckBet = function () {
                       .gridScroller(_options.report);
 
         _tables.reportHeader.removeClass("display-none");
-        _tables.report.removeClass("display-none");
+        _tables.report.removeClass("display-none");       
+        
     };
     self.resetTempHtml = function () {
         self.TempHtml.contentHtml = '';

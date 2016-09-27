@@ -424,3 +424,8 @@ div.ticketList div.void > div.match, div.ticketList div.void div.firstGoal, div.
 {
     color:#0017CD;
 }
+
+.excluding-choices {
+    color: #484848;
+    font-weight: normal;
+}
