@@ -690,22 +690,7 @@
     <Content Include="Areas\Betlist\Views\_RacingToteWinLoss.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportCompanyByCurrency.js" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportGameTableByCurrency.js" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportGameTypeByCurrency.js" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportMonthlyByCurrency.js" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportDailyByCurrency.js" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByHourly.js" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByGrandTotal.js" />
     <Content Include="Areas\Gaming\Views\CasinoWinLoss\Scripts\CasinoWinLoss.js" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByCompany.js" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByCurrency.js" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByDailyRange.js" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByGameTable.js" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByGameType.js" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByMonthlyRange.js" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportByUserName.js" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent_AgentReport.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent_BaseReport.js" />
@@ -721,14 +706,6 @@
     <Content Include="Areas\Gaming\Views\LiveCasinoGameFinancialReport\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameFinancial\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\NumberGameStatistic\Scripts\NumberGameStatistic.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameStatistic\Scripts\NumberGameStatisticByBettype.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameStatistic\Scripts\NumberGameStatisticByDaily.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameStatistic\Scripts\NumberGameStatisticByLeague.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameStatistic\Scripts\NumberGameStatisticByUserName.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameStatistic\Styles\NumberGameStatistic.less">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\CasinoWinLoss\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\CasinoWinLoss\Styles\CasinoWinLoss.less" />
@@ -2245,8 +2222,6 @@
     <Content Include="Areas\Main\Views\DailyWinLoss2h\ColossusBet.cshtml" />
     <None Include="App_Data\Fanex.Result\Badminton.xls" />
     <None Include="App_Data\Fanex.Result\BaseBall.xls" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\CasinoGameStatistic\Styles\CasinoGameStatistic.less" />
     <None Include="App_Data\Fanex.Result\Basketball.xls" />
     <None Include="App_Data\Fanex.Result\Billiard.xls" />
     <None Include="App_Data\Fanex.Result\GoldDeluxe.xls" />
@@ -2265,7 +2240,6 @@
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisSporting\_TennisMatchSporting.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisSporting\_TennisSetSporting.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisSporting\_TennisSportting.cshtml" />
-    <Content Include="Areas\Gaming\Views\NumberGameStatistic\Index.cshtml" />
     <Content Include="Areas\Special\Views\PunterAnalysis\Index.cshtml" />
     <Content Include="Views\Test\Style\TotalTransactions.less" />
     <Content Include="Areas\UserControl\Views\User\ChangePassword.cshtml" />

@@ -9,12 +9,12 @@
 
 namespace Fanex.AccountingReports.Gaming.Controllers
 {
-    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Gaming.Criteria;
     using Fanex.AccountingReports.Gaming.Services.Implement;
     using Fanex.AccountingReports.Gaming.Services.Interface;
+    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
