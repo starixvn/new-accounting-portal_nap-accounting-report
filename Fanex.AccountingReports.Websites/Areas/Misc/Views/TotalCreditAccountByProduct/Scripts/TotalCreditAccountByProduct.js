@@ -36,7 +36,8 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         ColossusBets: 204,
         AllBet: 211,
         MetricGamingSuperLive: -1,
-        MacauGames: 212
+        MacauGames: 212,
+        NG2: 213
     };
 
     var cachedData = {
@@ -476,6 +477,9 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 break;
             case productEnums.MacauGames:
                 productName = "Macau Games";
+                break;
+            case productEnums.NG2:
+                productName = "NG2";
                 break;
             default:
                 productName = "Unknown";

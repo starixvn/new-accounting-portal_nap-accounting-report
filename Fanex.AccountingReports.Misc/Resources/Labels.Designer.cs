@@ -1799,6 +1799,15 @@ namespace Fanex.AccountingReports.Misc.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NG2.
+        /// </summary>
+        public static string NG2 {
+            get {
+                return ResourceManager.GetString("NG2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string No {
