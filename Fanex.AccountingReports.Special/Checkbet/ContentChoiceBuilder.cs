@@ -35,6 +35,15 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 ContentBetTeam content = Activator.CreateInstance(type) as ContentBetTeam;
                 result = content.ContentBetTeamBuilder(model);
             }
+            else
+            {
+                result = betTeam
+                    .Replace("-over", "+")
+                    .Replace("-Over", "+")
+                    .Replace("&over", "+")
+                    .Replace("G6", "6+")
+                    .Replace("G3", "3+");
+            }
 
             return result;
         }

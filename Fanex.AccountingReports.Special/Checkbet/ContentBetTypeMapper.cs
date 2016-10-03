@@ -43,6 +43,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 { 406, ContenBetTeamBetType406 },
                 { 407, ContenBetTeamBetType407 },
                 { 408, ContenBetTeamBetType408 },
+                { 171, ContenBetTeamBetType408 },
                 { 409, ContenBetTeamBetType407 },
                 { 410, ContenBetTeamBetType410 },
                 { 411, ContenBetTeamBetType411 },

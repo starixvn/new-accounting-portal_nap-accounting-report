@@ -13,7 +13,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
             team.Add("G3", "3 Goals");
             team.Add("G4", "4 Goals");
             team.Add("G5", "5 Goals");
-            team.Add("G6", "6 Goals &Over");
+            team.Add("G6", "6+");
 
             return team.ContainsKey(model.BetTeam) == true ? team[model.BetTeam] : string.Empty;
         }
