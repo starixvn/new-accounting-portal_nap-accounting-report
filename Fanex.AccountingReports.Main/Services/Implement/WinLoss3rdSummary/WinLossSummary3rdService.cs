@@ -110,7 +110,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         Name = this.GetSportName(sportId)
                     };
 
-                    if (sportInfo.Id >= 213 && sportInfo.Id <= 220)
+                    if (sportInfo.Id >= 213 && sportInfo.Id <= 218)
                     {
                         sportsNG2Groups.Add(sportTypeGroup);
                         continue;

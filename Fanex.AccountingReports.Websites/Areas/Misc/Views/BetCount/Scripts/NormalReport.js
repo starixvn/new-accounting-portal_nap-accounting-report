@@ -319,7 +319,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                 var ddSportGroup = [];
                 
                 if ((_cachedData.Sportbook_SportID.contains(sportGroup.Id) && isExistsSportbook == true)||
-                    (sportGroup.Id <= 220 && sportGroup.Id >= 213 && isExistsNG2 == true) ||
+                    (sportGroup.Id <= 218 && sportGroup.Id >= 213 && isExistsNG2 == true) ||
                     (sportGroup.Id <= 186 && sportGroup.Id >= 180 && isExistsVirtualSports == true)) {
                     self.generateSportbyProduct(sportGroup, sportLength, ddSportGroup, ddSport, ddId);                    
                 }
