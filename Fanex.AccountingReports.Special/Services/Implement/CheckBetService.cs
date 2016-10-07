@@ -343,7 +343,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     result = "HT." + betTeam;
                     break;
 
-                case 6:
                 case 14:
                 case 16:
                 case 1206:

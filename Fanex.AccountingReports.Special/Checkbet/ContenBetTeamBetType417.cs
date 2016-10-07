@@ -7,12 +7,12 @@ namespace Fanex.AccountingReports.Special.Checkbet
         public string ContentBetTeamBuilder(BetTeamModel model)
         {
             var team = new Dictionary<string, string>();
-            team.Add("YH", "Yes" + "/" + model.HomeTeam);
+            team.Add("YH", "Yes/Home");
+            team.Add("YA", "Yes/Away");
+            team.Add("NH", "No/Home");
+            team.Add("NA", "No/Away");
             team.Add("YD", "Yes/Draw");
-            team.Add("YA", "Yes" + "/" + model.AwayTeam);
-            team.Add("NH", "No" + "/" + model.HomeTeam);
             team.Add("ND", "No/Draw");
-            team.Add("NA", "No" + "/" + model.AwayTeam);
 
             return team.ContainsKey(model.BetTeam) == true ? team[model.BetTeam] : string.Empty;
         }

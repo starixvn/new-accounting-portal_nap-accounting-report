@@ -7,8 +7,8 @@ namespace Fanex.AccountingReports.Special.Checkbet
         public string ContentBetTeamBuilder(BetTeamModel model)
         {
             var team = new Dictionary<string, string>();
-            team.Add("1H", "1st Half");
-            team.Add("2H", "2nd Half");
+            team.Add("1H", "First Half");
+            team.Add("2H", "Second Half");
             team.Add("N", "Neither");
 
             return team.ContainsKey(model.BetTeam) == true ? team[model.BetTeam] : string.Empty;
