@@ -76,6 +76,9 @@ ReportManager = function () {
         getSports: {
             IsSB: false
         },
+        getSportsLeagues: {
+            IsSB: true
+        },
         getLeaguesBySport: {
             FromDate: null,
             ToDate: null,
@@ -121,6 +124,7 @@ ReportManager.prototype.InitPage = function () {
     //    this.RenderDatePicker();
     this.GetProducts();
     this.GetSports();
+    this.getSportsLeagues();
     this.CachedDOMElements();
 
     this.RenderFilterNote();
@@ -676,6 +680,30 @@ ReportManager.prototype.GetSports = function () {
     var self = this;
 
     AccReport.disableInput();
+    self.Params.getSports.IsSB = false;
+    $.ajax({
+        type: "POST",
+        url: window.rootUrl + "PunterAnalysis/GetSports",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: false,
+        data: JSON.stringify(self.Params.getSports),
+        success: function (rs) {
+            self.RenderDropdownSports(rs);
+        },
+        error: function (event, jqXHR, ajaxSettings) {
+            self.RenderDropdownSports(null);
+        },
+        complete: function () {
+            AccReport.enableInput();
+        }
+    });
+};
+
+ReportManager.prototype.getSportsLeagues = function () {
+    var self = this;
+
+    AccReport.disableInput();
     self.Params.getSports.IsSB = true;
     $.ajax({
         type: "POST",
@@ -686,7 +714,6 @@ ReportManager.prototype.GetSports = function () {
         data: JSON.stringify(self.Params.getSports),
         success: function (rs) {
             self.CacheData.Sports = rs;
-            self.RenderDropdownSports(rs);
             self.RenderDropdownSports_ByLeague();
         },
         error: function (event, jqXHR, ajaxSettings) {
@@ -696,7 +723,8 @@ ReportManager.prototype.GetSports = function () {
             AccReport.enableInput();
         }
     });
-};
+}
+
 ReportManager.prototype.RenderDropdownSports = function (sports) {
     var ddSport = [];
     var ddId = "ddlSport";
