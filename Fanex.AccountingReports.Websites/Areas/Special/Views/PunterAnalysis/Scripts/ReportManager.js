@@ -676,7 +676,7 @@ ReportManager.prototype.GetSports = function () {
     var self = this;
 
     AccReport.disableInput();
-    self.Params.getSports.IsSB = false;
+    self.Params.getSports.IsSB = true;
     $.ajax({
         type: "POST",
         url: window.rootUrl + "PunterAnalysis/GetSports",
