@@ -290,7 +290,12 @@ Fanex.AccountingReports.Gaming.LiveCasinoGameStatistic.ReportManager = function 
         var productLength = rs.length;
         self.Tables.dropdownProduct.empty();
         for (var i = 0; i < productLength; i++) {
+            
             var product = rs[i];
+            if (product.Id == 21) {
+                continue;
+            }
+
             var option = '<option value="' + product.Id + '">' + product.Name + '</option>';
             self.Tables.dropdownProduct.append(option);
         }
