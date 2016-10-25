@@ -182,13 +182,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
                     WinLossInfo winloss = CreateWinlossInfo(item, isShowNotAvalable);
 
-
                     winloss.Name = this.GetBetType(winloss.Id);
 
                     if (!string.IsNullOrWhiteSpace(winloss.Status))
                     {
                         winloss.Name += " (" + winloss.Status + ")";
                     }
+
                     if (winloss.IsHedge)
                     {
                         winloss.Name = Labels.Hedge_title;
