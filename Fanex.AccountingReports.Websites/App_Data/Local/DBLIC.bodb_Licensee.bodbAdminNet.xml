@@ -9,4 +9,4 @@
 	<Function Name="Racing - Get Racing Licensee">
 		<Setting Key="WinlostRacingLicensee_SiteSel" SpName="Acc_LicenseeProduct3rdSel" DbName="DBLIC.bodb_Licensee.bodbAdminNet" TimeOut="0" />
 	</Function>
-</Functions>
+</Functions>  
