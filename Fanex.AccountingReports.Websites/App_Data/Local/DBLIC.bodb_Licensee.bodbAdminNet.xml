@@ -9,4 +9,7 @@
 	<Function Name="Racing - Get Racing Licensee">
 		<Setting Key="WinlostRacingLicensee_SiteSel" SpName="Acc_LicenseeProduct3rdSel" DbName="DBLIC.bodb_Licensee.bodbAdminNet" TimeOut="0" />
 	</Function>
+  <Function Name="Misc - Credit Site Bet Count">
+    <Setting Key="Misc_CreditSiteBetCount_GetReport" SpName="GET_Acc_CreditSite_BetCount_UAT2" DbName="DBLIC.bodb_Licensee.bodbAdminNet" TimeOut="0" />
+  </Function>
 </Functions>  
