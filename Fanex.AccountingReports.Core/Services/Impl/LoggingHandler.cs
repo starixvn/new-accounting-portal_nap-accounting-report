@@ -11,6 +11,8 @@ namespace Fanex.AccountingReports.Core.Services.Impl
 {
     using System;
     using System.Data.SqlClient;
+    using System.Diagnostics;
+    using System.Linq;
     using System.Web;
     using Fanex.Logging;
 
@@ -39,12 +41,15 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         public static void Log(Exception ex)
         {
             SqlException sqlException = ex as SqlException;
+            var stackTrace = new StackTrace(ex);            
+            var methodname = stackTrace.GetFrames().Select(f => f.GetMethod()).FirstOrDefault();            
             string message = ex.Message +
                               "<br />\r\nSOURCE: " + ex.Source +
                               "<br />\r\nDOMAIN: " + HttpContext.Current.Request.Headers["Host"] +
                               "<br />\r\nREFERRER: " + HttpContext.Current.Request.UrlReferrer +
                               "<br />\r\nFORM: " + HttpContext.Current.Request.Form.ToString() +
                               "<br />\r\nQUERYSTRING: " + HttpContext.Current.Request.QueryString.ToString() +
+                              (methodname != null ? "<br />\r\nMethodName: " + methodname.Name : string.Empty) +
                               "<br />\r\nTARGETSITE: " + ex.TargetSite +
                               "<br />\r\nSTACKTRACE: " + ex.StackTrace;
             if (sqlException != null)

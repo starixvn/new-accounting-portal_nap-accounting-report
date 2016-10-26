@@ -9,18 +9,20 @@
 
 namespace Fanex.AccountingReports.Websites
 {
-    using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.AccountingReports.Core.Services.Impl.Worker;
-    using Fanex.AccountingReports.Websites.App_Start;
-    using Fanex.Data.Configuration;
     using System;
     using System.Data.SqlClient;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using System.Reflection;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
+    using Fanex.AccountingReports.Core.Services.Impl;
+    using Fanex.AccountingReports.Core.Services.Impl.Worker;
+    using Fanex.AccountingReports.Websites.App_Start;
+    using Fanex.Data.Configuration;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode,
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -97,12 +99,16 @@ namespace Fanex.AccountingReports.Websites
                     }
                 }
 
+                var stackTrace = new StackTrace(ex);
+                var methodname = stackTrace.GetFrames().Select(f => f.GetMethod()).FirstOrDefault();
+
                 string message = ex.Message +
                     "\r\nType: " + ex.GetType().ToString() +
                     "\r\nSource: " + ex.Source +
                     "\r\nDomain: " + HttpContext.Current.Request.Headers["Host"] +
                     "\r\nForm Variable: " + formVariable +
                     "\r\nQuery String: " + Request.QueryString.ToString() +
+                    (methodname != null ? "<br />\r\nMethodName: " + methodname.Name : string.Empty) +
                     "\r\nTarget Site: " + ex.TargetSite +
                     "\r\nStack Trace: " + ex.StackTrace;
 
