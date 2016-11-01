@@ -9,10 +9,6 @@
 
 namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Models;
@@ -27,6 +23,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
     using Fanex.AccountingReports.Main.Services.Interface;
     using Fanex.Common;
     using Fanex.Data.Repository;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -65,7 +65,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
         {
             WinLoss3rdInfo report = null;
             SportTypeWinLossInfo sportInfo = null;
-            BetTypeWinLossInfo betInfo = null;
             WinLossInfo winloss = null;
             try
             {
@@ -100,6 +99,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 CacheRef.SaveCacheRefResponse(betTypeHash.Values.ToList(), CacheRef.GetBettype, ref this._betTypeNameCache);
 
                 var sportTypeGroups = rawData.GroupBy(data => data.sporttype);
+                var sportsNG2Groups = new List<IGrouping<dynamic, dynamic>>();
+
                 foreach (var sportTypeGroup in sportTypeGroups)
                 {
                     int sportId = Converter.ToInt(sportTypeGroup.Key);
@@ -109,147 +110,18 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         Name = this.GetSportName(sportId)
                     };
 
-                    bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeSingleWalletCasinoLaunchDate;
-                    var betTypeGroup = sportTypeGroup.GroupBy(data => new { data.bettype, data.liveindicator });
-
-                    var isNewCricket = false;
-                    var dataForNewCricket = betTypeGroup.First();
-
-                    foreach (var data in betTypeGroup)
+                    if (sportInfo.Id >= 213 && sportInfo.Id <= 218)
                     {
-                        betInfo = new BetTypeWinLossInfo();
-                        betInfo.Id = data.Key.bettype;
-                        if (data.Key.bettype == 500)
-                        {
-                            dataForNewCricket = data;
-                            isNewCricket = true;
-                            continue;
-                        }
-
-                        foreach (var item in data)
-                        {
-                            winloss = new WinLossInfo
-                            {
-                                Id = Converter.ToInt(item.bettype),
-                                LiveIndicator = Converter.ToBool(item.liveindicator) ? 1 : 0,
-                                IBC = Converter.ToInt(item.ibc),
-                                IsHedge = Converter.ToBool(item.IsHedge),
-                                Status = Converter.ToString2(item.status),
-                                WinLoss = Converter.ToDecimal(item.realWinlost),
-                                Position = Converter.ToDecimal(item.realPosition),
-                                Commission = Converter.ToDecimal(item.realCommission),
-                                RealLineTotal = ToDecimal(item.realLineTotal),
-                                VirtualLineTotal = ToDecimal(item.virtualLineTotal),
-                                RealTurnover = isShowNotAvalable ? 0 : ToDecimal(item.realTurnover),
-                                VirtualTurnover = isShowNotAvalable ? 0 : ToDecimal(item.virtualTurnover)
-                            };
-
-                            if (winloss.IBC == RowType.EightRM)
-                            {
-                                winloss.Name = Labels.EightRM;
-                                betInfo.EightRM = winloss;
-
-                                // IBC Total by BetType
-                                sportInfo.CalculateIBCTotal(winloss);
-
-                                // Footer: IBC Total
-                                report.CalculateTempIBCTotal(winloss);
-                            }
-                            else if (winloss.IBC == RowType.BARM)
-                            {
-                                winloss.Name = Labels.BARM;
-                                betInfo.BARM = winloss;
-
-                                // IBC Total by BetType
-                                sportInfo.CalculateIBCTotal(winloss);
-
-                                // Footer: IBC Total
-                                report.CalculateTempIBCTotal(winloss);
-                            }
-                            else
-                            {
-                                if (MainConstants.WinLossSummaryRacingSportIds.Contains(sportInfo.Id))
-                                {
-                                    // Horse Racing, Greyhounds, Harness are grouped by Racing
-                                    winloss.Name = sportInfo.Name;
-                                    sportInfo.Name = Labels.Racing;
-                                    winloss.Id = sportId;
-                                }
-                                else if (sportInfo.Id >= MainConstants.WinLossSummaryBeginVirtualSportId &&
-                                    sportInfo.Id <= MainConstants.WinLossSummaryEndVirtualSportId)
-                                {
-                                    winloss.Name = sportInfo.Name;
-                                    sportInfo.Name = Labels.VirtualSport;
-                                    winloss.Id = sportId;
-                                }
-                                else
-                                {
-                                    winloss.Name = this.GetBetType(winloss.Id);
-                                }
-
-                                if (!string.IsNullOrWhiteSpace(winloss.Status))
-                                {
-                                    winloss.Name += " (" + winloss.Status + ")";
-                                }
-
-                                if (winloss.IsHedge)
-                                {
-                                    winloss.Name = Labels.Hedge_title;
-                                    betInfo.Hedge = winloss;
-                                }
-                                else
-                                {
-                                    betInfo.IBCs.Add(winloss);
-                                }
-                            }
-
-                            sportInfo.CalculateTotal(winloss);
-                            sportInfo.CalculateTotalNewCricket(winloss);
-                            report.CalculateAllTotal(sportId, winloss);
-                        }
-
-                        sportInfo.BetTypeWinLosses.Add(betInfo);
+                        sportsNG2Groups.Add(sportTypeGroup);
+                        continue;
                     }
 
-                    if (isNewCricket == true)
-                    {
-                        sportInfo = CalculatorForNewCricket(dataForNewCricket, isShowNotAvalable, sportInfo, sportId, report);
-                    }
+                    GenerateSport(report, sportTypeGroup, isBeforeSingleWalletCasinoLaunchDate, winloss);
+                }
 
-                    if (MainConstants.WinLossSummaryRacingSportIds.Contains(sportInfo.Id))
-                    {
-                        SportTypeWinLossInfo racingSport = report.SportTypeWinLosses.FirstOrDefault(sport => sport.Id == MainConstants.WinLossSummaryRacingSportId);
-                        if (racingSport == null)
-                        {
-                            sportInfo.Id = MainConstants.WinLossSummaryRacingSportId;
-                            racingSport = sportInfo;
-                            report.SportTypeWinLosses.Add(racingSport);
-                        }
-                        else
-                        {
-                            racingSport.BetTypeWinLosses.Add(betInfo);
-                            racingSport.CalculateTotal(winloss);
-                        }
-                    }
-                    else if (sportInfo.Id >= MainConstants.WinLossSummaryBeginVirtualSportId && sportInfo.Id <= MainConstants.WinLossSummaryEndVirtualSportId)
-                    {
-                        SportTypeWinLossInfo virtualSport = report.SportTypeWinLosses.FirstOrDefault(sport => sport.Id == MainConstants.WinLossSummaryVirtualSportId);
-                        if (virtualSport == null)
-                        {
-                            sportInfo.Id = MainConstants.WinLossSummaryVirtualSportId;
-                            virtualSport = sportInfo;
-                            report.SportTypeWinLosses.Add(virtualSport);
-                        }
-                        else
-                        {
-                            virtualSport.BetTypeWinLosses.Add(betInfo);
-                            virtualSport.CalculateTotal(winloss);
-                        }
-                    }
-                    else
-                    {
-                        report.SportTypeWinLosses.Add(sportInfo);
-                    }
+                if (sportsNG2Groups.Count > 0)
+                {
+                    CalculateNG2Product(report, isBeforeSingleWalletCasinoLaunchDate, sportsNG2Groups);
                 }
 
                 this.CalculateHedgeTotalBySport(report);
@@ -260,6 +132,240 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             {
                 HandleException(ex);
                 throw;
+            }
+
+            return report;
+        }
+
+        public WinLossInfo CreateWinlossInfo(dynamic item, bool isShowNotAvalable)
+        {
+            return new WinLossInfo
+            {
+                Id = Converter.ToInt(item.bettype),
+                LiveIndicator = Converter.ToBool(item.liveindicator) ? 1 : 0,
+                IBC = Converter.ToInt(item.ibc),
+                IsHedge = Converter.ToBool(item.IsHedge),
+                Status = Converter.ToString2(item.status),
+                WinLoss = Converter.ToDecimal(item.realWinlost),
+                Position = Converter.ToDecimal(item.realPosition),
+                Commission = Converter.ToDecimal(item.realCommission),
+                RealLineTotal = ToDecimal(item.realLineTotal),
+                VirtualLineTotal = ToDecimal(item.virtualLineTotal),
+                RealTurnover = isShowNotAvalable ? 0 : ToDecimal(item.realTurnover),
+                VirtualTurnover = isShowNotAvalable ? 0 : ToDecimal(item.virtualTurnover)
+            };
+        }
+
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        public WinLoss3rdInfo CalculateNG2Product(WinLoss3rdInfo report, bool isBeforeDate, List<IGrouping<dynamic, dynamic>> sportTypeGroups)
+        {
+            var sportId = 23;
+            bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeDate;
+            var sportInfo = new SportTypeWinLossInfo
+            {
+                Id = sportId,
+                Name = "NG2"
+            };
+
+            foreach (var sportTypeGroup in sportTypeGroups)
+            {
+                var totalSportType = new BetTypeWinLossInfo();
+                var winlossTotal = new WinLossInfo();
+                winlossTotal.Name = this.GetSportName(sportTypeGroup.Key);
+
+                foreach (var item in sportTypeGroup)
+                {
+                    var betInfo = new BetTypeWinLossInfo();
+                    betInfo.Id = item.bettype;
+
+                    WinLossInfo winloss = CreateWinlossInfo(item, isShowNotAvalable);
+
+                    winloss.Name = this.GetBetType(winloss.Id);
+
+                    if (!string.IsNullOrWhiteSpace(winloss.Status))
+                    {
+                        winloss.Name += " (" + winloss.Status + ")";
+                    }
+
+                    if (winloss.IsHedge)
+                    {
+                        winloss.Name = Labels.Hedge_title;
+                        betInfo.Hedge = winloss;
+                    }
+                    else
+                    {
+                        betInfo.IBCs.Add(winloss);
+                    }
+
+                    sportInfo.CalculateTotal(winloss);
+                    report.CalculateAllTotal(sportId, winloss);
+
+                    sportInfo.BetTypeWinLosses.Add(betInfo);
+                    winlossTotal = CalculateWinlossTotal(winlossTotal, winloss);
+                }
+
+                totalSportType.Id = sportTypeGroup.Key;
+                totalSportType.IBCs.Add(winlossTotal);
+                sportInfo.BetTypeWinLosses.Add(totalSportType);
+            }
+
+            report.SportTypeWinLosses.Add(sportInfo);
+            return report;
+        }
+
+        public WinLossInfo CalculateWinlossTotal(WinLossInfo total, WinLossInfo item)
+        {
+            total.WinLoss += item.WinLoss;
+            total.Position += item.Position;
+            total.Commission += item.Commission;
+            total.RealLineTotal = total.RealLineTotal == null ? item.RealLineTotal : total.RealLineTotal += item.RealLineTotal;
+            total.VirtualLineTotal = total.VirtualLineTotal == null ? item.VirtualLineTotal : total.VirtualLineTotal += item.VirtualLineTotal;
+            total.RealTurnover = total.RealTurnover == null ? item.RealTurnover : total.RealTurnover += item.RealTurnover;
+            total.VirtualTurnover = total.VirtualTurnover == null ? item.VirtualTurnover : total.VirtualTurnover += item.VirtualTurnover;
+            return total;
+        }
+
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        public WinLoss3rdInfo GenerateSport(WinLoss3rdInfo report, IGrouping<dynamic, dynamic> sportTypeGroup, bool isBeforeDate, WinLossInfo winloss)
+        {
+            int sportId = Converter.ToInt(sportTypeGroup.Key);
+            BetTypeWinLossInfo betInfo = null;
+            var sportInfo = new SportTypeWinLossInfo
+            {
+                Id = sportId,
+                Name = this.GetSportName(sportId)
+            };
+
+            bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeDate;
+            var betTypeGroup = sportTypeGroup.GroupBy(data => new { data.bettype, data.liveindicator });
+
+            var isNewCricket = false;
+            var dataForNewCricket = betTypeGroup.First();
+
+            foreach (var data in betTypeGroup)
+            {
+                betInfo = new BetTypeWinLossInfo();
+                betInfo.Id = data.Key.bettype;
+                if (data.Key.bettype == 500)
+                {
+                    dataForNewCricket = data;
+                    isNewCricket = true;
+                    continue;
+                }
+
+                foreach (var item in data)
+                {
+                    winloss = CreateWinlossInfo(item, isShowNotAvalable);
+
+                    if (winloss.IBC == RowType.EightRM)
+                    {
+                        winloss.Name = Labels.EightRM;
+                        betInfo.EightRM = winloss;
+
+                        // IBC Total by BetType
+                        sportInfo.CalculateIBCTotal(winloss);
+
+                        // Footer: IBC Total
+                        report.CalculateTempIBCTotal(winloss);
+                    }
+                    else if (winloss.IBC == RowType.BARM)
+                    {
+                        winloss.Name = Labels.BARM;
+                        betInfo.BARM = winloss;
+
+                        // IBC Total by BetType
+                        sportInfo.CalculateIBCTotal(winloss);
+
+                        // Footer: IBC Total
+                        report.CalculateTempIBCTotal(winloss);
+                    }
+                    else
+                    {
+                        if (MainConstants.WinLossSummaryRacingSportIds.Contains(sportInfo.Id))
+                        {
+                            // Horse Racing, Greyhounds, Harness are grouped by Racing
+                            winloss.Name = sportInfo.Name;
+                            sportInfo.Name = Labels.Racing;
+                            winloss.Id = sportId;
+                        }
+                        else if (sportInfo.Id >= MainConstants.WinLossSummaryBeginVirtualSportId &&
+                            sportInfo.Id <= MainConstants.WinLossSummaryEndVirtualSportId)
+                        {
+                            winloss.Name = sportInfo.Name;
+                            sportInfo.Name = Labels.VirtualSport;
+                            winloss.Id = sportId;
+                        }
+                        else
+                        {
+                            winloss.Name = this.GetBetType(winloss.Id);
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(winloss.Status))
+                        {
+                            winloss.Name += " (" + winloss.Status + ")";
+                        }
+
+                        if (winloss.IsHedge)
+                        {
+                            winloss.Name = Labels.Hedge_title;
+                            betInfo.Hedge = winloss;
+                        }
+                        else
+                        {
+                            betInfo.IBCs.Add(winloss);
+                        }
+                    }
+
+                    sportInfo.CalculateTotal(winloss);
+                    sportInfo.CalculateTotalNewCricket(winloss);
+                    report.CalculateAllTotal(sportId, winloss);
+                }
+
+                sportInfo.BetTypeWinLosses.Add(betInfo);
+            }
+
+            if (isNewCricket == true)
+            {
+                sportInfo = CalculatorForNewCricket(dataForNewCricket, isShowNotAvalable, sportInfo, sportId, report);
+            }
+
+            if (MainConstants.WinLossSummaryRacingSportIds.Contains(sportInfo.Id))
+            {
+                SportTypeWinLossInfo racingSport = report.SportTypeWinLosses.FirstOrDefault(sport => sport.Id == MainConstants.WinLossSummaryRacingSportId);
+                if (racingSport == null)
+                {
+                    sportInfo.Id = MainConstants.WinLossSummaryRacingSportId;
+                    racingSport = sportInfo;
+                    report.SportTypeWinLosses.Add(racingSport);
+                }
+                else
+                {
+                    racingSport.BetTypeWinLosses.Add(betInfo);
+                    racingSport.CalculateTotal(winloss);
+                }
+            }
+            else if (sportInfo.Id >= MainConstants.WinLossSummaryBeginVirtualSportId && sportInfo.Id <= MainConstants.WinLossSummaryEndVirtualSportId)
+            {
+                SportTypeWinLossInfo virtualSport = report.SportTypeWinLosses.FirstOrDefault(sport => sport.Id == MainConstants.WinLossSummaryVirtualSportId);
+                if (virtualSport == null)
+                {
+                    sportInfo.Id = MainConstants.WinLossSummaryVirtualSportId;
+                    virtualSport = sportInfo;
+                    report.SportTypeWinLosses.Add(virtualSport);
+                }
+                else
+                {
+                    virtualSport.BetTypeWinLosses.Add(betInfo);
+                    virtualSport.CalculateTotal(winloss);
+                }
+            }
+            else
+            {
+                report.SportTypeWinLosses.Add(sportInfo);
             }
 
             return report;

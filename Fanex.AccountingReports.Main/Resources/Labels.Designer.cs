@@ -1384,6 +1384,24 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to House Income.
+        /// </summary>
+        public static string House_Income {
+            get {
+                return ResourceManager.GetString("House_Income", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to House Tunover.
+        /// </summary>
+        public static string House_Tunover {
+            get {
+                return ResourceManager.GetString("House_Tunover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to House Turnover.
         /// </summary>
         public static string House_Turnover {

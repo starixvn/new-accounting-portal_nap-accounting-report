@@ -64,10 +64,13 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         isFirstLoad: true,
         Sportbook_ProductId: "1_0",
         VirtualSport_GroupId: "5_0",
+        NG2_ProductId: "23_0",
         Sports: [],
         Sportbook_SportID: [1, 999, -9],
         SelectedSportBettype: []
     };
+
+    var productsHasSport = ["1_0", "5_0", "23_0"];
 
     self.initPage = function () {
         initGridScrollerTables();
@@ -186,6 +189,20 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
 
                 continue;
             }
+
+            if (productGroup.Name.toLowerCase() == "ng2") {
+                ddProduct.push({
+                    id: "#" + ddId + "_Product23",
+                    value: "23_0",
+                    text: productGroup.Name,
+                    checked: false,
+                    enable: true,
+                    cssClass: "bold"
+                });
+
+                continue;
+            }
+
             if (productGroup.Name.toLowerCase() == "virtual sports") {
                 ddProduct.push({
                     id: "#" + ddId + "_Product5",
@@ -269,8 +286,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
             noItemText: noItemText,
             listData: ddProduct,
             onCheck: function () {
-                if (this.value == _cachedData.Sportbook_ProductId
-                    || this.value == _cachedData.VirtualSport_GroupId
+                if ($.inArray(this.value, productsHasSport) != -1
                     || this.id == 'ddlProductHeaderCheckBox') {
                     self.getDropdownSport();
                 }
@@ -293,96 +309,19 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         var selectedProducts = _tables.ddlProduct.fanexMultiSelect('getItems', true);
         var isExistsSportbook = $.inArray(_cachedData.Sportbook_ProductId, selectedProducts) != -1;
         var isExistsVirtualSports = $.inArray(_cachedData.VirtualSport_GroupId, selectedProducts) != -1;
+        var isExistsNG2 = $.inArray(_cachedData.NG2_ProductId, selectedProducts) != -1;
         var isSetDefaultCollapse = true;
-        if (isExistsSportbook || isExistsVirtualSports) {
+        if (isExistsSportbook || isExistsVirtualSports || isExistsNG2) {
             var sportGrouplength = sports ? sports.length : 0;
             for (var i = 0; i < sportGrouplength; i++) {
                 var sportGroup = sports[i];
                 var sportLength = sportGroup.ChildsInfo ? sportGroup.ChildsInfo.length : 0;
                 var ddSportGroup = [];
-                if (_cachedData.Sportbook_SportID.contains(sportGroup.Id) && isExistsSportbook == true) {
-                    for (var j = 0; j < sportLength; j++) {
-                        var sport = sportGroup.ChildsInfo[j];
-                        var betTypeLength = sport.ChildsInfo ? sport.ChildsInfo.length : 0;
-                        var ddBetType = [];
-                        for (var k = 0; k < betTypeLength; k++) {
-                            var betType = sport.ChildsInfo[k];
-                            ddBetType.push({
-                                id: "#" + ddId + "SportGroup" + sportGroup.Id +
-                                                        "_Sport" + sport.Id +
-                                                        "_BetType" + betType.Id,
-                                value: sport.Id + "_" + betType.Id,
-                                text: betType.Name,
-                                checked: isExistsSportbook == true ? true : false,
-                                enable: true,
-                                cssClass: ""
-                            });
-                        }
-
-                        ddSportGroup.push({
-                            id: "#" + ddId + "SportGroup" + sportGroup.Id + "_Sport" + sport.Id,
-                            value: (sportGroup.Name != "Parlay" ? sportGroup.Id : "0") + "_" + sport.Id,
-                            text: sport.Name,
-                            checked: isExistsSportbook == true ? true : false,
-                            enable: true,
-                            cssClass: "",
-                            items: ddBetType
-                        });
-                    }
-                    if (sportGroup.Name != "Parlay" ||
-                    (sportGroup.ChildsInfo && sportGroup.ChildsInfo.length > 0)) {
-                        ddSport.push({
-                            id: "#" + ddId + "SportGroup" + sportGroup.Id.toString(),
-                            value: sportGroup.Id.toString(),
-                            text: sportGroup.Name,
-                            checked: isExistsSportbook == true ? true : false,
-                            enable: true,
-                            cssClass: "",
-                            items: ddSportGroup
-                        });
-                    }
-                }
-                if (sportGroup.Id <= 186 && sportGroup.Id >= 180 && isExistsVirtualSports == true) {
-                    for (var j = 0; j < sportLength; j++) {
-                        var sport = sportGroup.ChildsInfo[j];
-                        var betTypeLength = sport.ChildsInfo ? sport.ChildsInfo.length : 0;
-                        var ddBetType = [];
-                        for (var k = 0; k < betTypeLength; k++) {
-                            var betType = sport.ChildsInfo[k];
-                            ddBetType.push({
-                                id: "#" + ddId + "SportGroup" + sportGroup.Id +
-                                                        "_Sport" + sport.Id +
-                                                        "_BetType" + betType.Id,
-                                value: sport.Id + "_" + betType.Id,
-                                text: betType.Name,
-                                checked: true,
-                                enable: true,
-                                cssClass: ""
-                            });
-                        }
-
-                        ddSportGroup.push({
-                            id: "#" + ddId + "SportGroup" + sportGroup.Id + "_Sport" + sport.Id,
-                            value: (sportGroup.Name != "Parlay" ? sportGroup.Id : "0") + "_" + sport.Id,
-                            text: sport.Name,
-                            checked: isExistsVirtualSports == true ? true : false,
-                            enable: true,
-                            cssClass: "",
-                            items: ddBetType
-                        });
-                    }
-                    if (sportGroup.Name != "Parlay" ||
-                    (sportGroup.ChildsInfo && sportGroup.ChildsInfo.length > 0)) {
-                        ddSport.push({
-                            id: "#" + ddId + "SportGroup" + sportGroup.Id.toString(),
-                            value: sportGroup.Id.toString(),
-                            text: sportGroup.Name,
-                            checked: isExistsVirtualSports == true ? true : false,
-                            enable: true,
-                            cssClass: "",
-                            items: ddSportGroup
-                        });
-                    }
+                
+                if ((_cachedData.Sportbook_SportID.contains(sportGroup.Id) && isExistsSportbook == true)||
+                    (sportGroup.Id <= 218 && sportGroup.Id >= 213 && isExistsNG2 == true) ||
+                    (sportGroup.Id <= 186 && sportGroup.Id >= 180 && isExistsVirtualSports == true)) {
+                    self.generateSportbyProduct(sportGroup, sportLength, ddSportGroup, ddSport, ddId);                    
                 }
 
             }
@@ -401,7 +340,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
             useCustomCheckAllText: 'All',
             noneSelectedText: 'Select an option',
             noItemText: 'No sport found.',
-            disabled: (!isExistsSportbook && !isExistsVirtualSports),
+            disabled: (!isExistsSportbook && !isExistsVirtualSports && !isExistsNG2),
             listData: ddSport,
             onCheck: function () {
             },
@@ -414,9 +353,51 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         });
 
         _tables.ddlSport = $("#ddlSport");
-        if (!isExistsSportbook && !isExistsVirtualSports) {
+        if (!isExistsSportbook && !isExistsVirtualSports && !isExistsNG2) {
             _tables.ddlSport.fanexMultiSelect('setCheckAll', false);
             _tables.ddlSport.children('input').eq(0).val('Not applicable');
+        }
+    };
+
+    self.generateSportbyProduct = function (sportGroup, sportLength, ddSportGroup, ddSport, ddId) {
+        for (var j = 0; j < sportLength; j++) {
+            var sport = sportGroup.ChildsInfo[j];
+            var betTypeLength = sport.ChildsInfo ? sport.ChildsInfo.length : 0;
+            var ddBetType = [];
+            for (var k = 0; k < betTypeLength; k++) {
+                var betType = sport.ChildsInfo[k];
+                ddBetType.push({
+                    id: "#" + ddId + "SportGroup" + sportGroup.Id +
+                                            "_Sport" + sport.Id +
+                                            "_BetType" + betType.Id,
+                    value: sport.Id + "_" + betType.Id,
+                    text: betType.Name,
+                    checked: true,
+                    enable: true,
+                    cssClass: ""
+                });
+            }
+
+            ddSportGroup.push({
+                id: "#" + ddId + "SportGroup" + sportGroup.Id + "_Sport" + sport.Id,
+                value: (sportGroup.Name != "Parlay" ? sportGroup.Id : "0") + "_" + sport.Id,
+                text: sport.Name,
+                checked: true,
+                enable: true,
+                cssClass: "",
+                items: ddBetType
+            });
+        }
+        if (sportGroup.Name != "Parlay" ||(sportGroup.ChildsInfo && sportGroup.ChildsInfo.length > 0)) {
+            ddSport.push({
+                id: "#" + ddId + "SportGroup" + sportGroup.Id.toString(),
+                value: sportGroup.Id.toString(),
+                text: sportGroup.Name,
+                checked: true,
+                enable: true,
+                cssClass: "",
+                items: ddSportGroup
+            });
         }
     };
 
@@ -489,7 +470,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
 
     var checkParlay = function (selectedProducts) {
         for (var i = selectedProducts.length ; i--;) {
-            if (selectedProducts[i] === "1_0" || selectedProducts[i] === "5_0") {
+            if (selectedProducts[i] === "1_0" || selectedProducts[i] === "5_0" || selectedProducts[i] === "23_0") {
                 selectedProducts.splice(i, 1);
             }
         }

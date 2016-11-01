@@ -9,10 +9,6 @@
 
 namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Models;
@@ -24,6 +20,10 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
     using Fanex.AccountingReports.Special.Resources;
     using Fanex.AccountingReports.Special.Services.Interface;
     using Fanex.Common;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -67,36 +67,21 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
                         ChildsInfo = new List<ProductInfo>()
                     };
 
-                    if (string.Compare(product.Name, Labels.Sportsbook, true) == 0)
+                    if (SpecialConstants.ProductsHaveSport.Contains(product.Name.ToLower()))
                     {
                         products.Add(product);
                         continue;
                     }
 
-                    var sportGroups = productGroup.GroupBy(rawInfo => new
-                    {
-                        rawInfo.sporttype,
-                        rawInfo.SportName
-                    });
+                    var sportGroups = productGroup.GroupBy(rawInfo => new { rawInfo.sporttype, rawInfo.SportName });
 
                     foreach (var sportGroup in sportGroups)
                     {
-                        var sport = new ProductInfo
-                        {
-                            Id = Converter.ToInt(sportGroup.Key.sporttype),
-                            Name = Converter.ToString2(sportGroup.Key.SportName),
-                            ChildsInfo = new List<ProductInfo>()
-                        };
+                        var sport = CreateSportInfo(sportGroup);
 
                         foreach (var data in sportGroup)
                         {
-                            var info = new ProductInfo
-                            {
-                                Id = Converter.ToInt(data.bettype),
-                                Name = Converter.ToString2(data.bettypename)
-                            };
-
-                            sport.ChildsInfo.Add(info);
+                            sport.ChildsInfo.Add(CreateBetTypeInfo(data));
                         }
 
                         product.ChildsInfo.Add(sport);
@@ -115,6 +100,16 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
             return null;
         }
 
+        public ProductInfo CreateSportInfo(IGrouping<dynamic, dynamic> sportGroup)
+        {
+            return new ProductInfo
+            {
+                Id = Converter.ToInt(sportGroup.Key.sporttype),
+                Name = Converter.ToString2(sportGroup.Key.SportName),
+                ChildsInfo = new List<ProductInfo>()
+            };
+        }
+
         /// <summary>
         /// Gets the name of the sport.
         /// </summary>
@@ -130,6 +125,8 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
                     return Labels.Others;
                 case SpecialConstants.PunterAnalysisPArlayGroupId:
                     return Labels.Parlay;
+                case SpecialConstants.PunterAnalysisNG2GroupID:
+                    return Labels.NG2;
             }
 
             return string.Empty;
@@ -174,55 +171,12 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
                         case SpecialConstants.PunterAnalysisPArlayGroupId:
                             indGroup.Id = SpecialConstants.PunterAnalysisParlaySportId;
                             break;
+                        case SpecialConstants.PunterAnalysisNG2GroupID:
+                            GenerateNG2Sports(sports, indGroupRawData);
+                            break;
                     }
 
-                    if (indGroup.Id == SpecialConstants.PunterAnalysisOtherSportId)
-                    {
-                        var sportGroups = indGroupRawData.GroupBy(rawInfo =>
-                            new
-                            {
-                                rawInfo.sporttype,
-                                rawInfo.SportName
-                            });
-
-                        foreach (var sportGroup in sportGroups)
-                        {
-                            var sport = new ProductInfo
-                            {
-                                Id = Converter.ToInt(sportGroup.Key.sporttype),
-                                Name = Converter.ToString2(sportGroup.Key.SportName),
-                                ChildsInfo = new List<ProductInfo>()
-                            };
-
-                            foreach (var data in sportGroup)
-                            {
-                                var info = new ProductInfo
-                                {
-                                    Id = Converter.ToInt(data.bettype),
-                                    Name = Converter.ToString2(data.bettypename)
-                                };
-
-                                sport.ChildsInfo.Add(info);
-                            }
-
-                            indGroup.ChildsInfo.Add(sport);
-                        }
-                    }
-                    else
-                    {
-                        foreach (var data in indGroupRawData)
-                        {
-                            var info = new ProductInfo
-                            {
-                                Id = Converter.ToInt(data.bettype),
-                                Name = Converter.ToString2(data.bettypename)
-                            };
-
-                            indGroup.ChildsInfo.Add(info);
-                        }
-                    }
-
-                    sports.Add(indGroup);
+                    GenerateSportbookSports(sports, indGroupRawData, indGroup);
                 }
 
                 SessionManager.Set<List<ProductInfo>>(SpecialConstants.PunterAnalysisSportsSessionKey, sports);
@@ -235,6 +189,74 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
 
             SessionManager.Set<List<ProductInfo>>(SpecialConstants.PunterAnalysisSportsSessionKey, null);
             return null;
+        }
+
+        public List<ProductInfo> GenerateSportbookSports(List<ProductInfo> sports, IGrouping<dynamic, dynamic> indGroupRawData, ProductInfo indGroup)
+        {
+            if (indGroup.Id == SpecialConstants.PunterAnalysisOtherSportId)
+            {
+                var sportGroups = indGroupRawData.GroupBy(rawInfo =>
+                    new
+                    {
+                        rawInfo.sporttype,
+                        rawInfo.SportName
+                    });
+
+                foreach (var sportGroup in sportGroups)
+                {
+                    var sport = CreateSportInfo(sportGroup);
+
+                    foreach (var data in sportGroup)
+                    {
+                        sport.ChildsInfo.Add(CreateBetTypeInfo(data));
+                    }
+
+                    indGroup.ChildsInfo.Add(sport);
+                }
+            }
+            else
+            {
+                foreach (var data in indGroupRawData)
+                {
+                    indGroup.ChildsInfo.Add(CreateBetTypeInfo(data));
+                }
+            }
+
+            sports.Add(indGroup);
+
+            return sports;
+        }
+
+        public ProductInfo CreateBetTypeInfo(dynamic data)
+        {
+            return new ProductInfo
+            {
+                Id = Converter.ToInt(data.bettype),
+                Name = Converter.ToString2(data.bettypename)
+            };
+        }
+
+        public List<ProductInfo> GenerateNG2Sports(List<ProductInfo> sports, IGrouping<dynamic, dynamic> indGroupRawData)
+        {
+            var sportGroups = indGroupRawData.GroupBy(rawInfo => new
+            {
+                rawInfo.sporttype,
+                rawInfo.SportName
+            });
+
+            foreach (var sportGroup in sportGroups)
+            {
+                var sport = CreateSportInfo(sportGroup);
+
+                foreach (var data in sportGroup)
+                {
+                    sport.ChildsInfo.Add(CreateBetTypeInfo(data));
+                }
+
+                sports.Add(sport);
+            }
+
+            return sports;
         }
 
         /// <summary>
@@ -954,10 +976,10 @@ namespace Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis
                             });
 
                         grandTotalYearInfo.ChildsInfo.Add(new PunterWinLossInfo
-                            {
-                                WinLossDate_Str = dateId,
-                                Name = dateName
-                            });
+                        {
+                            WinLossDate_Str = dateId,
+                            Name = dateName
+                        });
                     }
                 }
 

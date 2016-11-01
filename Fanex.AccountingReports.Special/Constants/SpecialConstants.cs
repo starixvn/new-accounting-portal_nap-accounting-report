@@ -7,6 +7,8 @@
 //   <change who="Louis.Nguyen" date="2012.12.07">Created</change>
 // </history>
 
+using System.Collections.Generic;
+
 namespace Fanex.AccountingReports.Special.Constants
 {
     /// <summary>
@@ -20,6 +22,7 @@ namespace Fanex.AccountingReports.Special.Constants
         public const int PunterAnalysisSoocerSportId = 1;
         public const int PunterAnalysisOtherSportId = 999;
         public const int PunterAnalysisParlaySportId = 0;
+        public const int PunterAnalysisNG2GroupID = 23;
 
         public static readonly string ParlayWonFullReportSessionKey = "Fanex.AccountingReports.Special.ParlayWon.ParlayWonReport";
         public static readonly string MatchAnalysisSessionKey = "Fanex.AccountingReports.Special.MatchAnalysis";
@@ -45,5 +48,11 @@ namespace Fanex.AccountingReports.Special.Constants
         public static readonly short FontSize = 8;
 
         public static readonly string FontName = "Tahoma";
+
+        public static readonly List<string> ProductsHaveSport = new List<string>
+        {
+            "sportsbook",
+            "ng2"
+        };
     }
 }

@@ -1165,4 +1165,7 @@
   <data name="Company_Income" xml:space="preserve">
     <value>Company Income</value>
   </data>
+  <data name="NG2" xml:space="preserve">
+    <value>NG2</value>
+  </data>
 </root>

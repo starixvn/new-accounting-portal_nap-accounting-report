@@ -249,7 +249,12 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 
                     if (IBCs) {
                         $.each(IBCs, function (index, value) {
-                            sportType.SubRows.push(renderWinLoss(value, true, sportWinloss.Id, id > 0 ? sportName : value.Name, betTypeDrillDown, i));
+                            if (betType.Id < 221 && betType.Id > 212) {
+                                sportType.SubRows.push(renderTotalNew(value, 'total', value.Name + ' ' + viewResources.Total));
+                            }
+                            else {
+                                sportType.SubRows.push(renderWinLoss(value, true, sportWinloss.Id, id > 0 ? sportName : value.Name, betTypeDrillDown, i));
+                            }
                         });
                     }
                 }
