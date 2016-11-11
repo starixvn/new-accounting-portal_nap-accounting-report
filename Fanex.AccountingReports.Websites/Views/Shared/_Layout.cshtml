@@ -82,6 +82,9 @@
    @if (Fanex.NAP.Core.Configuration.NapSettings.Settings.Environment == "LIVE")
    { 
         <!-- Piwik -->
+    @{ 
+        var username = AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty;
+    }
         <script type="text/javascript">
             var _paq = _paq || [];
             _paq.push(['trackPageView']);
@@ -90,6 +93,8 @@
                 var u = "https://pw.detecas.com/";
                 _paq.push(['setTrackerUrl', u + 'piwik.php']);
                 _paq.push(['setSiteId', 2]);
+                _paq.push(['setUserId', '@username']);
+                
                 var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
                 g.type = 'text/javascript'; g.async = true; g.defer = true; g.src = u + 'piwik.js'; s.parentNode.insertBefore(g, s);
             })();
