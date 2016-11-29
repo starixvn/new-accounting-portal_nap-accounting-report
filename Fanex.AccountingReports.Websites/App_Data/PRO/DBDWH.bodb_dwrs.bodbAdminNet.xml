@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Functions>
   <Function Name="Misc - Bet Count">
-    <Setting Key="Misc_Bet_Count_GetProducts" SpName="Acc_Rpt_BetCount_SelProductSportBettypes" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
-    <Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Misc_Bet_Count_GetProducts" SpName="Acc_Rpt_BetCount_SelProductSportBettypes_UAT1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="Misc_BetCount_GetBetCountReport" SpName="Acc_Rpt_BetCount_UAT1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Gaming - Number Game Win Loss By Date">
     <Setting Key="Gaming_NumberGameWinlossByDate_GetReport" SpName="Acc_Rpt_NumberGameWinlossByDate" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
@@ -72,14 +72,14 @@
     <Setting Key="Main_DailyWinLoss2hOtherSports_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_OtherSports_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
   </Function>
   <Function Name="Win Loss - Tree Win Loss">
-    <Setting Key="WinLoss_TreeWinLoss_GetDataByProduct_WH" SpName="Acc_Rpt_TreeWinlostByProduct_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
-    <Setting Key="WinLoss_TreeWinLoss_GetDataByCom_WH" SpName="Acc_Rpt_TreeWinlostByCom_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
+    <Setting Key="WinLoss_TreeWinLoss_GetDataByProduct_WH" SpName="Acc_Rpt_TreeWinlostByProduct_Old_UAT1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="WinLoss_TreeWinLoss_GetDataByCom_WH" SpName="Acc_Rpt_TreeWinlostByCom_Old_UAT1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
     </Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetDataBySuper_WH" SpName="Acc_Rpt_TreeWinlostBySAg_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
+    <Setting Key="WinLoss_TreeWinLoss_GetDataBySuper_WH" SpName="Acc_Rpt_TreeWinlostBySAg_Old_UAT1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
     </Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetDataByMaster_WH" SpName="Acc_Rpt_TreeWinlostByMAg_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
+    <Setting Key="WinLoss_TreeWinLoss_GetDataByMaster_WH" SpName="Acc_Rpt_TreeWinlostByMAg_Old_UAT1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
     </Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetDataByAgent_WH" SpName="Acc_Rpt_TreeWinlostByAg_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
+    <Setting Key="WinLoss_TreeWinLoss_GetDataByAgent_WH" SpName="Acc_Rpt_TreeWinlostByAg_Old_UAT1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
     </Setting>
   </Function>
 
@@ -163,9 +163,9 @@
   </Function>
 
   <Function Name="SMA Turn Over">
-    <Setting Key="SMA_TurnOver_ReportByDate" SpName="Acc_Rpt_SMAs_TurnOverByDate" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
-    <Setting Key="SMA_TurnOver_ReportByMonth" SpName="Acc_Rpt_SMAs_TurnOverByMonth" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="SMA_TurnOver_ReportByYear" SpName="Acc_Rpt_SMAs_TurnOverByYear" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="SMA_TurnOver_ReportByDate" SpName="Acc_Rpt_SMAs_TurnOverByDate_UAT1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
+    <Setting Key="SMA_TurnOver_ReportByMonth" SpName="Acc_Rpt_SMAs_TurnOverByMonth_UAT1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="SMA_TurnOver_ReportByYear" SpName="Acc_Rpt_SMAs_TurnOverByYear_UAT1" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Core - Get DWH Date Range">
     <Setting Key="Core_GetDWH_DateRange" SpName="BI_GetDWStatusByCube" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"/>
