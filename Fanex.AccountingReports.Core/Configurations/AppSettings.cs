@@ -386,6 +386,15 @@ namespace Fanex.AccountingReports.Core.Configurations
             }
         }
 
+        public static bool IsUsingVirtualDirectory
+        {             
+            get
+            {
+                var val = ConfigurationManager.AppSettings["IsUsingVirtualDirectory"];
+                return val == null ? false : ConfigurationManager.AppSettings["IsUsingVirtualDirectory"] == "true";
+            }
+         }    
+
         private static List<string> GetExcludedControllers()
         {
             List<string> excludedControllers =
@@ -481,6 +490,6 @@ namespace Fanex.AccountingReports.Core.Configurations
             {
                 _liveCasinoFinancialReport_GameType.Add(Convert.ToInt32(gameType));
             }
-        }
+        }        
     }
 }
