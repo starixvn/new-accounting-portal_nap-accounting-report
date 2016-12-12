@@ -250,6 +250,21 @@
                 }
             }
         }
+
+		public string EnableReCheckin
+        {
+            get
+            {
+                switch(Environment)
+                {
+                    case SiteEnvironment.PRO:
+                        return "true";                  
+
+                    default:
+                        return "false";
+                }
+            }
+        }
 	        
         #endregion End for Webconfig file
     }
