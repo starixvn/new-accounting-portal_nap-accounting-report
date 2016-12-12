@@ -49,7 +49,7 @@
 	  EnableDirectLogin="1"
 	  SiteId="<#=site.SiteIdSettings#>"
 	  UnauthorizeUrl="~/UserLogin/Common/AccessDenied"
-	  EnableReCheckin="true"
+	  EnableReCheckin="<#=site.EnableReCheckin#>"
 	  HubUrl="<#=site.HubUrl#>">
 		<Domain>
 			<#=site.AuthorizeDomain#>
