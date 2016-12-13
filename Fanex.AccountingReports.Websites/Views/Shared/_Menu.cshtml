@@ -1,4 +1,3 @@
-@using Fanex.AccountingReports.Core.Configurations
 @using Fanex.NAP.Core.Model
 @{
     var universalReports = new[] { "House Win Loss by Products" };
@@ -37,7 +36,7 @@
                     <ul>
                         @foreach (var subMenuItem in lvl1MenuItemList)
                         {
-                            var subMenuUrl = universalReports.Any(u => u == subMenuItem.Name) && AppSettings.IsUsingVirtualDirectory
+                            var subMenuUrl = universalReports.Any(u => u == subMenuItem.Name)
                                 ? Url.Content("~/../" + subMenuItem.Url)
                                 : Url.Content("~" + subMenuItem.Url);
 
