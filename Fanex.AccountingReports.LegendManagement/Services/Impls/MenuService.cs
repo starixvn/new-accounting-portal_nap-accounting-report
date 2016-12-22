@@ -9,10 +9,6 @@
 
 namespace Fanex.AccountingReports.LegendManagement.Services.Impls
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.LegendManagement.Configurations;
     using Fanex.AccountingReports.LegendManagement.Criteria;
@@ -20,25 +16,28 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
     using Fanex.AccountingReports.LegendManagement.Services.Interfaces;
     using Fanex.Common;
     using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Domain;
-    using Fanex.NAP.Core.Service.Impl;
-    using Fanex.NAP.Core.Service.Interface;
+    using NAP.Core.Service.Impl;
+    using NAP.Core.Service.Interface;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// Menu Service.
     /// </summary>
     public class MenuService : ServiceBase, IMenuService
     {
-        private IMenuItemService _accNapMenuService;
+        private ISiteService _accNapMenuService;
 
         public MenuService()
             : this(null)
         {
         }
 
-        public MenuService(IMenuItemService accNapMenuService)
+        public MenuService(ISiteService accNapMenuService)
         {
-            this._accNapMenuService = accNapMenuService ?? new MenuItemService();
+            this._accNapMenuService = accNapMenuService ?? new SiteService();
         }
 
         /// <summary>
@@ -56,7 +55,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
                 switch (criteria.System)
                 {
                     case Constants.SystemName.AccNapReport:
-                        var menuList = this._accNapMenuService.GetBySite(WebSettings.NAPSiteId, Constant.Uat);
+                        var menuList = this._accNapMenuService.GetMenuItemBySiteId(WebSettings.NAPSiteId, Constant.UAT);
                         return this.MappingNapMenuToAccountingMenu(menuList);
                     case Constants.SystemName.AccReport:
                         var rawData = GetReportData<dynamic>(criteria)
@@ -118,7 +117,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
         /// <param name="rawData">The raw data.</param>
         /// <param name="parentId">The parent identifier.</param>
         /// <returns>Mappings result.</returns>
-        private List<MenuItem> MappingNapMenuToAccountingMenu(IEnumerable<IMenuItem> rawData, int? parentId = null)
+        private List<MenuItem> MappingNapMenuToAccountingMenu(IEnumerable<NAP.Core.Models.MenuItem> rawData, int? parentId = null)
         {
             List<MenuItem> menuList = null;
             if (rawData != null || rawData.Count() > 0)

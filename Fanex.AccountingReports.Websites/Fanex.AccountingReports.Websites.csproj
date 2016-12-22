@@ -101,8 +101,8 @@
       <HintPath>..\packages\Fanex.Caching.1.0.404.95\lib\net40\Fanex.Caching.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.Common, Version=1.0.404.97, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Common.1.0.404.97\lib\net40\Fanex.Common.dll</HintPath>
+    <Reference Include="Fanex.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Data, Version=0.5.404.63, Culture=neutral, processorArchitecture=MSIL">
@@ -125,8 +125,8 @@
       <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.2\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.NAP.Core, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.2.1.0.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
+    <Reference Include="Fanex.NAP.Core, Version=1.1.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.NAP.Core.Client.1.1.0.5\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Result.Core, Version=2.0.1.6, Culture=neutral, processorArchitecture=MSIL">
@@ -210,8 +210,8 @@
       <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.Interception.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
@@ -394,7 +394,6 @@
     </Content>
     <Content Include="App_Data\MNL\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBNAP.bodb_NAP.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBONUSER.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBONUSER.ON_USER.bodbAdminNet.xml" />
     <Content Include="App_Data\MNL\DBPOLICY.bodb02.bodbAdminNet.xml" />
@@ -426,7 +425,6 @@
     </Content>
     <Content Include="App_Data\DEV\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
     <Content Include="App_Data\DEV\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\DEV\DBNAP.bodb_NAP.bodbAdminNet.xml" />
     <Content Include="App_Data\DEV\DBONUSER.bodb02.bodbAdminNet.xml">
       <SubType>
       </SubType>
@@ -467,7 +465,6 @@
     </Content>
     <Content Include="App_Data\MASTER\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
     <Content Include="App_Data\MASTER\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\MASTER\DBNAP.bodb_NAP.bodbAdminNet.xml" />
     <Content Include="App_Data\MASTER\DBONUSER.bodb02.bodbAdminNet.xml">
       <SubType>
       </SubType>
@@ -504,7 +501,6 @@
     </Content>
     <Content Include="App_Data\LOCAL\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
     <Content Include="App_Data\LOCAL\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\LOCAL\DBNAP.bodb_NAP.bodbAdminNet.xml" />
     <Content Include="App_Data\LOCAL\DBONUSER.ON_USER.bodbAdminNet.xml" />
     <Content Include="App_Data\LOCAL\DBRPT.bodb_Report.bodbAdminNet.xml">
       <SubType>Designer</SubType>
@@ -538,7 +534,6 @@
     </Content>
     <Content Include="App_Data\PRO\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBNAP.bodb_NAP.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBONUSER.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBONUSER.ON_USER.bodbAdminNet.xml" />
     <Content Include="App_Data\PRO\DBPOLICY.bodb02.bodbAdminNet.xml" />
@@ -570,7 +565,6 @@
     </Content>
     <Content Include="App_Data\SIT\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
     <Content Include="App_Data\SIT\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBNAP.bodb_NAP.bodbAdminNet.xml" />
     <Content Include="App_Data\SIT\DBONUSER.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\SIT\DBONUSER.ON_USER.bodbAdminNet.xml" />
     <Content Include="App_Data\SIT\DBPOLICY.bodb02.bodbAdminNet.xml" />
@@ -604,7 +598,6 @@
     </Content>
     <Content Include="App_Data\UAT\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBNAP.bodb_NAP.bodbAdminNet.xml" />
     <Content Include="App_Data\UAT\DBONUSER.bodb02.bodbAdminNet.xml">
       <SubType>
       </SubType>
@@ -717,6 +710,7 @@
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByCurrency\Styles\NumberGameWinlossByCur.less" />
     <Content Include="Areas\Gaming\Views\NumberGameWinlossByDate\Styles\NumberGameWinlossByDate.less" />
     <Compile Include="Areas\UserControl\Controllers\UserController.cs" />
+    <Compile Include="Areas\UserControl\Models\UpdatePasswordModel.cs" />
     <Compile Include="Areas\UserControl\UserControlAreaRegistration.cs" />
     <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
     <Compile Include="Areas\UserLogin\Controllers\LoginController.cs" />
@@ -1941,7 +1935,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\LegendManagement\Views\LegendManagement\UploadedImage\" />
-    <Folder Include="Areas\UserControl\Models\" />
     <Folder Include="Areas\UserControl\Views\Shared\" />
     <Folder Include="Areas\UserLogin\Models\" />
     <Folder Include="scripts\_lib\BlockUI\img\" />
@@ -2256,7 +2249,6 @@
     <Content Include="Areas\UserLogin\Views\Login\Index.cshtml" />
     <Content Include="Areas\UserLogin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\UserLogin\Views\SSO\SSOIndex.cshtml" />
-    <Content Include="Areas\UserLogin\Views\UserSite\Site.cshtml" />
     <Content Include="Web.Configuration\Web.Config.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Web.Config.txt</LastGenOutput>

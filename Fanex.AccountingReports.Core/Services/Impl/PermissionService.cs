@@ -10,12 +10,11 @@
 
 namespace Fanex.AccountingReports.Core.Services.Impl
 {
-    using System.Collections.Generic;
-    using Fanex.AccountingReports.Core.Web;
     using Fanex.NAP.Core.Business;
-    using Fanex.NAP.Core.Model.ValueObject;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
+    using NAP.Core.Configuration;
+    using NAP.Core.Web.Session;
 
     /// <summary>
     /// TODO: Update summary.
@@ -24,31 +23,13 @@ namespace Fanex.AccountingReports.Core.Services.Impl
     {
         private static readonly IUserService UserService;
 
+        private static readonly ICurrentSession CurrentSession;
+
+
         static PermissionService()
         {
             UserService = new UserService();
-        }
-
-        /// <summary>
-        /// GetRollAccess: get permission to access with each menu item of current user login.
-        /// </summary>
-        /// <param name="currentFunctions">The current functions.</param>
-        /// <returns>
-        /// Roll Access.
-        /// </returns>
-        public static Dictionary<string, int> GetRoleAccess(IEnumerable<FunctionPolicy> currentFunctions)
-        {
-            Dictionary<string, int> roleAccess = new Dictionary<string, int>();
-
-            foreach (FunctionPolicy functionPolicy in currentFunctions)
-            {
-                if (functionPolicy.Policy >= (int)Constant.Policy.Read)
-                {
-                    roleAccess.Add(functionPolicy.Function.Key, functionPolicy.Policy);
-                }
-            }
-
-            return roleAccess;
+            CurrentSession = new CurrentSession();
         }
 
         /// <summary>
@@ -60,23 +41,17 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         /// </returns>
         public static bool HasReadPermission(string functionName)
         {
-            return AppSession.RoleAccess != null &&
-                   AppSession.RoleAccess.ContainsKey(functionName) &&
-                   AppSession.RoleAccess[functionName] == (int)Constant.Policy.Read;
+            return UserService.GetPermission(CurrentSession.UserId, NapSettings.Settings.SiteId, functionName) >= (int)Constant.Policy.Read;
         }
 
         public static bool HasHostPermission(string functionName)
         {
-            return AppSession.RoleAccess != null &&
-                   AppSession.RoleAccess.ContainsKey(functionName) &&
-                   AppSession.RoleAccess[functionName] == (int)Constant.Policy.Host;
+            return UserService.GetPermission(CurrentSession.UserId, NapSettings.Settings.SiteId, functionName) >= (int)Constant.Policy.Host;
         }
 
         public static bool HasPermission(string functionName)
         {
-            return AppSession.RoleAccess != null &&
-                   AppSession.RoleAccess.ContainsKey(functionName) &&
-                   AppSession.RoleAccess[functionName] >= (int)Constant.Policy.Read;
+            return HasReadPermission(functionName);
         }
     }
 }

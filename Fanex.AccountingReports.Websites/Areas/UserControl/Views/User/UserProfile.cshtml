@@ -1,8 +1,9 @@
 @using Fanex.AccountingReports.Core.Web
 @using Fanex.NAP.Core.Web
-@using Fanex.NAP.Core.Criteria.User
 @using Fanex.AccountingReports.Core.Resources
-@model UpdateCustCriteria
+@using Fanex.NAP.Core.Models;
+
+@model User
 @{
     ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -70,7 +71,7 @@
      var success = @success.ToString().ToLower();
      var message = '@message';
      var re = @Html.Raw(@"/\S+@\S+\.\S+/");
-     $(function () { 
+     $(function () {
         if(success == true)
         {
             AccReport.popUp.show('@Labels.ChangedProfile', null, 1);
@@ -82,7 +83,7 @@
 
         $("#btnSave").on("click",function(){
             var email = $("#Email").val();
-            if(email != "" 
+            if(email != ""
             && !re.test(email))
             {
                 AccReport.popUp.show('@Labels.InvalidEmail', "Email");
