@@ -9,10 +9,10 @@
 
 namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 {
-    using Fanex.AccountingReports.Core.Constants;
-    using Fanex.AccountingReports.Main.Common;
     using System;
     using System.Collections.Generic;
+    using Fanex.AccountingReports.Core.Constants;
+    using Fanex.AccountingReports.Main.Common;
 
     /// <summary>
     /// TODO: Update summary.
@@ -20,6 +20,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
     [Serializable]
     public class SportTypeWinLossInfo
     {
+        private readonly List<int> sportIdsWithoutDetails;
+
         public SportTypeWinLossInfo()
         {
             BetTypeWinLosses = new List<BetTypeWinLossInfo>();
@@ -37,6 +39,28 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                 RealTurnover = 0,
                 VirtualTurnover = 0,
             };
+
+            sportIdsWithoutDetails = new List<int>
+            {
+                MainConstants.WinLossSumamryCasinoSportId,
+                MainConstants.WinLossSummaryLiveCasinoSportId,
+                MainConstants.WinLossSummaryBingoSportId,
+                MainConstants.WinLossSummaryP2PSportId,
+                MainConstants.WinLossSummaryMixParlaySportId,
+                MainConstants.WinLossSummarySystemParlaySportId,
+                MainConstants.WinLossSummaryKenoSportId,
+                SportContants.GoldDeluxe,
+                SportContants.MicrogamingLiveCasino,
+                SportContants.MicrogamingRNGCasino,
+                SportContants.AGCasino,
+                SportContants.Macau,
+                SportContants.Bettrade,
+                SportContants.ColossusBet,
+                SportContants.Allbet,
+                SportContants.MacauGames,
+                SportContants.NG2,
+                SportContants.FishingWorld
+            };
         }
 
         public int Id { get; set; }
@@ -47,28 +71,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
         {
             get
             {
-                if (Id == MainConstants.WinLossSumamryCasinoSportId ||
-                    Id == MainConstants.WinLossSummaryLiveCasinoSportId ||
-                    Id == MainConstants.WinLossSummaryBingoSportId ||
-                    Id == MainConstants.WinLossSummaryP2PSportId ||
-                    Id == MainConstants.WinLossSummaryMixParlaySportId ||
-                    Id == MainConstants.WinLossSummarySystemParlaySportId ||
-                    Id == MainConstants.WinLossSummaryKenoSportId ||
-                    Id == SportContants.GoldDeluxe ||
-                    Id == SportContants.MicrogamingLiveCasino ||
-                    Id == SportContants.MicrogamingRNGCasino ||
-                    Id == SportContants.AGCasino ||
-                    Id == SportContants.Macau ||
-                    Id == SportContants.Bettrade ||
-                    Id == SportContants.ColossusBet ||
-                    Id == SportContants.Allbet ||
-                    Id == SportContants.MacauGames ||
-                    Id == SportContants.NG2)
-                {
-                    return false;
-                }
-
-                return true;
+                return !sportIdsWithoutDetails.Contains(Id);
             }
         }
 
