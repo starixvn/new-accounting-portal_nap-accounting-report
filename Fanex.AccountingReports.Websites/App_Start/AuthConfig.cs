@@ -9,12 +9,12 @@
 
 namespace Fanex.AccountingReports.Websites.App_Start
 {
-    using System.Web;
-    using System.Web.Security;
-    using Fanex.NAP.Core.Criteria.User;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
+    using NAP.Core.Auth;
+    using System.Web;
+    using System.Web.Security;
 
     /// <summary>
     /// TODO: Update summary.
@@ -63,11 +63,8 @@ namespace Fanex.AccountingReports.Websites.App_Start
         public static void SignOut()
         {
             var _currentSession = new CurrentSession();
-            var _userService = new UserService();
-            var logOutUserCriteria = new LogOutUserCriteria();
-
-            logOutUserCriteria.OnUserId = _currentSession.OnUserId;
-            _userService.UserLogOut(logOutUserCriteria);
+            var securityService = new SecurityService();
+            securityService.Logout(_currentSession.OnUserId);
             _currentSession.ClearAll();
         }
     }

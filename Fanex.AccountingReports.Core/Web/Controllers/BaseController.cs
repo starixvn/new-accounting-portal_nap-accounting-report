@@ -10,16 +10,15 @@
 
 namespace Fanex.AccountingReports.Core.Web.Controllers
 {
-    using System;
-    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Configuration;
-    using Fanex.NAP.Core.Service.Impl;
-    using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
+    using NAP.Core.Context;
+    using System;
+    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -29,8 +28,6 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
         protected readonly ICurrentContext CurrentContext;
 
         protected readonly ICurrentSession CurrentSession;
-
-        protected readonly IServiceContext ServiceContext;
 
         protected readonly string Environment = NapSettings.Settings.Environment;
 
@@ -46,16 +43,10 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
         {
             this.CurrentContext = new CurrentContext();
             ViewBag.Session = this.CurrentSession = new CurrentSession();
-            this.ServiceContext = new ServiceContext
-            {
-                UserId = this.CurrentSession.UserId,
-                SiteId = this.SiteId,
-                Ip = this.CurrentContext.IP
-            };
 
             ViewFlags = new ViewFlags
             {
-                IsLive = this.Environment.Equals(Constant.Live),
+                IsLive = this.Environment.Equals(Constant.LIVE),
                 HasEditRight = false
             };
             this._menuService = new MenuService();

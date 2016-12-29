@@ -10,9 +10,9 @@ namespace Fanex.AccountingReports.Websites.Controllers
             return Redirect("../../UniversalReports/HouseWinLossByProducts");
         }
 
-        public ActionResult NG2Statistic()
+        public ActionResult NG2Statistics()
         {
-            return Redirect("../../UniversalReports/NG2Statistic");
+            return Redirect("../../UniversalReports/NG2Statistics");
         }
     }
 }

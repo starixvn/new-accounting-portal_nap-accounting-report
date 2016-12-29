@@ -10,10 +10,9 @@
 
 namespace Fanex.AccountingReports.Core.Web
 {
-    using System;
-    using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Constants;
-    using Fanex.NAP.Core.Model;
+    using NAP.Core.Models;
+    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.
@@ -55,26 +54,6 @@ namespace Fanex.AccountingReports.Core.Web
             set
             {
                 SessionManager.Set<IList<MenuItem>>(CommonConstants.CurrentUserMenu, value);
-            }
-        }
-
-        public static Dictionary<string, int> RoleAccess
-        {
-            get
-            {
-                try
-                {
-                    return SessionManager.Get<Dictionary<string, int>>(CommonConstants.CurrentUserRoleAccess);
-                }
-                catch (Exception)
-                {
-                    return null;
-                }
-            }
-
-            set
-            {
-                SessionManager.Set<Dictionary<string, int>>(CommonConstants.CurrentUserRoleAccess, value);
             }
         }
 

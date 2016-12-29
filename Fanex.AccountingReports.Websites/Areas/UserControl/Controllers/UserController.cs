@@ -9,16 +9,19 @@
 
 namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
 {
-    using System;
-    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.Common;
     using Fanex.Logging;
-    using Fanex.NAP.Core.Criteria.User;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web;
+    using Models;
+    using NAP.Core.Configuration;
+    using NAP.Core.Models;
+    using NAP.Core.Models.ParameterObject;
+    using System;
+    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -28,6 +31,8 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
         // GET: /UserControl/User/
         private readonly IUserService _userService;
 
+        private readonly ISecurityService securityService;
+
         public UserController()
             : this(null)
         {
@@ -35,10 +40,8 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
 
         public UserController(IUserService userService)
         {
-            _userService = userService ?? new UserService
-                {
-                    ServiceContext = ServiceContext
-                };
+            _userService = userService ?? new UserService();
+            securityService = new SecurityService();
         }
 
         #region Change Password
@@ -46,7 +49,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
         [HttpGet]
         public ActionResult ChangePassword()
         {
-            return View(new UpdatePasswordCustCriteria { Username = AppSession.CurrentUser.Name });
+            return View(new UpdatePasswordModel());
         }
 
         /// <summary>
@@ -55,30 +58,22 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
         /// <param name="criteria">The criteria.</param>
         /// <returns>Changes the password view.</returns>
         [HttpPost]
-        public ActionResult ChangePassword(UpdatePasswordCustCriteria criteria)
+        public ActionResult ChangePassword(UpdatePasswordModel criteria)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var user = _userService.GetById(AppSession.CurrentUser.Id);
+                    var user = _userService.Get(AppSession.CurrentUser.Id);
                     string oldPwd = Cryptography.CfsEnCode(criteria.OldUserPwd);
 
                     if (oldPwd.Equals(user.Password))
                     {
-                        criteria.CustId = user.Id;
-                        criteria.UserPwd = Cryptography.CfsEnCode(criteria.UserPwd);
+                        var password = Cryptography.CfsEnCode(criteria.UserPwd);
 
-                        var result = _userService.InsertOrUpdate(criteria);
-
-                        if (result != null && result.IsSuccessful)
-                        {
-                            ViewBag.Success = true;
-                        }
-                        else if (result != null && result.IsSuccessful == false)
-                        {
-                            ViewBag.Message = result.Message;
-                        }
+                        var result = securityService.UpdatePassword(NapSettings.Settings.SiteId, user.Id, password);
+                        ViewBag.Success = result;
+                        ViewBag.Message = result ? string.Empty : "Sorry, an error occurred while processing your request, please notify the administrators.";
                     }
                     else
                     {
@@ -106,17 +101,11 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
         [HttpGet]
         public ActionResult UserProfile()
         {
-            var criteria = new UpdateCustCriteria();
-
             try
             {
-                var user = _userService.GetById(AppSession.CurrentUser.Id);
+                var user = _userService.Get(AppSession.CurrentUser.Id);
 
-                criteria.CustId = user.Id;
-                criteria.Username = user.Username;
-                criteria.FirstName = user.FirstName;
-                criteria.LastName = user.LastName;
-                criteria.Email = user.Email;
+                return View(user);
             }
             catch (Exception ex)
             {
@@ -124,7 +113,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
                 throw;
             }
 
-            return View(criteria);
+
         }
 
         /// <summary>
@@ -133,28 +122,27 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
         /// <param name="criteria">The criteria.</param>
         /// <returns>The User profile page.</returns>
         [HttpPost]
-        public ActionResult UserProfile(UpdateCustCriteria criteria)
+        public ActionResult UserProfile(User user)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    criteria.CustId = AppSession.CurrentUser.Id;
-                    criteria.Username = AppSession.CurrentUser.Username;
-                    criteria.FirstName = criteria.FirstName ?? string.Empty;
-                    criteria.LastName = criteria.LastName ?? string.Empty;
-                    criteria.Email = criteria.Email ?? string.Empty;
-
-                    var result = _userService.InsertOrUpdate(criteria);
-
-                    if (result != null && result.IsSuccessful)
+                    var oldUser = _userService.Get(CurrentSession.UserId);
+                    var parameter = new UpdateUserInfoParameter
                     {
-                        ViewBag.Success = true;
-                    }
-                    else if (result != null && result.IsSuccessful == false)
-                    {
-                        ViewBag.Message = result.Message;
-                    }
+                        CustId = oldUser.Id,
+                        Username = oldUser.Username,
+                        FirstName = user.FirstName ?? oldUser.FirstName,
+                        LastName = user.LastName ?? oldUser.LastName,
+                        Email = user.Email ?? oldUser.Email,
+                        GroupId = oldUser.Group == null ? 0 : oldUser.Group.Id
+                    };
+
+                    var result = securityService.UpdateProfile(this.SiteId, parameter);
+
+                    ViewBag.Success = result;
+                    ViewBag.Message = result ? string.Empty : "Sorry, an error occurred while processing your request, please notify the administrators.";
                 }
             }
             catch (Exception ex)
@@ -163,7 +151,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
                 throw;
             }
 
-            return View(criteria);
+            return View(user);
         }
 
         #endregion

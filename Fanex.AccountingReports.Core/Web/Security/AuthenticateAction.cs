@@ -9,13 +9,13 @@
 
 namespace Fanex.AccountingReports.Core.Web.Security
 {
+    using Fanex.AccountingReports.Core.Constants;
+    using Fanex.AccountingReports.Core.Models;
+    using NAP.Core.Models;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using Fanex.AccountingReports.Core.Constants;
-    using Fanex.AccountingReports.Core.Models;
-    using Fanex.NAP.Core.Model;
 
     /// <summary>
     /// TODO: Update summary.
@@ -36,7 +36,7 @@ namespace Fanex.AccountingReports.Core.Web.Security
             _authenticationType = authenticationType;
             _mainAction = mainAction;
         }
-        
+
         public enum AuthenticationType
         {
             /// <summary>
@@ -133,7 +133,7 @@ namespace Fanex.AccountingReports.Core.Web.Security
                 return 0;
             }
 
-            var result = useMenu.Where(menuItem => 
+            var result = useMenu.Where(menuItem =>
                 menuItem.Url.Trim().ToLower().Contains(fullActionPath.Trim().ToLower()));
             var s = result as List<MenuItem> ?? result.ToList();
             if (s.Any())

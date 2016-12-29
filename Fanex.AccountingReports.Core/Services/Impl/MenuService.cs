@@ -9,11 +9,11 @@
 
 namespace Fanex.AccountingReports.Core.Services.Impl
 {
+    using Fanex.AccountingReports.Core.Web;
+    using NAP.Core.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Fanex.AccountingReports.Core.Web;
-    using Fanex.NAP.Core.Model;
 
     /// <summary>
     /// TODO: Update summary.

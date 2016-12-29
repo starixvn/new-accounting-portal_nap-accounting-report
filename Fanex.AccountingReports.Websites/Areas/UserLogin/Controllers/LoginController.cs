@@ -17,13 +17,13 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.Logging;
     using Fanex.NAP.Core.Configuration;
-    using Fanex.NAP.Core.Criteria.User;
-    using Fanex.NAP.Core.Model;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
+    using NAP.Core.Models;
+    using NAP.Core.Models.ParameterObject;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -44,13 +44,13 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         #region members
 
         private const string LoginFormToken = "_SecureLoginFormToken";
-        private IUserService _userService;
+        private IUserService _userService = new UserService();
         private IGroupService _groupService;
         private ISiteService _siteService;
-        private IMenuItemService _menuItemService;
         private ICurrentSession _currentSession;
-        private IFunctionService _functionService;
         private ONEbookUMService.IMaintenanceService _maintenanceService;
+
+        private ISecurityService securityService = new SecurityService();
 
         private HashAlgorithm _hashAlgorithm;
 
@@ -59,7 +59,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         #region ctors
 
         public LoginController()
-            : this(null, null, null, null, null, null, null)
+            : this(null, null, null, null, null)
         {
         }
 
@@ -67,17 +67,12 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
             IUserService userService,
             IGroupService groupService,
             ISiteService siteService,
-            IMenuItemService menuItemService,
             ICurrentSession currentSession,
-            IFunctionService functionService,
             ONEbookUMService.IMaintenanceService maintenanceService)
         {
-            _userService = userService ?? new UserService();
             _groupService = groupService ?? new GroupService();
             _siteService = siteService ?? new SiteService();
-            _menuItemService = menuItemService ?? new MenuItemService();
             _currentSession = currentSession ?? new CurrentSession();
-            _functionService = functionService ?? new FunctionService();
             _maintenanceService = maintenanceService ?? new ONEbookUMServiceImp.MaintenanceService();
             _hashAlgorithm = new SHA256Managed();
         }
@@ -131,7 +126,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         {
             if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password) && CheckValidToken(loginToken))
             {
-                var user = _userService.GetByUsername(username.Trim()) as User;
+                var user = _userService.Get(username.Trim()) as User;
 
                 try
                 {
@@ -143,8 +138,8 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                         {
                             ClearToken();
 
-                            var group = user.Group == null ? null : _groupService.GetById(user.Group.Id);
-                            var siteLevelList = _siteService.GetSiteLevelByUser(user.Id, Environment); // gets all sites of logging-in user
+                            var group = user.Group == null ? null : _groupService.Get(user.Group.Id);
+                            var siteLevelList = _userService.GetSiteLevel(user.Id, Environment); // gets all sites of logging-in user
 
                             if ((group == null || group.IsActive) &&
                                 siteLevelList.Where(x => x.IsActive).Any())
@@ -153,7 +148,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 
                                 //// check-in user
 
-                                var criteria = new UserCheckInUserCriteria
+                                var criteria = new LoginParameter
                                 {
                                     UserId = user.Id,
                                     SiteId = this.SiteId,
@@ -166,16 +161,16 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                                     Platform = CurrentContext.Platform
                                 };
 
-                                _userService.UserCheckIn(criteria);
+                                var onUserId = securityService.Login(criteria);
 
                                 //// check-in user
 
                                 //// saves user session
 
-                                _currentSession.Level = _userService.GetUserSiteLevel(user.Id, this.SiteId);
+                                _currentSession.Level = _userService.GetUserLevel(user.Id, this.SiteId);
                                 _currentSession.UserId = user.Id;
                                 _currentSession.Username = username;
-                                _currentSession.OnUserId = criteria.OnUserId;
+                                _currentSession.OnUserId = onUserId;
                                 _currentSession.SessionId = Session.SessionID.ToString();
 
                                 // current site is not NAP Hub
@@ -186,67 +181,42 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 
                                 CreateAuthInfo(user);
                                 AppSession.CurrentUser = user;
-                                AppSession.RoleAccess = PermissionService.GetRoleAccess(_functionService.GetByUserAndSiteIncludeGroup(
-                                    user.Id,
-                                    NapSettings.Settings.SiteId,
-                                    NapSettings.Settings.Environment));
 
                                 //// saves user session
 
                                 if (AppSession.CurrentUserMenu != null &&
                                     AppSession.CurrentUserMenu.Where(m => m.Parent == null).ToList().Count > 0)
                                 {
-                                    //// redirects user
+                                    bool userIsActiveOnThisSite = false;
 
-                                    // if the user login directly, not through NAP Hub
-                                    if (this.IsSiteLogin)
+                                    foreach (var siteLevel in siteLevelList)
                                     {
-                                        //// checks if logging-in user is active on this site
-
-                                        bool userIsActiveOnThisSite = false;
-
-                                        foreach (var siteLevel in siteLevelList)
+                                        if (siteLevel.Site.Id == this.SiteId && siteLevel.IsActive)
                                         {
-                                            if (siteLevel.Site.Id == this.SiteId && siteLevel.IsActive)
-                                            {
-                                                userIsActiveOnThisSite = true;
-                                            }
+                                            userIsActiveOnThisSite = true;
                                         }
+                                    }
 
-                                        #endregion sign in
+                                    #endregion sign in
 
-                                        if (userIsActiveOnThisSite)
+                                    if (userIsActiveOnThisSite)
+                                    {
+                                        AppSession.ViewIPVN = PermissionService.HasPermission(AccReportFunctionKeys.ViewIPVN);
+                                        if (string.IsNullOrEmpty(returnUrl))
                                         {
-                                            AppSession.ViewIPVN = PermissionService.HasPermission(AccReportFunctionKeys.ViewIPVN);
-                                            if (string.IsNullOrEmpty(returnUrl))
-                                            {
-                                                return Redirect(FormsAuthentication.DefaultUrl);
-                                            }
-                                            else
-                                            {
-                                                returnUrl = Server.UrlDecode(returnUrl);
-                                                return Redirect(returnUrl);
-                                            }
+                                            return Redirect(FormsAuthentication.DefaultUrl);
                                         }
                                         else
                                         {
-                                            DoSignOut();
-                                            ViewBag.Message = ViewResources.Your_account_was_suspended;
+                                            returnUrl = Server.UrlDecode(returnUrl);
+                                            return Redirect(returnUrl);
                                         }
                                     }
                                     else
                                     {
-                                        AppSession.ViewIPVN = PermissionService.HasPermission(AccReportFunctionKeys.ViewIPVN);
-                                        //// user has access to multiple sites
-                                        if (siteLevelList.Count() > 1)
-                                        {
-                                            return RedirectToAction("Site", "UserSite");
-                                        }
-
-                                        return RedirectToAction("GoToSite", "UserSite", new { id = siteLevelList.First().Site.Id });
+                                        DoSignOut();
+                                        ViewBag.Message = ViewResources.Your_account_was_suspended;
                                     }
-
-                                    //// redirects user
                                 }
                                 else
                                 {
@@ -338,12 +308,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 
             try
             {
-                AppSession.RoleAccess = PermissionService.GetRoleAccess(_functionService.GetByUserAndSiteIncludeGroup(
-                                    AppSession.CurrentUser.Id,
-                                    NapSettings.Settings.SiteId,
-                                    NapSettings.Settings.Environment));
-
-                var siteStatus = _siteService.GetStatusById(this.SiteId);
+                var siteStatus = _siteService.IsActivated(this.SiteId);
                 if (!siteStatus)
                 {
                     return Json(new
@@ -352,14 +317,12 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                     });
                 }
 
-                UserReCheckInUserCriteria criteria = new UserReCheckInUserCriteria();
-                criteria.OnUserId = Convert.ToInt32(_currentSession.OnUserId);
-                _userService.ReUserCheckIn(criteria);
+                var isKickedOut = securityService.ReCheckIn(_currentSession.OnUserId, NapSettings.Settings.SiteId);
 
                 return Json(new
                 {
-                    OnUserId = Convert.ToInt32(_currentSession.OnUserId),
-                    IsKickedOut = criteria.IsKickedOut ? "1" : "0"
+                    OnUserId = _currentSession.OnUserId,
+                    IsKickedOut = isKickedOut
                 });
             }
             catch
@@ -376,7 +339,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 
         private void CreateUserMenu(User user)
         {
-            _currentSession.MenuItemList = (IList<MenuItem>)_menuItemService.GetByUserAndSiteIncludeGroup(
+            _currentSession.MenuItemList = (IList<MenuItem>)_userService.GetMenuItem(
                                                                                     user.Id,
                                                                                     SiteId,
                                                                                     Environment,
@@ -419,10 +382,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 
         private void DoSignOut()
         {
-            _userService.UserLogOut(new LogOutUserCriteria
-            {
-                OnUserId = _currentSession.OnUserId
-            });
+            securityService.Logout(_currentSession.OnUserId);
             FormsAuthentication.SignOut();
             _currentSession.ClearAll();
 
