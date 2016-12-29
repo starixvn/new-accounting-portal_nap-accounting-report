@@ -29,6 +29,8 @@ namespace Fanex.AccountingReports.Special.Checkbet
         private const string ContenBetTeamBetTypeYesNo = "ContenBetTeamBetTypeYesNo";
         private const string ContenBetTeamBetTypeAsBetTeam = "ContenBetTeamBetTypeAsBetTeam";
 
+        private const string ContenBetTeamBetType221To225 = "ContenBetTeamBetType221To225";
+
         private Dictionary<int, string> groupBettypes;
 
         public ContentBetTypeMapper()
@@ -81,7 +83,13 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 { 444, ContenBetTeamBetType442To444 },
                 { 445, ContenBetTeamBetType445To447 },
                 { 446, ContenBetTeamBetType445To447 },
-                { 447, ContenBetTeamBetType445To447 }
+                { 447, ContenBetTeamBetType445To447 },
+
+                { 221, ContenBetTeamBetType221To225 },
+                { 222, ContenBetTeamBetType221To225 },
+                { 223, ContenBetTeamBetType221To225 },
+                { 224, ContenBetTeamBetType221To225 },
+                { 225, ContenBetTeamBetType221To225 }
             };
         }
 

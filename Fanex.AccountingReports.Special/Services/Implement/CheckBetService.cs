@@ -93,6 +93,8 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                         var newmatchcode = (string)row.NewMatchCode;
                         var oldmatchcode = (string)row.OldMatchCode;
                         var hdp1 = (decimal)row.hdp1;
+                        var newHdp2 = (decimal)row.NewHdp2;
+                        var oldHdp2 = (decimal)row.OldHdp2;
                         var liveindicator = (bool)row.liveindicator;
                         string bettypeName = CacheRef.GetBettype(bettype);
                         string oldAway = string.Empty;
@@ -118,8 +120,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                             oldAway = CacheRef.GetTeamName(row.OldAwayID);
                         }
 
-                        newBetteam = this.GetBetTeam(home, newAway, bettype, newBetteam, hdp1);
-                        oldBetteam = this.GetBetTeam(home, oldAway, bettype, oldBetteam, hdp1);
+
+                        newBetteam = this.GetBetTeam(home, newAway, bettype, newBetteam, hdp1, newHdp2);
+                        oldBetteam = this.GetBetTeam(home, oldAway, bettype, oldBetteam, hdp1, oldHdp2);
                         if (bettype == 10)
                         {
                             newBetteam = !string.IsNullOrEmpty(newAway) ? newAway : home;
@@ -223,6 +226,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                         var away = CacheRef.GetTeamName(row.awayid);
                         var matchcode = (string)row.matchcode;
                         var hdp1 = (decimal)row.hdp1;
+                        var hdp2 = (decimal)row.hdp2;
                         var liveindicator = (bool)row.liveindicator;
                         string betypeName = CacheRef.GetBettype(bettype);
                         if (bettype == 85 || bettype == 86)
@@ -257,7 +261,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                             Currency = currency,
                             Bettype = betypeName,
                             Username = username,
-                            Betteam = this.GetBetTeam(home, away, bettype, betteam, hdp1),
+                            Betteam = this.GetBetTeam(home, away, bettype, betteam, hdp1, hdp2),
                             Stake = stake.Format(2),
                             Odds = odds.Format(2),
                             TotalPT = totalPT.Format(2),
@@ -295,7 +299,8 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             string awayTeam,
             int betType,
             string betTeam,
-            decimal hdp1)
+            decimal hdp1,
+            decimal hdp2)
         {
             string result = string.Empty;
             var getBetTeamEnhanced = new ContentChoiceBuilder();
@@ -525,7 +530,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     break;
 
                 default:
-                    result = getBetTeamEnhanced.GetContentBetchoiceToShowOf(homeTeam, awayTeam, betType, betTeam, hdp1);
+                    result = getBetTeamEnhanced.GetContentBetchoiceToShowOf(homeTeam, awayTeam, betType, betTeam, hdp1, hdp2);
 
                     break;
             }
