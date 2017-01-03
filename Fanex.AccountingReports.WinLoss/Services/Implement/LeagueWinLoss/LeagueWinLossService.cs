@@ -1,12 +1,5 @@
 ﻿namespace Fanex.AccountingReports.WinLoss.Services.Implement
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Drawing;
-    using System.Linq;
-    using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
@@ -21,6 +14,11 @@
     using Fanex.AccountingReports.WinLoss.Resources;
     using Fanex.AccountingReports.WinLoss.Services.Interface;
     using Fanex.Common;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -575,8 +573,6 @@
             SessionManager.Set<LeagueWinLossInfo>(WinLossContants.LeagueWinLossByBetTypeSessionKey, null);
             return null;
         }
-
-        
 
         private string GetSportName(int sportId)
         {

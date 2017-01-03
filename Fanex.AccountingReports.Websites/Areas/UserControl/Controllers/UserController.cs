@@ -112,8 +112,6 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
                 LogService.Error(ex.Message, ex);
                 throw;
             }
-
-
         }
 
         /// <summary>

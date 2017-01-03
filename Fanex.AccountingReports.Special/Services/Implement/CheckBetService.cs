@@ -120,7 +120,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                             oldAway = CacheRef.GetTeamName(row.OldAwayID);
                         }
 
-
                         newBetteam = this.GetBetTeam(home, newAway, bettype, newBetteam, hdp1, newHdp2);
                         oldBetteam = this.GetBetTeam(home, oldAway, bettype, oldBetteam, hdp1, oldHdp2);
                         if (bettype == 10)

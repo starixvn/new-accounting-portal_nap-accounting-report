@@ -9,8 +9,6 @@
 
 namespace Fanex.BetList.Accounting.Extensions
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.BetList.Accounting.Constants;
     using Fanex.BetList.Accounting.Core;
     using Fanex.BetList.Accounting.Models;
@@ -20,6 +18,8 @@ namespace Fanex.BetList.Accounting.Extensions
     using NPOI.HSSF.UserModel;
     using NPOI.SS.UserModel;
     using NPOI.SS.Util;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
@@ -113,7 +113,7 @@ namespace Fanex.BetList.Accounting.Extensions
                         statusHtml = status;
                         break;
                     default:
-                        if (33 <= sportTypeId && sportTypeId <= 42)
+                        if (sportTypeId >= 33 && sportTypeId <= 42)
                         {
                             statusHtml = string.Format(
                                 "{0}@{1}-{2}",
@@ -202,9 +202,9 @@ namespace Fanex.BetList.Accounting.Extensions
             headerStyle.CloneStyleFrom(factory.EvenCellStyle);
             headerStyle.FillForegroundColor = 44;
             headerStyle.Alignment = HorizontalAlignment.Center;
-            headerStyle.VerticalAlignment = VerticalAlignment.Center; 
+            headerStyle.VerticalAlignment = VerticalAlignment.Center;
             headerStyle.SetFont(factory.RTFHelper.PosFont);
-            
+
             CellAddress cellAddr;
             cellAddr = factory.AddCell(new HSSFRichTextString(Labels.No), headerStyle);
             factory.SetColumnWidth(cellAddr.ColumnIndex, 1200);
@@ -316,7 +316,7 @@ namespace Fanex.BetList.Accounting.Extensions
             style.VerticalAlignment = VerticalAlignment.Center;
             style.BorderTop = BorderStyle.Thin;
             style.BorderLeft = BorderStyle.Thin;
-            style.BorderBottom = BorderStyle.Thin; 
+            style.BorderBottom = BorderStyle.Thin;
             style.SetFont(font);
 
             string valueHtml = value.Format(2) + "\n";

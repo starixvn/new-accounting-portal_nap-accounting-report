@@ -9,13 +9,13 @@
 
 namespace Fanex.BetList.Accounting.Core
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Text.RegularExpressions;
     using Fanex.BetList.Accounting.Constants;
     using Fanex.BetList.Accounting.Extensions;
     using Fanex.BetList.Accounting.Models;
     using Fanex.BetList.Accounting.Resources;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// TODO: Update summary.
@@ -96,7 +96,7 @@ namespace Fanex.BetList.Accounting.Core
             bool isWonStatus = string.Equals(status, "won", StringComparison.OrdinalIgnoreCase);
             bool isLoseStatus = string.Equals(status, "lose", StringComparison.OrdinalIgnoreCase);
             bool isDrawStatus = string.Equals(status, "draw", StringComparison.OrdinalIgnoreCase);
-            
+
             if (betlistHelper.IsHRWinPlaceBettype(ticketDetail.Ticket.BetTypeId) &&
                 (isWonStatus || isLoseStatus))
             {
@@ -116,7 +116,7 @@ namespace Fanex.BetList.Accounting.Core
             {
                 statusLabel = "<div class=\"bl_status c\">" + status.ToUpper() + "</div>";
             }
-            
+
             string resultLink = string.Empty;
             if (betlistHelper.IsHRBettype(ticketDetail.Ticket.BetTypeId))
             {
@@ -264,7 +264,7 @@ namespace Fanex.BetList.Accounting.Core
             bool isLoseStatus = string.Equals(status, "lose", StringComparison.OrdinalIgnoreCase);
             bool isDrawStatus = string.Equals(status, "draw", StringComparison.OrdinalIgnoreCase);
             var betlistHelper = new BetListHelper();
-            
+
             if (sportTypeId <= 42 ||
                 sportTypeId == SportContants.OtherSports ||
                 sportTypeId == SportContants.ESport)
@@ -286,7 +286,7 @@ namespace Fanex.BetList.Accounting.Core
                         statusHtml = status;
                         break;
                     default:
-                        if (33 <= sportTypeId && sportTypeId <= 42)
+                        if (sportTypeId >= 33 && sportTypeId <= 42)
                         {
                             statusHtml = string.Format(
                                 "{0}@{1}-{2}",
@@ -358,7 +358,7 @@ namespace Fanex.BetList.Accounting.Core
                         break;
                 }
             }
-            
+
             string resultLink = string.Empty;
             if (betlistHelper.IsHRBettype(ticketDetail.Ticket.BetTypeId))
             {

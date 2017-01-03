@@ -70,7 +70,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             catch (Exception ex)
             {
                 HandleException(ex);
-                throw ex;
+                throw;
             }
         }
     }
