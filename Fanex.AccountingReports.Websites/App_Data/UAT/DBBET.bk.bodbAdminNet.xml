@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Function Name="Special - Check Bet">
-  <Setting Key="Special_CheckBet_GetReport" SpName="Acc_Rpt_CheckBet_xtest" DbName="DBBET.bk.bodbAdminNet" TimeOut="0" ></Setting>
-  <Setting Key="Special_CheckBet_GetReport_Normal" SpName="Acc_Rpt_CheckBet_Normal_xtest" DbName="DBBET.bk.bodbAdminNet" TimeOut="0" ></Setting>
-  <Setting Key="Special_CheckBet_GetReport_Reject" SpName="Acc_Rpt_CheckBet_Reject_xtest" DbName="DBBET.bk.bodbAdminNet" TimeOut="0" ></Setting>
+  <Setting Key="Special_CheckBet_GetReport" SpName="Acc_Rpt_CheckBet" DbName="DBBET.bk.bodbAdminNet" TimeOut="0" ></Setting>
+  <Setting Key="Special_CheckBet_GetReport_Normal" SpName="Acc_Rpt_CheckBet_Normal" DbName="DBBET.bk.bodbAdminNet" TimeOut="0" ></Setting>
+  <Setting Key="Special_CheckBet_GetReport_Reject" SpName="Acc_Rpt_CheckBet_Reject" DbName="DBBET.bk.bodbAdminNet" TimeOut="0" ></Setting>
 </Function>
