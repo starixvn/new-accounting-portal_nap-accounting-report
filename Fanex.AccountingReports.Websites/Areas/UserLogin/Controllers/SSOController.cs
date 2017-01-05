@@ -172,7 +172,6 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                         Platform = currentContext.Platform
                     };
 
-
                     var onUserId = securityService.Login(criteria);
                     _currentSession.UserId = user.Id;
                     _currentSession.Username = user.Username;
@@ -184,10 +183,11 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 
                     if (this.SiteId != 0)
                     {
-                        _currentSession.MenuItemList = _userService.GetMenuItem(user.Id,
-                                                                                SiteId,
-                                                                                Environment,
-                                                                                true) as IList<MenuItem>;
+                        _currentSession.MenuItemList = _userService.GetMenuItem(
+                            user.Id,
+                            SiteId,
+                            Environment,
+                            true) as IList<MenuItem>;
                         AppSession.CurrentUserMenu = _currentSession.MenuItemList;
                     }
 

@@ -31,7 +31,7 @@ namespace Fanex.AccountingReports.UnitTests.Module.Special.Services
         public void ContentChoiceBuilder_Return_True(int betType, string betTeam, string expect)
         {
             var service = new ContentChoiceBuilder();
-            var result = service.GetContentBetchoiceToShowOf("Barcelona", "Real", betType, betTeam, 2.5m);
+            var result = service.GetContentBetchoiceToShowOf("Barcelona", "Real", betType, betTeam, 2.5m, 0);
             ComparisonAssert.AreEqual(result, expect);
         }
     }

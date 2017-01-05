@@ -229,6 +229,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                                 betWinLossNewCricket = betWinLoss;
                                 continue;
                             }
+
                             var backgroundColor = j % 2 == 0 ? ExcelExtensions.BackGroundColor : ExcelExtensions.EvenRowColor;
                             textStyle.FillPattern.SetSolid(backgroundColor);
                             text8RM_BARMStyle.FillPattern.SetSolid(backgroundColor);
@@ -250,6 +251,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                                         soccerTotalStyle);
                                     continue;
                                 }
+
                                 currentRow++;
                                 currentColumn = startColumn;
                                 betTypeName = winloss.Name;
@@ -328,7 +330,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                                     betWinLoss.Total,
                                     soccerTotalStyle);
                             }
-
                         }
 
                         // for NewCricket
@@ -346,6 +347,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                                 numberOfGroupColumnsTotal,
                                 sportWinLoss.TotalForNewCricket,
                                 ExcelExtensions.TotalRowColor);
+
                             // for Charge Commisson
                             foreach (var winloss in betWinLossNewCricket.IBCs)
                             {
@@ -361,8 +363,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                                     winloss,
                                     ExcelExtensions.TotalRowColor);
                             }
-
                         }
+
                         // Total of Sport
                         currentRow++;
                         currentColumn = startColumn;

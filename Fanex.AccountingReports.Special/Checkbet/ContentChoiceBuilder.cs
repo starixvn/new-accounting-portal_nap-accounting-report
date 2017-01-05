@@ -9,7 +9,8 @@ namespace Fanex.AccountingReports.Special.Checkbet
             string awayTeam,
             int betType,
             string betTeam,
-            decimal hdp1)
+            decimal hdp1,
+            decimal hdp2)
         {
             string result = string.Empty;
             var model = new BetTeamModel
@@ -18,7 +19,8 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 AwayTeam = awayTeam,
                 BetType = betType,
                 BetTeam = betTeam.ToUpper(),
-                Hdp1 = decimal.Round(hdp1, 2, MidpointRounding.AwayFromZero)
+                Hdp1 = decimal.Round(hdp1, 2, MidpointRounding.AwayFromZero),
+                Hdp2 = decimal.Round(hdp2, 2, MidpointRounding.AwayFromZero),
             };
 
             var bettypeMapper = new ContentBetTypeMapper();

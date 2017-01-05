@@ -9,12 +9,6 @@
 
 namespace Fanex.AccountingReports.LegendManagement.Services.Impls
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.IO;
-    using System.Linq;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.LegendManagement.Configurations;
     using Fanex.AccountingReports.LegendManagement.Constants;
@@ -25,6 +19,12 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
     using Fanex.AccountingReports.LegendManagement.Resources;
     using Fanex.AccountingReports.LegendManagement.Services.Interfaces;
     using Fanex.Common;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Linq;
 
     /// <summary>
     /// Legend Management Service.
@@ -370,7 +370,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
 
                     var content = ms.ToArray();
                     base64String = Convert.ToBase64String(content, 0, content.Length);
-                    br.Close();
                 }
             }
 
@@ -383,7 +382,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             {
                 file.WriteLine(inlineData);
                 file.Flush();
-                file.Close();
             }
         }
 
@@ -401,11 +399,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
                 var filePath = imageFolder + "\\" + imagePath.Substring(imagePath.LastIndexOf("/", StringComparison.OrdinalIgnoreCase) + 1) + InlineFileDataSuffix;
                 if (File.Exists(filePath))
                 {
-                    using (var file = new StreamReader(filePath))
-                    {
-                        result = file.ReadToEnd();
-                        file.Close();
-                    }
+                    return File.ReadAllText(filePath);
                 }
             }
 

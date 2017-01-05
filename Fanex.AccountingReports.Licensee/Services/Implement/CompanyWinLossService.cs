@@ -76,8 +76,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
                         ProductName = Converter.ToString2(reader["ProductName"])
                     });
                 }
-
-                reader.Close();
             }
 
             return products;
@@ -118,7 +116,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             using (IDataReader reader = _repository.GetDataFromDB(criteria))
             {
                 gridOptions.BodyRows = MapReportDataRows(reader);
-                reader.Close();
             }
 
             CacheExtension.Set(_dataCachedKey, gridOptions);

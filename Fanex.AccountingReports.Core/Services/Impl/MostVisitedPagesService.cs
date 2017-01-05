@@ -9,9 +9,6 @@
 
 namespace Fanex.AccountingReports.Core.Services.Impl
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Criteria;
@@ -22,7 +19,9 @@ namespace Fanex.AccountingReports.Core.Services.Impl
     using Fanex.AccountingReports.Core.Web;
     using Fanex.Common;
     using Fanex.Data.Repository;
-    using Fanex.NAP.Core.Service.Impl;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -189,7 +188,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl
 
         private bool IsInRange(int position, int maxPages)
         {
-            return 1 <= position && position <= maxPages;
+            return position >= 1 && position <= maxPages;
         }
 
         /// <summary>

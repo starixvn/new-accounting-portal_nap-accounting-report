@@ -1,8 +1,8 @@
 ﻿namespace Fanex.AccountingReports.Core.Web
 {
-    using System;
     using Couchbase;
     using Enyim.Caching.Memcached;
+    using System;
 
     public static class CacheExtension
     {
@@ -26,13 +26,11 @@
         /// <param name="expireTime">Expire time [Hour].</param>
         public static void Set(string key, object value, int expireTime = 2)
         {
-            _couchbaseClient.ExecuteStore(
+            _couchbaseClient.Store(
                 StoreMode.Set,
                 key,
                 value,
-                DateTime.Now.AddHours(expireTime),
-                Couchbase.Operations.PersistTo.One,
-                Couchbase.Operations.ReplicateTo.Two);
+                DateTime.Now.AddHours(expireTime));
         }
 
         public static void Remove(string key)

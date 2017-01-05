@@ -9,14 +9,14 @@
 
 namespace Fanex.BetList.Accounting.Services
 {
-    using System;
-    using System.Collections.Generic;
     using Fanex.BetList.Accounting.Constants;
     using Fanex.BetList.Accounting.Core;
     using Fanex.BetList.Accounting.Models;
     using Fanex.BetList.Accounting.Resources;
     using Fanex.Common.Extensions;
     using Fanex.Data;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.
@@ -67,10 +67,10 @@ namespace Fanex.BetList.Accounting.Services
                                 while (reader.Read())
                                 {
                                     ipVnList.Add(new IPVNBean
-                                        {
-                                            IPFrom = reader.ToDouble("IPFrom"),
-                                            IPTo = reader.ToDouble("IPTo")
-                                        });
+                                    {
+                                        IPFrom = reader.ToDouble("IPFrom"),
+                                        IPTo = reader.ToDouble("IPTo")
+                                    });
                                 }
                             }
                         }
@@ -79,7 +79,7 @@ namespace Fanex.BetList.Accounting.Services
                     }
                     catch (Exception ex)
                     {
-                        LoggingHandler.Log(ex);
+                        throw ex;
                     }
                 }
 
@@ -140,8 +140,8 @@ namespace Fanex.BetList.Accounting.Services
 
         public static bool IsGoldDeluxe(int betTypeId)
         {
-            return betTypeId == BetTypeContants.GoldDeluxeBaccarat || 
-                betTypeId == BetTypeContants.GoldDeluxeParlayBaccarat || 
+            return betTypeId == BetTypeContants.GoldDeluxeBaccarat ||
+                betTypeId == BetTypeContants.GoldDeluxeParlayBaccarat ||
                 betTypeId == BetTypeContants.GoldDeluxeRoulette;
         }
 

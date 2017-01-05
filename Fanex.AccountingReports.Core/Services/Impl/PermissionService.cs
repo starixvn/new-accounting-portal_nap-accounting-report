@@ -25,7 +25,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
 
         private static readonly ICurrentSession CurrentSession;
 
-
         static PermissionService()
         {
             UserService = new UserService();
