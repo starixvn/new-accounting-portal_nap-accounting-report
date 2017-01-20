@@ -91,7 +91,7 @@
   <LiveCasinoProductSection configSource="Web.Configuration\LiveCasinoProductSection.config" />
   <couchbase>
     <servers bucket="Nap-Report" bucketPassword="">
-      <add uri="<#=site.CouchBase#>" />
+      <#=site.CouchBase#>
     </servers>
   </couchbase>
   <connectionStrings configSource="Web.Configuration\Web.<#=site.Environment#>.ConnectionString.config" />

@@ -118,7 +118,7 @@
 					case SiteEnvironment.DEV:
 					case SiteEnvironment.LOCAL:
                     case SiteEnvironment.MASTER:
-						return "http://10.18.200.124:17101/api";
+						return "http://ha.nexdev.net:1711/api";
                     case SiteEnvironment.SIT:
 						return "http://172.16.4.106:1710/api";
                     case SiteEnvironment.UAT:
@@ -212,7 +212,7 @@
 					case SiteEnvironment.SIT:
 						return "http://172.16.4.106:8889/api";
                     default:
-                        return "http://10.18.200.124:8889/api";
+                        return "http://10.35.35.254:8889/api";
                 }
             }
         }
@@ -247,7 +247,7 @@
                     case SiteEnvironment.MNL:
                         return @"FormatName:DIRECT=tcp:10.2.98.3\private$\entlib";
                     default:
-                        return @"FormatName:DIRECT=tcp:10.18.200.124\private$\entlib";
+                        return @"FormatName:DIRECT=http://10.35.35.254:808/msmq/Private$/entlib";
                 }
             }
         }
@@ -280,12 +280,11 @@
                     case SiteEnvironment.UAT:
 					case SiteEnvironment.SIT:
                     case SiteEnvironment.PRO:
-                        return "http://10.40.40.135:8091/pools/default";
+						return "<add uri=\"http://10.40.40.135:8091/pools/default\" />";                        
                     case SiteEnvironment.MNL:
-						return "http://10.2.98.3:8091/pools/default";
-
+						return	"<add uri=\"http://10.2.98.3:8091/pools/default\" />";						
                     default:
-                        return "http://10.18.200.124:8091/pools/default";
+                        return "<add uri=\"http://10.35.35.253:8091/pools/default\" /> \r\n\t\t <add uri=\"http://10.35.35.254:8091/pools/default\" />";
                 }
             }
         }
@@ -337,7 +336,7 @@
                         return "stateConnectionString=\"tcpip=10.2.12.10:42424\"";
 
                     default:
-                        return string.Empty;
+                        return "stateConnectionString=\"tcpip=10.35.35.254:42424\"";
                 }
             }
         }
