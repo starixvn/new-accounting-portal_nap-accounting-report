@@ -48,7 +48,7 @@
       Environment="<#= site.NapEnvironment #>"
       EnableDirectLogin="1"
       SiteId="<#= site.NapSiteId #>"
-      UnauthorizeUrl="~/Error/AccessDenied"
+      UnauthorizeUrl="~/UserLogin/Common/AccessDenied"
       EnableReCheckin="<#= site.NapEnableReCheckin #>"
       HubUrl=""
       ServiceUrls="<#= site.NapServiceUrls #>"

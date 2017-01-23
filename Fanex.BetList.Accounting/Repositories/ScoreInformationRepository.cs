@@ -9,13 +9,13 @@
 
 namespace Fanex.BetList.Accounting.Repositories
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Data;
     using Fanex.BetList.Accounting.Criteria;
     using Fanex.Common;
     using Fanex.Data;
     using Fanex.Result.Core.Sportsbook.DTO;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Data;
 
     /// <summary>
     /// TODO: Update summary.
@@ -47,19 +47,7 @@ namespace Fanex.BetList.Accounting.Repositories
                     if (reader.Read())
                     {
                         result.Add(BindSportsbook(reader, criteria));
-
-                        if (reader.NextResult())
-                        {
-                            while (reader.Read())
-                            {
-                                result[0].GameDetails.Add(BindGameDetail(reader));
-                            }
-                        }
-
-                        if (result[0].GameDetails.Count == 0)
-                        {
-                            result[0].GameDetails.Add(new GameDetail());
-                        }
+                        result[0].GameDetails.Add(new GameDetail());
                     }
                 }
 
@@ -104,25 +92,6 @@ namespace Fanex.BetList.Accounting.Repositories
         }
 
         /// <summary>
-        /// Bind game detail value.
-        /// </summary>
-        /// <param name="reader">The data reader.</param>
-        /// <returns>The game detail value.</returns>
-        private static GameDetail BindGameDetail(IDataReader reader)
-        {
-            return new GameDetail
-            {
-                MatchId = int.Parse(reader["matchid"].ToString()),
-                ResourceId = reader["ResourceId"].ToString(),
-                HomeValue = reader["HomeValue"].ToString(),
-                AwayValue = reader["AwayValue"].ToString(),
-                ResultStatusID = int.Parse(reader["ResultStatusID"].ToString()),
-                SettlementStatusID = int.Parse(reader["SettlementStatusID"].ToString()),
-                OtherInfo = Converter.ToString2(reader["OtherInfo"])
-            };
-        }
-
-        /// <summary>
         /// Binds the SPORTSBOOK.
         /// </summary>
         /// <param name="reader">The reader.</param>
@@ -148,12 +117,14 @@ namespace Fanex.BetList.Accounting.Repositories
                 MatchId = criteria.MatchId,
                 Color = string.Empty,
                 MatchCode = criteria.MatchCode,
-                GoalRecord = string.Empty,
+                GoalRecord = Converter.ToString2(reader["goalrecord"]),
                 IsHTCal = false,
                 Calculate = false,
                 Bettype = criteria.Bettype,
                 RefNo = string.Empty,
-                GameDetails = new List<GameDetail>()
+                GameDetails = new List<GameDetail>(),
+                LiveHomeScore = Converter.ToInt(reader["livehomescore"]),
+                LiveAwayScore = Converter.ToInt(reader["liveawayscore"])
             };
         }
     }
