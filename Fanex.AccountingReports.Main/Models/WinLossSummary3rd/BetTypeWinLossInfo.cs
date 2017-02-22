@@ -10,7 +10,6 @@
 namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.
@@ -20,10 +19,10 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
     {
         public BetTypeWinLossInfo()
         {
-            IBCs = new List<WinLossInfo>();
+            //IBCs = new List<WinLossInfo>();
         }
 
-        public List<WinLossInfo> IBCs { get; set; }
+        //public List<WinLossInfo> IBCs { get; set; }
 
         public int Id { get; set; }
 
@@ -33,6 +32,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 
         public WinLossInfo Hedge { get; set; }
 
+        public WinLossInfo Normal { get; set; }
+
         public string Name { get; set; }
 
         public WinLossInfo Total
@@ -41,34 +42,43 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             {
                 WinLossInfo total = new WinLossInfo
                 {
+                    WinLoss = 0,
+                    Position = 0,
+                    Commission = 0,
                     RealLineTotal = 0,
                     VirtualLineTotal = 0,
                     RealTurnover = 0,
-                    VirtualTurnover = 0
+                    VirtualTurnover = 0,
+                    Name = Name,
+                    LiveIndicator = Normal == null ? 0 : Normal.LiveIndicator,
+                    Status = Normal == null ? "" : Normal.Status,
+                    IBC = Normal == null ? 0 : Normal.IBC,
+                    Id = Normal == null ? 0 : Normal.Id,
+                    IsHedge = Normal == null ? false : Normal.IsHedge
                 };
 
-                if (IBCs != null)
+                if (Normal != null)
                 {
-                    foreach (WinLossInfo item in IBCs)
-                    {
-                        this.CalculateTotal(ref total, item);
-                    }
+                    this.CalculateTotal(ref total, Normal, false);
                 }
-
                 if (EightRM != null)
                 {
-                    this.CalculateTotal(ref total, EightRM);
+                    this.CalculateTotal(ref total, EightRM, true);
                 }
 
                 if (BARM != null)
                 {
-                    this.CalculateTotal(ref total, BARM);
+                    this.CalculateTotal(ref total, BARM, true);
                 }
 
                 if (Hedge != null)
                 {
-                    this.CalculateTotal(ref total, Hedge);
+                    this.CalculateTotal(ref total, Hedge, false);
                 }
+
+                total.Variance = total.RealLineTotal - total.VirtualLineTotal;
+                total.RealMargin = total.RealTurnover == 0 ? 0 : total.RealLineTotal / total.RealTurnover;
+                total.VirtualMargin = total.VirtualTurnover == 0 ? 0 : total.VirtualLineTotal / total.VirtualTurnover;
 
                 return total;
             }
@@ -79,16 +89,16 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
         /// </summary>
         /// <param name="winLoss">The win loss.</param>
         /// <param name="plusWinLoss">The plus win loss.</param>
-        private void CalculateTotal(ref WinLossInfo winLoss, WinLossInfo plusWinLoss)
+        private void CalculateTotal(ref WinLossInfo winLoss, WinLossInfo plusWinLoss, bool isRM)
         {
             winLoss.WinLoss += plusWinLoss.WinLoss;
             winLoss.Position += plusWinLoss.Position;
             winLoss.Commission += plusWinLoss.Commission;
 
-            winLoss.RealLineTotal += plusWinLoss.RealLineTotal;
-            winLoss.VirtualLineTotal += plusWinLoss.VirtualLineTotal;
-            winLoss.RealTurnover += plusWinLoss.RealTurnover;
-            winLoss.VirtualTurnover += plusWinLoss.VirtualTurnover;
+            winLoss.RealLineTotal += (isRM ? -1 : 1) * plusWinLoss.RealLineTotal;
+            winLoss.VirtualLineTotal += (isRM ? -1 : 1) * plusWinLoss.VirtualLineTotal;
+            winLoss.RealTurnover += isRM ? 0 : plusWinLoss.RealTurnover;
+            winLoss.VirtualTurnover += isRM ? 0 : plusWinLoss.VirtualTurnover;
         }
     }
 }

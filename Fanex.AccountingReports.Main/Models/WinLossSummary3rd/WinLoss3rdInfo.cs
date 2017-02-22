@@ -12,7 +12,6 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
     using System;
     using System.Collections.Generic;
     using System.Web.Script.Serialization;
-    using Fanex.AccountingReports.Core.Extensions;
 
     /// <summary>
     /// TODO: Update summary.
@@ -77,68 +76,6 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
         public WinLossInfo TempIBCTotal { get; set; }
 
         public WinLossInfo AllTotal { get; set; }
-
-        /// <summary>
-        /// Gets grand total = All Total + IBC Total.
-        /// </summary>
-        /// <value>
-        /// The grand total.
-        /// </value>
-        public WinLossInfo GrandTotal
-        {
-            get
-            {
-                WinLossInfo grandTotal = new WinLossInfo
-                {
-                    WinLoss = this.AllTotal.WinLoss + this.IBCTotal.WinLoss,
-                    Position = this.AllTotal.Position + this.IBCTotal.Position,
-                    Commission = this.AllTotal.Commission + this.IBCTotal.Commission,
-                    RealLineTotal = this.AllTotal.RealLineTotal + this.IBCTotal.RealLineTotal,
-                    VirtualLineTotal = this.AllTotal.VirtualLineTotal + this.IBCTotal.VirtualLineTotal,
-                    Variance = this.AllTotal.Variance + this.IBCTotal.Variance, // set Variance
-                    RealTurnover = this.AllTotal.RealTurnover + this.IBCTotal.RealTurnover,
-                    VirtualTurnover = this.AllTotal.VirtualTurnover + this.IBCTotal.VirtualTurnover,
-                };
-
-                if (grandTotal.RealTurnover.HasValue && grandTotal.RealTurnover.Value != 0)
-                {
-                    grandTotal.RealMargin = grandTotal.RealLineTotal / grandTotal.RealTurnover;
-                }
-
-                if (grandTotal.VirtualTurnover.HasValue && grandTotal.VirtualTurnover.Value != 0)
-                {
-                    grandTotal.VirtualMargin = grandTotal.VirtualLineTotal / grandTotal.VirtualTurnover;
-                }
-
-                return grandTotal;
-            }
-        }
-
-        //// Grand Total
-
-        public string RealGrandTotalStr
-        {
-            get
-            {
-                return this.GrandTotal.RealLineTotalStr;
-            }
-        }
-
-        public string VirtualGrandTotalStr
-        {
-            get
-            {
-                return this.GrandTotal.VirtualLineTotalStr;
-            }
-        }
-
-        public string VarianceGrandTotalStr
-        {
-            get
-            {
-                return (this.GrandTotal.RealLineTotal - this.GrandTotal.VirtualLineTotal).Format(2);
-            }
-        }
 
         /// <summary>
         /// Calculates all total.

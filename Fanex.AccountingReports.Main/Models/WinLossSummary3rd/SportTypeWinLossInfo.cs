@@ -9,10 +9,10 @@
 
 namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 {
-    using System;
-    using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Main.Common;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.
@@ -90,6 +90,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
         public WinLossInfo TotalForNewCricket { get; set; }
 
         public WinLossInfo HedgeTotal { get; set; }
+
+        public WinLossInfo NormalTotal { get; set; }
 
         /// <summary>
         /// Calculates the total.
@@ -178,6 +180,22 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             this.HedgeTotal.VirtualLineTotal += item.VirtualLineTotal;
             this.HedgeTotal.RealTurnover += item.RealTurnover;
             this.HedgeTotal.VirtualTurnover += item.VirtualTurnover;
+        }
+
+        public void CalculateNormalTotal(WinLossInfo item)
+        {
+            if (item == null)
+            {
+                return;
+            }
+
+            this.NormalTotal.WinLoss += item.WinLoss;
+            this.NormalTotal.Position += item.Position;
+            this.NormalTotal.Commission += item.Commission;
+            this.NormalTotal.RealLineTotal += item.RealLineTotal;
+            this.NormalTotal.VirtualLineTotal += item.VirtualLineTotal;
+            this.NormalTotal.RealTurnover += item.RealTurnover;
+            this.NormalTotal.VirtualTurnover += item.VirtualTurnover;
         }
     }
 }

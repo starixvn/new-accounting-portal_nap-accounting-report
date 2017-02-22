@@ -117,7 +117,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 case CoreConstants.SportContants.VirtualSoccer:
                     return Labels.VirtualSports;
                 case CoreConstants.SportContants.MetricGamingSuperLive:
-                    return Labels.MetricGaming_Superlive;
+                    return Labels.Metric_Gaming_Super_Live;
                 case SportContants._2hLiveCasinoSport:
                     return Labels.SLI;
                 case SportContants._2hCasinoSport:
@@ -420,7 +420,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         report.EnableVirtual,
                         isShowVirtualTurnover);
                 }
-                
+
                 if (isNewCricket == true)
                 {
                     info = report.Total;
@@ -464,7 +464,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         RowType._2hReportDeposit,
                         report.EnableVirtual,
                         isShowVirtualTurnover);
-                    
+
                     info = betTypeForNewCricket.GrandTotal;
                     this.ExportNormalRow(
                         ref workSheet,
@@ -507,7 +507,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         report.EnableVirtual,
                         isShowVirtualTurnover);
                 }
-                
+
                 info = report.GrandTotal;
                 this.ExportNormalRow(
                     ref workSheet,
