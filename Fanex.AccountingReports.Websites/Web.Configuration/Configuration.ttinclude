@@ -243,7 +243,7 @@
 					case SiteEnvironment.SIT:
                         return @"FormatName:DIRECT=tcp:172.16.4.106\private$\entlib";
                     case SiteEnvironment.PRO:
-                        return @"FormatName:DIRECT=http://10.40.40.127/msmq/Private$/entlib";
+                        return @"FormatName:DIRECT=http://10.40.40.22/msmq/Private$/entlib";
                     case SiteEnvironment.MNL:
                         return @"FormatName:DIRECT=tcp:10.2.98.3\private$\entlib";
                     default:
@@ -280,7 +280,7 @@
                     case SiteEnvironment.UAT:
 					case SiteEnvironment.SIT:
                     case SiteEnvironment.PRO:
-						return "<add uri=\"http://10.40.40.135:8091/pools/default\" />";                        
+						return "<add uri=\"http://10.40.40.22:8091/pools/default\" />";                        
                     case SiteEnvironment.MNL:
 						return	"<add uri=\"http://10.2.98.3:8091/pools/default\" />";						
                     default:
@@ -331,7 +331,7 @@
                     case SiteEnvironment.SIT:
                         return "stateConnectionString=\"tcpip=172.16.4.107:42424\"";
                     case SiteEnvironment.PRO:
-                        return "stateConnectionString=\"tcpip=10.40.40.135:42424\"";
+                        return "stateConnectionString=\"tcpip=10.40.40.22:42424\"";
                     case SiteEnvironment.MNL:
                         return "stateConnectionString=\"tcpip=10.2.12.10:42424\"";
 
