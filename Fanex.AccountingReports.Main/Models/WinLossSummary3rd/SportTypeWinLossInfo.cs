@@ -152,12 +152,12 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                 VirtualTurnover = 0
             };
 
-            this.IBCTotal.WinLoss += item.WinLoss;
+            this.IBCTotal.WinLoss += -item.WinLoss;
             this.IBCTotal.Position += item.Position;
             this.IBCTotal.Commission += item.Commission;
 
-            this.IBCTotal.RealLineTotal += item.RealLineTotal;
-            this.IBCTotal.VirtualLineTotal += item.VirtualLineTotal;
+            this.IBCTotal.RealLineTotal += -item.RealLineTotal;
+            this.IBCTotal.VirtualLineTotal += -item.VirtualLineTotal;
             this.IBCTotal.RealTurnover += item.RealTurnover;
             this.IBCTotal.VirtualTurnover += item.VirtualTurnover;
         }

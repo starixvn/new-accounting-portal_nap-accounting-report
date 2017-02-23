@@ -91,7 +91,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
         /// <param name="plusWinLoss">The plus win loss.</param>
         private void CalculateTotal(ref WinLossInfo winLoss, WinLossInfo plusWinLoss, bool isRM)
         {
-            winLoss.WinLoss += plusWinLoss.WinLoss;
+            winLoss.WinLoss += (isRM ? -1 : 1) * plusWinLoss.WinLoss;
             winLoss.Position += plusWinLoss.Position;
             winLoss.Commission += plusWinLoss.Commission;
 

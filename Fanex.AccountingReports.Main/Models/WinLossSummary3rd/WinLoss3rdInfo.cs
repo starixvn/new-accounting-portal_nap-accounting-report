@@ -52,16 +52,16 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             {
                 return new WinLossInfo
                 {
-                    WinLoss = -this.TempIBCTotal.WinLoss,
-                    Position = -this.TempIBCTotal.Position,
-                    Commission = -this.TempIBCTotal.Commission,
-                    RealLineTotal = -this.TempIBCTotal.RealLineTotal,
-                    VirtualLineTotal = -this.TempIBCTotal.VirtualLineTotal,
-                    Variance = -this.TempIBCTotal.Variance, // set Variance
-                    RealTurnover = -this.TempIBCTotal.RealTurnover,
-                    VirtualTurnover = -this.TempIBCTotal.VirtualTurnover,
-                    RealMargin = -this.TempIBCTotal.RealMargin, // set RealMargin
-                    VirtualMargin = -this.TempIBCTotal.VirtualMargin // set VirtualMargin
+                    WinLoss = this.TempIBCTotal.WinLoss,
+                    Position = this.TempIBCTotal.Position,
+                    Commission = this.TempIBCTotal.Commission,
+                    RealLineTotal = this.TempIBCTotal.RealLineTotal,
+                    VirtualLineTotal = this.TempIBCTotal.VirtualLineTotal,
+                    Variance = this.TempIBCTotal.Variance, // set Variance
+                    RealTurnover = this.TempIBCTotal.RealTurnover,
+                    VirtualTurnover = this.TempIBCTotal.VirtualTurnover,
+                    RealMargin = this.TempIBCTotal.RealMargin, // set RealMargin
+                    VirtualMargin = this.TempIBCTotal.VirtualMargin // set VirtualMargin
                 };
             }
         }
@@ -110,12 +110,12 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                 return;
             }
 
-            this.TempIBCTotal.WinLoss += item.WinLoss;
+            this.TempIBCTotal.WinLoss += -item.WinLoss;
             this.TempIBCTotal.Position += item.Position;
             this.TempIBCTotal.Commission += item.Commission;
 
-            this.TempIBCTotal.RealLineTotal += item.RealLineTotal.HasValue ? item.RealLineTotal.Value : 0;
-            this.TempIBCTotal.VirtualLineTotal += item.VirtualLineTotal.HasValue ? item.VirtualLineTotal.Value : 0;
+            this.TempIBCTotal.RealLineTotal += item.RealLineTotal.HasValue ? -item.RealLineTotal.Value : 0;
+            this.TempIBCTotal.VirtualLineTotal += item.VirtualLineTotal.HasValue ? -item.VirtualLineTotal.Value : 0;
             this.TempIBCTotal.RealTurnover += item.RealTurnover.HasValue ? item.RealTurnover.Value : 0;
             this.TempIBCTotal.VirtualTurnover += item.VirtualTurnover.HasValue ? item.VirtualTurnover.Value : 0;
         }

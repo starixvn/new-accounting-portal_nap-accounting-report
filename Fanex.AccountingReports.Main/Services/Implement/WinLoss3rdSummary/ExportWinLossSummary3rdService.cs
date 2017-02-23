@@ -233,8 +233,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                             var backgroundColor = j % 2 == 0 ? ExcelExtensions.BackGroundColor : ExcelExtensions.EvenRowColor;
                             textStyle.FillPattern.SetSolid(backgroundColor);
                             text8RM_BARMStyle.FillPattern.SetSolid(backgroundColor);
-                            foreach (var winloss in betWinLoss.IBCs)
+
                             {
+                                var winloss = betWinLoss.Total;
                                 if (betWinLoss.Id < 221 && betWinLoss.Id > 212)
                                 {
                                     // Total of each total sport type
@@ -311,24 +312,21 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                                     text8RM_BARMStyle,
                                     backgroundColor);
                             }
-
-                            if (
-                                betWinLoss.EightRM != null ||
-                                betWinLoss.BARM != null ||
-                                betWinLoss.Hedge != null)
+                            var hasOtherMatchType = betWinLoss.EightRM != null || betWinLoss.BARM != null || betWinLoss.Hedge != null;
+                            var showNormal = betWinLoss.Normal != null && hasOtherMatchType;
+                            if (showNormal)
                             {
-                                // Total of each Bet type
                                 currentRow++;
                                 currentColumn = startColumn;
-                                this.WriteWinLossSummaryTotal(
+
+                                this.WriteHedgeWinLossSummary(
                                     workSheet,
                                     currentRow,
                                     currentColumn,
-                                    Labels.Total + ":",
-                                    subTotalTitleStyle,
-                                    numberOfGroupColumnsTotal,
-                                    betWinLoss.Total,
-                                    soccerTotalStyle);
+                                    Labels.Normal_title,
+                                    betWinLoss.Normal,
+                                    text8RM_BARMStyle,
+                                    backgroundColor);
                             }
                         }
 
@@ -349,8 +347,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                                 ExcelExtensions.TotalRowColor);
 
                             // for Charge Commisson
-                            foreach (var winloss in betWinLossNewCricket.IBCs)
+
                             {
+                                var winloss = betWinLossNewCricket.Total;
                                 currentRow++;
                                 currentColumn = startColumn;
                                 this.WriteWinLossSummaryTotal(
@@ -410,6 +409,24 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                                 sportWinLoss.HedgeTotal,
                                 ExcelExtensions.TotalRowColor);
                         }
+                        var totalHasOtherMatchType = sportWinLoss.IBCTotal != null || sportWinLoss.HedgeTotal != null;
+                        var showTotalNormal = sportWinLoss.NormalTotal != null && totalHasOtherMatchType;
+
+                        if (showTotalNormal)
+                        {
+                            currentRow++;
+                            currentColumn = startColumn;
+
+                            this.WriteWinLossSummaryTotal(
+                                workSheet,
+                                currentRow,
+                                currentColumn,
+                                Labels.Normal_title + ":",
+                                titleStyle_Total,
+                                numberOfGroupColumnsTotal,
+                                sportWinLoss.NormalTotal,
+                                ExcelExtensions.TotalRowColor);
+                        }
                     }
 
                     // All Total
@@ -420,7 +437,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         workSheet,
                         currentRow,
                         currentColumn,
-                        Labels.All_Total + ":",
+                        Labels.Grand_Total.ToUpper() + ":",
                         grandTotalRowTextStyleWithBorder,
                         numberOfGroupColumnsTotal,
                         report.AllTotal,
@@ -440,22 +457,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         grandTotalRowTextStyle,
                         numberOfGroupColumnsTotal,
                         report.IBCTotal,
-                        ExcelExtensions.GrandTotalRowColor,
-                        true,
-                        false);
-
-                    // Grand Total
-                    currentRow++;
-                    currentColumn = startColumn;
-
-                    this.WriteWinLossSummaryTotal(
-                        workSheet,
-                        currentRow,
-                        currentColumn,
-                        Labels.Grand_Total.ToUpper() + ":",
-                        grandTotalRowTextStyle,
-                        numberOfGroupColumnsTotal,
-                        report.GrandTotal,
                         ExcelExtensions.GrandTotalRowColor,
                         true,
                         false);
