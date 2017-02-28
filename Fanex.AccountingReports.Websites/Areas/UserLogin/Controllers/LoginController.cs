@@ -382,7 +382,11 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 
         private void DoSignOut()
         {
-            securityService.Logout(_currentSession.OnUserId);
+            if (_currentSession != null && _currentSession.OnUserId != 0)
+            {
+                securityService.Logout(_currentSession.OnUserId);
+            }
+
             FormsAuthentication.SignOut();
             _currentSession.ClearAll();
 
