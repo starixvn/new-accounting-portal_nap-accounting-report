@@ -124,13 +124,14 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                 return;
             }
 
-            this.Total.WinLoss += item.WinLoss;
+            var isRM = item.IBC == RowType.BARM || item.IBC == RowType.EightRM;
+            this.Total.WinLoss += isRM ? -item.WinLoss : item.WinLoss;
             this.Total.Position += item.Position;
             this.Total.Commission += item.Commission;
-            this.Total.RealLineTotal += item.RealLineTotal;
-            this.Total.VirtualLineTotal += item.VirtualLineTotal;
-            this.Total.RealTurnover += item.RealTurnover;
-            this.Total.VirtualTurnover += item.VirtualTurnover;
+            this.Total.RealLineTotal += isRM ? -item.RealLineTotal : item.RealLineTotal;
+            this.Total.VirtualLineTotal += isRM ? -item.VirtualLineTotal : item.VirtualLineTotal;
+            this.Total.RealTurnover += isRM ? 0 : item.RealTurnover;
+            this.Total.VirtualTurnover += isRM ? 0 : item.VirtualTurnover;
         }
 
         /// <summary>

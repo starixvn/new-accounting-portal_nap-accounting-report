@@ -268,7 +268,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         sportInfo.CalculateIBCTotal(winloss);
 
                         // Footer: IBC Total
-                        report.CalculateTempIBCTotal(winloss);
+                        report.CalculateIBCTotal(winloss);
                     }
                     else if (winloss.IBC == RowType.BARM)
                     {
@@ -279,7 +279,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         sportInfo.CalculateIBCTotal(winloss);
 
                         // Footer: IBC Total
-                        report.CalculateTempIBCTotal(winloss);
+                        report.CalculateIBCTotal(winloss);
                     }
                     else
                     {
@@ -399,7 +399,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
 
                 sportInfo.CalculateTotal(winloss);
-                sportInfo.CalculateTotalNewCricket(winloss);
                 report.CalculateAllTotal(sportId, winloss);
 
                 parlayBetTypes.Add(betInfo);
@@ -443,7 +442,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                     sportInfo.CalculateIBCTotal(winloss);
 
                     // Footer: IBC Total
-                    report.CalculateTempIBCTotal(winloss);
+                    report.CalculateIBCTotal(winloss);
                 }
                 else if (winloss.IBC == RowType.BARM)
                 {
@@ -454,7 +453,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                     sportInfo.CalculateIBCTotal(winloss);
 
                     // Footer: IBC Total
-                    report.CalculateTempIBCTotal(winloss);
+                    report.CalculateIBCTotal(winloss);
                 }
                 else
                 {
