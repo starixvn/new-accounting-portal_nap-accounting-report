@@ -52,8 +52,6 @@ namespace Fanex.AccountingReports.Main.Controllers
         {
             WinLoss3rdInfo result = this._reportService.GetReport(criteria);
 
-            //result.SportTypeWinLosses = result.SportTypeWinLosses.Take(1).ToList();
-            //result.SportTypeWinLosses[0].BetTypeWinLosses = result.SportTypeWinLosses[0].BetTypeWinLosses.Take(1).ToList();
             return Json(result, JsonRequestBehavior.DenyGet);
         }
 

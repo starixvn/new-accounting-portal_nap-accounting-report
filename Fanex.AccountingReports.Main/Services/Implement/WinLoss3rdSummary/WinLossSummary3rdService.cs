@@ -172,7 +172,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
             foreach (var sportTypeGroup in sportTypeGroups)
             {
-
                 var winlossTotal = new WinLossInfo();
                 winlossTotal.Name = this.GetSportName(sportTypeGroup.Key);
 
@@ -187,7 +186,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                     betInfo.Normal = winloss;
 
                     sportInfo.CalculateTotal(winloss);
-                    report.CalculateAllTotal(sportId, winloss);
 
                     sportInfo.BetTypeWinLosses.Add(betInfo);
                     winlossTotal = CalculateWinlossTotal(winlossTotal, winloss);
@@ -240,6 +238,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             {
                 betInfo = new BetTypeWinLossInfo();
                 betInfo.Id = data.Key.bettype;
+                betInfo.LiveIndicator = (bool)data.Key.liveindicator ? 1 : 0;
+                betInfo.Name = this.GetBetType(data.Key.bettype);
 
                 if (data.Key.bettype == 500)
                 {
@@ -256,7 +256,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
                 foreach (var item in data)
                 {
-                    #region foreach-var-item-in-data)
                     winloss = CreateWinlossInfo(item, isShowNotAvalable);
 
                     if (winloss.IBC == RowType.EightRM)
@@ -266,9 +265,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
                         // IBC Total by BetType
                         sportInfo.CalculateIBCTotal(winloss);
-
-                        // Footer: IBC Total
-                        report.CalculateIBCTotal(winloss);
                     }
                     else if (winloss.IBC == RowType.BARM)
                     {
@@ -277,9 +273,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
                         // IBC Total by BetType
                         sportInfo.CalculateIBCTotal(winloss);
-
-                        // Footer: IBC Total
-                        report.CalculateIBCTotal(winloss);
                     }
                     else
                     {
@@ -316,8 +309,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
                     sportInfo.CalculateTotal(winloss);
                     sportInfo.CalculateTotalNewCricket(winloss);
-                    report.CalculateAllTotal(sportId, winloss);
-                    #endregion
                 }
 
                 sportInfo.BetTypeWinLosses.Add(betInfo);
@@ -366,20 +357,18 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             return report;
         }
 
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
+          "SP2100:CodeLineMustNotBeLongerThan",
+          Justification = "Reviewed. Suppression is OK here.")]
         public List<BetTypeWinLossInfo> GetParlayBetTypes(IGrouping<dynamic, dynamic> data, int sportId, int betType, bool isShowNotAvalable, WinLoss3rdInfo report, SportTypeWinLossInfo sportInfo)
         {
             var parlayBetTypes = new List<BetTypeWinLossInfo>();
             foreach (var item in data)
             {
-                #region foreach-var-item-in-data)
                 var winloss = CreateWinlossInfo(item, isShowNotAvalable);
                 var betInfo = new BetTypeWinLossInfo();
                 betInfo.Id = betType;
-
-
-
                 betInfo.Name = this.GetBetType(winloss.Id);
-
 
                 if (!string.IsNullOrWhiteSpace(winloss.Status))
                 {
@@ -397,13 +386,11 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                     betInfo.Normal = winloss;
                 }
 
-
                 sportInfo.CalculateTotal(winloss);
-                report.CalculateAllTotal(sportId, winloss);
 
                 parlayBetTypes.Add(betInfo);
-                #endregion
             }
+
             return parlayBetTypes;
         }
 
@@ -440,9 +427,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
                     // IBC Total by BetType
                     sportInfo.CalculateIBCTotal(winloss);
-
-                    // Footer: IBC Total
-                    report.CalculateIBCTotal(winloss);
                 }
                 else if (winloss.IBC == RowType.BARM)
                 {
@@ -451,9 +435,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
                     // IBC Total by BetType
                     sportInfo.CalculateIBCTotal(winloss);
-
-                    // Footer: IBC Total
-                    report.CalculateIBCTotal(winloss);
                 }
                 else
                 {
@@ -494,7 +475,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 }
 
                 sportInfo.CalculateTotal(winloss);
-                report.CalculateAllTotal(sportId, winloss);
             }
 
             sportInfo.BetTypeWinLosses.Add(betInfo);

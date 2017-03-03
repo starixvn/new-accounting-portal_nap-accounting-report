@@ -19,10 +19,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
     {
         public BetTypeWinLossInfo()
         {
-            //IBCs = new List<WinLossInfo>();
         }
-
-        //public List<WinLossInfo> IBCs { get; set; }
 
         public int Id { get; set; }
 
@@ -35,6 +32,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
         public WinLossInfo Normal { get; set; }
 
         public string Name { get; set; }
+
+        public int LiveIndicator { get; set; }
 
         public WinLossInfo Total
         {
@@ -50,8 +49,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                     RealTurnover = 0,
                     VirtualTurnover = 0,
                     Name = Name,
-                    LiveIndicator = Normal == null ? 0 : Normal.LiveIndicator,
-                    Status = Normal == null ? "" : Normal.Status,
+                    LiveIndicator = Normal == null ? LiveIndicator : Normal.LiveIndicator,
+                    Status = Normal == null ? string.Empty : Normal.Status,
                     IBC = Normal == null ? 0 : Normal.IBC,
                     Id = Normal == null ? 0 : Normal.Id,
                     IsHedge = Normal == null ? false : Normal.IsHedge
@@ -61,6 +60,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                 {
                     this.CalculateTotal(ref total, Normal, false);
                 }
+
                 if (EightRM != null)
                 {
                     this.CalculateTotal(ref total, EightRM, true);
