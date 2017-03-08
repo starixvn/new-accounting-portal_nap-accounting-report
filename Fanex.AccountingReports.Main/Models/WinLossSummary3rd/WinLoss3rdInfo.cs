@@ -11,8 +11,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Script.Serialization;
-    using Fanex.AccountingReports.Core.Extensions;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -23,20 +22,6 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
         public WinLoss3rdInfo()
         {
             SportTypeWinLosses = new List<SportTypeWinLossInfo>();
-            AllTotal = new WinLossInfo
-            {
-                RealLineTotal = 0,
-                VirtualLineTotal = 0,
-                RealTurnover = 0,
-                VirtualTurnover = 0
-            };
-            TempIBCTotal = this.TempIBCTotal ?? new WinLossInfo
-            {
-                RealLineTotal = 0,
-                VirtualLineTotal = 0,
-                RealTurnover = 0,
-                VirtualTurnover = 0
-            };
         }
 
         public IList<SportTypeWinLossInfo> SportTypeWinLosses { get; set; }
@@ -51,136 +36,59 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
         {
             get
             {
-                return new WinLossInfo
+                var ibcTotalList = SportTypeWinLosses.Where(s => s.IBCTotal != null).Select(s => s.IBCTotal).ToArray();
+                var total = new WinLossInfo
                 {
-                    WinLoss = -this.TempIBCTotal.WinLoss,
-                    Position = -this.TempIBCTotal.Position,
-                    Commission = -this.TempIBCTotal.Commission,
-                    RealLineTotal = -this.TempIBCTotal.RealLineTotal,
-                    VirtualLineTotal = -this.TempIBCTotal.VirtualLineTotal,
-                    Variance = -this.TempIBCTotal.Variance, // set Variance
-                    RealTurnover = -this.TempIBCTotal.RealTurnover,
-                    VirtualTurnover = -this.TempIBCTotal.VirtualTurnover,
-                    RealMargin = -this.TempIBCTotal.RealMargin, // set RealMargin
-                    VirtualMargin = -this.TempIBCTotal.VirtualMargin // set VirtualMargin
-                };
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets temporary IBC Total = 8RM + BARM.
-        /// </summary>
-        /// <value>
-        /// The temporary IBC total.
-        /// </value>
-        [ScriptIgnore]
-        public WinLossInfo TempIBCTotal { get; set; }
-
-        public WinLossInfo AllTotal { get; set; }
-
-        /// <summary>
-        /// Gets grand total = All Total + IBC Total.
-        /// </summary>
-        /// <value>
-        /// The grand total.
-        /// </value>
-        public WinLossInfo GrandTotal
-        {
-            get
-            {
-                WinLossInfo grandTotal = new WinLossInfo
-                {
-                    WinLoss = this.AllTotal.WinLoss + this.IBCTotal.WinLoss,
-                    Position = this.AllTotal.Position + this.IBCTotal.Position,
-                    Commission = this.AllTotal.Commission + this.IBCTotal.Commission,
-                    RealLineTotal = this.AllTotal.RealLineTotal + this.IBCTotal.RealLineTotal,
-                    VirtualLineTotal = this.AllTotal.VirtualLineTotal + this.IBCTotal.VirtualLineTotal,
-                    Variance = this.AllTotal.Variance + this.IBCTotal.Variance, // set Variance
-                    RealTurnover = this.AllTotal.RealTurnover + this.IBCTotal.RealTurnover,
-                    VirtualTurnover = this.AllTotal.VirtualTurnover + this.IBCTotal.VirtualTurnover,
+                    Name = string.Empty,
+                    Status = string.Empty,
+                    Id = 0,
+                    IsHedge = false,
+                    IBC = 0,
+                    LiveIndicator = 0,
+                    WinLoss = ibcTotalList.Sum(s => s.WinLoss),
+                    Commission = ibcTotalList.Sum(s => s.Commission),
+                    Position = ibcTotalList.Sum(s => s.Position),
+                    RealLineTotal = ibcTotalList.Sum(s => s.RealLineTotal),
+                    VirtualLineTotal = ibcTotalList.Sum(s => s.VirtualLineTotal),
+                    RealTurnover = ibcTotalList.Sum(s => s.RealTurnover),
+                    VirtualTurnover = ibcTotalList.Sum(s => s.VirtualTurnover),
                 };
 
-                if (grandTotal.RealTurnover.HasValue && grandTotal.RealTurnover.Value != 0)
+                total.Variance = total.RealLineTotal - total.VirtualLineTotal;
+                total.RealMargin = total.RealTurnover == 0 ? 0 : total.RealLineTotal / total.RealTurnover;
+                total.VirtualMargin = total.VirtualTurnover == 0 ? 0 : total.VirtualLineTotal / total.VirtualTurnover;
+
+                return total;
+            }
+        }
+
+        public WinLossInfo AllTotal
+        {
+            get
+            {
+                var total = new WinLossInfo
                 {
-                    grandTotal.RealMargin = grandTotal.RealLineTotal / grandTotal.RealTurnover;
-                }
+                    Name = string.Empty,
+                    Status = string.Empty,
+                    Id = 0,
+                    IsHedge = false,
+                    IBC = 0,
+                    LiveIndicator = 0,
+                    WinLoss = SportTypeWinLosses.Sum(s => s.Total.WinLoss),
+                    Commission = SportTypeWinLosses.Sum(s => s.Total.Commission),
+                    Position = SportTypeWinLosses.Sum(s => s.Total.Position),
+                    RealLineTotal = SportTypeWinLosses.Sum(s => s.Total.RealLineTotal),
+                    VirtualLineTotal = SportTypeWinLosses.Sum(s => s.Total.VirtualLineTotal),
+                    RealTurnover = SportTypeWinLosses.Sum(s => s.Total.RealTurnover),
+                    VirtualTurnover = SportTypeWinLosses.Sum(s => s.Total.VirtualTurnover),
+                };
 
-                if (grandTotal.VirtualTurnover.HasValue && grandTotal.VirtualTurnover.Value != 0)
-                {
-                    grandTotal.VirtualMargin = grandTotal.VirtualLineTotal / grandTotal.VirtualTurnover;
-                }
+                total.Variance = total.RealLineTotal - total.VirtualLineTotal;
+                total.RealMargin = total.RealTurnover == 0 ? 0 : total.RealLineTotal / total.RealTurnover;
+                total.VirtualMargin = total.VirtualTurnover == 0 ? 0 : total.VirtualLineTotal / total.VirtualTurnover;
 
-                return grandTotal;
+                return total;
             }
-        }
-
-        //// Grand Total
-
-        public string RealGrandTotalStr
-        {
-            get
-            {
-                return this.GrandTotal.RealLineTotalStr;
-            }
-        }
-
-        public string VirtualGrandTotalStr
-        {
-            get
-            {
-                return this.GrandTotal.VirtualLineTotalStr;
-            }
-        }
-
-        public string VarianceGrandTotalStr
-        {
-            get
-            {
-                return (this.GrandTotal.RealLineTotal - this.GrandTotal.VirtualLineTotal).Format(2);
-            }
-        }
-
-        /// <summary>
-        /// Calculates all total.
-        /// </summary>
-        /// <param name="sportId">The sport identifier.</param>
-        /// <param name="item">The item value.</param>
-        public void CalculateAllTotal(int sportId, WinLossInfo item)
-        {
-            if (item == null)
-            {
-                return;
-            }
-
-            this.AllTotal.WinLoss += item.WinLoss;
-            this.AllTotal.Position += item.Position;
-            this.AllTotal.Commission += item.Commission;
-
-            this.AllTotal.RealLineTotal += item.RealLineTotal.HasValue ? item.RealLineTotal.Value : 0;
-            this.AllTotal.VirtualLineTotal += item.VirtualLineTotal.HasValue ? item.VirtualLineTotal.Value : 0;
-            this.AllTotal.RealTurnover += item.RealTurnover.HasValue ? item.RealTurnover.Value : 0;
-            this.AllTotal.VirtualTurnover += item.VirtualTurnover.HasValue ? item.VirtualTurnover.Value : 0;
-        }
-
-        /// <summary>
-        /// Calculates the temporary IBC total.
-        /// </summary>
-        /// <param name="item">The item value.</param>
-        public void CalculateTempIBCTotal(WinLossInfo item)
-        {
-            if (item == null)
-            {
-                return;
-            }
-
-            this.TempIBCTotal.WinLoss += item.WinLoss;
-            this.TempIBCTotal.Position += item.Position;
-            this.TempIBCTotal.Commission += item.Commission;
-
-            this.TempIBCTotal.RealLineTotal += item.RealLineTotal.HasValue ? item.RealLineTotal.Value : 0;
-            this.TempIBCTotal.VirtualLineTotal += item.VirtualLineTotal.HasValue ? item.VirtualLineTotal.Value : 0;
-            this.TempIBCTotal.RealTurnover += item.RealTurnover.HasValue ? item.RealTurnover.Value : 0;
-            this.TempIBCTotal.VirtualTurnover += item.VirtualTurnover.HasValue ? item.VirtualTurnover.Value : 0;
         }
     }
 }

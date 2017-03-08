@@ -1330,7 +1330,7 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hedge.
+        ///   Looks up a localized string similar to Hedge match.
         /// </summary>
         public static string Hedge_title {
             get {
@@ -1843,15 +1843,6 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Metric Gaming - Superlive.
-        /// </summary>
-        public static string MetricGaming_Superlive {
-            get {
-                return ResourceManager.GetString("MetricGaming-Superlive", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Microgaming.
         /// </summary>
         public static string Microgaming {
@@ -2164,6 +2155,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         public static string NoneLicensee {
             get {
                 return ResourceManager.GetString("NoneLicensee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Normal match.
+        /// </summary>
+        public static string Normal_title {
+            get {
+                return ResourceManager.GetString("Normal_title", resourceCulture);
             }
         }
         

@@ -9,10 +9,10 @@
 
 namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 {
-    using System;
-    using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Main.Common;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.
@@ -91,6 +91,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 
         public WinLossInfo HedgeTotal { get; set; }
 
+        public WinLossInfo NormalTotal { get; set; }
+
         /// <summary>
         /// Calculates the total.
         /// </summary>
@@ -122,13 +124,14 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                 return;
             }
 
-            this.Total.WinLoss += item.WinLoss;
+            var isRM = item.IBC == RowType.BARM || item.IBC == RowType.EightRM;
+            this.Total.WinLoss += isRM ? -item.WinLoss : item.WinLoss;
             this.Total.Position += item.Position;
             this.Total.Commission += item.Commission;
-            this.Total.RealLineTotal += item.RealLineTotal;
-            this.Total.VirtualLineTotal += item.VirtualLineTotal;
-            this.Total.RealTurnover += item.RealTurnover;
-            this.Total.VirtualTurnover += item.VirtualTurnover;
+            this.Total.RealLineTotal += isRM ? -item.RealLineTotal : item.RealLineTotal;
+            this.Total.VirtualLineTotal += isRM ? -item.VirtualLineTotal : item.VirtualLineTotal;
+            this.Total.RealTurnover += isRM ? 0 : item.RealTurnover;
+            this.Total.VirtualTurnover += isRM ? 0 : item.VirtualTurnover;
         }
 
         /// <summary>
@@ -150,12 +153,12 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                 VirtualTurnover = 0
             };
 
-            this.IBCTotal.WinLoss += item.WinLoss;
+            this.IBCTotal.WinLoss += -item.WinLoss;
             this.IBCTotal.Position += item.Position;
             this.IBCTotal.Commission += item.Commission;
 
-            this.IBCTotal.RealLineTotal += item.RealLineTotal;
-            this.IBCTotal.VirtualLineTotal += item.VirtualLineTotal;
+            this.IBCTotal.RealLineTotal += -item.RealLineTotal;
+            this.IBCTotal.VirtualLineTotal += -item.VirtualLineTotal;
             this.IBCTotal.RealTurnover += item.RealTurnover;
             this.IBCTotal.VirtualTurnover += item.VirtualTurnover;
         }
@@ -178,6 +181,22 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             this.HedgeTotal.VirtualLineTotal += item.VirtualLineTotal;
             this.HedgeTotal.RealTurnover += item.RealTurnover;
             this.HedgeTotal.VirtualTurnover += item.VirtualTurnover;
+        }
+
+        public void CalculateNormalTotal(WinLossInfo item)
+        {
+            if (item == null)
+            {
+                return;
+            }
+
+            this.NormalTotal.WinLoss += item.WinLoss;
+            this.NormalTotal.Position += item.Position;
+            this.NormalTotal.Commission += item.Commission;
+            this.NormalTotal.RealLineTotal += item.RealLineTotal;
+            this.NormalTotal.VirtualLineTotal += item.VirtualLineTotal;
+            this.NormalTotal.RealTurnover += item.RealTurnover;
+            this.NormalTotal.VirtualTurnover += item.VirtualTurnover;
         }
     }
 }

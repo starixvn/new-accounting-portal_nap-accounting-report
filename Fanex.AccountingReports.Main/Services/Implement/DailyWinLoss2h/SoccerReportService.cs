@@ -466,7 +466,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 string sportName = string.Empty;
                 if (criteria.Bettype >= MainConstants.MinMetricGamingSuperLiveBetType && criteria.Bettype <= MainConstants.MaxMetricGamingSuperLiveBetType)
                 {
-                    sportName = Labels.MetricGaming_Superlive;
+                    sportName = Labels.Metric_Gaming_Super_Live;
                 }
                 else
                 {
