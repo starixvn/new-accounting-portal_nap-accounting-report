@@ -81,6 +81,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Checkbet\BetTeamModel.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType611.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType610And615And616.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType603To607And609And612And613And617.cs" />
+    <Compile Include="Checkbet\ContenBetTeamBetType601And602And608And614.cs" />
     <Compile Include="Checkbet\ContenBetTeamBetType221To225.cs" />
     <Compile Include="Checkbet\ContenBetTeamBetType401To404.cs" />
     <Compile Include="Checkbet\ContenBetTeamBetTypeAsBetTeam.cs" />
