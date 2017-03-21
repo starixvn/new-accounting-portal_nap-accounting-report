@@ -336,7 +336,7 @@
                         return "stateConnectionString=\"tcpip=10.2.12.10:42424\"";
 
                     default:
-                        return "stateConnectionString=\"tcpip=10.35.35.254:42424\"";
+                        return "stateConnectionString=\"tcpip=10.70.70.242:42424\"";
                 }
             }
         }
