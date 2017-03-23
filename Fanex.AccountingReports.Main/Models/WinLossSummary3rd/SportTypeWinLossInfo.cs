@@ -59,7 +59,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                 SportContants.Allbet,
                 SportContants.MacauGames,
                 SportContants.NG2,
-                SportContants.FishingWorld
+                SportContants.FishingWorld,
+                SportContants.CashOut
             };
         }
 
