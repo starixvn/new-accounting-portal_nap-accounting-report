@@ -1,7 +1,11 @@
-﻿namespace Fanex.AccountingReports.Special.Checkbet
+﻿using RemotingRef;
+
+namespace Fanex.AccountingReports.Special.Checkbet
 {
     public class ContenBetTeamBetType601And602And608And614 : ContentBetTeam
     {
+        protected const string BasketballRefId = "WMBasketball";
+
         public string ContentBetTeamBuilder(BetTeamModel model)
         {
             if (string.IsNullOrEmpty(model.BetTeam))
@@ -11,27 +15,18 @@
 
             if (model.BetTeam == "D")
             {
-                return "Draw";
+                return RefData.GetResourceDataByRefIdAndResourceId("WMBasketball", "D", "en", string.Empty);
             }
 
             var isHome = model.BetTeam.Contains("H");
             var isAway = !isHome;
             var teamName = isHome ? model.HomeTeam : model.AwayTeam;
 
-            var score = model.BetTeam.Replace("+", "")
-                   .Replace("H", "")
-                   .Replace("A", "");
+            var score = model.BetTeam.Replace("H", "").Replace("A", "");
 
-
-            if (model.BetTeam.Contains("+"))
-            {
-                return $"{teamName} to Win by {score}+ points";
-            }
-            else
-            {
-                var byText = score.Replace("-", " to ");
-                return $"{teamName} to Win by {byText} points";
-            }
+            var format = RefData.GetResourceDataByRefIdAndResourceId(BasketballRefId, score, "en", string.Empty);
+            var betType = RefData.GetBetTypeName("1", "en");
+            return string.Format(format, teamName);
         }
     }
 }
