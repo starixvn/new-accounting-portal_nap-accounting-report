@@ -6,8 +6,8 @@
   </Function>
   <Function Name="Core - Bet List Core">
     <Setting Key="BetList_MemberWinLoss" SpName="Acc_BetList_SelWinloss_Mem2" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="BetList_ScoreInformation_SelScoreInformation" SpName="Acc_Rpt_DailyWLDirect_Result" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="BetList_ScoreInformation_SelScoreInformation_WH" SpName="Acc_Rpt_DailyWLDirect_Result_Old" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="BetList_ScoreInformation_SelScoreInformation" SpName="Acc_Rpt_DailyWLDirect_Result_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="BetList_ScoreInformation_SelScoreInformation_WH" SpName="Acc_Rpt_DailyWLDirect_Result_Old_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Gaming - Live Casino Game Statistics">
     <Setting Key="Gaming_LiveCasinoGameStatistics_GetGameTable" SpName="Acc_Rpt_LiveCasino_GameStatistics_GameTableSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />

@@ -47,7 +47,18 @@ namespace Fanex.BetList.Accounting.Repositories
                     if (reader.Read())
                     {
                         result.Add(BindSportsbook(reader, criteria));
-                        result[0].GameDetails.Add(new GameDetail());
+                        if (reader.NextResult())
+                        {
+                            while (reader.Read())
+                            {
+                                result[0].GameDetails.Add(BindGameDetail(reader));
+                            }
+                        }
+
+                        if (result[0].GameDetails.Count == 0)
+                        {
+                            result[0].GameDetails.Add(new GameDetail());
+                        }
                     }
                 }
 
@@ -125,6 +136,24 @@ namespace Fanex.BetList.Accounting.Repositories
                 GameDetails = new List<GameDetail>(),
                 LiveHomeScore = Converter.ToInt(reader["livehomescore"]),
                 LiveAwayScore = Converter.ToInt(reader["liveawayscore"])
+            };
+        }
+
+        /// Bind game detail value.
+        /// </summary>
+        /// <param name="reader">The data reader.</param>
+        /// <returns>The game detail value.</returns>
+        private static GameDetail BindGameDetail(IDataReader reader)
+        {
+            return new GameDetail
+            {
+                MatchId = int.Parse(reader["matchid"].ToString()),
+                ResourceId = reader["ResourceId"].ToString(),
+                HomeValue = reader["HomeValue"].ToString(),
+                AwayValue = reader["AwayValue"].ToString(),
+                ResultStatusID = int.Parse(reader["ResultStatusID"].ToString()),
+                SettlementStatusID = int.Parse(reader["SettlementStatusID"].ToString()),
+                OtherInfo = Converter.ToString2(reader["OtherInfo"])
             };
         }
     }

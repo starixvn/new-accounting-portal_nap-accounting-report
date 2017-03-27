@@ -32,7 +32,7 @@
     <link type="text/css" rel="stylesheet" href="~/Areas/Uncategorized/IMS/ims.less" />
     @RenderSection("Head", false)
     @if (AppSession.IsAccountingLogin != null && AppSession.IsAccountingLogin)
-    { 
+    {
         <style type="text/css">
             #dialog-popup
             {
@@ -43,7 +43,7 @@
 </head>
 <body>
     @if (AppSession.IsAccountingLogin == null | AppSession.IsAccountingLogin == false)
-    { 
+    {
         <header>
             <div class="logo">
                 <a href="~/?ref=logo">&nbsp;</a>
@@ -69,7 +69,7 @@
     <section id="body">
         <div class="content" id="dvcontent">
             @RenderBody()
-            
+
         </div>
     </section>
     <div id="dialog-message">
@@ -78,30 +78,6 @@
     </div>
     <div id="previewReportLegendDialog" class="display-none">
     </div>
-   
-   @if (Fanex.NAP.Core.Configuration.NapSettings.Settings.Environment == "LIVE")
-   {
-        <!-- Piwik -->
-    
-        var username = AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty;
-    
-        <script type="text/javascript">
-            var _paq = _paq || [];
-            _paq.push(['trackPageView']);
-            _paq.push(['enableLinkTracking']);
-            (function () {
-                var u = "https://pw.detecas.com/";
-                _paq.push(['setTrackerUrl', u + 'piwik.php']);
-                _paq.push(['setSiteId', 2]);
-                _paq.push(['setUserId', '@username']);
-                
-                var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-                g.type = 'text/javascript'; g.async = true; g.defer = true; g.src = u + 'piwik.js'; s.parentNode.insertBefore(g, s);
-            })();
-            </script>
-            <noscript><p><img src="https://pw.detecas.com/piwik.php?rec=1&idsite=2" style="border:0;" alt="" /></p></noscript>
-        <!--/ Piwik -->
-   }
 </body>
 </html>
 @Html.Hidden("AccReportRoot", Url.Content("~/Admin/"))
@@ -131,7 +107,7 @@
 
     var currentMenuId = @(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Id : 0);
     var isDisableMostvisitedPage = @(AppSettings.IsDisableMostvisitedPage != null ? AppSettings.IsDisableMostvisitedPage.ToString().ToLower() : "false");
- 
+
     var isLegendEnable = '@(LegendSection.Instance.Websites["GetReportLegendUrl"].IsActive)'.toLowerCase();
     var getReportLegendUrl = '@(LegendSection.Instance.Websites["GetReportLegendUrl"].Address)';
     var inlineImageExpand = "@Labels.ReportLegend_SubTabHeadLineIcon_Expand_Image";
@@ -143,10 +119,10 @@
     //Set fix width for filter-bar
     $("#filter-bar").css("width", ($(window).width() - 20) + "px");
     $(window).resize(function () {
-        var width = $(window).width() - 20; //padding-right: 10 + padding-left: 10       
+        var width = $(window).width() - 20; //padding-right: 10 + padding-left: 10
         $("#filter-bar").css("width", width + "px");
     });
-  
+
 </script>
 @RenderSection("Scripts", false)
 @RenderSection("Foot", false)
