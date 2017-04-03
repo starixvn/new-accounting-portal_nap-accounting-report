@@ -31,6 +31,12 @@ namespace Fanex.AccountingReports.Special.Checkbet
 
         private const string ContenBetTeamBetType221To225 = "ContenBetTeamBetType221To225";
 
+        private const string ContenBetTeamBetType601And602And608And614 = "ContenBetTeamBetType601And602And608And614";
+        private const string ContenBetTeamBetType603To607And609And612And613And617 = "ContenBetTeamBetType603To607And609And612And613And617";
+        private const string ContenBetTeamBetType610And615And616 = "ContenBetTeamBetType610And615And616";
+        private const string ContenBetTeamBetType611 = "ContenBetTeamBetType611";
+
+
         private Dictionary<int, string> groupBettypes;
 
         public ContentBetTypeMapper()
@@ -89,7 +95,26 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 { 222, ContenBetTeamBetType221To225 },
                 { 223, ContenBetTeamBetType221To225 },
                 { 224, ContenBetTeamBetType221To225 },
-                { 225, ContenBetTeamBetType221To225 }
+                { 225, ContenBetTeamBetType221To225 },
+
+                { 601, ContenBetTeamBetType601And602And608And614 },
+                { 602, ContenBetTeamBetType601And602And608And614 },
+                { 603, ContenBetTeamBetType603To607And609And612And613And617 },
+                { 604, ContenBetTeamBetType603To607And609And612And613And617 },
+                { 605, ContenBetTeamBetType603To607And609And612And613And617 },
+                { 606, ContenBetTeamBetType603To607And609And612And613And617 },
+                { 607, ContenBetTeamBetType603To607And609And612And613And617 },
+                { 608, ContenBetTeamBetType601And602And608And614 },
+                { 609, ContenBetTeamBetType603To607And609And612And613And617 },
+                { 610, ContenBetTeamBetType610And615And616 },
+                { 611, ContenBetTeamBetType611 },
+                { 612, ContenBetTeamBetType603To607And609And612And613And617 },
+                { 613, ContenBetTeamBetType603To607And609And612And613And617 },
+                { 614, ContenBetTeamBetType601And602And608And614 },
+                { 615, ContenBetTeamBetType610And615And616 },
+                { 616, ContenBetTeamBetType610And615And616 },
+                { 617, ContenBetTeamBetType603To607And609And612And613And617 },
+
             };
         }
 

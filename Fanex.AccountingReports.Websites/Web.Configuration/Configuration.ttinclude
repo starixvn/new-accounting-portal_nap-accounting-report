@@ -280,9 +280,9 @@
                     case SiteEnvironment.UAT:
 					case SiteEnvironment.SIT:
                     case SiteEnvironment.PRO:
-						return "<add uri=\"http://10.40.40.22:8091/pools/default\" />";                        
+						return "<add uri=\"http://10.40.40.22:8091/pools/default\" />";
                     case SiteEnvironment.MNL:
-						return	"<add uri=\"http://10.2.98.3:8091/pools/default\" />";						
+						return	"<add uri=\"http://10.2.98.3:8091/pools/default\" />";
                     default:
                         return "<add uri=\"http://10.35.35.253:8091/pools/default\" /> \r\n\t\t <add uri=\"http://10.35.35.254:8091/pools/default\" />";
                 }
@@ -336,7 +336,7 @@
                         return "stateConnectionString=\"tcpip=10.2.12.10:42424\"";
 
                     default:
-                        return "stateConnectionString=\"tcpip=10.70.70.242:42424\"";
+                        return "stateConnectionString=\"tcpip=10.35.35.254:42424\"";
                 }
             }
         }

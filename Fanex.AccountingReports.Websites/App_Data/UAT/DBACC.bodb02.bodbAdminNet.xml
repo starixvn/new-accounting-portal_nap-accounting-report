@@ -44,7 +44,7 @@
     <Setting Key="WinLoss_DailyMixParlayWinLoss_GetCombinationWinLoss" SpName="Acc_Rpt_DailyParlayWinloss" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
     <Setting Key="WinLoss_DailyMixParlayWinLoss_GetAdvanceMixParlayReport" SpName="Acc_Rpt_MixParlay_Advance" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
   </Function>
-  <Function Name="Main - Daily Win Loss (2h)">
+    <Function Name="Main - Daily Win Loss (2h)">
     <Setting Key="Main_DailyWinLoss2h_GetReportByBetType" SpName="Acc_Rpt_DailyWLDirect_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2h_GetReportByBetType_14" SpName="Acc_Rpt_DailyWLDirect_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
 
@@ -228,7 +228,6 @@
     <Setting Key="Special_DailyTurnoverChangedDetail_GetReport" SpName="Acc_Rpt_DailyTurnover_ChangedDetail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
 
-    <Setting Key="Main_MatchWinLoss2a_GetMetricGamingDetailByBetType" SpName="Acc_Rpt_MatchWinLoss2_Sporttype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"/>
   <Function Name="Racing - Win Lost Group Daily">
     <Setting Key="Racing_WinLostGroupDaily" SpName="Acc_Rpt_WinlostRacing_Group_Daily" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
