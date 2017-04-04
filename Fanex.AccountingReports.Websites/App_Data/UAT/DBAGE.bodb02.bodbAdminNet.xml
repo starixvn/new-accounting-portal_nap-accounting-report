@@ -11,7 +11,8 @@
   <Function Name="Core - Bet List Core">
     <Setting Key="BetList_MixParlayBetsSel" SpName="Acc_BetsSelBetCheckM_All" DbName="DBAGE.bodb02.bodbAdminNet" />
     <Setting Key="BetList_CombinationParlay_Details" SpName="Acc_BetlistCombinationParlay_Details" DbName="DBAGE.bodb02.bodbAdminNet" />
-    <Setting Key="BetList_RefNoSel" SpName="Acc_BetList_CheckBet" DbName="DBAGE.bodb02.bodbAdminNet" />
+    <Setting Key="BetList_RefNoSel" SpName="Acc_BetList_CheckBet_xpre" DbName="DBAGE.bodb02.bodbAdminNet" />
+    <Setting Key="Acc_BetList_CashOut_Detail" SpName="Acc_BetList_CashOut_Detail_xpre" DbName="DBAGE.bodb02.bodbAdminNet" />
     <Setting Key="SoprtingSolutionBetlistResult" SpName="Acc_BetList_SelMatchResultSS" DbName="DBAGE.bodb02.bodbAdminNet" />
   </Function>
   <Function Name="Special - Parlay Won">
