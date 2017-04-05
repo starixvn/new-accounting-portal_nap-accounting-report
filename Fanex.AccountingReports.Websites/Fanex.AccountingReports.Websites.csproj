@@ -635,8 +635,6 @@
     <Content Include="Areas\Balance\Views\SuperBalance\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Areas\Betlist\Views\MemberBetListReport\Scripts\WinLossMemberBetList.js" />
-    <Content Include="Areas\Betlist\Views\MemberBetListReport\Styles\WinLossMemberBetList.css" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\BadmintonInfo.js" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\BaseballInfo.js" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\BasketballInfo.js" />
@@ -2251,9 +2249,7 @@
     <Content Include="Areas\Misc\Views\BetCount\BetCountReport.cshtml" />
     <Content Include="Areas\Misc\Views\BetCount\HistoryBetCountReport.cshtml" />
     <Content Include="Areas\Betlist\Views\CashOut\History.cshtml" />
-    <Content Include="Areas\Betlist\Views\MemberBetListReport\Index.cshtml" />
     <Content Include="Areas\Betlist\Views\MemberBetListReport\_MixParlayDetail.cshtml" />
-    <Content Include="Areas\Betlist\Views\MemberBetListReport\_WinLossMemberBetList.cshtml" />
     <None Include="Areas\UserLogin\themes\fonts\Abel.woff" />
     <None Include="Areas\UserLogin\themes\fonts\OpenSans.woff" />
     <None Include="Areas\UserLogin\themes\fonts\YanoneKaffeesatz.woff" />

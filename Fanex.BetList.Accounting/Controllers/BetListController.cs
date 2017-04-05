@@ -35,28 +35,6 @@ namespace Fanex.BetList.Accounting.Controllers
             this._betListCashoutDetailService = new BetListCashoutDetailServiceImp();
         }
 
-        /// <summary>
-        /// Gets the licensee win loss report member bet list.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The licensee win loss report member bet list.</returns>
-        [HttpPost]
-        public ActionResult GetWinLossMemberBetList(WinLossMemberBetListCriteria criteria)
-        {
-            Hashtable paramHastable = new Hashtable();
-            paramHastable.Add("custId", criteria.CustID);
-
-            TempData["paramHastable"] = paramHastable;
-
-            var result = _betListService.GetWinLossMemberBetList(criteria);
-            return PartialView("~/Areas/BetList/Views/MemberBetListReport/_WinLossMemberBetList.cshtml", result);
-        }
-
-        [HttpGet]
-        public ActionResult WinLossMemberBetList()
-        {
-            return View("~/Areas/BetList/Views/MemberBetListReport/Index.cshtml");
-        }
 
         /// <summary>
         /// Gets the mix parlay detail.
@@ -73,31 +51,6 @@ namespace Fanex.BetList.Accounting.Controllers
                 betteam);
 
             return PartialView("~/Areas/BetList/Views/MemberBetListReport/_MixParlayDetail.cshtml", result);
-        }
-
-        /// <summary>
-        /// Gets the bet list by reference no.
-        /// </summary>
-        /// <param name="refno">The ref no.</param>
-        /// <returns>The bet list by reference no.</returns>
-        public ActionResult GetBetListByRefNo(string refno)
-        {
-            IList<TicketDetail> result = new List<TicketDetail>();
-            if (BetListHelper.IsNumeric(refno.Trim()))
-            {
-                result = _betListService.GetBetListByRefNoTickets(new BetListByRefNoCriteria
-                {
-                    TransId = Converter.To<long>(refno)
-                });
-            }
-
-            Hashtable paramHastable = new Hashtable();
-            int custId = result.Count == 0 ? 0 : Converter.To<int>(result[0].Ticket.CustId);
-            paramHastable.Add("custId", custId);
-
-            TempData["paramHastable"] = paramHastable;
-
-            return PartialView("~/Views/BetList/BetListByRefNo/_BetListByRefNo.cshtml", result);
         }
 
         /// <summary>

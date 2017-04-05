@@ -302,10 +302,9 @@
     </Compile>
     <Compile Include="Services\BetListService.cs" />
     <Compile Include="Services\Authenticate\CheckSmartPunterService.cs" />
-    <Compile Include="Services\ExportExcelBetlist.cs" />
     <Compile Include="Services\BetListCashoutDetailService.cs" />
-    <Compile Include="Services\IBetListService.cs" />
     <Compile Include="Services\Authenticate\ICheckSmartPunterService.cs" />
+    <Compile Include="Services\IBetListService.cs" />
     <Compile Include="Services\IpService.cs" />
     <Compile Include="Services\IResultService.cs" />
     <Compile Include="Services\IScoreInformationService.cs" />
