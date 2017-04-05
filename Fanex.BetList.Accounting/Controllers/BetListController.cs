@@ -85,30 +85,6 @@ namespace Fanex.BetList.Accounting.Controllers
         }
 
         /// <summary>
-        /// Gets the bet list by customer info ref no.
-        /// </summary>
-        /// <param name="transactionId">The transaction identifier.</param>
-        /// <param name="customerId">The customer identifier.</param>
-        /// <returns>The bet list by customer info ref no.</returns>
-        public ActionResult GetBetListByCustInfo_Refno(string transactionId, int customerId)
-        {
-            IList<TicketDetail> result = new List<TicketDetail>();
-            if (BetListHelper.IsNumeric(transactionId.Trim()))
-            {
-                result = _betListService.GetBetListByCustInfo_Refno(transactionId, customerId);
-            }
-
-            Hashtable paramHastable = new Hashtable();
-            paramHastable.Add("custId", customerId);
-
-            TempData["paramHastable"] = paramHastable;
-
-            ViewBag.Quantity = 1;
-            ViewBag.NumberBegining = 1;
-            return PartialView("~/Views/BetList/BetlistByCustInfo/Betlist/_BetList.cshtml", result);
-        }
-
-        /// <summary>
         /// Gets the combination mix parlay.
         /// </summary>
         /// <param name="refNo">The reference no.</param>
@@ -147,7 +123,7 @@ namespace Fanex.BetList.Accounting.Controllers
         {
             var cashOutHistory = _betListCashoutDetailService.GetCashOutHistory(criteria);
 
-            return View("CashOut/History.cshtml", cashOutHistory);
+            return View("~/Areas/Betlist/Views/CashOut/History.cshtml", cashOutHistory);
         }
     }
 }

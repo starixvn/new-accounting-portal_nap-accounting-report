@@ -50,6 +50,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult AccessDenied()
         {
             return View("AccessDenied");

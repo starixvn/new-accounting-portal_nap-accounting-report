@@ -58,13 +58,16 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
         if ($('#combineParlayContainer').length > 0) {
             $('.ui-dialog-content').dialog('close');
         }
-
+        $.blockUI();
         $.ajax({
             type: "GET",
             url: window.rootUrl + "BetList/BetList/GetBetListReportByRefNo",
             data: 'refno=' + refno,
             success: function (result) {
                 betlistContent.html(result);
+                betlistContent.find(".bl_status .ip").remove();
+                betlistContent.find(".bl_status .result").not(".cashout-history").remove();
+
                 var t = setTimeout(function () {
 
                     $('#betlistContainer').dialog({
@@ -106,10 +109,9 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
 
             },
             error: function () {
-                try { parent.jQuery.unblockUI(); } catch (e) { }
             },
             complete: function () {
-                try { parent.jQuery.unblockUI(); } catch (e) { }
+                $.unblockUI();
             }
         });
     };

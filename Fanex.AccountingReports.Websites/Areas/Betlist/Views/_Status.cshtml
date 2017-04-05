@@ -49,20 +49,12 @@
 else
 {
     <div class="bl_status c">
-        @ticket.Status
+        @Html.Raw(ticket.Status)
     </div>
 }
 @{
-    //var result = betlistHelper.StatusRefNo(betdetail);
     var ip = @IpService.ReplaceVNIP(ticket.IP);
 }
-@*@if (!String.IsNullOrEmpty(result))
-{
-	<br />
-    <a id="result_@betdetail.Ticket.TransId" onclick="@result">Result</a><br />
-	
-}
-<br />*@
 @if (ip != "-")
 {
     @ip

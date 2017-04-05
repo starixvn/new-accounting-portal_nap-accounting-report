@@ -46,137 +46,6 @@ namespace Fanex.BetList.Accounting.Services
         }
 
         /// <summary>
-        /// Gets the win loss member bet list.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The win loss member bet list.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
-        public BetListDetail GetWinLossMemberBetList(WinLossMemberBetListCriteria criteria)
-        {
-            BetListDetail betListDetail = new BetListDetail();
-            try
-            {
-                Func<DataRow, TicketDetail> mapTicketObjectFunction = r => new TicketDetail
-                {
-                    Ticket = new Ticket
-                    {
-                        ActualStake = Converter.To<int>(r["actual_stake"]),
-                        AgentWinlost = Converter.ToDecimal(r["LicenseeWL"]),
-                        Comm = Converter.ToDecimal(r["comm"]),
-                        AwayId = Converter.To<long>(r["awayid"]),
-                        BetId = Converter.To<long>(r["betid"]),
-                        BetTeam = Converter.ToString2(r["betteam"]),
-                        BetTypeId = Converter.To<int>(r["bettype"]),
-                        CustId = Converter.To<long>(r["custid"]),
-                        Handicap1 = Converter.ToDecimal(r["hdp1"]),
-                        Handicap2 = Converter.ToDecimal(r["hdp2"]),
-                        HomeId = Converter.To<long>(r["homeid"]),
-                        EventDate = Converter.ToDateTime(r["eventdate"]),
-                        IP = Converter.ToString2(r["ip"]),
-                        IsLive = Converter.ToBool(r["liveindicator"]),
-                        IsNeutral = Converter.ToBool(r["isNeutral"]),
-                        LeagueId = Converter.To<int>(r["leagueid"]),
-                        LiveHomeScore = Converter.To<int>(r["livehomescore"]),
-                        LiveAwayScore = Converter.To<int>(r["liveawayscore"]),
-
-                        /*MasterWinlost = Converter.ToDecimal(r["mwinlost"]),
-                        MasterPositionTaking = Converter.ToDecimal(r["mpositiontaking"]),
-                        AgentComm = Converter.ToDecimal(r["acomm"]),
-                        MasterDiscount = Converter.ToDecimal(r["adiscount"]),*/
-
-                        MasterOdds = Converter.ToDecimal(r["modds"]),
-                        MatchCode = Converter.ToString2(r["matchcode"]),
-                        MatchId = Converter.To<int>(r["matchid"]),
-                        Odds = Converter.ToDecimal(r["odds"]),
-                        OddsType = Converter.ToString2(r["OddsType"]),
-                        PlayerComm = Converter.ToDecimal(r["PlayerComm"]),
-                        Race = Converter.ToString2(r["race"]),
-                        RefNo = Converter.ToString2(r["refno"]),
-                        ShowTime = Converter.ToString2(r["showtime"]),
-                        SportTypeId = Converter.To<int>(r["sporttype"]),
-                        Stake = Converter.To<decimal>(r["stake"]),
-                        Status = Converter.ToString2(r["status"]),
-
-                        /*SuperWinlost = Converter.ToDecimal(r["swinlost"]),
-                        SuperPositionTaking = Converter.ToDecimal(r["spositiontaking"]),
-                        SuperComm = Converter.ToDecimal(r["scomm"]),
-                        SuperDiscount = Converter.ToDecimal(r["sdiscount"]),*/
-
-                        TransDate = Converter.ToDateTime(r["transdate"]),
-                        TransId = Converter.To<long>(r["transid"]),
-                        Winlost = Converter.ToDecimal(r["winlost"]),
-                        WinlostDate = Convert.ToDateTime(r["winlostdate"])
-                    },
-                    ChoiceHtml = string.Empty,
-                    OddHtml = string.Empty,
-                    StakeHtml = string.Empty,
-                    IsShowOtExRate = Converter.To<bool>(r["isShowOTExRate"]),
-                    VirtualRate = Converter.ToDecimal(r["virtualrate"]),
-                    BetFrom = r["betfrom"].ToString(),
-                    AllowDelete = Converter.To<bool>(r["allowdelete"])
-                };
-
-                string baseCurrencyString = string.Empty;
-                CurrencyContants baseCurrency = (CurrencyContants)criteria.BaseCurrency;
-                var currencyName = ReportService.GetCurrencyName(baseCurrency);
-                if (!string.IsNullOrEmpty(currencyName))
-                {
-                    baseCurrencyString = " - " + currencyName + " " + Labels.Base_Currency;
-                }
-
-                criteria.MoveBetsDay = ReportService.BalanceUp.MoveBetsDay;
-                criteria.BalanceUpDay = ReportService.BalanceUp.BalanceUpDay;
-                betListDetail.Title = string.Format(
-                    BetListResources.BetList_MemberReport,
-                    criteria.FromDate.ToShortFormatedDate(),
-                    criteria.ToDate.ToShortFormatedDate(),
-                    criteria.CustName,
-                    baseCurrencyString);
-
-                List<ITicketData> outputLiveCasino = new List<ITicketData>();
-                betListDetail.BetDetails = _betListRepository.FetchMemberWinLoss<TicketDetail>(
-                    criteria, mapTicketObjectFunction, ref outputLiveCasino);
-
-                if (betListDetail.BetDetails != null)
-                {
-                    ITicketHelper ticketHelper = new TicketHelper();
-                    int index = 0;
-                    BetListHTMLFactory factory = new BetListHTMLFactory();
-                    BetListHTMLBuilder builder = factory.CreateBuilder();
-                    GetCachePropertyById funcGetOddsTypeName = AccBetListCore.CacheRef.GetOddsTypeName;
-                    foreach (TicketDetail betDetail in betListDetail.BetDetails)
-                    {
-                        index++;
-                        ticketHelper.Index = index;
-                        ticketHelper.IsShowOddsWithChoice = this.IsShowOddsWithChoice(betDetail.Ticket.BetTypeId);
-
-                        // build HTML
-                        betDetail.TransDateHtml = builder.BuildTrans(betDetail.Ticket);
-                        betDetail.ChoiceHtml = builder.BuildChoice(betDetail.Ticket, ticketHelper, outputLiveCasino, false);
-                        betDetail.StakeHtml = BetListExtension.BuildStake(betDetail, ref builder);
-                        betDetail.OddHtml = builder.BuildOdds(betDetail.Ticket, outputLiveCasino, funcGetOddsTypeName);
-
-                        // calculate total
-                        betListDetail.TotalWinLoss += betDetail.Ticket.Winlost + betDetail.Ticket.PlayerComm;
-                        betListDetail.TotalLicenseeWinLoss += betDetail.Ticket.AgentWinlost + betDetail.Ticket.Comm;
-                    }
-
-                    Core.SessionManager.Set<BetListDetail>(BetListService.BetListSessionKey, betListDetail);
-
-                    return betListDetail;
-                }
-            }
-            catch (Exception ex)
-            {
-                LoggingHandler.Log(ex);
-            }
-
-            return betListDetail;
-        }
-
-        /// <summary>
         /// Get Detail Mix Parlay ticket.
         /// </summary>
         /// <param name="criteria">The criteria.</param>
@@ -336,7 +205,7 @@ namespace Fanex.BetList.Accounting.Services
                     TransDesc = Converter.To<string>(r["TransDesc"]),
 
                     BetCheck = Convert.ToString(r["betcheck"]),
-                    BetdaqId = Converter.ToInt(r["betdaqId"]),
+                    BetdaqId = Converter.To<long>(r["betdaqId"]),
                     ExtraInfo = Converter.ToString2(r["ExtraInfo"])
                 },
                 ChoiceHtml = string.Empty,
@@ -349,37 +218,32 @@ namespace Fanex.BetList.Accounting.Services
                 SuperPositionTaking2 = Converter.ToDecimal(r["spositiontaking2"])
             };
 
-            try
+            ITicketHelper ticketHelper = new TicketHelper();
+            List<ITicketData> outputLiveCasino = new List<ITicketData>();
+            IList<TicketDetail> betDetails = _betListRepository.Fetch<TicketDetail>(criteria, mapTicketObjectFunction, ref outputLiveCasino);
+            StringBuilder content = new StringBuilder();
+            BetListHelper betListHelper = new BetListHelper();
+            if (betDetails != null)
             {
-                ITicketHelper ticketHelper = new TicketHelper();
-                List<ITicketData> outputLiveCasino = new List<ITicketData>();
-                IList<TicketDetail> betDetails = _betListRepository.Fetch<TicketDetail>(criteria, mapTicketObjectFunction, ref outputLiveCasino);
-                StringBuilder content = new StringBuilder();
-                BetListHelper betListHelper = new BetListHelper();
-                if (betDetails != null)
+                BetListHTMLFactory factory = new BetListHTMLFactory();
+                BetListHTMLBuilder builder = factory.CreateBuilder();
+                GetCachePropertyById funcGetOddsTypeName = AccBetListCore.CacheRef.GetOddsTypeName;
+                foreach (TicketDetail betDetail in betDetails)
                 {
-                    BetListHTMLFactory factory = new BetListHTMLFactory();
-                    BetListHTMLBuilder builder = factory.CreateBuilder();
-                    GetCachePropertyById funcGetOddsTypeName = AccBetListCore.CacheRef.GetOddsTypeName;
-                    foreach (TicketDetail betDetail in betDetails)
-                    {
-                        ticketHelper.IsShowOddsWithChoice = this.IsShowOddsWithChoice(betDetail.Ticket.BetTypeId);
-                        betDetail.ChoiceHtml = builder.BuildChoice(betDetail.Ticket, ticketHelper, outputLiveCasino, false);
-                        betDetail.StakeHtml = BetListExtension.BuildStake(betDetail, ref builder);
-                        betDetail.OddHtml = builder.BuildOdds(betDetail.Ticket, outputLiveCasino, funcGetOddsTypeName);
-                        betDetail.StatusHtml = betListHelper.StatusRefNo(betDetail);
-                    }
+                    ticketHelper.IsShowOddsWithChoice = this.IsShowOddsWithChoice(betDetail.Ticket.BetTypeId);
+                    betDetail.ChoiceHtml = builder.BuildChoice(betDetail.Ticket, ticketHelper, outputLiveCasino, false);
+                    betDetail.StakeHtml = BetListExtension.BuildStake(betDetail, ref builder);
+                    betDetail.OddHtml = builder.BuildOdds(betDetail.Ticket, outputLiveCasino, funcGetOddsTypeName);
 
-                    return betDetails;
+                    betDetail.Ticket.Status = builder.BuildStatus(betDetail.Ticket, ticketHelper, outputLiveCasino, true);
                 }
-            }
-            catch (Exception ex)
-            {
-                LoggingHandler.Log(ex);
+
+                return betDetails;
             }
 
             return new List<TicketDetail>();
         }
+
 
         /// <summary>
         /// Gets bet types by date after change date range.
@@ -441,129 +305,6 @@ namespace Fanex.BetList.Accounting.Services
             }
 
             return new List<BetType>();
-        }
-
-        /// <summary>
-        /// Get bet list data for Customer info bet list by ref no - bet list tab.
-        /// </summary>
-        /// <param name="transactionId">The transaction identifier.</param>
-        /// <param name="customerId">The customer identifier.</param>
-        /// <returns>
-        /// Bet list data for Customer info bet list by ref no - bet list tab.
-        /// </returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
-        public IList<TicketDetail> GetBetListByCustInfo_Refno(string transactionId, int customerId)
-        {
-            var criteria = new BetListByCustInfoByRefnoCriteria()
-            {
-                TransId = transactionId,
-                CustId = customerId
-            };
-
-            Func<DataRow, TicketDetail> mapTicketObjectFunction = r => new TicketDetail
-            {
-                Ticket = new Ticket
-                {
-                    ActualStake = Converter.To<int>(r["actual_stake"]),
-                    AgentWinlost = Converter.ToDecimal(r["awinlost"]),
-                    AgentPositionTaking = Converter.ToDecimal(r["apositiontaking"]),
-                    Comm = Converter.ToDecimal(r["comm"]),
-                    AgentDiscount = Converter.ToDecimal(r["discount"]),
-
-                    AwayId = Converter.To<long>(r["awayid"]),
-                    BetId = Converter.To<long>(r["betid"]),
-                    BetTeam = Converter.ToString2(r["betteam"]),
-                    BetTypeId = Converter.To<int>(r["bettype"]),
-                    CommStatus = Converter.To<string>(r["comstatus"]),
-                    CustId = Converter.To<long>(r["custid"]),
-                    Handicap1 = Converter.ToDecimal(r["hdp1"]),
-                    Handicap2 = Converter.ToDecimal(r["hdp2"]),
-                    HomeId = Converter.To<long>(r["homeid"]),
-                    EventDate = Converter.ToDateTime(r["eventdate"]),
-                    IP = Converter.ToString2(r["ip"]),
-                    IsLive = Converter.ToBool(r["liveindicator"]),
-                    IsNeutral = Converter.ToBool(r["isNeutral"]),
-                    LeagueId = Converter.To<int>(r["leagueid"]),
-                    LiveHomeScore = Converter.To<int>(r["livehomescore"]),
-                    LiveAwayScore = Converter.To<int>(r["liveawayscore"]),
-
-                    MasterWinlost = Converter.ToDecimal(r["mwinlost"]),
-                    MasterPositionTaking = Converter.ToDecimal(r["mpositiontaking"]),
-                    AgentComm = Converter.ToDecimal(r["acomm"]),
-                    MasterDiscount = Converter.ToDecimal(r["adiscount"]),
-
-                    MasterOdds = Converter.ToDecimal(r["modds"]),
-                    MatchCode = Converter.ToString2(r["matchcode"]),
-                    MatchId = Converter.To<int>(r["matchid"]),
-                    Odds = Converter.ToDecimal(r["odds"]),
-                    OddsType = Converter.ToString2(r["OddsType"]),
-                    PlayerComm = Converter.ToDecimal(r["commission"]),
-                    Race = Converter.ToString2(r["race"]),
-                    RefNo = Converter.ToString2(r["refno"]),
-                    ShowTime = Converter.ToString2(r["showtime"]),
-                    SportTypeId = Converter.To<int>(r["sporttype"]),
-                    Stake = Converter.To<decimal>(r["stake"]),
-                    Status = Converter.ToString2(r["status"]),
-
-                    SuperWinlost = Converter.ToDecimal(r["swinlost"]),
-                    SuperPositionTaking = Converter.ToDecimal(r["spositiontaking"]),
-                    SuperComm = Converter.ToDecimal(r["scomm"]),
-                    SuperDiscount = Converter.ToDecimal(r["sdiscount"]),
-
-                    TransDate = Converter.ToDateTime(r["transdate"]),
-                    TransId = Converter.To<long>(r["transid"]),
-                    Winlost = Converter.ToDecimal(r["winlost"]),
-                    WinlostDate = Convert.ToDateTime(r["winlostdate"]),
-
-                    BetCheck = Convert.ToString(r["betcheck"])
-                },
-                ChoiceHtml = string.Empty,
-                OddHtml = string.Empty,
-                StakeHtml = string.Empty,
-                IsShowOtExRate = Converter.To<bool>(r["isShowOTExRate"]),
-                VirtualRate = Converter.ToDecimal(r["virtualrate"]),
-                AgentPositionTaking2 = Converter.ToDecimal(r["apositiontaking2"]),
-                MasterPositionTaking2 = Converter.ToDecimal(r["mpositiontaking2"]),
-                SuperPositionTaking2 = Converter.ToDecimal(r["spositiontaking2"]),
-                BetFrom = r["betfrom"].ToString(),
-                AllowDelete = Converter.To<bool>(r["allowdelete"])
-            };
-
-            try
-            {
-                ITicketHelper ticketHelper = new TicketHelper();
-                List<ITicketData> outputLiveCasino = new List<ITicketData>();
-
-                IList<TicketDetail> betDetails = _betListRepository.Fetch<TicketDetail>(criteria, mapTicketObjectFunction, ref outputLiveCasino);
-
-                StringBuilder content = new StringBuilder();
-                BetListHelper betListHelper = new BetListHelper();
-
-                if (betDetails != null)
-                {
-                    BetListHTMLFactory factory = new BetListHTMLFactory();
-                    BetListHTMLBuilder builder = factory.CreateBuilder();
-                    GetCachePropertyById funcGetOddsTypeName = AccBetListCore.CacheRef.GetOddsTypeName;
-                    foreach (TicketDetail betDetail in betDetails)
-                    {
-                        ticketHelper.IsShowOddsWithChoice = this.IsShowOddsWithChoice(betDetail.Ticket.BetTypeId);
-                        betDetail.ChoiceHtml = builder.BuildChoice(betDetail.Ticket, ticketHelper, outputLiveCasino, false);
-                        betDetail.StakeHtml = BetListExtension.BuildStake(betDetail, ref builder);
-                        betDetail.OddHtml = builder.BuildOdds(betDetail.Ticket, outputLiveCasino, funcGetOddsTypeName);
-                        betDetail.StatusHtml = betListHelper.StatusRefNo(betDetail);
-                    }
-
-                    return betDetails;
-                }
-            }
-            catch (Exception ex)
-            {
-                LoggingHandler.Log(ex);
-            }
-
-            return new List<TicketDetail>();
         }
 
         public CombinationParlay GetCombinationMP(ICriteria criteria)
