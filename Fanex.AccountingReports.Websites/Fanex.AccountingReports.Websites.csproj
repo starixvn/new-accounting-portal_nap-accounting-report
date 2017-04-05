@@ -635,7 +635,6 @@
     <Content Include="Areas\Balance\Views\SuperBalance\Index.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Areas\Betlist\Views\BetlistReport\Scripts\BetListByRefNo.js" />
     <Content Include="Areas\Betlist\Views\MemberBetListReport\Scripts\WinLossMemberBetList.js" />
     <Content Include="Areas\Betlist\Views\MemberBetListReport\Styles\WinLossMemberBetList.css" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\BadmintonInfo.js" />
@@ -660,7 +659,6 @@
     <Content Include="Areas\Betlist\Views\Style\Images\loading.gif" />
     <Content Include="Areas\Betlist\Views\Style\Images\q_Icon2_1.png" />
     <Content Include="Areas\Betlist\Views\Style\Images\q_Icon_2.png" />
-    <Content Include="Areas\Betlist\Views\BetlistReport\Index.cshtml" />
     <Content Include="Areas\Betlist\Views\BetlistReport\_BetListByRefNo.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\BadmintonInfo.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\BaseballInfo.cshtml" />
@@ -671,10 +669,7 @@
     <Content Include="Areas\Betlist\Views\ScoreInformation\NumberGameInfo.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\ScoreInformation.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\SoccerInfo.cshtml" />
-    <Content Include="Areas\Betlist\Views\MemberBetListReport\Index.cshtml" />
-    <Content Include="Areas\Betlist\Views\MemberBetListReport\_WinLossMemberBetList.cshtml" />
     <Content Include="Areas\Balance\Views\SuperBalance\SuperBalance.less" />
-    <Content Include="Areas\Betlist\Views\MemberBetListReport\_MixParlayDetail.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\Styles\ScoreInformation.less" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisInfo.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\VirtualSoccerInfo.cshtml" />
@@ -1946,6 +1941,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Betlist\Views\BetlistReport\Scripts\" />
     <Folder Include="Areas\LegendManagement\Views\LegendManagement\UploadedImage\" />
     <Folder Include="Areas\UserControl\Views\Shared\" />
     <Folder Include="Areas\UserLogin\Models\" />
@@ -2254,6 +2250,10 @@
     <Content Include="Areas\Misc\Views\BetCount\Styles\BetCount.less" />
     <Content Include="Areas\Misc\Views\BetCount\BetCountReport.cshtml" />
     <Content Include="Areas\Misc\Views\BetCount\HistoryBetCountReport.cshtml" />
+    <Content Include="Areas\Betlist\Views\CashOut\History.cshtml" />
+    <Content Include="Areas\Betlist\Views\MemberBetListReport\Index.cshtml" />
+    <Content Include="Areas\Betlist\Views\MemberBetListReport\_MixParlayDetail.cshtml" />
+    <Content Include="Areas\Betlist\Views\MemberBetListReport\_WinLossMemberBetList.cshtml" />
     <None Include="Areas\UserLogin\themes\fonts\Abel.woff" />
     <None Include="Areas\UserLogin\themes\fonts\OpenSans.woff" />
     <None Include="Areas\UserLogin\themes\fonts\YanoneKaffeesatz.woff" />
@@ -2369,7 +2369,7 @@
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>63738</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63740/NAP-Reports</IISUrl>
+          <IISUrl>http://localhost:63741/NAP-Reports</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
