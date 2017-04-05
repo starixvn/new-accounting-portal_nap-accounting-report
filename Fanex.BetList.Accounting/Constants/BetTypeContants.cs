@@ -92,5 +92,8 @@ namespace Fanex.BetList.Accounting.Constants
         public const int GoldDeluxeBaccarat = 1701;
         public const int GoldDeluxeRoulette = 1702;
         public const int GoldDeluxeParlayBaccarat = 1703;
+
+        public const int CashOut = 911;
+        public const int CashOutBought = 912;
     }
 }

@@ -9,16 +9,16 @@
 
 namespace Fanex.BetList.Accounting.Controllers
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.BetList.Accounting.Core;
     using Fanex.BetList.Accounting.Criteria;
     using Fanex.BetList.Accounting.Models;
     using Fanex.BetList.Accounting.Services;
     using Fanex.Common;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -28,11 +28,13 @@ namespace Fanex.BetList.Accounting.Controllers
         private readonly IBetListService _betListService;
         private readonly ICheckSmartPunterService _smartPunterService = new CheckSmartPunterService();
         private readonly IResultService _resultService;
+        private readonly BetListCashoutDetailService _betListCashoutDetailService;
 
         public BetListController()
         {
             this._betListService = new BetListService();
             this._resultService = new ResultService();
+            this._betListCashoutDetailService = new BetListCashoutDetailServiceImp();
         }
 
         /// <summary>
@@ -375,6 +377,13 @@ namespace Fanex.BetList.Accounting.Controllers
         {
             var result = this._betListService.GetBetListRacingToteWinLoss(criteria);
             return Json(result);
+        }
+
+        public ActionResult GetCashOutHistory(GetCashOutDetailCriteria criteria)
+        {
+            var cashOutHistory = _betListCashoutDetailService.GetCashOutHistory(criteria);
+
+            return View("~/Views/BetList/CashOut/History.cshtml", cashOutHistory);
         }
     }
 }

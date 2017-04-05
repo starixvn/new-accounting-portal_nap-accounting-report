@@ -183,6 +183,8 @@ namespace Fanex.BetList.Accounting.Core
                                 CacheRef.GetLeagueName(ticketDetail.Ticket.LeagueId) + "')";
                             break;
                         default:
+
+
                             switch (ticketDetail.Ticket.BetTypeId)
                             {
                                 case BetTypeContants.SystemParlay:

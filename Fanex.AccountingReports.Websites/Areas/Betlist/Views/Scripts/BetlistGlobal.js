@@ -56,3 +56,8 @@ function virtualHRPopup(sporttype, matchID, raceNo) {
         }
     });
 }
+
+
+function ViewCashOutHistory(transId, refNo, betType, betdaqId) {
+
+}

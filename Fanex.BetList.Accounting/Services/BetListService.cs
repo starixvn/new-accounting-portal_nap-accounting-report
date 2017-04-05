@@ -9,13 +9,6 @@
 
 namespace Fanex.BetList.Accounting.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Configuration;
-    using System.Data;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using System.Text;
     using Fanex.BetList.Accounting.Constants;
     using Fanex.BetList.Accounting.Core;
     using Fanex.BetList.Accounting.Criteria;
@@ -31,9 +24,14 @@ namespace Fanex.BetList.Accounting.Services
     using Fanex.Data;
     using Fanex.Data.Repository;
     using RemotingRef;
-
+    using System;
+    using System.Collections.Generic;
+    using System.Configuration;
+    using System.Data;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Text;
     using AccBetListCore = Fanex.BetList.Accounting.Core;
-
     using AppSession = Fanex.AccountingReports.Core.Web.AppSession;
 
     /// <summary>
@@ -406,7 +404,9 @@ namespace Fanex.BetList.Accounting.Services
                     WinlostDate = Convert.ToDateTime(r["winlostdate"]),
                     TransDesc = Converter.To<string>(r["TransDesc"]),
 
-                    BetCheck = Convert.ToString(r["betcheck"])
+                    BetCheck = Convert.ToString(r["betcheck"]),
+                    BetdaqId = Converter.ToInt(r["betdaqId"]),
+                    ExtraInfo = Converter.ToString2(r["ExtraInfo"])
                 },
                 ChoiceHtml = string.Empty,
                 OddHtml = string.Empty,
