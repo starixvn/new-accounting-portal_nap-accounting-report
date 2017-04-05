@@ -648,7 +648,6 @@
     <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\VirtualSoccerInfo.js" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\Styles\Images\firstGoal.gif" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\Styles\Images\lastGoal.gif" />
-    <Content Include="Areas\Betlist\Views\Scripts\BetlistGlobal.js" />
     <Content Include="Areas\Betlist\Views\Style\BetList.css" />
     <Content Include="Areas\Betlist\Views\Style\Images\bgHeader.jpg" />
     <Content Include="Areas\Betlist\Views\Style\Images\firstGoal.gif" />

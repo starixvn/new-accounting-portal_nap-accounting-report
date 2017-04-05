@@ -255,7 +255,6 @@
     <Compile Include="Models\BalanceUp.cs" />
     <Compile Include="Models\ScoreInformation\BaseballInfo.cs" />
     <Compile Include="Models\ScoreInformation\BasketballInfo.cs" />
-    <Compile Include="Models\BetListByIP_Username.cs" />
     <Compile Include="Models\BetListDetail.cs" />
     <Compile Include="Models\BetType.cs" />
     <Compile Include="Models\CombinationParlay.cs" />
@@ -277,12 +276,9 @@
     <Compile Include="Models\SystemParlayModel.cs" />
     <Compile Include="Models\IPVNBean.cs" />
     <Compile Include="Models\ScoreInformation\TwoTimesMatchInfo.cs" />
-    <Compile Include="Models\VirtualHRPopupModel.cs" />
-    <Compile Include="Models\VirtualTennisModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BetListCashoutDetailRepository.cs" />
     <Compile Include="Repositories\BetListRepository.cs" />
-    <Compile Include="Repositories\IBetListRepository.cs" />
     <Compile Include="Repositories\IScoreInformationRepository.cs" />
     <Compile Include="Repositories\ScoreInformationRepository.cs" />
     <Compile Include="Resources\BetListGlobalResources.designer.cs">

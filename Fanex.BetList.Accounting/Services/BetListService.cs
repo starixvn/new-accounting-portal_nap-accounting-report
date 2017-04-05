@@ -38,11 +38,11 @@ namespace Fanex.BetList.Accounting.Services
     public class BetListService : IBetListService
     {
         public const string BetListSessionKey = "Fanex.BetList.Accounting.WinLossByLicensee";
-        private readonly IBetListRepository _betListRepository;
+        private readonly BetListRepository _betListRepository;
 
         public BetListService()
         {
-            _betListRepository = new BetListRepository();
+            _betListRepository = new BetListRepositoryImp();
         }
 
         /// <summary>
