@@ -5,7 +5,6 @@
     <Setting Key="Misc_DailyCreatedCustomers_GetDetailReport" SpName="Acc_DailyCreatedCustomer_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Core - Bet List Core">
-    <Setting Key="BetList_MemberWinLoss" SpName="Acc_BetList_SelWinloss_Mem2" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="BetList_ScoreInformation_SelScoreInformation" SpName="Acc_Rpt_DailyWLDirect_Result" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="BetList_ScoreInformation_SelScoreInformation_WH" SpName="Acc_Rpt_DailyWLDirect_Result_Old" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>

@@ -197,35 +197,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_GlobalResources\BetList.Designer.cs" />
-    <Compile Include="Authenticate\SmartPunterAttribute.cs" />
     <Compile Include="BetListAreaRegistration.cs" />
     <Compile Include="Constants\BetListConstants.cs" />
     <Compile Include="Constants\BetTypeContants.cs" />
     <Compile Include="Constants\CombinationTypeConstants.cs" />
-    <Compile Include="Constants\CommonConstants.cs" />
-    <Compile Include="Constants\CurrencyContants.cs" />
     <Compile Include="Constants\DateTimeFormatConstants.cs" />
     <Compile Include="Constants\LanguageTypeConstants.cs" />
-    <Compile Include="Constants\NumberFormatConstants.cs" />
-    <Compile Include="Constants\ScoreStatusConstants.cs" />
-    <Compile Include="Constants\SportContants.cs" />
     <Compile Include="Controllers\BetListController.cs" />
     <Compile Include="Controllers\ScoreInformationController.cs" />
     <Compile Include="Criteria\Authenticate\CheckSmartPunterCriteria.cs" />
-    <Compile Include="Criteria\BetListByCustInfoByRefnoCriteria.cs" />
-    <Compile Include="Criteria\BetListByCustInfoCriteria_Old.cs" />
-    <Compile Include="Criteria\BetListByIP_OthersCriteria.cs" />
-    <Compile Include="Criteria\BetListByIP_SoccerCriteria.cs" />
     <Compile Include="Criteria\BetListRacingWinLossToteCriteria.cs" />
-    <Compile Include="Criteria\BetListSystemParlayByRefnoCriteria.cs" />
-    <Compile Include="Criteria\BetListByCustInfoByRefnoU3Criteria.cs" />
-    <Compile Include="Criteria\BetListByCustInfoU3Criteria.cs" />
-    <Compile Include="Criteria\BetListByCustInfoU3Criteria_Old.cs" />
-    <Compile Include="Criteria\BetListByRefNoU3Criteria.cs" />
-    <Compile Include="Criteria\BetTypeByDateU3Criteria.cs" />
     <Compile Include="Criteria\GetCashOutDetailCriteria.cs" />
-    <Compile Include="Criteria\ResultParlayCriteria.cs" />
-    <Compile Include="Extensions\BetListExcelBuilderExt.cs" />
     <Compile Include="Extensions\BetListExtension.cs" />
     <Compile Include="Core\BetListHelper.cs" />
     <Compile Include="Core\CacheManager.cs" />
@@ -234,18 +216,11 @@
     <Compile Include="Core\LoggingHandler.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />
     <Compile Include="Core\SessionManager.cs" />
-    <Compile Include="Criteria\BetListByCustInfoCriteria.cs" />
-    <Compile Include="Criteria\BetListByIP_UsernameCriteria.cs" />
     <Compile Include="Criteria\BetListByRefNoCriteria.cs" />
-    <Compile Include="Criteria\BetListStatement.cs" />
-    <Compile Include="Criteria\BetTypeByDateCriteria.cs" />
     <Compile Include="Criteria\CombinationParlayDetailCriteria.cs" />
-    <Compile Include="Criteria\CustIDByUsernameCriteria.cs" />
     <Compile Include="Criteria\GetScoreInformationCriteria.cs" />
     <Compile Include="Criteria\GetSportingSolutionsResultCriteria.cs" />
     <Compile Include="Criteria\MixParlayDetailCriteria.cs" />
-    <Compile Include="Criteria\ResultPopupCriteria.cs" />
-    <Compile Include="Criteria\WinLossMemberBetListCriteria.cs" />
     <Compile Include="Extensions\WinLoss.htm.cs" />
     <Compile Include="Extensions\WinLost.cs" />
     <Compile Include="Models\BetListRacingToteWinLoss.cs" />
@@ -297,11 +272,7 @@
       <DependentUpon>Labels.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\BetListService.cs" />
-    <Compile Include="Services\Authenticate\CheckSmartPunterService.cs" />
     <Compile Include="Services\BetListCashoutDetailService.cs" />
-    <Compile Include="Services\Authenticate\ICheckSmartPunterService.cs" />
-    <Compile Include="Services\IBetListService.cs" />
-    <Compile Include="Services\IpService.cs" />
     <Compile Include="Services\IResultService.cs" />
     <Compile Include="Services\IScoreInformationService.cs" />
     <Compile Include="Services\ReportService.cs" />
@@ -340,27 +311,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="App_Data\Fanex.Result\Badminton.xls" />
-    <None Include="App_Data\Fanex.Result\BaseBall.xls" />
-    <None Include="App_Data\Fanex.Result\Basketball.xls" />
-    <None Include="App_Data\Fanex.Result\Billiard.xls" />
-    <None Include="App_Data\Fanex.Result\GoldDeluxe.xls" />
-    <None Include="App_Data\Fanex.Result\Hockey.xls" />
-    <None Include="App_Data\Fanex.Result\LiveCasino.xls" />
-    <None Include="App_Data\Fanex.Result\MuayThai.xls" />
-    <None Include="App_Data\Fanex.Result\NumberGame.xls" />
-    <None Include="App_Data\Fanex.Result\Other.xls" />
-    <None Include="App_Data\Fanex.Result\Outright.xls" />
-    <None Include="App_Data\Fanex.Result\Racing.xls" />
-    <None Include="App_Data\Fanex.Result\Soccer.xls" />
-    <None Include="App_Data\Fanex.Result\Tennis.xls" />
-    <None Include="App_Data\Fanex.Result\VSHRacing.xls" />
-    <None Include="App_Data\Fanex.Result\VSSpeedWay.xls" />
-    <None Include="App_Data\Fanex.Result\VSTennis.xls" />
     <None Include="Content\Fanex.Result\fanex.result.less" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

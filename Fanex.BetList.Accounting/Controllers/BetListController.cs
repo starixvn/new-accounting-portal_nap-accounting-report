@@ -23,14 +23,13 @@ namespace Fanex.BetList.Accounting.Controllers
     /// </summary>
     public class BetListController : Controller
     {
-        private readonly IBetListService _betListService;
-        private readonly ICheckSmartPunterService _smartPunterService = new CheckSmartPunterService();
+        private readonly BetListService _betListService;
         private readonly IResultService _resultService;
         private readonly BetListCashoutDetailService _betListCashoutDetailService;
 
         public BetListController()
         {
-            this._betListService = new BetListService();
+            this._betListService = new BetListServiceImp();
             this._resultService = new ResultService();
             this._betListCashoutDetailService = new BetListCashoutDetailServiceImp();
         }
@@ -70,18 +69,6 @@ namespace Fanex.BetList.Accounting.Controllers
             }
 
             return PartialView("~/Areas/BetList/Views/BetlistReport/_BetListByRefNo.cshtml", result);
-        }
-
-        /// <summary>
-        /// Gets the bet types.
-        /// </summary>
-        /// <param name="betTypeByDateCriteria">The bet type by date criteria.</param>
-        /// <returns>Bet types after change date range.</returns>
-        [HttpPost]
-        public JsonResult GetBetTypes(BetTypeByDateCriteria betTypeByDateCriteria)
-        {
-            var result = _betListService.GetBetTypeByDate(betTypeByDateCriteria);
-            return Json(result);
         }
 
         /// <summary>

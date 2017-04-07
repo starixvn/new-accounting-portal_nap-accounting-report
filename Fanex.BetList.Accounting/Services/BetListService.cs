@@ -31,16 +31,24 @@ namespace Fanex.BetList.Accounting.Services
     using System.Text;
     using AccBetListCore = Fanex.BetList.Accounting.Core;
 
+    public interface BetListService
+    {
+        IList<TicketDetail> GetBetListByRefNoTickets(BetListByRefNoCriteria criteria);
+        BetListRacingToteWinLoss GetBetListRacingToteWinLoss(BetListRacingWinLossToteCriteria criteria);
+        CombinationParlay GetCombinationMP(ICriteria criteria);
+        IList<TicketDetail> GetMixParlayTickets(MixParlayDetailCriteria criteria, string handicap1, string handicap2, string betcheck, string betteam);
+    }
+
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     [System.Runtime.InteropServices.Guid("6DF0115C-60E5-4182-BEF3-AC61F09BAF0A")]
-    public class BetListService : IBetListService
+    public class BetListServiceImp : BetListService
     {
         public const string BetListSessionKey = "Fanex.BetList.Accounting.WinLossByLicensee";
         private readonly BetListRepository _betListRepository;
 
-        public BetListService()
+        public BetListServiceImp()
         {
             _betListRepository = new BetListRepositoryImp();
         }
@@ -242,69 +250,6 @@ namespace Fanex.BetList.Accounting.Services
             }
 
             return new List<TicketDetail>();
-        }
-
-
-        /// <summary>
-        /// Gets bet types by date after change date range.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Bet types by date after change date range.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
-        public IList<BetType> GetBetTypeByDate(BetTypeByDateCriteria criteria)
-        {
-            IList<BetType> betTypeList = new List<BetType>();
-
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                DataSet dataSet = db.ExecuteDataSet(criteria);
-                if (dataSet != null &&
-                    dataSet.Tables.Count > 0)
-                {
-                    foreach (DataRow r in dataSet.Tables[0].Rows)
-                    {
-                        string betTypeNameTmp = r["typenamee"].ToString();
-                        int betTypeIdTmp = Converter.To<int>(r["typeid"]);
-                        if (ReportService.IsVirtualSportBetType(betTypeIdTmp))
-                        {
-                            betTypeNameTmp += " (" + Labels.Virtual_Sports + ")";
-                        }
-
-                        if (ReportService.IsGoldDeluxe(betTypeIdTmp))
-                        {
-                            betTypeNameTmp += " (" + Labels.Gold_Deluxe + ")";
-                        }
-
-                        if (betTypeIdTmp == BetTypeContants.OverUnder ||
-                            betTypeIdTmp == BetTypeContants.OddEven)
-                        {
-                            betTypeNameTmp += " (" + Labels.Number_Game + ")";
-                        }
-
-                        betTypeList.Add(new BetType
-                        {
-                            BetTypeID = betTypeIdTmp,
-                            BetTypeName = betTypeNameTmp
-                        });
-                    }
-                }
-            }
-
-            var all = new BetType
-            {
-                BetTypeName = Labels.All,
-                BetTypeID = 0
-            };
-
-            betTypeList.Insert(0, all);
-            if (betTypeList != null)
-            {
-                return betTypeList;
-            }
-
-            return new List<BetType>();
         }
 
         public CombinationParlay GetCombinationMP(ICriteria criteria)
