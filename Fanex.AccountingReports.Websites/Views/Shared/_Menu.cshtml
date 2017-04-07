@@ -1,7 +1,5 @@
 @using Fanex.NAP.Core.Models
 @{
-    var universalReports = new[] { "House Win Loss by Products" };
-
     var menuItemList = ViewBag.MenuItemList != null ? ViewBag.MenuItemList as List<MenuItem> : new List<MenuItem>();
     var lvl0MenuItemList = menuItemList.Where(m => m.Parent == null).OrderBy(m => m.DisplayOrder).ToList();
 }
@@ -42,7 +40,6 @@
                             {
                                 subMenuUrl = Url.Content("~/../" + subMenuItem.Url);
                             }
-
                             <li><a href="@subMenuUrl">@subMenuItem.Name</a></li>
                         }
                     </ul>
