@@ -163,9 +163,9 @@
     <Setting Key="NAP_User_GetUserSiteLevel" SpName="NAP_User_GetUserSiteLevel" DbName="DBNAP.bodb_NAP.bodbAdminNet"  />
     <Setting Key="NAP_User_AssignFunction" SpName="NAP_User_AssignFunction" DbName="DBNAP.bodb_NAP.bodbAdminNet"  />
     <Setting Key="NAP_User_AssignSite" SpName="NAP_User_AssignSite" DbName="DBNAP.bodb_NAP.bodbAdminNet"  />
-    <Setting Key="NAP_User_CheckIn" SpName="NAP_User_CheckIn_UAT1" DbName="DBNAP.bodb_NAP.bodbAdminNet"  />
+    <Setting Key="NAP_User_CheckIn" SpName="NAP_User_CheckIn" DbName="DBNAP.bodb_NAP.bodbAdminNet"  />
     <Setting Key="NAP_User_ReCheckIn" SpName="NAP_User_ReCheckIn" DbName="DBNAP.bodb_NAP.bodbAdminNet"  />
-    <Setting Key="NAP_User_SSOCheckIn" SpName="NAP_User_SSOCheckIn_UAT1" DbName="DBNAP.bodb_NAP.bodbAdminNet"  />
+    <Setting Key="NAP_User_SSOCheckIn" SpName="NAP_User_SSOCheckIn" DbName="DBNAP.bodb_NAP.bodbAdminNet"  />
     <Setting Key="NAP_User_Logout" SpName="Nap_User_Logout" DbName="DBNAP.bodb_NAP.bodbAdminNet"  />
     <Setting Key="NAP_User_GetUserFunctionPolicy" SpName="NAP_User_GetUserFunctionPolicy" DbName="DBNAP.bodb_NAP.bodbAdminNet"  />
     <Setting Key="NAP_User_GetUserSiteFunctionKeyPolicy" SpName="NAP_User_GetUserSiteFunctionKeyPolicy" DbName="DBNAP.bodb_NAP.bodbAdminNet"  />
@@ -208,7 +208,7 @@
     <Setting Key="NAP_LogExecSp_GetById" SpName="NAP_LogExecSp_GetById" DbName="DBNAP.bodb_NAP.bodbAdminNet"  />
   </Function>
   <Function Name="NAP - LogUserLogin">
-    <Setting Key="NAP_LogUserLogin_Insert" SpName="NAP_LogUserLogin_Insert_UAT1" DbName="DBNAP.bodb_NAP.bodbAdminNet"  />
+    <Setting Key="NAP_LogUserLogin_Insert" SpName="NAP_LogUserLogin_Insert" DbName="DBNAP.bodb_NAP.bodbAdminNet"  />
     <Setting Key="NAP_LogUserLogin_Search" SpName="NAP_LogUserLogin_Search" DbName="DBNAP.bodb_NAP.bodbAdminNet">
       <Mapping DataField="UserId" ObjectProperty="Id" />
       <Mapping DataField="SiteId" ObjectProperty="Id" />
