@@ -9,10 +9,12 @@
 
 namespace Fanex.BetList.Accounting.Services
 {
+    using Common.Extensions;
     using Fanex.BetList.Accounting.Core;
     using Fanex.BetList.Accounting.Models;
     using Fanex.Data;
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.
@@ -48,6 +50,41 @@ namespace Fanex.BetList.Accounting.Services
 
         #endregion StaticProperties
 
+        public static List<IPVNBean> IPVN
+        {
+            get
+            {
+                var ipVnList = CacheManager.Get<List<IPVNBean>>(CacheIPVN);
+                if (ipVnList == null)
+                {
+                    try
+                    {
+                        ipVnList = new List<IPVNBean>();
+                        using (ObjectDb objDb = new ObjectDb("BetList_GetIPVN"))
+                        {
+                            using (var reader = objDb.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    ipVnList.Add(new IPVNBean
+                                    {
+                                        IPFrom = reader.ToDouble("IPFrom"),
+                                        IPTo = reader.ToDouble("IPTo")
+                                    });
+                                }
+                            }
+                        }
 
+                        CacheManager.Set<List<IPVNBean>>(CacheIPVN, ipVnList);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                }
+
+                return ipVnList;
+            }
+        }
     }
 }

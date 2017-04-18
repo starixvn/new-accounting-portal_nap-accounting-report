@@ -201,6 +201,7 @@
     <Compile Include="Constants\BetListConstants.cs" />
     <Compile Include="Constants\BetTypeContants.cs" />
     <Compile Include="Constants\CombinationTypeConstants.cs" />
+    <Compile Include="Constants\CommonConstants.cs" />
     <Compile Include="Constants\DateTimeFormatConstants.cs" />
     <Compile Include="Constants\LanguageTypeConstants.cs" />
     <Compile Include="Controllers\BetListController.cs" />
@@ -273,6 +274,7 @@
     </Compile>
     <Compile Include="Services\BetListService.cs" />
     <Compile Include="Services\BetListCashoutDetailService.cs" />
+    <Compile Include="Services\IpService.cs" />
     <Compile Include="Services\IResultService.cs" />
     <Compile Include="Services\IScoreInformationService.cs" />
     <Compile Include="Services\ReportService.cs" />
