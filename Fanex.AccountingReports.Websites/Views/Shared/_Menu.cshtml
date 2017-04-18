@@ -34,7 +34,7 @@
                     <ul>
                         @foreach (var subMenuItem in lvl1MenuItemList)
                         {
-                            var subMenuUrl = Url.Content("~" + subMenuItem.Url);
+                            var subMenuUrl = @subMenuItem.Url.Contains("UniversalReport")
                             
                             if (@subMenuItem.Url.Contains("UniversalReport"))
                             {
