@@ -1,5 +1,7 @@
 @using Fanex.NAP.Core.Models
 @{
+    var universalReports = new[] { "House Win Loss by Products" };
+
     var menuItemList = ViewBag.MenuItemList != null ? ViewBag.MenuItemList as List<MenuItem> : new List<MenuItem>();
     var lvl0MenuItemList = menuItemList.Where(m => m.Parent == null).OrderBy(m => m.DisplayOrder).ToList();
 }
@@ -34,16 +36,18 @@
                     <ul>
                         @foreach (var subMenuItem in lvl1MenuItemList)
                         {
-                            var subMenuUrl = @subMenuItem.Url.Contains("UniversalReport")
-                            
+                            var subMenuUrl = Url.Content("~" + subMenuItem.Url);
+
                             if (@subMenuItem.Url.Contains("UniversalReport"))
                             {
                                 subMenuUrl = Url.Content("~/../" + subMenuItem.Url);
                             }
+
                             <li><a href="@subMenuUrl">@subMenuItem.Name</a></li>
                         }
                     </ul>
-                </li>}
+                </li>
+            }
         }
     </ul>
 </nav>
