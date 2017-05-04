@@ -11,7 +11,7 @@ body {
    height: 294px;
    position: absolute;
    left: 50%;
-   top: 50%; 
+   top: 50%;
    margin-left: -232px;
    margin-top: -175px;
 }
@@ -101,7 +101,7 @@ body {
 	-o-transition: all .2s ease-in-out;
 }
 
-#password 
+#password
 {
     font-size: 12px !important;
     }
@@ -195,7 +195,7 @@ body {
     text-shadow: 0 0 0.1em #000;
     padding: 1px;
     }
-    
+
 .bestview .ff4
 {
     background:url(img/firefox_original.png) 0 0 no-repeat;
@@ -203,9 +203,9 @@ body {
 	margin-left:6px;
 }
 
-.bestview .ie8
+.bestview .chrome
 {
     margin-left:6px;
-    background:url(img/ie.png) 0 0 no-repeat;
+    background:url(img/chrome.png) 0 0 no-repeat;
     padding:1px 18px;
 }
