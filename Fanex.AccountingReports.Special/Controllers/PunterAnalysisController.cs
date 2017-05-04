@@ -9,13 +9,13 @@
 
 namespace Fanex.AccountingReports.Special.Controllers
 {
-    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Special.Criteria.PunterAnalysis;
     using Fanex.AccountingReports.Special.Services.Implement.PunterAnalysis;
     using Fanex.AccountingReports.Special.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -38,7 +38,7 @@ namespace Fanex.AccountingReports.Special.Controllers
         [NapAuth(FunctionKey = AccReportFunctionKeys.PunterAnalysis, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
-            return View();
+            return Redirect("../../../UniversalReports/PunterAnalysis");
         }
 
         [HttpPost]
