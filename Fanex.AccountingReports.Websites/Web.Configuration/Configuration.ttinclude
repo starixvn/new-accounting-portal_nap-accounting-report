@@ -212,7 +212,7 @@
 					case SiteEnvironment.SIT:
 						return "http://172.16.4.106:8889/api";
                     default:
-                        return "http://10.35.35.254:8889/api";
+                        return "http://10.35.35.253:8889/api";
                 }
             }
         }
@@ -247,7 +247,7 @@
                     case SiteEnvironment.MNL:
                         return @"FormatName:DIRECT=tcp:10.2.98.3\private$\entlib";
                     default:
-                        return @"FormatName:DIRECT=http://10.35.35.254:808/msmq/Private$/entlib";
+                        return @"FormatName:DIRECT=http://10.35.35.253:808/msmq/Private$/entlib";
                 }
             }
         }
@@ -284,7 +284,7 @@
                     case SiteEnvironment.MNL:
 						return	"<add uri=\"http://10.2.98.3:8091/pools/default\" />";
                     default:
-                        return "<add uri=\"http://10.35.35.253:8091/pools/default\" /> \r\n\t\t <add uri=\"http://10.35.35.254:8091/pools/default\" />";
+                        return "<add uri=\"http://10.35.35.253:8091/pools/default\" /> \r\n\t\t <add uri=\"http://10.35.35.253:8091/pools/default\" />";
                 }
             }
         }
@@ -336,7 +336,7 @@
                         return "stateConnectionString=\"tcpip=10.2.12.10:42424\"";
 
                     default:
-                        return "stateConnectionString=\"tcpip=10.35.35.254:42424\"";
+                        return "stateConnectionString=\"tcpip=10.35.35.253:42424\"";
                 }
             }
         }
