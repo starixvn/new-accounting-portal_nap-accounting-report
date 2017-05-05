@@ -14,5 +14,10 @@ namespace Fanex.AccountingReports.Websites.Controllers
         {
             return Redirect("../../UniversalReports/NG2Statistics");
         }
+
+        public ActionResult PlayForFunStatistics()
+        {
+            return Redirect("../../UniversalReports/PlayForFunStatistics");
+        }
     }
 }
