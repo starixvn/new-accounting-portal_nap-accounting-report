@@ -11,11 +11,18 @@
     <link rel="stylesheet" type="text/css" href="~/Views/Home/MostVisitedPages/Styles/MostVisitedPages.less" />
 }
 @section Headline {
+	<div id="alert-browser" style="clear: both; display: none; margin-top: 100px; text-align: center; color: red; font-size: 1.2rem;">
+        You are using a browser that is not supported by this site.
+        <br />
+        Please upgrade your browser now to Firefox 50+ or Chrome 54+ by openning the following link <a href="http://outdatedbrowser.com/en" target="_blank">http://outdatedbrowser.com/en</a>
+
+    </div>
     <div class="title">
         <div>
             <div>@Labels.Most_Visited_Pages</div>
         </div>
     </div>
+	
 }
 <div class="contentBox">
     @Html.Partial("~/Views/Home/MostVisitedPages/MostVisitedPages_Content.cshtml")
@@ -31,4 +38,27 @@
     <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/jquery.fixedsortable.js"></script>
     <script type="text/javascript" src="~/Views/Home/MostVisitedPages/Scripts/MostVisitedPages.js"></script>
+	
+	 <script type="text/javascript">
+        (function () {
+            function isBrowserSupported() {
+                try {
+                    var matches = navigator.userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+                    if (matches[1] === 'Firefox') {
+                        return parseInt(matches[2]) >= 50;
+                    }
+
+                    if (matches[1] === 'Chrome') {
+                        return parseInt(matches[2]) >= 54;
+                    }
+                }
+                finally { }
+                return false;
+            }
+
+            if (!isBrowserSupported()) {
+                $('#alert-browser').show();
+            }
+        }());
+    </script>
 }

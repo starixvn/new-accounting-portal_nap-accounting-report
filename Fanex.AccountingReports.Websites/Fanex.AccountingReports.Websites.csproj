@@ -938,6 +938,7 @@
     <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon.png" />
     <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon2-hover.png" />
     <Content Include="Areas\UserLogin\scripts\lib\CryptoJS.js" />
+    <Content Include="Areas\UserLogin\themes\img\chrome.png" />
     <Content Include="Areas\WinLoss\Views\AllCustomerTurnOver\Scripts\AllCustomerTurnOver.js" />
     <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon2.png" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\AdvanceMixParlayReport.js" />

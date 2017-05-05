@@ -36,9 +36,12 @@
                     <ul>
                         @foreach (var subMenuItem in lvl1MenuItemList)
                         {
-                            var subMenuUrl = universalReports.Any(u => u == subMenuItem.Name)
-                                ? Url.Content("~/../" + subMenuItem.Url)
-                                : Url.Content("~" + subMenuItem.Url);
+                            var subMenuUrl = Url.Content("~" + subMenuItem.Url);
+                            
+                            if (@subMenuItem.Url.Contains("UniversalReport"))
+                            {
+                                subMenuUrl = Url.Content("~/../" + subMenuItem.Url);
+                            }
 
                             <li><a href="@subMenuUrl">@subMenuItem.Name</a></li>
                         }
