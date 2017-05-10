@@ -5,7 +5,7 @@
     <Setting Key="Misc_DailyCreatedCustomers_GetDetailReport" SpName="Acc_DailyCreatedCustomer_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Core - Bet List Core">
-    <Setting Key="Acc_BetList_CashOut_Detail" SpName="Acc_BetList_CashOut_Detail_xpre" DbName="DBACC.bodb02.bodbAdminNet" />
+    <Setting Key="Acc_BetList_CashOut_Detail" SpName="Acc_BetList_CashOut_Detail" DbName="DBACC.bodb02.bodbAdminNet" />
     <Setting Key="BetList_ScoreInformation_SelScoreInformation" SpName="Acc_Rpt_DailyWLDirect_Result" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="BetList_ScoreInformation_SelScoreInformation_WH" SpName="Acc_Rpt_DailyWLDirect_Result_Old" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
@@ -118,7 +118,7 @@
     <Setting Key="Main_TraderPerformance_GetDetailReport" SpName="Acc_Rpt_TraderPerformanceDetail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Main - Win Loss Summary 3rd">
-    <Setting Key="Main_WinLossSummary3rd_Exec_CalculateWinLoss" SpName="Task_rptWinLost_UpdateTable_xpre" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_WinLossSummary3rd_Exec_CalculateWinLoss" SpName="Task_rptWinLost_UpdateTable" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Balance - Direct Balance">
     <Setting Key="Balance_DirectBalance_DirectMaster" SpName="Acc_Rpt_Balance_Direct_Master" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
