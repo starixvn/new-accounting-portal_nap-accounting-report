@@ -56,6 +56,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Special.UnitTests", "Special\Special.UnitTests.csproj", "{009F5133-120B-43C8-B701-1FD76E54A9DD}"
 EndProject
 Global
+	GlobalSection(JSLint) = preSolution
+		SolutionConfigurationLocation = JSLintOptions.xml
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -218,8 +221,5 @@ Global
 		{71FE56EB-2E92-4D3F-8B8B-504A0743147A} = {3CE5D5C3-B509-42D6-8B70-73AEF1F6B3A5}
 		{A63FE358-F055-4C46-9791-45C6F8F98137} = {71FE56EB-2E92-4D3F-8B8B-504A0743147A}
 		{009F5133-120B-43C8-B701-1FD76E54A9DD} = {A63FE358-F055-4C46-9791-45C6F8F98137}
-	EndGlobalSection
-	GlobalSection(JSLint) = preSolution
-		SolutionConfigurationLocation = JSLintOptions.xml
 	EndGlobalSection
 EndGlobal

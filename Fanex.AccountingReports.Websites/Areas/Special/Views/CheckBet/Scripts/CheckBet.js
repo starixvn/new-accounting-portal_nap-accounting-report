@@ -1,4 +1,4 @@
-   
+
 Namespace.Register("Fanex.AccountingReports.Special.CheckBet.CheckBet");
 Fanex.AccountingReports.Special.CheckBet.CheckBet = function () {
     var self = this;
@@ -24,7 +24,7 @@ Fanex.AccountingReports.Special.CheckBet.CheckBet = function () {
             TicketType: null
         }
     };
-    
+
     self.TempHtml = {
         contentHtml: '',
     };
@@ -54,18 +54,18 @@ Fanex.AccountingReports.Special.CheckBet.CheckBet = function () {
 
       var renderDatePicker = function () {
         $('#datepickerplugin').nexDatePicker({
-            nexDatePickerType: "single",          
+            nexDatePickerType: "single",
             firstDatePicker: {
                 Id: "CheckDate",
                 Label: "Date",
                 InitDate: "",
                 LabelCss: "lbl-field col_2",
                 TextboxCss: "edit-field col_6"
-                
+
             },
 
-            datePickerFormat:{       
-                dateFormat: "M dd, yy",          
+            datePickerFormat:{
+                dateFormat: "M dd, yy",
                 minDate : new Date(minDate),
                 maxDate: new Date(currentDate)
             }
@@ -85,7 +85,7 @@ Fanex.AccountingReports.Special.CheckBet.CheckBet = function () {
     };
 
     self.getCheckBetReport = function(){
-        hideReport();       
+        hideReport();
         $('.ui-dialog').hide();
 
         var date = _tables.datepickerplugin.nexDatePicker("getSingleDate");
@@ -123,33 +123,79 @@ Fanex.AccountingReports.Special.CheckBet.CheckBet = function () {
             self.resetTempHtml();
             self.renderReportRow(report);
             self.removeSpaceIE9TempHtml();
-            _tables.reportContent.empty().append(self.TempHtml.contentHtml);                
+            _tables.reportContent.empty().append(self.TempHtml.contentHtml);
         }
 
         _tables.report.removeClass("display-none")
                       .gridScroller(_options.report);
 
         _tables.reportHeader.removeClass("display-none");
-        _tables.report.removeClass("display-none");       
-        
+        _tables.report.removeClass("display-none");
+
     };
     self.resetTempHtml = function () {
         self.TempHtml.contentHtml = '';
     };
     self.removeSpaceIE9TempHtml = function () {
         self.TempHtml.contentHtml = fixBugsBrowser.removeSpaceIE9(self.TempHtml.contentHtml);
-       
+
     };
     self.renderReportRow = function (row) {
-       
+
         var wlDate = '<td><div class="col100  align-center">' + _params.checkBetReport.WinLossDate + '</div></td>';
         var normal = parseInt(row.NormalTicket) > 0 ? '<div class="col150 align-center link" onclick="getNormalTickets(\'' +  _params.checkBetReport.WinLossDate + '\')" >' + row.NormalTicket + '</div>' : '<div class="col150 align-center">' + row.NormalTicket + '</div>';
         var reject = parseInt(row.RejectTicket) > 0 ? '<div class="col150 align-center link" onclick="getRejectTickets(\'' +  _params.checkBetReport.WinLossDate + '\')" >' + row.RejectTicket + '</div>' : '<div class="col150 align-center">' + row.RejectTicket + '</div>';
-        self.TempHtml.contentHtml += '<tr>' + wlDate + 
+        self.TempHtml.contentHtml += '<tr>' + wlDate +
                                             '<td>' + normal + '</td>\
                                             <td>' + reject + '</td>\
                                     </tr>';
-    };  
+    };
 };
 
 
+
+
+
+function ViewCashOutHistory(transId, refNo, betType, betdaqId) {
+    $.blockUI();
+    var URL = "BetList/BetList/GetCashOutHistory";
+    var title = "Cash Out History";
+    heightTmp = 640;
+    widthTmp = 680;
+    var params = {
+        transId: transId,
+        refNo: refNo,
+        betType: betType,
+        betdaqId: betdaqId
+    };
+    $.ajax({
+        type: "POST",
+        url: window.rootUrl + URL,
+        data: params,
+        success: function (result) {
+            var dlgContainer = $('#cashoutContainer');
+
+            dlgContainer.html(result);
+
+            dlgContainer.dialog({
+                title: title,
+                autoOpen: false,
+                resizable: false,
+                height: heightTmp,
+                width: widthTmp,
+                modal: true,
+                position: ['middle', 250],
+                close: function (event, ui) {
+                }
+            });
+
+            $('a.ui-dialog-titlebar-close').show();
+
+            dlgContainer.dialog("open");
+
+        },
+        complete: function () {
+            $.unblockUI();
+        }
+    });
+}

@@ -1,0 +1,128 @@
+﻿@using Fanex.BetList.Accounting.App_GlobalResources;
+@using Fanex.BetList.Accounting.Models
+@using Fanex.BetList.Accounting.Resources;
+@using Fanex.BetList.Accounting.Extensions;
+@{ bool isCashOutString = Request["betType"] == "911"; }
+@model CashOutHistory
+
+<p style="font-weight:bold;padding: 0 0 10px 0">Original Bet Ticket:</p>
+<div id="originalTicket" class="freegrid">
+
+    <div class="content-container">
+        <table id="originalBetTicketContent" class="grid-fixed-table col_header_content">
+            <thead>
+                <tr>
+                    <th><div class="table-cell height34 width120">Trans.Time</div></th>
+                    <th><div class="table-cell height34 width300">Choice</div></th>
+                    <th><div class="table-cell height34 width60">Odds</div></th>
+                    <th><div class="table-cell height34 width60">Stake</div></th>
+                    <th><div class="table-cell height34 width100">Win Loss/Comm</div></th>
+                    <th><div class="table-cell height34 width100">Status</div></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.TicketDetail == null)
+                        {
+                        <tr>
+                            <td colspan="6" class="c">@BetList.noInfo</td>
+                        </tr>
+                        }
+                        else
+                        {
+                            var highlightClass = Request["TransId"] == Model.TicketDetail.Ticket.TransId.ToString() ? "event" : string.Empty;
+                        <tr>
+                            <td class="@highlightClass">
+                                <div class="table-cell c b width120">
+                                    @Html.Raw(Model.TicketDetail.TransDateHtml)
+                                </div>
+                            </td>
+                            <td class="@highlightClass">
+                                <div class="table-cell r width300">
+                                    @Html.Raw(Model.TicketDetail.ChoiceHtml)
+                                </div>
+                            </td>
+                            <td class="@highlightClass">
+                                <div class="table-cell r width60">
+                                    @Html.Partial("~/Areas/BetList/Views/_Odds.cshtml", Model.TicketDetail)
+                                </div>
+                            </td>
+                            <td class="@highlightClass">
+                                <div class="table-cell r width60">
+                                    @Html.Raw(Model.TicketDetail.StakeHtml)
+                                </div>
+                            </td>
+                            <td class="@highlightClass">
+                                <div class="table-cell r width100">
+                                    @Html.Partial("~/Areas/BetList/Views/_WinLoss.cshtml", Model.TicketDetail)
+                                </div>
+                            </td>
+                            <td class="@highlightClass">
+                                <div class="table-cell c width100">
+                                    @Html.Raw(Model.TicketDetail.StatusHtml)
+                                </div>
+                            </td>
+                        </tr>
+                        }
+            </tbody>
+        </table>
+    </div>
+</div>
+<p style="font-weight:bold;padding: 25px 0 10px 0">@(isCashOutString ? "Cash Out Tickets" : "Bought Tickets"):</p>
+<div id="cashoutOrBoughtTickets" class="freegrid">
+        <div class="content-container">
+            <table id="cashoutOrBoughtTicketsContent" class="grid-fixed-table col_header_content">
+                <thead>
+                    <tr>
+                        <th><div class="table-cell height34 width120">Trans.Time</div></th>
+                        <th><div class="table-cell height34 width300">@(isCashOutString ? "Cash Out Stake" : "Bought Stake")</div></th>
+                        <th><div class="table-cell height34 width60">Price</div></th>
+                        <th><div class="table-cell height34 width60">Win/Loss</div></th>
+                        <th><div class="table-cell height34 width100">Status</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.CashOutTickets.Any())
+                    {
+                        <tr>
+                            <td colspan="5" class="c">@BetList.noInfo</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var ticket in Model.CashOutTickets)
+                        {
+                            var highlightClass = Request["TransId"] == ticket.TransId.ToString() ? "event" : string.Empty;
+                            <tr>
+                                <td class="@highlightClass">
+                                    <div class="table-cell c b width120">
+                                        @BetList.refno: @ticket.TransId
+                                        <div class="time">@ticket.TransDate</div>
+                                    </div>
+                                </td>
+                                <td class="@highlightClass">
+                                    <div class="table-cell r width300">
+                                        @ticket.Stake.Format(2)
+                                    </div>
+                                </td>
+                                <td class="@highlightClass">
+                                    <div class="table-cell r width60">
+                                        @ticket.Price.Format(2)
+                                    </div>
+                                </td>
+                                <td class="@highlightClass">
+                                    <div class="table-cell r width60">
+                                        @ticket.WinLost.Format(2)
+                                    </div>
+                                </td>
+                                <td class="@highlightClass">
+                                    <div class="table-cell c width100">
+                                        @Html.Raw(ticket.StatusHtml)
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+</div>

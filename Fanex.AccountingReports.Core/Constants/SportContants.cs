@@ -77,5 +77,6 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int MacauGames = 212;
         public const int NG2 = 23;
         public const int FishingWorld = 219;
+        public const int CashOut = -3;
     }
 }
