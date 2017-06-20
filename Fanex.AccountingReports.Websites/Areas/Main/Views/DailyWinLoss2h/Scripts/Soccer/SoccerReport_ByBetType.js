@@ -102,13 +102,13 @@ SoccerReport_ByBetType.prototype.RenderReport = function (report) {
                     info.AwayTeamName + "'); return;"
                 var scoreInfoLink = '<a class="report2h-link bold" title="' + viewResources.Show_Score_Information + '" onclick="' + openScoreInfoEvent + '">' + info.MatchCode + '</a>';
                 var outRightMatchCode = '<b>' + info.MatchCode + '</b>';
-                columns.push({ Name: "ColCode", Value: isOutRightBettype ? outRightMatchCode : scoreInfoLink });
+                columns.push({ Name: "ColCode", Value: isOutRightBettype ? outRightMatchCode : scoreInfoLink });                
 
                 if (!hasAwayTeamColumn) {
-                    columns.push({ Name: "ColHomeTeamName", Value: info.HomeTeamName + (info.IsNeutral ? " " + viewResources.Symbol_NeutralSuffix : ""), MergeColNumber: 3, CellAlign: "center" });
+                    columns.push({ Name: "ColHomeTeamName", Value: info.HomeTeamName, MergeColNumber: 3, CellAlign: "center" });
                 }
                 else {
-                    columns.push({ Name: "ColHomeTeamName", Value: info.HomeTeamName + (info.IsNeutral ? " " + viewResources.Symbol_NeutralSuffix : "") });
+                    columns.push({ Name: "ColHomeTeamName", Value: info.HomeTeamName });
                     columns.push({ Name: "ColVs", Value: "-vs-" });
                     columns.push({ Name: "ColAwayTeamName", Value: info.AwayTeamName });
                 }

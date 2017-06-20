@@ -93,13 +93,14 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                                 IsNeutral = Converter.ToBool(data.IsNeutral)
                             };
 
-                            info.HomeTeamName = this._teamNameCache[info.HomeTeamId];
-                            info.AwayTeamName = this._teamNameCache[info.AwayTeamId];
-                            leagueWinLoss.GrandTotal.Add(info);                            
+                            info.HomeTeamName = this._teamNameCache[info.HomeTeamId] + GetPlayOffBettype(true, info.IsNeutral, info.MatchCode);
+                            info.AwayTeamName = this._teamNameCache[info.AwayTeamId] + GetPlayOffBettype(false, info.IsNeutral, info.MatchCode);
+
+                            leagueWinLoss.GrandTotal.Add(info);
                             leagueWinLoss.ChildsInfo.Add(info);
                         }
 
-                        report.GrandTotal.Add(leagueWinLoss.GrandTotal);                        
+                        report.GrandTotal.Add(leagueWinLoss.GrandTotal);
                         report.ChildsInfo.Add(leagueWinLoss);
                     }
 
@@ -145,7 +146,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                     }
 
                     report.ChildsInfo = report.ChildsInfo.OrderBy(sportGroup => sportGroup.Id).ToList();
-                    report.ChildsInfo.Sort(delegate(WinLossInfo infoA, WinLossInfo infoB)
+                    report.ChildsInfo.Sort(delegate (WinLossInfo infoA, WinLossInfo infoB)
                     {
                         return this.SortWinLossInfoByLeague(infoA, infoB);
                     });
@@ -160,6 +161,19 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                 SessionManager.Set<WinLossInfo>(MainConstants.DailyWinLoss2hReportByBetTypeSessionKey, null);
                 throw;
             }
+        }
+
+        private Dictionary<string, string> PlayOffBettype => new Dictionary<string, string>
+        {
+            { "(o)", "(O/U)" },            
+            { "(h)", "(HDP)" }
+        };
+
+        private string GetPlayOffBettype(bool isHome, bool isNeutral, string matchCode)
+        {
+            matchCode = matchCode.Replace(" ", string.Empty).ToLower();
+            var bettype = PlayOffBettype.FirstOrDefault(s => matchCode.Contains(s.Key)).Value ?? string.Empty;
+            return isHome && isNeutral ? $" (N) {bettype}" : $" {bettype}";
         }
 
         /// <summary>
@@ -438,11 +452,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2h
                         if (isShowEventDetail)
                         {
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.HomeTeamName +
-                                (info.IsNeutral ? " " + Labels.Symbol_NeutralSuffix : string.Empty) +
-                               (string.IsNullOrEmpty(info.AwayTeamName) ?
-                                string.Empty :
-                                Labels.Vs + info.AwayTeamName);
+                            currentCell.Value = info.HomeTeamName + Labels.Vs + info.AwayTeamName;
 
                             currentCell.Style = textStyle;
                             currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;

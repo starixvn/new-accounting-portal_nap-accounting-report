@@ -879,11 +879,23 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             };
 
             matchWinLoss.WinLossDetail.LiveIndicator = Converter.ToInt(param.liveindicator);
-            matchWinLoss.HomeTeam.Name = this.GetTeamName(matchWinLoss.HomeTeam.Id)
-                + (matchWinLoss.IsNeutral ? Labels.IsNeutral : string.Empty);
-            matchWinLoss.AwayTeam.Name = this.GetTeamName(matchWinLoss.AwayTeam.Id);
+            matchWinLoss.HomeTeam.Name = this.GetTeamName(matchWinLoss.HomeTeam.Id) + GetPlayOffBettype(true, matchWinLoss.IsNeutral, matchWinLoss.MatchCode);
+            matchWinLoss.AwayTeam.Name = this.GetTeamName(matchWinLoss.AwayTeam.Id) + GetPlayOffBettype(true, matchWinLoss.IsNeutral, matchWinLoss.MatchCode);
 
             return matchWinLoss;
+        }
+
+        private Dictionary<string, string> PlayOffBettype => new Dictionary<string, string>
+        {
+            { "(o)", "(O/U)" },
+            { "(h)", "(HDP)" }
+        };
+
+        private string GetPlayOffBettype(bool isHome, bool isNeutral, string matchCode)
+        {
+            matchCode = matchCode.Replace(" ", string.Empty).ToLower();
+            var bettype = PlayOffBettype.FirstOrDefault(s => matchCode.Contains(s.Key)).Value ?? string.Empty;
+            return isHome && isNeutral ? $" (N) {bettype}" : $" {bettype}";
         }
 
         /// <summary>
