@@ -217,7 +217,7 @@ var AccReport = function ($) {
             if (url && data) {
                 //data can be string of parameters or array/object
                 data = typeof data == 'string' ? data : $.param(data);
-                if (url.indexOf('ExportTopPunter') > 0 || url.indexOf('MAMonitorTool') > 0) {
+                if (url.indexOf('MAMonitorTool') > 0) {
                     $.fileDownload(url, { httpMethod: "POST", data: data });
                 }
                 else {

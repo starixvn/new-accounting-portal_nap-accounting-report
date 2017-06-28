@@ -120,24 +120,6 @@
   <Function Name="2h - Keno">
     <Setting Key="Main_DailyWinLoss2h_GetKenoReport_WH" SpName="Acc_Rpt_DailyWLDirect_Keno" DbName="DBDWH.bodb_dwrs.bodbAdminNet" />
   </Function>
-  <Function Name="Special - Punter Analysis">
-    <Setting Key="Special_PunterAnalysis_GetProducts" SpName="Acc_SelBettypesbySports_DW" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_PunterAnalysis_GetLeaguesBySport" SpName="Acc_TopPunterSelLeagues" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_PunterAnalysis_GetTopPunterReport" SpName="Acc_SelTopPunterSummary" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunterByUser" SpName="Acc_SelTopPunterByCustID" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunterBetCountByUser" SpName="Acc_SelBetCountByCustomer" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunterBetCountIPByUser" SpName="Acc_SelIPByCustomer" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunter_ByUser_SportType" SpName="Acc_SelTopPunterBySporttype" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
-      <Mapping DataField="Betcount" ObjectProperty="betcount" />
-      <Mapping DataField="Margin" ObjectProperty="margin" />
-    </Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunterBetCount_ByUser_BetType" SpName="Acc_SelBetCountByCustomer_Detail" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunter_ByUser_BetType" SpName="Acc_SelTopPunterByBettype" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunter_ByLeague" SpName="Acc_SelTopPunterSummaryByLeague" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
-      <Mapping DataField="Betcount" ObjectProperty="BetCount" />
-    </Setting>
-    <Setting Key="Special_PunterAnalysis_GetTopPunter_ByLeague_User" SpName="Acc_SelTopPunterBySporttypeSum" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
-  </Function>
   <Function Name="Gaming - Casino Win Loss">
     <Setting Key="Gaming_WinLoss_CS_Detail_WH" SpName="Acc_Rpt_WinlostCA_Details_Old" DbName="DBDWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
