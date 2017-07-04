@@ -34,52 +34,47 @@ namespace Fanex.BetList.Accounting.Services
         /// <returns>Match tennis object.</returns>
         public List<TennisLeagueResult> GetTennisResult(CriteriaBase criteria, string matchId, int bettypeId)
         {
-            try
-            {
-                if (criteria.IsValid())
-                {
-                    var leagues = new List<TennisLeagueResult>();
 
-                    using (var objDb = new ObjectDb(criteria.GetSettingKey()))
+            if (criteria.IsValid())
+            {
+                var leagues = new List<TennisLeagueResult>();
+
+                using (var objDb = new ObjectDb(criteria.GetSettingKey()))
+                {
+                    using (var reader = objDb.ExecuteReader(criteria.GetSpParams()))
                     {
-                        using (var reader = objDb.ExecuteReader(criteria.GetSpParams()))
+                        while (reader.Read())
+                        {
+                            var match = new TennisMatchResult();
+                            if (!matchId.Equals("-1") || (matchId.Equals("-1") && reader.ToDecimal("sporttype").Equals(5)))
+                            {
+                                this.FectchTennisMatchInfor(reader, match, matchId, bettypeId);
+                                this.InsertMatchToLeague(leagues, match);
+                            }
+                        }
+
+                        if (reader.NextResult())
                         {
                             while (reader.Read())
                             {
-                                var match = new TennisMatchResult();
-                                if (!matchId.Equals("-1") || (matchId.Equals("-1") && reader.ToDecimal("sporttype").Equals(5)))
-                                {
-                                    this.FectchTennisMatchInfor(reader, match, matchId, bettypeId);
-                                    this.InsertMatchToLeague(leagues, match);
-                                }
-                            }
-
-                            if (reader.NextResult())
-                            {
-                                while (reader.Read())
-                                {
-                                    this.InsertMatchToLeague(reader, leagues);
-                                }
+                                this.InsertMatchToLeague(reader, leagues);
                             }
                         }
                     }
-
-                    foreach (var league in leagues)
-                    {
-                        foreach (var match in league.Matchs)
-                        {
-                            this.SetMatchStatus(match);
-                            this.InsertInexistenceSetToMatch(match);
-                        }
-                    }
-
-                    return leagues;
                 }
+
+                foreach (var league in leagues)
+                {
+                    foreach (var match in league.Matchs)
+                    {
+                        this.SetMatchStatus(match);
+                        this.InsertInexistenceSetToMatch(match);
+                    }
+                }
+
+                return leagues;
             }
-            catch (Exception ex)
-            {
-                LoggingHandler.Log(ex);
-            }
+
 
             return new List<TennisLeagueResult>();
         }
@@ -282,10 +277,10 @@ namespace Fanex.BetList.Accounting.Services
 
             var isExistedSetId = match.SetResults.Find(item => item.SetDetail.ResourceId == setId) != null;
             var game = new TennisGameResult
-                {
-                    TennisGame = tennisEntity,
-                    GameId = gameId
-                };
+            {
+                TennisGame = tennisEntity,
+                GameId = gameId
+            };
 
             if (!isExistedSetId)
             {

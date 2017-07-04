@@ -109,6 +109,7 @@ namespace Fanex.AccountingReports.Websites
                 string message = ex.Message +
                     "\r\nType: " + ex.GetType().ToString() +
                     "\r\nSource: " + ex.Source +
+                    "\r\nURL: " + Request.Url +
                     "\r\nDomain: " + HttpContext.Current.Request.Headers["Host"] +
                     "\r\nForm Variable: " + formVariable +
                     "\r\nQuery String: " + Request.QueryString.ToString() +

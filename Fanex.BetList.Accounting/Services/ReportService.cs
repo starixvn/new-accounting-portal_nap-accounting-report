@@ -32,17 +32,12 @@ namespace Fanex.BetList.Accounting.Services
             get
             {
                 BalanceUp balanceUp = null;
-                try
+
+                using (ObjectDb objDb = new ObjectDb("Core_ReportService_GetBalanceUpDay"))
                 {
-                    using (ObjectDb objDb = new ObjectDb("Core_ReportService_GetBalanceUpDay"))
-                    {
-                        balanceUp = objDb.QueryEntity<BalanceUp>();
-                    }
+                    balanceUp = objDb.QueryEntity<BalanceUp>();
                 }
-                catch (Exception ex)
-                {
-                    LoggingHandler.Log(ex);
-                }
+
 
                 return balanceUp;
             }

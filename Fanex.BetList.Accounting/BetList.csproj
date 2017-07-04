@@ -219,7 +219,6 @@
     <Compile Include="Core\CacheManager.cs" />
     <Compile Include="Core\CacheRef.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
-    <Compile Include="Core\LoggingHandler.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />
     <Compile Include="Core\SessionManager.cs" />
     <Compile Include="Criteria\BetListByRefNoCriteria.cs" />
