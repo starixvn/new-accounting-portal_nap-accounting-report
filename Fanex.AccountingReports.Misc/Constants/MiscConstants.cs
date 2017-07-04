@@ -21,6 +21,7 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int MiscOtherSportId = 999;
         public const int MiscParLaySportId = -9;
         public const int MiscVirtualSportsId = 5;
+        public const int MiscBetradarVirtualSportsId = 27;
         public const int MiscSportbookId = 1;
         public const int MiscNG2ProductID = 23;
 
@@ -38,7 +39,8 @@ namespace Fanex.AccountingReports.Misc.Constants
         {
             "sportsbook",
             "virtual sports",
-            "ng2"
+            "ng2",
+            "betradar virtual sports"
         };
 
         /// <summary>

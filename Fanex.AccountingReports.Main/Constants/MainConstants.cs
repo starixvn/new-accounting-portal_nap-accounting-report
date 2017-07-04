@@ -25,6 +25,8 @@ namespace Fanex.AccountingReports.Main.Common
 
         public const int WinLossSummaryVirtualSportId = -200;
 
+        public const int WinLossSummaryBetradarVirtualSportId = -201;
+
         public const int WinLossSummaryMaxSportbookId = 99;
 
         public const int WinLossSummaryKenoSportId = 202;
@@ -32,7 +34,12 @@ namespace Fanex.AccountingReports.Main.Common
         // Range ID of Virtual Sport
         public const int WinLossSummaryBeginVirtualSportId = 180;
 
-        public const int WinLossSummaryEndVirtualSportId = 190;
+        public const int WinLossSummaryEndVirtualSportId = 186;
+
+        // Range ID of Betradar Virtual Sports
+        public const int WinLossSummaryBeginBetradarVirtualSportId = 190;
+
+        public const int WinLossSummaryEndBetradarVirtualSportId = 199;
 
         // Sport Ids that don't need to show detail link
         public const int WinLossSumamryCasinoSportId = 251;
