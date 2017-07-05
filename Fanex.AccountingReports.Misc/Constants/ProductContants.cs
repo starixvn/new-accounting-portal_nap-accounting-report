@@ -36,6 +36,8 @@ namespace Fanex.AccountingReports.Misc.Constants
 
         public const int NG2 = 213;
 
+        public const int Lottery = 220;
+
         public const int MetricGamingSuperlive = -1;
     }
 }

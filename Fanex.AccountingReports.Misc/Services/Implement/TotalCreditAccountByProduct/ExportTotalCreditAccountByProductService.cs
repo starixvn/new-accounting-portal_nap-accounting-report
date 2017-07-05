@@ -450,6 +450,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     product = Labels.NG2;
                     break;
 
+                case ProductContants.Lottery:
+                    product = "Lottery";
+                    break;
+
                 default:
                     break;
             }
