@@ -174,6 +174,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             catch (Exception ex)
             {
                 HandleException(ex);
+                throw;
             }
 
             return result;
@@ -276,6 +277,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             catch (Exception ex)
             {
                 HandleException(ex);
+                throw;
             }
 
             return result;

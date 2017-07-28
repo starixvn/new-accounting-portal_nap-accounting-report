@@ -56,31 +56,19 @@ Fanex.AccountingReports.Special.CheckBet.NormalChangedTickets = function () {
     };
 
       self.getNormalTickets = function (checkDate) {
-       
-        AccReport.disableInput();
-        $.ajax({
-            type: "POST",
-            url: window.rootUrl + "Special/CheckBet/SelNormalTickets",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify({
-                WinLossDate: checkDate,
-                TicketType: 1
-            }),
-            beforeSend: function () {
-                AccReport.disableInput();
-            },
-            success: function (rs) {
-                self.renderReport(rs);
-            },
-            error: function (event, jqXHR, ajaxSettings) {
-                self.renderReport(null);
-            },
-            complete: function () {
-                AccReport.enableInput();
-            }
-        });
-       
+          var data = {
+              WinLossDate: checkDate,
+              TicketType: 1
+          };
+
+          AccReport.disableInput();
+
+          AccReport.utility.CallAjax(this,
+                                 window.rootUrl + "Special/CheckBet/SelNormalTickets",
+                                 data,
+                                 self.renderReport,
+                                 self.renderReport,
+                                 AccReport.enableInput);
     };
 
     self.renderReport = function(report){

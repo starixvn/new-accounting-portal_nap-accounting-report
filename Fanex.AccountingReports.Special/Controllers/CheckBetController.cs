@@ -9,6 +9,7 @@
 
 namespace Fanex.AccountingReports.Special.Controllers
 {
+    using Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Core.Web.Security;
     using Fanex.AccountingReports.Special.Criteria.CheckBet;
@@ -47,6 +48,7 @@ namespace Fanex.AccountingReports.Special.Controllers
         }
 
         [HttpPost]
+        [HandleAjaxError]
         public JsonResult SelNormalTickets(CheckBetCriteria checkBetCriteria)
         {
             var result = this._checkBetService.GetNormalChangedTicket(checkBetCriteria);
@@ -54,6 +56,7 @@ namespace Fanex.AccountingReports.Special.Controllers
         }
 
         [HttpPost]
+        [HandleAjaxError]
         public JsonResult SelRejectTickets(CheckBetCriteria checkBetCriteria)
         {
             var result = this._checkBetService.GetRejectChangedTicket(checkBetCriteria);
