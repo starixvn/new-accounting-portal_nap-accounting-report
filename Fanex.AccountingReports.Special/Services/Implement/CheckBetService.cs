@@ -521,6 +521,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     break;
 
                 case 9:
+                case 2799:
                     result = "Mix Parlay";
 
                     break;
