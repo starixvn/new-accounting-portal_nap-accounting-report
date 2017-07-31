@@ -533,11 +533,11 @@ namespace Fanex.AccountingReports.Special.Services.Implement
 
                 case 2703:
                 case 2704:
-                    if (betTeam.ToLower().Equals("h"))
+                    if (betTeam.ToLower().Equals("o"))
                     {
                         result = "Over";
                     }
-                    if (betTeam.ToLower().Equals("a"))
+                    if (betTeam.ToLower().Equals("u"))
                     {
                         result = "Under";
                     }
@@ -546,11 +546,11 @@ namespace Fanex.AccountingReports.Special.Services.Implement
 
                 case 2705:
                 case 2706:
-                    if (betTeam.ToLower().Equals("o"))
+                    if (betTeam.ToLower().Equals("h"))
                     {
                         result = homeTeam;
                     }
-                    if (betTeam.ToLower().Equals("u"))
+                    if (betTeam.ToLower().Equals("a"))
                     {
                         result = awayTeam;
                     }
