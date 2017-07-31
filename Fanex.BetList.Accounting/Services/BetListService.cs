@@ -86,7 +86,8 @@ namespace Fanex.BetList.Accounting.Services
                     IsNeutral = Converter.ToBool(r["isNeutral"]),
                     BetCheck = Converter.ToString2(r["BetCheck"]),
                     Stake = Converter.ToDecimal(r["Stake"]),
-                    Currency = Converter.ToString2(r["Currency"])
+                    Currency = Converter.ToString2(r["Currency"]),
+                    TransDesc = Converter.ToString2(r["TransDesc"])
                 },
                 ChoiceHtml = string.Empty,
                 OddHtml = string.Empty,
