@@ -217,7 +217,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                 continue;
             }
 
-            if (productGroup.Name.toLowerCase() == "betradar virtual sports") {
+            if (productGroup.Name.toLowerCase() == "virtual sports 2") {
                 ddProduct.push({
                     id: "#" + ddId + "_Product27",
                     value: "27_0",

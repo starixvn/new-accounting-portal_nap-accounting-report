@@ -40,7 +40,7 @@ namespace Fanex.AccountingReports.Misc.Constants
             "sportsbook",
             "virtual sports",
             "ng2",
-            "betradar virtual sports"
+            "virtual sports 2"
         };
 
         /// <summary>

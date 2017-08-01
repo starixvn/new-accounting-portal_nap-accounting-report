@@ -294,7 +294,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                             sportInfo.Id <= MainConstants.WinLossSummaryEndBetradarVirtualSportId)
                         {
                             betInfo.Name = sportInfo.Name;
-                            sportInfo.Name = "Betradar Virtual Sports";
+                            sportInfo.Name = "Virtual Sports 2";
                             winloss.Id = sportId;
                         }
                         else
@@ -478,7 +478,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         sportInfo.Id <= MainConstants.WinLossSummaryEndBetradarVirtualSportId)
                     {
                         betInfo.Name = sportInfo.Name;
-                        sportInfo.Name = "Betradar Virtual Sports";
+                        sportInfo.Name = "Virtual Sports 2";
                         winloss.Id = sportId;
                     }
                     else
