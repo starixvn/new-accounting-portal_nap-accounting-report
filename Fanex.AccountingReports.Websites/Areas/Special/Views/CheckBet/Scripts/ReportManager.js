@@ -208,6 +208,7 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
                         }
 
                         parlayContent.css("display", "block").html(rs);
+                        $("div[id^='divEvent'] .ticketDetailContent").removeClass("display-none");
                         self.betlistgridOpts.isResetScroller = false;
                         grid.gridScroller(self.betlistgridOpts);
                     }
@@ -221,7 +222,7 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
         }
         else {
             parlayContent.toggle();
-
+       
             if (parlayContent.css("display") == "block") {
                 $("div[id^='combinationOfferName']").addClass("display-none");
             } else {

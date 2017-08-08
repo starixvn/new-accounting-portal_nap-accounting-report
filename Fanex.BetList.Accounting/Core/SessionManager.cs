@@ -9,6 +9,7 @@
 
 namespace Fanex.BetList.Accounting.Core
 {
+    using Logging;
     using System;
     using System.Web;
 
@@ -25,14 +26,7 @@ namespace Fanex.BetList.Accounting.Core
         /// <param name="value">Value to session with specific type.</param>
         public static void Set<T>(string sessionKey, T value)
         {
-            try
-            {
-                HttpContext.Current.Session[sessionKey] = value;
-            }
-            catch (Exception ex)
-            {
-                LoggingHandler.Log(ex);
-            }
+            HttpContext.Current.Session[sessionKey] = value;
         }
 
         /// <summary>

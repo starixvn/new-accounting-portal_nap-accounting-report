@@ -20,7 +20,30 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
     [Serializable]
     public class SportTypeWinLossInfo
     {
-        private readonly List<int> sportIdsWithoutDetails;
+        private static readonly List<int> SportIdsWithoutDetails = new List<int>
+        {
+            MainConstants.WinLossSumamryCasinoSportId,
+            MainConstants.WinLossSummaryLiveCasinoSportId,
+            MainConstants.WinLossSummaryBingoSportId,
+            MainConstants.WinLossSummaryP2PSportId,
+            MainConstants.WinLossSummaryMixParlaySportId,
+            MainConstants.WinLossSummarySystemParlaySportId,
+            MainConstants.WinLossSummaryKenoSportId,
+            SportContants.GoldDeluxe,
+            SportContants.MicrogamingLiveCasino,
+            SportContants.MicrogamingRNGCasino,
+            SportContants.AGCasino,
+            SportContants.Macau,
+            SportContants.Bettrade,
+            SportContants.ColossusBet,
+            SportContants.Allbet,
+            SportContants.MacauGames,
+            SportContants.NG2,
+            SportContants.FishingWorld,
+            SportContants.CashOut,
+            SportContants.Lottery,
+            MainConstants.WinLossSummaryBetradarVirtualSportId
+        };
 
         public SportTypeWinLossInfo()
         {
@@ -39,29 +62,6 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                 RealTurnover = 0,
                 VirtualTurnover = 0,
             };
-
-            sportIdsWithoutDetails = new List<int>
-            {
-                MainConstants.WinLossSumamryCasinoSportId,
-                MainConstants.WinLossSummaryLiveCasinoSportId,
-                MainConstants.WinLossSummaryBingoSportId,
-                MainConstants.WinLossSummaryP2PSportId,
-                MainConstants.WinLossSummaryMixParlaySportId,
-                MainConstants.WinLossSummarySystemParlaySportId,
-                MainConstants.WinLossSummaryKenoSportId,
-                SportContants.GoldDeluxe,
-                SportContants.MicrogamingLiveCasino,
-                SportContants.MicrogamingRNGCasino,
-                SportContants.AGCasino,
-                SportContants.Macau,
-                SportContants.Bettrade,
-                SportContants.ColossusBet,
-                SportContants.Allbet,
-                SportContants.MacauGames,
-                SportContants.NG2,
-                SportContants.FishingWorld,
-                SportContants.CashOut
-            };
         }
 
         public int Id { get; set; }
@@ -72,7 +72,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
         {
             get
             {
-                return !sportIdsWithoutDetails.Contains(Id);
+                return !SportIdsWithoutDetails.Contains(Id);
             }
         }
 

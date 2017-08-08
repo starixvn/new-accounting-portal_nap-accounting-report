@@ -781,6 +781,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             CreateSportBookGroups(rawData, sports);
             CreateVirtualSportGroup(rawData, sports);
             CreateNG2SportGroup(rawData, sports);
+            CreateBetradarVirtualSportGroup(rawData, sports);
 
             return sports;
         }
@@ -803,6 +804,18 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         public List<ProductInfo> CreateVirtualSportGroup(IEnumerable<dynamic> rawData, List<ProductInfo> sports)
         {
             var virtualsportRaw = rawData.Where(r => r.ProductID == MiscConstants.MiscVirtualSportsId);
+            var virtualsportGroups = virtualsportRaw.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
+            foreach (var virtualsportGroup in virtualsportGroups)
+            {
+                sports.Add(AddSportGroup(virtualsportGroup));
+            }
+
+            return sports;
+        }
+
+        public List<ProductInfo> CreateBetradarVirtualSportGroup(IEnumerable<dynamic> rawData, List<ProductInfo> sports)
+        {
+            var virtualsportRaw = rawData.Where(r => r.ProductID == MiscConstants.MiscBetradarVirtualSportsId);
             var virtualsportGroups = virtualsportRaw.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
             foreach (var virtualsportGroup in virtualsportGroups)
             {

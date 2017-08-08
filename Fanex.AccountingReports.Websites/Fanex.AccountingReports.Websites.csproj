@@ -71,7 +71,7 @@
       <HintPath>..\_Dependencies\ExcelUtil.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.BetList.BetTrade, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.36.2.0\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
+      <HintPath>..\packages\Fanex.BetList.Core.2.38.0-beta4\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.BetList.CashOut, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
@@ -82,8 +82,8 @@
       <HintPath>..\packages\Fanex.BetList.ColossusBets.1.0.1.7\lib\net40\Fanex.BetList.ColossusBets.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.BetList.Core, Version=2.36.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.36.2.0\lib\net40\Fanex.BetList.Core.dll</HintPath>
+    <Reference Include="Fanex.BetList.Core, Version=2.38.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.BetList.Core.2.38.0-beta4\lib\net40\Fanex.BetList.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.BetList.MetricGaming, Version=1.0.4.4, Culture=neutral, processorArchitecture=MSIL">
@@ -101,8 +101,8 @@
       <HintPath>..\packages\Fanex.BetList.NumberGame.1.0.0.5-beta\lib\net40\Fanex.BetList.NumberGame.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.BetList.VirtualSports, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.VirtualSports.1.0.0.1\lib\net40\Fanex.BetList.VirtualSports.dll</HintPath>
+    <Reference Include="Fanex.BetList.VirtualSports, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.BetList.VirtualSports.1.1.1.0-beta1\lib\net40\Fanex.BetList.VirtualSports.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Caching, Version=1.0.404.95, Culture=neutral, processorArchitecture=MSIL">
@@ -137,16 +137,16 @@
       <HintPath>..\packages\Fanex.NAP.Core.Client.1.1.0.5\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.Result.Core, Version=2.0.8.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.8.2\lib\net40\Fanex.Result.Core.dll</HintPath>
+    <Reference Include="Fanex.Result.Core, Version=2.0.8.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.8.5-beta\lib\net40\Fanex.Result.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Result.Core.AGCasino, Version=1.0.0.7, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Result.Core.AGCasino.1.0.0.7\lib\net40\Fanex.Result.Core.AGCasino.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.Result.Core.Base, Version=2.0.8.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.8.2\lib\net40\Fanex.Result.Core.Base.dll</HintPath>
+    <Reference Include="Fanex.Result.Core.Base, Version=2.0.8.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.0.8.5-beta\lib\net40\Fanex.Result.Core.Base.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Result.Core.GoldDeluxe, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -173,8 +173,8 @@
       <HintPath>..\packages\Fanex.Result.Core-Racing.1.0.0.9\lib\net40\Fanex.Result.Core.Racing.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.Result.Core.Sportsbook, Version=1.0.8.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Result.Core-Sportsbook.1.0.8.5-beta3\lib\net40\Fanex.Result.Core.Sportsbook.dll</HintPath>
+    <Reference Include="Fanex.Result.Core.Sportsbook, Version=1.0.8.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Result.Core-Sportsbook.1.0.8.8-beta\lib\net40\Fanex.Result.Core.Sportsbook.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -371,267 +371,81 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Content Include="App_Data\DEV\DBBET.bk.bodbAdminNet.xml">
+    <Content Include="App_Data\TEST\DBBET.bk.bodbAdminNet.xml">
       <SubType>
       </SubType>
     </Content>
-    <Content Include="App_Data\DEV\DBNAP.bodb_NAP.bodbAdminNet.xml" />
-    <Content Include="App_Data\LOCAL\DBBET.bk.bodbAdminNet.xml">
+    <Content Include="App_Data\TEST\DBNAP.bodb_NAP.bodbAdminNet.xml" />
+    <Content Include="App_Data\TEST\DBPOLICY.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\TEST\DBONUSER.bodb02.bodbAdminNet.xml">
       <SubType>
       </SubType>
     </Content>
-    <Content Include="App_Data\LOCAL\DBNAP.bodb_NAP.bodbAdminNet.xml" />
-    <Content Include="App_Data\MASTER\DBBET.bk.bodbAdminNet.xml">
+    <Content Include="App_Data\TEST\DBACC.bodb02.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\TEST\DBACC.bodb_ACC.bodbAdminNet.xml" />
+    <Content Include="App_Data\TEST\DBAGE.bodb02.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\TEST\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\TEST\DBDWHBODB02.bodb02.bodbAdminNet.xml">
       <SubType>
       </SubType>
     </Content>
-    <Content Include="App_Data\DEV\DBPOLICY.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\LOCAL\DBPOLICY.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\MASTER\DBNAP.bodb_NAP.bodbAdminNet.xml" />
-    <Content Include="App_Data\MASTER\DBPOLICY.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBACC.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\TEST\DBEXT.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\MNL\DBACC.bodb_ACC.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBAGE.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\TEST\DBLIC.bodb_Licensee.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\MNL\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+    <Content Include="App_Data\TEST\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
+    <Content Include="App_Data\TEST\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
+    <Content Include="App_Data\TEST\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\TEST\DBRPT.bodb_Report.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\MNL\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBBET.bk.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBEXT.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\MNL\DBLIC.bodb_Licensee.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\MNL\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBNAP.bodb_NAP.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBONUSER.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBONUSER.ON_USER.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBPOLICY.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBRPT.bodb_Report.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\MNL\DBTXN.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBCUST.CustDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\MNL\DBCUST.IPDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\DEV\DBACC.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\DEV\DBACC.bodb_ACC.bodbAdminNet.xml" />
-    <Content Include="App_Data\DEV\DBAGE.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\DEV\DBDWH.bodb_dwrs.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\DEV\DBDWHBODB02.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\TEST\DBTXN.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\TEST\DBCUST.CustDB.bodbAdminNet.xml">
       <SubType>
       </SubType>
     </Content>
-    <Content Include="App_Data\DEV\DBEXT.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\DEV\DBLIC.bodb_Licensee.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\DEV\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
-    <Content Include="App_Data\DEV\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\DEV\DBONUSER.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\TEST\DBCUST.IPDB.bodbAdminNet.xml">
       <SubType>
       </SubType>
     </Content>
-    <Content Include="App_Data\DEV\DBONUSER.ON_USER.bodbAdminNet.xml" />
-    <Content Include="App_Data\DEV\DBRPT.bodb_Report.bodbAdminNet.xml">
+    <Content Include="App_Data\LIVE\DBACC.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\DEV\DBTXN.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\DEV\DBCUST.CustDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\DEV\DBCUST.IPDB.bodbAdminNet.xml">
-      <SubType>
-      </SubType>
-    </Content>
-    <Content Include="App_Data\LOCAL\DBONUSER.bodb02.bodbAdminNet.xml">
-      <SubType>
-      </SubType>
-    </Content>
-    <Content Include="App_Data\MASTER\DBACC.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\LIVE\DBACC.bodb_ACC.bodbAdminNet.xml" />
+    <Content Include="App_Data\LIVE\DBAGE.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\MASTER\DBACC.bodb_ACC.bodbAdminNet.xml" />
-    <Content Include="App_Data\MASTER\DBAGE.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\LIVE\DBDWH.bodb_dwrs.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\MASTER\DBDWH.bodb_dwrs.bodbAdminNet.xml">
+    <Content Include="App_Data\LIVE\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\LIVE\DBBET.bk.bodbAdminNet.xml" />
+    <Content Include="App_Data\LIVE\DBEXT.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\MASTER\DBDWHBODB02.bodb02.bodbAdminNet.xml">
-      <SubType>
-      </SubType>
-    </Content>
-    <Content Include="App_Data\MASTER\DBEXT.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\LIVE\DBLIC.bodb_Licensee.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\MASTER\DBLIC.bodb_Licensee.bodbAdminNet.xml">
+    <Content Include="App_Data\LIVE\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
+    <Content Include="App_Data\LIVE\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
+    <Content Include="App_Data\LIVE\DBNAP.bodb_NAP.bodbAdminNet.xml" />
+    <Content Include="App_Data\LIVE\DBONUSER.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\LIVE\DBONUSER.ON_USER.bodbAdminNet.xml" />
+    <Content Include="App_Data\LIVE\DBPOLICY.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\LIVE\DBRPT.bodb_Report.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\MASTER\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
-    <Content Include="App_Data\MASTER\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\MASTER\DBONUSER.bodb02.bodbAdminNet.xml">
-      <SubType>
-      </SubType>
-    </Content>
-    <Content Include="App_Data\MASTER\DBONUSER.ON_USER.bodbAdminNet.xml" />
-    <Content Include="App_Data\MASTER\DBRPT.bodb_Report.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\MASTER\DBTXN.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\MASTER\DBCUST.CustDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\MASTER\DBCUST.IPDB.bodbAdminNet.xml">
-      <SubType>
-      </SubType>
-    </Content>
-    <Content Include="App_Data\LOCAL\DBACC.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\LOCAL\DBACC.bodb_ACC.bodbAdminNet.xml" />
-    <Content Include="App_Data\LOCAL\DBAGE.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\LOCAL\DBDWH.bodb_dwrs.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\LOCAL\DBDWHBODB02.bodb02.bodbAdminNet.xml">
-      <SubType>
-      </SubType>
-    </Content>
-    <Content Include="App_Data\LOCAL\DBEXT.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\LOCAL\DBLIC.bodb_Licensee.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\LOCAL\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
-    <Content Include="App_Data\LOCAL\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\LOCAL\DBONUSER.ON_USER.bodbAdminNet.xml" />
-    <Content Include="App_Data\LOCAL\DBRPT.bodb_Report.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\LOCAL\DBTXN.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\LOCAL\DBCUST.CustDB.bodbAdminNet.xml">
-      <SubType>
-      </SubType>
-    </Content>
-    <Content Include="App_Data\LOCAL\DBCUST.IPDB.bodbAdminNet.xml">
-      <SubType>
-      </SubType>
-    </Content>
-    <Content Include="App_Data\PRO\DBACC.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\PRO\DBACC.bodb_ACC.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBAGE.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\PRO\DBDWH.bodb_dwrs.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\PRO\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBBET.bk.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBEXT.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\PRO\DBLIC.bodb_Licensee.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\PRO\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBNAP.bodb_NAP.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBONUSER.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBONUSER.ON_USER.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBPOLICY.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBRPT.bodb_Report.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\PRO\DBTXN.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBCUST.CustDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\PRO\DBCUST.IPDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBACC.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\SIT\DBACC.bodb_ACC.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBAGE.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\SIT\DBBET.bk.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBCUST.CustDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBCUST.IPDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBDWH.bodb_dwrs.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\SIT\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBEXT.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\SIT\DBLIC.bodb_Licensee.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\SIT\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBNAP.bodb_NAP.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBONUSER.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBONUSER.ON_USER.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBPOLICY.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\SIT\DBRPT.bodb_Report.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\SIT\DBTXN.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBACC.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\UAT\DBACC.bodb_ACC.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBAGE.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\UAT\DBDWH.bodb_dwrs.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\UAT\DBDWHBODB02.bodb02.bodbAdminNet.xml">
-      <SubType>
-      </SubType>
-    </Content>
-    <Content Include="App_Data\UAT\DBBET.bk.bodbAdminNet.xml">
-      <SubType>
-      </SubType>
-    </Content>
-    <Content Include="App_Data\UAT\DBEXT.bodb02.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\UAT\DBLIC.bodb_Licensee.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\UAT\DBLOG.bodb_CustomerLog.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBMA.bodb_Maintenance.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBNAP.bodb_NAP.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBONUSER.bodb02.bodbAdminNet.xml">
-      <SubType>
-      </SubType>
-    </Content>
-    <Content Include="App_Data\UAT\DBONUSER.ON_USER.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBPOLICY.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBRPT.bodb_Report.bodbAdminNet.xml">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="App_Data\UAT\DBTXN.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBCUST.CustDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\UAT\DBCUST.IPDB.bodbAdminNet.xml">
-      <SubType>
-      </SubType>
-    </Content>
+    <Content Include="App_Data\LIVE\DBTXN.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\LIVE\DBCUST.CustDB.bodbAdminNet.xml" />
+    <Content Include="App_Data\LIVE\DBCUST.IPDB.bodbAdminNet.xml" />
     <Content Include="App_Readme\Transformer.NET\LICENSE.txt" />
     <Content Include="App_Readme\Transformer.NET\README.txt" />
     <Content Include="Areas\Balance\Views\CompanyBalanceDifference\Index.cshtml" />
@@ -899,25 +713,7 @@
     <Content Include="Areas\Racing\Views\NumberOfActiveMembersForRacing\Scripts\NumberOfActiveMembers.js" />
     <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Scripts\RacingDailyReport.js" />
     <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Scripts\RacingDailyReportApply50Percent.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Images\setting.png" />
     <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Scripts\ReportManager.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\DatepickerManager.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\ReportManager.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterBetCountByUser.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterBetCount_ByLeague_BetType.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterBetCount_ByLeague_SportType.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterBetCount_ByLeague_User.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterBetCount_ByUser_BetType.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterBetCount_ByUser_SportType.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterByUser.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunterIPByUser.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunter_ByLeague.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunter_ByLeague_BetType.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunter_ByLeague_SportType.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunter_ByLeague_User.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunter_ByUser_BetType.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\TopPunter_ByUser_SportType.js" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Scripts\WeekPickerManager.js" />
     <Content Include="Areas\Special\Views\SaveBetReport\Images\download.png" />
     <Content Include="Areas\Special\Views\ReportingServices\Images\excel.gif" />
     <Content Include="Areas\Special\Views\ReportingServices\Images\excel.png" />
@@ -2160,15 +1956,12 @@
     <Content Include="Areas\Special\Views\MarginReport\Index.cshtml" />
     <Content Include="Areas\Special\Views\DailyTurnover\Styles\DailyTurnover.less" />
     <Content Include="Areas\Special\Views\ParlayWon\ParlayWon.less" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\TopPunter_ByUser_BetType_MonthRangeSummary.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Index.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchAnalysisByAgent.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchAnalysisByMaster.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchAnalysisByMember.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchAnalysisNormal.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchSelection.cshtml" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Styles\PunterAnalysis.less" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\TopPunter_ByLeague_BetType_MonthRangeSummary.cshtml" />
     <Content Include="Areas\Special\Views\SaveBetReport\Index.cshtml" />
     <Content Include="Areas\Special\Views\ReportingServices\Index.cshtml" />
     <Content Include="Areas\Special\Views\SMATurnover\Index.cshtml" />
@@ -2246,7 +2039,6 @@
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisSporting\_TennisMatchSporting.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisSporting\_TennisSetSporting.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisSporting\_TennisSportting.cshtml" />
-    <Content Include="Areas\Special\Views\PunterAnalysis\Index.cshtml" />
     <Content Include="Views\Test\Style\TotalTransactions.less" />
     <Content Include="Areas\UserControl\Views\User\ChangePassword.cshtml" />
     <Content Include="Areas\UserControl\Views\User\UserProfile.cshtml" />

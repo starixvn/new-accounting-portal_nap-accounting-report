@@ -45,24 +45,17 @@ namespace Fanex.BetList.Accounting.Services
         /// </returns>
         public ScoreInformation GetScoreInfo(GetScoreInformationCriteria criteria)
         {
-            ScoreInformation scoreInformation = new ScoreInformation();
-            try
+            var scoreInformation = new ScoreInformation();
+            Hashtable outputParams = new Hashtable();
+            var sportsBooks = this._repository.GetScoreInformation(criteria, ref outputParams);
+            scoreInformation.TraderName = Converter.ToString2(outputParams["tradername"]);
+            if (criteria.SportType != (int)SportType.Tennis || sportsBooks[0].GameDetails[0].MatchId == 0)
             {
-                Hashtable outputParams = new Hashtable();
-                var sportsBooks = this._repository.GetScoreInformation(criteria, ref outputParams);
-                scoreInformation.TraderName = Converter.ToString2(outputParams["tradername"]);
-                if (criteria.SportType != (int)SportType.Tennis || sportsBooks[0].GameDetails[0].MatchId == 0)
-                {
-                    scoreInformation.MatchInformation = ResultEngine.HtmlParser(sportsBooks, this.GetFanexResultSetting(criteria)).Replace("original-title", " title ");
-                    return scoreInformation;
-                }
+                scoreInformation.MatchInformation = ResultEngine.HtmlParser(sportsBooks, this.GetFanexResultSetting(criteria)).Replace("original-title", " title ");
+                return scoreInformation;
+            }
 
-                scoreInformation.MatchInformation = ResultEngine.HtmlGameDetailParser(sportsBooks[0], this.GetFanexResultSetting(criteria));
-            }
-            catch (Exception exception)
-            {
-                LoggingHandler.Log(exception);
-            }
+            scoreInformation.MatchInformation = ResultEngine.HtmlGameDetailParser(sportsBooks[0], this.GetFanexResultSetting(criteria));
 
             return scoreInformation;
         }

@@ -48,7 +48,23 @@
 
         #region For Webconfig file
 
-		public string NapEnvironment
+	   public string FanexDataPath
+	   {
+		  get
+            {
+                switch(Environment)
+                {
+				case SiteEnvironment.MASTER:
+                    case SiteEnvironment.PRO:
+                    case SiteEnvironment.MNL:
+                        return "LIVE";
+				default:
+                        return "TEST";
+                }
+            }
+	   }
+	   
+	   public string NapEnvironment
         {
             get
             {

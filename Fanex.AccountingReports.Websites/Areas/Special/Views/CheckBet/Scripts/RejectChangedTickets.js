@@ -54,30 +54,19 @@ Fanex.AccountingReports.Special.CheckBet.RejectChangedTickets = function () {
     };
 
     self.getRejectTickets = function (checkDate) {
-       
+        var data = {
+            WinLossDate: checkDate,
+            TicketType: 2
+        };
+
         AccReport.disableInput();
-        $.ajax({
-            type: "POST",
-            url: window.rootUrl + "Special/CheckBet/SelRejectTickets",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify({
-                WinLossDate: checkDate,
-                TicketType: 2
-            }),
-            beforeSend: function () {
-                AccReport.disableInput();
-            },
-            success: function (rs) {
-                self.renderReport(rs);
-            },
-            error: function (event, jqXHR, ajaxSettings) {
-                self.renderReport(null);
-            },
-            complete: function () {
-                AccReport.enableInput();
-            }
-        });
+
+        AccReport.utility.CallAjax(this,
+                                  window.rootUrl + "Special/CheckBet/SelRejectTickets",
+                                  data,
+                                  self.renderReport,
+                                  self.renderReport,
+                                  AccReport.enableInput);
        
     };
     self.renderReport = function(report){
@@ -96,9 +85,9 @@ Fanex.AccountingReports.Special.CheckBet.RejectChangedTickets = function () {
         }
 
         _tables.report.removeClass("display-none")
-                      .gridScroller(_options.report);
+                  .gridScroller(_options.report);
 
-         
+
         _tables.reportHeader.removeClass("display-none");
     };
       self.TempHtml = {

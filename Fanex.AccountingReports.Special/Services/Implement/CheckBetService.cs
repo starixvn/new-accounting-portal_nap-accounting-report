@@ -174,6 +174,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             catch (Exception ex)
             {
                 HandleException(ex);
+                throw;
             }
 
             return result;
@@ -276,6 +277,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             catch (Exception ex)
             {
                 HandleException(ex);
+                throw;
             }
 
             return result;
@@ -519,12 +521,39 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     break;
 
                 case 9:
+                case 2799:
                     result = "Mix Parlay";
 
                     break;
 
                 case 29:
                     result = "System Parlay";
+
+                    break;
+
+                case 2703:
+                case 2704:
+                    if (betTeam.ToLower().Equals("o"))
+                    {
+                        result = "Over";
+                    }
+                    if (betTeam.ToLower().Equals("u"))
+                    {
+                        result = "Under";
+                    }
+
+                    break;
+
+                case 2705:
+                case 2706:
+                    if (betTeam.ToLower().Equals("h"))
+                    {
+                        result = homeTeam;
+                    }
+                    if (betTeam.ToLower().Equals("a"))
+                    {
+                        result = awayTeam;
+                    }
 
                     break;
 

@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Functions>
-  <Function Name="User Account">
-    <Setting Key="Acc_AdminGroupSel" SpName="Acc_AdminGroupSel" DbName="DBPOLICY.bodb02.bodbAdminNet"  />
-  </Function>
-</Functions>
-
-

@@ -290,6 +290,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                             sportInfo.Name = Labels.VirtualSport;
                             winloss.Id = sportId;
                         }
+                        else if (sportInfo.Id >= MainConstants.WinLossSummaryBeginBetradarVirtualSportId &&
+                            sportInfo.Id <= MainConstants.WinLossSummaryEndBetradarVirtualSportId)
+                        {
+                            betInfo.Name = sportInfo.Name;
+                            sportInfo.Name = "Virtual Sports 2";
+                            winloss.Id = sportId;
+                        }
                         else
                         {
                             betInfo.Name = this.GetBetType(winloss.Id);
@@ -347,6 +354,21 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 {
                     virtualSport.BetTypeWinLosses.Add(betInfo);
                     virtualSport.CalculateTotal(winloss);
+                }
+            }
+            else if (sportInfo.Id >= MainConstants.WinLossSummaryBeginBetradarVirtualSportId && sportInfo.Id <= MainConstants.WinLossSummaryEndBetradarVirtualSportId)
+            {
+                SportTypeWinLossInfo betradarVirtualSport = report.SportTypeWinLosses.FirstOrDefault(sport => sport.Id == MainConstants.WinLossSummaryBetradarVirtualSportId);
+                if (betradarVirtualSport == null)
+                {
+                    sportInfo.Id = MainConstants.WinLossSummaryBetradarVirtualSportId;
+                    betradarVirtualSport = sportInfo;
+                    report.SportTypeWinLosses.Add(betradarVirtualSport);
+                }
+                else
+                {
+                    betradarVirtualSport.BetTypeWinLosses.Add(betInfo);
+                    betradarVirtualSport.CalculateTotal(winloss);
                 }
             }
             else
@@ -450,6 +472,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                     {
                         betInfo.Name = sportInfo.Name;
                         sportInfo.Name = Labels.VirtualSport;
+                        winloss.Id = sportId;
+                    }
+                    else if (sportInfo.Id >= MainConstants.WinLossSummaryBeginBetradarVirtualSportId &&
+                        sportInfo.Id <= MainConstants.WinLossSummaryEndBetradarVirtualSportId)
+                    {
+                        betInfo.Name = sportInfo.Name;
+                        sportInfo.Name = "Virtual Sports 2";
                         winloss.Id = sportId;
                     }
                     else
