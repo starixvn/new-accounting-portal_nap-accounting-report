@@ -8,6 +8,8 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
         btnGenerate: null,
         btnDetail: null,
         btnSummary: null,
+        btnDetailPH: null,
+        btnSummaryPH: null,
         reportContainer: null,
         report: null,
         reportHeader: null,
@@ -125,6 +127,8 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
         _tables.btnGenerate = $("#btnGenerate");
         _tables.btnDetail = $("#btnDetailReport");
         _tables.btnSummary = $("#btnSummarylReport");
+        _tables.btnDetailPH = $("#btnDetailPH");
+        _tables.btnSummaryPH = $("#btnSummaryPH");
 
         _tables.reportContainer = $("#soccerReportContainer");
         _tables.report = $("#soccerReport");
@@ -184,6 +188,12 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
         });
         _tables.btnSummary.click(function () {
             self.getSummaryReport();
+        });
+        _tables.btnDetailPH.click(function () {
+            self.exportDetailPH();
+        });
+        _tables.btnSummaryPH.click(function () {
+            self.exportSummaryPH();
         });
         _tables.reportExportExcel.click(function () {
             self.exportData();
@@ -558,13 +568,36 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
     };
 
     self.exportDetailData = function () {
+        var currentCriteria = self.getCurrentCriteria();        
         var exportParams = {
-            FromDate: _param.reportDetailParams.FromDate,
-            ToDate: _param.reportDetailParams.ToDate,
+            FromDate: currentCriteria.FromDate,
+            ToDate: currentCriteria.ToDate,
             IsSoccer: true
         };
 
         AccReport.downloadFile(window.rootUrl + "Main/TraderPerformanceSoccer/ExportDetailReport", exportParams);
+    };
+
+    self.exportSummaryPH = function () {
+        var currentCriteria = self.getCurrentCriteria();
+        var exportParams = {
+            FromDate: currentCriteria.FromDate,
+            ToDate: currentCriteria.ToDate,
+            IsSoccer: true
+        };
+
+        AccReport.downloadFile(window.rootUrl + "Main/TraderPerformanceSoccer/ExportSummaryPH", exportParams);
+    };
+
+    self.exportDetailPH = function () {
+        var currentCriteria = self.getCurrentCriteria();
+        var exportParams = {
+            FromDate: currentCriteria.FromDate,
+            ToDate: currentCriteria.ToDate,
+            IsSoccer: true
+        };
+
+        AccReport.downloadFile(window.rootUrl + "Main/TraderPerformanceSoccer/ExportDetailPH", exportParams);
     };
 
     self.compareCriteria = function (oldCriteria, currentCriteria) {

@@ -10,6 +10,7 @@
 
 namespace Fanex.AccountingReports.Main.Controllers
 {
+    using System.IO;
     using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
@@ -18,13 +19,20 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.AccountingReports.Main.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+    using OfficeOpenXml;
+    using Repositories.TraderPerformanceSoccerPH;
+    using Services.TraderPerformanceSoccerPH;
 
     /// <summary>
     /// Trader performance for soccer controller.
     /// </summary>
     public class TraderPerformanceSoccerController : BaseController
     {
-        private readonly ITraderPerformanceSoccerService _reportService;
+        private readonly ITraderPerformanceSoccerService reportService;
+        private ExcelTraderSumPHService excelTraderSumPHService;
+        private ExcelTraderDetailPHService excelTraderDetailPHService;
+        private TraderDataService traderDataService;
+        private ExcelPackage excelPackage;
 
         public TraderPerformanceSoccerController()
             : this(null)
@@ -33,7 +41,7 @@ namespace Fanex.AccountingReports.Main.Controllers
 
         public TraderPerformanceSoccerController(ITraderPerformanceSoccerService reportService)
         {
-            this._reportService = reportService ?? new TraderPerformanceSoccerService();
+            this.reportService = reportService ?? new TraderPerformanceSoccerService();
         }
 
         [HttpGet]
@@ -47,7 +55,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         [HandleAjaxError]
         public JsonResult GetTraderPerformanceSoccer(GetReportCriteria criteria)
         {
-            var result = _reportService.GetReport(criteria);
+            var result = reportService.GetReport(criteria);
             var jsonResult = Json(result);
             jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             jsonResult.MaxJsonLength = int.MaxValue;
@@ -58,7 +66,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         [HandleAjaxError]
         public JsonResult GetTraderPerformanceSoccerDetail(GetDetailReportCriteria criteria)
         {
-            var result = _reportService.GetDetailReport(criteria);
+            var result = reportService.GetDetailReport(criteria);
             var jsonResult = Json(result);
             jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             jsonResult.MaxJsonLength = int.MaxValue;
@@ -69,7 +77,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         [HandleAjaxError]
         public JsonResult SortTraderPerformanceSoccer(GetReportCriteria criteria)
         {
-            var result = _reportService.SortReportData(criteria);
+            var result = reportService.SortReportData(criteria);
             var jsonResult = Json(result);
             jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             jsonResult.MaxJsonLength = int.MaxValue;
@@ -80,7 +88,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         [HandleAjaxError]
         public JsonResult SortTraderPerformanceSoccerDetail(GetDetailReportCriteria criteria)
         {
-            var result = _reportService.SortDetailReportData(criteria);
+            var result = reportService.SortDetailReportData(criteria);
             var jsonResult = Json(result);
             jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             jsonResult.MaxJsonLength = int.MaxValue;
@@ -89,13 +97,34 @@ namespace Fanex.AccountingReports.Main.Controllers
 
         public ActionResult ExportReport(GetReportCriteria criteria)
         {
-            this._reportService.ExportReport(criteria);
+            this.reportService.ExportReport(criteria);
             return new EmptyResult();
         }
 
         public ActionResult ExportDetailReport(GetDetailReportCriteria criteria)
         {
-            this._reportService.ExportDetailReport(criteria);
+            this.reportService.ExportDetailReport(criteria);
+            return new EmptyResult();
+        }
+
+        public ActionResult ExportSummaryPH(GetSummaryPHCriteria criteria)
+        {
+            var path = @"App_Data\Templates\TraderPerformance_Soccer_Sum.xlsx";
+            this.traderDataService = traderDataService ?? new TraderDataServiceImp();
+            this.excelPackage = excelPackage ?? new ExcelPackage(new FileInfo(path));
+            this.excelTraderSumPHService = excelTraderSumPHService ?? new ExcelTraderSumPHServiceImp(traderDataService, excelPackage);
+
+            excelTraderSumPHService.Execute(criteria);
+            return new EmptyResult();
+        }
+
+        public ActionResult ExportDetailPH(GetDetailPHCriteria criteria)
+        {
+            var path = @"App_Data\Templates\TraderPerformance_Soccer_Detail.xlsx";
+            this.traderDataService = traderDataService ?? new TraderDataServiceImp();
+            this.excelPackage = excelPackage ?? new ExcelPackage(new FileInfo(path));
+            this.excelTraderDetailPHService = excelTraderDetailPHService ?? new ExcelTraderDetailPHServiceImp(traderDataService, excelPackage);
+            excelTraderDetailPHService.Execute(criteria);
             return new EmptyResult();
         }
     }

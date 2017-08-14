@@ -9,21 +9,22 @@
 
 namespace Fanex.AccountingReports.Websites
 {
-    using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.AccountingReports.Core.Services.Impl.Worker;
-    using Fanex.AccountingReports.Websites.App_Start;
-    using Fanex.Data.Configuration;
-    using RemotingRef;
     using System;
     using System.Data.SqlClient;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
+    using Fanex.AccountingReports.Core.Services.Impl;
+    using Fanex.AccountingReports.Core.Services.Impl.Worker;
+    using Fanex.AccountingReports.Websites.App_Start;
+    using Fanex.Data.Configuration;
+    using RemotingRef;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode,
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -44,6 +45,7 @@ namespace Fanex.AccountingReports.Websites
             RefData.GetBetTypeName("1", "en");
 
             DbSettingProviderManager.Current.Start();
+            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
 
             AreaRegistration.RegisterAllAreas();
 

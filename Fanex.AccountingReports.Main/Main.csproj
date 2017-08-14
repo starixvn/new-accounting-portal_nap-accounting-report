@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ExcelUtil">
       <HintPath>..\_Dependencies\ExcelUtil.dll</HintPath>
     </Reference>
@@ -158,8 +162,10 @@
     <Compile Include="Criteria\DailyWinLoss2h\GetVirtualSportReportBySportCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetVirtualSports_VirtualHorseRacingReportCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_BetTypeCriteria.cs" />
+    <Compile Include="Criteria\TraderPerformance\GetDetailPHCriteria.cs" />
     <Compile Include="Criteria\TraderPerformance\GetDetailReportCriteria.cs" />
     <Compile Include="Criteria\TraderPerformance\GetReportCriteria.cs" />
+    <Compile Include="Criteria\TraderPerformance\GetSummaryPHCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetMatchGameDetailsCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetRecalculateWinLossCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdRacingSportTypeCriteria.cs" />
@@ -206,6 +212,7 @@
     <Compile Include="Repositories\Interface\ITraderPerformanceSoccerRepository.cs" />
     <Compile Include="Repositories\Interface\IWinlossSummary3rdRepository.cs" />
     <Compile Include="Repositories\Interface\IWinLossSummaryRepository.cs" />
+    <Compile Include="Repositories\TraderPerformanceSoccerPH\TraderDataService.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -280,6 +287,8 @@
     <Compile Include="Services\Interface\ITraderPerformanceSoccerService.cs" />
     <Compile Include="Services\Interface\IWinLossSummary3rdService.cs" />
     <Compile Include="Services\Interface\IWinLossSummaryService.cs" />
+    <Compile Include="Services\TraderPerformanceSoccerPH\ExcelTraderDetailPHService.cs" />
+    <Compile Include="Services\TraderPerformanceSoccerPH\ExcelTraderSumPHService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">
@@ -306,6 +315,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
