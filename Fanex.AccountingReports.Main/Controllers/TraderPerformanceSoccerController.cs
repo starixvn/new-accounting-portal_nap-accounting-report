@@ -28,11 +28,7 @@ namespace Fanex.AccountingReports.Main.Controllers
     /// </summary>
     public class TraderPerformanceSoccerController : BaseController
     {
-        private readonly ITraderPerformanceSoccerService reportService;
-        private ExcelTraderSumPHService excelTraderSumPHService;
-        private ExcelTraderDetailPHService excelTraderDetailPHService;
-        private TraderDataService traderDataService;
-        private ExcelPackage excelPackage;
+        private readonly ITraderPerformanceSoccerService reportService;        
 
         public TraderPerformanceSoccerController()
             : this(null)
@@ -110,9 +106,10 @@ namespace Fanex.AccountingReports.Main.Controllers
         public ActionResult ExportSummaryPH(GetSummaryPHCriteria criteria)
         {
             var path = @"App_Data\Templates\TraderPerformance_Soccer_Sum.xlsx";
-            this.traderDataService = traderDataService ?? new TraderDataServiceImp();
-            this.excelPackage = excelPackage ?? new ExcelPackage(new FileInfo(path));
-            this.excelTraderSumPHService = excelTraderSumPHService ?? new ExcelTraderSumPHServiceImp(traderDataService, excelPackage);
+            var traderDataService = new TraderDataServiceImp();
+            var excelPackage = new ExcelPackage(new FileInfo(path));
+            var traderSumPivotServiceImp = new TraderSumPivotServiceImp();
+            var excelTraderSumPHService = new TraderSumExcelServiceImp(traderDataService, traderSumPivotServiceImp, excelPackage);
 
             excelTraderSumPHService.Execute(criteria);
             return new EmptyResult();
@@ -121,9 +118,10 @@ namespace Fanex.AccountingReports.Main.Controllers
         public ActionResult ExportDetailPH(GetDetailPHCriteria criteria)
         {
             var path = @"App_Data\Templates\TraderPerformance_Soccer_Detail.xlsx";
-            this.traderDataService = traderDataService ?? new TraderDataServiceImp();
-            this.excelPackage = excelPackage ?? new ExcelPackage(new FileInfo(path));
-            this.excelTraderDetailPHService = excelTraderDetailPHService ?? new ExcelTraderDetailPHServiceImp(traderDataService, excelPackage);
+            var traderDataService = new TraderDataServiceImp();
+            var excelPackage = new ExcelPackage(new FileInfo(path));
+            var traderDetailPivotService = new TraderDetailPivotServiceImp();
+            var excelTraderDetailPHService = new TraderDetailExcelServiceImp(traderDataService, traderDetailPivotService, excelPackage);
             excelTraderDetailPHService.Execute(criteria);
             return new EmptyResult();
         }

@@ -10,41 +10,44 @@ using OfficeOpenXml;
 
 namespace Fanex.AccountingReports.Main.Services.TraderPerformanceSoccerPH
 {
-    public interface ExcelTraderSumPHService
+    public interface TraderSumExcelService
     {
         void Execute(GetSummaryPHCriteria criteria);
     }
 
-    public class ExcelTraderSumPHServiceImp : ExcelTraderSumPHService
+    public class TraderSumExcelServiceImp : TraderSumExcelService
     {
         private const int BeginContentRowIndex = 6;
 
         private readonly TraderDataService traderDataService;
+        private readonly TraderSumPivotService traderPHTransformService;
         private readonly ExcelPackage excelPackage;
 
         private readonly ExcelWorksheet templateSheet;
         private readonly ExcelWorksheet sheetTrader;
 
-        public ExcelTraderSumPHServiceImp(TraderDataService traderDataService, ExcelPackage excelPackage)
+        public TraderSumExcelServiceImp(TraderDataService traderDataService, TraderSumPivotService traderPHTransformService, ExcelPackage excelPackage)
         {
             this.traderDataService = traderDataService;
+            this.traderPHTransformService = traderPHTransformService;
             this.excelPackage = excelPackage;
 
-            sheetTrader = excelPackage.Workbook.Worksheets.Add("TraderPerformance_Soccer PH");
+            sheetTrader = excelPackage.Workbook.Worksheets.Add("TraderPerformanceSoccerPH");
             templateSheet = excelPackage.Workbook.Worksheets["Content"];
         }
 
         public void Execute(GetSummaryPHCriteria criteria)
         {
-            var dataTable = traderDataService.Query(criteria);
+            var rawData = traderDataService.Query(criteria);
+            var dataTable = traderPHTransformService.Execute(rawData);
             var columnHeaders = new Collection<string>();
-            int lastColumnIndex = dataTable.Columns.Count;            
+            int lastColumnIndex = dataTable.Columns.Count;
 
             RenderTitle(lastColumnIndex, criteria);
             RenderHeader(dataTable, columnHeaders);
             MergeHeader(columnHeaders);
             SetHeaderStyle(lastColumnIndex);
-            RenderContent(dataTable, lastColumnIndex);
+            RenderContent(dataTable);
             SetContenStyle(dataTable, lastColumnIndex);
             RenderTotal(dataTable, lastColumnIndex);
             ClearSheet();
@@ -107,20 +110,16 @@ namespace Fanex.AccountingReports.Main.Services.TraderPerformanceSoccerPH
             sheetTrader.View.FreezePanes(6, 9);
         }
 
-        private void RenderContent(DataTable dataTable, int lastColumnIndex)
+        private void RenderContent(DataTable dataTable)
         {
             sheetTrader.Cells["A6"].LoadFromDataTable(dataTable, false);
+            sheetTrader.Cells.AutoFitColumns();
             var lastContentRowIndex = BeginContentRowIndex + dataTable.Rows.Count - 1;
 
             for (var rowIndex = 0; rowIndex <= dataTable.Rows.Count; rowIndex++)
             {
                 var currentRowIndex = BeginContentRowIndex + rowIndex;
                 sheetTrader.Cells[$"A{currentRowIndex}"].Value = rowIndex + 1;
-            }
-
-            for (var columnIndex = 2; columnIndex <= lastColumnIndex; columnIndex++)
-            {
-                sheetTrader.Column(columnIndex).Width = 15;
             }
 
             sheetTrader.Cells[$"A{BeginContentRowIndex}:H{lastContentRowIndex}"].StyleID = templateSheet.Cells["A6"].StyleID;
@@ -132,11 +131,11 @@ namespace Fanex.AccountingReports.Main.Services.TraderPerformanceSoccerPH
         {
             var styles = new Dictionary<string, int>
             {
-                { "winlost_",  templateSheet.Cells["I6"].StyleID },
-                { "stake_",  templateSheet.Cells["J6"].StyleID },
-                { "bet_",  templateSheet.Cells["K6"].StyleID },
-                { "comm_",  templateSheet.Cells["M6"].StyleID },
-                { "margin_",  templateSheet.Cells["L6"].StyleID },
+                { "Win Loss_",  templateSheet.Cells["I6"].StyleID },
+                { "Turnover_",  templateSheet.Cells["J6"].StyleID },
+                { "Live BetCount_",  templateSheet.Cells["K6"].StyleID },
+                { "Commission_",  templateSheet.Cells["M6"].StyleID },
+                { "Margin %_",  templateSheet.Cells["L6"].StyleID },
                 { "others",  templateSheet.Cells["N6"].StyleID }
             };
 
@@ -159,17 +158,59 @@ namespace Fanex.AccountingReports.Main.Services.TraderPerformanceSoccerPH
 
         private void RenderTotal(DataTable dataTable, int lastColumnIndex)
         {
+            var styles = new Dictionary<string, int>
+            {
+                { "Win Loss_",  templateSheet.Cells["I7"].StyleID },
+                { "Turnover_",  templateSheet.Cells["J7"].StyleID },
+                { "Live BetCount_",  templateSheet.Cells["K7"].StyleID },
+                { "Commission_",  templateSheet.Cells["M7"].StyleID },
+                { "Margin %_",  templateSheet.Cells["L7"].StyleID },
+                { "others",  templateSheet.Cells["N7"].StyleID }
+            };
+
             var totalRowIndex = BeginContentRowIndex + dataTable.Rows.Count;
             templateSheet.Cells[$"A7:B7"].Copy(sheetTrader.Cells[$"A{totalRowIndex}:B{totalRowIndex}"]);
             sheetTrader.Cells[$"A{totalRowIndex}:B{totalRowIndex}"].Merge = true;
 
-            for (var columnIndex = 2; columnIndex < lastColumnIndex; columnIndex++)
+            for (var columnIndex = 3; columnIndex <= lastColumnIndex; columnIndex++)
             {
-                sheetTrader.Cells[totalRowIndex, columnIndex + 1].Value = dataTable.AsEnumerable().Sum(s => Converter.To<decimal>(s[columnIndex]));
+                var columnName = dataTable.Columns[columnIndex - 1].ColumnName;
+                if (columnName.Contains("Margin %_"))
+                {
+                    decimal margin = CalculateMargin(dataTable.AsEnumerable(), columnName);
+                    sheetTrader.Cells[totalRowIndex, columnIndex].Value = margin;
+                }
+                else
+                {
+                    sheetTrader.Cells[totalRowIndex, columnIndex].Value = dataTable.AsEnumerable().Sum(s => Converter.To<decimal>(s[columnIndex - 1]));
+                }                
+
+                if (columnIndex >= 9)
+                {                    
+                    var result = styles.FirstOrDefault(s => columnName.Contains(s.Key));
+                    if (string.IsNullOrEmpty(result.Key))
+                    {
+                        sheetTrader.Cells[totalRowIndex, columnIndex, totalRowIndex, lastColumnIndex].StyleID = styles["others"];
+                    }
+                    else
+                    {
+                        sheetTrader.Cells[totalRowIndex, columnIndex, totalRowIndex, lastColumnIndex].StyleID = result.Value;
+                    }
+                }
             }
 
-            sheetTrader.Cells[$"C{totalRowIndex}:H{totalRowIndex}"].StyleID = templateSheet.Cells["H7"].StyleID;
-            sheetTrader.Cells[totalRowIndex, 9, totalRowIndex, lastColumnIndex].StyleID = templateSheet.Cells["I7"].StyleID;
+            sheetTrader.Cells[$"C{totalRowIndex}:H{totalRowIndex}"].StyleID = templateSheet.Cells["H7"].StyleID;            
+        }
+
+        private static decimal CalculateMargin(IEnumerable<DataRow> rows, string columnName)
+        {
+            var bettype = columnName.Split('_')[1];
+            var suffixWinLoss = columnName.Contains("Overall") ? "_Win Loss" : string.Empty;
+            var suffixTurover = columnName.Contains("Overall") ? "_Turnover" : string.Empty;
+            var sumWL = rows.Sum(s => Converter.To<decimal>(s[$"Win Loss_{bettype}{suffixWinLoss}"]));
+            var sumTO = rows.Sum(s => Converter.To<decimal>(s[$"Turnover_{bettype}{suffixTurover}"]));
+            var margin = sumTO == 0 ? 0.0m : sumWL / sumTO;
+            return margin;
         }
 
         private void ClearSheet()
@@ -179,7 +220,7 @@ namespace Fanex.AccountingReports.Main.Services.TraderPerformanceSoccerPH
 
         private void Save(GetSummaryPHCriteria criteria)
         {
-            var fileName = $@"TraderPerformance_Soccer_PH_From_Date_{criteria.Fromdate:MM_dd_yyyy}_To_Date_{criteria.Todate:MM_dd_yyyy}";
+            var fileName = $@"TraderPerformance_SoccerPH_From_Date_{criteria.Fromdate:MM_dd_yyyy}_To_Date_{criteria.Todate:MM_dd_yyyy}";
 
             var response = HttpContext.Current.Response;
             response.Clear();

@@ -9,8 +9,6 @@ namespace Fanex.AccountingReports.Main.Criteria.TraderPerformance
 
         public DateTime Todate { get; set; }
 
-        public bool IsSoccer { get; set; }
-
         public override string GetSettingKey()
         {
             return "Main_TraderPerformance_GetDetailReport_PH";

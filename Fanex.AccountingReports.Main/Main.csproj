@@ -287,8 +287,10 @@
     <Compile Include="Services\Interface\ITraderPerformanceSoccerService.cs" />
     <Compile Include="Services\Interface\IWinLossSummary3rdService.cs" />
     <Compile Include="Services\Interface\IWinLossSummaryService.cs" />
-    <Compile Include="Services\TraderPerformanceSoccerPH\ExcelTraderDetailPHService.cs" />
-    <Compile Include="Services\TraderPerformanceSoccerPH\ExcelTraderSumPHService.cs" />
+    <Compile Include="Services\TraderPerformanceSoccerPH\TraderDetailExcelService.cs" />
+    <Compile Include="Services\TraderPerformanceSoccerPH\TraderSumExcelService.cs" />
+    <Compile Include="Services\TraderPerformanceSoccerPH\TraderDetailPivotService.cs" />
+    <Compile Include="Services\TraderPerformanceSoccerPH\TraderSumPivotService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">
