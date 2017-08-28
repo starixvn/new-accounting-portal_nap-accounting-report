@@ -208,6 +208,6 @@
     <Setting Key="Misc_CreditMovement_GetSites" SpName="SiteSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Special - Total Credit Account By Product">
-    <Setting Key="Acc_Rpt_EnableDisableAccount_ByProduct" SpName="Acc_Rpt_EnableDisableAccount_ByProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_EnableDisableAccount_ByProduct" SpName="Acc_Rpt_EnableDisableAccount_ByProduct_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
 </Functions>
