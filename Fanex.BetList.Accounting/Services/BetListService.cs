@@ -218,7 +218,8 @@ namespace Fanex.BetList.Accounting.Services
                 VirtualRate = Converter.ToDecimal(r["virtualrate"]),
                 AgentPositionTaking2 = Converter.ToDecimal(r["apositiontaking2"]),
                 MasterPositionTaking2 = Converter.ToDecimal(r["mpositiontaking2"]),
-                SuperPositionTaking2 = Converter.ToDecimal(r["spositiontaking2"])
+                SuperPositionTaking2 = Converter.ToDecimal(r["spositiontaking2"]),
+                Currency = Converter.ToString2(r["currency"])
             };
 
             ITicketHelper ticketHelper = new TicketHelper();

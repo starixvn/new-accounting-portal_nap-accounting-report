@@ -58,5 +58,7 @@ namespace Fanex.BetList.Accounting.Models
         public string SportName { get; set; }
 
         public string LeagueName { get; set; }
+
+        public string Currency { get; set; }
     }
 }
