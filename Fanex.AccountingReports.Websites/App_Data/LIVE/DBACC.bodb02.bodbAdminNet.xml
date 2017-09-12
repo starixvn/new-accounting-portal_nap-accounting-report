@@ -113,9 +113,11 @@
     <Setting Key="Main_DailyWinLoss2hSoccerMinorBettype_Main2hReport" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2hSoccerMinorBettype_Main2hReport_14" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
-  <Function Name="Main - Trader Performance">
+  <Function Name="Main - Trader Performance">    
     <Setting Key="Main_TraderPerformance_GetReport" SpName="Acc_Rpt_TraderPerformanceSum" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_TraderPerformance_GetDetailReport" SpName="Acc_Rpt_TraderPerformanceDetail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_TraderPerformance_GetReport_PH" SpName="Acc_Rpt_TraderPerformanceSum_SoccerPH" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_TraderPerformance_GetDetailReport_PH" SpName="Acc_Rpt_TraderPerformanceDetail_SoccerPH" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Main - Win Loss Summary 3rd">
     <Setting Key="Main_WinLossSummary3rd_Exec_CalculateWinLoss" SpName="Task_rptWinLost_UpdateTable" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
