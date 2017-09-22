@@ -9,45 +9,18 @@
 
 namespace Fanex.BetList.Accounting.Core
 {
-    using System;
-    using System.Collections.Generic;
     using Fanex.BetList.Accounting.Constants;
     using Fanex.BetList.Accounting.Resources;
     using Fanex.Common;
     using RemotingRef;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public static class CacheRef
     {
-        public static string GetBettype(object bettypeId)
-        {
-            return GetBetType(bettypeId, null);
-        }
-
-        /// <summary>
-        /// Gets the type of the bet.
-        /// </summary>
-        /// <param name="betTypeId">The bet type identifier.</param>
-        /// <param name="betId">The bet identifier.</param>
-        /// <returns>The type of the bet.</returns>
-        public static string GetBetType(object betTypeId, object betId)
-        {
-            // resourceId remove first character
-            string resourceId = string.Empty;
-            if (betId != null && betId.ToString().Length > 1)
-            {
-                resourceId = betId.ToString().Substring(1);
-            }
-
-            return RefData.GetBetTypeName(
-                betTypeId.ToString(),
-                GetSimpleLanguage(LanguageTypeConstants.EnUS),
-                string.Empty,
-                resourceId);
-        }
-
         public static string GetSportName(object sportId)
         {
             return RefData.GetSportName(
@@ -131,17 +104,6 @@ namespace Fanex.BetList.Accounting.Core
             return RefData.GetRouletteBetItem(
                 Converter.ToString2(itemId),
                 GetSimpleLanguage(LanguageTypeConstants.EnUS));
-        }
-
-        public static string GetBettypeNameSportingSolution(object betypeId, string resourceId)
-        {
-            string bettypeName = string.Empty;
-            bettypeName = RefData.GetBetTypeName(
-                Converter.ToString2(betypeId),
-                GetSimpleLanguage(LanguageTypeConstants.EnUS),
-                string.Empty,
-                resourceId);
-            return bettypeName;
         }
 
         public static string GetCasinoBetItem(object betStatusId)

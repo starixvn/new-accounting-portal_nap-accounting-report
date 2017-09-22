@@ -22,29 +22,6 @@ namespace Fanex.AccountingReports.Core.Helper.SportHelper
         /// Gets the bet type.
         /// </summary>
         /// <param name="betTypeId">The bet type identifier.</param>
-        /// <param name="betId">The bet identifier.</param>
-        /// <returns>The bet type.</returns>
-        public static string GetBetType(int betTypeId, string betId)
-        {
-            string betypeName = string.Empty;
-            if (IsSportingSolutionBetType(betTypeId))
-            {
-                return CacheRef.GetBettypeNameSportingSolution(betTypeId, betId);
-            }
-
-            betypeName = CacheRef.GetBettype(betTypeId);
-            if (IsVirtualSportBetType(betTypeId))
-            {
-                betypeName += Labels.Symbol_VirtualSportSuffix;
-            }
-
-            return betypeName;
-        }
-
-        /// <summary>
-        /// Gets the bet type.
-        /// </summary>
-        /// <param name="betTypeId">The bet type identifier.</param>
         /// <returns>The bet type.</returns>
         public static string GetBetType(int betTypeId)
         {
