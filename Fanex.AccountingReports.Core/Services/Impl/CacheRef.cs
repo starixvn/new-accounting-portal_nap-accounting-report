@@ -23,150 +23,33 @@ namespace Fanex.AccountingReports.Core.Services.Impl
     {
         public static string GetBettype(object bettypeId)
         {
-            return GetBetType(bettypeId, null);
+            return RefData.GetBetTypeName(bettypeId.ToString(), LanguageTypeConstants.En);
         }
-
-        /// <summary>
-        /// Gets the type of the bet.
-        /// </summary>
-        /// <param name="betTypeId">The bet type identifier.</param>
-        /// <param name="betId">The bet identifier.</param>
-        /// <returns>The type of the bet.</returns>
-        public static string GetBetType(object betTypeId, object betId)
-        {
-            // resourceId remove first character
-            string resourceId = string.Empty;
-            if (betId != null && betId.ToString().Length > 1)
-            {
-                resourceId = betId.ToString().Substring(1);
-            }
-
-            return RefData.GetBetTypeName(
-                betTypeId.ToString(),
-                GetSimpleLanguage(LanguageTypeConstants.EnUS),
-                string.Empty,
-                resourceId);
-        }
-
         public static string GetSportName(object sportId)
         {
-            return RefData.GetSportName(
-                Converter.ToString2(sportId),
-                GetSimpleLanguage(LanguageTypeConstants.EnUS),
-                string.Empty);
+            return RefData.GetSportName(Converter.ToString2(sportId), LanguageTypeConstants.En);
         }
 
         public static string GetTeamName(object teamId)
         {
-            return RefData.GetTeamName(
-                Converter.ToString2(teamId),
-                GetSimpleLanguage(LanguageTypeConstants.EnUS),
-                string.Empty);
+            return RefData.GetTeamName(Converter.ToString2(teamId), LanguageTypeConstants.En);
         }
 
         public static string GetLeagueName(object leagueId)
         {
-            return RefData.GetLeagueName(
-                Converter.ToString2(leagueId),
-                GetSimpleLanguage(LanguageTypeConstants.EnUS),
-                string.Empty);
-        }
-
-        public static string GetFncIndexName(object indexId)
-        {
-            return RefData.GetFncIndexName(
-                Converter.ToString2(indexId),
-                GetSimpleLanguage(LanguageTypeConstants.EnUS));
+            return RefData.GetLeagueName(Converter.ToString2(leagueId), LanguageTypeConstants.En);
         }
 
         public static string GetHorseTeamName(object codeID)
         {
-            return RefData.GetHorseTeamName(
-                Converter.ToString2(codeID),
-                GetSimpleLanguage(LanguageTypeConstants.EnUS));
-        }
-
-        public static string GetOddsTypeName(object oddsType)
-        {
-            return RefData.GetOddsTypeName(
-                Converter.ToString2(oddsType),
-                GetSimpleLanguage(LanguageTypeConstants.EnUS));
-        }
-
-        /// <summary>
-        /// Gets the name of the combination.
-        /// </summary>
-        /// <param name="betTeam">The bet team.</param>
-        /// <returns>The name of the combination.</returns>
-        public static string GetCombinationName(string betTeam)
-        {
-            string name = string.Empty;
-            switch (betTeam)
-            {
-                case CombinationTypeConstants.Trixie:
-                    name = Labels.Trixie;
-                    break;
-                case CombinationTypeConstants.Yankee:
-                    name = Labels.Yankee;
-                    break;
-                case CombinationTypeConstants.Canadian:
-                    name = Labels.Canadian;
-                    break;
-                case CombinationTypeConstants.Heinz:
-                    name = Labels.Heinz;
-                    break;
-                case CombinationTypeConstants.SuperHeinz:
-                    name = Labels.Super_Heinz;
-                    break;
-                case CombinationTypeConstants.Goliath:
-                    name = Labels.Goliath;
-                    break;
-            }
-
-            return name;
-        }
-
-        public static string GetRouletteBetItem(int itemId)
-        {
-            return RefData.GetRouletteBetItem(
-                Converter.ToString2(itemId),
-                GetSimpleLanguage(LanguageTypeConstants.EnUS));
+            return RefData.GetHorseTeamName(Converter.ToString2(codeID), LanguageTypeConstants.En);
         }
 
         public static string GetBettypeNameSportingSolution(object betypeId, string resourceId)
         {
-            string bettypeName = string.Empty;
-            bettypeName = RefData.GetBetTypeName(
-                Converter.ToString2(betypeId),
-                GetSimpleLanguage(LanguageTypeConstants.EnUS),
-                string.Empty,
-                resourceId);
-            return bettypeName;
+            return RefData.GetBetTypeName(Converter.ToString2(betypeId), LanguageTypeConstants.En, string.Empty, resourceId);
         }
 
-        public static string GetCasinoBetItem(object betStatusId)
-        {
-            return RefData.GetCasinoBetItem(
-                betStatusId.ToString(),
-                GetSimpleLanguage(LanguageTypeConstants.EnUS),
-                string.Empty);
-        }
-
-        public static string GetRouletteBetItem(object itemId)
-        {
-            return RefData.GetRouletteBetItem(
-                itemId.ToString(),
-                GetSimpleLanguage(LanguageTypeConstants.EnUS),
-                string.Empty);
-        }
-
-        /// <summary>
-        /// Saves the cache reference response.
-        /// </summary>
-        /// <param name="identityList">The identifier list.</param>
-        /// <param name="cacheRefFunction">The cache reference function.</param>
-        /// <param name="currentStorage">The current storage.</param>
-        /// <returns>The cache reference response.</returns>
         public static Dictionary<object, string> SaveCacheRefResponse(
             List<object> identityList,
             Func<object, string> cacheRefFunction,
@@ -182,30 +65,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             }
 
             return currentStorage;
-        }
-
-        /// <summary>
-        /// Gets the simple language.
-        /// </summary>
-        /// <param name="lang">The language.</param>
-        /// <returns>The simple language.</returns>
-        private static string GetSimpleLanguage(string lang)
-        {
-            switch (lang)
-            {
-                case LanguageTypeConstants.EnUS:
-                    return LanguageTypeConstants.En;
-                case LanguageTypeConstants.ZhTW:
-                    return LanguageTypeConstants.Ch; // Traditional
-                case LanguageTypeConstants.ZhCn:
-                    return LanguageTypeConstants.Cs; // Simplified
-                case LanguageTypeConstants.JaJp:
-                    return LanguageTypeConstants.Jp;
-                case LanguageTypeConstants.ThTh:
-                    return LanguageTypeConstants.Th; // Thai
-                default:
-                    return LanguageTypeConstants.En;
-            }
         }
     }
 }

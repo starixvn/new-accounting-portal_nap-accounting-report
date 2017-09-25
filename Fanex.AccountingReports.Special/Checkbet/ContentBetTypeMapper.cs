@@ -37,7 +37,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
         private const string ContenBetTeamBetType611 = "ContenBetTeamBetType611";
 
 
-        private Dictionary<int, string> groupBettypes;
+        private readonly Dictionary<int, string> groupBettypes;
 
         public ContentBetTypeMapper()
         {
@@ -47,6 +47,10 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 { 402, ContenBetTeamBetType401To404 },
                 { 403, ContenBetTeamBetType401To404 },
                 { 404, ContenBetTeamBetType401To404 },
+                { 461, ContenBetTeamBetType401To404 },
+                { 462, ContenBetTeamBetType401To404 },
+                { 463, ContenBetTeamBetType401To404 },
+                { 464, ContenBetTeamBetType401To404 },
                 { 405, ContenBetTeamBetTypeAsBetTeam },
                 { 406, ContenBetTeamBetType406 },
                 { 407, ContenBetTeamBetType407 },
@@ -120,7 +124,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
 
         public string GetContentBetchoiceToShowOf(int bettype)
         {
-            return groupBettypes.ContainsKey(bettype) == true ? groupBettypes[bettype] : string.Empty;
+            return groupBettypes.ContainsKey(bettype) ? groupBettypes[bettype] : string.Empty;
         }
     }
 }
