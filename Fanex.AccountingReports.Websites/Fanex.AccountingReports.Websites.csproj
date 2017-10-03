@@ -75,7 +75,7 @@
       <HintPath>..\_Dependencies\ExcelUtil.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.BetList.BetTrade, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.38.0-beta4\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
+      <HintPath>..\packages\Fanex.BetList.Core.2.41.0-beta2\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.BetList.CashOut, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
@@ -86,8 +86,8 @@
       <HintPath>..\packages\Fanex.BetList.ColossusBets.1.0.1.7\lib\net40\Fanex.BetList.ColossusBets.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.BetList.Core, Version=2.38.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.38.0-beta4\lib\net40\Fanex.BetList.Core.dll</HintPath>
+    <Reference Include="Fanex.BetList.Core, Version=2.41.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.BetList.Core.2.41.0-beta2\lib\net40\Fanex.BetList.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.BetList.MetricGaming, Version=1.0.4.4, Culture=neutral, processorArchitecture=MSIL">
@@ -255,7 +255,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="RemotingRef, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RemotingRef.2.0.0.9\lib\net40\RemotingRef.dll</HintPath>
+      <HintPath>..\packages\RemotingRef.2.0.0.12\lib\net40\RemotingRef.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
