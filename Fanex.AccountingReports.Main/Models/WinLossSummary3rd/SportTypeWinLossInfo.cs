@@ -42,7 +42,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.FishingWorld,
             SportContants.CashOut,
             SportContants.Lottery,
-            MainConstants.WinLossSummaryBetradarVirtualSportId
+            MainConstants.WinLossSummaryBetradarVirtualSportId,
+            SportContants.Lucky3
         };
 
         public SportTypeWinLossInfo()
