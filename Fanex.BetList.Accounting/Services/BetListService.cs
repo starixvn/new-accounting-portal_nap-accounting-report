@@ -209,7 +209,8 @@ namespace Fanex.BetList.Accounting.Services
 
                     BetCheck = Convert.ToString(r["betcheck"]),
                     BetdaqId = Converter.To<long>(r["betdaqId"]),
-                    ExtraInfo = Converter.ToString2(r["ExtraInfo"])
+                    ExtraInfo = Converter.ToString2(r["ExtraInfo"]),
+                    Currency = Converter.ToString2(r["currency"])
                 },
                 ChoiceHtml = string.Empty,
                 OddHtml = string.Empty,
@@ -218,8 +219,7 @@ namespace Fanex.BetList.Accounting.Services
                 VirtualRate = Converter.ToDecimal(r["virtualrate"]),
                 AgentPositionTaking2 = Converter.ToDecimal(r["apositiontaking2"]),
                 MasterPositionTaking2 = Converter.ToDecimal(r["mpositiontaking2"]),
-                SuperPositionTaking2 = Converter.ToDecimal(r["spositiontaking2"]),
-                Currency = Converter.ToString2(r["currency"])
+                SuperPositionTaking2 = Converter.ToDecimal(r["spositiontaking2"])
             };
 
             ITicketHelper ticketHelper = new TicketHelper();
