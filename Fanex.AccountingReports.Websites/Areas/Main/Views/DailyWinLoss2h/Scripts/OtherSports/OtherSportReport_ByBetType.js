@@ -83,7 +83,7 @@ OtherSportReport_ByBetType.prototype.RenderReport = function (report) {
                 var columns = [];
                 var evenrow = (j % 2 == 0) ? '' : '';
                 var matchCode = info.MatchCode;
-                var openScoreInfoEvent = "scoreInfoManager.GetReport('" + self.CacheData.parentController.OtherSportReport_Summary.Params.reportParams.Winlostdate + "'," +
+                var openScoreInfoEvent = "scoreInfoManager.GetReport('" + self.CacheData.parentController.OtherSportReport_ByBetType.Params.reportParams.Winlostdate + "'," +
                     self.CacheData.parentController.OtherSportReport_BySportType.Params.reportParams.SportType + ",'" +
                     self.CacheData.parentController.OtherSportReport_BySportType.Params.reportParams.SportTypeName + "','" +
                     self.Params.reportParams.Bettype + "','" +
