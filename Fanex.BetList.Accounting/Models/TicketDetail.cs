@@ -9,9 +9,8 @@
 
 namespace Fanex.BetList.Accounting.Models
 {
-    using System;
-    using System.Collections.Generic;
     using Fanex.BetList.Core.Entities;
+    using System;
 
     /// <summary>
     /// TODO: Update summary.

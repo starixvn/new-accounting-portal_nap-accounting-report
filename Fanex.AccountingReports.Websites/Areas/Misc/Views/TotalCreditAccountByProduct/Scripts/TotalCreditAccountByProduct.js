@@ -38,7 +38,8 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         MetricGamingSuperLive: -1,
         MacauGames: 212,
         NG2: 213,
-        Lottery: 220
+        Lottery: 220,
+        Lucky3: 160
     };
 
     var cachedData = {
@@ -484,6 +485,9 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 break;
             case productEnums.Lottery:
                 productName = "Lottery";
+                break;
+            case productEnums.Lucky3:
+                productName = "Lucky 3";
                 break;
             default:
                 productName = "Unknown";

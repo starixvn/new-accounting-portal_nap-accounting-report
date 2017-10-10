@@ -125,12 +125,17 @@ Fanex.AccountingReports.Special.CheckBet.NormalChangedTickets = function () {
     self.renderReportRow = function(report){
         for(var i = 0; i < report.length; i++)
         {
+            var colOdds = '';
             var row = report[i]
             var frozenHtml = '';
             frozenHtml = '<td><div class="table-cell col100 three-row-text align-center link" onclick="getBetList(\'' + row.RefNo + '\')">' + row.RefNo + '</div></td>';
             self.TempHtml.frozenHtml += '<tr>'+ frozenHtml + '</tr>';
             var colStake = parseFloat(row.OldStake) == parseFloat(row.NewStake) ? row.NewStake : '<span>' + row.OldStake + '<br/></span><span style="color:#d47800">' + row.NewStake + '</span>';
-            var colOdds =   parseFloat(row.OldOdds) == parseFloat(row.NewOdds) ? row.NewOdds : '<span>' + row.OldOdds + '<br/></span><span style="color:#d47800">' + row.NewOdds + '</span>';
+            if (row.Bettype === "Lucky 3") {
+                colOdds = '-';
+            } else {
+                colOdds = parseFloat(row.OldOdds) == parseFloat(row.NewOdds) ? row.NewOdds : '<span>' + row.OldOdds + '<br/></span><span style="color:#d47800">' + row.NewOdds + '</span>';
+            }
             var colBetteam =   row.OldBetteam == row.NewBetteam ? row.NewBetteam : '<span>' + row.OldBetteam + '<br/></span><span style="color:#d47800">' + row.NewBetteam + '</span>';
             var colTotalPT =   parseFloat(row.OldTotalPT) == parseFloat(row.NewTotalPT) ? row.NewTotalPT : '<span>' + row.OldTotalPT + '<br/></span><span style="color:#d47800">' + row.NewTotalPT + '</span>';
             self.TempHtml.contentHtml += '<tr><td><div class="table-cell col100 three-row-text align-center link" onclick="getBetList(\'' + row.RefNo + '\')">' + row.RefNo + '</div></td>\

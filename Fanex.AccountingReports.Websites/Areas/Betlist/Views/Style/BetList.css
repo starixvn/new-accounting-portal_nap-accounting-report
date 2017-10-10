@@ -429,3 +429,6 @@ div.ticketList div.void > div.match, div.ticketList div.void div.firstGoal, div.
     color: #484848;
     font-weight: normal;
 }
+.lucky3-detail {
+    display: none;
+}

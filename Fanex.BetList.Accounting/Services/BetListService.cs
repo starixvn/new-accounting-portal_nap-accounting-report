@@ -209,7 +209,8 @@ namespace Fanex.BetList.Accounting.Services
 
                     BetCheck = Convert.ToString(r["betcheck"]),
                     BetdaqId = Converter.To<long>(r["betdaqId"]),
-                    ExtraInfo = Converter.ToString2(r["ExtraInfo"])
+                    ExtraInfo = Converter.ToString2(r["ExtraInfo"]),
+                    Currency = Converter.ToString2(r["currency"])
                 },
                 ChoiceHtml = string.Empty,
                 OddHtml = string.Empty,

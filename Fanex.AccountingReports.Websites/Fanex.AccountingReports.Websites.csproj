@@ -90,6 +90,10 @@
       <HintPath>..\packages\Fanex.BetList.Core.2.41.0-beta2\lib\net40\Fanex.BetList.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Fanex.BetList.Lucky3, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.BetList.Lucky3.1.0.0-beta9\lib\net40\Fanex.BetList.Lucky3.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Fanex.BetList.MetricGaming, Version=1.0.4.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.BetList.MetricGaming.1.0.4.4\lib\net40\Fanex.BetList.MetricGaming.dll</HintPath>
       <Private>True</Private>
@@ -791,6 +795,7 @@
     <Content Include="Content\Fanex.Result\images\bg_header03.jpg" />
     <Content Include="Content\Fanex.Result\images\bg_header04.jpg" />
     <Content Include="Content\Fanex.Result\images\goal-icon.png" />
+    <Content Include="Content\lucky3.css" />
     <Content Include="proxy.html" />
     <Content Include="scripts\ReCheckIn.js" />
     <Content Include="scripts\_lib\Autocomplete\jquery.autocomplete.js" />
