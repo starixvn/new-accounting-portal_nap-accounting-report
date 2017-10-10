@@ -82,7 +82,7 @@ MetricGamingByBetType.prototype.RenderReport = function (report) {
                 var matchCode = info.MatchCode;
 
                 var isOutRightBettype = parseInt(this.Params.reportParams.Bettype) === AccReportData.Constants.BetType.Outright && this.Params.reportParams.BetTypeName === "Outright";
-                var openScoreInfoEvent = "scoreInfoManager.GetReport('" + self.CacheData.parentController.Params.reportParams.Winlostdate + "'," +
+                var openScoreInfoEvent = "scoreInfoManager.GetReport('" + self.CacheData.parentController.MetricGamingByBetTypeReport.Params.reportParams.Winlostdate + "'," +
                     AccReportData.Constants.SportType.SoccerMajorBetType + ",'" +
                     self.CacheData.parentController.CacheData.SportName + "','" +
                     self.Params.reportParams.Bettype + "','" +
