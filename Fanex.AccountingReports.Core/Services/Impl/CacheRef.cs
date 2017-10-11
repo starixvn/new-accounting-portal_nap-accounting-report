@@ -12,7 +12,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
     using System;
     using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Constants;
-    using Fanex.AccountingReports.Core.Resources;
     using Fanex.Common;
     using RemotingRef;
 
@@ -21,9 +20,9 @@ namespace Fanex.AccountingReports.Core.Services.Impl
     /// </summary>
     public static class CacheRef
     {
-        public static string GetBettype(object bettypeId)
+        public static string GetBettype(object betTypeId)
         {
-            return RefData.GetBetTypeName(bettypeId.ToString(), LanguageTypeConstants.En);
+            return RefData.GetBetTypeName(betTypeId.ToString(), LanguageTypeConstants.En);
         }
         public static string GetSportName(object sportId)
         {
@@ -43,11 +42,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         public static string GetHorseTeamName(object codeID)
         {
             return RefData.GetHorseTeamName(Converter.ToString2(codeID), LanguageTypeConstants.En);
-        }
-
-        public static string GetBettypeNameSportingSolution(object betypeId, string resourceId)
-        {
-            return RefData.GetBetTypeName(Converter.ToString2(betypeId), LanguageTypeConstants.En, string.Empty, resourceId);
         }
 
         public static Dictionary<object, string> SaveCacheRefResponse(
