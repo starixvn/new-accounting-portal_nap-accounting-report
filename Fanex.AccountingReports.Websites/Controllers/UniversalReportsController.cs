@@ -1,5 +1,5 @@
-﻿using Fanex.AccountingReports.Core.Web.Controllers;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using Fanex.AccountingReports.Core.Web.Controllers;
 
 namespace Fanex.AccountingReports.Websites.Controllers
 {
@@ -19,10 +19,15 @@ namespace Fanex.AccountingReports.Websites.Controllers
         {
             return Redirect("../../UniversalReports/PlayForFunStatistics");
         }
-        
+
         public ActionResult PunterAnalysis()
         {
             return Redirect("../../UniversalReports/PunterAnalysis");
+        }
+
+        public ActionResult UpdatedUsernameAndGivenCredit()
+        {
+            return Redirect("../../UniversalReports/UpdatedUsernameAndGivenCredit");
         }
     }
 }
