@@ -10,11 +10,8 @@
 namespace Fanex.AccountingReports.Websites
 {
     using System;
-    using System.Data.SqlClient;
-    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
-    using System.Linq;
     using System.Reflection;
     using System.Web;
     using System.Web.Mvc;
@@ -61,6 +58,8 @@ namespace Fanex.AccountingReports.Websites
             catch (Exception)
             {
             }
+
+            FanexLogging.Register();
         }
 
         protected void Session_End(object sender, EventArgs e)
@@ -82,51 +81,7 @@ namespace Fanex.AccountingReports.Websites
             {
                 DbSettingProviderManager.Current.Restart();
 
-                Exception ex = Server.GetLastError().GetBaseException();
-
-                if (ex is HttpException)
-                {
-                    return;
-                }
-
-                var formVariable = string.Empty;
-                int length = Request.Form.Count;
-
-                for (int i = 0; i < length; i++)
-                {
-                    if (!Request.Form.Keys[i].Equals("password", StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        if (i != 0)
-                        {
-                            formVariable += "&";
-                        }
-
-                        formVariable += string.Format("{0}={1}", Request.Form.Keys[i], Request.Form[Request.Form.Keys[i]]);
-                    }
-                }
-
-                var stackTrace = new StackTrace(ex);
-                var methodname = stackTrace.GetFrames().Select(f => f.GetMethod()).FirstOrDefault();
-
-                string message = ex.Message +
-                    "\r\nType: " + ex.GetType().ToString() +
-                    "\r\nSource: " + ex.Source +
-                    "\r\nURL: " + Request.Url +
-                    "\r\nDomain: " + HttpContext.Current.Request.Headers["Host"] +
-                    "\r\nForm Variable: " + formVariable +
-                    "\r\nQuery String: " + Request.QueryString.ToString() +
-                    (methodname != null ? "<br />\r\nMethodName: " + methodname.Name : string.Empty) +
-                    "\r\nTarget Site: " + ex.TargetSite +
-                    "\r\nStack Trace: " + ex.StackTrace;
-
-                if (ex is SqlException)
-                {
-                    message += "\r\nProcedure: " + ((SqlException)ex).Procedure +
-                        "\r\nLine Number: " + ((SqlException)ex).LineNumber +
-                        "\r\nServer: " + ((SqlException)ex).Server;
-                }
-
-                LoggingHandler.Log(message);
+                FanexLogging.HandleApplicationError(Server);
             }
             catch (Exception ex2)
             {
