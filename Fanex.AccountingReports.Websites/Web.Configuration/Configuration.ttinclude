@@ -352,7 +352,7 @@
                         return "stateConnectionString=\"tcpip=10.2.12.10:42424\"";
 
                     default:
-                        return "stateConnectionString=\"tcpip=10.35.35.253:42424\"";
+                        return "stateConnectionString=\"tcpip=ha.nexdev.net:42424\"";
                 }
             }
         }
