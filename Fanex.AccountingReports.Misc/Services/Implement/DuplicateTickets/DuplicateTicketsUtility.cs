@@ -21,7 +21,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
     /// </summary>
     public class DuplicateTicketsUtility
     {
-        public const int TotalMilliseconds = 1000;
+        public const int TotalMilliseconds = 30000;
 
         /// <summary>
         /// Assign sub-ticket info into a group, In a group of duplicate ticket, trans date of tickets must be compared with min(ticket) and less than 1000 millisecond.
