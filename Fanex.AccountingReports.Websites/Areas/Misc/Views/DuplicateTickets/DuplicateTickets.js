@@ -37,13 +37,8 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
     };
 
     self.playMedia = function () {
-        var mediaUrl = window.rootUrl + "Areas/Misc/Views/DuplicateTickets/Media/koekoeksklok.mp3";
-        AudioPlayer.embed("audioplayer", {
-            soundFile: mediaUrl,
-            titles: "Title",
-            artists: "Artist name",
-            autostart: "yes"
-        });
+        var audio = new Audio(window.rootUrl + "Areas/Misc/Views/DuplicateTickets/Media/koekoeksklok.mp3");
+        audio.play();        
     };
 
     var catchedDOMElement = function () {
