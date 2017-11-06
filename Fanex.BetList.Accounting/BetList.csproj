@@ -65,6 +65,8 @@
       <HintPath>..\packages\Fanex.BetList.Lucky3.1.1.0-beta1\lib\net40\Fanex.BetList.Lucky3.dll</HintPath>
       <Private>True</Private>
     </Reference>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Fanex.BetList.NumberGame, Version=1.0.0.5, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.BetList.NumberGame.1.0.0.5-beta\lib\net40\Fanex.BetList.NumberGame.dll</HintPath>
       <Private>True</Private>
@@ -146,7 +148,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="RemotingRef, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RemotingRef.2.0.0.12\lib\net40\RemotingRef.dll</HintPath>
+      <HintPath>..\packages\RemotingRef.2.0.0.13-beta1\lib\net40\RemotingRef.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SPSRemoting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -316,6 +318,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
+    <Content Include="Content\bullfighting.css" />
     <Content Include="Content\Fanex.Result\fanex.result.css" />
     <Content Include="Content\Fanex.Result\images\goal-icon.png" />
     <Content Include="Content\lucky3.css" />

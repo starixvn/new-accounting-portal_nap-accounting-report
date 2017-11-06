@@ -78,6 +78,10 @@
       <HintPath>..\packages\Fanex.BetList.Core.2.45.0-beta3\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Fanex.BetList.Bullfighting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.BetList.Bullfighting.1.0.0-beta2\lib\net40\Fanex.BetList.Bullfighting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Fanex.BetList.CashOut, Version=1.0.0.6, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.BetList.CashOut.1.0.0.6\lib\net40\Fanex.BetList.CashOut.dll</HintPath>
       <Private>True</Private>
@@ -271,7 +275,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="RemotingRef, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RemotingRef.2.0.0.12\lib\net40\RemotingRef.dll</HintPath>
+      <HintPath>..\packages\RemotingRef.2.0.0.13-beta1\lib\net40\RemotingRef.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
@@ -801,6 +805,7 @@
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\Scripts\VirtualRateHistory.js" />
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\Styles\TreeWinLoss.less" />
     <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
+    <Content Include="Content\bullfighting.css" />
     <Content Include="Content\Fanex.Result\fanex.result-customized.css" />
     <Content Include="Content\Fanex.Result\fanex.result.css" />
     <Content Include="Content\Fanex.Result\images\bg_header01.jpg" />

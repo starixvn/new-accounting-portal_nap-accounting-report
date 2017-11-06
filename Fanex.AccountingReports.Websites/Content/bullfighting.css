@@ -1,0 +1,16 @@
+﻿.bullfighting-match {
+    color: #000;
+    line-height: 15px;
+}
+
+.bullfighting-match .banker{
+    color: #B50000;
+}
+
+.bullfighting-match .player{
+    color: #01122B;
+}
+
+.bullfighting-arena .arena-code{
+    font-weight: bold;
+}
