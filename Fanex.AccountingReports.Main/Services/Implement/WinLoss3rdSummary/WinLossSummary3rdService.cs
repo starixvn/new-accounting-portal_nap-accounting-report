@@ -9,6 +9,10 @@
 
 namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Models;
@@ -23,10 +27,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
     using Fanex.AccountingReports.Main.Services.Interface;
     using Fanex.Common;
     using Fanex.Data.Repository;
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -843,6 +843,28 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                     });
                     break;
 
+                case SportTypeWinLoss.Bullfighting:
+                    report = rawData.Select(r => new
+                    {
+                        matchid = r.matchid,
+                        matchcode = r.matchcode,
+                        homeid = r.homeid,
+                        awayid = r.awayid,
+                        bettype = r.bettype,
+                        leagueid = r.leagueid,
+                        leaguecode = r.LeagueCode,
+                        realWinLost = r.realWinlost,
+                        realPosition = r.realPosition,
+                        realCommission = r.realCommission,
+                        realTurnover = r.realTurnover,
+                        virtualTurnover = r.virtualTurnover,
+                        realLineTotal = r.realLineTotal,
+                        virtualLineTotal = r.virtualLineTotal,
+                        liveindicator = r.liveindicator, // add live indicator
+                        isNeutral = r.isNeutral
+                    });
+                    break;
+
                 case SportTypeWinLoss.Unknown:
                 default:
                     break;
@@ -873,6 +895,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 case SportTypeWinLoss.Racing:
                 case SportTypeWinLoss.VirtualRacing:
                     matchGameWinLoss = this.BuildRacingAndVirtualRacingWinLossDetail(param);
+                    break;
+
+                case SportTypeWinLoss.Bullfighting:
+                    matchGameWinLoss = this.BuilBullfightingWinLossDetail(param);
                     break;
 
                 case SportTypeWinLoss.Unknown:
@@ -1075,6 +1101,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 case SportTypeWinLoss.VirtualRacing:
                     return CreateWinLossSummary3rdVirtualRacingSportTypeCriteria(criteria);
 
+                case SportTypeWinLoss.Bullfighting:
+                    return CreateWinLossSummary3rdBullfightingSportTypeCriteria(criteria);
+
                 case SportTypeWinLoss.Unknown:
                 default:
                     return criteria;
@@ -1123,6 +1152,40 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 ToDate = criteria.ToDate,
                 SportType = criteria.SportType
             };
+        }
+
+        private CriteriaBase CreateWinLossSummary3rdBullfightingSportTypeCriteria(GetMatchGameDetailsCriteria criteria)
+        {
+            return new GetWinLossSummary3rdBullfightingSportTypeCriteria
+            {
+                FromDate = criteria.FromDate,
+                ToDate = criteria.ToDate,
+            };
+        }
+
+        private MatchGameWinLossInfo BuilBullfightingWinLossDetail(dynamic param)
+        {
+            MatchGameWinLossInfo matchWinLoss = new MatchGameWinLossInfo
+            {
+                MatchCode = Converter.ToString2(param.matchcode),
+                HomeTeam = new EntityBase<int, string>
+                {
+                    Id = Converter.ToInt(param.homeid)
+                },
+                AwayTeam = new EntityBase<int, string>
+                {
+                    Id = Converter.ToInt(param.awayid)
+                },
+                LeagueId = Converter.ToInt(param.leagueid),
+                LeagueCode = Converter.ToString2(param.leaguecode),
+                WinLossDetail = this.BuildWinLossDetail(param)
+            };
+
+            // update Team name
+            matchWinLoss.HomeTeam.Name = this.GetTeamName(matchWinLoss.HomeTeam.Id);
+            matchWinLoss.AwayTeam.Name = this.GetTeamName(matchWinLoss.AwayTeam.Id);
+
+            return matchWinLoss;
         }
     }
 }

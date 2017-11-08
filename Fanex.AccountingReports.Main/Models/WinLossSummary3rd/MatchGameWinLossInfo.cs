@@ -30,6 +30,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
         // Is meetingid column of Racing
         public int LeagueId { get; set; }
 
+        public string LeagueCode { get; set; }
+
         public WinLossInfo WinLossDetail { get; set; }
 
         public bool IsNeutral { get; set; }

@@ -8,6 +8,8 @@
 // </history>
 namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByProduct
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Misc.Constants;
@@ -17,8 +19,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
     using NPOI.HSSF.UserModel;
     using NPOI.HSSF.Util;
     using NPOI.SS.UserModel;
-    using System;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
@@ -456,6 +456,14 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
 
                 case ProductContants.Lucky3:
                     product = "Lucky 3";
+                    break;
+
+                case ProductContants.Bullfighting:
+                    product = "Bullfighting";
+                    break;
+
+                case ProductContants.GoldDeluxe:
+                    product = "Gold Deluxe";
                     break;
 
                 default:

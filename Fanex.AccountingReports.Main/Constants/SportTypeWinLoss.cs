@@ -39,6 +39,8 @@ namespace Fanex.AccountingReports.Main.Common
         /// <summary>
         /// The number game.
         /// </summary>
-        NumberGame // special sport of SportBook
+        NumberGame, // special sport of SportBook
+
+        Bullfighting
     }
 }

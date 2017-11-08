@@ -41,5 +41,9 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int MetricGamingSuperlive = -1;
 
         public const int Lucky3 = 160;
+
+        public const int Bullfighting = 207;
+
+        public const int GoldDeluxe = 255;
     }
 }

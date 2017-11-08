@@ -68,6 +68,10 @@ namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd
                     {
                         _type = SportTypeWinLoss.VirtualSports;
                     }
+                    else if (SportType == MainConstants.WinLossSummary3rdBullfightingSportId)
+                    {
+                        _type = SportTypeWinLoss.Bullfighting;
+                    }
                 }
 
                 return _type;
