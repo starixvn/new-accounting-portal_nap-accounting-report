@@ -9,6 +9,9 @@
 
 namespace Fanex.AccountingReports.Special.Services.Implement
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Checkbet;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Helper.SportHelper;
@@ -16,9 +19,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
     using Fanex.AccountingReports.Special.Criteria.CheckBet;
     using Fanex.AccountingReports.Special.Models;
     using Fanex.AccountingReports.Special.Services.Interface;
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// TODO: Update summary.
@@ -312,7 +312,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                 case 124:
                 case 125:
                 case 20:
-                case 22:
                 case 21:
                 case 1201:
                     result = betTeam == "h" ? homeTeam : awayTeam;
