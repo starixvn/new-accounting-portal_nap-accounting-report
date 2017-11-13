@@ -130,5 +130,7 @@ namespace Fanex.AccountingReports.Core.Constants
 
         public const int MinMicroGamingRNGCasinoBetType = 2008;
         public const int MaxMicroGamingRNGCasinoBetType = 2009;
+
+        public const int BullfightingBetType = 1004;
     }
 }

@@ -44,6 +44,16 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             return RefData.GetHorseTeamName(Converter.ToString2(codeID), LanguageTypeConstants.En);
         }
 
+        public static string GetTeamName3rd(object teamId)
+        {
+            return RefData.GetTeamName3rd(Converter.ToString2(teamId), LanguageTypeConstants.En);
+        }
+
+        public static string GetLeagueName3rd(object leagueId)
+        {
+            return RefData.GetLeagueName3rd(Converter.ToString2(leagueId), LanguageTypeConstants.En);
+        }
+
         public static Dictionary<object, string> SaveCacheRefResponse(
             List<object> identityList,
             Func<object, string> cacheRefFunction,

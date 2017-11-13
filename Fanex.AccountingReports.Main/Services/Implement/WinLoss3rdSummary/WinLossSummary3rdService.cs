@@ -621,17 +621,24 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         };
 
                         // 2. Group by league
-                        var leagueGroups = betTypeGroup.GroupBy(data => data.leagueid);
+                        var leagueGroups = betTypeId == BetTypeConstants.BullfightingBetType ?
+                            betTypeGroup.GroupBy(data => new { data.leagueid, data.leaguecode }) :
+                            betTypeGroup.GroupBy(data => data.leagueid);
                         foreach (var leagueGroup in leagueGroups)
                         {
-                            leagueid = Converter.ToInt(leagueGroup.Key);
+                            leagueid = betTypeId == BetTypeConstants.BullfightingBetType ?
+                                Converter.ToInt(leagueGroup.Key.leagueid) :
+                                Converter.ToInt(leagueGroup.Key);
+                            var leagueName = betTypeId == BetTypeConstants.BullfightingBetType ?
+                                this.GetBullfightingLeagueName(leagueid, leagueGroup.Key.leaguecode) :
+                                this.GetLeagueName(leagueid);
 
                             leagueSummary = new MatchGameLeagueInfo
                             {
                                 Key = new EntityBase<int, string>
                                 {
                                     Id = leagueid,
-                                    Name = this.GetLeagueName(leagueid)
+                                    Name = leagueName
                                 }
                             };
 
@@ -1182,10 +1189,15 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             };
 
             // update Team name
-            matchWinLoss.HomeTeam.Name = this.GetTeamName(matchWinLoss.HomeTeam.Id);
-            matchWinLoss.AwayTeam.Name = this.GetTeamName(matchWinLoss.AwayTeam.Id);
+            matchWinLoss.HomeTeam.Name = CacheRef.GetTeamName3rd(matchWinLoss.HomeTeam.Id);
+            matchWinLoss.AwayTeam.Name = CacheRef.GetTeamName3rd(matchWinLoss.AwayTeam.Id);
 
             return matchWinLoss;
+        }
+
+        private string GetBullfightingLeagueName(int leagueId, string leagueCode)
+        {
+            return $"{leagueCode} - {CacheRef.GetLeagueName3rd(leagueId)}";
         }
     }
 }
