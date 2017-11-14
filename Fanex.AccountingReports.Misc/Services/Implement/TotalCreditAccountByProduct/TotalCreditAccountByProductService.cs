@@ -59,7 +59,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     });
                 }
 
-                return result;
+                return result.OrderBy(x => x.Name).ToList();
             }
             catch (Exception ex)
             {

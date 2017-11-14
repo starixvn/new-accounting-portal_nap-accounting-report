@@ -74,11 +74,20 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SMATurnover
             try
             {
                 List<BaseModel> result = new List<BaseModel>();
+                var sportBooksBaseModel = new BaseModel();
                 SMAsTurnoverCollection collection = SMAsTurnoverSection.Instance.Products;
                 foreach (SMAsTurnoverElement element in collection)
                 {
                     if (!element.IsActive)
                     {
+                        continue;
+                    }
+
+                    if (element.Name == "Sportsbook")
+                    {
+                        sportBooksBaseModel.Id = Converter.ToInt(element.Id);
+                        sportBooksBaseModel.Name = Converter.ToString2(element.Name);
+                        sportBooksBaseModel.AliasName = Converter.ToString2(element.AliasName);
                         continue;
                     }
 
@@ -89,6 +98,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SMATurnover
                         AliasName = Converter.ToString2(element.AliasName)
                     });
                 }
+
+                result = result.OrderBy(x => x.Name).ToList();
+                result.Insert(0, sportBooksBaseModel);
 
                 return result;
             }
