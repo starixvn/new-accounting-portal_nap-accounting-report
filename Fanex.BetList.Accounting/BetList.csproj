@@ -54,17 +54,17 @@
       <HintPath>..\_Dependencies\Fanex.AuthenticationFilter.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.BetList.BetTrade, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.45.0-beta3\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
+      <HintPath>..\packages\Fanex.BetList.Core.2.44.0-beta1\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.BetList.Bullfighting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Bullfighting.1.0.0-beta2\lib\net40\Fanex.BetList.Bullfighting.dll</HintPath>
+      <HintPath>..\packages\Fanex.BetList.Bullfighting.1.0.0-beta1\lib\net40\Fanex.BetList.Bullfighting.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.BetList.Lucky3, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.BetList.Lucky3.1.1.0-beta1\lib\net40\Fanex.BetList.Lucky3.dll</HintPath>
       <Private>True</Private>
-    </Reference> 
+    </Reference>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.BetList.NumberGame, Version=1.0.0.5, Culture=neutral, processorArchitecture=MSIL">
