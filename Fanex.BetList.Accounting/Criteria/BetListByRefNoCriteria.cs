@@ -1,14 +1,10 @@
-namespace Fanex.BetList.Accounting.Criteria
+﻿namespace Fanex.BetList.Accounting.Criteria
 {
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class BetListByRefNoCriteria : CriteriaBase
     {
-        [SpParam(SqlParamName = "TransID")]
-        public long TransId { get; set; }
+        public long RefNo { get; set; }
 
         public override string GetSettingKey()
         {

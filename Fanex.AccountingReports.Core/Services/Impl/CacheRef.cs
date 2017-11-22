@@ -1,4 +1,4 @@
-namespace Fanex.AccountingReports.Core.Services.Impl
+﻿namespace Fanex.AccountingReports.Core.Services.Impl
 {
     using System;
     using System.Collections.Generic;
@@ -43,6 +43,11 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         public static string GetLeagueName3rd(object leagueId)
         {
             return RefData.GetLeagueName3rd(Converter.ToString2(leagueId), LanguageTypeConstants.En);
+        }
+
+        public static string GetResourceData(string refId, string team)
+        {
+            return RefData.GetResourceDataByRefIdAndResourceId(refId, team, LanguageTypeConstants.En, string.Empty);
         }
 
         public static Dictionary<object, string> SaveCacheRefResponse(

@@ -1,4 +1,4 @@
-namespace Fanex.BetList.Accounting.Controllers
+﻿namespace Fanex.BetList.Accounting.Controllers
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -55,7 +55,7 @@ namespace Fanex.BetList.Accounting.Controllers
             {
                 result = _betListService.GetBetListByRefNoTickets(new BetListByRefNoCriteria
                 {
-                    TransId = Converter.To<long>(refno)
+                    RefNo = Converter.To<long>(refno)
                 });
             }
 

@@ -1,4 +1,4 @@
-namespace Fanex.AccountingReports.Special.Services.Implement
+﻿namespace Fanex.AccountingReports.Special.Services.Implement
 {
     using System;
     using System.Collections.Generic;
@@ -560,6 +560,10 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                         result = awayTeam;
                     }
 
+                    break;
+
+                case 1004:
+                    result = CacheRef.GetResourceData("BF", betTeam);
                     break;
 
                 default:
