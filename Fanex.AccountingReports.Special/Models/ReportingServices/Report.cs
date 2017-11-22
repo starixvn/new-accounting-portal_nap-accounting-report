@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="Report.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2014.03.11">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Special.Models.ReportingServices
 {
     using System.Collections.Generic;

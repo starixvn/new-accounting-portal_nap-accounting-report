@@ -1,9 +1,3 @@
-// -----------------------------------------------------------------------
-// <copyright file="CreditTermController.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Main.Controllers
 {
     using System.Web.Mvc;

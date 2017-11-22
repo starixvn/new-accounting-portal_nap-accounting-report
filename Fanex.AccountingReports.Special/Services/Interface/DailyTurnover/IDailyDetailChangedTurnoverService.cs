@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="IDailyDetailChangedTurnoverService.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Special.Services.Interface.DailyTurnover
 {
     using System.Collections.Generic;

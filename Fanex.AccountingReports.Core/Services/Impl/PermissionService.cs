@@ -1,13 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="PermissionService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Louis.Nguyen" date="2012.10.18">Created</change>
-//   <change who="Ricky.Nguyen" date="2012.11.20">Update Check Permission</change>
-// </history>
-
 namespace Fanex.AccountingReports.Core.Services.Impl
 {
     using Fanex.NAP.Core.Business;

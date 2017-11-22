@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="NumberGameWinLossByCurrencyService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="David.Tran" date="2013.02.19">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
 {
     using System;

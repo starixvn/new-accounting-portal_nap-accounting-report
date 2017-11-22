@@ -1,4 +1,4 @@
-﻿using RemotingRef;
+using RemotingRef;
 using System;
 using System.Collections.Generic;
 using System.Linq;

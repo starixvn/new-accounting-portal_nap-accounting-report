@@ -1,4 +1,4 @@
-﻿using Fanex.AccountingReports.Core.Models;
+using Fanex.AccountingReports.Core.Models;
 using System;
 using System.Collections.Generic;
 

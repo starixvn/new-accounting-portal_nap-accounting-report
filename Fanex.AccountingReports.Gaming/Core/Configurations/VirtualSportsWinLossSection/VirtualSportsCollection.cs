@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="VirtualSportsCollection.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Gaming.Core.Configurations.VirtualSportsWinLossSection
 {
     using System.Configuration;

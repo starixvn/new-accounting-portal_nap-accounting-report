@@ -1,12 +1,3 @@
-// -----------------------------------------------------------------------
-// <copyright file="CreditMovementController.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
-/// <summary>
-///
-/// </summary>
 namespace Fanex.AccountingReports.Misc.Controllers
 {
     using System.Web.Mvc;

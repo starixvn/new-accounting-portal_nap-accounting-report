@@ -1,4 +1,4 @@
-﻿namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
+namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
 {
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Fanex.Data.Repository;
 
 namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd

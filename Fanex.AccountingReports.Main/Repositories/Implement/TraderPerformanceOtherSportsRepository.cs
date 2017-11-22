@@ -1,12 +1,3 @@
-// -----------------------------------------------------------------------
-// <copyright file="TraderPerformanceOtherSportsRepository.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2014.01.06">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Main.Repositories.Implement
 {
     using System.Data;

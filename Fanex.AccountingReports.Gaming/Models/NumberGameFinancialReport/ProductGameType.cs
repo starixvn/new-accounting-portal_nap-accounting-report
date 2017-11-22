@@ -1,4 +1,4 @@
-﻿namespace Fanex.AccountingReports.Gaming.Models.NumberGameFinancialReport
+namespace Fanex.AccountingReports.Gaming.Models.NumberGameFinancialReport
 {
     using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Models;

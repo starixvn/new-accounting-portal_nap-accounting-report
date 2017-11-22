@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="HarnessWinLossDetailAUSTote.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Racing.Models.HarnessAUSTote
 {
     using System;

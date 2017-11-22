@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="WorkbookExtensions.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Core.Extensions
 {
     using System.IO;

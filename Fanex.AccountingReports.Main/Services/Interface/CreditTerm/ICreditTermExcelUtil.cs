@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ICreditTermExcelUtil.cs" company="Nexcel Solutions VietNam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Main.Services.Interface.CreditTerm
 {
     /// <summary>

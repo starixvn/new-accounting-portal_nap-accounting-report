@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="SMATurnoverService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2014.09.12">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Misc.Services.Implement.SMATurnover
 {
     using System;

@@ -1,12 +1,3 @@
-// -----------------------------------------------------------------------
-// <copyright file="SuperBalanceController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="" date="2013.23.10">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Balance.Controllers
 {
     using System.Collections.Generic;

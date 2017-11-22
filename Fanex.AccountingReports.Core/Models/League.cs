@@ -1,4 +1,4 @@
-﻿namespace Fanex.AccountingReports.Core.Models
+namespace Fanex.AccountingReports.Core.Models
 {
     using Fanex.AccountingReports.Core.Services.Impl;
 

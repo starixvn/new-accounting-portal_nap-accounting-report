@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="LiveCasinoProductSection.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Core.Configurations
 {
     using System.Configuration;

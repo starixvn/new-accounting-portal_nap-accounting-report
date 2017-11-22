@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="LiveCasinoProductConstants.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Gaming.Constants
 {
     using System;

@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="INumberGameFinancialRepository.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2013.12.04">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Gaming.Repositories.Interface
 {
     using System;

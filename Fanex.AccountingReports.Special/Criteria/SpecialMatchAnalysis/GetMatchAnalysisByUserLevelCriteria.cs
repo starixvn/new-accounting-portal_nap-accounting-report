@@ -1,4 +1,4 @@
-﻿namespace Fanex.AccountingReports.Special.Criteria.SpecialMatchAnalysis
+namespace Fanex.AccountingReports.Special.Criteria.SpecialMatchAnalysis
 {
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;

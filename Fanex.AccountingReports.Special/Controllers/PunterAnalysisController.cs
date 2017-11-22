@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 using Fanex.AccountingReports.Core.Web.Controllers;
 using Fanex.NAP.Core.Business;
 using Fanex.NAP.Core.Web.Attribute;

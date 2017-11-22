@@ -1,9 +1,3 @@
-// -----------------------------------------------------------------------
-// <copyright file="DailyTurnoverController.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Special.Controllers
 {
     using System.Web.Mvc;

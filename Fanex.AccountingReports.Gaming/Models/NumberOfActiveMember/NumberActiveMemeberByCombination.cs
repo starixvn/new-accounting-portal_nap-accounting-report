@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="NumberActiveMemeberByCombination.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Gaming.Models.NumberOfActiveMember
 {
     using System;

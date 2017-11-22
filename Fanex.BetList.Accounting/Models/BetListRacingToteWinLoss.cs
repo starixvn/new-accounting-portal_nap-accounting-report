@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="BetListRacingToteWinLoss.cs" company="Nexcel Solution Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.BetList.Accounting.Models
 {
     using System;

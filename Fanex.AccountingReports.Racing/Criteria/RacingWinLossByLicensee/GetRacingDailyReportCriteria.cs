@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="GetRacingDailyReportCriteria.cs" company="Nexcel Solutions VietName">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Racing.Criteria.RacingWinLossByLicensee
 {
     using System;

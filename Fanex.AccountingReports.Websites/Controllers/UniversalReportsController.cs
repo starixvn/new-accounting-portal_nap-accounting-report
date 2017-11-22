@@ -1,4 +1,4 @@
-﻿using System.Web.Mvc;
+using System.Web.Mvc;
 using Fanex.AccountingReports.Core.Web.Controllers;
 
 namespace Fanex.AccountingReports.Websites.Controllers

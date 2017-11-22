@@ -1,9 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="DownloadReportController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Websites.Controllers
 {
     using System;

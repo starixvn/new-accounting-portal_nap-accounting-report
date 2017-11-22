@@ -1,4 +1,4 @@
-﻿namespace Fanex.AccountingReports.Main.Criteria.DailyWinLoss2h
+namespace Fanex.AccountingReports.Main.Criteria.DailyWinLoss2h
 {
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;

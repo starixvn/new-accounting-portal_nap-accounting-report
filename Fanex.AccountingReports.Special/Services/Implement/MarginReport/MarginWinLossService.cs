@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="MarginWinLossService.cs" company="Nexcel Solutions vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
 {
     using System;

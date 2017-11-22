@@ -1,12 +1,3 @@
-// --------------------------------------------------------------------------
-// <copyright file="ResultService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="David>Tran" date="2014.10.24">Created</change>
-// </history>
-
 namespace Fanex.BetList.Accounting.Services
 {
     using System;

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace Fanex.AccountingReports.UnitTests.Module.Special.TestUtility

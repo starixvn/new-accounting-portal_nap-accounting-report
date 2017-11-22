@@ -1,4 +1,4 @@
-﻿namespace Fanex.AccountingReports.Core.Web
+namespace Fanex.AccountingReports.Core.Web
 {
     using Couchbase;
     using Enyim.Caching.Memcached;

@@ -1,4 +1,4 @@
-﻿using System.Web;
+using System.Web;
 using Fanex.Logging.Extensions.Database;
 using Fanex.Logging.Extensions.Web;
 

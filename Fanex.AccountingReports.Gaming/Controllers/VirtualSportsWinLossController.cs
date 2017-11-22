@@ -1,9 +1,3 @@
-// -----------------------------------------------------------------------
-// <copyright file="VirtualSportsWinLossController.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Gaming.Controllers
 {
     using System.Web.Mvc;

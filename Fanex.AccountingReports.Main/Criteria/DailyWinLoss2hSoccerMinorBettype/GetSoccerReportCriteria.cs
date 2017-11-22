@@ -1,9 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="GetSoccerReportCriteria.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Main.Criteria.DailyWinLoss2hSoccerMinorBettype
 {
     using System;

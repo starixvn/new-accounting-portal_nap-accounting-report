@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="AGCasinoWinlossConstants.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Licensee.Constants
 {
     using System.Diagnostics.CodeAnalysis;

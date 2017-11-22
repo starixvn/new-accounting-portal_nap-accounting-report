@@ -1,13 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="LicenseeSiteService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="David.Tran" date="2012.11.16">Created</change>
-//   <change who="Louis.Bao" date="2012.11.26">Modified</change>
-// </history>
-
 namespace Fanex.AccountingReports.Licensee.Services.Implement
 {
     using Fanex.AccountingReports.Core.Configurations;

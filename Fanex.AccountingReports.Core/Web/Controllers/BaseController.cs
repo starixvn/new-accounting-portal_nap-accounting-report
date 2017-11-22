@@ -1,13 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="BaseController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Anders.Le" date="2012.10.12">Created</change>
-//   <change who="Ricky.Nguyen" date="2012.11.14">Update Maintenance Time</change>
-// </history>
-
 namespace Fanex.AccountingReports.Core.Web.Controllers
 {
     using System;
