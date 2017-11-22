@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="DailyMixParlayWinLoss_2hLinkController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -26,13 +26,8 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         private readonly IDailyMixParlayWinLossService _reportService;
 
         public DailyMixParlayWinLoss_2hLinkController()
-            : this(null)
         {
-        }
-
-        public DailyMixParlayWinLoss_2hLinkController(IDailyMixParlayWinLossService reportService)
-        {
-            this._reportService = reportService ?? new DailyMixParlayWinLossService();
+            this._reportService = new DailyMixParlayWinLossService();
         }
 
         [HttpGet]

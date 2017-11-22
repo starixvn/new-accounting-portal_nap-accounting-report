@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // <copyright file="DailyTurnoverController.cs" company="Nexcel Solutions Vietnam">
 // TODO: Update copyright text.
 // </copyright>
@@ -28,19 +28,10 @@ namespace Fanex.AccountingReports.Special.Controllers
         private readonly IDailyDetailChangedTurnoverExportReportService _exportReportDetailService;
 
         public DailyTurnoverController()
-            : this(null, null, null)
-        { 
-        }
-
-        public DailyTurnoverController(
-            IDailyTurnoverService reportService,
-            IDailyDetailChangedTurnoverService reportDetailService,
-            IDailyDetailChangedTurnoverExportReportService exportReportDetailService)
         {
-            this._reportService = reportService ?? new DailyTurnoverService();
-            this._reportDetailService = reportDetailService ?? new DailyDetailChangedTurnoverService();
-            this._exportReportDetailService = exportReportDetailService ?? 
-                                                new DailyDetailChangedTurnoverExportReportService();
+            this._reportService = new DailyTurnoverService();
+            this._reportDetailService = new DailyDetailChangedTurnoverService();
+            this._exportReportDetailService = new DailyDetailChangedTurnoverExportReportService();
         }
 
         [HttpGet]

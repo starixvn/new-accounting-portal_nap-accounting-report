@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="SpecialMatchAnalysisController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -25,13 +25,8 @@ namespace Fanex.AccountingReports.Special.Controllers
         private readonly ISpecialMatchAnalysisService _reportService;
 
         public SpecialMatchAnalysisController()
-            : this(null)
         {
-        }
-
-        public SpecialMatchAnalysisController(ISpecialMatchAnalysisService reportService)
-        {
-            this._reportService = reportService ?? new SpecialMatchAnalysisService();
+            this._reportService = new SpecialMatchAnalysisService();
         }
 
         [HttpGet]
@@ -68,7 +63,7 @@ namespace Fanex.AccountingReports.Special.Controllers
             var report = this._reportService.GetMatchAnalysis(criteria);
             return Json(report, JsonRequestBehavior.AllowGet);
         }
-             
+
         [HttpGet]
         public ActionResult ExportReport(GetMatchAnalysisCriteria criteria)
         {

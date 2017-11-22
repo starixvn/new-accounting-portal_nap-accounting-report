@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // <copyright file="AllCustomerTurnOverController.cs" company="Nexcel Solutions Vietnam">
 // TODO: Update copyright text.
 // </copyright>
@@ -26,14 +26,9 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         private readonly IAllCustomerTurnOverExportReportService _exportReportService;
 
         public AllCustomerTurnOverController()
-            : this(null, null)
         {
-        }
-
-        public AllCustomerTurnOverController(IAllCustomerTurnOverGetReportService getReportService, IAllCustomerTurnOverExportReportService exportReportService)
-        {
-            this._getReportService = getReportService ?? new AllCustomerTurnOverGetReportService();
-            this._exportReportService = exportReportService ?? new AllCustomerTurnOverExportReportService();
+            this._getReportService = new AllCustomerTurnOverGetReportService();
+            this._exportReportService = new AllCustomerTurnOverExportReportService();
         }
 
         [HttpGet]
@@ -46,7 +41,7 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         [HttpPost]
         [HandleAjaxError]
         public JsonResult GetReport(GetAllCustomerTurnOverCriteria criteria)
-        {            
+        {
             var report = this._getReportService.GetReport(criteria);
             var jsonResult = Json(report);
             jsonResult.MaxJsonLength = int.MaxValue;

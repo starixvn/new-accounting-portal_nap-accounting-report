@@ -20,7 +20,7 @@ namespace Fanex.AccountingReports.Racing.Controllers
     /// </summary>
     public class HarnessAUSToteController : BaseController
     {
-         private readonly ToteDailyWinLossService _greyhoundWinLossService;
+        private readonly ToteDailyWinLossService _greyhoundWinLossService;
         private readonly ToteDailyWinLossExcelService _greyhoundExcelService;
 
         public HarnessAUSToteController()
@@ -55,7 +55,7 @@ namespace Fanex.AccountingReports.Racing.Controllers
             jsonResult.MaxJsonLength = int.MaxValue;
             return jsonResult;
         }
-         
+
         public EmptyResult ExportExcelRacingWinLossMain(GetMainHarnessAUSToteCriteria criteria)
         {
             _greyhoundExcelService.ExportExcelRacingDailyMain(criteria);

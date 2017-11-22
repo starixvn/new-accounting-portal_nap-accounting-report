@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="DailyCreatedCustomersController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -26,13 +26,8 @@ namespace Fanex.AccountingReports.Misc.Controllers
         private readonly IDailyCreatedCustomersService _reportService;
 
         public DailyCreatedCustomersController()
-            : this(null)
         {
-        }
-
-        public DailyCreatedCustomersController(IDailyCreatedCustomersService reportService)
-        {
-            this._reportService = reportService ?? new DailyCreatedCustomersService();
+            this._reportService = new DailyCreatedCustomersService();
         }
 
         [HttpGet]

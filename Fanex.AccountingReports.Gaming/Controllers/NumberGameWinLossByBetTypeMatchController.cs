@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="NumberGameWinLossByBetTypeMatchController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -30,18 +30,10 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         private readonly IWinLossByMatchService _winLossByMatchService;
 
         public NumberGameWinLossByBetTypeMatchController()
-            : this(null, null, null)
         {
-        }
-
-        public NumberGameWinLossByBetTypeMatchController(
-            INumberGameWinLossByBetTypeMatchService numberGameWinLossService,
-            IWinLossByBetTypeService winLossByBetTypeService,
-            IWinLossByMatchService winLossByMatchService)
-        {
-            _numberGameWinLossService = numberGameWinLossService ?? new NumberGameWinLossByBetTypeMatchService();
-            _winLossByBetTypeService = winLossByBetTypeService ?? new WinLossByBetTypeService();
-            _winLossByMatchService = winLossByMatchService ?? new WinLossByMatchService();
+            _numberGameWinLossService = new NumberGameWinLossByBetTypeMatchService();
+            _winLossByBetTypeService = new WinLossByBetTypeService();
+            _winLossByMatchService = new WinLossByMatchService();
         }
 
         [HttpGet]

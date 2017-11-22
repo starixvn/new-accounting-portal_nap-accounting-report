@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // <copyright file="CreditMovementController.cs" company="Nexcel Solutions Vietnam">
 // TODO: Update copyright text.
 // </copyright>
@@ -32,13 +32,8 @@ namespace Fanex.AccountingReports.Misc.Controllers
         private string _amount = "300,000";
 
         public CreditMovementController()
-            : this(null)
         {
-        }
-
-        public CreditMovementController(ICreditMovementService service)
-        {
-            _service = service ?? new CreditMovementService();
+            _service = new CreditMovementService();
         }
 
         [NapAuth(FunctionKey = AccReportFunctionKeys.CreditMovement, Policy = Constant.Policy.Read)]

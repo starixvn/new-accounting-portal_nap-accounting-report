@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="CheckBetController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -9,13 +9,13 @@
 
 namespace Fanex.AccountingReports.Special.Controllers
 {
+    using System.Web.Mvc;
     using Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Core.Web.Security;
     using Fanex.AccountingReports.Special.Criteria.CheckBet;
     using Fanex.AccountingReports.Special.Services.Implement;
     using Fanex.AccountingReports.Special.Services.Interface;
-    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -25,13 +25,8 @@ namespace Fanex.AccountingReports.Special.Controllers
         private readonly ICheckBetService _checkBetService;
 
         public CheckBetController()
-            : this(null)
         {
-        }
-
-        public CheckBetController(ICheckBetService checkBetService)
-        {
-            this._checkBetService = checkBetService ?? new CheckBetService();
+            this._checkBetService = new CheckBetService();
         }
 
         [AuthenticateAction(AuthenticateAction.AuthenticationType.Read, "Index")]

@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="TotalSMAMemberActiveController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -26,13 +26,8 @@ namespace Fanex.AccountingReports.Misc.Controllers
         private readonly ITotalSMAMemberActiveService _reportService;
 
         public TotalSMAMemberActiveController()
-            : this(null)
         {
-        }
-
-        public TotalSMAMemberActiveController(ITotalSMAMemberActiveService reportService)
-        {
-            this._reportService = reportService ?? new TotalSMAMemberActiveService();
+            this._reportService = new TotalSMAMemberActiveService();
         }
 
         [HttpGet]

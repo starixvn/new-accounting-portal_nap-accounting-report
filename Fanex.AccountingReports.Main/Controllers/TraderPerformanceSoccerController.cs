@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="TraderPerformanceSoccerController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -31,13 +31,8 @@ namespace Fanex.AccountingReports.Main.Controllers
         private readonly ITraderPerformanceSoccerService reportService;        
 
         public TraderPerformanceSoccerController()
-            : this(null)
-        {
-        }
-
-        public TraderPerformanceSoccerController(ITraderPerformanceSoccerService reportService)
-        {
-            this.reportService = reportService ?? new TraderPerformanceSoccerService();
+            {
+            this.reportService = new TraderPerformanceSoccerService();
         }
 
         [HttpGet]

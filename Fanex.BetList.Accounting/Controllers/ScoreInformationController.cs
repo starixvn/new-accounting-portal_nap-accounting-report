@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="ScoreInformationController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -22,14 +22,9 @@ namespace Fanex.BetList.Accounting.Controllers
         private readonly IResultService _resultService;
 
         public ScoreInformationController()
-            : this(null, null)
         {
-        }
-
-        public ScoreInformationController(IScoreInformationService service, IResultService resultService)
-        {
-            this._service = service ?? new ScoreInformationService();
-            this._resultService = resultService ?? new ResultService();
+            this._service = new ScoreInformationService();
+            this._resultService = new ResultService();
         }
 
         [HttpPost]

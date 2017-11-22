@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="LeagueWinLossController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -28,14 +28,9 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         private readonly ILeagueWinLossExportExcel _excelService;
 
         public LeagueWinLossController()
-            : this(null, null)
         {
-        }
-
-        public LeagueWinLossController(ILeagueWinLossService reportService, ILeagueWinLossExportExcel excelService)
-        {
-            _reportService = reportService ?? new LeagueWinLossService();
-            _excelService = excelService ?? new LeagueWinLossExportExcel(_reportService);
+            _reportService = new LeagueWinLossService();
+            _excelService = new LeagueWinLossExportExcel(_reportService);
         }
 
         [HttpGet]

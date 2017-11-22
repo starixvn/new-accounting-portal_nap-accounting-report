@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="CommonController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -9,10 +9,10 @@
 
 namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 {
-    using ONEbook.UM.Services;
-    using ONEbook.UM.Services.Impl;
     using System.Web.Mvc;
     using System.Web.Security;
+    using ONEbook.UM.Services;
+    using ONEbook.UM.Services.Impl;
 
     /// <summary>
     /// TODO: Update summary.
@@ -22,13 +22,8 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         private readonly IMaintenanceService _maintenanceService;
 
         public CommonController()
-            : this(null)
         {
-        }
-
-        public CommonController(IMaintenanceService maintenanceService)
-        {
-            _maintenanceService = maintenanceService ?? new MaintenanceService();
+            _maintenanceService = new MaintenanceService();
         }
 
         /// <summary>

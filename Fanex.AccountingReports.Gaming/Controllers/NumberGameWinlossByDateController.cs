@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="NumberGameWinlossByDateController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -27,13 +27,8 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         private readonly INumberGameWinlossByDateService _numberGameWinlossByDateService;
 
         public NumberGameWinlossByDateController()
-            : this(null)
         {
-        }
-
-        public NumberGameWinlossByDateController(INumberGameWinlossByDateService numberGameWinlossByDateService)
-        {
-            this._numberGameWinlossByDateService = numberGameWinlossByDateService ?? new NumberGameWinlossByDateService();
+            this._numberGameWinlossByDateService = new NumberGameWinlossByDateService();
         }
 
         [HttpGet]

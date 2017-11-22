@@ -9,6 +9,8 @@
 
 namespace Fanex.AccountingReports.Main.Controllers
 {
+    using System;
+    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -16,28 +18,16 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.AccountingReports.Main.Criteria.DailyWinLoss2hSoccerMinorBettype;
     using Fanex.AccountingReports.Main.Resources;
     using Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMinorBettype;
-    using Fanex.AccountingReports.Main.Services.Interface;
     using Fanex.Excel;
     using Fanex.Excel.Extensions;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
-    using System;
-    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class DailyWinLoss2hSoccerMinorBettypeController : BaseController
     {
-        public DailyWinLoss2hSoccerMinorBettypeController()
-            : this(null)
-        {
-        }
-
-        public DailyWinLoss2hSoccerMinorBettypeController(IDailyWinLoss2hSoccerService reportService)
-        {
-        }
-
         [HttpGet]
         [NapAuth(FunctionKey = AccReportFunctionKeys.DailyWinLoss2hSoccerMinorBettype, Policy = Constant.Policy.Read)]
         public ActionResult Index()

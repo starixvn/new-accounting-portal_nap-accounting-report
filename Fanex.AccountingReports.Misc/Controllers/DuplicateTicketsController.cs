@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="DuplicateTicketsController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -27,13 +27,8 @@ namespace Fanex.AccountingReports.Misc.Controllers
         private readonly IDuplicateTicketsService _reportService;
 
         public DuplicateTicketsController()
-            : this(null)
         {
-        }
-
-        public DuplicateTicketsController(IDuplicateTicketsService reportService)
-        {
-            this._reportService = reportService ?? new DuplicateTicketsService();
+            this._reportService = new DuplicateTicketsService();
         }
 
         [HttpGet]

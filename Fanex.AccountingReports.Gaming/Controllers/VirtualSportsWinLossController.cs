@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // <copyright file="VirtualSportsWinLossController.cs" company="Nexcel Solutions Vietnam">
 // TODO: Update copyright text.
 // </copyright>
@@ -27,23 +27,14 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         private readonly IVirtualSportsWinLossExportReportService _exportReportService;
 
         public VirtualSportsWinLossController()
-            : this(null, null, null)
-        { 
-        }
-
-        public VirtualSportsWinLossController(
-            VirtualSportsWinLossGetReportService reportService,
-            VirtualSportsWinLossDetailService reportDetailService,
-            VirtualSportsWinLossExportReportService exportReportService)
         {
-            this._getReportService = reportService ?? new VirtualSportsWinLossGetReportService();
-            this._reportDetailService = reportDetailService ?? new VirtualSportsWinLossDetailService();
-            this._exportReportService = exportReportService ?? 
-                                        new VirtualSportsWinLossExportReportService();
+            this._getReportService = new VirtualSportsWinLossGetReportService();
+            this._reportDetailService = new VirtualSportsWinLossDetailService();
+            this._exportReportService = new VirtualSportsWinLossExportReportService();
         }
 
         [HttpGet]
-        [NapAuth(FunctionKey = AccReportFunctionKeys.VirtualSportsWinLossGaming, 
+        [NapAuth(FunctionKey = AccReportFunctionKeys.VirtualSportsWinLossGaming,
                  Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

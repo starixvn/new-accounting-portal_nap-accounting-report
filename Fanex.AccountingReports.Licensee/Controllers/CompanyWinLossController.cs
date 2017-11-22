@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="AGCasinoWinLossController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -27,14 +27,9 @@ namespace Fanex.AccountingReports.Licensee.Controllers
         private readonly ICompanyWinLossService _reportService;
 
         public CompanyWinLossController()
-            : this(null)
         {
+            this._reportService = new CompanyWinLossService();
         }
-
-        public CompanyWinLossController(ICompanyWinLossService reportService)
-        {
-            this._reportService = reportService ?? new CompanyWinLossService();
-        }       
 
         [HttpGet]
         [NapAuth(FunctionKey = AccReportFunctionKeys.CompanyWinLoss, Policy = Constant.Policy.Read)]

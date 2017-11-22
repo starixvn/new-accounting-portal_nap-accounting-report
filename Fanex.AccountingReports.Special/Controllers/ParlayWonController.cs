@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="ParlayWonController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -25,13 +25,8 @@ namespace Fanex.AccountingReports.Special.Controllers
         private readonly IParlayWonService _reportService;
 
         public ParlayWonController()
-            : this(null)
         {
-        }
-
-        public ParlayWonController(IParlayWonService reportService)
-        {
-            this._reportService = reportService ?? new ParlayWonService();
+            this._reportService = new ParlayWonService();
         }
 
         [HttpGet]

@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="DailyWinLoss2hSoccerController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -27,13 +27,8 @@ namespace Fanex.AccountingReports.Main.Controllers
         private readonly IDailyWinLoss2hSoccerService _reportService;
 
         public DailyWinLoss2hSoccerController()
-            : this(null)
         {
-        }
-
-        public DailyWinLoss2hSoccerController(IDailyWinLoss2hSoccerService reportService)
-        {
-            this._reportService = reportService ?? new DailyWinLoss2hSoccerService();
+            this._reportService = new DailyWinLoss2hSoccerService();
         }
 
         [HttpGet]

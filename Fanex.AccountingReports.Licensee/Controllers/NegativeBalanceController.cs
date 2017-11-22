@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="NegativeBalanceController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -28,14 +28,9 @@ namespace Fanex.AccountingReports.Licensee.Controllers
         private readonly ILicenseeSiteService _licenseeSite;
 
         public NegativeBalanceController()
-            : this(null, null)
         {
-        }
-
-        public NegativeBalanceController(INegativeBanlance reportService, ILicenseeSiteService licenseeSite)
-        {
-            _reportService = reportService ?? new NegativeBalanceService();
-            _licenseeSite = licenseeSite ?? new LicenseeSiteService();
+            _reportService = new NegativeBalanceService();
+            _licenseeSite = new LicenseeSiteService();
         }
 
         [HttpGet]

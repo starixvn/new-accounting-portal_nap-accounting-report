@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // <copyright file="RacingGroupDailyController.cs" company="Nexcel Solutions Vietnam">
 // TODO: Update copyright text.
 // </copyright>
@@ -24,16 +24,9 @@ namespace Fanex.AccountingReports.Racing.Controllers
         private IRacingGroupDailyExportReportServices _exportReportService;
 
         public RacingGroupDailyController()
-            : this(null, null)
-        {
-        }
-
-        public RacingGroupDailyController(
-            IRacingGroupDailyGetReportServices getReportService,
-            IRacingGroupDailyExportReportServices exportReportService)
-        {
-            this._getReportService = getReportService ?? new RacingGroupDailyGetReportServices();
-            this._exportReportService = exportReportService ?? new RacingGroupDailyExportReportServices();
+            {
+            this._getReportService = new RacingGroupDailyGetReportServices();
+            this._exportReportService = new RacingGroupDailyExportReportServices();
         }
 
         [HttpGet]

@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="UserController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -9,6 +9,8 @@
 
 namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
 {
+    using System;
+    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.Common;
@@ -20,8 +22,6 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
     using NAP.Core.Configuration;
     using NAP.Core.Models;
     using NAP.Core.Models.ParameterObject;
-    using System;
-    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -34,13 +34,8 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
         private readonly ISecurityService securityService;
 
         public UserController()
-            : this(null)
         {
-        }
-
-        public UserController(IUserService userService)
-        {
-            _userService = userService ?? new UserService();
+            _userService = new UserService();
             securityService = new SecurityService();
         }
 

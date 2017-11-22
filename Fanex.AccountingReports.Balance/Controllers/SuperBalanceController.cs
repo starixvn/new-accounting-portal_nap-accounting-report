@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // <copyright file="SuperBalanceController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -27,13 +27,8 @@ namespace Fanex.AccountingReports.Balance.Controllers
         private readonly ISuperBalanceService _superBalanceService;
 
         public SuperBalanceController()
-            : this(null)
         {
-        }
-
-        public SuperBalanceController(ISuperBalanceService superBalaceService)
-        {
-            this._superBalanceService = superBalaceService ?? new SuperBalanceService();
+            this._superBalanceService = new SuperBalanceService();
         }
 
         [HttpGet]

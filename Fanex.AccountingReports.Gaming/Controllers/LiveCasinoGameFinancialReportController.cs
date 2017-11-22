@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="LiveCasinoGameFinancialReportController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -24,13 +24,8 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         private readonly ILiveCasinoGameFinancialReportService _reportService;
 
         public LiveCasinoGameFinancialReportController()
-            : this(null)
         {
-        }
-
-        public LiveCasinoGameFinancialReportController(ILiveCasinoGameFinancialReportService reportService)
-        {
-            this._reportService = reportService ?? new LiveCasinoGameFinancialReportService();
+            this._reportService = new LiveCasinoGameFinancialReportService();
         }
 
         [NapAuth(FunctionKey = AccReportFunctionKeys.LiveCasinoGameFinancialReport, Policy = Constant.Policy.Read)]

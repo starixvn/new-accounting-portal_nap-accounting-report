@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="WinLossSummaryController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -25,13 +25,8 @@ namespace Fanex.AccountingReports.Main.Controllers
         private readonly IWinLossSummaryService _reportService;
 
         public WinLossSummaryController()
-            : this(null)
         {
-        }
-
-        public WinLossSummaryController(IWinLossSummaryService reportService)
-        {
-            this._reportService = reportService ?? new WinLossSummaryService();
+            this._reportService = new WinLossSummaryService();
         }
 
         [HttpGet]

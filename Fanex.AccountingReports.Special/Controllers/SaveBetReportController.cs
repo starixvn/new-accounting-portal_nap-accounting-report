@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // <copyright file="SaveBetReportController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -37,11 +37,6 @@ namespace Fanex.AccountingReports.Special.Controllers
         private string password = AppSettings.Password;
 
         public SaveBetReportController()
-            : this(null)
-        {
-        }
-
-        public SaveBetReportController(ISaveBetReportService saveBetReportService)
         {
             if (AppSettings.IsAuthenticate)
             {
@@ -53,7 +48,7 @@ namespace Fanex.AccountingReports.Special.Controllers
                 _networkCredential = new NetworkCredential(username, password);
             }
 
-            this._saveBetReportService = saveBetReportService ?? new SaveBetReportService();
+            this._saveBetReportService = new SaveBetReportService();
         }
 
         [HttpGet]
@@ -95,7 +90,7 @@ namespace Fanex.AccountingReports.Special.Controllers
             jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             return jsonResult;
         }
-             
+
         /// <summary>
         /// Checks the file exist.
         /// </summary>

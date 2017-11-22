@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="SSOController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -9,6 +9,12 @@
 
 namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Security;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Core.Web.Controllers;
@@ -20,12 +26,6 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
     using NAP.Core.Context;
     using NAP.Core.Models;
     using NAP.Core.Models.ParameterObject;
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Web;
-    using System.Web.Mvc;
-    using System.Web.Security;
 
     /// <summary>
     /// TODO: Update summary.
@@ -44,16 +44,9 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         #region ctors
 
         public SSOController()
-            : this(null, null)
         {
-        }
-
-        public SSOController(
-            IUserService userService,
-            ICurrentSession currentSession)
-        {
-            _userService = userService ?? new UserService();
-            _currentSession = currentSession ?? new CurrentSession();
+            _userService = new UserService();
+            _currentSession = new CurrentSession();
         }
 
         #endregion ctors

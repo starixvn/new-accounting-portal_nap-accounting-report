@@ -9,14 +9,14 @@
 
 namespace Fanex.BetList.Accounting.Controllers
 {
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Web.Mvc;
     using Fanex.BetList.Accounting.Core;
     using Fanex.BetList.Accounting.Criteria;
     using Fanex.BetList.Accounting.Models;
     using Fanex.BetList.Accounting.Services;
     using Fanex.Common;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.

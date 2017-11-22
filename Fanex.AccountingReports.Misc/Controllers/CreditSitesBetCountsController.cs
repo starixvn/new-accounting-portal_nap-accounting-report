@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="CreditSitesBetCountsController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -25,13 +25,8 @@ namespace Fanex.AccountingReports.Misc.Controllers
         private readonly ICreditSitesBetCountsService _reportService;
 
         public CreditSitesBetCountsController()
-            : this(null)
         {
-        }
-
-        public CreditSitesBetCountsController(ICreditSitesBetCountsService reportService)
-        {
-            this._reportService = reportService ?? new CreditSitesBetCountsService();
+            this._reportService = new CreditSitesBetCountsService();
         }
 
         [HttpGet]

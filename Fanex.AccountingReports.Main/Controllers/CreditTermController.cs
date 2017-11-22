@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // <copyright file="CreditTermController.cs" company="Nexcel Solutions Vietnam">
 // TODO: Update copyright text.
 // </copyright>
@@ -29,20 +29,11 @@ namespace Fanex.AccountingReports.Main.Controllers
         private IInstallmentAmountExportExcelService _exportInstallmentAmountService;
 
         public CreditTermController()
-            : this(null, null, null, null)
         {
-        }
-
-        public CreditTermController(
-            ICreditTermService creditTermGetReportService,
-            IInstallmentAmountService installmentAmountService,
-            ICreditTermExportExcelService creditTermExportReportService,
-            IInstallmentAmountExportExcelService installmentAmountExportService)
-        {
-            this._getCreditReportService = creditTermGetReportService ?? new CreditTermService();
-            this._getInstallmentAmountService = installmentAmountService ?? new InstallmentAmountService();
-            this._exportCreditReportService = creditTermExportReportService ?? new CreditTermExportExcelService();
-            this._exportInstallmentAmountService = installmentAmountExportService ?? new InstallmentAmountExportExcelService();
+            this._getCreditReportService = new CreditTermService();
+            this._getInstallmentAmountService = new InstallmentAmountService();
+            this._exportCreditReportService = new CreditTermExportExcelService();
+            this._exportInstallmentAmountService = new InstallmentAmountExportExcelService();
         }
 
         [HttpGet]

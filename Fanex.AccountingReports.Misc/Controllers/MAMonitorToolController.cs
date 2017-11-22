@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="MAMonitorToolController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -28,16 +28,9 @@ namespace Fanex.AccountingReports.Misc.Controllers
         private readonly IMAMonitorToolService _exportReportService;
 
         public MAMonitorToolController()
-            : this(null, null)
         {
-        }
-
-        public MAMonitorToolController(
-            IMAMonitorToolService reportService,
-            IMAMonitorToolService exportReportService)
-        {
-            _reportService = reportService ?? new MAMonitorToolService();
-            _exportReportService = exportReportService ?? new MAMonitorToolExportExcelService();
+            _reportService = new MAMonitorToolService();
+            _exportReportService = new MAMonitorToolExportExcelService();
         }
 
         [HttpGet]

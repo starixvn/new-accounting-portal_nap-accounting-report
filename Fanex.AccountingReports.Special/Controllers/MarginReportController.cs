@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // <copyright file="MarginReportController.cs" company="Nexcel Solutions Vietnam">
 // TODO: Update copyright text.
 // </copyright>
@@ -23,13 +23,8 @@ namespace Fanex.AccountingReports.Special.Controllers
         private IMarginWinLossService _marginService;
 
         public MarginReportController()
-            : this(null)
         {
-        }
-
-        public MarginReportController(IMarginWinLossService marginService)
-        {
-            this._marginService = marginService ?? new MarginWinLossService();
+            this._marginService = new MarginWinLossService();
         }
 
         [HttpGet]

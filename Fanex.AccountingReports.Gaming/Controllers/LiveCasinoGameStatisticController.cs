@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
 // <copyright file="LiveCasinoGameStatisticController.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
@@ -27,13 +27,8 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         private readonly ILiveCasinoGameStatisticService _reportService;
 
         public LiveCasinoGameStatisticController()
-            : this(null)
         {
-        }
-
-        public LiveCasinoGameStatisticController(ILiveCasinoGameStatisticService reportService)
-        {
-            _reportService = reportService ?? new LiveCasinoGameStatisticService();
+            _reportService = new LiveCasinoGameStatisticService();
         }
 
         [HttpGet]
