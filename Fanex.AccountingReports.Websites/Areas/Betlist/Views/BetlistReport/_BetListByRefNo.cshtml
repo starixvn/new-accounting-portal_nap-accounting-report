@@ -46,11 +46,8 @@
             </div>
         </td>
         <td class="c">
-            <div class="width120 table-cell">
-                <div class="refno ">
-                    Ref No: @betdetail.Ticket.TransId</div>
-                <div class="c">
-                    @betdetail.Ticket.TransDate</div>
+            <div class="width120 table-cell refno">
+                @Html.Raw(betdetail.TransDateHtml)
             </div>
         </td>
         <td class='r bl_evt'>
