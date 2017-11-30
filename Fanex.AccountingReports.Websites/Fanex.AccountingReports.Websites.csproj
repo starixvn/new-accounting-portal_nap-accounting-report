@@ -114,7 +114,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.BetList.VirtualSports, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.VirtualSports.1.1.1.0-beta1\lib\net40\Fanex.BetList.VirtualSports.dll</HintPath>
+      <HintPath>..\packages\Fanex.BetList.VirtualSports.1.1.1.0\lib\net40\Fanex.BetList.VirtualSports.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Caching, Version=1.0.404.95, Culture=neutral, processorArchitecture=MSIL">
