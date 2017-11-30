@@ -90,8 +90,8 @@
       <HintPath>..\packages\Fanex.BetList.Core.2.45.0-beta3\lib\net40\Fanex.BetList.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.BetList.Lucky3, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Lucky3.1.0.0-beta9\lib\net40\Fanex.BetList.Lucky3.dll</HintPath>
+    <Reference Include="Fanex.BetList.Lucky3, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.BetList.Lucky3.1.1.0-beta1\lib\net40\Fanex.BetList.Lucky3.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.BetList.MetricGaming, Version=1.0.4.4, Culture=neutral, processorArchitecture=MSIL">
