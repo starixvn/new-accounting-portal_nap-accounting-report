@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="CheckBetService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Faisal.Tran" date="2012.12.20">Created</change>
-// </history>
-
-namespace Fanex.AccountingReports.Special.Services.Implement
+﻿namespace Fanex.AccountingReports.Special.Services.Implement
 {
     using System;
     using System.Collections.Generic;
@@ -109,7 +100,12 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                             bettype == 33 ||
                             bettype == 41 ||
                             bettype == 42 ||
-                            bettype == 43)
+                            bettype == 43 ||
+                            bettype == 1231 ||
+                            bettype == 1232 ||
+                            bettype == 1233 ||
+                            bettype == 1237 ||
+                            bettype == 1238)
                         {
                             newAway = newmatchcode + " - " + CacheRef.GetHorseTeamName(row.NewAwayID);
                             oldAway = oldmatchcode + " - " + CacheRef.GetHorseTeamName(row.OldAwayID);
@@ -239,7 +235,12 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                             bettype == 33 ||
                             bettype == 41 ||
                             bettype == 42 ||
-                            bettype == 43)
+                            bettype == 43 ||
+                            bettype == 1231 ||
+                            bettype == 1232 ||
+                            bettype == 1233 ||
+                            bettype == 1237 ||
+                            bettype == 1238)
                         {
                             away = (string)row.matchcode + " - " + CacheRef.GetHorseTeamName(row.awayid);
                         }
@@ -377,6 +378,11 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                 case 41:
                 case 42:
                 case 43:
+                case 1231:
+                case 1232:
+                case 1233:
+                case 1237:
+                case 1238:
                     result = awayTeam;
                     break;
 
@@ -554,6 +560,10 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                         result = awayTeam;
                     }
 
+                    break;
+
+                case 1004:
+                    result = CacheRef.GetResourceData("BF", betTeam);
                     break;
 
                 default:

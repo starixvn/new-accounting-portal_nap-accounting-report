@@ -1,14 +1,14 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="LoginController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Ricky.Nguyen" date="2012.12.12">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Security.Cryptography;
+    using System.Text;
+    using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Security;
     using Core.Constants;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Resources;
@@ -24,15 +24,6 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Web.Session;
     using NAP.Core.Models;
     using NAP.Core.Models.ParameterObject;
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using System.Security.Cryptography;
-    using System.Text;
-    using System.Web;
-    using System.Web.Mvc;
-    using System.Web.Security;
     using ONEbookUMService = ONEbook.UM.Services;
     using ONEbookUMServiceImp = ONEbook.UM.Services.Impl;
 
@@ -59,21 +50,11 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         #region ctors
 
         public LoginController()
-            : this(null, null, null, null, null)
         {
-        }
-
-        public LoginController(
-            IUserService userService,
-            IGroupService groupService,
-            ISiteService siteService,
-            ICurrentSession currentSession,
-            ONEbookUMService.IMaintenanceService maintenanceService)
-        {
-            _groupService = groupService ?? new GroupService();
-            _siteService = siteService ?? new SiteService();
-            _currentSession = currentSession ?? new CurrentSession();
-            _maintenanceService = maintenanceService ?? new ONEbookUMServiceImp.MaintenanceService();
+            _groupService = new GroupService();
+            _siteService = new SiteService();
+            _currentSession = new CurrentSession();
+            _maintenanceService = new ONEbookUMServiceImp.MaintenanceService();
             _hashAlgorithm = new SHA256Managed();
         }
 

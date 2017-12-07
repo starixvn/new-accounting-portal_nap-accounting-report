@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="NumberGameMonthlyWinLossController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2013.10.12">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Gaming.Controllers
 {
     using System.Web.Mvc;
@@ -27,16 +18,9 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         private readonly INumberGameMonthlyWinLossExportDataService _numberGameMonthlyWinLossExportDataService;
 
         public NumberGameMonthlyWinLossController()
-            : this(null, null)
         {
-        }
-
-        public NumberGameMonthlyWinLossController(
-            INumberGameMonthlyWinLossService numberGameMonthlyWinLossService,
-            INumberGameMonthlyWinLossExportDataService numberGameMonthlyWinLossExportDataService)
-        {
-            this._numberGameMonthlyWinLossService = numberGameMonthlyWinLossService ?? new NumberGameMonthlyWinLossService();
-            this._numberGameMonthlyWinLossExportDataService = numberGameMonthlyWinLossExportDataService ?? new NumberGameMonthlyWinLossExportDataService();
+            this._numberGameMonthlyWinLossService = new NumberGameMonthlyWinLossService();
+            this._numberGameMonthlyWinLossExportDataService = new NumberGameMonthlyWinLossExportDataService();
         }
 
         [HttpGet]

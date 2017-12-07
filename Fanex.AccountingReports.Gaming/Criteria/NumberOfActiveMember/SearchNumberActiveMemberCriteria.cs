@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="SearchNumberActiveMemberCriteria.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Gaming.Criteria.NumberOfActiveMember
 {
     using System;

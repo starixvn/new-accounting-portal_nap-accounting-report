@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="Product.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Licensee.Models
 {
     using System;

@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="Site.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Misc.Models.CreditMovement
 {
     using System;

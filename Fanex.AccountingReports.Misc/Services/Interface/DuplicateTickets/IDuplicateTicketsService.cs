@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="IDuplicateTicketsService.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Misc.Services.Interface.DuplicateTickets
 {
     using System.Collections.Generic;

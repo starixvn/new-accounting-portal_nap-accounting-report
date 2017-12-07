@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="GetMatchGameDetailsCriteria.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Kan.Nguyen" date="2013.06.27">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd
 {
     using System;
@@ -67,6 +58,10 @@ namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd
                     else if (MainConstants.WinLossSummaryVirtualSportIds.Contains(SportType))
                     {
                         _type = SportTypeWinLoss.VirtualSports;
+                    }
+                    else if (SportType == MainConstants.WinLossSummary3rdBullfightingSportId)
+                    {
+                        _type = SportTypeWinLoss.Bullfighting;
                     }
                 }
 

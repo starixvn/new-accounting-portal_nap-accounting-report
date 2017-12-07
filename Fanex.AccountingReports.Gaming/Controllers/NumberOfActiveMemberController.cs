@@ -1,9 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="NumberOfActiveMemberController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Gaming.Controllers
 {
     using System.Web.Mvc;

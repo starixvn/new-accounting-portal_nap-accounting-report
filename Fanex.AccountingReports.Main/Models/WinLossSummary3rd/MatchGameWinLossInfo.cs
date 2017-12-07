@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="MatchGameWinLossInfo.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Kan.Nguyen" date="2013.06.26">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 {
     using System;
@@ -29,6 +20,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 
         // Is meetingid column of Racing
         public int LeagueId { get; set; }
+
+        public string LeagueCode { get; set; }
 
         public WinLossInfo WinLossDetail { get; set; }
 

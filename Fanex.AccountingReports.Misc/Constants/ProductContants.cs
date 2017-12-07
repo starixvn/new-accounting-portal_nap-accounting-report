@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ProductContants.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2014.06.10">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Misc.Constants
 {
     /// <summary>
@@ -41,5 +32,9 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int MetricGamingSuperlive = -1;
 
         public const int Lucky3 = 160;
+
+        public const int Bullfighting = 207;
+
+        public const int GoldDeluxe = 255;
     }
 }

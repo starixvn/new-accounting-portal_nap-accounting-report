@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="GetResellerCriteria.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Phillip.Truong" date="2013.08.12">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Gaming.Criteria.LiveCasinoGameFinancialReport
 {
     using Fanex.Data.Repository;

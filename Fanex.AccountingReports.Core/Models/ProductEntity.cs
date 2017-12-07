@@ -1,4 +1,4 @@
-﻿namespace Fanex.AccountingReports.Core.Models
+namespace Fanex.AccountingReports.Core.Models
 {
     public class ProductEntity
     {

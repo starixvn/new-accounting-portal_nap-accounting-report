@@ -1,11 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="TotalCreditAccountByProductService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2014.06.05">Created</change>
-// </history>
 namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByProduct
 {
     using System;
@@ -59,7 +51,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     });
                 }
 
-                return result;
+                return result.OrderBy(x => x.Name).ToList();
             }
             catch (Exception ex)
             {

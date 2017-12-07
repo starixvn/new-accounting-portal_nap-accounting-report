@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="DailyWinLoss2hController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Louis.Nguyen" date="2012.12.07">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Main.Controllers
 {
     using Fanex.AccountingReports.Core.Exceptions;
@@ -31,20 +22,11 @@ namespace Fanex.AccountingReports.Main.Controllers
         private readonly IColossusBetService _colossusBetService;
 
         public DailyWinLoss2hController()
-            : this(null, null, null, null)
         {
-        }
-
-        public DailyWinLoss2hController(
-            IDailyWinLoss2hService reportService, 
-            IMetricGamingService metricGamingService, 
-            IBettradeService bettradeService, 
-            IColossusBetService colossusBetService)
-        {
-            this._reportService = reportService ?? new DailyWinLoss2hService();
-            this._metricGamingService = metricGamingService ?? new MetricGamingService();
-            this._bettradeService = bettradeService ?? new BettradeService();
-            this._colossusBetService = colossusBetService ?? new ColossusBetService();
+            this._reportService = new DailyWinLoss2hService();
+            this._metricGamingService = new MetricGamingService();
+            this._bettradeService = new BettradeService();
+            this._colossusBetService = new ColossusBetService();
         }
 
         [HttpGet]

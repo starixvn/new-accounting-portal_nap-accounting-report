@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="RacingWinLossByLicenseeController.cs" company="Nexcel Solutions Viet Name">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Racing.Controllers
 {
     using System.Collections.Generic;
@@ -33,22 +27,12 @@ namespace Fanex.AccountingReports.Racing.Controllers
         private readonly IRacingWinLossByLicenseeApply50PercentService _export50PercentReportService;
 
         public RacingWinLossByLicenseeController()
-                : this(null, null, null, null, null)
         {
-        }
-
-        public RacingWinLossByLicenseeController(
-            IRacingWinLossByLicenseeService racingWinLossService,
-            IRacingDetailBetListService detailBetListService,
-            IRacingGetListLicenseeService listLicenseeSerice,
-            IRacingWinLossByLicenseeExportReportService exportReportService,
-            IRacingWinLossByLicenseeApply50PercentService export50PercentReportService)
-        {
-            _getRacingDailyReport = racingWinLossService ?? new RacingWinLossByLicenseeService();
-            _getDetailBetListService = detailBetListService ?? new RacingDetailBetListService();
-            _getListLicenseeService = listLicenseeSerice ?? new RacingGetListLicenseeService();
-            _exportReportService = exportReportService ?? new RacingWinLossByLicenseeExportReportService();
-            _export50PercentReportService = export50PercentReportService ?? new RacingWinLossByLicenseeApply50PercentService();
+            _getRacingDailyReport = new RacingWinLossByLicenseeService();
+            _getDetailBetListService = new RacingDetailBetListService();
+            _getListLicenseeService = new RacingGetListLicenseeService();
+            _exportReportService = new RacingWinLossByLicenseeExportReportService();
+            _export50PercentReportService = new RacingWinLossByLicenseeApply50PercentService();
         }
 
         [HttpGet]

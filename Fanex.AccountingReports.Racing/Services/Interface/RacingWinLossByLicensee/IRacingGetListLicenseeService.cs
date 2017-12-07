@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="IRacingGetListLicenseeService.cs" company="Nexcel Solutions Viet Nam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Racing.Services.Interface.RacingWinLossByLicensee
 {
     using System.Collections.Generic;

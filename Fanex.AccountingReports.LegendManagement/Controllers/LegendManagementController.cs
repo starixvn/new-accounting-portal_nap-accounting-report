@@ -1,14 +1,7 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="LegendManagementController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Louis.Bao" date="2012.11.26">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.LegendManagement.Controllers
 {
+    using System.Collections.Generic;
+    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.LegendManagement.Criteria;
@@ -16,8 +9,6 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
     using Fanex.AccountingReports.LegendManagement.Services.Interfaces;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
-    using System.Collections.Generic;
-    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -27,13 +18,8 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
         private readonly ILegendManagementService _legendService;
 
         public LegendManagementController()
-            : this(null)
         {
-        }
-
-        public LegendManagementController(ILegendManagementService reportService)
-        {
-            this._legendService = reportService ?? new LegendManagementService();
+            this._legendService = new LegendManagementService();
         }
 
         [HttpGet]

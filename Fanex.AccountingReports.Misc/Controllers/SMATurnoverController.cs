@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="SMATurnoverController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2014.09.12">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Misc.Controllers
 {
     using System.Web.Mvc;
@@ -26,13 +17,8 @@ namespace Fanex.AccountingReports.Misc.Controllers
         private ISMATurnoverService _smasTurnOverService;
 
         public SMATurnoverController()
-            : this(null)
-        {
-        }
-
-        public SMATurnoverController(ISMATurnoverService smasTurnoverService)
-        {
-            _smasTurnOverService = smasTurnoverService ?? new SMATurnoverService();
+            {
+            _smasTurnOverService = new SMATurnoverService();
         }
 
         [HttpGet]

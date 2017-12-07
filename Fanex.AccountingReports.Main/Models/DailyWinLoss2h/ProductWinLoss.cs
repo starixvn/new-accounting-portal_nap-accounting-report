@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ProductWinLoss.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Main.Models.DailyWinLoss2h
 {
     using System;

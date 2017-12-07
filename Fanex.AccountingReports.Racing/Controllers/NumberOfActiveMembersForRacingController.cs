@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="NumberOfActiveMembersForRacingController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2013.12.12">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Racing.Controllers
 {
     using System.Web.Mvc;
@@ -28,16 +19,9 @@ namespace Fanex.AccountingReports.Racing.Controllers
         private readonly INumberOfActiveMembersExportDataService _numberOfActiveMemberExportDataService;
 
         public NumberOfActiveMembersForRacingController()
-            : this(null, null)
         {
-        }
-
-        public NumberOfActiveMembersForRacingController(
-            INumberOfActiveMembersService numberOfActiveMemberService,
-            INumberOfActiveMembersExportDataService numberOfActiveMemberExportDataService)
-        {
-            this._numberOfActiveMemberService = numberOfActiveMemberService ?? new NumberOfActiveMembersService();
-            this._numberOfActiveMemberExportDataService = numberOfActiveMemberExportDataService ?? new NumberOfActiveMembersExportDataService();
+            this._numberOfActiveMemberService = new NumberOfActiveMembersService();
+            this._numberOfActiveMemberExportDataService = new NumberOfActiveMembersExportDataService();
         }
 
         [HttpGet]

@@ -1,4 +1,4 @@
-﻿namespace Fanex.AccountingReports.WinLoss.Services.Implement
+namespace Fanex.AccountingReports.WinLoss.Services.Implement
 {
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;

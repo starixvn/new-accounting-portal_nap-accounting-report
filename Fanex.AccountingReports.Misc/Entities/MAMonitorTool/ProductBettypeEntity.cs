@@ -1,4 +1,4 @@
-﻿namespace Fanex.AccountingReports.Misc.Entities.MAMonitorTool
+namespace Fanex.AccountingReports.Misc.Entities.MAMonitorTool
 {
     /// <summary>
     /// TODO: Update summary.

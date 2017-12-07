@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="NumberGameWinLossByCurrencyMainCriteria.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="David.Tran" date="2013.1.22">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByCurrency
 {
     using Fanex.Data.Repository;

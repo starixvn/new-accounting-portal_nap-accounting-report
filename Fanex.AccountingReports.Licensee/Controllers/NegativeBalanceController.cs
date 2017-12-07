@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="NegativeBalanceController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="David.Tran" date="2012.11.16">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Licensee.Controllers
 {
     using System.Web.Mvc;
@@ -28,14 +19,9 @@ namespace Fanex.AccountingReports.Licensee.Controllers
         private readonly ILicenseeSiteService _licenseeSite;
 
         public NegativeBalanceController()
-            : this(null, null)
         {
-        }
-
-        public NegativeBalanceController(INegativeBanlance reportService, ILicenseeSiteService licenseeSite)
-        {
-            _reportService = reportService ?? new NegativeBalanceService();
-            _licenseeSite = licenseeSite ?? new LicenseeSiteService();
+            _reportService = new NegativeBalanceService();
+            _licenseeSite = new LicenseeSiteService();
         }
 
         [HttpGet]

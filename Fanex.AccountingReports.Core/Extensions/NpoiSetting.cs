@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="NpoiSetting.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Core.Extensions
 {
     using System.Drawing;

@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ReportingServicesController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2014.03.11">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Special.Controllers
 {
     using System.Configuration;
@@ -28,13 +19,8 @@ namespace Fanex.AccountingReports.Special.Controllers
         private IReportingService _reportingService;
 
         public ReportingServicesController()
-            : this(null)
         {
-        }
-
-        public ReportingServicesController(IReportingService reportingService)
-        {
-            _reportingService = reportingService ?? new ReportingService();
+            _reportingService = new ReportingService();
         }
 
         [HttpGet]

@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ICasinoWinLossRepository.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Gaming.Repositories.Interface
 {
     using System.Data;

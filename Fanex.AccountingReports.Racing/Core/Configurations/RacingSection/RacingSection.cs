@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="RacingSection.cs" company="Nexcel Solutions Viet Nam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Racing.Core.Configurations
 {
     using System.Configuration;

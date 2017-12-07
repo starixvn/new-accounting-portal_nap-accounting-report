@@ -1,4 +1,4 @@
-﻿namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
+namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
 {
     public class TreeWinLossProduct
     {

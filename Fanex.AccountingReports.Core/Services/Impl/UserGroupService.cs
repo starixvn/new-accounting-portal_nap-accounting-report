@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="UserGroupService.cs" company="">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Core.Services.Impl
 {
     using System;

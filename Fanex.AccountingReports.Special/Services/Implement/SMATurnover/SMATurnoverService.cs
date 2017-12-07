@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="SMATurnoverService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2014.06.05">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Special.Services.Implement.SMATurnover
 {
     using System;
@@ -74,11 +65,20 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SMATurnover
             try
             {
                 List<BaseModel> result = new List<BaseModel>();
+                var sportBooksBaseModel = new BaseModel();
                 SMAsTurnoverCollection collection = SMAsTurnoverSection.Instance.Products;
                 foreach (SMAsTurnoverElement element in collection)
                 {
                     if (!element.IsActive)
                     {
+                        continue;
+                    }
+
+                    if (element.Name == "Sportsbook")
+                    {
+                        sportBooksBaseModel.Id = Converter.ToInt(element.Id);
+                        sportBooksBaseModel.Name = Converter.ToString2(element.Name);
+                        sportBooksBaseModel.AliasName = Converter.ToString2(element.AliasName);
                         continue;
                     }
 
@@ -89,6 +89,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SMATurnover
                         AliasName = Converter.ToString2(element.AliasName)
                     });
                 }
+
+                result = result.OrderBy(x => x.Name).ToList();
+                result.Insert(0, sportBooksBaseModel);
 
                 return result;
             }

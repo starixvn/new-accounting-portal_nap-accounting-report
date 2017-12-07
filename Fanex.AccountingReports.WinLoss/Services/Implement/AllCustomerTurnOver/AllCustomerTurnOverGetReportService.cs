@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="AllCustomerTurnOverGetReportService.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.WinLoss.Services.Implement
 {
     using System;

@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="GetSuperBalanceCriteria.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="" date="2013.10.24">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Balance.Criteria.SuperBalance
 {
     using Fanex.AccountingReports.Core.Constants;

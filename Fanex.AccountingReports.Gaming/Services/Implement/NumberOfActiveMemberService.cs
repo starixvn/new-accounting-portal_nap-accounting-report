@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="NumberOfActiveMemberService.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Gaming.Services.Implement
 {
     using System;

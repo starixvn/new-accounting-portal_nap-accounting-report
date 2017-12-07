@@ -39,7 +39,9 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         MacauGames: 212,
         NG2: 213,
         Lottery: 220,
-        Lucky3: 160
+        Lucky3: 160,
+        Bullfighting: 207,
+        GoldDeluxe: 255
     };
 
     var cachedData = {
@@ -488,6 +490,12 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 break;
             case productEnums.Lucky3:
                 productName = "Lucky 3";
+                break;
+            case productEnums.Bullfighting:
+                productName = "Bullfighting";
+                break;
+            case productEnums.GoldDeluxe:
+                productName = "Gold Deluxe";
                 break;
             default:
                 productName = "Unknown";

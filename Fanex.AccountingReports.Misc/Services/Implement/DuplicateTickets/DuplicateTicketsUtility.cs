@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="DuplicateTicketsUtility.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
 {
     using System;

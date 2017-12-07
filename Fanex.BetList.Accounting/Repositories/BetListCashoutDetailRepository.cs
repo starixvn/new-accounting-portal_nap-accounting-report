@@ -1,4 +1,4 @@
-﻿using Fanex.BetList.Accounting.Models;
+using Fanex.BetList.Accounting.Models;
 using Fanex.BetList.Core.Entities;
 using Fanex.Data;
 using Fanex.Data.Repository;

@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="BaseBodyCellStyles.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Phillip.Truong" date="2014.04.14">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Core.Utilities.CellStyles
 {
     using Fanex.AccountingReports.Core.Extensions;

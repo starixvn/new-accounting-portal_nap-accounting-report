@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="WinLossInfo.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Louis.Nguyen" date="2013.02.18">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Main.Models.WinLossSummary
 {
     using System;

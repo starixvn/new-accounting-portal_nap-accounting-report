@@ -1,21 +1,12 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="BetCountController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Louis.Nguyen" date="2012.12.07">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Misc.Controllers
 {
+    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Misc.Criteria.BetCount;
     using Fanex.AccountingReports.Misc.Services.Implement;
     using Fanex.AccountingReports.Misc.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
-    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -25,13 +16,8 @@ namespace Fanex.AccountingReports.Misc.Controllers
         private readonly IBetCountService _reportService;
 
         public BetCountController()
-            : this(null)
         {
-        }
-
-        public BetCountController(IBetCountService reportService)
-        {
-            this._reportService = reportService ?? new BetCountService();
+            this._reportService = new BetCountService();
         }
 
         [HttpGet]

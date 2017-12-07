@@ -1,21 +1,12 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="HomeController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Ricky.Nguyen" date="2012.11.6">Update</change>
-// </history>
-
 namespace Fanex.AccountingReports.Websites.Controllers
 {
+    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Criteria;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Services.Interface;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.NAP.Core.Web.Attribute;
-    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -26,13 +17,8 @@ namespace Fanex.AccountingReports.Websites.Controllers
         private readonly IMostVisitedPagesService _mostVisitedPagesService;
 
         public HomeController()
-            : this(null)
         {
-        }
-
-        public HomeController(IMostVisitedPagesService mostVisitedPagesService)
-        {
-            this._mostVisitedPagesService = mostVisitedPagesService ?? new MostVisitedPagesService();
+            this._mostVisitedPagesService = new MostVisitedPagesService();
         }
 
         /// <summary>

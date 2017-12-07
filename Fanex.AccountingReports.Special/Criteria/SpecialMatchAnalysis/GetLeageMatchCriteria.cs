@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="GetLeageMatchCriteria.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Robert.Tran" date="2012.12.26">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Special.Criteria.SpecialMatchAnalysis
 {
     using System;

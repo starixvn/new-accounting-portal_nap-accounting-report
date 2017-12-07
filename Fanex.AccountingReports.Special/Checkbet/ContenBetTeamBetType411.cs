@@ -1,4 +1,4 @@
-﻿namespace Fanex.AccountingReports.Special.Checkbet
+namespace Fanex.AccountingReports.Special.Checkbet
 {
     public class ContenBetTeamBetType411 : ContentBetTeam
     {

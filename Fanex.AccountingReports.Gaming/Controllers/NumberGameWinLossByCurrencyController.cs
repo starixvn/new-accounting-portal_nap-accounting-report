@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="NumberGameWinLossByCurrencyController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="David.Tran" date="2013.02.19">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Gaming.Controllers
 {
     using System.Web.Mvc;
@@ -25,13 +16,8 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         private readonly INumberGameWinLossByCurrencyService _reportService;
 
         public NumberGameWinLossByCurrencyController()
-            : this(null)
         {
-        }
-
-        public NumberGameWinLossByCurrencyController(INumberGameWinLossByCurrencyService reportService)
-        {
-            _reportService = reportService ?? new NumberGameWinLossByCurrencyService();
+            _reportService = new NumberGameWinLossByCurrencyService();
         }
 
         [HttpGet]

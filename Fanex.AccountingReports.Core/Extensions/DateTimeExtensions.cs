@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="DateTimeExtensions.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Anders.Le" date="2012.10.11">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Core.Extensions
 {
     using System;

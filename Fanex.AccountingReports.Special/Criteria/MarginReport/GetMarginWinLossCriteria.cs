@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="GetMarginWinLossCriteria.cs" company="Nexcel Slutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Special.Criteria.MarginReport
 {
     using System;

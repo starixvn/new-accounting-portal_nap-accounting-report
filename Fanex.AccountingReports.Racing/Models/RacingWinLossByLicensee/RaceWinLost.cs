@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="RaceWinLost.cs" company="Nexcel Solutions VietNam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Racing.Models.RacingWinLossByLicensee
 {
     using System;

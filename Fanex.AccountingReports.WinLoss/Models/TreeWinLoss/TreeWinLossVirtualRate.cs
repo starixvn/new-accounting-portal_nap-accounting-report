@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="TreeWinLossVirtualRate.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
 {
     using System;

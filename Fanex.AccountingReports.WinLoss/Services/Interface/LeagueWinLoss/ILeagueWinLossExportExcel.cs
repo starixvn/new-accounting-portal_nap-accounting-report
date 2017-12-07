@@ -1,4 +1,4 @@
-﻿using Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss;
+using Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss;
 
 namespace Fanex.AccountingReports.WinLoss.Services.Interface.LeagueWinLoss
 {

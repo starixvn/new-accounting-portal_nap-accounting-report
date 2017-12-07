@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="LiveCasinoAgencyWinLossController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Louis.Nguyen" date="2012.12.07">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Gaming.Controllers
 {
     using System.Web.Mvc;
@@ -29,14 +20,9 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         private readonly ILiveCasinoProductService _liveCasinoProductService;
 
         public LiveCasinoAgencyWinLossController()
-            : this(null, null)
         {
-        }
-
-        public LiveCasinoAgencyWinLossController(ILiveCasinoAgencyWinLossService reportService, ILiveCasinoProductService liveCasinoProductService)
-        {
-            this._reportService = reportService ?? new LiveCasinoAgencyWinLossService();
-            this._liveCasinoProductService = liveCasinoProductService ?? new LiveCasinoProductService();
+            this._reportService = new LiveCasinoAgencyWinLossService();
+            this._liveCasinoProductService = new LiveCasinoProductService();
         }
 
         [HttpGet]

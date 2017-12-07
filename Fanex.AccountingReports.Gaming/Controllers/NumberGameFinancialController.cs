@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="NumberGameFinancialController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2013.12.04">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Gaming.Controllers
 {
     using System.Web.Mvc;
@@ -27,16 +18,9 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         private readonly INumberGameFinancialExportDataService _numberGameFinancialExportDataService;
 
         public NumberGameFinancialController()
-            : this(null, null)
         {
-        }
-
-        public NumberGameFinancialController(
-            INumberGameFinancialService numberGameFinancialService,
-            INumberGameFinancialExportDataService numberGameFinancialExportDataService)
-        {
-            this._numberGameFinancialService = numberGameFinancialService ?? new NumberGameFinancialService();
-            this._numberGameFinancialExportDataService = numberGameFinancialExportDataService ?? new NumberGameFinancialExportDataService();
+            this._numberGameFinancialService = new NumberGameFinancialService();
+            this._numberGameFinancialExportDataService = new NumberGameFinancialExportDataService();
         }
 
         [HttpGet]

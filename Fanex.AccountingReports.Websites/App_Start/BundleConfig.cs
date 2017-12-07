@@ -1,13 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="BundleConfig.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Ethan.Nguyen" date="2012.10.18">Created</change>
-//   <change who="Ricky.Nguyen" date="2012.11.16">Update</change>
-// </history>
-
 namespace Fanex.AccountingReports.Websites
 {
     using System.Diagnostics.CodeAnalysis;

@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="GetBetlistGreyhoundAUSToteCriteria.cs" company="Nexcel Solution Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Racing.Criteria.ForTote.GreyhoundAUSTote
 {
     using System;

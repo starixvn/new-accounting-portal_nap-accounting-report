@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="PeakConcurrentUsersController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="David.Tran" date="2012.11.16">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Licensee.Controllers
 {
     using System.Web.Mvc;
@@ -27,14 +18,9 @@ namespace Fanex.AccountingReports.Licensee.Controllers
         private readonly ILicenseeSiteService _licenseeSite;
 
         public PeakConcurrentUsersController()
-            : this(null, null)
         {
-        }
-
-        public PeakConcurrentUsersController(IPeakConcurrentUserService reportService, ILicenseeSiteService licenseeSite)
-        {
-            _reportService = reportService ?? new PeakConcurrentUserService();
-            _licenseeSite = licenseeSite ?? new LicenseeSiteService();
+            _reportService = new PeakConcurrentUserService();
+            _licenseeSite = new LicenseeSiteService();
         }
 
         [HttpGet]

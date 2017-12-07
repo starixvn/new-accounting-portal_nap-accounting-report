@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ProductGameType.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Gaming.Models.LiveCasinoWinLossByAgency
 {
     using System.Collections.Generic;

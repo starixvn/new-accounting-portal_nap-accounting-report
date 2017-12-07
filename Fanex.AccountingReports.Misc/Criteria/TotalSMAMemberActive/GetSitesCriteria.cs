@@ -1,4 +1,4 @@
-﻿namespace Fanex.AccountingReports.Misc.Criteria.TotalSMAMemberActive
+namespace Fanex.AccountingReports.Misc.Criteria.TotalSMAMemberActive
 {
     using Fanex.Data.Repository;
 

@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="MainConstants.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Louis.Nguyen" date="2012.12.07">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Main.Common
 {
     /// <summary>
@@ -103,5 +94,7 @@ namespace Fanex.AccountingReports.Main.Common
         private const string NegativeNumberFormat = "[>=0]#,##0{0}_);[RED][<0]-#,##0{1}";
         private const string NormalNumberFormat = "#,##0{0}_);-#,##0{1}";
         private const string PositiveNumberFormat = "[RED][>0]#,##0{0}_);[<0]-#,##0{1};#,##0{2}";
+
+        public const int WinLossSummary3rdBullfightingSportId = 207;
     }
 }

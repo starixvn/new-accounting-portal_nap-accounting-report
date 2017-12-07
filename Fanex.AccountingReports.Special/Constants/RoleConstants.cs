@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="RoleConstants.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2014.06.05">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Special.Constants
 {
     using System;

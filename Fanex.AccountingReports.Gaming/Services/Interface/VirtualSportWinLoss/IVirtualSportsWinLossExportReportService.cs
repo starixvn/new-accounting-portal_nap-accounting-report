@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="IVirtualSportsWinLossExportReportService.cs" company="Nexcel Solution Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Gaming.Services.Interface.VirtualSportWinLoss
 {
     using Fanex.AccountingReports.Gaming.Criteria.VirtualSportsWinLoss;

@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="GetCreditMovementCriteria.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Misc.Criteria.CreditMovement
 {
     using System;

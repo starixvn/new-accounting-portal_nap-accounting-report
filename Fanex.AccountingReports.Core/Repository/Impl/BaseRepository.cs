@@ -1,13 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="BaseRepository.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Ricky.Nguyen" date="2012.11.22">Created</change>
-//   <change who="Ricky.Nguyen" date="2012.12.11">Update Get Data Function</change>
-// </history>
-
 namespace Fanex.AccountingReports.Core.Repository.Impl
 {
     using System;

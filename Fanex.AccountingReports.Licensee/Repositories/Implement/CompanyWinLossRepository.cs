@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="CompanyWinLossRepository.cs" company="Microsoft">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Licensee.Repositories.Implement
 {
     using System.Data;

@@ -1,4 +1,4 @@
-﻿using Fanex.AccountingReports.Special.Checkbet;
+using Fanex.AccountingReports.Special.Checkbet;
 using NUnit.Framework;
 using RemotingRef;
 

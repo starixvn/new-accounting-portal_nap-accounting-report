@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="CompanyBalanceDifferenceController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Louis.Nguyen" date="2012.12.07">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Balance.Controllers
 {
     using System.Web.Mvc;
@@ -24,13 +15,8 @@ namespace Fanex.AccountingReports.Balance.Controllers
         private readonly ICompanyBalanceDifferenceService _reportService;
 
         public CompanyBalanceDifferenceController()
-            : this(null)
         {
-        }
-
-        public CompanyBalanceDifferenceController(ICompanyBalanceDifferenceService reportService)
-        {
-            this._reportService = reportService ?? new CompanyBalanceDifferenceService();
+            this._reportService = new CompanyBalanceDifferenceService();
         }
 
         [HttpGet]

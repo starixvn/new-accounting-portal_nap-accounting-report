@@ -1,14 +1,11 @@
-// --------------------------------------------------------------------------
-// <copyright file="BetListService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Ricky.Nguyen" date="2012.12.10">Created</change>
-// </history>
-
 namespace Fanex.BetList.Accounting.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Text;
     using Fanex.BetList.Accounting.Constants;
     using Fanex.BetList.Accounting.Core;
     using Fanex.BetList.Accounting.Criteria;
@@ -23,12 +20,6 @@ namespace Fanex.BetList.Accounting.Services
     using Fanex.Common;
     using Fanex.Data;
     using Fanex.Data.Repository;
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using System.Text;
     using AccBetListCore = Fanex.BetList.Accounting.Core;
 
     public interface BetListService
@@ -238,7 +229,7 @@ namespace Fanex.BetList.Accounting.Services
                     betDetail.ChoiceHtml = builder.BuildChoice(betDetail.Ticket, ticketHelper, outputLiveCasino, false);
                     betDetail.StakeHtml = BetListExtension.BuildStake(betDetail, ref builder);
                     betDetail.OddHtml = builder.BuildOdds(betDetail.Ticket, outputLiveCasino, funcGetOddsTypeName);
-
+                    betDetail.TransDateHtml = builder.BuildTrans(betDetail.Ticket);
                     betDetail.Ticket.Status = builder.BuildStatus(betDetail.Ticket, ticketHelper, outputLiveCasino, true);
                 }
 

@@ -1,13 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="TraderPerformanceOtherSportsController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Louis.Nguyen" date="2012.12.07">Created</change>
-//   <change who="Franklin.Nguyen" date="2014.01.06">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Main.Controllers
 {
     using System.Web.Mvc;
@@ -27,13 +17,8 @@ namespace Fanex.AccountingReports.Main.Controllers
         private readonly ITraderPerformanceOtherSportsService _reportService;
 
         public TraderPerformanceOtherSportsController()
-            : this(null)
         {
-        }
-
-        public TraderPerformanceOtherSportsController(ITraderPerformanceOtherSportsService reportService)
-        {
-            this._reportService = reportService ?? new TraderPerformanceOtherSportsService();
+            this._reportService = new TraderPerformanceOtherSportsService();
         }
 
         [HttpGet]

@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="CasinoWinLossController.cs" company="Nexcel Solutions Viet Nam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Gaming.Controllers
 {
     using System.Web.Mvc;
@@ -26,16 +20,9 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         private ICasinoWinLossExportReportService _exportReportService;
 
         public CasinoWinLossController()
-            : this(null, null)
         {
-        }
-
-        public CasinoWinLossController(
-            ICasinoWinLossGetReportService getReportService,
-            ICasinoWinLossExportReportService exportReportService)
-        {
-            _getReportService = getReportService ?? new CasinoWinLossGetReportService();
-            _exportReportService = exportReportService ?? new CasinoWinLossExportReportService();
+            _getReportService = new CasinoWinLossGetReportService();
+            _exportReportService = new CasinoWinLossExportReportService();
         }
 
         [HttpGet]

@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="CacheRef.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="" date="2012.12.17">Created</change>
-// </history>
-
-namespace Fanex.AccountingReports.Core.Services.Impl
+﻿namespace Fanex.AccountingReports.Core.Services.Impl
 {
     using System;
     using System.Collections.Generic;
@@ -42,6 +33,21 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         public static string GetHorseTeamName(object codeID)
         {
             return RefData.GetHorseTeamName(Converter.ToString2(codeID), LanguageTypeConstants.En);
+        }
+
+        public static string GetTeamName3rd(object teamId)
+        {
+            return RefData.GetTeamName3rd(Converter.ToString2(teamId), LanguageTypeConstants.En);
+        }
+
+        public static string GetLeagueName3rd(object leagueId)
+        {
+            return RefData.GetLeagueName3rd(Converter.ToString2(leagueId), LanguageTypeConstants.En);
+        }
+
+        public static string GetResourceData(string refId, string team)
+        {
+            return RefData.GetResourceDataByRefIdAndResourceId(refId, team, LanguageTypeConstants.En, string.Empty);
         }
 
         public static Dictionary<object, string> SaveCacheRefResponse(

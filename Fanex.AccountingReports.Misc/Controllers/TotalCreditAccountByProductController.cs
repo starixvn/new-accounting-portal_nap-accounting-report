@@ -1,12 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="TotalCreditAccountByProductController.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2014.06.10">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Misc.Controllers
 {
     using System.Web.Mvc;
@@ -26,13 +17,8 @@ namespace Fanex.AccountingReports.Misc.Controllers
         private ITotalCreditAccountByProductService _totalCreditAccountByProductService;
 
         public TotalCreditAccountByProductController()
-            : this(null)
         {
-        }
-
-        public TotalCreditAccountByProductController(ITotalCreditAccountByProductService totalCreditAccountByProductService)
-        {
-            _totalCreditAccountByProductService = totalCreditAccountByProductService ?? new TotalCreditAccountByProductService();
+            _totalCreditAccountByProductService = new TotalCreditAccountByProductService();
         }
 
         [HttpGet]

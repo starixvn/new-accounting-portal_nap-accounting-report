@@ -1,12 +1,3 @@
-﻿// --------------------------------------------------------------------------
-// <copyright file="Status.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// --------------------------------------------------------------------------
-// <history>
-//   <change who="Kan.Nguyen" date="2013.07.18">Created</change>
-// </history>
-
 namespace Fanex.AccountingReports.Misc.Constants
 {
     public enum Status

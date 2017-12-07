@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="SaveBetReportService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
 {
     using System;

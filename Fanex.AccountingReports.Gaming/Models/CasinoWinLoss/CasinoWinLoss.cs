@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="CasinoWinLoss.cs" company="Nexcel Solutions Viet Nam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Gaming.Models.CasinoWinLoss
 {
     using System;

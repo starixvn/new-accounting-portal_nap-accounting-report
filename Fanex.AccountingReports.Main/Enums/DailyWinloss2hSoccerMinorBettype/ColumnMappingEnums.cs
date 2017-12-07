@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ColumnMappingEnums.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Main.Enums.DailyWinloss2hSoccerMinorBettype
 {
     /// <summary>

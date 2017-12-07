@@ -1,9 +1,3 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="GetMainReportCriteria.cs" company="Nexcel Solutions Vietnam">
-// TODO: Update copyright text.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace Fanex.AccountingReports.Main.Criteria.DailyWinLoss2hSoccerMinorBettype
 {
     using Fanex.AccountingReports.Core.Services.Impl;
