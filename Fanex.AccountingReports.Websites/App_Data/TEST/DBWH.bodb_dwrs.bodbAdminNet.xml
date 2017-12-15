@@ -59,17 +59,10 @@
       <Mapping DataField="company" ObjectProperty="CompanyTotal" />
     </Setting>
   </Function>
-  <Function Name="Gaming - Virtual Sports Win Loss">
-    <Setting Key="Gaming_VirtualSportsWinLoss_GetReport" SpName="Acc_Rpt_VirtualsportWinloss" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Gaming_VirtualSportsWinLoss_GetReportDetail" SpName="Acc_Rpt_VirtualsportWinloss_detail" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-  </Function>
   <Function Name="Gaming - Number Game Monthly Winloss">
     <Setting Key="Gaming_NumberGameMonthlyWinloss" SpName="Acc_Rpt_NumberGameWinlossByMonth" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
       <Mapping DataField="WinLost" ObjectProperty="WinLoss" />
     </Setting>
-  </Function>
-  <Function Name="Number Game Financial Report">
-    <Setting Key="Number_Game_Financial_Report" SpName="Acc_Rpt_NumberGameFinanceWinlossByMonth" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="MA Monitor Tool">
     <Setting Key="Misc_MAMonitorTool_GetLeagueList" SpName="Acc_Rpt_MAMonitor_LeagueSel" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
