@@ -533,7 +533,6 @@
     <Content Include="Areas\Betlist\Views\_RacingToteWinLoss.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Areas\Gaming\Views\CasinoWinLoss\Scripts\CasinoWinLoss.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent_AgentReport.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent_BaseReport.js" />
@@ -550,8 +549,6 @@
     <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameFinancial\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\CasinoWinLoss\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\CasinoWinLoss\Styles\CasinoWinLoss.less" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Styles\NumberGameWinLossByBetTypeMatch.less" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Styles\LiveCasinoAgencyWinLoss.less" />
