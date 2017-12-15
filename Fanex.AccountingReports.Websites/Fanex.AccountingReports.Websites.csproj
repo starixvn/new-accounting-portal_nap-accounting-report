@@ -552,8 +552,6 @@
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Styles\NumberGameWinLossByBetTypeMatch.less" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Styles\LiveCasinoAgencyWinLoss.less" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Styles\LiveCasinoGameStatistic.less" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByCurrency\Styles\NumberGameWinlossByCur.less" />
     <Content Include="Areas\Gaming\Views\NumberGameWinlossByDate\Styles\NumberGameWinlossByDate.less" />
     <Compile Include="Areas\UserControl\Controllers\UserController.cs" />
@@ -567,14 +565,6 @@
     <Content Include="Areas\Gaming\Views\LiveCasinoGameFinancialReport\Styles\LiveCasinoGameFinancialReport.css" />
     <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Scripts\NumberGameMonthlyWinLoss.js" />
     <Content Include="Areas\Gaming\Views\NumberGameFinancial\Scripts\NumberGameFinancial.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByCompany.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByCurrency.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByDailyRange.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByGameTable.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByGameType.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByMonthlyRange.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByUserName.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByBetType.js" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByBetTypeDetailReport.js" />
