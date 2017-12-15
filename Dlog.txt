@@ -1,0 +1,609 @@
+13c54d6 - franklin.nguyen, 8 days ago : #85382 - bullfighting - merge to master
+1c44094 - franklin.nguyen, 8 days ago : #85382 - bullfighting - remove xtest
+d677e97 - franklin.nguyen, 10 days ago : #85382 - bullfighting - update nuget
+7b18047 - franklin.nguyen, 2 weeks ago : #85382 - bullfighting - update nuget
+6e86a37 - robert.tran, 2 weeks ago : #85382 - bullfighting - checkbet - rebuild
+805794b - franklin.nguyen, 2 weeks ago : #85382 - bullfighting - checkbet
+85bcc0e - franklin.nguyen, 3 weeks ago : #85382 - bullfighting - checkbet
+82de1d7 - franklin.nguyen, 3 weeks ago : #85382 - bullfighting - checkbet
+42f0cb1 - jacob.phan, 3 weeks ago : 85382 - Remove copyright comment
+6fd349e - jacob.phan, 3 weeks ago : 85382 - Remove parameter constructor in controller
+8249ada - robert.tran, 3 weeks ago : #85382 - bullfighting - down grade betlist version
+fbf5862 - franklin.nguyen, 4 weeks ago : #85382 - bullfighting - sort product
+1cd264c - franklin.nguyen, 5 weeks ago : #85382 - bullfighting -2d
+b465ccd - franklin.nguyen, 5 weeks ago : #85382 - bullfighting
+9f4b145 - franklin.nguyen, 5 weeks ago : #85382 - bullfighting
+7520d1c - franklin.nguyen, 6 weeks ago : #85382 - bullfighting
+5976096 - franklin.nguyen, 2 weeks ago : #20171130 - betlist-lucky3 - merge to master
+84931d2 - franklin.nguyen, 2 weeks ago : 20171130 - update betlist packages.
+7a0240e - franklin.nguyen, 5 weeks ago : #84202-merge to master
+9d46f7e - franklin.nguyen, 6 weeks ago : #84202 - remotingref packages
+8355f1a - franklin.nguyen, 6 weeks ago : #84202 - betlist packages
+0cd7c2d - franklin.nguyen, 6 weeks ago : #84202 - check bet
+6c97baa - robert.tran, 6 weeks ago : #20171101-hotfix-duplicate-tickets
+6eade2f - robert.tran, 6 weeks ago : #20171101 - hotfix - duplicate tickets - no sound
+7da59b0 - robert.tran, 6 weeks ago : #20171101 - hotfix - duplicate tickets - no sound - for testing: set 30s diff
+db24e82 - robert.tran, 6 weeks ago : #20171101 - hotfix - duplicate tickets - no sound
+4ad0994 - franklin.nguyen, 8 weeks ago : 23102017 - change session state connection string local environment
+3d78216 - jacob.phan, 8 weeks ago : 82402 - Apply new FanexLogging
+f36a9eb - franklin.nguyen, 9 weeks ago : #81634 - merge to master
+39644cd - franklin.nguyen, 9 weeks ago : 81634 - add action redirect to universal report.
+6e214f4 - jacob.phan, 9 weeks ago : 82402 - Merge branch '82402-Permission'
+beecd23 - jacob.phan, 3 months ago : 82402-Upgrade Nap.Core.Client
+af90e3d - franklin.nguyen, 9 weeks ago : #20171010 - merge to master - hotfix score information - 2h report.
+c89c4f0 - franklin.nguyen, 9 weeks ago : #20171010 - hot fix show score information
+19ba0f0 - franklin.nguyen, 9 weeks ago : #20171010 - hot fix show score information
+352badb - franklin.nguyen, 9 weeks ago : #78214 - merge lucky 3 to master
+6fe8bbf - franklin.nguyen, 9 weeks ago : #78214 - lucky 3 - remove _xtest
+0b74f06 - franklin.nguyen, 2 months ago : #78214 - lucky 3 - checkbet
+9cb8621 - franklin.nguyen, 2 months ago : #78214 - lucky 3 - 2d
+bb834ef - franklin.nguyen, 2 months ago : #78214 - lucky 3 - checkbet
+1a3c54a - franklin.nguyen, 3 months ago : #78214 - lucky 3 - TotalCreditAccountByProduct
+3cfbabd - franklin.nguyen, 4 months ago : #78214 - lucky 3 - checkbet
+8c3c02c - franklin.nguyen, 4 months ago : #78214 - lucky 3
+9c4d918 - franklin.nguyen, 4 months ago : #78214 - lucky 3
+aa8beb1 - franklin.nguyen, 2 months ago : #0000 - change bodb_Maintenance IP
+2612c26 - robert.tran, 2 months ago : #83667-new-bettypes-with-decimal-odds
+9ede41c - robert.tran, 3 months ago : #83667 - NAP Report - Implement new bettypes with decimal odds only
+31965d4 - robert.tran, 3 months ago : #78011-trader-performance
+b836abf - robert.tran, 4 months ago : #78011 - remove columns OE and 1stOE on TraderPerformanceSoccer
+3dbdf02 - robert.tran, 4 months ago : #78011 - Incorporate more bettypes into NAP Trader Performance Report
+9ad6f98 - franklin.nguyen, 4 months ago : #78184 - #78495 - merge to master.
+ff854c7 - franklin.nguyen, 4 months ago : #78495 - remove xtest
+e2f7253 - franklin.nguyen, 5 months ago : #78495 - change connection string
+32b2aed - robert.tran, 5 months ago : #78495 - change the product name from "Betradar Virtual Sports" to "Virtual Sports 2".
+72a5ef4 - franklin.nguyen, 5 months ago : #78495 - checkbet
+f21c1ee - franklin.nguyen, 5 months ago : #78495 - checkbet
+c1ba6db - franklin.nguyen, 5 months ago : #78495 - checkbet
+dced95d - jacob.phan, 5 months ago : #78495 - build conflict
+2432011 - franklin.nguyen, 5 months ago : #78495 - checkbet - fix bug mix parlay bettype
+b04bb28 - franklin.nguyen, 5 months ago : #78495 - checkbet
+23a61d2 - franklin.nguyen, 5 months ago : #78495 - upgrade betlist
+a3ce59e - jacob.phan, 5 months ago : #78495 - System Name for NDICT
+c7ae631 - jacob.phan, 5 months ago : #78495 - VirtualSports Bet List Core
+e1a9862 - Leo Vo, 5 months ago : #78495 - Fix.
+e17d0fb - Leo Vo, 5 months ago : #78495 - Fix.
+b70e365 - Leo Vo, 5 months ago : #78495 - Update Fanex Result.
+0607144 - Leo Vo, 5 months ago : #78495 - Integrate Lottery & Betradar VS.
+95ad81c - jacob.phan, 5 months ago : #78495 - Remove LoggingHandler
+f234160 - Leo Vo, 6 months ago : #78495 - Integrate Lottery & Betradar VS.
+8881134 - Leo Vo, 6 months ago : #000 - Remove old punter analysis.
+6ca8b1e - franklin.nguyen, 5 months ago : #20170711 - update nuget packages - betlist number game.
+a9f8c77 - franklin.nguyen, 5 months ago : #20170711 - update nuget packages.
+5f495cc - jacob.phan, 6 months ago : 00000 - Switch db052 to db054
+82f83e8 - robert.tran, 6 months ago : #20170627-upgrade-betlist-core-ng
+3ee6f0b - robert.tran, 6 months ago : #20170627 - upgrade betlist core for ng
+d7a790f - jacob.phan, 6 months ago : 78678- Remove number 37.5 in Number Game in Bet List - Show Handicap or Over/Under for Penalty matches in Result
+f5cb298 - jacob.phan, 6 months ago : 78160-BetListCore For CashOut
+fe6f429 - robert.tran, 6 months ago : #20170616-change-config-uat
+db97e71 - robert.tran, 6 months ago : #20170616 - change configurations on uat
+fe7e6e0 - Jacob.Phan, 7 months ago : 67055-PunterAnalysis
+c361753 - Jacob.Phan, 7 months ago : #20140414 - Remove XTEST
+c2cce81 - franklin.nguyen, 7 months ago : #20140414 - Duplicate ticket - Cashout
+3cd3fdf - franklin.nguyen, 7 months ago : #20140414 - PunterAnalysis - update Result Core.
+15c3b1b - Jacob.Phan, 8 months ago : #20140414 - PunterAnalysis Redirect
+c4eb3d4 - Jacob.Phan, 7 months ago : 73419-NAPReport-IntegrateCashOut
+1985b67 - Jacob.Phan, 7 months ago : 73419- Remove XPRE
+5595594 - Jacob.Phan, 7 months ago : 73419- Release version of BetList nuget
+683c57b - Jacob.Phan, 8 months ago : 73419- Move Acc_BetList_CashOut_Detail to DBACC.bodb02
+4490338 - Jacob.Phan, 8 months ago : 73419- "Acc_Rpt_DuplicatedTicketsSel" XPRE
+bcbab5a - franklin.nguyen, 8 months ago : 73419- change setting.
+6e3d5fa - franklin.nguyen, 8 months ago : 73419- CashOut - betlist
+c0cfb2f - Jacob.Phan, 8 months ago : 73419- CashOut - IpService
+2be403d - franklin.nguyen, 8 months ago : 73419- CashOut - 2d
+0e3f798 - Jacob.Phan, 8 months ago : 73419- CashOut - Cheat menu to universal reports
+488ad6a - Jacob.Phan, 8 months ago : 73419- CashOut - Upgrade nuget
+0078384 - Jacob.Phan, 8 months ago : 73419- CashOut - SP XPRE
+3eba7b6 - Jacob.Phan, 8 months ago : 73419- CashOut - LogUsername
+4e3173f - Jacob.Phan, 8 months ago : 73419- CashOut - Remove Redundant Code
+216969a - Jacob.Phan, 8 months ago : 73419- CashOut - Bet List-Remove redundant files
+2ee5348 - Jacob.Phan, 8 months ago : 73419- CashOut - Bet List
+9e6689b - Jacob.Phan, 8 months ago : 73419- CashOut - Remove redudant controller action 2
+0a01512 - Jacob.Phan, 8 months ago : 73419- CashOut - Remove redudant controller action
+d2dcb26 - Jacob.Phan, 8 months ago : 73419- CashOut - BetList Cashout Detail
+e8cad63 - Jacob.Phan, 9 months ago : 73419- CashOut - BetList
+0ecae70 - franklin.nguyen, 9 months ago : 73419- CashOut - checkbet report
+09a2baa - franklin.nguyen, 9 months ago : 73419- CashOut - 2d report
+d05639f - franklin.nguyen, 9 months ago : 73419-Upgrade nuget packages
+47cc1e5 - jacob.phan, 7 months ago : 20170505-PlayForFun-HubLink-Merge to master
+1bab674 - jacob.phan, 7 months ago : 20170505-PlayForFun-HubLink
+a841b0a - Jacob.Phan, 7 months ago : 67055-PlayForFun-Merge to master
+be6714c - Jacob.Phan, 8 months ago : #20140414 - Best view
+b12874c - Jacob.Phan, 8 months ago : #20140414 - Local StateServer
+87bb3af - robert.tran, 8 months ago : #20140414 - Change IP nap-api on uat.
+da09cc0 - robert.tran, 8 months ago : #20170414 - Change IP of nap api on UAT.
+ea59484 - Jacob.Phan, 9 months ago : 72900-BAIO-Merge to master
+b38c0bf - robert.tran, 9 months ago : 73419-baio - upgrade result core
+aa49d82 - Jacob.Phan, 9 months ago : 73419-local session state
+432f822 - Jacob.Phan, 9 months ago : 72900-Upgrade Fanex.Result
+1eb766f - Jacob.Phan, 9 months ago : 72900-Check Bet by remoting ref
+198c6f7 - Jacob.Phan, 9 months ago : 72900-Check Bet
+b47fb2b - robert.tran, 9 months ago : #20170403-bypass-login-mnl
+d8ca250 - robert.tran, 9 months ago : #20170403 - bypass update login on mnl
+b590bc2 - robert.tran, 9 months ago : #20170321-change-local-state-session
+aa53f68 - robert.tran, 9 months ago : #20170321 - change local state session
+579d841 - Jacob.Phan, 9 months ago : 59840-Correct-8RM-BARM-HedgeData
+85e1b42 - Jacob.Phan, 9 months ago : #71906 - Remove Test version
+8aed06b - robert.tran, 10 months ago : #71906 - Bet List - Displays more info of Event date and time
+087c1ea - Jacob.Phan, 10 months ago : 72612-bug Total is wrong (not calculating hedge match)
+9549e8a - Jacob.Phan, 10 months ago : 72389-Bug
+57c46fc - Jacob.Phan, 10 months ago : 59840-SP Xtest
+ab9af4f - Jacob.Phan, 10 months ago : 59840-ExcelView
+17313b3 - Jacob.Phan, 10 months ago : 59840-GridView
+5ff9166 - Jacob.Phan, 10 months ago : 23022017-MoveCoreServer
+420244d - Jacob.Phan, 10 months ago : 23022017-MoveCoreServer
+7aee1da - Jacob.Phan, 10 months ago : #70731-Abandoned1H2H
+b68e972 - Jacob.Phan, 11 months ago : #70731-Upgrade Result Core
+b925c1f - Jacob.Phan, 11 months ago : #20170117-change-local-config-setting
+a14a632 - robert.tran, 11 months ago : #20170117 - change local configuration setting.
+3bc60aa - Jacob.Phan, 11 months ago : #70300-WinningMargin
+fe7cc54 - Jacob.Phan, 11 months ago : #56803 - NAP Report - Winning Margin
+aa41dac - robert.tran, 11 months ago : #56803 - NAP Report - Offer Fast Makets bet types
+2c9a560 - robert.tran, 11 months ago : #56803 - remove _xtest
+579ade5 - Jacob.Phan, 11 months ago : #56803 - Upgrade fanex.caching
+64a997a - robert.tran, 12 months ago : #56803 - update betlist core dll
+66db2b3 - Jacob.Phan, 12 months ago : #56803 - Stylecop
+c65f639 - Jacob.Phan, 12 months ago : #56803 - Nuget packages
+8fdfde5 - Jacob.Phan, 12 months ago : #56803 - Use remoting Ref to get bet team
+7ea5ced - robert.tran, 1 year ago : #56803 - NAP Report - Offer Fast Makets bet types
+80b9219 - Jacob.Phan, 12 months ago : #12567-HotFix-AutoGeneratedReport
+6adf560 - Jacob.Phan, 12 months ago : #12567-HotFix-AutoGeneratedReport
+013a209 - Jacob.Phan, 12 months ago : #68371-NG2-AddColumnCompanyGrossIncome-Merge to master
+424a28c - Jacob.Phan, 12 months ago : #68371-Upgrade Fanex.Nap.Core
+461c247 - robert.tran, 12 months ago : #67757 - NAP Reports - Integrate Fishing World Product
+6414a8d - robert.tran, 1 year, 1 month ago : #67757 - NAP Reports - Integrate Fishing World Product
+1faa2da - robert.tran, 1 year ago : #0000-MNL- render menu
+df42a2a - robert.tran, 1 year ago : #0000 - MNL - using virtual directory
+9a5bc1b - robert.tran, 1 year ago : #0000 - MNL - bypass write log on MNL
+3afe498 - robert.tran, 1 year ago : #0000 - MNL - by pass write log when logging on MNL
+7818139 - robert.tran, 1 year ago : #0000 - hotfix - MNL - menu
+5c57682 - robert.tran, 1 year ago : #0000 - hotfix MNL menu
+56aef2a - robert.tran, 1 year, 1 month ago : #20161111 - piwik - log log userId
+f8676f9 - robert.tran, 1 year, 1 month ago : #20161111 - piwik - log log userId
+2a5b5c3 - robert.tran, 1 year, 1 month ago : #63460 - NAP Report - Integrate new product NG2
+4147d55 - xavi.mai, 1 year, 2 months ago : #63460- change SP name for betcount
+6f06b23 - robert.tran, 1 year, 2 months ago : #63460 - get method name when an exception issue
+bc5f8e9 - xavi.mai, 1 year, 2 months ago : #63460- fix bug #65826: NG2 - Punter Analysic: League mode is only supported for SB
+3e706b2 - xavi.mai, 1 year, 2 months ago : #63460- fix bug #65826: NG2 - Punter Analysic: League mode is only supported for SB
+17702fa - robert.tran, 1 year, 2 months ago : #63564 - create menu for NG2Statistic
+bdb7ce0 - xavi.mai, 1 year, 2 months ago : #63460- update range sportType
+bf889ff - xavi.mai, 1 year, 2 months ago : #63460- fix bug #65075  Total Credit Accounts Enabled/Disabled per Product
+a191ee1 - xavi.mai, 1 year, 3 months ago : #63460-intergate-NG2: remove NG and CasinoGameStatistic
+e7f47f9 - xavi.mai, 1 year, 3 months ago : #63460-intergate-NG2: update Sp relative to UAT2
+a919bc3 - xavi.mai, 1 year, 3 months ago : #63460-intergate-NG2: update Sp relative to UAT2
+8b27873 - xavi.mai, 1 year, 3 months ago : #63460-intergate-NG2: change sportType for Misc/Total credit accounts
+86f61f4 - xavi.mai, 1 year, 3 months ago : #63460-intergate-NG2: Implement 2d and remain reports : 2d completed
+9795b87 - xavi.mai, 1 year, 3 months ago : #63460-intergate-NG2: Implement 2d and remain reports
+7753e8b - xavi.mai, 1 year, 3 months ago : #63460-intergate-NG2: Implement Fraud & Risk / Punter Analysis SP name
+0632f44 - xavi.mai, 1 year, 3 months ago : #63460-intergate-NG2: Implement Fraud & Risk / Punter Analysis
+b188df0 - xavi.mai, 1 year, 3 months ago : #63460-intergate-NG2: implement for Misc/BetCount
+5aba84b - robert.tran, 1 year, 1 month ago : #65534 - NAP Report - Move a number of reporting tables to bodb_LicenseeReport
+3f2afb5 - xavi.mai, 1 year, 2 months ago : #65534: change SP Name
+55ee727 - xavi.mai, 1 year, 2 months ago : #65534: initial
+56f7998 - robert.tran, 1 year, 2 months ago : #66295 - NAP Reports raise exception Out of memmory but can't locate in which function
+4da4763 - robert.tran, 1 year, 2 months ago : #66295 - NAP Reports raise exception Out of memmory but can't locate in which function
+c33e9a5 - Jacob.Phan, 1 year, 2 months ago : #65816-RemoveAllBetLiveCasinoGameStatistic
+3391a95 - Jacob.Phan, 1 year, 2 months ago : #65816-RemoveAllBetLiveCasinoGameStatistic
+3f59662 - robert.tran, 1 year, 2 months ago : #63564 - PHAIO 2 - Incorporate PH All-In-One 67 betypes in to NAP Acc Report - Phase 2b (14+1bettypes)
+22cf3b9 - robert.tran, 1 year, 2 months ago : #63564 - PHAIO 2 - Incorporate PH All-In-One 67 betypes in to NAP Acc Report - Phase 2b (14+1bettypes)
+213f604 - robert.tran, 1 year, 3 months ago : #63564 - PHAIO 2 - Incorporate PH All-In-One 67 betypes in to NAP Acc Report - Phase 2b (14+1bettypes)
+5b7548e - Jacob.Phan, 1 year, 3 months ago : #63564 - PHAIO 2 - Force logout if session is expired
+2e1f060 - robert.tran, 1 year, 3 months ago : #63564 - PHAIO 2 - Incorporate PH All-In-One 67 betypes in to NAP Acc Report - Phase 2b (14+1bettypes) + #63520 - Incorporate data of Colossus Bets - Cash Model
+6ba1595 - robert.tran, 1 year, 3 months ago : #63482 - Code removal and arrangement for the shutdown for 2a report
+5cc7f3c - xavi.mai, 1 year, 3 months ago : #63482-code-remove-shutdown-for-2a-report: Remove Sp
+d128967 - xavi.mai, 1 year, 3 months ago : #63482-code-remove-shutdown-for-2a-report: Remove Sp
+fa13860 - xavi.mai, 1 year, 3 months ago : #63482-code-remove-shutdown-for-2a-report: Remove constants & Labels.
+09b5287 - xavi.mai, 1 year, 3 months ago : #63482-code-remove-shutdown-for-2a-report: Remove code Backend& front end
+4c0808e - xavi.mai, 1 year, 3 months ago : #63482-code-remove-shutdown-for-2a-report: initial
+ece4a85 - robert.tran, 1 year, 3 months ago : #63022 - NAP Report - Enhance System/Mix Parlay to support Combo Parlay
+6aea69b - robert.tran, 1 year, 3 months ago : #63022 - NAP Report - Enhance System/Mix Parlay to support Combo Parlay
+e056555 - robert.tran, 1 year, 3 months ago : #63022 - #63520 - Incorporate data of Colossus Bets - Cash Model
+587c399 - robert.tran, 1 year, 4 months ago : #63022 - NAP Report - Enhance System/Mix Parlay to support Combo Parlay
+30d826c - Jacob.Phan, 1 year, 4 months ago : #63022-Mix-Parlay-to-support-Combo-Parlay-Remove tab in sp name
+638658d - Jacob.Phan, 1 year, 4 months ago : #63022-Mix-Parlay-to-support-Combo-Parlay-Remove Main_MatchWinLoss2a_GetAllDetailReportBySportsType_WH
+052e416 - Jacob.Phan, 1 year, 4 months ago : #63022-Mix-Parlay-to-support-Combo-Parlay-Synchronize sp in all environment
+fbf3272 - robert.tran, 1 year, 3 months ago : #62630 - BetTrade - Apply new business terms
+7ac48dd - robert.tran, 1 year, 3 months ago : #62630 - BetTrade - set save bet uat folder
+b4024bd - franklin.nguyen, 1 year, 4 months ago : #62630 - BetTrade - 2h report - show bettrade virtual turnover.
+5c22edf - franklin.nguyen, 1 year, 4 months ago : #62630 - BetTrade - Show value for OtherLive  and Virtual OtherLive .
+d5195b8 - franklin.nguyen, 1 year, 4 months ago : #62630 - BetTrade - Show value for VirtualLineTotal and Variance.
+53b1058 - franklin.nguyen, 1 year, 4 months ago : #62630 - BetTrade - Show NA for Commission and Virtual Commission.
+96b8ffd - robert.tran, 1 year, 4 months ago : #62630 - BetTrade - Apply new business terms
+34e7281 - robert.tran, 1 year, 4 months ago : #53523-Incorporate PH All-In-One 67 betypes in to NAP Acc Report - Phase 2
+96c33a5 - xavi.mai, 1 year, 4 months ago : #53154-Bet List, Result - PHAIO2 - rebase on master
+8552bed - xavi.mai, 1 year, 4 months ago : #53154-Bet List, Result - PHAIO2 - fix bug #62822: Lack of Betteam for Bettype=431 and Betteam=DA
+f5fcab9 - xavi.mai, 1 year, 4 months ago : #53154-Bet List, Result - PHAIO2 - check styleScope
+e947130 - xavi.mai, 1 year, 4 months ago : #53154-Bet List, Result - PHAIO2 - Refactor TestCase  for Unit Test
+986adbb - xavi.mai, 1 year, 4 months ago : #53154-Bet List, Result - PHAIO2 - fix bug #62463 UI is broken
+9653e4a - xavi.mai, 1 year, 4 months ago : #53154-Bet List, Result - PHAIO2 - Refactor Code
+ecce7a2 - xavi.mai, 1 year, 4 months ago : #53154-Bet List, Result - PHAIO2 - fix bug #62752: Value of hdp should be formatted with 2 decimal places instead of 4
+94c41e6 - xavi.mai, 1 year, 4 months ago : #53154-Bet List, Result - reset Timeout
+7529cd2 - xavi.mai, 1 year, 4 months ago : #53154-Bet List, Result - PHAIO2 - Update Fanex.Data.DbSettingProviderExtension
+7d0922f - xavi.mai, 1 year, 4 months ago : #53154-Bet List, Result - PHAIO2 - Update UnitTests
+c879b6a - xavi.mai, 1 year, 4 months ago : #53154-Bet List, Result - PHAIO2 - Implement for CheckBet.
+bfcbb0b - xavi.mai, 1 year, 4 months ago : #53154-Bet List, Result - PHAIO2 - initial
+e779bde - robert.tran, 1 year, 5 months ago : #53154-Bet List, Result - PHAIO2
+bb98ec6 - Jacob.Phan, 1 year, 4 months ago : #23435-WrongLinkFromNapHub
+3b06152 - Jacob.Phan, 1 year, 4 months ago : #60973 - UniversalReportsController
+64c8aff - robert.tran, 1 year, 4 months ago : #60973 - Incorporate Macau into the Extra PT list in NAP Accounting Report - remove _uat3
+b7e84a8 - robert.tran, 1 year, 4 months ago : #60973 - Incorporate Macau into the Extra PT list in NAP Accounting Report - remove _uat3
+60653ad - robert.tran, 1 year, 4 months ago : #60973 - fix bug Missing sum data of Credit and Deposit for Bettypes of
+5f72f23 - xavi.mai, 1 year, 4 months ago : #60973 - fix bug Missing sum data of Credit and Deposit for Bettypes of
+1782a05 - robert.tran, 1 year, 5 months ago : #60973 - Incorporate Macau into the Extra PT list in NAP Accounting Report
+ab43697 - robert.tran, 1 year, 4 months ago : #0000-hotfix-fanex.data - merge into master
+7b4b240 - robert.tran, 1 year, 4 months ago : #0000 - hot fix -  Fanex.Data.DbSettingProviderExtension 1.0.0.1
+240abc9 - Jacob.Phan, 1 year, 4 months ago : #48448-company-win-loss: Merge to master
+5ed6c26 - Jacob.Phan, 1 year, 4 months ago : #48448 - Change report name to House Win Loss
+36186d7 - Jacob.Phan, 1 year, 4 months ago : #48448 - Authenticate cookie name
+aa91cd8 - Jacob.Phan, 1 year, 4 months ago : #48448 - Remove NapAuth in LegendManagementController
+6500b37 - Jacob.Phan, 1 year, 7 months ago : #48448 - Rebase on master
+152d82c - Leo Vo, 1 year, 8 months ago : #48448 - Support start-date and end-date for mix-parlay link.
+66e370b - Leo Vo, 1 year, 8 months ago : #00000 - Change local remoting ref URL.
+9318868 - Jacob.Phan, 1 year, 9 months ago : #48448-Integrate With Universal Reports-Configuration
+b0e92c2 - Jacob.Phan, 1 year, 10 months ago : #48448-Integrate With Universal Reports
+eafd73c - robert.tran, 1 year, 5 months ago : #0000 - hotfix - Misc_BetCount_GetAllProductsForBetCountReport: Fixed
+6820c43 - xavi.mai, 1 year, 5 months ago : #0000 - hotfix - Misc_BetCount_GetAllProductsForBetCountReport: Fixed
+4a3b0fd - xavi.mai, 1 year, 5 months ago : #0000 - hotfix - Misc_BetCount_GetAllProductsForBetCountReport: Key not found exception : Fix
+f38ca6c - robert.tran, 1 year, 5 months ago : #0000 - hotfix - Misc_BetCount_GetAllProductsForBetCountReport: Key not found exception
+2651235 - robert.tran, 1 year, 5 months ago : #56572 - NAP Report - Enhance System Parlay to support Combo Parlay
+bb3d87b - robert.tran, 1 year, 5 months ago : #55282 - show detail parlay - change Pro config.
+f034d22 - franklin.nguyen, 1 year, 7 months ago : #55282 - show detail parlay - change Pro config.
+851ef01 - franklin.nguyen, 1 year, 7 months ago : #55282 - show detail parlay - broken layout.
+fa0763e - franklin.nguyen, 1 year, 7 months ago : #55282 - upgrade bet list core.
+5dfc021 - franklin.nguyen, 1 year, 7 months ago : #55282 - combo parlay - fix bugs.
+abb134b - franklin.nguyen, 1 year, 7 months ago : #55282 - combo parlay - change sp.
+a2ddbe5 - franklin.nguyen, 1 year, 7 months ago : #55282 - combo parlay - fix bugs.
+19fff04 - franklin.nguyen, 1 year, 8 months ago : #55282 - combo parlay.
+16c60ac - franklin.nguyen, 1 year, 8 months ago : #55282 - web - upgrade BetList
+d5bc38c - robert.tran, 1 year, 5 months ago : #56441 - Bet Count Report Enhancement - remove _xtest
+e26343e - robert.tran, 1 year, 5 months ago : #56441 - Bet Count Report Enhancement - remove _xtest
+6294708 - xavi.mai, 1 year, 5 months ago : #56441- Custom size column in report table - fix
+ae8f982 - xavi.mai, 1 year, 5 months ago : #56441- Custom size column in report table
+db13775 - xavi.mai, 1 year, 5 months ago : #56441- Fix Bug #60806: Cannot sort by Turnover/winlosst /margin by clicking icon on column header
+f663758 - xavi.mai, 1 year, 5 months ago : #56441- Fix Bug #60555: Change name Member Group
+282211a - xavi.mai, 1 year, 5 months ago : #56441- Fix Bug #60555: Change name 'Company' column to 'Company Income'
+6810e2c - xavi.mai, 1 year, 5 months ago : #56441- Fix bug #60249: There is no scroll bar on drop down list Sport at the first load
+558d05a - xavi.mai, 1 year, 5 months ago : #56441- Upgrade Filter Follow New Spec - Remove ProductType
+8bfbb6c - xavi.mai, 1 year, 6 months ago : #56441- Upgrade Filter Follow New Spec
+bb0c4ce - xavi.mai, 1 year, 7 months ago : #56441- rebase on master
+e3ec32b - xavi.mai, 1 year, 7 months ago : #56441- fix - fanex.multiSelect
+dd70bef - Jacob.Phan, 1 year, 7 months ago : #56441-Javascript
+918d55f - Jacob.Phan, 1 year, 7 months ago : #56441-Front end
+45c5384 - Jacob.Phan, 1 year, 7 months ago : #56441-Server code
+0c8c1e5 - Jacob.Phan, 1 year, 7 months ago : #56441-Add new sp name
+f65d20f - robert.tran, 1 year, 6 months ago : #57781 - Add More Actions of Settlement to Daily Turnover Report
+7919801 - robert.tran, 1 year, 6 months ago : #0000 - check stylecop
+b1db23f - xavi.mai, 1 year, 6 months ago : #0000 - change SP name - update
+9541022 - xavi.mai, 1 year, 6 months ago : #0000 - change SP name
+ad6c4ce - xavi.mai, 1 year, 6 months ago : #0000 - implement Add More Actions of Settlement
+42e9aa4 - xavi.mai, 1 year, 6 months ago : #0000 - rebase on master - fix Gaming UI
+baf49f1 - xavi.mai, 1 year, 6 months ago : #0000 - rebase on master
+b8e651f - Jacob.Phan, 1 year, 7 months ago : #57551- delete - Match Win Loss Single Bet
+c832e48 - Jacob.Phan, 1 year, 7 months ago : #57551- delete - all Cockfighting
+c5194f1 - franklin.nguyen, 1 year, 7 months ago : #0000 - delete - cockfighting product in 2a, 2h reports.
+e79e112 - franklin.nguyen, 1 year, 7 months ago : #0000 - delete - misc - Hourly Member Win/Loss on MBC - RNG Casino
+5746337 - franklin.nguyen, 1 year, 7 months ago : #0000 - rebase master.
+d016d09 - franklin.nguyen, 1 year, 7 months ago : #0000 - delete Bingo reports.
+d0b2328 - franklin.nguyen, 1 year, 7 months ago : #0000 - delete Licensee report group.
+73c13ee - franklin.nguyen, 1 year, 7 months ago : #0000 - revert commit.
+b08c0d0 - franklin.nguyen, 1 year, 7 months ago : #0000 - delete licensee email config.
+a1a1b10 - robert.tran, 1 year, 6 months ago : #58980 - Report 2h - Correct the sign of Extra PT figures
+6a0465a - robert.tran, 1 year, 6 months ago : #58980 - Report 2h - Correct the sign of Extra PT figures
+1f00a01 - robert.tran, 1 year, 6 months ago : #58980 - Report 2h - Incorrect data of Main Bet Types Total at Soccer Major Bet Types Non-Live section
+4f26f37 - robert.tran, 1 year, 6 months ago : #0000 - tree wl - extend to 120 days from yesterday on calendar
+dc86e2a - robert.tran, 1 year, 6 months ago : #0000 - fully 3 months on calendar - tree wl
+4227de1 - robert.tran, 1 year, 6 months ago : #57112-Live Casino Financial Report: implement for GameLevyToPay
+0f97e63 - xavi.mai, 1 year, 6 months ago : #57112-Live Casino Financial Report: implement for GameLevyToPay
+bd3e277 - xavi.mai, 1 year, 6 months ago : #57112-Live Casino Financial Report: change SP name
+47e973d - xavi.mai, 1 year, 6 months ago : #57112-Live Casino Financial Report: initial
+da4f079 - robert.tran, 1 year, 6 months ago : #57987-Enhancement to 2h - Child Reports: Implement for Soccer, OtherSports
+573498c - xavi.mai, 1 year, 7 months ago : #57987-Enhancement to 2h - Child Reports: Implement for Soccer, OtherSports
+4b8d5b2 - xavi.mai, 1 year, 7 months ago : #57987-Enhancement to 2h - Child Reports: Add SP name
+3daa155 - xavi.mai, 1 year, 7 months ago : #57987-Enhancement to 2h - Child Reports: rebase on master
+6bbcff8 - xavi.mai, 1 year, 7 months ago : #57987-Enhancement to 2h - Child Reports: change SP Name
+d1ded7a - xavi.mai, 1 year, 7 months ago : #57987-Enhancement to 2h - Child Reports: Initial
+16b76df - robert.tran, 1 year, 6 months ago : #0000 - nap report - Gaming/ Live Casino Game Financial Report - timeout
+4cb0163 - robert.tran, 1 year, 6 months ago : #0000 - nap report - Gaming/ Live Casino Game Financial Report
+1dd3134 - robert.tran, 1 year, 7 months ago : #55406 - Casino Game Statistic Enhancement
+d54b458 - robert.tran, 1 year, 7 months ago : #55406 - Casino Game Statistic Enhancement - check stylecop
+8037df1 - robert.tran, 1 year, 7 months ago : #55406 - Casino Game Statistic Enhancement - rounding number
+597d652 - xavi.mai, 1 year, 7 months ago : #55406 - Casino Game Statistic Enhancement - change SP Name
+e55f800 - xavi.mai, 1 year, 7 months ago : #55406 - Casino Game Statistic Enhancement - initial
+cd1c996 - robert.tran, 1 year, 7 months ago : #56764-enhancement to 2h report
+837b459 - xavi.mai, 1 year, 7 months ago : #56764-enhancement to 2h report : System displayed error message when searching data- fixed
+b6c2bac - xavi.mai, 1 year, 7 months ago : #56764-enhancement to 2h report : System displayed error message when searching data- fixed
+924ef43 - xavi.mai, 1 year, 7 months ago : #56764-enhancement to 2h report : Bug #57668 - fixed
+ed880dd - xavi.mai, 1 year, 7 months ago : #56764-enhancement to 2h report : change SP name
+5c343fa - franklin.nguyen, 1 year, 7 months ago : #57657 - Merge OnebookUM feature to master.
+8a9d7a0 - Jacob.Phan, 1 year, 7 months ago : #57657-Onebook.UM
+fead84c - Jacob.Phan, 1 year, 7 months ago : #57657-Update nuget packages
+478ccaf - Jacob.Phan, 1 year, 7 months ago : #57657-Remove app.config
+f5d6968 - franklin.nguyen, 1 year, 7 months ago : #57182 - Remove _xtest.
+2e63596 - franklin.nguyen, 1 year, 7 months ago : #57182 - Merge feature to master.
+64a519a - franklin.nguyen, 1 year, 7 months ago : #57182 - Apply SIT environment.
+c9ce851 - robert.tran, 1 year, 7 months ago : #57182 - Rename product "Voidbridge" to "Macau Games"
+40e099a - franklin.nguyen, 1 year, 7 months ago : #55589 - remove _xtest version.
+95239ae - franklin.nguyen, 1 year, 7 months ago : #55589 - Merge Voidbridge feature to Master
+f47d1f7 - franklin.nguyen, 1 year, 8 months ago : #55589 - change SP version for DBDWH
+ebe65b2 - robert.tran, 1 year, 8 months ago : #55589 - Integrate Voidbridge Credit - Single Wallet model
+9d827b6 - franklin.nguyen, 1 year, 8 months ago : #55584 - remove _xpre version.
+f144d91 - franklin.nguyen, 1 year, 8 months ago : #55584 - Merge metric gaming feature to master.
+f40a360 - franklin.nguyen, 1 year, 8 months ago : #55584 - summarize bet type total - fix bugs.
+a00a73c - franklin.nguyen, 1 year, 8 months ago : #55584 - 2a, 2h, 2d reports
+0523c35 - franklin.nguyen, 1 year, 8 months ago : #55584 - 2h report.
+2d4391c - franklin.nguyen, 1 year, 8 months ago : #55584 - 2a, 2d report.
+41c37e8 - franklin.nguyen, 1 year, 8 months ago : #55584 - 2a report.
+9f5a22f - franklin.nguyen, 1 year, 8 months ago : #565287 - hot fix for 2a report.
+2ab859d - franklin.nguyen, 1 year, 8 months ago : #565287 - rename  SP
+ffa3b51 - robert.tran, 1 year, 8 months ago : #0000 - check login folder share on save bet
+1dbab69 - robert.tran, 1 year, 8 months ago : #0000 - check login folder share on save bet
+d6cfff8 - franklin.nguyen, 1 year, 9 months ago : #0000 - WEB - ONEbook UM
+eebed87 - robert.tran, 1 year, 8 months ago : #50921 - Allbet Live Casino - Implement NAP Acc Reports
+9ac8187 - robert.tran, 1 year, 8 months ago : #55595 - Allbet Live Casino - Casino Game Statistic - 'Game table' displays unexpectedly when turn on/off 'Exclude test data'
+dcd8bf1 - robert.tran, 1 year, 9 months ago : #55020 - Allbet Live Casino - 2a [DW] - Cockfighting drilldown: Margin values should be formatted as 2 decimal
+e646532 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2h Generate button does not work on Live Casino drilldown reports
+b8ed3fc - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2h Generate button does not work on Live Casino drilldown reports
+df2187e - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2a cockfighting
+3d73f8a - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2h Colossus_Bets
+b92a378 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2a cockfighting
+ef41e97 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2a cockfighting
+9ae13c8 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2a cockfighting
+9a3a55d - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2a cockfighting
+17e2bd2 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2a MBC-RNG Casino
+bd49b52 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2a MBC-RNG Casino
+b7d80c0 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2h drilldown
+699dfb0 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2h drilldown
+c1e12b3 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix Gaming Statitis
+419b29e - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix MISC
+aefc321 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2h
+04bbc03 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix MISC
+ce3377e - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix MISC
+1d76736 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2h
+a8e0325 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix 2a
+9e41116 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix Gaming and Misc
+5255585 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino - update the sps of Tree WL
+9883f67 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino - update the sps of Tree WL
+007f72c - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino - update the sps of Tree WL
+cfc7bfb - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix name MBC_RNG_Casino
+240ce62 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino -fix name MBC_RNG_Casino
+4fdd62d - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino - Implement for remain screens (2a) - CockFighting - excel
+40cd98d - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino - Implement for remain screens (2a) - MBC-RNG Casino
+58ddfc2 - xavi.mai, 1 year, 9 months ago : #50921 - Allbet Live Casino - Implement for remain screens (2a) - CockFighting
+ec60428 - xavi.mai, 1 year, 10 months ago : #50921 - Allbet Live Casino - Implement for remain screens (2a)
+e620677 - xavi.mai, 1 year, 10 months ago : #50921 - Allbet Live Casino - Implement for remain screens
+c905bdc - xavi.mai, 1 year, 10 months ago : #50921 - Allbet Live Casino - Implement for 2h: (BetTrans)
+da0be1d - xavi.mai, 1 year, 10 months ago : #50921 - Allbet Live Casino - Implement for 2d
+98dff66 - xavi.mai, 1 year, 10 months ago : #50921 - Allbet Live Casino - Implement for 2h
+5a8e023 - xavi.mai, 1 year, 10 months ago : #50921 - Allbet Live Casino - Change SP Name For 2h
+dd3544b - xavi.mai, 1 year, 10 months ago : #50921 - Allbet Live Casino - Change SP Name For 2h
+46de970 - robert.tran, 1 year, 10 months ago : #50921 - Allbet Live Casino - Implement NAP Acc Reports
+a968d7e - franklin.nguyen, 1 year, 9 months ago : #54611 - merge to master.
+5d3e68c - franklin.nguyen, 1 year, 9 months ago : #54611 - hot fix
+6635cf8 - franklin.nguyen, 1 year, 9 months ago : #53194 - WEB - remove _xpre.
+3590023 - franklin.nguyen, 1 year, 9 months ago : #53194 - WEB - merge current feature to master
+e366641 - franklin.nguyen, 1 year, 9 months ago : #53194 - WEB - UAT - fix bug broken layout in footer.
+4b4a1ee - franklin.nguyen, 1 year, 9 months ago : #53194 - WEB - UAT - fix bug.
+6542a61 - franklin.nguyen, 1 year, 9 months ago : #53194 - WEB -extra pt - fix bugs
+7d40335 - franklin.nguyen, 1 year, 9 months ago : #53194 - WEB - calculate After Extra PT.
+fe85968 - xavi.mai, 1 year, 9 months ago : #53194 - implement  extra PT into 2h report - fix UI 2h
+8c5c9f4 - franklin.nguyen, 1 year, 9 months ago : #53194 - implement  extra PT into 2h report
+1afa0cd - robert.tran, 1 year, 9 months ago : #0000 - config on mnl
+7631577 - robert.tran, 1 year, 9 months ago : #0000 - config on mnl
+93cd3ca - robert.tran, 1 year, 9 months ago : #0000 - set timeout on 2d report
+41820ba - robert.tran, 1 year, 9 months ago : #0000 - set timeout on 2d report
+802956c - franklin.nguyen, 1 year, 9 months ago : #53569 - WEB - merge to master.
+1659da7 - xavi.mai, 1 year, 9 months ago : #53569 - Win Loss Summary (2d): Bettrade
+9afcf99 - xavi.mai, 1 year, 9 months ago : #53569 - Win Loss Summary (2d): fix-Collapse button include row bettype on Soccer -disable
+a69b252 - xavi.mai, 1 year, 9 months ago : #53569 - Win Loss Summary (2d): fix-Collapse button include row bettype on Soccer
+bee2f86 - xavi.mai, 1 year, 9 months ago : #53569 - Win Loss Summary (2d): fix-Collapse button include row bettype on Soccer
+15253b5 - robert.tran, 1 year, 9 months ago : #53569 - Win Loss Summary (2d): Collapse button include row bettype on Soccer
+fbe7014 - robert.tran, 1 year, 9 months ago : #0000 - Cricket - Integrate to Accounting Reports - CompanyWinLoss - export grand total
+cc7ab08 - xavi.mai, 1 year, 9 months ago : #0000 - Cricket - Integrate to Accounting Reports - CompanyWinLoss - export grand total
+6635903 - xavi.mai, 1 year, 9 months ago : #0000 - Cricket - Integrate to Accounting Reports - CompanyWinLoss - export grand total
+723cf48 - xavi.mai, 1 year, 9 months ago : #0000 - Cricket - Integrate to Accounting Reports - CompanyWinLoss - export grand total
+204bc46 - robert.tran, 1 year, 9 months ago : #0000 - Cricket - Integrate to Accounting Reports - CompanyWinLoss - export excel
+0892cb0 - xavi.mai, 1 year, 9 months ago : #0000 - Cricket - Integrate to Accounting Reports - CompanyWinLoss - export excel
+953de34 - xavi.mai, 1 year, 9 months ago : #0000 - Cricket - Integrate to Accounting Reports - 2a - grid
+19ee727 - xavi.mai, 1 year, 9 months ago : #0000 - Cricket - Integrate to Accounting Reports - 2a - grid
+3367850 - robert.tran, 1 year, 9 months ago : #50274 - Cricket - Integrate to Accounting Reports - remove _xpre
+9317a32 - robert.tran, 1 year, 9 months ago : #50274 - Cricket - Integrate to Accounting Reports - remove _xpre
+e8278e5 - robert.tran, 1 year, 9 months ago : #50274 - Cricket - Integrate to Accounting Reports
+ec324cf - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix 2d collapse/expand
+53073db - robert.tran, 1 year, 10 months ago : #53077 - Integrate Cricket (bettrans/bettrans14) - League Win Loss - The data of Grand Total is calculated incorrectly
+5009cae - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix 2d collapse/expand +SP
+d20a1e5 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix 2d collapse/expand
+163c09c - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix Special Match Analysis
+7eba61f - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix Special Match Analysis
+5d44bda - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix Name Sp for 2h
+ea4fbd7 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix Name Acc_Rpt_LeagueWL_Details and Acc_Rpt_LeagueWL_Details14
+193cc17 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix Name Acc_Rpt_LeagueWL_Details and Acc_Rpt_LeagueWL_Details14
+3da69f6 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix Name GET_Acc_CreditSite_BetCount_Xpre
+7fefb91 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix LeagueWinLossService excel
+d3e1ed3 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix LeagueWinLossService excel
+58f255f - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix Sp for Tree WinLoss
+c944f55 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix LeagueWinLossService Total
+8270f1a - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix 2d
+4c8115b - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix 2h-collapse
+69b1034 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix LeagueWinLoss
+733c2eb - robert.tran, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - rebase on master
+ab99d66 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix LeagueWinLoss
+286e692 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix SP Name
+a3d3311 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix SP Name
+f6d7899 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix SP Name for Acc_Rpt_DailyWLDirect_Sporttype_OtherSports and Acc_Rpt_DailyWLDirect_Sporttype_OtherSports14
+3ffda13 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix *Cricket
+5f16bc6 - robert.tran, 1 year, 10 months ago : #50274 - Integrate Cricket - The result score is not displayed on UI.
+db444c4 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - implement for 2d
+dbbe0ef - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - implement for 2d
+68e4aaa - Jacob.Phan, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - SpecialMatchAnalysis
+ed39ef8 - Jacob.Phan, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - League WinLoss - By Sporttype - By BetType
+ac15be6 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - update Store Procedure
+a72057f - Jacob.Phan, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - League WinLoss - Excel - Fix bug sum
+4b862d7 - Jacob.Phan, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - League WinLoss - Excel
+2577244 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - Implement Export for 2h and 2h other
+acf7216 - Jacob.Phan, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - League WinLoss
+89a5b62 - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - fix bettypeID
+ca9f53e - xavi.mai, 1 year, 10 months ago : #50274 - Cricket - Integrate to Accounting Reports - for 2h, 2h other
+1425a19 - xavi.mai, 1 year, 11 months ago : #50274 - Cricket - Integrate to Accounting Reports - changed SP Name
+f0a2415 - xavi.mai, 1 year, 11 months ago : #50274 - Cricket - Integrate to Accounting Reports - implement for 2d
+9690fcc - xavi.mai, 1 year, 11 months ago : #50274 - Cricket - Integrate to Accounting Reports
+f68f6a3 - robert.tran, 1 year, 11 months ago : #50274 - Cricket - Integrate to Accounting Reports
+cfa8e3f - robert.tran, 1 year, 10 months ago : #52614 - Report - Hourly Member Win/Loss on MBC - RNG Casino only shows sum win/lost of whole day, not real time
+127a184 - robert.tran, 1 year, 10 months ago : #52614 - Report - Hourly Member Win/Loss on MBC - RNG Casino only shows sum win/lost of whole day, not real time
+a43d189 - robert.tran, 1 year, 10 months ago : #49027 - cockfighting - missing cockfigting product in punter report.
+a12a78b - franklin.nguyen, 1 year, 10 months ago : #49027 - cockfighting - missing cockfigting product in punter report.
+626daff - franklin.nguyen, 1 year, 10 months ago : #49027 - Cockfighting - fix bug.
+bc2d08b - franklin.nguyen, 1 year, 11 months ago : #49027 - Cockfighting - rebase master.
+fcc3fe5 - franklin.nguyen, 1 year, 11 months ago : #49027 - apply single wallet casino launch date.
+da9b820 - franklin.nguyen, 1 year, 11 months ago : #49027 - cockfighting - fixbug.
+dd411c7 - franklin.nguyen, 1 year, 11 months ago : #49027 - cockfighting - fix bug.
+b10df51 - robert.tran, 1 year, 11 months ago : #49134 - ONERnG Casino - Implement NAP report
+dba2997 - franklin.nguyen, 2 years ago : #49027 - WEB - implement cockfighting sabong.
+20967f5 - franklin.nguyen, 2 years ago : #49027 - rebase master
+0b4b393 - robert.tran, 1 year, 10 months ago : #0000 - DR - MNL
+1744d89 - robert.tran, 1 year, 10 months ago : #0000 - DR - MNL
+26c9573 - robert.tran, 1 year, 10 months ago : #52112 - Credit Term Report - Unable to Export Excel
+bc45336 - robert.tran, 1 year, 10 months ago : #52112 - Credit Term Report - Unable to Export Excel
+9a7f9db - robert.tran, 1 year, 10 months ago : #0000 - ONEbook.UM
+bb7a96c - robert.tran, 1 year, 10 months ago : #0000 - hotfix - Could not load file or assembly 'Enyim.Caching, Version=2.12.0.0'
+06a80fb - robert.tran, 1 year, 10 months ago : #0000 - hotfix - Could not load file or assembly 'Enyim.Caching, Version=2.12.0.0'
+2ff53b1 - robert.tran, 1 year, 10 months ago : #48956 - Number Game Statistic Report  - Sorting - Update Couchebase .dll
+49a97e5 - robert.tran, 1 year, 10 months ago : #48956 - Number Game Statistic Report - Update Couchebase .dll
+ae37da8 - robert.tran, 1 year, 11 months ago : #46841 - Casino Game Statistics - Implement new report - sorting F3
+5d3abce - franklin.nguyen, 1 year, 11 months ago : #49134 - merge to master.
+833a2f6 - franklin.nguyen, 1 year, 11 months ago : #49134 - WEB - MBC - RNC Casino - Hourly member winloss report.
+9e80fce - franklin.nguyen, 1 year, 11 months ago : #0000 - WEB - merge to master.
+44db6bc - franklin.nguyen, 1 year, 11 months ago : #0000 - WEB - 2d hotfix.
+97a1d70 - franklin.nguyen, 1 year, 11 months ago : #0000 - WEB - merge to master.
+0b7d8c7 - franklin.nguyen, 1 year, 11 months ago : #0000 - WEB - hotfix
+79230fc - franklin.nguyen, 1 year, 11 months ago : #49027 - WEB - merge to master.
+5cb6f40 - franklin.nguyen, 1 year, 11 months ago : #49027 - WEB - hotfix.
+93a460c - robert.tran, 1 year, 11 months ago : #0000 - recheckin um page
+6b3571f - robert.tran, 1 year, 11 months ago : #0000 - recheckin - um page
+a891908 - franklin.nguyen, 1 year, 11 months ago : #49027 - WEB - merge 2h, 2d, tree win loss of feature cockfighting - MBC - RNG Casino to master.
+e88b912 - franklin.nguyen, 1 year, 11 months ago : #49027 - WEB - cockfighting and MBC - RNG Casino - 2h, 2d, tree win loss report.
+c9c091f - franklin.nguyen, 1 year, 11 months ago : #0000 - WEB - remove _xtest version.
+540d123 - franklin.nguyen, 1 year, 11 months ago : #48956 - WEB - merge Number Game Statistic Report to master.
+fa31d1d - robert.tran, 1 year, 11 months ago : #48956 - number game statistic - export excel by user name - n sheet.
+a351234 - robert.tran, 1 year, 11 months ago : #48956 - number game statistic - paging report by user name.
+461e38d - franklin.nguyen, 1 year, 11 months ago : #48956 - number game statistic - paging report by user name.
+4923401 - franklin.nguyen, 1 year, 11 months ago : #48956 - number game statistic - fix date picker bug.
+104471b - franklin.nguyen, 1 year, 11 months ago : #48956 - WEB - implement Number game statistic report - phase 2.
+f9f6088 - robert.tran, 2 years ago : #48956 - Number Game Statistic Report - Phase2
+56d2feb - robert.tran, 1 year, 11 months ago : #0000 - web - update UM Controller.
+2abd7b2 - franklin.nguyen, 1 year, 11 months ago : #0000 - web - update UM Controller.
+04f051e - robert.tran, 1 year, 11 months ago : #0000 - save bets
+1cabf24 - robert.tran, 1 year, 11 months ago : #0000 - save bets
+090f9c0 - robert.tran, 1 year, 11 months ago : #46841 - Casino Game Statistics - Implement new report
+9d132fe - robert.tran, 1 year, 11 months ago : #46841 - Casino Game Statistics - Implement new report
+22c2e5f - robert.tran, 1 year, 11 months ago : #46841 - Casino Games Statistic
+dec2577 - robert.tran, 2 years ago : #46841 - Casino Games Statistic - Check constraint data
+d050a12 - robert.tran, 2 years ago : #46841 - Casino Games Statistic - Currency
+18f4bdf - robert.tran, 2 years ago : #46841 - Casino Games Statistic - Company
+904be40 - robert.tran, 2 years ago : #46841 - Casino Games Statistic - Game Table
+8935ab5 - robert.tran, 2 years ago : #46841 - Casino Games Statistic - Game Type
+3f58111 - robert.tran, 2 years ago : #46841 - Casino Games Statistic - Username Report
+c337e0d - franklin.nguyen, 2 years ago : #46841 - web - rebase master.
+c1bb5bd - robert.tran, 2 years, 1 month ago : #46841 - Casino Game Statistics - Implement new report
+e2751e3 - robert.tran, 2 years ago : #48078 - WEB - Incorporate PH All-In-One bettypes in to NAP Acc Report
+3858fb5 - franklin.nguyen, 2 years ago : #48078 - WEB - Incorporate PH All-In-One bettypes in to NAP Acc Report
+b00afe2 - robert.tran, 2 years ago : #49380 - Apply limit to the date time selection of Punter Analysis report
+fd688f4 - robert.tran, 2 years ago : #0000 - limit calendar for 4 months on Punter Analysis
+3e45b62 - robert.tran, 2 years ago : #48956 - WEB - merge feature #48956 to master.
+8c87cb0 - franklin.nguyen, 2 years ago : #48956 - WEB - merge feature #48956 to master.
+3ff5bca - franklin.nguyen, 2 years ago : #48956 - web - rebase master.
+4e5695a - franklin.nguyen, 2 years ago : #48890 - WEB - remove _uat1 sps version.
+b0213db - franklin.nguyen, 2 years ago : #48890 - WEB - merge feature #48890  to master.
+e3ed799 - franklin.nguyen, 2 years ago : #48890 - MA monitor tool report - rebase master.
+147bfa6 - franklin.nguyen, 2 years ago : #46150 - WEB - remove _xtest.
+44c9518 - franklin.nguyen, 2 years ago : #46150 - WEB - merge feature #46150 to master.
+091868b - franklin.nguyen, 2 years ago : #46150 - WEB -  Add one more Game table Baccarat14 and Gold Deluxe
+1d91934 - robert.tran, 2 years ago : #46113 - WEB - HotFix  - Live Casino Game Statistic/Live Casino Agency Win Loss - Product Gold Deluxe: Bettype Gold Deluxe - Deposit (1700) returns Company IBC Group instead of Licensee.
+11391b3 - franklin.nguyen, 2 years ago : #46113 - WEB - HotFix  - Live Casino Game Statistic/Live Casino Agency Win Loss - Product Gold Deluxe: Bettype Gold Deluxe - Deposit (1700) returns Company IBC Group instead of Licensee.
+937edbe - robert.tran, 2 years ago : #45128 - Nap Report to work with new Virtual Rate
+91ed5ad - robert.tran, 2 years ago : #45128 - Nap Report to work with new Virtual Rate
+7d95895 - robert.tran, 2 years, 2 months ago : #45128 - WEB - rebase master.
+c4d2c13 - franklin.nguyen, 2 years ago : #0000 - WEB - remove  _xpre SPS version.
+8aeaaff - franklin.nguyen, 2 years ago : #0000 - WEB - remove _xpre sps version.
+29b0d2e - franklin.nguyen, 2 years ago : #41238 - WEB - Merge branch UpgradeFanexData to master.
+5bacdc7 - franklin.nguyen, 2 years, 1 month ago : #46576 - web - result
+e8c52e3 - franklin.nguyen, 2 years, 1 month ago : #46576 - web - number of active member report - remove combination don't have active member.
+24a0f14 - franklin.nguyen, 2 years, 1 month ago : #46576 - web - rebase master.
+1b25332 - franklin.nguyen, 2 years, 1 month ago : #46576 - web - implement micro gaming - change sport type, bet type, product id.
+16dbafb - franklin.nguyen, 2 years, 2 months ago : #41238 - upgrade fanex.data - fix 2d report bugs.
+ad0118d - franklin.nguyen, 2 years, 2 months ago : #41238 - Upgrade Fanex.Data
+ad571db - franklin.nguyen, 2 years, 3 months ago : #41238 - web -2h bettrade.
+3c0e5ef - Johnny Trinh, 2 years, 3 months ago : #41238 - Upgrade fanex.data
+da35dcc - robert.tran, 2 years, 1 month ago : #45121 - Implement result for Muay Thai sport
+754025b - franklin.nguyen, 2 years, 2 months ago : #45121 - Implement result for Muay Thai sport
+a5a5b21 - robert.tran, 2 years, 2 months ago : #45121 - Implement result for Muay Thai sport
+2fa2543 - robert.tran, 2 years, 1 month ago : #46014 - Win/Loss Members on RnG Casino product Adjustment - change function name and remove _xtest
+3c116c6 - robert.tran, 2 years, 1 month ago : #46014 - Win/Loss Members on RnG Casino product Adjustment - change function name and remove _xtest
+387fa90 - robert.tran, 2 years, 1 month ago : #46014 - Win/Loss Members on RnG Casino product Adjustment - change function name and remove _xtest
+7f35c56 - robert.tran, 2 years, 1 month ago : #46014 - Win/Loss Members on RnG Casino product Adjustment - change function name and remove _xtest
+f1a1feb - robert.tran, 2 years, 1 month ago : #0000 - nap reports - timeout - 2a report
+74ad8d4 - robert.tran, 2 years, 1 month ago : #0000 - nap reports - timeout - 2a report
+86f9827 - robert.tran, 2 years, 2 months ago : #46559 - Live Casino Game Statistic: SP returns wrong error message instead of 'There is no data'
+a5da657 - robert.tran, 2 years, 2 months ago : #46559 - Live Casino Game Statistic: SP returns wrong error message instead of 'There is no data'
+cbbf380 - robert.tran, 2 years, 2 months ago : #0000 - nap reports - change function name from Hourly Member Win/Loss on RNG Casino to Hourly Member Win/Loss on SLI - RNG Casino
+f742644 - robert.tran, 2 years, 2 months ago : #0000 - nap reports - change function name from Hourly Member Win/Loss on RNG Casino to Hourly Member Win/Loss on SLI - RNG Casino
+dc93b9a - robert.tran, 2 years, 2 months ago : #45655 - Add CustomerID into the Live Casino Game Statistic report
+1357008 - robert.tran, 2 years, 2 months ago : #45655 - Add CustomerID into the Live Casino Game Statistic report
+37dae5b - robert.tran, 2 years, 2 months ago : #0000 - nap reports - Misc/ Hourly Member Win/Loss on RNG Casino - modify block time
+ce25bb9 - robert.tran, 2 years, 2 months ago : #0000 - nap reports - Misc/ Hourly Member Win/Loss on RNG Casino - modify block time
+c2bb8ba - robert.tran, 2 years, 2 months ago : #0000 - nap reports - Misc/ Hourly Member Win/Loss on RNG Casino - modify block time
+6043468 - robert.tran, 2 years, 2 months ago : #0000 - nap reports - Misc/ Hourly Member Win/Loss on RNG Casino - modify block time
+c30b82e - robert.tran, 2 years, 2 months ago : #0000 - nap reports - change function name on Hourly Member Win/Loss on RNG Casino Report
+1c63791 - robert.tran, 2 years, 2 months ago : #0000 - nap reports - change function name on Hourly Member Win/Loss on RNG Casino Report
+2ff4d1c - robert.tran, 2 years, 2 months ago : #46014 - Win/Loss Members on RnG Casino product Adjustment
+3fb40b6 - robert.tran, 2 years, 2 months ago : #46014 - Win/Loss Members on RnG Casino product Adjustment
+103c48f - robert.tran, 2 years, 2 months ago : #41935 - Integrate MO, CB product into the NAP Acc Report site - remove _xpre
+469f7bd - robert.tran, 2 years, 2 months ago : #41935 - Integrate MO, CB product into the NAP Acc Report site - remove _xpre
+199605a - robert.tran, 2 years, 2 months ago : #41935 - Integrate MO, CB product into the NAP Acc Report site
+9c5643f - franklin.nguyen, 2 years, 2 months ago : #41935 - #42608 - rebase master.
+e643e51 - franklin.nguyen, 2 years, 2 months ago : #41935 - #42608 - fix bug for MA monitor tool report.
+9c87dc0 - franklin.nguyen, 2 years, 2 months ago : #41935 - #42608 - rebase master.
+8ef9f40 - franklin.nguyen, 2 years, 2 months ago : #41935 - 42608 - implement CB and MO for WH.
+7c09ab5 - robert.tran, 2 years, 2 months ago : #41479 - web - implement RNG Casino.
+53f1fa3 - franklin.nguyen, 2 years, 3 months ago : #41479 - web - implement RNG Casino.
+c979cee - robert.tran, 2 years, 3 months ago : #41479 - Win/Loss Members on RnG Casino product
+c46b65b - franklin.nguyen, 2 years, 2 months ago : #0000 - change address for RemotingRef and Mail Service.
+ba78d15 - franklin.nguyen, 2 years, 2 months ago : #0000 - change address for remotingref and mail service.
+b952241 - franklin.nguyen, 2 years, 2 months ago : #42608 - remove _xpre version.
+7e526d2 - franklin.nguyen, 2 years, 2 months ago : #42608 - remove _xpre version.
+940b1c5 - franklin.nguyen, 2 years, 2 months ago : #426084 - #41935 - merge Colossus bets and Myanmar Odds to master.
+bcddf78 - franklin.nguyen, 2 years, 2 months ago : #44789 - web - fix bug to show tooltip.
+cb5ea9d - franklin.nguyen, 2 years, 3 months ago : #41935 - change SPs configuration for Colossus bet and MO feature.
+a23f30b - franklin.nguyen, 2 years, 3 months ago : #41935 - web - update export margin report.
+c0bbfd6 - franklin.nguyen, 2 years, 3 months ago : #41935 - web - change 2d export report.
+8b31838 - franklin.nguyen, 2 years, 3 months ago : #41935 - web - change 2d report view.
+520fb40 - franklin.nguyen, 2 years, 3 months ago : #41935 - web - implement myanmar odds.
+0d97f52 - franklin.nguyen, 2 years, 3 months ago : #42608 - web - implement colosus bet.
+867fd44 - robert.tran, 2 years, 3 months ago : #36213 - Super Balance - There is always no data when filtering with First Letter '0-9'
+cde6fd5 - robert.tran, 2 years, 3 months ago : #36213 - Super Balance - There is always no data when filtering with First Letter '0-9'
+fa0d5f5 - robert.tran, 2 years, 3 months ago : #44469 - Nap Report - Daily Turnover - System displayed error message when searching data
+b3ddc4e - robert.tran, 2 years, 3 months ago : #44469 - Nap Report - Daily Turnover - System displayed error message when searching data
+713517c - robert.tran, 2 years, 3 months ago : #0000 - nap-report - config - auto-generated-reports
+0db0ba6 - robert.tran, 2 years, 3 months ago : #0000 - nap-report return url after login
+7f0b9de - franklin.nguyen, 2 years, 3 months ago : #0000 - nap-report return url after login
+77c170d - franklin.nguyen, 2 years, 3 months ago : #0000 - web - return current url after login for Nap-Reports.
+38ee1a4 - robert.tran, 2 years, 3 months ago : #0000 -  Gaming / Live Casino Game Statistic - Monthly  - Wrong Excel file name
+5578a57 - robert.tran, 2 years, 3 months ago : #0000 -  Gaming / Live Casino Game Statistic - Monthly  - Wrong Excel file name
+fead06b - franklin.nguyen, 2 years, 3 months ago : #0000 - WEB - merge hot fix U3 and 2a to master.
+875c22e - franklin.nguyen, 2 years, 3 months ago : #0000 - web - u3 control access and 2a hot fix.
+75427b9 - franklin.nguyen, 2 years, 4 months ago : #0000 - WEB - hot fix U3 permission for Live Casino reports.
+1ba212f - franklin.nguyen, 2 years, 3 months ago : #38815 - web - remove _xpre sps version.
+b8f1e7c - franklin.nguyen, 2 years, 3 months ago : #38815 - web - remove _xpre sps version.
+aaa625a - franklin.nguyen, 2 years, 3 months ago : #38815 - WEB - merge bettrade feature to master.
+1c54376 - franklin.nguyen, 2 years, 4 months ago : #38815 - WEB - change bettrade for 2a report.
+03181fb - franklin.nguyen, 2 years, 4 months ago : #38815 - WEB - change bettrade for 2d report.
+9661622 - franklin.nguyen, 2 years, 4 months ago : #38815 - WEB - fix bugs for bettrade drilldown to bettype report.
+c91159f - franklin.nguyen, 2 years, 4 months ago : #38815 - WEB - update sps config.
+1452c8b - franklin.nguyen, 2 years, 4 months ago : #38815 - WEB - remove out date code.
+f6b0eb7 - franklin.nguyen, 2 years, 4 months ago : #38815 - WEB - change 2h report footer note.
+46b1a2c - franklin.nguyen, 2 years, 4 months ago : #38815 - WEB - change sps config.
+ca19881 - franklin.nguyen, 2 years, 4 months ago : #38815 - WEB - rebase from master.
+3711fa9 - franklin.nguyen, 2 years, 5 months ago : #38815 - WEB - implement Bettrade for 2h report.
+e193947 - franklin.nguyen, 2 years, 5 months ago : #38815 - WEB - implement Bettrade for 2a,2d report.
+a89654e - franklin.nguyen, 2 years, 5 months ago : #38815 - WEB - change sps and connection string.
+eb0d073 - robert.tran, 2 years, 5 months ago : #38815 - Integrate BetTrade product into the NAP Acc Report site
+3bbc2bf - robert.tran, 2 years, 4 months ago : #40320 - WEB - write log - recheck in

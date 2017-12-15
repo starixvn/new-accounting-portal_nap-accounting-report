@@ -41,77 +41,15 @@
     <Setting Key="WinLoss_DailyMixParlayWinLoss_GetCombinationWinLoss" SpName="Acc_Rpt_DailyParlayWinloss" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="WinLoss_DailyMixParlayWinLoss_GetAdvanceMixParlayReport" SpName="Acc_Rpt_MixParlay_Advance" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
-  <Function Name="Main - Daily Win Loss (2h)">
-    <Setting Key="Main_DailyWinLoss2h_GetReportByBetType" SpName="Acc_Rpt_DailyWLDirect_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetReportByBetType_14" SpName="Acc_Rpt_DailyWLDirect_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_Main2hReport" SpName="Acc_Rpt_DailyWLDirect_Sporttype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_Main2hReport_14" SpName="Acc_Rpt_DailyWLDirect_Sporttype14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetCasinoReport" SpName="Acc_Rpt_DailyWLDirect_Casino" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetCasinoReport_14" SpName="Acc_Rpt_DailyWLDirect_Casino14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetLiveCasinoReport" SpName="Acc_Rpt_DailyWLDirect_LiveCasino" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetLiveCasinoReport_14" SpName="Acc_Rpt_DailyWLDirect_LiveCasino14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetMixParlayReport" SpName="Acc_Rpt_DailyWLDirect_MixParlay" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetMixParlayReport_14" SpName="Acc_Rpt_DailyWLDirect_MixParlay14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetSummaryRacingReport" SpName="Acc_Rpt_DailyWLDirect_Racing" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetSummaryRacingReport_14" SpName="Acc_Rpt_DailyWLDirect_Racing14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetRacingReportBySport" SpName="Acc_Rpt_DailyWLDirect_RacingBySport" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetRacingReportBySport_14" SpName="Acc_Rpt_DailyWLDirect_RacingBySport14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetRacingReportByBetType" SpName="Acc_Rpt_DailyWLDirect_RacingBySport_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetRacingReportByBetType_14" SpName="Acc_Rpt_DailyWLDirect_RacingBySport_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetSummaryNumberGameReport" SpName="Acc_Rpt_DailyWLDirect_NumberGame" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetSummaryNumberGameReport_14" SpName="Acc_Rpt_DailyWLDirect_NumberGame14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetSummaryOtherSportReport" SpName="Acc_Rpt_DailyWLDirect_OtherSport" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetSummaryOtherSportReport_14" SpName="Acc_Rpt_DailyWLDirect_OtherSport14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetOtherSportReportBySport" SpName="Acc_Rpt_DailyWLDirect_OtherSport_Bettype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetOtherSportReportBySport_14" SpName="Acc_Rpt_DailyWLDirect_OtherSport_Bettype14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetSoccerReport" SpName="Acc_Rpt_DailyWLDirect_Soccer_Bettype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetSoccerReport_14" SpName="Acc_Rpt_DailyWLDirect_Soccer_Bettype14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetBingoReport" SpName="Acc_Rpt_DailyWLDirect_Bingo" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetBingoReport_14" SpName="Acc_Rpt_DailyWLDirect_Bingo14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetVirtualSportReport" SpName="Acc_Rpt_DailyWLDirect_VirtualSports" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetVirtualSportReport_14" SpName="Acc_Rpt_DailyWLDirect_VirtualSports14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetVirtualSportReportBySport" SpName="Acc_Rpt_DailyWLDirect_VirtualSports_Bettype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetVirtualSportReportBySport_14" SpName="Acc_Rpt_DailyWLDirect_VirtualSports_Bettype14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetVirtualSports_VirtualHorseRacingReport" SpName="Acc_Rpt_DailyWLDirect_VirtualHR_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetVirtualSports_VirtualHorseRacingReport_14" SpName="Acc_Rpt_DailyWLDirect_VirtualHR_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_14" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Racing" SpName="Acc_Rpt_DailyWLDirect_RacingBySport_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Racing_14" SpName="Acc_Rpt_DailyWLDirect_RacingBySport_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_LiveCasino" SpName="Acc_Rpt_DailyWLDirect_LiveCasino_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_LiveCasino_14" SpName="Acc_Rpt_DailyWLDirect_LiveCasino_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Bingo" SpName="Acc_Rpt_DailyWLDirect_Bingo_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Bingo_14" SpName="Acc_Rpt_DailyWLDirect_Bingo_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Casino" SpName="Acc_Rpt_DailyWLDirect_Casino_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Casino_14" SpName="Acc_Rpt_DailyWLDirect_Casino_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_VirtualSports" SpName="Acc_Rpt_DailyWLDirect_VirtualSports_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_VirtualSports_14" SpName="Acc_Rpt_DailyWLDirect_VirtualSports_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetParlayReport" SpName="Acc_Rpt_DailyWLDirect_Parlay" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetParlayReport_14" SpName="Acc_Rpt_DailyWLDirect_Parlay14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetMetricGamingBettypeReport" SpName="Acc_Rpt_DailyWLDirect_MetricGaming" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetMetricGamingBettypeReport_14" SpName="Acc_Rpt_DailyWLDirect_MetricGaming14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_MetricGaming" SpName="Acc_Rpt_DailyWLDirect_MetricGaming_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_MetricGaming_14" SpName="Acc_Rpt_DailyWLDirect_MetricGaming_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetBettradeReport" SpName="Acc_Rpt_DailyWLDirect_Bettrade" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetBettradeReport_14" SpName="Acc_Rpt_DailyWLDirect_Bettrade14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Bettrade" SpName="Acc_Rpt_DailyWLDirect_Bettrade_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_Bettrade_14" SpName="Acc_Rpt_DailyWLDirect_Bettrade_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetColossusBetReport" SpName="Acc_Rpt_DailyWLDirect_ColosussBets" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetColossusBetReport_14" SpName="Acc_Rpt_DailyWLDirect_ColosussBets14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_ColossusBet" SpName="Acc_Rpt_DailyWLDirect_ColosussBets_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_ColossusBet_14" SpName="Acc_Rpt_DailyWLDirect_ColosussBets_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-  </Function>
-  <Function Name="Main Report - Daily Win Loss (2h) Soccer">
-    <Setting Key="Main_DailyWinLoss2hSoccer_Main2hReport" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2hSoccer_Main2hReport_14" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-  </Function>
-  <Function Name="Main Report - Daily Win Loss (2h) Other Sports">
-    <Setting Key="Main_DailyWinLoss2hOtherSports_Main2hReport" SpName="Acc_Rpt_DailyWLDirect_Sporttype_OtherSports" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2hOtherSports_Main2hReport_14" SpName="Acc_Rpt_DailyWLDirect_Sporttype_OtherSports14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-  </Function>
   <Function Name="Main Report - Daily Win Loss (2h) Soccer Minor Bettypes">
     <Setting Key="Main_DailyWinLoss2hSoccerMinorBettype_Main2hReport" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_DailyWinLoss2hSoccerMinorBettype_Main2hReport_14" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetSoccerReport" SpName="Acc_Rpt_DailyWLDirect_Soccer_Bettype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetSoccerReport_14" SpName="Acc_Rpt_DailyWLDirect_Soccer_Bettype14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetReportByBetType" SpName="Acc_Rpt_DailyWLDirect_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetReportByBetType_14" SpName="Acc_Rpt_DailyWLDirect_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_14" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Main - Trader Performance">
     <Setting Key="Main_TraderPerformance_GetReport" SpName="Acc_Rpt_TraderPerformanceSum" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
