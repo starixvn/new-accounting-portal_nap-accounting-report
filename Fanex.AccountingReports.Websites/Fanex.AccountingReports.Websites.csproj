@@ -547,7 +547,6 @@
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoGameFinancialReport\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\NumberGameFinancial\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Styles\NumberGameWinLossByBetTypeMatch.less" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Index.cshtml" />
@@ -564,7 +563,6 @@
     <Content Include="Areas\Gaming\Views\LiveCasinoGameFinancialReport\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoGameFinancialReport\Styles\LiveCasinoGameFinancialReport.css" />
     <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Scripts\NumberGameMonthlyWinLoss.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameFinancial\Scripts\NumberGameFinancial.js" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByBetType.js" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByBetTypeDetailReport.js" />
