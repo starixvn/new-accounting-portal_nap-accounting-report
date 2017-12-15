@@ -101,20 +101,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contants\RacingConstants.cs" />
-    <Compile Include="Controllers\GreyhoundAUSToteController.cs" />
-    <Compile Include="Controllers\HarnessAUSToteController.cs" />
-    <Compile Include="Controllers\RacingAUSToteController.cs" />
     <Compile Include="Controllers\RacingGroupDailyController.cs" />
-    <Compile Include="Controllers\RacingSAToteController.cs" />
     <Compile Include="Controllers\NumberOfActiveMembersForRacingController.cs" />
     <Compile Include="Core\Configurations\RacingSection\RacingSection.cs" />
-    <Compile Include="Criteria\ForTote\GreyhoundAUSTote\GetBetlistGreyhoundAUSToteCriteria.cs" />
-    <Compile Include="Criteria\ForTote\GreyhoundAUSTote\GetDetailGreyhoundAUSToteCriteria.cs" />
     <Compile Include="Controllers\RacingWinLossByLicenseeController.cs" />
-    <Compile Include="Criteria\ForTote\GreyhoundAUSTote\GetMainGreyhoundAUSToteCriteria.cs" />
-    <Compile Include="Criteria\ForTote\HarnessAUSTote\GetBetlistHarnessAUSToteCriteria.cs" />
-    <Compile Include="Criteria\ForTote\HarnessAUSTote\GetDetailHarnessAUSToteCriteria.cs" />
-    <Compile Include="Criteria\ForTote\HarnessAUSTote\GetMainHarnessAUSToteCriteria.cs" />
     <Compile Include="Criteria\NumberOActiveMembersForRacing\NumberOfActiveMembersCriteria.cs" />
     <Compile Include="Criteria\RacingGroupDaily\GetWinLostRacingGroupCriteria.cs" />
     <Compile Include="Criteria\RacingGroupDaily\GetWinLostRacingGroupDailyCriteria.cs" />
@@ -134,12 +124,6 @@
     <Compile Include="Models\RacingWinLossByLicensee\RaceWinLost.cs" />
     <Compile Include="Models\RacingWinLossByLicensee\RacingDailyReport.cs" />
     <Compile Include="Models\RacingWinLossByLicensee\RacingLicensee.cs" />
-    <Compile Include="Criteria\ForTote\RacingAUSTote\GetBetlistRacingAUSToteCriteria.cs" />
-    <Compile Include="Criteria\ForTote\RacingAUSTote\GetDetailRacingAUSToteCriteria.cs" />
-    <Compile Include="Criteria\ForTote\RacingAUSTote\GetMainRacingAUSToteCriteria.cs" />
-    <Compile Include="Criteria\ForTote\RacingSATote\GetBetlistRacingSAToteCriteria.cs" />
-    <Compile Include="Criteria\ForTote\RacingSATote\GetDetailRacingSAToteCriteria.cs" />
-    <Compile Include="Criteria\ForTote\RacingSATote\GetMainRacingSAToteCriteria.cs" />
     <Compile Include="Criteria\ForTote\RacingUKTote\GetMainRacingUKToteCriteria.cs" />
     <Compile Include="Criteria\ForTote\RacingUKTote\GetBetlistRacingUKToteCriteria.cs" />
     <Compile Include="Criteria\ForTote\RacingUKTote\GetDetailRacingUKToteCriteria.cs" />
@@ -168,18 +152,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RacingResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Implement\ForTote\GreyhoundAUSTote\GreyhoundWinLossAUSToteExcelService.cs" />
-    <Compile Include="Services\Implement\ForTote\GreyhoundAUSTote\GreyhoundWinLossAUSToteService.cs" />
-    <Compile Include="Services\Implement\ForTote\HarnessAUSTote\HarnessWinLossAUSToteExcelService.cs" />
-    <Compile Include="Services\Implement\ForTote\HarnessAUSTote\HarnessWinLossAUSToteService.cs" />
     <Compile Include="Services\Implement\ForTote\ToteDailyWinLossAbstractExcelService.cs" />
     <Compile Include="Services\Implement\ForTote\ToteDailyWinLossAbstractService.cs" />
-    <Compile Include="Services\Implement\ForTote\RacingAUSTote\RacingDailyAUSToteExcelService.cs" />
-    <Compile Include="Services\Implement\ForTote\RacingAUSTote\RacingWinLossAUSToteService.cs" />
     <Compile Include="Services\Implement\ForTote\ToteDailyWinLossExcelService.cs" />
-    <Compile Include="Services\Implement\ForTote\RacingSATote\RacingDailySAToteExcelService.cs" />
     <Compile Include="Services\Implement\ForTote\RacingDailyWinLossUtil.cs" />
-    <Compile Include="Services\Implement\ForTote\RacingSATote\RacingWinLossSAToteService.cs" />
     <Compile Include="Services\Implement\ForTote\RacingUKTote\RacingDailyUKToteExcelService.cs" />
     <Compile Include="Services\Implement\ForTote\ToteDailyWinLossService.cs" />
     <Compile Include="Services\Implement\ForTote\RacingUKTote\RacingWinLossUKToteService.cs" />
