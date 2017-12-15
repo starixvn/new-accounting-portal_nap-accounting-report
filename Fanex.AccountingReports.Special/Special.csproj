@@ -146,7 +146,6 @@
     <Compile Include="Controllers\MarginReportController.cs" />
     <Compile Include="Controllers\ParlayWonController.cs" />
     <Compile Include="Controllers\PunterAnalysisController.cs" />
-    <Compile Include="Controllers\ReportingServicesController.cs" />
     <Compile Include="Controllers\SaveBetReportController.cs" />
     <Compile Include="Controllers\SMATurnoverController.cs" />
     <Compile Include="Controllers\SpecialMatchAnalysisController.cs" />
@@ -156,7 +155,6 @@
     <Compile Include="Criteria\DailyTurnover\GetDailyTurnoverCriteria.cs" />
     <Compile Include="Criteria\ParlayWon\GetParlayWonReportCriteria.cs" />
     <Compile Include="Criteria\SaveBetReport\DownloadReportCriteria.cs" />
-    <Compile Include="Criteria\ReportingServices\GetReportCriteria.cs" />
     <Compile Include="Criteria\SaveBetReport\GetLeaguesCriteria.cs" />
     <Compile Include="Criteria\SMATurnover\SMATurnoverCriteria.cs" />
     <Compile Include="Criteria\SaveBetReport\GetMatchsCriteria.cs" />
@@ -204,7 +202,6 @@
     <Compile Include="Services\Implement\DailyTurnover\ExcelUtil.cs" />
     <Compile Include="Services\Implement\DailyTurnover\DailyTurnoverService.cs" />
     <Compile Include="Services\Implement\ParlayWonService.cs" />
-    <Compile Include="Services\Implement\ReportingServices\ReportingService.cs" />
     <Compile Include="Services\Implement\SaveBetReport\SaveBetReportService.cs" />
     <Compile Include="Services\Implement\SMATurnover\SMATurnoverExportDataService.cs" />
     <Compile Include="Services\Implement\SMATurnover\SMATurnoverService.cs" />
@@ -213,7 +210,6 @@
     <Compile Include="Services\Interface\DailyTurnover\IDailyDetailChangedTurnoverService.cs" />
     <Compile Include="Services\Interface\DailyTurnover\IDailyTurnoverService.cs" />
     <Compile Include="Services\Interface\IParlayWonService.cs" />
-    <Compile Include="Services\Interface\IReportingService.cs" />
     <Compile Include="Services\Interface\ISaveBetReportService.cs" />
     <Compile Include="Services\Interface\ISMATurnoverService.cs" />
     <Compile Include="Services\Interface\ISpecialMatchAnalysisService.cs" />
