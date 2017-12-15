@@ -676,14 +676,9 @@
     <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Scripts\RacingDailyReportApply50Percent.js" />
     <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Scripts\ReportManager.js" />
     <Content Include="Areas\Special\Views\SaveBetReport\Images\download.png" />
-    <Content Include="Areas\Special\Views\ReportingServices\Images\excel.gif" />
-    <Content Include="Areas\Special\Views\ReportingServices\Images\excel.png" />
     <Content Include="Areas\Special\Views\SMATurnover\Scripts\SMATurnover.js" />
     <Content Include="Areas\Special\Views\SMATurnover\Styles\SMATurnover.less" />
-    <Content Include="Areas\Special\Views\ReportingServices\Images\folder.gif" />
-    <Content Include="Areas\Special\Views\ReportingServices\Scripts\ReportingServices.js" />
     <Content Include="Areas\Special\Views\SaveBetReport\Styles\SaveBetReport.less" />
-    <Content Include="Areas\Special\Views\ReportingServices\Styles\ReportingServices.less" />
     <Content Include="Areas\Special\Views\SaveBetReport\Scripts\SaveBetReport.js" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\MatchAnalysisBaseReport.js" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\MatchAnalysisByAgent.js" />
@@ -1902,7 +1897,6 @@
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchAnalysisNormal.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchSelection.cshtml" />
     <Content Include="Areas\Special\Views\SaveBetReport\Index.cshtml" />
-    <Content Include="Areas\Special\Views\ReportingServices\Index.cshtml" />
     <Content Include="Areas\Special\Views\SMATurnover\Index.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Styles\SpecialMatchAnalysis.less" />
     <Content Include="Areas\Misc\Views\TotalCreditAccountByProduct\Index.cshtml" />
