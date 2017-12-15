@@ -574,9 +574,6 @@
     <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Styles\Images\icon-search.png" />
     <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Styles\NumberOfActiveMember.less" />
     <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Scripts\NumberOfActiveMember.js" />
-    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Scripts\ReportManager.js" />
-    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Scripts\VirtualSportsWinLossDetail.js" />
-    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Scripts\VirtualSportsWinLoss.js" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\CopyLegend.js" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\GuideMan.js" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\GuideManMessage.js" />
@@ -1807,8 +1804,6 @@
     <Content Include="Areas\Gaming\Views\NumberGameWinlossByDate\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\Web.config" />
     <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Styles\VirtualSportsWinLoss.less" />
     <Content Include="Areas\Licensee\Views\NegativeBalance\Index.cshtml" />
     <Content Include="Areas\Licensee\Views\NegativeBalance\NegativeBalance.less" />
     <Content Include="Areas\Licensee\Views\PeakConcurrentUsers\Index.cshtml" />
