@@ -94,16 +94,6 @@
     <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeDetailReport_14" SpName="Acc_Rpt_NumberGame_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="Acc_Rpt_GetLicenseesByProduct" SpName="Acc_Rpt_GetLicenseesByProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
-  <Function Name="Gaming / Live Casino Game Statistic">
-    <Setting Key="Gaming_LiveCasinoGameStatistics_GetGameTypeList" SpName="Acc_Rpt_LiveCasino_GameStatistics_GameTypeSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0">
-      <Mapping DataField="typeID" ObjectProperty="Id" />
-      <Mapping DataField="typenamee" ObjectProperty="Name" />
-    </Setting>
-    <Setting Key="Gaming_LiveCasinoGameStatistics_GetGameTableList" SpName="Acc_Rpt_LiveCasino_GameStatistics_GameTableSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0">
-      <Mapping DataField="GameTableID" ObjectProperty="Id" />
-      <Mapping DataField="GameTable" ObjectProperty="Name" />
-    </Setting>
-  </Function>
   <Function Name="Gaming - Live Casino Agency Win Loss">
     <Setting Key="Gaming_LiveCasinoAgencyWinLoss_GetReport" SpName="Acc_Rpt_LiveCasino_AgencyWinLoss" TimeOut="0" DbName="DBACC.bodb02.bodbAdminNet" />
   </Function>
