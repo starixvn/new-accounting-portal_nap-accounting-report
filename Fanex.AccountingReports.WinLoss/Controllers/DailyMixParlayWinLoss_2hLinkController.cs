@@ -22,7 +22,7 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         }
 
         [HttpGet]
-        [NapAuth(FunctionKey = AccReportFunctionKeys.DailyWinLoss2h, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = AccReportFunctionKeys.HouseWinLossByProducts, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             return View();

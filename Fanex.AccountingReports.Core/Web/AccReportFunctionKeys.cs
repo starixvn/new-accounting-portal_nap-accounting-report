@@ -36,6 +36,8 @@ public static class AccReportFunctionKeys
 
     public const string DailyWinLoss2h = "DailyWinLoss_2h_";
 
+    public const string HouseWinLossByProducts = "HouseWinLossbyProducts";
+
     public const string DailyWinLoss2hOtherSports = "DailyWinLoss_2h_OtherSports";
 
     public const string DailyWinLoss2hSoccer = "DailyWinLoss_2h_Soccer";
