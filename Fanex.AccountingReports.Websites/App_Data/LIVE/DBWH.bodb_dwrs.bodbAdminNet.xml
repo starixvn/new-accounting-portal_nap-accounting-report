@@ -20,52 +20,12 @@
     <Setting Key="WinLoss_DailyMixParlayWinLoss_GetCombinationWinLoss_WH" SpName="Acc_Rpt_DailyParlayWinloss_DW" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="WinLoss_DailyMixParlayWinLoss_GetAdvanceMixParlayReport_WH" SpName="Acc_Rpt_MixParlay_Advance_Dw" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
-  <Function Name="Main - Daily Win Loss (2h)">
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_WH" SpName="Acc_Rpt_DailyWLDirect_Bettype_Site_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetReportByBetType_WH" SpName="Acc_Rpt_DailyWLDirect_Details" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetCasinoReport_WH" SpName="Acc_Rpt_DailyWLDirect_Casino" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetLiveCasinoReport_WH" SpName="Acc_Rpt_DailyWLDirect_LiveCasino" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetMixParlayReport_WH" SpName="Acc_Rpt_DailyWLDirect_MixParlay" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetSummaryRacingReport_WH" SpName="Acc_Rpt_DailyWLDirect_Racing" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
-      <Mapping DataField="Site" ObjectProperty="site" />
-      <Mapping DataField="WinLost" ObjectProperty="winlost" />
-      <Mapping DataField="Position" ObjectProperty="position" />
-      <Mapping DataField="Commission" ObjectProperty="commission" />
-    </Setting>
-    <Setting Key="Main_DailyWinLoss2h_GetRacingReportBySport_WH" SpName="Acc_Rpt_DailyWLDirect_RacingBySport" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
-      <Mapping DataField="WinLost" ObjectProperty="winlost" />
-      <Mapping DataField="Position" ObjectProperty="position" />
-      <Mapping DataField="Commission" ObjectProperty="commission" />
-    </Setting>
-    <Setting Key="Main_DailyWinLoss2h_GetRacingReportByBetType_WH" SpName="Acc_Rpt_DailyWLDirect_RacingBySport_Details" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
-      <Mapping DataField="Race" ObjectProperty="race" />
-      <Mapping DataField="WinLost" ObjectProperty="winlost" />
-      <Mapping DataField="Position" ObjectProperty="position" />
-      <Mapping DataField="Commission" ObjectProperty="commission" />
-    </Setting>
-    <Setting Key="Main_DailyWinLoss2h_GetSummaryNumberGameReport_WH" SpName="Acc_Rpt_DailyWLDirect_NumberGame" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetSummaryOtherSportReport_WH" SpName="Acc_Rpt_DailyWLDirect_OtherSport" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetOtherSportReportBySport_WH" SpName="Acc_Rpt_DailyWLDirect_OtherSport_Bettype" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetSoccerReport_WH" SpName="Acc_Rpt_DailyWLDirect_Soccer_Bettype" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetBingoReport_WH" SpName="Acc_Rpt_DailyWLDirect_Bingo" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetVirtualSportReport_WH" SpName="Acc_Rpt_DailyWLDirect_VirtualSports_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetVirtualSportReportBySport_WH" SpName="Acc_Rpt_DailyWLDirect_VirtualSports_Bettype_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetVirtualSports_VirtualHorseRacingReport_WH" SpName="Acc_Rpt_DailyWLDirect_VirtualHR_Details" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
-      <Mapping DataField="Site" ObjectProperty="site" />
-      <Mapping DataField="LeagueID" ObjectProperty="leagueid" />
-      <Mapping DataField="Race" ObjectProperty="race" />
-    </Setting>
-    <Setting Key="Main_DailyWinLoss2h_GetParlayReport_WH" SpName="Acc_Rpt_DailyWLDirect_Parlay" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetMetricGamingBettypeReport_WH" SpName="Acc_Rpt_DailyWLDirect_MetricGaming" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetBettradeReport_WH" SpName="Acc_Rpt_DailyWLDirect_BetTrade" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetColossusBetReport_WH" SpName="Acc_Rpt_DailyWLDirect_ColossusBets" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-  </Function>
-  <Function Name="Main Report - Daily Win Loss (2h) Soccer">
+  
+  <Function Name="Main Report - Daily Win Loss (2h) Soccer Minor Bettypes">
     <Setting Key="Main_DailyWinLoss2hSoccer_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-  </Function>
-  <Function Name="Main Report - Daily Win Loss (2h) Other Sports">
-    <Setting Key="Main_DailyWinLoss2hOtherSports_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_OtherSports_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetSoccerReport_WH" SpName="Acc_Rpt_DailyWLDirect_Soccer_Bettype" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_GetReportByBetType_WH" SpName="Acc_Rpt_DailyWLDirect_Details" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_WH" SpName="Acc_Rpt_DailyWLDirect_Bettype_Site_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Win Loss - Tree Win Loss">
     <Setting Key="WinLoss_TreeWinLoss_GetDataByProduct_WH" SpName="Acc_Rpt_TreeWinlostByProduct_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
@@ -74,6 +34,7 @@
     <Setting Key="WinLoss_TreeWinLoss_GetDataByMaster_WH" SpName="Acc_Rpt_TreeWinlostByMAg_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="WinLoss_TreeWinLoss_GetDataByAgent_WH" SpName="Acc_Rpt_TreeWinlostByAg_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
+  
   <Function Name="Gaming - Number Game Win Loss">
     <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeMainReport_WH" SpName="Acc_Rpt_NumberGameWinlossByBettype" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeDetailReport_WH" SpName="Acc_Rpt_NumberGameWinlossByBettypeDetail" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
@@ -98,17 +59,10 @@
       <Mapping DataField="company" ObjectProperty="CompanyTotal" />
     </Setting>
   </Function>
-  <Function Name="Gaming - Virtual Sports Win Loss">
-    <Setting Key="Gaming_VirtualSportsWinLoss_GetReport" SpName="Acc_Rpt_VirtualsportWinloss" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Gaming_VirtualSportsWinLoss_GetReportDetail" SpName="Acc_Rpt_VirtualsportWinloss_detail" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-  </Function>
   <Function Name="Gaming - Number Game Monthly Winloss">
     <Setting Key="Gaming_NumberGameMonthlyWinloss" SpName="Acc_Rpt_NumberGameWinlossByMonth" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
       <Mapping DataField="WinLost" ObjectProperty="WinLoss" />
     </Setting>
-  </Function>
-  <Function Name="Number Game Financial Report">
-    <Setting Key="Number_Game_Financial_Report" SpName="Acc_Rpt_NumberGameFinanceWinlossByMonth" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="MA Monitor Tool">
     <Setting Key="Misc_MAMonitorTool_GetLeagueList" SpName="Acc_Rpt_MAMonitor_LeagueSel" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0">
@@ -117,10 +71,6 @@
     <Setting Key="Misc_MAMonitorTool_GetReport" SpName="Acc_Rpt_MAMonitor" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="Misc_MAMonitorTool_GetReport_Archive" SpName="Acc_Rpt_MAMonitor_Archive" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
-  <Function Name="2h - Keno">
-    <Setting Key="Main_DailyWinLoss2h_GetKenoReport_WH" SpName="Acc_Rpt_DailyWLDirect_Keno" DbName="DBWH.bodb_dwrs.bodbAdminNet" />
-  </Function>
-
   <Function Name="SMA Turn Over">
     <Setting Key="SMA_TurnOver_ReportByDate" SpName="Acc_Rpt_SMAs_TurnOverByDate" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="SMA_TurnOver_ReportByMonth" SpName="Acc_Rpt_SMAs_TurnOverByMonth" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
