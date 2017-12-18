@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Licensee
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Web.Mvc;
 
     /// <summary>

@@ -1,7 +1,5 @@
 namespace Fanex.AccountingReports.Core.Constants
 {
-    using System.Diagnostics.CodeAnalysis;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>

@@ -1,7 +1,5 @@
 namespace Fanex.AccountingReports.Balance.Constants
 {
-    using Fanex.AccountingReports.Core.Web;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>

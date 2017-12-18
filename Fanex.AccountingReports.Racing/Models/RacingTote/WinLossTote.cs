@@ -2,8 +2,6 @@ namespace Fanex.AccountingReports.Racing.Models.RacingTote
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
     /// <summary>
     /// Create Win Loss Tote model.

@@ -1,6 +1,5 @@
 namespace Fanex.BetList.Accounting.Core
 {
-    using Logging;
     using System;
     using System.Web;
 

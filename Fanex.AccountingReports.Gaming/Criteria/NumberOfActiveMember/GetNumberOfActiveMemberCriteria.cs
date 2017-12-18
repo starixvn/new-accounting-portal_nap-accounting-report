@@ -1,7 +1,6 @@
 namespace Fanex.AccountingReports.Gaming.Criteria.NumberOfActiveMember
 {
     using System;
-    using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.Data.Repository;
 
     /// <summary>

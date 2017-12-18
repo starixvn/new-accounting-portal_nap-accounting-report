@@ -1,7 +1,5 @@
 namespace Fanex.AccountingReports.Core.Criteria
 {
-    using System.Diagnostics.CodeAnalysis;
-
     public interface IPagingCriteria
     {
         int PageSize { get; set; }
@@ -15,6 +13,6 @@ namespace Fanex.AccountingReports.Core.Criteria
         int PageIndex { get; set; }
 
         // StartIndex = PageIndex * PageSize;
-        // EndIndex = (PageIndex + 1) * PageSize - 1;       
+        // EndIndex = (PageIndex + 1) * PageSize - 1;
     }
 }

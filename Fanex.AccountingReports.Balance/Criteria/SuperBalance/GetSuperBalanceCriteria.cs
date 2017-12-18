@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Balance.Criteria.SuperBalance
 {
-    using Fanex.AccountingReports.Core.Constants;
     using Fanex.Data.Repository;
 
     /// <summary>
@@ -23,7 +22,7 @@ namespace Fanex.AccountingReports.Balance.Criteria.SuperBalance
         [SpParam(SqlParamName = "IsViewTotalOnly")]
         public bool IsViewTotalOnly { get; set; }
 
-        public double Total { get; set; }  
+        public double Total { get; set; }
 
         public override bool IsValid()
         {
@@ -37,7 +36,7 @@ namespace Fanex.AccountingReports.Balance.Criteria.SuperBalance
         public override string GetSettingKey()
         {
             var storeProcedureName = "Balance_SuperBalance_Super";
-           
+
             if (!string.IsNullOrEmpty(storeProcedureName) && BalanceType == 2)
             {
                 storeProcedureName += "Yesterday";

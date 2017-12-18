@@ -1,6 +1,5 @@
 namespace Fanex.BetList.Accounting.Services
 {
-    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
@@ -25,7 +24,6 @@ namespace Fanex.BetList.Accounting.Services
         /// <returns>Match tennis object.</returns>
         public List<TennisLeagueResult> GetTennisResult(CriteriaBase criteria, string matchId, int bettypeId)
         {
-
             if (criteria.IsValid())
             {
                 var leagues = new List<TennisLeagueResult>();
@@ -65,7 +63,6 @@ namespace Fanex.BetList.Accounting.Services
 
                 return leagues;
             }
-
 
             return new List<TennisLeagueResult>();
         }

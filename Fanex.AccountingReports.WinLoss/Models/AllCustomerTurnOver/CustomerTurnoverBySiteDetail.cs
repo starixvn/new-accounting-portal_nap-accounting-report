@@ -2,8 +2,6 @@ namespace Fanex.AccountingReports.WinLoss.Models.AllCustomerTurnOver
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
     /// <summary>
     /// TODO: Customer turnover by site .

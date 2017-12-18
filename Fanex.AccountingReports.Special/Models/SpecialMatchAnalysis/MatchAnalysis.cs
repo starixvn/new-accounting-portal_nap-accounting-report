@@ -1,7 +1,6 @@
 namespace Fanex.AccountingReports.Special.Models.SpecialMatchAnalysis
 {
     using System;
-    using System.Collections.Generic;
 
     public enum ReportType
     {

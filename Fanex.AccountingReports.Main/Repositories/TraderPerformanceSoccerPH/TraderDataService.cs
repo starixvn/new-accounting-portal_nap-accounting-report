@@ -1,4 +1,3 @@
-using System;
 using System.Data;
 using Fanex.Data;
 using Fanex.Data.Repository;

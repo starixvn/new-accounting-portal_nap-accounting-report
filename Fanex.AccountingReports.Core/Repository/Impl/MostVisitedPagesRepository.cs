@@ -3,7 +3,6 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Core.Criteria;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Repository.Interface;

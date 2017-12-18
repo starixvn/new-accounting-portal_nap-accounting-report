@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Extensions;
@@ -139,7 +138,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
                 MiscResources.MAMonitorTool_ReportName,
                 Converter.ToDateTime(criteria.FromDate).ToShortFormatedDateWithSlash().Replace('/', '_'),
                 Converter.ToDateTime(criteria.ToDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
-            excelFile.ReponseStream(reportName);           
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>

@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Misc.Services.Interface.DuplicateTickets
 {
-    using System.Collections.Generic;
     using Fanex.AccountingReports.Misc.Criteria.DuplicateTickets;
     using Fanex.AccountingReports.Misc.Models.DuplicateTickets;
 

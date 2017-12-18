@@ -1,7 +1,6 @@
 namespace Fanex.AccountingReports.Gaming.Models.LiveCasinoGameStatistic
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.

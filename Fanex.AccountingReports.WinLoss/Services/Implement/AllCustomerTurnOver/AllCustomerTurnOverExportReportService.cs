@@ -1,10 +1,7 @@
 namespace Fanex.AccountingReports.WinLoss.Services.Implement.AllCustomerTurnOver
 {
     using System;
-    using System.Collections.Generic;
     using System.Drawing;
-    using System.Linq;
-    using System.Text;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
@@ -14,7 +11,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.AllCustomerTurnOver
     using Fanex.AccountingReports.WinLoss.Criteria.GetAllCustomerTurnOver;
     using Fanex.AccountingReports.WinLoss.Models.AllCustomerTurnOver;
     using Fanex.AccountingReports.WinLoss.Resources;
-    using Fanex.AccountingReports.WinLoss.Services.Interface;
     using Fanex.AccountingReports.WinLoss.Services.Interface.AllCustomerTurnOver;
 
     /// <summary>
@@ -237,7 +233,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.AllCustomerTurnOver
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="startRow">The start row.</param>
         /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>        
+        /// <param name="currentRow">The current row.</param>
         /// <param name="siteInformation">The information of site.</param>
         /// <param name="nameSite">The name of site.</param>
         /// <param name="reportRowType">The type of row.</param>

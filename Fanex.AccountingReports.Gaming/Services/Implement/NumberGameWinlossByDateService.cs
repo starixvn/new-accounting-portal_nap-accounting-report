@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
     using System.Linq;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
-    using Fanex.AccountingReports.Core.Criteria;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;

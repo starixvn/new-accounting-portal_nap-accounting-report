@@ -1,7 +1,6 @@
 namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.Data.Repository;
 

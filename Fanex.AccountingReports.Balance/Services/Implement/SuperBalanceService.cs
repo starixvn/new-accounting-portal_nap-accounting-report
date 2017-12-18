@@ -13,7 +13,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
     using Fanex.AccountingReports.Balance.Resources;
     using Fanex.AccountingReports.Balance.Services.Interface;
     using Fanex.AccountingReports.Core.Constants;
-    using Fanex.AccountingReports.Core.Criteria;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -172,7 +171,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                     result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
                 }
 
-                SessionManager.Set<SuperBalance>(_superBalanceSessionKey, result);
+                SessionManager.Set(_superBalanceSessionKey, result);
                 return result;
             }
             catch (Exception ex)

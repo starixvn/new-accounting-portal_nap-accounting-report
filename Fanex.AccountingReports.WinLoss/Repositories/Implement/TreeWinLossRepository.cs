@@ -3,7 +3,6 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
     using System.Collections;
     using System.Collections.Generic;
     using System.Data;
-    using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.WinLoss.Models.TreeWinLoss;
     using Fanex.AccountingReports.WinLoss.Repositories.Interface;
     using Fanex.Common;
@@ -27,7 +26,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
             DataSet result;
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-               result = db.ExecuteDataSet(criteria.GetSpParams());
+                result = db.ExecuteDataSet(criteria.GetSpParams());
                 outputParam = db.GetOuputParams();
             }
 

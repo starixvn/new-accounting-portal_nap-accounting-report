@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Special.Services.Interface
 {
-    using System.Net;
     using Fanex.AccountingReports.Special.Criteria.SaveBetReport;
     using Fanex.AccountingReports.Special.Models.SaveBetReport;
 
