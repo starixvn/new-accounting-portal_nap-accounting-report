@@ -1,9 +1,9 @@
 namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 {
-    using Fanex.AccountingReports.Core.Constants;
-    using Fanex.AccountingReports.Main.Common;
     using System;
     using System.Collections.Generic;
+    using Fanex.AccountingReports.Core.Constants;
+    using Fanex.AccountingReports.Main.Common;
 
     /// <summary>
     /// TODO: Update summary.
@@ -34,7 +34,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.CashOut,
             SportContants.Lottery,
             MainConstants.WinLossSummaryBetradarVirtualSportId,
-            SportContants.Lucky3
+            SportContants.Lucky3,
+            SportContants.Exchange
         };
 
         public SportTypeWinLossInfo()
