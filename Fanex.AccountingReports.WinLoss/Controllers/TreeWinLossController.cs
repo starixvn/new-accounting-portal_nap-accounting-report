@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.WinLoss.Controllers
 {
-    using System;
     using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;

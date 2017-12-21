@@ -1,12 +1,10 @@
 namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
 {
     using System;
-    using System.Collections.Generic;
-    using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Resources;
 
     /// <summary>
-    /// Create Tree Win Loss Info Model. 
+    /// Create Tree Win Loss Info Model.
     /// </summary>
     [Serializable]
     public class TreeWinLossInfo

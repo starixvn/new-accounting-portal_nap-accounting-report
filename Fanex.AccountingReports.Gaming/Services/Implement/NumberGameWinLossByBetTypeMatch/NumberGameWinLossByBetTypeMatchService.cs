@@ -7,9 +7,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByBetTypeMatch;
-    using Fanex.AccountingReports.Gaming.Repositories.Implement.NumberGameWinLossByBetTypeMatch;
-    using Fanex.AccountingReports.Gaming.Repositories.Interface.NumberGameWinLossByBetTypeMatch;
     using Fanex.AccountingReports.Gaming.Resources;
     using Fanex.AccountingReports.Gaming.Services.Interface.NumberGameWinLossByBetTypeMatch;
 

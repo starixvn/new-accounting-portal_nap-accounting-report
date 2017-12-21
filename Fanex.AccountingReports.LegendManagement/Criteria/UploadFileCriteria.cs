@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.LegendManagement.Criteria
 {
-    using System.Diagnostics.CodeAnalysis;
     using System.Web;
     using Fanex.Data.Repository;
 

@@ -114,22 +114,17 @@
     <Compile Include="Constants\LiveCasinoProductConstants.cs" />
     <Compile Include="Constants\PeriodTypeConstants.cs" />
     <Compile Include="Constants\RowTypeConstants.cs" />
-    <Compile Include="Controllers\CasinoWinLossController.cs" />
     <Compile Include="Controllers\LiveCasinoAgencyWinLossController.cs" />
     <Compile Include="Controllers\LiveCasinoGameFinancialReportController.cs" />
     <Compile Include="Controllers\GamingController.cs" />
     <Compile Include="Controllers\NumberGameMonthlyWinLossController.cs" />
-    <Compile Include="Controllers\NumberGameFinancialController.cs" />
-    <Compile Include="Controllers\LiveCasinoGameStatisticController.cs" />
     <Compile Include="Controllers\NumberGameWinLossByBetTypeMatchController.cs" />
     <Compile Include="Controllers\NumberGameWinLossByCurrencyController.cs" />
     <Compile Include="Controllers\NumberGameWinlossByDateController.cs" />
     <Compile Include="Controllers\NumberOfActiveMemberController.cs" />
-    <Compile Include="Controllers\VirtualSportsWinLossController.cs" />
     <Compile Include="Core\Configurations\VirtualSportsWinLossSection\VirtualSportsCollection.cs" />
     <Compile Include="Core\Configurations\VirtualSportsWinLossSection\VirtualSportsElement.cs" />
     <Compile Include="Core\Configurations\VirtualSportsWinLossSection\VirtualSportsWinLossSection.cs" />
-    <Compile Include="Criteria\CasinoWinLoss\GetCasinoWinLossCriteria.cs" />
     <Compile Include="Criteria\GetLicenseesByProductCriteria.cs" />
     <Compile Include="Criteria\GetLiveCasinoGameCompanyListCriteria.cs" />
     <Compile Include="Criteria\GetNumberGameBetTypeListCriteria.cs" />
@@ -140,10 +135,6 @@
     <Compile Include="Criteria\LiveCasinoGameFinancialReport\GetGameTypesCriteria.cs" />
     <Compile Include="Criteria\LiveCasinoGameFinancialReport\GetResellerCriteria.cs" />
     <Compile Include="Criteria\NumberGameMonthlyWinLoss\NumberGameMonthlyWinLossCriteria.cs" />
-    <Compile Include="Criteria\NumberGameFinancialReport\GetNumberGameFinancialCriteria.cs" />
-    <Compile Include="Criteria\LiveCasinoGameStatistic\GetGameTableListCriteria.cs" />
-    <Compile Include="Criteria\LiveCasinoGameStatistic\GetGameTypeListCriteria.cs" />
-    <Compile Include="Criteria\LiveCasinoGameStatistic\GetReportCriteria.cs" />
     <Compile Include="Criteria\LiveCasinoWinLossByAgency\GetGameTableListCriteria.cs" />
     <Compile Include="Criteria\LiveCasinoWinLossByAgency\GetGameTypeListCriteria.cs" />
     <Compile Include="Criteria\LiveCasinoWinLossByAgency\GetReportCriteria.cs" />
@@ -157,8 +148,6 @@
     <Compile Include="Criteria\NumberOfActiveMember\GetNumberOfActiveMemberCriteria.cs" />
     <Compile Include="Criteria\NumberOfActiveMember\GetProductCriteria.cs" />
     <Compile Include="Criteria\NumberOfActiveMember\SearchNumberActiveMemberCriteria.cs" />
-    <Compile Include="Criteria\VirtualSportsWinLoss\GetVirtualSportsWinLossCriteria.cs" />
-    <Compile Include="Criteria\VirtualSportsWinLoss\GetVirtualSportsWinLossDetailCriteria.cs" />
     <Compile Include="GamingAreaRegistration.cs" />
     <Compile Include="Models\CasinoWinLoss\CasinoWinLoss.cs" />
     <Compile Include="Models\CompanyInfo.cs" />
@@ -187,26 +176,18 @@
     <Compile Include="Models\VirtualSportsWinLoss\VirtualSportsWinLoss.cs" />
     <Compile Include="Models\VirtualSportsWinLoss\VirtualSportsWinLossDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Implement\CasinoWinLossRepository.cs" />
     <Compile Include="Repositories\Implement\GamingRepository.cs" />
     <Compile Include="Repositories\Implement\LiveCasinoAgencyWinLossRepository.cs" />
-    <Compile Include="Repositories\Implement\NumberGameFinancialRepository.cs" />
     <Compile Include="Repositories\Implement\NumberGameMonthlyWinLossRepository.cs" />
     <Compile Include="Repositories\Interface\IGamingRepository.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Repositories\Interface\ICasinoWinLossRepository.cs" />
     <Compile Include="Repositories\Interface\ILiveCasinoAgencyWinLossRepository.cs" />
-    <Compile Include="Repositories\Implement\LiveCasinoGameStatisticRepository.cs" />
     <Compile Include="Repositories\Implement\NumberGameWinLossByBetTypeMatch\WinLossByBetTypeRepository.cs" />
     <Compile Include="Repositories\Implement\NumberGameWinLossByBetTypeMatch\WinLossByMatchRepository.cs" />
-    <Compile Include="Repositories\Implement\VirtualSportsWinLossRepository.cs" />
     <Compile Include="Repositories\Interface\ILiveCasinoGameFinancialReportRepository.cs" />
     <Compile Include="Repositories\Implement\LiveCasinoGameFinancialReportRepository.cs" />
     <Compile Include="Repositories\Interface\INumberGameMonthlyWinLossRepository.cs" />
-    <Compile Include="Repositories\Interface\INumberGameFinancialRepository.cs" />
-    <Compile Include="Repositories\Interface\ILiveCasinoGameStatisticRepository.cs" />
-    <Compile Include="Repositories\Interface\IVirtualSportsWinLossRepository.cs" />
     <Compile Include="Repositories\Interface\NumberGameWinLossByBetTypeMatch\IWinLossByBetTypeRepository.cs" />
     <Compile Include="Repositories\Interface\NumberGameWinLossByBetTypeMatch\IWinLossByMatchRepository.cs" />
     <Compile Include="Resources\GamingResources.Designer.cs">
@@ -224,22 +205,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Implement\CasinoWinLoss\CasinoWinLossGetReportService.cs" />
-    <Compile Include="Services\Implement\CasinoWinLoss\CasinoWinLossExportReportService.cs" />
     <Compile Include="Services\Implement\LiveCasinoGameFinancialReportService.cs" />
     <Compile Include="Services\Implement\GamingService.cs" />
     <Compile Include="Services\Implement\LiveCasinoProductService.cs" />
     <Compile Include="Services\Implement\NumberGameMonthlyWinLoss\NumberGameMonthlyWinLossExportDataService.cs" />
     <Compile Include="Services\Implement\NumberGameMonthlyWinLoss\NumberGameMonthlyWinLossService.cs" />
-    <Compile Include="Services\Implement\NumberGameFinancialReport\NumberGameFinancialExportDataService.cs" />
-    <Compile Include="Services\Implement\NumberGameFinancialReport\NumberGameFinancialService.cs" />
-    <Compile Include="Services\Implement\LiveCasinoGameStatistic\LiveCasinoGameStatisticService.cs" />
-    <Compile Include="Services\Implement\LiveCasinoGameStatistic\LiveCasinoGameStatisticServiceByCompany.cs" />
-    <Compile Include="Services\Implement\LiveCasinoGameStatistic\LiveCasinoGameStatisticServiceByCurrency.cs" />
-    <Compile Include="Services\Implement\LiveCasinoGameStatistic\LiveCasinoGameStatisticServiceByDailyRange.cs" />
-    <Compile Include="Services\Implement\LiveCasinoGameStatistic\LiveCasinoGameStatisticServiceByGameTable.cs" />
-    <Compile Include="Services\Implement\LiveCasinoGameStatistic\LiveCasinoGameStatisticServiceByGameType.cs" />
-    <Compile Include="Services\Implement\LiveCasinoGameStatistic\LiveCasinoGameStatisticServiceByMonthlyRange.cs" />
     <Compile Include="Services\Implement\LiveCasinoWinLossByAgency\LiveCasinoAgencyWinLossByAgentService.cs" />
     <Compile Include="Services\Implement\LiveCasinoWinLossByAgency\LiveCasinoAgencyWinLossByDailyRangeService.cs" />
     <Compile Include="Services\Implement\LiveCasinoWinLossByAgency\LiveCasinoAgencyWinLossByGameTableService.cs" />
@@ -247,7 +217,6 @@
     <Compile Include="Services\Implement\LiveCasinoWinLossByAgency\LiveCasinoAgencyWinLossByMonthlyRangeService.cs" />
     <Compile Include="Services\Implement\LiveCasinoWinLossByAgency\LiveCasinoAgencyWinLossByUsernameService.cs" />
     <Compile Include="Services\Implement\LiveCasinoWinLossByAgency\LiveCasinoAgencyWinLossService.cs" />
-    <Compile Include="Services\Implement\LiveCasinoGameStatistic\LiveCasinoGameStatisticServiceByUsername.cs" />
     <Compile Include="Services\Implement\NumberGameWinLossByBetTypeMatch\GroupTypeConstants.cs" />
     <Compile Include="Services\Implement\NumberGameWinLossByBetTypeMatch\NumberGameWinLossByBetTypeMatchService.cs" />
     <Compile Include="Services\Implement\NumberGameWinLossByBetTypeMatch\ReportLevelType.cs" />
@@ -255,17 +224,9 @@
     <Compile Include="Services\Implement\NumberGameWinLossByBetTypeMatch\WinLossByMatchService.cs" />
     <Compile Include="Services\Implement\NumberGameWinlossByDateService.cs" />
     <Compile Include="Services\Implement\NumberOfActiveMemberService.cs" />
-    <Compile Include="Services\Implement\VirtualSportWinLoss\VirtualSportsWinLossDetailService.cs" />
-    <Compile Include="Services\Implement\VirtualSportWinLoss\VirtualSportsWinLossExportReportService.cs">
-      <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Services\Implement\VirtualSportWinLoss\VirtualSportsWinLossGetReportService.cs" />
-    <Compile Include="Services\Interface\CasinoWinLoss\ICasinoWinLossGetReportService.cs" />
-    <Compile Include="Services\Interface\CasinoWinLoss\ICasinoWinLossExportReportService.cs" />
     <Compile Include="Services\Interface\ILiveCasinoAgencyWinLossService.cs" />
     <Compile Include="Services\Interface\ILiveCasinoGameFinancialReportService.cs" />
     <Compile Include="Services\Interface\IGamingService.cs" />
-    <Compile Include="Services\Interface\ILiveCasinoGameStatisticService.cs" />
     <Compile Include="Services\Interface\ILiveCasinoProductService.cs" />
     <Compile Include="Services\Interface\INumberGameWinlossByDateService.cs" />
     <Compile Include="Services\Interface\INumberGameWinLossByCurrencyService.cs" />
@@ -275,14 +236,9 @@
     </Compile>
     <Compile Include="Services\Interface\NumberGameMonthlyWinLoss\INumberGameMonthlyWinLossExportDataService.cs" />
     <Compile Include="Services\Interface\NumberGameMonthlyWinLoss\INumberGameMonthlyWinLossService.cs" />
-    <Compile Include="Services\Interface\NumberGameFinancialReport\INumberGameFinancialExportDataService.cs" />
-    <Compile Include="Services\Interface\NumberGameFinancialReport\INumberGameFinancialService.cs" />
     <Compile Include="Services\Interface\NumberGameWinLossByBetTypeMatch\INumberGameWinLossByBetTypeMatchService.cs" />
     <Compile Include="Services\Interface\NumberGameWinLossByBetTypeMatch\IWinLossByBetTypeService.cs" />
     <Compile Include="Services\Interface\NumberGameWinLossByBetTypeMatch\IWinLossByMatchService.cs" />
-    <Compile Include="Services\Interface\VirtualSportWinLoss\IVirtualSportsWinLossDetailService.cs" />
-    <Compile Include="Services\Interface\VirtualSportWinLoss\IVirtualSportsWinLossExportReportService.cs" />
-    <Compile Include="Services\Interface\VirtualSportWinLoss\IVirtualSportsWinLossGetReportService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">

@@ -1,7 +1,5 @@
 namespace Fanex.AccountingReports.Special.Models
 {
-    using System.Collections.Generic;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>

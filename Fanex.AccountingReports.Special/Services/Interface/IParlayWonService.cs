@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Special.Services.Interface
 {
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Special.Criteria.ParlayWon;
     using Fanex.AccountingReports.Special.Models.ParlayWon;
 

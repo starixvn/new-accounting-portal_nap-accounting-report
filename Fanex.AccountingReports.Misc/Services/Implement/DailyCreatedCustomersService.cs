@@ -8,7 +8,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
-    using Fanex.AccountingReports.Misc.Constants;
     using Fanex.AccountingReports.Misc.Criteria.DailyCreatedCustomers;
     using Fanex.AccountingReports.Misc.Models.DailyCreatedCustomers;
     using Fanex.AccountingReports.Misc.Resources;
@@ -38,11 +37,11 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// <summary>
         /// The session key to get detail report.
         /// </summary>
-        private string _dailyCreatedCustomersDetailSessionKey;        
+        private string _dailyCreatedCustomersDetailSessionKey;
 
         public DailyCreatedCustomersService()
         {
-            this._dailyCreatedCustomersSessionKey = "Fanex.AccountingReports.Misc.DailyCreatedCustomers.DailyCreatedCustomersReport." 
+            this._dailyCreatedCustomersSessionKey = "Fanex.AccountingReports.Misc.DailyCreatedCustomers.DailyCreatedCustomersReport."
                                                         + AppSession.CurrentUser.Username;
             this._dailyCreatedCustomersDetailSessionKey = "Fanex.AccountingReports.Misc.DailyCreatedCustomers.DailyCreatedCustomersDetailsReport."
                                                         + AppSession.CurrentUser.Username;
@@ -72,7 +71,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             /// The normal odd row.
             /// </summary>
             NormalOddRow = 4
-        }       
+        }
 
         /// <summary>
         /// Gets the report.
@@ -85,7 +84,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             {
                 var report = new SummaryInformation
                 {
-                    CreatingDetails = new List<SummaryInformation>(),                    
+                    CreatingDetails = new List<SummaryInformation>(),
                 };
 
                 if (!criteria.IsValid())
@@ -100,7 +99,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                     SummaryInformation info = new SummaryInformation
                     {
                         CreatedDate = createdDate.ToShortFormatedDate(),
-                        SuperAmount = Converter.ToInt(row.AmountSAg),             
+                        SuperAmount = Converter.ToInt(row.AmountSAg),
                         DirectMasterAmount = Converter.ToInt(row.AmountMAg),
                         DirectAgentAmount = Converter.ToInt(row.AmountAg),
                         MasterAmount = Converter.ToInt(row.AmountMaster),
@@ -119,7 +118,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             {
                 this.HandleException(ex);
                 throw;
-            }           
+            }
         }
 
         /// <summary>
@@ -159,7 +158,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             {
                 this.HandleException(ex);
                 throw;
-            }            
+            }
         }
 
         #region ExportExcel
@@ -176,12 +175,12 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 if (report == null)
                 {
                     report = this.GetReport(criteria);
-                }     
-           
+                }
+
                 ExcelFile excelFile = new ExcelFile();
                 ExcelWorksheetCollection worksheets = excelFile.Worksheets;
                 var currentRow = 0;
-                if (report != null 
+                if (report != null
                         && report.CreatingDetails != null
                         && report.CreatingDetails.Count > 0)
                 {
@@ -206,7 +205,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 {
                     string sheetName = MiscResources.DailyCreatedCustomersReport_SheetName;
                     ExcelWorksheet workSheet = worksheets.Add(sheetName);
-                    workSheet.ExportEmptyReport(0, 0, ref currentRow, 6);                   
+                    workSheet.ExportEmptyReport(0, 0, ref currentRow, 6);
                 }
 
                 excelFile.ReponseStream(string.Format(
@@ -233,11 +232,11 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 {
                     report = this.GetReportDetails(criteria);
                 }
-                
+
                 ExcelFile excelFile = new ExcelFile();
                 ExcelWorksheetCollection worksheets = excelFile.Worksheets;
                 var currentRow = 0;
-                if (report != null 
+                if (report != null
                         && report.Count > 0)
                 {
                     var infoLength = report.Count;
@@ -263,8 +262,8 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                     string sheetName = string.Format(MiscResources.DailyCreatedCustomersDetailsReport_SheetName, criteria.RoleName);
                     ExcelWorksheet workSheet = worksheets.Add(sheetName);
                     workSheet.ExportEmptyReport(0, 0, ref currentRow, 3);
-                }               
-                
+                }
+
                 excelFile.ReponseStream(string.Format(
                     MiscResources.DailyCreatedCustomersDetailsReport_ReportName,
                     criteria.RoleName,
@@ -295,7 +294,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             var headerColor = ExcelExtensions.HeaderTitleColor;
             CellRange currentCellRange;
             var currentColumn = startColumn;
-           
+
             for (int colIndex = 0; colIndex < 7; colIndex++)
             {
                 worksheet.Columns[startColumn + colIndex].Width = 140 * ExcelExtensions.FontWidth;
@@ -307,7 +306,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 criteria.Todate.ToShortFormatedDate());
 
             currentColumn = startColumn;
-           
+
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 6);
             currentCellRange.Merged = true;
             currentCellRange.Value = title;
@@ -318,19 +317,19 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
             currentColumn = startColumn;
 
-            this.RenderCellHeader(ref worksheet, currentRow, ref currentColumn, true, Labels.Date, headerColor);           
+            this.RenderCellHeader(ref worksheet, currentRow, ref currentColumn, true, Labels.Date, headerColor);
 
-            this.RenderCellHeader(ref worksheet, currentRow, ref currentColumn, true, Labels.Super, headerColor);          
+            this.RenderCellHeader(ref worksheet, currentRow, ref currentColumn, true, Labels.Super, headerColor);
 
-            this.RenderCellHeader(ref worksheet, currentRow, ref currentColumn, true, Labels.Direct_Master, headerColor);           
+            this.RenderCellHeader(ref worksheet, currentRow, ref currentColumn, true, Labels.Direct_Master, headerColor);
 
-            this.RenderCellHeader(ref worksheet, currentRow, ref currentColumn, true, Labels.Direct_Agent, headerColor);           
+            this.RenderCellHeader(ref worksheet, currentRow, ref currentColumn, true, Labels.Direct_Agent, headerColor);
 
-            this.RenderCellHeader(ref worksheet, currentRow, ref currentColumn, true, Labels.Master, headerColor);           
+            this.RenderCellHeader(ref worksheet, currentRow, ref currentColumn, true, Labels.Master, headerColor);
 
-            this.RenderCellHeader(ref worksheet, currentRow, ref currentColumn, true, Labels.Agent, headerColor);           
+            this.RenderCellHeader(ref worksheet, currentRow, ref currentColumn, true, Labels.Agent, headerColor);
 
-            this.RenderCellHeader(ref worksheet, currentRow, ref currentColumn, true, Labels.Member, headerColor);                 
+            this.RenderCellHeader(ref worksheet, currentRow, ref currentColumn, true, Labels.Member, headerColor);
 
             currentRow++;
         }
@@ -355,27 +354,27 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             int startIndex,
             int endIndex,
             SummaryInformation report)
-           {                         
-                for (int i = startIndex; i < endIndex; i++)
-                {
-                    var info = report.CreatingDetails[i];
-                    this.ExportRow(
-                        ref worksheet,
-                        startRow,
-                        startColumn,
-                        ref currentRow,
-                        info,
-                        i % 2 == 0 ? ReportRowType.NormalEvenRow : ReportRowType.NormalOddRow);
-                }
-
+        {
+            for (int i = startIndex; i < endIndex; i++)
+            {
+                var info = report.CreatingDetails[i];
                 this.ExportRow(
                     ref worksheet,
                     startRow,
                     startColumn,
                     ref currentRow,
-                    report,
-                    ReportRowType.GrandTotal);            
-          }
+                    info,
+                    i % 2 == 0 ? ReportRowType.NormalEvenRow : ReportRowType.NormalOddRow);
+            }
+
+            this.ExportRow(
+                ref worksheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                report,
+                ReportRowType.GrandTotal);
+        }
 
         /// <summary>
         /// Exports the row.
@@ -407,11 +406,13 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                     intStyle = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.BackGroundColor, false, false, false);
                     intStyle.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                     break;
+
                 case ReportRowType.NormalEvenRow:
                     textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.EvenRowColor, false);
                     intStyle = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.EvenRowColor, false, false, false);
                     intStyle.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                     break;
+
                 case ReportRowType.GrandTotal:
                     textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true);
                     textStyle.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
@@ -445,7 +446,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             currentCellRange.Value = info.SuperAmount;
             currentCellRange.Style = intStyle;
             currentColumn++;
-           
+
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
             currentCellRange.Merged = true;
             currentCellRange.Value = info.DirectMasterAmount;
@@ -457,7 +458,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             currentCellRange.Value = info.DirectAgentAmount;
             currentCellRange.Style = intStyle;
             currentColumn++;
-            
+
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
             currentCellRange.Merged = true;
             currentCellRange.Value = info.MasterAmount;
@@ -475,7 +476,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             currentCellRange.Value = info.MemberAmount;
             currentCellRange.Style = intStyle;
             currentColumn++;
-            
+
             currentRow++;
         }
 
@@ -572,17 +573,17 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             List<DetailInformation> report)
         {
             for (int i = startIndex; i < endIndex; i++)
-                {
-                    var info = report[i];
-                    this.ExportDetailsRow(
-                        ref worksheet,
-                        startRow,
-                        startColumn,
-                        ref currentRow,
-                        info,
-                        i % 2 == 0 ? ReportRowType.NormalEvenRow : ReportRowType.NormalOddRow,
-                        i);
-                }  
+            {
+                var info = report[i];
+                this.ExportDetailsRow(
+                    ref worksheet,
+                    startRow,
+                    startColumn,
+                    ref currentRow,
+                    info,
+                    i % 2 == 0 ? ReportRowType.NormalEvenRow : ReportRowType.NormalOddRow,
+                    i);
+            }
         }
 
         /// <summary>
@@ -614,6 +615,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                     intStyle = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.BackGroundColor, false, false, false);
                     intStyle.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                     break;
+
                 case ReportRowType.NormalEvenRow:
                     textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.EvenRowColor, false);
                     intStyle = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.EvenRowColor, false, false, false);

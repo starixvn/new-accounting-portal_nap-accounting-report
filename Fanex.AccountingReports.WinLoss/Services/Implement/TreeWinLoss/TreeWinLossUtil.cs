@@ -1,9 +1,6 @@
 namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.AccountingReports.WinLoss.Models.TreeWinLoss;
 
     /// <summary>
@@ -38,7 +35,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         }
 
         /// <summary>
-        /// Round object value. 
+        /// Round object value.
         /// </summary>
         /// <param name="winLoss">The Tree Win Loss Info.</param>
         /// <returns>The Tree Win Loss Info after rounding.</returns>

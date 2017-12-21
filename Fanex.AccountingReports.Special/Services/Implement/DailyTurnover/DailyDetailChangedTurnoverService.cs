@@ -2,7 +2,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
@@ -10,7 +9,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
     using Fanex.AccountingReports.Special.Models.DailyTurnover;
     using Fanex.AccountingReports.Special.Services.Interface.DailyTurnover;
     using Fanex.Common;
-    using Fanex.Data;
 
     /// <summary>
     /// The implement service of detail report.
@@ -97,9 +95,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
             this.GetDailyTurnoverByCurrency(ref virtualDailyTurnover, ref actualDailyturnover, criteria);
 
             LoopAndPushDataIntoReport(
-                ref report, 
-                rowsData, 
-                virtualDailyTurnover, 
+                ref report,
+                rowsData,
+                virtualDailyTurnover,
                 actualDailyturnover);
 
             return report;
@@ -113,9 +111,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
         /// <param name="virtualDailyTurnover">The virtual daily turnover.</param>
         /// <param name="actualDailyturnover">The actual daily turnover.</param>
         private void LoopAndPushDataIntoReport(
-            ref List<DailyDetailChangedTurnover> report, 
-            IEnumerable<dynamic> rowsData, 
-            TurnoverInformation virtualDailyTurnover, 
+            ref List<DailyDetailChangedTurnover> report,
+            IEnumerable<dynamic> rowsData,
+            TurnoverInformation virtualDailyTurnover,
             TurnoverInformation actualDailyturnover)
         {
             int index = 0;
@@ -198,7 +196,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
         /// <param name="actualDailyTurnover">The actual currency.</param>
         /// <param name="detailCriteria">The detail criteria.</param>
         private void GetDailyTurnoverByCurrency(
-            ref TurnoverInformation virtualDailyTurnover, 
+            ref TurnoverInformation virtualDailyTurnover,
             ref TurnoverInformation actualDailyTurnover,
             GetDailyTurnoverChangedDetailCriteria detailCriteria)
         {
@@ -230,12 +228,12 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
         /// <param name="differenceTurnover">The different turnover.</param>
         /// <returns>The TurnoverInformation.</returns>
         private TurnoverInformation CalculateTurnoverAmount(
-            TurnoverInformation beforeTurnover, 
+            TurnoverInformation beforeTurnover,
             TurnoverInformation differenceTurnover)
         {
             var turnoverByCurrency = new TurnoverInformation();
 
-            turnoverByCurrency.TotalTurnover = beforeTurnover.TotalTurnover 
+            turnoverByCurrency.TotalTurnover = beforeTurnover.TotalTurnover
                                                 - differenceTurnover.TotalTurnover;
             turnoverByCurrency.SuperTurnover = beforeTurnover.SuperTurnover
                                                 - differenceTurnover.SuperTurnover;

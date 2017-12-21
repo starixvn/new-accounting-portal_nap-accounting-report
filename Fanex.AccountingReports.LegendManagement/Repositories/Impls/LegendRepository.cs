@@ -3,7 +3,6 @@ namespace Fanex.AccountingReports.LegendManagement.Repositories.Impls
     using System.Collections;
     using Fanex.AccountingReports.LegendManagement.Criteria;
     using Fanex.AccountingReports.LegendManagement.Repositories.Interfaces;
-    using Fanex.Common;
 
     /// <summary>
     /// Legend Repository.

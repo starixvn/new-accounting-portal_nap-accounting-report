@@ -2,7 +2,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
 {
     using System;
     using System.IO;
-    using System.Net;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -11,7 +10,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
     using Fanex.AccountingReports.Special.Services.Interface;
     using Fanex.Common;
     using Fanex.Data;
-    using Fanex.ServiceManagement.Utility;
 
     /// <summary>
     /// TODO: Update summary.
@@ -222,14 +220,19 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
             {
                 case "xls":
                     return "application/vnd.ms-excel";
+
                 case "xlsx":
                     return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
                 case "doc":
                     return "application/msword";
+
                 case "zip":
                     return "application/x-zip-compressed";
+
                 case "pdf":
                     return "application/pdf";
+
                 default:
                     return System.Net.Mime.MediaTypeNames.Application.Octet;
             }

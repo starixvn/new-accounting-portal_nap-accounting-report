@@ -1,7 +1,6 @@
 namespace Fanex.AccountingReports.Gaming.Repositories.Implement
 {
     using System.Collections.Generic;
-    using System.Data;
     using Fanex.AccountingReports.Gaming.Criteria.NumberGameMonthlyWinLoss;
     using Fanex.AccountingReports.Gaming.Models.NumberGameMonthlyWinLoss;
     using Fanex.AccountingReports.Gaming.Repositories.Interface;

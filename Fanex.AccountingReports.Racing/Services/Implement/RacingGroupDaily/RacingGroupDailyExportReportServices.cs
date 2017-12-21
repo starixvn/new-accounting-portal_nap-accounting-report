@@ -5,12 +5,10 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.RacingGroupDaily
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
-    using Fanex.AccountingReports.Racing.Constants;
     using Fanex.AccountingReports.Racing.Criteria.RacingGroupDaily;
     using Fanex.AccountingReports.Racing.Models.RacingGroupDaily;
     using Fanex.AccountingReports.Racing.Resources;
     using Fanex.AccountingReports.Racing.Services.Interface.RacingGroupDaily;
-    using Fanex.NAP.Core.Service.Impl;
     using NPOI.HSSF.UserModel;
     using NPOI.HSSF.Util;
     using NPOI.SS.UserModel;

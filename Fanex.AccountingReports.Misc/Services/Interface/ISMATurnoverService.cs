@@ -1,9 +1,6 @@
 namespace Fanex.AccountingReports.Misc.Services.Interface
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Misc.Criteria.SMATurnover;
     using Fanex.AccountingReports.Misc.Models.SMATurnover;

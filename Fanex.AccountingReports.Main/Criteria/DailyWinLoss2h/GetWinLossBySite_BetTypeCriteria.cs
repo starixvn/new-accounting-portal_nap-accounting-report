@@ -2,9 +2,7 @@ namespace Fanex.AccountingReports.Main.Criteria.DailyWinLoss2h
 {
     using System;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.AccountingReports.Main.Constants;
     using Fanex.Data.Repository;
-    using CoreConstants = Fanex.AccountingReports.Core.Constants;
 
     /// <summary>
     /// TODO: Update summary.

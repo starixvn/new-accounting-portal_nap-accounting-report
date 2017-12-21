@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
 {
-    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;

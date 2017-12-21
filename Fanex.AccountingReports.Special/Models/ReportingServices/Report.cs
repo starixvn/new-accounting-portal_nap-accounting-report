@@ -1,7 +1,6 @@
 namespace Fanex.AccountingReports.Special.Models.ReportingServices
 {
     using System.Collections.Generic;
-    using System.Configuration;
 
     /// <summary>
     /// Reporting services model.

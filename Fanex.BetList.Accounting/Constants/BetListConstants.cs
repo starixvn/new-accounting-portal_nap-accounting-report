@@ -1,7 +1,5 @@
 namespace Fanex.BetList.Accounting.Constants
 {
-    using System.Diagnostics.CodeAnalysis;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>

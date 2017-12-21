@@ -23,6 +23,12 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -533,7 +539,6 @@
     <Content Include="Areas\Betlist\Views\_RacingToteWinLoss.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Areas\Gaming\Views\CasinoWinLoss\Scripts\CasinoWinLoss.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent_AgentReport.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportByAgent\ReportByAgent_BaseReport.js" />
@@ -548,15 +553,10 @@
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoGameFinancialReport\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\NumberGameFinancial\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\CasinoWinLoss\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\CasinoWinLoss\Styles\CasinoWinLoss.less" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Styles\NumberGameWinLossByBetTypeMatch.less" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\LiveCasinoAgencyWinLoss\Styles\LiveCasinoAgencyWinLoss.less" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Styles\LiveCasinoGameStatistic.less" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByCurrency\Styles\NumberGameWinlossByCur.less" />
     <Content Include="Areas\Gaming\Views\NumberGameWinlossByDate\Styles\NumberGameWinlossByDate.less" />
     <Compile Include="Areas\UserControl\Controllers\UserController.cs" />
@@ -569,15 +569,6 @@
     <Content Include="Areas\Gaming\Views\LiveCasinoGameFinancialReport\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\LiveCasinoGameFinancialReport\Styles\LiveCasinoGameFinancialReport.css" />
     <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Scripts\NumberGameMonthlyWinLoss.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameFinancial\Scripts\NumberGameFinancial.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByCompany.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByCurrency.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByDailyRange.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByGameTable.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByGameType.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByMonthlyRange.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportByUserName.js" />
-    <Content Include="Areas\Gaming\Views\LiveCasinoGameStatistic\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByBetType.js" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByBetTypeDetailReport.js" />
@@ -589,9 +580,6 @@
     <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Styles\Images\icon-search.png" />
     <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Styles\NumberOfActiveMember.less" />
     <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Scripts\NumberOfActiveMember.js" />
-    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Scripts\ReportManager.js" />
-    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Scripts\VirtualSportsWinLossDetail.js" />
-    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Scripts\VirtualSportsWinLoss.js" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\CopyLegend.js" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\GuideMan.js" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\GuideManMessage.js" />
@@ -611,72 +599,8 @@
     <Content Include="Areas\Main\Views\CreditTerm\Scripts\CreditTerm.js" />
     <Content Include="Areas\Main\Views\CreditTerm\Scripts\InstallAmount.js" />
     <Content Include="Areas\Main\Views\CreditTerm\Scripts\ReportManager.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\Main2hReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportReport_ByBetType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportReport_BySportType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportReport_Summary.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\OtherSportsForNewCricket.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\ReportManager.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\ShowHideReportManager.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\WinLossBySite_BetType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Scripts\ShowHideSiteTypeManager.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Styles\Images\icon-collpase.png" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Styles\Images\icon-expand.png" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\Scripts\Index.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\Main2hReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\ReportManager.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\ShowHideReportManager.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\SoccerReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\SoccerReport_ByBetType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\SoccerReport_Summary.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\WinLossBySite_BetType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Scripts\ShowHideSiteTypeManager.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Styles\Images\icon-collpase.png" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Styles\Images\icon-expand.png" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Index.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Bettrade.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\BingoReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\CasinoReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\ColossusBet.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\KenoReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\LiveCasinoWinLossByProductReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\MainLiveCasinoReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\LiveCasinoReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Main2hReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\MetricGamingByBetType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\MetricGamingReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\MixParlayReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\NumberGame\NumberGameReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\NumberGame\NumberGameReport_ByBetType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\NumberGame\NumberGameReport_Summary.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportReport_ByBetType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportReport_BySportType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportReport_Summary.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\OtherSports\OtherSportsForNewCricket.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\ParlayReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Racing\RacingReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Racing\RacingReport_BySportType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Racing\RacingReport_Summary.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\ReportManager.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Racing\RacingReport_ByBetType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\ShowHideReportManager.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\ShowHideSiteTypeManager.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Soccer\SoccerReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Soccer\SoccerReport_ByBetType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\Soccer\SoccerReport_Summary.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\SystemParlayReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\VirtualSports\VirtualSportsReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\VirtualSports\VirtualSportsReport_ByBetType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\VirtualSports\VirtualSportsReport_BySportType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\VirtualSports\VirtualSportsReport_Summary.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\VirtualSports\VirtualSports_VirtualHorseRacingReport.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Scripts\WinLossBySite_BetType.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Styles\Images\icon-collpase.png" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Styles\Images\icon-expand.png" />
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Index.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\KenoReport.cshtml" />
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Styles\TraderPerformanceOtherSports.less" />
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Scripts\TraderPerformanceOtherSports.js" />
     <Content Include="Areas\Main\Views\TraderPerformanceSoccer\Scripts\TraderPerformanceSoccer.js" />
@@ -740,14 +664,9 @@
     <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Scripts\RacingDailyReportApply50Percent.js" />
     <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Scripts\ReportManager.js" />
     <Content Include="Areas\Special\Views\SaveBetReport\Images\download.png" />
-    <Content Include="Areas\Special\Views\ReportingServices\Images\excel.gif" />
-    <Content Include="Areas\Special\Views\ReportingServices\Images\excel.png" />
     <Content Include="Areas\Special\Views\SMATurnover\Scripts\SMATurnover.js" />
     <Content Include="Areas\Special\Views\SMATurnover\Styles\SMATurnover.less" />
-    <Content Include="Areas\Special\Views\ReportingServices\Images\folder.gif" />
-    <Content Include="Areas\Special\Views\ReportingServices\Scripts\ReportingServices.js" />
     <Content Include="Areas\Special\Views\SaveBetReport\Styles\SaveBetReport.less" />
-    <Content Include="Areas\Special\Views\ReportingServices\Styles\ReportingServices.less" />
     <Content Include="Areas\Special\Views\SaveBetReport\Scripts\SaveBetReport.js" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\MatchAnalysisBaseReport.js" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\MatchAnalysisByAgent.js" />
@@ -1891,8 +1810,6 @@
     <Content Include="Areas\Gaming\Views\NumberGameWinlossByDate\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\Web.config" />
     <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\VirtualSportsWinLoss\Styles\VirtualSportsWinLoss.less" />
     <Content Include="Areas\Licensee\Views\NegativeBalance\Index.cshtml" />
     <Content Include="Areas\Licensee\Views\NegativeBalance\NegativeBalance.less" />
     <Content Include="Areas\Licensee\Views\PeakConcurrentUsers\Index.cshtml" />
@@ -1909,32 +1826,8 @@
     <Content Include="Areas\Main\Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\BingoReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\CasinoReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\LiveCasinoReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Main2hReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\MixParlayReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\NumberGameReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\OtherSportReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\RacingReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\SoccerReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Index.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Main2hReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\SoccerReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Index.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Main2hReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\OtherSportReport.cshtml" />
     <Content Include="Areas\Main\Views\CreditTerm\Index.cshtml" />
     <Content Include="Areas\Main\Views\CreditTerm\Styles\CreditTerm.less" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\Styles\DailyWinLoss2h.less" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hOtherSports\WinLossBySite_BetType.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\Styles\DailyWinLoss2h.less" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccer\WinLossBySite_BetType.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Styles\DailyWinLoss2h.less" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\SystemParlayReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\VirtualSportsReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\VirtualSports_VirtualHorseRacingReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\WinLossBySite_BetType.cshtml" />
     <Content Include="Areas\Main\Views\WinLossSummary\Index.cshtml" />
     <Content Include="Areas\Main\Views\WinLossSummary3rd\Index.cshtml" />
     <Content Include="Areas\Main\Views\TraderPerformanceSoccer\Index.cshtml" />
@@ -1990,7 +1883,6 @@
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchAnalysisNormal.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchSelection.cshtml" />
     <Content Include="Areas\Special\Views\SaveBetReport\Index.cshtml" />
-    <Content Include="Areas\Special\Views\ReportingServices\Index.cshtml" />
     <Content Include="Areas\Special\Views\SMATurnover\Index.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Styles\SpecialMatchAnalysis.less" />
     <Content Include="Areas\Misc\Views\TotalCreditAccountByProduct\Index.cshtml" />
@@ -2028,7 +1920,6 @@
     <Content Include="Areas\LegendManagement\Views\LegendManagement\CopyLegend.cshtml" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\InputedLegendReport.cshtml" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\UploadImagePopup.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\ParlayReport.cshtml" />
     <Content Include="Areas\Uncategorized\IMS\ims.less" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\BettypeReport.cshtml" />
     <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\Index.cshtml" />
@@ -2039,13 +1930,8 @@
     <Content Include="Areas\Misc\Views\CreditMovement\Index.cshtml" />
     <Content Include="Areas\Licensee\Views\CompanyWinLoss\Index.cshtml" />
     <Content Include="Areas\Licensee\Views\CompanyWinLoss\Styles\Index.less" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\MetricGamingReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\MainLiveCasinoReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\LiveCasinoWinLossByProductReport.cshtml" />
     <Content Include="Areas\Misc\Views\AutoGeneratedReport\Index.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\Bettrade.cshtml" />
     <Content Include="Areas\Misc\Views\AutoGeneratedReport\Styles\AutoGeneratedReport.less" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2h\ColossusBet.cshtml" />
     <None Include="App_Data\Fanex.Result\Badminton.xls" />
     <None Include="App_Data\Fanex.Result\BaseBall.xls" />
     <None Include="App_Data\Fanex.Result\Basketball.xls" />

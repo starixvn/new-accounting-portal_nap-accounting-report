@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Gaming.Criteria.LiveCasinoWinLossByAgency
 {
-    using Fanex.AccountingReports.Core.Constants;
     using Fanex.Data.Repository;
 
     /// <summary>

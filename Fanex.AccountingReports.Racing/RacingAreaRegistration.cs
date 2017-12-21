@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Racing
 {
-    using System.Web;
     using System.Web.Mvc;
 
     /// <summary>

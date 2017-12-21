@@ -2,10 +2,6 @@ namespace Fanex.AccountingReports.Misc.Criteria.MAMonitorTool
 {
     using System;
     using System.Collections;
-    using System.Collections.Generic;
-    using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.AccountingReports.Misc.Models.MAMonitorTool;
-    using Fanex.Common;
     using Fanex.Data.Repository;
 
     /// <summary>

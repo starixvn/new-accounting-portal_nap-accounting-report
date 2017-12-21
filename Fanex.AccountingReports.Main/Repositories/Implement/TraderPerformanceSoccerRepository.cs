@@ -2,7 +2,6 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
 {
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Main.Criteria.TraderPerformance;
@@ -130,9 +129,9 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
         public TraderPerformanceSoccerDetail GetTraderPerformanceSoccerDetailReport(GetDetailReportCriteria criteria)
         {
             var result = new TraderPerformanceSoccerDetail
-                {
-                    GrandTotal = new TraderPerformanceSoccerDetail()
-                };
+            {
+                GrandTotal = new TraderPerformanceSoccerDetail()
+            };
 
             var winLossTotal = new TraderPerformanceSoccerDetail();
             var turnOverTotal = new TraderPerformanceSoccerDetail();
@@ -239,7 +238,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
                 NoOfCorners = Converter.ToDecimal(reader[groupNamePrefix + "_NoOfCorners"]),
                 FifteenMinOU = Converter.ToDecimal(reader[groupNamePrefix + "_15minOU"]),
                 FirstHalfTotalBookings = Converter.ToDecimal(reader[groupNamePrefix + "_1stTotalBookings"]),
-                TotalBookings = Converter.ToDecimal(reader[groupNamePrefix + "_TotalBookings"]),                
+                TotalBookings = Converter.ToDecimal(reader[groupNamePrefix + "_TotalBookings"]),
                 NextCorner = Converter.ToDecimal(reader[groupNamePrefix + "_NextCorner"]),
                 Overall = Converter.ToDecimal(reader["overall_" + overallSuffix]),
                 NextBookings = Converter.ToDecimal(reader[groupNamePrefix + "_NextBooking"]),
@@ -280,7 +279,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
                 NoOfCorners = Converter.ToDecimal(reader[groupNamePrefix + "_NoOfCorners"]),
                 FifteenMinOU = Converter.ToDecimal(reader[groupNamePrefix + "_15minOU"]),
                 FirstHalfTotalBookings = Converter.ToDecimal(reader[groupNamePrefix + "_1stTotalBookings"]),
-                TotalBookings = Converter.ToDecimal(reader[groupNamePrefix + "_TotalBookings"]),                
+                TotalBookings = Converter.ToDecimal(reader[groupNamePrefix + "_TotalBookings"]),
                 NextCorner = Converter.ToDecimal(reader[groupNamePrefix + "_NextCorner"]),
                 Overall = Converter.ToDecimal(reader["overall_" + overallSuffix]),
                 NextBookings = Converter.ToDecimal(reader[groupNamePrefix + "_NextBooking"]),

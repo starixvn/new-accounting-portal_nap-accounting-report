@@ -1,8 +1,6 @@
 namespace Fanex.BetList.Accounting.Services
 {
-    using System;
     using System.Collections;
-    using Fanex.BetList.Accounting.Core;
     using Fanex.BetList.Accounting.Criteria;
     using Fanex.BetList.Accounting.Models.ScoreInformation;
     using Fanex.BetList.Accounting.Repositories;

@@ -1,5 +1,6 @@
 namespace Fanex.AccountingReports.Main.Controllers
 {
+    using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
@@ -9,8 +10,6 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.AccountingReports.Main.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
-    using System.Linq;
-    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.

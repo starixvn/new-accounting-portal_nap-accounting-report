@@ -1,7 +1,5 @@
 namespace Fanex.AccountingReports.Core.Extensions
 {
-    using System;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>

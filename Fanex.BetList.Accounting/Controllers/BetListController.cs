@@ -15,16 +15,13 @@
     public class BetListController : Controller
     {
         private readonly BetListService _betListService;
-        private readonly IResultService _resultService;
         private readonly BetListCashoutDetailService _betListCashoutDetailService;
 
         public BetListController()
         {
             this._betListService = new BetListServiceImp();
-            this._resultService = new ResultService();
             this._betListCashoutDetailService = new BetListCashoutDetailServiceImp();
         }
-
 
         /// <summary>
         /// Gets the mix parlay detail.

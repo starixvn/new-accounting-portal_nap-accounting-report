@@ -2,8 +2,6 @@ namespace Fanex.AccountingReports.Misc.Models.DuplicateTickets
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
     /// <summary>
     /// TODO: Update summary.

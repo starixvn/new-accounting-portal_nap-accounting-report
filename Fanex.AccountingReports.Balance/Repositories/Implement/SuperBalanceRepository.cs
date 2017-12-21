@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
     using Fanex.AccountingReports.Balance.Criteria.SuperBalance;
     using Fanex.AccountingReports.Balance.Models.SuperBalance;
     using Fanex.AccountingReports.Balance.Repositories.Interface;
-    using Fanex.AccountingReports.Core.Criteria;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.Common;
     using Fanex.Data;

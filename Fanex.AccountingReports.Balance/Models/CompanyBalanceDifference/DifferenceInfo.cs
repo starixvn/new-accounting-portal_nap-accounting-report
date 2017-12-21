@@ -1,11 +1,9 @@
 namespace Fanex.AccountingReports.Balance.Models.CompanyBalanceDifference
 {
-    using System;
-
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-     public class DifferenceInfo
+    public class DifferenceInfo
     {
         public string BalanceUpDate { get; set; }
 
