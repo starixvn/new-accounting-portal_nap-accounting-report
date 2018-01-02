@@ -36,9 +36,24 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
         });
     };
 
-    self.playMedia = function () {
+    self.playSound = function () {
         var audio = new Audio(window.rootUrl + "Areas/Misc/Views/DuplicateTickets/Media/koekoeksklok.mp3");
-        audio.play();        
+        audio.play();
+    };
+
+    self.repeatPlaySoundEvent = function () {
+        cachedData.countPlaySoundInAPatch++;
+        if (cachedData.countPlaySoundInAPatch >= 4) {
+            window.clearInterval(cachedData.countPlaySoundInAPatchEvent);
+            cachedData.countPlaySoundInAPatch = 0;
+        }
+
+        self.playSound();
+    };
+
+    self.repeatPlaySound = function () {                
+        cachedData.countPlaySoundInAPatchEvent = setInterval(self.repeatPlaySoundEvent, 3000);
+        self.playSound();
     };
 
     var catchedDOMElement = function () {
@@ -60,7 +75,9 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
         MD5Hash_Pre: null,
         MD5Hash_Current: null,
         CountAlertSound: 0,
-        isGenerateReport: false
+        isGenerateReport: false,
+        countPlaySoundInAPatch: 0,
+        countPlaySoundInAPatchEvent: null
     };
 
     var renderDatePicker = function () {
@@ -223,8 +240,7 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
     };
 
     self.playNotificationAudio = function () {
-        self.initFlashMedia();
-        self.playMedia();
+        self.repeatPlaySound();
     };
 
     self.getDuplicateTicketReport = function () {

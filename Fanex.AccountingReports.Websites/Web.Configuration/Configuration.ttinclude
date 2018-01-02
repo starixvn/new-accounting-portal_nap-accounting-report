@@ -263,7 +263,7 @@
                     case SiteEnvironment.MNL:
                         return @"FormatName:DIRECT=tcp:10.2.98.3\private$\entlib";
                     default:
-                        return @"FormatName:DIRECT=http://10.35.35.253:808/msmq/Private$/entlib";
+                        return @"FormatName:DIRECT=http://10.18.200.103:808/msmq/Private$/entlib";
                 }
             }
         }

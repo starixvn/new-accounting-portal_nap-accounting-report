@@ -12,6 +12,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
     using Fanex.AccountingReports.Misc.Models.DuplicateTickets;
     using Fanex.AccountingReports.Misc.Resources;
     using Fanex.AccountingReports.Misc.Services.Interface.DuplicateTickets;
+    using Logging;
     using Newtonsoft.Json;
     using NPOI.HSSF.UserModel;
     using NPOI.HSSF.Util;
@@ -24,9 +25,9 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
     {
         private const short TitleColorIndex = 51;
 
-        private const short EvenRowColorIndex = 52;        
+        private const short EvenRowColorIndex = 52;
 
-        private string _duplicateTicketsSessionKey = MiscConstants.DuplicateTicketsPrefixSessionKey + 
+        private string _duplicateTicketsSessionKey = MiscConstants.DuplicateTicketsPrefixSessionKey +
                                              (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
 
         /// <summary>
@@ -57,7 +58,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             DuplicateTicketsUtility utility = new DuplicateTicketsUtility();
 
             foreach (var duplicateTicketByUserName in duplicateTicketGroup)
-            {                
+            {
                 var subTickets = utility.AssignSubTicketInfo(duplicateTicketByUserName);
                 var groups = subTickets.GroupBy(x => new { x.GroupNo }).ToList();
                 foreach (var group in groups)
@@ -76,12 +77,18 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
 
                         result.Add(mainTicket);
                     }
-                }             
+                }
             }
 
             duplicateTicketsInfo.Rows = result;
             duplicateTicketsInfo.MD5Hash = utility.GetMD5Hash(JsonConvert.SerializeObject(result));
             SessionManager.Set<DuplicateTicketsInfo>(this._duplicateTicketsSessionKey, duplicateTicketsInfo);
+
+            if (result.Count > 0)
+            {                
+                var json = JsonConvert.SerializeObject(result, Formatting.Indented);
+                LogService.Info($"Misc / Duplicate Tickets by Username: {AppSession.CurrentUser.Username}" + Environment.NewLine + json);
+            }
 
             return duplicateTicketsInfo;
         }
@@ -303,7 +310,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
 
                 int subCount = 0;
                 foreach (var ticketInfo in ticketByUser.TicketInfo)
-                {                    
+                {
                     currentColumn = 0;
                     NpoiExcelExtensions.RenderCell(
                         ref worksheet,
