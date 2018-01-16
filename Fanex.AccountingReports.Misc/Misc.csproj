@@ -169,6 +169,7 @@
     <Compile Include="Criteria\CreditSitesBetCounts\GetCreditSitesBetCountsCriteria.cs" />
     <Compile Include="Criteria\DailyCreatedCustomers\GetDailyCreatedCustomersCriteria.cs" />
     <Compile Include="Criteria\DailyCreatedCustomers\GetDailyCreatedCustomersDetailsCriteria.cs" />
+    <Compile Include="Criteria\DuplicateTickets\DuplicateTicketsCheckCashOutCriteria.cs" />
     <Compile Include="Criteria\MAMonitorTool\GetBetTypeListCriteria.cs" />
     <Compile Include="Criteria\DuplicateTickets\GetDuplicateTicketsCriteria.cs" />
     <Compile Include="Criteria\MAMonitorTool\GetCurrencyListCriteria.cs" />
@@ -230,6 +231,7 @@
     <Compile Include="Services\Implement\CreditMovement\CreditMovementService.cs" />
     <Compile Include="Services\Implement\CreditSitesBetCountsService.cs" />
     <Compile Include="Services\Implement\DailyCreatedCustomersService.cs" />
+    <Compile Include="Services\Implement\DuplicateTickets\DuplicateTicketsCashOutService.cs" />
     <Compile Include="Services\Implement\DuplicateTickets\DuplicateTicketsService.cs" />
     <Compile Include="Services\Implement\DuplicateTickets\DuplicateTicketsUtility.cs" />
     <Compile Include="Services\Implement\MAMonitorTool\MAMonitorToolExportExcelService.cs" />

@@ -101,7 +101,8 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                 WinLostDate = winlostDate.ToShortFormatedDate(),
                 BalanceBeforeBet = Converter.ToDecimal(duplicateTicketByUserName.Key.balance),
                 Stake = Converter.ToDecimal(duplicateTicketByUserName.Key.stake),
-                Odds = Converter.ToDecimal(duplicateTicketByUserName.Key.odds)
+                Odds = Converter.ToDecimal(duplicateTicketByUserName.Key.odds),
+                BetTypeId = Converter.To<int>(duplicateTicketByUserName.Key.bettype)
             };
 
             return ticket;
