@@ -27,6 +27,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
             _service = new CreditMovementService();
         }
 
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.CreditMovement, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

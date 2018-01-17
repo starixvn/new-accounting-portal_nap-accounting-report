@@ -24,6 +24,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.WinLossSummary, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
@@ -31,6 +32,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         }
 
         [HttpPost]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.WinLossSummary, Policy = Constant.Policy.Read)]
         [HandleAjaxError]
         public JsonResult GetReport(GetReportCriteria criteria)
@@ -41,6 +43,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         }
 
         [HttpPost]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.WinLossSummary, Policy = Constant.Policy.Read)]
         [HandleAjaxError]
         public JsonResult ViewGameMatchDetails(GetMatchGameDetailsCriteria criteria)
@@ -54,6 +57,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         }
 
         [HttpPost]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.WinLossSummary, Policy = Constant.Policy.Host)]
         [HandleAjaxError]
         public JsonResult RecalculateWinLoss(GetRecalculateWinLossCriteria criteria)
@@ -64,6 +68,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.WinLossSummary, Policy = Constant.Policy.Read)]
         [HandleAjaxError]
         public ActionResult ExportWinLossSummary3rd(GetReportCriteria criteria)
@@ -74,6 +79,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.WinLossSummary, Policy = Constant.Policy.Read)]
         [HandleAjaxError]
         public ActionResult ExportWinLossSummary3rdDetails(GetMatchGameDetailsCriteria criteria)

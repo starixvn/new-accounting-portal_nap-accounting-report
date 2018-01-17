@@ -26,6 +26,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.TraderPerformanceSoccer, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

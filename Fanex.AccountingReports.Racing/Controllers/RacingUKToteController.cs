@@ -23,6 +23,7 @@ namespace Fanex.AccountingReports.Racing.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.HorseRacingForUKTote, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

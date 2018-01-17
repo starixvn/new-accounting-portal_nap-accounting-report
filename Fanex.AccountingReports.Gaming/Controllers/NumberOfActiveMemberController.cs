@@ -45,6 +45,7 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         /// </summary>
         /// <returns>The index view.</returns>
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.NumberofActiveMembers, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

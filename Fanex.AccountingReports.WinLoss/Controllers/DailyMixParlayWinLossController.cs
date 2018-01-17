@@ -22,12 +22,14 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.DailyMixParlayWinLoss, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             return View();
         }
 
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.DailyMixParlayWinLoss, Policy = Constant.Policy.Read)]
         public ActionResult MixParlayPopup()
         {

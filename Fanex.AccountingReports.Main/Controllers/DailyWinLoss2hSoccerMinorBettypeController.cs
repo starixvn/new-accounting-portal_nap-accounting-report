@@ -20,6 +20,7 @@ namespace Fanex.AccountingReports.Main.Controllers
     public class DailyWinLoss2hSoccerMinorBettypeController : BaseController
     {
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.DailyWinLoss2hSoccerMinorBettype, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

@@ -8,6 +8,7 @@ namespace Fanex.AccountingReports.Special.Controllers
     public class PunterAnalysisController : BaseController
     {
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.PunterAnalysis, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

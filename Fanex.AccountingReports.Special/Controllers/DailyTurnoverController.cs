@@ -29,6 +29,7 @@ namespace Fanex.AccountingReports.Special.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.DailyTurnover, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

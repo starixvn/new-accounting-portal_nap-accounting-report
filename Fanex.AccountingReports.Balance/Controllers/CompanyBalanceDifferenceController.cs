@@ -20,6 +20,7 @@ namespace Fanex.AccountingReports.Balance.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.CompanyBalanceDifference, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

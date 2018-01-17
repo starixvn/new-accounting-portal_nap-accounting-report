@@ -24,6 +24,7 @@ namespace Fanex.AccountingReports.Licensee.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.PeakConcurrentUsers, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
