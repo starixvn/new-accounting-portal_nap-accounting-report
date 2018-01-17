@@ -23,11 +23,7 @@ namespace Fanex.AccountingReports.Core.Extensions
         public const string PositivePercentFormat = "[>0][Red]#,##0.00%;[<0]-#,##0.00%;#,##0.00%";
         public const string NormalPercentFormat = "#,##0.00%;-#,##0.00%";
 
-        private const int VerticalAlignTop = 0;
         private const int VerticalAlignCenter = 1;
-        private const int VerticalAlignBottom = 2;
-        private const int VerticalAlignJustify = 3;
-        private const int VerticalAlignDistributed = 4;
 
         public const int FontWidth = 30;
         public const int FontHeight = 20;
@@ -128,9 +124,11 @@ namespace Fanex.AccountingReports.Core.Extensions
                 case Alignment.Right:
                     cellStyle.Alignment = HorizontalAlignment.Right;
                     break;
+
                 case Alignment.Left:
                     cellStyle.Alignment = HorizontalAlignment.Left;
                     break;
+
                 case Alignment.Center:
                     cellStyle.Alignment = HorizontalAlignment.Center;
                     break;
@@ -174,151 +172,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             cellStyle.Alignment = HorizontalAlignment.Right;
             cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
             cellStyle.DataFormat = dataFormat.GetFormat(TwoDecimalDigitNumber);
-            cellStyle.SetFont(font);
-            cellStyle = SetBorderToCell(cellStyle);
-            return cellStyle;
-        }
-
-        public static ICellStyle PositiveDecimalStyle(
-           HSSFWorkbook excelFile,
-           short cellColor,
-           bool bold,
-           short fontColor = 8)
-        {
-            ICellStyle cellStyle = excelFile.CreateCellStyle();
-            IFont font = excelFile.CreateFont();
-            IDataFormat dataFormat = excelFile.CreateDataFormat();
-
-            font.FontHeightInPoints = FontSize;
-            font.FontName = FontName;
-            font.Color = fontColor;
-
-            if (bold)
-            {
-                font.Boldweight = (short)FontBoldWeight.Bold;
-            }
-
-            cellStyle.FillForegroundColor = cellColor;
-            cellStyle.FillPattern = FillPattern.SolidForeground;
-            cellStyle.Alignment = HorizontalAlignment.Right;
-            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
-            cellStyle.DataFormat = dataFormat.GetFormat(PositiveDecimalNumberFormat);
-            cellStyle.SetFont(font);
-            cellStyle = SetBorderToCell(cellStyle);
-            return cellStyle;
-        }
-
-        public static ICellStyle NegativeDecimalStyle(
-           HSSFWorkbook excelFile,
-           short cellColor,
-           bool bold,
-           short fontColor = 8)
-        {
-            ICellStyle cellStyle = excelFile.CreateCellStyle();
-            IFont font = excelFile.CreateFont();
-            IDataFormat dataFormat = excelFile.CreateDataFormat();
-
-            font.FontHeightInPoints = FontSize;
-            font.FontName = FontName;
-            font.Color = fontColor;
-
-            if (bold)
-            {
-                font.Boldweight = (short)FontBoldWeight.Bold;
-            }
-
-            cellStyle.FillForegroundColor = cellColor;
-            cellStyle.FillPattern = FillPattern.SolidForeground;
-            cellStyle.Alignment = HorizontalAlignment.Right;
-            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
-            cellStyle.DataFormat = dataFormat.GetFormat(NegativeDecimalNumberFormat);
-            cellStyle.SetFont(font);
-            cellStyle = SetBorderToCell(cellStyle);
-            return cellStyle;
-        }
-
-        public static ICellStyle PercentStyle(
-           HSSFWorkbook excelFile,
-           short cellColor,
-           bool bold,
-           short fontColor = 8)
-        {
-            ICellStyle cellStyle = excelFile.CreateCellStyle();
-            IFont font = excelFile.CreateFont();
-            IDataFormat dataFormat = excelFile.CreateDataFormat();
-
-            font.FontHeightInPoints = FontSize;
-            font.FontName = FontName;
-            font.Color = fontColor;
-
-            if (bold)
-            {
-                font.Boldweight = (short)FontBoldWeight.Bold;
-            }
-
-            cellStyle.FillForegroundColor = cellColor;
-            cellStyle.FillPattern = FillPattern.SolidForeground;
-            cellStyle.Alignment = HorizontalAlignment.Right;
-            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
-            cellStyle.DataFormat = dataFormat.GetFormat(PercentFormat);
-            cellStyle.SetFont(font);
-            cellStyle = SetBorderToCell(cellStyle);
-            return cellStyle;
-        }
-
-        public static ICellStyle PositivePercentStyle(
-           HSSFWorkbook excelFile,
-           short cellColor,
-           bool bold,
-           short fontColor = 8)
-        {
-            ICellStyle cellStyle = excelFile.CreateCellStyle();
-            IFont font = excelFile.CreateFont();
-            IDataFormat dataFormat = excelFile.CreateDataFormat();
-
-            font.FontHeightInPoints = FontSize;
-            font.FontName = FontName;
-            font.Color = fontColor;
-
-            if (bold)
-            {
-                font.Boldweight = (short)FontBoldWeight.Bold;
-            }
-
-            cellStyle.FillForegroundColor = cellColor;
-            cellStyle.FillPattern = FillPattern.SolidForeground;
-            cellStyle.Alignment = HorizontalAlignment.Right;
-            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
-            cellStyle.DataFormat = dataFormat.GetFormat(PositivePercentFormat);
-            cellStyle.SetFont(font);
-            cellStyle = SetBorderToCell(cellStyle);
-            return cellStyle;
-        }
-
-        public static ICellStyle NegativePercentStyle(
-           HSSFWorkbook excelFile,
-           short cellColor,
-           bool bold,
-           short fontColor = 8)
-        {
-            ICellStyle cellStyle = excelFile.CreateCellStyle();
-            IFont font = excelFile.CreateFont();
-            IDataFormat dataFormat = excelFile.CreateDataFormat();
-
-            font.FontHeightInPoints = FontSize;
-            font.FontName = FontName;
-            font.Color = fontColor;
-
-            if (bold)
-            {
-                font.Boldweight = (short)FontBoldWeight.Bold;
-            }
-
-            cellStyle.FillForegroundColor = cellColor;
-            cellStyle.FillPattern = FillPattern.SolidForeground;
-            cellStyle.Alignment = HorizontalAlignment.Right;
-            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
-            cellStyle.DataFormat = dataFormat.GetFormat(NegativePercentFormat);
             cellStyle.SetFont(font);
             cellStyle = SetBorderToCell(cellStyle);
             return cellStyle;
@@ -395,9 +248,11 @@ namespace Fanex.AccountingReports.Core.Extensions
                 case Alignment.Right:
                     cellStyle.Alignment = HorizontalAlignment.Right;
                     break;
+
                 case Alignment.Left:
                     cellStyle.Alignment = HorizontalAlignment.Left;
                     break;
+
                 case Alignment.Center:
                     cellStyle.Alignment = HorizontalAlignment.Center;
                     break;
@@ -440,7 +295,7 @@ namespace Fanex.AccountingReports.Core.Extensions
                 for (var j = currentColumn; j <= endColumn; j++)
                 {
                     ICell cell = row.GetCell(j) ?? row.CreateCell(j);
-                    
+
                     if (i == currentRow && j == currentColumn)
                     {
                         SetCellValue(cell, cellValue);
@@ -476,7 +331,7 @@ namespace Fanex.AccountingReports.Core.Extensions
         /// <param name="cellValue">The cell value.</param>
         public static void SetCellValue(ICell cell, object cellValue)
         {
-            if (cellValue is string)
+            if ((cellValue != null) && (cellValue is string))
             {
                 cell.SetCellValue((string)cellValue);
             }
@@ -523,104 +378,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             cellStyle.RightBorderColor = HSSFColor.Grey80Percent.Index;
             cellStyle.TopBorderColor = HSSFColor.Grey80Percent.Index;
 
-            return cellStyle;
-        }
-
-        public static ICellStyle CustomTextBackGroundCellStyle(HSSFWorkbook excelFile, byte red, byte green, byte blue, HorizontalAlignment alignment)
-        {
-            ICellStyle cellStyle = excelFile.CreateCellStyle();
-            HSSFPalette palette = excelFile.GetCustomPalette();
-            IFont font = excelFile.CreateFont();
-            palette.SetColorAtIndex(HSSFColor.Aqua.Index, red, green, blue);
-            font.Boldweight = (short)FontBoldWeight.Bold;
-            font.Color = HSSFColor.Black.Index;
-            font.FontHeightInPoints = FontSize;
-            font.FontName = FontName;
-
-            cellStyle.FillForegroundColor = HSSFColor.Aqua.Index;
-            cellStyle.FillPattern = FillPattern.SolidForeground;
-            cellStyle.Alignment = alignment;
-            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter; 
-            cellStyle.SetFont(font);
-            cellStyle = SetBorderToCell(cellStyle);
-            return cellStyle;
-        }
-
-        public static ICellStyle CustomCellStyle(HSSFWorkbook excelFile, NpoiSetting setting)
-        {
-            ICellStyle cellStyle = excelFile.CreateCellStyle();
-            HSSFPalette palette = excelFile.GetCustomPalette();
-            IFont font = excelFile.CreateFont();
-            palette.SetColorAtIndex(setting.FillForegroundColorIndex, setting.BackgroundColor.R, setting.BackgroundColor.G, setting.BackgroundColor.B);
-            IDataFormat dataFormat = excelFile.CreateDataFormat();
-
-            font.FontHeightInPoints = FontSize;
-            font.FontName = FontName;
-            font.Color = setting.FontColorIndex;
-
-            if (setting.IsBold)
-            {
-                font.Boldweight = (short)FontBoldWeight.Bold;
-            }
-
-            cellStyle.FillForegroundColor = setting.FillForegroundColorIndex;
-            cellStyle.FillPattern = FillPattern.SolidForeground;
-            cellStyle.Alignment = HorizontalAlignment.Right;
-            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
-            cellStyle.DataFormat = dataFormat.GetFormat(setting.DataFormat);
-            cellStyle.SetFont(font);
-            cellStyle = SetBorderToCell(cellStyle);
-
-            return cellStyle;
-        }
-
-        public static ICellStyle GetPercentageStyle(HSSFWorkbook excelFile, short cellColor, bool bold, short fontColor = 8)
-        {
-            ICellStyle cellStyle = excelFile.CreateCellStyle();
-            IFont font = excelFile.CreateFont();
-            IDataFormat dataFormat = excelFile.CreateDataFormat();
-
-            font.FontHeightInPoints = FontSize;
-            font.FontName = FontName;
-            font.Color = fontColor;
-
-            if (bold)
-            {
-                font.Boldweight = (short)FontBoldWeight.Bold;
-            }
-
-            cellStyle.FillForegroundColor = cellColor;
-            cellStyle.FillPattern = FillPattern.SolidForeground;
-            cellStyle.Alignment = HorizontalAlignment.Right;
-            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
-            cellStyle.DataFormat = dataFormat.GetFormat(NormalPercentFormat);
-            cellStyle.SetFont(font);
-            cellStyle = SetBorderToCell(cellStyle);
-            return cellStyle;
-        }
-
-        public static ICellStyle GetNegativeDecimalNumberStyle(HSSFWorkbook excelFile, short cellColor, bool bold, short fontColor = 8)
-        {
-            ICellStyle cellStyle = excelFile.CreateCellStyle();
-            IFont font = excelFile.CreateFont();
-            IDataFormat dataFormat = excelFile.CreateDataFormat();
-
-            font.FontHeightInPoints = FontSize;
-            font.FontName = FontName;
-            font.Color = fontColor;
-
-            if (bold)
-            {
-                font.Boldweight = (short)FontBoldWeight.Bold;
-            }
-
-            cellStyle.FillForegroundColor = cellColor;
-            cellStyle.FillPattern = FillPattern.SolidForeground;
-            cellStyle.Alignment = HorizontalAlignment.Right;
-            cellStyle.VerticalAlignment = (VerticalAlignment)VerticalAlignCenter;
-            cellStyle.DataFormat = dataFormat.GetFormat(NegativeDecimalNumberFormat);
-            cellStyle.SetFont(font);
-            cellStyle = SetBorderToCell(cellStyle);
             return cellStyle;
         }
     }

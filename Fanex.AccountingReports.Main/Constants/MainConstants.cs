@@ -3,7 +3,7 @@ namespace Fanex.AccountingReports.Main.Common
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class MainConstants
+    public static class MainConstants
     {
         public const int DailyWinLoss2hKickOffId = 1001;
         public const int WinLossSummaryMixParlaySportId = 97;
@@ -84,16 +84,13 @@ namespace Fanex.AccountingReports.Main.Common
         public static readonly string DailyWinLoss2hSoccerMinorBettypeSessionKey = "Fanex.AccountingReports.Main.DailyWinLoss2hSoccerMinor.Bettype";
         public static readonly string DailyWinLoss2hSoccerMinorSiteSessionKey = "Fanex.AccountingReports.Main.DailyWinLoss2hSoccerMinor.Site";
 
-        public static readonly int[] WinLossSummaryRacingSportIds = new int[] { 151, 152, 153 };
-        public static readonly int[] WinLossSummaryVirtualRacingSportTypeIds = new int[] { 181, 182, 184, 183, 185 };
-        public static readonly int[] WinLossSummaryVirtualSportIds = new int[] { 180, 186, 187, 188, 189, 190 };
+        public static int[] WinLossSummaryRacingSportIds => new int[] { 151, 152, 153 };
+        public static int[] WinLossSummaryVirtualRacingSportTypeIds => new int[] { 181, 182, 184, 183, 185 };
+        public static int[] WinLossSummaryVirtualSportIds => new int[] { 180, 186, 187, 188, 189, 190 };
 
         public static readonly short FontSize = 8;
         public static readonly string FontName = "Tahoma";
         public static readonly string TwoDecimalDigitNumber = "##,##0.00";
-        private const string NegativeNumberFormat = "[>=0]#,##0{0}_);[RED][<0]-#,##0{1}";
-        private const string NormalNumberFormat = "#,##0{0}_);-#,##0{1}";
-        private const string PositiveNumberFormat = "[RED][>0]#,##0{0}_);[<0]-#,##0{1};#,##0{2}";
 
         public const int WinLossSummary3rdBullfightingSportId = 207;
     }

@@ -57,8 +57,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                 if (timeDifferenceGroup >= TotalMilliseconds)
                 {
                     groupNo++;
-                    ticketIndex = 0;
-                    timeDifferenceGroup = 0;
+                    ticketIndex = 0;                    
                     timeDifferenceTicket = 0;
                 }
 

@@ -142,6 +142,7 @@
     <Compile Include="Criteria\WinLossSummary\GetReportCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetReportCriteria.cs" />
     <Compile Include="Enums\DailyWinloss2hSoccerMinorBettype\ColumnMappingEnums.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MainAreaRegistration.cs" />
     <Compile Include="Models\CreditTerm\CreditTerm.cs" />
     <Compile Include="Models\CreditTerm\EditedRemarkResult.cs" />

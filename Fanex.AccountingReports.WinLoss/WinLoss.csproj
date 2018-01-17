@@ -201,6 +201,7 @@
     <Compile Include="Criteria\TreeWinLoss\GetTreeWinLossBySuperCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetVirtualRateCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetVirtualRateHistoryCriteria.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Models\AllCustomerTurnOver\CustomerTurnOverBySite.cs" />
     <Compile Include="Models\AllCustomerTurnOver\CustomerTurnoverBySiteDetail.cs" />
     <Compile Include="Models\DailyMixParlayWinLoss\WinLossInfo.cs" />

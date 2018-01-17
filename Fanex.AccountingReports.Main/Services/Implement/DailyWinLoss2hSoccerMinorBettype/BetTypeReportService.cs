@@ -22,11 +22,11 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
     /// </summary>
     public class BetTypeReportService : BaseReportService, IBettypeReportService
     {
-        private Dictionary<object, string> _teamName;
+        private readonly Dictionary<object, string> _teamName;
 
-        private Dictionary<object, string> _leagueName;
+        private readonly Dictionary<object, string> _leagueName;
 
-        private Dictionary<object, List<GridDataRow>> _dataBlocks;
+        private readonly Dictionary<object, List<GridDataRow>> _dataBlocks;
 
         private GetReportByBetTypeCriteria _criteria;
 
@@ -62,7 +62,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
                 }
             }
 
-            GridDataRow eightRMTotalRow = null;
+            var eightRMTotalRow = new GridDataRow();
             this._criteria = criteria;
             criteria.BetTypeName = CacheRef.GetBettype(criteria.Bettype);
             this.Init();
@@ -204,24 +204,24 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
             double virtualLineTotal = Math.Round(Convert.ToDouble(row.Columns[(int)ColumnMappingEnums.LineTotalVirtual + shiftColumn].Value), 2);
             double realTurnOver = Math.Round(Convert.ToDouble(row.Columns[(int)ColumnMappingEnums.TurnoverReal + shiftColumn].Value), 2);
             double virtualTurnOver = Math.Round(Convert.ToDouble(row.Columns[(int)ColumnMappingEnums.TurnoverVirtual + shiftColumn].Value), 2);
-            if (realTurnOver == 0)
+            if (Math.Abs(realTurnOver) < 0)
             {
                 row.Columns[(int)ColumnMappingEnums.MarginReal + shiftColumn].Value = Labels.NotAvailable;
                 row.Columns[(int)ColumnMappingEnums.MarginReal + shiftColumn].CellAlignment = HAlignment.Right;
             }
             else
             {
-                row.Columns[(int)ColumnMappingEnums.MarginReal + shiftColumn].Value = Converter.ToDecimal(realTurnOver == 0 ? 0 : realLineTotal / realTurnOver);
+                row.Columns[(int)ColumnMappingEnums.MarginReal + shiftColumn].Value = Converter.ToDecimal(Math.Abs(realTurnOver) < 0 ? 0 : realLineTotal / realTurnOver);
             }
 
-            if (virtualTurnOver == 0)
+            if (Math.Abs(virtualTurnOver) < 0)
             {
                 row.Columns[(int)ColumnMappingEnums.MarginVirtual + shiftColumn].Value = Labels.NotAvailable;
                 row.Columns[(int)ColumnMappingEnums.MarginVirtual + shiftColumn].CellAlignment = HAlignment.Right;
             }
             else
             {
-                row.Columns[(int)ColumnMappingEnums.MarginVirtual + shiftColumn].Value = Converter.ToDecimal(virtualTurnOver == 0 ? 0 : virtualLineTotal / virtualTurnOver);
+                row.Columns[(int)ColumnMappingEnums.MarginVirtual + shiftColumn].Value = Converter.ToDecimal(Math.Abs(virtualTurnOver) < 0 ? 0 : virtualLineTotal / virtualTurnOver);
             }
 
             row.Columns[(int)ColumnMappingEnums.Variance + shiftColumn].Value = Converter.ToDecimal(realLineTotal - virtualLineTotal);
@@ -315,7 +315,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
             gridDataRow.Columns.Add(new Columns(currentColIndex++) { Name = Labels.Turnover + Labels.Real, Value = Converter.ToDecimal(this.Reader["RealTurnOver"]), CellAlignment = HAlignment.Right });
             gridDataRow.Columns.Add(new Columns(currentColIndex++) { Name = Labels.Turnover + Labels.Virtual, Value = Converter.ToDecimal(this.Reader["VirtualTurnOver"]), CellAlignment = HAlignment.Right });
             gridDataRow.Columns.Add(new Columns(currentColIndex++) { Name = Labels.Margin + Labels.Real, Value = 0, CellAlignment = HAlignment.Right });
-            gridDataRow.Columns.Add(new Columns(currentColIndex++) { Name = Labels.Margin + Labels.Virtual, Value = 0, CellAlignment = HAlignment.Right });
+            gridDataRow.Columns.Add(new Columns(currentColIndex) { Name = Labels.Margin + Labels.Virtual, Value = 0, CellAlignment = HAlignment.Right });
             this.RecalculateVarianceAndMarginValue(gridDataRow);
             return gridDataRow;
         }
@@ -404,18 +404,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
             }
         }
 
-        private void GetTotalRMRow(decimal total8RM, decimal totalBARM)
-        {
-            if (total8RM != 0 || totalBARM != 0)
-            {
-                GridDataRow row = new GridDataRow();
-                row.Columns.Add(new Columns(0) { Name = Labels.Code, Value = Labels.IBCTotal, CellAlignment = HAlignment.Right, MergeColNumber = 4 });
-                row.Columns.Add(new Columns(1) { Name = Labels.WinLoss, Value = total8RM + totalBARM, CellAlignment = HAlignment.Right });
-                row.Columns.Add(new Columns(1) { Name = Labels.Position, MergeColNumber = 9, Value = string.Empty });
-                this.GridOptions.FooterRows.Add(row);
-            }
-        }
-
         /// <summary>
         /// Maps the RM total row.
         /// </summary>
@@ -437,7 +425,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
             dataRow.Columns.Add(new Columns(columnIndex++) { Name = Labels.Turnover + Labels.Real, Value = Converter.ToDecimal(this.Reader["RealTurnOver"]), CellAlignment = HAlignment.Right });
             dataRow.Columns.Add(new Columns(columnIndex++) { Name = Labels.Turnover + Labels.Virtual, Value = Converter.ToDecimal(this.Reader["VirtualTurnOver"]), CellAlignment = HAlignment.Right });
             dataRow.Columns.Add(new Columns(columnIndex++) { Name = Labels.Margin + Labels.Real, Value = 0, CellAlignment = HAlignment.Right });
-            dataRow.Columns.Add(new Columns(columnIndex++) { Name = Labels.Margin + Labels.Virtual, Value = 0, CellAlignment = HAlignment.Right });
+            dataRow.Columns.Add(new Columns(columnIndex) { Name = Labels.Margin + Labels.Virtual, Value = 0, CellAlignment = HAlignment.Right });
             return dataRow;
         }
 
@@ -451,24 +439,24 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
             double virtualLineTotal = Math.Round(Convert.ToDouble(row.Columns[(int)ColumnMappingEnums.LineTotalVirtual].Value), 2);
             double realTurnOver = Math.Round(Convert.ToDouble(row.Columns[(int)ColumnMappingEnums.TurnoverReal].Value), 2);
             double virtualTurnOver = Math.Round(Convert.ToDouble(row.Columns[(int)ColumnMappingEnums.TurnoverVirtual].Value), 2);
-            if (realTurnOver == 0)
+            if (Math.Abs(realTurnOver) < 0)
             {
                 row.Columns[(int)ColumnMappingEnums.MarginReal].Value = Labels.NotAvailable;
                 row.Columns[(int)ColumnMappingEnums.MarginReal].CellAlignment = HAlignment.Right;
             }
             else
             {
-                row.Columns[(int)ColumnMappingEnums.MarginReal].Value = Converter.ToDecimal(realTurnOver == 0 ? 0 : realLineTotal / realTurnOver);
+                row.Columns[(int)ColumnMappingEnums.MarginReal].Value = Converter.ToDecimal(Math.Abs(realTurnOver) < 0 ? 0 : realLineTotal / realTurnOver);
             }
 
-            if (virtualTurnOver == 0)
+            if (Math.Abs(virtualTurnOver) < 0)
             {
                 row.Columns[(int)ColumnMappingEnums.MarginVirtual].Value = Labels.NotAvailable;
                 row.Columns[(int)ColumnMappingEnums.MarginVirtual].CellAlignment = HAlignment.Right;
             }
             else
             {
-                row.Columns[(int)ColumnMappingEnums.MarginVirtual].Value = Converter.ToDecimal(virtualTurnOver == 0 ? 0 : virtualLineTotal / virtualTurnOver);
+                row.Columns[(int)ColumnMappingEnums.MarginVirtual].Value = Converter.ToDecimal(Math.Abs(virtualTurnOver) < 0 ? 0 : virtualLineTotal / virtualTurnOver);
             }
 
             row.Columns[(int)ColumnMappingEnums.Variance].Value = Converter.ToDecimal(realLineTotal - virtualLineTotal);

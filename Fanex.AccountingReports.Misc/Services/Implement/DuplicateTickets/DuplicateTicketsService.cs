@@ -100,10 +100,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
         {
             try
             {
-                List<dynamic> report = new List<dynamic>();
-
-                report = GetReportData<dynamic>(criteria).ToList();
-                return report;
+                return GetReportData<dynamic>(criteria).ToList();
             }
             catch (Exception ex)
             {
@@ -347,7 +344,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                         currentColumn,
                         ticketInfo.BetTime,
                         i % 2 == 0 ? evenRowTextStyle : textStyle);
-                    if (ticketInfo.TimeDifference == 0 && subCount == 0)
+                    if (Math.Abs(ticketInfo.TimeDifference) < 0 && subCount == 0)
                     {
                         NpoiExcelExtensions.RenderCell(
                             ref worksheet,

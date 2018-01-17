@@ -44,7 +44,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 
         public ActionResult DownloadReport(string time, string reportName)
         {
-            return RedirectToAction("DownloadReport", "DownloadReport", new { time = time, reportName = reportName, area = string.Empty });
+            return RedirectToAction("DownloadReport", "DownloadReport", new { time, reportName, area = string.Empty });
         }
 
         public ActionResult ExpiredNotification(int type)

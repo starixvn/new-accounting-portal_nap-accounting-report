@@ -1,5 +1,9 @@
 namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMinorBettype
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
     using Core.Configurations;
     using Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
@@ -11,20 +15,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
     using Fanex.Data;
     using Fanex.Excel.Enums;
     using Fanex.Excel.Models;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class MainReportService : BaseReportService, IMainReportService
     {
-        private GridDataRow _soccerMinorBettypesRow;
-
-        private GridDataRow _grandTotalRow;
-
         private string _soccerMinorBetTypes = string.Empty;
 
         private GridOptions _gridOptions { get; set; }
@@ -83,6 +79,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
 
             this.RefineData();
             SessionManager.Set<GridOptions>(MainConstants.DailyWinLoss2hSoccerMinorMainSessionKey, this._gridOptions);
+
             return this._gridOptions;
         }
 
@@ -109,8 +106,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
             double virtualLineTotal = Convert.ToDouble(this.Reader["VirtualLineTotal"]);
             double realTurnOver = Convert.ToDouble(this.Reader["RealTurnOver"]);
             double virtualTurnOver = Convert.ToDouble(this.Reader["VirtualTurnOver"]);
-            double realMargin = realTurnOver == 0 ? 0 : realLineTotal / realTurnOver;
-            double virtualMargin = virtualTurnOver == 0 ? 0 : virtualLineTotal / virtualTurnOver;
+            double realMargin = Math.Abs(realTurnOver) < 0 ? 0 : realLineTotal / realTurnOver;
+            double virtualMargin = Math.Abs(virtualTurnOver) < 0 ? 0 : virtualLineTotal / virtualTurnOver;
             double variance = realLineTotal - virtualLineTotal;
             string cellClass = isRMRow ? "subTotal" : string.Empty;
             int ibc = Convert.ToInt32(this.Reader["IBC"]);
@@ -128,7 +125,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
             dataRow.Columns.Add(this.CreateColumns(currentColIndex++, Labels.Turnover + Labels.Real, Converter.ToDecimal(realTurnOver), cellClass, align, isRMRow));
             dataRow.Columns.Add(this.CreateColumns(currentColIndex++, Labels.Turnover + Labels.Virtual, Converter.ToDecimal(virtualTurnOver), cellClass, align, isRMRow));
             dataRow.Columns.Add(this.CreateColumns(currentColIndex++, Labels.Margin + Labels.Real, Converter.ToDecimal(realMargin), cellClass, align, isRMRow));
-            dataRow.Columns.Add(this.CreateColumns(currentColIndex++, Labels.Margin + Labels.Virtual, Converter.ToDecimal(virtualMargin), cellClass, align, isRMRow));
+            dataRow.Columns.Add(this.CreateColumns(currentColIndex, Labels.Margin + Labels.Virtual, Converter.ToDecimal(virtualMargin), cellClass, align, isRMRow));
             if (ibc == 0)
             {
                 dataRow.CssClass = "data-group-0";
@@ -162,8 +159,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
             {
                 return Labels.BARM;
             }
-
-            return string.Empty;
+            else
+            {
+                return string.Empty;
+            }
         }
 
         /// <summary>
@@ -180,30 +179,30 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
             this._gridOptions.BodyRows = this._gridOptions.BodyRows.OrderBy(m => this.GetSortingOrder(m.Columns[0].Value.ToString())).ToList();
 
             // Calculate Sporttype TotalRow
-            this._soccerMinorBettypesRow = this._gridOptions.BodyRows[0].Clone();
-            this._soccerMinorBettypesRow.IsEven = true;
-            this._soccerMinorBettypesRow.Columns[0].CellAlignment = HAlignment.Left;
+            var soccerMinorBettypesRow = this._gridOptions.BodyRows[0].Clone();
+            soccerMinorBettypesRow.IsEven = true;
+            soccerMinorBettypesRow.Columns[0].CellAlignment = HAlignment.Left;
             if (this._gridOptions.BodyRows.Count > 1)
             {
-                this._soccerMinorBettypesRow.AddValue(this._gridOptions.BodyRows[1]);
+                soccerMinorBettypesRow.AddValue(this._gridOptions.BodyRows[1]);
             }
 
-            this._soccerMinorBettypesRow.Columns[0].Value = this._soccerMinorBetTypes;
-            this._soccerMinorBettypesRow.CssClass = "freegrid-even";
+            soccerMinorBettypesRow.Columns[0].Value = this._soccerMinorBetTypes;
+            soccerMinorBettypesRow.CssClass = "freegrid-even";
 
-            this.RecalculateVarianceAndMarginValue(this._soccerMinorBettypesRow);
-            this._grandTotalRow = this._gridOptions.BodyRows[0].Clone();
-            this._grandTotalRow.CssClass = string.Empty;
-            this._grandTotalRow.Columns[0].Value = Labels.Grand_Total;
-            this._grandTotalRow.Columns[0].CellAlignment = HAlignment.Right;
+            this.RecalculateVarianceAndMarginValue(soccerMinorBettypesRow);
+            var grandTotalRow = this._gridOptions.BodyRows[0].Clone();
+            grandTotalRow.CssClass = string.Empty;
+            grandTotalRow.Columns[0].Value = Labels.Grand_Total;
+            grandTotalRow.Columns[0].CellAlignment = HAlignment.Right;
             for (int i = 1; i < bodyRowsCount; i++)
             {
-                this._grandTotalRow.AddValue(this._gridOptions.BodyRows[i]);
+                grandTotalRow.AddValue(this._gridOptions.BodyRows[i]);
             }
 
-            this.RecalculateVarianceAndMarginValue(this._grandTotalRow);
-            this._gridOptions.BodyRows.Insert(0, this._soccerMinorBettypesRow);
-            this._gridOptions.FooterRows.Add(this._grandTotalRow);
+            this.RecalculateVarianceAndMarginValue(grandTotalRow);
+            this._gridOptions.BodyRows.Insert(0, soccerMinorBettypesRow);
+            this._gridOptions.FooterRows.Add(grandTotalRow);
 
             GridDataRow grandTotalInfoRow = new GridDataRow();
             grandTotalInfoRow.Columns.Add(new Columns(0)

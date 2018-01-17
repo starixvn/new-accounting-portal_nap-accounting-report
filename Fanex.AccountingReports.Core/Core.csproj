@@ -212,6 +212,7 @@
     <Compile Include="Extensions\SessionExtension.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\WorkbookExtensions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helper\SportHelper\BetTeam.cs" />
     <Compile Include="Helper\SportHelper\BetType.cs" />
     <Compile Include="Helper\SportHelper\CalcOdds.cs" />
@@ -287,7 +288,6 @@
     </Compile>
     <Compile Include="Services\Impl\ServiceBase.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
-    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Services\Impl\MenuService.cs" />
     <Compile Include="Web\AppSession.cs" />
     <Compile Include="Web\Controllers\ReportHelperController.cs" />

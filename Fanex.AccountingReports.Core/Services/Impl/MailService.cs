@@ -33,11 +33,11 @@ namespace Fanex.AccountingReports.Core.Services.Impl
                         Content = attachment.Content
                     };
 
-                    if (attachment.ContentType.ToLower().IndexOf("excel") != -1)
+                    if (attachment.ContentType.ToLower().IndexOf("excel", StringComparison.Ordinal) != -1)
                     {
                         attItem.ContentType = MailDeliverModel.FileExtentions.MS_EXCEL;
                     }
-                    else if (attachment.ContentType.ToLower().IndexOf("doc") != -1)
+                    else if (attachment.ContentType.ToLower().IndexOf("doc", StringComparison.Ordinal) != -1)
                     {
                         attItem.ContentType = MailDeliverModel.FileExtentions.MS_DOC;
                     }
@@ -84,14 +84,12 @@ namespace Fanex.AccountingReports.Core.Services.Impl
                     foreach (var linked in linkedResource)
                     {
                         var stream = linked.ContentStream;
-                        byte[] buffer = new byte[stream.Length];
-                        stream.Read(buffer, 0, buffer.Length);
                         var resource = new MailDeliverModel.MailLinkedResource
                         {
                             FileName = string.Empty,
                             ImageType = MailDeliverModel.FileExtentions.IMG_GIF,
                             ContentCID = linked.ContentId,
-                            StreamContent = new MemoryStream(buffer)
+                            StreamContent = CreateMemoryStream(stream)
                         };
 
                         mailRecord.AlternateView.Add(resource);
@@ -109,6 +107,19 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             }
 
             return true;
+        }
+
+        private static MemoryStream CreateMemoryStream(Stream stream)
+        {
+            var buffer = new byte[stream.Length];
+            var ms = new MemoryStream();
+            int read;
+            while ((read = stream.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                ms.Write(buffer, 0, read);
+            }
+
+            return ms;
         }
 
         /// <summary>
