@@ -133,4 +133,7 @@
   <Function Name="Special - Total Credit Account By Product">
     <Setting Key="Acc_Rpt_EnableDisableAccount_ByProduct" SpName="Acc_Rpt_EnableDisableAccount_ByProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
+  <Function Name="Special - Margin Report">
+    <Setting Key ="Special_MarginReport_BetRatioByUser" SpName="Acc_Rpt_BetRatioByUser" DbName="DBACC.bodb02.bodbAdminNet"></Setting>
+  </Function>
 </Functions>

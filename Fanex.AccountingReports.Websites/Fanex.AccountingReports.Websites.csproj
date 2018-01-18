@@ -438,7 +438,6 @@
     <Content Include="App_Data\TEST\DBRPT.bodb_Report.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\TEST\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\TEST\DBCUST.CustDB.bodbAdminNet.xml">
       <SubType>
       </SubType>
@@ -474,7 +473,6 @@
     <Content Include="App_Data\LIVE\DBRPT.bodb_Report.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\LIVE\DBTXN.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\LIVE\DBCUST.CustDB.bodbAdminNet.xml" />
     <Content Include="App_Data\LIVE\DBCUST.IPDB.bodbAdminNet.xml" />
     <Content Include="App_Readme\Transformer.NET\LICENSE.txt" />
