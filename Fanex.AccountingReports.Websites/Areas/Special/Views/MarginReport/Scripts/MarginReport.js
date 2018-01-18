@@ -89,7 +89,7 @@ Fanex.AccountingReports.Special.Margin.MarginReport = function () {
         }
         var gridOptions = {
             columns: [{ HeaderText: "No", Width: 80, Name: "ColNo", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Username", Width: 120, Name: "ColUsername", HeaderAlign: "center", CellAlign: "left" },
+                    { HeaderText: "Username", Width: 220, Name: "ColUsername", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Type", Width: 100, Name: "ColBettype", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Winning Amount", Width: 120, Name: "ColWinningAmount", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
                     { HeaderText: "Turnover", Width: 120, Name: "ColTurnover", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", CellAlign: "right" },
