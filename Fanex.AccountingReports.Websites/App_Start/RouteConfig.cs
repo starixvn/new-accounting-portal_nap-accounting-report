@@ -7,7 +7,7 @@ namespace Fanex.AccountingReports.Websites
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class RouteConfig
+    public static class RouteConfig
     {
         /// <summary>
         /// Registers the routes.

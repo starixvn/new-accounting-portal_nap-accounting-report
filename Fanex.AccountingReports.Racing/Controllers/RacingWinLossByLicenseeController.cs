@@ -36,6 +36,7 @@ namespace Fanex.AccountingReports.Racing.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.RacingWinLossByLicensee, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

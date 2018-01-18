@@ -73,22 +73,22 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
             double virtualLineTotal = Math.Round(Convert.ToDouble(row.Columns[(int)ColumnMappingEnums.LineTotalVirtual].Value), 2);
             double realTurnOver = Math.Round(Convert.ToDouble(row.Columns[(int)ColumnMappingEnums.TurnoverReal].Value), 2);
             double virtualTurnOver = Math.Round(Convert.ToDouble(row.Columns[(int)ColumnMappingEnums.TurnoverVirtual].Value), 2);
-            if (realTurnOver == 0)
+            if (Math.Abs(realTurnOver) < 0)
             {
                 row.Columns[(int)ColumnMappingEnums.MarginReal].Value = Labels.NotAvailable;
             }
             else
             {
-                row.Columns[(int)ColumnMappingEnums.MarginReal].Value = Converter.ToDecimal(realTurnOver == 0 ? 0 : realLineTotal / realTurnOver);
+                row.Columns[(int)ColumnMappingEnums.MarginReal].Value = Converter.ToDecimal(Math.Abs(realTurnOver) < 0 ? 0 : realLineTotal / realTurnOver);
             }
 
-            if (virtualTurnOver == 0)
+            if (Math.Abs(virtualTurnOver) < 0)
             {
                 row.Columns[(int)ColumnMappingEnums.MarginVirtual].Value = Labels.NotAvailable;
             }
             else
             {
-                row.Columns[(int)ColumnMappingEnums.MarginVirtual].Value = Converter.ToDecimal(virtualTurnOver == 0 ? 0 : virtualLineTotal / virtualTurnOver);
+                row.Columns[(int)ColumnMappingEnums.MarginVirtual].Value = Converter.ToDecimal(Math.Abs(virtualTurnOver) < 0 ? 0 : virtualLineTotal / virtualTurnOver);
             }
 
             row.Columns[(int)ColumnMappingEnums.Variance].Value = Converter.ToDecimal(realLineTotal - virtualLineTotal);

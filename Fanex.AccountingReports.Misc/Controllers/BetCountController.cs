@@ -21,6 +21,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.BetCount, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

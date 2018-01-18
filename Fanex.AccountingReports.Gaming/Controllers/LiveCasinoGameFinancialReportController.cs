@@ -19,6 +19,7 @@ namespace Fanex.AccountingReports.Gaming.Controllers
             this._reportService = new LiveCasinoGameFinancialReportService();
         }
 
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.LiveCasinoGameFinancialReport, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

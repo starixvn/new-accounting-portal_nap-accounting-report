@@ -25,6 +25,7 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.LeagueWinLoss, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

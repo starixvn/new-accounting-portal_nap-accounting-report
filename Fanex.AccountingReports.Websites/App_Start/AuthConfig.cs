@@ -10,7 +10,7 @@ namespace Fanex.AccountingReports.Websites.App_Start
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class AuthConfig
+    public static class AuthConfig
     {
         /// <summary>
         /// Registers the authentication.

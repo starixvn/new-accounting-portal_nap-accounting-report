@@ -31,6 +31,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.CreditTerm, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
@@ -48,6 +49,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         }
 
         [HttpPost]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.CreditTerm, Policy = Constant.Policy.Host)]
         [HandleAjaxError]
         public JsonResult EditRemark(GetRemarkEditedCriteria criteria)

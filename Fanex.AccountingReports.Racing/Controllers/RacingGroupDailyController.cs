@@ -24,6 +24,7 @@ namespace Fanex.AccountingReports.Racing.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.RacingGroupDaily, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

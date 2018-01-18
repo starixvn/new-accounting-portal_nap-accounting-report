@@ -1,5 +1,9 @@
 namespace Fanex.AccountingReports.LegendManagement.Services.Impls
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.LegendManagement.Configurations;
     using Fanex.AccountingReports.LegendManagement.Criteria;
@@ -8,29 +12,12 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
     using Fanex.Common;
     using Fanex.NAP.Core.Business;
     using NAP.Core.Service.Impl;
-    using NAP.Core.Service.Interface;
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
     /// <summary>
     /// Menu Service.
     /// </summary>
     public class MenuService : ServiceBase, IMenuService
     {
-        private ISiteService _accNapMenuService;
-
-        public MenuService()
-            : this(null)
-        {
-        }
-
-        public MenuService(ISiteService accNapMenuService)
-        {
-            this._accNapMenuService = accNapMenuService ?? new SiteService();
-        }
-
         /// <summary>
         /// Gets the menu list.
         /// </summary>
@@ -46,8 +33,9 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
                 switch (criteria.System)
                 {
                     case Constants.SystemName.AccNapReport:
-                        var menuList = this._accNapMenuService.GetMenuItemBySiteId(WebSettings.NAPSiteId, Constant.UAT);
+                        var menuList = new SiteService().GetMenuItemBySiteId(WebSettings.NAPSiteId, Constant.UAT);
                         return this.MappingNapMenuToAccountingMenu(menuList);
+
                     case Constants.SystemName.AccReport:
                         var rawData = GetReportData<dynamic>(criteria)
                             .OrderBy(menuItem => menuItem.Menu)
@@ -62,7 +50,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
                 HandleException(ex);
             }
 
-            return null;
+            return new List<MenuItem>();
         }
 
         /// <summary>
@@ -73,8 +61,13 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
         /// <returns>The menu list.</returns>
         private List<MenuItem> RecursionMenu(List<dynamic> rawData, int parentId)
         {
-            List<MenuItem> menuList = null;
-            if (rawData != null || rawData.Count > 0)
+            var menuList = new List<MenuItem>();
+            if (rawData == null)
+            {
+                return menuList;
+            }
+
+            if (rawData.Count > 0)
             {
                 var rows = rawData.Where(menuItem => menuItem.ParentId == parentId);
                 menuList = new List<MenuItem>();
@@ -110,14 +103,19 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
         /// <returns>Mappings result.</returns>
         private List<MenuItem> MappingNapMenuToAccountingMenu(IEnumerable<NAP.Core.Models.MenuItem> rawData, int? parentId = null)
         {
-            List<MenuItem> menuList = null;
-            if (rawData != null || rawData.Count() > 0)
+            var menuList = new List<MenuItem>();
+            if (rawData == null)
+            {
+                return menuList;
+            }
+
+            if (rawData.Any())
             {
                 var rows = rawData.Where(menuItem =>
                     (parentId == null && menuItem.Parent == null) ||
                     (menuItem.Parent != null && menuItem.Parent.Id == parentId));
 
-                if (rows != null && rows.Count() > 0)
+                if (rows != null && rows.Any())
                 {
                     menuList = new List<MenuItem>();
                     foreach (var row in rows)

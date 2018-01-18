@@ -23,6 +23,7 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.LegendManagement, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
@@ -30,6 +31,7 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
         }
 
         [HttpPost]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.LegendManagement, Policy = Constant.Policy.Read)]
         public JsonResult GetMenuList(GetSystemMenuCriteria criteria)
         {
@@ -38,6 +40,7 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
         }
 
         [HttpPost]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.LegendManagement, Policy = Constant.Policy.Host)]
         public JsonResult SaveReportLegend(SaveReportLegendCriteria criteria)
         {
@@ -77,6 +80,7 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
         }
 
         [HttpPost]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.LegendManagement, Policy = Constant.Policy.Host)]
         public JsonResult MakeInlineImages(List<string> imagesPath)
         {
@@ -85,6 +89,7 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
         }
 
         [HttpPost]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.LegendManagement, Policy = Constant.Policy.Host)]
         public JsonResult SaveReportLegendMapping(SaveReportLegendMappingCriteria criteria)
         {
@@ -93,6 +98,7 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
         }
 
         [HttpPost]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.LegendManagement, Policy = Constant.Policy.Read)]
         public JsonResult GetInputedLegendReport(GetInputedLegendReportCriteria criteria)
         {

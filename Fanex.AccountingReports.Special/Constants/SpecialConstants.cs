@@ -16,7 +16,7 @@ namespace Fanex.AccountingReports.Special.Constants
 
         public static readonly string FontName = "Tahoma";
 
-        public static readonly List<string> ProductsHaveSport = new List<string>
+        public static List<string> ProductsHaveSport => new List<string>
         {
             "sportsbook",
             "ng2"

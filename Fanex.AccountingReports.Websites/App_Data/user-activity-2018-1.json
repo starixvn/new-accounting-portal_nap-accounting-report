@@ -1,0 +1,6 @@
+{"User":"sa","Controller":"DuplicateTickets","Action":"index","Url":"http://localhost:63741/NAP-Reports/Misc/DuplicateTickets/index","Time":"2018-01-17T13:21:38.1681226+07:00"}
+{"User":"sa","Controller":"SaveBetReport","Action":"Index","Url":"http://localhost:63741/NAP-Reports/Special/SaveBetReport/Index","Time":"2018-01-17T13:21:56.3851556+07:00"}
+{"User":"sa","Controller":"DuplicateTickets","Action":"index","Url":"http://localhost:63741/NAP-Reports/Misc/DuplicateTickets/index","Time":"2018-01-17T13:41:48.6158285+07:00"}
+{"User":"sa","Controller":"RacingUKTote","Action":"Index","Url":"http://localhost:63741/NAP-Reports/Racing/RacingUKTote/Index","Time":"2018-01-17T13:43:16.1216561+07:00"}
+{"User":"sa","Controller":"DailyWinLoss2hSoccerMinorBettype","Action":"Index","Url":"http://localhost:63741/NAP-Reports/Main/DailyWinLoss2hSoccerMinorBettype/Index","Time":"2018-01-18T09:17:16.0310855+07:00"}
+{"User":"sa","Controller":"DailyWinLoss2hSoccerMinorBettype","Action":"Index","Url":"http://localhost:63741/NAP-Reports/Main/DailyWinLoss2hSoccerMinorBettype/Index","Time":"2018-01-18T11:02:29.3107568+07:00"}

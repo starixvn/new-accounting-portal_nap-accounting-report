@@ -57,8 +57,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                 if (timeDifferenceGroup >= TotalMilliseconds)
                 {
                     groupNo++;
-                    ticketIndex = 0;
-                    timeDifferenceGroup = 0;
+                    ticketIndex = 0;                    
                     timeDifferenceTicket = 0;
                 }
 
@@ -101,7 +100,8 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                 WinLostDate = winlostDate.ToShortFormatedDate(),
                 BalanceBeforeBet = Converter.ToDecimal(duplicateTicketByUserName.Key.balance),
                 Stake = Converter.ToDecimal(duplicateTicketByUserName.Key.stake),
-                Odds = Converter.ToDecimal(duplicateTicketByUserName.Key.odds)
+                Odds = Converter.ToDecimal(duplicateTicketByUserName.Key.odds),
+                BetTypeId = Converter.To<int>(duplicateTicketByUserName.Key.bettype)
             };
 
             return ticket;

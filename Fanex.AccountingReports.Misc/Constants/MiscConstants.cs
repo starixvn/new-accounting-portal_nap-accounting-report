@@ -26,7 +26,7 @@ namespace Fanex.AccountingReports.Misc.Constants
         public static readonly string DuplicateTicketsPrefixSessionKey = "Fanex.AccountingReports.Misc.DuplicateTickets.";
         public static readonly string MiscSportsSessionKey = "Fanex.AccountingReports.Misc.BetCount.Sports";
 
-        public static readonly List<string> ProductsHaveSports = new List<string>
+        public static List<string> ProductsHaveSports => new List<string>
         {
             "sportsbook",
             "virtual sports",

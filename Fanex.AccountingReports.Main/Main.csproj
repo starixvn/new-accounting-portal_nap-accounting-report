@@ -55,6 +55,10 @@
       <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NapReports.UserActivityLog, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Olympus.NapReports.UserActivityLog.1.0.0.4\lib\net40\NapReports.UserActivityLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -138,6 +142,7 @@
     <Compile Include="Criteria\WinLossSummary\GetReportCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetReportCriteria.cs" />
     <Compile Include="Enums\DailyWinloss2hSoccerMinorBettype\ColumnMappingEnums.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MainAreaRegistration.cs" />
     <Compile Include="Models\CreditTerm\CreditTerm.cs" />
     <Compile Include="Models\CreditTerm\EditedRemarkResult.cs" />

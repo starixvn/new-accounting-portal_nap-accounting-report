@@ -28,8 +28,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
     public class TreeWinLossService : ServiceBase, ITreeWinLossService
     {
         private const string TreeWinLossProductPath = @"Web.Configuration\TreeWinLossProduct.xml";
-        private ITreeWinLossRepository _treeWinLossRepository;
-        private Dictionary<int, int> _bettype = new Dictionary<int, int>();
+        private readonly ITreeWinLossRepository _treeWinLossRepository;
+        private readonly Dictionary<int, int> _bettype = new Dictionary<int, int>();
 
         public TreeWinLossService()
             : this(null)
@@ -86,18 +86,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 DateTime moveBetsDay = ReportService.BalanceUp.MoveBetsDay;
                 if (criteria.FromDate <= moveBetsDay && criteria.ToDate > moveBetsDay)
                 {
-                    DateTime fromDate = criteria.FromDate;
-                    var accountWinLoss = new TreeWinLoss();
-                    var wareHouseWinLoss = new TreeWinLoss();
-                    criteria.FromDate = moveBetsDay.AddDays(1);
-                    criteria.ToDate = criteria.ToDate;
-                    accountWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
+                    DateTime fromDate = criteria.FromDate;                                        
+                    criteria.FromDate = moveBetsDay.AddDays(1);                    
+                    var accountWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
 
                     criteria.FromDate = fromDate;
                     criteria.ToDate = moveBetsDay;
-                    wareHouseWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
-                    var treeWinLossTmp = new List<TreeWinLossInfo>();
-                    treeWinLossTmp = accountWinLoss.ChildsInfo.Concat(wareHouseWinLoss.ChildsInfo).ToList();
+                    var wareHouseWinLoss = GetTreeWinLossDateRangeByProduct(criteria);                    
+                    var treeWinLossTmp = accountWinLoss.ChildsInfo.Concat(wareHouseWinLoss.ChildsInfo).ToList();
                     treeWinLoss.ChildsInfo = treeWinLossTmp.GroupBy(x => x.Id)
                         .Select(y => new TreeWinLossInfo
                         {
@@ -182,10 +178,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
                     criteria.FromDate = fromDate;
                     criteria.ToDate = moveBetsDay;
-                    var wareHouseWinLoss = GetTreeWinLossDateRangeByLevel(criteria);
-
-                    var winLossByCommTmp = new List<TreeWinLossInfo>();
-                    winLossByCommTmp = accountWinLoss.TreeWinLoss.ChildsInfo.Concat(wareHouseWinLoss.TreeWinLoss.ChildsInfo).ToList();
+                    var wareHouseWinLoss = GetTreeWinLossDateRangeByLevel(criteria);                    
+                    var winLossByCommTmp = accountWinLoss.TreeWinLoss.ChildsInfo.Concat(wareHouseWinLoss.TreeWinLoss.ChildsInfo).ToList();
                     winLossByComm.ChildsInfo = winLossByCommTmp.GroupBy(x => new { x.Id, x.Name, x.VirtualRate })
                         .Select(y => new TreeWinLossInfo
                         {
@@ -688,7 +682,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     bool isLive = Converter.ToInt(element.Attribute("IsLive").Value) == 1;
                     decimal virtualRate = Converter.ToDecimal(element.Attribute("VirtualMultiplier").Value);
                     string liveAndSportType = string.Join(string.Empty, sportId, isLive);
-                    int bettypeIndex = this._bettype.FirstOrDefault(x => x.Value == bettypeId).Key;
 
                     if (liveAndSportType != preLiveAndSportType)
                     {

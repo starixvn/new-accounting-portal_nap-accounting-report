@@ -23,6 +23,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
 
         [HttpGet]
         [HandleAjaxError]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.MiscTotalSMAandMemberActive, Policy = Constant.Policy.Read)]
         public ActionResult ExportReport(GetTotalSMAMemberActiveCriteria criteria)
         {
@@ -32,6 +33,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
 
         [HttpGet]
         [HandleAjaxError]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.MiscTotalSMAandMemberActive, Policy = Constant.Policy.Read)]
         public ActionResult ExportStatusDetails(GetStatusDetailsCriteria criteria)
         {
@@ -41,6 +43,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
 
         [HttpPost]
         [HandleAjaxError]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.MiscTotalSMAandMemberActive, Policy = Constant.Policy.Read)]
         public JsonResult GetReport(GetTotalSMAMemberActiveCriteria criteria)
         {
@@ -50,6 +53,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
 
         [HttpPost]
         [HandleAjaxError]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.MiscTotalSMAandMemberActive, Policy = Constant.Policy.Read)]
         public JsonResult GetSites(GetSitesCriteria criteria)
         {
@@ -59,6 +63,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
 
         [HttpPost]
         [HandleAjaxError]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.MiscTotalSMAandMemberActive, Policy = Constant.Policy.Read)]
         public JsonResult GetStatusDetails(GetStatusDetailsCriteria criteria)
         {
@@ -73,6 +78,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.MiscTotalSMAandMemberActive, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

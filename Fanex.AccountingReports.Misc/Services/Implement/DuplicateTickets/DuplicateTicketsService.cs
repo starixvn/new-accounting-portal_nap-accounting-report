@@ -27,7 +27,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
 
         private const short EvenRowColorIndex = 52;
 
-        private string _duplicateTicketsSessionKey = MiscConstants.DuplicateTicketsPrefixSessionKey +
+        private readonly string _duplicateTicketsSessionKey = MiscConstants.DuplicateTicketsPrefixSessionKey +
                                              (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
 
         /// <summary>
@@ -44,6 +44,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
 
             List<DuplicateTicketsByUserName> result = new List<DuplicateTicketsByUserName>();
             var reportData = this.GetDuplicateTicketData(criteria);
+            var cashOutService = new DuplicateTicketsCashOutServiceImp();
             var duplicateTicketGroup = reportData.GroupBy(x => new
             {
                 x.username,
@@ -52,29 +53,26 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                 x.winlostdate,
                 x.balance,
                 x.stake,
-                x.odds
+                x.odds,
+                x.bettype,
+                x.refnoGroup
             }).ToList();
 
             DuplicateTicketsUtility utility = new DuplicateTicketsUtility();
 
             foreach (var duplicateTicketByUserName in duplicateTicketGroup)
             {
+                var mainTicket = utility.AssignMainTicketInfo(duplicateTicketByUserName);
                 var subTickets = utility.AssignSubTicketInfo(duplicateTicketByUserName);
-                var groups = subTickets.GroupBy(x => new { x.GroupNo }).ToList();
-                foreach (var group in groups)
+                var groupHavingMultipleTickets = subTickets.GroupBy(x => new { x.GroupNo }).Where(g => g.Count() > 1).ToList();
+                foreach (var group in groupHavingMultipleTickets)
                 {
-                    if (group.Count() == 1)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        var mainTicket = utility.AssignMainTicketInfo(duplicateTicketByUserName);
-                        foreach (var ticket in group)
-                        {
-                            mainTicket.TicketInfo.Add(ticket);
-                        }
+                    var transIds = string.Join(",", group.Select(s => s.ReferenceNumber));
+                    var isDuplicateCashOut = cashOutService.IsDuplicateTicketsCashOut(mainTicket.BetTypeId, transIds);
 
+                    if (mainTicket.BetTypeId != 911 || isDuplicateCashOut)
+                    {
+                        mainTicket.TicketInfo.AddRange(group);
                         result.Add(mainTicket);
                     }
                 }
@@ -85,7 +83,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             SessionManager.Set<DuplicateTicketsInfo>(this._duplicateTicketsSessionKey, duplicateTicketsInfo);
 
             if (result.Count > 0)
-            {                
+            {
                 var json = JsonConvert.SerializeObject(result, Formatting.Indented);
                 LogService.Info($"Misc / Duplicate Tickets by Username: {AppSession.CurrentUser.Username}" + Environment.NewLine + json);
             }
@@ -102,10 +100,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
         {
             try
             {
-                List<dynamic> report = new List<dynamic>();
-
-                report = GetReportData<dynamic>(criteria).ToList();
-                return report;
+                return GetReportData<dynamic>(criteria).ToList();
             }
             catch (Exception ex)
             {
@@ -349,7 +344,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                         currentColumn,
                         ticketInfo.BetTime,
                         i % 2 == 0 ? evenRowTextStyle : textStyle);
-                    if (ticketInfo.TimeDifference == 0 && subCount == 0)
+                    if (Math.Abs(ticketInfo.TimeDifference) < 0 && subCount == 0)
                     {
                         NpoiExcelExtensions.RenderCell(
                             ref worksheet,

@@ -89,6 +89,10 @@
       <HintPath>..\packages\EnterpriseLibrary.Unity.5.0.414.0\lib\net40\Microsoft.Practices.Unity.Interception.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NapReports.UserActivityLog, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Olympus.NapReports.UserActivityLog.1.0.0.4\lib\net40\NapReports.UserActivityLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -165,6 +169,7 @@
     <Compile Include="Criteria\CreditSitesBetCounts\GetCreditSitesBetCountsCriteria.cs" />
     <Compile Include="Criteria\DailyCreatedCustomers\GetDailyCreatedCustomersCriteria.cs" />
     <Compile Include="Criteria\DailyCreatedCustomers\GetDailyCreatedCustomersDetailsCriteria.cs" />
+    <Compile Include="Criteria\DuplicateTickets\DuplicateTicketsCheckCashOutCriteria.cs" />
     <Compile Include="Criteria\MAMonitorTool\GetBetTypeListCriteria.cs" />
     <Compile Include="Criteria\DuplicateTickets\GetDuplicateTicketsCriteria.cs" />
     <Compile Include="Criteria\MAMonitorTool\GetCurrencyListCriteria.cs" />
@@ -226,6 +231,7 @@
     <Compile Include="Services\Implement\CreditMovement\CreditMovementService.cs" />
     <Compile Include="Services\Implement\CreditSitesBetCountsService.cs" />
     <Compile Include="Services\Implement\DailyCreatedCustomersService.cs" />
+    <Compile Include="Services\Implement\DuplicateTickets\DuplicateTicketsCashOutService.cs" />
     <Compile Include="Services\Implement\DuplicateTickets\DuplicateTicketsService.cs" />
     <Compile Include="Services\Implement\DuplicateTickets\DuplicateTicketsUtility.cs" />
     <Compile Include="Services\Implement\MAMonitorTool\MAMonitorToolExportExcelService.cs" />

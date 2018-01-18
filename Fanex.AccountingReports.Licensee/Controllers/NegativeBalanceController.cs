@@ -25,6 +25,7 @@ namespace Fanex.AccountingReports.Licensee.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.NegativeBalance, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

@@ -105,9 +105,9 @@ namespace Fanex.BetList.Accounting.Services
                 SettlementStatusId = reader.ToInt("SettlementStatusID")
             };
 
-            leagues.Select(league =>
+            leagues.ForEach(league =>
             {
-                foreach (var match in league.Matchs)
+                league.Matchs.ForEach(match =>
                 {
                     if (match.MatchId.Equals(tennisEntity.MatchId) || match.MatchId.Equals("-1"))
                     {
@@ -120,10 +120,8 @@ namespace Fanex.BetList.Accounting.Services
                             this.InsertGameToSet(match, tennisEntity);
                         }
                     }
-                }
-
-                return league;
-            }).ToList();
+                });
+            });
         }
 
         /// <summary>
@@ -148,18 +146,13 @@ namespace Fanex.BetList.Accounting.Services
             }
             else
             {
-                leagues = leagues.Select(item =>
+                leagues.ForEach(item =>
                 {
                     if (item.LeagueId.Equals(match.LeagueId))
                     {
                         item.Matchs.Add(match);
-                        return item;
                     }
-                    else
-                    {
-                        return item;
-                    }
-                }).ToList();
+                });
             }
         }
 

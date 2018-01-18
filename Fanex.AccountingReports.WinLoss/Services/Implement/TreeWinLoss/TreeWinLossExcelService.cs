@@ -67,14 +67,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             true,
             false);
 
-        private static CellStyle grandTotalRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
-            NumberFormatConstants.TwoDecimalDigitPercentFormat,
-            ExcelExtensions.GrandTotalRowColor,
-            true,
-            true,
-            false);
-
-        private ITreeWinLossService _reportService;
+        private readonly ITreeWinLossService _reportService;
 
         public TreeWinLossExcelService()
             : this(null)
@@ -111,7 +104,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 int startRow = 0;
                 int startColumn = 0;
                 int maxColumnIndex = 17;
-                var currentRow = startRow;
 
                 var currentColumn = startColumn;
                 CellRange currentCellRange;
@@ -127,7 +119,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     WinLossResources.TreeWinLoss_WLByCurrency,
                     criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
                     criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
-                currentRow = startColumn;
+                var currentRow = startColumn;
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + maxColumnIndex - 1);
                 currentCellRange.Merged = true;
                 currentCellRange.Value = title;
@@ -137,7 +129,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 this.ExportTreeWinLossByProductHeader(ref workSheet, ref currentRow, startColumn);
 
                 var childsInfoLength = report.ChildsInfo.Count;
-                if (report != null && childsInfoLength > 0)
+                if (childsInfoLength > 0)
                 {
                     this.ExportTreeWinLossByProductAssignBodyData(isShowNA, ref workSheet, report.ChildsInfo, ref currentRow, startColumn);
                     this.ExportTreeWinLossByProductAssignFooterData(isShowNA, ref workSheet, report.TotalInfo, ref currentRow, startColumn);
@@ -231,9 +223,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             int startRow = 0;
             int startColumn = 0;
             int maxColumnIndex = 18;
-            var currentRow = startRow;
 
-            var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
+            var titleStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
             var currentColumn = startColumn;
             CellRange currentCellRange;
 
@@ -244,11 +235,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
 
             string title = GetReportTitleByLevel(criteria);
-            currentRow = startColumn;
+            var currentRow = startColumn;
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + maxColumnIndex);
             currentCellRange.Merged = true;
             currentCellRange.Value = title;
-            currentCellRange.Style = headerTextStyle;
+            currentCellRange.Style = titleStyle;
             currentRow++;
 
             workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
@@ -256,7 +247,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             this.ExportTreeWinLossByLevelHeader(ref workSheet, ref currentRow, startColumn);
             isShowNA = report.TreeWinLoss.IsShowNotAvailableTurnover;
             var childsInfoLength = report.TreeWinLoss.ChildsInfo.Count;
-            if (report != null && childsInfoLength > 0)
+            if (childsInfoLength > 0)
             {
                 this.ExportTreeWinLossByLevelAssignBodyData(isShowNA, ref workSheet, report, ref currentRow, startColumn);
                 this.ExportTreeWinLossByLevelAssignFooterData(isShowNA, ref workSheet, report.TreeWinLoss.TotalInfo, ref currentRow, startColumn);
@@ -440,7 +431,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentCellRange.Merged = true;
             currentCellRange.Value = Labels.Margin;
             currentCellRange.Style = headerTextStyle;
-            currentColumn++;
             currentRow++;
         }
 
@@ -605,7 +595,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     currentCell.Style = twoDecimalPositiveNumberStyle;
                 }
 
-                currentColumn++;
                 currentRow++;
             }
         }
@@ -738,7 +727,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                 }
 
-                currentColumn++;
                 currentRow++;
             }
         }
@@ -880,7 +868,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentCellRange.Merged = true;
             currentCellRange.Value = WinLossResources.VirtualRate;
             currentCellRange.Style = headerTextStyle;
-            currentColumn++;
+
             currentRow++;
         }
 
@@ -923,9 +911,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     twoDecimalPositivePercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
                 }
 
-                var currentColumn = startColumn;
                 info = report.TreeWinLoss.ChildsInfo[i];
-                currentColumn = startColumn;
+                var currentColumn = startColumn;
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = Converter.ToInt(i + 1);
                 intStyle.HorizontalAlignment = HorizontalAlignmentStyle.Center;
@@ -1061,7 +1048,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 currentCell.Value = isDisabledVirtualRate ? "Disabled" :
                     GetVirtualRateColumnValue(report.EnabledVirtualRateUser[info.Name]);
                 currentCell.Style = isDisabledVirtualRate ? redTextStyle : rightTextStyle;
-                currentColumn++;
+
                 currentRow++;
             }
         }
@@ -1199,7 +1186,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = string.Empty;
                 currentCell.Style = grandTotalRowTextStyle;
-                currentColumn++;
+
                 currentRow++;
             }
         }
@@ -1286,7 +1273,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = Labels.SetXGameYWinner;
             currentCell.Style = headerTextStyle;
-            currentColumn++;
 
             currentRow++;
         }
@@ -1326,7 +1312,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentCellRange.Value = userIndex + 1;
             intStyle.HorizontalAlignment = HorizontalAlignmentStyle.Center;
             currentCellRange.Style = intStyle;
-            currentColumn++;
 
             foreach (var virtualRateBySportAndLiveStatus in virtualRateByUser.ReportRows)
             {

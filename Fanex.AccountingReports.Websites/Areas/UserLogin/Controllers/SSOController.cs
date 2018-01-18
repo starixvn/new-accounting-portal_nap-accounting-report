@@ -21,20 +21,20 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class SSOController : BaseController
+    public class SsoController : BaseController
     {
         #region members
 
         private readonly int _timeExipration = 30;
-        private IUserService _userService;
-        private ICurrentSession _currentSession;
-        private ISecurityService securityService = new SecurityService();
+        private readonly IUserService _userService;
+        private readonly ICurrentSession _currentSession;
+        private readonly ISecurityService securityService = new SecurityService();
 
         #endregion members
 
         #region ctors
 
-        public SSOController()
+        public SsoController()
         {
             _userService = new UserService();
             _currentSession = new CurrentSession();
@@ -59,12 +59,11 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         {
             string currentTime = this.securityService.GetTime();
             string forwardLink = redirectUrl == null ? FormsAuthentication.DefaultUrl : redirectUrl.ToString();
-            TimeSpan expiration = new TimeSpan();
 
             userId = Cryptography.CfsDeCrypt(userId.Replace(" ", "+"));
             onuserId = Cryptography.CfsDeCrypt(onuserId.Replace(" ", "+"));
             time = Cryptography.CfsDeCrypt(time.Replace(" ", "+"));
-            expiration = Convert.ToDateTime(currentTime) - Convert.ToDateTime(time);
+            var expiration = Convert.ToDateTime(currentTime) - Convert.ToDateTime(time);
 
             if (expiration.TotalSeconds <= this._timeExipration)
             {
@@ -84,16 +83,15 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                     Platform = CurrentContext.Platform
                 };
 
-                var onUserId = this.securityService.SSOLogin(criteria);
-
-                if (onUserId != 0)
+                var ssoLoginUserId = this.securityService.SSOLogin(criteria);
+                if (ssoLoginUserId != 0)
                 {
                     var user = this._userService.Get(criteria.UserId) as User;
 
                     // saves user session & auth info
                     this._currentSession.UserId = user.Id;
                     this._currentSession.Username = user.Username;
-                    this._currentSession.OnUserId = onUserId;
+                    this._currentSession.OnUserId = ssoLoginUserId;
                     this._currentSession.SessionId = Session.SessionID.ToString();
                     this._currentSession.Level = this._userService.GetUserLevel(user.Id, this.SiteId);
 
@@ -130,7 +128,9 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
+#pragma warning disable RECS0154 // Parameter is never used
         public ActionResult AccountingLogin(string username, string onlineUserId, string redirectUrl)
+#pragma warning restore RECS0154 // Parameter is never used
         {
             try
             {
@@ -156,10 +156,10 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                         Platform = currentContext.Platform
                     };
 
-                    var onUserId = securityService.Login(criteria);
+                    var onuserId = securityService.Login(criteria);
                     _currentSession.UserId = user.Id;
                     _currentSession.Username = user.Username;
-                    _currentSession.OnUserId = Convert.ToInt32(onUserId);
+                    _currentSession.OnUserId = Convert.ToInt32(onuserId);
                     _currentSession.SessionId = Session.SessionID.ToString();
                     _currentSession.Level = _userService.GetUserLevel(user.Id, this.SiteId);
 

@@ -21,6 +21,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.WinLossSummary, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

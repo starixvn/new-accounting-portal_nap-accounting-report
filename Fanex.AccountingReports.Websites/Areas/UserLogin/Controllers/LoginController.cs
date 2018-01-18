@@ -35,15 +35,13 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         #region members
 
         private const string LoginFormToken = "_SecureLoginFormToken";
-        private IUserService _userService = new UserService();
-        private IGroupService _groupService;
-        private ISiteService _siteService;
-        private ICurrentSession _currentSession;
-        private ONEbookUMService.IMaintenanceService _maintenanceService;
+        private readonly IUserService _userService = new UserService();
+        private readonly IGroupService _groupService;
+        private readonly ISiteService _siteService;
+        private readonly ICurrentSession _currentSession;
+        private readonly ISecurityService securityService = new SecurityService();
 
-        private ISecurityService securityService = new SecurityService();
-
-        private HashAlgorithm _hashAlgorithm;
+        private readonly HashAlgorithm _hashAlgorithm;
 
         #endregion members
 
@@ -53,8 +51,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         {
             _groupService = new GroupService();
             _siteService = new SiteService();
-            _currentSession = new CurrentSession();
-            _maintenanceService = new ONEbookUMServiceImp.MaintenanceService();
+            _currentSession = new CurrentSession();            
             _hashAlgorithm = new SHA256Managed();
         }
 
@@ -123,7 +120,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                             var siteLevelList = _userService.GetSiteLevel(user.Id, Environment); // gets all sites of logging-in user
 
                             if ((group == null || group.IsActive) &&
-                                siteLevelList.Where(x => x.IsActive).Any())
+                                siteLevelList.Any(x => x.IsActive))
                             {
                                 //// allows user login
 
@@ -142,7 +139,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                                     Platform = CurrentContext.Platform
                                 };
 
-                                var onUserId = securityService.Login(criteria);
+                                var onuserId = securityService.Login(criteria);
 
                                 //// check-in user
 
@@ -151,7 +148,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                                 _currentSession.Level = _userService.GetUserLevel(user.Id, this.SiteId);
                                 _currentSession.UserId = user.Id;
                                 _currentSession.Username = username;
-                                _currentSession.OnUserId = onUserId;
+                                _currentSession.OnUserId = onuserId;
                                 _currentSession.SessionId = Session.SessionID.ToString();
 
                                 // current site is not NAP Hub
@@ -211,7 +208,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                             else
                             {
                                 // user account was suspended on all sites
-                                if (siteLevelList.Count() > 0)
+                                if (siteLevelList.Any())
                                 {
                                     ViewBag.Message = ViewResources.Your_account_was_suspended;
                                 }
@@ -287,32 +284,20 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                 });
             }
 
-            try
+            var siteStatus = _siteService.IsActivated(this.SiteId);
+            if (!siteStatus)
             {
-                var siteStatus = _siteService.IsActivated(this.SiteId);
-                if (!siteStatus)
-                {
-                    return Json(new
-                    {
-                        IsKickedOut = "1"
-                    });
-                }
-
-                var isKickedOut = securityService.ReCheckIn(_currentSession.OnUserId, NapSettings.Settings.SiteId);
-
                 return Json(new
                 {
-                    OnUserId = _currentSession.OnUserId,
-                    IsKickedOut = isKickedOut
+                    IsKickedOut = "1"
                 });
             }
-            catch
-            {
-            }
+
+            var isKickedOut = securityService.ReCheckIn(_currentSession.OnUserId, NapSettings.Settings.SiteId);
 
             return Json(new
             {
-                IsKickedOut = "0"
+                IsKickedOut = isKickedOut
             });
         }
 

@@ -43,6 +43,7 @@ namespace Fanex.AccountingReports.Special.Controllers
         }
 
         [HttpGet]
+        [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.SaveBet, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {

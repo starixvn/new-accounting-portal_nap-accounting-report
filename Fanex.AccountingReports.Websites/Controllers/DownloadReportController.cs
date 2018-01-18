@@ -14,11 +14,11 @@ namespace Fanex.AccountingReports.Websites.Controllers
     /// </summary>
     public class DownloadReportController : Controller
     {
-        private string _ip = AppSettings.IP;
-        private string _password = AppSettings.Password;
-        private string _username = AppSettings.UserName;
+        private readonly string _ip = AppSettings.IP;
+        private readonly string _password = AppSettings.Password;
+        private readonly string _username = AppSettings.UserName;
 
-        private NetworkCredential _networkCredential;
+        private readonly NetworkCredential _networkCredential;
 
         public DownloadReportController()
         {
@@ -61,7 +61,13 @@ namespace Fanex.AccountingReports.Websites.Controllers
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2100:CodeLineMustNotBeLongerThan",
            Justification = "Reviewed. Suppression is OK here.")]
-        private ActionResult GetExcelFile(DateTime currentTime, string parentReportPath, DateTime reportTime, DateTime nextMonthReportTime, string reportContainerFolder, string reportNameWithExtension)
+        private ActionResult GetExcelFile(
+            DateTime currentTime, 
+            string parentReportPath, 
+            DateTime reportTime, 
+            DateTime nextMonthReportTime, 
+            string reportContainerFolder, 
+            string reportNameWithExtension)
         {
             string reportPath = Path.Combine(new string[] { parentReportPath, reportContainerFolder, reportNameWithExtension });
             if (!System.IO.File.Exists(reportPath))
@@ -77,8 +83,7 @@ namespace Fanex.AccountingReports.Websites.Controllers
 
             if (duration.TotalDays < expiredDuration.TotalDays)
             {
-                byte[] fileBytes = System.IO.File.ReadAllBytes(reportPath);
-                string fileExtension = Path.GetExtension(reportPath);
+                byte[] fileBytes = System.IO.File.ReadAllBytes(reportPath);                
                 var mimeType = "application/x-zip-compressed";
                 var contentResult = File(fileBytes, mimeType, reportNameWithExtension);
                 return contentResult;

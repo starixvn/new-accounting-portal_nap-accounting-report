@@ -7,7 +7,7 @@ namespace Fanex.AccountingReports.Websites
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class BundleConfig
+    public static class BundleConfig
     {
         /// <summary>
         /// Registers the bundles.
