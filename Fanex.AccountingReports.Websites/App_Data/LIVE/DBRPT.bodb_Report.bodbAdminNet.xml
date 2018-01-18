@@ -19,7 +19,7 @@
     <Setting Key="Racing_WinLossGroup" SpName="Acc_Rpt_WinlostRacing_Group" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0" />
   </Function>
   <Function Name="Misc - Duplicate Tickets">
-    <Setting Key="Misc_DuplicateTickets_GetReport" SpName="Acc_Rpt_DuplicatedTicketsSel_UAT1" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Acc_Rpt_DuplicatedTicketsCheckCashOut" SpName="Acc_Rpt_DuplicatedTicketsCheckCashOut_UAT1" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Misc_DuplicateTickets_GetReport" SpName="Acc_Rpt_DuplicatedTicketsSel" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_DuplicatedTicketsCheckCashOut" SpName="Acc_Rpt_DuplicatedTicketsCheckCashOut" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="0" />
   </Function>
 </Functions>
