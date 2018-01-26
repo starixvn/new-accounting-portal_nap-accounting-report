@@ -11,6 +11,6 @@
     color: #01122B;
 }
 
-.bullfighting-arena .arena-code{
+.bullfighting-arena .arena-code, .bullfighting-arena .match-no {
     font-weight: bold;
 }

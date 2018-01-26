@@ -444,23 +444,6 @@
 
                     break;
 
-                case 24:
-                case 1224:
-                    if (betTeam.ToLower().Equals("1x"))
-                    {
-                        result = homeTeam + " or Draw";
-                    }
-                    else if (betTeam.ToLower().Equals("2x"))
-                    {
-                        result = awayTeam + " or Draw";
-                    }
-                    else if (betTeam.ToLower().Equals("12"))
-                    {
-                        result = homeTeam + " or " + awayTeam;
-                    }
-
-                    break;
-
                 case 25:
                     result = betTeam == "h" ? homeTeam : awayTeam;
                     break;

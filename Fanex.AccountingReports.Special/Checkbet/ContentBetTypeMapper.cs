@@ -11,27 +11,21 @@ namespace Fanex.AccountingReports.Special.Checkbet
         private const string ContenBetTeamBetType401To404 = "ContenBetTeamBetType401To404";
         private const string ContenBetTeamBetType406 = "ContenBetTeamBetType406";
         private const string ContenBetTeamBetType407 = "ContenBetTeamBetType407";
-        private const string ContenBetTeamBetType408 = "ContenBetTeamBetType408";
-        private const string ContenBetTeamBetType410 = "ContenBetTeamBetType410";
         private const string ContenBetTeamBetType411 = "ContenBetTeamBetType411";
         private const string ContenBetTeamBetType412And429 = "ContenBetTeamBetType412And429";
-        private const string ContenBetTeamBetType415 = "ContenBetTeamBetType415";
         private const string ContenBetTeamBetType417 = "ContenBetTeamBetType417";
         private const string ContenBetTeamBetType418 = "ContenBetTeamBetType418";
         private const string ContenBetTeamBetType419To421 = "ContenBetTeamBetType419To421";
         private const string ContenBetTeamBetType422To423 = "ContenBetTeamBetType422To423";
         private const string ContenBetTeamBetType424 = "ContenBetTeamBetType424";
-        private const string ContenBetTeamBetType426 = "ContenBetTeamBetType426";
         private const string ContenBetTeamBetType442To444 = "ContenBetTeamBetType442To444";
         private const string ContenBetTeamBetType445To447 = "ContenBetTeamBetType445To447";
-        private const string ContenBetTeamBetTypeDoubleChance = "ContenBetTeamBetTypeDoubleChance";
         private const string ContenBetTeamBetTypeOddEven = "ContenBetTeamBetTypeOddEven";
         private const string ContenBetTeamBetTypeYesNo = "ContenBetTeamBetTypeYesNo";
         private const string ContenBetTeamBetTypeAsBetTeam = "ContenBetTeamBetTypeAsBetTeam";
 
         private const string ContenBetTeamBetType221To225 = "ContenBetTeamBetType221To225";
 
-        private const string ContenBetTeamBetType601And602And608And614 = "ContenBetTeamBetType601And602And608And614";
         private const string ContenBetTeamBetType603To607And609And612And613And617 = "ContenBetTeamBetType603To607And609And612And613And617";
         private const string ContenBetTeamBetType610And615And616 = "ContenBetTeamBetType610And615And616";
         private const string ContenBetTeamBetType611 = "ContenBetTeamBetType611";
@@ -54,15 +48,11 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 { 405, ContenBetTeamBetTypeAsBetTeam },
                 { 406, ContenBetTeamBetType406 },
                 { 407, ContenBetTeamBetType407 },
-                { 408, ContenBetTeamBetType408 },
-                { 171, ContenBetTeamBetType408 },
                 { 409, ContenBetTeamBetType407 },
-                { 410, ContenBetTeamBetType410 },
                 { 411, ContenBetTeamBetType411 },
                 { 412, ContenBetTeamBetType412And429 },
                 { 413, ContenBetTeamBetTypeAsBetTeam },
                 { 414, ContenBetTeamBetTypeAsBetTeam },
-                { 415, ContenBetTeamBetType415 },
                 { 416, ContenBetTeamBetTypeAsBetTeam },
                 { 417, ContenBetTeamBetType417 },
                 { 418, ContenBetTeamBetType418 },
@@ -73,11 +63,9 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 { 423, ContenBetTeamBetType422To423 },
                 { 424, ContenBetTeamBetType424 },
                 { 425, ContenBetTeamBetType422To423 },
-                { 426, ContenBetTeamBetType426 },
                 { 427, ContenBetTeamBetTypeYesNo },
                 { 428, ContenBetTeamBetTypeOddEven },
                 { 429, ContenBetTeamBetType412And429 },
-                { 431, ContenBetTeamBetTypeDoubleChance },
                 { 432, ContenBetTeamBetType411 },
                 { 433, ContenBetTeamBetTypeYesNo },
                 { 434, ContenBetTeamBetTypeYesNo },
@@ -101,20 +89,16 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 { 224, ContenBetTeamBetType221To225 },
                 { 225, ContenBetTeamBetType221To225 },
 
-                { 601, ContenBetTeamBetType601And602And608And614 },
-                { 602, ContenBetTeamBetType601And602And608And614 },
                 { 603, ContenBetTeamBetType603To607And609And612And613And617 },
                 { 604, ContenBetTeamBetType603To607And609And612And613And617 },
                 { 605, ContenBetTeamBetType603To607And609And612And613And617 },
                 { 606, ContenBetTeamBetType603To607And609And612And613And617 },
                 { 607, ContenBetTeamBetType603To607And609And612And613And617 },
-                { 608, ContenBetTeamBetType601And602And608And614 },
                 { 609, ContenBetTeamBetType603To607And609And612And613And617 },
                 { 610, ContenBetTeamBetType610And615And616 },
                 { 611, ContenBetTeamBetType611 },
                 { 612, ContenBetTeamBetType603To607And609And612And613And617 },
                 { 613, ContenBetTeamBetType603To607And609And612And613And617 },
-                { 614, ContenBetTeamBetType601And602And608And614 },
                 { 615, ContenBetTeamBetType610And615And616 },
                 { 616, ContenBetTeamBetType610And615And616 },
                 { 617, ContenBetTeamBetType603To607And609And612And613And617 },

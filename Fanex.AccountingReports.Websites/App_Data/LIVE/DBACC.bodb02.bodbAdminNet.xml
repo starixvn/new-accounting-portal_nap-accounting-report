@@ -136,4 +136,7 @@
   <Function Name="Special - Margin Report">
     <Setting Key ="Special_MarginReport_BetRatioByUser" SpName="Acc_Rpt_BetRatioByUser" DbName="DBACC.bodb02.bodbAdminNet"></Setting>
   </Function>
+  <Function Name="Core - Bet List Core">
+    <Setting Key="BetList_RefNoSel" SpName="Acc_BetList_CheckBet" DbName="DBACC.bodb02.bodbAdminNet" />
+  </Function>
 </Functions>
