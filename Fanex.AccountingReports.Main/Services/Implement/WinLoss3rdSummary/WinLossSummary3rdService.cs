@@ -295,12 +295,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
                         if (winloss.IsHedge)
                         {
-                            winloss.Name = Labels.Hedge_title;
+                            winloss.Name = winloss.Id == 18000 ? "Colossus Bets(Free Play)" : Labels.Hedge_title;
                             betInfo.Hedge = winloss;
                         }
                         else
                         {
-                            winloss.Name = Labels.Normal_title;
+                            winloss.Name = winloss.Id == 18000 ? "Colossus Bets" : Labels.Normal_title;
                             betInfo.Normal = winloss;
                         }
                     }
@@ -1019,6 +1019,11 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
             foreach (var sportType in report.SportTypeWinLosses)
             {
+                if (sportType.Id == 204)
+                {
+                    continue;
+                }
+
                 hedgeIsExist = CheckHedgeExistInSportType(sportType);
                 if (hedgeIsExist)
                 {
