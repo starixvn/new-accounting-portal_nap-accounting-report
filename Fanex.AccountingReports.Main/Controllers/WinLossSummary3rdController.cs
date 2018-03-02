@@ -37,7 +37,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         [HandleAjaxError]
         public JsonResult GetReport(GetReportCriteria criteria)
         {
-            WinLoss3rdInfo result = this._reportService.GetReport(criteria);
+          WinLoss3rdInfo result = this._reportService.GetReport(criteria);
 
             return Json(result, JsonRequestBehavior.DenyGet);
         }

@@ -220,17 +220,19 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             };
 
             bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeDate;
-            var betTypeGroup = sportTypeGroup.GroupBy(data => new { data.bettype, data.liveindicator });
+            var betTypeGroup = sportTypeGroup.GroupBy(data => new { data.bettype, data.liveindicator, data.IsFreePlay });
 
             var isNewCricket = false;
             var dataForNewCricket = betTypeGroup.First();
 
             foreach (var data in betTypeGroup)
             {
+                var bettypeName = this.GetBetType(data.Key.bettype);
+                var isFreePlay = Converter.ToInt(data.Key.IsFreePlay) == 1;
                 betInfo = new BetTypeWinLossInfo();
                 betInfo.Id = data.Key.bettype;
                 betInfo.LiveIndicator = (bool)data.Key.liveindicator ? 1 : 0;
-                betInfo.Name = this.GetBetType(data.Key.bettype);
+                betInfo.Name = isFreePlay ? bettypeName + "(Free Play)" : bettypeName;
 
                 if (data.Key.bettype == 500)
                 {
@@ -238,9 +240,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                     isNewCricket = true;
                     continue;
                 }
-                else if (data.Key.bettype == 9 || data.Key.bettype == 29)
+
+                if (data.Key.bettype == 9 || data.Key.bettype == 29)
                 {
-                    var mixPalayBetTypes = GetParlayBetTypes(data, sportId, data.Key.bettype, isShowNotAvalable, report, sportInfo);
+                    var mixPalayBetTypes = GetParlayBetTypes(data, data.Key.bettype, isShowNotAvalable, sportInfo);
                     sportInfo.BetTypeWinLosses.AddRange(mixPalayBetTypes);
                     continue;
                 }
@@ -290,17 +293,18 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         }
                         else
                         {
-                            betInfo.Name = this.GetBetType(winloss.Id);
+                            var freePlay = isFreePlay ? "(Free Play)" : string.Empty;
+                            betInfo.Name = this.GetBetType(winloss.Id) + freePlay;
                         }
 
                         if (winloss.IsHedge)
                         {
-                            winloss.Name = winloss.Id == 18000 ? "Colossus Bets(Free Play)" : Labels.Hedge_title;
+                            winloss.Name = Labels.Hedge_title;
                             betInfo.Hedge = winloss;
                         }
                         else
                         {
-                            winloss.Name = winloss.Id == 18000 ? "Colossus Bets" : Labels.Normal_title;
+                            winloss.Name = Labels.Normal_title;
                             betInfo.Normal = winloss;
                         }
                     }
@@ -314,7 +318,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
             if (isNewCricket == true)
             {
-                sportInfo = CalculatorForNewCricket(dataForNewCricket, isShowNotAvalable, sportInfo, sportId, report);
+                sportInfo = CalculatorForNewCricket(dataForNewCricket, isShowNotAvalable, sportInfo, sportId);
             }
 
             if (MainConstants.WinLossSummaryRacingSportIds.Contains(sportInfo.Id))
@@ -373,7 +377,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
           "SP2100:CodeLineMustNotBeLongerThan",
           Justification = "Reviewed. Suppression is OK here.")]
-        public List<BetTypeWinLossInfo> GetParlayBetTypes(IGrouping<dynamic, dynamic> data, int sportId, int betType, bool isShowNotAvalable, WinLoss3rdInfo report, SportTypeWinLossInfo sportInfo)
+        public List<BetTypeWinLossInfo> GetParlayBetTypes(IGrouping<dynamic, dynamic> data, int betType, bool isShowNotAvalable, SportTypeWinLossInfo sportInfo)
         {
             var parlayBetTypes = new List<BetTypeWinLossInfo>();
             foreach (var item in data)
@@ -410,7 +414,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        public SportTypeWinLossInfo CalculatorForNewCricket(dynamic data, bool isShowNotAvalable, SportTypeWinLossInfo sportInfo, int sportId, WinLoss3rdInfo report)
+        public SportTypeWinLossInfo CalculatorForNewCricket(dynamic data, bool isShowNotAvalable, SportTypeWinLossInfo sportInfo, int sportId)
         {
             BetTypeWinLossInfo betInfo = new BetTypeWinLossInfo();
 
@@ -1019,11 +1023,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
             foreach (var sportType in report.SportTypeWinLosses)
             {
-                if (sportType.Id == 204)
-                {
-                    continue;
-                }
-
                 hedgeIsExist = CheckHedgeExistInSportType(sportType);
                 if (hedgeIsExist)
                 {
