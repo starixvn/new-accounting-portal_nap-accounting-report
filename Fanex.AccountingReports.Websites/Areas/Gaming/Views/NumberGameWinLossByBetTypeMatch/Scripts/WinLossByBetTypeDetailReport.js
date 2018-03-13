@@ -13,7 +13,8 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.WinLossByBetType.
             CompanyList: null,
             CurrencyList: null,
             LiveStatus: null,
-            ReportDate: null
+            ReportDate: null,
+            TrialData: false
         }
     };
 

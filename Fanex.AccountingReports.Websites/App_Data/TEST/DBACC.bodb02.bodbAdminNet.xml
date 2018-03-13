@@ -93,11 +93,11 @@
     <Setting Key="WinLoss_TreeWinLoss_GetVirtualRate" SpName="Acc_CustomerSelVirtualMultiplier" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
   <Function Name="Gaming - Number Game Win Loss">
-    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeMainReport" SpName="Acc_Rpt_NumberGame" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeMainReport_14" SpName="Acc_Rpt_NumberGame14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeDetailReport" SpName="Acc_Rpt_NumberGame_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeDetailReport_14" SpName="Acc_Rpt_NumberGame_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Acc_Rpt_GetLicenseesByProduct" SpName="Acc_Rpt_GetLicenseesByProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeMainReport" SpName="Acc_Rpt_NumberGame_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeMainReport_14" SpName="Acc_Rpt_NumberGame14_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeDetailReport" SpName="Acc_Rpt_NumberGame_Details_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeDetailReport_14" SpName="Acc_Rpt_NumberGame_Details14_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Acc_Rpt_GetLicenseesByProduct" SpName="Acc_Rpt_GetLicenseesByProduct_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
   <Function Name="Gaming - Live Casino Agency Win Loss">
     <Setting Key="Gaming_LiveCasinoAgencyWinLoss_GetReport" SpName="Acc_Rpt_LiveCasino_AgencyWinLoss" TimeOut="0" DbName="DBACC.bodb02.bodbAdminNet" />

@@ -9,7 +9,8 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
             Currency: null,
             FromDate: null,
             ToDate: null,
-            IsLive: null
+            IsLive: null,
+            TrialData: false
         }
     };
 
@@ -24,7 +25,8 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
         RoleID: 0,
         CustID: 0,
         PageSize: 50,
-        PageIndex: 1
+        PageIndex: 1,
+        TrialData: false
     };
 
     var MainOnclick = '';
@@ -186,6 +188,10 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
         $("#btnGenerate").click(function () {
             self.getNumberGameWinlossByCur();
         });
+
+        $(".checkbox-trialdata").change(function () {
+            self.checkboxTrialDataChange();
+        });
     };
 
     self.hideReport = function () {
@@ -229,13 +235,15 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
 
     self.getLicensee = function () {
         var dateRange = $('#datepickerplugin').nexDatePicker("getDateRange");
+        var trialData = $(".checkbox-trialdata").is(":checked");
         var params = {
             FromDate: dateRange.FromDate,
             ToDate: dateRange.ToDate,
             GetIsActiveOnly: true,
             ExcludeLicenseeID: 18,
             SystemID: 3,
-            ProductPrefix: "NG"
+            ProductPrefix: "NG",
+            TrialData: trialData
         };
 
         $.ajax({
@@ -528,6 +536,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
         _params.paramReport.FromDate = dateRange.FromDate;
         _params.paramReport.ToDate = dateRange.ToDate;
         _params.paramReport.IsLive = $('#ddlLiveStatus').val();
+        _params.paramReport.TrialData = $(".checkbox-trialdata").is(":checked");
 
         if (!self.checkReportParams(_params)) {
             AccReport.enableInput();
@@ -782,6 +791,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
         _detailParams.ToDate = dateRange.ToDate;
         _detailParams.IsLive = $('#ddlLiveStatus').val();
         _detailParams.Username = username;
+        _detailParams.TrialData = $(".checkbox-trialdata").is(":checked");
 
         getLinkForTitle(currency, custId, roleId, username);
 
@@ -917,6 +927,10 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
             AccReport.downloadFile(window.rootUrl + "Gaming/NumberGameWinLossByCurrency/ExportReportDetail", _detailParams);
         }
     }
+
+    self.checkboxTrialDataChange = function () {
+        self.getLicensee();
+    };
 };
 var numberGameWLByCur = new Fanex.AccountingReports.Gaming.NumberGameWinlossByCur();
 

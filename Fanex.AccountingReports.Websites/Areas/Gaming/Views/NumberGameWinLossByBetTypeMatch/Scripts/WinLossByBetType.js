@@ -8,7 +8,8 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.WinLossByBetType 
             CompanyList: null,
             CurrencyList: null,
             LiveStatus: null,
-            ReportDate: null
+            ReportDate: null,
+            TrialData: false
         },
 
         DetailReportParams: {
@@ -16,7 +17,8 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.WinLossByBetType 
             CurrencyList: null,
             LiveStatus: null,
             ReportDate: null,
-            BetTypeId: null
+            BetTypeId: null,
+            TrialData: false
         }
     };
 
@@ -40,7 +42,8 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.WinLossByBetType 
             CurrencyList: self.Params.MainReportParams.CurrencyList,
             LiveStatus: self.Params.MainReportParams.LiveStatus,
             ReportDate: self.Params.MainReportParams.ReportDate,
-            BetTypeId: betTypeId
+            BetTypeId: betTypeId,
+            TrialData: self.Params.MainReportParams.TrialData
         };
 
         self.DetailReport.GetReport(self.Params.DetailReportParams);

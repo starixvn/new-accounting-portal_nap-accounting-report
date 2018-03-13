@@ -26,6 +26,8 @@ namespace Fanex.AccountingReports.Gaming.Criteria
         [SpParam(SqlParamName = "ProductPrefix")]
         public string ProductPrefix { get; set; }
 
+        public bool TrialData { get; set; }
+
         public override bool IsValid()
         {
             return true;

@@ -38,15 +38,13 @@
                 @Labels.Company
             </div>
             <div class="edit-field col_7 width-auto">
-                <select id="dropdown-company">
-                </select>
+                <select id="dropdown-company"></select>
             </div>
             <div class="lbl-field col_3 align-right width-auto">
                 @Labels.Currency
             </div>
             <div class="edit-field col_5 width-auto">
-                <select id="dropdown-currency">
-                </select>
+                <select id="dropdown-currency"></select>
             </div>
             <div class="lbl-field col_3 align-right width-auto winloss-bybettype-filter">
                 @Labels.Live_Status
@@ -62,9 +60,14 @@
                 @Labels.Bettype
             </div>
             <div class="edit-field col_6 ddlProductContainer width-auto winloss-bymatch-filter display-none">
-                <select id="dropdown-bettype">
-                </select>
-            </div>            
+                <select id="dropdown-bettype"></select>
+            </div>
+            <div class="lbl-field col_4 align-right">
+                <label for="chbTrialData">
+                    @Labels.TrialData
+                </label>
+                <input type="checkbox" id="checkbox-trialdata" class="checkbox-trialdata" />
+            </div>
             <div class="submit width-auto col_4 prefix_1">
                 <input id="button-generate" name="btnGenerate" type="submit" value="@Labels.Generate" />
             </div>
@@ -131,7 +134,7 @@
             Super: '@Labels.Super',
             Win_Loss: '@Labels.Win_Loss',
             Total: '@Labels.Total'
-        }; 
+        };
     </script>
 }
 @section Foot

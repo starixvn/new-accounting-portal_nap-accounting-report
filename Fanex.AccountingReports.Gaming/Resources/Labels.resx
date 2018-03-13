@@ -1186,4 +1186,7 @@
   <data name="Player_ID" xml:space="preserve">
     <value>Player ID</value>
   </data>
+  <data name="TrialData" xml:space="preserve">
+    <value>Trial Data</value>
+  </data>
 </root>
