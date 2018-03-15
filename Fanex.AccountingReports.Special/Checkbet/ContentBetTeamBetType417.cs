@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Fanex.AccountingReports.Special.Checkbet
 {
-    public class ContenBetTeamBetType417 : ContentBetTeam
+    public class ContentBetTeamBetType417 : ContentBetTeam
     {
         public string ContentBetTeamBuilder(BetTeamModel model)
         {

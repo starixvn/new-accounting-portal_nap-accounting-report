@@ -1,10 +1,10 @@
 namespace Fanex.AccountingReports.Special.Checkbet
 {
-    public class ContenBetTeamBetTypeOddEven : ContentBetTeam
+    public class ContentBetTeamBetType411 : ContentBetTeam
     {
         public string ContentBetTeamBuilder(BetTeamModel model)
         {
-            return model.BetTeam == "O" ? "Odd" : "Even";
+            return model.BetTeam == "H" ? model.HomeTeam : model.AwayTeam;
         }
     }
 }

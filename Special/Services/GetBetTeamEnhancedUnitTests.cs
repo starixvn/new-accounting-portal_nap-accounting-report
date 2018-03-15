@@ -17,54 +17,24 @@ namespace Fanex.AccountingReports.UnitTests.Module.Special.Services
         [TestCase(405, "2:0", ExpectedResult = "2:0")]
         [TestCase(406, "G3", ExpectedResult = "3 Goals")]
         [TestCase(407, "G3", ExpectedResult = "3+")]
-        [TestCase(408, "H2", ExpectedResult = "Barcelona to Win by 2 Goals")]
-        [TestCase(410, "1X", ExpectedResult = "Barcelona or Draw")]
         [TestCase(411, "H", ExpectedResult = "Barcelona")]
-        [TestCase(415, "HH", ExpectedResult = "Barcelona/Barcelona")]
         [TestCase(417, "YH", ExpectedResult = "Yes/Home")]
         [TestCase(418, "YO", ExpectedResult = "Yes & Over")]
         [TestCase(419, "1H", ExpectedResult = "First Half")]
         [TestCase(422, "H", ExpectedResult = "Home")]
         [TestCase(424, "OG", ExpectedResult = "Own Goal")]
-        [TestCase(426, "H2+", ExpectedResult = "Barcelona to Win by 2+ Goals")]
         [TestCase(427, "N", ExpectedResult = "No")]
         [TestCase(428, "o", ExpectedResult = "Odd")]
         [TestCase(429, "3-Over", ExpectedResult = "3+")]
-        [TestCase(431, "HA", ExpectedResult = "Barcelona/Real")]
         [TestCase(443, "2H", ExpectedResult = "Second Half")]
         [TestCase(446, "YY", ExpectedResult = "Yes/Yes")]
         public string ContentChoiceBuilder_Return_True(int betType, string betTeam)
         {
             var service = new ContentChoiceBuilder();
-            return service.GetContentBetchoiceToShowOf("Barcelona", "Real", betType, betTeam, 2.5m, 0);
+            return service.GetContentBetchoiceToShowOf("Barcelona", "Real", betType, betTeam, 2.5m, 0, 0.5m);
         }
 
-        [TestCase(601, "H1-2", ExpectedResult = "Cleveland Cavaliers to Win by 1 - 2 Points")]
-        [TestCase(601, "H3-6", ExpectedResult = "Cleveland Cavaliers to Win by 3 - 6 Points")]
-        [TestCase(601, "H7-9", ExpectedResult = "Cleveland Cavaliers to Win by 7 - 9 Points")]
-        [TestCase(601, "H10-13", ExpectedResult = "Cleveland Cavaliers to Win by 10 - 13 Points")]
-        [TestCase(601, "H14-16", ExpectedResult = "Cleveland Cavaliers to Win by 14 - 16 Points")]
-        [TestCase(601, "H17-20", ExpectedResult = "Cleveland Cavaliers to Win by 17 - 20 Points")]
-        [TestCase(601, "H21+", ExpectedResult = "Cleveland Cavaliers to Win by 21+ Points")]
-        [TestCase(601, "A1-2", ExpectedResult = "Houston Rockets to Win by 1 - 2 Points")]
-        [TestCase(601, "A3-6", ExpectedResult = "Houston Rockets to Win by 3 - 6 Points")]
-        [TestCase(601, "A7-9", ExpectedResult = "Houston Rockets to Win by 7 - 9 Points")]
-        [TestCase(601, "A10-13", ExpectedResult = "Houston Rockets to Win by 10 - 13 Points")]
-        [TestCase(601, "A14-16", ExpectedResult = "Houston Rockets to Win by 14 - 16 Points")]
-        [TestCase(601, "A17-20", ExpectedResult = "Houston Rockets to Win by 17 - 20 Points")]
-        [TestCase(601, "A21+", ExpectedResult = "Houston Rockets to Win by 21+ Points")]
-        [TestCase(602, "H1-5", ExpectedResult = "Cleveland Cavaliers to Win by 1 - 5 Points")]
-        [TestCase(602, "H6-10", ExpectedResult = "Cleveland Cavaliers to Win by 6 - 10 Points")]
-        [TestCase(602, "H11-15", ExpectedResult = "Cleveland Cavaliers to Win by 11 - 15 Points")]
-        [TestCase(602, "H16-20", ExpectedResult = "Cleveland Cavaliers to Win by 16 - 20 Points")]
-        [TestCase(602, "H21-25", ExpectedResult = "Cleveland Cavaliers to Win by 21 - 25 Points")]
-        [TestCase(602, "H26+", ExpectedResult = "Cleveland Cavaliers to Win by 26+ Points")]
-        [TestCase(602, "A1-5", ExpectedResult = "Houston Rockets to Win by 1 - 5 Points")]
-        [TestCase(602, "A6-10", ExpectedResult = "Houston Rockets to Win by 6 - 10 Points")]
-        [TestCase(602, "A11-15", ExpectedResult = "Houston Rockets to Win by 11 - 15 Points")]
-        [TestCase(602, "A16-20", ExpectedResult = "Houston Rockets to Win by 16 - 20 Points")]
-        [TestCase(602, "A21-25", ExpectedResult = "Houston Rockets to Win by 21 - 25 Points")]
-        [TestCase(602, "A26+", ExpectedResult = "Houston Rockets to Win by 26+ Points")]
+
         [TestCase(603, "H", ExpectedResult = "Cleveland Cavaliers")]
         [TestCase(603, "A", ExpectedResult = "Houston Rockets")]
         [TestCase(604, "H", ExpectedResult = "Cleveland Cavaliers")]
@@ -75,19 +45,6 @@ namespace Fanex.AccountingReports.UnitTests.Module.Special.Services
         [TestCase(606, "A", ExpectedResult = "Houston Rockets")]
         [TestCase(607, "H", ExpectedResult = "Cleveland Cavaliers")]
         [TestCase(607, "A", ExpectedResult = "Houston Rockets")]
-        [TestCase(608, "H1-5", ExpectedResult = "Cleveland Cavaliers to Win by 1 - 5 Points")]
-        [TestCase(608, "H6-10", ExpectedResult = "Cleveland Cavaliers to Win by 6 - 10 Points")]
-        [TestCase(608, "H11-15", ExpectedResult = "Cleveland Cavaliers to Win by 11 - 15 Points")]
-        [TestCase(608, "H16-20", ExpectedResult = "Cleveland Cavaliers to Win by 16 - 20 Points")]
-        [TestCase(608, "H21-25", ExpectedResult = "Cleveland Cavaliers to Win by 21 - 25 Points")]
-        [TestCase(608, "H26+", ExpectedResult = "Cleveland Cavaliers to Win by 26+ Points")]
-        [TestCase(608, "D", ExpectedResult = "Draw")]
-        [TestCase(608, "A1-5", ExpectedResult = "Houston Rockets to Win by 1 - 5 Points")]
-        [TestCase(608, "A6-10", ExpectedResult = "Houston Rockets to Win by 6 - 10 Points")]
-        [TestCase(608, "A11-15", ExpectedResult = "Houston Rockets to Win by 11 - 15 Points")]
-        [TestCase(608, "A16-20", ExpectedResult = "Houston Rockets to Win by 16 - 20 Points")]
-        [TestCase(608, "A21-25", ExpectedResult = "Houston Rockets to Win by 21 - 25 Points")]
-        [TestCase(608, "A26+", ExpectedResult = "Houston Rockets to Win by 26+ Points")]
         [TestCase(609, "H", ExpectedResult = "Cleveland Cavaliers")]
         [TestCase(609, "A", ExpectedResult = "Houston Rockets")]
         [TestCase(610, "O", ExpectedResult = "Over")]
@@ -98,13 +55,6 @@ namespace Fanex.AccountingReports.UnitTests.Module.Special.Services
         [TestCase(612, "A", ExpectedResult = "Houston Rockets")]
         [TestCase(613, "H", ExpectedResult = "Cleveland Cavaliers")]
         [TestCase(613, "A", ExpectedResult = "Houston Rockets")]
-        [TestCase(614, "H1-4", ExpectedResult = "Cleveland Cavaliers to Win by 1 - 4 Points")]
-        [TestCase(614, "H5-8", ExpectedResult = "Cleveland Cavaliers to Win by 5 - 8 Points")]
-        [TestCase(614, "H9+", ExpectedResult = "Cleveland Cavaliers to Win by 9+ Points")]
-        [TestCase(614, "D", ExpectedResult = "Draw")]
-        [TestCase(614, "A1-4", ExpectedResult = "Houston Rockets to Win by 1 - 4 Points")]
-        [TestCase(614, "A5-8", ExpectedResult = "Houston Rockets to Win by 5 - 8 Points")]
-        [TestCase(614, "A9+", ExpectedResult = "Houston Rockets to Win by 9+ Points")]
         [TestCase(615, "O", ExpectedResult = "Over")]
         [TestCase(615, "U", ExpectedResult = "Under")]
         [TestCase(616, "O", ExpectedResult = "Over")]
@@ -117,7 +67,7 @@ namespace Fanex.AccountingReports.UnitTests.Module.Special.Services
             // Initialize RefData. It always returns empty for first time
             RefData.GetBetTypeName("1", "en");
             var service = new ContentChoiceBuilder();
-            return service.GetContentBetchoiceToShowOf("Cleveland Cavaliers", "Houston Rockets", betType, betTeam, 0, 0);
+            return service.GetContentBetchoiceToShowOf("Cleveland Cavaliers", "Houston Rockets", betType, betTeam, 0, 0, 0.5m);
         }
     }
 }

@@ -13,5 +13,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
         public decimal Hdp1 { get; set; }
 
         public decimal Hdp2 { get; set; }
+
+        public decimal OddsSpread { get; set; }
     }
 }

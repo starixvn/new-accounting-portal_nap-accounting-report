@@ -1,6 +1,6 @@
 namespace Fanex.AccountingReports.Special.Checkbet
 {
-    public class ContenBetTeamBetTypeNA : ContentBetTeam
+    public class ContentBetTeamBetTypeNA : ContentBetTeam
     {
         public string ContentBetTeamBuilder(BetTeamModel model)
         {

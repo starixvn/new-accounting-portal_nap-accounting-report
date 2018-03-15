@@ -90,6 +90,7 @@
                         string bettypeName = CacheRef.GetBettype(bettype);
                         string oldAway = string.Empty;
                         string newAway = string.Empty;
+                        var oddsSpread = (decimal)row.OddsSpread;
                         if (bettype == 85 || bettype == 86)
                         {
                             bettypeName = liveindicator ? "Next " + bettypeName : "FT." + bettypeName;
@@ -116,8 +117,8 @@
                             oldAway = CacheRef.GetTeamName(row.OldAwayID);
                         }
 
-                        newBetteam = this.GetBetTeam(home, newAway, bettype, newBetteam, hdp1, newHdp2);
-                        oldBetteam = this.GetBetTeam(home, oldAway, bettype, oldBetteam, hdp1, oldHdp2);
+                        newBetteam = this.GetBetTeam(home, newAway, bettype, newBetteam, hdp1, newHdp2, oddsSpread);
+                        oldBetteam = this.GetBetTeam(home, oldAway, bettype, oldBetteam, hdp1, oldHdp2, oddsSpread);
                         if (bettype == 10)
                         {
                             newBetteam = !string.IsNullOrEmpty(newAway) ? newAway : home;
@@ -225,6 +226,7 @@
                         var hdp2 = (decimal)row.hdp2;
                         var liveindicator = (bool)row.liveindicator;
                         string betypeName = CacheRef.GetBettype(bettype);
+                        var oddsSpread = (decimal)row.OddsSpread;
                         if (bettype == 85 || bettype == 86)
                         {
                             betypeName = liveindicator ? "Next " + betypeName : "FT." + betypeName;
@@ -262,7 +264,7 @@
                             Currency = currency,
                             Bettype = betypeName,
                             Username = username,
-                            Betteam = this.GetBetTeam(home, away, bettype, betteam, hdp1, hdp2),
+                            Betteam = this.GetBetTeam(home, away, bettype, betteam, hdp1, hdp2, oddsSpread),
                             Stake = stake.Format(2),
                             Odds = odds.Format(2),
                             TotalPT = totalPT.Format(2),
@@ -302,7 +304,8 @@
             int betType,
             string betTeam,
             decimal hdp1,
-            decimal hdp2)
+            decimal hdp2,
+            decimal oddsSpread)
         {
             string result = string.Empty;
             var getBetTeamEnhanced = new ContentChoiceBuilder();
@@ -550,7 +553,7 @@
                     break;
 
                 default:
-                    result = getBetTeamEnhanced.GetContentBetchoiceToShowOf(homeTeam, awayTeam, betType, betTeam, hdp1, hdp2);
+                    result = getBetTeamEnhanced.GetContentBetchoiceToShowOf(homeTeam, awayTeam, betType, betTeam, hdp1, hdp2, oddsSpread);
 
                     break;
             }

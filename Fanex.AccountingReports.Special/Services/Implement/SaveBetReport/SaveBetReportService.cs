@@ -10,6 +10,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
     using Fanex.AccountingReports.Special.Services.Interface;
     using Fanex.Common;
     using Fanex.Data;
+    using RemotingRef;
 
     /// <summary>
     /// TODO: Update summary.
@@ -114,7 +115,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
                         var matchInfo = new Match()
                         {
                             MatchId = Converter.ToInt(reader["MatchID"]),
-                            MatchCode = Converter.ToString2(reader["MatchCode"]),
+                            MatchCode = RefData.GetBetRadarMatchCodeFormat(Converter.ToString2(reader["MatchCode"]), "en"),
                             HomeTeam = Converter.ToString2(reader["Home"]),
                             AwayTeam = Converter.ToString2(reader["Away"]),
                             EventDate = Converter.ToDateTime(reader["EventDate"]).ToShortFormatedDateWithSlash().Replace("/", "_"),
