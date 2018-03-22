@@ -19,6 +19,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.ReportManager = f
         datepickerplugin: null,
         dropdownLiveStatus: null,
         dropdownBetType: null,
+        chkTrialData: null,
 
         winLossByBetTypeFilter: null,
         winLossByMatchFilter: null
@@ -36,14 +37,16 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.ReportManager = f
             CompanyList: null,
             CurrencyList: null,
             LiveStatus: null,
-            ReportDate: null
+            ReportDate: null,
+            TrialData: false
         },
 
         winLossByMatch_MainReportParams: {
             ReportDate: null,
             CompanyList: null,
             CurrencyList: null,
-            BetTypeList: null
+            BetTypeList: null,
+            TrialData: false
         },
 
         licenseesByProductParams: {
@@ -52,7 +55,8 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.ReportManager = f
             GetIsActiveOnly: true,
             ExcludeLicenseeID: 18,
             SystemID: 3,
-            ProductPrefix: "NG"
+            ProductPrefix: "NG",
+            TrialData: false
         }
     };
 
@@ -82,6 +86,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.ReportManager = f
         self.Tables.dropdownLiveStatus = $("#dropdown-livestatus");
         self.Tables.winLossByBetTypeFilter = $(".winloss-bybettype-filter");
         self.Tables.winLossByMatchFilter = $(".winloss-bymatch-filter");
+        self.Tables.chkTrialData = $(".checkbox-trialdata");
     };
 
     self.BindingEvents = function () {
@@ -93,6 +98,10 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.ReportManager = f
         self.Tables.buttonGenerate.unbind("click");
         self.Tables.buttonGenerate.click(function () {
             self.buttonGenerateClick();
+        });
+
+        self.Tables.chkTrialData.change(function () {
+            self.checkboxTrialDataChange();
         });
     };
 
@@ -106,6 +115,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.ReportManager = f
     self.GetCompanyList = function () {
         self.Params.licenseesByProductParams.FromDate = self.Tables.datepickerplugin.nexDatePicker("getSingleDate");
         self.Params.licenseesByProductParams.ToDate = self.Tables.datepickerplugin.nexDatePicker("getSingleDate");
+        self.Params.licenseesByProductParams.TrialData = self.Tables.chkTrialData.is(":checked");
 
         AccReport.utility.CallAjax(this,
             window.rootUrl + "Gaming/Gaming/GetLicenseesByProduct",
@@ -329,6 +339,8 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.ReportManager = f
         params.ReportDate = self.Tables.datepickerplugin.nexDatePicker("getSingleDate");
         params.CompanyList = self.Tables.dropdownCompany.multiSelect('getCheckedItems').toString();
         params.CurrencyList = self.Tables.dropdownCurrency.multiSelect('getCheckedItems').toString();
+        params.TrialData = self.Tables.chkTrialData.is(":checked");
+
         switch (self.CachedData.reportBy) {
             case self.Enums.ReportBy.ByBetType:
                 params.LiveStatus = self.Tables.dropdownLiveStatus.val();
@@ -366,6 +378,11 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.ReportManager = f
     };
 
     self.datePickerChange = function () {
+        self.GetCompanyList();
+    };
+
+    self.checkboxTrialDataChange = function () {
+        AccReport.disableInput();
         self.GetCompanyList();
     };
 

@@ -17,7 +17,8 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.WinLossByMatch.De
             BetTypeId: null,
             LiveStatus: null,
             MatchId: null,
-            MatchCode: null
+            MatchCode: null,
+            TrialData: false
         }
     };
 

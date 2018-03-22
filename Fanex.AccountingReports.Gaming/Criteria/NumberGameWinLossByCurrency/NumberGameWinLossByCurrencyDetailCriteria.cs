@@ -33,6 +33,8 @@ namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByCurrency
         [SpParam(Ignored = true)]
         public int PageIndex { get; set; }
 
+        public bool TrialData { get; set; }
+
         public override bool IsValid()
         {
             return true;

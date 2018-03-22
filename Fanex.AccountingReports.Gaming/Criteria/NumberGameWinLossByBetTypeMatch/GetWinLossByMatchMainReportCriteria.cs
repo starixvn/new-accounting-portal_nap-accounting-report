@@ -20,6 +20,8 @@ namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByBetTypeMatc
         [SpParam(SqlParamName = "date")]
         public DateTime ReportDate { get; set; }
 
+        public bool TrialData { get; set; }
+
         public override bool IsValid()
         {
             return true;

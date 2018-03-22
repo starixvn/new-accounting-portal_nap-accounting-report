@@ -17,6 +17,8 @@ namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByDate
 
         public string SiteID { get; set; }
 
+        public bool TrialData { get; set; }
+
         public override bool IsValid()
         {
             return true;

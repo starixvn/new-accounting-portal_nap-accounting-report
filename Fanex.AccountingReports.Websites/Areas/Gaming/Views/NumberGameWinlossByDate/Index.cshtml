@@ -1,4 +1,4 @@
-@using Fanex.AccountingReports.Licensee.Resources;
+@using Fanex.AccountingReports.Gaming.Resources;
 @using Fanex.AccountingReports.Core.Web;
 @{
     ViewBag.Title = AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty;
@@ -44,7 +44,13 @@
                 <div class="edit-field col_6 ddlProductContainer width-auto">
                     <select id="ddlBettype">
                     </select>
-                </div>                
+                </div>   
+                <div class="lbl-field col_4 align-right">
+                    <label for="chbTrialData">
+                        @Labels.TrialData
+                    </label>
+                    <input type="checkbox" id="checkbox-trialdata" class="checkbox-trialdata" />
+                </div>             
                 <div class="submit width-auto col_4 prefix_1">
                     <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
                 </div>
@@ -65,7 +71,7 @@
 @section scripts
 {
     <script type="text/javascript">
-        var noteMessage = '@Html.Raw(LicenseeResources.WinLossByLicensee_FilterNote)';
+        var noteMessage = '@Html.Raw(GamingResources.WinLossByLicensee_FilterNote)';
         var labelFrom = '@Labels.From';
         var labelTo = '@Labels.To';
         var today = '@DateTime.Today.ToShortDateString()';

@@ -8,7 +8,8 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
             Bettypes: null,
             Currencies: null,
             FromDate: null,
-            ToDate: null
+            ToDate: null,
+            TrialData: false
         }
     };
 
@@ -23,6 +24,10 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
     self.bindingEvent = function () {
         $("#btnGenerate").click(function () {
             self.getNumberGameWinlossByDate();
+        });
+
+        $(".checkbox-trialdata").change(function () {
+            self.checkboxTrialDataChange();
         });
     };
 
@@ -67,13 +72,15 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
 
     self.getLicensee = function () {
         var dateRange = $('#datepickerplugin').nexDatePicker("getDateRange");
+        var trialData = $(".checkbox-trialdata").is(":checked");
         var params = {
             FromDate: dateRange.FromDate,
             ToDate: dateRange.ToDate,
             GetIsActiveOnly: true,
             ExcludeLicenseeID: 18,
             SystemID: 3,
-            ProductPrefix: "NG"
+            ProductPrefix: "NG",
+            TrialData: trialData
         };
 
         $.ajax({
@@ -328,13 +335,15 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
         var dateRange = $('#datepickerplugin').nexDatePicker("getDateRange");
         _params.paramReport.FromDate = dateRange.FromDate;
         _params.paramReport.ToDate = dateRange.ToDate;
+        _params.paramReport.TrialData = $(".checkbox-trialdata").is(":checked");
 
         var params = {
             Currency: _params.paramReport.Currencies,
             SiteID: _params.paramReport.Companies,
             Bettype: _params.paramReport.Bettypes,
             FromDate: _params.paramReport.FromDate,
-            ToDate: _params.paramReport.ToDate
+            ToDate: _params.paramReport.ToDate,
+            TrialData: _params.paramReport.TrialData
         };
 
         if (!self.checkReportParams(_params)) {
@@ -485,11 +494,15 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
             SiteID: _params.paramReport.Companies,
             Bettype: _params.paramReport.Bettypes,
             FromDate: _params.paramReport.FromDate,
-            ToDate: _params.paramReport.ToDate
+            ToDate: _params.paramReport.ToDate,
+            TrialData: _params.paramReport.TrialData
         };
         AccReport.downloadFile(window.rootUrl + "Gaming/NumberGameWinlossByDate/ExportReport", params);
     };
 
+    self.checkboxTrialDataChange = function () {
+        self.getLicensee();
+    };
 };
 
 $(document).ready(function () {
