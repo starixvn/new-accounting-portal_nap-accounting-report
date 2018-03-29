@@ -1093,6 +1093,7 @@
     </Content>
     <Content Include="Web.Configuration\TotalCreditAccountByProductSection.config" />
     <Content Include="Web.Configuration\RacingSection.config" />
+    <Content Include="WhoIsRemotingRef.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Balance\Views\CompanyBalanceDifference\Scripts\CompanyBalanceDifference.js" />
