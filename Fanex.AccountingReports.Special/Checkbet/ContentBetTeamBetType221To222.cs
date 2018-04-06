@@ -13,7 +13,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 (int)model.Hdp2,
                 "en");
 
-            return $"{choice} {model.OddsSpread}";
+            return $"{choice} {model.OddsSpread.ToString("G29")}";
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
             team.Add("YD", "Yes/Draw");
             team.Add("ND", "No/Draw");
 
-            return team.ContainsKey(model.BetTeam) == true ? team[model.BetTeam] : string.Empty;
+            return team.ContainsKey(model.BetTeam) ? team[model.BetTeam] : string.Empty;
         }
     }
 }

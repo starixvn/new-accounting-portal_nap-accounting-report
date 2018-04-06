@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
             team.Add("A", "Away");
             team.Add("N", "Neither");
 
-            return team.ContainsKey(model.BetTeam) == true ? team[model.BetTeam] : string.Empty;
+            return team.ContainsKey(model.BetTeam) ? team[model.BetTeam] : string.Empty;
         }
     }
 }
