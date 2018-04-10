@@ -35,7 +35,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.Lottery,
             MainConstants.WinLossSummaryBetradarVirtualSportId,
             SportContants.Lucky3,
-            SportContants.Exchange
+            SportContants.Exchange,
+            SportContants.Pragmatic
         };
 
         public SportTypeWinLossInfo()
