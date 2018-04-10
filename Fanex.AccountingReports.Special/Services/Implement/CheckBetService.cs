@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using Checkbet;
+    using Common;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Helper.SportHelper;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -90,7 +91,7 @@
                         string bettypeName = CacheRef.GetBettype(bettype);
                         string oldAway = string.Empty;
                         string newAway = string.Empty;
-                        var oddsSpread = (decimal)row.OddsSpread;
+                        var oddsSpread = Converter.ToDecimal(row.OddsSpread);
                         if (bettype == 85 || bettype == 86)
                         {
                             bettypeName = liveindicator ? "Next " + bettypeName : "FT." + bettypeName;
@@ -216,17 +217,15 @@
                         var odds = (decimal)row.odds;
                         var betteam = BetTeam.GetBetTeam((string)row.betteam, bettype, "e");
                         var totalPT = (decimal)row.tpositiontaking;
-                        var oddstype = CalcOdds.GetOddsType(bettype, oddStyle);
                         var newStatus = (string)row.NewStatus;
                         var oldStatus = (string)row.OldStatus;
                         var home = CacheRef.GetTeamName(row.homeid);
                         var away = CacheRef.GetTeamName(row.awayid);
-                        var matchcode = (string)row.matchcode;
                         var hdp1 = (decimal)row.hdp1;
                         var hdp2 = (decimal)row.hdp2;
                         var liveindicator = (bool)row.liveindicator;
                         string betypeName = CacheRef.GetBettype(bettype);
-                        var oddsSpread = (decimal)row.OddsSpread;
+                        var oddsSpread = Converter.ToDecimal(row.OddsSpread);
                         if (bettype == 85 || bettype == 86)
                         {
                             betypeName = liveindicator ? "Next " + betypeName : "FT." + betypeName;
