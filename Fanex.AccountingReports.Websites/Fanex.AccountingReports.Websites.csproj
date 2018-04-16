@@ -2024,6 +2024,7 @@
     <Content Include="Web.Configuration\Web.MNL.ConnectionString.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="deployment.ignore" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="scripts\_lib\Fanex.Grid\images\Thumbs.db" />
     <None Include="themes\easyui\default\images\Thumbs.db" />
