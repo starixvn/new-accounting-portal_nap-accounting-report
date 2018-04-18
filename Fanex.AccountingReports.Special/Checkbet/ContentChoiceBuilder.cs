@@ -10,7 +10,8 @@ namespace Fanex.AccountingReports.Special.Checkbet
             int betType,
             string betTeam,
             decimal hdp1,
-            decimal hdp2)
+            decimal hdp2,
+            decimal oddsSpread)
         {
             string result = string.Empty;
             var model = new BetTeamModel
@@ -21,6 +22,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 BetTeam = betTeam.ToUpper(),
                 Hdp1 = decimal.Round(hdp1, 2, MidpointRounding.AwayFromZero),
                 Hdp2 = decimal.Round(hdp2, 2, MidpointRounding.AwayFromZero),
+                OddsSpread = oddsSpread
             };
 
             var bettypeMapper = new ContentBetTypeMapper();
@@ -31,7 +33,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 Type type = Type.GetType(typeName);
                 if (type == null)
                 {
-                    type = Type.GetType("Fanex.AccountingReports.Special.Checkbet.ContenBetTeamBetTypeNA");
+                    type = Type.GetType("Fanex.AccountingReports.Special.Checkbet.ContentBetTeamBetTypeNA");
                 }
 
                 ContentBetTeam content = Activator.CreateInstance(type) as ContentBetTeam;

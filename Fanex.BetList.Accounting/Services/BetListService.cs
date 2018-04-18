@@ -203,7 +203,8 @@ namespace Fanex.BetList.Accounting.Services
                     ExtraInfo = Converter.ToString2(r["ExtraInfo"]),
                     Currency = Converter.ToString2(r["currency"]),
                     WalletType = Converter.To<byte>(r["WalletType"]),
-                    RefCode = Converter.To<long>(r["RefCode"])
+                    RefCode = Converter.To<long>(r["RefCode"]),
+                    OddsSpread = Converter.To<decimal>(r["Oddsspread"])
                 },
                 ChoiceHtml = string.Empty,
                 OddHtml = string.Empty,

@@ -2,16 +2,16 @@ using System.Collections.Generic;
 
 namespace Fanex.AccountingReports.Special.Checkbet
 {
-    public class ContenBetTeamBetType419To421 : ContentBetTeam
+    public class ContentBetTeamBetType422To423 : ContentBetTeam
     {
         public string ContentBetTeamBuilder(BetTeamModel model)
         {
             var team = new Dictionary<string, string>();
-            team.Add("1H", "First Half");
-            team.Add("2H", "Second Half");
+            team.Add("H", "Home");
+            team.Add("A", "Away");
             team.Add("N", "Neither");
 
-            return team.ContainsKey(model.BetTeam) == true ? team[model.BetTeam] : string.Empty;
+            return team.ContainsKey(model.BetTeam) ? team[model.BetTeam] : string.Empty;
         }
     }
 }

@@ -2,7 +2,7 @@ using RemotingRef;
 
 namespace Fanex.AccountingReports.Special.Checkbet
 {
-    public class ContenBetTeamBetType221To225 : ContentBetTeam
+    public class ContentBetTeamBetType223To227 : ContentBetTeam
     {
         public string ContentBetTeamBuilder(BetTeamModel model)
         {

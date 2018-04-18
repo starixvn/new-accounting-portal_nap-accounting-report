@@ -1,10 +1,10 @@
 namespace Fanex.AccountingReports.Special.Checkbet
 {
-    public class ContenBetTeamBetTypeAsBetTeam : ContentBetTeam
+    public class ContentBetTeamBetTypeYesNo : ContentBetTeam
     {
         public string ContentBetTeamBuilder(BetTeamModel model)
         {
-            return model.BetTeam;
+            return model.BetTeam == "Y" ? "Yes" : "No";
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Fanex.AccountingReports.Special.Checkbet
 {
-    public class ContenBetTeamBetType424 : ContentBetTeam
+    public class ContentBetTeamBetType424 : ContentBetTeam
     {
         public string ContentBetTeamBuilder(BetTeamModel model)
         {
@@ -14,7 +14,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
             team.Add("OG", "Own Goal");
             team.Add("NG", "No Goal");
 
-            return team.ContainsKey(model.BetTeam) == true ? team[model.BetTeam] : string.Empty;
+            return team.ContainsKey(model.BetTeam) ? team[model.BetTeam] : string.Empty;
         }
     }
 }
