@@ -458,10 +458,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     product = "Gold Deluxe";
                     break;
 
-                case ProductContants.Pragmatic:
-                    product = "PP";
-                    break;
-
                 default:
                     break;
             }
