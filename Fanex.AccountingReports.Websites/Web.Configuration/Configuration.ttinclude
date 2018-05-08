@@ -186,7 +186,7 @@
                     case SiteEnvironment.UAT:
 						return "qa-accrpt.starific.net";
 					case SiteEnvironment.PRO:
-                        return "58.86.55.10";
+                        return "nap.oneops.net";
 					case SiteEnvironment.MNL:
                         return "nap-report.ibcbk.com";
 					default:
