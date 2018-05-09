@@ -1,7 +1,7 @@
 namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
 {
     using System;
-    using Fanex.AccountingReports.Core.Resources;
+    using Resources;
 
     /// <summary>
     /// Create Tree Win Loss Info Model.
@@ -84,5 +84,11 @@ namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
         }
 
         public decimal VirtualRate { get; set; }
+
+        public decimal ExtraAmount { get; set; }
+
+        public decimal WLVarianceTotal { get; set; }
+
+        public decimal TOVarianceTotal { get; set; }
     }
 }

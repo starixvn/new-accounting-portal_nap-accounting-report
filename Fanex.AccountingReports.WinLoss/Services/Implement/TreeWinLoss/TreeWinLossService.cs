@@ -86,13 +86,13 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 DateTime moveBetsDay = ReportService.BalanceUp.MoveBetsDay;
                 if (criteria.FromDate <= moveBetsDay && criteria.ToDate > moveBetsDay)
                 {
-                    DateTime fromDate = criteria.FromDate;                                        
-                    criteria.FromDate = moveBetsDay.AddDays(1);                    
+                    DateTime fromDate = criteria.FromDate;
+                    criteria.FromDate = moveBetsDay.AddDays(1);
                     var accountWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
 
                     criteria.FromDate = fromDate;
                     criteria.ToDate = moveBetsDay;
-                    var wareHouseWinLoss = GetTreeWinLossDateRangeByProduct(criteria);                    
+                    var wareHouseWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
                     var treeWinLossTmp = accountWinLoss.ChildsInfo.Concat(wareHouseWinLoss.ChildsInfo).ToList();
                     treeWinLoss.ChildsInfo = treeWinLossTmp.GroupBy(x => x.Id)
                         .Select(y => new TreeWinLossInfo
@@ -178,7 +178,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
                     criteria.FromDate = fromDate;
                     criteria.ToDate = moveBetsDay;
-                    var wareHouseWinLoss = GetTreeWinLossDateRangeByLevel(criteria);                    
+                    var wareHouseWinLoss = GetTreeWinLossDateRangeByLevel(criteria);
                     var winLossByCommTmp = accountWinLoss.TreeWinLoss.ChildsInfo.Concat(wareHouseWinLoss.TreeWinLoss.ChildsInfo).ToList();
                     winLossByComm.ChildsInfo = winLossByCommTmp.GroupBy(x => new { x.Id, x.Name, x.VirtualRate })
                         .Select(y => new TreeWinLossInfo
@@ -840,7 +840,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 BaseRMTOVarianceMinus = Converter.ToDecimal(reader["TOVariance-"]),
                 BaseRMWLVarianceMinus = Converter.ToDecimal(reader["WLVariance-"]),
                 BaseRMWLVariancePlus = Converter.ToDecimal(reader["WLVariance+"]),
-                VirtualRate = Converter.ToDecimal(reader["EnableVirtualrate"])
+                VirtualRate = Converter.ToDecimal(reader["EnableVirtualrate"]),
+                ExtraAmount = Converter.ToDecimal(reader["ExtraAmount"]),
+                WLVarianceTotal = Converter.ToDecimal(reader["WLVarianceTotal"]),
+                TOVarianceTotal = Converter.ToDecimal(reader["TOVarianceTotal"])
             };
 
             return winLoss;
