@@ -53,7 +53,10 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                         BaseRMTOVarianceMinus = Converter.ToDecimal(row["TOVariance-"]),
                         BaseRMTOVariancePlus = Converter.ToDecimal(row["TOVariance+"]),
                         BaseRMWLVarianceMinus = Converter.ToDecimal(row["WLVariance-"]),
-                        BaseRMWLVariancePlus = Converter.ToDecimal(row["WLVariance+"])
+                        BaseRMWLVariancePlus = Converter.ToDecimal(row["WLVariance+"]),
+                        ExtraAmount = Converter.ToDecimal(row["ExtraAmount"]),
+                        BaseRMWinlostVarianceTotal = Converter.ToDecimal(row["WLVarianceTotal"]),
+                        BaseRMTOVarianceAbsoluteTotal = Converter.ToDecimal(row["TOVarianceTotal"])
                     });
                 }
             }

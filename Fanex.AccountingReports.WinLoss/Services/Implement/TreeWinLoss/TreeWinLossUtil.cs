@@ -31,6 +31,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 total.BaseRMWLVariancePlus += winLoss.BaseRMWLVariancePlus;
                 total.BaseRMTotal += winLoss.BaseRMTotal;
                 total.BaseRMVirtualTotal += winLoss.BaseRMVirtualTotal;
+                total.BaseRMTOVarianceAbsoluteTotal += winLoss.BaseRMTOVarianceAbsoluteTotal;
+                total.BaseRMWinlostVarianceTotal += winLoss.BaseRMWinlostVarianceTotal;
             }
         }
 
@@ -58,6 +60,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             winLoss.BaseRMWLVariancePlus = Math.Round(winLoss.BaseRMWLVariancePlus, 2);
             winLoss.BaseRMVirtualTotal = Math.Round(winLoss.BaseRMVirtualTotal, 2);
             winLoss.BaseRMTotal = Math.Round(winLoss.BaseRMTotal, 2);
+            winLoss.BaseRMTOVarianceAbsoluteTotal = Math.Round(winLoss.BaseRMTOVarianceAbsoluteTotal, 2);
+            winLoss.BaseRMWinlostVarianceTotal = Math.Round(winLoss.BaseRMWinlostVarianceTotal, 2);
+            winLoss.ExtraAmount = Math.Round(winLoss.ExtraAmount, 2);
 
             return winLoss;
         }

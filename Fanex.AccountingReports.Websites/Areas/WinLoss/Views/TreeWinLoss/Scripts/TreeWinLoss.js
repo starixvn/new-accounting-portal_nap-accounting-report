@@ -283,6 +283,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                         }
                     },
                         { Name: "ColTurnover", Value: info.Turnover },
+                        { Name: "ColExtraPT", Value: info.ExtraAmount },
                         { Name: "ColWinLoss", Value: info.WinLoss },
                         { Name: "ColCommission", Value: info.Comm },
                         { Name: "ColWinLossTotal", Value: info.WinLossTotal },
@@ -308,7 +309,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                 info.BaseRMVirtualTurnover = isShowNA ? "N/A" : info.BaseRMVirtualTurnover;
                 info.BaseRMMargin = isShowNA ? "N/A" : info.BaseRMMargin;
                 footerData.push({
-                    Columns: [{ Name: "ColCurrencyName", Value: info.Name, MergeColNumber: 5, CellAlign: "right" },
+                    Columns: [{ Name: "ColCurrencyName", Value: info.Name, MergeColNumber: 6, CellAlign: "right" },
                         { Name: "ColBaseRMTurnover", Value: info.BaseRMTurnover },
                         { Name: "ColBaseRMVirtualTurnover", Value: info.BaseRMVirtualTurnover },
                         { Name: "ColBaseRMTOVariancePlus", Value: info.BaseRMTOVariancePlus },
@@ -332,6 +333,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             {
                 Columns: [{ HeaderText: "Currency", Name: "ColCurrencyName", MergeRowNumber: 3 },
                 { HeaderText: "Turnover", Name: "ColTurnover", MergeRowNumber: 3 },
+                { HeaderText: "ExtraPT", Name: "ColExtraPT", MergeRowNumber: 3 },
                 { HeaderText: "WinLoss", Name: "ColWinLoss", MergeRowNumber: 3 },
                 { HeaderText: "Comm", Name: "ColCommission", MergeRowNumber: 3 },
                 { HeaderText: "Total", Name: "ColWinLossTotal", MergeRowNumber: 3 },
@@ -341,7 +343,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                 Columns: [{ HeaderText: "Turnover", Name: "ColBaseRMTurnover", MergeRowNumber: 2 },
                 { HeaderText: "Virtual Turnover", Name: "ColBaseRMVirtualTurnover", MergeRowNumber: 2 },
                 { HeaderText: "Turnover Variance", Name: "ColBaseRMTOVariancePlus", MergeColNumber: 3 },
-                { HeaderText: "Winlost Variance", Name: "ColBaseRMWLVariancePlus", MergeColNumber: 3 },
+                { HeaderText: "WinLoss Variance", Name: "ColBaseRMWLVariancePlus", MergeColNumber: 3 },
                 { HeaderText: "Variance Margin(%)", Name: "ColBaseRMVarianceMargin", MergeRowNumber: 2 },
                 { HeaderText: "Total", Name: "ColBaseRMTotal", MergeRowNumber: 2 },
                 { HeaderText: "Virtual Total", Name: "ColBaseRMVirtualTotal", MergeRowNumber: 2 },
@@ -349,6 +351,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             }],
             columns: [{ HeaderText: "Currency", Width: 80, Name: "ColCurrencyName", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                { HeaderText: "ExtraPT", Width: 120, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "WinLoss", Width: 120, Name: "ColWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: "Comm", Width: 120, Name: "ColCommission", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: "Total", Width: 120, Name: "ColWinLossTotal", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
@@ -356,7 +359,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                 { HeaderText: "Virtual Turnover", Width: 120, Name: "ColBaseRMVirtualTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true },
                 { HeaderText: "+", Width: 120, Name: "ColBaseRMTOVariancePlus", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true },
                 { HeaderText: "-", Width: 120, Name: "ColBaseRMTOVarianceMinus", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true },
-                { HeaderText: "Absolute Total", Width: 120, Name: "ColBaseRMTOVarianceAbsoluteTotal", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true },
+                { HeaderText: "Total", Width: 120, Name: "ColBaseRMTOVarianceAbsoluteTotal", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true },
                 { HeaderText: "+", Width: 120, Name: "ColBaseRMWLVariancePlus", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: "-", Width: 120, Name: "ColBaseRMWLVarianceMinus", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: "Total", Width: 120, Name: "ColBaseRMWLVarianceTotal", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },

@@ -221,9 +221,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
                     winLossByComm.ChildsInfo = winLossByComm.ChildsInfo.OrderBy(c => c.Name).ToList();
                     treeWinLossVirtualRate.TreeWinLoss = winLossByComm;
-                    treeWinLossVirtualRate.SMAVirtualRate.ReportRows = this.GetEnabledVirtualRateUserFromIBCAndWH(
-                        accountWinLoss.SMAVirtualRate.ReportRows,
-                        wareHouseWinLoss.SMAVirtualRate.ReportRows);
+                    //treeWinLossVirtualRate.SMAVirtualRate.ReportRows = this.GetEnabledVirtualRateUserFromIBCAndWH(
+                    //    accountWinLoss.SMAVirtualRate.ReportRows,
+                    //    wareHouseWinLoss.SMAVirtualRate.ReportRows);
                 }
                 else
                 {
@@ -231,8 +231,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     treeWinLossVirtualRate.TreeWinLoss.ChildsInfo.OrderBy(c => c.Name).ToList();
                 }
 
-                treeWinLossVirtualRate.NumberUserEnabledVirtualRate = treeWinLossVirtualRate.SMAVirtualRate.ReportRows.Count;
-                treeWinLossVirtualRate.EnabledVirtualRateUser = MapEnabledVirtualRateUserData(treeWinLossVirtualRate.TreeWinLoss.ChildsInfo);
+                //treeWinLossVirtualRate.NumberUserEnabledVirtualRate = treeWinLossVirtualRate.SMAVirtualRate.ReportRows.Count;
+                //treeWinLossVirtualRate.EnabledVirtualRateUser = MapEnabledVirtualRateUserData(treeWinLossVirtualRate.TreeWinLoss.ChildsInfo);
                 treeWinLossVirtualRate.TreeWinLoss.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
 
                 switch (criteria.RoleId)
@@ -357,7 +357,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             BaseRMWLVariancePlus = row.BaseRMWLVariancePlus,
                             BaseRMWLVarianceMinus = row.BaseRMWLVarianceMinus,
                             BaseRMTotal = row.BaseRMTotal,
-                            BaseRMVirtualTotal = row.BaseRMVirtualTotal
+                            BaseRMVirtualTotal = row.BaseRMVirtualTotal,
+                            BaseRMTOVarianceAbsoluteTotal = row.BaseRMTOVarianceAbsoluteTotal,
+                            BaseRMWinlostVarianceTotal = row.BaseRMWinlostVarianceTotal,
+                            ExtraAmount = row.ExtraAmount
                         };
 
                         winLoss = TreeWinLossUtil.RoundTreeWinLossInfo(winLoss);
@@ -842,8 +845,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 BaseRMWLVariancePlus = Converter.ToDecimal(reader["WLVariance+"]),
                 VirtualRate = Converter.ToDecimal(reader["EnableVirtualrate"]),
                 ExtraAmount = Converter.ToDecimal(reader["ExtraAmount"]),
-                WLVarianceTotal = Converter.ToDecimal(reader["WLVarianceTotal"]),
-                TOVarianceTotal = Converter.ToDecimal(reader["TOVarianceTotal"])
+                BaseRMWinlostVarianceTotal = Converter.ToDecimal(reader["WLVarianceTotal"]),
+                BaseRMTOVarianceAbsoluteTotal = Converter.ToDecimal(reader["TOVarianceTotal"])
             };
 
             return winLoss;

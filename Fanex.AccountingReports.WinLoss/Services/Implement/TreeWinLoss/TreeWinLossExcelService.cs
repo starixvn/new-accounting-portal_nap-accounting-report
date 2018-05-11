@@ -103,7 +103,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 var isShowNA = report.IsShowNotAvailableTurnover;
                 int startRow = 0;
                 int startColumn = 0;
-                int maxColumnIndex = 17;
+                int maxColumnIndex = 18;
 
                 var currentColumn = startColumn;
                 CellRange currentCellRange;
@@ -191,7 +191,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 ExcelWorksheetCollection workSheets = excelFile.Worksheets;
 
                 this.ExportTreeWinLossInfo(report, criteria, workSheets);
-                this.ExportVirtualRateInfo(report, criteria, workSheets);
+                //this.ExportVirtualRateInfo(report, criteria, workSheets);
 
                 var reportName = string.Format(
                     WinLossResources.TreeWinLoss_ReportName,
@@ -222,7 +222,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             var isShowNA = false;
             int startRow = 0;
             int startColumn = 0;
-            int maxColumnIndex = 18;
+            int maxColumnIndex = 19;
 
             var titleStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
             var currentColumn = startColumn;
@@ -254,7 +254,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
             else
             {
-                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 16);
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 18);
             }
         }
 
@@ -334,6 +334,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 2, currentColumn);
             currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.ExtraPT;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 2, currentColumn);
+            currentCellRange.Merged = true;
             currentCellRange.Value = Labels.Win_Loss;
             currentCellRange.Style = headerTextStyle;
             currentColumn++;
@@ -375,7 +381,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn + 3, currentRow, currentColumn + 5);
             currentCellRange.Merged = true;
-            currentCellRange.Value = WinLossResources.WinlostVariance;
+            currentCellRange.Value = WinLossResources.WinlossVariance;
             currentCellRange.Style = headerTextStyle;
             currentRow++;
 
@@ -390,7 +396,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = WinLossResources.AbsoluteTotal;
+            currentCell.Value = Labels.Total;
             currentCell.Style = headerTextStyle;
             currentColumn++;
 
@@ -480,6 +486,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = info.Turnover;
+                currentCell.Style = twoDecimalNumberStyle;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.ExtraAmount;
                 currentCell.Style = twoDecimalNumberStyle;
                 currentColumn++;
 
@@ -624,12 +635,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             {
                 info = totalInfo[i];
                 var currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 4);
+                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
                 currentCellRange.Merged = true;
                 currentCellRange.Value = info.Name;
                 currentCellRange.Style = grandTotalRowTextStyle;
                 currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentColumn += 5;
+                currentColumn += 6;
                 if (isShowNA)
                 {
                     currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -765,6 +776,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 2, currentColumn);
             currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.ExtraPT;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 2, currentColumn);
+            currentCellRange.Merged = true;
             currentCellRange.Value = Labels.Win_Loss;
             currentCellRange.Style = headerTextStyle;
             currentColumn++;
@@ -806,7 +823,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn + 3, currentRow, currentColumn + 5);
             currentCellRange.Merged = true;
-            currentCellRange.Value = WinLossResources.WinlostVariance;
+            currentCellRange.Value = WinLossResources.WinlossVariance;
             currentCellRange.Style = headerTextStyle;
             currentRow++;
 
@@ -821,7 +838,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = WinLossResources.AbsoluteTotal;
+            currentCell.Value = Labels.Total;
             currentCell.Style = headerTextStyle;
             currentColumn++;
 
@@ -926,6 +943,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = info.Turnover;
+                currentCell.Style = twoDecimalNumberStyle;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.ExtraAmount;
                 currentCell.Style = twoDecimalNumberStyle;
                 currentColumn++;
 
@@ -1045,8 +1067,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
                 bool isDisabledVirtualRate = info.VirtualRate != 1;
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = isDisabledVirtualRate ? "Disabled" :
-                    GetVirtualRateColumnValue(report.EnabledVirtualRateUser[info.Name]);
+                currentCell.Value = "Disabled";
+                //currentCell.Value = isDisabledVirtualRate ? "Disabled" :
+                //    GetVirtualRateColumnValue(report.EnabledVirtualRateUser[info.Name]);
                 currentCell.Style = isDisabledVirtualRate ? redTextStyle : rightTextStyle;
 
                 currentRow++;
@@ -1078,12 +1101,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             {
                 info = totalInfo[j];
                 var currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
                 currentCellRange.Merged = true;
                 currentCellRange.Value = info.Name;
                 currentCellRange.Style = grandTotalRowTextStyle;
                 currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentColumn += 6;
+                currentColumn += 7;
 
                 if (isShowNA)
                 {

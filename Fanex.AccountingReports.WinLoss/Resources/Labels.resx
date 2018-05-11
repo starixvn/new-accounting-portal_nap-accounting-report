@@ -1078,4 +1078,7 @@
   <data name="_1st_Moneyline" xml:space="preserve">
     <value>1st Moneyline</value>
   </data>
+  <data name="ExtraPT" xml:space="preserve">
+    <value>ExtraPT</value>
+  </data>
 </root>
