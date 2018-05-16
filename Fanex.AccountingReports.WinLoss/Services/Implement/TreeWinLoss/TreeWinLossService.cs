@@ -156,7 +156,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
-        public TreeWinLossVirtualRate GetTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
+        public TreeWinLoss GetTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
             try
             {
@@ -179,7 +179,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     criteria.FromDate = fromDate;
                     criteria.ToDate = moveBetsDay;
                     var wareHouseWinLoss = GetTreeWinLossDateRangeByLevel(criteria);
-                    var winLossByCommTmp = accountWinLoss.TreeWinLoss.ChildsInfo.Concat(wareHouseWinLoss.TreeWinLoss.ChildsInfo).ToList();
+                    var winLossByCommTmp = accountWinLoss.ChildsInfo.Concat(wareHouseWinLoss.ChildsInfo).ToList();
                     winLossByComm.ChildsInfo = winLossByCommTmp.GroupBy(x => new { x.Id, x.Name, x.VirtualRate })
                         .Select(y => new TreeWinLossInfo
                         {
@@ -200,10 +200,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             VirtualRate = y.Key.VirtualRate
                         }).ToList();
 
-                    for (int j = 0; j < accountWinLoss.TreeWinLoss.TotalInfo.Count; j++)
+                    for (int j = 0; j < accountWinLoss.TotalInfo.Count; j++)
                     {
-                        var totalAccountWinLoss = accountWinLoss.TreeWinLoss.TotalInfo[j];
-                        var totalWarehouseWinLoss = wareHouseWinLoss.TreeWinLoss.TotalInfo[j];
+                        var totalAccountWinLoss = accountWinLoss.TotalInfo[j];
+                        var totalWarehouseWinLoss = wareHouseWinLoss.TotalInfo[j];
                         var totalWinLoss = new TreeWinLossInfo()
                         {
                             Name = totalAccountWinLoss.Name,
@@ -220,41 +220,43 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     }
 
                     winLossByComm.ChildsInfo = winLossByComm.ChildsInfo.OrderBy(c => c.Name).ToList();
-                    treeWinLossVirtualRate.TreeWinLoss = winLossByComm;
+                    /// treeWinLossVirtualRate.TreeWinLoss = winLossByComm;
                     //treeWinLossVirtualRate.SMAVirtualRate.ReportRows = this.GetEnabledVirtualRateUserFromIBCAndWH(
                     //    accountWinLoss.SMAVirtualRate.ReportRows,
                     //    wareHouseWinLoss.SMAVirtualRate.ReportRows);
                 }
                 else
                 {
-                    treeWinLossVirtualRate = GetTreeWinLossDateRangeByLevel(criteria);
-                    treeWinLossVirtualRate.TreeWinLoss.ChildsInfo.OrderBy(c => c.Name).ToList();
+                    winLossByComm = GetTreeWinLossDateRangeByLevel(criteria);
+                    winLossByComm.ChildsInfo.OrderBy(c => c.Name).ToList();
                 }
 
                 //treeWinLossVirtualRate.NumberUserEnabledVirtualRate = treeWinLossVirtualRate.SMAVirtualRate.ReportRows.Count;
                 //treeWinLossVirtualRate.EnabledVirtualRateUser = MapEnabledVirtualRateUserData(treeWinLossVirtualRate.TreeWinLoss.ChildsInfo);
-                treeWinLossVirtualRate.TreeWinLoss.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
+                // treeWinLossVirtualRate.TreeWinLoss.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
+
+                winLossByComm.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
 
                 switch (criteria.RoleId)
                 {
                     case 5:
-                        SessionManager.Set<TreeWinLossVirtualRate>(TreeWinLossUtil.TreeWinLossByCommSession, treeWinLossVirtualRate);
+                        SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByCommSession, winLossByComm);
                         break;
 
                     case 4:
-                        SessionManager.Set<TreeWinLossVirtualRate>(TreeWinLossUtil.TreeWinLossBySuperSession, treeWinLossVirtualRate);
+                        SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossBySuperSession, winLossByComm);
                         break;
 
                     case 3:
-                        SessionManager.Set<TreeWinLossVirtualRate>(TreeWinLossUtil.TreeWinLossByMasterSession, treeWinLossVirtualRate);
+                        SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByMasterSession, winLossByComm);
                         break;
 
                     case 2:
-                        SessionManager.Set<TreeWinLossVirtualRate>(TreeWinLossUtil.TreeWinLossByAgentSession, treeWinLossVirtualRate);
+                        SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByAgentSession, winLossByComm);
                         break;
                 }
 
-                return treeWinLossVirtualRate;
+                return winLossByComm;
             }
             catch (Exception ex)
             {
@@ -403,7 +405,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
-        private TreeWinLossVirtualRate GetTreeWinLossDateRangeByLevel(GetTreeWinLossByLevelCriteria criteria)
+        private TreeWinLoss GetTreeWinLossDateRangeByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
             switch (criteria.RoleId)
             {
@@ -453,12 +455,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     criteria.RoleId);
             }
 
-            return new TreeWinLossVirtualRate();
+            return new TreeWinLoss();
         }
 
-        private TreeWinLossVirtualRate GetTreeWinlossData(CriteriaBase criteria, int roleId)
+        private TreeWinLoss GetTreeWinlossData(CriteriaBase criteria, int roleId)
         {
-            TreeWinLossVirtualRate treeWinLossVirtualRate = new TreeWinLossVirtualRate();
+            //   TreeWinLossVirtualRate treeWinLossVirtualRate = new TreeWinLossVirtualRate();
             var treeWinLoss = new TreeWinLoss
             {
                 ChildsInfo = new List<TreeWinLossInfo>(),
@@ -484,18 +486,18 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 }
 
                 treeWinLoss.TotalInfo.Add(totalWinLoss);
-                treeWinLossVirtualRate.TreeWinLoss = treeWinLoss;
+                //   treeWinLossVirtualRate.TreeWinLoss = treeWinLoss;
 
-                if (reader.NextResult())
-                {
-                    virtualRate = MapSMAVirtualRateData(reader);
-                }
+                //if (reader.NextResult())
+                //{
+                //    virtualRate = MapSMAVirtualRateData(reader);
+                //}
 
-                treeWinLossVirtualRate.SMAVirtualRate = virtualRate;
+                //treeWinLossVirtualRate.SMAVirtualRate = virtualRate;
                 reader.Close();
             }
 
-            return treeWinLossVirtualRate;
+            return treeWinLoss;
         }
 
         /// <summary>

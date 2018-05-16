@@ -30,10 +30,6 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                 outputParam = db.GetOuputParams();
             }
 
-            /*ObjectDb db = new ObjectDb(criteria.GetSettingKey());
-            var parameters = criteria.GetSpParams();
-            result = db.ExecuteReader(parameters,);
-            return result;*/
             if (result != null && result.Tables.Count > 0)
             {
                 var winLossTable = result.Tables[0];

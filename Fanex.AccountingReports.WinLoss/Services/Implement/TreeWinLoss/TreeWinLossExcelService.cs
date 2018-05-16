@@ -4,7 +4,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
-    using System.Linq;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
@@ -162,23 +161,23 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         {
             try
             {
-                var report = new TreeWinLossVirtualRate();
+                var report = new TreeWinLoss();
                 switch (criteria.RoleId)
                 {
                     case 5:
-                        report = SessionManager.Get<TreeWinLossVirtualRate>(TreeWinLossUtil.TreeWinLossByCommSession);
+                        report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByCommSession);
                         break;
 
                     case 4:
-                        report = SessionManager.Get<TreeWinLossVirtualRate>(TreeWinLossUtil.TreeWinLossBySuperSession);
+                        report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossBySuperSession);
                         break;
 
                     case 3:
-                        report = SessionManager.Get<TreeWinLossVirtualRate>(TreeWinLossUtil.TreeWinLossByMasterSession);
+                        report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByMasterSession);
                         break;
 
                     case 2:
-                        report = SessionManager.Get<TreeWinLossVirtualRate>(TreeWinLossUtil.TreeWinLossByAgentSession);
+                        report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByAgentSession);
                         break;
                 }
 
@@ -190,7 +189,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 var excelFile = new ExcelFile();
                 ExcelWorksheetCollection workSheets = excelFile.Worksheets;
 
-                this.ExportTreeWinLossInfo(report, criteria, workSheets);
+                //   this.ExportTreeWinLossInfo(report, criteria, workSheets);
                 //this.ExportVirtualRateInfo(report, criteria, workSheets);
 
                 var reportName = string.Format(
@@ -264,48 +263,48 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// <param name="report">The report.</param>
         /// <param name="criteria">The criteria.</param>
         /// <param name="workSheets">The work sheets.</param>
-        private void ExportVirtualRateInfo(TreeWinLossVirtualRate report, GetTreeWinLossByLevelCriteria criteria, ExcelWorksheetCollection workSheets)
-        {
-            int maxUserPerSheet = _MaxUserPerSheet;
-            int redundancyUsers = report.NumberUserEnabledVirtualRate % maxUserPerSheet;
-            int numberSheetBeforeRounding = Converter.ToInt(report.NumberUserEnabledVirtualRate / maxUserPerSheet);
-            int numberSheet = redundancyUsers == 0 ? numberSheetBeforeRounding : numberSheetBeforeRounding + 1;
+        //private void ExportVirtualRateInfo(TreeWinLossVirtualRate report, GetTreeWinLossByLevelCriteria criteria, ExcelWorksheetCollection workSheets)
+        //{
+        //    int maxUserPerSheet = _MaxUserPerSheet;
+        //    int redundancyUsers = report.NumberUserEnabledVirtualRate % maxUserPerSheet;
+        //    int numberSheetBeforeRounding = Converter.ToInt(report.NumberUserEnabledVirtualRate / maxUserPerSheet);
+        //    int numberSheet = redundancyUsers == 0 ? numberSheetBeforeRounding : numberSheetBeforeRounding + 1;
 
-            for (int sheetIndex = 0; sheetIndex < numberSheet; sheetIndex++)
-            {
-                var virtualRateByUserInSheet = report.SMAVirtualRate.ReportRows.Skip(sheetIndex * maxUserPerSheet).Take(maxUserPerSheet).ToList();
-                string sheetName = string.Format(WinLossResources.TreeWinLoss_VirtualRate_SheetName, sheetIndex + 1);
-                ExcelWorksheet worksheet = workSheets.Add(sheetName);
-                for (var colIndex = 1; colIndex < 12; colIndex++)
-                {
-                    worksheet.Columns[colIndex].Width = 120 * ExcelExtensions.FontWidth;
-                }
+        //    for (int sheetIndex = 0; sheetIndex < numberSheet; sheetIndex++)
+        //    {
+        //        var virtualRateByUserInSheet = report.SMAVirtualRate.ReportRows.Skip(sheetIndex * maxUserPerSheet).Take(maxUserPerSheet).ToList();
+        //        string sheetName = string.Format(WinLossResources.TreeWinLoss_VirtualRate_SheetName, sheetIndex + 1);
+        //        ExcelWorksheet worksheet = workSheets.Add(sheetName);
+        //        for (var colIndex = 1; colIndex < 12; colIndex++)
+        //        {
+        //            worksheet.Columns[colIndex].Width = 120 * ExcelExtensions.FontWidth;
+        //        }
 
-                worksheet.Columns[1].Width = 200 * ExcelExtensions.FontWidth;
-                worksheet.Columns[2].Width = 200 * ExcelExtensions.FontWidth;
-                worksheet.Columns[9].Width = 180 * ExcelExtensions.FontWidth;
-                worksheet.Columns[10].Width = 180 * ExcelExtensions.FontWidth;
-                worksheet.Columns[11].Width = 180 * ExcelExtensions.FontWidth;
+        //        worksheet.Columns[1].Width = 200 * ExcelExtensions.FontWidth;
+        //        worksheet.Columns[2].Width = 200 * ExcelExtensions.FontWidth;
+        //        worksheet.Columns[9].Width = 180 * ExcelExtensions.FontWidth;
+        //        worksheet.Columns[10].Width = 180 * ExcelExtensions.FontWidth;
+        //        worksheet.Columns[11].Width = 180 * ExcelExtensions.FontWidth;
 
-                int currentRow = 0;
-                string title = GetReportTitleByLevel(criteria);
+        //        int currentRow = 0;
+        //        string title = GetReportTitleByLevel(criteria);
 
-                CellRange currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, 0, currentRow, 11);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = title;
-                currentCellRange.Style = headerTextStyle;
-                currentRow++;
-                worksheet.ExportEmptyRow(currentRow, 0, ref currentRow, 11);
+        //        CellRange currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, 0, currentRow, 11);
+        //        currentCellRange.Merged = true;
+        //        currentCellRange.Value = title;
+        //        currentCellRange.Style = headerTextStyle;
+        //        currentRow++;
+        //        worksheet.ExportEmptyRow(currentRow, 0, ref currentRow, 11);
 
-                this.ExportVirtualRateReportHeader(worksheet, ref currentRow);
+        //        this.ExportVirtualRateReportHeader(worksheet, ref currentRow);
 
-                for (int userIndex = 0; userIndex < virtualRateByUserInSheet.Count; userIndex++)
-                {
-                    var virtualRateByUser = virtualRateByUserInSheet[userIndex];
-                    this.ExportVirtualRateByUser(worksheet, userIndex, virtualRateByUser, ref currentRow);
-                }
-            }
-        }
+        //        for (int userIndex = 0; userIndex < virtualRateByUserInSheet.Count; userIndex++)
+        //        {
+        //            var virtualRateByUser = virtualRateByUserInSheet[userIndex];
+        //            this.ExportVirtualRateByUser(worksheet, userIndex, virtualRateByUser, ref currentRow);
+        //        }
+        //    }
+        //}
 
         /// <summary>
         /// Header for export excel tree win loss by product.
