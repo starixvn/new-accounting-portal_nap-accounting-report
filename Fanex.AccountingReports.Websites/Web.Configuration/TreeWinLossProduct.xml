@@ -25,4 +25,5 @@
   <Product ProductID="26" ProductName ="Lucky 3" IsNoTurnover="0" IsNoVirtual="1"/>
   <Product ProductID="30" ProductName ="Bullfighting" IsNoTurnover="0" IsNoVirtual="1"/>
   <Product ProductID="31" ProductName ="Exchange" IsNoTurnover="0" IsNoVirtual="1"/>
+  <Product ProductID="32" ProductName ="PP" IsNoTurnover="0" IsNoVirtual="1"/>
 </ROOT>

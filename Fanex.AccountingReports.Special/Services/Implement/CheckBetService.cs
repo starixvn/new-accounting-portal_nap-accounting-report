@@ -197,16 +197,6 @@
                     var rejectTicketList = new List<RejectTicketDetail>();
                     foreach (var row in rawData)
                     {
-                        int oddStyle = 0;
-                        if (row.oddstype == null)
-                        {
-                            oddStyle = 0;
-                        }
-                        else
-                        {
-                            oddStyle = (int)row.oddstype;
-                        }
-
                         var transid = (long)row.transid;
                         var transdate = (DateTime)row.transdate;
                         var currency = (string)row.CurrencyName;
