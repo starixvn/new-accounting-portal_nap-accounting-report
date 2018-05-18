@@ -4,6 +4,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
+    using System.Linq;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
@@ -186,11 +187,13 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     report = _reportService.GetTreeWinLossByLevel(criteria);
                 }
 
+                var allVirtualRate = _reportService.GetAllVirtualRate(report);
+
                 var excelFile = new ExcelFile();
                 ExcelWorksheetCollection workSheets = excelFile.Worksheets;
 
-                //   this.ExportTreeWinLossInfo(report, criteria, workSheets);
-                //this.ExportVirtualRateInfo(report, criteria, workSheets);
+                this.ExportTreeWinLossInfo(report, allVirtualRate.EnabledVirtualRateUser, criteria, workSheets);
+                this.ExportVirtualRateInfo(allVirtualRate, criteria, workSheets);
 
                 var reportName = string.Format(
                     WinLossResources.TreeWinLoss_ReportName,
@@ -204,16 +207,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
         }
 
-        /// <summary>
-        /// Exports the tree win loss information.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="workSheets">The work sheets.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
-        private void ExportTreeWinLossInfo(TreeWinLossVirtualRate report, GetTreeWinLossByLevelCriteria criteria, ExcelWorksheetCollection workSheets)
+        private void ExportTreeWinLossInfo(TreeWinLoss report, Dictionary<string, int> enabledVirtualRateUser, GetTreeWinLossByLevelCriteria criteria, ExcelWorksheetCollection workSheets)
         {
             string sheetName = WinLossResources.TreeWinLoss_SheetName;
             ExcelWorksheet workSheet = workSheets.Add(sheetName);
@@ -244,12 +241,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
 
             this.ExportTreeWinLossByLevelHeader(ref workSheet, ref currentRow, startColumn);
-            isShowNA = report.TreeWinLoss.IsShowNotAvailableTurnover;
-            var childsInfoLength = report.TreeWinLoss.ChildsInfo.Count;
+            isShowNA = report.IsShowNotAvailableTurnover;
+            var childsInfoLength = report.ChildsInfo.Count;
             if (childsInfoLength > 0)
             {
-                this.ExportTreeWinLossByLevelAssignBodyData(isShowNA, ref workSheet, report, ref currentRow, startColumn);
-                this.ExportTreeWinLossByLevelAssignFooterData(isShowNA, ref workSheet, report.TreeWinLoss.TotalInfo, ref currentRow, startColumn);
+                this.ExportTreeWinLossByLevelAssignBodyData(isShowNA, ref workSheet, report, enabledVirtualRateUser, ref currentRow, startColumn);
+                this.ExportTreeWinLossByLevelAssignFooterData(isShowNA, ref workSheet, report.TotalInfo, ref currentRow, startColumn);
             }
             else
             {
@@ -263,48 +260,48 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         /// <param name="report">The report.</param>
         /// <param name="criteria">The criteria.</param>
         /// <param name="workSheets">The work sheets.</param>
-        //private void ExportVirtualRateInfo(TreeWinLossVirtualRate report, GetTreeWinLossByLevelCriteria criteria, ExcelWorksheetCollection workSheets)
-        //{
-        //    int maxUserPerSheet = _MaxUserPerSheet;
-        //    int redundancyUsers = report.NumberUserEnabledVirtualRate % maxUserPerSheet;
-        //    int numberSheetBeforeRounding = Converter.ToInt(report.NumberUserEnabledVirtualRate / maxUserPerSheet);
-        //    int numberSheet = redundancyUsers == 0 ? numberSheetBeforeRounding : numberSheetBeforeRounding + 1;
+        private void ExportVirtualRateInfo(TreeWinLossVirtualRate report, GetTreeWinLossByLevelCriteria criteria, ExcelWorksheetCollection workSheets)
+        {
+            int maxUserPerSheet = _MaxUserPerSheet;
+            int redundancyUsers = report.NumberUserEnabledVirtualRate % maxUserPerSheet;
+            int numberSheetBeforeRounding = Converter.ToInt(report.NumberUserEnabledVirtualRate / maxUserPerSheet);
+            int numberSheet = redundancyUsers == 0 ? numberSheetBeforeRounding : numberSheetBeforeRounding + 1;
 
-        //    for (int sheetIndex = 0; sheetIndex < numberSheet; sheetIndex++)
-        //    {
-        //        var virtualRateByUserInSheet = report.SMAVirtualRate.ReportRows.Skip(sheetIndex * maxUserPerSheet).Take(maxUserPerSheet).ToList();
-        //        string sheetName = string.Format(WinLossResources.TreeWinLoss_VirtualRate_SheetName, sheetIndex + 1);
-        //        ExcelWorksheet worksheet = workSheets.Add(sheetName);
-        //        for (var colIndex = 1; colIndex < 12; colIndex++)
-        //        {
-        //            worksheet.Columns[colIndex].Width = 120 * ExcelExtensions.FontWidth;
-        //        }
+            for (int sheetIndex = 0; sheetIndex < numberSheet; sheetIndex++)
+            {
+                var virtualRateByUserInSheet = report.SMAVirtualRate.ReportRows.Skip(sheetIndex * maxUserPerSheet).Take(maxUserPerSheet).ToList();
+                string sheetName = string.Format(WinLossResources.TreeWinLoss_VirtualRate_SheetName, sheetIndex + 1);
+                ExcelWorksheet worksheet = workSheets.Add(sheetName);
+                for (var colIndex = 1; colIndex < 12; colIndex++)
+                {
+                    worksheet.Columns[colIndex].Width = 120 * ExcelExtensions.FontWidth;
+                }
 
-        //        worksheet.Columns[1].Width = 200 * ExcelExtensions.FontWidth;
-        //        worksheet.Columns[2].Width = 200 * ExcelExtensions.FontWidth;
-        //        worksheet.Columns[9].Width = 180 * ExcelExtensions.FontWidth;
-        //        worksheet.Columns[10].Width = 180 * ExcelExtensions.FontWidth;
-        //        worksheet.Columns[11].Width = 180 * ExcelExtensions.FontWidth;
+                worksheet.Columns[1].Width = 200 * ExcelExtensions.FontWidth;
+                worksheet.Columns[2].Width = 200 * ExcelExtensions.FontWidth;
+                worksheet.Columns[9].Width = 180 * ExcelExtensions.FontWidth;
+                worksheet.Columns[10].Width = 180 * ExcelExtensions.FontWidth;
+                worksheet.Columns[11].Width = 180 * ExcelExtensions.FontWidth;
 
-        //        int currentRow = 0;
-        //        string title = GetReportTitleByLevel(criteria);
+                int currentRow = 0;
+                string title = GetReportTitleByLevel(criteria);
 
-        //        CellRange currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, 0, currentRow, 11);
-        //        currentCellRange.Merged = true;
-        //        currentCellRange.Value = title;
-        //        currentCellRange.Style = headerTextStyle;
-        //        currentRow++;
-        //        worksheet.ExportEmptyRow(currentRow, 0, ref currentRow, 11);
+                CellRange currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, 0, currentRow, 11);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = title;
+                currentCellRange.Style = headerTextStyle;
+                currentRow++;
+                worksheet.ExportEmptyRow(currentRow, 0, ref currentRow, 11);
 
-        //        this.ExportVirtualRateReportHeader(worksheet, ref currentRow);
+                this.ExportVirtualRateReportHeader(worksheet, ref currentRow);
 
-        //        for (int userIndex = 0; userIndex < virtualRateByUserInSheet.Count; userIndex++)
-        //        {
-        //            var virtualRateByUser = virtualRateByUserInSheet[userIndex];
-        //            this.ExportVirtualRateByUser(worksheet, userIndex, virtualRateByUser, ref currentRow);
-        //        }
-        //    }
-        //}
+                for (int userIndex = 0; userIndex < virtualRateByUserInSheet.Count; userIndex++)
+                {
+                    var virtualRateByUser = virtualRateByUserInSheet[userIndex];
+                    this.ExportVirtualRateByUser(worksheet, userIndex, virtualRateByUser, ref currentRow);
+                }
+            }
+        }
 
         /// <summary>
         /// Header for export excel tree win loss by product.
@@ -888,27 +885,20 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentRow++;
         }
 
-        /// <summary>
-        /// Exports the tree win loss by level assign body data.
-        /// </summary>
-        /// <param name="isShowNA">If set to <c>true</c> [is show na].</param>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="report">The report.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="startColumn">The start column.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
         private void ExportTreeWinLossByLevelAssignBodyData(
             bool isShowNA,
             ref ExcelWorksheet workSheet,
-            TreeWinLossVirtualRate report,
+            TreeWinLoss report,
+            Dictionary<string, int> enabledVirtualRateUser,
             ref int currentRow,
             int startColumn)
         {
             ExcelCell currentCell;
             TreeWinLossInfo info;
-            for (var i = 0; i < report.TreeWinLoss.ChildsInfo.Count; i++)
+            for (var i = 0; i < report.ChildsInfo.Count; i++)
             {
                 if (i % 2 == 0)
                 {
@@ -927,7 +917,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     twoDecimalPositivePercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
                 }
 
-                info = report.TreeWinLoss.ChildsInfo[i];
+                info = report.ChildsInfo[i];
                 var currentColumn = startColumn;
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = Converter.ToInt(i + 1);
@@ -1066,9 +1056,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
                 bool isDisabledVirtualRate = info.VirtualRate != 1;
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = "Disabled";
-                //currentCell.Value = isDisabledVirtualRate ? "Disabled" :
-                //    GetVirtualRateColumnValue(report.EnabledVirtualRateUser[info.Name]);
+                currentCell.Value = isDisabledVirtualRate ? "Disabled" :
+                    GetVirtualRateColumnValue(enabledVirtualRateUser[info.Name]);
                 currentCell.Style = isDisabledVirtualRate ? redTextStyle : rightTextStyle;
 
                 currentRow++;

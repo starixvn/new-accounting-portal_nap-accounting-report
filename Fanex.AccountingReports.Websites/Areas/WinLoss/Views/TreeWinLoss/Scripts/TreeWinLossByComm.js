@@ -103,7 +103,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByComm = function () {
     };
 
     var renderTreeWinLossByComm = function (report) {
-        report = report.TreeWinLoss;
+       // report = report.TreeWinLoss;
         _tables.reportContainer.removeClass("display-none");
         _tables.report.addClass("display-none");
         var bodyData = [];

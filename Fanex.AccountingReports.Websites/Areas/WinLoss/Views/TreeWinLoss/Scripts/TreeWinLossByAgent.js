@@ -100,7 +100,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByAgent = function () {
     };
 
     var renderTreeWinLossByMaster = function (report) {
-        report = report.TreeWinLoss;
+       // report = report.TreeWinLoss;
         _tables.reportContainer.removeClass("display-none");
         _tables.report.addClass("display-none");
         var bodyData = [];

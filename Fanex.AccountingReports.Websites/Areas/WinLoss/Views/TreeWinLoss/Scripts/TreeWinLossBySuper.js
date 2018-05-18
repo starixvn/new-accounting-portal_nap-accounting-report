@@ -101,7 +101,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossBySuper = function () {
     };
 
     var renderTreeWinLossBySuper = function (report) {
-        report = report.TreeWinLoss;
+      //  report = report.TreeWinLoss;
         _tables.reportContainer.removeClass("display-none");
         _tables.report.addClass("display-none");
         var bodyData = [];

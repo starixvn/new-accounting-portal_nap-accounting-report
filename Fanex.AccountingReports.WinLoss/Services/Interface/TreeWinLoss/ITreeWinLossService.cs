@@ -16,5 +16,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Interface.TreeWinLoss
         VirtualRateInfo GetVirtualRate(int custId);
 
         List<TreeWinLossProduct> GetProduct();
+
+        TreeWinLossVirtualRate GetAllVirtualRate(TreeWinLoss report);
     }
 }

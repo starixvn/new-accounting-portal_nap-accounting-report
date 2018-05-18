@@ -162,7 +162,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             {
                 bool isShowNotAvailableTurnover = IsShowAvailableTurnoverByLevel(criteria);
                 criteria.Products = GetProductParams(criteria.ProductSelection);
-                TreeWinLossVirtualRate treeWinLossVirtualRate = new TreeWinLossVirtualRate();
                 var winLossByComm = new TreeWinLoss
                 {
                     ChildsInfo = new List<TreeWinLossInfo>(),
@@ -220,20 +219,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     }
 
                     winLossByComm.ChildsInfo = winLossByComm.ChildsInfo.OrderBy(c => c.Name).ToList();
-                    /// treeWinLossVirtualRate.TreeWinLoss = winLossByComm;
-                    //treeWinLossVirtualRate.SMAVirtualRate.ReportRows = this.GetEnabledVirtualRateUserFromIBCAndWH(
-                    //    accountWinLoss.SMAVirtualRate.ReportRows,
-                    //    wareHouseWinLoss.SMAVirtualRate.ReportRows);
                 }
                 else
                 {
                     winLossByComm = GetTreeWinLossDateRangeByLevel(criteria);
                     winLossByComm.ChildsInfo.OrderBy(c => c.Name).ToList();
                 }
-
-                //treeWinLossVirtualRate.NumberUserEnabledVirtualRate = treeWinLossVirtualRate.SMAVirtualRate.ReportRows.Count;
-                //treeWinLossVirtualRate.EnabledVirtualRateUser = MapEnabledVirtualRateUserData(treeWinLossVirtualRate.TreeWinLoss.ChildsInfo);
-                // treeWinLossVirtualRate.TreeWinLoss.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
 
                 winLossByComm.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
 
@@ -300,6 +291,25 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
 
             return virtualRateInfo;
+        }
+
+        public TreeWinLossVirtualRate GetAllVirtualRate(TreeWinLoss report)
+        {
+
+            var custIdEnableVirtualRate = string.Join(",", report.ChildsInfo.Where(x => x.VirtualRate == 1).Select(x => x.Id));
+            var getAllVirtualRateCriteria = new GetAllVirtualRateCriteria
+            {
+                CustIDs = custIdEnableVirtualRate
+            };
+
+            var allVirtualRate = GetAllVirtualRate(getAllVirtualRateCriteria);
+
+            var treeWinLossVirtualRate = new TreeWinLossVirtualRate();
+            treeWinLossVirtualRate.SMAVirtualRate = allVirtualRate;
+            treeWinLossVirtualRate.NumberUserEnabledVirtualRate = allVirtualRate.ReportRows.Count;
+            treeWinLossVirtualRate.EnabledVirtualRateUser = MapEnabledVirtualRateUserData(report.ChildsInfo);
+
+            return treeWinLossVirtualRate;
         }
 
         /// <summary>
@@ -460,14 +470,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
         private TreeWinLoss GetTreeWinlossData(CriteriaBase criteria, int roleId)
         {
-            //   TreeWinLossVirtualRate treeWinLossVirtualRate = new TreeWinLossVirtualRate();
             var treeWinLoss = new TreeWinLoss
             {
                 ChildsInfo = new List<TreeWinLossInfo>(),
                 TotalInfo = new List<TreeWinLossInfo>()
             };
-
-            SMAVirtualRate virtualRate = null;
 
             using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
             {
@@ -486,14 +493,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 }
 
                 treeWinLoss.TotalInfo.Add(totalWinLoss);
-                //   treeWinLossVirtualRate.TreeWinLoss = treeWinLoss;
-
-                //if (reader.NextResult())
-                //{
-                //    virtualRate = MapSMAVirtualRateData(reader);
-                //}
-
-                //treeWinLossVirtualRate.SMAVirtualRate = virtualRate;
                 reader.Close();
             }
 
@@ -872,38 +871,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return enabledVirtualRateUserDictionary;
         }
 
-        /// <summary>
-        /// Gets the enabled virtual rate user from IBC and WH.
-        /// </summary>
-        /// <param name="enabledVirtualRateUserFromIBC">The enabled virtual rate user from IBC.</param>
-        /// <param name="enabledVirtualRateUserFromWH">The enabled virtual rate user from WH.</param>
-        /// <returns>Enable virtual rate user from IBC and WH.</returns>
-        private List<SMAVirtualRate> GetEnabledVirtualRateUserFromIBCAndWH(
-            List<SMAVirtualRate> enabledVirtualRateUserFromIBC,
-            List<SMAVirtualRate> enabledVirtualRateUserFromWH)
-        {
-            Dictionary<string, string> enabledVirtualRateUserDictionary = new Dictionary<string, string>();
-            List<SMAVirtualRate> enabledVirtualRateUser = new List<SMAVirtualRate>();
-            foreach (var user in enabledVirtualRateUserFromIBC)
-            {
-                enabledVirtualRateUserDictionary.Add(user.UserName, user.UserName);
-                enabledVirtualRateUser.Add(user);
-            }
-
-            foreach (var user in enabledVirtualRateUserFromWH)
-            {
-                bool userIsExist = enabledVirtualRateUserDictionary.ContainsKey(user.UserName);
-                if (userIsExist)
-                {
-                    continue;
-                }
-
-                enabledVirtualRateUser.Add(user);
-            }
-
-            return enabledVirtualRateUser;
-        }
-
         private string GetProductParams(string productSelection)
         {
             XDocument productDocument = new XDocument(new XElement("ROOT"));
@@ -1008,6 +975,25 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
 
             return isShowNotAvailableTurnover;
+        }
+
+        private SMAVirtualRate GetAllVirtualRate(GetAllVirtualRateCriteria criteria)
+        {
+            SMAVirtualRate virtualRate = new SMAVirtualRate();
+
+            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            {
+                IDataReader reader = objectDb.ExecuteReader(criteria.GetSpParams());
+
+                while (reader.Read())
+                {
+                    virtualRate = MapSMAVirtualRateData(reader);
+                }
+
+                reader.Close();
+            }
+
+            return virtualRate;
         }
     }
 }
