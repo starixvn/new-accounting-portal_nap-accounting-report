@@ -223,7 +223,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 else
                 {
                     winLossByComm = GetTreeWinLossDateRangeByLevel(criteria);
-                    winLossByComm.ChildsInfo.OrderBy(c => c.Name).ToList();
                 }
 
                 winLossByComm.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
