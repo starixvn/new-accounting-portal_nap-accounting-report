@@ -8,3 +8,6 @@
 {"User":"sa","Controller":"WinLossSummary3rd","Action":"GetReport","Url":"http://localhost:63741/NAP-Reports/Main/WinLossSummary3rd/GetReport","Time":"2018-05-07T09:31:10.5752813+07:00"}
 {"User":"sa","Controller":"WinLossSummary3rd","Action":"GetReport","Url":"http://localhost:63741/NAP-Reports/Main/WinLossSummary3rd/GetReport","Time":"2018-05-07T09:31:12.4581131+07:00"}
 {"User":"sa","Controller":"WinLossSummary3rd","Action":"GetReport","Url":"http://localhost:63741/NAP-Reports/Main/WinLossSummary3rd/GetReport","Time":"2018-05-07T09:31:14.1776573+07:00"}
+{"User":"sa","Controller":"DailyWinLoss2hSoccerMinorBettype","Action":"Index","Url":"http://localhost:63741/NAP-Reports/Main/DailyWinLoss2hSoccerMinorBettype/Index","Time":"2018-05-24T16:05:20.2119705+07:00"}
+{"User":"sa","Controller":"DailyWinLoss2hSoccerMinorBettype","Action":"Index","Url":"http://localhost:63741/NAP-Reports/Main/DailyWinLoss2hSoccerMinorBettype/Index","Time":"2018-05-24T16:06:30.3072282+07:00"}
+{"User":"sa","Controller":"DailyWinLoss2hSoccerMinorBettype","Action":"Index","Url":"http://localhost:63741/NAP-Reports/Main/DailyWinLoss2hSoccerMinorBettype/Index","Time":"2018-05-24T16:09:04.6551153+07:00"}

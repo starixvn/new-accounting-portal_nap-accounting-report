@@ -274,6 +274,8 @@ ScoreInfoManager.prototype.RenderScoreTitle = function (report) {
     headerTitle += "Bettype: " + (self.Params.reportParams.LiveIndicator ? "<font color='red'>Live!</font> " : "NON-LIVE ") + self.Params.reportParams.BetTypeName;
     headerTitle += "<br />";
     headerTitle += "Trader: " + (report && report.TraderName && report.TraderName != '' ? report.TraderName : "Unassigned");
+    headerTitle += "<br />";
+    headerTitle += "MatchID: " + report.MatchId;
     return headerTitle;
 };
 
