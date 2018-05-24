@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Main.Controllers
 {
     using System.Web.Mvc;
+    using Core.Web;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
@@ -11,14 +12,11 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
-    public class WinLossSummary3rdController : BaseController
+    public class WinLossSummary3RdController : BaseController
     {
         private readonly IWinLossSummary3rdService _reportService;
 
-        public WinLossSummary3rdController()
+        public WinLossSummary3RdController()
         {
             this._reportService = new WinLossSummary3rdService();
         }
@@ -37,7 +35,7 @@ namespace Fanex.AccountingReports.Main.Controllers
         [HandleAjaxError]
         public JsonResult GetReport(GetReportCriteria criteria)
         {
-          WinLoss3rdInfo result = this._reportService.GetReport(criteria);
+            WinLoss3rdInfo result = this._reportService.GetReport(criteria);
 
             return Json(result, JsonRequestBehavior.DenyGet);
         }

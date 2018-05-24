@@ -1,90 +1,93 @@
-public static class AccReportFunctionKeys
+namespace Fanex.AccountingReports.Core.Web
 {
-    public const string AllCustomerTurnoverBySite = "AllCustomerTurnover_bySite_";
+    public static class AccReportFunctionKeys
+    {
+        public const string AllCustomerTurnoverBySite = "AllCustomerTurnover_bySite_";
 
-    public const string BetCount = "BetCount";
+        public const string BetCount = "BetCount";
 
-    public const string CompanyBalanceDifference = "CompanyBalanceDifference";
+        public const string CompanyBalanceDifference = "CompanyBalanceDifference";
 
-    public const string CreditTerm = "CreditTerm";
+        public const string CreditTerm = "CreditTerm";
 
-    public const string DailyCreatedCustomers = "DailyCreatedCustomers";
+        public const string DailyCreatedCustomers = "DailyCreatedCustomers";
 
-    public const string DailyMixParlayWinLoss = "DailyMixParlayWinLoss";
+        public const string DailyMixParlayWinLoss = "DailyMixParlayWinLoss";
 
-    public const string DailyTurnover = "DailyTurnover";
+        public const string DailyTurnover = "DailyTurnover";
 
-    public const string HouseWinLossByProducts = "HouseWinLossbyProducts";
+        public const string HouseWinLossByProducts = "HouseWinLossbyProducts";
 
-    public const string DailyWinLoss2hSoccerMinorBettype = "DailyWinLoss2hSoccerMinorBettype";
+        public const string DailyWinLoss2hSoccerMinorBettype = "DailyWinLoss2hSoccerMinorBettype";
 
-    public const string DuplicateTickets = "DuplicateTickets";
+        public const string DuplicateTickets = "DuplicateTickets";
 
-    public const string HorseRacingForUKTote = "HorseRacing_forUKTote_";
+        public const string HorseRacingForUKTote = "HorseRacing_forUKTote_";
 
-    public const string LeagueWinLoss = "LeagueWinLoss";
+        public const string LeagueWinLoss = "LeagueWinLoss";
 
-    public const string LiveCasinoAgencyWinLoss = "LiveCasinoAgencyWinLoss";
+        public const string LiveCasinoAgencyWinLoss = "LiveCasinoAgencyWinLoss";
 
-    public const string LiveCasinoGameFinancialReport = "LiveCasinoGameFinancialReport";
+        public const string LiveCasinoGameFinancialReport = "LiveCasinoGameFinancialReport";
 
-    public const string MAMonitorTool = "MAMonitorTool";
+        public const string MAMonitorTool = "MAMonitorTool";
 
-    public const string MarginReport = "MarginReport";
+        public const string MarginReport = "MarginReport";
 
-    public const string MiscTotalSMAandMemberActive = "TotalSMAandMemberActive";
+        public const string MiscTotalSMAandMemberActive = "TotalSMAandMemberActive";
 
-    public const string NegativeBalance = "NegativeBalance";
+        public const string NegativeBalance = "NegativeBalance";
 
-    public const string NumberGameMonthlyWinloss = "NumberGameMonthlyWinloss";
+        public const string NumberGameMonthlyWinloss = "NumberGameMonthlyWinloss";
 
-    public const string NumberGameWinLossByCurrency = "NumberGameWinLossByCurrency";
+        public const string NumberGameWinLossByCurrency = "NumberGameWinLossByCurrency";
 
-    public const string NumberGameWinLossByDate = "NumberGameWinLossByDate";
+        public const string NumberGameWinLossByDate = "NumberGameWinLossByDate";
 
-    public const string NumberofActiveMembers = "NumberofActiveMembers";
+        public const string NumberofActiveMembers = "NumberofActiveMembers";
 
-    public const string NumberofActiveMembersForRacing = "NumberofActiveMembers_forRacing_";
+        public const string NumberofActiveMembersForRacing = "NumberofActiveMembers_forRacing_";
 
-    public const string NumberofbetsforCreditsites = "NumberofbetsforCreditsites";
+        public const string NumberofbetsforCreditsites = "NumberofbetsforCreditsites";
 
-    public const string ParlayWon = "ParlayWon";
+        public const string ParlayWon = "ParlayWon";
 
-    public const string PeakConcurrentUsers = "PeakConcurrentUsers";
+        public const string PeakConcurrentUsers = "PeakConcurrentUsers";
 
-    public const string PunterAnalysis = "PunterAnalysis";
+        public const string PunterAnalysis = "PunterAnalysis";
 
-    public const string RacingGroupDaily = "RacingGroupDaily";
+        public const string RacingGroupDaily = "RacingGroupDaily";
 
-    public const string RacingWinLossByLicensee = "RacingWinLossByLicensee";
+        public const string RacingWinLossByLicensee = "RacingWinLossByLicensee";
 
-    public const string SpecialMatchAnalysis = "SpecialMatchAnalysis";
+        public const string SpecialMatchAnalysis = "SpecialMatchAnalysis";
 
-    public const string TraderPerformanceSoccer = "TraderPerformanceSoccer";
+        public const string TraderPerformanceSoccer = "TraderPerformanceSoccer";
 
-    public const string TraderPerformanceOtherSports = "TraderPerformanceOtherSports";
+        public const string TraderPerformanceOtherSports = "TraderPerformanceOtherSports";
 
-    public const string TreeWinLoss = "TreeWinLoss";
+        public const string TreeWinLoss = "TreeWinLoss";
 
-    public const string ViewIPVN = "ViewIPVN";
+        public const string ViewIPVN = "ViewIPVN";
 
-    public const string WinLossSummary = "WinLossSummary";
+        public const string WinLossSummary = "WinLossSummary";
 
-    public const string ViewFinanceAccount = "ViewFinanceAccount";
+        public const string ViewFinanceAccount = "ViewFinanceAccount";
 
-    public const string NumberGameWinLoss = "NumberGameWinLoss";
+        public const string NumberGameWinLoss = "NumberGameWinLoss";
 
-    public const string SaveBet = "SaveBet";
+        public const string SaveBet = "SaveBet";
 
-    public const string TotalCreditBetCountByProduct = "TotalCreditAccountsEnabled_DisabledperProduct";
+        public const string TotalCreditBetCountByProduct = "TotalCreditAccountsEnabled_DisabledperProduct";
 
-    public const string SmaTurnOver = "SMATurnoverbyProduct";
+        public const string SmaTurnOver = "SMATurnoverbyProduct";
 
-    public const string LegendManagement = "LegendManagement";
+        public const string LegendManagement = "LegendManagement";
 
-    public const string CreditMovement = "CreditMovement";
+        public const string CreditMovement = "CreditMovement";
 
-    public const string CompanyWinLoss = "CompanyWinLoss";
+        public const string CompanyWinLoss = "CompanyWinLoss";
 
-    public const string AutoGeneratedReport = "Auto_GeneratedReports";
+        public const string AutoGeneratedReport = "Auto_GeneratedReports";
+    }
 }

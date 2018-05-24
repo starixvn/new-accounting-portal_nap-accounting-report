@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Licensee.Controllers
 {
     using System.Web.Mvc;
+    using AccountingReports.Core.Web;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Licensee.Criteria.NegativeBalance;
     using Fanex.AccountingReports.Licensee.Models;
@@ -10,9 +11,6 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NegativeBalanceController : BaseController
     {
         private readonly INegativeBanlance _reportService;

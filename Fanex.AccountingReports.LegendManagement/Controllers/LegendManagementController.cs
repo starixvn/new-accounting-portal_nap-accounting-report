@@ -2,6 +2,7 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
 {
     using System.Collections.Generic;
     using System.Web.Mvc;
+    using Core.Web;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.LegendManagement.Criteria;

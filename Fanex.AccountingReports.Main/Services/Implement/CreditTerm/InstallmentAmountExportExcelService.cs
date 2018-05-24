@@ -171,13 +171,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
                     roleName);
             IRow row = worksheet.CreateRow(currentRow);
             NpoiExcelExtensions.RenderCell(
-                ref worksheet, 
-                ref row, 
-                currentRow, 
-                ref currentColumn, 
-                currentRow + 1, 
-                currentColumn + 5, 
-                reportTitle, 
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref currentColumn,
+                currentRow + 1,
+                currentColumn + 5,
+                reportTitle,
                 this._headerStyle.TextStyle);
 
             currentRow += 2;
@@ -187,49 +187,49 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             currentColumn = 0;
             row = worksheet.CreateRow(currentRow);
             NpoiExcelExtensions.RenderCell(
-                ref worksheet, 
-                ref row, 
-                currentRow, 
-                ref currentColumn, 
-                currentRow + 1, 
-                currentColumn, 
-                Labels.Member, 
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref currentColumn,
+                currentRow + 1,
+                currentColumn,
+                Labels.Member,
                 this._headerStyle.TextStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Curr, this._headerStyle.TextStyle);
             NpoiExcelExtensions.RenderCell(
-                ref worksheet, 
-                ref row, 
-                currentRow, 
-                ref currentColumn, 
-                currentRow + 1, 
-                currentColumn, 
-                Labels.Balance, 
-                this._headerStyle.TextStyle);
-            NpoiExcelExtensions.RenderCell(
-                ref worksheet, 
-                ref row, 
-                currentRow, 
-                ref currentColumn, 
-                currentRow + 1, 
-                currentColumn, 
-                Labels.BaseRM, 
-                this._headerStyle.TextStyle);
-            NpoiExcelExtensions.RenderCell(
-                ref worksheet, 
-                ref row, 
-                currentRow, 
-                ref currentColumn, 
-                currentRow + 1, 
-                currentColumn, 
-                Labels.InstallmentAmount, 
-                this._headerStyle.TextStyle);
-            NpoiExcelExtensions.RenderCell(
-                ref worksheet, 
-                ref row, 
-                currentRow, 
-                ref currentColumn, 
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref currentColumn,
                 currentRow + 1,
-                currentColumn, 
+                currentColumn,
+                Labels.Balance,
+                this._headerStyle.TextStyle);
+            NpoiExcelExtensions.RenderCell(
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref currentColumn,
+                currentRow + 1,
+                currentColumn,
+                Labels.BaseRM,
+                this._headerStyle.TextStyle);
+            NpoiExcelExtensions.RenderCell(
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref currentColumn,
+                currentRow + 1,
+                currentColumn,
+                Labels.InstallmentAmount,
+                this._headerStyle.TextStyle);
+            NpoiExcelExtensions.RenderCell(
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref currentColumn,
+                currentRow + 1,
+                currentColumn,
                 Labels.DayOfInstallment,
                 this._headerStyle.TextStyle);
 
@@ -294,23 +294,23 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
 
             colorDecimalStyle = this.SetColorToDecimal(memberRow.InstallmentAmount, styleCell.DecimalStyle, cssClass);
             NpoiExcelExtensions.RenderCell(
-                ref worksheet, 
-                ref row, 
-                currentRow, 
-                ref currentColumn, 
-                currentRow, 
-                currentColumn, 
-                memberRow.InstallmentAmount, 
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref currentColumn,
+                currentRow,
+                currentColumn,
+                memberRow.InstallmentAmount,
                 colorDecimalStyle);
 
             NpoiExcelExtensions.RenderCell(
-                ref worksheet, 
-                ref row, 
-                currentRow, 
-                ref currentColumn, 
-                currentRow, 
-                currentColumn, 
-                memberRow.NumberDayInstallment, 
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref currentColumn,
+                currentRow,
+                currentColumn,
+                memberRow.NumberDayInstallment,
                 styleCell.IntStyle);
 
             currentRow++;
@@ -431,22 +431,22 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             return cellStyle;
         }
 
-#endregion export report
+        #endregion export report
 
         public struct CustomStyleCell
         {
-            public ICellStyle TextStyle;
-
-            public ICellStyle DecimalStyle;
-
-            public ICellStyle IntStyle;
-
             public CustomStyleCell(HSSFWorkbook excelFile)
             {
                 TextStyle = excelFile.CreateCellStyle();
                 DecimalStyle = excelFile.CreateCellStyle();
                 IntStyle = excelFile.CreateCellStyle();
             }
+
+            public ICellStyle TextStyle { get; set; }
+
+            public ICellStyle DecimalStyle { get; set; }
+
+            public ICellStyle IntStyle { get; set; }
         }
     }
 }

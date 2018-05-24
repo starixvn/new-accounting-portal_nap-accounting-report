@@ -11,6 +11,6 @@ namespace Fanex.AccountingReports.Special.Services.Interface.IDailyTurnover
     {
         List<DailyTurnover> GetReport(GetDailyTurnoverCriteria criteria);
 
-        void ExportReport(GetDailyTurnoverCriteria crtieria);
+        void ExportReport(GetDailyTurnoverCriteria criteria);
     }
 }

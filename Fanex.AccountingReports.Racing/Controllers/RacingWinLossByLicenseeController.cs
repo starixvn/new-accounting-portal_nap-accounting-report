@@ -2,6 +2,7 @@ namespace Fanex.AccountingReports.Racing.Controllers
 {
     using System.Collections.Generic;
     using System.Web.Mvc;
+    using AccountingReports.Core.Web;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Racing.Criteria.RacingWinLossByLicensee;

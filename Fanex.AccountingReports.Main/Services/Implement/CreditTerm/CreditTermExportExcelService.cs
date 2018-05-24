@@ -221,13 +221,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
                         var currentColumn = 0;
                         IRow row = worksheet.GetRow(currentRow) ?? worksheet.CreateRow(currentRow);
                         NpoiExcelExtensions.RenderCell(
-                            ref worksheet, 
-                            ref row, 
-                            currentRow, 
-                            ref currentColumn, 
-                            currentRow + (childRows.Count - 1) + 2, 
-                            currentColumn, 
-                            string.Empty, 
+                            ref worksheet,
+                            ref row,
+                            currentRow,
+                            ref currentColumn,
+                            currentRow + (childRows.Count - 1) + 2,
+                            currentColumn,
+                            string.Empty,
                             this._oddNormalStyle.TextStyle);
                         this.RenderChildHeader(excelFile, ref worksheet, ref currentRow, parentMember.CurrencyName, this._headerStyle.TextStyle);
                         this.RenderAllChildRow(
@@ -242,7 +242,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
                 }
             }
         }
-        
+
         /// <summary>
         /// Get style and class for parent and child row.
         /// </summary>
@@ -253,9 +253,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
         /// <param name="cssChildClass">The class of child row.</param>
         private void GetStyleAndClassForParentAndChildRow(
             ref CustomStyleCell parentStyle,
-            ref CustomStyleCell childStyle, 
-            CreditTerm parentMember, 
-            ref string cssParentClass, 
+            ref CustomStyleCell childStyle,
+            CreditTerm parentMember,
+            ref string cssParentClass,
             ref string cssChildClass)
         {
             if (parentMember.OverLimit)
@@ -639,14 +639,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
 
         public struct CustomStyleCell
         {
-            public ICellStyle TextStyle;
-
-            public ICellStyle DecimalStyle;
-
-            public ICellStyle UsernameStyle;
-
-            public ICellStyle ChildRemarkStyle;
-
             public CustomStyleCell(HSSFWorkbook excelFile)
             {
                 TextStyle = excelFile.CreateCellStyle();
@@ -654,6 +646,14 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
                 UsernameStyle = excelFile.CreateCellStyle();
                 ChildRemarkStyle = excelFile.CreateCellStyle();
             }
+
+            public ICellStyle TextStyle { get; set; }
+
+            public ICellStyle DecimalStyle { get; set; }
+
+            public ICellStyle UsernameStyle { get; set; }
+
+            public ICellStyle ChildRemarkStyle { get; set; }
         }
     }
 }

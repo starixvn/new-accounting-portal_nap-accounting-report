@@ -52,9 +52,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
             object cellValue,
             ICellStyle cellStyle)
         {
-           for (var i = currentRow; i <= endRow; i++)
-           {     
-                row = worksheet.GetRow(i) ?? worksheet.CreateRow(i);  
+            for (var i = currentRow; i <= endRow; i++)
+            {
+                row = worksheet.GetRow(i) ?? worksheet.CreateRow(i);
 
                 for (var j = currentColumn; j <= endColumn; j++)
                 {
@@ -83,15 +83,15 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
 
         public struct CustomStyleCell
         {
-            public ICellStyle TextStyle;
-
-            public ICellStyle DecimalStyle;
-
             public CustomStyleCell(HSSFWorkbook excelFile)
             {
                 TextStyle = excelFile.CreateCellStyle();
                 DecimalStyle = excelFile.CreateCellStyle();
             }
+
+            public ICellStyle TextStyle { get; set; }
+
+            public ICellStyle DecimalStyle { get; set; }
         }
     }
 }
