@@ -10,6 +10,9 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
     /// </summary>
     public class GetTreeWinLossByLevelCriteria : CriteriaBase
     {
+        [SpParam(Ignored = true)]
+        public bool IsNormalMode { get; set; }
+
         public DateTime FromDate { get; set; }
 
         public DateTime ToDate { get; set; }
@@ -51,56 +54,29 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
         Justification = "Reviewed. Suppression is OK here.")]
         public override string GetSettingKey()
         {
-            DateTime movebetsDay = ReportService.BalanceUp.MoveBetsDay;
+            var storeProcedureSuffix = IsNormalMode ? string.Empty : ReportService.WarehouseSPSuffix;
+            var settingKey = string.Empty;
+
             switch (this.RoleId)
             {
                 case 2:
-                    if (FromDate > movebetsDay && ToDate > movebetsDay)
-                    {
-                        return "WinLoss_TreeWinLoss_GetDataByAgent";
-                    }
-                    else if (FromDate <= movebetsDay && ToDate <= movebetsDay)
-                    {
-                        return "WinLoss_TreeWinLoss_GetDataByAgent_WH";
-                    }
-
+                    settingKey = "WinLoss_TreeWinLoss_GetDataByAgent";
                     break;
                 case 3:
-                    if (FromDate > movebetsDay && ToDate > movebetsDay)
-                    {
-                        return "WinLoss_TreeWinLoss_GetDataByMaster";
-                    }
-                    else if (FromDate <= movebetsDay && ToDate <= movebetsDay)
-                    {
-                        return "WinLoss_TreeWinLoss_GetDataByMaster_WH";
-                    }
-
+                    settingKey = "WinLoss_TreeWinLoss_GetDataByMaster";
                     break;
                 case 4:
-                    if (FromDate > movebetsDay && ToDate > movebetsDay)
-                    {
-                        return "WinLoss_TreeWinLoss_GetDataBySuper";
-                    }
-                    else if (FromDate <= movebetsDay && ToDate <= movebetsDay)
-                    {
-                        return "WinLoss_TreeWinLoss_GetDataBySuper_WH";
-                    }
-
+                    settingKey = "WinLoss_TreeWinLoss_GetDataBySuper";
                     break;
                 case 5:
-                    if (FromDate > movebetsDay && ToDate > movebetsDay)
-                    {
-                        return "WinLoss_TreeWinLoss_GetDataByCom";
-                    }
-                    else if (FromDate <= movebetsDay && ToDate <= movebetsDay)
-                    {
-                        return "WinLoss_TreeWinLoss_GetDataByCom_WH";
-                    }
-
+                    settingKey = "WinLoss_TreeWinLoss_GetDataByCom";
+                    break;
+                default:
+                    settingKey = "WinLoss_TreeWinLoss_GetDataByAgent";
                     break;
             }
 
-            return string.Empty;
+            return settingKey + storeProcedureSuffix;
         }
     }
 }

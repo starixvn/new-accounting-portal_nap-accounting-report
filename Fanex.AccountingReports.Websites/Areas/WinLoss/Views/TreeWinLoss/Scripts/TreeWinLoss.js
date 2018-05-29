@@ -4,7 +4,11 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
     var self = this;
     var _tables = {
         btnGenerate: null,
-        datepickerplugin: null,
+        btnMode: null,
+        normalModeDatepickerPlugin: null,
+        historyModeDatepickerPlugin: null,
+        normalMode: null,
+        historyMode: null,
         reportContainer: null,
         report: null,
         filterNote: null,
@@ -23,6 +27,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
 
     self.Params = {
         reportParams: {
+            IsNormalMode: true,
             FromDate: new Date(),
             ToDate: new Date(),
             ProductSelection: null,
@@ -32,7 +37,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
 
     self.initPage = function () {
         cachedDOMElements();
-        renderDatePicker();
+        renderSingleDatePicker();
+        renderDateRangeDatePicker();
         getProduct();
         renderFilterNote(noteMessage);
         bindingEvent();
@@ -44,34 +50,56 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         _tables.report = $("#treeWinLossByProduct");
         _tables.filterNote = $("#notemessage");
         _tables.ddlProduct = $("#ddlProduct");
+        _tables.btnMode = $("#btnMode");
+        _tables.normalMode = $("#normalMode");
+        _tables.historyMode = $("#historyMode");
     };
 
-    var renderDatePicker = function () {
-        $('#datepickerplugin').nexDatePicker({
-            nexDatePickerType: "quickchoose",
+
+    var renderSingleDatePicker = function () {
+        $('#normalModeDatepickerPlugin').nexDatePicker({
+            nexDatePickerType: "single",
+            firstDatePicker: {
+                Id: "datePickerInput",
+                Label: labelDate,
+                InitDate: today,
+                LabelCss: "lbl-field col_2",
+                TextboxCss: "edit-field col_6"
+            },
+
+            datePickerFormat: {
+                dateFormat: FormatConstant.M_DD_YY_STRING,
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date(dateAfterMoveBet),
+                maxDate: new Date(today),
+                showOtherMonths: true,
+                selectOtherMonths: true
+            }
+        });
+
+        _tables.normalModeDatepickerPlugin = $("#normalModeDatepickerPlugin");
+    };
+
+    var renderDateRangeDatePicker = function () {
+        $('#historyModeDatepickerPlugin').nexDatePicker({
+            nexDatePickerType: "daterange",
             datePickerFormat: {
                 changeMonth: true,
                 changeYear: true,
                 dateFormat: FormatConstant.M_DD_YY_STRING
             },
-            dropDownList:
-            {
-                Id: "dropDownListId",
-                Label: "Date ",
-                LabelCss: "lbl-field col_2",
-                OptionCss: "edit-field col_5"
-            },
             firstDatePicker: {
                 Id: "firstDatePickerId1",
                 Label: labelFrom,
-                InitDate: today,
+                InitDate: yesterday,
                 LabelCss: "lbl-field col_2",
                 TextboxCss: "edit-field col_5"
             },
             secondDatePicker: {
                 Id: "secondDatePickerId1",
                 Label: labelTo,
-                InitDate: today,
+                InitDate: yesterday,
                 LabelCss: "lbl-field col_2",
                 TextboxCss: "edit-field col_6"
             },
@@ -79,10 +107,10 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             onSelectDatePicker: function () {
             },
             minDate: new Date(minDate),
-            maxDate: new Date(today)
+            maxDate: new Date(yesterday)
         });
 
-        _tables.datepickerplugin = $("#datepickerplugin");
+        _tables.historyModeDatepickerPlugin = $("#historyModeDatepickerPlugin");
     };
 
     var renderFilterNote = function (noteMessage) {
@@ -150,6 +178,10 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         _tables.btnGenerate.click(function () {
             self.btnGenerateClick();
         });
+
+        _tables.btnMode.click(function () {
+            btnModeClick();
+        });
     };
 
     self.btnGenerateClick = function () {
@@ -189,9 +221,17 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
     };
 
     var getParams = function () {
-        var dateRange = _tables.datepickerplugin.nexDatePicker("getDateRange");
-        self.Params.reportParams.FromDate = dateRange.FromDate;
-        self.Params.reportParams.ToDate = dateRange.ToDate;
+        if (self.Params.reportParams.IsNormalMode) {
+            var date = _tables.normalModeDatepickerPlugin.nexDatePicker("getSingleDate");
+            self.Params.reportParams.FromDate = date;
+            self.Params.reportParams.ToDate = date;
+
+        } else {
+            var dateRange = _tables.historyModeDatepickerPlugin.nexDatePicker("getDateRange");
+            self.Params.reportParams.FromDate = dateRange.FromDate;
+            self.Params.reportParams.ToDate = dateRange.ToDate;
+        }
+
         self.Params.reportParams.ProductSelection = _tables.ddlProduct.multiSelect("getCheckedItems").join(',');
     };
 
@@ -272,10 +312,11 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                 info.BaseRMVirtualTurnover = isShowNA ? "N/A" : info.BaseRMVirtualTurnover;
                 info.BaseRMMargin = isShowNA ? "N/A" : info.BaseRMMargin;
                 bodyData.push({
-                    Columns: [{ Name: "ColCurrencyName", Value: {
-                        currencyId: info.Id,
-                        currencyName: info.Name
-                    },
+                    Columns: [{
+                        Name: "ColCurrencyName", Value: {
+                            currencyId: info.Id,
+                            currencyName: info.Name
+                        },
                         CustomCellRender: function (currentCell) {
                             var clickEvent = ' onclick = "viewTreeWinLossByComm(' + currentCell.Value.currencyId + ',\'' + currentCell.Value.currencyName + "');\"";
                             var html = '<div class="link " ' + clickEvent + '>' + currentCell.Value.currencyName + '</div>';
@@ -283,7 +324,6 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                         }
                     },
                         { Name: "ColTurnover", Value: info.Turnover },
-                        { Name: "ColExtraPT", Value: info.ExtraAmount },
                         { Name: "ColWinLoss", Value: info.WinLoss },
                         { Name: "ColCommission", Value: info.Comm },
                         { Name: "ColWinLossTotal", Value: info.WinLossTotal },
@@ -309,7 +349,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                 info.BaseRMVirtualTurnover = isShowNA ? "N/A" : info.BaseRMVirtualTurnover;
                 info.BaseRMMargin = isShowNA ? "N/A" : info.BaseRMMargin;
                 footerData.push({
-                    Columns: [{ Name: "ColCurrencyName", Value: info.Name, MergeColNumber: 6, CellAlign: "right" },
+                    Columns: [{ Name: "ColCurrencyName", Value: info.Name, MergeColNumber: 5, CellAlign: "right" },
                         { Name: "ColBaseRMTurnover", Value: info.BaseRMTurnover },
                         { Name: "ColBaseRMVirtualTurnover", Value: info.BaseRMVirtualTurnover },
                         { Name: "ColBaseRMTOVariancePlus", Value: info.BaseRMTOVariancePlus },
@@ -333,25 +373,23 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             {
                 Columns: [{ HeaderText: "Currency", Name: "ColCurrencyName", MergeRowNumber: 3 },
                 { HeaderText: "Turnover", Name: "ColTurnover", MergeRowNumber: 3 },
-                { HeaderText: "ExtraPT", Name: "ColExtraPT", MergeRowNumber: 3 },
                 { HeaderText: "WinLoss", Name: "ColWinLoss", MergeRowNumber: 3 },
                 { HeaderText: "Comm", Name: "ColCommission", MergeRowNumber: 3 },
                 { HeaderText: "Total", Name: "ColWinLossTotal", MergeRowNumber: 3 },
-                { HeaderText: "BaseRM", Name: "ColBaseRMTurnover", MergeColNumber: 12}]
+                { HeaderText: "BaseRM", Name: "ColBaseRMTurnover", MergeColNumber: 12 }]
             },
             {
                 Columns: [{ HeaderText: "Turnover", Name: "ColBaseRMTurnover", MergeRowNumber: 2 },
                 { HeaderText: "Virtual Turnover", Name: "ColBaseRMVirtualTurnover", MergeRowNumber: 2 },
                 { HeaderText: "Turnover Variance", Name: "ColBaseRMTOVariancePlus", MergeColNumber: 3 },
-                { HeaderText: "WinLoss Variance", Name: "ColBaseRMWLVariancePlus", MergeColNumber: 3 },
+                { HeaderText: "Winlost Variance", Name: "ColBaseRMWLVariancePlus", MergeColNumber: 3 },
                 { HeaderText: "Variance Margin(%)", Name: "ColBaseRMVarianceMargin", MergeRowNumber: 2 },
                 { HeaderText: "Total", Name: "ColBaseRMTotal", MergeRowNumber: 2 },
                 { HeaderText: "Virtual Total", Name: "ColBaseRMVirtualTotal", MergeRowNumber: 2 },
-                { HeaderText: "Margin(%)", Name: "ColBaseRMMargin", MergeRowNumber: 2}]
+                { HeaderText: "Margin(%)", Name: "ColBaseRMMargin", MergeRowNumber: 2 }]
             }],
             columns: [{ HeaderText: "Currency", Width: 80, Name: "ColCurrencyName", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-                { HeaderText: "ExtraPT", Width: 120, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "WinLoss", Width: 120, Name: "ColWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: "Comm", Width: 120, Name: "ColCommission", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: "Total", Width: 120, Name: "ColWinLossTotal", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
@@ -359,14 +397,14 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                 { HeaderText: "Virtual Turnover", Width: 120, Name: "ColBaseRMVirtualTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true },
                 { HeaderText: "+", Width: 120, Name: "ColBaseRMTOVariancePlus", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true },
                 { HeaderText: "-", Width: 120, Name: "ColBaseRMTOVarianceMinus", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true },
-                { HeaderText: "Total", Width: 120, Name: "ColBaseRMTOVarianceAbsoluteTotal", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true },
+                { HeaderText: "Absolute Total", Width: 120, Name: "ColBaseRMTOVarianceAbsoluteTotal", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true },
                 { HeaderText: "+", Width: 120, Name: "ColBaseRMWLVariancePlus", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: "-", Width: 120, Name: "ColBaseRMWLVarianceMinus", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: "Total", Width: 120, Name: "ColBaseRMWLVarianceTotal", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: "Variance Margin(%)", Width: 120, Name: "ColBaseRMVarianceMargin", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatPositive: '$', CustomSortFunction: self.customSortNumber },
                 { HeaderText: "Total", Width: 120, Name: "ColBaseRMTotal", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: "Virtual Total", Width: 120, Name: "ColBaseRMVirtualTotal", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
-                { HeaderText: "Margin(%)", Width: 120, Name: "ColBaseRMMargin", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatPositive: '$', CustomSortFunction: self.customSortNumber}],
+                { HeaderText: "Margin(%)", Width: 120, Name: "ColBaseRMMargin", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatPositive: '$', CustomSortFunction: self.customSortNumber }],
             showTitle: true,
             showFooter: true,
             titleInfo:
@@ -391,4 +429,17 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         AccReport.downloadFile(window.rootUrl + "WinLoss/TreeWinLoss/ExportTreeWinLossByProduct", self.Params.reportParams);
     };
 
+    var btnModeClick = function () {
+        if (self.Params.reportParams.IsNormalMode) {
+            self.Params.reportParams.IsNormalMode = false;
+            _tables.btnMode.val("BACK");
+            _tables.normalMode.addClass("display-none");
+            _tables.historyMode.removeClass("display-none");
+        } else {
+            self.Params.reportParams.IsNormalMode = true;
+            _tables.btnMode.val("HISTORY REPORT");
+            _tables.historyMode.addClass("display-none");
+            _tables.normalMode.removeClass("display-none");
+        }
+    }
 }

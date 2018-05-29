@@ -73,7 +73,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         {
             try
             {
-                var currencies = ReportService.ExchangeCurrencies;
                 var isShowNotAvailableTurnover = IsShowAvailableTurnoverByProduct(criteria);
                 criteria.Products = GetProductParams(criteria.ProductSelection);
                 var treeWinLoss = new TreeWinLoss
@@ -83,59 +82,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     IsShowNotAvailableTurnover = isShowNotAvailableTurnover
                 };
 
-                DateTime moveBetsDay = ReportService.BalanceUp.MoveBetsDay;
-                if (criteria.FromDate <= moveBetsDay && criteria.ToDate > moveBetsDay)
-                {
-                    DateTime fromDate = criteria.FromDate;
-                    criteria.FromDate = moveBetsDay.AddDays(1);
-                    var accountWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
 
-                    criteria.FromDate = fromDate;
-                    criteria.ToDate = moveBetsDay;
-                    var wareHouseWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
-                    var treeWinLossTmp = accountWinLoss.ChildsInfo.Concat(wareHouseWinLoss.ChildsInfo).ToList();
-                    treeWinLoss.ChildsInfo = treeWinLossTmp.GroupBy(x => x.Id)
-                        .Select(y => new TreeWinLossInfo
-                        {
-                            Id = y.Key,
-                            Name = currencies[Converter.ToInt(y.Key)],
-                            Turnover = y.Sum(x => x.Turnover),
-                            WinLoss = y.Sum(x => x.WinLoss),
-                            Comm = y.Sum(x => x.Comm),
-                            WinLossTotal = y.Sum(x => x.WinLossTotal),
-                            BaseRMTurnover = y.Sum(x => x.BaseRMTurnover),
-                            BaseRMTotal = y.Sum(x => x.BaseRMTotal),
-                            BaseRMVirtualTotal = y.Sum(x => x.BaseRMVirtualTotal),
-                            BaseRMVirtualTurnover = y.Sum(x => x.BaseRMVirtualTurnover),
-                            BaseRMTOVarianceMinus = y.Sum(x => x.BaseRMTOVarianceMinus),
-                            BaseRMTOVariancePlus = y.Sum(x => x.BaseRMTOVariancePlus),
-                            BaseRMWLVarianceMinus = y.Sum(x => x.BaseRMWLVarianceMinus),
-                            BaseRMWLVariancePlus = y.Sum(x => x.BaseRMWLVariancePlus),
-                        }).ToList();
-
-                    for (int j = 0; j < accountWinLoss.TotalInfo.Count; j++)
-                    {
-                        var totalAccountWinLoss = accountWinLoss.TotalInfo[j];
-                        var totalWarehouseWinLoss = wareHouseWinLoss.TotalInfo[j];
-                        var totalWinLoss = new TreeWinLossInfo()
-                        {
-                            Name = totalAccountWinLoss.Name,
-                            BaseRMTurnover = totalAccountWinLoss.BaseRMTurnover + totalWarehouseWinLoss.BaseRMTurnover,
-                            BaseRMVirtualTurnover = totalAccountWinLoss.BaseRMVirtualTurnover + totalWarehouseWinLoss.BaseRMVirtualTurnover,
-                            BaseRMTOVarianceMinus = totalAccountWinLoss.BaseRMTOVarianceMinus + totalWarehouseWinLoss.BaseRMTOVarianceMinus,
-                            BaseRMTOVariancePlus = totalAccountWinLoss.BaseRMTOVariancePlus + totalWarehouseWinLoss.BaseRMTOVariancePlus,
-                            BaseRMWLVarianceMinus = totalAccountWinLoss.BaseRMWLVarianceMinus + totalWarehouseWinLoss.BaseRMWLVarianceMinus,
-                            BaseRMWLVariancePlus = totalAccountWinLoss.BaseRMWLVariancePlus + totalWarehouseWinLoss.BaseRMWLVariancePlus,
-                            BaseRMTotal = totalAccountWinLoss.BaseRMTotal + totalWarehouseWinLoss.BaseRMTotal,
-                            BaseRMVirtualTotal = totalAccountWinLoss.BaseRMVirtualTotal + totalWarehouseWinLoss.BaseRMVirtualTotal
-                        };
-                        treeWinLoss.TotalInfo.Add(totalWinLoss);
-                    }
-                }
-                else
-                {
-                    treeWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
-                }
+                treeWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
 
                 SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByProductSession, treeWinLoss);
                 return treeWinLoss;
@@ -168,62 +116,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     TotalInfo = new List<TreeWinLossInfo>(),
                     IsShowNotAvailableTurnover = isShowNotAvailableTurnover
                 };
-                DateTime moveBetsDay = ReportService.BalanceUp.MoveBetsDay;
-                if (criteria.FromDate <= moveBetsDay && criteria.ToDate > moveBetsDay)
-                {
-                    DateTime fromDate = criteria.FromDate;
-                    criteria.FromDate = moveBetsDay.AddDays(1);
-                    var accountWinLoss = GetTreeWinLossDateRangeByLevel(criteria);
 
-                    criteria.FromDate = fromDate;
-                    criteria.ToDate = moveBetsDay;
-                    var wareHouseWinLoss = GetTreeWinLossDateRangeByLevel(criteria);
-                    var winLossByCommTmp = accountWinLoss.ChildsInfo.Concat(wareHouseWinLoss.ChildsInfo).ToList();
-                    winLossByComm.ChildsInfo = winLossByCommTmp.GroupBy(x => new { x.Id, x.Name, x.VirtualRate })
-                        .Select(y => new TreeWinLossInfo
-                        {
-                            Id = y.Key.Id,
-                            Name = y.Key.Name,
-                            Turnover = y.Sum(x => x.Turnover),
-                            WinLoss = y.Sum(x => x.WinLoss),
-                            Comm = y.Sum(x => x.Comm),
-                            WinLossTotal = y.Sum(x => x.WinLossTotal),
-                            BaseRMTurnover = y.Sum(x => x.BaseRMTurnover),
-                            BaseRMTotal = y.Sum(x => x.BaseRMTotal),
-                            BaseRMVirtualTotal = y.Sum(x => x.BaseRMVirtualTotal),
-                            BaseRMVirtualTurnover = y.Sum(x => x.BaseRMVirtualTurnover),
-                            BaseRMTOVarianceMinus = y.Sum(x => x.BaseRMTOVarianceMinus),
-                            BaseRMTOVariancePlus = y.Sum(x => x.BaseRMTOVariancePlus),
-                            BaseRMWLVarianceMinus = y.Sum(x => x.BaseRMWLVarianceMinus),
-                            BaseRMWLVariancePlus = y.Sum(x => x.BaseRMWLVariancePlus),
-                            VirtualRate = y.Key.VirtualRate
-                        }).ToList();
-
-                    for (int j = 0; j < accountWinLoss.TotalInfo.Count; j++)
-                    {
-                        var totalAccountWinLoss = accountWinLoss.TotalInfo[j];
-                        var totalWarehouseWinLoss = wareHouseWinLoss.TotalInfo[j];
-                        var totalWinLoss = new TreeWinLossInfo()
-                        {
-                            Name = totalAccountWinLoss.Name,
-                            BaseRMTurnover = totalAccountWinLoss.BaseRMTurnover + totalWarehouseWinLoss.BaseRMTurnover,
-                            BaseRMVirtualTurnover = totalAccountWinLoss.BaseRMVirtualTurnover + totalWarehouseWinLoss.BaseRMVirtualTurnover,
-                            BaseRMTOVarianceMinus = totalAccountWinLoss.BaseRMTOVarianceMinus + totalWarehouseWinLoss.BaseRMTOVarianceMinus,
-                            BaseRMTOVariancePlus = totalAccountWinLoss.BaseRMTOVariancePlus + totalWarehouseWinLoss.BaseRMTOVariancePlus,
-                            BaseRMWLVarianceMinus = totalAccountWinLoss.BaseRMWLVarianceMinus + totalWarehouseWinLoss.BaseRMWLVarianceMinus,
-                            BaseRMWLVariancePlus = totalAccountWinLoss.BaseRMWLVariancePlus + totalWarehouseWinLoss.BaseRMWLVariancePlus,
-                            BaseRMTotal = totalAccountWinLoss.BaseRMTotal + totalWarehouseWinLoss.BaseRMTotal,
-                            BaseRMVirtualTotal = totalAccountWinLoss.BaseRMVirtualTotal + totalWarehouseWinLoss.BaseRMVirtualTotal
-                        };
-                        winLossByComm.TotalInfo.Add(totalWinLoss);
-                    }
-
-                    winLossByComm.ChildsInfo = winLossByComm.ChildsInfo.OrderBy(c => c.Name).ToList();
-                }
-                else
-                {
-                    winLossByComm = GetTreeWinLossDateRangeByLevel(criteria);
-                }
+                winLossByComm = GetTreeWinLossDateRangeByLevel(criteria);
 
                 winLossByComm.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
 
