@@ -2042,6 +2042,33 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Real Income.
+        /// </summary>
+        public static string RealIncome {
+            get {
+                return ResourceManager.GetString("RealIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real Turnover.
+        /// </summary>
+        public static string RealTurnover {
+            get {
+                return ResourceManager.GetString("RealTurnover", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real WinLoss.
+        /// </summary>
+        public static string RealWinLoss {
+            get {
+                return ResourceManager.GetString("RealWinLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ref No.
         /// </summary>
         public static string Ref_No {
@@ -2830,6 +2857,15 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         public static string VirtualTotal {
             get {
                 return ResourceManager.GetString("VirtualTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual WinLoss.
+        /// </summary>
+        public static string VirtualWinLoss {
+            get {
+                return ResourceManager.GetString("VirtualWinLoss", resourceCulture);
             }
         }
         

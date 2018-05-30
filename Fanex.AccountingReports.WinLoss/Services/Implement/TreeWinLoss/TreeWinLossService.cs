@@ -320,7 +320,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             FromDate = criteria.FromDate,
                             ToDate = criteria.ToDate,
                             ProductSelection = criteria.ProductSelection,
-                            Products = criteria.Products
+                            Products = criteria.Products,
+                            IsNormalMode = criteria.IsNormalMode
                         },
                     criteria.RoleId);
                 case 4:
@@ -331,7 +332,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             FromDate = criteria.FromDate,
                             ToDate = criteria.ToDate,
                             ProductSelection = criteria.ProductSelection,
-                            Products = criteria.Products
+                            Products = criteria.Products,
+                            IsNormalMode = criteria.IsNormalMode
                         },
                     criteria.RoleId);
                 case 3:
@@ -342,7 +344,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             FromDate = criteria.FromDate,
                             ToDate = criteria.ToDate,
                             ProductSelection = criteria.ProductSelection,
-                            Products = criteria.Products
+                            Products = criteria.Products,
+                            IsNormalMode = criteria.IsNormalMode
                         },
                     criteria.RoleId);
                 case 2:
@@ -353,7 +356,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             FromDate = criteria.FromDate,
                             ToDate = criteria.ToDate,
                             ProductSelection = criteria.ProductSelection,
-                            Products = criteria.Products
+                            Products = criteria.Products,
+                            IsNormalMode = criteria.IsNormalMode
                         },
                     criteria.RoleId);
             }

@@ -1081,4 +1081,16 @@
   <data name="ExtraPT" xml:space="preserve">
     <value>ExtraPT</value>
   </data>
+  <data name="RealIncome" xml:space="preserve">
+    <value>Real Income</value>
+  </data>
+  <data name="RealTurnover" xml:space="preserve">
+    <value>Real Turnover</value>
+  </data>
+  <data name="RealWinLoss" xml:space="preserve">
+    <value>Real WinLoss</value>
+  </data>
+  <data name="VirtualWinLoss" xml:space="preserve">
+    <value>Virtual WinLoss</value>
+  </data>
 </root>
