@@ -263,15 +263,15 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
                     treeWinLoss.TotalInfo.Add(totalWinLoss);
                     total8RMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_8rm"]);
-                    total8RMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_8rm"]);
                     TreeWinLossUtil.AddToTotal(total8RMWinLoss, ref grandTotalWinLoss);
+                    total8RMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_8rm"]);
                     total8RMWinLoss.BaseRMTurnover = Converter.ToDecimal(outputParam["turnover_8rm"]);
                     total8RMWinLoss.BaseRMVirtualTurnover = Converter.ToDecimal(outputParam["turnover_8rm"]);
                     treeWinLoss.TotalInfo.Add(total8RMWinLoss);
 
                     totalBARMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_barm"]);
-                    totalBARMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_barm"]);
                     TreeWinLossUtil.AddToTotal(totalBARMWinLoss, ref grandTotalWinLoss);
+                    totalBARMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_barm"]);
                     totalBARMWinLoss.BaseRMTurnover = Converter.ToDecimal(outputParam["turnover_barm"]);
                     totalBARMWinLoss.BaseRMVirtualTurnover = totalBARMWinLoss.BaseRMTurnover;
                     treeWinLoss.TotalInfo.Add(totalBARMWinLoss);
