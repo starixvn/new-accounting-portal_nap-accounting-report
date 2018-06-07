@@ -1096,4 +1096,7 @@
   <data name="VirtualMargin" xml:space="preserve">
     <value>Virtual Margin</value>
   </data>
+  <data name="RealMargin" xml:space="preserve">
+    <value>Real Margin</value>
+  </data>
 </root>

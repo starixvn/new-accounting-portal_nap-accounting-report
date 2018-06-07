@@ -431,7 +431,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow - 1, currentColumn, currentRow, currentColumn);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Margin;
+            currentCellRange.Value = Labels.RealMargin;
             currentCellRange.Style = headerTextStyle;
             currentColumn++;
 
@@ -911,7 +911,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow - 1, currentColumn, currentRow, currentColumn);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Margin;
+            currentCellRange.Value = Labels.RealMargin;
             currentCellRange.Style = headerTextStyle;
             currentColumn++;
 

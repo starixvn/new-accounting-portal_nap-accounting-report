@@ -2051,6 +2051,15 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Real Margin.
+        /// </summary>
+        public static string RealMargin {
+            get {
+                return ResourceManager.GetString("RealMargin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Real Turnover.
         /// </summary>
         public static string RealTurnover {
