@@ -1093,4 +1093,7 @@
   <data name="VirtualWinLoss" xml:space="preserve">
     <value>Virtual WinLoss</value>
   </data>
+  <data name="VirtualMargin" xml:space="preserve">
+    <value>Virtual Margin</value>
+  </data>
 </root>

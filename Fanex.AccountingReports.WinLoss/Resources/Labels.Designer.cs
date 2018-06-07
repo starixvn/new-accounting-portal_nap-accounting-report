@@ -2825,6 +2825,15 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Virtual Margin.
+        /// </summary>
+        public static string VirtualMargin {
+            get {
+                return ResourceManager.GetString("VirtualMargin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual Rate.
         /// </summary>
         public static string VirtualRate {

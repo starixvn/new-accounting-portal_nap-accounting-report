@@ -57,13 +57,28 @@ namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
             }
         }
 
-        public string BaseRMMargin
+        public string VirtualBaseRMMargin
         {
             get
             {
                 if (this.BaseRMVirtualTurnover != 0)
                 {
                     return Math.Round((this.BaseRMVirtualTotal / this.BaseRMVirtualTurnover) * 100, 2).ToString();
+                }
+                else
+                {
+                    return Labels.NotAvailable;
+                }
+            }
+        }
+
+        public string BaseRMMargin
+        {
+            get
+            {
+                if (this.BaseRMTurnover != 0)
+                {
+                    return Math.Round((this.BaseRMTotal / this.BaseRMTurnover) * 100, 2).ToString();
                 }
                 else
                 {

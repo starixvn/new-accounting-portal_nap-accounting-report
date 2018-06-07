@@ -103,7 +103,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 var isShowNA = report.IsShowNotAvailableTurnover;
                 int startRow = 0;
                 int startColumn = 0;
-                int maxColumnIndex = 18;
+                int maxColumnIndex = 19;
 
                 var currentColumn = startColumn;
                 CellRange currentCellRange;
@@ -218,7 +218,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             var isShowNA = false;
             int startRow = 0;
             int startColumn = 0;
-            int maxColumnIndex = 19;
+            int maxColumnIndex = 20;
 
             var titleStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
             var currentColumn = startColumn;
@@ -352,7 +352,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentCellRange.Style = headerTextStyle;
             currentColumn++;
 
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 11);
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 12);
             currentCellRange.Merged = true;
             currentCellRange.Value = Labels.BaseRM;
             currentCellRange.Style = headerTextStyle;
@@ -433,7 +433,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentCellRange.Merged = true;
             currentCellRange.Value = Labels.Margin;
             currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow - 1, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.VirtualMargin;
+            currentCellRange.Style = headerTextStyle;
             currentRow++;
+
         }
 
         /// <summary>
@@ -602,6 +609,22 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     currentCell.Style = twoDecimalPositiveNumberStyle;
                 }
 
+                currentColumn++;
+
+                if (isShowNA || info.VirtualBaseRMMargin == Labels.NotAvailable)
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Labels.NotAvailable;
+                    currentCell.Style = textStyle;
+                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                }
+                else
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Converter.ToDecimal(info.VirtualBaseRMMargin);
+                    currentCell.Style = twoDecimalPositiveNumberStyle;
+                }
+
                 currentRow++;
             }
         }
@@ -734,6 +757,21 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                 }
 
+                currentColumn++;
+                if (isShowNA || info.VirtualBaseRMMargin == Labels.NotAvailable)
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Labels.NotAvailable;
+                    currentCell.Style = grandTotalRowTextStyle;
+                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                }
+                else
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Converter.ToDecimal(info.VirtualBaseRMMargin);
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                }
+
                 currentRow++;
             }
         }
@@ -794,7 +832,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentCellRange.Style = headerTextStyle;
             currentColumn++;
 
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 11);
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 12);
             currentCellRange.Merged = true;
             currentCellRange.Value = Labels.BaseRM;
             currentCellRange.Style = headerTextStyle;
@@ -874,6 +912,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow - 1, currentColumn, currentRow, currentColumn);
             currentCellRange.Merged = true;
             currentCellRange.Value = Labels.Margin;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow - 1, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.VirtualMargin;
             currentCellRange.Style = headerTextStyle;
             currentColumn++;
 
@@ -1054,6 +1098,22 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
                 currentColumn++;
 
+                if (isShowNA || info.VirtualBaseRMMargin == Labels.NotAvailable)
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Labels.NotAvailable;
+                    currentCell.Style = textStyle;
+                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                }
+                else
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Converter.ToDecimal(info.VirtualBaseRMMargin);
+                    currentCell.Style = twoDecimalPositiveNumberStyle;
+                }
+
+                currentColumn++;
+
                 bool isDisabledVirtualRate = info.VirtualRate != 1;
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = isDisabledVirtualRate ? "Disabled" :
@@ -1190,6 +1250,22 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 {
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = Converter.ToDecimal(info.BaseRMMargin);
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                }
+
+                currentColumn++;
+
+                if (isShowNA || info.VirtualBaseRMMargin == Labels.NotAvailable)
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Labels.NotAvailable;
+                    currentCell.Style = grandTotalRowTextStyle;
+                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                }
+                else
+                {
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = Converter.ToDecimal(info.VirtualBaseRMMargin);
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                 }
 

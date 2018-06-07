@@ -137,6 +137,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByAgent = function () {
                         { Name: "ColBaseRMTotal", Value: info.BaseRMTotal },
                         { Name: "ColBaseRMVirtualTotal", Value: info.BaseRMVirtualTotal },
                         { Name: "ColBaseRMMargin", Value: info.BaseRMMargin },
+                        { Name: "ColVirtualBaseRMMargin", Value: info.VirtualBaseRMMargin },
                         { Name: "ColVirtualRate", Value: {
                             custId: info.Id,
                             virtualRate: info.VirtualRate,
@@ -170,7 +171,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByAgent = function () {
                         { Name: "ColBaseRMVarianceMargin", Value: info.BaseRMVarianceMargin },
                         { Name: "ColBaseRMTotal", Value: info.BaseRMTotal },
                         { Name: "ColBaseRMVirtualTotal", Value: info.BaseRMVirtualTotal },
-                        { Name: "ColBaseRMMargin", Value: info.BaseRMMargin }
+                        { Name: "ColBaseRMMargin", Value: info.BaseRMMargin },
+                        { Name: "ColVirtualBaseRMMargin", Value: info.VirtualBaseRMMargin }
                     ]
                 });
             }
@@ -188,7 +190,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByAgent = function () {
                 { HeaderText: "Real WinLoss", Name: "ColWinLoss", MergeRowNumber: 3 },
                 { HeaderText: "Comm", Name: "ColCommission", MergeRowNumber: 3 },
                 { HeaderText: "Real Income", Name: "ColWinLossTotal", MergeRowNumber: 3 },
-                { HeaderText: "BaseRM", Name: "ColBaseRMTurnover", MergeColNumber: 12 },
+                { HeaderText: "BaseRM", Name: "ColBaseRMTurnover", MergeColNumber: 13 },
                 { HeaderText: "Virtual Rate(%)", Name: "ColVirtualRate", MergeRowNumber: 3}]
             },
             {
@@ -199,7 +201,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByAgent = function () {
                 { HeaderText: "Variance Margin(%)", Name: "ColBaseRMVarianceMargin", MergeRowNumber: 2 },
                 { HeaderText: "Real Income", Name: "ColBaseRMTotal", MergeRowNumber: 2 },
                 { HeaderText: "Virtual WinLoss", Name: "ColBaseRMVirtualTotal", MergeRowNumber: 2 },
-                { HeaderText: "Margin(%)", Name: "ColBaseRMMargin", MergeRowNumber: 2}]
+                { HeaderText: "Margin(%)", Name: "ColBaseRMMargin", MergeRowNumber: 2 },
+                { HeaderText: "Virtual Margin(%)", Name: "ColVirtualBaseRMMargin", MergeRowNumber: 2 }]
             }],
             columns: [{ HeaderText: "No", Width: 50, Name: "ColNo", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Username", Width: 120, Name: "ColUserName", HeaderAlign: "center", CellAlign: "center" },
@@ -220,6 +223,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByAgent = function () {
                 { HeaderText: "Real Income", Width: 120, Name: "ColBaseRMTotal", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatPositive: '$', FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "Virtual WinLoss", Width: 120, Name: "ColBaseRMVirtualTotal", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatPositive: '$', FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "Margin(%)", Width: 120, Name: "ColBaseRMMargin", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatPositive: '$', FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, CustomSortFunction: self.customSortNumber },
+                { HeaderText: "Virtual Margin(%)", Width: 120, Name: "ColVirtualBaseRMMargin", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatPositive: '$', FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, CustomSortFunction: self.customSortNumber },
                 { HeaderText: "Virtual Rate(%)", Width: 80, Name: "ColVirtualRate", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER}],
             showTitle: true,
             showFooter: true,

@@ -339,7 +339,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                         { Name: "ColBaseRMVarianceMargin", Value: info.BaseRMVarianceMargin },
                         { Name: "ColBaseRMTotal", Value: info.BaseRMTotal },
                         { Name: "ColBaseRMVirtualTotal", Value: info.BaseRMVirtualTotal },
-                        { Name: "ColBaseRMMargin", Value: info.BaseRMMargin }
+                        { Name: "ColBaseRMMargin", Value: info.BaseRMMargin },
+                        { Name: "ColVirtualBaseRMMargin", Value: info.VirtualBaseRMMargin }
                     ]
                 });
             }
@@ -362,7 +363,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                         { Name: "ColBaseRMVarianceMargin", Value: info.BaseRMVarianceMargin },
                         { Name: "ColBaseRMTotal", Value: info.BaseRMTotal },
                         { Name: "ColBaseRMVirtualTotal", Value: info.BaseRMVirtualTotal },
-                        { Name: "ColBaseRMMargin", Value: info.BaseRMMargin }
+                        { Name: "ColBaseRMMargin", Value: info.BaseRMMargin },
+                        { Name: "ColVirtualBaseRMMargin", Value: info.VirtualBaseRMMargin }
                     ]
                 });
             }
@@ -378,7 +380,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                 { HeaderText: "Real WinLoss", Name: "ColWinLoss", MergeRowNumber: 3 },
                 { HeaderText: "Comm", Name: "ColCommission", MergeRowNumber: 3 },
                 { HeaderText: "Real Income", Name: "ColWinLossTotal", MergeRowNumber: 3 },
-                { HeaderText: "BaseRM", Name: "ColBaseRMTurnover", MergeColNumber: 12 }]
+                { HeaderText: "BaseRM", Name: "ColBaseRMTurnover", MergeColNumber: 13 }]
             },
             {
                 Columns: [{ HeaderText: "Real Turnover", Name: "ColBaseRMTurnover", MergeRowNumber: 2 },
@@ -388,7 +390,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                 { HeaderText: "Variance Margin(%)", Name: "ColBaseRMVarianceMargin", MergeRowNumber: 2 },
                 { HeaderText: "Real Income", Name: "ColBaseRMTotal", MergeRowNumber: 2 },
                 { HeaderText: "Virtual WinLoss", Name: "ColBaseRMVirtualTotal", MergeRowNumber: 2 },
-                { HeaderText: "Margin(%)", Name: "ColBaseRMMargin", MergeRowNumber: 2 }]
+                { HeaderText: "Margin(%)", Name: "ColBaseRMMargin", MergeRowNumber: 2 },
+                { HeaderText: "Virtual Margin(%)", Name: "ColVirtualBaseRMMargin", MergeRowNumber: 2 }]
             }],
             columns: [{ HeaderText: "Currency", Width: 80, Name: "ColCurrencyName", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Real Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
@@ -407,7 +410,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                 { HeaderText: "Variance Margin(%)", Width: 120, Name: "ColBaseRMVarianceMargin", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatPositive: '$', CustomSortFunction: self.customSortNumber },
                 { HeaderText: "Real Income", Width: 120, Name: "ColBaseRMTotal", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: "Virtual WinLoss", Width: 120, Name: "ColBaseRMVirtualTotal", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
-                { HeaderText: "Margin(%)", Width: 120, Name: "ColBaseRMMargin", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatPositive: '$', CustomSortFunction: self.customSortNumber }],
+                { HeaderText: "Margin(%)", Width: 120, Name: "ColBaseRMMargin", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatPositive: '$', CustomSortFunction: self.customSortNumber },
+                { HeaderText: "Virtual Margin(%)", Width: 120, Name: "ColVirtualBaseRMMargin", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatPositive: '$', CustomSortFunction: self.customSortNumber }],
             showTitle: true,
             showFooter: true,
             titleInfo:
