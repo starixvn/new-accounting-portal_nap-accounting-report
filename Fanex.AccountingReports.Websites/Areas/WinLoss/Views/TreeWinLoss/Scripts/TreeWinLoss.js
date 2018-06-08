@@ -377,7 +377,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                 Columns: [{ HeaderText: "Currency", Name: "ColCurrencyName", MergeRowNumber: 3 },
                 { HeaderText: "Real Turnover", Name: "ColTurnover", MergeRowNumber: 3 },
                 { HeaderText: "ExtraPT", Name: "ColExtraPT", MergeRowNumber: 3 },
-                { HeaderText: "Real WinLoss", Name: "ColWinLoss", MergeRowNumber: 3 },
+                { HeaderText: "Gross WinLoss", Name: "ColWinLoss", MergeRowNumber: 3 },
                 { HeaderText: "Comm", Name: "ColCommission", MergeRowNumber: 3 },
                 { HeaderText: "Real Income", Name: "ColWinLossTotal", MergeRowNumber: 3 },
                 { HeaderText: "BaseRM", Name: "ColBaseRMTurnover", MergeColNumber: 13 }]
@@ -396,7 +396,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             columns: [{ HeaderText: "Currency", Width: 80, Name: "ColCurrencyName", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Real Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "ExtraPT", Width: 120, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-                { HeaderText: "Real WinLoss", Width: 120, Name: "ColWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
+                { HeaderText: "Gross WinLoss", Width: 120, Name: "ColWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: "Comm", Width: 120, Name: "ColCommission", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: "Total", Width: 120, Name: "ColWinLossTotal", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: "Real Turnover", Width: 120, Name: "ColBaseRMTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true },

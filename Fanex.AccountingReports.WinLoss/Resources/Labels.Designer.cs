@@ -1096,6 +1096,15 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gross WinLoss.
+        /// </summary>
+        public static string GrossWinLoss {
+            get {
+                return ResourceManager.GetString("GrossWinLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Group Headline.
         /// </summary>
         public static string GroupHeadline {

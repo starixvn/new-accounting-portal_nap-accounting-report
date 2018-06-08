@@ -1099,4 +1099,7 @@
   <data name="RealMargin" xml:space="preserve">
     <value>Real Margin</value>
   </data>
+  <data name="GrossWinLoss" xml:space="preserve">
+    <value>Gross WinLoss</value>
+  </data>
 </root>
