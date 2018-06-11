@@ -251,7 +251,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossBySuper = function () {
             bodyRows: bodyData,
             footerRows: footerData,
             gridExpandHeight: 185,
-            numberOfFrozenColumn: 6,
+            numberOfFrozenColumn: 7,
             showDistinctRow: true,
             showPager: true,
             pagerOption: {

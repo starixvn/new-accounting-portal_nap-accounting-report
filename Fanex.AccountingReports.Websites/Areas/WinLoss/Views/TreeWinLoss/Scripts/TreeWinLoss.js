@@ -426,7 +426,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             bodyRows: bodyData,
             footerRows: footerData,
             gridExpandHeight: 185,
-            numberOfFrozenColumn: 5,
+            numberOfFrozenColumn: 6,
             showDistinctRow: true
         };
         _tables.report.removeClass("display-none").fanexGrid(gridOptions);
