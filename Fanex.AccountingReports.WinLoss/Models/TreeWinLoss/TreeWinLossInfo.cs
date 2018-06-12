@@ -87,7 +87,7 @@ namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
             }
         }
 
-        public bool VirtualRate { get; set; }
+        public decimal VirtualRate { get; set; }
 
         public decimal ExtraAmount { get; set; }
     }
