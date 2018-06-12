@@ -176,7 +176,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         public TreeWinLossVirtualRate GetAllVirtualRate(TreeWinLoss report)
         {
 
-            var custIdEnableVirtualRate = string.Join(",", report.ChildsInfo.Where(x => x.VirtualRate == 1).Select(x => x.Id));
+            var custIdEnableVirtualRate = string.Join(",", report.ChildsInfo.Where(x => x.VirtualRate).Select(x => x.Id));
             var getAllVirtualRateCriteria = new GetAllVirtualRateCriteria
             {
                 CustIDs = custIdEnableVirtualRate
@@ -187,7 +187,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             var treeWinLossVirtualRate = new TreeWinLossVirtualRate();
             treeWinLossVirtualRate.SMAVirtualRate = allVirtualRate;
             treeWinLossVirtualRate.NumberUserEnabledVirtualRate = allVirtualRate.ReportRows.Count;
-            treeWinLossVirtualRate.EnabledVirtualRateUser = MapEnabledVirtualRateUserData(report.ChildsInfo);
+            treeWinLossVirtualRate.EnabledVirtualRateUser = MapEnabledVirtualRateUserData(report.ChildsInfo.Where(x => x.VirtualRate).ToList());
 
             return treeWinLossVirtualRate;
         }
@@ -728,7 +728,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 BaseRMTOVarianceMinus = Converter.ToDecimal(reader["TOVariance-"]),
                 BaseRMWLVarianceMinus = Converter.ToDecimal(reader["WLVariance-"]),
                 BaseRMWLVariancePlus = Converter.ToDecimal(reader["WLVariance+"]),
-                VirtualRate = Converter.ToDecimal(reader["EnableVirtualrate"]),
+                VirtualRate = Converter.ToBool(reader["EnableVirtualrate"]),
                 ExtraAmount = Converter.ToDecimal(reader["ExtraAmount"]),
                 BaseRMWinlostVarianceTotal = Converter.ToDecimal(reader["WLVarianceTotal"]),
                 BaseRMTOVarianceAbsoluteTotal = Converter.ToDecimal(reader["TOVarianceTotal"])

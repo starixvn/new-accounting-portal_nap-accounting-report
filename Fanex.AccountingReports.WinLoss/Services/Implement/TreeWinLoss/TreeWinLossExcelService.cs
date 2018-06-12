@@ -21,7 +21,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
     /// </summary>
     public class TreeWinLossExcelService : ServiceBase, ITreeWinLossExcelService
     {
-        private const int _MaxUserPerSheet = 40000;
+        private const int _MaxUserPerSheet = 2000;
         private static CellStyle headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
         private static Color backgroundColor = ExcelExtensions.BackGroundColor;
         private static CellStyle textStyle = ExcelExtensions.GetCellTextStyle(backgroundColor, false);
@@ -1114,7 +1114,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
                 currentColumn++;
 
-                bool isDisabledVirtualRate = info.VirtualRate != 1;
+                bool isDisabledVirtualRate = !info.VirtualRate;
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = isDisabledVirtualRate ? "Disabled" :
                     GetVirtualRateColumnValue(enabledVirtualRateUser[info.Name]);
