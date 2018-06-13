@@ -1,7 +1,7 @@
 namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
 {
     using System;
-    using Fanex.AccountingReports.Core.Resources;
+    using Core.Resources;
 
     /// <summary>
     /// Create Tree Win Loss Info Model.
@@ -37,21 +37,10 @@ namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
 
         public decimal BaseRMWLVarianceMinus { get; set; }
 
-        public decimal BaseRMTOVarianceAbsoluteTotal
-        {
-            get
-            {
-                return Math.Round(Math.Abs(this.BaseRMTOVarianceMinus) + Math.Abs(this.BaseRMTOVariancePlus), 2);
-            }
-        }
+        public decimal BaseRMTOVarianceAbsoluteTotal { get; set; }
 
-        public decimal BaseRMWinlostVarianceTotal
-        {
-            get
-            {
-                return Math.Round(this.BaseRMWLVariancePlus + this.BaseRMWLVarianceMinus, 2);
-            }
-        }
+
+        public decimal BaseRMWinlostVarianceTotal { get; set; }
 
         public string BaseRMVarianceMargin
         {
@@ -68,7 +57,7 @@ namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
             }
         }
 
-        public string BaseRMMargin
+        public string VirtualBaseRMMargin
         {
             get
             {
@@ -83,6 +72,23 @@ namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
             }
         }
 
+        public string BaseRMMargin
+        {
+            get
+            {
+                if (this.BaseRMTurnover != 0)
+                {
+                    return Math.Round((this.BaseRMTotal / this.BaseRMTurnover) * 100, 2).ToString();
+                }
+                else
+                {
+                    return Labels.NotAvailable;
+                }
+            }
+        }
+
         public decimal VirtualRate { get; set; }
+
+        public decimal ExtraAmount { get; set; }
     }
 }

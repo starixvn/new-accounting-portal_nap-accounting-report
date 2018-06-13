@@ -73,69 +73,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         {
             try
             {
-                var currencies = ReportService.ExchangeCurrencies;
                 var isShowNotAvailableTurnover = IsShowAvailableTurnoverByProduct(criteria);
                 criteria.Products = GetProductParams(criteria.ProductSelection);
-                var treeWinLoss = new TreeWinLoss
-                {
-                    ChildsInfo = new List<TreeWinLossInfo>(),
-                    TotalInfo = new List<TreeWinLossInfo>(),
-                    IsShowNotAvailableTurnover = isShowNotAvailableTurnover
-                };
 
-                DateTime moveBetsDay = ReportService.BalanceUp.MoveBetsDay;
-                if (criteria.FromDate <= moveBetsDay && criteria.ToDate > moveBetsDay)
-                {
-                    DateTime fromDate = criteria.FromDate;                                        
-                    criteria.FromDate = moveBetsDay.AddDays(1);                    
-                    var accountWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
-
-                    criteria.FromDate = fromDate;
-                    criteria.ToDate = moveBetsDay;
-                    var wareHouseWinLoss = GetTreeWinLossDateRangeByProduct(criteria);                    
-                    var treeWinLossTmp = accountWinLoss.ChildsInfo.Concat(wareHouseWinLoss.ChildsInfo).ToList();
-                    treeWinLoss.ChildsInfo = treeWinLossTmp.GroupBy(x => x.Id)
-                        .Select(y => new TreeWinLossInfo
-                        {
-                            Id = y.Key,
-                            Name = currencies[Converter.ToInt(y.Key)],
-                            Turnover = y.Sum(x => x.Turnover),
-                            WinLoss = y.Sum(x => x.WinLoss),
-                            Comm = y.Sum(x => x.Comm),
-                            WinLossTotal = y.Sum(x => x.WinLossTotal),
-                            BaseRMTurnover = y.Sum(x => x.BaseRMTurnover),
-                            BaseRMTotal = y.Sum(x => x.BaseRMTotal),
-                            BaseRMVirtualTotal = y.Sum(x => x.BaseRMVirtualTotal),
-                            BaseRMVirtualTurnover = y.Sum(x => x.BaseRMVirtualTurnover),
-                            BaseRMTOVarianceMinus = y.Sum(x => x.BaseRMTOVarianceMinus),
-                            BaseRMTOVariancePlus = y.Sum(x => x.BaseRMTOVariancePlus),
-                            BaseRMWLVarianceMinus = y.Sum(x => x.BaseRMWLVarianceMinus),
-                            BaseRMWLVariancePlus = y.Sum(x => x.BaseRMWLVariancePlus),
-                        }).ToList();
-
-                    for (int j = 0; j < accountWinLoss.TotalInfo.Count; j++)
-                    {
-                        var totalAccountWinLoss = accountWinLoss.TotalInfo[j];
-                        var totalWarehouseWinLoss = wareHouseWinLoss.TotalInfo[j];
-                        var totalWinLoss = new TreeWinLossInfo()
-                        {
-                            Name = totalAccountWinLoss.Name,
-                            BaseRMTurnover = totalAccountWinLoss.BaseRMTurnover + totalWarehouseWinLoss.BaseRMTurnover,
-                            BaseRMVirtualTurnover = totalAccountWinLoss.BaseRMVirtualTurnover + totalWarehouseWinLoss.BaseRMVirtualTurnover,
-                            BaseRMTOVarianceMinus = totalAccountWinLoss.BaseRMTOVarianceMinus + totalWarehouseWinLoss.BaseRMTOVarianceMinus,
-                            BaseRMTOVariancePlus = totalAccountWinLoss.BaseRMTOVariancePlus + totalWarehouseWinLoss.BaseRMTOVariancePlus,
-                            BaseRMWLVarianceMinus = totalAccountWinLoss.BaseRMWLVarianceMinus + totalWarehouseWinLoss.BaseRMWLVarianceMinus,
-                            BaseRMWLVariancePlus = totalAccountWinLoss.BaseRMWLVariancePlus + totalWarehouseWinLoss.BaseRMWLVariancePlus,
-                            BaseRMTotal = totalAccountWinLoss.BaseRMTotal + totalWarehouseWinLoss.BaseRMTotal,
-                            BaseRMVirtualTotal = totalAccountWinLoss.BaseRMVirtualTotal + totalWarehouseWinLoss.BaseRMVirtualTotal
-                        };
-                        treeWinLoss.TotalInfo.Add(totalWinLoss);
-                    }
-                }
-                else
-                {
-                    treeWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
-                }
+                var treeWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
+                treeWinLoss.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
 
                 SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByProductSession, treeWinLoss);
                 return treeWinLoss;
@@ -156,105 +98,36 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
-        public TreeWinLossVirtualRate GetTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
+        public TreeWinLoss GetTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
             try
             {
                 bool isShowNotAvailableTurnover = IsShowAvailableTurnoverByLevel(criteria);
                 criteria.Products = GetProductParams(criteria.ProductSelection);
-                TreeWinLossVirtualRate treeWinLossVirtualRate = new TreeWinLossVirtualRate();
-                var winLossByComm = new TreeWinLoss
-                {
-                    ChildsInfo = new List<TreeWinLossInfo>(),
-                    TotalInfo = new List<TreeWinLossInfo>(),
-                    IsShowNotAvailableTurnover = isShowNotAvailableTurnover
-                };
-                DateTime moveBetsDay = ReportService.BalanceUp.MoveBetsDay;
-                if (criteria.FromDate <= moveBetsDay && criteria.ToDate > moveBetsDay)
-                {
-                    DateTime fromDate = criteria.FromDate;
-                    criteria.FromDate = moveBetsDay.AddDays(1);
-                    var accountWinLoss = GetTreeWinLossDateRangeByLevel(criteria);
 
-                    criteria.FromDate = fromDate;
-                    criteria.ToDate = moveBetsDay;
-                    var wareHouseWinLoss = GetTreeWinLossDateRangeByLevel(criteria);                    
-                    var winLossByCommTmp = accountWinLoss.TreeWinLoss.ChildsInfo.Concat(wareHouseWinLoss.TreeWinLoss.ChildsInfo).ToList();
-                    winLossByComm.ChildsInfo = winLossByCommTmp.GroupBy(x => new { x.Id, x.Name, x.VirtualRate })
-                        .Select(y => new TreeWinLossInfo
-                        {
-                            Id = y.Key.Id,
-                            Name = y.Key.Name,
-                            Turnover = y.Sum(x => x.Turnover),
-                            WinLoss = y.Sum(x => x.WinLoss),
-                            Comm = y.Sum(x => x.Comm),
-                            WinLossTotal = y.Sum(x => x.WinLossTotal),
-                            BaseRMTurnover = y.Sum(x => x.BaseRMTurnover),
-                            BaseRMTotal = y.Sum(x => x.BaseRMTotal),
-                            BaseRMVirtualTotal = y.Sum(x => x.BaseRMVirtualTotal),
-                            BaseRMVirtualTurnover = y.Sum(x => x.BaseRMVirtualTurnover),
-                            BaseRMTOVarianceMinus = y.Sum(x => x.BaseRMTOVarianceMinus),
-                            BaseRMTOVariancePlus = y.Sum(x => x.BaseRMTOVariancePlus),
-                            BaseRMWLVarianceMinus = y.Sum(x => x.BaseRMWLVarianceMinus),
-                            BaseRMWLVariancePlus = y.Sum(x => x.BaseRMWLVariancePlus),
-                            VirtualRate = y.Key.VirtualRate
-                        }).ToList();
-
-                    for (int j = 0; j < accountWinLoss.TreeWinLoss.TotalInfo.Count; j++)
-                    {
-                        var totalAccountWinLoss = accountWinLoss.TreeWinLoss.TotalInfo[j];
-                        var totalWarehouseWinLoss = wareHouseWinLoss.TreeWinLoss.TotalInfo[j];
-                        var totalWinLoss = new TreeWinLossInfo()
-                        {
-                            Name = totalAccountWinLoss.Name,
-                            BaseRMTurnover = totalAccountWinLoss.BaseRMTurnover + totalWarehouseWinLoss.BaseRMTurnover,
-                            BaseRMVirtualTurnover = totalAccountWinLoss.BaseRMVirtualTurnover + totalWarehouseWinLoss.BaseRMVirtualTurnover,
-                            BaseRMTOVarianceMinus = totalAccountWinLoss.BaseRMTOVarianceMinus + totalWarehouseWinLoss.BaseRMTOVarianceMinus,
-                            BaseRMTOVariancePlus = totalAccountWinLoss.BaseRMTOVariancePlus + totalWarehouseWinLoss.BaseRMTOVariancePlus,
-                            BaseRMWLVarianceMinus = totalAccountWinLoss.BaseRMWLVarianceMinus + totalWarehouseWinLoss.BaseRMWLVarianceMinus,
-                            BaseRMWLVariancePlus = totalAccountWinLoss.BaseRMWLVariancePlus + totalWarehouseWinLoss.BaseRMWLVariancePlus,
-                            BaseRMTotal = totalAccountWinLoss.BaseRMTotal + totalWarehouseWinLoss.BaseRMTotal,
-                            BaseRMVirtualTotal = totalAccountWinLoss.BaseRMVirtualTotal + totalWarehouseWinLoss.BaseRMVirtualTotal
-                        };
-                        winLossByComm.TotalInfo.Add(totalWinLoss);
-                    }
-
-                    winLossByComm.ChildsInfo = winLossByComm.ChildsInfo.OrderBy(c => c.Name).ToList();
-                    treeWinLossVirtualRate.TreeWinLoss = winLossByComm;
-                    treeWinLossVirtualRate.SMAVirtualRate.ReportRows = this.GetEnabledVirtualRateUserFromIBCAndWH(
-                        accountWinLoss.SMAVirtualRate.ReportRows,
-                        wareHouseWinLoss.SMAVirtualRate.ReportRows);
-                }
-                else
-                {
-                    treeWinLossVirtualRate = GetTreeWinLossDateRangeByLevel(criteria);
-                    treeWinLossVirtualRate.TreeWinLoss.ChildsInfo.OrderBy(c => c.Name).ToList();
-                }
-
-                treeWinLossVirtualRate.NumberUserEnabledVirtualRate = treeWinLossVirtualRate.SMAVirtualRate.ReportRows.Count;
-                treeWinLossVirtualRate.EnabledVirtualRateUser = MapEnabledVirtualRateUserData(treeWinLossVirtualRate.TreeWinLoss.ChildsInfo);
-                treeWinLossVirtualRate.TreeWinLoss.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
+                var winLossByComm = GetTreeWinLossDateRangeByLevel(criteria);
+                winLossByComm.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
 
                 switch (criteria.RoleId)
                 {
                     case 5:
-                        SessionManager.Set<TreeWinLossVirtualRate>(TreeWinLossUtil.TreeWinLossByCommSession, treeWinLossVirtualRate);
+                        SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByCommSession, winLossByComm);
                         break;
 
                     case 4:
-                        SessionManager.Set<TreeWinLossVirtualRate>(TreeWinLossUtil.TreeWinLossBySuperSession, treeWinLossVirtualRate);
+                        SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossBySuperSession, winLossByComm);
                         break;
 
                     case 3:
-                        SessionManager.Set<TreeWinLossVirtualRate>(TreeWinLossUtil.TreeWinLossByMasterSession, treeWinLossVirtualRate);
+                        SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByMasterSession, winLossByComm);
                         break;
 
                     case 2:
-                        SessionManager.Set<TreeWinLossVirtualRate>(TreeWinLossUtil.TreeWinLossByAgentSession, treeWinLossVirtualRate);
+                        SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByAgentSession, winLossByComm);
                         break;
                 }
 
-                return treeWinLossVirtualRate;
+                return winLossByComm;
             }
             catch (Exception ex)
             {
@@ -298,6 +171,25 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
 
             return virtualRateInfo;
+        }
+
+        public TreeWinLossVirtualRate GetAllVirtualRate(TreeWinLoss report)
+        {
+
+            var custIdEnableVirtualRate = string.Join(",", report.ChildsInfo.Where(x => x.VirtualRate == 1).Select(x => x.Id));
+            var getAllVirtualRateCriteria = new GetAllVirtualRateCriteria
+            {
+                CustIDs = custIdEnableVirtualRate
+            };
+
+            var allVirtualRate = GetAllVirtualRate(getAllVirtualRateCriteria);
+
+            var treeWinLossVirtualRate = new TreeWinLossVirtualRate();
+            treeWinLossVirtualRate.SMAVirtualRate = allVirtualRate;
+            treeWinLossVirtualRate.NumberUserEnabledVirtualRate = allVirtualRate.ReportRows.Count;
+            treeWinLossVirtualRate.EnabledVirtualRateUser = MapEnabledVirtualRateUserData(report.ChildsInfo.Where(x => x.VirtualRate == 1).ToList());
+
+            return treeWinLossVirtualRate;
         }
 
         /// <summary>
@@ -357,7 +249,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             BaseRMWLVariancePlus = row.BaseRMWLVariancePlus,
                             BaseRMWLVarianceMinus = row.BaseRMWLVarianceMinus,
                             BaseRMTotal = row.BaseRMTotal,
-                            BaseRMVirtualTotal = row.BaseRMVirtualTotal
+                            BaseRMVirtualTotal = row.BaseRMVirtualTotal,
+                            BaseRMTOVarianceAbsoluteTotal = row.BaseRMTOVarianceAbsoluteTotal,
+                            BaseRMWinlostVarianceTotal = row.BaseRMWinlostVarianceTotal,
+                            ExtraAmount = row.ExtraAmount
                         };
 
                         winLoss = TreeWinLossUtil.RoundTreeWinLossInfo(winLoss);
@@ -367,18 +262,18 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                     }
 
                     treeWinLoss.TotalInfo.Add(totalWinLoss);
+                    total8RMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_8rm"]);
+                    TreeWinLossUtil.AddToTotal(total8RMWinLoss, ref grandTotalWinLoss);
+                    total8RMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_8rm"]);
                     total8RMWinLoss.BaseRMTurnover = Converter.ToDecimal(outputParam["turnover_8rm"]);
                     total8RMWinLoss.BaseRMVirtualTurnover = Converter.ToDecimal(outputParam["turnover_8rm"]);
-                    total8RMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_8rm"]);
-                    total8RMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_8rm"]);
-                    TreeWinLossUtil.AddToTotal(total8RMWinLoss, ref grandTotalWinLoss);
                     treeWinLoss.TotalInfo.Add(total8RMWinLoss);
 
+                    totalBARMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_barm"]);
+                    TreeWinLossUtil.AddToTotal(totalBARMWinLoss, ref grandTotalWinLoss);
+                    totalBARMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_barm"]);
                     totalBARMWinLoss.BaseRMTurnover = Converter.ToDecimal(outputParam["turnover_barm"]);
                     totalBARMWinLoss.BaseRMVirtualTurnover = totalBARMWinLoss.BaseRMTurnover;
-                    totalBARMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_barm"]);
-                    totalBARMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_barm"]);
-                    TreeWinLossUtil.AddToTotal(totalBARMWinLoss, ref grandTotalWinLoss);
                     treeWinLoss.TotalInfo.Add(totalBARMWinLoss);
                     treeWinLoss.TotalInfo.Add(grandTotalWinLoss);
                 }
@@ -400,7 +295,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
-        private TreeWinLossVirtualRate GetTreeWinLossDateRangeByLevel(GetTreeWinLossByLevelCriteria criteria)
+        private TreeWinLoss GetTreeWinLossDateRangeByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
             switch (criteria.RoleId)
             {
@@ -412,7 +307,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             FromDate = criteria.FromDate,
                             ToDate = criteria.ToDate,
                             ProductSelection = criteria.ProductSelection,
-                            Products = criteria.Products
+                            Products = criteria.Products,
+                            IsNormalMode = criteria.IsNormalMode
                         },
                     criteria.RoleId);
                 case 4:
@@ -423,7 +319,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             FromDate = criteria.FromDate,
                             ToDate = criteria.ToDate,
                             ProductSelection = criteria.ProductSelection,
-                            Products = criteria.Products
+                            Products = criteria.Products,
+                            IsNormalMode = criteria.IsNormalMode
                         },
                     criteria.RoleId);
                 case 3:
@@ -434,7 +331,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             FromDate = criteria.FromDate,
                             ToDate = criteria.ToDate,
                             ProductSelection = criteria.ProductSelection,
-                            Products = criteria.Products
+                            Products = criteria.Products,
+                            IsNormalMode = criteria.IsNormalMode
                         },
                     criteria.RoleId);
                 case 2:
@@ -445,24 +343,22 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             FromDate = criteria.FromDate,
                             ToDate = criteria.ToDate,
                             ProductSelection = criteria.ProductSelection,
-                            Products = criteria.Products
+                            Products = criteria.Products,
+                            IsNormalMode = criteria.IsNormalMode
                         },
                     criteria.RoleId);
             }
 
-            return new TreeWinLossVirtualRate();
+            return new TreeWinLoss();
         }
 
-        private TreeWinLossVirtualRate GetTreeWinlossData(CriteriaBase criteria, int roleId)
+        private TreeWinLoss GetTreeWinlossData(CriteriaBase criteria, int roleId)
         {
-            TreeWinLossVirtualRate treeWinLossVirtualRate = new TreeWinLossVirtualRate();
             var treeWinLoss = new TreeWinLoss
             {
                 ChildsInfo = new List<TreeWinLossInfo>(),
                 TotalInfo = new List<TreeWinLossInfo>()
             };
-
-            SMAVirtualRate virtualRate = null;
 
             using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
             {
@@ -481,18 +377,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 }
 
                 treeWinLoss.TotalInfo.Add(totalWinLoss);
-                treeWinLossVirtualRate.TreeWinLoss = treeWinLoss;
-
-                if (reader.NextResult())
-                {
-                    virtualRate = MapSMAVirtualRateData(reader);
-                }
-
-                treeWinLossVirtualRate.SMAVirtualRate = virtualRate;
                 reader.Close();
             }
 
-            return treeWinLossVirtualRate;
+            return treeWinLoss;
         }
 
         /// <summary>
@@ -840,7 +728,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 BaseRMTOVarianceMinus = Converter.ToDecimal(reader["TOVariance-"]),
                 BaseRMWLVarianceMinus = Converter.ToDecimal(reader["WLVariance-"]),
                 BaseRMWLVariancePlus = Converter.ToDecimal(reader["WLVariance+"]),
-                VirtualRate = Converter.ToDecimal(reader["EnableVirtualrate"])
+                VirtualRate = Converter.ToDecimal(reader["EnableVirtualrate"]),
+                ExtraAmount = Converter.ToDecimal(reader["ExtraAmount"]),
+                BaseRMWinlostVarianceTotal = Converter.ToDecimal(reader["WLVarianceTotal"]),
+                BaseRMTOVarianceAbsoluteTotal = Converter.ToDecimal(reader["TOVarianceTotal"])
             };
 
             return winLoss;
@@ -862,38 +753,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
 
             return enabledVirtualRateUserDictionary;
-        }
-
-        /// <summary>
-        /// Gets the enabled virtual rate user from IBC and WH.
-        /// </summary>
-        /// <param name="enabledVirtualRateUserFromIBC">The enabled virtual rate user from IBC.</param>
-        /// <param name="enabledVirtualRateUserFromWH">The enabled virtual rate user from WH.</param>
-        /// <returns>Enable virtual rate user from IBC and WH.</returns>
-        private List<SMAVirtualRate> GetEnabledVirtualRateUserFromIBCAndWH(
-            List<SMAVirtualRate> enabledVirtualRateUserFromIBC,
-            List<SMAVirtualRate> enabledVirtualRateUserFromWH)
-        {
-            Dictionary<string, string> enabledVirtualRateUserDictionary = new Dictionary<string, string>();
-            List<SMAVirtualRate> enabledVirtualRateUser = new List<SMAVirtualRate>();
-            foreach (var user in enabledVirtualRateUserFromIBC)
-            {
-                enabledVirtualRateUserDictionary.Add(user.UserName, user.UserName);
-                enabledVirtualRateUser.Add(user);
-            }
-
-            foreach (var user in enabledVirtualRateUserFromWH)
-            {
-                bool userIsExist = enabledVirtualRateUserDictionary.ContainsKey(user.UserName);
-                if (userIsExist)
-                {
-                    continue;
-                }
-
-                enabledVirtualRateUser.Add(user);
-            }
-
-            return enabledVirtualRateUser;
         }
 
         private string GetProductParams(string productSelection)
@@ -1000,6 +859,25 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
 
             return isShowNotAvailableTurnover;
+        }
+
+        private SMAVirtualRate GetAllVirtualRate(GetAllVirtualRateCriteria criteria)
+        {
+            SMAVirtualRate virtualRate = new SMAVirtualRate();
+
+            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            {
+                IDataReader reader = objectDb.ExecuteReader(criteria.GetSpParams());
+
+                while (reader.Read())
+                {
+                    virtualRate = MapSMAVirtualRateData(reader);
+                }
+
+                reader.Close();
+            }
+
+            return virtualRate;
         }
     }
 }

@@ -40,7 +40,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             Currency: currencyId,
             Name: currencyName,
             ProductSelection: _treeWinLoss.Params.reportParams.ProductSelection,
-            Products: _treeWinLoss.Params.reportParams.Products
+            Products: _treeWinLoss.Params.reportParams.Products,
+            IsNormalMode: _treeWinLoss.Params.reportParams.IsNormalMode
         });
     };
 
@@ -53,7 +54,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             SRecommend: custId,
             Name: Username,
             ProductSelection: _treeWinLoss.Params.reportParams.ProductSelection,
-            Products: _treeWinLoss.Params.reportParams.Products
+            Products: _treeWinLoss.Params.reportParams.Products,
+            IsNormalMode: _treeWinLoss.Params.reportParams.IsNormalMode
         });
     };
 
@@ -66,7 +68,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             MRecommend: custId,
             Name: Username,
             ProductSelection: _treeWinLoss.Params.reportParams.ProductSelection,
-            Products: _treeWinLoss.Params.reportParams.Products
+            Products: _treeWinLoss.Params.reportParams.Products,
+            IsNormalMode: _treeWinLoss.Params.reportParams.IsNormalMode
         });
     };
 
@@ -79,7 +82,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             Recommend: custId,
             Name: Username,
             ProductSelection: _treeWinLoss.Params.reportParams.ProductSelection,
-            Products: _treeWinLoss.Params.reportParams.Products
+            Products: _treeWinLoss.Params.reportParams.Products,
+            IsNormalMode: _treeWinLoss.Params.reportParams.IsNormalMode
         });
     };
 

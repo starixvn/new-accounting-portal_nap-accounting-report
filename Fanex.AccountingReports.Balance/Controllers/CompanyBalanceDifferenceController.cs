@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Balance.Controllers
 {
     using System.Web.Mvc;
+    using Core.Web;
     using Fanex.AccountingReports.Balance.Services.Implement;
     using Fanex.AccountingReports.Balance.Services.Interface;
     using Fanex.AccountingReports.Core.Web.Controllers;

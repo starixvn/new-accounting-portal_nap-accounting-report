@@ -1,15 +1,13 @@
 namespace Fanex.AccountingReports.Gaming.Controllers
 {
     using System.Web.Mvc;
+    using AccountingReports.Core.Web;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Gaming.Criteria.LiveCasinoGameFinancialReport;
     using Fanex.AccountingReports.Gaming.Services.LiveCasinoGameFinancialReport;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class LiveCasinoGameFinancialReportController : BaseController
     {
         private readonly ILiveCasinoGameFinancialReportService _reportService;

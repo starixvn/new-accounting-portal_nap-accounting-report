@@ -30,10 +30,6 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                 outputParam = db.GetOuputParams();
             }
 
-            /*ObjectDb db = new ObjectDb(criteria.GetSettingKey());
-            var parameters = criteria.GetSpParams();
-            result = db.ExecuteReader(parameters,);
-            return result;*/
             if (result != null && result.Tables.Count > 0)
             {
                 var winLossTable = result.Tables[0];
@@ -53,7 +49,10 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                         BaseRMTOVarianceMinus = Converter.ToDecimal(row["TOVariance-"]),
                         BaseRMTOVariancePlus = Converter.ToDecimal(row["TOVariance+"]),
                         BaseRMWLVarianceMinus = Converter.ToDecimal(row["WLVariance-"]),
-                        BaseRMWLVariancePlus = Converter.ToDecimal(row["WLVariance+"])
+                        BaseRMWLVariancePlus = Converter.ToDecimal(row["WLVariance+"]),
+                        ExtraAmount = Converter.ToDecimal(row["ExtraAmount"]),
+                        BaseRMWinlostVarianceTotal = Converter.ToDecimal(row["WLVarianceTotal"]),
+                        BaseRMTOVarianceAbsoluteTotal = Converter.ToDecimal(row["TOVarianceTotal"])
                     });
                 }
             }

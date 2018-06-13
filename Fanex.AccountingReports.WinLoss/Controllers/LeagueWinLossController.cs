@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.WinLoss.Controllers
 {
     using System.Web.Mvc;
+    using Core.Web;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss;
     using Fanex.AccountingReports.WinLoss.Services.Implement;

@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Special.Controllers
 {
     using System.Web.Mvc;
+    using Core.Web;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Special.Criteria.MarginReport;

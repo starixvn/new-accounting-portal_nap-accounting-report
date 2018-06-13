@@ -11,10 +11,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Interface.TreeWinLoss
     {
         TreeWinLoss GetTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria);
 
-        TreeWinLossVirtualRate GetTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria);
+        TreeWinLoss GetTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria);
 
         VirtualRateInfo GetVirtualRate(int custId);
 
         List<TreeWinLossProduct> GetProduct();
+
+        TreeWinLossVirtualRate GetAllVirtualRate(TreeWinLoss report);
     }
 }

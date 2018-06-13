@@ -9,6 +9,9 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
     /// </summary>
     public class GetTreeWinLossByProductCriteria : CriteriaBase
     {
+        [SpParam(Ignored = true)]
+        public bool IsNormalMode { get; set; }
+
         public DateTime FromDate { get; set; }
 
         public DateTime ToDate { get; set; }
@@ -41,17 +44,8 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
         /// <returns>The store procedure name.</returns>
         public override string GetSettingKey()
         {
-            DateTime movebetsDay = ReportService.BalanceUp.MoveBetsDay;
-            if (FromDate <= movebetsDay && ToDate <= movebetsDay)
-            {
-                return "WinLoss_TreeWinLoss_GetDataByProduct_WH";
-            }
-            else if (FromDate > movebetsDay && ToDate > movebetsDay)
-            {
-                return "WinLoss_TreeWinLoss_GetDataByProduct";
-            }
-
-            return string.Empty;
+            var storeProcedureSuffix = IsNormalMode ? string.Empty : ReportService.WarehouseSPSuffix;
+            return "WinLoss_TreeWinLoss_GetDataByProduct" + storeProcedureSuffix;
         }
     }
 }

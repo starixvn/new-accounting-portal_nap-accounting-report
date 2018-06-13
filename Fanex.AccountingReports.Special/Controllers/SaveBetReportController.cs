@@ -4,6 +4,7 @@ namespace Fanex.AccountingReports.Special.Controllers
     using System.IO;
     using System.Net;
     using System.Web.Mvc;
+    using Core.Web;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Services.Impl;

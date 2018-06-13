@@ -252,4 +252,7 @@
   <data name="TreeWinLoss_VirtualRate_SheetName" xml:space="preserve">
     <value>VirtualRate {0}</value>
   </data>
+  <data name="WinlossVariance" xml:space="preserve">
+    <value>WinLoss Variance</value>
+  </data>
 </root>

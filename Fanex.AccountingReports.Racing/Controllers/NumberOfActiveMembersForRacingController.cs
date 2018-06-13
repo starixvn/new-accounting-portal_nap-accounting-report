@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Racing.Controllers
 {
     using System.Web.Mvc;
+    using AccountingReports.Core.Web;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web.Controllers;

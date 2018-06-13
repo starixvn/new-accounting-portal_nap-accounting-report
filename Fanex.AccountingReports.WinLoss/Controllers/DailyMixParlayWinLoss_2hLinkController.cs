@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.WinLoss.Controllers
 {
     using System.Web.Mvc;
+    using Core.Web;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.WinLoss.Criteria.DailyMixParlayWinLoss;

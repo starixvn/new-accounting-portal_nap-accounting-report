@@ -2,6 +2,7 @@ namespace Fanex.AccountingReports.Main.Controllers
 {
     using System.IO;
     using System.Web.Mvc;
+    using Core.Web;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Main.Criteria.TraderPerformance;
@@ -18,10 +19,10 @@ namespace Fanex.AccountingReports.Main.Controllers
     /// </summary>
     public class TraderPerformanceSoccerController : BaseController
     {
-        private readonly ITraderPerformanceSoccerService reportService;        
+        private readonly ITraderPerformanceSoccerService reportService;
 
         public TraderPerformanceSoccerController()
-            {
+        {
             this.reportService = new TraderPerformanceSoccerService();
         }
 

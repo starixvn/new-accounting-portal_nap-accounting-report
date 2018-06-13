@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Gaming.Controllers
 {
     using System.Web.Mvc;
+    using AccountingReports.Core.Web;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByCurrency;
@@ -8,9 +9,6 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NumberGameWinLossByCurrencyController : BaseController
     {
         private readonly INumberGameWinLossByCurrencyService _reportService;

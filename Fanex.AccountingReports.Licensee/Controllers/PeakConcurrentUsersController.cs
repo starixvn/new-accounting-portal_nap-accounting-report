@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Licensee.Controllers
 {
     using System.Web.Mvc;
+    using AccountingReports.Core.Web;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Licensee.Criteria.PeakConcurrentUser;
     using Fanex.AccountingReports.Licensee.Models.PeakConcurrentUser;

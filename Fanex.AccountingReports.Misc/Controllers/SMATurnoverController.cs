@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Misc.Controllers
 {
     using System.Web.Mvc;
+    using Core.Web;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Misc.Criteria.SMATurnover;
@@ -17,7 +18,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
         private ISMATurnoverService _smasTurnOverService;
 
         public SMATurnoverController()
-            {
+        {
             _smasTurnOverService = new SMATurnoverService();
         }
 

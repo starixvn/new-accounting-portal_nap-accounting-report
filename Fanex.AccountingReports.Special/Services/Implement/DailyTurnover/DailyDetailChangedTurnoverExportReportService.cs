@@ -50,7 +50,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
 
         private ExcelUtil.CustomStyleCell _normalDifferenceRowStyle;
 
-        private string _dailyTurnoverDetailSessionKey = string.Empty;
+        private readonly string _dailyTurnoverDetailSessionKey;
 
         public DailyDetailChangedTurnoverExportReportService()
         {
@@ -127,7 +127,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
 
                 if (report == null)
                 {
-                    report = GetDetailReportFromSession(fromDate, report);
+                    report = GetDetailReportFromSession(fromDate);
                 }
 
                 if (report != null)
@@ -192,14 +192,12 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
         /// <param name="fromDate">The from date.</param>
         /// <param name="report">The report.</param>
         /// <returns>The list DailyDetailChangedTurnover.</returns>
-        private List<DailyDetailChangedTurnover> GetDetailReportFromSession(
-            string fromDate,
-            List<DailyDetailChangedTurnover> report)
+        private List<DailyDetailChangedTurnover> GetDetailReportFromSession(string fromDate)
         {
             GetDailyTurnoverChangedDetailCriteria criteria =
                 new GetDailyTurnoverChangedDetailCriteria();
             criteria.FromDate = DateTime.Parse(fromDate);
-            report = this._detailReportService.GetDetailReport(criteria);
+            var report = this._detailReportService.GetDetailReport(criteria);
 
             SessionManager.Set<List<DailyDetailChangedTurnover>>(
                             this._dailyTurnoverDetailSessionKey,
@@ -241,7 +239,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
 
             worksheet.AddMergedRegion(new CellRangeAddress(currentRow, currentRow, currentColumn, currentColumn + 5));
             currentColumn = 0;
-            
+
             currentRow++;
             row = worksheet.GetRow(currentRow) ?? worksheet.CreateRow(currentRow);
             ExcelUtil.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Match, headerStyle);
@@ -271,13 +269,13 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
                 var currentColumn = 0;
                 IRow row = worksheet.GetRow(currentRow) ?? worksheet.CreateRow(currentRow);
                 ExcelUtil.RenderCell(
-                    ref worksheet, 
-                    ref row, 
-                    currentRow, 
-                    ref currentColumn, 
-                    currentRow + 3, 
-                    currentColumn, 
-                    eventDetail.Match, 
+                    ref worksheet,
+                    ref row,
+                    currentRow,
+                    ref currentColumn,
+                    currentRow + 3,
+                    currentColumn,
+                    eventDetail.Match,
                     this._normalOddRowStyle.TextStyle);
 
                 this.RenderTurnover(
@@ -525,18 +523,18 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
             switch (cssClass)
             {
                 case HeaderRowClass:
-                    CellStyleHeaderRow(ref styleCell.TextStyle, palette, font);
+                    CellStyleHeaderRow(styleCell, palette, font);
                     break;
 
                 case CurrencyOddRowClass:
                     short cellColor = HSSFColor.White.Index;
-                    CellStyleCurrencyRow(ref styleCell.TextStyle, palette, font, cellColor);
+                    CellStyleCurrencyRow(styleCell, font, cellColor);
                     break;
 
                 case CurrencyEvenRowClass:
                     palette.SetColorAtIndex(HSSFColor.Tan.Index, (byte)235, (byte)241, (byte)222);
                     cellColor = HSSFColor.Tan.Index;
-                    CellStyleCurrencyRow(ref styleCell.TextStyle, palette, font, cellColor);
+                    CellStyleCurrencyRow(styleCell, font, cellColor);
                     break;
 
                 case NormalOddRowClass:
@@ -564,7 +562,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
         /// <param name="textStyle">The text style.</param>
         /// <param name="palette">The palette.</param>
         /// <param name="font">The font setting.</param>
-        private void CellStyleHeaderRow(ref ICellStyle textStyle, HSSFPalette palette, IFont font)
+        private static void CellStyleHeaderRow(ExcelUtil.CustomStyleCell customStyleCell, HSSFPalette palette, IFont font)
         {
             palette.SetColorAtIndex(HSSFColor.Pink.Index, (byte)60, (byte)94, (byte)165);
             font.Boldweight = (short)FontBoldWeight.Bold;
@@ -572,12 +570,12 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
             font.FontHeightInPoints = SpecialConstants.FontSize;
             font.FontName = SpecialConstants.FontName;
 
-            textStyle.FillForegroundColor = HSSFColor.Pink.Index;
-            textStyle.FillPattern = FillPattern.SolidForeground;
-            textStyle.Alignment = HorizontalAlignment.Center;
-            textStyle.VerticalAlignment = VerticalAlignment.Center;
-            textStyle.SetFont(font);
-            textStyle = ExcelUtil.SetBorderToCell(textStyle);
+            customStyleCell.TextStyle.FillForegroundColor = HSSFColor.Pink.Index;
+            customStyleCell.TextStyle.FillPattern = FillPattern.SolidForeground;
+            customStyleCell.TextStyle.Alignment = HorizontalAlignment.Center;
+            customStyleCell.TextStyle.VerticalAlignment = VerticalAlignment.Center;
+            customStyleCell.TextStyle.SetFont(font);
+            customStyleCell.TextStyle = ExcelUtil.SetBorderToCell(customStyleCell.TextStyle);
         }
 
         /// <summary>
@@ -587,17 +585,17 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
         /// <param name="palette">The palette.</param>
         /// <param name="font">The font setting.</param>
         /// <param name="cellColor">The cell color.</param>
-        private void CellStyleCurrencyRow(ref ICellStyle textStyle, HSSFPalette palette, IFont font, short cellColor)
+        private static void CellStyleCurrencyRow(ExcelUtil.CustomStyleCell customStyleCell, IFont font, short cellColor)
         {
             font.Boldweight = (short)FontBoldWeight.Bold;
             font.FontHeightInPoints = SpecialConstants.FontSize;
             font.FontName = SpecialConstants.FontName;
 
-            textStyle.FillForegroundColor = cellColor;
-            textStyle.FillPattern = FillPattern.SolidForeground;
-            textStyle.Alignment = HorizontalAlignment.Left;
-            textStyle.SetFont(font);
-            textStyle = ExcelUtil.SetBorderToCell(textStyle);
+            customStyleCell.TextStyle.FillForegroundColor = cellColor;
+            customStyleCell.TextStyle.FillPattern = FillPattern.SolidForeground;
+            customStyleCell.TextStyle.Alignment = HorizontalAlignment.Left;
+            customStyleCell.TextStyle.SetFont(font);
+            customStyleCell.TextStyle = ExcelUtil.SetBorderToCell(customStyleCell.TextStyle);
         }
 
         /// <summary>

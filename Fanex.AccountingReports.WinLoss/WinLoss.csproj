@@ -199,6 +199,7 @@
     <Compile Include="Criteria\TreeWinLoss\GetTreeWinLossByLevelCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetTreeWinLossByProductCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetTreeWinLossBySuperCriteria.cs" />
+    <Compile Include="Criteria\TreeWinLoss\GetAllVirtualRateCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetVirtualRateCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetVirtualRateHistoryCriteria.cs" />
     <Compile Include="GlobalSuppressions.cs" />

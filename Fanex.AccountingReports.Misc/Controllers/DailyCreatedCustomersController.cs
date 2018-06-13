@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Misc.Controllers
 {
     using System.Web.Mvc;
+    using Core.Web;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Misc.Criteria.DailyCreatedCustomers;
@@ -9,9 +10,6 @@ namespace Fanex.AccountingReports.Misc.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class DailyCreatedCustomersController : BaseController
     {
         private readonly IDailyCreatedCustomersService _reportService;

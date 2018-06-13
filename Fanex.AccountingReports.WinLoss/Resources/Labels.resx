@@ -1078,4 +1078,28 @@
   <data name="_1st_Moneyline" xml:space="preserve">
     <value>1st Moneyline</value>
   </data>
+  <data name="ExtraPT" xml:space="preserve">
+    <value>ExtraPT</value>
+  </data>
+  <data name="RealIncome" xml:space="preserve">
+    <value>Real Income</value>
+  </data>
+  <data name="RealTurnover" xml:space="preserve">
+    <value>Real Turnover</value>
+  </data>
+  <data name="RealWinLoss" xml:space="preserve">
+    <value>Real WinLoss</value>
+  </data>
+  <data name="VirtualWinLoss" xml:space="preserve">
+    <value>Virtual WinLoss</value>
+  </data>
+  <data name="VirtualMargin" xml:space="preserve">
+    <value>Virtual Margin</value>
+  </data>
+  <data name="RealMargin" xml:space="preserve">
+    <value>Real Margin</value>
+  </data>
+  <data name="GrossWinLoss" xml:space="preserve">
+    <value>Gross WinLoss</value>
+  </data>
 </root>
