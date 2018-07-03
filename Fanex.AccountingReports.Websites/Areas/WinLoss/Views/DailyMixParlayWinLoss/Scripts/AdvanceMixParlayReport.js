@@ -94,12 +94,12 @@ AdvanceMixParlayReport.prototype.RenderReport = function (report) {
                     }
 
                     columns.push({ Name: "ColBetType", Value: info.Name });
-                    columns.push({ Name: "ColWinLoss", Value: mixParlayPopupManager.FormatNumberCell(info.WinLoss_Str, true, false, false) });
-                    columns.push({ Name: "ColPosition", Value: info.Position_Str });
+                    columns.push({ Name: "ColWinLoss", Value: mixParlayPopupManager.FormatNumberCell(info.MemberWinLoss_Str, true, false, false) });
+                    columns.push({ Name: "ColPosition", Value: info.SMAWinLoss_Str });
                     columns.push({ Name: "ColExtraPT", Value: info.ExtraPT_Str });
                     columns.push({ Name: "ColComm", Value: info.Commission_Str });
-                    columns.push({ Name: "ColLineTotal", Value: mixParlayPopupManager.FormatNumberCell(info.LineTotal_Str, true, false, false) });
-                    columns.push({ Name: "ColTurnover", Value: info.Turnover_Str });
+                    columns.push({ Name: "ColLineTotal", Value: mixParlayPopupManager.FormatNumberCell(info.RealIncome_Str, true, false, false) });
+                    columns.push({ Name: "ColTurnover", Value: info.RealTurnover_Str });
                     columns.push({ Name: "ColMargin", Value: mixParlayPopupManager.FormatNumberCell(info.Margin_Str, true, false, true) });
                     bodyData.push({
                         Columns: columns
@@ -110,12 +110,12 @@ AdvanceMixParlayReport.prototype.RenderReport = function (report) {
                 bodyData.push({
                     CssClass: "betTypeTotal",
                     Columns: [{ Name: "ColBetType", Value: info.Name, CssClass: "align-center" },
-                    { Name: "ColWinLoss", Value: mixParlayPopupManager.FormatNumberCell(info.WinLoss_Str, true, false, false) },
-                    { Name: "ColPosition", Value: info.Position_Str },
+                    { Name: "ColWinLoss", Value: mixParlayPopupManager.FormatNumberCell(info.MemberWinLoss_Str, true, false, false) },
+                    { Name: "ColPosition", Value: info.SMAWinLoss_Str },
                     { Name: "ColExtraPT", Value: info.ExtraPT_Str },
                     { Name: "ColComm", Value: info.Commission_Str },
-                    { Name: "ColLineTotal", Value: mixParlayPopupManager.FormatNumberCell(info.LineTotal_Str, true, false, false) },
-                    { Name: "ColTurnover", Value: info.Turnover_Str },
+                    { Name: "ColLineTotal", Value: mixParlayPopupManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
+                    { Name: "ColTurnover", Value: info.RealTurnover_Str },
                     { Name: "ColMargin", Value: mixParlayPopupManager.FormatNumberCell(info.Margin_Str, true, false, true)}]
                 });
             }
@@ -125,12 +125,12 @@ AdvanceMixParlayReport.prototype.RenderReport = function (report) {
                 CssClass: "subTotal",
                 Columns: [{ Name: "ColSportType", Value: "" },
                     { Name: "ColBetType", Value: info.Name, CssClass: "align-center" },
-                    { Name: "ColWinLoss", Value: mixParlayPopupManager.FormatNumberCell(info.WinLoss_Str, true, false, false) },
-                    { Name: "ColPosition", Value: info.Position_Str },
+                    { Name: "ColWinLoss", Value: mixParlayPopupManager.FormatNumberCell(info.MemberWinLoss_Str, true, false, false) },
+                    { Name: "ColPosition", Value: info.SMAWinLoss_Str },
                     { Name: "ColExtraPT", Value: info.ExtraPT_Str },
                     { Name: "ColComm", Value: info.Commission_Str },
-                    { Name: "ColLineTotal", Value: mixParlayPopupManager.FormatNumberCell(info.LineTotal_Str, true, false, false) },
-                    { Name: "ColTurnover", Value: info.Turnover_Str },
+                    { Name: "ColLineTotal", Value: mixParlayPopupManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
+                    { Name: "ColTurnover", Value: info.RealTurnover_Str },
                     { Name: "ColMargin", Value: mixParlayPopupManager.FormatNumberCell(info.Margin_Str, true, false, true)}]
             });
         }
@@ -138,12 +138,12 @@ AdvanceMixParlayReport.prototype.RenderReport = function (report) {
         info = report.GrandTotal;
         footerData.push({
             Columns: [{ Name: "ColLiveType", Value: info.Name, MergeColNumber: 3 },
-                    { Name: "ColWinLoss", Value: mixParlayPopupManager.FormatNumberCell(info.WinLoss_Str, true, false, false) },
-                    { Name: "ColPosition", Value: info.Position_Str },
+                    { Name: "ColWinLoss", Value: mixParlayPopupManager.FormatNumberCell(info.MemberWinLoss_Str, true, false, false) },
+                    { Name: "ColPosition", Value: info.SMAWinLoss_Str },
                     { Name: "ColExtraPT", Value: info.ExtraPT_Str },
                     { Name: "ColComm", Value: info.Commission_Str },
-                    { Name: "ColLineTotal", Value: mixParlayPopupManager.FormatNumberCell(info.LineTotal_Str, true, false, false), TdClass: "colLineTotal" },
-                    { Name: "ColTurnover", Value: info.Turnover_Str },
+                    { Name: "ColLineTotal", Value: mixParlayPopupManager.FormatNumberCell(info.RealIncome_Str, true, false, false), TdClass: "colLineTotal" },
+                    { Name: "ColTurnover", Value: info.RealTurnover_Str },
                     { Name: "ColMargin", Value: mixParlayPopupManager.FormatNumberCell(info.Margin_Str, true, false, true)}]
         });
     }

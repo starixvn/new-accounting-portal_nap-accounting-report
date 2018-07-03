@@ -21,19 +21,19 @@ namespace Fanex.AccountingReports.WinLoss.Models.DailyMixParlayWinLoss
         public decimal MemberTurnover { get; set; }
 
         [ScriptIgnore]
-        public decimal WinLoss { get; set; }
+        public decimal MemberWinLoss { get; set; }
 
         [ScriptIgnore]
-        public decimal Position { get; set; }
+        public decimal SMAWinLoss { get; set; }
 
         [ScriptIgnore]
         public decimal Commission { get; set; }
 
         [ScriptIgnore]
-        public decimal LineTotal { get; set; }
+        public decimal RealIncome { get; set; }
 
         [ScriptIgnore]
-        public decimal Turnover { get; set; }
+        public decimal RealTurnover { get; set; }
 
         [ScriptIgnore]
         public decimal Margin { get; set; }
@@ -50,15 +50,15 @@ namespace Fanex.AccountingReports.WinLoss.Models.DailyMixParlayWinLoss
 
         public string Commission_Str { get; set; }
 
-        public string LineTotal_Str { get; set; }
+        public string RealIncome_Str { get; set; }
 
-        public string WinLoss_Str { get; set; }
+        public string MemberWinLoss_Str { get; set; }
 
-        public string Position_Str { get; set; }
+        public string SMAWinLoss_Str { get; set; }
 
         public string MemberTurnover_Str { get; set; }
 
-        public string Turnover_Str { get; set; }
+        public string RealTurnover_Str { get; set; }
 
         public string BetCount_Str { get; set; }
 
@@ -83,11 +83,11 @@ namespace Fanex.AccountingReports.WinLoss.Models.DailyMixParlayWinLoss
 
             this.BetCount += winLoss.BetCount;
             this.MemberTurnover += winLoss.MemberTurnover;
-            this.WinLoss += winLoss.WinLoss;
-            this.Position += winLoss.Position;
+            this.MemberWinLoss += winLoss.MemberWinLoss;
+            this.SMAWinLoss += winLoss.SMAWinLoss;
             this.Commission += winLoss.Commission;
-            this.LineTotal += winLoss.LineTotal;
-            this.Turnover += winLoss.Turnover;
+            this.RealIncome += winLoss.RealIncome;
+            this.RealTurnover += winLoss.RealTurnover;
             this.ExtraPT += winLoss.ExtraPT;
         }
     }
