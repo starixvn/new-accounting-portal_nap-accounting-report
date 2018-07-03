@@ -183,8 +183,10 @@ CombinationWinLoss_HistoryReport.prototype.RenderReport = function (report) {
                 { HeaderText: "Type", Name: "ColType", MergeRowNumber: 2 },
                 { HeaderText: "Bet Type", Name: "ColBetType", MergeRowNumber: 2 },
                 { HeaderText: viewResources.Member, Name: "ColWinLoss", MergeColNumber: 3 },
-                { HeaderText: viewResources.Agency, Name: "ColPosition", MergeColNumber: 2 },
-                { HeaderText: viewResources.Company, Name: "ColLineTotal", MergeColNumber: 3}]
+                { HeaderText: viewResources.SMA_Win_Loss, Name: "ColPosition", MergeRowNumber: 2 },
+                { HeaderText: "ExtraPT", Name: "ColExtraPT", MergeRowNumber: 2 },
+                { HeaderText: "Commission", Name: "ColComm", MergeRowNumber: 2 },
+                { HeaderText: viewResources.House, Name: "ColLineTotal", MergeColNumber: 3}]
         }],
         columns: [{ HeaderText: "Combinations", Width: 140, Name: "ColCombination", HeaderAlign: "center", CellAlign: "center" },
                       { HeaderText: "Type", Width: 140, Name: "ColType", HeaderAlign: "center", CellAlign: "right" },
@@ -193,6 +195,7 @@ CombinationWinLoss_HistoryReport.prototype.RenderReport = function (report) {
                       { HeaderText: "Turnover", Width: 120, Name: "ColMemberTurnover", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Bet Count", Width: 120, Name: "ColBetCount", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Position", Width: 100, Name: "ColPosition", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "Extra PT", Width: 120, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Comm", Width: 100, Name: "ColComm", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Line Total", Width: 120, Name: "ColLineTotal", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right" },

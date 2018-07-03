@@ -38,6 +38,9 @@ namespace Fanex.AccountingReports.WinLoss.Models.DailyMixParlayWinLoss
         [ScriptIgnore]
         public decimal Margin { get; set; }
 
+        [ScriptIgnore]
+        public decimal ExtraPT { get; set; }
+
         public List<WinLossInfo> ChildsInfo { get; set; }
 
         public WinLossInfo GrandTotal { get; set; }
@@ -61,6 +64,8 @@ namespace Fanex.AccountingReports.WinLoss.Models.DailyMixParlayWinLoss
 
         public string Margin_Str { get; set; }
 
+        public string ExtraPT_Str { get; set; }
+
         public int TotalRowDetail { get; set; }
 
         #endregion FieldToDisplay
@@ -83,6 +88,7 @@ namespace Fanex.AccountingReports.WinLoss.Models.DailyMixParlayWinLoss
             this.Commission += winLoss.Commission;
             this.LineTotal += winLoss.LineTotal;
             this.Turnover += winLoss.Turnover;
+            this.ExtraPT += winLoss.ExtraPT;
         }
     }
 }

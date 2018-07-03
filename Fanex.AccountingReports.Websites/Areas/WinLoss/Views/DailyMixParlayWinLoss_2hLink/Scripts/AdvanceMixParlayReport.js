@@ -96,6 +96,7 @@ AdvanceMixParlayReport.prototype.RenderReport = function (report) {
                     columns.push({ Name: "ColBetType", Value: info.Name });
                     columns.push({ Name: "ColWinLoss", Value: mixParlayPopupManager.FormatNumberCell(info.WinLoss_Str, true, false, false) });
                     columns.push({ Name: "ColPosition", Value: info.Position_Str });
+                    columns.push({ Name: "ColExtraPT", Value: info.ExtraPT_Str });
                     columns.push({ Name: "ColComm", Value: info.Commission_Str });
                     columns.push({ Name: "ColLineTotal", Value: mixParlayPopupManager.FormatNumberCell(info.LineTotal_Str, true, false, false) });
                     columns.push({ Name: "ColTurnover", Value: info.Turnover_Str });
@@ -111,6 +112,7 @@ AdvanceMixParlayReport.prototype.RenderReport = function (report) {
                     Columns: [{ Name: "ColBetType", Value: info.Name, CssClass: "align-center" },
                     { Name: "ColWinLoss", Value: mixParlayPopupManager.FormatNumberCell(info.WinLoss_Str, true, false, false) },
                     { Name: "ColPosition", Value: info.Position_Str },
+                    { Name: "ColExtraPT", Value: info.ExtraPT_Str },
                     { Name: "ColComm", Value: info.Commission_Str },
                     { Name: "ColLineTotal", Value: mixParlayPopupManager.FormatNumberCell(info.LineTotal_Str, true, false, false) },
                     { Name: "ColTurnover", Value: info.Turnover_Str },
@@ -125,6 +127,7 @@ AdvanceMixParlayReport.prototype.RenderReport = function (report) {
                     { Name: "ColBetType", Value: info.Name, CssClass: "align-center" },
                     { Name: "ColWinLoss", Value: mixParlayPopupManager.FormatNumberCell(info.WinLoss_Str, true, false, false) },
                     { Name: "ColPosition", Value: info.Position_Str },
+                    { Name: "ColExtraPT", Value: info.ExtraPT_Str },
                     { Name: "ColComm", Value: info.Commission_Str },
                     { Name: "ColLineTotal", Value: mixParlayPopupManager.FormatNumberCell(info.LineTotal_Str, true, false, false) },
                     { Name: "ColTurnover", Value: info.Turnover_Str },
@@ -137,6 +140,7 @@ AdvanceMixParlayReport.prototype.RenderReport = function (report) {
             Columns: [{ Name: "ColLiveType", Value: info.Name, MergeColNumber: 3 },
                     { Name: "ColWinLoss", Value: mixParlayPopupManager.FormatNumberCell(info.WinLoss_Str, true, false, false) },
                     { Name: "ColPosition", Value: info.Position_Str },
+                    { Name: "ColExtraPT", Value: info.ExtraPT_Str },
                     { Name: "ColComm", Value: info.Commission_Str },
                     { Name: "ColLineTotal", Value: mixParlayPopupManager.FormatNumberCell(info.LineTotal_Str, true, false, false), TdClass: "colLineTotal" },
                     { Name: "ColTurnover", Value: info.Turnover_Str },
@@ -149,11 +153,12 @@ AdvanceMixParlayReport.prototype.RenderReport = function (report) {
         columns: [{ HeaderText: "", Width: 140, Name: "ColLiveType", HeaderAlign: "center", CellAlign: "center" },
                       { HeaderText: "Sport Type", Width: 140, Name: "ColSportType", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Bet Type", Width: 120, Name: "ColBetType", HeaderAlign: "center", CellAlign: "left" },
-                      { HeaderText: "Win Loss", Width: 120, Name: "ColWinLoss", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Position", Width: 100, Name: "ColPosition", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Comm", Width: 100, Name: "ColComm", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Line Total", Width: 120, Name: "ColLineTotal", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "Member Win Loss", Width: 120, Name: "ColWinLoss", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "SMA Win Loss", Width: 100, Name: "ColPosition", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "Extra PT", Width: 120, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "Commission", Width: 100, Name: "ColComm", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "Real Income", Width: 120, Name: "ColLineTotal", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "Real Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Margin", Width: 100, Name: "ColMargin", HeaderAlign: "center", CellAlign: "right"}],
         showTitle: true,
         showFooter: true,

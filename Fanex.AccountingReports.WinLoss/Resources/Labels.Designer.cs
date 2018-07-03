@@ -1150,6 +1150,15 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to House.
+        /// </summary>
+        public static string House {
+            get {
+                return ResourceManager.GetString("House", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to House Turnover.
         /// </summary>
         public static string House_Turnover {
@@ -2290,6 +2299,15 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         public static string Site {
             get {
                 return ResourceManager.GetString("Site", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SMA.
+        /// </summary>
+        public static string SMA {
+            get {
+                return ResourceManager.GetString("SMA", resourceCulture);
             }
         }
         

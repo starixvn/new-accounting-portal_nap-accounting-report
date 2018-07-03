@@ -42,7 +42,8 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                         Commission = row["Commission"],
                         LineTotal = row["LineTotal"],
                         Turnover = row["Turnover"],
-                        Combinations = row["Combinations"]
+                        Combinations = row["Combinations"],
+                        ExtraPT = row["ExtraPT"]
                     });
                 }
             }
