@@ -154,6 +154,7 @@ CombinationWinLoss.prototype.RenderReport = function (report) {
                     columns.push({ Name: "ColMemberTurnover", Value: info.MemberTurnover_Str });
                     columns.push({ Name: "ColBetCount", Value: info.BetCount_Str });
                     columns.push({ Name: "ColPosition", Value: info.SMAWinLoss_Str });
+                    columns.push({ Name: "ColExtraPT", Value: info.ExtraPT_Str });
                     columns.push({ Name: "ColComm", Value: info.Commission_Str });
                     columns.push({ Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) });
                     columns.push({ Name: "ColTurnover", Value: info.RealTurnover_Str });
@@ -171,6 +172,7 @@ CombinationWinLoss.prototype.RenderReport = function (report) {
                     { Name: "ColMemberTurnover", Value: info.MemberTurnover_Str },
                     { Name: "ColBetCount", Value: info.BetCount_Str },
                     { Name: "ColPosition", Value: info.SMAWinLoss_Str },
+                    { Name: "ColExtraPT", Value: info.ExtraPT_Str },
                     { Name: "ColComm", Value: info.Commission_Str },
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
@@ -187,6 +189,7 @@ CombinationWinLoss.prototype.RenderReport = function (report) {
                     { Name: "ColMemberTurnover", Value: info.MemberTurnover_Str },
                     { Name: "ColBetCount", Value: info.BetCount_Str },
                     { Name: "ColPosition", Value: info.SMAWinLoss_Str },
+                    { Name: "ColExtraPT", Value: info.ExtraPT_Str },
                     { Name: "ColComm", Value: info.Commission_Str },
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
@@ -201,6 +204,7 @@ CombinationWinLoss.prototype.RenderReport = function (report) {
                     { Name: "ColMemberTurnover", Value: info.MemberTurnover_Str },
                     { Name: "ColBetCount", Value: info.BetCount_Str },
                     { Name: "ColPosition", Value: info.SMAWinLoss_Str },
+                    { Name: "ColExtraPT", Value: info.ExtraPT_Str },
                     { Name: "ColComm", Value: info.Commission_Str },
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false), TdClass: "colLineTotal" },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
@@ -218,7 +222,7 @@ CombinationWinLoss.prototype.RenderReport = function (report) {
                 { HeaderText: viewResources.SMA_Win_Loss, Name: "ColPosition", MergeRowNumber: 2 },
                 { HeaderText: "ExtraPT", Name: "ColExtraPT", MergeRowNumber: 2 },
                 { HeaderText: "Commission", Name: "ColComm", MergeRowNumber: 2 },
-                { HeaderText: viewResources.Company, Name: "ColLineTotal", MergeColNumber: 3}]
+                { HeaderText: viewResources.House, Name: "ColLineTotal", MergeColNumber: 3}]
         }],
         columns: [{ HeaderText: "Combination", Width: 140, Name: "ColCombination", HeaderAlign: "center", CellAlign: "center" },
                       { HeaderText: "Type", Width: 140, Name: "ColType", HeaderAlign: "center", CellAlign: "right" },

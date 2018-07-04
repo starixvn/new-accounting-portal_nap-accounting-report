@@ -209,8 +209,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                                 {
                                     Id = criteria.Bettype,
                                     Status = Converter.ToString2(data.status),
-                                    MemberWinLoss = Converter.ToDecimal(data.MemberWinloss),
-                                    SMAWinLoss = Converter.ToDecimal(data.SMAWinloss),
+                                    MemberWinLoss = Converter.ToDecimal(data.MemberWinLoss),
+                                    SMAWinLoss = Converter.ToDecimal(data.SMAWinLoss),
                                     Commission = Converter.ToDecimal(data.Commission),
                                     RealIncome = Converter.ToDecimal(data.RealIncome),
                                     RealTurnover = Converter.ToDecimal(data.RealTurnover),
@@ -648,7 +648,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
                             currentCell.Value = info.ExtraPT;
-                            currentCell.Style = twoDecimalNumberStyle;
+                            currentCell.Style = totalRowTwoDecimalNumberStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];

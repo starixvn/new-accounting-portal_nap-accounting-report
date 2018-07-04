@@ -190,7 +190,7 @@ CombinationWinLoss_HistoryReport.prototype.RenderReport = function (report) {
                 { HeaderText: viewResources.SMA_Win_Loss, Name: "ColPosition", MergeRowNumber: 2 },
                 { HeaderText: "ExtraPT", Name: "ColExtraPT", MergeRowNumber: 2 },
                 { HeaderText: "Commission", Name: "ColComm", MergeRowNumber: 2 },
-                { HeaderText: viewResources.Company, Name: "ColLineTotal", MergeColNumber: 3}]
+                { HeaderText: viewResources.House, Name: "ColLineTotal", MergeColNumber: 3 }]
         }],
         columns: [{ HeaderText: "Combination", Width: 140, Name: "ColCombination", HeaderAlign: "center", CellAlign: "center" },
                       { HeaderText: "Type", Width: 140, Name: "ColType", HeaderAlign: "center", CellAlign: "right" },
