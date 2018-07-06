@@ -67,7 +67,8 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                     ReferenceNumber = Convert.ToInt64(duplicateTicket.refno),
                     BetTime = betTime.ToLongMMMddFormatedDate(),
                     TimeDifference = timeDifferenceTicket,
-                    GroupNo = groupNo
+                    GroupNo = groupNo,
+                    TransDesc = duplicateTicket.transdesc
                 };
 
                 if (ticketIndex == 0)
