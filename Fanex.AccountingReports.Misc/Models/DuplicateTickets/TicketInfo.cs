@@ -17,5 +17,7 @@ namespace Fanex.AccountingReports.Misc.Models.DuplicateTickets
         public double TimeDifference { get; set; }
 
         public int GroupNo { get; set; }
+
+        public string TransDesc { get; set; }
     }
 }

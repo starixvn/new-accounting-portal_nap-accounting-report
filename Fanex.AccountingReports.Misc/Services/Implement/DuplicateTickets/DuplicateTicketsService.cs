@@ -149,6 +149,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                 worksheet.SetColumnWidth(i, 170 * NpoiExcelExtensions.FontWidth);
             }
 
+            worksheet.SetColumnWidth(12, 170 * 5 * NpoiExcelExtensions.FontWidth);
             worksheet.SetColumnWidth(0, 80 * NpoiExcelExtensions.FontWidth);
         }
 
@@ -168,7 +169,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                 MiscResources.DuplicateTickets_ReportTitle,
                 criteria.Date.ToShortFormatedDate());
 
-            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn + 11, reportTitle, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn + 12, reportTitle, headerStyle);
         }
 
         /// <summary>
@@ -194,6 +195,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Reference_Number, headerStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.BetTime, headerStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.TimeDifference, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, "TransDesc", headerStyle);
         }
 
         /// <summary>
@@ -235,7 +237,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                 int numberDuplicateTickets = ticketByUser.TicketInfo.Count;
                 string refNo = ticketByUser.TicketInfo.FirstOrDefault().ReferenceNumber.ToString();
                 string duplicateTicketOfUser = string.Format(MiscResources.DuplicateTicket_OfUser, refNo);
-                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn + 11, duplicateTicketOfUser, userTitle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn + 12, duplicateTicketOfUser, userTitle);
                 currentRow++;
                 row = worksheet.GetRow(currentRow) ?? worksheet.CreateRow(currentRow);
                 currentColumn = 1;
@@ -368,6 +370,16 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                             ticketInfo.TimeDifference,
                             i % 2 == 0 ? evenRowRightNumberStyle : rightNumberStyle);
                     }
+
+                    NpoiExcelExtensions.RenderCell(
+                        ref worksheet,
+                        ref row,
+                        currentRow,
+                        ref currentColumn,
+                        currentRow,
+                        currentColumn,
+                        ticketInfo.TransDesc,
+                        i % 2 == 0 ? evenRowTextStyle : textStyle);
 
                     currentRow++;
                     rowIndex++;

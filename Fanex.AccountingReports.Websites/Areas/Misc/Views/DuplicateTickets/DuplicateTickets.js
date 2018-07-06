@@ -327,6 +327,10 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
             },
             { HeaderText: "Time Diff (milisecond)", Width: 70, Name: "ColTimeDiff", HeaderAlign: "center",
                 CellAlign: "right", FormatNumber: FormatConstant.INT_NUMBER
+            },
+            {
+                HeaderText: "TransDesc", Width: 700, Name: "ColTransDesc", HeaderAlign: "center",
+                CellAlign: "left" 
             }
             ];
 
@@ -407,7 +411,8 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
                         { Name: "ColStatus", Value: currentTicketInfo.Status, TdClass: tdClass },
                         { Name: "ColRefNo", Value: currentTicketInfo.ReferenceNumber, TdClass: tdClass },
                         { Name: "ColBetTime", Value: currentTicketInfo.BetTime, TdClass: tdClass },
-                        { Name: "ColTimeDiff", Value: timeDiff, TdClass: tdClass }
+                        { Name: "ColTimeDiff", Value: timeDiff, TdClass: tdClass },
+                        { Name: "ColTransDesc", Value: currentTicketInfo.TransDesc, TdClass: tdClass }
                     );
 
                     rowIndex++;
