@@ -20,6 +20,7 @@
   <Product ProductID="22" ProductName ="Macau Games" IsNoTurnover="0" IsNoVirtual="1"/>
   <Product ProductID="23" ProductName ="NG2" IsNoTurnover="0" IsNoVirtual="1"/>
   <Product ProductID="24" ProductName ="Fishing World" IsNoTurnover="0" IsNoVirtual="1"/>
+  <Product ProductID="25" ProductName ="Cash Out" IsNoTurnover="0" IsNoVirtual="1"/>
   <Product ProductID="27" ProductName ="Virtual Sports 2" IsNoTurnover="0" IsNoVirtual="1"/>
   <Product ProductID="28" ProductName ="Lottery" IsNoTurnover="0" IsNoVirtual="1"/>
   <Product ProductID="26" ProductName ="Lucky 3" IsNoTurnover="0" IsNoVirtual="1"/>

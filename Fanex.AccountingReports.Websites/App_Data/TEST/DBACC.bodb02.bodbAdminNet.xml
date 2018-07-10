@@ -92,6 +92,7 @@
     <Setting Key="WinLoss_TreeWinLoss_GetDataByAgent" SpName="Acc_Rpt_TreeWinlostByAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="WinLoss_TreeWinLoss_GetVirtualRate" SpName="Acc_CustomerSelVirtualMultiplier" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="WinLoss_TreeWinLoss_GetAllVirtualRate" SpName="Acc_Rpt_TreeWinlostBulkGetVR" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Acc_Rpt_TreeWinlostListProduct" SpName="Acc_Rpt_TreeWinlostListProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
   <Function Name="Gaming - Number Game Win Loss">
     <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeMainReport" SpName="Acc_Rpt_NumberGame" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>

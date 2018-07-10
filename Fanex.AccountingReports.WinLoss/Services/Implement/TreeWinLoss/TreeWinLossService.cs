@@ -27,7 +27,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
     /// </summary>
     public class TreeWinLossService : ServiceBase, ITreeWinLossService
     {
-        private const string TreeWinLossProductPath = @"Web.Configuration\TreeWinLossProduct.xml";
         private readonly ITreeWinLossRepository _treeWinLossRepository;
         private readonly Dictionary<int, int> _bettype = new Dictionary<int, int>();
 
@@ -44,21 +43,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
         public List<TreeWinLossProduct> GetProduct()
         {
-            var product = new List<TreeWinLossProduct>();
-            var root = AppDomain.CurrentDomain.BaseDirectory;
-            var productFilePath = root + TreeWinLossProductPath;
-            XDocument productDocument = XDocument.Load(productFilePath);
-
-            foreach (var profileElement in productDocument.Descendants("Product").ToList())
-            {
-                product.Add(new TreeWinLossProduct()
-                {
-                    ProductId = Converter.ToInt(profileElement.Attribute("ProductID").Value),
-                    ProductName = Converter.ToString2(profileElement.Attribute("ProductName").Value)
-                });
-            }
-
-            return product;
+            var dynamicRipository = new DynamicRepository();
+            return dynamicRipository.Fetch<TreeWinLossProduct>(new GetTreeWinLossListProduct()).ToList();
         }
 
         /// <summary>
@@ -74,7 +60,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             try
             {
                 var isShowNotAvailableTurnover = IsShowAvailableTurnoverByProduct(criteria);
-                criteria.Products = GetProductParams(criteria.ProductSelection);
+                criteria.Products = criteria.ProductSelection;
 
                 var treeWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
                 treeWinLoss.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
@@ -103,7 +89,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             try
             {
                 bool isShowNotAvailableTurnover = IsShowAvailableTurnoverByLevel(criteria);
-                criteria.Products = GetProductParams(criteria.ProductSelection);
+                criteria.Products = criteria.ProductSelection;
 
                 var winLossByComm = GetTreeWinLossDateRangeByLevel(criteria);
                 winLossByComm.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
@@ -175,7 +161,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
         public TreeWinLossVirtualRate GetAllVirtualRate(TreeWinLoss report)
         {
-
             var custIdEnableVirtualRate = string.Join(",", report.ChildsInfo.Where(x => x.VirtualRate == 1).Select(x => x.Id));
             var getAllVirtualRateCriteria = new GetAllVirtualRateCriteria
             {
@@ -311,6 +296,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             IsNormalMode = criteria.IsNormalMode
                         },
                     criteria.RoleId);
+
                 case 4:
                     return GetTreeWinlossData(
                         new GetTreeWinLossBySuperCriteria
@@ -323,6 +309,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             IsNormalMode = criteria.IsNormalMode
                         },
                     criteria.RoleId);
+
                 case 3:
                     return GetTreeWinlossData(
                         new GetTreeWinLossByMasterCriteria
@@ -335,6 +322,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             IsNormalMode = criteria.IsNormalMode
                         },
                     criteria.RoleId);
+
                 case 2:
                     return GetTreeWinlossData(
                         new GetTreeWinLossByAgentCriteria
@@ -755,56 +743,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return enabledVirtualRateUserDictionary;
         }
 
-        private string GetProductParams(string productSelection)
-        {
-            XDocument productDocument = new XDocument(new XElement("ROOT"));
-            var root = AppDomain.CurrentDomain.BaseDirectory;
-            var productFilePath = root + TreeWinLossProductPath;
-            XDocument treeWinLossProductDocument = XDocument.Load(productFilePath);
-
-            var products = productSelection.Split(',');
-
-            foreach (var item in products)
-            {
-                foreach (var profileElement in treeWinLossProductDocument.Descendants("Product").ToList())
-                {
-                    if (Converter.ToInt(profileElement.Attribute("ProductID").Value) == Converter.ToInt(item))
-                    {
-                        productDocument.Root.Add(profileElement);
-                        break;
-                    }
-                }
-            }
-
-            return productDocument.ToString();
-        }
-
-        private bool IshowNotAvailableTurnover(string productSelection)
-        {
-            bool isShowNotAvailable = false;
-            List<bool> isShowTurnover = new List<bool>();
-
-            var products = productSelection.Split(',');
-            var root = AppDomain.CurrentDomain.BaseDirectory;
-            var productFilePath = root + TreeWinLossProductPath;
-            XDocument productDocument = XDocument.Load(productFilePath);
-
-            foreach (var item in products)
-            {
-                foreach (var profileElement in productDocument.Descendants("Product").ToList())
-                {
-                    if (Converter.ToInt(profileElement.Attribute("ProductID").Value) == Converter.ToInt(item))
-                    {
-                        isShowTurnover.Add(Converter.ToInt(profileElement.Attribute("IsNoTurnover").Value) == 1);
-                        break;
-                    }
-                }
-            }
-
-            isShowNotAvailable = isShowTurnover.All(x => x == true);
-            return isShowNotAvailable;
-        }
-
         private bool IsShowAvailableTurnoverByProduct(GetTreeWinLossByProductCriteria criteria)
         {
             bool isShowNotAvailableTurnover = false;
@@ -827,7 +765,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
             else
             {
-                isShowNotAvailableTurnover = IshowNotAvailableTurnover(criteria.ProductSelection);
+                isShowNotAvailableTurnover = false;
             }
 
             return isShowNotAvailableTurnover;
@@ -855,7 +793,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
             else
             {
-                isShowNotAvailableTurnover = IshowNotAvailableTurnover(criteria.ProductSelection);
+                isShowNotAvailableTurnover = false;
             }
 
             return isShowNotAvailableTurnover;
