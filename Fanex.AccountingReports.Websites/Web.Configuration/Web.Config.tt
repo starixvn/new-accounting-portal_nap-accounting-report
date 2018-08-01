@@ -104,7 +104,7 @@
     <add key="UnobtrusiveJavaScriptEnabled" value="true" />
   </appSettings>
   <system.web>
-    <compilation debug="<#= site.DebugMode #>" targetFramework="4.0" />
+    <compilation debug="<#= site.DebugMode #>" targetFramework="4.6" />
 	<customErrors mode="<#=site.ErrorMode#>" defaultRedirect="~/Views/Errors/GeneralError.htm">
       <error statusCode="404" redirect="~/Views/Errors/Error404.htm" />
       <error statusCode="500" redirect="Error" />
