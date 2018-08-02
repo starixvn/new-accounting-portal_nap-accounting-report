@@ -1,5 +1,5 @@
 using System;
-using RemotingRef;
+using Fanex.RemotingRef;
 
 namespace Special.UnitTests
 {
@@ -7,7 +7,7 @@ namespace Special.UnitTests
     {
         private static void Main(string[] args)
         {
-            var a = RefData.GetResourceDataByRefIdAndResourceId("WMBasketball", "1-2", "en", string.Empty);
+            var a = new RemotingRefService().GetResourceDataByRefIdAndResourceId("WMBasketball", "1-2", "en", string.Empty);
             Console.WriteLine(a);
             Console.ReadLine();
         }

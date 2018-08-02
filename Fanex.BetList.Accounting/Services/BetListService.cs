@@ -5,9 +5,7 @@ namespace Fanex.BetList.Accounting.Services
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using System.Text;
     using Fanex.BetList.Accounting.Constants;
-    using Fanex.BetList.Accounting.Core;
     using Fanex.BetList.Accounting.Criteria;
     using Fanex.BetList.Accounting.Extensions;
     using Fanex.BetList.Accounting.Models;
@@ -20,6 +18,7 @@ namespace Fanex.BetList.Accounting.Services
     using Fanex.Common;
     using Fanex.Data;
     using Fanex.Data.Repository;
+    using RemotingRef;
     using AccBetListCore = Fanex.BetList.Accounting.Core;
 
     public interface BetListService
@@ -87,15 +86,13 @@ namespace Fanex.BetList.Accounting.Services
 
             ITicketHelper ticketHelper = new TicketHelper();
             IList<TicketDetail> betDetails = _betListRepository.Fetch<TicketDetail>(criteria, mapTicketObjectFunction);
-            StringBuilder content = new StringBuilder();
-            DataTable commandData = new DataTable();
             string comboParlayDetail = string.Empty;
 
             if (!string.IsNullOrEmpty(handicap1))
             {
                 int hdp1 = Converter.ToInt(Math.Round(Convert.ToDouble(handicap1)));
                 int hdp2 = Converter.ToInt(Math.Round(Convert.ToDouble(handicap2)));
-                string[] comboParlay = RemotingRef.RefData.GetCombinationTypeCombo(betteam, betcheck, hdp1, hdp2, "en");
+                string[] comboParlay = new RemotingRefService().GetCombinationTypeCombo(betteam, betcheck, hdp1, hdp2, "en");
                 comboParlayDetail = GetComboParlayDetail(hdp1, comboParlay, betDetails);
             }
 
@@ -103,10 +100,8 @@ namespace Fanex.BetList.Accounting.Services
             {
                 BetListHTMLFactory factory = new BetListHTMLFactory();
                 BetListHTMLBuilder builder = factory.CreateBuilder();
-                GetCachePropertyById funcGetOddsTypeName = AccBetListCore.CacheRef.GetOddsTypeName;
 
                 ticketHelper.IsShowOddsWithChoice = true;
-                var lastTicket = betDetails.LastOrDefault();
                 var totalItem = betDetails.Count;
                 foreach (TicketDetail betDetail in betDetails)
                 {
@@ -219,8 +214,6 @@ namespace Fanex.BetList.Accounting.Services
             ITicketHelper ticketHelper = new TicketHelper();
             List<ITicketData> outputLiveCasino = new List<ITicketData>();
             IList<TicketDetail> betDetails = _betListRepository.Fetch<TicketDetail>(criteria, mapTicketObjectFunction, ref outputLiveCasino);
-            StringBuilder content = new StringBuilder();
-            BetListHelper betListHelper = new BetListHelper();
             if (betDetails != null)
             {
                 BetListHTMLFactory factory = new BetListHTMLFactory();
@@ -261,6 +254,8 @@ namespace Fanex.BetList.Accounting.Services
             {
                 BetListDetail = new List<BetListRacingToteWinLoss>()
             };
+
+            var ticketHelper = new TicketHelper();
 
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
@@ -313,8 +308,8 @@ namespace Fanex.BetList.Accounting.Services
                             VirtualRate = Converter.ToDecimal(row["virtualrate"]).ToString("0.#####"),
                             IsShowOTExRate = Converter.ToBool(row["isShowOTExRate"])
                         };
-                        betList.Choice = betList.HorseNo + " - " + Fanex.BetList.Core.TicketHelper.CacheRef.GetHorseTeamName(betList.HorseId);
-                        betList.BettypeName = Fanex.BetList.Core.TicketHelper.CacheRef.GetBettype(betList.BettypeId);
+                        betList.Choice = betList.HorseNo + " - " + ticketHelper.GetHorseTeamNameById(betList.HorseId, string.Empty);
+                        betList.BettypeName = ticketHelper.GetBetTypeNameById(betList.BettypeId);
                         if (betList.IsShowOTExRate)
                         {
                             betList.Stake += "<br/>" + "<span class='extra'>" + betList.VirtualRate + "</span><br/>" + "<span class='extra'>(" + Labels.Ex_Rate_2 + ")</span>";

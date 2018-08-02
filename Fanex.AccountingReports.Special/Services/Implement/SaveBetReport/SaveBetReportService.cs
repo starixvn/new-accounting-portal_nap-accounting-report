@@ -115,7 +115,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
                         var matchInfo = new Match()
                         {
                             MatchId = Converter.ToInt(reader["MatchID"]),
-                            MatchCode = RefData.GetBetRadarMatchCodeFormat(Converter.ToString2(reader["MatchCode"]), "en"),
+                            MatchCode = new RemotingRefService().GetBetRadarMatchCodeFormat(Converter.ToString2(reader["MatchCode"]), "en"),
                             HomeTeam = Converter.ToString2(reader["Home"]),
                             AwayTeam = Converter.ToString2(reader["Away"]),
                             EventDate = Converter.ToDateTime(reader["EventDate"]).ToShortFormatedDateWithSlash().Replace("/", "_"),

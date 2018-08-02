@@ -11,43 +11,50 @@
     /// </summary>
     public static class CacheRef
     {
+        private static RemotingRefService remotingRefService;
+
+        static CacheRef()
+        {
+            remotingRefService = new RemotingRefService();
+        }
+
         public static string GetBettype(object betTypeId)
         {
-            return RefData.GetBetTypeName(betTypeId.ToString(), LanguageTypeConstants.En);
+            return remotingRefService.GetBetTypeName(betTypeId.ToString(), LanguageTypeConstants.En);
         }
         public static string GetSportName(object sportId)
         {
-            return RefData.GetSportName(Converter.ToString2(sportId), LanguageTypeConstants.En);
+            return remotingRefService.GetSportName(Converter.ToString2(sportId), LanguageTypeConstants.En);
         }
 
         public static string GetTeamName(object teamId)
         {
-            return RefData.GetTeamName(Converter.ToString2(teamId), LanguageTypeConstants.En);
+            return remotingRefService.GetTeamName(Converter.ToString2(teamId), LanguageTypeConstants.En);
         }
 
         public static string GetLeagueName(object leagueId)
         {
-            return RefData.GetLeagueName(Converter.ToString2(leagueId), LanguageTypeConstants.En);
+            return remotingRefService.GetLeagueName(Converter.ToString2(leagueId), LanguageTypeConstants.En);
         }
 
         public static string GetHorseTeamName(object codeID)
         {
-            return RefData.GetHorseTeamName(Converter.ToString2(codeID), LanguageTypeConstants.En);
+            return remotingRefService.GetHorseTeamName(Converter.ToString2(codeID), LanguageTypeConstants.En);
         }
 
         public static string GetTeamName3rd(object teamId)
         {
-            return RefData.GetTeamName3rd(Converter.ToString2(teamId), LanguageTypeConstants.En);
+            return remotingRefService.GetTeamName3rd(Converter.ToString2(teamId), LanguageTypeConstants.En);
         }
 
         public static string GetLeagueName3rd(object leagueId)
         {
-            return RefData.GetLeagueName3rd(Converter.ToString2(leagueId), LanguageTypeConstants.En);
+            return remotingRefService.GetLeagueName3rd(Converter.ToString2(leagueId), LanguageTypeConstants.En);
         }
 
         public static string GetResourceData(string refId, string team)
         {
-            return RefData.GetResourceDataByRefIdAndResourceId(refId, team, LanguageTypeConstants.En, string.Empty);
+            return remotingRefService.GetResourceDataByRefIdAndResourceId(refId, team, LanguageTypeConstants.En, string.Empty);
         }
 
         public static Dictionary<object, string> SaveCacheRefResponse(

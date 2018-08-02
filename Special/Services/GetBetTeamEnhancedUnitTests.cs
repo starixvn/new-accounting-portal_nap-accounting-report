@@ -1,6 +1,5 @@
 using Fanex.AccountingReports.Special.Checkbet;
 using NUnit.Framework;
-using RemotingRef;
 
 namespace Fanex.AccountingReports.UnitTests.Module.Special.Services
 {
@@ -65,7 +64,6 @@ namespace Fanex.AccountingReports.UnitTests.Module.Special.Services
         {
             // Arrange
             // Initialize RefData. It always returns empty for first time
-            RefData.GetBetTypeName("1", "en");
             var service = new ContentChoiceBuilder();
             return service.GetContentBetchoiceToShowOf("Cleveland Cavaliers", "Houston Rockets", betType, betTeam, 0, 0, 0.5m);
         }
