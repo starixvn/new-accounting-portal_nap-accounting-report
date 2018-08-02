@@ -308,7 +308,7 @@ namespace Fanex.BetList.Accounting.Services
                             VirtualRate = Converter.ToDecimal(row["virtualrate"]).ToString("0.#####"),
                             IsShowOTExRate = Converter.ToBool(row["isShowOTExRate"])
                         };
-                        betList.Choice = betList.HorseNo + " - " + ticketHelper.GetHorseTeamNameById(betList.HorseId, string.Empty);
+                        betList.Choice = betList.HorseNo + " - " + ticketHelper.GetHorseTeamNameById(betList.HorseId);
                         betList.BettypeName = ticketHelper.GetBetTypeNameById(betList.BettypeId);
                         if (betList.IsShowOTExRate)
                         {
