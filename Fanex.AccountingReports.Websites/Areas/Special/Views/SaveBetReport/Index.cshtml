@@ -67,7 +67,7 @@
     <script type="text/javascript">
         var labelDate = '@Labels.Date';
         var today = '@DateTime.Today.ToShortDateString()';
-        var minDate = '1/1/2014';
+        var minDate = '@DateTime.Today.AddMonths(-3).ToShortDateString()';
         var noneSportAndLeagueMsg = '@Labels.There_are_no_sports_and_leagues';
         var newSaveBetReportDate = '@AppSettings.NewSaveBetReportDate';
     </script>
