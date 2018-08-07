@@ -1102,4 +1102,10 @@
   <data name="GrossWinLoss" xml:space="preserve">
     <value>Gross WinLoss</value>
   </data>
+  <data name="House" xml:space="preserve">
+    <value>House</value>
+  </data>
+  <data name="SMA" xml:space="preserve">
+    <value>SMA</value>
+  </data>
 </root>

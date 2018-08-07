@@ -35,14 +35,15 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                     {
                         LiveType = row["LiveType"],
                         Status = row["status"],
-                        WinLost = row["WinLost"],
-                        TurnoverP = row["TurnoverP"],
+                        MemberWinLoss = row["MemberWinLoss"],
+                        MemberTurnover = row["MemberTurnover"],
                         BetCount = row["BetCount"],
-                        Position = row["Position"],
+                        SMAWinLoss = row["SMAWinLoss"],
                         Commission = row["Commission"],
-                        LineTotal = row["LineTotal"],
-                        Turnover = row["Turnover"],
-                        Combinations = row["Combinations"]
+                        RealIncome = row["RealIncome"],
+                        RealTurnover = row["RealTurnover"],
+                        Combinations = row["Combinations"],
+                        ExtraPT = row["ExtraPT"]
                     });
                 }
             }

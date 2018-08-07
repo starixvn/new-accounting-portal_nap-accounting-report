@@ -94,17 +94,18 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                                 WinLossInfo info = new WinLossInfo
                                 {
                                     Status = Converter.ToString2(data.Status),
-                                    WinLoss = Converter.ToDecimal(data.WinLost),
-                                    MemberTurnover = Converter.ToDecimal(data.TurnoverP),
+                                    MemberWinLoss = Converter.ToDecimal(data.MemberWinLoss),
+                                    MemberTurnover = Converter.ToDecimal(data.MemberTurnover),
                                     BetCount = Converter.ToInt(data.BetCount),
-                                    Position = Converter.ToDecimal(data.Position),
+                                    SMAWinLoss = Converter.ToDecimal(data.SMAWinLoss),
                                     Commission = Converter.ToDecimal(data.Commission),
-                                    LineTotal = Converter.ToDecimal(data.LineTotal),
-                                    Turnover = Converter.ToDecimal(data.Turnover)
+                                    RealIncome = Converter.ToDecimal(data.RealIncome),
+                                    RealTurnover = Converter.ToDecimal(data.RealTurnover),
+                                    ExtraPT = Converter.ToDecimal(data.ExtraPT)
                                 };
 
                                 info.Name = string.Format(Labels.Mix_Parlay + " ({0})", info.Status);
-                                info.Margin = this.CalculateMargin(info.LineTotal, info.Turnover);
+                                info.Margin = this.CalculateMargin(info.RealIncome, info.RealTurnover);
                                 liveTypeWinLoss.GrandTotal.Add(info);
                                 info = this.FormatWinLossInfo(info);
                                 liveTypeWinLoss.ChildsInfo.Add(info);
@@ -114,24 +115,24 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                             }
 
                             liveTypeWinLoss.GrandTotal.Margin = this.CalculateMargin(
-                                liveTypeWinLoss.GrandTotal.LineTotal,
-                                liveTypeWinLoss.GrandTotal.Turnover);
+                                liveTypeWinLoss.GrandTotal.RealIncome,
+                                liveTypeWinLoss.GrandTotal.RealTurnover);
                             combinationWinLoss.GrandTotal.Add(liveTypeWinLoss.GrandTotal);
                             liveTypeWinLoss.GrandTotal = this.FormatWinLossInfo(liveTypeWinLoss.GrandTotal);
                             combinationWinLoss.ChildsInfo.Add(liveTypeWinLoss);
                         }
 
                         combinationWinLoss.GrandTotal.Margin = this.CalculateMargin(
-                            combinationWinLoss.GrandTotal.LineTotal,
-                            combinationWinLoss.GrandTotal.Turnover);
+                            combinationWinLoss.GrandTotal.RealIncome,
+                            combinationWinLoss.GrandTotal.RealTurnover);
                         report.GrandTotal.Add(combinationWinLoss.GrandTotal);
                         combinationWinLoss.GrandTotal = this.FormatWinLossInfo(combinationWinLoss.GrandTotal);
                         report.ChildsInfo.Add(combinationWinLoss);
                     }
 
                     report.GrandTotal.Margin = this.CalculateMargin(
-                        report.GrandTotal.LineTotal,
-                        report.GrandTotal.Turnover);
+                        report.GrandTotal.RealIncome,
+                        report.GrandTotal.RealTurnover);
                     report.GrandTotal = this.FormatWinLossInfo(report.GrandTotal);
                 }
 
@@ -208,15 +209,16 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                                 {
                                     Id = criteria.Bettype,
                                     Status = Converter.ToString2(data.status),
-                                    WinLoss = Converter.ToDecimal(data.WinLost),
-                                    Position = Converter.ToDecimal(data.Position),
+                                    MemberWinLoss = Converter.ToDecimal(data.MemberWinLoss),
+                                    SMAWinLoss = Converter.ToDecimal(data.SMAWinLoss),
                                     Commission = Converter.ToDecimal(data.Commission),
-                                    LineTotal = Converter.ToDecimal(data.LineTotal),
-                                    Turnover = Converter.ToDecimal(data.Turnover)
+                                    RealIncome = Converter.ToDecimal(data.RealIncome),
+                                    RealTurnover = Converter.ToDecimal(data.RealTurnover),
+                                    ExtraPT = Converter.ToDecimal(data.ExtraPT)
                                 };
 
                                 info.Name = string.Format(Labels.Mix_Parlay + " ({0})", info.Status);
-                                info.Margin = this.CalculateMargin(info.LineTotal, info.Turnover);
+                                info.Margin = this.CalculateMargin(info.RealIncome, info.RealTurnover);
                                 sportWinLoss.GrandTotal.Add(info);
                                 info = this.FormatWinLossInfo(info);
                                 sportWinLoss.ChildsInfo.Add(info);
@@ -226,24 +228,24 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                             }
 
                             sportWinLoss.GrandTotal.Margin = this.CalculateMargin(
-                               sportWinLoss.GrandTotal.LineTotal,
-                               sportWinLoss.GrandTotal.Turnover);
+                               sportWinLoss.GrandTotal.RealIncome,
+                               sportWinLoss.GrandTotal.RealTurnover);
                             liveTypeWinLoss.GrandTotal.Add(sportWinLoss.GrandTotal);
                             sportWinLoss.GrandTotal = this.FormatWinLossInfo(sportWinLoss.GrandTotal);
                             liveTypeWinLoss.ChildsInfo.Add(sportWinLoss);
                         }
 
                         liveTypeWinLoss.GrandTotal.Margin = this.CalculateMargin(
-                          liveTypeWinLoss.GrandTotal.LineTotal,
-                          liveTypeWinLoss.GrandTotal.Turnover);
+                          liveTypeWinLoss.GrandTotal.RealIncome,
+                          liveTypeWinLoss.GrandTotal.RealTurnover);
                         report.GrandTotal.Add(liveTypeWinLoss.GrandTotal);
                         liveTypeWinLoss.GrandTotal = this.FormatWinLossInfo(liveTypeWinLoss.GrandTotal);
                         report.ChildsInfo.Add(liveTypeWinLoss);
                     }
 
                     report.GrandTotal.Margin = this.CalculateMargin(
-                        report.GrandTotal.LineTotal,
-                        report.GrandTotal.Turnover);
+                        report.GrandTotal.RealIncome,
+                        report.GrandTotal.RealTurnover);
                     report.GrandTotal = this.FormatWinLossInfo(report.GrandTotal);
                 }
 
@@ -319,7 +321,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
 
                 int startRow = 0;
                 int startColumn = 0;
-                int maxColumnIndex = 10;
+                int maxColumnIndex = 11;
                 var currentRow = startRow;
 
                 var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
@@ -459,15 +461,27 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                 currentCellRange.Style = headerTextStyle;
                 currentColumn += 3;
 
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
                 currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.Agency;
+                currentCellRange.Value = Labels.SMA_Win_Loss;
                 currentCellRange.Style = headerTextStyle;
-                currentColumn += 2;
+                currentColumn++;
+
+                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Labels.ExtraPT;
+                currentCellRange.Style = headerTextStyle;
+                currentColumn++;
+
+                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Labels.Commission;
+                currentCellRange.Style = headerTextStyle;
+                currentColumn++;
 
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 2);
                 currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.Company;
+                currentCellRange.Value = Labels.House;
                 currentCellRange.Style = headerTextStyle;
                 currentColumn += 3;
                 currentRow++;
@@ -487,25 +501,15 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = Labels.Bet_Count;
                 currentCell.Style = headerTextStyle;
-                currentColumn++;
+                currentColumn += 4;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Position;
+                currentCell.Value = Labels.RealIncome;
                 currentCell.Style = headerTextStyle;
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Comm;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Line_Total;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Turnover;
+                currentCell.Value = Labels.RealTurnover;
                 currentCell.Style = headerTextStyle;
                 currentColumn++;
 
@@ -566,7 +570,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                                 currentColumn++;
 
                                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.WinLoss;
+                                currentCell.Value = info.MemberWinLoss;
                                 currentCell.Style = twoDecimalPositiveNumberStyle;
                                 currentColumn++;
 
@@ -581,7 +585,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                                 currentColumn++;
 
                                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.Position;
+                                currentCell.Value = info.SMAWinLoss;
+                                currentCell.Style = twoDecimalNumberStyle;
+                                currentColumn++;
+
+                                currentCell = workSheet.Cells[currentRow, currentColumn];
+                                currentCell.Value = info.ExtraPT;
                                 currentCell.Style = twoDecimalNumberStyle;
                                 currentColumn++;
 
@@ -591,12 +600,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                                 currentColumn++;
 
                                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.LineTotal;
+                                currentCell.Value = info.RealIncome;
                                 currentCell.Style = twoDecimalPositiveNumberStyle;
                                 currentColumn++;
 
                                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.Turnover;
+                                currentCell.Value = info.RealTurnover;
                                 currentCell.Style = twoDecimalNumberStyle;
                                 currentColumn++;
 
@@ -618,7 +627,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.WinLoss;
+                            currentCell.Value = info.MemberWinLoss;
                             currentCell.Style = totalRowPositiveTwoDecimalNumberStyle;
                             currentColumn++;
 
@@ -633,7 +642,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.Position;
+                            currentCell.Value = info.SMAWinLoss;
+                            currentCell.Style = totalRowTwoDecimalNumberStyle;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = info.ExtraPT;
                             currentCell.Style = totalRowTwoDecimalNumberStyle;
                             currentColumn++;
 
@@ -643,12 +657,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.LineTotal;
+                            currentCell.Value = info.RealIncome;
                             currentCell.Style = totalRowPositiveTwoDecimalNumberStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.Turnover;
+                            currentCell.Value = info.RealTurnover;
                             currentCell.Style = totalRowTwoDecimalNumberStyle;
                             currentColumn++;
 
@@ -674,7 +688,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.WinLoss;
+                        currentCell.Value = info.MemberWinLoss;
                         currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
                         currentColumn++;
 
@@ -689,7 +703,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Position;
+                        currentCell.Value = info.SMAWinLoss;
+                        currentCell.Style = subRowTwoDecimalNumberStyle;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+                        currentCell.Value = info.ExtraPT;
                         currentCell.Style = subRowTwoDecimalNumberStyle;
                         currentColumn++;
 
@@ -699,12 +718,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.LineTotal;
+                        currentCell.Value = info.RealIncome;
                         currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Turnover;
+                        currentCell.Value = info.RealTurnover;
                         currentCell.Style = subRowTwoDecimalNumberStyle;
                         currentColumn++;
 
@@ -727,7 +746,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                     currentColumn += 3;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.WinLoss;
+                    currentCell.Value = info.MemberWinLoss;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
                     currentColumn++;
@@ -745,7 +764,13 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Position;
+                    currentCell.Value = info.SMAWinLoss;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.ExtraPT;
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
                     currentColumn++;
@@ -757,14 +782,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.LineTotal;
+                    currentCell.Value = info.RealIncome;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
                     currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Turnover;
+                    currentCell.Value = info.RealTurnover;
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
                     currentColumn++;
@@ -817,7 +842,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
 
                 int startRow = 0;
                 int startColumn = 0;
-                int maxColumnIndex = 8;
+                int maxColumnIndex = 9;
                 var currentRow = startRow;
 
                 var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
@@ -923,27 +948,32 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Win_Loss;
+                currentCell.Value = Labels.Member_Win_Loss;
                 currentCell.Style = headerTextStyle;
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Position;
+                currentCell.Value = Labels.SMA_Win_Loss;
                 currentCell.Style = headerTextStyle;
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Comm;
+                currentCell.Value = Labels.ExtraPT;
                 currentCell.Style = headerTextStyle;
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Line_Total;
+                currentCell.Value = Labels.Commission;
                 currentCell.Style = headerTextStyle;
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Turnover;
+                currentCell.Value = Labels.RealIncome;
+                currentCell.Style = headerTextStyle;
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = Labels.RealTurnover;
                 currentCell.Style = headerTextStyle;
                 currentColumn++;
 
@@ -1003,12 +1033,17 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                                 currentColumn++;
 
                                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.WinLoss;
+                                currentCell.Value = info.MemberWinLoss;
                                 currentCell.Style = twoDecimalPositiveNumberStyle;
                                 currentColumn++;
 
                                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.Position;
+                                currentCell.Value = info.SMAWinLoss;
+                                currentCell.Style = twoDecimalNumberStyle;
+                                currentColumn++;
+
+                                currentCell = workSheet.Cells[currentRow, currentColumn];
+                                currentCell.Value = info.ExtraPT;
                                 currentCell.Style = twoDecimalNumberStyle;
                                 currentColumn++;
 
@@ -1018,12 +1053,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                                 currentColumn++;
 
                                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.LineTotal;
+                                currentCell.Value = info.RealIncome;
                                 currentCell.Style = twoDecimalPositiveNumberStyle;
                                 currentColumn++;
 
                                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.Turnover;
+                                currentCell.Value = info.RealTurnover;
                                 currentCell.Style = twoDecimalNumberStyle;
                                 currentColumn++;
 
@@ -1045,12 +1080,17 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.WinLoss;
+                            currentCell.Value = info.MemberWinLoss;
                             currentCell.Style = totalRowPositiveTwoDecimalNumberStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.Position;
+                            currentCell.Value = info.SMAWinLoss;
+                            currentCell.Style = totalRowTwoDecimalNumberStyle;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = info.ExtraPT;
                             currentCell.Style = totalRowTwoDecimalNumberStyle;
                             currentColumn++;
 
@@ -1060,12 +1100,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.LineTotal;
+                            currentCell.Value = info.RealIncome;
                             currentCell.Style = totalRowPositiveTwoDecimalNumberStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.Turnover;
+                            currentCell.Value = info.RealTurnover;
                             currentCell.Style = totalRowTwoDecimalNumberStyle;
                             currentColumn++;
 
@@ -1091,12 +1131,17 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.WinLoss;
+                        currentCell.Value = info.MemberWinLoss;
                         currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Position;
+                        currentCell.Value = info.SMAWinLoss;
+                        currentCell.Style = subRowTwoDecimalNumberStyle;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+                        currentCell.Value = info.ExtraPT;
                         currentCell.Style = subRowTwoDecimalNumberStyle;
                         currentColumn++;
 
@@ -1106,12 +1151,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.LineTotal;
+                        currentCell.Value = info.RealIncome;
                         currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Turnover;
+                        currentCell.Value = info.RealTurnover;
                         currentCell.Style = subRowTwoDecimalNumberStyle;
                         currentColumn++;
 
@@ -1134,13 +1179,19 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                     currentColumn += 3;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.WinLoss;
+                    currentCell.Value = info.MemberWinLoss;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Position;
+                    currentCell.Value = info.SMAWinLoss;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.ExtraPT;
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
                     currentColumn++;
@@ -1152,14 +1203,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.LineTotal;
+                    currentCell.Value = info.RealIncome;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
                     currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Turnover;
+                    currentCell.Value = info.RealTurnover;
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
                     currentColumn++;
@@ -1233,15 +1284,15 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                             {
                                 Id = Converter.ToInt(data.bettype),
                                 Status = Converter.ToString2(data.status),
-                                WinLoss = Converter.ToDecimal(data.WinLost),
-                                Position = Converter.ToDecimal(data.Position),
+                                MemberWinLoss = Converter.ToDecimal(data.WinLost),
+                                SMAWinLoss = Converter.ToDecimal(data.Position),
                                 Commission = Converter.ToDecimal(data.Commission),
-                                LineTotal = Converter.ToDecimal(data.LineTotal),
-                                Turnover = Converter.ToDecimal(data.Turnover)
+                                RealIncome = Converter.ToDecimal(data.LineTotal),
+                                RealTurnover = Converter.ToDecimal(data.Turnover)
                             };
 
                             info.Name = this._betTypeNameCache[info.Id];
-                            info.Margin = this.CalculateMargin(info.LineTotal, info.Turnover);
+                            info.Margin = this.CalculateMargin(info.RealIncome, info.RealTurnover);
                             sportWinLoss.GrandTotal.Add(info);
                             info = this.FormatWinLossInfo(info);
                             sportWinLoss.ChildsInfo.Add(info);
@@ -1249,8 +1300,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
 
                         sportWinLoss.ChildsInfo = sportWinLoss.ChildsInfo.OrderBy(info => info.Id).ToList();
                         sportWinLoss.GrandTotal.Margin = this.CalculateMargin(
-                            sportWinLoss.GrandTotal.LineTotal,
-                            sportWinLoss.GrandTotal.Turnover);
+                            sportWinLoss.GrandTotal.RealIncome,
+                            sportWinLoss.GrandTotal.RealTurnover);
                         report.GrandTotal.Add(sportWinLoss.GrandTotal);
                         sportWinLoss.GrandTotal = this.FormatWinLossInfo(sportWinLoss.GrandTotal);
                         report.ChildsInfo.Add(sportWinLoss);
@@ -1258,8 +1309,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
 
                     report.ChildsInfo = report.ChildsInfo.OrderBy(sportGroup => sportGroup.Id).ToList();
                     report.GrandTotal.Margin = this.CalculateMargin(
-                        report.GrandTotal.LineTotal,
-                        report.GrandTotal.Turnover);
+                        report.GrandTotal.RealIncome,
+                        report.GrandTotal.RealTurnover);
                     report.GrandTotal = this.FormatWinLossInfo(report.GrandTotal);
                     SessionManager.Set<WinLossInfo>(WinLossContants.DailyMixParlayNormalMixParlayReport, report);
                     return report;
@@ -1427,12 +1478,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.WinLoss;
+                            currentCell.Value = info.MemberWinLoss;
                             currentCell.Style = twoDecimalPositiveNumberStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.Position;
+                            currentCell.Value = info.SMAWinLoss;
                             currentCell.Style = twoDecimalNumberStyle;
                             currentColumn++;
 
@@ -1442,12 +1493,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.LineTotal;
+                            currentCell.Value = info.RealIncome;
                             currentCell.Style = twoDecimalPositiveNumberStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.Turnover;
+                            currentCell.Value = info.RealTurnover;
                             currentCell.Style = twoDecimalNumberStyle;
                             currentColumn++;
 
@@ -1467,12 +1518,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.WinLoss;
+                        currentCell.Value = info.MemberWinLoss;
                         currentCell.Style = totalRowPositiveTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Position;
+                        currentCell.Value = info.SMAWinLoss;
                         currentCell.Style = totalRowTwoDecimalNumberStyle;
                         currentColumn++;
 
@@ -1482,12 +1533,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.LineTotal;
+                        currentCell.Value = info.RealIncome;
                         currentCell.Style = totalRowPositiveTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Turnover;
+                        currentCell.Value = info.RealTurnover;
                         currentCell.Style = totalRowTwoDecimalNumberStyle;
                         currentColumn++;
 
@@ -1511,13 +1562,13 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.WinLoss;
+                    currentCell.Value = info.MemberWinLoss;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Position;
+                    currentCell.Value = info.SMAWinLoss;
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
                     currentColumn++;
@@ -1529,14 +1580,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.LineTotal;
+                    currentCell.Value = info.RealIncome;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
                     currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Turnover;
+                    currentCell.Value = info.RealTurnover;
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
                     currentColumn++;
@@ -1570,15 +1621,16 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
         private WinLossInfo FormatWinLossInfo(WinLossInfo winLoss)
         {
             winLoss.BetCount_Str = winLoss.BetCount.Format(0);
-            winLoss.WinLoss_Str = winLoss.WinLoss.Format(2);
-            winLoss.Position_Str = winLoss.Position.Format(2);
+            winLoss.MemberWinLoss_Str = winLoss.MemberWinLoss.Format(2);
+            winLoss.SMAWinLoss_Str = winLoss.SMAWinLoss.Format(2);
 
             winLoss.MemberTurnover_Str = winLoss.MemberTurnover.Format(2);
-            winLoss.Turnover_Str = winLoss.Turnover.Format(2);
+            winLoss.RealTurnover_Str = winLoss.RealTurnover.Format(2);
             winLoss.Commission_Str = winLoss.Commission.Format(2);
-            winLoss.LineTotal_Str = winLoss.LineTotal.Format(2);
+            winLoss.RealIncome_Str = winLoss.RealIncome.Format(2);
+            winLoss.ExtraPT_Str = winLoss.ExtraPT.Format(2);
 
-            if (winLoss.Turnover != 0)
+            if (winLoss.RealTurnover != 0)
             {
                 winLoss.Margin_Str = (winLoss.Margin * 100).Format(2);
             }

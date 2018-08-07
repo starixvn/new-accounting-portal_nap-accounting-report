@@ -150,13 +150,14 @@ CombinationWinLoss.prototype.RenderReport = function (report) {
                     }
 
                     columns.push({ Name: "ColBetType", Value: info.Name });
-                    columns.push({ Name: "ColWinLoss", Value: reportManager.FormatNumberCell(info.WinLoss_Str, true, false, false) });
+                    columns.push({ Name: "ColWinLoss", Value: reportManager.FormatNumberCell(info.MemberWinLoss_Str, true, false, false) });
                     columns.push({ Name: "ColMemberTurnover", Value: info.MemberTurnover_Str });
                     columns.push({ Name: "ColBetCount", Value: info.BetCount_Str });
-                    columns.push({ Name: "ColPosition", Value: info.Position_Str });
+                    columns.push({ Name: "ColPosition", Value: info.SMAWinLoss_Str });
+                    columns.push({ Name: "ColExtraPT", Value: info.ExtraPT_Str });
                     columns.push({ Name: "ColComm", Value: info.Commission_Str });
-                    columns.push({ Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.LineTotal_Str, true, false, false) });
-                    columns.push({ Name: "ColTurnover", Value: info.Turnover_Str });
+                    columns.push({ Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) });
+                    columns.push({ Name: "ColTurnover", Value: info.RealTurnover_Str });
                     columns.push({ Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) });
                     bodyData.push({
                         Columns: columns
@@ -167,13 +168,14 @@ CombinationWinLoss.prototype.RenderReport = function (report) {
                 bodyData.push({
                     CssClass: "betTypeTotal",
                     Columns: [{ Name: "ColBetType", Value: info.Name, CssClass: "align-center" },
-                    { Name: "ColWinLoss", Value: reportManager.FormatNumberCell(info.WinLoss_Str, true, false, false) },
+                    { Name: "ColWinLoss", Value: reportManager.FormatNumberCell(info.MemberWinLoss_Str, true, false, false) },
                     { Name: "ColMemberTurnover", Value: info.MemberTurnover_Str },
                     { Name: "ColBetCount", Value: info.BetCount_Str },
-                    { Name: "ColPosition", Value: info.Position_Str },
+                    { Name: "ColPosition", Value: info.SMAWinLoss_Str },
+                    { Name: "ColExtraPT", Value: info.ExtraPT_Str },
                     { Name: "ColComm", Value: info.Commission_Str },
-                    { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.LineTotal_Str, true, false, false) },
-                    { Name: "ColTurnover", Value: info.Turnover_Str },
+                    { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
+                    { Name: "ColTurnover", Value: info.RealTurnover_Str },
                     { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true)}]
                 });
             }
@@ -183,13 +185,14 @@ CombinationWinLoss.prototype.RenderReport = function (report) {
                 CssClass: "subTotal",
                 Columns: [{ Name: "ColType", Value: "" },
                     { Name: "ColBetType", Value: info.Name, CssClass: "align-center" },
-                    { Name: "ColWinLoss", Value: reportManager.FormatNumberCell(info.WinLoss_Str, true, false, false) },
+                    { Name: "ColWinLoss", Value: reportManager.FormatNumberCell(info.MemberWinLoss_Str, true, false, false) },
                     { Name: "ColMemberTurnover", Value: info.MemberTurnover_Str },
                     { Name: "ColBetCount", Value: info.BetCount_Str },
-                    { Name: "ColPosition", Value: info.Position_Str },
+                    { Name: "ColPosition", Value: info.SMAWinLoss_Str },
+                    { Name: "ColExtraPT", Value: info.ExtraPT_Str },
                     { Name: "ColComm", Value: info.Commission_Str },
-                    { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.LineTotal_Str, true, false, false) },
-                    { Name: "ColTurnover", Value: info.Turnover_Str },
+                    { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
+                    { Name: "ColTurnover", Value: info.RealTurnover_Str },
                     { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true)}]
             });
         }
@@ -197,13 +200,14 @@ CombinationWinLoss.prototype.RenderReport = function (report) {
         info = report.GrandTotal;
         footerData.push({
             Columns: [{ Name: "ColCombination", Value: info.Name, MergeColNumber: 3 },
-                    { Name: "ColWinLoss", Value: reportManager.FormatNumberCell(info.WinLoss_Str, true, false, false) },
+                    { Name: "ColWinLoss", Value: reportManager.FormatNumberCell(info.MemberWinLoss_Str, true, false, false) },
                     { Name: "ColMemberTurnover", Value: info.MemberTurnover_Str },
                     { Name: "ColBetCount", Value: info.BetCount_Str },
-                    { Name: "ColPosition", Value: info.Position_Str },
+                    { Name: "ColPosition", Value: info.SMAWinLoss_Str },
+                    { Name: "ColExtraPT", Value: info.ExtraPT_Str },
                     { Name: "ColComm", Value: info.Commission_Str },
-                    { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.LineTotal_Str, true, false, false), TdClass: "colLineTotal" },
-                    { Name: "ColTurnover", Value: info.Turnover_Str },
+                    { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false), TdClass: "colLineTotal" },
+                    { Name: "ColTurnover", Value: info.RealTurnover_Str },
                     { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true)}]
         });
     }
@@ -215,8 +219,10 @@ CombinationWinLoss.prototype.RenderReport = function (report) {
                 { HeaderText: "Type", Name: "ColType", MergeRowNumber: 2 },
                 { HeaderText: "Bet Type", Name: "ColBetType", MergeRowNumber: 2 },
                 { HeaderText: viewResources.Member, Name: "ColWinLoss", MergeColNumber: 3 },
-                { HeaderText: viewResources.Agency, Name: "ColPosition", MergeColNumber: 2 },
-                { HeaderText: viewResources.Company, Name: "ColLineTotal", MergeColNumber: 3}]
+                { HeaderText: viewResources.SMA_Win_Loss, Name: "ColPosition", MergeRowNumber: 2 },
+                { HeaderText: "ExtraPT", Name: "ColExtraPT", MergeRowNumber: 2 },
+                { HeaderText: "Commission", Name: "ColComm", MergeRowNumber: 2 },
+                { HeaderText: viewResources.House, Name: "ColLineTotal", MergeColNumber: 3}]
         }],
         columns: [{ HeaderText: "Combinations", Width: 140, Name: "ColCombination", HeaderAlign: "center", CellAlign: "center" },
                       { HeaderText: "Type", Width: 140, Name: "ColType", HeaderAlign: "center", CellAlign: "right" },
@@ -224,10 +230,11 @@ CombinationWinLoss.prototype.RenderReport = function (report) {
                       { HeaderText: "Win Loss", Width: 120, Name: "ColWinLoss", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Turnover", Width: 120, Name: "ColMemberTurnover", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Bet Count", Width: 120, Name: "ColBetCount", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Position", Width: 100, Name: "ColPosition", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Comm", Width: 100, Name: "ColComm", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Line Total", Width: 120, Name: "ColLineTotal", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "SMA Win Loss", Width: 100, Name: "ColPosition", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "Extra PT", Width: 120, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "Commission", Width: 100, Name: "ColComm", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "Real Income", Width: 120, Name: "ColLineTotal", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "Real Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Margin", Width: 100, Name: "ColMargin", HeaderAlign: "center", CellAlign: "right"}],
         showTitle: true,
         showFooter: true,
