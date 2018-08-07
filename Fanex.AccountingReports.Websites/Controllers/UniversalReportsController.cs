@@ -29,5 +29,10 @@ namespace Fanex.AccountingReports.Websites.Controllers
         {
             return Redirect("../../UniversalReports/UpdatedUsernameAndGivenCredit");
         }
+
+        public ActionResult Exchange()
+        {
+            return Redirect("../../UniversalReports/Exchange");
+        }
     }
 }
