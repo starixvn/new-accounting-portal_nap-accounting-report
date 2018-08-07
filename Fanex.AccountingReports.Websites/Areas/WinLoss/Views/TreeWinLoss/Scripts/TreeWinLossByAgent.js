@@ -205,7 +205,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByAgent = function () {
                 { HeaderText: "Virtual Margin(%)", Name: "ColVirtualBaseRMMargin", MergeRowNumber: 2 }]
             }],
             columns: [{ HeaderText: "No", Width: 50, Name: "ColNo", HeaderAlign: "center", CellAlign: "center" },
-                { HeaderText: "Username", Width: 120, Name: "ColUserName", HeaderAlign: "center", CellAlign: "center" },
+                { HeaderText: "Username", Width: 150, Name: "ColUserName", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Real Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "ExtraPT", Width: 120, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "Gross WinLoss", Width: 120, Name: "ColWinLoss", HeaderAlign: "center", CellAlign: "right", FormatPositive: '$', FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },

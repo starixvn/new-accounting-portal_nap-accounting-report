@@ -7,6 +7,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         btnMode: null,
         normalModeDatepickerPlugin: null,
         historyModeDatepickerPlugin: null,
+        dateOptionSelector:null,
         normalMode: null,
         historyMode: null,
         reportContainer: null,
@@ -83,23 +84,30 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
 
     var renderDateRangeDatePicker = function () {
         $('#historyModeDatepickerPlugin').nexDatePicker({
-            nexDatePickerType: "daterange",
+            nexDatePickerType: "quickchoose",
             datePickerFormat: {
                 changeMonth: true,
                 changeYear: true,
                 dateFormat: FormatConstant.M_DD_YY_STRING
             },
+            dropDownList:
+            {
+                Id: "dateOptionSelector",
+                Label: "Date",
+                LabelCss: "lbl-field col_2 align-left",
+                OptionCss: "edit-field col_5"
+            },
             firstDatePicker: {
                 Id: "firstDatePickerId1",
                 Label: labelFrom,
-                InitDate: yesterday,
+                InitDate: today,
                 LabelCss: "lbl-field col_2",
                 TextboxCss: "edit-field col_5"
             },
             secondDatePicker: {
                 Id: "secondDatePickerId1",
                 Label: labelTo,
-                InitDate: yesterday,
+                InitDate: today,
                 LabelCss: "lbl-field col_2",
                 TextboxCss: "edit-field col_6"
             },
@@ -109,6 +117,10 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             minDate: new Date(minDate),
             maxDate: new Date(yesterday)
         });
+
+        _tables.dateOptionSelector = $('#dateOptionSelector');
+        var dateOption = '<option value="1">Yesterday</option><option value="4">Current Month</option><option value="5">Last Month</option><option value="7">Specific Date</option>';
+        _tables.dateOptionSelector.find('option').remove().end().append(dateOption);
 
         _tables.historyModeDatepickerPlugin = $("#historyModeDatepickerPlugin");
     };
