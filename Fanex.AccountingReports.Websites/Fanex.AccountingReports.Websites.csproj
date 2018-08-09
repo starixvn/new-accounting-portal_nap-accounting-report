@@ -178,8 +178,8 @@
       <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.RemotingRef, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.RemotingRef.1.0.0-beta8\lib\net461\Fanex.RemotingRef.dll</HintPath>
+    <Reference Include="Fanex.RemotingRef, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.RemotingRef.1.1.0\lib\net461\Fanex.RemotingRef.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Result.Core, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -219,7 +219,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Result.Core.RemotingRef, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Result.Core.RemotingRef.1.0.0-beta2\lib\net461\Fanex.Result.Core.RemotingRef.dll</HintPath>
+      <HintPath>..\packages\Fanex.Result.Core.RemotingRef.1.0.0-beta4\lib\net461\Fanex.Result.Core.RemotingRef.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Result.Core.Sportsbook, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
