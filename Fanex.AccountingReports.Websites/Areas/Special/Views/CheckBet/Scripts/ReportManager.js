@@ -121,7 +121,8 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
     };
 
     var combineParlayContent = $("#combineParlayContent");
-    showCombMPDetail = function (refno, date, tranid, betid, custId) {
+    showCombMPDetail = function (refno, date, tranid, betid, custId, betteam) {
+        var title = parseInt(betteam) === 1 ? " Mix Parlay" : "System Parlay";
         $.ajax({
             type: 'GET',
             url: window.rootUrl + 'BetList/BetList/GetCombinationMP?refNo='
@@ -134,7 +135,7 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
                     combineParlayContent.empty().html(rs);
                     var dlgContainer = $('#combineParlayContainer');
                     dlgContainer.dialog({
-                        title: "System Parlay",
+                        title: title,
                         autoOpen: false,
                         height: 'auto',
                         width: 850,
