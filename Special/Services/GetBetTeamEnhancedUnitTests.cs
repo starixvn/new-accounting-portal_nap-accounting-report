@@ -63,7 +63,6 @@ namespace Fanex.AccountingReports.UnitTests.Module.Special.Services
         public string ContentChoiceBuilder_BAIO_ReturnsRightResult(int betType, string betTeam)
         {
             // Arrange
-            // Initialize RefData. It always returns empty for first time
             var service = new ContentChoiceBuilder();
             return service.GetContentBetchoiceToShowOf("Cleveland Cavaliers", "Houston Rockets", betType, betTeam, 0, 0, 0.5m);
         }

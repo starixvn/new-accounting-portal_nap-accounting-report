@@ -33,10 +33,9 @@ namespace Fanex.AccountingReports.Websites
         {
             ChangeApplicationName();
 
-            // Initialize RefData. It always returns empty for first time. Please contact CTO if you have any question
             RefDataTypeContainer
                .ConnectTo(new Uri(ConfigurationManager.AppSettings["Fanex.RemotingRef.Service.Url"]))
-               .FromApplication("Nap-Reports")
+               .FromApplication("Nap - Reports")
                .SupportOnlyDefaultLanguage();
 
             BetListManager.RegisterRemotingRef(new BetList.Core.RemotingRef.CacheRef());
