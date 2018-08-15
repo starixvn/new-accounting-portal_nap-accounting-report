@@ -73,5 +73,6 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int Lucky3 = 160;
         public const int Exchange = 221;
         public const int Pragmatic = 248;
+        public const int PockerGame = 163;
     }
 }

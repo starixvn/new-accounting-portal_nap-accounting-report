@@ -19,6 +19,7 @@ Thumbs.db
 *.ilk
 *.log
 *.orig
+*.user-activity.*
 [Bb]in
 [Dd]ebug*/
 packages*/
@@ -43,4 +44,4 @@ Fanex.AccountingReports.sln
 Fanex.AccountingReports.sln
 .vs/config/applicationhost.config
 .vs/config/applicationhost.config
-/Fanex.AccountingReports.Websites/App_Data/user-activity*.json
+/Fanex.AccountingReports.Websites/App_Data/user-activity
