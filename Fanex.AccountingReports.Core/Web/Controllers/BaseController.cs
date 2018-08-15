@@ -87,7 +87,6 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
             if (filterContext.Result is ViewResult && string.Equals(AppSession.CurrentActionName, "Index", StringComparison.OrdinalIgnoreCase))
             {
                 var menuPath = MenuService.GetMenuPathFromRequestFilePath(filterContext.HttpContext.Request.FilePath, Request.ApplicationPath);
-                string controllerName = (string)filterContext.RouteData.Values["controller"];
                 AppSession.CurrentWorkingOnMenu = this._menuService.GetMenuByURL(menuPath);
             }
         }

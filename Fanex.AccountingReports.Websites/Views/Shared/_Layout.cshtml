@@ -34,10 +34,9 @@
     @if (AppSession.IsAccountingLogin != null && AppSession.IsAccountingLogin)
     {
         <style type="text/css">
-            #dialog-popup
-            {
-                top: 3px !important;
-            }
+             #dialog-popup {
+                 top: 3px !important;
+             }
         </style>
     }
 </head>
@@ -52,8 +51,8 @@
             <div class="user-info">
                 <div class="greeting">
                     <h2>
-                        Welcome <span class="info-acc">@HttpContext.Current.User.Identity.Name</span><span
-                            class="info-more"></span></h2>
+                        Welcome <span class="info-acc">@HttpContext.Current.User.Identity.Name</span><span class="info-more"></span>
+                    </h2>
                     <ul>
                         <li>@Html.ActionLink(ViewResources.Profile, "UserProfile", "User", new { Area = "UserControl" }, new { })</li>
                         <li>@Html.ActionLink(ViewResources.Change_Password, "ChangePassword", "User", new { Area = "UserControl" }, new { })</li>
@@ -78,51 +77,52 @@
     </div>
     <div id="previewReportLegendDialog" class="display-none">
     </div>
+
+    @Html.Hidden("AccReportRoot", Url.Content("~/Admin/"))
+    @Html.Hidden("NapHubRoot", Url.Content("~/"))
+    @Scripts.Render("~/scripts-bundle/jquery")
+    @Scripts.Render("~/scripts/_lib/msgbox/JS")
+    <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/CrossdomainAjax/jquery.xdomainajax.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/CustomScrollbar/jquery.event.drag-2.0.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/CustomScrollbar/jquery.ba-resize.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/CustomScrollbar/mousehold.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/CustomScrollbar/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/CustomScrollbar/aplweb.scrollbars.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/jquery.fileDownload.js"></script>
+    <script type="text/javascript" src="~/Areas/Uncategorized/ReportLegend/FanexLegend.js"></script>
+    <script type="text/javascript" src="~/Areas/Uncategorized/ims/ims.js"></script>
+    <script type="text/javascript" src="~/scripts/ReCheckIn.js?ver=12"></script>
+    <script type="text/javascript">
+        window.rootUrl = '@Url.Content("~")';
+        window.rootWebPath = '@(Request.Url.GetLeftPart(UriPartial.Authority) + Request.ApplicationPath)';
+        var port = '@Request.Url.Port';
+        var isUsingPort = '@(AppSettings.IsUsingPort)';
+        if(isUsingPort == 'False')
+        {
+            window.rootWebPath = window.rootWebPath.replace(':' + port, '');
+        }
+
+        var currentMenuId = @(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Id : 0);
+        var isDisableMostvisitedPage = @(AppSettings.IsDisableMostvisitedPage != null ? AppSettings.IsDisableMostvisitedPage.ToString().ToLower() : "false");
+
+        var isLegendEnable = '@(LegendSection.Instance.Websites["GetReportLegendUrl"].IsActive)'.toLowerCase();
+        var getReportLegendUrl = '@(LegendSection.Instance.Websites["GetReportLegendUrl"].Address)';
+        var inlineImageExpand = "@Labels.ReportLegend_SubTabHeadLineIcon_Expand_Image";
+        var inlineImageCollapse = "@Labels.ReportLegend_SubTabHeadLineIcon_Collapse_Image";
+        var menuId = "@(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Id : -1)";
+        var functionName = "@(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Function.Name : string.Empty)";
+        var menuName = "@(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty)";
+
+        //Set fix width for filter-bar
+        $("#filter-bar").css("width", ($(window).width() - 20) + "px");
+        $(window).resize(function () {
+            var width = $(window).width() - 20; //padding-right: 10 + padding-left: 10
+            $("#filter-bar").css("width", width + "px");
+        });
+
+    </script>
+    @RenderSection("Scripts", false)
+    @RenderSection("Foot", false)
 </body>
 </html>
-@Html.Hidden("AccReportRoot", Url.Content("~/Admin/"))
-@Html.Hidden("NapHubRoot", Url.Content("~/"))
-@Scripts.Render("~/scripts-bundle/jquery")
-@Scripts.Render("~/scripts/_lib/msgbox/JS")
-<script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
-<script type="text/javascript" src="~/scripts/_lib/CrossdomainAjax/jquery.xdomainajax.js"></script>
-<script type="text/javascript" src="~/scripts/_lib/CustomScrollbar/jquery.event.drag-2.0.js"></script>
-<script type="text/javascript" src="~/scripts/_lib/CustomScrollbar/jquery.ba-resize.js"></script>
-<script type="text/javascript" src="~/scripts/_lib/CustomScrollbar/mousehold.js"></script>
-<script type="text/javascript" src="~/scripts/_lib/CustomScrollbar/jquery.mousewheel.js"></script>
-<script type="text/javascript" src="~/scripts/_lib/CustomScrollbar/aplweb.scrollbars.js"></script>
-<script type="text/javascript" src="~/scripts/_lib/jquery.fileDownload.js"></script>
-<script type="text/javascript" src="~/Areas/Uncategorized/ReportLegend/FanexLegend.js"></script>
-<script type="text/javascript" src="~/Areas/Uncategorized/ims/ims.js"></script>
-<script type="text/javascript" src="~/scripts/ReCheckIn.js?ver=12"></script>
-<script type="text/javascript">
-    window.rootUrl = '@Url.Content("~")';
-    window.rootWebPath = '@(Request.Url.GetLeftPart(UriPartial.Authority) + Request.ApplicationPath)';
-    var port = '@Request.Url.Port';
-    var isUsingPort = '@(AppSettings.IsUsingPort)';
-    if(isUsingPort == 'False')
-    {
-        window.rootWebPath = window.rootWebPath.replace(':' + port, '');
-    }
-
-    var currentMenuId = @(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Id : 0);
-    var isDisableMostvisitedPage = @(AppSettings.IsDisableMostvisitedPage != null ? AppSettings.IsDisableMostvisitedPage.ToString().ToLower() : "false");
-
-    var isLegendEnable = '@(LegendSection.Instance.Websites["GetReportLegendUrl"].IsActive)'.toLowerCase();
-    var getReportLegendUrl = '@(LegendSection.Instance.Websites["GetReportLegendUrl"].Address)';
-    var inlineImageExpand = "@Labels.ReportLegend_SubTabHeadLineIcon_Expand_Image";
-    var inlineImageCollapse = "@Labels.ReportLegend_SubTabHeadLineIcon_Collapse_Image";
-    var menuId = "@(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Id : -1)";
-    var functionName = "@(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Function.Name : string.Empty)";
-    var menuName = "@(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty)";
-
-    //Set fix width for filter-bar
-    $("#filter-bar").css("width", ($(window).width() - 20) + "px");
-    $(window).resize(function () {
-        var width = $(window).width() - 20; //padding-right: 10 + padding-left: 10
-        $("#filter-bar").css("width", width + "px");
-    });
-
-</script>
-@RenderSection("Scripts", false)
-@RenderSection("Foot", false)

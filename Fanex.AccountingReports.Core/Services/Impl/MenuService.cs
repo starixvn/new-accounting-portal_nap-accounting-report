@@ -1,10 +1,10 @@
 namespace Fanex.AccountingReports.Core.Services.Impl
 {
-    using Fanex.AccountingReports.Core.Web;
-    using NAP.Core.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Fanex.AccountingReports.Core.Web;
+    using NAP.Core.Models;
 
     /// <summary>
     /// TODO: Update summary.
@@ -27,7 +27,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             applicationPath = applicationPath.Trim();
             var menuPath = filePath;
             if (!string.IsNullOrEmpty(applicationPath) &&
-                menuPath.StartsWith(applicationPath) &&
+                menuPath.StartsWith(applicationPath, StringComparison.CurrentCultureIgnoreCase) &&
                 AppSession.CurrentUserMenu != null)
             {
                 menuPath = menuPath.Remove(0, applicationPath.Length);
