@@ -34,5 +34,10 @@ namespace Fanex.AccountingReports.Websites.Controllers
         {
             return Redirect("../../UniversalReports/Exchange");
         }
+
+        public ActionResult ActualMemberBet()
+        {
+            return Redirect("../../UniversalReports/ActualMemberBet");
+        }
     }
 }
