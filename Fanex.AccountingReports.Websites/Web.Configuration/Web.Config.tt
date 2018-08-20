@@ -57,18 +57,12 @@
        <add Name="<#= site.NapDomainName #>" Path="<#= site.NapDomainPath #>" />
     </Domain>
   </NapSettings>
-	<ONEbook.UM ServiceUris="<#=site.ONEbookUMAddress#>"
+  <ONEbook.UM ServiceUris="<#=site.ONEbookUMAddress#>"
               EnableCheckUM="<#=site.EnableCheckUM#>"
               EnableUnscheduledUM="false"
               UMFrom="01:00"
               UMTo="23:00"
               SiteId="2000000" UMPageUrl="~/UserLogin/Common/Offline">
-    <AllowedIPs AllowAll="true">
-      <add Value="10.19.10.54" />
-      <!--Exact IP-->
-      <add From="10.19.10.100" To="10.19.10.200" />
-      <!--IP Range-->
-    </AllowedIPs>
   </ONEbook.UM>
   <Fanex.Data.DbSettingProvider default="XmlDbSettingProvider">
     <providers>
