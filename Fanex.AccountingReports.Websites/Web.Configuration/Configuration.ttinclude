@@ -138,7 +138,7 @@
                     case SiteEnvironment.SIT:
 						return "http://172.16.4.106:1710/api";
                     case SiteEnvironment.UAT:
-						return "http://10.40.40.248:1710/api";
+						return "http://10.40.40.248:1710/main/api";
 					case SiteEnvironment.PRO:
 						return "http://10.40.40.22:1710/api";
 					case SiteEnvironment.MNL:
@@ -221,14 +221,20 @@
             {
                 switch(Environment)
                 {
-                    case SiteEnvironment.UAT:
+                    case SiteEnvironment.DEV:
+					case SiteEnvironment.LOCAL:
+					case SiteEnvironment.MASTER:
+                        return "http://ha.nexdev.net:8889/api";
                     case SiteEnvironment.PRO:
-                    case SiteEnvironment.MNL:
                         return "http://10.40.40.22:8889/api";
-					case SiteEnvironment.SIT:
-						return "http://172.16.4.106:8889/api";
+                    case SiteEnvironment.UAT:
+                        return "http://10.40.40.248:8889/api";
+                    case SiteEnvironment.SIT:
+                        return "http://172.16.4.106:8889/api";
+                    case SiteEnvironment.MNL:
+                        return "http://10.2.98.3:8889/api";
                     default:
-                        return "http://10.35.35.253:8889/api";
+                        return string.Empty;
                 }
             }
         }
@@ -239,9 +245,24 @@
             {
                 switch(Environment)
                 {
-					case SiteEnvironment.PRO:
+                    case SiteEnvironment.PRO:
                     case SiteEnvironment.MNL:
-						return "true";
+                        return "true";
+                    default:
+                        return "false";
+                }
+            }
+        }
+
+        public string EnableReCheckin
+        {
+            get
+            {
+                switch(Environment)
+                {
+                    case SiteEnvironment.PRO:
+                    case SiteEnvironment.MNL:
+                        return "true";
                     default:
                         return "false";
                 }
@@ -353,21 +374,6 @@
 
                     default:
                         return "stateConnectionString=\"tcpip=ha.nexdev.net:42424\"";
-                }
-            }
-        }
-
-		public string EnableReCheckin
-        {
-            get
-            {
-                switch(Environment)
-                {
-                    case SiteEnvironment.PRO:
-                        return "true";
-
-                    default:
-                        return "false";
                 }
             }
         }

@@ -1,4 +1,4 @@
-using RemotingRef;
+using Fanex.RemotingRef;
 
 namespace Fanex.AccountingReports.Special.Checkbet
 {
@@ -6,7 +6,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
     {
         public string ContentBetTeamBuilder(BetTeamModel model)
         {
-            return RefData.GetFastMarketsChoise(
+            return new RemotingRefService().GetFastMarketsChoice(
                 model.BetType.ToString(),
                 model.BetTeam,
                 (int)model.Hdp1,

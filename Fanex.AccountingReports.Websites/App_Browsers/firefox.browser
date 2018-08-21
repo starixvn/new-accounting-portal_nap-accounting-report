@@ -1,4 +1,4 @@
-<browsers>
+﻿<browsers>
     <!-- Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.0.11) Gecko/2009060215 Firefox/3.0.11 (.NET CLR 3.5.30729) -->
     <browser id="Firefox3Plus" parentID="Firefox">
         <identification>

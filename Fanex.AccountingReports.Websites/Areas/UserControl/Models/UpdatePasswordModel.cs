@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace Fanex.AccountingReports.Websites.Areas.UserControl.Models
 {

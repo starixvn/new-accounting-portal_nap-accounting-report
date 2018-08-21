@@ -38,7 +38,7 @@ namespace Fanex.BetList.Accounting.Services
 
                 ticketDetail.TransDateHtml = builder.BuildTrans(ticketDetail.Ticket);
                 ticketDetail.ChoiceHtml = builder.BuildChoice(ticket, ticketHelper, null, false);
-                ticketDetail.OddHtml = builder.BuildOdds(ticket, null, CacheRef.GetOddsTypeName);
+                ticketDetail.OddHtml = builder.BuildOdds(ticket, null, ticketHelper.GetOddsTypeNameById);
                 ticketDetail.StakeHtml = BetListExtension.BuildStake(ticketDetail, ref builder);
 
                 var statusBuilder = builder.CreateStatusBuilder(ticket.BetTypeId);

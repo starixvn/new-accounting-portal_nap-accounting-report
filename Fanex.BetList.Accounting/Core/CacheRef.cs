@@ -1,20 +1,26 @@
 namespace Fanex.BetList.Accounting.Core
 {
+    using System;
+    using System.Collections.Generic;
     using Fanex.BetList.Accounting.Constants;
     using Fanex.BetList.Accounting.Resources;
     using Fanex.Common;
     using RemotingRef;
-    using System;
-    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public static class CacheRef
     {
+        private static RemotingRefService remotingRefService;
+        static CacheRef()
+        {
+            remotingRefService = new RemotingRefService();
+        }
+
         public static string GetSportName(object sportId)
         {
-            return RefData.GetSportName(
+            return remotingRefService.GetSportName(
                 Converter.ToString2(sportId),
                 GetSimpleLanguage(LanguageTypeConstants.EnUS),
                 string.Empty);
@@ -22,7 +28,7 @@ namespace Fanex.BetList.Accounting.Core
 
         public static string GetTeamName(object teamId)
         {
-            return RefData.GetTeamName(
+            return remotingRefService.GetTeamName(
                 Converter.ToString2(teamId),
                 GetSimpleLanguage(LanguageTypeConstants.EnUS),
                 string.Empty);
@@ -30,29 +36,22 @@ namespace Fanex.BetList.Accounting.Core
 
         public static string GetLeagueName(object leagueId)
         {
-            return RefData.GetLeagueName(
+            return remotingRefService.GetLeagueName(
                 Converter.ToString2(leagueId),
                 GetSimpleLanguage(LanguageTypeConstants.EnUS),
                 string.Empty);
         }
 
-        public static string GetFncIndexName(object indexId)
-        {
-            return RefData.GetFncIndexName(
-                Converter.ToString2(indexId),
-                GetSimpleLanguage(LanguageTypeConstants.EnUS));
-        }
-
         public static string GetHorseTeamName(object codeID)
         {
-            return RefData.GetHorseTeamName(
+            return remotingRefService.GetHorseTeamName(
                 Converter.ToString2(codeID),
                 GetSimpleLanguage(LanguageTypeConstants.EnUS));
         }
 
         public static string GetOddsTypeName(object oddsType)
         {
-            return RefData.GetOddsTypeName(
+            return remotingRefService.GetOddsTypeName(
                 Converter.ToString2(oddsType),
                 GetSimpleLanguage(LanguageTypeConstants.EnUS));
         }
@@ -92,14 +91,14 @@ namespace Fanex.BetList.Accounting.Core
 
         public static string GetRouletteBetItem(int itemId)
         {
-            return RefData.GetRouletteBetItem(
+            return remotingRefService.GetRouletteBetItem(
                 Converter.ToString2(itemId),
                 GetSimpleLanguage(LanguageTypeConstants.EnUS));
         }
 
         public static string GetCasinoBetItem(object betStatusId)
         {
-            return RefData.GetCasinoBetItem(
+            return remotingRefService.GetCasinoBetItem(
                 betStatusId.ToString(),
                 GetSimpleLanguage(LanguageTypeConstants.EnUS),
                 string.Empty);
@@ -107,7 +106,7 @@ namespace Fanex.BetList.Accounting.Core
 
         public static string GetRouletteBetItem(object itemId)
         {
-            return RefData.GetRouletteBetItem(
+            return new RemotingRefService().GetRouletteBetItem(
                 itemId.ToString(),
                 GetSimpleLanguage(LanguageTypeConstants.EnUS),
                 string.Empty);
