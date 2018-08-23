@@ -109,18 +109,10 @@
             {
                 switch(Environment)
                 {
-					case SiteEnvironment.DEV:
-					case SiteEnvironment.LOCAL:
-                    case SiteEnvironment.MASTER:
-						return "false";
-                    case SiteEnvironment.SIT:
-                    case SiteEnvironment.UAT:
 					case SiteEnvironment.PRO:
 						return "true";
-					case SiteEnvironment.MNL:
-                        return "false";
 					default:
-                        return string.Empty;
+                        return "false";
                 }
             }
         }
@@ -240,21 +232,6 @@
         }
 
         public string EnableCheckUM
-        {
-            get
-            {
-                switch(Environment)
-                {
-                    case SiteEnvironment.PRO:
-                    case SiteEnvironment.MNL:
-                        return "true";
-                    default:
-                        return "false";
-                }
-            }
-        }
-
-        public string EnableReCheckin
         {
             get
             {
