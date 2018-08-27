@@ -9,10 +9,6 @@
         {
             Environment = SiteEnvironment.LOCAL
         },
-		new SiteInfo
-        {
-            Environment = SiteEnvironment.MASTER
-        },
         new SiteInfo
         {
             Environment = SiteEnvironment.SIT
@@ -36,7 +32,6 @@
     {
 		DEV,
         LOCAL,
-		MASTER,
         SIT,
         UAT,
         MNL,
@@ -54,7 +49,6 @@
             {
                 switch(Environment)
                 {
-				case SiteEnvironment.MASTER:
                     case SiteEnvironment.PRO:
                     case SiteEnvironment.MNL:
                         return "LIVE";
@@ -77,7 +71,6 @@
 					case SiteEnvironment.SIT:
                     case SiteEnvironment.LOCAL:
                     case SiteEnvironment.DEV:
-                    case SiteEnvironment.MASTER:
                         return "UAT";
 
                     default:
@@ -125,7 +118,6 @@
                 {
 					case SiteEnvironment.DEV:
 					case SiteEnvironment.LOCAL:
-                    case SiteEnvironment.MASTER:
 						return "http://ha.nexdev.net:1711/api";
                     case SiteEnvironment.SIT:
 						return "http://172.16.4.106:1710/api";
@@ -149,7 +141,6 @@
                 {
 					case SiteEnvironment.DEV:
 					case SiteEnvironment.LOCAL:
-                    case SiteEnvironment.MASTER:
 						return "HTAiA6W/kzs0PjSnm3ll1kD7tXPyDyO0gTeD8Nz6078=";
                     case SiteEnvironment.SIT:
 						return "ZU5inpesUej+dCIxitApgXAiRhK0N7uCuVHCCjPyT9o=";
@@ -171,7 +162,6 @@
                 {
 					case SiteEnvironment.DEV:
 					case SiteEnvironment.LOCAL:
-                    case SiteEnvironment.MASTER:
 						return "localhost:9902";
                     case SiteEnvironment.SIT:
                         return "nap-report.playthefun.com";
@@ -195,7 +185,6 @@
                 {
 					case SiteEnvironment.DEV:
 					case SiteEnvironment.LOCAL:
-                    case SiteEnvironment.MASTER:
                     case SiteEnvironment.SIT:
                     case SiteEnvironment.UAT:
 					case SiteEnvironment.PRO:
@@ -215,8 +204,7 @@
                 {
                     case SiteEnvironment.DEV:
 					case SiteEnvironment.LOCAL:
-					case SiteEnvironment.MASTER:
-                        return "http://ha.nexdev.net:8889/api";
+					    return "http://ha.nexdev.net:8889/api";
                     case SiteEnvironment.PRO:
                         return "http://10.40.40.22:8889/api";
                     case SiteEnvironment.UAT:
