@@ -41,7 +41,8 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         Lottery: 220,
         Lucky3: 160,
         Bullfighting: 207,
-        GoldDeluxe: 255
+        GoldDeluxe: 255,
+        PockerGames: 163
     };
 
     var cachedData = {
@@ -496,6 +497,9 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 break;
             case productEnums.GoldDeluxe:
                 productName = "Gold Deluxe";
+                break;
+            case productEnums.PockerGames:
+                productName = "Pocker Games";
                 break;
             default:
                 productName = "Unknown";

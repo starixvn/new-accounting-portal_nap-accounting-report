@@ -457,6 +457,9 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                 case ProductContants.GoldDeluxe:
                     product = "Gold Deluxe";
                     break;
+                case ProductContants.PockerGames:
+                    product = "Pocker Games";
+                    break;
 
                 default:
                     break;
