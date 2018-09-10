@@ -1,5 +1,8 @@
 namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
@@ -11,9 +14,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
     using Fanex.AccountingReports.Main.Services.Interface;
     using NPOI.HSSF.UserModel;
     using NPOI.SS.UserModel;
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Drawing;
     using spreadsheetLineStyle = ExcelUtil.Spreadsheet;
 
     /// <summary>
@@ -444,7 +444,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         workSheet,
                         currentRow,
                         currentColumn,
-                        Labels.IBCTotal + ":",
+                        "House Total:",
                         grandTotalRowTextStyle,
                         numberOfGroupColumnsTotal,
                         report.IBCTotal,

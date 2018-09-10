@@ -415,7 +415,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.DailyWinLoss2hSoccerMi
         {
             int columnIndex = 0;
             GridDataRow dataRow = new GridDataRow();
-            dataRow.Columns.Add(new Columns(columnIndex++) { Name = Labels.Code, Value = Labels.IBCTotal, CellAlignment = HAlignment.Right, MergeColNumber = 4 });
+            dataRow.Columns.Add(new Columns(columnIndex++) { Name = Labels.Code, Value = "House Total", CellAlignment = HAlignment.Right, MergeColNumber = 4 });
             dataRow.Columns.Add(new Columns(columnIndex++) { Name = Labels.WinLoss, Value = Converter.ToDecimal(this.Reader["WinLost"]), CellAlignment = HAlignment.Right });
             dataRow.Columns.Add(new Columns(columnIndex++) { Name = Labels.Position, Value = Converter.ToDecimal(this.Reader["Position"]), CellAlignment = HAlignment.Right });
             dataRow.Columns.Add(new Columns(columnIndex++) { Name = Labels.Commission, Value = Converter.ToDecimal(this.Reader["Commission"]), CellAlignment = HAlignment.Right });

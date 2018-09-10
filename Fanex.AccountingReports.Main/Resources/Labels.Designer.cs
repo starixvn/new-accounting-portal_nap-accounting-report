@@ -232,7 +232,7 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to IBC(8RM + BARM).
+        ///   Looks up a localized string similar to House(8RM + BARM).
         /// </summary>
         public static string _8RM_BARM {
             get {
