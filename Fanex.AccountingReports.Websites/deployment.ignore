@@ -6,3 +6,4 @@ package.json
 tsconfig.json
 tslint.json
 \\App_Data\\user-activity-.*-.*.json
+\\App_Data\\user-activity.*\.json

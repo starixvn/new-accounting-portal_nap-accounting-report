@@ -220,7 +220,7 @@ Fanex.AccountingReports.Special.DailyTurnover = function () {
                 { HeaderText: "Agent Turnover", Width: 120, Name: "AgentTurnover", HeaderAlign: "center",
                     CellAlign: "right", FormatNumber: FormatConstant.INT_NUMBER
                 },
-                { HeaderText: "IBC Turnover", Width: 120, Name: "IBCTurnover", HeaderAlign: "center",
+                { HeaderText: "House Turnover", Width: 120, Name: "IBCTurnover", HeaderAlign: "center",
                     CellAlign: "right", FormatNumber: FormatConstant.INT_NUMBER
                 },
                 { HeaderText: "CNT", Width: 360, Name: "CNT", HeaderAlign: "center", CellAlign: "center" }
@@ -338,7 +338,7 @@ Fanex.AccountingReports.Special.DailyTurnover = function () {
                 { HeaderText: "Agent Turnover", Width: 130, Name: "AgentTurnover", HeaderAlign: "center",
                     CellAlign: "right", FormatNumber: FormatConstant.INT_NUMBER
                 },
-                { HeaderText: "IBC Turnover", Width: 130, Name: "IBCTurnover", HeaderAlign: "center",
+                { HeaderText: "House Turnover", Width: 130, Name: "IBCTurnover", HeaderAlign: "center",
                     CellAlign: "right", FormatNumber: FormatConstant.INT_NUMBER
                 }
             ],

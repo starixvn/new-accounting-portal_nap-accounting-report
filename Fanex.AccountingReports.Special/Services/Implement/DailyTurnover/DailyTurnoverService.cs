@@ -238,7 +238,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
             ExcelUtil.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Super_Turnover, headerStyle);
             ExcelUtil.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Master_Turnover, headerStyle);
             ExcelUtil.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Agent_Turnover, headerStyle);
-            ExcelUtil.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.IBC_Turnover, headerStyle);
+            ExcelUtil.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, "House Turnover", headerStyle);
             ExcelUtil.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.CNT, headerStyle);
 
             currentRow++;
