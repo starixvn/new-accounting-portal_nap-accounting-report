@@ -499,7 +499,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 productName = "Gold Deluxe";
                 break;
             case productEnums.PockerGames:
-                productName = "Pocker Games";
+                productName = "Poker Games";
                 break;
             default:
                 productName = "Unknown";
