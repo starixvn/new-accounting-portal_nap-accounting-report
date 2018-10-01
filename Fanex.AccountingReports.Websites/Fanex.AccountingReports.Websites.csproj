@@ -631,7 +631,6 @@
     <Content Include="Areas\Main\Views\CreditTerm\Scripts\CreditTerm.js" />
     <Content Include="Areas\Main\Views\CreditTerm\Scripts\InstallAmount.js" />
     <Content Include="Areas\Main\Views\CreditTerm\Scripts\ReportManager.js" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\Scripts\Index.js" />
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Index.cshtml" />
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Styles\TraderPerformanceOtherSports.less" />
     <Content Include="Areas\Main\Views\TraderPerformanceOtherSports\Scripts\TraderPerformanceOtherSports.js" />
@@ -1908,12 +1907,6 @@
     <Content Include="Areas\LegendManagement\Views\LegendManagement\InputedLegendReport.cshtml" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\UploadImagePopup.cshtml" />
     <Content Include="Areas\Uncategorized\IMS\ims.less" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\BettypeReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\Index.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\Main2hReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\SoccerReport.cshtml" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\Styles\DailyWinLoss2h.less" />
-    <Content Include="Areas\Main\Views\DailyWinLoss2hSoccerMinorBettypes\WinLossBySite_BetType.cshtml" />
     <Content Include="Areas\Misc\Views\CreditMovement\Index.cshtml" />
     <Content Include="Areas\Licensee\Views\CompanyWinLoss\Index.cshtml" />
     <Content Include="Areas\Licensee\Views\CompanyWinLoss\Styles\Index.less" />

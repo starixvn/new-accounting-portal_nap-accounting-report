@@ -149,7 +149,6 @@
     <Compile Include="Constants\SoccerBetTypeConstants.cs" />
     <Compile Include="Constants\SportContants.cs" />
     <Compile Include="Constants\SportTypeWinLoss.cs" />
-    <Compile Include="Controllers\DailyWinLoss2hSoccerMinorBettypeController.cs" />
     <Compile Include="Controllers\CreditTermController.cs" />
     <Compile Include="Controllers\TraderPerformanceOtherSportsController.cs" />
     <Compile Include="Controllers\TraderPerformanceSoccerController.cs" />
@@ -158,8 +157,6 @@
     <Compile Include="Criteria\CreditTerm\GetCreditTermCriteria.cs" />
     <Compile Include="Criteria\CreditTerm\GetInstallAmountCriteria.cs" />
     <Compile Include="Criteria\CreditTerm\GetRemarkEditedCriteria.cs" />
-    <Compile Include="Criteria\DailyWinLoss2hSoccerMinorBettype\GetMainReportCriteria.cs" />
-    <Compile Include="Criteria\DailyWinLoss2hSoccerMinorBettype\GetSoccerReportCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetReportByBetTypeCriteria.cs" />
     <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_BetTypeCriteria.cs" />
     <Compile Include="Criteria\TraderPerformance\GetDetailPHCriteria.cs" />
@@ -175,15 +172,11 @@
     <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdVirtualSportSportTypeCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary\GetReportCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetReportCriteria.cs" />
-    <Compile Include="Enums\DailyWinloss2hSoccerMinorBettype\ColumnMappingEnums.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MainAreaRegistration.cs" />
     <Compile Include="Models\CreditTerm\CreditTerm.cs" />
     <Compile Include="Models\CreditTerm\EditedRemarkResult.cs" />
     <Compile Include="Models\CreditTerm\InstallAmount.cs" />
-    <Compile Include="Models\DailyWinLoss2h\ProductWinLoss.cs" />
-    <Compile Include="Models\DailyWinLoss2h\WinLossInfo.cs" />
-    <Compile Include="Models\DailyWinLoss2h\LiveAndNoneLiveReport.cs" />
     <Compile Include="Models\TraderPerformanceOtherSports\TraderPerformanceOtherSports.cs" />
     <Compile Include="Models\TraderPerformanceOtherSports\TraderPerformanceOtherSportsDetail.cs" />
     <Compile Include="Models\TraderPerformanceSoccer\TraderPerformanceSoccer.cs" />
@@ -226,11 +219,6 @@
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Services\Implement\CreditTerm\CreditTermExcelUtil.cs" />
-    <Compile Include="Services\Implement\DailyWinLoss2hSoccerMinorBettype\BaseReportService.cs" />
-    <Compile Include="Services\Implement\DailyWinLoss2hSoccerMinorBettype\BetTypeReportService.cs" />
-    <Compile Include="Services\Implement\DailyWinLoss2hSoccerMinorBettype\SiteReportService.cs" />
-    <Compile Include="Services\Implement\DailyWinLoss2hSoccerMinorBettype\MainReportService.cs" />
-    <Compile Include="Services\Implement\DailyWinLoss2hSoccerMinorBettype\SportTypeReportService.cs" />
     <Compile Include="Services\Implement\TraderPerformanceOtherSports\ExportDetailReportService.cs" />
     <Compile Include="Services\Implement\TraderPerformanceOtherSports\ExportReportService.cs" />
     <Compile Include="Services\Implement\TraderPerformanceOtherSports\TraderPerformanceOtherSportsService.cs" />
@@ -242,9 +230,6 @@
     </Compile>
     <Compile Include="Services\Implement\WinLoss3rdSummary\WinLossSummary3rdService.cs" />
     <Compile Include="Services\Implement\WinLossSummary\WinLossSummaryService.cs" />
-    <Compile Include="Services\Interface\DailyWinLoss2hSoccerMinorBettype\IBettypeReportService.cs" />
-    <Compile Include="Services\Interface\DailyWinLoss2hSoccerMinorBettype\ISoccerReportService.cs" />
-    <Compile Include="Services\Interface\DailyWinLoss2hSoccerMinorBettype\IMainReportService.cs" />
     <Compile Include="Services\Interface\CreditTerm\ICreditTermExportExcelService.cs" />
     <Compile Include="Services\Interface\CreditTerm\ICreditTermService.cs" />
     <Compile Include="Services\Interface\CreditTerm\IInstallmentAmountExportExcelService.cs" />
