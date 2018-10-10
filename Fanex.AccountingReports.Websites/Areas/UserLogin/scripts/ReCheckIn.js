@@ -8,8 +8,7 @@ function ReCheckin() {
         dataType: "json",
         success: function (result) {
             console.log(result);
-            if (result == "1") {
-                console.log(result + "OK");
+            if (result) {
                 window.location.href = location.protocol + '//' + location.host + "/UserLogin/Login/LogOut";
             }
         },

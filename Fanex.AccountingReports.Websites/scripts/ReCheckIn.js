@@ -19,7 +19,7 @@ var Recheckin = function ($) {
                 type: "POST",
                 dataType: "json",
                 success: function (result) {
-                    if (result.IsKickedOut == "1") {                        
+                    if (result) {                        
                         alert('Another session has been logged in or your session is expired. Forced to logout!');
                         window.location.href = AccReport.accReportRoot + "UserLogin/Login/LogOut";
                     }

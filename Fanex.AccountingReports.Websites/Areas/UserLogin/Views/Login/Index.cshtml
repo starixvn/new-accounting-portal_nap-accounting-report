@@ -40,7 +40,6 @@
                     <input type="text" id="username" name="username" autocomplete="off" />
                     <input type="password" id="password" />
                     <input type ="hidden" id="hdnPassword" name="password" />
-                    <input type ="hidden" id="hdnLoginToken" name="loginToken" value="@ViewBag.LoginToken" />
                     <input type="submit" id="submit" value="Sign In" />
                     <div class="bestview">
                         <span>Best view in </span><span class="ff4">Firefox 50+</span><span class="chrome">Chrome 54+</span>
@@ -100,12 +99,11 @@
         } else {
             password.classList.remove('err');
 
-            var loginToken = document.getElementById('hdnLoginToken').value;
             var encryptedPwd = CryptoJS.CfsEnCode(password.value);
             var hashPwd = '';
 
             password.className = password.className.replace('err', '');
-            hashPwd = CryptoJS.SHA256(encryptedPwd + loginToken);
+            hashPwd = CryptoJS.SHA256(encryptedPwd);
             document.getElementById('hdnPassword').value = hashPwd;
         }
 
