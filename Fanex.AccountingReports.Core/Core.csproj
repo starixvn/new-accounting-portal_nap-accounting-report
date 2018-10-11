@@ -348,7 +348,6 @@
     <Compile Include="Web\CustomResults\SpreadSheetResult.cs" />
     <Compile Include="Web\AccReportFunctionKeys.cs" />
     <Compile Include="Web\JsonWithoutNullField.cs" />
-    <Compile Include="Web\Security\AuthenticateAction.cs" />
     <Compile Include="Web\SessionManager.cs" />
   </ItemGroup>
   <ItemGroup>

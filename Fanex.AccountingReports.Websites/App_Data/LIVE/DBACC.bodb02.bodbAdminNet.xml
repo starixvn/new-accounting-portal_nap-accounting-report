@@ -108,14 +108,6 @@
     <Setting Key="CreditTerm" SpName="Acc_Rpt_CreditTerm" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="InstallAmount" SpName="Acc_Rpt_InstallAmount" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
-  <Function Name="Racing - Horse Racing For SA, UK, AUS Tote">
-    <Setting Key="Racing_HorseRacingDailyReportForTote" SpName="Acc_Rpt_WinlostRacing_Tote" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Racing_HorseRacingDailyReportForTote_14" SpName="Acc_Rpt_WinlostRacing_Tote14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Racing_HorseRacingDailyReportForTote_Detail" SpName="Acc_Rpt_WinlostRacing_Tote_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Racing_HorseRacingDailyReportForTote_Detail_14" SpName="Acc_Rpt_WinlostRacing_Tote_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Racing_HorseRacingDailyReportForTote_Betlist" SpName="Acc_Rpt_WinlostRacing_Tote_BetList" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Racing_HorseRacingDailyReportForTote_Betlist_14" SpName="Acc_Rpt_WinlostRacing_Tote_BetList14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-  </Function>
   <Function Name="Special - Daily Turnover">
     <Setting Key="Special_DailyTurnover_GetReport" SpName="Acc_Rpt_DailyTurnover" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Special_DailyTurnoverChangedDetail_GetReport" SpName="Acc_Rpt_DailyTurnover_ChangedDetail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
@@ -123,12 +115,7 @@
   <Function Name="Racing - Win Lost Group Daily">
     <Setting Key="Racing_WinLostGroupDaily" SpName="Acc_Rpt_WinlostRacing_Group_Daily" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
-  <Function Name="Racing - Racing Win Lost By Licensee">
-    <Setting Key="Racing_RacingWinLostLicensee_Detail" SpName="Acc_Rpt_WinlostRacingLicensee_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Racing_RacingWinLostLicensee_DetailBetList" SpName="Acc_Rpt_WinlostRacingLicensee_BetList_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Racing_RacingWinLostLicensee_Detail_14" SpName="Acc_Rpt_WinlostRacingLicensee_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Racing_RacingWinLostLicensee_DetailBetList_14" SpName="Acc_Rpt_WinlostRacingLicensee_BetList_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-  </Function>
+  
   <Function Name="Misc - Credit Movement">
     <Setting Key="Misc_CreditMovement_GetSites" SpName="SiteSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>

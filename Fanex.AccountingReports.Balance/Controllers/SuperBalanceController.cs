@@ -1,12 +1,14 @@
 namespace Fanex.AccountingReports.Balance.Controllers
 {
     using System.Web.Mvc;
+    using Core.Web;
     using Fanex.AccountingReports.Balance.Criteria.SuperBalance;
     using Fanex.AccountingReports.Balance.Services.Implement;
     using Fanex.AccountingReports.Balance.Services.Interface;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
-    using Fanex.AccountingReports.Core.Web.Security;
+    using NAP.Core.Business;
+    using NAP.Core.Web.Attribute;
 
     /// <summary>
     /// TODO: Update summary.
@@ -21,7 +23,8 @@ namespace Fanex.AccountingReports.Balance.Controllers
         }
 
         [HttpGet]
-        [AuthenticateAction(AuthenticateAction.AuthenticationType.Read, "Index")]
+        [UserActivityFilter]
+        [NapAuth(FunctionKey = AccReportFunctionKeys.SuperBalance, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             return View();

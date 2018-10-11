@@ -661,40 +661,10 @@
     <Content Include="Areas\Misc\Views\SMATurnover\Styles\SMATurnover.less" />
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Scripts\ReportManager.js" />
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Scripts\StatusDetail.js" />
-    <Content Include="Areas\Racing\Views\GreyhoundAUSTote\Styles\img\help.png" />
-    <Content Include="Areas\Racing\Views\HarnessAUSTote\Styles\img\help.png" />
     <Content Include="Areas\Racing\Views\RacingGroupDaily\Scripts\RacingGroupDaily.js" />
-    <Content Include="Areas\Racing\Views\GreyhoundAUSTote\Scripts\ReportManager.js" />
     <Content Include="Areas\Special\Views\DailyTurnover\Scripts\DailyTurnover.js" />
-    <Content Include="Areas\Racing\Views\GreyhoundAUSTote\Scripts\GreyhoundAUSToteBetlist.js" />
-    <Content Include="Areas\Racing\Views\GreyhoundAUSTote\Scripts\GreyhoundAUSToteDetail.js" />
-    <Content Include="Areas\Racing\Views\GreyhoundAUSTote\Scripts\GreyhoundAUSToteMain.js" />
-    <Content Include="Areas\Racing\Views\GreyhoundAUSTote\Styles\GreyhoundAUSTote.less" />
-    <Content Include="Areas\Racing\Views\HarnessAUSTote\Scripts\ReportManager.js" />
-    <Content Include="Areas\Racing\Views\HarnessAUSTote\Scripts\HarnessAUSToteBetlist.js" />
-    <Content Include="Areas\Racing\Views\HarnessAUSTote\Scripts\HarnessAUSToteDetail.js" />
-    <Content Include="Areas\Racing\Views\HarnessAUSTote\Scripts\HarnessAUSToteMain.js" />
-    <Content Include="Areas\Racing\Views\HarnessAUSTote\Styles\HarnessAUSTote.less" />
-    <Content Include="Areas\Racing\Views\RacingAUSTote\Scripts\RacingAUSToteBetlist.js" />
-    <Content Include="Areas\Racing\Views\RacingAUSTote\Scripts\RacingAUSToteDetail.js" />
-    <Content Include="Areas\Racing\Views\RacingAUSTote\Scripts\RacingAUSToteMain.js" />
-    <Content Include="Areas\Racing\Views\RacingAUSTote\Scripts\ReportManager.js" />
-    <Content Include="Areas\Racing\Views\RacingAUSTote\Styles\img\help.png" />
-    <Content Include="Areas\Racing\Views\RacingSATote\Scripts\RacingSAToteBetlist.js" />
-    <Content Include="Areas\Racing\Views\RacingSATote\Scripts\RacingSAToteDetail.js" />
-    <Content Include="Areas\Racing\Views\RacingSATote\Scripts\ReportManager.js" />
-    <Content Include="Areas\Racing\Views\RacingSATote\Scripts\RacingSAToteMain.js" />
-    <Content Include="Areas\Racing\Views\RacingSATote\Styles\img\help.png" />
-    <Content Include="Areas\Racing\Views\RacingUKTote\Scripts\RacingUKToteBetlist.js" />
-    <Content Include="Areas\Racing\Views\RacingUKTote\Scripts\RacingUKToteDetail.js" />
-    <Content Include="Areas\Racing\Views\RacingUKTote\Scripts\RacingUKToteMain.js" />
-    <Content Include="Areas\Racing\Views\RacingUKTote\Scripts\ReportManager.js" />
-    <Content Include="Areas\Racing\Views\RacingUKTote\Styles\img\help.png" />
     <Content Include="Areas\Special\Views\MarginReport\Scripts\MarginReport.js" />
     <Content Include="Areas\Racing\Views\NumberOfActiveMembersForRacing\Scripts\NumberOfActiveMembers.js" />
-    <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Scripts\RacingDailyReport.js" />
-    <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Scripts\RacingDailyReportApply50Percent.js" />
-    <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Scripts\ReportManager.js" />
     <Content Include="Areas\Special\Views\SaveBetReport\Images\download.png" />
     <Content Include="Areas\Special\Views\SMATurnover\Scripts\SMATurnover.js" />
     <Content Include="Areas\Special\Views\SMATurnover\Styles\SMATurnover.less" />
@@ -1885,21 +1855,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Racing\Views\NumberOfActiveMembersForRacing\Index.cshtml" />
-    <Content Include="Areas\Racing\Views\GreyhoundAUSTote\Index.cshtml" />
-    <Content Include="Areas\Racing\Views\HarnessAUSTote\Index.cshtml" />
     <Content Include="Areas\Racing\Views\NumberOfActiveMembersForRacing\Styles\NumberOfActiveMembers.less" />
     <Content Include="Areas\Racing\Views\Web.config" />
-    <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Index.cshtml" />
-    <Content Include="Areas\Racing\Views\RacingWinLossByLicensee\Styles\RacingDailyReport.less" />
-    <Content Include="Areas\Racing\Views\RacingSATote\Index.cshtml" />
-    <Content Include="Areas\Racing\Views\RacingAUSTote\Index.cshtml" />
-    <Content Include="Areas\Racing\Views\RacingAUSTote\Styles\RacingAUSTote.less" />
-    <Content Include="Areas\Racing\Views\RacingSATote\Styles\RacingSATote.less">
-      <Compile>True</Compile>
-      <Minify>True</Minify>
-    </Content>
-    <Content Include="Areas\Racing\Views\RacingUKTote\Index.cshtml" />
-    <Content Include="Areas\Racing\Views\RacingUKTote\Styles\RacingUKTote.less" />
     <Content Include="Areas\Special\Views\CheckBet\Style\CheckBet.less" />
     <Content Include="Areas\Special\Views\ParlayWon\Index.cshtml" />
     <Content Include="Areas\Special\Views\DailyTurnover\Index.cshtml" />
