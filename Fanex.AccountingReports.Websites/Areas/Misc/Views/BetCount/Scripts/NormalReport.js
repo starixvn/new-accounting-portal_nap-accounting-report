@@ -568,7 +568,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         _tables.reportContent.empty().append(
                 "<tr>" +
                     frezeeContent +
-                    "<td colspan='9'><div class='no-data-message'>There is no data.</div></td>\
+                    "<td colspan='11'><div class='no-data-message'>There is no data.</div></td>\
                  </tr>");
         _tables.reportRowFooter.empty();
         _tables.reportColFooter.empty();
@@ -606,6 +606,12 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                 break;
             case 'colHeaderCompanyWinLoss':
                 sortBy = self.Enums.sortBy.CompanyWinLoss;
+                break;
+            case 'colHeaderCommission':
+                sortBy = self.Enums.sortBy.Commission;
+                break;
+            case 'colHeaderExtraPT':
+                sortBy = self.Enums.sortBy.ExtraPT;
                 break;
         }
 
