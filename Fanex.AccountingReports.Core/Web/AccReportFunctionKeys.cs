@@ -10,6 +10,10 @@ namespace Fanex.AccountingReports.Core.Web
 
         public const string CreditTerm = "CreditTerm";
 
+        public const string DirectBalance = "DirectBalance";
+
+        public const string SuperBalance = "SuperBalance";
+
         public const string DailyCreatedCustomers = "DailyCreatedCustomers";
 
         public const string DailyMixParlayWinLoss = "DailyMixParlayWinLoss";
@@ -21,8 +25,6 @@ namespace Fanex.AccountingReports.Core.Web
         public const string DailyWinLoss2hSoccerMinorBettype = "DailyWinLoss2hSoccerMinorBettype";
 
         public const string DuplicateTickets = "DuplicateTickets";
-
-        public const string HorseRacingForUKTote = "HorseRacing_forUKTote_";
 
         public const string LeagueWinLoss = "LeagueWinLoss";
 
@@ -37,6 +39,8 @@ namespace Fanex.AccountingReports.Core.Web
         public const string MiscTotalSMAandMemberActive = "TotalSMAandMemberActive";
 
         public const string NegativeBalance = "NegativeBalance";
+
+        public const string NumberGameWinLoss = "NumberGameWinLoss";
 
         public const string NumberGameMonthlyWinloss = "NumberGameMonthlyWinloss";
 
@@ -58,8 +62,6 @@ namespace Fanex.AccountingReports.Core.Web
 
         public const string RacingGroupDaily = "RacingGroupDaily";
 
-        public const string RacingWinLossByLicensee = "RacingWinLossByLicensee";
-
         public const string SpecialMatchAnalysis = "SpecialMatchAnalysis";
 
         public const string TraderPerformanceSoccer = "TraderPerformanceSoccer";
@@ -74,9 +76,9 @@ namespace Fanex.AccountingReports.Core.Web
 
         public const string ViewFinanceAccount = "ViewFinanceAccount";
 
-        public const string NumberGameWinLoss = "NumberGameWinLoss";
-
         public const string SaveBet = "SaveBet";
+
+        public const string CheckBet = "CheckBet";
 
         public const string TotalCreditBetCountByProduct = "TotalCreditAccountsEnabled_DisabledperProduct";
 

@@ -2,11 +2,13 @@ namespace Fanex.AccountingReports.Special.Controllers
 {
     using System.Web.Mvc;
     using Core.Exceptions;
+    using Core.Web;
     using Fanex.AccountingReports.Core.Web.Controllers;
-    using Fanex.AccountingReports.Core.Web.Security;
     using Fanex.AccountingReports.Special.Criteria.CheckBet;
     using Fanex.AccountingReports.Special.Services.Implement;
     using Fanex.AccountingReports.Special.Services.Interface;
+    using NAP.Core.Business;
+    using NAP.Core.Web.Attribute;
 
     /// <summary>
     /// TODO: Update summary.
@@ -20,7 +22,8 @@ namespace Fanex.AccountingReports.Special.Controllers
             this._checkBetService = new CheckBetService();
         }
 
-        [AuthenticateAction(AuthenticateAction.AuthenticationType.Read, "Index")]
+        [UserActivityFilter]
+        [NapAuth(FunctionKey = AccReportFunctionKeys.CheckBet, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
             return View();

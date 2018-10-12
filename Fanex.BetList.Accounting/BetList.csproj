@@ -276,7 +276,6 @@
     <Compile Include="Controllers\BetListController.cs" />
     <Compile Include="Controllers\ScoreInformationController.cs" />
     <Compile Include="Criteria\Authenticate\CheckSmartPunterCriteria.cs" />
-    <Compile Include="Criteria\BetListRacingWinLossToteCriteria.cs" />
     <Compile Include="Criteria\GetCashOutDetailCriteria.cs" />
     <Compile Include="Extensions\BetListExtension.cs" />
     <Compile Include="Core\BetListHelper.cs" />

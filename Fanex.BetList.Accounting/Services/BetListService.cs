@@ -10,13 +10,11 @@ namespace Fanex.BetList.Accounting.Services
     using Fanex.BetList.Accounting.Extensions;
     using Fanex.BetList.Accounting.Models;
     using Fanex.BetList.Accounting.Repositories;
-    using Fanex.BetList.Accounting.Resources;
     using Fanex.BetList.Core.Builder;
     using Fanex.BetList.Core.Entities;
     using Fanex.BetList.Core.Factories;
     using Fanex.BetList.Core.TicketHelper;
     using Fanex.Common;
-    using Fanex.Data;
     using Fanex.Data.Repository;
     using RemotingRef;
     using AccBetListCore = Fanex.BetList.Accounting.Core;
@@ -24,7 +22,6 @@ namespace Fanex.BetList.Accounting.Services
     public interface BetListService
     {
         IList<TicketDetail> GetBetListByRefNoTickets(BetListByRefNoCriteria criteria);
-        BetListRacingToteWinLoss GetBetListRacingToteWinLoss(BetListRacingWinLossToteCriteria criteria);
         CombinationParlay GetCombinationMP(ICriteria criteria);
         IList<TicketDetail> GetMixParlayTickets(MixParlayDetailCriteria criteria, string handicap1, string handicap2, string betcheck, string betteam);
     }
@@ -239,128 +236,6 @@ namespace Fanex.BetList.Accounting.Services
         {
             return this._betListRepository.BetList_SelDetailCombinationMP(criteria);
         }
-
-        /// <summary>
-        /// Get Bet list Racing Tote Win Loss.
-        /// </summary>
-        /// <param name="criteria">The bet list win loss tote criteria.</param>
-        /// <returns>The bet list racing tote win loss.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-      "SP2101:MethodMustNotContainMoreLinesThan",
-      Justification = "Reviewed. Suppression is OK here.")]
-        public BetListRacingToteWinLoss GetBetListRacingToteWinLoss(BetListRacingWinLossToteCriteria criteria)
-        {
-            var betListRacing = new BetListRacingToteWinLoss
-            {
-                BetListDetail = new List<BetListRacingToteWinLoss>()
-            };
-
-            var ticketHelper = new TicketHelper();
-
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
-            {
-                DataSet dataSet = db.ExecuteDataSet(criteria);
-                if (dataSet != null && dataSet.Tables.Count > 0)
-                {
-                    decimal stakeTotal = 0,
-                        memberWinLossTotal = 0,
-                        playerCommTotal = 0,
-                        agencyWinLossTotal = 0,
-                        agencyCommIncomeTotal = 0,
-                        ibcWinLossTotal = 0,
-                        ibcCommIncomeTotal = 0,
-                        dividendTotal = 0;
-                    var dataTable = dataSet.Tables[0];
-                    int no = 0;
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        var stake = Converter.ToDecimal(row["stake"]);
-                        var memberWinLoss = Converter.ToDecimal(row["winlost"]);
-                        var playerComm = Converter.ToDecimal(row["playercomm"]);
-                        var agencyWinLoss = Converter.ToDecimal(row["WLPTAgency"]);
-                        var agencyCommIncome = Converter.ToDecimal(row["commIncomeAgency"]);
-                        var ibcWinLoss = Converter.ToDecimal(row["WLPTIBC"]);
-                        var ibcCommIncome = Converter.ToDecimal(row["commIncomeIBC"]);
-                        var dividend = Converter.ToDecimal(row["dividend"]);
-                        var betList = new BetListRacingToteWinLoss()
-                        {
-                            No = ++no,
-                            Username = Converter.ToString2(row["username"]),
-                            TransId = Converter.ToString2(row["transid"]),
-                            TransDate = Converter.ToString2(row["transdate"]),
-                            BettypeId = Converter.ToInt(row["bettype"]),
-                            WinOdds = Converter.ToDecimal(row["winOdds"]).ToString("0.#####"),
-                            PlaceOdds = Converter.ToDecimal(row["placeOdds"]).ToString("0.#####"),
-                            Odds = "<b>" + Converter.ToDecimal(row["odds"]).ToString("0.#####") + "</b>",
-                            Stake = stake.ToString("#,##0"),
-                            MemberWinLoss = memberWinLoss.Format(2),
-                            PlayerComm = playerComm.Format(2),
-                            AgencyCommIncome = agencyCommIncome.Format(2),
-                            AgencyPTWinLoss = agencyWinLoss.Format(2),
-                            IBCCommIncome = ibcCommIncome.Format(2),
-                            IBCPTWinLoss = ibcWinLoss.Format(2),
-                            Dividend = dividend.Format(2),
-                            WinStatus = Converter.ToString2(row["winStatus"]).Format(2),
-                            PlaceStatus = Converter.ToString2(row["placeStatus"]).Format(2),
-                            Status = Converter.ToString2(row["status"]).Format(2),
-                            HorseId = Converter.ToInt(row["HorseID"]),
-                            HorseNo = Converter.ToInt(row["HorseNo"]),
-                            VirtualRate = Converter.ToDecimal(row["virtualrate"]).ToString("0.#####"),
-                            IsShowOTExRate = Converter.ToBool(row["isShowOTExRate"])
-                        };
-                        betList.Choice = betList.HorseNo + " - " + ticketHelper.GetHorseTeamNameById(betList.HorseId);
-                        betList.BettypeName = ticketHelper.GetBetTypeNameById(betList.BettypeId);
-                        if (betList.IsShowOTExRate)
-                        {
-                            betList.Stake += "<br/>" + "<span class='extra'>" + betList.VirtualRate + "</span><br/>" + "<span class='extra'>(" + Labels.Ex_Rate_2 + ")</span>";
-                        }
-
-                        if (betList.BettypeId == 31 || betList.BettypeId == 32)
-                        {
-                            if (!betList.Status.ToLower().Equals(BetStatus.Won) && !betList.Status.ToLower().Equals(BetStatus.Refund))
-                            {
-                                betList.Odds = "-";
-                            }
-                        }
-                        else
-                        {
-                            betList.WinOdds = betList.WinStatus.ToLower().Equals(BetStatus.Won) ? betList.WinOdds : "0";
-                            betList.PlaceOdds = betList.PlaceStatus.ToLower().Equals(BetStatus.Won) ||
-                            betList.PlaceStatus.ToLower().Equals(BetStatus.Lose) ?
-                            betList.PlaceOdds.Format(2) : "0.00";
-                            betList.Odds = "<span>Win:<b>" + betList.WinOdds + "</b></span><br/><span>Place:<b>" + betList.PlaceOdds + "</b></span>";
-                            betList.Status = "<span>Win:<b>" + betList.WinStatus + "</b></span></br><span>Place:<b>" + betList.PlaceStatus + "</b></span>";
-                        }
-
-                        stakeTotal += stake;
-                        memberWinLossTotal += memberWinLoss;
-                        playerCommTotal += playerComm;
-                        agencyWinLossTotal += agencyWinLoss;
-                        agencyCommIncomeTotal += agencyCommIncome;
-                        ibcCommIncomeTotal += ibcCommIncome;
-                        ibcWinLossTotal += ibcWinLoss;
-                        dividendTotal += dividend;
-                        betListRacing.BetListDetail.Add(betList);
-                    }
-
-                    betListRacing.Total = new BetListRacingToteWinLoss()
-                    {
-                        Stake = stakeTotal.ToString("#,##0"),
-                        MemberWinLoss = memberWinLossTotal.Format(2),
-                        PlayerComm = playerCommTotal.Format(2),
-                        AgencyCommIncome = agencyCommIncomeTotal.Format(2),
-                        AgencyPTWinLoss = agencyWinLossTotal.Format(2),
-                        IBCCommIncome = ibcCommIncomeTotal.Format(2),
-                        IBCPTWinLoss = ibcWinLossTotal.Format(2),
-                        Dividend = dividendTotal.Format(2)
-                    };
-                }
-            }
-
-
-            return betListRacing;
-        }
-
 
         private bool IsShowOddsWithChoice(int betTypeId)
         {

@@ -87,13 +87,6 @@
             return PartialView("~/Areas/Betlist/Views/_CombinationMPDetail.cshtml", result);
         }
 
-        [HttpPost]
-        public ActionResult GetBetlistRacingToteWinLoss(BetListRacingWinLossToteCriteria criteria)
-        {
-            var result = this._betListService.GetBetListRacingToteWinLoss(criteria);
-            return Json(result);
-        }
-
         public ActionResult GetCashOutHistory(GetCashOutDetailCriteria criteria)
         {
             var cashOutHistory = _betListCashoutDetailService.GetCashOutHistory(criteria);
