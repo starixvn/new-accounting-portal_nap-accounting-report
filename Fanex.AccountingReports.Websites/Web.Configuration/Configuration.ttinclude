@@ -306,9 +306,8 @@
             {
                 switch(Environment)
                 {
-				case SiteEnvironment.PRO:
+				    case SiteEnvironment.PRO:
                     case SiteEnvironment.MNL:
-					case SiteEnvironment.LOCAL:
 						return "On";
                     default:
                         return "Off";

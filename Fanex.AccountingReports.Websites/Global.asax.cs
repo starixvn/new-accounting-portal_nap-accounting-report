@@ -50,6 +50,7 @@ namespace Fanex.AccountingReports.Websites
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            FanexLogging.Register();
 
             try
             {
@@ -59,8 +60,6 @@ namespace Fanex.AccountingReports.Websites
             catch (Exception)
             {
             }
-
-            FanexLogging.Register();
         }
 
         protected void Session_End(object sender, EventArgs e)
