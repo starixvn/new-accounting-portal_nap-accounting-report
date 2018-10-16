@@ -39,5 +39,10 @@ namespace Fanex.AccountingReports.Websites.Controllers
         {
             return Redirect("../../UniversalReports/ActualMemberBet");
         }
+
+        public ActionResult DailyWinLoss2hSoccerMinor()
+        {
+            return Redirect("../../UniversalReports/DailyWinLoss2hSoccerMinor");
+        }
     }
 }
