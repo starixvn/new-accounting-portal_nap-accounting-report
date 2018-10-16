@@ -1,6 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Functions>
-  <Function Name="Legend Management - Core">
-    <Setting Key="LegendManagement_SelMenuListBySystem" SpName="Acc_MenuSelList" DbName="DBCUST.NAP_UserControl.bodbAdminNet" > </Setting>
-  </Function>
-</Functions>
