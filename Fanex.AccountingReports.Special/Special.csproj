@@ -208,7 +208,6 @@
     <Compile Include="Controllers\DailyTurnoverController.cs" />
     <Compile Include="Controllers\MarginReportController.cs" />
     <Compile Include="Controllers\ParlayWonController.cs" />
-    <Compile Include="Controllers\PunterAnalysisController.cs" />
     <Compile Include="Controllers\SaveBetReportController.cs" />
     <Compile Include="Controllers\SMATurnoverController.cs" />
     <Compile Include="Controllers\SpecialMatchAnalysisController.cs" />
