@@ -9,18 +9,7 @@
     <Setting Key="BetList_ScoreInformation_SelScoreInformation" SpName="Acc_Rpt_DailyWLDirect_Result" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="BetList_ScoreInformation_SelScoreInformation_WH" SpName="Acc_Rpt_DailyWLDirect_Result_Old" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
-  <Function Name="Gaming - Live Casino Game Statistics">
-    <Setting Key="Gaming_LiveCasinoGameStatistics_GetGameTable" SpName="Acc_Rpt_LiveCasino_GameStatistics_GameTableSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Gaming_LiveCasinoGameStatistics_GetReport" SpName="Acc_Rpt_LiveCasino_GameStatistics_DW" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Gaming_LiveCasinoGameStatistics_GetGameTypeList" SpName="Acc_Rpt_LiveCasino_GameStatistics_GameTypeSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0">
-      <Mapping DataField="typeID" ObjectProperty="Id" />
-      <Mapping DataField="typenamee" ObjectProperty="Name" />
-    </Setting>
-    <Setting Key="Gaming_LiveCasinoGameStatistics_GetGameTableList" SpName="Acc_Rpt_LiveCasino_GameStatistics_GameTableSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0">
-      <Mapping DataField="GameTableID" ObjectProperty="Id" />
-      <Mapping DataField="GameTable" ObjectProperty="Name" />
-    </Setting>
-  </Function>
+
   <Function Name="Gaming - Number Game Win Loss By Date">
     <Setting Key="Gaming_NumberGameWinLossByDate_GetBetType" SpName="Acc_BetTypeSel_NumberGame" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
@@ -49,16 +38,7 @@
     <Setting Key="WinLoss_DailyMixParlayWinLoss_GetCombinationWinLoss" SpName="Acc_Rpt_DailyParlayWinloss" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="WinLoss_DailyMixParlayWinLoss_GetAdvanceMixParlayReport" SpName="Acc_Rpt_MixParlay_Advance" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
-  <Function Name="Main Report - Daily Win Loss (2h) Soccer Minor Bettypes">
-    <Setting Key="Main_DailyWinLoss2hSoccer_Main2hReport" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2hSoccer_Main2hReport_14" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetSoccerReport" SpName="Acc_Rpt_DailyWLDirect_Soccer_Bettype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetSoccerReport_14" SpName="Acc_Rpt_DailyWLDirect_Soccer_Bettype14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetReportByBetType" SpName="Acc_Rpt_DailyWLDirect_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetReportByBetType_14" SpName="Acc_Rpt_DailyWLDirect_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Bettype_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_14" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Bettype_Site14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-  </Function>
+
   <Function Name="Main - Trader Performance">
     <Setting Key="Main_TraderPerformance_GetReport" SpName="Acc_Rpt_TraderPerformanceSum" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="Main_TraderPerformance_GetDetailReport" SpName="Acc_Rpt_TraderPerformanceDetail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
@@ -101,9 +81,7 @@
     <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeDetailReport_14" SpName="Acc_Rpt_NumberGame_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="Acc_Rpt_GetLicenseesByProduct" SpName="Acc_Rpt_GetLicenseesByProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
-  <Function Name="Gaming - Live Casino Agency Win Loss">
-    <Setting Key="Gaming_LiveCasinoAgencyWinLoss_GetReport" SpName="Acc_Rpt_LiveCasino_AgencyWinLoss" TimeOut="0" DbName="DBACC.bodb02.bodbAdminNet" />
-  </Function>
+
   <Function Name="Main - Credit Term">
     <Setting Key="CreditTerm" SpName="Acc_Rpt_CreditTerm" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
     <Setting Key="InstallAmount" SpName="Acc_Rpt_InstallAmount" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
@@ -115,7 +93,7 @@
   <Function Name="Racing - Win Lost Group Daily">
     <Setting Key="Racing_WinLostGroupDaily" SpName="Acc_Rpt_WinlostRacing_Group_Daily" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>
-  
+
   <Function Name="Misc - Credit Movement">
     <Setting Key="Misc_CreditMovement_GetSites" SpName="SiteSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
   </Function>

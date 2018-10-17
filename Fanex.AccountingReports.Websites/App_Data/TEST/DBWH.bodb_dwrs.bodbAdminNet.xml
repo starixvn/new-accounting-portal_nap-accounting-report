@@ -7,11 +7,6 @@
   <Function Name="Gaming - Number Game Win Loss By Date">
     <Setting Key="Gaming_NumberGameWinlossByDate_GetReport" SpName="Acc_Rpt_NumberGameWinlossByDate" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
-  <Function Name="Gaming - Live Casino Game Financial">
-    <Setting Key="Gaming_LiveCasinoGameFinancial_GetGameType" SpName="Acc_Rpt_CasinoGameStatistics_GameTypeSel" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Gaming_LiveCasinoGameFinancial_GetGameTable" SpName="Acc_Rpt_LiveCasinoFinance_GameTable" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Gaming_LiveCasinoGameFinancial_GetReport" SpName="Acc_Rpt_LiveCasinoFinance" DbName="DBWH.bodb_dwrs.bodbAdminNet" />
-  </Function>
   <Function Name="Gaming - Number Game Win Loss By Currency">
     <Setting Key="Gaming_NumberGameWinlossByCurrency_GetReport" SpName="Acc_Rpt_NumberGameWinlossByCurrency" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="Gaming_NumberGameWinlossByCurrency_GetReportDetail" SpName="Acc_Rpt_NumberGameWinlossByCurrency_detail" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
@@ -20,13 +15,7 @@
     <Setting Key="WinLoss_DailyMixParlayWinLoss_GetCombinationWinLoss_WH" SpName="Acc_Rpt_DailyParlayWinloss_DW" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="WinLoss_DailyMixParlayWinLoss_GetAdvanceMixParlayReport_WH" SpName="Acc_Rpt_MixParlay_Advance_Dw" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
   </Function>
-  
-  <Function Name="Main Report - Daily Win Loss (2h) Soccer Minor Bettypes">
-    <Setting Key="Main_DailyWinLoss2hSoccer_Main2hReport_WH" SpName="Acc_Rpt_DailyWLDirect_Sporttype_Soccer_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetSoccerReport_WH" SpName="Acc_Rpt_DailyWLDirect_Soccer_Bettype" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_GetReportByBetType_WH" SpName="Acc_Rpt_DailyWLDirect_Details" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_DailyWinLoss2h_WinLossBySiteBetType_WH" SpName="Acc_Rpt_DailyWLDirect_Bettype_Site_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-  </Function>
+
   <Function Name="Win Loss - Tree Win Loss">
     <Setting Key="WinLoss_TreeWinLoss_GetDataByProduct_WH" SpName="Acc_Rpt_TreeWinlostByProduct_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
     <Setting Key="WinLoss_TreeWinLoss_GetDataByCom_WH" SpName="Acc_Rpt_TreeWinlostByCom_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
@@ -34,7 +23,7 @@
     <Setting Key="WinLoss_TreeWinLoss_GetDataByMaster_WH" SpName="Acc_Rpt_TreeWinlostByMAg_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="WinLoss_TreeWinLoss_GetDataByAgent_WH" SpName="Acc_Rpt_TreeWinlostByAg_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
   </Function>
-  
+
   <Function Name="Gaming - Number Game Win Loss">
     <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeMainReport_WH" SpName="Acc_Rpt_NumberGameWinlossByBettype" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
     <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeDetailReport_WH" SpName="Acc_Rpt_NumberGameWinlossByBettypeDetail" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0"></Setting>
