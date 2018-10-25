@@ -205,6 +205,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\LiveCasinoProductSection\LiveCasinoProductCollection.cs" />
@@ -247,7 +248,6 @@
     <Compile Include="Constants\SportContants.cs" />
     <Compile Include="Constants\SystemNameConstants.cs" />
     <Compile Include="Criteria\DeleteMostVisitedPagesCriteria.cs" />
-    <Compile Include="Criteria\GetAdminGroupCriteria.cs" />
     <Compile Include="Criteria\GetCurrencyByLicenseeCriteria.cs" />
     <Compile Include="Criteria\GetDWHDateRangeCriteria.cs" />
     <Compile Include="Criteria\GetExchangeCurrenciesCriteria.cs" />
@@ -301,12 +301,10 @@
       <DependentUpon>Labels.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\Impl\CacheRef.cs" />
-    <Compile Include="Services\Impl\Interface\IUserGroupService.cs" />
     <Compile Include="Services\Impl\LoggingHandler.cs" />
     <Compile Include="Services\Impl\MostVisitedPagesService.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Services\Impl\UserGroupService.cs" />
     <Compile Include="Services\Impl\Worker\BaseWorker.cs" />
     <Compile Include="Services\Impl\Worker\MostVisitedPageSavingWorker.cs" />
     <Compile Include="Services\Impl\Interface\IMostVisitedPagesService.cs" />

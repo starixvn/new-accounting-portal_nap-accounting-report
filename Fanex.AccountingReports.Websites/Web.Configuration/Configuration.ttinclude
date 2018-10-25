@@ -67,14 +67,8 @@
                     case SiteEnvironment.PRO:
                     case SiteEnvironment.MNL:
                         return "LIVE";
-                    case SiteEnvironment.UAT:
-					case SiteEnvironment.SIT:
-                    case SiteEnvironment.LOCAL:
-                    case SiteEnvironment.DEV:
-                        return "UAT";
-
                     default:
-                        return string.Empty;
+                        return "UAT";
                 }
             }
         }
@@ -118,11 +112,11 @@
                 {
 					case SiteEnvironment.DEV:
 					case SiteEnvironment.LOCAL:
-						return "http://ha.nexdev.net:1711/api";
+						return "http://ha.nexdev.net:1712/api";
                     case SiteEnvironment.SIT:
 						return "http://172.16.4.106:1710/api";
                     case SiteEnvironment.UAT:
-						return "http://10.40.40.248:1710/main/api";
+						return "http://10.40.40.248:1710/v1/api";
 					case SiteEnvironment.PRO:
 						return "http://10.40.40.22:1710/api";
 					case SiteEnvironment.MNL:
@@ -286,7 +280,7 @@
                     case SiteEnvironment.MNL:
 						return	"<add uri=\"http://10.2.98.3:8091/pools/default\" />";
                     default:
-                        return "<add uri=\"http://10.35.35.253:8091/pools/default\" /> \r\n\t\t <add uri=\"http://10.35.35.253:8091/pools/default\" />";
+                        return "<add uri=\"http://ha.nexdev.net:8091/pools/default\" />";
                 }
             }
         }
@@ -312,9 +306,8 @@
             {
                 switch(Environment)
                 {
-				case SiteEnvironment.PRO:
+				    case SiteEnvironment.PRO:
                     case SiteEnvironment.MNL:
-					case SiteEnvironment.LOCAL:
 						return "On";
                     default:
                         return "Off";

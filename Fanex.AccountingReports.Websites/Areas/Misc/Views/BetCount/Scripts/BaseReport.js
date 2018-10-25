@@ -13,6 +13,8 @@ Fanex.AccountingReports.Misc.BetCount.BaseReport = function () {
             SuperWinLoss: 'SuperWinLoss',
             CompanyWinLoss: 'CompanyWinLoss',
             TotalWinLoss: 'TotalWinLoss',
+            Commission: 'Commission',
+            ExtraPT: 'ExtraPT',
             None: ''
         }
     };
@@ -49,6 +51,8 @@ Fanex.AccountingReports.Misc.BetCount.BaseReport = function () {
                                                 <td><div class="col140 align-right">' + numeral(row.MasterWinLoss).format(FormatConstant.TWO_DECIMAL_NUMBER) + '</div></td>\
                                                 <td><div class="col140 align-right">' + numeral(row.SuperWinLoss).format(FormatConstant.TWO_DECIMAL_NUMBER) + '</div></td>\
                                                 <td><div class="col140 align-right">' + numeral(row.TotalWinLoss).format(FormatConstant.TWO_DECIMAL_NUMBER) + '</div></td>\
+                                                <td><div class="col140 align-right">' + numeral(row.Commission).format(FormatConstant.TWO_DECIMAL_NUMBER) + '</div></td>\
+                                                <td><div class="col140 align-right">' + numeral(row.ExtraPT).format(FormatConstant.TWO_DECIMAL_NUMBER) + '</div></td>\
                                                 <td><div class="col140 align-right' +
                                                 self.formatCellColor(row.CompanyWinLoss, true, false) + '">' +
                                                 numeral(row.CompanyWinLoss).format(FormatConstant.TWO_DECIMAL_NUMBER) + '</div></td>\
@@ -68,6 +72,8 @@ Fanex.AccountingReports.Misc.BetCount.BaseReport = function () {
                                             <th><div class="col140 align-right">' + numeral(row.MasterWinLoss).format(FormatConstant.TWO_DECIMAL_NUMBER) + '</div></th>\
                                             <th><div class="col140 align-right">' + numeral(row.SuperWinLoss).format(FormatConstant.TWO_DECIMAL_NUMBER) + '</div></th>\
                                             <th><div class="col140 align-right">' + numeral(row.TotalWinLoss).format(FormatConstant.TWO_DECIMAL_NUMBER) + '</div></th>\
+                                            <th><div class="col140 align-right">' + numeral(row.Commission).format(FormatConstant.TWO_DECIMAL_NUMBER) + '</div></th>\
+                                            <th><div class="col140 align-right">' + numeral(row.ExtraPT).format(FormatConstant.TWO_DECIMAL_NUMBER) + '</div></th>\
                                             <th><div class="col140 align-right' +
                                                 self.formatCellColor(row.CompanyWinLoss, true, false) + '">' +
                                                 numeral(row.CompanyWinLoss).format(FormatConstant.TWO_DECIMAL_NUMBER) + '</div></th>\

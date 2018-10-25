@@ -18,7 +18,6 @@
  <configSections>
     <section name="Fanex.Data.DbSettingProvider" type="Fanex.Data.Configuration.DbSettingProviderConfigurationSection, Fanex.Data" />
     <section name="Fanex.Logging" type="Fanex.Logging.Configuration.LoggingSettings, Fanex.Logging" />
-    <section name="LicenseeReportSection" type="Fanex.AccountingReports.Licensee.Core.Configurations.LicenseeReportSection, Fanex.AccountingReports.Licensee, Version=1.0.0.0, Culture=neutral" />
     <section name="LicenseeEmailSection" type="Fanex.AccountingReports.Licensee.Core.Configurations.LicenseeEmailSection, Fanex.AccountingReports.Licensee, Version=1.0.0.0, Culture=neutral" />
     <section name="RMSection" type="Fanex.AccountingReports.Core.Configurations.RMSection, Fanex.AccountingReports.Core, Version=1.0.0.0, Culture=neutral" />
     <section name="MAMonitorSection" type="Fanex.AccountingReports.Core.Configurations.MAMonitorSection, Fanex.AccountingReports.Core, Version=1.0.0.0, Culture=neutral" />
@@ -73,7 +72,6 @@
   <AuthenticationFilter>
     <Security authenticateFactory="Fanex.BetList.Accounting.Authenticate.SmartPunterAttribute, Fanex.BetList.Accounting" deniedViewPath="~/Views/Common/AccessDenied.cshtml" />
   </AuthenticationFilter>
-  <LicenseeReportSection configSource="Web.Configuration\LicenseeReportSection.config" />
   <LicenseeEmailSection configSource="Web.Configuration\LicenseeEmailSection.config" />
   <VirtualSportsWinLossSection configSource="Web.Configuration\VirtualSportsWinLossSection.config" />
   <RacingSection configSource="Web.Configuration\RacingSection.config" />
@@ -105,7 +103,7 @@
     </compilation>
 	<customErrors mode="<#=site.ErrorMode#>" defaultRedirect="~/Views/Errors/GeneralError.htm">
       <error statusCode="404" redirect="~/Views/Errors/Error404.htm" />
-      <error statusCode="500" redirect="Error" />
+      <error statusCode="500" redirect="~/Views/Errors/GeneralError.htm" />
     </customErrors>
     <authentication mode="Forms">
       <forms

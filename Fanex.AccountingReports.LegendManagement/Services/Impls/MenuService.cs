@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.LegendManagement.Services.Impls
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
@@ -28,29 +27,8 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             Justification = "Reviewed. Suppression is OK here.")]
         public List<MenuItem> GetMenuList(GetSystemMenuCriteria criteria)
         {
-            try
-            {
-                switch (criteria.System)
-                {
-                    case Constants.SystemName.AccNapReport:
-                        var menuList = new SiteService().GetMenuItemBySiteId(WebSettings.NAPSiteId, Constant.UAT);
-                        return this.MappingNapMenuToAccountingMenu(menuList);
-
-                    case Constants.SystemName.AccReport:
-                        var rawData = GetReportData<dynamic>(criteria)
-                            .OrderBy(menuItem => menuItem.Menu)
-                            .ToList();
-
-                        var listMenu = this.RecursionMenu(rawData, 0);
-                        return listMenu;
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            return new List<MenuItem>();
+            var menuList = new SiteService().GetMenuItemBySiteId(WebSettings.NAPSiteId, Constant.UAT, true);
+            return this.MappingNapMenuToAccountingMenu(menuList);
         }
 
         /// <summary>

@@ -96,8 +96,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                                                AgentWinLoss = Converter.ToDecimal(transaction.AgentWL),
                                                MasterWinLoss = Converter.ToDecimal(transaction.MasterWL),
                                                SuperWinLoss = Converter.ToDecimal(transaction.SuperWL),
-                                               CompanyWinLoss = Converter.ToDecimal(transaction.Company),
-                                               TotalWinLoss = Converter.ToDecimal(transaction.SMAWL)
+                                               CompanyWinLoss = Converter.ToDecimal(transaction.RealIncome),
+                                               TotalWinLoss = Converter.ToDecimal(transaction.SMAWL),
+                                               Commission = Converter.ToDecimal(transaction.Commission),
+                                               ExtraPT = Converter.ToDecimal(transaction.ExtraPT),                                               
                                            };
 
                                            transactionData.MarginPercent = CalculateMargin(transactionData.MemberWinLoss, transactionData.Turnover);
@@ -255,7 +257,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             CellRange currentCellRange;
 
             currentColumn = startColumn;
-            for (int colIndex = 0; colIndex < 10; colIndex++)
+            for (int colIndex = 0; colIndex < 12; colIndex++)
             {
                 worksheet.Columns[startColumn + colIndex].Width = 150 * ExcelExtensions.FontWidth;
             }
@@ -266,13 +268,13 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 criteria.Dateend.ToShortFormatedDate());
 
             currentColumn = startColumn;
-            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 9);
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 11);
             currentCellRange.Merged = true;
             currentCellRange.Value = title;
             currentCellRange.Style.FormatTitleCell(titleColor);
             currentRow += 2;
 
-            worksheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 9);
+            worksheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 11);
 
             //// First Row
             currentColumn = startColumn;
@@ -302,7 +304,19 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Company_Income;
+            currentCellRange.Value = "Commission";
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = "ExtraPT";
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = "House Real Income";
             currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
             currentRow++;
@@ -311,7 +325,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             currentColumn = startColumn + 2;
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Total_Turnover;
+            currentCellRange.Value = "Turnover";
             currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
 
@@ -572,6 +586,18 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
             currentCellRange.Merged = true;
+            currentCellRange.Value = transaction.Commission;
+            currentCellRange.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = transaction.ExtraPT;
+            currentCellRange.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+            currentCellRange.Merged = true;
             currentCellRange.Value = transaction.CompanyWinLoss;
             currentCellRange.Style = twoDecimalPositiveNumberStyle;
             currentColumn++;
@@ -624,6 +650,12 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                     break;
                 case "CompanyWinLoss":
                     columnName = "CompanyWinLoss";
+                    break;
+                case "Commission":
+                    columnName = "Commission";
+                    break;
+                case "ExtraPT":
+                    columnName = "ExtraPT";
                     break;
             }
 

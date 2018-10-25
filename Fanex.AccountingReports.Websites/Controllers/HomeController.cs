@@ -16,9 +16,12 @@ namespace Fanex.AccountingReports.Websites.Controllers
     {
         private readonly IMostVisitedPagesService _mostVisitedPagesService;
 
+        private readonly MenuService _menuService;
+
         public HomeController()
         {
             this._mostVisitedPagesService = new MostVisitedPagesService();
+            _menuService = new MenuService();
         }
 
         /// <summary>
@@ -50,6 +53,24 @@ namespace Fanex.AccountingReports.Websites.Controllers
             this._mostVisitedPagesService.UpdateCount(mostVisitedPage);
             return new EmptyResult();
         }
+
+        [HttpGet]
+        public ActionResult UpdateMostVisitedPageCountByUrl(string url)
+        {
+            var menuPath = MenuService.GetMenuPathFromRequestFilePath(url, Request.ApplicationPath);
+            menuPath = menuPath.TrimEnd(new[] { '/', '#' });
+            var menu = _menuService.GetMenuByURL(menuPath);
+            if (menu != null)
+            {
+                var mostVisitedPage = new MostVisitedPage { MenuId = menu.Id };
+                this._mostVisitedPagesService.UpdateCount(mostVisitedPage);
+                return Content(menu.Id.ToString());
+
+            }
+            return new EmptyResult();
+        }
+
+
 
         [HttpPost]
         public ActionResult UpdateMostVisitedPagePosition(UpdateMostVisitedPagePositionCriteria mostVisitedPage)
