@@ -4,7 +4,6 @@ namespace Fanex.AccountingReports.Balance.Controllers
     using Core.Web;
     using Fanex.AccountingReports.Balance.Criteria.SuperBalance;
     using Fanex.AccountingReports.Balance.Services.Implement;
-    using Fanex.AccountingReports.Balance.Services.Interface;
     using Fanex.AccountingReports.Core.Exceptions;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using NAP.Core.Business;
@@ -15,7 +14,7 @@ namespace Fanex.AccountingReports.Balance.Controllers
     /// </summary>
     public class SuperBalanceController : BaseController
     {
-        private readonly ISuperBalanceService _superBalanceService;
+        private readonly SuperBalanceService _superBalanceService;
 
         public SuperBalanceController()
         {

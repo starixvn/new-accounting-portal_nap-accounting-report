@@ -175,10 +175,8 @@
     <Compile Include="Models\PeakConcurrentUser\PeakConcurrentUser.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Implement\CompanyWinLossRepository.cs" />
-    <Compile Include="Repositories\Implement\NegativeBalanceRepository.cs" />
-    <Compile Include="Repositories\Interface\ICompanyWinLossRepository.cs" />
-    <Compile Include="Repositories\Interface\INegativeBalanceRepository.cs" />
+    <Compile Include="Repositories\CompanyWinLossRepository.cs" />
+    <Compile Include="Repositories\NegativeBalanceRepository.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -189,14 +187,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LicenseeResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Implement\CompanyWinLossService.cs" />
-    <Compile Include="Services\Implement\NegativeBalanceService.cs" />
-    <Compile Include="Services\Implement\LicenseeSiteService.cs" />
-    <Compile Include="Services\Interface\ICompanyWinLossService.cs" />
-    <Compile Include="Services\Interface\ILicenseeSiteService.cs" />
-    <Compile Include="Services\Implement\PeakConcurrentUserService.cs" />
-    <Compile Include="Services\Interface\INegativeBanlance.cs" />
-    <Compile Include="Services\Interface\IPeakConcurrentUserService.cs" />
+    <Compile Include="Services\CompanyWinLossService.cs" />
+    <Compile Include="Services\NegativeBalanceService.cs" />
+    <Compile Include="Services\LicenseeSiteService.cs" />
+    <Compile Include="Services\PeakConcurrentUserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Labels.resx">
@@ -210,7 +204,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Services\Implement\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">
       <Project>{A5608298-26C2-4F05-A7FD-AA8C0700ED38}</Project>

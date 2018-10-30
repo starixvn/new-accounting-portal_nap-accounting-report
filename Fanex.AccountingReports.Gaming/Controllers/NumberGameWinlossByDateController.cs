@@ -7,7 +7,6 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     using Fanex.AccountingReports.Gaming.Criteria;
     using Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByDate;
     using Fanex.AccountingReports.Gaming.Services.Implement;
-    using Fanex.AccountingReports.Gaming.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -16,7 +15,7 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     /// </summary>
     public class NumberGameWinlossByDateController : BaseController
     {
-        private readonly INumberGameWinlossByDateService _numberGameWinlossByDateService;
+        private readonly NumberGameWinlossByDateService _numberGameWinlossByDateService;
 
         public NumberGameWinlossByDateController()
         {

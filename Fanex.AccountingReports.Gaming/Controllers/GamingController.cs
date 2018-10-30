@@ -5,14 +5,13 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Gaming.Criteria;
     using Fanex.AccountingReports.Gaming.Services.Implement;
-    using Fanex.AccountingReports.Gaming.Services.Interface;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class GamingController : BaseController
     {
-        private readonly IGamingService _reportService;
+        private readonly GamingService _reportService;
 
         public GamingController()
         {

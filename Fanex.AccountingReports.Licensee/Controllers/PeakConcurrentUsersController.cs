@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     using Fanex.AccountingReports.Licensee.Criteria.PeakConcurrentUser;
     using Fanex.AccountingReports.Licensee.Models.PeakConcurrentUser;
     using Fanex.AccountingReports.Licensee.Services.Implement;
-    using Fanex.AccountingReports.Licensee.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -15,8 +14,8 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     /// </summary>
     public class PeakConcurrentUsersController : BaseController
     {
-        private readonly IPeakConcurrentUserService _reportService;
-        private readonly ILicenseeSiteService _licenseeSite;
+        private readonly PeakConcurrentUserService _reportService;
+        private readonly LicenseeSiteService _licenseeSite;
 
         public PeakConcurrentUsersController()
         {

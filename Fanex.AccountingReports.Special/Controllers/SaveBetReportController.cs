@@ -11,7 +11,6 @@ namespace Fanex.AccountingReports.Special.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Special.Criteria.SaveBetReport;
     using Fanex.AccountingReports.Special.Services.Implement.SaveBetReport;
-    using Fanex.AccountingReports.Special.Services.Interface;
     using Fanex.Common;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
@@ -22,7 +21,7 @@ namespace Fanex.AccountingReports.Special.Controllers
     /// </summary>
     public class SaveBetReportController : BaseController
     {
-        private readonly ISaveBetReportService _saveBetReportService;
+        private readonly SaveBetReportService _saveBetReportService;
         private NetworkCredential _networkCredential;
         private string ip = AppSettings.IP;
         private string username = AppSettings.UserName;

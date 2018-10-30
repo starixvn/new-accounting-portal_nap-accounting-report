@@ -259,29 +259,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SpecialResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Implement\DailyTurnover\DailyDetailChangedTurnoverExportReportService.cs" />
-    <Compile Include="Services\Implement\MarginReport\MarginWinLossService.cs" />
-    <Compile Include="Services\Implement\DailyTurnover\DailyDetailChangedTurnoverService.cs" />
-    <Compile Include="Services\Implement\DailyTurnover\ExcelUtil.cs" />
-    <Compile Include="Services\Implement\DailyTurnover\DailyTurnoverService.cs" />
-    <Compile Include="Services\Implement\ParlayWonService.cs" />
-    <Compile Include="Services\Implement\SaveBetReport\SaveBetReportService.cs" />
-    <Compile Include="Services\Implement\SMATurnover\SMATurnoverExportDataService.cs" />
-    <Compile Include="Services\Implement\SMATurnover\SMATurnoverService.cs" />
-    <Compile Include="Services\Implement\SpecialMatchAnalysisService.cs" />
-    <Compile Include="Services\Interface\DailyTurnover\IDailyDetailChangedTurnoverExportReportService.cs" />
-    <Compile Include="Services\Interface\DailyTurnover\IDailyDetailChangedTurnoverService.cs" />
-    <Compile Include="Services\Interface\DailyTurnover\IDailyTurnoverService.cs" />
-    <Compile Include="Services\Interface\IParlayWonService.cs" />
-    <Compile Include="Services\Interface\ISaveBetReportService.cs" />
-    <Compile Include="Services\Interface\ISMATurnoverService.cs" />
-    <Compile Include="Services\Interface\ISpecialMatchAnalysisService.cs" />
-    <Compile Include="Services\Interface\MarginReport\IMarginWinLossService.cs" />
+    <Compile Include="Services\DailyTurnover\DailyDetailChangedTurnoverExportReportService.cs" />
+    <Compile Include="Services\MarginReport\MarginWinLossService.cs" />
+    <Compile Include="Services\DailyTurnover\DailyDetailChangedTurnoverService.cs" />
+    <Compile Include="Services\DailyTurnover\ExcelUtil.cs" />
+    <Compile Include="Services\DailyTurnover\DailyTurnoverService.cs" />
+    <Compile Include="Services\ParlayWonService.cs" />
+    <Compile Include="Services\SaveBetReport\SaveBetReportService.cs" />
+    <Compile Include="Services\SMATurnover\SMATurnoverExportDataService.cs" />
+    <Compile Include="Services\SMATurnover\SMATurnoverService.cs" />
+    <Compile Include="Services\SpecialMatchAnalysisService.cs" />
     <Compile Include="SpecialAreaRegistration.cs" />
     <Compile Include="Models\CheckBet\CheckBet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Implement\CheckBetService.cs" />
-    <Compile Include="Services\Interface\ICheckBetService.cs" />
+    <Compile Include="Services\CheckBetService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Labels.resx">

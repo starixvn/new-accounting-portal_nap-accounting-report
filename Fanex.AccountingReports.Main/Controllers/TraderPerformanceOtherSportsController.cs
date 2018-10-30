@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Main.Criteria.TraderPerformance;
     using Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOtherSports;
-    using Fanex.AccountingReports.Main.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -15,7 +14,7 @@ namespace Fanex.AccountingReports.Main.Controllers
     /// </summary>
     public class TraderPerformanceOtherSportsController : BaseController
     {
-        private readonly ITraderPerformanceOtherSportsService _reportService;
+        private readonly TraderPerformanceOtherSportsService _reportService;
 
         public TraderPerformanceOtherSportsController()
         {

@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Main.Criteria.CreditTerm;
     using Fanex.AccountingReports.Main.Services.Implement.CreditTerm;
-    using Fanex.AccountingReports.Main.Services.Interface.CreditTerm;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -15,13 +14,13 @@ namespace Fanex.AccountingReports.Main.Controllers
     /// </summary>
     public class CreditTermController : BaseController
     {
-        private ICreditTermService _getCreditReportService;
+        private CreditTermService _getCreditReportService;
 
-        private IInstallmentAmountService _getInstallmentAmountService;
+        private InstallmentAmountService _getInstallmentAmountService;
 
-        private ICreditTermExportExcelService _exportCreditReportService;
+        private CreditTermExportExcelService _exportCreditReportService;
 
-        private IInstallmentAmountExportExcelService _exportInstallmentAmountService;
+        private InstallmentAmountExportExcelService _exportInstallmentAmountService;
 
         public CreditTermController()
         {

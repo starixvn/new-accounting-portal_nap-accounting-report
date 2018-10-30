@@ -11,25 +11,20 @@ using OfficeOpenXml;
 
 namespace Fanex.AccountingReports.Main.Services.TraderPerformanceSoccerPH
 {
-    public interface TraderDetailExcelService
-    {
-        void Execute(GetDetailPHCriteria criteria);
-    }
-
-    public class TraderDetailExcelServiceImp : TraderDetailExcelService
+    public class TraderDetailExcelServiceImp
     {
         private const int BeginContentRowIndex = 6;
         private const int BeginColumnMainGroupIndex = 8;
 
-        private readonly TraderDataService traderDataService;
-        private readonly TraderDetailPivotService traderDetailPivotService;
+        private readonly TraderDataServiceImp traderDataService;
+        private readonly TraderDetailPivotServiceImp traderDetailPivotService;
         private readonly ExcelPackage excelPackage;
         private ExcelWorksheet templateSheet;
         private ExcelWorksheet sheetTrader;
 
         private int currentContentRowIndex;
 
-        public TraderDetailExcelServiceImp(TraderDataService traderDataService, TraderDetailPivotService traderDetailPivotService, ExcelPackage excelPackage)
+        public TraderDetailExcelServiceImp(TraderDataServiceImp traderDataService, TraderDetailPivotServiceImp traderDetailPivotService, ExcelPackage excelPackage)
         {
             this.traderDataService = traderDataService;
             this.traderDetailPivotService = traderDetailPivotService;

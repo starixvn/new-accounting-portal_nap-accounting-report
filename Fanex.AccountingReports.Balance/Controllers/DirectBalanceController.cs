@@ -4,7 +4,6 @@ namespace Fanex.AccountingReports.Balance.Controllers
     using Core.Web;
     using Fanex.AccountingReports.Balance.Criteria.DirectBalance;
     using Fanex.AccountingReports.Balance.Services.Implement;
-    using Fanex.AccountingReports.Balance.Services.Interface;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using NAP.Core.Business;
     using NAP.Core.Web.Attribute;
@@ -14,7 +13,7 @@ namespace Fanex.AccountingReports.Balance.Controllers
     /// </summary>
     public class DirectBalanceController : BaseController
     {
-        private readonly IDirectBalanceService _directBalanceService;
+        private readonly DirectBalanceService _directBalanceService;
 
         public DirectBalanceController()
         {

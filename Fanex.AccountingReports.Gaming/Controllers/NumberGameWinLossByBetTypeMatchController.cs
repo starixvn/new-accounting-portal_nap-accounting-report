@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByBetTypeMatch;
     using Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByBetTypeMatch;
-    using Fanex.AccountingReports.Gaming.Services.Interface.NumberGameWinLossByBetTypeMatch;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -15,11 +14,11 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     /// </summary>
     public class NumberGameWinLossByBetTypeMatchController : BaseController
     {
-        private readonly INumberGameWinLossByBetTypeMatchService _numberGameWinLossService;
+        private readonly NumberGameWinLossByBetTypeMatchService _numberGameWinLossService;
 
-        private readonly IWinLossByBetTypeService _winLossByBetTypeService;
+        private readonly WinLossByBetTypeService _winLossByBetTypeService;
 
-        private readonly IWinLossByMatchService _winLossByMatchService;
+        private readonly WinLossByMatchService _winLossByMatchService;
 
         public NumberGameWinLossByBetTypeMatchController()
         {

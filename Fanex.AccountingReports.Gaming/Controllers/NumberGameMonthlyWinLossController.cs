@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Gaming.Criteria.NumberGameMonthlyWinLoss;
     using Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWinLoss;
-    using Fanex.AccountingReports.Gaming.Services.Interface.NumberGameMonthlyWinLoss;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -15,8 +14,8 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     /// </summary>
     public class NumberGameMonthlyWinLossController : BaseController
     {
-        private readonly INumberGameMonthlyWinLossService _numberGameMonthlyWinLossService;
-        private readonly INumberGameMonthlyWinLossExportDataService _numberGameMonthlyWinLossExportDataService;
+        private readonly NumberGameMonthlyWinLossService _numberGameMonthlyWinLossService;
+        private readonly NumberGameMonthlyWinLossExportDataService _numberGameMonthlyWinLossExportDataService;
 
         public NumberGameMonthlyWinLossController()
         {

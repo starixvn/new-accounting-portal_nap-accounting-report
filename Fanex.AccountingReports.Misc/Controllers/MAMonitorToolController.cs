@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.Misc.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Misc.Criteria.MAMonitorTool;
     using Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool;
-    using Fanex.AccountingReports.Misc.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -15,9 +14,9 @@ namespace Fanex.AccountingReports.Misc.Controllers
     /// </summary>
     public class MAMonitorToolController : BaseController
     {
-        private readonly IMAMonitorToolService _reportService;
+        private readonly MAMonitorToolService _reportService;
 
-        private readonly IMAMonitorToolService _exportReportService;
+        private readonly MAMonitorToolService _exportReportService;
 
         public MAMonitorToolController()
         {

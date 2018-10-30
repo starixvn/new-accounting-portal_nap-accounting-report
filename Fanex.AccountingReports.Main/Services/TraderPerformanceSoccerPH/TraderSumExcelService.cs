@@ -10,23 +10,18 @@ using OfficeOpenXml;
 
 namespace Fanex.AccountingReports.Main.Services.TraderPerformanceSoccerPH
 {
-    public interface TraderSumExcelService
-    {
-        void Execute(GetSummaryPHCriteria criteria);
-    }
-
-    public class TraderSumExcelServiceImp : TraderSumExcelService
+    public class TraderSumExcelServiceImp
     {
         private const int BeginContentRowIndex = 6;
 
-        private readonly TraderDataService traderDataService;
-        private readonly TraderSumPivotService traderPHTransformService;
+        private readonly TraderDataServiceImp traderDataService;
+        private readonly TraderSumPivotServiceImp traderPHTransformService;
         private readonly ExcelPackage excelPackage;
 
         private readonly ExcelWorksheet templateSheet;
         private readonly ExcelWorksheet sheetTrader;
 
-        public TraderSumExcelServiceImp(TraderDataService traderDataService, TraderSumPivotService traderPHTransformService, ExcelPackage excelPackage)
+        public TraderSumExcelServiceImp(TraderDataServiceImp traderDataService, TraderSumPivotServiceImp traderPHTransformService, ExcelPackage excelPackage)
         {
             this.traderDataService = traderDataService;
             this.traderPHTransformService = traderPHTransformService;
@@ -183,10 +178,10 @@ namespace Fanex.AccountingReports.Main.Services.TraderPerformanceSoccerPH
                 else
                 {
                     sheetTrader.Cells[totalRowIndex, columnIndex].Value = dataTable.AsEnumerable().Sum(s => Converter.To<decimal>(s[columnIndex - 1]));
-                }                
+                }
 
                 if (columnIndex >= 9)
-                {                    
+                {
                     var result = styles.FirstOrDefault(s => columnName.Contains(s.Key));
                     if (string.IsNullOrEmpty(result.Key))
                     {
@@ -199,7 +194,7 @@ namespace Fanex.AccountingReports.Main.Services.TraderPerformanceSoccerPH
                 }
             }
 
-            sheetTrader.Cells[$"C{totalRowIndex}:H{totalRowIndex}"].StyleID = templateSheet.Cells["H7"].StyleID;            
+            sheetTrader.Cells[$"C{totalRowIndex}:H{totalRowIndex}"].StyleID = templateSheet.Cells["H7"].StyleID;
         }
 
         private static decimal CalculateMargin(IEnumerable<DataRow> rows, string columnName)

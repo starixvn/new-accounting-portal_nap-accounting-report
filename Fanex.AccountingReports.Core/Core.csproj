@@ -252,7 +252,6 @@
     <Compile Include="Criteria\GetDWHDateRangeCriteria.cs" />
     <Compile Include="Criteria\GetExchangeCurrenciesCriteria.cs" />
     <Compile Include="Criteria\GetLicensee_SupportByProductCriteria.cs" />
-    <Compile Include="Criteria\IPagingCriteria.cs" />
     <Compile Include="Criteria\SelectMostvisitedPageCriteria.cs" />
     <Compile Include="Criteria\UpdateMostVisitedPageCountCriteria.cs" />
     <Compile Include="Criteria\UpdateMostVisitedPagePositionCriteria.cs" />
@@ -281,15 +280,12 @@
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\UserNameSuggestion.cs" />
-    <Compile Include="Repository\Impl\BaseRepository.cs" />
-    <Compile Include="Repository\Impl\ExchangeCurrencyRepository.cs" />
-    <Compile Include="Repository\Impl\MostVisitedPagesRepository.cs">
+    <Compile Include="Repository\BaseRepository.cs" />
+    <Compile Include="Repository\ExchangeCurrencyRepository.cs" />
+    <Compile Include="Repository\MostVisitedPagesRepository.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Repository\Impl\ReportHelperRepository.cs" />
-    <Compile Include="Repository\Interface\IExchangeCurrencyRepository.cs" />
-    <Compile Include="Repository\Interface\IMostVisitedPagesRepository.cs" />
-    <Compile Include="Repository\Interface\IReportHelperRepository.cs" />
+    <Compile Include="Repository\ReportHelperRepository.cs" />
     <Compile Include="Resources\Errors.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -300,14 +296,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Labels.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Impl\CacheRef.cs" />
-    <Compile Include="Services\Impl\LoggingHandler.cs" />
-    <Compile Include="Services\Impl\MostVisitedPagesService.cs">
+    <Compile Include="Services\CacheRef.cs" />
+    <Compile Include="Services\LoggingHandler.cs" />
+    <Compile Include="Services\MostVisitedPagesService.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Services\Impl\Worker\BaseWorker.cs" />
-    <Compile Include="Services\Impl\Worker\MostVisitedPageSavingWorker.cs" />
-    <Compile Include="Services\Impl\Interface\IMostVisitedPagesService.cs" />
+    <Compile Include="Services\Worker\BaseWorker.cs" />
+    <Compile Include="Services\Worker\MostVisitedPageSavingWorker.cs" />
     <Compile Include="Utilities\CellStyles\BaseBodyCellStyles.cs" />
     <Compile Include="Utilities\CellStyles\BaseCellStyles.cs" />
     <Compile Include="Utility\Impersonate.cs" />
@@ -316,16 +311,15 @@
     <Compile Include="Utilities\CellStyles\BaseSubTotalCellStyles.cs" />
     <Compile Include="Utilities\CellStyles\CustomColor.cs" />
     <Compile Include="Web\CacheExtension.cs" />
-    <Compile Include="Services\Impl\MailService.cs" />
-    <Compile Include="Services\Impl\PermissionService.cs" />
-    <Compile Include="Services\Impl\ReportService.cs" />
+    <Compile Include="Services\MailService.cs" />
+    <Compile Include="Services\PermissionService.cs" />
+    <Compile Include="Services\ReportService.cs" />
     <Compile Include="Web\Controllers\BaseController.cs" />
     <Compile Include="Configurations\AppSettings.cs" />
     <Compile Include="Criteria\BalanceUpCriteria.cs" />
     <Compile Include="Extensions\ExcelExtensions.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />
     <Compile Include="Models\DownTime.cs" />
-    <Compile Include="Services\Impl\Interface\IServiceBase.cs" />
     <Compile Include="Models\BalanceUp.cs" />
     <Compile Include="Models\EntityBase.cs" />
     <Compile Include="Models\MostVisitedPage.cs" />
@@ -336,9 +330,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Impl\ServiceBase.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
-    <Compile Include="Services\Impl\MenuService.cs" />
+    <Compile Include="Services\MenuService.cs" />
     <Compile Include="Web\AppSession.cs" />
     <Compile Include="Web\Controllers\ReportHelperController.cs" />
     <Compile Include="Web\CustomResults\CsvResult.cs" />

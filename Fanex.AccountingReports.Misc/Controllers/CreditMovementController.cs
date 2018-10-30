@@ -8,7 +8,6 @@ namespace Fanex.AccountingReports.Misc.Controllers
     using Fanex.AccountingReports.Misc.Criteria.CreditMovement;
     using Fanex.AccountingReports.Misc.Resources;
     using Fanex.AccountingReports.Misc.Services.Implement.CreditMovement;
-    using Fanex.AccountingReports.Misc.Services.Interface.CrediMovement;
     using Fanex.Excel;
     using Fanex.Excel.Extensions;
     using Fanex.NAP.Core.Business;
@@ -19,7 +18,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
     /// </summary>
     public class CreditMovementController : BaseController
     {
-        private ICreditMovementService _service;
+        private CreditMovementService _service;
 
         private string _amount = "300,000";
 

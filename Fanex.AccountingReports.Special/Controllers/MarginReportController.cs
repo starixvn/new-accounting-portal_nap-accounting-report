@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.Special.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Special.Criteria.MarginReport;
     using Fanex.AccountingReports.Special.Services.Implement.MarginReport;
-    using Fanex.AccountingReports.Special.Services.Interface.MarginReport;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -15,7 +14,7 @@ namespace Fanex.AccountingReports.Special.Controllers
     /// </summary>
     public class MarginReportController : BaseController
     {
-        private IMarginWinLossService _marginService;
+        private MarginWinLossService _marginService;
 
         public MarginReportController()
         {

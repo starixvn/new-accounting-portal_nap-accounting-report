@@ -5,7 +5,6 @@ namespace Fanex.AccountingReports.Misc.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Misc.Criteria.CreditSitesBetCounts;
     using Fanex.AccountingReports.Misc.Services.Implement;
-    using Fanex.AccountingReports.Misc.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -14,7 +13,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
     /// </summary>
     public class CreditSitesBetCountsController : BaseController
     {
-        private readonly ICreditSitesBetCountsService _reportService;
+        private readonly CreditSitesBetCountsService _reportService;
 
         public CreditSitesBetCountsController()
         {

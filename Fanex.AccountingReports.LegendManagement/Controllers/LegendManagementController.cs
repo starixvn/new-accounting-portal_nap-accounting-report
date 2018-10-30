@@ -7,7 +7,6 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.LegendManagement.Criteria;
     using Fanex.AccountingReports.LegendManagement.Services.Impls;
-    using Fanex.AccountingReports.LegendManagement.Services.Interfaces;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -16,7 +15,7 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
     /// </summary>
     public class LegendManagementController : BaseController
     {
-        private readonly ILegendManagementService _legendService;
+        private readonly LegendManagementService _legendService;
 
         public LegendManagementController()
         {

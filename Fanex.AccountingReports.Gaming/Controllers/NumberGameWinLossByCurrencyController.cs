@@ -11,7 +11,7 @@ namespace Fanex.AccountingReports.Gaming.Controllers
 
     public class NumberGameWinLossByCurrencyController : BaseController
     {
-        private readonly INumberGameWinLossByCurrencyService _reportService;
+        private readonly NumberGameWinLossByCurrencyService _reportService;
 
         public NumberGameWinLossByCurrencyController()
         {
