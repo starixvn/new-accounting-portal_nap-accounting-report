@@ -323,7 +323,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BetListCashoutDetailRepository.cs" />
     <Compile Include="Repositories\BetListRepository.cs" />
-    <Compile Include="Repositories\IScoreInformationRepository.cs" />
     <Compile Include="Repositories\ScoreInformationRepository.cs" />
     <Compile Include="Resources\BetListGlobalResources.designer.cs">
       <AutoGen>True</AutoGen>
@@ -343,10 +342,7 @@
     <Compile Include="Services\BetListService.cs" />
     <Compile Include="Services\BetListCashoutDetailService.cs" />
     <Compile Include="Services\IpService.cs" />
-    <Compile Include="Services\IResultService.cs" />
-    <Compile Include="Services\IScoreInformationService.cs" />
     <Compile Include="Services\ReportService.cs" />
-    <Compile Include="Services\ResultService.cs" />
     <Compile Include="Services\ScoreInformationService.cs" />
   </ItemGroup>
   <ItemGroup>

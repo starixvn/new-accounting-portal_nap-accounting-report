@@ -11,18 +11,13 @@ namespace Fanex.BetList.Accounting.Services
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class ScoreInformationService : IScoreInformationService
+    public class ScoreInformationService
     {
-        private readonly IScoreInformationRepository _repository;
+        private readonly ScoreInformationRepository _repository;
 
         public ScoreInformationService()
-            : this(null)
         {
-        }
-
-        public ScoreInformationService(IScoreInformationRepository repository)
-        {
-            this._repository = repository ?? new ScoreInformationRepository();
+            this._repository = new ScoreInformationRepository();
         }
 
         /// <summary>

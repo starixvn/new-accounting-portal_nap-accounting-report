@@ -11,7 +11,7 @@ namespace Fanex.BetList.Accounting.Repositories
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class ScoreInformationRepository : IScoreInformationRepository
+    public class ScoreInformationRepository
     {
         /// <summary>
         /// Gets the score information.

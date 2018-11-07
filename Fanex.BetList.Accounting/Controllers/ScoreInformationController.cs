@@ -9,28 +9,17 @@ namespace Fanex.BetList.Accounting.Controllers
     /// </summary>
     public class ScoreInformationController : Controller
     {
-        private readonly IScoreInformationService _service;
-        private readonly IResultService _resultService;
+        private readonly ScoreInformationService _service;
 
         public ScoreInformationController()
         {
             this._service = new ScoreInformationService();
-            this._resultService = new ResultService();
         }
 
         [HttpPost]
         public JsonResult GetScoreInformation(GetScoreInformationCriteria criteria)
         {
             return Json(this._service.GetScoreInfo(criteria));
-        }
-
-        [HttpPost]
-        public ActionResult GetTennisResult(GetScoreInformationCriteria criteria)
-        {
-            criteria.TraderName = string.Empty;
-            var result = _resultService.GetTennisResult(criteria, criteria.MatchId.ToString(), 0);
-            ViewBag.criteria = criteria;
-            return PartialView("~/Areas/Betlist/Views/ScoreInformation/TennisSporting/_TennisSportting.cshtml", result);
         }
     }
 }
