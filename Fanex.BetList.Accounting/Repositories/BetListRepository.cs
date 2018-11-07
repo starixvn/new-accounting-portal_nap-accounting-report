@@ -1,5 +1,10 @@
 namespace Fanex.BetList.Accounting.Repositories
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using Fanex.BetList.Accounting.Core;
     using Fanex.BetList.Accounting.Models;
     using Fanex.BetList.Accounting.Resources;
@@ -7,23 +12,9 @@ namespace Fanex.BetList.Accounting.Repositories
     using Fanex.Common;
     using Fanex.Data;
     using Fanex.Data.Repository;
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
 
-    public interface BetListRepository
-    {
-        CombinationParlay BetList_SelDetailCombinationMP(ICriteria criteria);
-        IList<S> Fetch<S>(dynamic criteria, System.Func<DataRow, S> mapObjectFunction) where S : class;
-        IList<S> Fetch<S>(dynamic criteria, System.Func<DataRow, S> mapObjectFunction, ref List<ITicketData> outputList) where S : class;
-    }
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
-    public class BetListRepositoryImp : BetListRepository
+    public class BetListRepository
     {
         /// <summary>
         /// Fetches the specified data.

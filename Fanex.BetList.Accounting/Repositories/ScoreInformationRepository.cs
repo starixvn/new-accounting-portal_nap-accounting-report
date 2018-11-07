@@ -1,12 +1,12 @@
 namespace Fanex.BetList.Accounting.Repositories
 {
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Data;
     using Fanex.BetList.Accounting.Criteria;
     using Fanex.Common;
     using Fanex.Data;
     using Fanex.Result.Core.Sportsbook.DTO;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Data;
 
     /// <summary>
     /// TODO: Update summary.
@@ -58,40 +58,7 @@ namespace Fanex.BetList.Accounting.Repositories
 
             return result;
         }
-
-        /// <summary>
-        /// Gets the sporting solutions result.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The sporting solutions result.</returns>
-        public List<dynamic> GetSportingSolutionsResult(GetSportingSolutionsResultCriteria criteria)
-        {
-            var dataTable = new DataTable();
-            using (ObjectDb objDb = new ObjectDb(criteria.GetSettingKey()))
-            {
-                objDb.AddInParameter("matchid", DbType.Int32, criteria.MatchId);
-                objDb.AddInParameter("resourceid", DbType.String, criteria.Resourceid);
-                var ds = objDb.ExecuteDataSet();
-                if (ds != null && ds.Tables.Count > 0)
-                {
-                    dataTable = ds.Tables[0];
-                }
-            }
-
-            var result = new List<dynamic>();
-            if (dataTable != null && dataTable.Rows.Count > 0)
-            {
-                foreach (DataRow row in dataTable.Rows)
-                {
-                    result.Add(new
-                    {
-                        resultvalue = Converter.ToString2(row["resultvalue"])
-                    });
-                }
-            }
-
-            return result;
-        }
+        
 
         /// <summary>
         /// Binds the SPORTSBOOK.
@@ -114,7 +81,7 @@ namespace Fanex.BetList.Accounting.Repositories
                 EventDate = Converter.ToDateTime(reader["eventdate"].ToString()),
                 IsNeutral = Converter.ToBool(reader["IsNeutral"]),
                 BetStatus = Converter.ToString2(reader["betstatus"]),
-                IsPending = Converter.ToBool(reader["IsPending"]),
+                SettlementStatus = (byte)Converter.ToInt(reader["SettlementStatus"]),
                 LeagueId = criteria.LeagueId,
                 MatchId = criteria.MatchId,
                 Color = string.Empty,

@@ -19,25 +19,19 @@ namespace Fanex.BetList.Accounting.Services
     using RemotingRef;
     using AccBetListCore = Fanex.BetList.Accounting.Core;
 
-    public interface BetListService
-    {
-        IList<TicketDetail> GetBetListByRefNoTickets(BetListByRefNoCriteria criteria);
-        CombinationParlay GetCombinationMP(ICriteria criteria);
-        IList<TicketDetail> GetMixParlayTickets(MixParlayDetailCriteria criteria, string handicap1, string handicap2, string betcheck, string betteam);
-    }
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     [System.Runtime.InteropServices.Guid("6DF0115C-60E5-4182-BEF3-AC61F09BAF0A")]
-    public class BetListServiceImp : BetListService
+    public class BetListService
     {
         public const string BetListSessionKey = "Fanex.BetList.Accounting.WinLossByLicensee";
         private readonly BetListRepository _betListRepository;
 
-        public BetListServiceImp()
+        public BetListService()
         {
-            _betListRepository = new BetListRepositoryImp();
+            _betListRepository = new BetListRepository();
         }
 
         /// <summary>
@@ -74,7 +68,8 @@ namespace Fanex.BetList.Accounting.Services
                     BetCheck = Converter.ToString2(r["BetCheck"]),
                     Stake = Converter.ToDecimal(r["Stake"]),
                     Currency = Converter.ToString2(r["Currency"]),
-                    TransDesc = Converter.ToString2(r["TransDesc"])
+                    TransDesc = Converter.ToString2(r["TransDesc"]),
+                    SettlementStatus = 0
                 },
                 ChoiceHtml = string.Empty,
                 OddHtml = string.Empty,
@@ -196,7 +191,8 @@ namespace Fanex.BetList.Accounting.Services
                     Currency = Converter.ToString2(r["currency"]),
                     WalletType = Converter.To<byte>(r["WalletType"]),
                     RefCode = Converter.To<long>(r["RefCode"]),
-                    OddsSpread = Converter.To<decimal>(r["Oddsspread"])
+                    OddsSpread = Converter.To<decimal>(r["Oddsspread"]),
+                    SettlementStatus = (byte)Converter.ToInt(r["SettlementStatus"])
                 },
                 ChoiceHtml = string.Empty,
                 OddHtml = string.Empty,

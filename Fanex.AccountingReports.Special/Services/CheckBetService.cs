@@ -3,6 +3,8 @@ namespace Fanex.AccountingReports.Special.Services.Implement
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using BetList.Core.App_GlobalResources;
+    using BetList.Core.Entities;
     using Checkbet;
     using Common;
     using Fanex.AccountingReports.Core.Extensions;
@@ -80,6 +82,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                         var newTotalPT = (decimal)row.NewPT;
                         var oddstype = (row.oddstype != null) ? CalcOdds.GetOddsType(bettype, (int)row.oddstype) : 0;
                         var status = (string)row.status;
+                        var settlementStatus = (byte)Converter.ToInt(row.SettlementStatus);
                         var home = CacheRef.GetTeamName(row.homeid);
                         var newmatchcode = (string)row.NewMatchCode;
                         var oldmatchcode = (string)row.OldMatchCode;
@@ -140,7 +143,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                             NewBetteam = newBetteam,
                             OldTotalPT = oldTotalPT.Format(2),
                             NewTotalPT = newTotalPT.Format(2),
-                            Status = status,
+                            Status = GetResultString(status, settlementStatus),
                             Username = username
                         });
 
@@ -206,8 +209,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                         var odds = (decimal)row.odds;
                         var betteam = BetTeam.GetBetTeam((string)row.betteam, bettype, "e");
                         var totalPT = (decimal)row.tpositiontaking;
-                        var newStatus = (string)row.NewStatus;
-                        var oldStatus = (string)row.OldStatus;
+                        var settlementStatus = (byte)row.SettlementStatus;
+                        var newStatus = GetResultString((string)row.NewStatus, settlementStatus);
+                        var oldStatus = GetResultString((string)row.OldStatus, settlementStatus);
                         var home = CacheRef.GetTeamName(row.homeid);
                         var away = CacheRef.GetTeamName(row.awayid);
                         var hdp1 = (decimal)row.hdp1;
@@ -547,6 +551,72 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             }
 
             return result;
+        }
+
+        protected static string GetResultString(string ticketStatus, byte settlementStatus)
+        {
+            string result = string.Empty;
+
+            switch (ticketStatus.ToLowerInvariant())
+            {
+                case BetStatus.Running:
+                    result = DetectRealRunningStatus(settlementStatus);
+                    break;
+
+                case BetStatus.Reject:
+                    result = CoreBetList.reject;
+                    break;
+
+                case BetStatus.Won:
+                    result = CoreBetList.won;
+                    break;
+
+                case BetStatus.Lose:
+                    result = CoreBetList.lose;
+                    break;
+
+                case BetStatus.Draw:
+                    result = CoreBetList.draw;
+                    break;
+
+                case BetStatus.Waiting:
+                    result = CoreBetList.waiting;
+                    break;
+
+                case BetStatus.Void:
+                    result = CoreBetList.voided;
+                    break;
+
+                case BetStatus.Refund:
+                    result = CoreBetList.refund;
+                    break;
+
+                default:
+                    result = string.Empty;
+                    break;
+            }
+
+            return result;
+        }
+
+        private static string DetectRealRunningStatus(byte settlementStatus)
+        {
+            const byte pendingStatus = 1;
+            const byte underSettlementStatus = 4;
+            const byte systemSettlementStatus = 8;
+
+            if ((settlementStatus & pendingStatus) == pendingStatus)
+            {
+                return CoreBetList.ResultPending;
+            }
+
+            if ((settlementStatus & underSettlementStatus) == underSettlementStatus
+                || (settlementStatus & systemSettlementStatus) == systemSettlementStatus)
+            {
+                return CoreBetList.UnderSettlement;
+            }
+
+            return CoreBetList.running;
         }
     }
 }

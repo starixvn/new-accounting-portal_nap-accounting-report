@@ -8,18 +8,13 @@ using Fanex.Data.Repository;
 
 namespace Fanex.BetList.Accounting.Services
 {
-    public interface BetListCashoutDetailService
-    {
-        CashOutHistory GetCashOutHistory(ICriteria criteria);
-    }
-
-    public class BetListCashoutDetailServiceImp : BetListCashoutDetailService
+    public class BetListCashoutDetailService
     {
         private readonly BetListCashoutDetailRepository _betListDetailRepository;
 
-        public BetListCashoutDetailServiceImp(BetListCashoutDetailRepository betListDetailRepository = null)
+        public BetListCashoutDetailService()
         {
-            _betListDetailRepository = betListDetailRepository ?? new BetListCashoutDetailRepositoryImp();
+            _betListDetailRepository = new BetListCashoutDetailRepository();
         }
 
         public CashOutHistory GetCashOutHistory(ICriteria criteria)

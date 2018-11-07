@@ -19,8 +19,8 @@
 
         public BetListController()
         {
-            this._betListService = new BetListServiceImp();
-            this._betListCashoutDetailService = new BetListCashoutDetailServiceImp();
+            this._betListService = new BetListService();
+            this._betListCashoutDetailService = new BetListCashoutDetailService();
         }
 
         /// <summary>
@@ -28,10 +28,10 @@
         /// </summary>
         /// <param name="refno">The ref no.</param>
         /// <returns>The mix parlay detail.</returns>
-        public ActionResult GetMixParlayDetail(string refno, string transId, string handicap1, string handicap2, string betcheck, string betteam)
+        public ActionResult GetMixParlayDetail(string refno, string transId, int custId, string handicap1, string handicap2, string betcheck, string betteam)
         {
             var result = _betListService.GetMixParlayTickets(
-                new MixParlayDetailCriteria { RefNo = refno, TransId = transId },
+                new MixParlayDetailCriteria { RefNo = refno, TransId = transId, CustId = custId },
                 handicap1,
                 handicap2,
                 betcheck,
