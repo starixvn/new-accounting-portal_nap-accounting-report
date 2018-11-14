@@ -6,13 +6,12 @@ namespace Fanex.AccountingReports.Misc.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Misc.Criteria.DailyCreatedCustomers;
     using Fanex.AccountingReports.Misc.Services.Implement;
-    using Fanex.AccountingReports.Misc.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
     public class DailyCreatedCustomersController : BaseController
     {
-        private readonly IDailyCreatedCustomersService _reportService;
+        private readonly DailyCreatedCustomersService _reportService;
 
         public DailyCreatedCustomersController()
         {

@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss;
     using Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss;
-    using Fanex.AccountingReports.WinLoss.Services.Interface.TreeWinLoss;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -15,8 +14,8 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     /// </summary>
     public class TreeWinLossController : BaseController
     {
-        public readonly ITreeWinLossService TreeWinLossService;
-        public readonly ITreeWinLossExcelService TreeWinLossExcelService;
+        public readonly TreeWinLossService TreeWinLossService;
+        public readonly TreeWinLossExcelService TreeWinLossExcelService;
 
         public TreeWinLossController()
         {

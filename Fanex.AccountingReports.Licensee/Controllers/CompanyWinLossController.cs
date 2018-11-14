@@ -8,7 +8,6 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     using Fanex.AccountingReports.Licensee.Criteria.CompanyWinLoss;
     using Fanex.AccountingReports.Licensee.Resources;
     using Fanex.AccountingReports.Licensee.Services.Implement;
-    using Fanex.AccountingReports.Licensee.Services.Interface;
     using Fanex.Excel;
     using Fanex.Excel.Extensions;
     using Fanex.NAP.Core.Business;
@@ -19,7 +18,7 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     /// </summary>
     public class CompanyWinLossController : BaseController
     {
-        private readonly ICompanyWinLossService _reportService;
+        private readonly CompanyWinLossService _reportService;
 
         public CompanyWinLossController()
         {

@@ -5,19 +5,17 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss;
     using Fanex.AccountingReports.WinLoss.Services.Implement;
-    using Fanex.AccountingReports.WinLoss.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
     using Services.Implement.LeagueWinLoss;
-    using Services.Interface.LeagueWinLoss;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class LeagueWinLossController : BaseController
     {
-        private readonly ILeagueWinLossService _reportService;
-        private readonly ILeagueWinLossExportExcel _excelService;
+        private readonly LeagueWinLossService _reportService;
+        private readonly LeagueWinLossExportExcel _excelService;
 
         public LeagueWinLossController()
         {

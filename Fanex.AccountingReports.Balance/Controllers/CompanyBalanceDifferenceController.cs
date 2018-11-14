@@ -3,7 +3,6 @@ namespace Fanex.AccountingReports.Balance.Controllers
     using System.Web.Mvc;
     using Core.Web;
     using Fanex.AccountingReports.Balance.Services.Implement;
-    using Fanex.AccountingReports.Balance.Services.Interface;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
@@ -13,7 +12,7 @@ namespace Fanex.AccountingReports.Balance.Controllers
     /// </summary>
     public class CompanyBalanceDifferenceController : BaseController
     {
-        private readonly ICompanyBalanceDifferenceService _reportService;
+        private readonly CompanyBalanceDifferenceService _reportService;
 
         public CompanyBalanceDifferenceController()
         {

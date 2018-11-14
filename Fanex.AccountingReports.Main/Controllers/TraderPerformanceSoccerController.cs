@@ -1,3 +1,6 @@
+using Fanex.AccountingReports.Main.Repositories.TraderPerformanceSoccerPH;
+using Fanex.AccountingReports.Main.Services.TraderPerformanceSoccerPH;
+
 namespace Fanex.AccountingReports.Main.Controllers
 {
     using System.IO;
@@ -7,19 +10,16 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Main.Criteria.TraderPerformance;
     using Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSoccer;
-    using Fanex.AccountingReports.Main.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
     using OfficeOpenXml;
-    using Repositories.TraderPerformanceSoccerPH;
-    using Services.TraderPerformanceSoccerPH;
 
     /// <summary>
     /// Trader performance for soccer controller.
     /// </summary>
     public class TraderPerformanceSoccerController : BaseController
     {
-        private readonly ITraderPerformanceSoccerService reportService;
+        private readonly TraderPerformanceSoccerService reportService;
 
         public TraderPerformanceSoccerController()
         {

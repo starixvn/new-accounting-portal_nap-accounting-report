@@ -33,7 +33,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 Type type = Type.GetType(typeName);
                 if (type == null)
                 {
-                    type = Type.GetType("Fanex.AccountingReports.Special.Checkbet.ContentBetTeamBetTypeNA");
+                    type = Type.GetType("Fanex.AccountingReports.Special.Checkbet.ContentBetTeamBetTypeNa");
                 }
 
                 ContentBetTeam content = Activator.CreateInstance(type) as ContentBetTeam;

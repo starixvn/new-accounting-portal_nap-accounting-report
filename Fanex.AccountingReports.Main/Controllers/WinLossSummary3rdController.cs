@@ -8,13 +8,12 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd;
     using Fanex.AccountingReports.Main.Models.WinLossSummary3rd;
     using Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary;
-    using Fanex.AccountingReports.Main.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
     public class WinLossSummary3RdController : BaseController
     {
-        private readonly IWinLossSummary3rdService _reportService;
+        private readonly WinLossSummary3rdService _reportService;
 
         public WinLossSummary3RdController()
         {

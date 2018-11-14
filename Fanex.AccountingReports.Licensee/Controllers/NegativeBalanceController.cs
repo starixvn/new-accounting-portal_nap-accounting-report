@@ -7,14 +7,13 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     using Fanex.AccountingReports.Licensee.Models;
     using Fanex.AccountingReports.Licensee.Models.NegativeBalance;
     using Fanex.AccountingReports.Licensee.Services.Implement;
-    using Fanex.AccountingReports.Licensee.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
     public class NegativeBalanceController : BaseController
     {
-        private readonly INegativeBanlance _reportService;
-        private readonly ILicenseeSiteService _licenseeSite;
+        private readonly NegativeBalanceService _reportService;
+        private readonly LicenseeSiteService _licenseeSite;
 
         public NegativeBalanceController()
         {

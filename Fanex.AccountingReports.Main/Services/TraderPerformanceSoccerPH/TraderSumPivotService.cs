@@ -5,12 +5,7 @@ using Fanex.Common;
 
 namespace Fanex.AccountingReports.Main.Services.TraderPerformanceSoccerPH
 {
-    public interface TraderSumPivotService
-    {
-        DataTable Execute(DataTable rawData);
-    }
-
-    public class TraderSumPivotServiceImp : TraderSumPivotService
+    public class TraderSumPivotServiceImp
     {
         private const string BettypeColumnName = "BettypeName";
         private const string TraderColmunName = "Trader";

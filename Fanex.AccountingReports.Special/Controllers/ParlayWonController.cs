@@ -5,7 +5,6 @@ namespace Fanex.AccountingReports.Special.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Special.Criteria.ParlayWon;
     using Fanex.AccountingReports.Special.Services.Implement;
-    using Fanex.AccountingReports.Special.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -14,7 +13,7 @@ namespace Fanex.AccountingReports.Special.Controllers
     /// </summary>
     public class ParlayWonController : BaseController
     {
-        private readonly IParlayWonService _reportService;
+        private readonly ParlayWonService _reportService;
 
         public ParlayWonController()
         {

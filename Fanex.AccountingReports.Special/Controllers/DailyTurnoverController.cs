@@ -6,8 +6,6 @@ namespace Fanex.AccountingReports.Special.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Special.Criteria.DailyTurnover;
     using Fanex.AccountingReports.Special.Services.Implement.DailyTurnover;
-    using Fanex.AccountingReports.Special.Services.Interface.DailyTurnover;
-    using Fanex.AccountingReports.Special.Services.Interface.IDailyTurnover;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -16,11 +14,11 @@ namespace Fanex.AccountingReports.Special.Controllers
     /// </summary>
     public class DailyTurnoverController : BaseController
     {
-        private readonly IDailyTurnoverService _reportService;
+        private readonly DailyTurnoverService _reportService;
 
-        private readonly IDailyDetailChangedTurnoverService _reportDetailService;
+        private readonly DailyDetailChangedTurnoverService _reportDetailService;
 
-        private readonly IDailyDetailChangedTurnoverExportReportService _exportReportDetailService;
+        private readonly DailyDetailChangedTurnoverExportReportService _exportReportDetailService;
 
         public DailyTurnoverController()
         {

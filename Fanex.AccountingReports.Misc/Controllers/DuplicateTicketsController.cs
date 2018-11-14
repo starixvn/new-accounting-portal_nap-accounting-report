@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.Misc.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Misc.Criteria.DuplicateTickets;
     using Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets;
-    using Fanex.AccountingReports.Misc.Services.Interface.DuplicateTickets;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -15,7 +14,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
     /// </summary>
     public class DuplicateTicketsController : BaseController
     {
-        private readonly IDuplicateTicketsService _reportService;
+        private readonly DuplicateTicketsService _reportService;
 
         public DuplicateTicketsController()
         {

@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.Misc.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Misc.Criteria.TotalSMAMemberActive;
     using Fanex.AccountingReports.Misc.Services.Implement;
-    using Fanex.AccountingReports.Misc.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -15,7 +14,7 @@ namespace Fanex.AccountingReports.Misc.Controllers
     /// </summary>
     public class TotalSMAMemberActiveController : BaseController
     {
-        private readonly ITotalSMAMemberActiveService _reportService;
+        private readonly TotalSMAMemberActiveService _reportService;
 
         public TotalSMAMemberActiveController()
         {

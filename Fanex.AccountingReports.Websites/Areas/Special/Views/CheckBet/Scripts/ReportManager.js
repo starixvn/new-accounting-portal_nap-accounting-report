@@ -160,16 +160,16 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
         });
     };
 
-    showNewCombMP = function (transId, transIndex, refNo, handicap1, handicap2, betcheck, betteam) {
-        showSystemParlay(transId, refNo, handicap1, handicap2, betcheck, betteam)
+    showNewCombMP = function (transId, transIndex, refNo, handicap1, handicap2, betcheck, betteam, custId) {
+        showSystemParlay(transId, refNo, handicap1, handicap2, betcheck, betteam, custId)
     };
 
-    showMP = function (transid, refno) {
+    showMP = function (transid, refno, custId) {
         var grid = $('#BetlistByRefNo');
         var parlayContent = $("div[id^='divEvent']")
         $.ajax({
             type: 'GET',
-            url: window.rootUrl + 'BetList/BetList/GetMixParlayDetail?refno=' + refno + '&transId=' + transid,
+            url: window.rootUrl + 'BetList/BetList/GetMixParlayDetail?refno=' + refno + '&transId=' + transid + '&custid=' + custId,
             beforeSend: function () {
                 AccReport.disableInput();
             },
@@ -188,17 +188,17 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
         });
     };
 
-    showCombMP = function(transId, transIndex, refNo) {
-        showSystemParlay(transId, refNo, '', '', '', '');
+    showCombMP = function(transId, transIndex, refNo, custId) {
+        showSystemParlay(transId, refNo, '', '', '', '', custId);
     };
 
-    showSystemParlay = function (transid, refno, handicap1, handicap2, betcheck, betteam) {
+    showSystemParlay = function (transid, refno, handicap1, handicap2, betcheck, betteam, custId) {
         var grid = $('#BetlistByRefNo');
         var parlayContent = $("div[id^='divEvent']")
         if (parlayContent.html() == '') {
             $.ajax({
                 type: 'GET',
-                url: window.rootUrl + 'BetList/BetList/GetMixParlayDetail?refno=' + refno + '&transId=' + transid + '&handicap1=' + handicap1 + '&handicap2=' + handicap2 + '&betcheck=' + betcheck + '&betteam=' + betteam,
+                url: window.rootUrl + 'BetList/BetList/GetMixParlayDetail?refno=' + refno + '&transId=' + transid + '&handicap1=' + handicap1 + '&handicap2=' + handicap2 + '&betcheck=' + betcheck + '&betteam=' + betteam + '&custId=' + custId,
                 beforeSend: function () {
                     AccReport.disableInput();
                 },

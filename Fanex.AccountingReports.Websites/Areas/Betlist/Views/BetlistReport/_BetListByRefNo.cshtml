@@ -58,7 +58,7 @@
                 <div>
                     @if (betdetail.Ticket.BetTypeId == 9 || betdetail.Ticket.BetTypeId == 29 || betdetail.Ticket.BetTypeId == 2799)
                     {
-                        var html = Html.Action("GetMixParlayDetail", "BetList", new { refno = betdetail.Ticket.RefNo, transId = betdetail.Ticket.TransId });
+                        var html = Html.Action("GetMixParlayDetail", "BetList", new { refno = betdetail.Ticket.RefNo, transId = betdetail.Ticket.TransId, custId = betdetail.Ticket.CustId });
                         @html;
                     }
                 </div>

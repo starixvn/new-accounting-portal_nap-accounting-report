@@ -68,8 +68,8 @@
       <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.2\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.NAP.Core, Version=1.2.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
+    <Reference Include="Fanex.NAP.Core, Version=1.2.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.4\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -198,12 +198,9 @@
     <Compile Include="Models\TreeWinLoss\VirtualRateByBettypeInfo.cs" />
     <Compile Include="Models\TreeWinLoss\VirtualRateInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Implement\DailyMixParlayWinLossRepository.cs" />
-    <Compile Include="Repositories\Implement\LeagueWinLossRepository.cs" />
-    <Compile Include="Repositories\Implement\TreeWinLossRepository.cs" />
-    <Compile Include="Repositories\Interface\IDailyMixParlayWinLossRepository.cs" />
-    <Compile Include="Repositories\Interface\ILeagueWinLossRepository.cs" />
-    <Compile Include="Repositories\Interface\ITreeWinLossRepository.cs" />
+    <Compile Include="Repositories\DailyMixParlayWinLossRepository.cs" />
+    <Compile Include="Repositories\LeagueWinLossRepository.cs" />
+    <Compile Include="Repositories\TreeWinLossRepository.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -214,23 +211,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WinLossResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Implement\AllCustomerTurnOver\AllCustomerTurnOverExportReportService.cs" />
-    <Compile Include="Services\Implement\AllCustomerTurnOver\AllCustomerTurnOverGetReportService.cs" />
-    <Compile Include="Services\Implement\DailyMixParlayWinLoss\DailyMixParlayWinLossService.cs" />
-    <Compile Include="Services\Implement\LeagueWinLoss\LeagueWinLossService.cs">
+    <Compile Include="Services\AllCustomerTurnOver\AllCustomerTurnOverExportReportService.cs" />
+    <Compile Include="Services\AllCustomerTurnOver\AllCustomerTurnOverGetReportService.cs" />
+    <Compile Include="Services\DailyMixParlayWinLoss\DailyMixParlayWinLossService.cs" />
+    <Compile Include="Services\LeagueWinLoss\LeagueWinLossService.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Services\Implement\LeagueWinLoss\LeagueWinLossExportExcel.cs" />
-    <Compile Include="Services\Implement\TreeWinLoss\TreeWinLossExcelService.cs" />
-    <Compile Include="Services\Implement\TreeWinLoss\TreeWinLossService.cs" />
-    <Compile Include="Services\Implement\TreeWinLoss\TreeWinLossUtil.cs" />
-    <Compile Include="Services\Interface\AllCustomerTurnOver\IAllCustomerTurnOverExportReportService.cs" />
-    <Compile Include="Services\Interface\AllCustomerTurnOver\IAllCustomerTurnOverGetReportService.cs" />
-    <Compile Include="Services\Interface\DailyMixParlayWinLoss\IDailyMixParlayWinLossService.cs" />
-    <Compile Include="Services\Interface\LeagueWinLoss\ILeagueWinLossService.cs" />
-    <Compile Include="Services\Interface\LeagueWinLoss\ILeagueWinLossExportExcel.cs" />
-    <Compile Include="Services\Interface\TreeWinLoss\ITreeWinLossExcelService.cs" />
-    <Compile Include="Services\Interface\TreeWinLoss\ITreeWinLossService.cs" />
+    <Compile Include="Services\LeagueWinLoss\LeagueWinLossExportExcel.cs" />
+    <Compile Include="Services\TreeWinLoss\TreeWinLossExcelService.cs" />
+    <Compile Include="Services\TreeWinLoss\TreeWinLossService.cs" />
+    <Compile Include="Services\TreeWinLoss\TreeWinLossUtil.cs" />
     <Compile Include="WinLossAreaRegistration.cs" />
   </ItemGroup>
   <ItemGroup>

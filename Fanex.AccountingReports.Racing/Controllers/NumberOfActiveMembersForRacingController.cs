@@ -7,7 +7,6 @@ namespace Fanex.AccountingReports.Racing.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Racing.Criteria.NumberOActiveMembersForRacing;
     using Fanex.AccountingReports.Racing.Services.Implement.NumberOActiveMembersForRacing;
-    using Fanex.AccountingReports.Racing.Services.Interface.NumberOActiveMembersForRacing;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -16,8 +15,8 @@ namespace Fanex.AccountingReports.Racing.Controllers
     /// </summary>
     public class NumberOfActiveMembersForRacingController : BaseController
     {
-        private readonly INumberOfActiveMembersService _numberOfActiveMemberService;
-        private readonly INumberOfActiveMembersExportDataService _numberOfActiveMemberExportDataService;
+        private readonly NumberOfActiveMembersService _numberOfActiveMemberService;
+        private readonly NumberOfActiveMembersExportDataService _numberOfActiveMemberExportDataService;
 
         public NumberOfActiveMembersForRacingController()
         {

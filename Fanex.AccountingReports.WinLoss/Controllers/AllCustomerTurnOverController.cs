@@ -7,8 +7,6 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     using Fanex.AccountingReports.WinLoss.Criteria.GetAllCustomerTurnOver;
     using Fanex.AccountingReports.WinLoss.Services.Implement;
     using Fanex.AccountingReports.WinLoss.Services.Implement.AllCustomerTurnOver;
-    using Fanex.AccountingReports.WinLoss.Services.Interface;
-    using Fanex.AccountingReports.WinLoss.Services.Interface.AllCustomerTurnOver;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -17,8 +15,8 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     /// </summary>
     public class AllCustomerTurnOverController : BaseController
     {
-        private readonly IAllCustomerTurnOverGetReportService _getReportService;
-        private readonly IAllCustomerTurnOverExportReportService _exportReportService;
+        private readonly AllCustomerTurnOverGetReportService _getReportService;
+        private readonly AllCustomerTurnOverExportReportService _exportReportService;
 
         public AllCustomerTurnOverController()
         {

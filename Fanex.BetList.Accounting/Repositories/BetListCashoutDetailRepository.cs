@@ -1,19 +1,15 @@
-using Fanex.BetList.Accounting.Models;
-using Fanex.BetList.Core.Entities;
-using Fanex.Data;
-using Fanex.Data.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using Fanex.BetList.Accounting.Models;
+using Fanex.BetList.Core.Entities;
+using Fanex.Common;
+using Fanex.Data;
+using Fanex.Data.Repository;
 
 namespace Fanex.BetList.Accounting.Repositories
 {
-    public interface BetListCashoutDetailRepository
-    {
-        CashOutHistory GetCashOutHistory(ICriteria criteria);
-    }
-
-    public class BetListCashoutDetailRepositoryImp : BetListCashoutDetailRepository
+    public class BetListCashoutDetailRepository
     {
         public CashOutHistory GetCashOutHistory(ICriteria criteria)
         {
@@ -118,7 +114,8 @@ namespace Fanex.BetList.Accounting.Repositories
 
                 OriginalBetType = Convert.ToInt32(reader["originalbettype"]),
                 BetdaqId = Convert.ToInt64(reader["betdaqid"]),
-                ExtraInfo = Convert.ToString(reader["extrainfo"])
+                ExtraInfo = Convert.ToString(reader["extrainfo"]),
+                SettlementStatus = (byte)Converter.ToInt(reader["SettlementStatus"])
             };
         }
 
@@ -134,7 +131,7 @@ namespace Fanex.BetList.Accounting.Repositories
                 TransDate = Convert.ToDateTime(reader["transdate"]),
                 CustId = Convert.ToInt32(reader["custid"]),
                 Price = Convert.ToDecimal(reader["price"]),
-                WinLost = Convert.ToDecimal(reader["winlost"])
+                WinLost = Convert.ToDecimal(reader["winlost"]),
             };
         }
     }

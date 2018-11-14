@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.Racing.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Racing.Criteria.RacingGroupDaily;
     using Fanex.AccountingReports.Racing.Services.Implement.RacingGroupDaily;
-    using Fanex.AccountingReports.Racing.Services.Interface.RacingGroupDaily;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -15,11 +14,11 @@ namespace Fanex.AccountingReports.Racing.Controllers
     /// </summary>
     public class RacingGroupDailyController : BaseController
     {
-        private readonly IRacingGroupDailyGetReportServices _getReportService;
-        private readonly IRacingGroupDailyExportReportServices _exportReportService;
+        private readonly RacingGroupDailyGetReportServices _getReportService;
+        private readonly RacingGroupDailyExportReportServices _exportReportService;
 
         public RacingGroupDailyController()
-            {
+        {
             this._getReportService = new RacingGroupDailyGetReportServices();
             this._exportReportService = new RacingGroupDailyExportReportServices();
         }

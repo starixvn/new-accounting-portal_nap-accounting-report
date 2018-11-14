@@ -8,7 +8,6 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     using Fanex.AccountingReports.Gaming.Criteria.NumberOfActiveMember;
     using Fanex.AccountingReports.Gaming.Resources;
     using Fanex.AccountingReports.Gaming.Services.Implement;
-    using Fanex.AccountingReports.Gaming.Services.Interface;
     using Fanex.Excel;
     using Fanex.Excel.Extensions;
     using Fanex.NAP.Core.Business;
@@ -22,7 +21,7 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         /// <summary>
         /// Report Service.
         /// </summary>
-        private readonly INumberOfActiveMemberService _reportService;
+        private readonly NumberOfActiveMemberService _reportService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NumberOfActiveMemberController" /> class.
@@ -30,15 +29,6 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         public NumberOfActiveMemberController()
         {
             this._reportService = new NumberOfActiveMemberService();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NumberOfActiveMemberController" /> class.
-        /// </summary>
-        /// <param name="reportService">The Report Service.</param>
-        public NumberOfActiveMemberController(INumberOfActiveMemberService reportService)
-        {
-            this._reportService = reportService ?? new NumberOfActiveMemberService();
         }
 
         /// <summary>

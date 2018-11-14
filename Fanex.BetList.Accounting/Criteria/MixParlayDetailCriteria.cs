@@ -12,6 +12,8 @@ namespace Fanex.BetList.Accounting.Criteria
 
         public string TransId { get; set; }
 
+        public int CustId { get; set; }
+
         public string GetSettingKey()
         {
             return "BetList_MixParlayBetsSel";

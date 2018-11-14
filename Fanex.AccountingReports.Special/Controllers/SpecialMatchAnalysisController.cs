@@ -5,7 +5,6 @@ namespace Fanex.AccountingReports.Special.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Special.Criteria.SpecialMatchAnalysis;
     using Fanex.AccountingReports.Special.Services.Implement;
-    using Fanex.AccountingReports.Special.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -14,7 +13,7 @@ namespace Fanex.AccountingReports.Special.Controllers
     /// </summary>
     public class SpecialMatchAnalysisController : BaseController
     {
-        private readonly ISpecialMatchAnalysisService _reportService;
+        private readonly SpecialMatchAnalysisService _reportService;
 
         public SpecialMatchAnalysisController()
         {

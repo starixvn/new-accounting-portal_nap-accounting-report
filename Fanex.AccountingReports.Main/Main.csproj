@@ -54,8 +54,8 @@
     <Reference Include="Fanex.Excel">
       <HintPath>..\_Dependencies\Fanex.Excel.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.NAP.Core, Version=1.2.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
+    <Reference Include="Fanex.NAP.Core, Version=1.2.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.4\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
@@ -191,16 +191,11 @@
     <Compile Include="Models\WinLossSummary3rd\WinLossInfo.cs" />
     <Compile Include="Models\WinLossSummary\WinLossInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Implement\CreditTermRepository.cs" />
-    <Compile Include="Repositories\Implement\TraderPerformanceOtherSportsRepository.cs" />
-    <Compile Include="Repositories\Implement\TraderPerformanceSoccerRepository.cs" />
-    <Compile Include="Repositories\Implement\WinlossSummary3rdRepository.cs" />
-    <Compile Include="Repositories\Implement\WinLossSummaryRepository.cs" />
-    <Compile Include="Repositories\Interface\ICreditTermRepository.cs" />
-    <Compile Include="Repositories\Interface\ITraderPerformanceOtherSportsRepository.cs" />
-    <Compile Include="Repositories\Interface\ITraderPerformanceSoccerRepository.cs" />
-    <Compile Include="Repositories\Interface\IWinlossSummary3rdRepository.cs" />
-    <Compile Include="Repositories\Interface\IWinLossSummaryRepository.cs" />
+    <Compile Include="Repositories\CreditTermRepository.cs" />
+    <Compile Include="Repositories\TraderPerformanceOtherSportsRepository.cs" />
+    <Compile Include="Repositories\TraderPerformanceSoccerRepository.cs" />
+    <Compile Include="Repositories\WinlossSummary3rdRepository.cs" />
+    <Compile Include="Repositories\WinLossSummaryRepository.cs" />
     <Compile Include="Repositories\TraderPerformanceSoccerPH\TraderDataService.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -212,33 +207,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Implement\CreditTerm\CreditTermExportExcelService.cs" />
-    <Compile Include="Services\Implement\CreditTerm\CreditTermService.cs" />
-    <Compile Include="Services\Implement\CreditTerm\InstallmentAmountExportExcelService.cs" />
-    <Compile Include="Services\Implement\CreditTerm\InstallmentAmountService.cs">
+    <Compile Include="Services\CreditTerm\CreditTermExportExcelService.cs" />
+    <Compile Include="Services\CreditTerm\CreditTermService.cs" />
+    <Compile Include="Services\CreditTerm\InstallmentAmountExportExcelService.cs" />
+    <Compile Include="Services\CreditTerm\InstallmentAmountService.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Services\Implement\CreditTerm\CreditTermExcelUtil.cs" />
-    <Compile Include="Services\Implement\TraderPerformanceOtherSports\ExportDetailReportService.cs" />
-    <Compile Include="Services\Implement\TraderPerformanceOtherSports\ExportReportService.cs" />
-    <Compile Include="Services\Implement\TraderPerformanceOtherSports\TraderPerformanceOtherSportsService.cs" />
-    <Compile Include="Services\Implement\TraderPerformanceSoccer\ExportDetailReportService.cs" />
-    <Compile Include="Services\Implement\TraderPerformanceSoccer\ExportReportService.cs" />
-    <Compile Include="Services\Implement\TraderPerformanceSoccer\TraderPerformanceSoccerService.cs" />
-    <Compile Include="Services\Implement\WinLoss3rdSummary\ExportWinLossSummary3rdService.cs">
+    <Compile Include="Services\CreditTerm\CreditTermExcelUtil.cs" />
+    <Compile Include="Services\TraderPerformanceOtherSports\ExportDetailReportService.cs" />
+    <Compile Include="Services\TraderPerformanceOtherSports\ExportReportService.cs" />
+    <Compile Include="Services\TraderPerformanceOtherSports\TraderPerformanceOtherSportsService.cs" />
+    <Compile Include="Services\TraderPerformanceSoccer\ExportDetailReportService.cs" />
+    <Compile Include="Services\TraderPerformanceSoccer\ExportReportService.cs" />
+    <Compile Include="Services\TraderPerformanceSoccer\TraderPerformanceSoccerService.cs" />
+    <Compile Include="Services\WinLoss3rdSummary\ExportWinLossSummary3rdService.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Services\Implement\WinLoss3rdSummary\WinLossSummary3rdService.cs" />
-    <Compile Include="Services\Implement\WinLossSummary\WinLossSummaryService.cs" />
-    <Compile Include="Services\Interface\CreditTerm\ICreditTermExportExcelService.cs" />
-    <Compile Include="Services\Interface\CreditTerm\ICreditTermService.cs" />
-    <Compile Include="Services\Interface\CreditTerm\IInstallmentAmountExportExcelService.cs" />
-    <Compile Include="Services\Interface\CreditTerm\IInstallmentAmountService.cs" />
-    <Compile Include="Services\Interface\CreditTerm\ICreditTermExcelUtil.cs" />
-    <Compile Include="Services\Interface\ITraderPerformanceOtherSportsService.cs" />
-    <Compile Include="Services\Interface\ITraderPerformanceSoccerService.cs" />
-    <Compile Include="Services\Interface\IWinLossSummary3rdService.cs" />
-    <Compile Include="Services\Interface\IWinLossSummaryService.cs" />
+    <Compile Include="Services\WinLoss3rdSummary\WinLossSummary3rdService.cs" />
+    <Compile Include="Services\WinLossSummary\WinLossSummaryService.cs" />
     <Compile Include="Services\TraderPerformanceSoccerPH\TraderDetailExcelService.cs" />
     <Compile Include="Services\TraderPerformanceSoccerPH\TraderSumExcelService.cs" />
     <Compile Include="Services\TraderPerformanceSoccerPH\TraderDetailPivotService.cs" />

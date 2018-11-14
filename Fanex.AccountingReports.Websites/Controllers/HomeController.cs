@@ -4,7 +4,6 @@ namespace Fanex.AccountingReports.Websites.Controllers
     using Fanex.AccountingReports.Core.Criteria;
     using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.AccountingReports.Core.Services.Interface;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -14,7 +13,7 @@ namespace Fanex.AccountingReports.Websites.Controllers
     [NapSuperAuth]
     public class HomeController : BaseController
     {
-        private readonly IMostVisitedPagesService _mostVisitedPagesService;
+        private readonly MostVisitedPagesService _mostVisitedPagesService;
 
         private readonly MenuService _menuService;
 
@@ -65,12 +64,9 @@ namespace Fanex.AccountingReports.Websites.Controllers
                 var mostVisitedPage = new MostVisitedPage { MenuId = menu.Id };
                 this._mostVisitedPagesService.UpdateCount(mostVisitedPage);
                 return Content(menu.Id.ToString());
-
             }
             return new EmptyResult();
         }
-
-
 
         [HttpPost]
         public ActionResult UpdateMostVisitedPagePosition(UpdateMostVisitedPagePositionCriteria mostVisitedPage)

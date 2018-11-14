@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.WinLoss.Criteria.DailyMixParlayWinLoss;
     using Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLoss;
-    using Fanex.AccountingReports.WinLoss.Services.Interface.DailyMixParlayWinLoss;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -15,7 +14,7 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     /// </summary>
     public class DailyMixParlayWinLossController : BaseController
     {
-        private readonly IDailyMixParlayWinLossService _reportService;
+        private readonly DailyMixParlayWinLossService _reportService;
 
         public DailyMixParlayWinLossController()
         {

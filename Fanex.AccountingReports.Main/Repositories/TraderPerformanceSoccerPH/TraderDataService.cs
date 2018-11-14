@@ -4,12 +4,7 @@ using Fanex.Data.Repository;
 
 namespace Fanex.AccountingReports.Main.Repositories.TraderPerformanceSoccerPH
 {
-    public interface TraderDataService
-    {
-        DataTable Query(ICriteria criteria);
-    }
-
-    public class TraderDataServiceImp : TraderDataService
+    public class TraderDataServiceImp
     {
         public DataTable Query(ICriteria criteria)
         {

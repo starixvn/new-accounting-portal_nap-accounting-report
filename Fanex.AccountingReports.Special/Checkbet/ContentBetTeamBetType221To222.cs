@@ -1,4 +1,4 @@
-﻿using Fanex.RemotingRef;
+using Fanex.RemotingRef;
 
 namespace Fanex.AccountingReports.Special.Checkbet
 {

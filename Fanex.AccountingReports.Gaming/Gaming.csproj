@@ -60,8 +60,8 @@
       <HintPath>..\packages\Fanex.Logging.1.0.4\lib\net40\Fanex.Logging.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.NAP.Core, Version=1.2.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
+    <Reference Include="Fanex.NAP.Core, Version=1.2.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.4\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
@@ -212,16 +212,10 @@
     <Compile Include="Models\VirtualSportsWinLoss\VirtualSportsWinLoss.cs" />
     <Compile Include="Models\VirtualSportsWinLoss\VirtualSportsWinLossDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Implement\GamingRepository.cs" />
-    <Compile Include="Repositories\Implement\NumberGameMonthlyWinLossRepository.cs" />
-    <Compile Include="Repositories\Interface\IGamingRepository.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Repositories\Implement\NumberGameWinLossByBetTypeMatch\WinLossByBetTypeRepository.cs" />
-    <Compile Include="Repositories\Implement\NumberGameWinLossByBetTypeMatch\WinLossByMatchRepository.cs" />
-    <Compile Include="Repositories\Interface\INumberGameMonthlyWinLossRepository.cs" />
-    <Compile Include="Repositories\Interface\NumberGameWinLossByBetTypeMatch\IWinLossByBetTypeRepository.cs" />
-    <Compile Include="Repositories\Interface\NumberGameWinLossByBetTypeMatch\IWinLossByMatchRepository.cs" />
+    <Compile Include="Repositories\GamingRepository.cs" />
+    <Compile Include="Repositories\NumberGameMonthlyWinLossRepository.cs" />
+    <Compile Include="Repositories\NumberGameWinLossByBetTypeMatch\WinLossByBetTypeRepository.cs" />
+    <Compile Include="Repositories\NumberGameWinLossByBetTypeMatch\WinLossByMatchRepository.cs" />
     <Compile Include="Resources\GamingResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -237,28 +231,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Implement\GamingService.cs" />
-    <Compile Include="Services\Implement\NumberGameMonthlyWinLoss\NumberGameMonthlyWinLossExportDataService.cs" />
-    <Compile Include="Services\Implement\NumberGameMonthlyWinLoss\NumberGameMonthlyWinLossService.cs" />
-    <Compile Include="Services\Implement\NumberGameWinLossByBetTypeMatch\GroupTypeConstants.cs" />
-    <Compile Include="Services\Implement\NumberGameWinLossByBetTypeMatch\NumberGameWinLossByBetTypeMatchService.cs" />
-    <Compile Include="Services\Implement\NumberGameWinLossByBetTypeMatch\ReportLevelType.cs" />
-    <Compile Include="Services\Implement\NumberGameWinLossByBetTypeMatch\WinLossByBetTypeService.cs" />
-    <Compile Include="Services\Implement\NumberGameWinLossByBetTypeMatch\WinLossByMatchService.cs" />
-    <Compile Include="Services\Implement\NumberGameWinlossByDateService.cs" />
-    <Compile Include="Services\Implement\NumberOfActiveMemberService.cs" />
-    <Compile Include="Services\Interface\IGamingService.cs" />
-    <Compile Include="Services\Interface\INumberGameWinlossByDateService.cs" />
-    <Compile Include="Services\Interface\INumberGameWinLossByCurrencyService.cs" />
-    <Compile Include="Services\Implement\NumberGameWinLossByCurrencyService.cs" />
-    <Compile Include="Services\Interface\INumberOfActiveMemberService.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Services\Interface\NumberGameMonthlyWinLoss\INumberGameMonthlyWinLossExportDataService.cs" />
-    <Compile Include="Services\Interface\NumberGameMonthlyWinLoss\INumberGameMonthlyWinLossService.cs" />
-    <Compile Include="Services\Interface\NumberGameWinLossByBetTypeMatch\INumberGameWinLossByBetTypeMatchService.cs" />
-    <Compile Include="Services\Interface\NumberGameWinLossByBetTypeMatch\IWinLossByBetTypeService.cs" />
-    <Compile Include="Services\Interface\NumberGameWinLossByBetTypeMatch\IWinLossByMatchService.cs" />
+    <Compile Include="Services\GamingService.cs" />
+    <Compile Include="Services\NumberGameMonthlyWinLoss\NumberGameMonthlyWinLossExportDataService.cs" />
+    <Compile Include="Services\NumberGameMonthlyWinLoss\NumberGameMonthlyWinLossService.cs" />
+    <Compile Include="Services\NumberGameWinLossByBetTypeMatch\GroupTypeConstants.cs" />
+    <Compile Include="Services\NumberGameWinLossByBetTypeMatch\NumberGameWinLossByBetTypeMatchService.cs" />
+    <Compile Include="Services\NumberGameWinLossByBetTypeMatch\ReportLevelType.cs" />
+    <Compile Include="Services\NumberGameWinLossByBetTypeMatch\WinLossByBetTypeService.cs" />
+    <Compile Include="Services\NumberGameWinLossByBetTypeMatch\WinLossByMatchService.cs" />
+    <Compile Include="Services\NumberGameWinlossByDateService.cs" />
+    <Compile Include="Services\NumberOfActiveMemberService.cs" />
+    <Compile Include="Services\NumberGameWinLossByCurrencyService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">

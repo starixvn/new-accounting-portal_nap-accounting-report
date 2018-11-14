@@ -39,6 +39,14 @@
     <Reference Include="ExcelUtil">
       <HintPath>..\_Dependencies\ExcelUtil.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.BetList.BetTrade, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.BetList.Core.2.73.0-beta1\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Fanex.BetList.Core, Version=2.73.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.BetList.Core.2.73.0-beta1\lib\net40\Fanex.BetList.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Fanex.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
       <Private>True</Private>
@@ -47,12 +55,12 @@
       <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.NAP.Core, Version=1.2.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
+    <Reference Include="Fanex.NAP.Core, Version=1.2.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.4\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.RemotingRef, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.RemotingRef.1.1.1\lib\net461\Fanex.RemotingRef.dll</HintPath>
+    <Reference Include="Fanex.RemotingRef, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.RemotingRef.1.3.0\lib\net461\Fanex.RemotingRef.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -175,6 +183,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="TplCore, Version=1.0.4854.17253, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TplCore.1.0.4854.17254\lib\net40\TplCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Checkbet\BetTeamModel.cs" />
@@ -259,29 +271,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SpecialResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Implement\DailyTurnover\DailyDetailChangedTurnoverExportReportService.cs" />
-    <Compile Include="Services\Implement\MarginReport\MarginWinLossService.cs" />
-    <Compile Include="Services\Implement\DailyTurnover\DailyDetailChangedTurnoverService.cs" />
-    <Compile Include="Services\Implement\DailyTurnover\ExcelUtil.cs" />
-    <Compile Include="Services\Implement\DailyTurnover\DailyTurnoverService.cs" />
-    <Compile Include="Services\Implement\ParlayWonService.cs" />
-    <Compile Include="Services\Implement\SaveBetReport\SaveBetReportService.cs" />
-    <Compile Include="Services\Implement\SMATurnover\SMATurnoverExportDataService.cs" />
-    <Compile Include="Services\Implement\SMATurnover\SMATurnoverService.cs" />
-    <Compile Include="Services\Implement\SpecialMatchAnalysisService.cs" />
-    <Compile Include="Services\Interface\DailyTurnover\IDailyDetailChangedTurnoverExportReportService.cs" />
-    <Compile Include="Services\Interface\DailyTurnover\IDailyDetailChangedTurnoverService.cs" />
-    <Compile Include="Services\Interface\DailyTurnover\IDailyTurnoverService.cs" />
-    <Compile Include="Services\Interface\IParlayWonService.cs" />
-    <Compile Include="Services\Interface\ISaveBetReportService.cs" />
-    <Compile Include="Services\Interface\ISMATurnoverService.cs" />
-    <Compile Include="Services\Interface\ISpecialMatchAnalysisService.cs" />
-    <Compile Include="Services\Interface\MarginReport\IMarginWinLossService.cs" />
+    <Compile Include="Services\DailyTurnover\DailyDetailChangedTurnoverExportReportService.cs" />
+    <Compile Include="Services\MarginReport\MarginWinLossService.cs" />
+    <Compile Include="Services\DailyTurnover\DailyDetailChangedTurnoverService.cs" />
+    <Compile Include="Services\DailyTurnover\ExcelUtil.cs" />
+    <Compile Include="Services\DailyTurnover\DailyTurnoverService.cs" />
+    <Compile Include="Services\ParlayWonService.cs" />
+    <Compile Include="Services\SaveBetReport\SaveBetReportService.cs" />
+    <Compile Include="Services\SMATurnover\SMATurnoverExportDataService.cs" />
+    <Compile Include="Services\SMATurnover\SMATurnoverService.cs" />
+    <Compile Include="Services\SpecialMatchAnalysisService.cs" />
     <Compile Include="SpecialAreaRegistration.cs" />
     <Compile Include="Models\CheckBet\CheckBet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Implement\CheckBetService.cs" />
-    <Compile Include="Services\Interface\ICheckBetService.cs" />
+    <Compile Include="Services\CheckBetService.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Labels.resx">

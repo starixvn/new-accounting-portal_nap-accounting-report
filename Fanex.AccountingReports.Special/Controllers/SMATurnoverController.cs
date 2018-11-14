@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.Special.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Special.Criteria.SMATurnover;
     using Fanex.AccountingReports.Special.Services.Implement.SMATurnover;
-    using Fanex.AccountingReports.Special.Services.Interface;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
@@ -15,7 +14,7 @@ namespace Fanex.AccountingReports.Special.Controllers
     /// </summary>
     public class SMATurnoverController : BaseController
     {
-        private ISMATurnoverService _smasTurnOverService;
+        private SMATurnoverService _smasTurnOverService;
 
         public SMATurnoverController()
         {

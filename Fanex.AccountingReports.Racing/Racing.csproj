@@ -52,8 +52,8 @@
       <HintPath>..\packages\Fanex.Data.0.5.404.63\lib\net40\Fanex.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.NAP.Core, Version=1.2.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.1\lib\net40\Fanex.NAP.Core.dll</HintPath>
+    <Reference Include="Fanex.NAP.Core, Version=1.2.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.NAP.Core.Client.1.2.1.4\lib\net40\Fanex.NAP.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
@@ -151,8 +151,7 @@
     <Compile Include="Models\RacingGroupDaily\RacingGroupDaily.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RacingAreaRegistration.cs" />
-    <Compile Include="Repositories\Implement\RacingGroupDailyRepository.cs" />
-    <Compile Include="Repositories\Interface\IRacingGroupDailyRepository.cs" />
+    <Compile Include="Repositories\RacingGroupDailyRepository.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -163,14 +162,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RacingResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Implement\NumberOfActiveMembersForRacing\NumberOfActiveMembersExportDataService.cs" />
-    <Compile Include="Services\Implement\NumberOfActiveMembersForRacing\NumberOfActiveMembersService.cs" />
-    <Compile Include="Services\Implement\RacingGroupDaily\RacingGroupDailyExportReportServices.cs" />
-    <Compile Include="Services\Implement\RacingGroupDaily\RacingGroupDailyGetReportServices.cs" />
-    <Compile Include="Services\Interface\NumberOfActiveMembersForRacing\INumberOfActiveMembersExportDataService.cs" />
-    <Compile Include="Services\Interface\NumberOfActiveMembersForRacing\INumberOfActiveMembersService.cs" />
-    <Compile Include="Services\Interface\RacingGroupDaily\IRacingGroupDailyExportReportServices.cs" />
-    <Compile Include="Services\Interface\RacingGroupDaily\IRacingGroupDailyGetReportServices.cs" />
+    <Compile Include="Services\NumberOfActiveMembersForRacing\NumberOfActiveMembersExportDataService.cs" />
+    <Compile Include="Services\NumberOfActiveMembersForRacing\NumberOfActiveMembersService.cs" />
+    <Compile Include="Services\RacingGroupDaily\RacingGroupDailyExportReportServices.cs" />
+    <Compile Include="Services\RacingGroupDaily\RacingGroupDailyGetReportServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />

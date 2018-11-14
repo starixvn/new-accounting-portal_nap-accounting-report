@@ -6,7 +6,6 @@ namespace Fanex.AccountingReports.Special.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Special.Criteria.CheckBet;
     using Fanex.AccountingReports.Special.Services.Implement;
-    using Fanex.AccountingReports.Special.Services.Interface;
     using NAP.Core.Business;
     using NAP.Core.Web.Attribute;
 
@@ -15,7 +14,7 @@ namespace Fanex.AccountingReports.Special.Controllers
     /// </summary>
     public class CheckBetController : BaseController
     {
-        private readonly ICheckBetService _checkBetService;
+        private readonly CheckBetService _checkBetService;
 
         public CheckBetController()
         {

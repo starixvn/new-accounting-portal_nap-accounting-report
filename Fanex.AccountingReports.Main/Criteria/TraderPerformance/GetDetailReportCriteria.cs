@@ -1,13 +1,12 @@
 namespace Fanex.AccountingReports.Main.Criteria.TraderPerformance
 {
     using System;
-    using Fanex.AccountingReports.Core.Criteria;
     using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class GetDetailReportCriteria : CriteriaBase, IPagingCriteria
+    public class GetDetailReportCriteria : CriteriaBase
     {
         public DateTime Fromdate { get; set; }
 
