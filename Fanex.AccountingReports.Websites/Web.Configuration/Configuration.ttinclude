@@ -118,7 +118,7 @@
                     case SiteEnvironment.UAT:
 						return "http://10.40.40.248:1710/v1/api";
 					case SiteEnvironment.PRO:
-						return "http://10.40.40.22:1710/api";
+						return "http://10.40.40.47:1710/api";
 					case SiteEnvironment.MNL:
                         return "http://10.40.40.202:1710/api";
 					default:
@@ -200,7 +200,7 @@
 					case SiteEnvironment.LOCAL:
 					    return "http://ha.nexdev.net:8889/api";
                     case SiteEnvironment.PRO:
-                        return "http://10.40.40.22:8889/api";
+                        return "http://10.40.40.47:8889/api";
                     case SiteEnvironment.UAT:
                         return "http://10.40.40.248:8889/api";
                     case SiteEnvironment.SIT:
@@ -239,7 +239,7 @@
 					case SiteEnvironment.SIT:
                         return @"FormatName:DIRECT=tcp:172.16.4.106\private$\entlib";
                     case SiteEnvironment.PRO:
-                        return @"FormatName:DIRECT=tcp:10.40.40.22\private$\entlib";
+                        return @"FormatName:DIRECT=tcp:10.40.40.127\private$\entlib";
                     case SiteEnvironment.MNL:
                         return @"FormatName:DIRECT=tcp:10.2.98.3\private$\entlib";
                     default:
@@ -276,7 +276,7 @@
                     case SiteEnvironment.UAT:
 					case SiteEnvironment.SIT:
                     case SiteEnvironment.PRO:
-						return "<add uri=\"http://10.40.40.22:8091/pools/default\" />";
+						return "<add uri=\"http://10.40.40.127:8091/pools/default\" />";
                     case SiteEnvironment.MNL:
 						return	"<add uri=\"http://10.2.98.3:8091/pools/default\" />";
                     default:
@@ -326,7 +326,7 @@
                     case SiteEnvironment.SIT:
                         return "stateConnectionString=\"tcpip=172.16.4.107:42424\"";
                     case SiteEnvironment.PRO:
-                        return "stateConnectionString=\"tcpip=10.40.40.22:42424\"";
+                        return "stateConnectionString=\"tcpip=10.40.40.127:42424\"";
                     case SiteEnvironment.MNL:
                         return "stateConnectionString=\"tcpip=10.2.12.10:42424\"";
 
