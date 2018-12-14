@@ -444,7 +444,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         workSheet,
                         currentRow,
                         currentColumn,
-                        "House Total:",
+                        "(8RM + BARM) Total:",
                         grandTotalRowTextStyle,
                         numberOfGroupColumnsTotal,
                         report.IBCTotal,

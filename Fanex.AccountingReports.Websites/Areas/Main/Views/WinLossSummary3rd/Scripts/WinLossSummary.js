@@ -118,7 +118,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 
                 // footer: Grand Total
                 footerData.push(renderTotalFooter(viewResources.GrandTotal, report.AllTotal));
-                footerData.push(renderTotalFooter("House Total", report.IBCTotal));
+                footerData.push(renderTotalFooter("(8RM + BARM) Total:", report.IBCTotal));
             }
         }
 
