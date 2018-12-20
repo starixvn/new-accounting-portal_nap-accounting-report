@@ -279,7 +279,6 @@
     <Compile Include="Criteria\GetCashOutDetailCriteria.cs" />
     <Compile Include="Extensions\BetListExtension.cs" />
     <Compile Include="Core\BetListHelper.cs" />
-    <Compile Include="Core\CacheManager.cs" />
     <Compile Include="Core\CacheRef.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />

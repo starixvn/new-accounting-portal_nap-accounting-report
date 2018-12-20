@@ -219,6 +219,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
             bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeDate;
             var betTypeGroup = sportTypeGroup.GroupBy(data => new { data.bettype, data.liveindicator, data.IsFreePlay });
+            var cnt = betTypeGroup.Count();
 
             var isNewCricket = false;
             var dataForNewCricket = betTypeGroup.First();
@@ -280,6 +281,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         {
                             betInfo.Name = sportInfo.Name;
                             sportInfo.Name = Labels.VirtualSport;
+                            winloss.Id = sportId;
+                        }
+                        else if (sportInfo.Id == 161 || sportInfo.Id == 164)
+                        {
+                            betInfo.Name = this.GetSportName(sportId);
+                            sportInfo.Name = "Number Game";
                             winloss.Id = sportId;
                         }
                         else if (sportInfo.Id >= MainConstants.WinLossSummaryBeginBetradarVirtualSportId &&
@@ -347,6 +354,25 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 {
                     virtualSport.BetTypeWinLosses.Add(betInfo);
                     virtualSport.CalculateTotal(winloss);
+                }
+            }
+            else if (sportInfo.Id == 161 || sportInfo.Id == 164)
+            {
+
+                SportTypeWinLossInfo ng = report.SportTypeWinLosses.FirstOrDefault(sport => sport.Id == -161);
+                if (ng == null)
+                {
+                    sportInfo.Id = -161;
+                    ng = sportInfo;
+                    report.SportTypeWinLosses.Add(ng);
+                }
+                else
+                {
+                    foreach(var row in sportInfo.BetTypeWinLosses)
+                    {
+                        ng.BetTypeWinLosses.Add(row);
+                        ng.CalculateTotal(row.Normal);
+                    }
                 }
             }
             else if (sportInfo.Id >= MainConstants.WinLossSummaryBeginBetradarVirtualSportId && sportInfo.Id <= MainConstants.WinLossSummaryEndBetradarVirtualSportId)

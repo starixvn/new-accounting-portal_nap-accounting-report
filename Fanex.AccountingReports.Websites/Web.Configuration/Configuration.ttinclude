@@ -265,25 +265,7 @@
                         return "NAP-Report-LOCAL";
                 }
             }
-        }
-
-		public string CouchBase
-        {
-            get
-            {
-                switch(Environment)
-                {
-                    case SiteEnvironment.UAT:
-					case SiteEnvironment.SIT:
-                    case SiteEnvironment.PRO:
-						return "<add uri=\"http://10.40.40.127:8091/pools/default\" />";
-                    case SiteEnvironment.MNL:
-						return	"<add uri=\"http://10.2.98.3:8091/pools/default\" />";
-                    default:
-                        return "<add uri=\"http://ha.nexdev.net:8091/pools/default\" />";
-                }
-            }
-        }
+        }		
 
         public string DebugMode
         {

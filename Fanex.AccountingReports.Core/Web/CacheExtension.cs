@@ -1,41 +1,21 @@
 namespace Fanex.AccountingReports.Core.Web
 {
-    using Couchbase;
-    using Enyim.Caching.Memcached;
     using System;
+    using Caching;
 
     public static class CacheExtension
     {
-        private static CouchbaseClient _couchbaseClient = new CouchbaseClient();
-
-        public static object Get(string key)
-        {
-            return _couchbaseClient.Get(key);
-        }
+        private static CacheService cacheService = new CacheServiceImpl();
 
         public static T Get<T>(string key)
         {
-            return _couchbaseClient.Get<T>(key);
+            return cacheService.Get<T>(key);
         }
 
-        /// <summary>
-        /// Function to set cache info.
-        /// </summary>
-        /// <param name="key">Cache key.</param>
-        /// <param name="value">Cache value.</param>
-        /// <param name="expireTime">Expire time [Hour].</param>
-        public static void Set(string key, object value, int expireTime = 2)
-        {
-            _couchbaseClient.Store(
-                StoreMode.Set,
-                key,
-                value,
-                DateTime.Now.AddHours(expireTime));
-        }
 
-        public static void Remove(string key)
+        public static void Set<T>(string key, T value, int expireTime = 2)
         {
-            _couchbaseClient.Remove(key);
+            cacheService.Set(key, value, new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromHours(expireTime)));
         }
     }
 }

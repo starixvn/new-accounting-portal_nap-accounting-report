@@ -1,11 +1,11 @@
 namespace Fanex.BetList.Accounting.Services
 {
-    using Common.Extensions;
-    using Fanex.BetList.Accounting.Core;
-    using Fanex.BetList.Accounting.Models;
-    using Fanex.Data;
     using System;
     using System.Collections.Generic;
+    using AccountingReports.Core.Web;
+    using Common.Extensions;
+    using Fanex.BetList.Accounting.Models;
+    using Fanex.Data;
 
     /// <summary>
     /// TODO: Update summary.
@@ -29,7 +29,6 @@ namespace Fanex.BetList.Accounting.Services
                     balanceUp = objDb.QueryEntity<BalanceUp>();
                 }
 
-
                 return balanceUp;
             }
         }
@@ -40,7 +39,7 @@ namespace Fanex.BetList.Accounting.Services
         {
             get
             {
-                var ipVnList = CacheManager.Get<List<IPVNBean>>(CacheIPVN);
+                var ipVnList = CacheExtension.Get<List<IPVNBean>>(CacheIPVN);
                 if (ipVnList == null)
                 {
                     try
@@ -61,7 +60,7 @@ namespace Fanex.BetList.Accounting.Services
                             }
                         }
 
-                        CacheManager.Set<List<IPVNBean>>(CacheIPVN, ipVnList);
+                        CacheExtension.Set(CacheIPVN, ipVnList);
                     }
                     catch (Exception ex)
                     {
