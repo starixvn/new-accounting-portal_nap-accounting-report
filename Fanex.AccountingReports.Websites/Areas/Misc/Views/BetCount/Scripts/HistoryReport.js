@@ -59,6 +59,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
         VirtualSport_GroupId: "5_0",
         BetradarVirtualSport_GroupId: "27_0",
         NG2_ProductId: "23_0",
+        NG_ProductId: "3_0",
         SelectedSportBettype: [],
         Sports: [],
         Sportbook_SportID: [1, 999, -9],
@@ -164,6 +165,18 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
 
                 continue;
             }
+            if (productGroup.Name.toLowerCase() == "number game") {
+                ddProduct.push({
+                    id: "#" + ddId + "_Product3",
+                    value: "3_0",
+                    text: productGroup.Name,
+                    checked: false,
+                    enable: true,
+                    cssClass: "bold"
+                });
+
+                continue;
+            }
             if (productGroup.Name.toLowerCase() == "virtual sports") {
                 ddProduct.push({
                     id: "#" + ddId + "_Product5",
@@ -261,6 +274,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                     this.value == _cachedData.VirtualSport_GroupId ||
                     this.value == _cachedData.BetradarVirtualSport_GroupId ||
                     this.value == _cachedData.NG2_ProductId ||
+                    this.value == _cachedData.NG_ProductId ||
                     this.id == 'ddlProduct_HistoryReportHeaderCheckBox') {
                     self.getDropdownSport();
                 }
@@ -285,17 +299,20 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
         var isExistsVirtualSports = $.inArray(_cachedData.VirtualSport_GroupId, selectedProducts) != -1;
         var isExistsBetradarVirtualSports = $.inArray(_cachedData.BetradarVirtualSport_GroupId, selectedProducts) != -1;
         var isExistsNG2 = $.inArray(_cachedData.NG2_ProductId, selectedProducts) != -1;
+        var isExistsNG = $.inArray(_cachedData.NG_ProductId, selectedProducts) != -1;
         var isSetDefaultCollapse = true;
-        if (isExistsSportbook || isExistsVirtualSports || isExistsNG2 || isExistsBetradarVirtualSports) {
+        if (isExistsSportbook || isExistsVirtualSports || isExistsNG2 || isExistsNG || isExistsBetradarVirtualSports) {
             var sportGrouplength = sports ? sports.length : 0;
             for (var i = 0; i < sportGrouplength; i++) {
                 var sportGroup = sports[i];
                 var sportLength = sportGroup.ChildsInfo ? sportGroup.ChildsInfo.length : 0;
                 var ddSportGroup = [];
+
                 if ((_cachedData.Sportbook_SportID.contains(sportGroup.Id) && isExistsSportbook == true) ||
                     (sportGroup.Id <= 218 && sportGroup.Id >= 213 && isExistsNG2 == true) ||
+                    ((sportGroup.Id == 161 || sportGroup.Id == 164) && isExistsNG == true) ||
                     (sportGroup.Id <= 199 && sportGroup.Id >= 190 && isExistsBetradarVirtualSports == true) ||
-                    (sportGroup.Id <= 186 && sportGroup.Id >= 180 && isExistsVirtualSports == true)) {
+                    (sportGroup.Id <= 186 && sportGroup.Id >= 180 && isExistsVirtualSports == true)) {                    
                     self.generateSportbyProduct(sportGroup, sportLength, ddSportGroup, ddSport, ddId);
                 }
             }
@@ -313,7 +330,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
             useCustomCheckAllText: 'All',
             noneSelectedText: 'Select an option',
             noItemText: 'No sport found.',
-            disabled: (!isExistsSportbook && !isExistsVirtualSports && !isExistsNG2 && !isExistsBetradarVirtualSports),
+            disabled: (!isExistsSportbook && !isExistsVirtualSports && !isExistsNG2 && !isExistsNG && !isExistsBetradarVirtualSports),
             listData: ddSport,
             onCheck: function () {
             },
@@ -326,7 +343,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
         });
 
         _tables.ddlSport = $("#ddlSport_HistoryReport");
-        if (!isExistsSportbook && !isExistsVirtualSports && !isExistsNG2 && !isExistsBetradarVirtualSports) {
+        if (!isExistsSportbook && !isExistsVirtualSports && !isExistsNG2 && !isExistsNG && !isExistsBetradarVirtualSports) {
             _tables.ddlSport.fanexMultiSelect('setCheckAll', false);
             _tables.ddlSport.children('input').eq(0).val('Not applicable');
         }
@@ -449,7 +466,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
 
     var checkParlay = function (selectedProducts) {
         for (var i = selectedProducts.length ; i--;) {
-            if (selectedProducts[i] === "1_0" || selectedProducts[i] === "5_0" || selectedProducts[i] === "23_0" || selectedProducts[i] === "27_0") {
+            if (selectedProducts[i] === "1_0" || selectedProducts[i] === "5_0" || selectedProducts[i] === "23_0" || selectedProducts[i] === "3_0" || selectedProducts[i] === "27_0") {
                 selectedProducts.splice(i, 1);
             }
         }

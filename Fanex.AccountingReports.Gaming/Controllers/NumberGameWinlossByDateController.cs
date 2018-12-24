@@ -16,10 +16,12 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     public class NumberGameWinlossByDateController : BaseController
     {
         private readonly NumberGameWinlossByDateService _numberGameWinlossByDateService;
+        private readonly GamingService _reportService;
 
         public NumberGameWinlossByDateController()
         {
             this._numberGameWinlossByDateService = new NumberGameWinlossByDateService();
+            _reportService = new GamingService();
         }
 
         [HttpGet]
@@ -40,7 +42,7 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         [HttpPost]
         public JsonResult GetBettypes(GetNumberGameBetTypeListCriteria getNumberGameBettypeCriteria)
         {
-            var result = this._numberGameWinlossByDateService.GetBetTypes(getNumberGameBettypeCriteria);
+            var result = _reportService.GetBetTypes(getNumberGameBettypeCriteria);
             return Json(result);
         }
 

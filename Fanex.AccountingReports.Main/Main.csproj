@@ -167,6 +167,7 @@
     <Compile Include="Criteria\WinLossSummary3rd\GetRecalculateWinLossCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdBullfightingSportTypeCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdRacingSportTypeCriteria.cs" />
+    <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdNumberGameSportTypeCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdSportbookSportTypeCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdVirtualRacingSportTypeCriteria.cs" />
     <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdVirtualSportSportTypeCriteria.cs" />

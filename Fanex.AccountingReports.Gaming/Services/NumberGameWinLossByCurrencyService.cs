@@ -381,15 +381,18 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Style = backGroundHeaderFormat;
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Value = Labels.Currency;
             workSheetReport.Columns[startCol + nextCol].Width = 255 * 15;
-
-            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol += 1), startRow, startCol + nextCol).Merged = true;
-            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Style = backGroundHeaderFormat;
-            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Value = Labels.Turnover;
+            
+            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol + 1), startRow - 1, startCol + nextCol + 2).Merged = true;
+            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol + 1), startRow - 1, startCol + nextCol + 2).Style = backGroundHeaderFormat;
+            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol + 1), startRow - 1, startCol + nextCol + 2).Value = "Member";
             workSheetReport.Columns[startCol + nextCol].Width = 255 * 15;
 
-            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol += 1), startRow, startCol + nextCol).Merged = true;
-            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Style = backGroundHeaderFormat;
-            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Value = Labels.Member_WL;
+            workSheetReport.Cells[startRow, startCol + (nextCol += 1)].Style = backGroundHeaderFormat;
+            workSheetReport.Cells[startRow, startCol + nextCol].Value = "Turnover";
+            workSheetReport.Columns[startCol + nextCol].Width = 255 * 15;
+
+            workSheetReport.Cells[startRow, startCol + (nextCol += 1)].Style = backGroundHeaderFormat;
+            workSheetReport.Cells[startRow, startCol + nextCol].Value = "Win Loss";
             workSheetReport.Columns[startCol + nextCol].Width = 255 * 15;
 
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol += 1), startRow, startCol + nextCol).Merged = true;
@@ -399,7 +402,9 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
 
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol + 1), startRow - 1, startCol + nextCol + 5).Merged = true;
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol + 1), startRow - 1, startCol + nextCol + 5).Style = backGroundHeaderFormat;
-            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol + 1), startRow - 1, startCol + nextCol + 5).Value = Labels.Company;
+            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol + 1), startRow - 1, startCol + nextCol + 5).Value = "House";
+
+            
 
             workSheetReport.Cells[startRow, startCol + (nextCol += 1)].Style = backGroundHeaderFormat;
             workSheetReport.Cells[startRow, startCol + nextCol].Value = Labels.Net_Turnover;
@@ -602,11 +607,11 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
 
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol += 1), startRow, startCol + nextCol).Merged = true;
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Style = backGroundHeaderFormat;
-            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Value = Labels.Turnover;
+            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Value = "Member Turnover";
 
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol += 1), startRow, startCol + nextCol).Merged = true;
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Style = backGroundHeaderFormat;
-            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Value = Labels.GrossComm;
+            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Value = "Gross Comm";
 
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol + 1), startRow - 1, startCol + nextCol + 3).Merged = true;
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol + 1), startRow - 1, startCol + nextCol + 3).Style = backGroundHeaderFormat;
@@ -662,7 +667,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
 
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol += 1), startRow, startCol + nextCol).Merged = true;
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Style = backGroundHeaderFormat;
-            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Value = Labels.Company;
+            workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Value = "House";
 
             var userNameTemp = string.IsNullOrEmpty(criteria.Username) ? criteria.Username : (" - Username " + criteria.Username);
             var title = GamingResources.NumberGameWinLossByCurrency_Detail_Title + criteria.Currency + userNameTemp;

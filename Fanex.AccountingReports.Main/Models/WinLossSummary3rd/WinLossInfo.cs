@@ -17,6 +17,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 
         public int Id { get; set; }
 
+        public int SportId { get; set; }
+
         public string Name { get; set; }
 
         public int LiveIndicator { get; set; }

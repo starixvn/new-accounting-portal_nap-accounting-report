@@ -391,20 +391,35 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
             },
             success: function (rs) {
                 var id = "ddlBettype";
-                var bettypes = [];
+                var sports = [];
                 for (var i = 0; i < rs.length; i++) {
-                    var bettype = rs[i];
-                    bettypes.push({
-                        Id: "" + bettype.Id.toString(),
-                        Value: bettype.Id,
-                        Text: bettype.Name,
+                    var sport = rs[i];
+                    var bettypes = [];
+                    for (j = 0; j < sport.Bettypes.length; j++) {
+                        var bettype = sport.Bettypes[j];
+                        bettypes.push({
+                            Id: "" + bettype.Id.toString(),
+                            Value: bettype.Id,
+                            Text: bettype.Name,
+                            Checked: true,
+                            Enable: true,
+                            CssClass: "",
+                            Items: []
+                        });
+                    }
+
+                    sports.push({
+                        Id: i,
+                        Value: sport.SportName,
+                        Text: sport.SportName,
                         Checked: true,
                         Enable: true,
                         CssClass: "",
-                        Items: []
+                        Items: bettypes
                     });
                 }
-                self.renderBettypesDropdown(bettypes);
+
+                self.renderBettypesDropdown(sports);
             },
             error: function (event, jqXHR, ajaxSettings) {
                 self.renderBettypesDropdown([]);
@@ -462,10 +477,9 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
             {
                 Columns: [
                     { HeaderText: "Currency", Name: "Currency", MergeRowNumber: 2 },
-					{ HeaderText: "Turnover", Name: "Turnover", MergeRowNumber: 2 },
-					{ HeaderText: "Member Win Loss", Name: "MemberWinLoss", MergeRowNumber: 2 },
+                    { HeaderText: "Member", Name: "Turnover", MergeColNumber: 2, HeaderAlign: "center" },					
                     { HeaderText: "Game Payout", Name: "GamePayout", MergeRowNumber: 2 },
-					{ HeaderText: "Company", Name: "CompanyTurnover", MergeColNumber: 5, HeaderAlign: "center" }
+					{ HeaderText: "House", Name: "CompanyTurnover", MergeColNumber: 5, HeaderAlign: "center" }
                 ]
             }
         ]
@@ -476,7 +490,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
 					}
 					},
 					{ HeaderText: "Turnover", Width: 120, Name: "Turnover", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center" },
-                    { HeaderText: "Member Win Loss", Width: 120, Name: "MemberWinLoss", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", FormatPositive: '$' },
+                    { HeaderText: "Win Loss", Width: 120, Name: "MemberWinLoss", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", FormatPositive: '$' },
                     { HeaderText: "Game Payout", Width: 120, Name: "GamePayout", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, HeaderAlign: "center", FormatPositive: '$' },
 					{ HeaderText: "Net Turnover", Width: 120, Name: "CompanyTurnover", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center" },
 					{ HeaderText: "PT Win Loss", Width: 120, Name: "CompanyWinLoss", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
@@ -641,13 +655,13 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
             {
                 Columns: [
                     { HeaderText: "Username", Name: "Username", MergeRowNumber: 2 },
-					{ HeaderText: "Turnover", Name: "CustomerTurnover", MergeRowNumber: 2 },
-					{ HeaderText: "GrossComm", Name: "CustomerGrossComm", MergeRowNumber: 2 },
+					{ HeaderText: "Member Turnover", Name: "CustomerTurnover", MergeRowNumber: 2 },
+					{ HeaderText: "Gross Comm", Name: "CustomerGrossComm", MergeRowNumber: 2 },
                     { HeaderText: "Member", Name: "MemberWinloss", MergeColNumber: 3, HeaderAlign: "center" },
                     { HeaderText: "Agent", Name: "AgentWinloss", MergeColNumber: 3, HeaderAlign: "center" },
                     { HeaderText: "Master", Name: "MasterWinloss", MergeColNumber: 3, HeaderAlign: "center" },
                     { HeaderText: "Super", Name: "SuperWinloss", MergeColNumber: 3, HeaderAlign: "center" },
-					{ HeaderText: "Company", Name: "CompanyTurnover", MergeRowNumber: 2 }
+					{ HeaderText: "House", Name: "CompanyTurnover", MergeRowNumber: 2 }
                 ]
             }
         ]
@@ -663,8 +677,8 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
 
                     }
                     },
-					{ HeaderText: "Turnover", Width: 120, Name: "CustomerTurnover", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center" },
-                    { HeaderText: "GrossComm", Width: 120, Name: "CustomerGrossComm", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", FormatPositive: '$' },
+					{ HeaderText: "Member Turnover", Width: 120, Name: "CustomerTurnover", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center" },
+                    { HeaderText: "Gross Comm", Width: 120, Name: "CustomerGrossComm", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", FormatPositive: '$' },
 
                     { HeaderText: "Win Loss", Width: 120, Name: "MemberWinloss", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                     { HeaderText: "Comm", Width: 120, Name: "MemberComm", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
@@ -682,7 +696,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
                     { HeaderText: "Comm", Width: 120, Name: "SuperComm", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
 					{ HeaderText: "Total", Width: 120, Name: "SuperTotal", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
 
-                    { HeaderText: "Company", Width: 100, Name: "CompanyTurnover", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' }
+                    { HeaderText: "House", Width: 100, Name: "CompanyTurnover", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' }
 
                 ];
 

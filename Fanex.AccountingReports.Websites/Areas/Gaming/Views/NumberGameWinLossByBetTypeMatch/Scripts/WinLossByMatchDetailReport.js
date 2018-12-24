@@ -117,10 +117,10 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.WinLossByMatch.De
                 Columns: [
                     { HeaderText: viewResources.Symbol_No, Name: "ColNo", MergeRowNumber: 2 },
                     { HeaderText: viewResources.User_Name, Name: "ColUserName", MergeRowNumber: 2 },
-                    { HeaderText: viewResources.Company_Turnover, Name: "ColCompanyTurnover", MergeRowNumber: 2 },
+                    { HeaderText: 'House Turnover', Name: "ColCompanyTurnover", MergeRowNumber: 2 },
                     { HeaderText: viewResources.Gross_Comm, Name: "ColGrossComm", MergeRowNumber: 2 },
 
-                    { HeaderText: viewResources.Customer, Name: "ColCustomerWinLoss", MergeColNumber: 3, HeaderAlign: "center" },
+                    { HeaderText: 'Member', Name: "ColCustomerWinLoss", MergeColNumber: 3, HeaderAlign: "center" },
                     { HeaderText: viewResources.Agent, Name: "ColAgentWinLoss", MergeColNumber: 3, HeaderAlign: "center" },
                     { HeaderText: viewResources.Master, Name: "ColMasterWinLoss", MergeColNumber: 3, HeaderAlign: "center" },
                     { HeaderText: viewResources.Super, Name: "ColSuperWinLoss", MergeColNumber: 3, HeaderAlign: "center"}]
@@ -128,7 +128,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.WinLossByMatch.De
             columns: [{ HeaderText: viewResources.Symbol_No, Width: 60, Name: "ColNo", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: viewResources.User_Name, Width: 150, Name: "ColUserName", HeaderAlign: "center", CellAlign: "center" },
                 {
-                    HeaderText: viewResources.Company_Turnover,
+                    HeaderText: 'House Turnover',
                     Width: 120,
                     Name: "ColCompanyTurnover",
                     HeaderAlign: "center",
@@ -273,6 +273,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.WinLossByMatch.De
             headerColumnHeight: 17,
             showPager: false
         };
+        
 
         self.Tables.reportContainer.dialog({
             title: "",

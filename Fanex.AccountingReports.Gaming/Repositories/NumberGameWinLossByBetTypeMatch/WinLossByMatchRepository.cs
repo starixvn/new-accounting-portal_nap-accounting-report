@@ -46,7 +46,7 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement.NumberGameWinLos
 
                     MatchCode = Converter.ToString2(row["matchcode"]),
                     MatchId = Converter.ToInt(row["matchid"]),
-                    LiveIndicator = Converter.ToBool(row["islive"]),
+                    SportType = Converter.ToInt(row["SportType"]),
                     BetType = Converter.ToInt(row["bettype"])
                 };
 

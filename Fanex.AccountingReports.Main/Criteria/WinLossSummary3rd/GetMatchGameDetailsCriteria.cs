@@ -37,11 +37,14 @@ namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd
             {
                 if (_type == SportTypeWinLoss.Unknown)
                 {
-                    if (SportType <= MainConstants.WinLossSummaryMaxSportbookId ||
-                        SportType == SportContants.NumberGame ||
+                    if (SportType <= MainConstants.WinLossSummaryMaxSportbookId ||                        
                         SportType == SportContants.HorseRacingFixedOdds)
                     {
                         _type = SportTypeWinLoss.SportBook;
+                    }
+                    else if(SportType == 161 || SportType == 164)
+                    {
+                        _type = SportTypeWinLoss.NumberGame;
                     }
                     else if (SportType >= MainConstants.MinMetricGamingSuperLiveBetType && SportType <= MainConstants.MaxMetricGamingSuperLiveBetType)
                     {

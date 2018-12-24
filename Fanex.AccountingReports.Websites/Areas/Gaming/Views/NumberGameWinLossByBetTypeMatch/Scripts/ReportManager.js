@@ -233,18 +233,31 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.ReportManager = f
     };
     self.RenderBetTypeList = function (rs) {
         var id = "dropdown-bettype";
-        var betTypes = [];
-        var betTypeLength = rs.length;
-        for (var i = 0; i < betTypeLength; i++) {
-            var betType = rs[i];
-            betTypes.push({
-                Id: id + betType.Id,
-                Value: betType.Id,
-                Text: betType.Name,
+        var sports = [];
+        for (var i = 0; i < rs.length; i++) {
+            var sport = rs[i];
+            var bettypes = [];
+            for (j = 0; j < sport.Bettypes.length; j++) {
+                var bettype = sport.Bettypes[j];
+                bettypes.push({
+                    Id: "" + bettype.Id.toString(),
+                    Value: bettype.Id,
+                    Text: bettype.Name,
+                    Checked: true,
+                    Enable: true,
+                    CssClass: "",
+                    Items: []
+                });
+            }
+
+            sports.push({
+                Id: i,
+                Value: sport.SportName,
+                Text: sport.SportName,
                 Checked: true,
                 Enable: true,
                 CssClass: "",
-                Items: []
+                Items: bettypes
             });
         }
 
@@ -260,7 +273,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.ReportManager = f
             isUsedCustomCheckAllText: true,
             customCheckAllText: viewResources.All_Bet_Types,
             noItemText: viewResources.Error_NoBetTypeFound,
-            listData: betTypes
+            listData: sports
         });
 
         self.Tables.dropdownBettype = $("#dropdown-bettype");

@@ -40,7 +40,7 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         [HandleAjaxError]
         public JsonResult GetNumberGameBetTypeList(GetNumberGameBetTypeListCriteria criteria)
         {
-            var result = _reportService.GetNumberGameBetTypeList(criteria);
+            var result = _reportService.GetBetTypes(criteria);
             return Json(result);
         }
 

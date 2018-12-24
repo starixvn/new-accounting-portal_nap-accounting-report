@@ -885,13 +885,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
             currentCellRange.Style = headerTextStyle;
-            currentCellRange.Value = Labels.WinLoss;
+            currentCellRange.Value = "Member Win Loss";
             currentColumn++;
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
             currentCellRange.Style = headerTextStyle;
-            currentCellRange.Value = Labels.Position;
+            currentCellRange.Value = "SMA Win Loss";
             currentColumn++;
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
@@ -903,7 +903,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
             currentCellRange.Merged = true;
             currentCellRange.Style = headerTextStyle;
-            currentCellRange.Value = Labels.LineTotal;
+            currentCellRange.Value = "House Income";
             currentColumn += 2;
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
@@ -915,7 +915,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
             currentCellRange.Merged = true;
             currentCellRange.Style = headerTextStyle;
-            currentCellRange.Value = Labels.Turnover;
+            currentCellRange.Value = "House Turnover";
             currentColumn += 2;
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -1139,13 +1139,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
             currentCellRange.Style = headerTextStyle;
-            currentCellRange.Value = Labels.WinLoss;
+            currentCellRange.Value = "Member Win Loss";
             currentColumn++;
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
             currentCellRange.Style = headerTextStyle;
-            currentCellRange.Value = Labels.Position;
+            currentCellRange.Value = "SMA Win Loss";
             currentColumn++;
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
@@ -1157,7 +1157,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
             currentCellRange.Merged = true;
             currentCellRange.Style = headerTextStyle;
-            currentCellRange.Value = Labels.LineTotal;
+            currentCellRange.Value = "House Income";
             currentColumn += 2;
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
@@ -1169,7 +1169,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
             currentCellRange.Merged = true;
             currentCellRange.Style = headerTextStyle;
-            currentCellRange.Value = Labels.Turnover;
+            currentCellRange.Value = "House Turnover";
             currentColumn += 2;
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);

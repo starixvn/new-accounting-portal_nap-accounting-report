@@ -82,21 +82,19 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
                         }
                     };
 
-                    var liveIndicatorGroups = matchGroup.GroupBy(data => data.LiveIndicator);
-                    foreach (var liveIndicatorGroup in liveIndicatorGroups)
+                    var sportGroups = matchGroup.GroupBy(data => data.SportType);
+                    foreach (var sportGroup in sportGroups)
                     {
-                        WinLossInfo liveIndicatorWinLoss = new WinLossInfo
+                        WinLossInfo sportWinLoss = new WinLossInfo
                         {
-                            Id = liveIndicatorGroup.Key ?
-                                LiveTypeConstants.Live :
-                                LiveTypeConstants.NonLive,
+                            Id = sportGroup.Key,
                             DetailInfo = new List<WinLossInfo>(),
                             GrandTotal = new WinLossInfo()
                         };
 
-                        liveIndicatorWinLoss.Name = ReportService.GetLiveTypeName(liveIndicatorWinLoss.Id);
-                        liveIndicatorWinLoss.GrandTotal.Name = liveIndicatorWinLoss.Name;
-                        foreach (var data in liveIndicatorGroup)
+                        sportWinLoss.Name = CacheRef.GetSportName(sportWinLoss.Id);
+                        sportWinLoss.GrandTotal.Name = sportWinLoss.Name;
+                        foreach (var data in sportGroup)
                         {
                             WinLossInfo info = new WinLossInfo
                             {
@@ -110,14 +108,14 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
                             };
 
                             info.Name = CacheRef.GetBettype(info.Id);
-                            liveIndicatorWinLoss.GrandTotal.Sum(info);
+                            sportWinLoss.GrandTotal.Sum(info);
                             info = WinLossInfo.Format(info);
-                            liveIndicatorWinLoss.DetailInfo.Add(info);
+                            sportWinLoss.DetailInfo.Add(info);
                         }
 
-                        matchWinLoss.GrandTotal.Sum(liveIndicatorWinLoss.GrandTotal);
-                        liveIndicatorWinLoss.GrandTotal = WinLossInfo.Format(liveIndicatorWinLoss.GrandTotal);
-                        matchWinLoss.DetailInfo.Add(liveIndicatorWinLoss);
+                        matchWinLoss.GrandTotal.Sum(sportWinLoss.GrandTotal);
+                        sportWinLoss.GrandTotal = WinLossInfo.Format(sportWinLoss.GrandTotal);
+                        matchWinLoss.DetailInfo.Add(sportWinLoss);
                     }
 
                     matchWinLoss.DetailInfo = matchWinLoss.DetailInfo.OrderByDescending(detailInfo => detailInfo.Id).ToList();
@@ -153,8 +151,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
                 {
                     Name = string.Format(
                         GamingResources.NumberGameWinLossByBetTypeMatch_ByMatchDetailReportTitle,
-                        criteria.MatchCode,
-                        ReportService.GetLiveTypeName(criteria.LiveStatus),
+                        criteria.MatchCode,                        
                         CacheRef.GetBettype(criteria.BetTypeId),
                         criteria.ReportDate.ToShortFormatedDate()),
                     DetailInfo = new List<WinLossInfo>(),
@@ -424,13 +421,13 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Customer_Win_Loss;
+            currentCellRange.Value = "Member Win Loss";
             currentCellRange.Style = headerTextStyle;
             currentColumn++;
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Agency_Win_Loss;
+            currentCellRange.Value = "SMA Win Loss";
             currentCellRange.Style = headerTextStyle;
             currentColumn++;
 
@@ -442,7 +439,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 4);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Company;
+            currentCellRange.Value = "House";
             currentCellRange.Style = headerTextStyle;
             currentColumn += 5;
             currentRow++;
@@ -455,12 +452,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Style = headerTextStyle;
-            currentCell.Value = Labels.Line_Total;
+            currentCell.Value = "Real Income";
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Style = headerTextStyle;
-            currentCell.Value = Labels.Virtual_Line_Total;
+            currentCell.Value = "Virtual Win Loss";
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -908,7 +905,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Company_Turnover;
+            currentCellRange.Value = "House Turnover";
             currentCellRange.Style = headerTextStyle;
             currentColumn++;
 
@@ -920,7 +917,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 2);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Customer;
+            currentCellRange.Value = "Member";
             currentCellRange.Style = headerTextStyle;
             currentColumn += 3;
 
