@@ -228,20 +228,35 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
             },
             success: function (rs) {
                 var id = "ddlBettype";
-                var bettypes = [];
+                var sports = [];
                 for (var i = 0; i < rs.length; i++) {
-                    var bettype = rs[i];
-                    bettypes.push({
-                        Id: "" + bettype.Id.toString(),
-                        Value: bettype.Id,
-                        Text: bettype.Name,
+                    var sport = rs[i];
+                    var bettypes = [];
+                    for (j = 0; j < sport.Bettypes.length; j++){
+                        var bettype = sport.Bettypes[j];
+                        bettypes.push({
+                            Id: "" + bettype.Id.toString(),
+                            Value: bettype.Id,
+                            Text: bettype.Name,
+                            Checked: true,
+                            Enable: true,
+                            CssClass: "",
+                            Items: []
+                        });
+                    }
+
+                    sports.push({
+                        Id: i,
+                        Value: sport.SportName,
+                        Text: sport.SportName,
                         Checked: true,
                         Enable: true,
                         CssClass: "",
-                        Items: []
+                        Items: bettypes
                     });
                 }
-                self.renderBettypesDropdown(bettypes);
+            
+                self.renderBettypesDropdown(sports);
             },
             error: function (event, jqXHR, ajaxSettings) {
                 self.renderBettypesDropdown([]);
@@ -279,22 +294,22 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
             {
                 Columns: [
                     { HeaderText: "Date", Name: "Bettype", MergeRowNumber: 2 },
-					{ HeaderText: "Customer Win Loss", Name: "CustomerWL", MergeRowNumber: 2 },
-					{ HeaderText: "Agency Win Loss", Name: "AgencyWL", MergeRowNumber: 2 },
+					{ HeaderText: "Member Win Loss", Name: "CustomerWL", MergeRowNumber: 2 },
+					{ HeaderText: "SMA Win Loss", Name: "AgencyWL", MergeRowNumber: 2 },
                     { HeaderText: "Comm", Name: "Comm", MergeRowNumber: 2 },
-					{ HeaderText: "Company", Name: "Turnover", MergeColNumber: 5, HeaderAlign: "center" }
+					{ HeaderText: "House", Name: "Turnover", MergeColNumber: 5, HeaderAlign: "center" }
                 ]
             }
         ]
 
         var columns = [
 					{ HeaderText: "Date", Width: 237, Name: "Bettype", CellAlign: "left", ShowCollapseExpand: true, HeaderAlign: "center" },
-					{ HeaderText: "Customer Win Loss", Width: 120, Name: "CustomerWL", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$', HeaderAlign: "center" },
-					{ HeaderText: "Agency Win Loss", Width: 120, Name: "AgencyWL", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center" },
+					{ HeaderText: "Member Win Loss", Width: 120, Name: "CustomerWL", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$', HeaderAlign: "center" },
+					{ HeaderText: "SMA Win Loss", Width: 120, Name: "AgencyWL", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center" },
                     { HeaderText: "Comm", Width: 120, Name: "Comm", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center" },
 					{ HeaderText: "Turnover", Width: 120, Name: "Turnover", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center" },
-					{ HeaderText: "Line Total", Width: 120, Name: "LineTotal", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
-                    { HeaderText: "Virtual Total", Width: 120, Name: "VirtualTotal", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
+					{ HeaderText: "Real Income", Width: 120, Name: "LineTotal", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
+                    { HeaderText: "Virtual Win Loss", Width: 120, Name: "VirtualTotal", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                     { HeaderText: "Variance", Width: 120, Name: "Variance", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
 					{ HeaderText: "Margin", Width: 120, Name: "Margin", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$' }
 				];

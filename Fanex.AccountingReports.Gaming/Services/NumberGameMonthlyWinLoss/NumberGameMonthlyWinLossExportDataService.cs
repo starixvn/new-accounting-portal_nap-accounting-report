@@ -136,7 +136,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWin
 
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
                 currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.Position;
+                currentCellRange.Value = "SMA Win Loss";
                 currentCellRange.Style.FormatTitleCell(headerColor);
                 currentColumn++;
 
@@ -148,13 +148,13 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWin
 
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
                 currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.LineTotal;
+                currentCellRange.Value = "House Real Income";
                 currentCellRange.Style.FormatTitleCell(headerColor);
                 currentColumn++;
 
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
                 currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.Turnover;
+                currentCellRange.Value = "House Real Turnover";
                 currentCellRange.Style.FormatTitleCell(headerColor);
                 currentColumn++;
 

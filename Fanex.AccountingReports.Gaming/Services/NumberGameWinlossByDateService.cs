@@ -16,6 +16,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
     using Fanex.AccountingReports.Gaming.Models.NumberGameWinLossByDate;
     using Fanex.AccountingReports.Gaming.Resources;
     using Fanex.Common;
+    using Models;
 
     /// <summary>
     /// TODO: Update summary.
@@ -71,36 +72,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             return result;
         }
 
-        /// <summary>
-        /// Gets the bet types.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The bet types.</returns>
-        public List<EntityBase<int, string>> GetBetTypes(GetNumberGameBetTypeListCriteria criteria)
-        {
-            var result = new List<EntityBase<int, string>>();
-            try
-            {
-                var rawData = GetReportData<dynamic>(criteria);
-                if (rawData != null)
-                {
-                    foreach (var row in rawData)
-                    {
-                        result.Add(new EntityBase<int, string>()
-                        {
-                            Id = row.typeID,
-                            Name = row.typenamee
-                        });
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            return result;
-        }
+        
 
         /// <summary>
         /// Gets the number game win loss by date.
@@ -135,18 +107,18 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
                                 GrandTotal = new NumberGameWinLossDetail()
                             };
 
-                            group.GroupBy(l => l.islive)
+                            group.GroupBy(l => l.SportType)
                                  .ToList()
-                                 .ForEach(status =>
+                                 .ForEach(sport =>
                             {
                                 var winLossInfo = new NumberGameWinLossDetail
                                 {
-                                    Status = status.Key ? "Live" : "Non Live",
+                                    Status = CacheRef.GetSportName(sport.Key),
                                     ChildInfo = new List<NumberGameWinLossDetail>(),
                                     GrandTotal = new NumberGameWinLossDetail()
                                 };
 
-                                status.ToList().ForEach(bettype =>
+                                sport.ToList().ForEach(bettype =>
                                 {
                                     var detail = new NumberGameWinLossDetail
                                     {
@@ -331,13 +303,13 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
 
                 currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
                 currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.CustomerWinLoss;
+                currentCellRange.Value = "Member Win Loss";
                 currentCellRange.Style.FormatTitleCell(headerColor);
                 currentColumn++;
 
                 currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
                 currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.Agency_Win_Loss;
+                currentCellRange.Value = "SMA Win Loss";
                 currentCellRange.Style.FormatTitleCell(headerColor);
                 currentColumn++;
 
@@ -349,18 +321,18 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
 
                 currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 4);
                 currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.Company;
+                currentCellRange.Value = "House";
                 currentCellRange.Style.FormatTitleCell(headerColor);
 
                 worksheet.Cells[currentRow + 1, currentColumn].Value = Labels.Turnover;
                 worksheet.Cells[currentRow + 1, currentColumn].Style.FormatTitleCell(headerColor);
                 currentColumn++;
 
-                worksheet.Cells[currentRow + 1, currentColumn].Value = Labels.LineTotal;
+                worksheet.Cells[currentRow + 1, currentColumn].Value = "Real Income";
                 worksheet.Cells[currentRow + 1, currentColumn].Style.FormatTitleCell(headerColor);
                 currentColumn++;
 
-                worksheet.Cells[currentRow + 1, currentColumn].Value = Labels.VirtualTotal;
+                worksheet.Cells[currentRow + 1, currentColumn].Value = "Virtual Win Loss";
                 worksheet.Cells[currentRow + 1, currentColumn].Style.FormatTitleCell(headerColor);
                 currentColumn++;
 

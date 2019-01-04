@@ -3,6 +3,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Criteria;
     using Fanex.AccountingReports.Core.Models;
@@ -126,38 +127,24 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             }
         }
 
-        /// <summary>
-        /// Gets the bet type list.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The bet type list.</returns>
-        public List<EntityBase<int, string>> GetNumberGameBetTypeList(GetNumberGameBetTypeListCriteria criteria)
+        public List<NumberGameSport> GetBetTypes(GetNumberGameBetTypeListCriteria criteria)
         {
-            try
-            {
-                var result = new List<EntityBase<int, string>>();
-                var rawData = GetReportData<dynamic>(criteria);
-                if (rawData == null)
+            var result = new List<NumberGameSport>();
+            var rawData = DynamicRepository.Fetch<NumberGameBettypeRaw>(criteria);
+            rawData.GroupBy(g => g.SportName).ToList()
+                .ForEach(sport =>
                 {
-                    return result;
-                }
-
-                foreach (var row in rawData)
-                {
-                    result.Add(new EntityBase<int, string>()
+                    var bettypes = new List<NumberGameBettype>();
+                    sport.Select(s => s).ToList()
+                    .ForEach(b =>
                     {
-                        Id = row.typeID,
-                        Name = row.typenamee
+                        bettypes.Add(new NumberGameBettype { Id = b.TypeId, Name = b.TypeNamee });
                     });
-                }
 
-                return result;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+                    result.Add(new NumberGameSport { SportName = sport.Key, Bettypes = bettypes });
+                });
+
+            return result;
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace Fanex.AccountingReports.Gaming.Models.NumberGameWinLossByBetTypeMatch
 
         public int MatchId { get; set; }
 
-        public bool LiveIndicator { get; set; }
+        public int SportType { get; set; }
 
         public int LeagueId { get; set; }
 

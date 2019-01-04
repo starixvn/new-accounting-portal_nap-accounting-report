@@ -132,6 +132,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             return new WinLossInfo
             {
                 Id = Converter.ToInt(item.bettype),
+                SportId = Converter.ToInt(item.sporttype),
                 LiveIndicator = Converter.ToBool(item.liveindicator) ? 1 : 0,
                 IBC = Converter.ToInt(item.ibc),
                 IsHedge = Converter.ToBool(item.IsHedge),
@@ -219,6 +220,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
             bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeDate;
             var betTypeGroup = sportTypeGroup.GroupBy(data => new { data.bettype, data.liveindicator, data.IsFreePlay });
+            var cnt = betTypeGroup.Count();
 
             var isNewCricket = false;
             var dataForNewCricket = betTypeGroup.First();
@@ -230,7 +232,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 betInfo = new BetTypeWinLossInfo();
                 betInfo.Id = data.Key.bettype;
                 betInfo.LiveIndicator = (bool)data.Key.liveindicator ? 1 : 0;
-                betInfo.Name = isFreePlay ? bettypeName + "(Free Play)" : bettypeName;
+                betInfo.Name = isFreePlay ? bettypeName + "(Free Play)" : bettypeName;                
 
                 if (data.Key.bettype == 500)
                 {
@@ -281,6 +283,13 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                             betInfo.Name = sportInfo.Name;
                             sportInfo.Name = Labels.VirtualSport;
                             winloss.Id = sportId;
+                        }
+                        else if (sportInfo.Id == 161 || sportInfo.Id == 164)
+                        {
+                            betInfo.Name = this.GetSportName(sportId);                            
+                            sportInfo.Name = "Number Game";
+                            winloss.Id = item.bettype;                            
+                            
                         }
                         else if (sportInfo.Id >= MainConstants.WinLossSummaryBeginBetradarVirtualSportId &&
                             sportInfo.Id <= MainConstants.WinLossSummaryEndBetradarVirtualSportId)
@@ -347,6 +356,23 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 {
                     virtualSport.BetTypeWinLosses.Add(betInfo);
                     virtualSport.CalculateTotal(winloss);
+                }
+            }
+            else if (sportInfo.Id == 161 || sportInfo.Id == 164)
+            {
+                SportTypeWinLossInfo ng = report.SportTypeWinLosses.FirstOrDefault(sport => sport.Id == 161);
+                if (ng == null)
+                {
+                    ng = sportInfo;
+                    report.SportTypeWinLosses.Add(ng);
+                }
+                else
+                {
+                    foreach (var row in sportInfo.BetTypeWinLosses)
+                    {
+                        ng.BetTypeWinLosses.Add(row);
+                        ng.CalculateTotal(row.Normal);
+                    }
                 }
             }
             else if (sportInfo.Id >= MainConstants.WinLossSummaryBeginBetradarVirtualSportId && sportInfo.Id <= MainConstants.WinLossSummaryEndBetradarVirtualSportId)
@@ -562,7 +588,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                             leagueHash.Add(leagueId, leagueId);
                         }
 
-                        if (type == SportTypeWinLoss.SportBook || type == SportTypeWinLoss.VirtualSports)
+                        if (type == SportTypeWinLoss.SportBook || type == SportTypeWinLoss.NumberGame|| type == SportTypeWinLoss.VirtualSports)
                         {
                             homeId = Converter.ToInt(data.HomeId);
                             if (!teamHash.ContainsKey(homeId))
@@ -585,7 +611,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                     CacheRef.SaveCacheRefResponse(leagueHash.Values.ToList(), CacheRef.GetLeagueName, ref this._leagueNameCache);
 
                     // get team name
-                    if (type == SportTypeWinLoss.SportBook || type == SportTypeWinLoss.VirtualSports)
+                    if (type == SportTypeWinLoss.SportBook || type == SportTypeWinLoss.NumberGame || type == SportTypeWinLoss.VirtualSports)
                     {
                         CacheRef.SaveCacheRefResponse(teamHash.Values.ToList(), CacheRef.GetTeamName, ref this._teamNameCache);
                     }
@@ -886,6 +912,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             switch (type)
             {
                 case SportTypeWinLoss.SportBook:
+                case SportTypeWinLoss.NumberGame:
                     matchGameWinLoss = this.BuildSportBookWinLossDetail(param);
                     break;
 
@@ -1093,6 +1120,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 case SportTypeWinLoss.SportBook:
                     return CreateWinLossSummary3rdSportbookSportTypeCriteria(criteria);
 
+                case SportTypeWinLoss.NumberGame:
+                    return CreateWinLossSummary3rdNumberGameSportTypeCriteria(criteria);
+
                 case SportTypeWinLoss.Racing:
                     return CreateWinLossSummary3rdRacingSportTypeCriteria(criteria);
 
@@ -1122,6 +1152,17 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 LiveIndicator = criteria.LiveIndicator,
                 DrillDownByType = criteria.DrillDownByType,
                 SubProduct = criteria.SubProduct
+            };
+        }
+
+        private CriteriaBase CreateWinLossSummary3rdNumberGameSportTypeCriteria(GetMatchGameDetailsCriteria criteria)
+        {
+            return new GetWinLossSummary3rdNumberGameSportTypeCriteria
+            {
+                FromDate = criteria.FromDate,
+                ToDate = criteria.ToDate,
+                SportType = criteria.SportType,
+                BetType = criteria.BetType                
             };
         }
 

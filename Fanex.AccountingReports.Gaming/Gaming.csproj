@@ -195,6 +195,9 @@
     <Compile Include="Models\LiveCasinoWinLossByAgency\ProductGameType.cs" />
     <Compile Include="Models\LiveCasinoWinLossByAgency\WinLossInfo.cs" />
     <Compile Include="Models\LiveCasinoWinLossByAgency\WinLossInfoEntity.cs" />
+    <Compile Include="Models\NumberGameBettype.cs" />
+    <Compile Include="Models\NumberGameBettypeRaw.cs" />
+    <Compile Include="Models\NumberGameSport.cs" />
     <Compile Include="Models\NumberGameFinancialReport\ProductGameType.cs" />
     <Compile Include="Models\NumberGameMonthlyWinLoss\NumberGameMonthlyWinLoss.cs" />
     <Compile Include="Models\NumberGameFinancialReport\NumberGameFinancial.cs" />

@@ -245,7 +245,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                     if (betType.Id < 221 && betType.Id > 212) {
                         sportType.SubRows.push(renderTotalNew(total, 'total', total.Name + ' ' + viewResources.Total));
                     }
-                    else {
+                    else {                        
                         sportType.SubRows.push(renderWinLoss(total, true, sportWinloss.Id, id > 0 ? sportName : total.Name, betTypeDrillDown, i));
                     }
                 }
@@ -262,7 +262,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 
                 var hasOtherMatchType = betType.EightRM || betType.BARM || betType.Hedge;
                 var showNormal = betType.Normal && hasOtherMatchType;
-                if (showNormal) { // Normal
+                if (showNormal) { // Normal                    
                     sportType.SubRows.push(renderWinLoss(betType.Normal, false, sportWinloss.Id, id > 0 ? sportName : betType.Normal.Name, false, i));
                 }
             }
@@ -380,9 +380,15 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
     var renderWinLoss = function (winloss, ibc, sportId, sportName, showDetailLink, bettypeIndex) {
         var cssClass = bettypeIndex % 2 == 0 ? 'evenRow' : 'oddRow';
         var betType = ibc ? ((winloss.LiveIndicator == 1 ? '<span class="live">Live!</span> ' : '') + winloss.Name) : winloss.Name;
+
+        console.log(winloss);
         var groupdId = '';
         if (sportId == AccReportData.Constants.SportType.MetricGamingSuperLive) {
             sportId = AccReportData.Constants.SportType.Soccer;
+        }
+        else if (sportId == 161) {
+            sportId = winloss.SportId;
+            sportName = winloss.Name;
         }
 
         return {

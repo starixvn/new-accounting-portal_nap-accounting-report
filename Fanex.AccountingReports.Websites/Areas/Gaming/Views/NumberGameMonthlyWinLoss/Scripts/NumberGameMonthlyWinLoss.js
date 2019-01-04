@@ -120,10 +120,10 @@ Fanex.AccountingReports.Gaming.NumberGameMonthlyWinLossReport = function () {
 					}
 					},
 					{ HeaderText: memberWinLoss, Width: 150, Name: "MemberWinLoss", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
-					{ HeaderText: position, Width: 150, Name: "Position", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+					{ HeaderText: 'SMA Win Loss', Width: 150, Name: "Position", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                     { HeaderText: commission, Width: 120, Name: "Commission", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center" },
-					{ HeaderText: lineTotal, Width: 150, Name: "LineTotal", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", FormatPositive: '$' },
-					{ HeaderText: turnOver, Width: 150, Name: "TurnOver", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+					{ HeaderText: 'House Real Income', Width: 150, Name: "LineTotal", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", FormatPositive: '$' },
+					{ HeaderText: 'House Real Turnover', Width: 150, Name: "TurnOver", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                     { HeaderText: margin, Width: 150, Name: "Margin", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$' }
 				];
 

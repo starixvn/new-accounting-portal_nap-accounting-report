@@ -155,19 +155,19 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.WinLossByMatch.Ma
             groupHeaderRows: [{
                 Columns: [
                     { HeaderText: viewResources.Match, Name: "ColName", MergeRowNumber: 2 },
-                    { HeaderText: viewResources.Customer_Win_Loss, Name: "ColCustomerWinLoss", MergeRowNumber: 2 },
-                    { HeaderText: viewResources.Agency_Win_Loss, Name: "ColAgencyWinLoss", MergeRowNumber: 2 },
+                    { HeaderText: 'Member Win Loss', Name: "ColCustomerWinLoss", MergeRowNumber: 2 },
+                    { HeaderText: 'SMA Win Loss', Name: "ColAgencyWinLoss", MergeRowNumber: 2 },
                     { HeaderText: viewResources.Commission, Name: "ColCommission", MergeRowNumber: 2 },
-                    { HeaderText: viewResources.Company, Name: "ColTurnover", MergeColNumber: 5, HeaderAlign: "center" }
+                    { HeaderText: 'House', Name: "ColTurnover", MergeColNumber: 5, HeaderAlign: "center" }
                 ]
             }],
             columns: [{ HeaderText: viewResources.Match, Width: 140, Name: "ColName", HeaderAlign: "center", CellAlign: "left", ShowCollapseExpand: true },
-                { HeaderText: viewResources.Customer_Win_Loss, Width: 120, Name: "ColCustomerWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
-                { HeaderText: viewResources.Agency_Win_Loss, Width: 120, Name: "ColAgencyWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                { HeaderText: 'Member Win Loss', Width: 120, Name: "ColCustomerWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
+                { HeaderText: 'SMA Win Loss', Width: 120, Name: "ColAgencyWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: viewResources.Commission, Width: 80, Name: "ColCommission", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: viewResources.Turnover, Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-                { HeaderText: viewResources.Line_Total, Width: 120, Name: "ColRealLineTotal", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
-                { HeaderText: viewResources.Virtual_Line_Total, Width: 120, Name: "ColVirtualLineTotal", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
+                { HeaderText: 'Real Income', Width: 120, Name: "ColRealLineTotal", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
+                { HeaderText: 'Virtual Win Loss', Width: 120, Name: "ColVirtualLineTotal", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: viewResources.Variance, Width: 80, Name: "ColVariance", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                 { HeaderText: viewResources.Margin, Width: 80, Name: "ColMargin", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$'}],
             showTitle: true,

@@ -2,6 +2,7 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement.NumberGameWinLos
 {
     using System.Collections.Generic;
     using System.Data;
+    using AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByBetTypeMatch;
     using Fanex.AccountingReports.Gaming.Models.NumberGameWinLossByBetTypeMatch;
     using Fanex.Common;
@@ -42,7 +43,8 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement.NumberGameWinLos
             {
                 var info = new WinLossInfo
                 {
-                    Id = Converter.ToInt(row["bettype"]),
+                    Id = Converter.ToInt(row["bettype"]),                    
+                    SportType = Converter.ToInt(row["SportType"]),
                     CustomerWinLoss = Converter.ToDecimal(row["WinLost"]),
                     AgencyWinLoss = Converter.ToDecimal(row["Position"]),
                     Commission = Converter.ToDecimal(row["Commission"]),

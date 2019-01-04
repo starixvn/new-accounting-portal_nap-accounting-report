@@ -59,15 +59,26 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
                     return report;
                 }
 
-                foreach (WinLossInfo rawWinLossInfo in rawData)
-                {
-                    WinLossInfo info = rawWinLossInfo;
-                    info.Name = CacheRef.GetBettype(info.Id);
-                    report.GrandTotal.Sum(info);
-                    info = WinLossInfo.Format(info);
-                    report.DetailInfo.Add(info);
-                }
+                rawData.GroupBy(g => g.SportType).ToList()
+                    .ForEach(sport =>
+                    {
+                        WinLossInfo sportData = new WinLossInfo { DetailInfo = new List<WinLossInfo>(), Name = CacheRef.GetSportName(sport.Key), GrandTotal = new WinLossInfo { Name = CacheRef.GetSportName(sport.Key) } };
+                        sport.Select(s => s).ToList()
+                        .ForEach(bettype =>
+                        {
+                            WinLossInfo bettypeRow = bettype;
+                            bettypeRow.Name = CacheRef.GetBettype(bettype.Id);
+                            bettypeRow = WinLossInfo.Format(bettypeRow);
+                            sportData.GrandTotal.Sum(bettypeRow);
+                            sportData.DetailInfo.Add(bettypeRow);
 
+                            report.GrandTotal.Sum(bettypeRow);
+                        });
+
+                        sportData.GrandTotal = WinLossInfo.Format(sportData.GrandTotal);
+                        report.DetailInfo.Add(sportData);
+                    });
+             
                 report.GrandTotal = WinLossInfo.Format(report.GrandTotal);
 
                 SessionManager.Set<WinLossInfo>(_winLossByBetTypeMainReportSessionKey, report);
@@ -337,13 +348,13 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Customer_Win_Loss;
+            currentCellRange.Value = "Member Win Loss";
             currentCellRange.Style = headerTextStyle;
             currentColumn++;
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Agency_Win_Loss;
+            currentCellRange.Value = "SMA Win Loss";
             currentCellRange.Style = headerTextStyle;
             currentColumn++;
 
@@ -355,7 +366,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 4);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Company;
+            currentCellRange.Value = "House";
             currentCellRange.Style = headerTextStyle;
             currentColumn += 5;
             currentRow++;
@@ -368,12 +379,12 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Style = headerTextStyle;
-            currentCell.Value = Labels.Line_Total;
+            currentCell.Value = "Real Income";
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Style = headerTextStyle;
-            currentCell.Value = Labels.Virtual_Line_Total;
+            currentCell.Value = "Virtual Win Loss";
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -419,6 +430,21 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             }
 
             var backgroundColor = ExcelExtensions.BackGroundColor;
+            var textBoldStyle = ExcelExtensions.GetCellTextStyle(backgroundColor, true);
+            var twoDecimalNumberBoldStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, true, false, false);
+            var twoDecimalPositiveNumberBoldStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                backgroundColor,
+                true,
+                true,
+                false);
+            var twoDecimalPositivePercentNumberBoldStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                backgroundColor,
+                true,
+                true,
+                false);
+
             var textStyle = ExcelExtensions.GetCellTextStyle(backgroundColor, false);
             var twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, false, false, false);
             var twoDecimalPositiveNumberStyle = ExcelExtensions.GetCellNumberStyle(
@@ -466,31 +492,55 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             WinLossInfo info;
             for (var i = 0; i < reportLength; i++)
             {
-                info = report.DetailInfo[i];
+                var sportTotal = report.DetailInfo[i].GrandTotal;                
+
                 NumberGameWinLossByBetTypeMatchService.SetOddEvenColor_ExportExcel(
-                    ref textStyle,
-                    ref twoDecimalNumberStyle,
-                    ref twoDecimalPositiveNumberStyle,
-                    ref twoDecimalPositivePercentNumberStyle,
-                    (i + 1) % 2 == 0);
+                    ref textBoldStyle,
+                    ref twoDecimalNumberBoldStyle,
+                    ref twoDecimalPositiveNumberBoldStyle,
+                    ref twoDecimalPositivePercentNumberBoldStyle,
+                    true);
                 ExportReport_WinLossByBetType_WinLossRow(
                     ref workSheet,
                     startRow,
                     startColumn,
                     ref currentRow,
                     maxColumnIndex,
-                    textStyle,
-                    twoDecimalNumberStyle,
-                    twoDecimalPositiveNumberStyle,
-                    twoDecimalPositivePercentNumberStyle,
-                    info);
+                    textBoldStyle,
+                    twoDecimalNumberBoldStyle,
+                    twoDecimalPositiveNumberBoldStyle,
+                    twoDecimalPositivePercentNumberBoldStyle,
+                    sportTotal);
+
+                var sportData = report.DetailInfo[i].DetailInfo;
+                for (var j = 0; j < sportData.Count; j++)
+                {
+                    var bettypeData = sportData[j];
+                    NumberGameWinLossByBetTypeMatchService.SetOddEvenColor_ExportExcel(
+                    ref textStyle,
+                    ref twoDecimalNumberStyle,
+                    ref twoDecimalPositiveNumberStyle,
+                    ref twoDecimalPositivePercentNumberStyle,
+                    false);
+                    ExportReport_WinLossByBetType_WinLossRow(
+                        ref workSheet,
+                        startRow,
+                        startColumn,
+                        ref currentRow,
+                        maxColumnIndex,
+                        textStyle,
+                        twoDecimalNumberStyle,
+                        twoDecimalPositiveNumberStyle,
+                        twoDecimalPositivePercentNumberStyle,
+                        bettypeData);
+                }
             }
 
             NumberGameWinLossByBetTypeMatchService.SetOddEvenColor_ExportExcel(
-                ref textStyle,
-                ref twoDecimalNumberStyle,
-                ref twoDecimalPositiveNumberStyle,
-                ref twoDecimalPositivePercentNumberStyle,
+                ref textBoldStyle,
+                ref twoDecimalNumberBoldStyle,
+                ref twoDecimalPositiveNumberBoldStyle,
+                ref twoDecimalPositivePercentNumberBoldStyle,
                 false);
             info = report.GrandTotal;
             ExportReport_WinLossByBetType_GrandTotalRow(
@@ -540,7 +590,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             currentColumn = startColumn;
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Style = textStyle;
-            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
             currentCell.Value = info.Name;
             currentColumn++;
 

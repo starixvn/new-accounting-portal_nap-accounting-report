@@ -223,7 +223,7 @@
     <value>Number Game Monthly Win Loss Report From {0} To {1}</value>
   </data>
   <data name="NumberGameWinLossByBetTypeMatch_ByMatchDetailReportTitle" xml:space="preserve">
-    <value>Number Game Product Win Loss By Match {0} - {1} - {2} Report on {3}</value>
+    <value>Number Game Product Win Loss By Match {0} - {1} Report on {2}</value>
   </data>
   <data name="NumberGameMonthlyWinLoss_SheetName" xml:space="preserve">
     <value>Number Game Monthly Win Loss</value>
@@ -241,7 +241,7 @@
     <value>NUMBERGAME_WINLOSS_BYCURRENCY_DETAIL_</value>
   </data>
   <data name="NumberGameWinLossByCurrency_Detail_Title" xml:space="preserve">
-    <value>Number Game WinLoss By Currency Detail For </value>
+    <value>Number Game Win Loss By Currency Detail For </value>
   </data>
   <data name="NumberGameWinLossByCurrency_Main_ReportName" xml:space="preserve">
     <value>NUMBERGAME_WINLOSS_BYCURRENCY_MAIN</value>

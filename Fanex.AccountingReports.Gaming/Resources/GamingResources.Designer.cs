@@ -547,7 +547,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number Game Product Win Loss By Match {0} - {1} - {2} Report on {3}.
+        ///   Looks up a localized string similar to Number Game Product Win Loss By Match {0} - {1} Report on {2}.
         /// </summary>
         public static string NumberGameWinLossByBetTypeMatch_ByMatchDetailReportTitle {
             get {
@@ -592,7 +592,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number Game WinLoss By Currency Detail For .
+        ///   Looks up a localized string similar to Number Game Win Loss By Currency Detail For .
         /// </summary>
         public static string NumberGameWinLossByCurrency_Detail_Title {
             get {

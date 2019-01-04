@@ -59,7 +59,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             };
         }
 
-        public int Id { get; set; }
+        public int Id { get; set; }        
 
         public string Name { get; set; }
 
