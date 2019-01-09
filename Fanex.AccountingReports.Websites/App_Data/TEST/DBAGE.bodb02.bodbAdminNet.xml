@@ -9,7 +9,7 @@
 
   </Function>
   <Function Name="Core - Bet List Core">
-    <Setting Key="BetList_MixParlayBetsSel" SpName="Acc_BetsSelBetCheckM_All" DbName="DBAGE.bodb02.bodbAdminNet" />
+    <Setting Key="BetList_MixParlayBetsSel" SpName="Acc_BetsSelBetCheckM_All_xtest" DbName="DBAGE.bodb02.bodbAdminNet" />
     <Setting Key="BetList_CombinationParlay_Details" SpName="Acc_BetlistCombinationParlay_Details" DbName="DBAGE.bodb02.bodbAdminNet" />
     <Setting Key="SoprtingSolutionBetlistResult" SpName="Acc_BetList_SelMatchResultSS" DbName="DBAGE.bodb02.bodbAdminNet" />
   </Function>

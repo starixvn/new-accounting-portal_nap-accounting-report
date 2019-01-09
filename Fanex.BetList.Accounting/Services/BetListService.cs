@@ -55,7 +55,6 @@ namespace Fanex.BetList.Accounting.Services
                     Handicap2 = Converter.ToDecimal(r["hdp2"]),
                     Odds = Converter.ToDecimal(r["Odds"]),
                     BetTeam = Converter.ToString2(r["Betteam"]),
-                    StatusId = Converter.ToInt(r["statusid"]),
                     IsLive = Converter.ToBool(r["Liveindicator"]),
                     LiveHomeScore = Converter.ToInt(r["Livehomescore"]),
                     LiveAwayScore = Converter.ToInt(r["Liveawayscore"]),
@@ -69,7 +68,11 @@ namespace Fanex.BetList.Accounting.Services
                     Stake = Converter.ToDecimal(r["Stake"]),
                     Currency = Converter.ToString2(r["Currency"]),
                     TransDesc = Converter.ToString2(r["TransDesc"]),
-                    SettlementStatus = 0
+                    SettlementStatus = 0,
+                    ShowTime = Converter.ToString2(r["showtime"]),
+                    EventDate = Converter.ToDateTime(r["eventdate"]),
+                    Status = Converter.ToString2(r["status"])
+
                 },
                 ChoiceHtml = string.Empty,
                 OddHtml = string.Empty,
@@ -99,10 +102,17 @@ namespace Fanex.BetList.Accounting.Services
                 {
                     totalItem--;
                     betDetail.ChoiceHtml =
-                        "<div class='ticketList'>" + builder.BuildChoice(betDetail.Ticket, ticketHelper, null, false)
-                            + (totalItem > 0 ?
-                            "</div>" + "<div class=\"line\"></div>" :
-                            "</div>");
+                        "<table class='parlay-selection'><tr>" +
+                                "<td class='c width80'>" + betDetail.Ticket.EventDate + "</td>" +
+                                "<td class='ticketList r'>" +
+                                    builder.BuildChoice(betDetail.Ticket, ticketHelper, null, false) +
+                                "</td>" +
+                                "<td class='c width50'>" +
+                                    this.BuildSelectionParlayStatus(betDetail.Ticket, ticketHelper) +
+                                "</td>" +
+                            "</tr></table>" +
+                            (totalItem > 0 ? "<div class=\"line\"></div>" : string.Empty);
+
                 }
 
                 if (!string.IsNullOrEmpty(comboParlayDetail))
@@ -279,5 +289,18 @@ namespace Fanex.BetList.Accounting.Services
 
             return comboParlayDetail;
         }
+
+        private string BuildSelectionParlayStatus(ITicket ticket, ITicketHelper ticketHelper)
+        {
+            var betListBuilder = new BetListHTMLBuilder();
+            var statusBuilder = betListBuilder.CreateStatusBuilder(ticket.BetTypeId);
+            var statusTemplate = statusBuilder.Render(ticket, ticketHelper, null, isShowVNIP: false);
+
+            statusTemplate.ShowIP = null;
+            statusTemplate.StatusResult = null;
+
+            return statusTemplate.ToString();
+        }
+
     }
 }
