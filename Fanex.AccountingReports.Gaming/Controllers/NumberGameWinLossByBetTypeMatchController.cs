@@ -64,7 +64,10 @@ namespace Fanex.AccountingReports.Gaming.Controllers
         public JsonResult GetWinLossByMatchMainReport(GetWinLossByMatchMainReportCriteria criteria)
         {
             var result = _winLossByMatchService.GetMainReport(criteria);
-            return Json(result);
+            var json = Json(result);
+            json.MaxJsonLength = int.MaxValue;
+
+            return json;
         }
 
         [HttpPost]
