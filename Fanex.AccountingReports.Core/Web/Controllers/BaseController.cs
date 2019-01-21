@@ -90,5 +90,17 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
                 AppSession.CurrentWorkingOnMenu = this._menuService.GetMenuByURL(menuPath);
             }
         }
+
+        protected override JsonResult Json(object data, string contentType, System.Text.Encoding contentEncoding, JsonRequestBehavior behavior)
+        {
+            return new JsonResult()
+            {
+                Data = data,
+                ContentType = contentType,
+                ContentEncoding = contentEncoding,
+                JsonRequestBehavior = behavior,
+                MaxJsonLength = Int32.MaxValue
+            };
+        }
     }
 }
