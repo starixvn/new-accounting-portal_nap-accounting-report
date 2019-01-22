@@ -1,5 +1,6 @@
 namespace Fanex.AccountingReports.Balance.Criteria.SuperBalance
 {
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

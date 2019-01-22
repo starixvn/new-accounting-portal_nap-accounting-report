@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByBetTypeMatch
 {
     using System;
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

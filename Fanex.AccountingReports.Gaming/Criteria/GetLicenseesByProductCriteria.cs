@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Gaming.Criteria
 {
     using System;
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Main.Criteria.DailyWinLoss2h
 {
     using System;
+    using Data;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.Data.Repository;
 

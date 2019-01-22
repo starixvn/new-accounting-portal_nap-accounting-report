@@ -1,6 +1,6 @@
 namespace Fanex.BetList.Accounting.Criteria
 {
-    using Fanex.Data.Repository;
+    using Data;
 
     /// <summary>
     /// TODO: Update summary.

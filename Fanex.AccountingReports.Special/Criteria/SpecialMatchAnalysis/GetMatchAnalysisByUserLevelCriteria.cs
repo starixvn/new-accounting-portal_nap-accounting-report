@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Special.Criteria.SpecialMatchAnalysis
 {
     using System;
+    using Data;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Special.Models.SpecialMatchAnalysis;
     using Fanex.Data.Repository;

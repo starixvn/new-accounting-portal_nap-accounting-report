@@ -1,6 +1,7 @@
 namespace Fanex.BetList.Accounting.Criteria
 {
     using System;
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>
@@ -27,6 +28,11 @@ namespace Fanex.BetList.Accounting.Criteria
         public override string GetSettingKey()
         {
             return "BetList_CombinationParlay_Details";
+        }
+
+        public override bool IsValid()
+        {
+            return true;
         }
     }
 }

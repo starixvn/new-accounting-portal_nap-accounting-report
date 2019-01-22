@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Misc.Criteria.SMATurnover
 {
     using System;
+    using Data;
     using Fanex.AccountingReports.Misc.Constants;
     using Fanex.Data.Repository;
 

@@ -13,7 +13,6 @@ namespace Fanex.AccountingReports.Websites
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Services.Impl.Worker;
     using Fanex.AccountingReports.Websites.App_Start;
-    using Fanex.Data.Configuration;
     using RemotingRef;
     using Result.Core.Base;
     using Result.Core.RemotingRef;
@@ -38,11 +37,12 @@ namespace Fanex.AccountingReports.Websites
                .FromApplication("Nap - Reports")
                .SupportOnlyDefaultLanguage();
 
-            BetListManager.RegisterRemotingRef(new BetList.Core.RemotingRef.CacheRef());
+            FanexData.Register();
+            FanexLogging.Register();
 
+            BetListManager.RegisterRemotingRef(new BetList.Core.RemotingRef.CacheRef());
             ResultCoreManager.RegisterRefDataHelper(new RefDataHelper());
 
-            DbSettingProviderManager.Current.Start();
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
 
             AreaRegistration.RegisterAllAreas();
@@ -50,7 +50,6 @@ namespace Fanex.AccountingReports.Websites
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            FanexLogging.Register();
 
             try
             {
@@ -79,8 +78,6 @@ namespace Fanex.AccountingReports.Websites
         {
             try
             {
-                DbSettingProviderManager.Current.Restart();
-
                 FanexLogging.HandleApplicationError(Server);
             }
             catch (Exception ex2)

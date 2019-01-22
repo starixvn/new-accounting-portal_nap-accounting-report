@@ -1,5 +1,6 @@
 namespace Fanex.AccountingReports.Licensee.Criteria.NegativeBalance
 {
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

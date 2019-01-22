@@ -2,6 +2,7 @@ namespace Fanex.AccountingReports.Misc.Criteria.MAMonitorTool
 {
     using System;
     using System.Collections;
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

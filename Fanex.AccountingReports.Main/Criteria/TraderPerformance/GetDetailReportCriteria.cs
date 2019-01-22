@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Main.Criteria.TraderPerformance
 {
     using System;
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

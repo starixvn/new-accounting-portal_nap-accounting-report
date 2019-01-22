@@ -1,5 +1,6 @@
 namespace Fanex.AccountingReports.Core.Criteria
 {
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

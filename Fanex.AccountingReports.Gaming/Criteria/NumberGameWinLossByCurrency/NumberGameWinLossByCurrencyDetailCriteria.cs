@@ -1,5 +1,6 @@
 namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByCurrency
 {
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

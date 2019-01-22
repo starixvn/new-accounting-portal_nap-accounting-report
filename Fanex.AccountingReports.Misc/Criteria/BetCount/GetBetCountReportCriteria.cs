@@ -1,7 +1,8 @@
 namespace Fanex.AccountingReports.Misc.Criteria.BetCount
 {
-    using Fanex.Data.Repository;
     using System;
+    using Data;
+    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
