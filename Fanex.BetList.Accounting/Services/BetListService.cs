@@ -102,16 +102,11 @@ namespace Fanex.BetList.Accounting.Services
                 {
                     totalItem--;
                     betDetail.ChoiceHtml =
-                        "<table class='parlay-selection'><tr>" +
-                                "<td class='c width80'>" + betDetail.Ticket.EventDate + "</td>" +
-                                "<td class='ticketList r'>" +
-                                    builder.BuildChoice(betDetail.Ticket, ticketHelper, null, false) +
-                                "</td>" +
-                                "<td class='c width50'>" +
-                                    this.BuildSelectionParlayStatus(betDetail.Ticket, ticketHelper) +
-                                "</td>" +
-                            "</tr></table>" +
-                            (totalItem > 0 ? "<div class=\"line\"></div>" : string.Empty);
+                        "<div class='ticketList'>" + builder.BuildChoice(betDetail.Ticket, ticketHelper, null, false)
+                            + builder.BuildTransEventDateAndStatusResult(betDetail.Ticket, null)
+                            + (totalItem > 0 ?
+                            "</div>" + "<div class=\"line\"></div>" :
+                        "</div>");
 
                 }
 
@@ -289,18 +284,5 @@ namespace Fanex.BetList.Accounting.Services
 
             return comboParlayDetail;
         }
-
-        private string BuildSelectionParlayStatus(ITicket ticket, ITicketHelper ticketHelper)
-        {
-            var betListBuilder = new BetListHTMLBuilder();
-            var statusBuilder = betListBuilder.CreateStatusBuilder(ticket.BetTypeId);
-            var statusTemplate = statusBuilder.Render(ticket, ticketHelper, null, isShowVNIP: false);
-
-            statusTemplate.ShowIP = null;
-            statusTemplate.StatusResult = null;
-
-            return statusTemplate.ToString();
-        }
-
     }
 }

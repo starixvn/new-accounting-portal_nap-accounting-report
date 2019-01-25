@@ -40,11 +40,11 @@
       <HintPath>..\_Dependencies\ExcelUtil.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.BetList.BetTrade, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.77.0-beta01\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
+      <HintPath>..\packages\Fanex.BetList.Core.2.77.0-beta02\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.BetList.Core, Version=2.77.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.77.0-beta01\lib\net40\Fanex.BetList.Core.dll</HintPath>
+      <HintPath>..\packages\Fanex.BetList.Core.2.77.0-beta02\lib\net40\Fanex.BetList.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
