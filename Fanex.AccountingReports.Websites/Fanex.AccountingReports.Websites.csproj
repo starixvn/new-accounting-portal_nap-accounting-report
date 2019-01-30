@@ -537,7 +537,7 @@
     <Content Include="App_Data\TEST\DBWH.bodb_dwrs.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\TEST\DBDWHBODB02.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\TEST\DBWH.bodb02.bodbAdminNet.xml">
       <SubType>
       </SubType>
     </Content>
@@ -571,7 +571,7 @@
     <Content Include="App_Data\LIVE\DBWH.bodb_dwrs.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\LIVE\DBDWHBODB02.bodb02.bodbAdminNet.xml" />
+    <Content Include="App_Data\LIVE\DBWH.bodb02.bodbAdminNet.xml" />
     <Content Include="App_Data\LIVE\DBBET.bk.bodbAdminNet.xml" />
     <Content Include="App_Data\LIVE\DBEXT.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
