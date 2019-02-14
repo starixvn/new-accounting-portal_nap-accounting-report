@@ -1,103 +1,103 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Functions>
   <Function Name="Misc - Daily Created Customers">
-    <Setting Key="Misc_DailyCreatedCustomers_GetReport" SpName="Acc_DailyCreatedCustomer" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Misc_DailyCreatedCustomers_GetDetailReport" SpName="Acc_DailyCreatedCustomer_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Misc_DailyCreatedCustomers_GetReport" SpName="Acc_DailyCreatedCustomer" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Misc_DailyCreatedCustomers_GetDetailReport" SpName="Acc_DailyCreatedCustomer_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
   <Function Name="Core - Bet List Core">
     <Setting Key="Acc_BetList_CashOut_Detail" SpName="Acc_BetList_CashOut_Detail" DbName="DBACC.bodb02.bodbAdminNet" />
-    <Setting Key="BetList_ScoreInformation_SelScoreInformation" SpName="Acc_Rpt_DailyWLDirect_Result" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="BetList_ScoreInformation_SelScoreInformation_WH" SpName="Acc_Rpt_DailyWLDirect_Result_Old" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="BetList_ScoreInformation_SelScoreInformation" SpName="Acc_Rpt_DailyWLDirect_Result" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="BetList_ScoreInformation_SelScoreInformation_WH" SpName="Acc_Rpt_DailyWLDirect_Result_Old" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
 
   <Function Name="Gaming - Number Game Win Loss By Date">
-    <Setting Key="Gaming_NumberGameWinLossByDate_GetBetType" SpName="Acc_BetTypeSel_NumberGame" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Gaming_NumberGameWinLossByDate_GetBetType" SpName="Acc_BetTypeSel_NumberGame" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
   </Function>
   <Function Name="Special - Special Match Analysis">
-    <Setting Key="Special_SpecialMatchAnalysis_GetLeagues" SpName="Acc_LeagueSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetMatches" SpName="Acc_MatchSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetBetTypeByMatch" SpName="Acc_BettypeSelFromMatch" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetReportByCurrency" SpName="Acc_Rpt_MatchAnalysisByCurrency" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetReportByBetType" SpName="Acc_Rpt_MatchAnalysisByBettype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper" SpName="Acc_Rpt_MatchAnalysisBySuper" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetReportByMember" SpName="Acc_Rpt_MatchAnalysisByMember" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper_SAg" SpName="Acc_Rpt_MatchAnalysisBySuper_SAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper_MAg" SpName="Acc_Rpt_MatchAnalysisBySuper_MAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper_Ag" SpName="Acc_Rpt_MatchAnalysisBySuper_Ag" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetLeagues" SpName="Acc_LeagueSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetMatches" SpName="Acc_MatchSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetBetTypeByMatch" SpName="Acc_BettypeSelFromMatch" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetReportByCurrency" SpName="Acc_Rpt_MatchAnalysisByCurrency" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetReportByBetType" SpName="Acc_Rpt_MatchAnalysisByBettype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper" SpName="Acc_Rpt_MatchAnalysisBySuper" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetReportByMember" SpName="Acc_Rpt_MatchAnalysisByMember" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper_SAg" SpName="Acc_Rpt_MatchAnalysisBySuper_SAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper_MAg" SpName="Acc_Rpt_MatchAnalysisBySuper_MAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Special_SpecialMatchAnalysis_GetReportBySuper_Ag" SpName="Acc_Rpt_MatchAnalysisBySuper_Ag" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
   <Function Name="Win Loss - League Win Loss">
-    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLoss" SpName="Acc_Rpt_LeagueWL_Sporttype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLoss_14" SpName="Acc_Rpt_LeagueWL_Sporttype14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossBySport" SpName="Acc_Rpt_LeagueWL_Bettype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossBySport_14" SpName="Acc_Rpt_LeagueWL_Bettype14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossByBetType" SpName="Acc_Rpt_LeagueWL_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossByBetType_14" SpName="Acc_Rpt_LeagueWL_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="WinLoss_AllCustomerTurnOver_GetReport" SpName="Acc_Rpt_CustomerTurnoverBySite" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLoss" SpName="Acc_Rpt_LeagueWL_Sporttype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLoss_14" SpName="Acc_Rpt_LeagueWL_Sporttype14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossBySport" SpName="Acc_Rpt_LeagueWL_Bettype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossBySport_14" SpName="Acc_Rpt_LeagueWL_Bettype14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossByBetType" SpName="Acc_Rpt_LeagueWL_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossByBetType_14" SpName="Acc_Rpt_LeagueWL_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="WinLoss_AllCustomerTurnOver_GetReport" SpName="Acc_Rpt_CustomerTurnoverBySite" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
   <Function Name="Win Loss - Daily Mix Parlay Win Loss">
-    <Setting Key="WinLoss_DailyMixParlayWinLoss_GetCombinationWinLoss" SpName="Acc_Rpt_DailyParlayWinloss" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="WinLoss_DailyMixParlayWinLoss_GetAdvanceMixParlayReport" SpName="Acc_Rpt_MixParlay_Advance" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="WinLoss_DailyMixParlayWinLoss_GetCombinationWinLoss" SpName="Acc_Rpt_DailyParlayWinloss" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="WinLoss_DailyMixParlayWinLoss_GetAdvanceMixParlayReport" SpName="Acc_Rpt_MixParlay_Advance" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
   <Function Name="Main - Trader Performance">
-    <Setting Key="Main_TraderPerformance_GetReport" SpName="Acc_Rpt_TraderPerformanceSum" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_TraderPerformance_GetDetailReport" SpName="Acc_Rpt_TraderPerformanceDetail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_TraderPerformance_GetReport_PH" SpName="Acc_Rpt_TraderPerformanceSum_SoccerPH" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Main_TraderPerformance_GetDetailReport_PH" SpName="Acc_Rpt_TraderPerformanceDetail_SoccerPH" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_TraderPerformance_GetReport" SpName="Acc_Rpt_TraderPerformanceSum" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Main_TraderPerformance_GetDetailReport" SpName="Acc_Rpt_TraderPerformanceDetail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Main_TraderPerformance_GetReport_PH" SpName="Acc_Rpt_TraderPerformanceSum_SoccerPH" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Main_TraderPerformance_GetDetailReport_PH" SpName="Acc_Rpt_TraderPerformanceDetail_SoccerPH" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
   <Function Name="Main - Win Loss Summary 3rd">
-    <Setting Key="Main_WinLossSummary3rd_Exec_CalculateWinLoss" SpName="Task_rptWinLost_UpdateTable" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Main_WinLossSummary3rd_Exec_CalculateWinLoss" SpName="Task_rptWinLost_UpdateTable" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
   <Function Name="Balance - Direct Balance">
-    <Setting Key="Balance_DirectBalance_DirectMaster" SpName="Acc_Rpt_Balance_Direct_Master" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Balance_DirectBalance_DirectAgent" SpName="Acc_Rpt_Balance_Direct_Agent" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Balance_DirectBalance_DirectMember" SpName="Acc_Rpt_Balance_Direct_Member" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Balance_DirectBalance_DirectMasterYesterday" SpName="Acc_Rpt_Balance_Direct_Master_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Balance_DirectBalance_DirectAgentYesterday" SpName="Acc_Rpt_Balance_Direct_Agent_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Balance_DirectBalance_DirectMemberYesterday" SpName="Acc_Rpt_Balance_Direct_Member_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Balance_SuperBalance_Super" SpName="Acc_Rpt_Balance_Super" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Balance_SuperBalance_Master" SpName="Acc_Rpt_Balance_Master" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Balance_SuperBalance_Agent" SpName="Acc_Rpt_Balance_Agent" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Balance_SuperBalance_Member" SpName="Acc_Rpt_Balance_Member" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Balance_SuperBalance_SuperYesterday" SpName="Acc_Rpt_Balance_Super_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Balance_SuperBalance_MasterYesterday" SpName="Acc_Rpt_Balance_Master_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Balance_SuperBalance_AgentYesterday" SpName="Acc_Rpt_Balance_Agent_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Balance_SuperBalance_MemberYesterday" SpName="Acc_Rpt_Balance_Member_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Balance_DirectBalance_DirectMaster" SpName="Acc_Rpt_Balance_Direct_Master" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_DirectBalance_DirectAgent" SpName="Acc_Rpt_Balance_Direct_Agent" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_DirectBalance_DirectMember" SpName="Acc_Rpt_Balance_Direct_Member" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_DirectBalance_DirectMasterYesterday" SpName="Acc_Rpt_Balance_Direct_Master_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_DirectBalance_DirectAgentYesterday" SpName="Acc_Rpt_Balance_Direct_Agent_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_DirectBalance_DirectMemberYesterday" SpName="Acc_Rpt_Balance_Direct_Member_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_SuperBalance_Super" SpName="Acc_Rpt_Balance_Super" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_SuperBalance_Master" SpName="Acc_Rpt_Balance_Master" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_SuperBalance_Agent" SpName="Acc_Rpt_Balance_Agent" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_SuperBalance_Member" SpName="Acc_Rpt_Balance_Member" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_SuperBalance_SuperYesterday" SpName="Acc_Rpt_Balance_Super_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_SuperBalance_MasterYesterday" SpName="Acc_Rpt_Balance_Master_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_SuperBalance_AgentYesterday" SpName="Acc_Rpt_Balance_Agent_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_SuperBalance_MemberYesterday" SpName="Acc_Rpt_Balance_Member_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
   </Function>
   <Function Name="Win Loss - Tree Win Loss">
-    <Setting Key="WinLoss_TreeWinLoss_GetDataByProduct" SpName="Acc_Rpt_TreeWinlostByProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="WinLoss_TreeWinLoss_GetDataByCom" SpName="Acc_Rpt_TreeWinlostByCom" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetDataBySuper" SpName="Acc_Rpt_TreeWinlostBySAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetDataByMaster" SpName="Acc_Rpt_TreeWinlostByMAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetDataByAgent" SpName="Acc_Rpt_TreeWinlostByAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetVirtualRate" SpName="Acc_CustomerSelVirtualMultiplier" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetAllVirtualRate" SpName="Acc_Rpt_TreeWinlostBulkGetVR" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Acc_Rpt_TreeWinlostListProduct" SpName="Acc_Rpt_TreeWinlostListProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="WinLoss_TreeWinLoss_GetDataByProduct" SpName="Acc_Rpt_TreeWinlostByProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="WinLoss_TreeWinLoss_GetDataByCom" SpName="Acc_Rpt_TreeWinlostByCom" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="WinLoss_TreeWinLoss_GetDataBySuper" SpName="Acc_Rpt_TreeWinlostBySAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="WinLoss_TreeWinLoss_GetDataByMaster" SpName="Acc_Rpt_TreeWinlostByMAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="WinLoss_TreeWinLoss_GetDataByAgent" SpName="Acc_Rpt_TreeWinlostByAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="WinLoss_TreeWinLoss_GetVirtualRate" SpName="Acc_CustomerSelVirtualMultiplier" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="WinLoss_TreeWinLoss_GetAllVirtualRate" SpName="Acc_Rpt_TreeWinlostBulkGetVR" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Acc_Rpt_TreeWinlostListProduct" SpName="Acc_Rpt_TreeWinlostListProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
   </Function>
   <Function Name="Gaming - Number Game Win Loss">
-    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeMainReport" SpName="Acc_Rpt_NumberGame" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeMainReport_14" SpName="Acc_Rpt_NumberGame14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeDetailReport" SpName="Acc_Rpt_NumberGame_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeDetailReport_14" SpName="Acc_Rpt_NumberGame_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
-    <Setting Key="Acc_Rpt_GetLicenseesByProduct" SpName="Acc_Rpt_GetLicenseesByProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0"></Setting>
+    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeMainReport" SpName="Acc_Rpt_NumberGame" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeMainReport_14" SpName="Acc_Rpt_NumberGame14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeDetailReport" SpName="Acc_Rpt_NumberGame_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeDetailReport_14" SpName="Acc_Rpt_NumberGame_Details14" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Acc_Rpt_GetLicenseesByProduct" SpName="Acc_Rpt_GetLicenseesByProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
   </Function>
   <Function Name="Main - Credit Term">
-    <Setting Key="CreditTerm" SpName="Acc_Rpt_CreditTerm" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="InstallAmount" SpName="Acc_Rpt_InstallAmount" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="CreditTerm" SpName="Acc_Rpt_CreditTerm" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="InstallAmount" SpName="Acc_Rpt_InstallAmount" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
 
   <Function Name="Special - Daily Turnover">
-    <Setting Key="Special_DailyTurnover_GetReport" SpName="Acc_Rpt_DailyTurnover" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
-    <Setting Key="Special_DailyTurnoverChangedDetail_GetReport" SpName="Acc_Rpt_DailyTurnover_ChangedDetail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Special_DailyTurnover_GetReport" SpName="Acc_Rpt_DailyTurnover" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Special_DailyTurnoverChangedDetail_GetReport" SpName="Acc_Rpt_DailyTurnover_ChangedDetail" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
   <Function Name="Racing - Win Lost Group Daily">
-    <Setting Key="Racing_WinLostGroupDaily" SpName="Acc_Rpt_WinlostRacing_Group_Daily" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Racing_WinLostGroupDaily" SpName="Acc_Rpt_WinlostRacing_Group_Daily" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
 
   <Function Name="Misc - Credit Movement">
-    <Setting Key="Misc_CreditMovement_GetSites" SpName="SiteSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Misc_CreditMovement_GetSites" SpName="SiteSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
   <Function Name="Special - Total Credit Account By Product">
-    <Setting Key="Acc_Rpt_EnableDisableAccount_ByProduct" SpName="Acc_Rpt_EnableDisableAccount_ByProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="0" />
+    <Setting Key="Acc_Rpt_EnableDisableAccount_ByProduct" SpName="Acc_Rpt_EnableDisableAccount_ByProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
   <Function Name="Special - Margin Report">
     <Setting Key ="Special_MarginReport_BetRatioByUser" SpName="Acc_Rpt_BetRatioByUser" DbName="DBACC.bodb02.bodbAdminNet"></Setting>
