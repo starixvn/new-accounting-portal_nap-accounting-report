@@ -2,6 +2,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using Data;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.Data.Repository;
 

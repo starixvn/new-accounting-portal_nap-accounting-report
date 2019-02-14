@@ -1,5 +1,6 @@
 namespace Fanex.AccountingReports.Balance.Criteria.DirectBalance
 {
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

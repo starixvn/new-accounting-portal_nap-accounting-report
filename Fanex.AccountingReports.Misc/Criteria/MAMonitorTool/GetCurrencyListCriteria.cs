@@ -1,5 +1,6 @@
 namespace Fanex.AccountingReports.Misc.Criteria.MAMonitorTool
 {
+    using Data;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.Data.Repository;
 

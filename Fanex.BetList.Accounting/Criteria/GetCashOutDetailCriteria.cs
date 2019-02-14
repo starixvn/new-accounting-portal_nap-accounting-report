@@ -1,3 +1,4 @@
+using Fanex.Data;
 using Fanex.Data.Repository;
 
 namespace Fanex.BetList.Accounting.Criteria

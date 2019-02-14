@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Racing.Criteria.RacingGroupDaily
 {
     using System;
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Special.Criteria.CheckBet
 {
     using System;
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

@@ -1,5 +1,6 @@
 namespace Fanex.AccountingReports.LegendManagement.Criteria
 {
+    using Data;
     using Fanex.AccountingReports.LegendManagement.Configurations;
     using Fanex.Data.Repository;
 

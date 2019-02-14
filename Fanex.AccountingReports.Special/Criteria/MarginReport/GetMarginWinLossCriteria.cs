@@ -1,5 +1,6 @@
 namespace Fanex.AccountingReports.Special.Criteria.MarginReport
 {
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.WinLoss.Criteria.GetAllCustomerTurnOver
 {
     using System;
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

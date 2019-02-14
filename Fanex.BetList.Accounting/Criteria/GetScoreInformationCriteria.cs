@@ -1,6 +1,7 @@
 namespace Fanex.BetList.Accounting.Criteria
 {
     using System;
+    using Data;
     using Fanex.BetList.Accounting.Services;
     using Fanex.Data.Repository;
 

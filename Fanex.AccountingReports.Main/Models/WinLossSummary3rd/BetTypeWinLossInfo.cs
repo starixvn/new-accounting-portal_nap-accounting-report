@@ -12,7 +12,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
         {
         }
 
-        public int Id { get; set; }        
+        public int Id { get; set; }
 
         public WinLossInfo EightRM { get; set; }
 
@@ -44,7 +44,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
                     Status = Normal == null ? string.Empty : Normal.Status,
                     IBC = Normal == null ? 0 : Normal.IBC,
                     Id = Normal == null ? 0 : Normal.Id,
-                    SportId = Normal.SportId,
+                    SportId = Normal == null ? 0 : Normal.SportId,
                     IsHedge = Normal == null ? false : Normal.IsHedge
                 };
 

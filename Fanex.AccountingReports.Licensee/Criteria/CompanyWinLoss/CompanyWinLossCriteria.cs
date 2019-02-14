@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Licensee.Criteria.CompanyWinLoss
 {
     using System;
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

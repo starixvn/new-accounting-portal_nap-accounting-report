@@ -2,6 +2,7 @@ namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd
 {
     using System;
     using System.Linq;
+    using Data;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Main.Common;
     using Fanex.Data.Repository;
@@ -37,12 +38,12 @@ namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd
             {
                 if (_type == SportTypeWinLoss.Unknown)
                 {
-                    if (SportType <= MainConstants.WinLossSummaryMaxSportbookId ||                        
+                    if (SportType <= MainConstants.WinLossSummaryMaxSportbookId ||
                         SportType == SportContants.HorseRacingFixedOdds)
                     {
                         _type = SportTypeWinLoss.SportBook;
                     }
-                    else if(SportType == 161 || SportType == 164)
+                    else if (SportType == 161 || SportType == 164)
                     {
                         _type = SportTypeWinLoss.NumberGame;
                     }
@@ -70,6 +71,16 @@ namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd
 
                 return _type;
             }
+        }
+
+        public override bool IsValid()
+        {
+            return true;
+        }
+
+        public override string GetSettingKey()
+        {
+            return string.Empty;
         }
     }
 }

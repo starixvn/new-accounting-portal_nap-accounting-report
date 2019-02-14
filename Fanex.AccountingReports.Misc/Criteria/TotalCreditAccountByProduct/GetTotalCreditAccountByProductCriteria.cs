@@ -1,5 +1,6 @@
 namespace Fanex.AccountingReports.Misc.Criteria.TotalCreditAccountByProduct
 {
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>

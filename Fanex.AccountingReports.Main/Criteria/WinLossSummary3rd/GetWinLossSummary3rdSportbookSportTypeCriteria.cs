@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Main.Criteria.WinLossSummary3rd
 {
     using System;
+    using Data;
     using Fanex.Data.Repository;
 
     public class GetWinLossSummary3rdSportbookSportTypeCriteria : CriteriaBase

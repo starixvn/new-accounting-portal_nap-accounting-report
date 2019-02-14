@@ -29,9 +29,9 @@ namespace Fanex.BetList.Accounting.Repositories
 
             using (ObjectDb objDb = new ObjectDb(criteria.GetSettingKey()))
             {
-                objDb.AddInParameter("MatchID", DbType.Int32, criteria.MatchId);
-                objDb.AddInParameter("Bettype", DbType.Int32, criteria.Bettype);
-                objDb.AddOutParameter("tradername", DbType.String, 1000);
+                objDb.SetParameterValue("MatchID", criteria.MatchId);
+                objDb.SetParameterValue("Bettype", criteria.Bettype);
+                objDb.SetParameterValue("tradername", 1000);
 
                 using (var reader = objDb.ExecuteReader())
                 {
@@ -58,7 +58,7 @@ namespace Fanex.BetList.Accounting.Repositories
 
             return result;
         }
-        
+
 
         /// <summary>
         /// Binds the SPORTSBOOK.

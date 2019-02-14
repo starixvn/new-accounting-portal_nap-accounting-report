@@ -1,6 +1,7 @@
 namespace Fanex.AccountingReports.Misc.Criteria.TotalSMAMemberActive
 {
     using System;
+    using Data;
     using Fanex.Data.Repository;
 
     /// <summary>
@@ -76,6 +77,11 @@ namespace Fanex.AccountingReports.Misc.Criteria.TotalSMAMemberActive
         public override string GetSettingKey()
         {
             return "Misc_TotalSMAMemberActive_GetStatusDetail";
+        }
+
+        public override bool IsValid()
+        {
+            return true;
         }
     }
 }

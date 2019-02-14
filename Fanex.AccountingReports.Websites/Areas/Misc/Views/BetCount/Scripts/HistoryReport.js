@@ -227,6 +227,36 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                 continue;
             }
 
+            if (productGroup.Name.toLowerCase() == "poker games") {
+                var porkerSportLength = productGroup.ChildsInfo.length;
+                var porkerBetTypeList = [];
+                for (var j = 0; j < porkerSportLength; j++) {
+                    var porkerSportGroup = productGroup.ChildsInfo[j];
+                    var porkerBetTypeLength = porkerSportGroup.ChildsInfo.length;
+                    for (var k = 0; k < porkerBetTypeLength; k++) {
+                        var betType = porkerSportGroup.ChildsInfo[k];
+                        porkerBetTypeList.push({
+                            id: "#" + ddId + "_Product_Sport" + porkerSportGroup.Id + "_BetType" + betType.Id,
+                            value: porkerSportGroup.Id + "_" + betType.Id,
+                            text: betType.Name,
+                            checked: false,
+                            enable: true
+                        });
+                    }
+                }
+
+                ddProduct.push({
+                    id: "#" + ddId + "_Product_Sport" + 163,
+                    value: 163,
+                    text: productGroup.Name,
+                    checked: false,
+                    enable: true,
+                    items: porkerBetTypeList
+                });
+
+                continue;
+            }
+
             var sportLength = productGroup.ChildsInfo.length;
             for (var j = 0; j < sportLength; j++) {
                 var sportGroup = productGroup.ChildsInfo[j];

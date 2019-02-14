@@ -14,6 +14,11 @@ namespace Fanex.AccountingReports.LegendManagement.Criteria
 
         public string SavePath { get; set; }
 
+        public override string GetSettingKey()
+        {
+            return string.Empty;
+        }
+
         /// <summary>
         /// Check data's constrains.
         /// </summary>
