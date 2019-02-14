@@ -8,7 +8,7 @@ namespace Fanex.AccountingReports.Websites.App_Start
         public static void Register()
         {
             var resourceFolder = NapSettings.Settings.Environment == "LIVE"
-                ? "PRO"
+                ? "LIVE"
                 : "TEST";
             DbSettingProviderManager
              .StartNewSession()
