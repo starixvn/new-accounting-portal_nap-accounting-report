@@ -55,7 +55,6 @@ namespace Fanex.BetList.Accounting.Services
                     Handicap2 = Converter.ToDecimal(r["hdp2"]),
                     Odds = Converter.ToDecimal(r["Odds"]),
                     BetTeam = Converter.ToString2(r["Betteam"]),
-                    StatusId = Converter.ToInt(r["statusid"]),
                     IsLive = Converter.ToBool(r["Liveindicator"]),
                     LiveHomeScore = Converter.ToInt(r["Livehomescore"]),
                     LiveAwayScore = Converter.ToInt(r["Liveawayscore"]),
@@ -69,7 +68,11 @@ namespace Fanex.BetList.Accounting.Services
                     Stake = Converter.ToDecimal(r["Stake"]),
                     Currency = Converter.ToString2(r["Currency"]),
                     TransDesc = Converter.ToString2(r["TransDesc"]),
-                    SettlementStatus = 0
+                    SettlementStatus = 0,
+                    ShowTime = Converter.ToString2(r["showtime"]),
+                    EventDate = Converter.ToDateTime(r["eventdate"]),
+                    Status = Converter.ToString2(r["status"])
+
                 },
                 ChoiceHtml = string.Empty,
                 OddHtml = string.Empty,
@@ -100,9 +103,11 @@ namespace Fanex.BetList.Accounting.Services
                     totalItem--;
                     betDetail.ChoiceHtml =
                         "<div class='ticketList'>" + builder.BuildChoice(betDetail.Ticket, ticketHelper, null, false)
+                            + builder.BuildTransEventDateAndStatusResult(betDetail.Ticket, null)
                             + (totalItem > 0 ?
                             "</div>" + "<div class=\"line\"></div>" :
-                            "</div>");
+                        "</div>");
+
                 }
 
                 if (!string.IsNullOrEmpty(comboParlayDetail))
