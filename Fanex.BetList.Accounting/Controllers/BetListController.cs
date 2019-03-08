@@ -93,5 +93,12 @@
 
             return View("~/Areas/Betlist/Views/CashOut/History.cshtml", cashOutHistory);
         }
+
+        public ActionResult GetBetBuilderDetail(GetBetBuilderDetailCriteria criteria)
+        {
+            var models = _betListService.GetBetBuilderDetail(criteria);
+
+            return View("~/Areas/BetList/Views/MemberBetListReport/_BetBuilderDetail.cshtml", models);
+        }
     }
 }

@@ -24,6 +24,9 @@
         }
         public static string GetSportName(object sportId)
         {
+            if (sportId.ToString() == "-38")
+                return "Bet Builder";
+
             return remotingRefService.GetSportName(Converter.ToString2(sportId), LanguageTypeConstants.En);
         }
 

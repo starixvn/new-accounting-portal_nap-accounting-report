@@ -203,7 +203,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.ReportManager = function () {
         _tables.scoreInformationContainer.addClass('display-none');
     };
     ViewMatchGameDetails = function (fromDate, toDate, sportId, betId, live, parentName, drillDownByType, subProduct) {
-        if (sportId < 0) {
+        if (sportId < 0 && sportId != -38) {
             sportId = betId;
             betId = 0;
         }

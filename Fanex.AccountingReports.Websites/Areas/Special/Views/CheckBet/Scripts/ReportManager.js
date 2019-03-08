@@ -188,7 +188,7 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
         });
     };
 
-    showCombMP = function(transId, transIndex, refNo, custId) {
+    showCombMP = function (transId, transIndex, refNo, custId) {
         showSystemParlay(transId, refNo, '', '', '', '', custId);
     };
 
@@ -223,7 +223,7 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
         }
         else {
             parlayContent.toggle();
-       
+
             if (parlayContent.css("display") == "block") {
                 $("div[id^='combinationOfferName']").addClass("display-none");
             } else {
@@ -234,4 +234,36 @@ Fanex.AccountingReports.Special.CheckBet.ReportManager = function () {
         }
     };
 
+
+    showSingleMatchParlayDetail = function (transid, custId) {
+        var grid = $('#BetlistByRefNo');
+        var parlayContent = $("div[id^='divEvent']")
+        if (parlayContent.html() == '') {
+            $.ajax({
+                type: 'POST',
+                url: window.rootUrl + 'BetList/BetList/GetBetBuilderDetail',
+                data: { transid: transid, custId: custId },
+                beforeSend: function () {
+                    AccReport.disableInput();
+                },
+                success: function (rs) {
+                    if (rs) {
+                        parlayContent.css("display", "block").html(rs);
+                        $("div[id^='divEvent'] .ticketDetailContent").removeClass("display-none");
+                        self.betlistgridOpts.isResetScroller = false;
+                        grid.gridScroller(self.betlistgridOpts);
+                    }
+                    AccReport.enableInput();
+                },
+                error: function (event, jqXHR, ajaxSettings) {
+                    AccReport.enableInput();
+                },
+                complete: function () { }
+            });
+        }
+        else {
+            parlayContent.toggle();           
+            grid.gridScroller(self.betlistgridOpts);
+        }
+    };
 }
