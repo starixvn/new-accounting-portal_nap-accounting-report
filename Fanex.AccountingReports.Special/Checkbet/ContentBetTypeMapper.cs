@@ -30,7 +30,7 @@ namespace Fanex.AccountingReports.Special.Checkbet
         private const string ContentBetTeamBetType610And615And616 = "ContentBetTeamBetType610And615And616";
         private const string ContentBetTeamBetType611 = "ContentBetTeamBetType611";
         private const string ContentBetTeamBetType221To222 = "ContentBetTeamBetType221To222";
-
+        private const string ContentBetTeamBetType38 = "ContentBetTeamBetType38";
 
         private readonly Dictionary<int, string> groupBettypes;
 
@@ -104,7 +104,8 @@ namespace Fanex.AccountingReports.Special.Checkbet
                 { 613, ContentBetTeamBetType603To607And609And612And613And617 },
                 { 615, ContentBetTeamBetType610And615And616 },
                 { 616, ContentBetTeamBetType610And615And616 },
-                { 617, ContentBetTeamBetType603To607And609And612And613And617 }
+                { 617, ContentBetTeamBetType603To607And609And612And613And617 },
+                { 38, ContentBetTeamBetType38 }
             };
         }
 

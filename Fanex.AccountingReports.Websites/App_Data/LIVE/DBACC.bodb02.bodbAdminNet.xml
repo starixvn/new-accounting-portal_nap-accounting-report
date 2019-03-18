@@ -105,6 +105,6 @@
   </Function>
   <Function Name="Core - Bet List Core">
     <Setting Key="BetList_RefNoSel" SpName="Acc_BetList_CheckBet" DbName="DBACC.bodb02.bodbAdminNet" />
-    <Setting Key="Acc_BetList_BetBuilder_Detail" SpName="Acc_BetList_BetBuilder_Detail" DbName="DBACC.bodb02.bodbAdminNet" />
+    <Setting Key="Acc_BetList_BetBuilder_Detail" SpName="Acc_Rpt_BetList_BetBuilder_Detail" DbName="DBACC.bodb02.bodbAdminNet" />
   </Function>
 </Functions>

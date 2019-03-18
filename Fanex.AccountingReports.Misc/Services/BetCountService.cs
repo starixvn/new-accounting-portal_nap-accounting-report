@@ -330,7 +330,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.Member_Win_Loss;
+            currentCellRange.Value = "Win Loss";
             currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
 
