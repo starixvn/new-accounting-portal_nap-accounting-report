@@ -28,6 +28,7 @@ namespace Fanex.BetList.Accounting.Services
     {
         public const string BetListSessionKey = "Fanex.BetList.Accounting.WinLossByLicensee";
         private readonly BetListRepository _betListRepository;
+        private readonly IDynamicRepository repository = new DynamicRepository();
 
         public BetListService()
         {
@@ -283,6 +284,20 @@ namespace Fanex.BetList.Accounting.Services
             }
 
             return comboParlayDetail;
+        }
+
+        public List<BetBuilderDetailModel> GetBetBuilderDetail(GetBetBuilderDetailCriteria criteria)
+        {
+            var models = repository.Fetch<BetBuilderDetailModel>(criteria).ToList();
+            var remotingRefService = new RemotingRefService();
+            models.ForEach(m =>
+            {
+                var name = remotingRefService.GetBetBuilderSelectionNames(new[] { m.SelectionType }, "en-US").FirstOrDefault();
+                m.Result = string.IsNullOrEmpty(m.Result) ? "N/A" : m.Result;
+                m.SelectionName = string.IsNullOrEmpty(name) ? "N/A" : name;
+            });
+
+            return models;
         }
     }
 }
