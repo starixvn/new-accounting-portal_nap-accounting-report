@@ -178,6 +178,7 @@
     <Compile Include="Controllers\NumberGameWinLossByCurrencyController.cs" />
     <Compile Include="Controllers\NumberGameWinlossByDateController.cs" />
     <Compile Include="Controllers\NumberOfActiveMemberController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Core\Configurations\VirtualSportsWinLossSection\VirtualSportsCollection.cs" />
     <Compile Include="Core\Configurations\VirtualSportsWinLossSection\VirtualSportsElement.cs" />
     <Compile Include="Core\Configurations\VirtualSportsWinLossSection\VirtualSportsWinLossSection.cs" />
