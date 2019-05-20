@@ -50,7 +50,6 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 
         #endregion ctors
 
-
         #region sign in
 
         /// <summary>
@@ -82,7 +81,6 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 
                         if (password == hashPassword)
                         {
-
                             var group = user.Group == null ? null : groupService.Get(user.Group.Id);
                             var siteLevelList = _userService.GetSiteLevel(user.Id, Environment); // gets all sites of logging-in user
 
@@ -232,8 +230,8 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         [HttpPost]
         public ActionResult ReCheckLogin()
         {
-            var isKickedOut = NapSettings.Settings.EnableReCheckIn
-              && securityService.ReCheckIn(currentSession.OnUserId, NapSettings.Settings.SiteId) > 0;
+            var recheckIn = securityService.ReCheckIn(currentSession.OnUserId, NapSettings.Settings.SiteId);
+            var isKickedOut = currentSession.OnUserId <= 0 || NapSettings.Settings.EnableReCheckIn && recheckIn > 0;
             return Json(isKickedOut);
         }
 
