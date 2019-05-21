@@ -57,26 +57,18 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
         /// <returns>The list DailyTurnover.</returns>
         public List<DailyTurnover> GetReport(GetDailyTurnoverCriteria criteria)
         {
-            try
+            var report = new List<DailyTurnover>();
+
+            if (!criteria.IsValid())
             {
-                var report = new List<DailyTurnover>();
-
-                if (!criteria.IsValid())
-                {
-                    return report;
-                }
-
-                report = this.ConvertReportData(criteria);
-
-                SessionManager.Set<List<DailyTurnover>>(this._dailyTurnoverSessionKey, report);
-
                 return report;
             }
-            catch (Exception ex)
-            {
-                this.HandleException(ex);
-                throw;
-            }
+
+            report = this.ConvertReportData(criteria);
+
+            SessionManager.Set<List<DailyTurnover>>(this._dailyTurnoverSessionKey, report);
+
+            return report;
         }
 
         /// <summary>

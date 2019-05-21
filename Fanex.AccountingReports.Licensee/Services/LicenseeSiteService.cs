@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Licensee.Services.Implement
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Fanex.AccountingReports.Core.Configurations;
@@ -22,29 +21,22 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
         {
             var licenseeSiteCriteria = new GetAllLicenseeCriteria();
             var licenseeSiteList = new List<Licensee>();
-            try
+            var rawData = GetReportData<dynamic>(licenseeSiteCriteria);
+            if (rawData != null)
             {
-                var rawData = GetReportData<dynamic>(licenseeSiteCriteria);
-                if (rawData != null)
+                foreach (var row in rawData)
                 {
-                    foreach (var row in rawData)
+                    var licenseeSite = new Licensee()
                     {
-                        var licenseeSite = new Licensee()
-                        {
-                            LicenseeName = row.LicenseeName,
-                            BrandName = row.Brandname,
-                            LicenseeId = row.LicenseeID,
-                            IsEnabledBA = row.EnableBA,
-                            IsMultiAgent = AppSettings.MultiAgentLicensses.Contains(row.LicenseeName)
-                        };
+                        LicenseeName = row.LicenseeName,
+                        BrandName = row.Brandname,
+                        LicenseeId = row.LicenseeID,
+                        IsEnabledBA = row.EnableBA,
+                        IsMultiAgent = AppSettings.MultiAgentLicensses.Contains(row.LicenseeName)
+                    };
 
-                        licenseeSiteList.Add(licenseeSite);
-                    }
+                    licenseeSiteList.Add(licenseeSite);
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
             }
 
             return licenseeSiteList;
@@ -57,27 +49,18 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
         /// <returns>The currencies by licensee.</returns>
         public List<Currency> GetCurrenciesByLicensee(GetCurrenciesByLicenseeCriteria criteria)
         {
-            try
+            var currencies = new List<Currency>();
+            var rawData = GetReportData<dynamic>(criteria);
+            rawData.ToList().ForEach(currency =>
             {
-                var currencies = new List<Currency>();
-                var rawData = GetReportData<dynamic>(criteria);
-                rawData.ToList().ForEach(currency =>
+                currencies.Add(new Currency
                 {
-                    currencies.Add(new Currency
-                    {
-                        CurrencyId = currency.currency,
-                        CurrencyName = currency.CurrencyName
-                    });
+                    CurrencyId = currency.currency,
+                    CurrencyName = currency.CurrencyName
                 });
+            });
 
-                return currencies;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            return null;
+            return currencies;
         }
     }
 }

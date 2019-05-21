@@ -46,161 +46,153 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportReport(GetTotalSMAMemberActiveCriteria criteria)
         {
-            try
+            var report = SessionManager.Get<IList<SMASummaryInfo>>(MiscConstants.TotalSMAMemberActiveSessionKey);
+            if (report == null)
             {
-                var report = SessionManager.Get<IList<SMASummaryInfo>>(MiscConstants.TotalSMAMemberActiveSessionKey);
-                if (report == null)
+                report = this.GetReport(criteria);
+                if (report == null || report.Count == 0)
                 {
-                    report = this.GetReport(criteria);
-                    if (report == null || report.Count == 0)
-                    {
-                        return;
-                    }
+                    return;
                 }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = MiscResources.TotalSMAMemberActiveReport_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                int currentRow = startRow;
-                int currentColumn = startColumn;
-
-                ExcelCell currentCell;
-                CellRange currentCellRange;
-
-                var titleTextStyle = ExcelExtensions.GetCellTextStyle(
-                    ExcelExtensions.HeaderTitleColor,
-                    true,
-                    HorizontalAlignmentStyle.Left,
-                    false,
-                    ExcelExtensions.BackGroundColor);
-                var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
-                var textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false, HorizontalAlignmentStyle.Center);
-
-                int maxColumnIndex = 3;
-                for (int i = 0; i < maxColumnIndex; i++)
-                {
-                    workSheet.Columns[startColumn + i].Width = 150 * ExcelExtensions.FontWidth;
-                }
-
-                string title = string.Format(
-                    MiscResources.TotalSMAMemberActiveReport_Title,
-                    criteria.FromDate.ToShortFormatedDate(),
-                    criteria.ToDate.ToShortFormatedDate());
-                currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + maxColumnIndex);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = title;
-                currentCellRange.Style = titleTextStyle;
-                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
-                currentRow += 2;
-
-                // empty row
-                workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.NewCreated;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Active;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Suspended;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Closed;
-                currentCell.Style = headerTextStyle;
-
-                int index = -1;
-                var newCreated = report[++index];
-                var active = report[++index];
-                var suspended = report[++index];
-                var closed = report[++index];
-                ++index;
-
-                currentRow++;
-                currentColumn = startColumn;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = this.BuildSMA(newCreated);
-                currentCell.Style = textStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = this.BuildSMA(active);
-                currentCell.Style = textStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = this.BuildSMA(suspended);
-                currentCell.Style = textStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = this.BuildSMA(closed);
-                currentCell.Style = textStyle;
-
-                int reportLen = report.Count;
-                int maxColumIndexActive = reportLen - index - 1;
-                for (int i = 1; i <= maxColumIndexActive; i++)
-                {
-                    workSheet.Columns[startColumn + i].Width = 150 * ExcelExtensions.FontWidth;
-                }
-
-                currentRow++;
-                workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumIndexActive);
-
-                title = MiscResources.TotalSMAMemberActiveReport_ActiveTitle;
-                currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + maxColumIndexActive);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = title;
-                currentCellRange.Style = titleTextStyle;
-                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
-                currentRow += 2;
-
-                // empty row
-                workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumIndexActive);
-
-                currentColumn = startColumn;
-                for (int i = index; i < reportLen; i++)
-                {
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = report[i].Key.Name;
-                    currentCell.Style = headerTextStyle;
-                    currentColumn++;
-                }
-
-                currentRow++;
-                currentColumn = startColumn;
-                for (int i = index; i < reportLen; i++)
-                {
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = this.BuildSMA(report[i]);
-                    currentCell.Style = textStyle;
-                    currentColumn++;
-                }
-
-                var reportName = string.Format(
-                    MiscResources.TotalSMAMemberActiveReport_ReportName,
-                    criteria.FromDate.ToShortFormatedDateWithSlash(),
-                    criteria.ToDate.ToShortFormatedDateWithSlash()).Replace("/", "_");
-                excelFile.ReponseStream(reportName);
             }
-            catch (Exception ex)
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = MiscResources.TotalSMAMemberActiveReport_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            int currentRow = startRow;
+            int currentColumn = startColumn;
+
+            ExcelCell currentCell;
+            CellRange currentCellRange;
+
+            var titleTextStyle = ExcelExtensions.GetCellTextStyle(
+                ExcelExtensions.HeaderTitleColor,
+                true,
+                HorizontalAlignmentStyle.Left,
+                false,
+                ExcelExtensions.BackGroundColor);
+            var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
+            var textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false, HorizontalAlignmentStyle.Center);
+
+            int maxColumnIndex = 3;
+            for (int i = 0; i < maxColumnIndex; i++)
             {
-                HandleException(ex);
-                throw;
+                workSheet.Columns[startColumn + i].Width = 150 * ExcelExtensions.FontWidth;
             }
+
+            string title = string.Format(
+                MiscResources.TotalSMAMemberActiveReport_Title,
+                criteria.FromDate.ToShortFormatedDate(),
+                criteria.ToDate.ToShortFormatedDate());
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + maxColumnIndex);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = title;
+            currentCellRange.Style = titleTextStyle;
+            currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
+            currentRow += 2;
+
+            // empty row
+            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.NewCreated;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Active;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Suspended;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Closed;
+            currentCell.Style = headerTextStyle;
+
+            int index = -1;
+            var newCreated = report[++index];
+            var active = report[++index];
+            var suspended = report[++index];
+            var closed = report[++index];
+            ++index;
+
+            currentRow++;
+            currentColumn = startColumn;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = this.BuildSMA(newCreated);
+            currentCell.Style = textStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = this.BuildSMA(active);
+            currentCell.Style = textStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = this.BuildSMA(suspended);
+            currentCell.Style = textStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = this.BuildSMA(closed);
+            currentCell.Style = textStyle;
+
+            int reportLen = report.Count;
+            int maxColumIndexActive = reportLen - index - 1;
+            for (int i = 1; i <= maxColumIndexActive; i++)
+            {
+                workSheet.Columns[startColumn + i].Width = 150 * ExcelExtensions.FontWidth;
+            }
+
+            currentRow++;
+            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumIndexActive);
+
+            title = MiscResources.TotalSMAMemberActiveReport_ActiveTitle;
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + maxColumIndexActive);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = title;
+            currentCellRange.Style = titleTextStyle;
+            currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
+            currentRow += 2;
+
+            // empty row
+            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumIndexActive);
+
+            currentColumn = startColumn;
+            for (int i = index; i < reportLen; i++)
+            {
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = report[i].Key.Name;
+                currentCell.Style = headerTextStyle;
+                currentColumn++;
+            }
+
+            currentRow++;
+            currentColumn = startColumn;
+            for (int i = index; i < reportLen; i++)
+            {
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = this.BuildSMA(report[i]);
+                currentCell.Style = textStyle;
+                currentColumn++;
+            }
+
+            var reportName = string.Format(
+                MiscResources.TotalSMAMemberActiveReport_ReportName,
+                criteria.FromDate.ToShortFormatedDateWithSlash(),
+                criteria.ToDate.ToShortFormatedDateWithSlash()).Replace("/", "_");
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>
@@ -209,53 +201,45 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// <param name="criteria">The criteria.</param>
         public void ExportStatusDetails(GetStatusDetailsCriteria criteria)
         {
-            try
+            Hashtable outputParams = null;
+            criteria.PageIndex = criteria.PageSize = 0;
+            var rawData = this._repositoryReport.GetStatusDetail(criteria, ref outputParams);
+
+            int totalRow = 0;
+            if (outputParams != null)
             {
-                Hashtable outputParams = null;
-                criteria.PageIndex = criteria.PageSize = 0;
-                var rawData = this._repositoryReport.GetStatusDetail(criteria, ref outputParams);
-
-                int totalRow = 0;
-                if (outputParams != null)
-                {
-                    totalRow = Converter.ToInt(outputParams["totalrow"]);
-                }
-
-                if (totalRow <= 0)
-                {
-                    return;
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                Status status = (Status)criteria.Status;
-                int pageIndex = 0;
-                int maxRowPerSheet = ExcelExtensions.MaxRowPerSheet;
-                do
-                {
-                    var sheetData = rawData
-                        .Skip(maxRowPerSheet * pageIndex)
-                        .Take(maxRowPerSheet)
-                        .ToList();
-                    pageIndex++;
-
-                    // export excel here ...
-                    IList<GroupStatusDetailInfo> report = this.GetStatusDetails(sheetData, status);
-                    this.ExportStatusDetails(ref worksheets, report, status, pageIndex, criteria.SiteName);
-                }
-                while (totalRow > maxRowPerSheet * pageIndex);
-
-                var reportName = string.Format(
-                    MiscResources.TotalSMAMemberActiveReport_ReportName,
-                    criteria.FromDate.ToShortFormatedDateWithSlash(),
-                    criteria.ToDate.ToShortFormatedDateWithSlash()).Replace("/", "_");
-                excelFile.ReponseStream(reportName);
+                totalRow = Converter.ToInt(outputParams["totalrow"]);
             }
-            catch (Exception ex)
+
+            if (totalRow <= 0)
             {
-                HandleException(ex);
-                throw;
+                return;
             }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            Status status = (Status)criteria.Status;
+            int pageIndex = 0;
+            int maxRowPerSheet = ExcelExtensions.MaxRowPerSheet;
+            do
+            {
+                var sheetData = rawData
+                    .Skip(maxRowPerSheet * pageIndex)
+                    .Take(maxRowPerSheet)
+                    .ToList();
+                pageIndex++;
+
+                // export excel here ...
+                IList<GroupStatusDetailInfo> report = this.GetStatusDetails(sheetData, status);
+                this.ExportStatusDetails(ref worksheets, report, status, pageIndex, criteria.SiteName);
+            }
+            while (totalRow > maxRowPerSheet * pageIndex);
+
+            var reportName = string.Format(
+                MiscResources.TotalSMAMemberActiveReport_ReportName,
+                criteria.FromDate.ToShortFormatedDateWithSlash(),
+                criteria.ToDate.ToShortFormatedDateWithSlash()).Replace("/", "_");
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>
@@ -269,79 +253,71 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         public IList<SMASummaryInfo> GetReport(GetTotalSMAMemberActiveCriteria criteria)
         {
             IList<SMASummaryInfo> report = null;
-            try
-            {
-                dynamic totalSMA = null;
-                IList<dynamic> activeDetails = null;
-                _repositoryReport.GetReport(criteria, ref totalSMA, ref activeDetails);
+            dynamic totalSMA = null;
+            IList<dynamic> activeDetails = null;
+            _repositoryReport.GetReport(criteria, ref totalSMA, ref activeDetails);
 
-                if (totalSMA != null && activeDetails != null && activeDetails.Count > 0)
+            if (totalSMA != null && activeDetails != null && activeDetails.Count > 0)
+            {
+                report = new List<SMASummaryInfo>();
+
+                // New Created
+                report.Add(new SMASummaryInfo
                 {
-                    report = new List<SMASummaryInfo>();
-
-                    // New Created
-                    report.Add(new SMASummaryInfo
+                    Key = new EntityBase<int, string>
                     {
-                        Key = new EntityBase<int, string>
-                        {
-                            Name = Labels.NewCreated
-                        },
-                        Super = Converter.ToInt(totalSMA.NewCreatedSuper),
-                        Master = Converter.ToInt(totalSMA.NewCreatedMaster),
-                        Agent = Converter.ToInt(totalSMA.NewCreatedAgent)
-                    });
+                        Name = Labels.NewCreated
+                    },
+                    Super = Converter.ToInt(totalSMA.NewCreatedSuper),
+                    Master = Converter.ToInt(totalSMA.NewCreatedMaster),
+                    Agent = Converter.ToInt(totalSMA.NewCreatedAgent)
+                });
 
-                    // Active
-                    report.Add(new SMASummaryInfo
+                // Active
+                report.Add(new SMASummaryInfo
+                {
+                    Key = new EntityBase<int, string>
                     {
-                        Key = new EntityBase<int, string>
-                        {
-                            Name = Labels.Active
-                        },
-                        Super = Converter.ToInt(totalSMA.ActiveSuper),
-                        Master = Converter.ToInt(totalSMA.ActiveMaster),
-                        Agent = Converter.ToInt(totalSMA.ActiveAgent)
-                    });
+                        Name = Labels.Active
+                    },
+                    Super = Converter.ToInt(totalSMA.ActiveSuper),
+                    Master = Converter.ToInt(totalSMA.ActiveMaster),
+                    Agent = Converter.ToInt(totalSMA.ActiveAgent)
+                });
 
-                    // Suspended
-                    report.Add(new SMASummaryInfo
+                // Suspended
+                report.Add(new SMASummaryInfo
+                {
+                    Key = new EntityBase<int, string>
                     {
-                        Key = new EntityBase<int, string>
-                        {
-                            Name = Labels.Suspended
-                        },
-                        Super = Converter.ToInt(totalSMA.SuspendedSuper),
-                        Master = Converter.ToInt(totalSMA.SuspendedMaster),
-                        Agent = Converter.ToInt(totalSMA.SuspendedAgent)
-                    });
+                        Name = Labels.Suspended
+                    },
+                    Super = Converter.ToInt(totalSMA.SuspendedSuper),
+                    Master = Converter.ToInt(totalSMA.SuspendedMaster),
+                    Agent = Converter.ToInt(totalSMA.SuspendedAgent)
+                });
 
-                    // Closed
-                    report.Add(new SMASummaryInfo
+                // Closed
+                report.Add(new SMASummaryInfo
+                {
+                    Key = new EntityBase<int, string>
                     {
-                        Key = new EntityBase<int, string>
-                        {
-                            Name = Labels.Closed
-                        },
-                        Super = Converter.ToInt(totalSMA.ClosedSuper),
-                        Master = Converter.ToInt(totalSMA.ClosedMaster),
-                        Agent = Converter.ToInt(totalSMA.ClosedAgent)
-                    });
+                        Name = Labels.Closed
+                    },
+                    Super = Converter.ToInt(totalSMA.ClosedSuper),
+                    Master = Converter.ToInt(totalSMA.ClosedMaster),
+                    Agent = Converter.ToInt(totalSMA.ClosedAgent)
+                });
 
-                    // Active Details
-                    SMASummaryInfo smaSummary = null;
-                    foreach (var item in activeDetails)
-                    {
-                        smaSummary = this.BuildSMASummaryInfo(item);
-                        report.Add(smaSummary);
-                    }
-
-                    SessionManager.Set<IList<SMASummaryInfo>>(MiscConstants.TotalSMAMemberActiveSessionKey, report);
+                // Active Details
+                SMASummaryInfo smaSummary = null;
+                foreach (var item in activeDetails)
+                {
+                    smaSummary = this.BuildSMASummaryInfo(item);
+                    report.Add(smaSummary);
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
+
+                SessionManager.Set<IList<SMASummaryInfo>>(MiscConstants.TotalSMAMemberActiveSessionKey, report);
             }
 
             return report;
@@ -355,23 +331,15 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         public IList<EntityBase<int, string>> GetSites(CriteriaBase criteria)
         {
             IList<EntityBase<int, string>> sites = null;
-            try
+            var rawData = GetReportData<SiteEntity>(criteria);
+            sites = new List<EntityBase<int, string>>();
+            foreach (var item in rawData)
             {
-                var rawData = GetReportData<SiteEntity>(criteria);
-                sites = new List<EntityBase<int, string>>();
-                foreach (var item in rawData)
+                sites.Add(new EntityBase<int, string>
                 {
-                    sites.Add(new EntityBase<int, string>
-                    {
-                        Id = item.SiteId,
-                        Name = item.Site
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
+                    Id = item.SiteId,
+                    Name = item.Site
+                });
             }
 
             return sites;
@@ -386,29 +354,21 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         {
             Status status = (Status)criteria.Status;
             IList<GroupStatusDetailInfo> report = null;
-            try
+            Hashtable outputParams = null;
+            var rawData = this._repositoryReport.GetStatusDetail(criteria, ref outputParams);
+
+            int totalRow = 0;
+            if (outputParams != null)
             {
-                Hashtable outputParams = null;
-                var rawData = this._repositoryReport.GetStatusDetail(criteria, ref outputParams);
-
-                int totalRow = 0;
-                if (outputParams != null)
-                {
-                    totalRow = Converter.ToInt(outputParams["totalrow"]);
-                }
-
-                if (totalRow > 0)
-                {
-                    criteria.TotalRow = totalRow;
-                    report = this.GetStatusDetails(rawData, status);
-
-                    SessionManager.Set<IList<GroupStatusDetailInfo>>(MiscConstants.TotalSMAMemberActiveDetailSessionKey, report);
-                }
+                totalRow = Converter.ToInt(outputParams["totalrow"]);
             }
-            catch (Exception ex)
+
+            if (totalRow > 0)
             {
-                HandleException(ex);
-                throw;
+                criteria.TotalRow = totalRow;
+                report = this.GetStatusDetails(rawData, status);
+
+                SessionManager.Set<IList<GroupStatusDetailInfo>>(MiscConstants.TotalSMAMemberActiveDetailSessionKey, report);
             }
 
             return report;

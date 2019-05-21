@@ -51,37 +51,30 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         /// <returns>The report.</returns>
         public ParlayWonTransaction GetReport(GetParlayWonReportCriteria criteria)
         {
-            try
+            ParlayWonTransaction fullReport = null;
+            var startIndex = criteria.StartIndex;
+            var endIndex = criteria.EndIndex;
+
+            if (!criteria.IsPagingCallBack)
             {
-                ParlayWonTransaction fullReport = null;
-                var startIndex = criteria.StartIndex;
-                var endIndex = criteria.EndIndex;
-
-                if (!criteria.IsPagingCallBack)
-                {
-                    fullReport = this.GetFullReportFromDatabase(criteria);
-                    SessionManager.Set<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey, fullReport);
-                }
-                else
-                {
-                    fullReport = SessionManager.Get<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey);
-                }
-
-                var pagingReport = new ParlayWonTransaction
-                {
-                    TransactionList = fullReport.TransactionList.Skip(startIndex)
-                                                .Take(criteria.ItemsPerPage)
-                                                .ToList(),
-                    ReportItemLength = fullReport.ReportItemLength,
-                    Total = fullReport.Total
-                };
-
-                return pagingReport;
+                fullReport = this.GetFullReportFromDatabase(criteria);
+                SessionManager.Set<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey, fullReport);
             }
-            catch (Exception ex)
+            else
             {
-                HandleException(ex);
+                fullReport = SessionManager.Get<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey);
             }
+
+            var pagingReport = new ParlayWonTransaction
+            {
+                TransactionList = fullReport.TransactionList.Skip(startIndex)
+                                            .Take(criteria.ItemsPerPage)
+                                            .ToList(),
+                ReportItemLength = fullReport.ReportItemLength,
+                Total = fullReport.Total
+            };
+
+            return pagingReport;
 
             SessionManager.Set<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey, null);
             return null;
@@ -94,42 +87,35 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         /// <returns>The report.</returns>
         public ParlayWonTransaction SortReport(GetParlayWonReportCriteria criteria)
         {
-            try
+            var fullReport = SessionManager.Get<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey);
+            if (fullReport == null)
             {
-                var fullReport = SessionManager.Get<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey);
-                if (fullReport == null)
-                {
-                    fullReport = this.GetReport(criteria);
-                }
-
-                if (fullReport != null &&
-                    fullReport.TransactionList != null &&
-                    fullReport.TransactionList.Count > 0)
-                {
-                    var propertyName = this.GetSortedColumnName(criteria.SortBy);
-                    var startIndex = criteria.StartIndex;
-                    var endIndex = criteria.EndIndex;
-                    fullReport.TransactionList.SortByProperty<ParlayWonTransaction>(
-                        criteria.SortDirection,
-                        propertyName);
-
-                    SessionManager.Set<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey, fullReport);
-
-                    var pagingReport = new ParlayWonTransaction
-                    {
-                        TransactionList = fullReport.TransactionList.Skip(startIndex)
-                                                    .Take(criteria.ItemsPerPage)
-                                                    .ToList(),
-                        ReportItemLength = fullReport.ReportItemLength,
-                        Total = fullReport.Total
-                    };
-
-                    return pagingReport;
-                }
+                fullReport = this.GetReport(criteria);
             }
-            catch (Exception ex)
+
+            if (fullReport != null &&
+                fullReport.TransactionList != null &&
+                fullReport.TransactionList.Count > 0)
             {
-                HandleException(ex);
+                var propertyName = this.GetSortedColumnName(criteria.SortBy);
+                var startIndex = criteria.StartIndex;
+                var endIndex = criteria.EndIndex;
+                fullReport.TransactionList.SortByProperty<ParlayWonTransaction>(
+                    criteria.SortDirection,
+                    propertyName);
+
+                SessionManager.Set<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey, fullReport);
+
+                var pagingReport = new ParlayWonTransaction
+                {
+                    TransactionList = fullReport.TransactionList.Skip(startIndex)
+                                                .Take(criteria.ItemsPerPage)
+                                                .ToList(),
+                    ReportItemLength = fullReport.ReportItemLength,
+                    Total = fullReport.Total
+                };
+
+                return pagingReport;
             }
 
             SessionManager.Set<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey, null);
@@ -147,350 +133,343 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportReport(GetParlayWonReportCriteria criteria)
         {
-            try
+            var fullReport = SessionManager.Get<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey);
+            if (fullReport == null)
             {
-                var fullReport = SessionManager.Get<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey);
-                if (fullReport == null)
+                fullReport = this.GetReport(criteria);
+            }
+
+            //// ExcelTypes
+
+            ExcelFile excelFile = new ExcelFile();
+            string sheetName = SpecialResources.ParlayWon_SheetName;
+            ExcelWorksheet workSheet = excelFile.Worksheets.Add(string.Format("{0} - {1}", sheetName, 1));
+
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
+
+            var textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);
+            var intStyle = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.BackGroundColor, false, false, false);
+            var twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                ExcelExtensions.BackGroundColor,
+                false,
+                false,
+                false);
+            var fourDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.FourDecimalDigitFormat,
+                ExcelExtensions.BackGroundColor,
+                false,
+                false,
+                false);
+            textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);
+            intStyle = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.BackGroundColor, false, false, false);
+            twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, ExcelExtensions.BackGroundColor, false, false, false);
+            fourDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.FourDecimalDigitFormat, ExcelExtensions.BackGroundColor, false, false, false);
+            textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true);
+            textStyle.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            intStyle = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.GrandTotalRowColor, true, false, false);
+            intStyle.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+            intStyle.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+
+            twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, ExcelExtensions.GrandTotalRowColor, true, false, false);
+            twoDecimalNumberStyle.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+            twoDecimalNumberStyle.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            fourDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.FourDecimalDigitFormat,
+                ExcelExtensions.GrandTotalRowColor,
+                false,
+                false,
+                false);
+            fourDecimalNumberStyle.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+            fourDecimalNumberStyle.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+
+            var textStyle_EvenRow = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);
+            var intStyle_EvenRow = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.BackGroundColor, false, false, false);
+            var twoDecimalNumberStyle_EvenRow = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                ExcelExtensions.BackGroundColor,
+                false,
+                false,
+                false);
+            var fourDecimalNumberStyle_EvenRow = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.FourDecimalDigitFormat,
+                ExcelExtensions.BackGroundColor,
+                false,
+                false,
+                false);
+            textStyle_EvenRow = ExcelExtensions.GetCellTextStyle(ExcelExtensions.EvenRowColor, false);
+            intStyle_EvenRow = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.EvenRowColor, false, false, false);
+            intStyle_EvenRow.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+            twoDecimalNumberStyle_EvenRow = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                ExcelExtensions.EvenRowColor,
+                false,
+                false,
+                false);
+            twoDecimalNumberStyle_EvenRow.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+            fourDecimalNumberStyle_EvenRow = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.FourDecimalDigitFormat,
+                ExcelExtensions.EvenRowColor,
+                false,
+                false,
+                false);
+            fourDecimalNumberStyle_EvenRow.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+
+            var textStyle_OddRow = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);
+            var intStyle_OddRow = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.BackGroundColor, false, false, false);
+            var twoDecimalNumberStyle_OddRow = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                ExcelExtensions.BackGroundColor,
+                false,
+                false,
+                false);
+            var fourDecimalNumberStyle_OddRow = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.FourDecimalDigitFormat,
+                ExcelExtensions.BackGroundColor,
+                false,
+                false,
+                false);
+            textStyle_OddRow = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);
+            intStyle_OddRow = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.BackGroundColor, false, false, false);
+            intStyle_OddRow.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+            twoDecimalNumberStyle_OddRow = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                ExcelExtensions.BackGroundColor,
+                false,
+                false,
+                false);
+            twoDecimalNumberStyle_OddRow.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+            fourDecimalNumberStyle_OddRow = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.FourDecimalDigitFormat,
+                ExcelExtensions.BackGroundColor,
+                false,
+                false,
+                false);
+            fourDecimalNumberStyle_OddRow.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+
+            ExcelCell currentCell;
+            var maxItemsInSheet = 3000;
+
+            //// ExcelTypes
+            //// MakeExcelFile
+
+            this.ExportReportHeader(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                criteria);
+
+            if (fullReport != null &&
+                fullReport.TransactionList != null &&
+                fullReport.TransactionList.Count > 0)
+            {
+                var reportLength = fullReport.TransactionList.Count;
+                var totalSheet = (fullReport.TransactionList.Count % maxItemsInSheet > 0 ? 1 : 0) + (fullReport.TransactionList.Count / maxItemsInSheet);
+                int infoIndex = 0;
+                int currentInfoIndexInSheet = 0;
+                int sheetIndex = 1;
+                for (int i = 0; i < totalSheet; i++)
                 {
-                    fullReport = this.GetReport(criteria);
+                    var currentColumn = startColumn;
+                    for (; infoIndex < reportLength && currentInfoIndexInSheet < maxItemsInSheet;
+                        infoIndex++, currentInfoIndexInSheet++)
+                    {
+                        var transaction = fullReport.TransactionList[infoIndex];
+                        if (infoIndex % 2 == 0)
+                        {
+                            //// NormalEvenRow
+
+                            currentColumn = startColumn;
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.RefNo;
+                            currentCell.Style = textStyle_EvenRow;
+                            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.UserName;
+                            currentCell.Style = textStyle_EvenRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.Currency;
+                            currentCell.Style = textStyle_EvenRow;
+                            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.Exchange;
+                            currentCell.Style = fourDecimalNumberStyle_EvenRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.OriginalStake;
+                            currentCell.Style = twoDecimalNumberStyle_EvenRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.OriginalWinLoss;
+                            currentCell.Style = twoDecimalNumberStyle_EvenRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.BaseStake;
+                            currentCell.Style = twoDecimalNumberStyle_EvenRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.BaseWinLoss;
+                            currentCell.Style = twoDecimalNumberStyle_EvenRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.CompanyStake;
+                            currentCell.Style = twoDecimalNumberStyle_EvenRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.CompanyWinLoss;
+                            currentCell.Style = twoDecimalNumberStyle_EvenRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.Selection;
+                            currentCell.Style = intStyle_EvenRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.WinOdds;
+                            currentCell.Style = fourDecimalNumberStyle_EvenRow;
+                            currentColumn++;
+                            currentRow++;
+
+                            //// NormalEvenRow
+                        }
+                        else
+                        {
+                            //// NormalOddRow
+
+                            currentColumn = startColumn;
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.RefNo;
+                            currentCell.Style = textStyle_OddRow;
+                            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.UserName;
+                            currentCell.Style = textStyle_OddRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.Currency;
+                            currentCell.Style = textStyle_OddRow;
+                            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.Exchange;
+                            currentCell.Style = fourDecimalNumberStyle_OddRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.OriginalStake;
+                            currentCell.Style = twoDecimalNumberStyle_OddRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.OriginalWinLoss;
+                            currentCell.Style = twoDecimalNumberStyle_OddRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.BaseStake;
+                            currentCell.Style = twoDecimalNumberStyle_OddRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.BaseWinLoss;
+                            currentCell.Style = twoDecimalNumberStyle_OddRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.CompanyStake;
+                            currentCell.Style = twoDecimalNumberStyle_OddRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.CompanyWinLoss;
+                            currentCell.Style = twoDecimalNumberStyle_OddRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.Selection;
+                            currentCell.Style = intStyle_OddRow;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = transaction.WinOdds;
+                            currentCell.Style = fourDecimalNumberStyle_OddRow;
+                            currentColumn++;
+                            currentRow++;
+
+                            //// NormalOddRow
+                        }
+                    }
+
+                    if (currentInfoIndexInSheet == maxItemsInSheet &&
+                       sheetIndex < totalSheet)
+                    {
+                        this.ExportTransactionRow(
+                            ref workSheet,
+                            startRow,
+                            startColumn,
+                            ref currentRow,
+                            fullReport.Total,
+                            ReportRowType.GrandTotal,
+                            textStyle,
+                            intStyle,
+                            twoDecimalNumberStyle,
+                            fourDecimalNumberStyle);
+                        sheetIndex++;
+                        currentRow = 0;
+                        currentInfoIndexInSheet = 0;
+                        workSheet = excelFile.Worksheets.Add(string.Format("{0} - {1}", sheetName, sheetIndex));
+                        this.ExportReportHeader(
+                            ref workSheet,
+                            startRow,
+                            startColumn,
+                            ref currentRow,
+                            criteria);
+                    }
                 }
 
-                //// ExcelTypes
-
-                ExcelFile excelFile = new ExcelFile();
-                string sheetName = SpecialResources.ParlayWon_SheetName;
-                ExcelWorksheet workSheet = excelFile.Worksheets.Add(string.Format("{0} - {1}", sheetName, 1));
-
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
-
-                var textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);
-                var intStyle = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.BackGroundColor, false, false, false);
-                var twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    ExcelExtensions.BackGroundColor,
-                    false,
-                    false,
-                    false);
-                var fourDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.FourDecimalDigitFormat,
-                    ExcelExtensions.BackGroundColor,
-                    false,
-                    false,
-                    false);
-                textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);
-                intStyle = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.BackGroundColor, false, false, false);
-                twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, ExcelExtensions.BackGroundColor, false, false, false);
-                fourDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.FourDecimalDigitFormat, ExcelExtensions.BackGroundColor, false, false, false);
-                textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true);
-                textStyle.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                intStyle = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.GrandTotalRowColor, true, false, false);
-                intStyle.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                intStyle.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-
-                twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, ExcelExtensions.GrandTotalRowColor, true, false, false);
-                twoDecimalNumberStyle.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                twoDecimalNumberStyle.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-                fourDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.FourDecimalDigitFormat,
-                    ExcelExtensions.GrandTotalRowColor,
-                    false,
-                    false,
-                    false);
-                fourDecimalNumberStyle.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                fourDecimalNumberStyle.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
-
-                var textStyle_EvenRow = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);
-                var intStyle_EvenRow = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.BackGroundColor, false, false, false);
-                var twoDecimalNumberStyle_EvenRow = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    ExcelExtensions.BackGroundColor,
-                    false,
-                    false,
-                    false);
-                var fourDecimalNumberStyle_EvenRow = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.FourDecimalDigitFormat,
-                    ExcelExtensions.BackGroundColor,
-                    false,
-                    false,
-                    false);
-                textStyle_EvenRow = ExcelExtensions.GetCellTextStyle(ExcelExtensions.EvenRowColor, false);
-                intStyle_EvenRow = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.EvenRowColor, false, false, false);
-                intStyle_EvenRow.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                twoDecimalNumberStyle_EvenRow = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    ExcelExtensions.EvenRowColor,
-                    false,
-                    false,
-                    false);
-                twoDecimalNumberStyle_EvenRow.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                fourDecimalNumberStyle_EvenRow = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.FourDecimalDigitFormat,
-                    ExcelExtensions.EvenRowColor,
-                    false,
-                    false,
-                    false);
-                fourDecimalNumberStyle_EvenRow.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-
-                var textStyle_OddRow = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);
-                var intStyle_OddRow = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.BackGroundColor, false, false, false);
-                var twoDecimalNumberStyle_OddRow = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    ExcelExtensions.BackGroundColor,
-                    false,
-                    false,
-                    false);
-                var fourDecimalNumberStyle_OddRow = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.FourDecimalDigitFormat,
-                    ExcelExtensions.BackGroundColor,
-                    false,
-                    false,
-                    false);
-                textStyle_OddRow = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);
-                intStyle_OddRow = ExcelExtensions.GetCellNumberStyle(string.Empty, ExcelExtensions.BackGroundColor, false, false, false);
-                intStyle_OddRow.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                twoDecimalNumberStyle_OddRow = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    ExcelExtensions.BackGroundColor,
-                    false,
-                    false,
-                    false);
-                twoDecimalNumberStyle_OddRow.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                fourDecimalNumberStyle_OddRow = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.FourDecimalDigitFormat,
-                    ExcelExtensions.BackGroundColor,
-                    false,
-                    false,
-                    false);
-                fourDecimalNumberStyle_OddRow.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-
-                ExcelCell currentCell;
-                var maxItemsInSheet = 3000;
-
-                //// ExcelTypes
-                //// MakeExcelFile
-
-                this.ExportReportHeader(
+                this.ExportTransactionRow(
                     ref workSheet,
                     startRow,
                     startColumn,
                     ref currentRow,
-                    criteria);
-
-                if (fullReport != null &&
-                    fullReport.TransactionList != null &&
-                    fullReport.TransactionList.Count > 0)
-                {
-                    var reportLength = fullReport.TransactionList.Count;
-                    var totalSheet = (fullReport.TransactionList.Count % maxItemsInSheet > 0 ? 1 : 0) + (fullReport.TransactionList.Count / maxItemsInSheet);
-                    int infoIndex = 0;
-                    int currentInfoIndexInSheet = 0;
-                    int sheetIndex = 1;
-                    for (int i = 0; i < totalSheet; i++)
-                    {
-                        var currentColumn = startColumn;
-                        for (; infoIndex < reportLength && currentInfoIndexInSheet < maxItemsInSheet;
-                            infoIndex++, currentInfoIndexInSheet++)
-                        {
-                            var transaction = fullReport.TransactionList[infoIndex];
-                            if (infoIndex % 2 == 0)
-                            {
-                                //// NormalEvenRow
-
-                                currentColumn = startColumn;
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.RefNo;
-                                currentCell.Style = textStyle_EvenRow;
-                                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.UserName;
-                                currentCell.Style = textStyle_EvenRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.Currency;
-                                currentCell.Style = textStyle_EvenRow;
-                                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.Exchange;
-                                currentCell.Style = fourDecimalNumberStyle_EvenRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.OriginalStake;
-                                currentCell.Style = twoDecimalNumberStyle_EvenRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.OriginalWinLoss;
-                                currentCell.Style = twoDecimalNumberStyle_EvenRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.BaseStake;
-                                currentCell.Style = twoDecimalNumberStyle_EvenRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.BaseWinLoss;
-                                currentCell.Style = twoDecimalNumberStyle_EvenRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.CompanyStake;
-                                currentCell.Style = twoDecimalNumberStyle_EvenRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.CompanyWinLoss;
-                                currentCell.Style = twoDecimalNumberStyle_EvenRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.Selection;
-                                currentCell.Style = intStyle_EvenRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.WinOdds;
-                                currentCell.Style = fourDecimalNumberStyle_EvenRow;
-                                currentColumn++;
-                                currentRow++;
-
-                                //// NormalEvenRow
-                            }
-                            else
-                            {
-                                //// NormalOddRow
-
-                                currentColumn = startColumn;
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.RefNo;
-                                currentCell.Style = textStyle_OddRow;
-                                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.UserName;
-                                currentCell.Style = textStyle_OddRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.Currency;
-                                currentCell.Style = textStyle_OddRow;
-                                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.Exchange;
-                                currentCell.Style = fourDecimalNumberStyle_OddRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.OriginalStake;
-                                currentCell.Style = twoDecimalNumberStyle_OddRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.OriginalWinLoss;
-                                currentCell.Style = twoDecimalNumberStyle_OddRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.BaseStake;
-                                currentCell.Style = twoDecimalNumberStyle_OddRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.BaseWinLoss;
-                                currentCell.Style = twoDecimalNumberStyle_OddRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.CompanyStake;
-                                currentCell.Style = twoDecimalNumberStyle_OddRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.CompanyWinLoss;
-                                currentCell.Style = twoDecimalNumberStyle_OddRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.Selection;
-                                currentCell.Style = intStyle_OddRow;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = transaction.WinOdds;
-                                currentCell.Style = fourDecimalNumberStyle_OddRow;
-                                currentColumn++;
-                                currentRow++;
-
-                                //// NormalOddRow
-                            }
-                        }
-
-                        if (currentInfoIndexInSheet == maxItemsInSheet &&
-                           sheetIndex < totalSheet)
-                        {
-                            this.ExportTransactionRow(
-                                ref workSheet,
-                                startRow,
-                                startColumn,
-                                ref currentRow,
-                                fullReport.Total,
-                                ReportRowType.GrandTotal,
-                                textStyle,
-                                intStyle,
-                                twoDecimalNumberStyle,
-                                fourDecimalNumberStyle);
-                            sheetIndex++;
-                            currentRow = 0;
-                            currentInfoIndexInSheet = 0;
-                            workSheet = excelFile.Worksheets.Add(string.Format("{0} - {1}", sheetName, sheetIndex));
-                            this.ExportReportHeader(
-                                ref workSheet,
-                                startRow,
-                                startColumn,
-                                ref currentRow,
-                                criteria);
-                        }
-                    }
-
-                    this.ExportTransactionRow(
-                        ref workSheet,
-                        startRow,
-                        startColumn,
-                        ref currentRow,
-                        fullReport.Total,
-                        ReportRowType.GrandTotal,
-                        textStyle,
-                        intStyle,
-                        twoDecimalNumberStyle,
-                        fourDecimalNumberStyle);
-                }
-                else
-                {
-                    workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 11);
-                }
-
-                //// MakeExcelFile
-
-                var reportName = string.Format(
-                    SpecialResources.ParlayWon_ReportName,
-                    criteria.WinlostDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
-                excelFile.ReponseStream(reportName);
+                    fullReport.Total,
+                    ReportRowType.GrandTotal,
+                    textStyle,
+                    intStyle,
+                    twoDecimalNumberStyle,
+                    fourDecimalNumberStyle);
             }
-            catch (Exception ex)
+            else
             {
-                HandleException(ex);
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 11);
             }
+
+            //// MakeExcelFile
+
+            var reportName = string.Format(
+                SpecialResources.ParlayWon_ReportName,
+                criteria.WinlostDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>
@@ -503,59 +482,52 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             Justification = "Reviewed. Suppression is OK here.")]
         private ParlayWonTransaction GetFullReportFromDatabase(GetParlayWonReportCriteria criteria)
         {
-            try
+            var rawData = GetReportData<dynamic>(criteria);
+            var fullReport = new ParlayWonTransaction
             {
-                var rawData = GetReportData<dynamic>(criteria);
-                var fullReport = new ParlayWonTransaction
+                TransactionList = new List<ParlayWonTransaction>(),
+                ReportItemLength = rawData.Count(),
+                Total = new ParlayWonTransaction
                 {
-                    TransactionList = new List<ParlayWonTransaction>(),
-                    ReportItemLength = rawData.Count(),
-                    Total = new ParlayWonTransaction
-                    {
-                        UserName = Labels.Total
-                    }
+                    UserName = Labels.Total
+                }
+            };
+
+            foreach (var row in rawData)
+            {
+                ParlayWonTransaction transaction = new ParlayWonTransaction
+                {
+                    RefNo = Convert.ToUInt64(row.transid),
+                    UserName = Converter.ToString2(row.username),
+                    Currency = Converter.ToString2(row.Currency),
+                    Exchange = Converter.ToDecimal(row.exchange),
+                    OriginalWinLoss = Converter.ToDecimal(row.Winlost),
+                    BaseWinLoss = Converter.ToDecimal(row.Winlost_RM),
+                    CompanyWinLoss = Converter.ToDecimal(row.CompanyWinlost_RM),
+                    Selection = Converter.ToInt(row.selection),
+                    WinOdds = Converter.ToDecimal(row.modds)
                 };
 
-                foreach (var row in rawData)
+                switch (criteria.Bettype)
                 {
-                    ParlayWonTransaction transaction = new ParlayWonTransaction
-                    {
-                        RefNo = Convert.ToUInt64(row.transid),
-                        UserName = Converter.ToString2(row.username),
-                        Currency = Converter.ToString2(row.Currency),
-                        Exchange = Converter.ToDecimal(row.exchange),
-                        OriginalWinLoss = Converter.ToDecimal(row.Winlost),
-                        BaseWinLoss = Converter.ToDecimal(row.Winlost_RM),
-                        CompanyWinLoss = Converter.ToDecimal(row.CompanyWinlost_RM),
-                        Selection = Converter.ToInt(row.selection),
-                        WinOdds = Converter.ToDecimal(row.modds)
-                    };
+                    case BetTypeConstants.MixParlay:
+                        transaction.OriginalStake = Converter.ToDecimal(row.stake);
+                        transaction.BaseStake = Converter.ToDecimal(row.stake_RM);
+                        transaction.CompanyStake = Converter.ToDecimal(row.CompanyStake_RM);
+                        break;
 
-                    switch (criteria.Bettype)
-                    {
-                        case BetTypeConstants.MixParlay:
-                            transaction.OriginalStake = Converter.ToDecimal(row.stake);
-                            transaction.BaseStake = Converter.ToDecimal(row.stake_RM);
-                            transaction.CompanyStake = Converter.ToDecimal(row.CompanyStake_RM);
-                            break;
-
-                        default:
-                            transaction.OriginalStake = Converter.ToDecimal(row.actual_stake);
-                            transaction.BaseStake = Converter.ToDecimal(row.actual_stake_RM);
-                            transaction.CompanyStake = Converter.ToDecimal(row.CompanyActual_stake_RM);
-                            break;
-                    }
-
-                    fullReport.TransactionList.Add(transaction);
-                    fullReport.SumDataToTotal(transaction);
+                    default:
+                        transaction.OriginalStake = Converter.ToDecimal(row.actual_stake);
+                        transaction.BaseStake = Converter.ToDecimal(row.actual_stake_RM);
+                        transaction.CompanyStake = Converter.ToDecimal(row.CompanyActual_stake_RM);
+                        break;
                 }
 
-                return fullReport;
+                fullReport.TransactionList.Add(transaction);
+                fullReport.SumDataToTotal(transaction);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            return fullReport;
 
             return null;
         }

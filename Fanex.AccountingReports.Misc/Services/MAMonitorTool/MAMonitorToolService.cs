@@ -40,31 +40,23 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
         /// <returns>The report type list.</returns>
         public List<EntityBase<int, string>> GetReportTypeList()
         {
-            try
+            List<EntityBase<int, string>> result = new List<EntityBase<int, string>>();
+            MAMonitorCollection collection = MAMonitorSection.Instance.ReportBy;
+            foreach (MAMonitorElement element in collection)
             {
-                List<EntityBase<int, string>> result = new List<EntityBase<int, string>>();
-                MAMonitorCollection collection = MAMonitorSection.Instance.ReportBy;
-                foreach (MAMonitorElement element in collection)
+                if (!element.IsActive)
                 {
-                    if (!element.IsActive)
-                    {
-                        continue;
-                    }
-
-                    result.Add(new EntityBase<int, string>()
-                    {
-                        Id = Converter.ToInt(element.Id),
-                        Name = Converter.ToString2(element.Name)
-                    });
+                    continue;
                 }
 
-                return result;
+                result.Add(new EntityBase<int, string>()
+                {
+                    Id = Converter.ToInt(element.Id),
+                    Name = Converter.ToString2(element.Name)
+                });
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+
+            return result;
         }
 
         /// <summary>
@@ -73,39 +65,31 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
         /// <returns>The product list.</returns>
         public List<BaseModel> GetProductList()
         {
-            try
+            List<BaseModel> result = new List<BaseModel>();
+            MAMonitorCollection collection = MAMonitorSection.Instance.Products;
+            Dictionary<int, string> cachedProducts = new Dictionary<int, string>();
+            foreach (MAMonitorElement element in collection)
             {
-                List<BaseModel> result = new List<BaseModel>();
-                MAMonitorCollection collection = MAMonitorSection.Instance.Products;
-                Dictionary<int, string> cachedProducts = new Dictionary<int, string>();
-                foreach (MAMonitorElement element in collection)
+                if (!element.IsActive)
                 {
-                    if (!element.IsActive)
-                    {
-                        continue;
-                    }
-
-                    int productId = Converter.ToInt(element.Id);
-                    string productName = Converter.ToString2(element.Name);
-
-                    result.Add(new BaseModel()
-                    {
-                        Id = productId,
-                        Name = productName,
-                        AliasName = Converter.ToString2(element.AliasName)
-                    });
-
-                    cachedProducts.Add(productId, productName);
+                    continue;
                 }
 
-                SessionManager.Set<Dictionary<int, string>>(_productSessionKey, cachedProducts);
-                return result;
+                int productId = Converter.ToInt(element.Id);
+                string productName = Converter.ToString2(element.Name);
+
+                result.Add(new BaseModel()
+                {
+                    Id = productId,
+                    Name = productName,
+                    AliasName = Converter.ToString2(element.AliasName)
+                });
+
+                cachedProducts.Add(productId, productName);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+
+            SessionManager.Set<Dictionary<int, string>>(_productSessionKey, cachedProducts);
+            return result;
         }
 
         /// <summary>
@@ -114,32 +98,24 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
         /// <returns>The sport list.</returns>
         public List<EntityBase<int, string>> GetSportList()
         {
-            try
+            List<EntityBase<int, string>> result = new List<EntityBase<int, string>>();
+            result.Add(new EntityBase<int, string>()
             {
-                List<EntityBase<int, string>> result = new List<EntityBase<int, string>>();
+                Id = SportConstants.AllSport,
+                Name = Labels.All
+            });
+
+            var rawData = GetReportData<Sport>(new GetSportListCriteria());
+            foreach (var row in rawData)
+            {
                 result.Add(new EntityBase<int, string>()
                 {
-                    Id = SportConstants.AllSport,
-                    Name = Labels.All
+                    Id = row.SportType,
+                    Name = row.SportName
                 });
-
-                var rawData = GetReportData<Sport>(new GetSportListCriteria());
-                foreach (var row in rawData)
-                {
-                    result.Add(new EntityBase<int, string>()
-                    {
-                        Id = row.SportType,
-                        Name = row.SportName
-                    });
-                }
-
-                return result;
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+
+            return result;
         }
 
         /// <summary>
@@ -151,62 +127,46 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
         /// </returns>
         public List<EntityBase<int, string>> GetBetTypeList(GetBetTypeListCriteria criteria)
         {
-            try
+            List<EntityBase<int, string>> result = new List<EntityBase<int, string>>();
+            result.Add(new EntityBase<int, string>()
             {
-                List<EntityBase<int, string>> result = new List<EntityBase<int, string>>();
+                Id = SportConstants.AllSport,
+                Name = Labels.All
+            });
+
+            var rawData = GetReportData<ProductEntity>(criteria);
+            foreach (var row in rawData)
+            {
                 result.Add(new EntityBase<int, string>()
                 {
-                    Id = SportConstants.AllSport,
-                    Name = Labels.All
+                    Id = row.TypeId,
+                    Name = row.TypeName
                 });
-
-                var rawData = GetReportData<ProductEntity>(criteria);
-                foreach (var row in rawData)
-                {
-                    result.Add(new EntityBase<int, string>()
-                    {
-                        Id = row.TypeId,
-                        Name = row.TypeName
-                    });
-                }
-
-                return result;
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+
+            return result;
         }
 
         public List<ProductBettype> GetProductBettype(GetBetTypeListCriteria criteria)
         {
             var productBettypes = new List<ProductBettype>();
-            try
+            var rawData = GetReportData<ProductBettypeEntity>(criteria);
+            var productGroups = rawData.GroupBy(x => x.ProductId).ToList();
+            var cachedProducts = GetProductFromCache();
+            foreach (var productGroup in productGroups)
             {
-                var rawData = GetReportData<ProductBettypeEntity>(criteria);
-                var productGroups = rawData.GroupBy(x => x.ProductId).ToList();
-                var cachedProducts = GetProductFromCache();
-                foreach (var productGroup in productGroups)
+                var productBettype = new ProductBettype();
+                productBettype.ProductName = cachedProducts[productGroup.Key];
+                foreach (var bettype in productGroup)
                 {
-                    var productBettype = new ProductBettype();
-                    productBettype.ProductName = cachedProducts[productGroup.Key];
-                    foreach (var bettype in productGroup)
+                    productBettype.Bettypes.Add(new Bettype()
                     {
-                        productBettype.Bettypes.Add(new Bettype()
-                        {
-                            BettypeId = Converter.ToInt(bettype.TypeId),
-                            BettypeName = Converter.ToString2(bettype.TypeName)
-                        });
-                    }
-
-                    productBettypes.Add(productBettype);
+                        BettypeId = Converter.ToInt(bettype.TypeId),
+                        BettypeName = Converter.ToString2(bettype.TypeName)
+                    });
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
+
+                productBettypes.Add(productBettype);
             }
 
             return productBettypes;
@@ -218,32 +178,24 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
         /// <returns>The currency list.</returns>
         public List<EntityBase<int, string>> GetCurrencyList()
         {
-            try
+            List<EntityBase<int, string>> result = new List<EntityBase<int, string>>();
+            result.Add(new EntityBase<int, string>()
             {
-                List<EntityBase<int, string>> result = new List<EntityBase<int, string>>();
+                Id = (int)CoreConstants.CurrencyContants.All,
+                Name = string.Format("{0} ({1})", Labels.All, Labels.RM)
+            });
+
+            var rawData = ReportService.ExchangeCurrencies;
+            foreach (var row in rawData)
+            {
                 result.Add(new EntityBase<int, string>()
                 {
-                    Id = (int)CoreConstants.CurrencyContants.All,
-                    Name = string.Format("{0} ({1})", Labels.All, Labels.RM)
+                    Id = Converter.ToInt(row.Key),
+                    Name = Converter.ToString2(row.Value)
                 });
-
-                var rawData = ReportService.ExchangeCurrencies;
-                foreach (var row in rawData)
-                {
-                    result.Add(new EntityBase<int, string>()
-                    {
-                        Id = Converter.ToInt(row.Key),
-                        Name = Converter.ToString2(row.Value)
-                    });
-                }
-
-                return result;
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+
+            return result;
         }
 
         /// <summary>
@@ -252,32 +204,24 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
         /// <returns>The league type list.</returns>
         public List<BaseModel> GetLeagueTypeList()
         {
-            try
+            List<BaseModel> result = new List<BaseModel>();
+            MAMonitorCollection collection = MAMonitorSection.Instance.LeagueTypes;
+            foreach (MAMonitorElement element in collection)
             {
-                List<BaseModel> result = new List<BaseModel>();
-                MAMonitorCollection collection = MAMonitorSection.Instance.LeagueTypes;
-                foreach (MAMonitorElement element in collection)
+                if (!element.IsActive)
                 {
-                    if (!element.IsActive)
-                    {
-                        continue;
-                    }
-
-                    result.Add(new BaseModel()
-                    {
-                        Id = Converter.ToInt(element.Id),
-                        Name = Converter.ToString2(element.Name),
-                        AliasName = Converter.ToString2(element.AliasName)
-                    });
+                    continue;
                 }
 
-                return result;
+                result.Add(new BaseModel()
+                {
+                    Id = Converter.ToInt(element.Id),
+                    Name = Converter.ToString2(element.Name),
+                    AliasName = Converter.ToString2(element.AliasName)
+                });
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+
+            return result;
         }
 
         /// <summary>
@@ -287,27 +231,19 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
         /// <returns>The league list.</returns>
         public List<EntityBase<int, string>> GetLeagueList(GetLeagueListCriteria criteria)
         {
-            try
+            List<EntityBase<int, string>> result = new List<EntityBase<int, string>>();
+            var rawData = GetReportData<League>(criteria);
+            foreach (var row in rawData)
             {
-                List<EntityBase<int, string>> result = new List<EntityBase<int, string>>();
-                var rawData = GetReportData<League>(criteria);
-                foreach (var row in rawData)
+                var league = new EntityBase<int, string>()
                 {
-                    var league = new EntityBase<int, string>()
-                    {
-                        Id = row.LeagueId,
-                        Name = row.LeagueName
-                    };
-                    result.Add(league);
-                }
+                    Id = row.LeagueId,
+                    Name = row.LeagueName
+                };
+                result.Add(league);
+            }
 
-                return result;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+            return result;
         }
 
         /// <summary>
@@ -317,50 +253,41 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
         /// <returns>The report.</returns>
         public WinLossInfo GetReport(GetReportCriteria criteria)
         {
-            try
+            WinLossInfo fullReport = new WinLossInfo();
+            WinLossInfo pagingReport = new WinLossInfo();
+
+            if (!criteria.IsPagingCallBack)
             {
-                WinLossInfo fullReport = new WinLossInfo();
-                WinLossInfo pagingReport = new WinLossInfo();
+                fullReport = GetAndConvertFullReport(criteria);
+                pagingReport = fullReport;
+                ClearAllPagingSessionKey();
 
-                if (!criteria.IsPagingCallBack)
+                if (criteria.ReportBy != 2)
                 {
-                    fullReport = GetAndConvertFullReport(criteria);
-                    pagingReport = fullReport;
-                    ClearAllPagingSessionKey();
-
-                    if (criteria.ReportBy != 2)
-                    {
-                        SessionManager.Set<WinLossInfo>(ReportSessionKey, fullReport);
-                    }
+                    SessionManager.Set<WinLossInfo>(ReportSessionKey, fullReport);
                 }
-                else
-                {
-                    fullReport = SessionManager.Get<WinLossInfo>(ReportSessionKey);
-                    if (criteria.ReportBy == 2)
-                    {
-                        fullReport = null;
-                    }
-                }
-
-                if (fullReport == null)
-                {
-                    fullReport = GetAndConvertFullReport(criteria);
-                    pagingReport = fullReport;
-                }
-
-                if (fullReport.ChildsInfo != null && fullReport.ChildsInfo.Count > 0 && !criteria.IsExportExcel)
-                {
-                    pagingReport = GetPagingReport(fullReport, pagingReport, criteria);
-                }
-
-                return pagingReport;
             }
-            catch (Exception ex)
+            else
             {
-                HandleException(ex);
-                SessionManager.Set<WinLossInfo>(ReportSessionKey, null);
-                throw;
+                fullReport = SessionManager.Get<WinLossInfo>(ReportSessionKey);
+                if (criteria.ReportBy == 2)
+                {
+                    fullReport = null;
+                }
             }
+
+            if (fullReport == null)
+            {
+                fullReport = GetAndConvertFullReport(criteria);
+                pagingReport = fullReport;
+            }
+
+            if (fullReport.ChildsInfo != null && fullReport.ChildsInfo.Count > 0 && !criteria.IsExportExcel)
+            {
+                pagingReport = GetPagingReport(fullReport, pagingReport, criteria);
+            }
+
+            return pagingReport;
         }
 
         /// <summary>

@@ -160,141 +160,133 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             MatchAnalysisView matchAnalysis = new MatchAnalysisView();
             var currencies = ReportService.ExchangeCurrencies;
 
-            try
+            var getMatchAnalysisCriteria = GetMatchAnalysisCriteria(criteria);
+            var data = GetReportData<dynamic>(getMatchAnalysisCriteria);
+            MatchAnalysis chargedCommission = null;
+            foreach (var d in data)
             {
-                var getMatchAnalysisCriteria = GetMatchAnalysisCriteria(criteria);
-                var data = GetReportData<dynamic>(getMatchAnalysisCriteria);
-                MatchAnalysis chargedCommission = null;
-                foreach (var d in data)
+                MatchAnalysis row = new MatchAnalysis()
                 {
-                    MatchAnalysis row = new MatchAnalysis()
-                    {
-                        SMAWL = ((double)d.SMAWinLost).Format(2),
-                        SMATO = ((double)d.SMATurnover).Format(2),
+                    SMAWL = ((double)d.SMAWinLost).Format(2),
+                    SMATO = ((double)d.SMATurnover).Format(2),
 
-                        HouseWL = ((double)d.HouseWinloss).Format(2),
-                        HouseTO = ((double)d.HouseTurnover).Format(2),
+                    HouseWL = ((double)d.HouseWinloss).Format(2),
+                    HouseTO = ((double)d.HouseTurnover).Format(2),
 
-                        MemberWL = ((double)d.MemberWinLost).Format(2),
-                        MemberTO = ((double)d.MemberTurnover).Format(2),
+                    MemberWL = ((double)d.MemberWinLost).Format(2),
+                    MemberTO = ((double)d.MemberTurnover).Format(2),
 
-                        BetCount = ((int)d.betcount).Format(0),
-                    };
-
-                    switch (criteria.Reporttype)
-                    {
-                        case ReportType.Currency:
-                            row.Currency = currencies[d.currency];
-                            row.Name = row.Currency;
-                            break;
-
-                        case ReportType.Bettype:
-                            row.Id = d.bettype;
-                            row.Name = CacheRef.GetBettype(d.bettype);
-                            break;
-
-                        case ReportType.Super:
-                            row.Currency = currencies[d.Currency];
-                            row.Id = d.srecommend;
-                            row.Name = d.username;
-                            break;
-
-                        case ReportType.Member:
-                            row.Currency = currencies[d.currency];
-                            row.Name = d.username;
-                            break;
-
-                        case ReportType.SuperViewOnMaster:
-                            row.Currency = currencies[d.Currency];
-                            row.Id = d.mrecommend;
-                            row.Name = d.username;
-                            break;
-
-                        case ReportType.MasterViewOnAgent:
-                            row.Currency = currencies[d.Currency];
-                            row.Id = d.recommend;
-                            row.Name = d.username;
-                            break;
-
-                        case ReportType.AgentViewOnMember:
-                            row.Currency = currencies[d.Currency];
-                            row.Id = d.custid;
-                            row.Name = d.username;
-                            break;
-                    }
-
-                    int chargedComissionBetType = 500;
-                    if (row.Id == chargedComissionBetType && criteria.Reporttype == ReportType.Bettype)
-                    {
-                        chargedCommission = row;
-                        chargedCommission.Name = "Charged Commission";
-                        chargedCommission.BetCount = "0";
-                    }
-                    else
-                    {
-                        matchAnalysis.Rows.Add(row);
-                    }
-                }
-
-                var total = new MatchAnalysis()
-                {
-                    SMAWL = data.Sum(s => (double)s.SMAWinLost).Format(2),
-                    SMATO = data.Sum(s => (double)s.SMATurnover).Format(2),
-
-                    HouseWL = data.Sum(s => (double)s.HouseWinloss).Format(2),
-                    HouseTO = data.Sum(s => (double)s.HouseTurnover).Format(2),
-
-                    MemberWL = data.Sum(s => (double)s.MemberWinLost).Format(2),
-                    MemberTO = data.Sum(s => (double)s.MemberTurnover).Format(2),
-
-                    BetCount = data.Sum(s => (int)s.betcount).Format(0),
-                    Name = Labels.Total
+                    BetCount = ((int)d.betcount).Format(0),
                 };
-                matchAnalysis.Total = new List<MatchAnalysis> { total };
 
-                if (chargedCommission != null)
+                switch (criteria.Reporttype)
                 {
-                    matchAnalysis.Total.Add(chargedCommission);
+                    case ReportType.Currency:
+                        row.Currency = currencies[d.currency];
+                        row.Name = row.Currency;
+                        break;
 
-                    var grandTotal = new MatchAnalysis
-                    {
-                        Name = "All Total",
-                        SMAWL = total.SMAWL,
-                        SMATO = total.SMATO,
-                        HouseWL = total.HouseWL,
-                        HouseTO = total.HouseTO,
-                        MemberWL = total.MemberWL,
-                        MemberTO = total.MemberTO,
-                        BetCount = total.BetCount,
-                    };
+                    case ReportType.Bettype:
+                        row.Id = d.bettype;
+                        row.Name = CacheRef.GetBettype(d.bettype);
+                        break;
 
-                    matchAnalysis.Total.Add(grandTotal);
-                    matchAnalysis.Total.First().SMAWL = Converter.ToString2(Converter.ToDecimal(total.SMAWL)
-                                   - Converter.ToDecimal(chargedCommission.SMAWL));
-                    matchAnalysis.Total.First().SMATO = Converter.ToString2(Converter.ToDecimal(total.SMATO)
-                                   - Converter.ToDecimal(chargedCommission.SMATO));
+                    case ReportType.Super:
+                        row.Currency = currencies[d.Currency];
+                        row.Id = d.srecommend;
+                        row.Name = d.username;
+                        break;
 
-                    matchAnalysis.Total.First().HouseWL = Converter.ToString2(Converter.ToDecimal(total.HouseWL)
-                                   - Converter.ToDecimal(chargedCommission.HouseWL));
-                    matchAnalysis.Total.First().HouseTO = Converter.ToString2(Converter.ToDecimal(total.HouseTO)
-                                   - Converter.ToDecimal(chargedCommission.HouseTO));
+                    case ReportType.Member:
+                        row.Currency = currencies[d.currency];
+                        row.Name = d.username;
+                        break;
 
-                    matchAnalysis.Total.First().MemberWL = Converter.ToString2(Converter.ToDecimal(total.MemberWL)
-                                    - Converter.ToDecimal(chargedCommission.MemberWL));
-                    matchAnalysis.Total.First().MemberTO = Converter.ToString2(Converter.ToDecimal(total.MemberTO)
-                                    - Converter.ToDecimal(chargedCommission.MemberTO));
+                    case ReportType.SuperViewOnMaster:
+                        row.Currency = currencies[d.Currency];
+                        row.Id = d.mrecommend;
+                        row.Name = d.username;
+                        break;
 
-                    matchAnalysis.Total.First().BetCount = Converter.ToString2(Converter.ToDecimal(total.BetCount)
-                                    - Converter.ToDecimal(chargedCommission.BetCount));
+                    case ReportType.MasterViewOnAgent:
+                        row.Currency = currencies[d.Currency];
+                        row.Id = d.recommend;
+                        row.Name = d.username;
+                        break;
+
+                    case ReportType.AgentViewOnMember:
+                        row.Currency = currencies[d.Currency];
+                        row.Id = d.custid;
+                        row.Name = d.username;
+                        break;
                 }
 
-                SessionManager.Set(SpecialConstants.MatchAnalysisSessionKey + GetReportTypeName(criteria.Reporttype), matchAnalysis);
+                int chargedComissionBetType = 500;
+                if (row.Id == chargedComissionBetType && criteria.Reporttype == ReportType.Bettype)
+                {
+                    chargedCommission = row;
+                    chargedCommission.Name = "Charged Commission";
+                    chargedCommission.BetCount = "0";
+                }
+                else
+                {
+                    matchAnalysis.Rows.Add(row);
+                }
             }
-            catch (Exception ex)
+
+            var total = new MatchAnalysis()
             {
-                HandleException(ex);
-                throw;
+                SMAWL = data.Sum(s => (double)s.SMAWinLost).Format(2),
+                SMATO = data.Sum(s => (double)s.SMATurnover).Format(2),
+
+                HouseWL = data.Sum(s => (double)s.HouseWinloss).Format(2),
+                HouseTO = data.Sum(s => (double)s.HouseTurnover).Format(2),
+
+                MemberWL = data.Sum(s => (double)s.MemberWinLost).Format(2),
+                MemberTO = data.Sum(s => (double)s.MemberTurnover).Format(2),
+
+                BetCount = data.Sum(s => (int)s.betcount).Format(0),
+                Name = Labels.Total
+            };
+            matchAnalysis.Total = new List<MatchAnalysis> { total };
+
+            if (chargedCommission != null)
+            {
+                matchAnalysis.Total.Add(chargedCommission);
+
+                var grandTotal = new MatchAnalysis
+                {
+                    Name = "All Total",
+                    SMAWL = total.SMAWL,
+                    SMATO = total.SMATO,
+                    HouseWL = total.HouseWL,
+                    HouseTO = total.HouseTO,
+                    MemberWL = total.MemberWL,
+                    MemberTO = total.MemberTO,
+                    BetCount = total.BetCount,
+                };
+
+                matchAnalysis.Total.Add(grandTotal);
+                matchAnalysis.Total.First().SMAWL = Converter.ToString2(Converter.ToDecimal(total.SMAWL)
+                               - Converter.ToDecimal(chargedCommission.SMAWL));
+                matchAnalysis.Total.First().SMATO = Converter.ToString2(Converter.ToDecimal(total.SMATO)
+                               - Converter.ToDecimal(chargedCommission.SMATO));
+
+                matchAnalysis.Total.First().HouseWL = Converter.ToString2(Converter.ToDecimal(total.HouseWL)
+                               - Converter.ToDecimal(chargedCommission.HouseWL));
+                matchAnalysis.Total.First().HouseTO = Converter.ToString2(Converter.ToDecimal(total.HouseTO)
+                               - Converter.ToDecimal(chargedCommission.HouseTO));
+
+                matchAnalysis.Total.First().MemberWL = Converter.ToString2(Converter.ToDecimal(total.MemberWL)
+                                - Converter.ToDecimal(chargedCommission.MemberWL));
+                matchAnalysis.Total.First().MemberTO = Converter.ToString2(Converter.ToDecimal(total.MemberTO)
+                                - Converter.ToDecimal(chargedCommission.MemberTO));
+
+                matchAnalysis.Total.First().BetCount = Converter.ToString2(Converter.ToDecimal(total.BetCount)
+                                - Converter.ToDecimal(chargedCommission.BetCount));
             }
+
+            SessionManager.Set(SpecialConstants.MatchAnalysisSessionKey + GetReportTypeName(criteria.Reporttype), matchAnalysis);
 
             return matchAnalysis;
         }

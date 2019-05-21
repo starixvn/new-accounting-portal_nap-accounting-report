@@ -68,37 +68,29 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <returns>The currency list.</returns>
         public List<EntityBase<int, string>> GetCurrencyList()
         {
-            try
+            var result = new List<EntityBase<int, string>>();
+            var currencyList = ReportService.ExchangeCurrencies;
+            if (currencyList == null)
             {
-                var result = new List<EntityBase<int, string>>();
-                var currencyList = ReportService.ExchangeCurrencies;
-                if (currencyList == null)
-                {
-                    return result;
-                }
-
-                foreach (var row in currencyList)
-                {
-                    if (ReportService.IsExcludeCurrency(row.Value))
-                    {
-                        continue;
-                    }
-
-                    result.Add(new EntityBase<int, string>()
-                    {
-                        Id = row.Key,
-                        Name = row.Value
-                    });
-                }
-
-                result = result.OrderBy(info => info.Name).ToList();
                 return result;
             }
-            catch (Exception ex)
+
+            foreach (var row in currencyList)
             {
-                HandleException(ex);
-                throw;
+                if (ReportService.IsExcludeCurrency(row.Value))
+                {
+                    continue;
+                }
+
+                result.Add(new EntityBase<int, string>()
+                {
+                    Id = row.Key,
+                    Name = row.Value
+                });
             }
+
+            result = result.OrderBy(info => info.Name).ToList();
+            return result;
         }
     }
 }

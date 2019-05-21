@@ -31,30 +31,22 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWin
         {
             var result = new NumberGameMonthlyWinLoss();
 
-            try
+            var rawData = _numberGameMonthlyWinLossRepository.GetNumberGameMonthlyWinLoss(getNumberGameMonthlyWinLossCriteria);
+
+            if (rawData == null)
             {
-                var rawData = _numberGameMonthlyWinLossRepository.GetNumberGameMonthlyWinLoss(getNumberGameMonthlyWinLossCriteria);
-
-                if (rawData == null)
-                {
-                    return result;
-                }
-
-                result.ReportRows = rawData;
-
-                foreach (var row in result.ReportRows)
-                {
-                    result.CalculateTotal(row);
-                }
-
-                SessionManager.Set<NumberGameMonthlyWinLoss>(_numberGameMonthlyWinLossReportSessionKey, result);
                 return result;
             }
-            catch (Exception ex)
+
+            result.ReportRows = rawData;
+
+            foreach (var row in result.ReportRows)
             {
-                HandleException(ex);
-                throw;
+                result.CalculateTotal(row);
             }
+
+            SessionManager.Set<NumberGameMonthlyWinLoss>(_numberGameMonthlyWinLossReportSessionKey, result);
+            return result;
         }
     }
 }

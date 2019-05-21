@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.WinLoss.Services.Implement.AllCustomerTurnOver
 {
-    using System;
     using System.Drawing;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
@@ -45,51 +44,45 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.AllCustomerTurnOver
         /// <param name="criteria">The criteria.</param>
         public void ExportReport(GetAllCustomerTurnOverCriteria criteria)
         {
-            try
+            var report = SessionManager.Get<CustomerTurnoverBySite>(this._allCustomerTurnOverSessionKey);
+            if (report == null)
             {
-                var report = SessionManager.Get<CustomerTurnoverBySite>(this._allCustomerTurnOverSessionKey);
-                if (report == null)
-                {
-                    report = this._getReportService.GetReport(criteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-
-                int startRow = 0;
-                int startColumn = 0;
-                int currentRow = startRow;
-                int currentIndex = 0;
-                var numberOfSites = report.Site.Rows.Count;
-
-                if (report.Site != null &&
-                    report.Site.Rows != null && numberOfSites > 0)
-                {
-                    for (int i = 0; i < numberOfSites; i++)
-                    {
-                        var siteInfomation = report.Site.Rows[i];
-                        this.ExportReportSite(ref worksheets, startRow, startColumn, ref currentRow, criteria, report, siteInfomation, ref currentIndex);
-                    }
-
-                    ExcelWorksheet worksheet = worksheets[worksheets.Count - 1];
-                    this.ExportRow(ref worksheet, startRow, startColumn, ref currentRow, report.Site, null, WinLossContants.ReportRowType.GrandTotal, 0);
-                }
-                else
-                {
-                    string sheetName = WinLossResources.AllCustomerTurnOver_SheetName;
-                    ExcelWorksheet worksheet = worksheets.Add(sheetName);
-                    worksheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 2);
-                }
-
-                excelFile.ReponseStream(string.Format(
-                    WinLossResources.AllCustomerTurnOver_ReportName,
-                    criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
-                    criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_')));
+                report = this._getReportService.GetReport(criteria);
             }
-            catch (Exception ex)
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+
+            int startRow = 0;
+            int startColumn = 0;
+            int currentRow = startRow;
+            int currentIndex = 0;
+            var numberOfSites = report.Site.Rows.Count;
+
+            if (report.Site != null &&
+                report.Site.Rows != null && numberOfSites > 0)
             {
-                this.HandleException(ex);
+                for (int i = 0; i < numberOfSites; i++)
+                {
+                    var siteInfomation = report.Site.Rows[i];
+                    this.ExportReportSite(ref worksheets, startRow, startColumn, ref currentRow, criteria, report, siteInfomation, ref currentIndex);
+                }
+
+                ExcelWorksheet worksheet = worksheets[worksheets.Count - 1];
+                this.ExportRow(ref worksheet, startRow, startColumn, ref currentRow, report.Site, null, WinLossContants.ReportRowType.GrandTotal, 0);
             }
+            else
+            {
+                string sheetName = WinLossResources.AllCustomerTurnOver_SheetName;
+                ExcelWorksheet worksheet = worksheets.Add(sheetName);
+                worksheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 2);
+            }
+
+            excelFile.ReponseStream(string.Format(
+                WinLossResources.AllCustomerTurnOver_ReportName,
+                criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
+                criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_')));
+
         }
 
         /// <summary>
@@ -113,52 +106,45 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.AllCustomerTurnOver
             CustomerTurnoverBySiteDetail siteInformation,
             ref int currentIndex)
         {
-            try
+            if (siteInformation != null
+                    && siteInformation.Rows != null
+                    && siteInformation.Rows.Count > 0)
             {
-                if (siteInformation != null
-                        && siteInformation.Rows != null
-                        && siteInformation.Rows.Count > 0)
+                ExcelWorksheet worksheet = worksheets.Count > 0 ? worksheets[worksheets.Count - 1] : null;
+                if (worksheet != null)
                 {
-                    ExcelWorksheet worksheet = worksheets.Count > 0 ? worksheets[worksheets.Count - 1] : null;
-                    if (worksheet != null)
+                    this.ExportRow(ref worksheet, startRow, startColumn, ref currentRow, siteInformation, siteInformation.Name, WinLossContants.ReportRowType.HeaderSite, 0);
+                }
+
+                var numberOfUsersInSite = siteInformation.Rows.Count;
+
+                for (int i = 0; i < numberOfUsersInSite; i++)
+                {
+                    if (currentIndex % MaxRowsData == 0)
                     {
+                        if (currentIndex != 0)
+                        {
+                            this.ExportRow(ref worksheet, startRow, startColumn, ref currentRow, report.Site, null, WinLossContants.ReportRowType.GrandTotal, 0);
+                        }
+
+                        string sheetName = "Sheet " + ((currentIndex / MaxRowsData) + 1);
+                        worksheet = worksheets.Add(sheetName);
+
+                        startRow = 0;
+                        startColumn = 0;
+                        currentRow = startRow;
+
+                        this.ExportReportHeader(ref worksheet, startRow, startColumn, ref currentRow, criteria, report.Site);
                         this.ExportRow(ref worksheet, startRow, startColumn, ref currentRow, siteInformation, siteInformation.Name, WinLossContants.ReportRowType.HeaderSite, 0);
                     }
 
-                    var numberOfUsersInSite = siteInformation.Rows.Count;
-
-                    for (int i = 0; i < numberOfUsersInSite; i++)
-                    {
-                        if (currentIndex % MaxRowsData == 0)
-                        {
-                            if (currentIndex != 0)
-                            {
-                                this.ExportRow(ref worksheet, startRow, startColumn, ref currentRow, report.Site, null, WinLossContants.ReportRowType.GrandTotal, 0);
-                            }
-
-                            string sheetName = "Sheet " + ((currentIndex / MaxRowsData) + 1);
-                            worksheet = worksheets.Add(sheetName);
-
-                            startRow = 0;
-                            startColumn = 0;
-                            currentRow = startRow;
-
-                            this.ExportReportHeader(ref worksheet, startRow, startColumn, ref currentRow, criteria, report.Site);
-                            this.ExportRow(ref worksheet, startRow, startColumn, ref currentRow, siteInformation, siteInformation.Name, WinLossContants.ReportRowType.HeaderSite, 0);
-                        }
-
-                        var userInSite = siteInformation.Rows[i];
-                        currentIndex++;
-                        var rowType = i % 2 == 0 ? WinLossContants.ReportRowType.EvenRow : WinLossContants.ReportRowType.OddRow;
-                        this.ExportRow(ref worksheet, startRow, startColumn, ref currentRow, userInSite, null, rowType, currentIndex);
-                    }
-
-                    this.ExportRow(ref worksheet, startRow, startColumn, ref currentRow, siteInformation, siteInformation.Name, WinLossContants.ReportRowType.Total, 0);
+                    var userInSite = siteInformation.Rows[i];
+                    currentIndex++;
+                    var rowType = i % 2 == 0 ? WinLossContants.ReportRowType.EvenRow : WinLossContants.ReportRowType.OddRow;
+                    this.ExportRow(ref worksheet, startRow, startColumn, ref currentRow, userInSite, null, rowType, currentIndex);
                 }
-            }
-            catch (Exception ex)
-            {
-                this.HandleException(ex);
+
+                this.ExportRow(ref worksheet, startRow, startColumn, ref currentRow, siteInformation, siteInformation.Name, WinLossContants.ReportRowType.Total, 0);
             }
         }
 

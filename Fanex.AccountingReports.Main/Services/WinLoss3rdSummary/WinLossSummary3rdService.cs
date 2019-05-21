@@ -55,74 +55,66 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             WinLoss3rdInfo report = null;
             SportTypeWinLossInfo sportInfo = null;
             WinLossInfo winloss = null;
-            try
+            var rawData = GetReportData<dynamic>(criteria).ToList();
+            bool isBeforeSingleWalletCasinoLaunchDate = DateTime.Compare(criteria.Fromdate, AppSettings.CasinoSingleWalletLaunchDate) < 0;
+            report = new WinLoss3rdInfo();
+
+            Dictionary<int, object> sportTypeHash = new Dictionary<int, object>();
+            Dictionary<int, object> betTypeHash = new Dictionary<int, object>();
+            rawData.ForEach(data =>
             {
-                var rawData = GetReportData<dynamic>(criteria).ToList();
-                bool isBeforeSingleWalletCasinoLaunchDate = DateTime.Compare(criteria.Fromdate, AppSettings.CasinoSingleWalletLaunchDate) < 0;
-                report = new WinLoss3rdInfo();
-
-                Dictionary<int, object> sportTypeHash = new Dictionary<int, object>();
-                Dictionary<int, object> betTypeHash = new Dictionary<int, object>();
-                rawData.ForEach(data =>
+                int sportId, betId;
+                sportId = Converter.ToInt(data.sporttype);
+                if (!sportTypeHash.ContainsKey(sportId))
                 {
-                    int sportId, betId;
-                    sportId = Converter.ToInt(data.sporttype);
-                    if (!sportTypeHash.ContainsKey(sportId))
-                    {
-                        sportTypeHash.Add(sportId, sportId);
-                    }
-
-                    betId = Converter.ToInt(data.bettype);
-                    if (!betTypeHash.ContainsKey(betId))
-                    {
-                        betTypeHash.Add(betId, betId);
-                    }
-                });
-
-                CacheRef.SaveCacheRefResponse(sportTypeHash.Values.ToList(), CacheRef.GetSportName, ref this._sportTypeNameCache);
-                if (_sportTypeNameCache.ContainsKey(_casinoSportType))
-                {
-                    _sportTypeNameCache[_casinoSportType] = Labels.MBC_RNG_Casino;
+                    sportTypeHash.Add(sportId, sportId);
                 }
 
-                CacheRef.SaveCacheRefResponse(betTypeHash.Values.ToList(), CacheRef.GetBettype, ref this._betTypeNameCache);
-
-                var sportTypeGroups = rawData.GroupBy(data => data.sporttype);
-                var sportsNG2Groups = new List<IGrouping<dynamic, dynamic>>();
-
-                foreach (var sportTypeGroup in sportTypeGroups)
+                betId = Converter.ToInt(data.bettype);
+                if (!betTypeHash.ContainsKey(betId))
                 {
-                    int sportId = Converter.ToInt(sportTypeGroup.Key);
-                    sportInfo = new SportTypeWinLossInfo
-                    {
-                        Id = sportId,
-                        Name = this.GetSportName(sportId)
-                    };
-
-                    if (sportInfo.Id >= 213 && sportInfo.Id <= 218)
-                    {
-                        sportsNG2Groups.Add(sportTypeGroup);
-                        continue;
-                    }
-
-                    GenerateSport(report, sportTypeGroup, isBeforeSingleWalletCasinoLaunchDate, winloss);
+                    betTypeHash.Add(betId, betId);
                 }
+            });
 
-                if (sportsNG2Groups.Count > 0)
-                {
-                    CalculateNG2Product(report, isBeforeSingleWalletCasinoLaunchDate, sportsNG2Groups);
-                }
-
-                this.CalculateHedgeTotalBySport(report);
-                this.CalculateNormalTotalBySport(report);
-
-                SessionManager.Set<WinLoss3rdInfo>(MainConstants.WinLossSummary3rdReportSessionKey, report);
-            }
-            catch (Exception ex)
+            CacheRef.SaveCacheRefResponse(sportTypeHash.Values.ToList(), CacheRef.GetSportName, ref this._sportTypeNameCache);
+            if (_sportTypeNameCache.ContainsKey(_casinoSportType))
             {
-                HandleException(ex);
-                throw;
+                _sportTypeNameCache[_casinoSportType] = Labels.MBC_RNG_Casino;
             }
+
+            CacheRef.SaveCacheRefResponse(betTypeHash.Values.ToList(), CacheRef.GetBettype, ref this._betTypeNameCache);
+
+            var sportTypeGroups = rawData.GroupBy(data => data.sporttype);
+            var sportsNG2Groups = new List<IGrouping<dynamic, dynamic>>();
+
+            foreach (var sportTypeGroup in sportTypeGroups)
+            {
+                int sportId = Converter.ToInt(sportTypeGroup.Key);
+                sportInfo = new SportTypeWinLossInfo
+                {
+                    Id = sportId,
+                    Name = this.GetSportName(sportId)
+                };
+
+                if (sportInfo.Id >= 213 && sportInfo.Id <= 218)
+                {
+                    sportsNG2Groups.Add(sportTypeGroup);
+                    continue;
+                }
+
+                GenerateSport(report, sportTypeGroup, isBeforeSingleWalletCasinoLaunchDate, winloss);
+            }
+
+            if (sportsNG2Groups.Count > 0)
+            {
+                CalculateNG2Product(report, isBeforeSingleWalletCasinoLaunchDate, sportsNG2Groups);
+            }
+
+            this.CalculateHedgeTotalBySport(report);
+            this.CalculateNormalTotalBySport(report);
+
+            SessionManager.Set<WinLoss3rdInfo>(MainConstants.WinLossSummary3rdReportSessionKey, report);
 
             return report;
         }
@@ -535,15 +527,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
         /// <param name="criteria">The criteria.</param>
         public void RecalculateReport(CriteriaBase criteria)
         {
-            try
-            {
-                this._reportRepository.RecalculateWinLoss(criteria);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+            this._reportRepository.RecalculateWinLoss(criteria);
         }
 
         /// <summary>
@@ -563,140 +547,132 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             }
 
             MatchGame3rdInfo report = null;
-            try
+            var rawData = this.GetMatchGameDetails(criteria).ToList();
+            if (rawData.Count > 0)
             {
-                var rawData = this.GetMatchGameDetails(criteria).ToList();
-                if (rawData.Count > 0)
+                report = new MatchGame3rdInfo();
+
+                Dictionary<int, object> betTypeHash = new Dictionary<int, object>();
+                Dictionary<int, object> leagueHash = new Dictionary<int, object>();
+                Dictionary<int, object> teamHash = new Dictionary<int, object>();
+                rawData.ForEach(data =>
                 {
-                    report = new MatchGame3rdInfo();
-
-                    Dictionary<int, object> betTypeHash = new Dictionary<int, object>();
-                    Dictionary<int, object> leagueHash = new Dictionary<int, object>();
-                    Dictionary<int, object> teamHash = new Dictionary<int, object>();
-                    rawData.ForEach(data =>
+                    int betId, leagueId, homeId, awayId;
+                    betId = Converter.ToInt(data.bettype);
+                    if (!betTypeHash.ContainsKey(betId))
                     {
-                        int betId, leagueId, homeId, awayId;
-                        betId = Converter.ToInt(data.bettype);
-                        if (!betTypeHash.ContainsKey(betId))
-                        {
-                            betTypeHash.Add(betId, betId);
-                        }
-
-                        leagueId = Converter.ToInt(data.leagueid);
-                        if (!leagueHash.ContainsKey(leagueId))
-                        {
-                            leagueHash.Add(leagueId, leagueId);
-                        }
-
-                        if (type == SportTypeWinLoss.SportBook || type == SportTypeWinLoss.NumberGame|| type == SportTypeWinLoss.VirtualSports)
-                        {
-                            homeId = Converter.ToInt(data.HomeId);
-                            if (!teamHash.ContainsKey(homeId))
-                            {
-                                teamHash.Add(homeId, homeId);
-                            }
-
-                            awayId = Converter.ToInt(data.AwayId);
-                            if (!teamHash.ContainsKey(awayId))
-                            {
-                                teamHash.Add(awayId, awayId);
-                            }
-                        }
-                    });
-
-                    // get name of BetType
-                    CacheRef.SaveCacheRefResponse(betTypeHash.Values.ToList(), CacheRef.GetBettype, ref this._betTypeNameCache);
-
-                    // get name of League
-                    CacheRef.SaveCacheRefResponse(leagueHash.Values.ToList(), CacheRef.GetLeagueName, ref this._leagueNameCache);
-
-                    // get team name
-                    if (type == SportTypeWinLoss.SportBook || type == SportTypeWinLoss.NumberGame || type == SportTypeWinLoss.VirtualSports)
-                    {
-                        CacheRef.SaveCacheRefResponse(teamHash.Values.ToList(), CacheRef.GetTeamName, ref this._teamNameCache);
+                        betTypeHash.Add(betId, betId);
                     }
 
-                    // process data
-                    bool liveIndicator;
-                    int betTypeId, leagueid;
-                    MatchGameBetTypeInfo betSummary = null;
-                    MatchGameLeagueInfo leagueSummary = null;
-                    MatchGameWinLossInfo matchGameWinLoss = null;
-
-                    var betTypeGroups = rawData.GroupBy(data => new { data.bettype, data.liveindicator });
-                    foreach (var betTypeGroup in betTypeGroups)
+                    leagueId = Converter.ToInt(data.leagueid);
+                    if (!leagueHash.ContainsKey(leagueId))
                     {
-                        betTypeId = Converter.ToInt(betTypeGroup.Key.bettype);
-                        liveIndicator = Converter.ToBool(betTypeGroup.Key.liveindicator);
+                        leagueHash.Add(leagueId, leagueId);
+                    }
 
-                        betSummary = new MatchGameBetTypeInfo
+                    if (type == SportTypeWinLoss.SportBook || type == SportTypeWinLoss.NumberGame || type == SportTypeWinLoss.VirtualSports)
+                    {
+                        homeId = Converter.ToInt(data.HomeId);
+                        if (!teamHash.ContainsKey(homeId))
+                        {
+                            teamHash.Add(homeId, homeId);
+                        }
+
+                        awayId = Converter.ToInt(data.AwayId);
+                        if (!teamHash.ContainsKey(awayId))
+                        {
+                            teamHash.Add(awayId, awayId);
+                        }
+                    }
+                });
+
+                // get name of BetType
+                CacheRef.SaveCacheRefResponse(betTypeHash.Values.ToList(), CacheRef.GetBettype, ref this._betTypeNameCache);
+
+                // get name of League
+                CacheRef.SaveCacheRefResponse(leagueHash.Values.ToList(), CacheRef.GetLeagueName, ref this._leagueNameCache);
+
+                // get team name
+                if (type == SportTypeWinLoss.SportBook || type == SportTypeWinLoss.NumberGame || type == SportTypeWinLoss.VirtualSports)
+                {
+                    CacheRef.SaveCacheRefResponse(teamHash.Values.ToList(), CacheRef.GetTeamName, ref this._teamNameCache);
+                }
+
+                // process data
+                bool liveIndicator;
+                int betTypeId, leagueid;
+                MatchGameBetTypeInfo betSummary = null;
+                MatchGameLeagueInfo leagueSummary = null;
+                MatchGameWinLossInfo matchGameWinLoss = null;
+
+                var betTypeGroups = rawData.GroupBy(data => new { data.bettype, data.liveindicator });
+                foreach (var betTypeGroup in betTypeGroups)
+                {
+                    betTypeId = Converter.ToInt(betTypeGroup.Key.bettype);
+                    liveIndicator = Converter.ToBool(betTypeGroup.Key.liveindicator);
+
+                    betSummary = new MatchGameBetTypeInfo
+                    {
+                        Key = new EntityBase<int, string>
+                        {
+                            Id = betTypeId,
+                            Name = this.GetBetType(betTypeId)
+                        },
+                        LiveIndicator = liveIndicator ? 1 : 0
+                    };
+
+                    // 2. Group by league
+                    var leagueGroups = betTypeId == BetTypeConstants.BullfightingBetType ?
+                        betTypeGroup.GroupBy(data => new { data.leagueid, data.leaguecode }) :
+                        betTypeGroup.GroupBy(data => data.leagueid);
+                    foreach (var leagueGroup in leagueGroups)
+                    {
+                        leagueid = betTypeId == BetTypeConstants.BullfightingBetType ?
+                            Converter.ToInt(leagueGroup.Key.leagueid) :
+                            Converter.ToInt(leagueGroup.Key);
+                        var leagueName = betTypeId == BetTypeConstants.BullfightingBetType ?
+                            this.GetBullfightingLeagueName(leagueid, leagueGroup.Key.leaguecode) :
+                            this.GetLeagueName(leagueid);
+
+                        leagueSummary = new MatchGameLeagueInfo
                         {
                             Key = new EntityBase<int, string>
                             {
-                                Id = betTypeId,
-                                Name = this.GetBetType(betTypeId)
-                            },
-                            LiveIndicator = liveIndicator ? 1 : 0
+                                Id = leagueid,
+                                Name = leagueName
+                            }
                         };
 
-                        // 2. Group by league
-                        var leagueGroups = betTypeId == BetTypeConstants.BullfightingBetType ?
-                            betTypeGroup.GroupBy(data => new { data.leagueid, data.leaguecode }) :
-                            betTypeGroup.GroupBy(data => data.leagueid);
-                        foreach (var leagueGroup in leagueGroups)
+                        foreach (dynamic item in leagueGroup)
                         {
-                            leagueid = betTypeId == BetTypeConstants.BullfightingBetType ?
-                                Converter.ToInt(leagueGroup.Key.leagueid) :
-                                Converter.ToInt(leagueGroup.Key);
-                            var leagueName = betTypeId == BetTypeConstants.BullfightingBetType ?
-                                this.GetBullfightingLeagueName(leagueid, leagueGroup.Key.leaguecode) :
-                                this.GetLeagueName(leagueid);
+                            matchGameWinLoss = this.BuildWinLossDetail(item, type);
 
-                            leagueSummary = new MatchGameLeagueInfo
-                            {
-                                Key = new EntityBase<int, string>
-                                {
-                                    Id = leagueid,
-                                    Name = leagueName
-                                }
-                            };
+                            // Total for each League
+                            leagueSummary.CalculateTotal(matchGameWinLoss.WinLossDetail);
 
-                            foreach (dynamic item in leagueGroup)
-                            {
-                                matchGameWinLoss = this.BuildWinLossDetail(item, type);
+                            leagueSummary.MatchGameWinLosses.Add(matchGameWinLoss);
 
-                                // Total for each League
-                                leagueSummary.CalculateTotal(matchGameWinLoss.WinLossDetail);
+                            // Total for each BetType
+                            betSummary.CalculateTotal(matchGameWinLoss.WinLossDetail);
 
-                                leagueSummary.MatchGameWinLosses.Add(matchGameWinLoss);
-
-                                // Total for each BetType
-                                betSummary.CalculateTotal(matchGameWinLoss.WinLossDetail);
-
-                                // Grand Total
-                                report.CalculateTotal(matchGameWinLoss.WinLossDetail);
-                            }
-
-                            betSummary.MatchGameLeagues.Add(leagueSummary);
+                            // Grand Total
+                            report.CalculateTotal(matchGameWinLoss.WinLossDetail);
                         }
 
-                        report.MatchGameBetTypes.Add(betSummary);
+                        betSummary.MatchGameLeagues.Add(leagueSummary);
                     }
 
-                    // Set type of details
-                    report.Type = type;
-                    if (criteria.SportType == SportContants.NumberGame)
-                    {
-                        report.Type = SportTypeWinLoss.NumberGame;
-                    }
-
-                    SessionManager.Set<MatchGame3rdInfo>(MainConstants.WinLossSummary3rdReportDetailSessionKEy, report);
+                    report.MatchGameBetTypes.Add(betSummary);
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
+
+                // Set type of details
+                report.Type = type;
+                if (criteria.SportType == SportContants.NumberGame)
+                {
+                    report.Type = SportTypeWinLoss.NumberGame;
+                }
+
+                SessionManager.Set<MatchGame3rdInfo>(MainConstants.WinLossSummary3rdReportDetailSessionKEy, report);
             }
 
             return report;

@@ -42,27 +42,19 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
         /// <returns>The list InstallAmount.</returns>
         public List<InstallAmount> GetInstallmentAmountReport(GetInstallAmountCriteria criteria)
         {
-            try
+            var report = new List<InstallAmount>();
+
+            if (!criteria.IsValid())
             {
-                var report = new List<InstallAmount>();
-
-                if (!criteria.IsValid())
-                {
-                    return report;
-                }
-
-                report = this.ConvertDataReport(criteria, report);
-
-                var sessionKey = this._installmentAmountSessionKey + "." + criteria.RoleID;
-                SessionManager.Set<List<InstallAmount>>(sessionKey, report);
-
                 return report;
             }
-            catch (Exception ex)
-            {
-                this.HandleException(ex);
-                throw;
-            }
+
+            report = this.ConvertDataReport(criteria, report);
+
+            var sessionKey = this._installmentAmountSessionKey + "." + criteria.RoleID;
+            SessionManager.Set<List<InstallAmount>>(sessionKey, report);
+
+            return report;
         }
 
         /// <summary>

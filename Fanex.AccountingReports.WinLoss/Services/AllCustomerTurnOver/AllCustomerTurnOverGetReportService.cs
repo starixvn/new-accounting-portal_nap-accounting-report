@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.WinLoss.Services.Implement
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
@@ -37,42 +36,34 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
         /// <returns>The report.</returns>
         public CustomerTurnoverBySite GetReport(GetAllCustomerTurnOverCriteria criteria)
         {
-            try
+            CustomerTurnoverBySite fullReport = null;
+            CustomerTurnoverBySite pagingReport = null;
+
+            var startIndex = criteria.StartIndex;
+            var usersPerPage = criteria.UsersPerPage;
+
+            if (!criteria.IsPagingCallBack)
             {
-                CustomerTurnoverBySite fullReport = null;
-                CustomerTurnoverBySite pagingReport = null;
-
-                var startIndex = criteria.StartIndex;
-                var usersPerPage = criteria.UsersPerPage;
-
-                if (!criteria.IsPagingCallBack)
-                {
-                    fullReport = this.ConvertReportData(criteria);
-                    this.ClearAllPagingSessionKey();
-                    SessionManager.Set<CustomerTurnoverBySite>(this._allCustomerTurnOverSessionKey, fullReport);
-                }
-                else
-                {
-                    fullReport = SessionManager.Get<CustomerTurnoverBySite>(this._allCustomerTurnOverSessionKey);
-                }
-
-                if (fullReport != null && fullReport.Site != null &&
-                        fullReport.Site.Rows != null && fullReport.Site.Rows.Count > 0)
-                {
-                    string pagingSessionKey = PagingSessionKeyConstant + AppSession.CurrentUser.Username
-                            + "." + startIndex + "." + usersPerPage
-                            + "." + criteria.FromDate + "." + criteria.ToDate
-                            + "." + criteria.Site + "." + criteria.From;
-                    pagingReport = this.GetPagingReport(fullReport, startIndex, usersPerPage, criteria.IsPagingCallBack, pagingSessionKey);
-                }
-
-                return pagingReport;
+                fullReport = this.ConvertReportData(criteria);
+                this.ClearAllPagingSessionKey();
+                SessionManager.Set<CustomerTurnoverBySite>(this._allCustomerTurnOverSessionKey, fullReport);
             }
-            catch (Exception ex)
+            else
             {
-                this.HandleException(ex);
-                throw;
+                fullReport = SessionManager.Get<CustomerTurnoverBySite>(this._allCustomerTurnOverSessionKey);
             }
+
+            if (fullReport != null && fullReport.Site != null &&
+                    fullReport.Site.Rows != null && fullReport.Site.Rows.Count > 0)
+            {
+                string pagingSessionKey = PagingSessionKeyConstant + AppSession.CurrentUser.Username
+                        + "." + startIndex + "." + usersPerPage
+                        + "." + criteria.FromDate + "." + criteria.ToDate
+                        + "." + criteria.Site + "." + criteria.From;
+                pagingReport = this.GetPagingReport(fullReport, startIndex, usersPerPage, criteria.IsPagingCallBack, pagingSessionKey);
+            }
+
+            return pagingReport;
         }
 
         /// <summary>

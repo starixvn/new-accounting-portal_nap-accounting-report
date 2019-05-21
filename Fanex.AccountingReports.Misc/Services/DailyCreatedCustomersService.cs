@@ -79,45 +79,37 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// <returns>The report.</returns>
         public SummaryInformation GetReport(GetDailyCreatedCustomersCriteria criteria)
         {
-            try
+            var report = new SummaryInformation
             {
-                var report = new SummaryInformation
-                {
-                    CreatingDetails = new List<SummaryInformation>(),
-                };
+                CreatingDetails = new List<SummaryInformation>(),
+            };
 
-                if (!criteria.IsValid())
-                {
-                    return report;
-                }
-
-                var rawData = GetReportData<dynamic>(criteria);
-                foreach (var row in rawData)
-                {
-                    DateTime createdDate = Converter.ToDateTime(row.CreateDate);
-                    SummaryInformation info = new SummaryInformation
-                    {
-                        CreatedDate = createdDate.ToShortFormatedDate(),
-                        SuperAmount = Converter.ToInt(row.AmountSAg),
-                        DirectMasterAmount = Converter.ToInt(row.AmountMAg),
-                        DirectAgentAmount = Converter.ToInt(row.AmountAg),
-                        MasterAmount = Converter.ToInt(row.AmountMaster),
-                        AgentAmount = Converter.ToInt(row.AmountAgent),
-                        MemberAmount = Converter.ToInt(row.AmountMember)
-                    };
-
-                    report.SumDataToTotal(info);
-                    report.CreatingDetails.Add(info);
-                }
-
-                SessionManager.Set<SummaryInformation>(this._dailyCreatedCustomersSessionKey, report);
+            if (!criteria.IsValid())
+            {
                 return report;
             }
-            catch (Exception ex)
+
+            var rawData = GetReportData<dynamic>(criteria);
+            foreach (var row in rawData)
             {
-                this.HandleException(ex);
-                throw;
+                DateTime createdDate = Converter.ToDateTime(row.CreateDate);
+                SummaryInformation info = new SummaryInformation
+                {
+                    CreatedDate = createdDate.ToShortFormatedDate(),
+                    SuperAmount = Converter.ToInt(row.AmountSAg),
+                    DirectMasterAmount = Converter.ToInt(row.AmountMAg),
+                    DirectAgentAmount = Converter.ToInt(row.AmountAg),
+                    MasterAmount = Converter.ToInt(row.AmountMaster),
+                    AgentAmount = Converter.ToInt(row.AmountAgent),
+                    MemberAmount = Converter.ToInt(row.AmountMember)
+                };
+
+                report.SumDataToTotal(info);
+                report.CreatingDetails.Add(info);
             }
+
+            SessionManager.Set<SummaryInformation>(this._dailyCreatedCustomersSessionKey, report);
+            return report;
         }
 
         /// <summary>
@@ -127,37 +119,29 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// <returns>The report details.</returns>
         public List<DetailInformation> GetReportDetails(GetDailyCreatedCustomersDetailsCriteria criteria)
         {
-            try
+            var report = new List<DetailInformation>();
+            if (!criteria.IsValid())
             {
-                var report = new List<DetailInformation>();
-                if (!criteria.IsValid())
-                {
-                    return report;
-                }
-
-                var rawData = GetReportData<dynamic>(criteria);
-                foreach (var row in rawData)
-                {
-                    DateTime createdDate = Converter.ToDateTime(row.creatdate);
-                    DetailInformation info = new DetailInformation
-                    {
-                        CreatedDate = createdDate.ToLongFormatedDate(),
-                        UserId = Converter.ToInt(row.custid),
-                        UserName = Converter.ToString2(row.username),
-                        Creator = Converter.ToString2(row.creator)
-                    };
-
-                    report.Add(info);
-                }
-
-                SessionManager.Set<List<DetailInformation>>(this._dailyCreatedCustomersDetailSessionKey, report);
                 return report;
             }
-            catch (Exception ex)
+
+            var rawData = GetReportData<dynamic>(criteria);
+            foreach (var row in rawData)
             {
-                this.HandleException(ex);
-                throw;
+                DateTime createdDate = Converter.ToDateTime(row.creatdate);
+                DetailInformation info = new DetailInformation
+                {
+                    CreatedDate = createdDate.ToLongFormatedDate(),
+                    UserId = Converter.ToInt(row.custid),
+                    UserName = Converter.ToString2(row.username),
+                    Creator = Converter.ToString2(row.creator)
+                };
+
+                report.Add(info);
             }
+
+            SessionManager.Set<List<DetailInformation>>(this._dailyCreatedCustomersDetailSessionKey, report);
+            return report;
         }
 
         #region ExportExcel

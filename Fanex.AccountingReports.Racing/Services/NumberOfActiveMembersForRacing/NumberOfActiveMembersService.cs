@@ -22,24 +22,16 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.NumberOActiveMembers
         /// <returns>Number Of Active Member.</returns>
         public NumberOfActiveMembers GetNumberOfActiveMembers(NumberOfActiveMembersCriteria getNumberOfActiveMembersCriteria)
         {
-            try
-            {
-                var result = new NumberOfActiveMembers();
+            var result = new NumberOfActiveMembers();
 
-                using (var db = new ObjectDb(getNumberOfActiveMembersCriteria.GetSettingKey()))
-                {
-                    var param = getNumberOfActiveMembersCriteria.GetSpParams();
-                    result = db.QueryEntity<NumberOfActiveMembers>(param);
-                }
-
-                SessionManager.Set<NumberOfActiveMembers>(_numberOfActiveMemberReportSessionKey, result);
-                return result;
-            }
-            catch (Exception ex)
+            using (var db = new ObjectDb(getNumberOfActiveMembersCriteria.GetSettingKey()))
             {
-                HandleException(ex);
-                throw;
+                var param = getNumberOfActiveMembersCriteria.GetSpParams();
+                result = db.QueryEntity<NumberOfActiveMembers>(param);
             }
+
+            SessionManager.Set<NumberOfActiveMembers>(_numberOfActiveMemberReportSessionKey, result);
+            return result;
         }
     }
 }

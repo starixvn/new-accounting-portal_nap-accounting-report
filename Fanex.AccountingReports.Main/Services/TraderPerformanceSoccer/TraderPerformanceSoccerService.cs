@@ -85,18 +85,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
 
             var traderSportType = criteria.IsSoccer ? SoccerTitle : OtherSportTitle;
 
-            try
-            {
-                result = this._traderPerformanceSoccerRepository.GetTraderPerformanceSoccerReport(criteria);
-                SessionManager.Set<TraderPerformanceSoccer>(_traderPerformanceSessionKey + traderSportType, result);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                SessionManager.Set<TraderPerformanceSoccer>(_traderPerformanceSessionKey + traderSportType, null);
-                throw;
-            }
+            result = this._traderPerformanceSoccerRepository.GetTraderPerformanceSoccerReport(criteria);
+            SessionManager.Set<TraderPerformanceSoccer>(_traderPerformanceSessionKey + traderSportType, result);
+            return result;
         }
 
         /// <summary>
@@ -138,108 +129,99 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             var traderSportType = criteria.IsSoccer ? SoccerTitle : OtherSportTitle;
             var startIndex = criteria.StartIndex;
 
-            try
+            if (criteria.IsPagingCallBack)
             {
-                if (criteria.IsPagingCallBack)
+                result = SessionManager.Get<TraderPerformanceSoccerDetail>(_traderPerformanceDetailSessionKey + traderSportType);
+            }
+            else
+            {
+                var reportDetailData = this._traderPerformanceSoccerRepository.GetTraderPerformanceSoccerDetailReport(criteria);
+
+                var traderGroups = reportDetailData.ReportRows.GroupBy(data => new
                 {
-                    result = SessionManager.Get<TraderPerformanceSoccerDetail>(_traderPerformanceDetailSessionKey + traderSportType);
-                }
-                else
+                    data.Id,
+                    data.Name
+                });
+
+                foreach (var traderGroup in traderGroups)
                 {
-                    var reportDetailData = this._traderPerformanceSoccerRepository.GetTraderPerformanceSoccerDetailReport(criteria);
+                    var winLossTotal = new TraderPerformanceSoccerDetail();
+                    var turnOverTotal = new TraderPerformanceSoccerDetail();
+                    var liveBetCountTotal = new TraderPerformanceSoccerDetail();
+                    var marginTotal = new TraderPerformanceSoccerDetail();
+                    var commissionTotal = new TraderPerformanceSoccerDetail();
 
-                    var traderGroups = reportDetailData.ReportRows.GroupBy(data => new
+                    var traderGroupInfo = new TraderPerformanceSoccerDetail
                     {
-                        data.Id,
-                        data.Name
-                    });
+                        Id = traderGroup.Key.Id,
+                        Name = traderGroup.Key.Name,
+                        GrandTotal = new TraderPerformanceSoccerDetail()
+                    };
 
-                    foreach (var traderGroup in traderGroups)
+                    foreach (var data in traderGroup)
                     {
-                        var winLossTotal = new TraderPerformanceSoccerDetail();
-                        var turnOverTotal = new TraderPerformanceSoccerDetail();
-                        var liveBetCountTotal = new TraderPerformanceSoccerDetail();
-                        var marginTotal = new TraderPerformanceSoccerDetail();
-                        var commissionTotal = new TraderPerformanceSoccerDetail();
-
-                        var traderGroupInfo = new TraderPerformanceSoccerDetail
+                        var traderInfo = new TraderPerformanceSoccerDetail
                         {
-                            Id = traderGroup.Key.Id,
-                            Name = traderGroup.Key.Name,
-                            GrandTotal = new TraderPerformanceSoccerDetail()
+                            EventDate = data.EventDate,
+                            LeagueName = data.LeagueName,
+                            HomeName = data.HomeName,
+                            AwayName = data.AwayName,
+                            HTHomeScore = data.HTHomeScore,
+                            HTAwayScore = data.HTAwayScore,
+                            FTHomeScore = data.FTHomeScore,
+                            FTAwayScore = data.FTAwayScore,
+                            Maxbet = data.Maxbet,
+                            ChildInfo = data.ChildInfo
                         };
 
-                        foreach (var data in traderGroup)
-                        {
-                            var traderInfo = new TraderPerformanceSoccerDetail
-                            {
-                                EventDate = data.EventDate,
-                                LeagueName = data.LeagueName,
-                                HomeName = data.HomeName,
-                                AwayName = data.AwayName,
-                                HTHomeScore = data.HTHomeScore,
-                                HTAwayScore = data.HTAwayScore,
-                                FTHomeScore = data.FTHomeScore,
-                                FTAwayScore = data.FTAwayScore,
-                                Maxbet = data.Maxbet,
-                                ChildInfo = data.ChildInfo
-                            };
+                        winLossTotal.CalculateTotal(traderInfo.ChildInfo[0]);
+                        turnOverTotal.CalculateTotal(traderInfo.ChildInfo[1]);
+                        liveBetCountTotal.CalculateTotal(traderInfo.ChildInfo[2]);
+                        commissionTotal.CalculateTotal(traderInfo.ChildInfo[4]);
 
-                            winLossTotal.CalculateTotal(traderInfo.ChildInfo[0]);
-                            turnOverTotal.CalculateTotal(traderInfo.ChildInfo[1]);
-                            liveBetCountTotal.CalculateTotal(traderInfo.ChildInfo[2]);
-                            commissionTotal.CalculateTotal(traderInfo.ChildInfo[4]);
+                        traderInfo.ChildInfo[0].FormatTwoDecimalNumberData(traderInfo.ChildInfo[0]);
+                        traderInfo.ChildInfo[1].FormatTwoDecimalNumberData(traderInfo.ChildInfo[1]);
+                        traderInfo.ChildInfo[3].FormatTwoDecimalNumberData(traderInfo.ChildInfo[3]);
+                        traderInfo.ChildInfo[4].FormatTwoDecimalNumberData(traderInfo.ChildInfo[4]);
 
-                            traderInfo.ChildInfo[0].FormatTwoDecimalNumberData(traderInfo.ChildInfo[0]);
-                            traderInfo.ChildInfo[1].FormatTwoDecimalNumberData(traderInfo.ChildInfo[1]);
-                            traderInfo.ChildInfo[3].FormatTwoDecimalNumberData(traderInfo.ChildInfo[3]);
-                            traderInfo.ChildInfo[4].FormatTwoDecimalNumberData(traderInfo.ChildInfo[4]);
-
-                            traderGroupInfo.ReportRows.Add(traderInfo);
-                        }
-
-                        marginTotal.CalculateMarginTotal(winLossTotal, turnOverTotal);
-
-                        winLossTotal.FormatTwoDecimalNumberData(winLossTotal);
-                        turnOverTotal.FormatTwoDecimalNumberData(turnOverTotal);
-                        marginTotal.FormatTwoDecimalNumberData(marginTotal);
-                        commissionTotal.FormatTwoDecimalNumberData(commissionTotal);
-
-                        traderGroupInfo.GrandTotal.ChildInfo.Add(winLossTotal);
-                        traderGroupInfo.GrandTotal.ChildInfo.Add(turnOverTotal);
-                        traderGroupInfo.GrandTotal.ChildInfo.Add(liveBetCountTotal);
-                        traderGroupInfo.GrandTotal.ChildInfo.Add(marginTotal);
-                        traderGroupInfo.GrandTotal.ChildInfo.Add(commissionTotal);
-
-                        result.ReportRows.Add(traderGroupInfo);
+                        traderGroupInfo.ReportRows.Add(traderInfo);
                     }
 
-                    result.GrandTotal = reportDetailData.GrandTotal;
-                    result.ReportLength = result.ReportRows.Count;
+                    marginTotal.CalculateMarginTotal(winLossTotal, turnOverTotal);
 
-                    SessionManager.Set<TraderPerformanceSoccerDetail>(_traderPerformanceDetailSessionKey + traderSportType, result);
+                    winLossTotal.FormatTwoDecimalNumberData(winLossTotal);
+                    turnOverTotal.FormatTwoDecimalNumberData(turnOverTotal);
+                    marginTotal.FormatTwoDecimalNumberData(marginTotal);
+                    commissionTotal.FormatTwoDecimalNumberData(commissionTotal);
+
+                    traderGroupInfo.GrandTotal.ChildInfo.Add(winLossTotal);
+                    traderGroupInfo.GrandTotal.ChildInfo.Add(turnOverTotal);
+                    traderGroupInfo.GrandTotal.ChildInfo.Add(liveBetCountTotal);
+                    traderGroupInfo.GrandTotal.ChildInfo.Add(marginTotal);
+                    traderGroupInfo.GrandTotal.ChildInfo.Add(commissionTotal);
+
+                    result.ReportRows.Add(traderGroupInfo);
                 }
 
-                this.SortSecondSubLevelReport(result, criteria);
+                result.GrandTotal = reportDetailData.GrandTotal;
+                result.ReportLength = result.ReportRows.Count;
 
-                var reportPagingData = new TraderPerformanceSoccerDetail
-                {
-                    ReportRows = result.ReportRows
-                        .Skip(startIndex)
-                        .Take(criteria.PageSize)
-                        .ToList(),
-                    GrandTotal = result.GrandTotal,
-                    ReportLength = result.ReportLength
-                };
-
-                return reportPagingData;
+                SessionManager.Set<TraderPerformanceSoccerDetail>(_traderPerformanceDetailSessionKey + traderSportType, result);
             }
-            catch (Exception ex)
+
+            this.SortSecondSubLevelReport(result, criteria);
+
+            var reportPagingData = new TraderPerformanceSoccerDetail
             {
-                HandleException(ex);
-                SessionManager.Set<TraderPerformanceSoccerDetail>(_traderPerformanceDetailSessionKey + traderSportType, null);
-                throw;
-            }
+                ReportRows = result.ReportRows
+                    .Skip(startIndex)
+                    .Take(criteria.PageSize)
+                    .ToList(),
+                GrandTotal = result.GrandTotal,
+                ReportLength = result.ReportLength
+            };
+
+            return reportPagingData;
         }
 
         /// <summary>

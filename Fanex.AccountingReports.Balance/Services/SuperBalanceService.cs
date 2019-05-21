@@ -100,84 +100,75 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
 
             var outputParam = new Hashtable();
 
-            try
+            if (superBalanceCriteria.Currency == 0)
             {
-                if (superBalanceCriteria.Currency == 0)
-                {
-                    superBalanceCriteria.Currency = null;
-                }
+                superBalanceCriteria.Currency = null;
+            }
 
-                if (superBalanceCriteria.Username == null)
-                {
-                    superBalanceCriteria.Username = string.Empty;
-                }
+            if (superBalanceCriteria.Username == null)
+            {
+                superBalanceCriteria.Username = string.Empty;
+            }
 
-                if (superBalanceCriteria.FirstLetter == null)
-                {
-                    superBalanceCriteria.FirstLetter = string.Empty;
-                }
+            if (superBalanceCriteria.FirstLetter == null)
+            {
+                superBalanceCriteria.FirstLetter = string.Empty;
+            }
 
-                var rawData = _superBalanceRepository.GetSuperBalance(superBalanceCriteria, ref outputParam);
+            var rawData = _superBalanceRepository.GetSuperBalance(superBalanceCriteria, ref outputParam);
 
-                if (rawData == null)
-                {
-                    return result;
-                }
+            if (rawData == null)
+            {
+                return result;
+            }
 
-                if (superBalanceCriteria.IsViewTotalOnly)
+            if (superBalanceCriteria.IsViewTotalOnly)
+            {
+                var superBalanceInfo = new SuperBalance()
                 {
+                    CustId = null,
+                    Username = null,
+                    Currency = null,
+                    Balance = 0,
+                    BaseBalance = Converter.ToDecimal(rawData[0])
+                };
+
+                result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);
+                result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
+                result.HasData = !Convert.IsDBNull(rawData[0]);
+            }
+            else
+            {
+                foreach (var row in rawData)
+                {
+                    var balance = Converter.ToDecimal(row.Balance);
+                    var baseBalance = Converter.ToDecimal(row.BaseBalance);
+
+                    if (Math.Round(balance, 2, MidpointRounding.AwayFromZero) == 0 &&
+                        Math.Round(baseBalance, 2, MidpointRounding.AwayFromZero) == 0)
+                    {
+                        continue;
+                    }
+
                     var superBalanceInfo = new SuperBalance()
                     {
-                        CustId = null,
-                        Username = null,
-                        Currency = null,
-                        Balance = 0,
-                        BaseBalance = Converter.ToDecimal(rawData[0])
+                        CustId = row.CustId,
+                        Username = row.Username,
+                        Currency = row.Currency,
+                        Balance = balance,
+                        BaseBalance = baseBalance
                     };
 
                     result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);
-                    result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
-                    result.HasData = !Convert.IsDBNull(rawData[0]);
-                }
-                else
-                {
-                    foreach (var row in rawData)
-                    {
-                        var balance = Converter.ToDecimal(row.Balance);
-                        var baseBalance = Converter.ToDecimal(row.BaseBalance);
-
-                        if (Math.Round(balance, 2, MidpointRounding.AwayFromZero) == 0 &&
-                            Math.Round(baseBalance, 2, MidpointRounding.AwayFromZero) == 0)
-                        {
-                            continue;
-                        }
-
-                        var superBalanceInfo = new SuperBalance()
-                        {
-                            CustId = row.CustId,
-                            Username = row.Username,
-                            Currency = row.Currency,
-                            Balance = balance,
-                            BaseBalance = baseBalance
-                        };
-
-                        result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);
-                        superBalanceInfo = SuperBalance.FormatInfo(superBalanceInfo);
-                        result.SuperBalanceList.Add(superBalanceInfo);
-                    }
-
-                    result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
+                    superBalanceInfo = SuperBalance.FormatInfo(superBalanceInfo);
+                    result.SuperBalanceList.Add(superBalanceInfo);
                 }
 
-                SessionManager.Set(_superBalanceSessionKey, result);
-                return result;
+                result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                SessionManager.Set<SuperBalance>(_superBalanceSessionKey, null);
-                throw;
-            }
+
+            SessionManager.Set(_superBalanceSessionKey, result);
+            return result;
         }
 
         /// <summary>
@@ -198,50 +189,41 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
 
             var outputParam = new Hashtable();
 
-            try
+            var rawData = _superBalanceRepository.GetSuperBalanceDownline(superBalanceSuperDownlineCriteria, ref outputParam);
+
+            if (rawData == null)
             {
-                var rawData = _superBalanceRepository.GetSuperBalanceDownline(superBalanceSuperDownlineCriteria, ref outputParam);
-
-                if (rawData == null)
-                {
-                    return result;
-                }
-
-                foreach (var row in rawData)
-                {
-                    var balance = Converter.ToDecimal(row.Balance);
-                    var baseBalance = Converter.ToDecimal(row.BaseBalance);
-
-                    if (Math.Round(balance, 2, MidpointRounding.AwayFromZero) == 0 &&
-                        Math.Round(baseBalance, 2, MidpointRounding.AwayFromZero) == 0)
-                    {
-                        continue;
-                    }
-
-                    var superBalanceInfo = new SuperBalance()
-                    {
-                        CustId = row.CustId,
-                        Username = row.Username,
-                        Currency = row.Currency,
-                        Balance = balance,
-                        BaseBalance = baseBalance
-                    };
-
-                    result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);
-                    superBalanceInfo = SuperBalance.FormatInfo(superBalanceInfo);
-                    result.SuperBalanceList.Add(superBalanceInfo);
-                }
-
-                result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
-                SessionManager.Set<SuperBalance>(_superDownLineSessionKey, result);
                 return result;
             }
-            catch (Exception ex)
+
+            foreach (var row in rawData)
             {
-                HandleException(ex);
-                SessionManager.Set<SuperBalance>(_superDownLineSessionKey, null);
-                throw;
+                var balance = Converter.ToDecimal(row.Balance);
+                var baseBalance = Converter.ToDecimal(row.BaseBalance);
+
+                if (Math.Round(balance, 2, MidpointRounding.AwayFromZero) == 0 &&
+                    Math.Round(baseBalance, 2, MidpointRounding.AwayFromZero) == 0)
+                {
+                    continue;
+                }
+
+                var superBalanceInfo = new SuperBalance()
+                {
+                    CustId = row.CustId,
+                    Username = row.Username,
+                    Currency = row.Currency,
+                    Balance = balance,
+                    BaseBalance = baseBalance
+                };
+
+                result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);
+                superBalanceInfo = SuperBalance.FormatInfo(superBalanceInfo);
+                result.SuperBalanceList.Add(superBalanceInfo);
             }
+
+            result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
+            SessionManager.Set<SuperBalance>(_superDownLineSessionKey, result);
+            return result;
         }
 
         /// <summary>
@@ -262,50 +244,41 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
 
             var outputParam = new Hashtable();
 
-            try
+            var rawData = _superBalanceRepository.GetSuperBalanceMasterDownline(superBalanceMasterDownlineCriteria, ref outputParam);
+
+            if (rawData == null)
             {
-                var rawData = _superBalanceRepository.GetSuperBalanceMasterDownline(superBalanceMasterDownlineCriteria, ref outputParam);
-
-                if (rawData == null)
-                {
-                    return result;
-                }
-
-                foreach (var row in rawData)
-                {
-                    var balance = Converter.ToDecimal(row.Balance);
-                    var baseBalance = Converter.ToDecimal(row.BaseBalance);
-
-                    if (Math.Round(balance, 2, MidpointRounding.AwayFromZero) == 0 &&
-                        Math.Round(baseBalance, 2, MidpointRounding.AwayFromZero) == 0)
-                    {
-                        continue;
-                    }
-
-                    var superBalanceInfo = new SuperBalance()
-                    {
-                        CustId = row.CustId,
-                        Username = row.Username,
-                        Currency = row.Currency,
-                        Balance = balance,
-                        BaseBalance = baseBalance
-                    };
-
-                    result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);
-                    superBalanceInfo = SuperBalance.FormatInfo(superBalanceInfo);
-                    result.SuperBalanceList.Add(superBalanceInfo);
-                }
-
-                result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
-                SessionManager.Set<SuperBalance>(_masterDownLineSessionKey, result);
                 return result;
             }
-            catch (Exception ex)
+
+            foreach (var row in rawData)
             {
-                HandleException(ex);
-                SessionManager.Set<SuperBalance>(_masterDownLineSessionKey, null);
-                throw;
+                var balance = Converter.ToDecimal(row.Balance);
+                var baseBalance = Converter.ToDecimal(row.BaseBalance);
+
+                if (Math.Round(balance, 2, MidpointRounding.AwayFromZero) == 0 &&
+                    Math.Round(baseBalance, 2, MidpointRounding.AwayFromZero) == 0)
+                {
+                    continue;
+                }
+
+                var superBalanceInfo = new SuperBalance()
+                {
+                    CustId = row.CustId,
+                    Username = row.Username,
+                    Currency = row.Currency,
+                    Balance = balance,
+                    BaseBalance = baseBalance
+                };
+
+                result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);
+                superBalanceInfo = SuperBalance.FormatInfo(superBalanceInfo);
+                result.SuperBalanceList.Add(superBalanceInfo);
             }
+
+            result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
+            SessionManager.Set<SuperBalance>(_masterDownLineSessionKey, result);
+            return result;
         }
 
         /// <summary>
@@ -326,50 +299,41 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
 
             var outputParam = new Hashtable();
 
-            try
+            var rawData = _superBalanceRepository.GetSuperBalanceDownline(superBalanceAgentDownlineCriteria, ref outputParam);
+
+            if (rawData == null)
             {
-                var rawData = _superBalanceRepository.GetSuperBalanceDownline(superBalanceAgentDownlineCriteria, ref outputParam);
-
-                if (rawData == null)
-                {
-                    return result;
-                }
-
-                foreach (var row in rawData)
-                {
-                    var balance = Converter.ToDecimal(row.Balance);
-                    var baseBalance = Converter.ToDecimal(row.BaseBalance);
-
-                    if (Math.Round(balance, 2, MidpointRounding.AwayFromZero) == 0 &&
-                        Math.Round(baseBalance, 2, MidpointRounding.AwayFromZero) == 0)
-                    {
-                        continue;
-                    }
-
-                    var superBalanceInfo = new SuperBalance()
-                    {
-                        CustId = row.CustId,
-                        Username = row.Username,
-                        Currency = row.Currency,
-                        Balance = balance,
-                        BaseBalance = row.BaseBalance
-                    };
-
-                    result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);
-                    superBalanceInfo = SuperBalance.FormatInfo(superBalanceInfo);
-                    result.SuperBalanceList.Add(superBalanceInfo);
-                }
-
-                result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
-                SessionManager.Set<SuperBalance>(_agentDownLineSessionKey, result);
                 return result;
             }
-            catch (Exception ex)
+
+            foreach (var row in rawData)
             {
-                HandleException(ex);
-                SessionManager.Set<SuperBalance>(_agentDownLineSessionKey, null);
-                throw;
+                var balance = Converter.ToDecimal(row.Balance);
+                var baseBalance = Converter.ToDecimal(row.BaseBalance);
+
+                if (Math.Round(balance, 2, MidpointRounding.AwayFromZero) == 0 &&
+                    Math.Round(baseBalance, 2, MidpointRounding.AwayFromZero) == 0)
+                {
+                    continue;
+                }
+
+                var superBalanceInfo = new SuperBalance()
+                {
+                    CustId = row.CustId,
+                    Username = row.Username,
+                    Currency = row.Currency,
+                    Balance = balance,
+                    BaseBalance = row.BaseBalance
+                };
+
+                result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);
+                superBalanceInfo = SuperBalance.FormatInfo(superBalanceInfo);
+                result.SuperBalanceList.Add(superBalanceInfo);
             }
+
+            result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
+            SessionManager.Set<SuperBalance>(_agentDownLineSessionKey, result);
+            return result;
         }
 
         /// <summary>

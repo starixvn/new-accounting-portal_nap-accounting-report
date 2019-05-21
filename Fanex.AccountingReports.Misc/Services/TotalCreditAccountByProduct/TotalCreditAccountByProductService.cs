@@ -31,32 +31,24 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
         /// <returns>List sport products.</returns>
         public List<BaseModel> GetProducts()
         {
-            try
+            List<BaseModel> result = new List<BaseModel>();
+            TotalCreditAccountByProductCollection collection = TotalCreditAccountByProductSection.Instance.Products;
+            foreach (TotalCreditAccountByProductElement element in collection)
             {
-                List<BaseModel> result = new List<BaseModel>();
-                TotalCreditAccountByProductCollection collection = TotalCreditAccountByProductSection.Instance.Products;
-                foreach (TotalCreditAccountByProductElement element in collection)
+                if (!element.IsActive)
                 {
-                    if (!element.IsActive)
-                    {
-                        continue;
-                    }
-
-                    result.Add(new BaseModel()
-                    {
-                        Id = Converter.ToInt(element.Id),
-                        Name = Converter.ToString2(element.Name),
-                        AliasName = Converter.ToString2(element.AliasName)
-                    });
+                    continue;
                 }
 
-                return result.OrderBy(x => x.Name).ToList();
+                result.Add(new BaseModel()
+                {
+                    Id = Converter.ToInt(element.Id),
+                    Name = Converter.ToString2(element.Name),
+                    AliasName = Converter.ToString2(element.AliasName)
+                });
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+
+            return result.OrderBy(x => x.Name).ToList();
         }
 
         /// <summary>
@@ -103,26 +95,18 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
         /// <returns>Total credit account by product.</returns>
         public TotalCreditAccountByProduct GetTotalCreditAccountByProduct(GetTotalCreditAccountByProductCriteria criteria)
         {
-            try
-            {
-                var result = this.GetTotalCreditAccountByProductData(criteria);
-                var startItemIndex = criteria.PageIndex * criteria.PageSize;
+            var result = this.GetTotalCreditAccountByProductData(criteria);
+            var startItemIndex = criteria.PageIndex * criteria.PageSize;
 
-                var pagingResult = new TotalCreditAccountByProduct
-                {
-                    ReportRows = result.ReportRows.Skip(startItemIndex).Take(criteria.PageSize).ToList(),
-                    Total = result.Total,
-                    ReportLength = result.ReportRows.Count
-                };
-
-                SessionManager.Set<TotalCreditAccountByProduct>(_totalCreditAccountByProductSessionKey, result);
-                return pagingResult;
-            }
-            catch (Exception ex)
+            var pagingResult = new TotalCreditAccountByProduct
             {
-                HandleException(ex);
-                throw;
-            }
+                ReportRows = result.ReportRows.Skip(startItemIndex).Take(criteria.PageSize).ToList(),
+                Total = result.Total,
+                ReportLength = result.ReportRows.Count
+            };
+
+            SessionManager.Set<TotalCreditAccountByProduct>(_totalCreditAccountByProductSessionKey, result);
+            return pagingResult;
         }
 
         /// <summary>
@@ -136,26 +120,18 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
             criteria.BalanceUpDay = balanceUp.BalanceUpDay;
             criteria.MoveBetsDay = balanceUp.MoveBetsDay;
 
-            try
-            {
-                var result = this.GetBetCountDetailByCustId(criteria);
-                var startItemIndex = criteria.PageIndex * criteria.PageSize;
+            var result = this.GetBetCountDetailByCustId(criteria);
+            var startItemIndex = criteria.PageIndex * criteria.PageSize;
 
-                var pagingResult = new BetCountDetail
-                {
-                    ReportRows = result.ReportRows.Skip(startItemIndex).Take(criteria.PageSize).ToList(),
-                    Total = result.Total,
-                    ReportLength = result.ReportRows.Count
-                };
-
-                SessionManager.Set<BetCountDetail>(_betCountDetailSessionKey, result);
-                return pagingResult;
-            }
-            catch (Exception ex)
+            var pagingResult = new BetCountDetail
             {
-                HandleException(ex);
-                throw;
-            }
+                ReportRows = result.ReportRows.Skip(startItemIndex).Take(criteria.PageSize).ToList(),
+                Total = result.Total,
+                ReportLength = result.ReportRows.Count
+            };
+
+            SessionManager.Set<BetCountDetail>(_betCountDetailSessionKey, result);
+            return pagingResult;
         }
 
         /// <summary>

@@ -57,124 +57,116 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         public NormalTickets GetNormalChangedTicket(CheckBetCriteria checkBetCriteria)
         {
             var result = new NormalTickets();
-            try
+            var rawData = GetReportData<dynamic>(checkBetCriteria);
+            if (rawData != null)
             {
-                var rawData = GetReportData<dynamic>(checkBetCriteria);
-                if (rawData != null)
+                var normalTicketList = new List<NormalTicketDetail>();
+
+                foreach (var row in rawData)
                 {
-                    var normalTicketList = new List<NormalTicketDetail>();
-
-                    foreach (var row in rawData)
+                    var transid = (long)row.transid;
+                    var transdate = (DateTime)row.transdate;
+                    var currency = (string)row.CurrencyName;
+                    var bettype = (int)row.bettype;
+                    var creator = (string)row.Creator;
+                    var username = (string)row.Username;
+                    var oldStake = (decimal)row.OldStake;
+                    var newStake = (decimal)row.NewStake;
+                    var oldOdds = (decimal)row.OldOdds;
+                    var newOdds = (decimal)row.NewOdds;
+                    var oldBetteam = BetTeam.GetBetTeam((string)row.OldBetteam, bettype, "e");
+                    var newBetteam = BetTeam.GetBetTeam((string)row.NewBetteam, bettype, "e");
+                    var oldTotalPT = (decimal)row.OldPT;
+                    var newTotalPT = (decimal)row.NewPT;
+                    var oddstype = (row.oddstype != null) ? CalcOdds.GetOddsType(bettype, (int)row.oddstype) : 0;
+                    var status = (string)row.status;
+                    var settlementStatus = (byte)Converter.ToInt(row.SettlementStatus);
+                    var home = CacheRef.GetTeamName(row.homeid);
+                    var newmatchcode = (string)row.NewMatchCode;
+                    var oldmatchcode = (string)row.OldMatchCode;
+                    var hdp1 = (decimal)row.hdp1;
+                    var newHdp2 = (decimal)row.NewHdp2;
+                    var oldHdp2 = (decimal)row.OldHdp2;
+                    var liveindicator = (bool)row.liveindicator;
+                    string bettypeName = CacheRef.GetBettype(bettype);
+                    string oldAway = string.Empty;
+                    string newAway = string.Empty;
+                    var oddsSpread = Converter.ToDecimal(row.OddsSpread);
+                    if (bettype == 85 || bettype == 86)
                     {
-                        var transid = (long)row.transid;
-                        var transdate = (DateTime)row.transdate;
-                        var currency = (string)row.CurrencyName;
-                        var bettype = (int)row.bettype;
-                        var creator = (string)row.Creator;
-                        var username = (string)row.Username;
-                        var oldStake = (decimal)row.OldStake;
-                        var newStake = (decimal)row.NewStake;
-                        var oldOdds = (decimal)row.OldOdds;
-                        var newOdds = (decimal)row.NewOdds;
-                        var oldBetteam = BetTeam.GetBetTeam((string)row.OldBetteam, bettype, "e");
-                        var newBetteam = BetTeam.GetBetTeam((string)row.NewBetteam, bettype, "e");
-                        var oldTotalPT = (decimal)row.OldPT;
-                        var newTotalPT = (decimal)row.NewPT;
-                        var oddstype = (row.oddstype != null) ? CalcOdds.GetOddsType(bettype, (int)row.oddstype) : 0;
-                        var status = (string)row.status;
-                        var settlementStatus = (byte)Converter.ToInt(row.SettlementStatus);
-                        var home = CacheRef.GetTeamName(row.homeid);
-                        var newmatchcode = (string)row.NewMatchCode;
-                        var oldmatchcode = (string)row.OldMatchCode;
-                        var hdp1 = (decimal)row.hdp1;
-                        var newHdp2 = (decimal)row.NewHdp2;
-                        var oldHdp2 = (decimal)row.OldHdp2;
-                        var liveindicator = (bool)row.liveindicator;
-                        string bettypeName = CacheRef.GetBettype(bettype);
-                        string oldAway = string.Empty;
-                        string newAway = string.Empty;
-                        var oddsSpread = Converter.ToDecimal(row.OddsSpread);
-                        if (bettype == 85 || bettype == 86)
-                        {
-                            bettypeName = liveindicator ? "Next " + bettypeName : "FT." + bettypeName;
-                        }
-
-                        if (bettype == 31 ||
-                            bettype == 32 ||
-                            bettype == 33 ||
-                            bettype == 41 ||
-                            bettype == 42 ||
-                            bettype == 43 ||
-                            bettype == 1231 ||
-                            bettype == 1232 ||
-                            bettype == 1233 ||
-                            bettype == 1237 ||
-                            bettype == 1238)
-                        {
-                            newAway = newmatchcode + " - " + CacheRef.GetHorseTeamName(row.NewAwayID);
-                            oldAway = oldmatchcode + " - " + CacheRef.GetHorseTeamName(row.OldAwayID);
-                        }
-                        else
-                        {
-                            newAway = CacheRef.GetTeamName(row.NewAwayID);
-                            oldAway = CacheRef.GetTeamName(row.OldAwayID);
-                        }
-
-                        newBetteam = this.GetBetTeam(home, newAway, bettype, newBetteam, hdp1, newHdp2, oddsSpread);
-                        oldBetteam = this.GetBetTeam(home, oldAway, bettype, oldBetteam, hdp1, oldHdp2, oddsSpread);
-                        if (bettype == 10)
-                        {
-                            newBetteam = !string.IsNullOrEmpty(newAway) ? newAway : home;
-                            oldBetteam = !string.IsNullOrEmpty(oldAway) ? oldAway : home;
-                        }
-
-                        normalTicketList.Add(new NormalTicketDetail()
-                        {
-                            RefNo = transid.ToString(),
-                            TransDate = transdate.ToLongFormatedDateWithSlash(),
-                            CurrencyName = currency,
-                            Bettype = bettypeName,
-                            Creator = creator,
-                            OldStake = oldStake.Format(2),
-                            NewStake = newStake.Format(2),
-                            OldOdds = CalcOdds.GetOdds(oldOdds, bettype, oddstype).Format(2),
-                            NewOdds = CalcOdds.GetOdds(newOdds, bettype, oddstype).Format(2),
-                            OldBetteam = oldBetteam,
-                            NewBetteam = newBetteam,
-                            OldTotalPT = oldTotalPT.Format(2),
-                            NewTotalPT = newTotalPT.Format(2),
-                            Status = GetResultString(status, settlementStatus),
-                            Username = username
-                        });
-
-                        if (oldStake != newStake)
-                        {
-                            result.TotalChangedStake++;
-                        }
-
-                        if (oldOdds != newOdds)
-                        {
-                            result.TotalChangedOdds++;
-                        }
-
-                        if (oldBetteam != newBetteam)
-                        {
-                            result.TotalChangedBetteam++;
-                        }
-
-                        if (oldTotalPT != newTotalPT)
-                        {
-                            result.TotalChangedPT++;
-                        }
+                        bettypeName = liveindicator ? "Next " + bettypeName : "FT." + bettypeName;
                     }
 
-                    result.NormalTicketList = normalTicketList;
+                    if (bettype == 31 ||
+                        bettype == 32 ||
+                        bettype == 33 ||
+                        bettype == 41 ||
+                        bettype == 42 ||
+                        bettype == 43 ||
+                        bettype == 1231 ||
+                        bettype == 1232 ||
+                        bettype == 1233 ||
+                        bettype == 1237 ||
+                        bettype == 1238)
+                    {
+                        newAway = newmatchcode + " - " + CacheRef.GetHorseTeamName(row.NewAwayID);
+                        oldAway = oldmatchcode + " - " + CacheRef.GetHorseTeamName(row.OldAwayID);
+                    }
+                    else
+                    {
+                        newAway = CacheRef.GetTeamName(row.NewAwayID);
+                        oldAway = CacheRef.GetTeamName(row.OldAwayID);
+                    }
+
+                    newBetteam = this.GetBetTeam(home, newAway, bettype, newBetteam, hdp1, newHdp2, oddsSpread);
+                    oldBetteam = this.GetBetTeam(home, oldAway, bettype, oldBetteam, hdp1, oldHdp2, oddsSpread);
+                    if (bettype == 10)
+                    {
+                        newBetteam = !string.IsNullOrEmpty(newAway) ? newAway : home;
+                        oldBetteam = !string.IsNullOrEmpty(oldAway) ? oldAway : home;
+                    }
+
+                    normalTicketList.Add(new NormalTicketDetail()
+                    {
+                        RefNo = transid.ToString(),
+                        TransDate = transdate.ToLongFormatedDateWithSlash(),
+                        CurrencyName = currency,
+                        Bettype = bettypeName,
+                        Creator = creator,
+                        OldStake = oldStake.Format(2),
+                        NewStake = newStake.Format(2),
+                        OldOdds = CalcOdds.GetOdds(oldOdds, bettype, oddstype).Format(2),
+                        NewOdds = CalcOdds.GetOdds(newOdds, bettype, oddstype).Format(2),
+                        OldBetteam = oldBetteam,
+                        NewBetteam = newBetteam,
+                        OldTotalPT = oldTotalPT.Format(2),
+                        NewTotalPT = newTotalPT.Format(2),
+                        Status = GetResultString(status, settlementStatus),
+                        Username = username
+                    });
+
+                    if (oldStake != newStake)
+                    {
+                        result.TotalChangedStake++;
+                    }
+
+                    if (oldOdds != newOdds)
+                    {
+                        result.TotalChangedOdds++;
+                    }
+
+                    if (oldBetteam != newBetteam)
+                    {
+                        result.TotalChangedBetteam++;
+                    }
+
+                    if (oldTotalPT != newTotalPT)
+                    {
+                        result.TotalChangedPT++;
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
+
+                result.NormalTicketList = normalTicketList;
             }
 
             return result;
@@ -191,88 +183,80 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         public RejectTickets GetRejectChangedTicket(CheckBetCriteria checkBetCriteria)
         {
             var result = new RejectTickets();
-            try
+            var rawData = GetReportData<dynamic>(checkBetCriteria);
+            if (rawData != null)
             {
-                var rawData = GetReportData<dynamic>(checkBetCriteria);
-                if (rawData != null)
+                var rejectTicketList = new List<RejectTicketDetail>();
+                foreach (var row in rawData)
                 {
-                    var rejectTicketList = new List<RejectTicketDetail>();
-                    foreach (var row in rawData)
+                    var transid = (long)row.transid;
+                    var transdate = (DateTime)row.transdate;
+                    var currency = (string)row.CurrencyName;
+                    var bettype = (int)row.bettype;
+                    var creator = (string)row.Creator;
+                    var username = (string)row.Username;
+                    var stake = (decimal)row.stake;
+                    var odds = (decimal)row.odds;
+                    var betteam = BetTeam.GetBetTeam((string)row.betteam, bettype, "e");
+                    var totalPT = (decimal)row.tpositiontaking;
+                    var settlementStatus = (byte)row.SettlementStatus;
+                    var newStatus = GetResultString((string)row.NewStatus, settlementStatus);
+                    var oldStatus = GetResultString((string)row.OldStatus, settlementStatus);
+                    var home = CacheRef.GetTeamName(row.homeid);
+                    var away = CacheRef.GetTeamName(row.awayid);
+                    var hdp1 = (decimal)row.hdp1;
+                    var hdp2 = (decimal)row.hdp2;
+                    var liveindicator = (bool)row.liveindicator;
+                    string betypeName = CacheRef.GetBettype(bettype);
+                    var oddsSpread = Converter.ToDecimal(row.OddsSpread);
+                    if (bettype == 85 || bettype == 86)
                     {
-                        var transid = (long)row.transid;
-                        var transdate = (DateTime)row.transdate;
-                        var currency = (string)row.CurrencyName;
-                        var bettype = (int)row.bettype;
-                        var creator = (string)row.Creator;
-                        var username = (string)row.Username;
-                        var stake = (decimal)row.stake;
-                        var odds = (decimal)row.odds;
-                        var betteam = BetTeam.GetBetTeam((string)row.betteam, bettype, "e");
-                        var totalPT = (decimal)row.tpositiontaking;
-                        var settlementStatus = (byte)row.SettlementStatus;
-                        var newStatus = GetResultString((string)row.NewStatus, settlementStatus);
-                        var oldStatus = GetResultString((string)row.OldStatus, settlementStatus);
-                        var home = CacheRef.GetTeamName(row.homeid);
-                        var away = CacheRef.GetTeamName(row.awayid);
-                        var hdp1 = (decimal)row.hdp1;
-                        var hdp2 = (decimal)row.hdp2;
-                        var liveindicator = (bool)row.liveindicator;
-                        string betypeName = CacheRef.GetBettype(bettype);
-                        var oddsSpread = Converter.ToDecimal(row.OddsSpread);
-                        if (bettype == 85 || bettype == 86)
-                        {
-                            betypeName = liveindicator ? "Next " + betypeName : "FT." + betypeName;
-                        }
-
-                        if (bettype == 31 ||
-                            bettype == 32 ||
-                            bettype == 33 ||
-                            bettype == 41 ||
-                            bettype == 42 ||
-                            bettype == 43 ||
-                            bettype == 1231 ||
-                            bettype == 1232 ||
-                            bettype == 1233 ||
-                            bettype == 1237 ||
-                            bettype == 1238)
-                        {
-                            away = (string)row.matchcode + " - " + CacheRef.GetHorseTeamName(row.awayid);
-                        }
-
-                        if (bettype == 10)
-                        {
-                            betteam = !string.IsNullOrEmpty(away) ? away : home;
-                        }
-
-                        if (oldStatus != newStatus)
-                        {
-                            result.TotalChangedStatus++;
-                        }
-
-                        rejectTicketList.Add(new RejectTicketDetail()
-                        {
-                            RefNo = transid.ToString(),
-                            TransDate = transdate.ToLongFormatedDateWithSlash(),
-                            Currency = currency,
-                            Bettype = betypeName,
-                            Username = username,
-                            Betteam = this.GetBetTeam(home, away, bettype, betteam, hdp1, hdp2, oddsSpread),
-                            Stake = stake.Format(2),
-                            Odds = odds.Format(2),
-                            TotalPT = totalPT.Format(2),
-                            NewStatus = newStatus,
-                            OldStatus = oldStatus,
-                            Creator = creator
-                        });
+                        betypeName = liveindicator ? "Next " + betypeName : "FT." + betypeName;
                     }
 
-                    result.RejectTicketList = rejectTicketList;
+                    if (bettype == 31 ||
+                        bettype == 32 ||
+                        bettype == 33 ||
+                        bettype == 41 ||
+                        bettype == 42 ||
+                        bettype == 43 ||
+                        bettype == 1231 ||
+                        bettype == 1232 ||
+                        bettype == 1233 ||
+                        bettype == 1237 ||
+                        bettype == 1238)
+                    {
+                        away = (string)row.matchcode + " - " + CacheRef.GetHorseTeamName(row.awayid);
+                    }
+
+                    if (bettype == 10)
+                    {
+                        betteam = !string.IsNullOrEmpty(away) ? away : home;
+                    }
+
+                    if (oldStatus != newStatus)
+                    {
+                        result.TotalChangedStatus++;
+                    }
+
+                    rejectTicketList.Add(new RejectTicketDetail()
+                    {
+                        RefNo = transid.ToString(),
+                        TransDate = transdate.ToLongFormatedDateWithSlash(),
+                        Currency = currency,
+                        Bettype = betypeName,
+                        Username = username,
+                        Betteam = this.GetBetTeam(home, away, bettype, betteam, hdp1, hdp2, oddsSpread),
+                        Stake = stake.Format(2),
+                        Odds = odds.Format(2),
+                        TotalPT = totalPT.Format(2),
+                        NewStatus = newStatus,
+                        OldStatus = oldStatus,
+                        Creator = creator
+                    });
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
+
+                result.RejectTicketList = rejectTicketList;
             }
 
             return result;

@@ -97,15 +97,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
         /// <returns>List user ticket data.</returns>
         public List<dynamic> GetDuplicateTicketData(GetDuplicateTicketsCriteria criteria)
         {
-            try
-            {
-                return GetReportData<dynamic>(criteria).ToList();
-            }
-            catch (Exception ex)
-            {
-                this.HandleException(ex);
-                throw;
-            }
+            return GetReportData<dynamic>(criteria).ToList();
         }
 
         #region Export Report.

@@ -42,53 +42,45 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <returns>The win loss by bet type main report.</returns>
         public WinLossInfo GetMainReport(GetWinLossByBetTypeMainReportCriteria criteria)
         {
-            try
+            var rawData = _winLossByBetTypeRepository.GetMainReport(criteria);
+            WinLossInfo report = new WinLossInfo
             {
-                var rawData = _winLossByBetTypeRepository.GetMainReport(criteria);
-                WinLossInfo report = new WinLossInfo
+                DetailInfo = new List<WinLossInfo>(),
+                GrandTotal = new WinLossInfo
                 {
-                    DetailInfo = new List<WinLossInfo>(),
-                    GrandTotal = new WinLossInfo
-                    {
-                        Name = Labels.Total
-                    }
-                };
-
-                if (rawData == null || rawData.Count == 0)
-                {
-                    return report;
+                    Name = Labels.Total
                 }
+            };
 
-                rawData.GroupBy(g => g.SportType).ToList()
-                    .ForEach(sport =>
-                    {
-                        WinLossInfo sportData = new WinLossInfo { DetailInfo = new List<WinLossInfo>(), Name = CacheRef.GetSportName(sport.Key), GrandTotal = new WinLossInfo { Name = CacheRef.GetSportName(sport.Key) } };
-                        sport.Select(s => s).ToList()
-                        .ForEach(bettype =>
-                        {
-                            WinLossInfo bettypeRow = bettype;
-                            bettypeRow.Name = CacheRef.GetBettype(bettype.Id);
-                            bettypeRow = WinLossInfo.Format(bettypeRow);
-                            sportData.GrandTotal.Sum(bettypeRow);
-                            sportData.DetailInfo.Add(bettypeRow);
-
-                            report.GrandTotal.Sum(bettypeRow);
-                        });
-
-                        sportData.GrandTotal = WinLossInfo.Format(sportData.GrandTotal);
-                        report.DetailInfo.Add(sportData);
-                    });
-             
-                report.GrandTotal = WinLossInfo.Format(report.GrandTotal);
-
-                SessionManager.Set<WinLossInfo>(_winLossByBetTypeMainReportSessionKey, report);
+            if (rawData == null || rawData.Count == 0)
+            {
                 return report;
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+
+            rawData.GroupBy(g => g.SportType).ToList()
+                .ForEach(sport =>
+                {
+                    WinLossInfo sportData = new WinLossInfo { DetailInfo = new List<WinLossInfo>(), Name = CacheRef.GetSportName(sport.Key), GrandTotal = new WinLossInfo { Name = CacheRef.GetSportName(sport.Key) } };
+                    sport.Select(s => s).ToList()
+                    .ForEach(bettype =>
+                    {
+                        WinLossInfo bettypeRow = bettype;
+                        bettypeRow.Name = CacheRef.GetBettype(bettype.Id);
+                        bettypeRow = WinLossInfo.Format(bettypeRow);
+                        sportData.GrandTotal.Sum(bettypeRow);
+                        sportData.DetailInfo.Add(bettypeRow);
+
+                        report.GrandTotal.Sum(bettypeRow);
+                    });
+
+                    sportData.GrandTotal = WinLossInfo.Format(sportData.GrandTotal);
+                    report.DetailInfo.Add(sportData);
+                });
+
+            report.GrandTotal = WinLossInfo.Format(report.GrandTotal);
+
+            SessionManager.Set<WinLossInfo>(_winLossByBetTypeMainReportSessionKey, report);
+            return report;
         }
 
         /// <summary>
@@ -101,69 +93,61 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetDetailReport(GetWinLossByBetTypeDetailReportCriteria criteria)
         {
-            try
+            var rawData = _winLossByBetTypeRepository.GetDetailReport(criteria);
+            WinLossInfo report = new WinLossInfo
             {
-                var rawData = _winLossByBetTypeRepository.GetDetailReport(criteria);
-                WinLossInfo report = new WinLossInfo
+                Id = criteria.BetTypeId,
+                DetailInfo = new List<WinLossInfo>(),
+                GrandTotal = new WinLossInfo
                 {
-                    Id = criteria.BetTypeId,
-                    DetailInfo = new List<WinLossInfo>(),
-                    GrandTotal = new WinLossInfo
-                    {
-                        Name = Labels.Total
-                    }
-                };
-
-                report.Name = CacheRef.GetBettype(report.Id);
-                if (rawData == null || rawData.Count == 0)
-                {
-                    return report;
+                    Name = Labels.Total
                 }
+            };
 
-                var leagueGroups = rawData.GroupBy(data => data.LeagueId);
-                foreach (var leagueGroup in leagueGroups)
-                {
-                    WinLossInfo leagueWinLoss = new WinLossInfo
-                    {
-                        Id = leagueGroup.Key,
-                        DetailInfo = new List<WinLossInfo>(),
-                        GrandTotal = new WinLossInfo()
-                    };
-
-                    leagueWinLoss.Name = CacheRef.GetLeagueName(leagueWinLoss.Id);
-                    foreach (var data in leagueGroup)
-                    {
-                        WinLossInfo info = new WinLossInfo
-                        {
-                            Name = data.MatchCode,
-                            CustomerWinLoss = data.CustomerWinLoss,
-                            AgencyWinLoss = data.AgencyWinLoss,
-                            Commission = data.Commission,
-                            LineTotal = data.LineTotal,
-                            VirtualLineTotal = data.VirtualLineTotal,
-                            Turnover = data.Turnover
-                        };
-
-                        leagueWinLoss.GrandTotal.Sum(info);
-                        info = WinLossInfo.Format(info);
-                        leagueWinLoss.DetailInfo.Add(info);
-                    }
-
-                    report.GrandTotal.Sum(leagueWinLoss.GrandTotal);
-                    leagueWinLoss.GrandTotal = WinLossInfo.Format(leagueWinLoss.GrandTotal);
-                    report.DetailInfo.Add(leagueWinLoss);
-                }
-
-                report.GrandTotal = WinLossInfo.Format(report.GrandTotal);
-
-                SessionManager.Set<WinLossInfo>(_winLossByBetTypeDetailReportSessionKey, report);
+            report.Name = CacheRef.GetBettype(report.Id);
+            if (rawData == null || rawData.Count == 0)
+            {
                 return report;
             }
-            catch (Exception ex)
+
+            var leagueGroups = rawData.GroupBy(data => data.LeagueId);
+            foreach (var leagueGroup in leagueGroups)
             {
-                HandleException(ex);
-                throw;
+                WinLossInfo leagueWinLoss = new WinLossInfo
+                {
+                    Id = leagueGroup.Key,
+                    DetailInfo = new List<WinLossInfo>(),
+                    GrandTotal = new WinLossInfo()
+                };
+
+                leagueWinLoss.Name = CacheRef.GetLeagueName(leagueWinLoss.Id);
+                foreach (var data in leagueGroup)
+                {
+                    WinLossInfo info = new WinLossInfo
+                    {
+                        Name = data.MatchCode,
+                        CustomerWinLoss = data.CustomerWinLoss,
+                        AgencyWinLoss = data.AgencyWinLoss,
+                        Commission = data.Commission,
+                        LineTotal = data.LineTotal,
+                        VirtualLineTotal = data.VirtualLineTotal,
+                        Turnover = data.Turnover
+                    };
+
+                    leagueWinLoss.GrandTotal.Sum(info);
+                    info = WinLossInfo.Format(info);
+                    leagueWinLoss.DetailInfo.Add(info);
+                }
+
+                report.GrandTotal.Sum(leagueWinLoss.GrandTotal);
+                leagueWinLoss.GrandTotal = WinLossInfo.Format(leagueWinLoss.GrandTotal);
+                report.DetailInfo.Add(leagueWinLoss);
             }
+
+            report.GrandTotal = WinLossInfo.Format(report.GrandTotal);
+
+            SessionManager.Set<WinLossInfo>(_winLossByBetTypeDetailReportSessionKey, report);
+            return report;
         }
 
         /// <summary>
@@ -172,54 +156,47 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <param name="criteria">The criteria.</param>
         public void ExportMainReport(GetWinLossByBetTypeMainReportCriteria criteria)
         {
-            try
+            WinLossInfo report = SessionManager.Get<WinLossInfo>(_winLossByBetTypeMainReportSessionKey);
+            if (report == null)
             {
-                WinLossInfo report = SessionManager.Get<WinLossInfo>(_winLossByBetTypeMainReportSessionKey);
-                if (report == null)
-                {
-                    report = GetMainReport(criteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = GamingResources.NumberGameWinLossByBetTypeMatch_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                int maxColumnIndex = 8;
-                var currentRow = startRow;
-
-                var reportTitle = string.Format(
-                    GamingResources.NumberGameWinLossByBetTypeMatch_ByBetTypeMainReportTitle,
-                    criteria.ReportDate.ToShortFormatedDate());
-                this.ExportReport_WinLossByBetTypeHeader(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    maxColumnIndex,
-                    reportTitle,
-                    ReportLevelType.WinLossByBetTypeMainReport);
-
-                this.ExportReport_WinLossByBetTypeMainReportContent(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    maxColumnIndex,
-                    criteria,
-                    report);
-
-                var reportName = string.Format(
-                    GamingResources.NumberGameWinLossByBetTypeMatch_ReportName,
-                    Converter.ToDateTime(criteria.ReportDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
-                excelFile.ReponseStream(reportName);
+                report = GetMainReport(criteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = GamingResources.NumberGameWinLossByBetTypeMatch_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            int maxColumnIndex = 8;
+            var currentRow = startRow;
+
+            var reportTitle = string.Format(
+                GamingResources.NumberGameWinLossByBetTypeMatch_ByBetTypeMainReportTitle,
+                criteria.ReportDate.ToShortFormatedDate());
+            this.ExportReport_WinLossByBetTypeHeader(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                maxColumnIndex,
+                reportTitle,
+                ReportLevelType.WinLossByBetTypeMainReport);
+
+            this.ExportReport_WinLossByBetTypeMainReportContent(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                maxColumnIndex,
+                criteria,
+                report);
+
+            var reportName = string.Format(
+                GamingResources.NumberGameWinLossByBetTypeMatch_ReportName,
+                Converter.ToDateTime(criteria.ReportDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>
@@ -231,56 +208,49 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportDetailReport(GetWinLossByBetTypeDetailReportCriteria criteria)
         {
-            try
+            WinLossInfo report = SessionManager.Get<WinLossInfo>(_winLossByBetTypeDetailReportSessionKey);
+            if (report == null)
             {
-                WinLossInfo report = SessionManager.Get<WinLossInfo>(_winLossByBetTypeDetailReportSessionKey);
-                if (report == null)
-                {
-                    report = GetDetailReport(criteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = GamingResources.NumberGameWinLossByBetTypeMatch_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                int maxColumnIndex = 8;
-                var currentRow = startRow;
-
-                var betTypeName = report != null ? " - " + report.Name : string.Empty;
-                var reportTitle = string.Format(
-                    GamingResources.NumberGameWinLossByBetTypeMatch_ByBetTypeDetailReportTitle,
-                    betTypeName,
-                    criteria.ReportDate.ToShortFormatedDate());
-                this.ExportReport_WinLossByBetTypeHeader(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    maxColumnIndex,
-                    reportTitle,
-                    ReportLevelType.WinLossByBetTypeDetailReport);
-
-                this.ExportReport_WinLossByBetTypeDetailReportContent(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    maxColumnIndex,
-                    criteria,
-                    report);
-
-                var reportName = string.Format(
-                    GamingResources.NumberGameWinLossByBetTypeMatch_ReportName,
-                    Converter.ToDateTime(criteria.ReportDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
-                excelFile.ReponseStream(reportName);
+                report = GetDetailReport(criteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = GamingResources.NumberGameWinLossByBetTypeMatch_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            int maxColumnIndex = 8;
+            var currentRow = startRow;
+
+            var betTypeName = report != null ? " - " + report.Name : string.Empty;
+            var reportTitle = string.Format(
+                GamingResources.NumberGameWinLossByBetTypeMatch_ByBetTypeDetailReportTitle,
+                betTypeName,
+                criteria.ReportDate.ToShortFormatedDate());
+            this.ExportReport_WinLossByBetTypeHeader(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                maxColumnIndex,
+                reportTitle,
+                ReportLevelType.WinLossByBetTypeDetailReport);
+
+            this.ExportReport_WinLossByBetTypeDetailReportContent(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                maxColumnIndex,
+                criteria,
+                report);
+
+            var reportName = string.Format(
+                GamingResources.NumberGameWinLossByBetTypeMatch_ReportName,
+                Converter.ToDateTime(criteria.ReportDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>
