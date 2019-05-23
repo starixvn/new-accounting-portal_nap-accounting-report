@@ -54,39 +54,32 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.RacingGroupDaily
         /// <param name="criteria">The criteria.</param>
         public void ExportReport(GetWinLostRacingGroupCriteria criteria)
         {
-            try
+            var report = SessionManager.Get<List<RacingGroupDaily>>(this._racingGroupDailySessionKey);
+
+            if (report == null)
             {
-                var report = SessionManager.Get<List<RacingGroupDaily>>(this._racingGroupDailySessionKey);
-
-                if (report == null)
-                {
-                    report = this._getReportService.GetReport(criteria);
-                }
-
-                HSSFWorkbook excelFile = new HSSFWorkbook();
-                this.SetColorAtIndex(excelFile);
-
-                string sheetName = RacingResources.RacingGroupDaily_SheetName;
-                ISheet worksheet = excelFile.CreateSheet(sheetName);
-                int currentRow = 0;
-
-                if (report != null && report.Count >= 2)
-                {
-                    this.RenderReportHeader(excelFile, ref worksheet, ref currentRow, criteria);
-                    this.RenderReportContent(excelFile, ref worksheet, ref currentRow, report);
-                }
-
-                string reportTitle = string.Format(
-                        RacingResources.RacingGroupDaily_ReportName,
-                        criteria.FromDate.ToShortFormatedDateWithSlash(),
-                        criteria.ToDate.ToShortFormatedDateWithSlash());
-
-                excelFile.ToReponseStream(reportTitle);
+                report = this._getReportService.GetReport(criteria);
             }
-            catch (Exception ex)
+
+            HSSFWorkbook excelFile = new HSSFWorkbook();
+            this.SetColorAtIndex(excelFile);
+
+            string sheetName = RacingResources.RacingGroupDaily_SheetName;
+            ISheet worksheet = excelFile.CreateSheet(sheetName);
+            int currentRow = 0;
+
+            if (report != null && report.Count >= 2)
             {
-                this.HandleException(ex);
+                this.RenderReportHeader(excelFile, ref worksheet, ref currentRow, criteria);
+                this.RenderReportContent(excelFile, ref worksheet, ref currentRow, report);
             }
+
+            string reportTitle = string.Format(
+                    RacingResources.RacingGroupDaily_ReportName,
+                    criteria.FromDate.ToShortFormatedDateWithSlash(),
+                    criteria.ToDate.ToShortFormatedDateWithSlash());
+
+            excelFile.ToReponseStream(reportTitle);
         }
 
         /// <summary>

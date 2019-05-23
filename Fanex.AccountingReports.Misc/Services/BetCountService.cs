@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Misc.Services.Implement
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
@@ -56,77 +55,70 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 MiscConstants.BetCountHistoryReportSessionKey :
                 MiscConstants.BetCountSessionKey;
 
-            try
+            var rawData = GetReportData<dynamic>(criteria);
+            Transaction report = new Transaction
             {
-                var rawData = GetReportData<dynamic>(criteria);
-                Transaction report = new Transaction
+                TransactionList = new List<Transaction>(),
+                Total = new Transaction
                 {
-                    TransactionList = new List<Transaction>(),
-                    Total = new Transaction
-                    {
-                        SiteName = Labels.Total
-                    }
-                };
-
-                rawData.GroupBy(data => data.IsDeposit)
-                       .ToList()
-                       .ForEach(group =>
-                         {
-                             Transaction transByIsDepositionGroup = new Transaction
-                             {
-                                 TransactionList = new List<Transaction>(),
-                                 Total = new Transaction()
-                             };
-
-                             transByIsDepositionGroup.SiteName = Converter.ToBool(group.Key) ?
-                                 Labels.Deposit :
-                                 Labels.Credit;
-                             transByIsDepositionGroup.Total.SiteName = transByIsDepositionGroup.SiteName;
-
-                             group.ToList()
-                                  .ForEach(transaction =>
-                                       {
-                                           var transactionData = new Transaction
-                                           {
-                                               SiteName = transaction.Site,
-                                               BetCount = Converter.ToInt(transaction.BetCount),
-                                               Turnover = Converter.ToDecimal(transaction.TurnOver),
-                                               MemberWinLoss = Converter.ToDecimal(transaction.MemberWL),
-                                               AgentWinLoss = Converter.ToDecimal(transaction.AgentWL),
-                                               MasterWinLoss = Converter.ToDecimal(transaction.MasterWL),
-                                               SuperWinLoss = Converter.ToDecimal(transaction.SuperWL),
-                                               CompanyWinLoss = Converter.ToDecimal(transaction.RealIncome),
-                                               TotalWinLoss = Converter.ToDecimal(transaction.SMAWL),
-                                               Commission = Converter.ToDecimal(transaction.Commission),
-                                               ExtraPT = Converter.ToDecimal(transaction.ExtraPT),
-                                           };
-
-                                           transactionData.MarginPercent = CalculateMargin(transactionData.MemberWinLoss, transactionData.Turnover);
-                                           transByIsDepositionGroup.SumDataToTotal(transactionData);
-                                           transByIsDepositionGroup.TransactionList.Add(transactionData);
-                                       });
-
-                             transByIsDepositionGroup.Total.MarginPercent = CalculateMargin(
-                                 transByIsDepositionGroup.Total.MemberWinLoss,
-                                 transByIsDepositionGroup.Total.Turnover);
-
-                             report.TransactionList.Add(transByIsDepositionGroup);
-                         });
-
-                for (int i = 0; i < report.TransactionList.Count; i++)
-                {
-                    var transactionGroup = report.TransactionList[i];
-                    report.SumDataToTotal(transactionGroup.Total);
+                    SiteName = Labels.Total
                 }
+            };
 
-                report.Total.MarginPercent = this.CalculateMargin(report.Total.MemberWinLoss, report.Total.Turnover);
-                SessionManager.Set<Transaction>(sessionKey, report);
-                return report;
-            }
-            catch (Exception ex)
+            rawData.GroupBy(data => data.IsDeposit)
+                   .ToList()
+                   .ForEach(group =>
+                     {
+                         Transaction transByIsDepositionGroup = new Transaction
+                         {
+                             TransactionList = new List<Transaction>(),
+                             Total = new Transaction()
+                         };
+
+                         transByIsDepositionGroup.SiteName = Converter.ToBool(group.Key) ?
+                             Labels.Deposit :
+                             Labels.Credit;
+                         transByIsDepositionGroup.Total.SiteName = transByIsDepositionGroup.SiteName;
+
+                         group.ToList()
+                              .ForEach(transaction =>
+                                   {
+                                       var transactionData = new Transaction
+                                       {
+                                           SiteName = transaction.Site,
+                                           BetCount = Converter.ToInt(transaction.BetCount),
+                                           Turnover = Converter.ToDecimal(transaction.TurnOver),
+                                           MemberWinLoss = Converter.ToDecimal(transaction.MemberWL),
+                                           AgentWinLoss = Converter.ToDecimal(transaction.AgentWL),
+                                           MasterWinLoss = Converter.ToDecimal(transaction.MasterWL),
+                                           SuperWinLoss = Converter.ToDecimal(transaction.SuperWL),
+                                           CompanyWinLoss = Converter.ToDecimal(transaction.RealIncome),
+                                           TotalWinLoss = Converter.ToDecimal(transaction.SMAWL),
+                                           Commission = Converter.ToDecimal(transaction.Commission),
+                                           ExtraPT = Converter.ToDecimal(transaction.ExtraPT),
+                                       };
+
+                                       transactionData.MarginPercent = CalculateMargin(transactionData.MemberWinLoss, transactionData.Turnover);
+                                       transByIsDepositionGroup.SumDataToTotal(transactionData);
+                                       transByIsDepositionGroup.TransactionList.Add(transactionData);
+                                   });
+
+                         transByIsDepositionGroup.Total.MarginPercent = CalculateMargin(
+                             transByIsDepositionGroup.Total.MemberWinLoss,
+                             transByIsDepositionGroup.Total.Turnover);
+
+                         report.TransactionList.Add(transByIsDepositionGroup);
+                     });
+
+            for (int i = 0; i < report.TransactionList.Count; i++)
             {
-                HandleException(ex);
+                var transactionGroup = report.TransactionList[i];
+                report.SumDataToTotal(transactionGroup.Total);
             }
+
+            report.Total.MarginPercent = this.CalculateMargin(report.Total.MemberWinLoss, report.Total.Turnover);
+            SessionManager.Set<Transaction>(sessionKey, report);
+            return report;
 
             SessionManager.Set<Transaction>(sessionKey, null);
             return null;
@@ -143,35 +135,28 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 MiscConstants.BetCountHistoryReportSessionKey :
                 MiscConstants.BetCountSessionKey;
 
-            try
+            var report = SessionManager.Get<Transaction>(sessionKey);
+            if (report == null)
             {
-                var report = SessionManager.Get<Transaction>(sessionKey);
-                if (report == null)
-                {
-                    report = this.GetReport(criteria);
-                }
-
-                if (report != null &&
-                    report.TransactionList != null &&
-                    report.TransactionList.Count > 0)
-                {
-                    var siteGroupLength = report.TransactionList.Count;
-                    for (int i = 0; i < siteGroupLength; i++)
-                    {
-                        var propertyName = this.GetSortedColumnName(criteria.SortBy);
-                        report.TransactionList[i].TransactionList.SortByProperty<Transaction>(
-                            criteria.SortDirection,
-                            propertyName);
-                    }
-                }
-
-                SessionManager.Set<Transaction>(sessionKey, report);
-                return report;
+                report = this.GetReport(criteria);
             }
-            catch (Exception ex)
+
+            if (report != null &&
+                report.TransactionList != null &&
+                report.TransactionList.Count > 0)
             {
-                HandleException(ex);
+                var siteGroupLength = report.TransactionList.Count;
+                for (int i = 0; i < siteGroupLength; i++)
+                {
+                    var propertyName = this.GetSortedColumnName(criteria.SortBy);
+                    report.TransactionList[i].TransactionList.SortByProperty<Transaction>(
+                        criteria.SortDirection,
+                        propertyName);
+                }
             }
+
+            SessionManager.Set<Transaction>(sessionKey, report);
+            return report;
 
             SessionManager.Set<Transaction>(sessionKey, null);
             return null;
@@ -185,51 +170,44 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// <param name="criteria">The criteria.</param>
         public void ExportReport(GetBetCountReportCriteria criteria)
         {
-            try
+            var sessionKey = criteria.IsHistoryReport ?
+                MiscConstants.BetCountHistoryReportSessionKey :
+                MiscConstants.BetCountSessionKey;
+
+            var report = SessionManager.Get<Transaction>(sessionKey);
+            if (report == null)
             {
-                var sessionKey = criteria.IsHistoryReport ?
-                    MiscConstants.BetCountHistoryReportSessionKey :
-                    MiscConstants.BetCountSessionKey;
-
-                var report = SessionManager.Get<Transaction>(sessionKey);
-                if (report == null)
-                {
-                    report = this.GetReport(criteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = MiscResources.BetCountReport_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
-
-                this.ExportBetCountReportHeader(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    criteria);
-
-                this.ExportBetCountReportContent(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    criteria,
-                    report);
-
-                excelFile.ReponseStream(string.Format(
-                    MiscResources.BetCountReport_ReportName,
-                    criteria.Datestart.ToShortFormatedDateWithSlash().Replace('/', '_'),
-                    criteria.Dateend.ToShortFormatedDateWithSlash().Replace('/', '_')));
+                report = this.GetReport(criteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = MiscResources.BetCountReport_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
+
+            this.ExportBetCountReportHeader(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                criteria);
+
+            this.ExportBetCountReportContent(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                criteria,
+                report);
+
+            excelFile.ReponseStream(string.Format(
+                MiscResources.BetCountReport_ReportName,
+                criteria.Datestart.ToShortFormatedDateWithSlash().Replace('/', '_'),
+                criteria.Dateend.ToShortFormatedDateWithSlash().Replace('/', '_')));
         }
 
         /// <summary>
@@ -676,50 +654,41 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
         public List<ProductInfo> GetProducts(GetProductsCriteria criteria)
         {
-            try
+            var rawData = this.GetReportData<dynamic>(criteria);
+            List<ProductInfo> products = new List<ProductInfo>();
+            var productGroups = rawData.GroupBy(rawInfo => rawInfo.ProductName);
+
+            foreach (var productGroup in productGroups)
             {
-                var rawData = this.GetReportData<dynamic>(criteria);
-                List<ProductInfo> products = new List<ProductInfo>();
-                var productGroups = rawData.GroupBy(rawInfo => rawInfo.ProductName);
-
-                foreach (var productGroup in productGroups)
+                var product = new ProductInfo
                 {
-                    var product = new ProductInfo
-                    {
-                        Name = Converter.ToString2(productGroup.Key),
-                        ChildsInfo = new List<ProductInfo>()
-                    };
+                    Name = Converter.ToString2(productGroup.Key),
+                    ChildsInfo = new List<ProductInfo>()
+                };
 
-                    if (MiscConstants.ProductsHaveSports.Contains(product.Name.ToLower()))
-                    {
-                        products.Add(product);
-                        continue;
-                    }
-
-                    var sportGroups = productGroup.GroupBy(rawInfo => new { rawInfo.SportID, rawInfo.SportName });
-
-                    foreach (var sportGroup in sportGroups)
-                    {
-                        var sport = CreateSportInfo(sportGroup.Key);
-                        foreach (var data in sportGroup)
-                        {
-                            sport.ChildsInfo.Add(CreateProductInfo(data));
-                        }
-
-                        product.ChildsInfo.Add(sport);
-                    }
-
+                if (MiscConstants.ProductsHaveSports.Contains(product.Name.ToLower()))
+                {
                     products.Add(product);
+                    continue;
                 }
 
-                return products;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
+                var sportGroups = productGroup.GroupBy(rawInfo => new { rawInfo.SportID, rawInfo.SportName });
+
+                foreach (var sportGroup in sportGroups)
+                {
+                    var sport = CreateSportInfo(sportGroup.Key);
+                    foreach (var data in sportGroup)
+                    {
+                        sport.ChildsInfo.Add(CreateProductInfo(data));
+                    }
+
+                    product.ChildsInfo.Add(sport);
+                }
+
+                products.Add(product);
             }
 
-            return null;
+            return products;
         }
 
         public ProductInfo GenerateSports(IEnumerable<dynamic> rawData)
@@ -888,24 +857,14 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
         public List<ProductInfo> GetSports(GetProductsCriteria criteria)
         {
-            try
-            {
-                var rawData = this.GetReportData<dynamic>(criteria);
-                List<ProductInfo> sports = new List<ProductInfo>();
-                var sportTypeList = rawData.Select(info => info.SportID as dynamic).Distinct().ToList();
-                BetCountService._sportTypeNameCache = CacheRef.SaveCacheRefResponse(
-                    sportTypeList, CacheRef.GetSportName, ref BetCountService._sportTypeNameCache);
-                CalculateSportData(rawData, sports);
-                SessionManager.Set<List<ProductInfo>>(MiscConstants.MiscSportsSessionKey, sports);
-                return sports;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            SessionManager.Set<List<ProductInfo>>(MiscConstants.MiscSportsSessionKey, null);
-            return null;
+            var rawData = this.GetReportData<dynamic>(criteria);
+            List<ProductInfo> sports = new List<ProductInfo>();
+            var sportTypeList = rawData.Select(info => info.SportID as dynamic).Distinct().ToList();
+            BetCountService._sportTypeNameCache = CacheRef.SaveCacheRefResponse(
+                sportTypeList, CacheRef.GetSportName, ref BetCountService._sportTypeNameCache);
+            CalculateSportData(rawData, sports);
+            SessionManager.Set<List<ProductInfo>>(MiscConstants.MiscSportsSessionKey, sports);
+            return sports;
         }
 
         public string GetSportName(int sportId)

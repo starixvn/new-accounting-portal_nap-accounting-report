@@ -26,21 +26,14 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         public CheckBet GetCheckedBet(CheckBetCriteria checkBetCriteria)
         {
             var result = new CheckBet();
-            try
+            var rawData = GetReportData<dynamic>(checkBetCriteria);
+            if (rawData != null)
             {
-                var rawData = GetReportData<dynamic>(checkBetCriteria);
-                if (rawData != null)
+                foreach (var row in rawData)
                 {
-                    foreach (var row in rawData)
-                    {
-                        result.NormalTicket = (int)row.CheckNormalBet;
-                        result.RejectTicket = (int)row.CheckRejectBet;
-                    }
+                    result.NormalTicket = (int)row.CheckNormalBet;
+                    result.RejectTicket = (int)row.CheckRejectBet;
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
             }
 
             return result;

@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
@@ -29,32 +28,25 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
         public MarginWinLoss GetDataMarginReport(GetMarginWinLossCriteria criteria)
         {
             var marginWinLoss = new MarginWinLoss();
-            try
+            var rawData = this.GetReportData<dynamic>(criteria);
+            if (rawData.Count() == 0)
             {
-                var rawData = this.GetReportData<dynamic>(criteria);
-                if (rawData.Count() == 0)
-                {
-                    return marginWinLoss;
-                }
-
-                foreach (var row in rawData)
-                {
-                    var marginDetail = new MarginWinLoss()
-                    {
-                        UserName = Converter.ToString2(row.username),
-                        BettypeId = Converter.ToInt(row.bettype),
-                        BettypeName = CacheRef.GetBettype(row.bettype),
-                        WinningAmount = Converter.ToDecimal(row.totalwon),
-                        Turnover = Converter.ToDecimal(row.turnover),
-                        Ratio = Converter.ToDecimal(row.ratio),
-                        TotalBet = Converter.ToInt(row.n)
-                    };
-                    marginWinLoss.ChildsInfo.Add(marginDetail);
-                }
+                return marginWinLoss;
             }
-            catch (Exception ex)
+
+            foreach (var row in rawData)
             {
-                this.HandleException(ex);
+                var marginDetail = new MarginWinLoss()
+                {
+                    UserName = Converter.ToString2(row.username),
+                    BettypeId = Converter.ToInt(row.bettype),
+                    BettypeName = CacheRef.GetBettype(row.bettype),
+                    WinningAmount = Converter.ToDecimal(row.totalwon),
+                    Turnover = Converter.ToDecimal(row.turnover),
+                    Ratio = Converter.ToDecimal(row.ratio),
+                    TotalBet = Converter.ToInt(row.n)
+                };
+                marginWinLoss.ChildsInfo.Add(marginDetail);
             }
 
             SessionManager.Set<MarginWinLoss>(MarginReportSessionKey, marginWinLoss);
@@ -70,65 +62,58 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
            Justification = "Reviewed. Suppression is OK here.")]
         public void ExcelReport(GetMarginWinLossCriteria criteria)
         {
-            try
+            var marginWinLoss = new MarginWinLoss();
+            marginWinLoss = SessionManager.Get<MarginWinLoss>(MarginReportSessionKey);
+            if (marginWinLoss == null)
             {
-                var marginWinLoss = new MarginWinLoss();
-                marginWinLoss = SessionManager.Get<MarginWinLoss>(MarginReportSessionKey);
-                if (marginWinLoss == null)
-                {
-                    marginWinLoss = this.GetDataMarginReport(criteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = SpecialResources.MarginReport_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                var titleColor = ExcelExtensions.HeaderTitleColor;
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
-
-                var currentColumn = startColumn;
-                CellRange currentCellRange;
-
-                workSheet.Columns[0].Width = 80 * ExcelExtensions.FontWidth;
-                workSheet.Columns[6].Width = 80 * ExcelExtensions.FontWidth;
-                currentColumn = startColumn;
-                for (int colIndex = 1; colIndex < 7; colIndex++)
-                {
-                    workSheet.Columns[startColumn + colIndex].Width = 120 * ExcelExtensions.FontWidth;
-                }
-
-                var title = string.Format(
-                    SpecialResources.Margin_ReportTitle,
-                    criteria.ActualStake);
-
-                currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = title;
-                currentCellRange.Style.FormatTitleCell(titleColor);
-                currentRow++;
-                if (marginWinLoss != null && marginWinLoss.ChildsInfo.Count > 0)
-                {
-                    workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 6);
-
-                    this.MarginReportExportHeader(ref workSheet, startColumn, ref currentRow);
-                    this.MarginReportExportBody(ref workSheet, marginWinLoss.ChildsInfo, startColumn, ref currentRow);
-                }
-                else
-                {
-                    workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 5);
-                }
-
-                var reportName = SpecialResources.MarginReport_SheetName;
-                excelFile.ReponseStream(reportName);
+                marginWinLoss = this.GetDataMarginReport(criteria);
             }
-            catch (Exception ex)
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = SpecialResources.MarginReport_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            var titleColor = ExcelExtensions.HeaderTitleColor;
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
+
+            var currentColumn = startColumn;
+            CellRange currentCellRange;
+
+            workSheet.Columns[0].Width = 80 * ExcelExtensions.FontWidth;
+            workSheet.Columns[6].Width = 80 * ExcelExtensions.FontWidth;
+            currentColumn = startColumn;
+            for (int colIndex = 1; colIndex < 7; colIndex++)
             {
-                this.HandleException(ex);
+                workSheet.Columns[startColumn + colIndex].Width = 120 * ExcelExtensions.FontWidth;
             }
+
+            var title = string.Format(
+                SpecialResources.Margin_ReportTitle,
+                criteria.ActualStake);
+
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = title;
+            currentCellRange.Style.FormatTitleCell(titleColor);
+            currentRow++;
+            if (marginWinLoss != null && marginWinLoss.ChildsInfo.Count > 0)
+            {
+                workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 6);
+
+                this.MarginReportExportHeader(ref workSheet, startColumn, ref currentRow);
+                this.MarginReportExportBody(ref workSheet, marginWinLoss.ChildsInfo, startColumn, ref currentRow);
+            }
+            else
+            {
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 5);
+            }
+
+            var reportName = SpecialResources.MarginReport_SheetName;
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>

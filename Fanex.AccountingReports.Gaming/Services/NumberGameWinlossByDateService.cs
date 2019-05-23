@@ -47,24 +47,17 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
         public List<EntityBase<int, string>> GetLicensee(GetNumberGameLicenseeCriteria criteria)
         {
             var result = new List<EntityBase<int, string>>();
-            try
+            var rawData = GetReportData<dynamic>(criteria);
+            if (rawData != null)
             {
-                var rawData = GetReportData<dynamic>(criteria);
-                if (rawData != null)
+                foreach (var row in rawData)
                 {
-                    foreach (var row in rawData)
+                    result.Add(new EntityBase<int, string>()
                     {
-                        result.Add(new EntityBase<int, string>()
-                        {
-                            Id = row.LicenseeID,
-                            Name = row.Licenseename
-                        });
-                    }
+                        Id = row.LicenseeID,
+                        Name = row.Licenseename
+                    });
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
             }
 
             return result;

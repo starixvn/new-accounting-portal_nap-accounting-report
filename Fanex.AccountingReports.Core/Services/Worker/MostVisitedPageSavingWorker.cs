@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Core.Services.Impl.Worker
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
@@ -27,14 +26,8 @@ namespace Fanex.AccountingReports.Core.Services.Impl.Worker
         protected override void Run()
         {
             var intervalGetMostVisitedPage = 10;
-            try
-            {
-                intervalGetMostVisitedPage = AppSettings.IntervalGetMostVisitedPage;
-            }
-            catch (Exception)
-            {
-                intervalGetMostVisitedPage = 10;
-            }
+
+            intervalGetMostVisitedPage = AppSettings.IntervalGetMostVisitedPage;
 
             while (true)
             {
@@ -53,35 +46,29 @@ namespace Fanex.AccountingReports.Core.Services.Impl.Worker
         /// </summary>
         private void SaveMostVisitedPageCount()
         {
-            try
+            lock (CommonConstants.MostVisitedPageLockObject)
             {
-                lock (CommonConstants.MostVisitedPageLockObject)
+                List<MostVisitedPage> mostVisitedPages = CacheExtension.Get<List<MostVisitedPage>>(CommonConstants.MistVisitedPageCacheKey);
+                if (mostVisitedPages != null && mostVisitedPages.Count > 0)
                 {
-                    List<MostVisitedPage> mostVisitedPages = CacheExtension.Get<List<MostVisitedPage>>(CommonConstants.MistVisitedPageCacheKey);
-                    if (mostVisitedPages != null && mostVisitedPages.Count > 0)
+                    //// Save to Database
+                    var criteria = new UpdateMostVisitedPageCountCriteria
                     {
-                        //// Save to Database
-                        var criteria = new UpdateMostVisitedPageCountCriteria
-                        {
-                            CustId = mostVisitedPages.First().UserId,
-                            MenuId = string.Join<string>(
-                                CommonConstants.SPParamSeparator,
-                                mostVisitedPages.Select(mvp => mvp.MenuId.ToString())),
-                            Count = string.Join<string>(
-                                CommonConstants.SPParamSeparator,
-                                mostVisitedPages.Select(mvp => mvp.Count.ToString())),
-                        };
+                        CustId = mostVisitedPages.First().UserId,
+                        MenuId = string.Join<string>(
+                            CommonConstants.SPParamSeparator,
+                            mostVisitedPages.Select(mvp => mvp.MenuId.ToString())),
+                        Count = string.Join<string>(
+                            CommonConstants.SPParamSeparator,
+                            mostVisitedPages.Select(mvp => mvp.Count.ToString())),
+                    };
 
-                        var repository = new MostVisitedPagesRepository();
-                        repository.UpdateCount(criteria);
+                    var repository = new MostVisitedPagesRepository();
+                    repository.UpdateCount(criteria);
 
-                        //// Update Cache
-                        CacheExtension.Set(CommonConstants.MistVisitedPageCacheKey, new List<MostVisitedPage>());
-                    }
+                    //// Update Cache
+                    CacheExtension.Set(CommonConstants.MistVisitedPageCacheKey, new List<MostVisitedPage>());
                 }
-            }
-            catch (Exception)
-            {
             }
         }
     }

@@ -30,35 +30,28 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         {
             List<SportLeague> sportLeagues = new List<SportLeague>();
 
-            try
-            {
-                var data = GetReportData<dynamic>(criteria);
+            var data = GetReportData<dynamic>(criteria);
 
-                var sports = data.Select(s => s.sporttype).Distinct().ToList();
-                foreach (var sportId in sports)
+            var sports = data.Select(s => s.sporttype).Distinct().ToList();
+            foreach (var sportId in sports)
+            {
+                SportLeague sportLeague = new SportLeague();
+                sportLeague.Id = sportId;
+                sportLeague.Name = CacheRef.GetSportName(sportId);
+                sportLeague.Leagues = new List<League>();
+                sportLeagues.Add(sportLeague);
+
+                var leagues = data.Where(s => s.sporttype == sportId).Select(s => s.leagueid).ToList();
+                foreach (var leagueId in leagues)
                 {
-                    SportLeague sportLeague = new SportLeague();
-                    sportLeague.Id = sportId;
-                    sportLeague.Name = CacheRef.GetSportName(sportId);
-                    sportLeague.Leagues = new List<League>();
-                    sportLeagues.Add(sportLeague);
-
-                    var leagues = data.Where(s => s.sporttype == sportId).Select(s => s.leagueid).ToList();
-                    foreach (var leagueId in leagues)
+                    League league = new League()
                     {
-                        League league = new League()
-                        {
-                            Id = leagueId,
-                            Name = CacheRef.GetLeagueName(leagueId)
-                        };
+                        Id = leagueId,
+                        Name = CacheRef.GetLeagueName(leagueId)
+                    };
 
-                        sportLeague.Leagues.Add(league);
-                    }
+                    sportLeague.Leagues.Add(league);
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
             }
 
             return sportLeagues;
@@ -72,48 +65,41 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         public List<LeagueMatch> GetLeagueMatch(GetLeageMatchCriteria criteria)
         {
             List<LeagueMatch> leagueMatches = new List<LeagueMatch>();
-            try
-            {
-                var data = GetReportData<dynamic>(criteria);
-                var leagues = data.Select(s => s.leagueid).Distinct().ToList();
+            var data = GetReportData<dynamic>(criteria);
+            var leagues = data.Select(s => s.leagueid).Distinct().ToList();
 
-                foreach (var leagueId in leagues)
+            foreach (var leagueId in leagues)
+            {
+                LeagueMatch leagueMatch = new LeagueMatch();
+                leagueMatch.Id = leagueId;
+                leagueMatch.Name = CacheRef.GetLeagueName(leagueId);
+                leagueMatches.Add(leagueMatch);
+
+                var matches = data.Where(s => s.leagueid == leagueId).ToList();
+                foreach (var match in matches)
                 {
-                    LeagueMatch leagueMatch = new LeagueMatch();
-                    leagueMatch.Id = leagueId;
-                    leagueMatch.Name = CacheRef.GetLeagueName(leagueId);
-                    leagueMatches.Add(leagueMatch);
-
-                    var matches = data.Where(s => s.leagueid == leagueId).ToList();
-                    foreach (var match in matches)
+                    leagueMatch.Matches.Add(new Match()
                     {
-                        leagueMatch.Matches.Add(new Match()
+                        MatchId = match.matchid,
+                        MatchCode = match.matchcode,
+                        ShowTime = match.showtime,
+                        Sport = new BaseModel()
                         {
-                            MatchId = match.matchid,
-                            MatchCode = match.matchcode,
-                            ShowTime = match.showtime,
-                            Sport = new BaseModel()
-                            {
-                                Id = match.sporttype,
-                                Name = CacheRef.GetSportName(match.sporttype)
-                            },
-                            Home = new BaseModel()
-                            {
-                                Id = match.homeid,
-                                Name = CacheRef.GetTeamName(match.homeid)
-                            },
-                            Away = new BaseModel()
-                            {
-                                Id = match.awayid,
-                                Name = CacheRef.GetTeamName(match.awayid)
-                            }
-                        });
-                    }
+                            Id = match.sporttype,
+                            Name = CacheRef.GetSportName(match.sporttype)
+                        },
+                        Home = new BaseModel()
+                        {
+                            Id = match.homeid,
+                            Name = CacheRef.GetTeamName(match.homeid)
+                        },
+                        Away = new BaseModel()
+                        {
+                            Id = match.awayid,
+                            Name = CacheRef.GetTeamName(match.awayid)
+                        }
+                    });
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
             }
 
             return leagueMatches;
@@ -127,21 +113,14 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         public List<Bettype> GetBetType(GetBetTypeCriteria criteria)
         {
             List<Bettype> bettypes = new List<Bettype>();
-            try
+            var data = GetReportData<dynamic>(criteria);
+            foreach (var d in data)
             {
-                var data = GetReportData<dynamic>(criteria);
-                foreach (var d in data)
+                bettypes.Add(new Bettype()
                 {
-                    bettypes.Add(new Bettype()
-                    {
-                        Id = d.bettype,
-                        Name = CacheRef.GetBettype(d.bettype)
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
+                    Id = d.bettype,
+                    Name = CacheRef.GetBettype(d.bettype)
+                });
             }
 
             return bettypes;
@@ -297,36 +276,29 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         /// <param name="criteria">The criteria.</param>
         public void ExportReport(GetMatchAnalysisCriteria criteria)
         {
-            try
+            var matchAnalysis = SessionManager.Get<MatchAnalysisView>(SpecialConstants.MatchAnalysisSessionKey + GetReportTypeName(criteria.Reporttype));
+            if (matchAnalysis == null)
             {
-                var matchAnalysis = SessionManager.Get<MatchAnalysisView>(SpecialConstants.MatchAnalysisSessionKey + GetReportTypeName(criteria.Reporttype));
-                if (matchAnalysis == null)
-                {
-                    matchAnalysis = GetMatchAnalysis(criteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = SpecialResources.MatchAnalysis_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
-
-                this.ExportReportHeader(ref workSheet, startRow, startColumn, ref currentRow, criteria);
-                currentRow++;
-                this.ExportReportContent(ref workSheet, currentRow, startColumn, ref currentRow, criteria, matchAnalysis);
-
-                var reportName = string.Format(
-                    SpecialResources.MatchAnalysis_SheetName.Replace(" ", "_"),
-                    criteria.EventDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
-                excelFile.ReponseStream(reportName);
+                matchAnalysis = GetMatchAnalysis(criteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = SpecialResources.MatchAnalysis_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
+
+            this.ExportReportHeader(ref workSheet, startRow, startColumn, ref currentRow, criteria);
+            currentRow++;
+            this.ExportReportContent(ref workSheet, currentRow, startColumn, ref currentRow, criteria, matchAnalysis);
+
+            var reportName = string.Format(
+                SpecialResources.MatchAnalysis_SheetName.Replace(" ", "_"),
+                criteria.EventDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>
@@ -678,81 +650,74 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                 false,
                 true);
 
-            try
+            //// Rows
+            foreach (MatchAnalysis row in matchAnalysis.Rows)
             {
-                //// Rows
-                foreach (MatchAnalysis row in matchAnalysis.Rows)
+                currentColumn = startColumn;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = row.Name;
+                currentCellRange.Style = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false, HorizontalAlignmentStyle.Center);
+
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Convert.ToDecimal(row.MemberTO);
+                currentCellRange.Style = twoDecimalNumberStyle;
+
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Convert.ToDecimal(row.MemberWL);
+                currentCellRange.Style = twoDecimalNumberStyle;
+
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Convert.ToDecimal(row.BetCount);
+                currentCellRange.Style = intStyle;
+
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Convert.ToDecimal(row.HouseTO);
+                currentCellRange.Style = twoDecimalNumberStyle;
+
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Convert.ToDecimal(row.HouseWL);
+                currentCellRange.Style = twoDecimalNumberStyleNegative;
+
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Convert.ToDecimal(row.SMATO);
+                currentCellRange.Style = twoDecimalNumberStyle;
+
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Convert.ToDecimal(row.SMAWL);
+                currentCellRange.Style = twoDecimalNumberStyle;
+
+                if (isAddMoreCurrencyColumn)
                 {
-                    currentColumn = startColumn;
+                    currentColumn++;
                     currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = row.Name;
+                    currentCellRange.Value = row.Currency;
                     currentCellRange.Style = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false, HorizontalAlignmentStyle.Center);
-
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = Convert.ToDecimal(row.MemberTO);
-                    currentCellRange.Style = twoDecimalNumberStyle;
-
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = Convert.ToDecimal(row.MemberWL);
-                    currentCellRange.Style = twoDecimalNumberStyle;
-
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = Convert.ToDecimal(row.BetCount);
-                    currentCellRange.Style = intStyle;
-
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = Convert.ToDecimal(row.HouseTO);
-                    currentCellRange.Style = twoDecimalNumberStyle;
-
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = Convert.ToDecimal(row.HouseWL);
-                    currentCellRange.Style = twoDecimalNumberStyleNegative;
-
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = Convert.ToDecimal(row.SMATO);
-                    currentCellRange.Style = twoDecimalNumberStyle;
-
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = Convert.ToDecimal(row.SMAWL);
-                    currentCellRange.Style = twoDecimalNumberStyle;
-
-                    if (isAddMoreCurrencyColumn)
-                    {
-                        currentColumn++;
-                        currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                        currentCellRange.Merged = true;
-                        currentCellRange.Value = row.Currency;
-                        currentCellRange.Style = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false, HorizontalAlignmentStyle.Center);
-                    }
-
-                    currentRow++;
                 }
 
-                //// Total
-                foreach (var total in matchAnalysis.Total)
-                {
-                    ExportReportTotalContent(currentRow, startColumn, isAddMoreCurrencyColumn, worksheet, total);
-                    currentRow++;
-                }
+                currentRow++;
             }
-            catch (Exception ex)
+
+            //// Total
+            foreach (var total in matchAnalysis.Total)
             {
-                HandleException(ex);
+                ExportReportTotalContent(currentRow, startColumn, isAddMoreCurrencyColumn, worksheet, total);
+                currentRow++;
             }
         }
 

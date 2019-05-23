@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Core.Extensions;
@@ -78,41 +77,34 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
         /// <param name="criteria">The criteria.</param>
         public void ExportInstallmentAmountReport(GetInstallAmountCriteria criteria)
         {
-            try
+            var sessionKeyWithRoleID = this._installmentAmountSessionKey + "." + criteria.RoleID;
+
+            var report = SessionManager.Get<List<InstallAmount>>(sessionKeyWithRoleID);
+
+            if (report == null)
             {
-                var sessionKeyWithRoleID = this._installmentAmountSessionKey + "." + criteria.RoleID;
-
-                var report = SessionManager.Get<List<InstallAmount>>(sessionKeyWithRoleID);
-
-                if (report == null)
-                {
-                    report = this._reportService.GetInstallmentAmountReport(criteria);
-                }
-
-                var currentRow = 0;
-                var roleName = CreditTermExcelUtil.GetRoleNameByID(criteria.RoleID);
-
-                HSSFWorkbook excelFile = new HSSFWorkbook();
-                string sheetName = string.Format(
-                        MainResources.CreditTermInstallAmount_SheetName,
-                        roleName);
-                ISheet worksheet = excelFile.CreateSheet(sheetName);
-
-                if (report != null)
-                {
-                    this.InitialStyle(excelFile);
-                    this.ExportReportHeader(excelFile, ref worksheet, ref currentRow, roleName);
-                    this.ExportReportContent(excelFile, ref worksheet, ref currentRow, report);
-                }
-
-                excelFile.ToReponseStream(string.Format(
-                    MainResources.CreditTermInstallAmount_ReportName,
-                    roleName));
+                report = this._reportService.GetInstallmentAmountReport(criteria);
             }
-            catch (Exception ex)
+
+            var currentRow = 0;
+            var roleName = CreditTermExcelUtil.GetRoleNameByID(criteria.RoleID);
+
+            HSSFWorkbook excelFile = new HSSFWorkbook();
+            string sheetName = string.Format(
+                    MainResources.CreditTermInstallAmount_SheetName,
+                    roleName);
+            ISheet worksheet = excelFile.CreateSheet(sheetName);
+
+            if (report != null)
             {
-                this.HandleException(ex);
+                this.InitialStyle(excelFile);
+                this.ExportReportHeader(excelFile, ref worksheet, ref currentRow, roleName);
+                this.ExportReportContent(excelFile, ref worksheet, ref currentRow, report);
             }
+
+            excelFile.ToReponseStream(string.Format(
+                MainResources.CreditTermInstallAmount_ReportName,
+                roleName));
         }
 
         /// <summary>

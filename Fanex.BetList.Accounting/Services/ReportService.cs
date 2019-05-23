@@ -1,6 +1,5 @@
 namespace Fanex.BetList.Accounting.Services
 {
-    using System;
     using System.Collections.Generic;
     using AccountingReports.Core.Web;
     using Common.Extensions;
@@ -42,30 +41,23 @@ namespace Fanex.BetList.Accounting.Services
                 var ipVnList = CacheExtension.Get<List<IPVNBean>>(CacheIPVN);
                 if (ipVnList == null)
                 {
-                    try
+                    ipVnList = new List<IPVNBean>();
+                    using (ObjectDb objDb = new ObjectDb("BetList_GetIPVN"))
                     {
-                        ipVnList = new List<IPVNBean>();
-                        using (ObjectDb objDb = new ObjectDb("BetList_GetIPVN"))
+                        using (var reader = objDb.ExecuteReader())
                         {
-                            using (var reader = objDb.ExecuteReader())
+                            while (reader.Read())
                             {
-                                while (reader.Read())
+                                ipVnList.Add(new IPVNBean
                                 {
-                                    ipVnList.Add(new IPVNBean
-                                    {
-                                        IPFrom = reader.ToDouble("IPFrom"),
-                                        IPTo = reader.ToDouble("IPTo")
-                                    });
-                                }
+                                    IPFrom = reader.ToDouble("IPFrom"),
+                                    IPTo = reader.ToDouble("IPTo")
+                                });
                             }
                         }
+                    }
 
-                        CacheExtension.Set(CacheIPVN, ipVnList);
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
+                    CacheExtension.Set(CacheIPVN, ipVnList);
                 }
 
                 return ipVnList;

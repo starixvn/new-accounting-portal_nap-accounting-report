@@ -132,63 +132,55 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         public ActionResult AccountingLogin(string username, string onlineUserId, string redirectUrl)
 #pragma warning restore RECS0154 // Parameter is never used
         {
-            try
+            Session.Clear();
+            username = Cryptography.CfsDeCrypt(username.Replace(" ", "+"));
+
+            var user = _userService.Get(username) as User;
+            if (user != null)
             {
-                Session.Clear();
-                username = Cryptography.CfsDeCrypt(username.Replace(" ", "+"));
+                //// saves user session & auth info
+                var currentContext = new CurrentContext();
 
-                var user = _userService.Get(username) as User;
-                if (user != null)
+                var criteria = new LoginParameter
                 {
-                    //// saves user session & auth info
-                    var currentContext = new CurrentContext();
+                    UserId = user.Id,
+                    SiteId = 100,
+                    NetSessionId = Session.SessionID,
+                    Ip = currentContext.IP,
+                    LoginDate = DateTime.Now,
+                    BrowserName = currentContext.BrowserName,
+                    CountryCode = currentContext.CountryCode,
+                    Domain = currentContext.DomainName,
+                    Platform = currentContext.Platform
+                };
 
-                    var criteria = new LoginParameter
-                    {
-                        UserId = user.Id,
-                        SiteId = 100,
-                        NetSessionId = Session.SessionID,
-                        Ip = currentContext.IP,
-                        LoginDate = DateTime.Now,
-                        BrowserName = currentContext.BrowserName,
-                        CountryCode = currentContext.CountryCode,
-                        Domain = currentContext.DomainName,
-                        Platform = currentContext.Platform
-                    };
+                var onuserId = securityService.Login(criteria);
+                _currentSession.UserId = user.Id;
+                _currentSession.Username = user.Username;
+                _currentSession.OnUserId = Convert.ToInt32(onuserId);
+                _currentSession.SessionId = Session.SessionID.ToString();
+                _currentSession.Level = _userService.GetUserLevel(user.Id, this.SiteId);
 
-                    var onuserId = securityService.Login(criteria);
-                    _currentSession.UserId = user.Id;
-                    _currentSession.Username = user.Username;
-                    _currentSession.OnUserId = Convert.ToInt32(onuserId);
-                    _currentSession.SessionId = Session.SessionID.ToString();
-                    _currentSession.Level = _userService.GetUserLevel(user.Id, this.SiteId);
+                AppSession.CurrentUser = user;
 
-                    AppSession.CurrentUser = user;
-
-                    if (this.SiteId != 0)
-                    {
-                        _currentSession.MenuItemList = _userService.GetMenuItem(
-                            user.Id,
-                            SiteId,
-                            Environment,
-                            true) as IList<MenuItem>;
-                        AppSession.CurrentUserMenu = _currentSession.MenuItemList;
-                    }
-
-                    AppSession.IsAccountingLogin = true;
-
-                    CreateAuthInfo(user);
-                    return Redirect(redirectUrl);
-                    //// saves user session & auth info
+                if (this.SiteId != 0)
+                {
+                    _currentSession.MenuItemList = _userService.GetMenuItem(
+                        user.Id,
+                        SiteId,
+                        Environment,
+                        true) as IList<MenuItem>;
+                    AppSession.CurrentUserMenu = _currentSession.MenuItemList;
                 }
 
-                return Redirect(FormsAuthentication.LoginUrl);
+                AppSession.IsAccountingLogin = true;
+
+                CreateAuthInfo(user);
+                return Redirect(redirectUrl);
+                //// saves user session & auth info
             }
-            catch (Exception ex)
-            {
-                LoggingHandler.Log(ex);
-                return Redirect(FormsAuthentication.LoginUrl);
-            }
+
+            return Redirect(FormsAuthentication.LoginUrl);
         }
 
         #region utilities

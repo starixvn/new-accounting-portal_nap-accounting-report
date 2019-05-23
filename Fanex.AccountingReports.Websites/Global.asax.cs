@@ -10,7 +10,6 @@ namespace Fanex.AccountingReports.Websites
     using System.Web.Optimization;
     using System.Web.Routing;
     using BetList.Core;
-    using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Services.Impl.Worker;
     using Fanex.AccountingReports.Websites.App_Start;
     using RemotingRef;
@@ -51,14 +50,9 @@ namespace Fanex.AccountingReports.Websites
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            try
-            {
-                MostVisitedPageSavingWorker mostVisitedPageSavingWorker = new MostVisitedPageSavingWorker("MostVisitedPage Saving Worker");
-                mostVisitedPageSavingWorker.Start();
-            }
-            catch (Exception)
-            {
-            }
+
+            MostVisitedPageSavingWorker mostVisitedPageSavingWorker = new MostVisitedPageSavingWorker("MostVisitedPage Saving Worker");
+            mostVisitedPageSavingWorker.Start();
         }
 
         protected void Session_End(object sender, EventArgs e)
@@ -76,19 +70,7 @@ namespace Fanex.AccountingReports.Websites
             Justification = "Reviewed. Suppression is OK here.")]
         protected void Application_Error(object sender, EventArgs e)
         {
-            try
-            {
-                FanexLogging.HandleApplicationError(Server);
-            }
-            catch (Exception ex2)
-            {
-                LoggingHandler.Log(ex2);
-
-                if (!Response.IsRequestBeingRedirected)
-                {
-                    Response.Redirect("~");
-                }
-            }
+            FanexLogging.HandleApplicationError(Server);
         }
 
         private void ChangeApplicationName()

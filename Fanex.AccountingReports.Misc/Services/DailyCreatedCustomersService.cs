@@ -152,54 +152,47 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// <param name="criteria">The criteria.</param>
         public void ExportReport(GetDailyCreatedCustomersCriteria criteria)
         {
-            try
+            var report = SessionManager.Get<SummaryInformation>(this._dailyCreatedCustomersSessionKey);
+            if (report == null)
             {
-                var report = SessionManager.Get<SummaryInformation>(this._dailyCreatedCustomersSessionKey);
-                if (report == null)
-                {
-                    report = this.GetReport(criteria);
-                }
+                report = this.GetReport(criteria);
+            }
 
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                var currentRow = 0;
-                if (report != null
-                        && report.CreatingDetails != null
-                        && report.CreatingDetails.Count > 0)
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            var currentRow = 0;
+            if (report != null
+                    && report.CreatingDetails != null
+                    && report.CreatingDetails.Count > 0)
+            {
+                var infoLength = report.CreatingDetails.Count;
+                var numberSheets = Math.Ceiling((decimal)infoLength / MaxRowsSheet);
+                for (int i = 0; i < numberSheets; i++)
                 {
-                    var infoLength = report.CreatingDetails.Count;
-                    var numberSheets = Math.Ceiling((decimal)infoLength / MaxRowsSheet);
-                    for (int i = 0; i < numberSheets; i++)
-                    {
-                        string sheetName = "Sheet " + (i + 1);
-                        ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                        int startRow = 0;
-                        int startColumn = 0;
-                        currentRow = startRow;
-                        var startIndex = i * MaxRowsSheet;
-                        var endIndex = (i == (numberSheets - 1)) ? infoLength : (i + 1) * MaxRowsSheet;
-
-                        this.ExportReportHeader(ref workSheet, startRow, startColumn, ref currentRow, criteria);
-                        this.ExportReportContent(ref workSheet, startRow, startColumn, ref currentRow, criteria, startIndex, endIndex, report);
-                    }
-                }
-                else
-                {
-                    string sheetName = MiscResources.DailyCreatedCustomersReport_SheetName;
+                    string sheetName = "Sheet " + (i + 1);
                     ExcelWorksheet workSheet = worksheets.Add(sheetName);
-                    workSheet.ExportEmptyReport(0, 0, ref currentRow, 6);
-                }
 
-                excelFile.ReponseStream(string.Format(
-                    MiscResources.DailyCreatedCustomersReport_ReportName,
-                    criteria.Fromdate.ToShortFormatedDateWithSlash().Replace('/', '_'),
-                    criteria.Todate.ToShortFormatedDateWithSlash().Replace('/', '_')));
+                    int startRow = 0;
+                    int startColumn = 0;
+                    currentRow = startRow;
+                    var startIndex = i * MaxRowsSheet;
+                    var endIndex = (i == (numberSheets - 1)) ? infoLength : (i + 1) * MaxRowsSheet;
+
+                    this.ExportReportHeader(ref workSheet, startRow, startColumn, ref currentRow, criteria);
+                    this.ExportReportContent(ref workSheet, startRow, startColumn, ref currentRow, criteria, startIndex, endIndex, report);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                this.HandleException(ex);
+                string sheetName = MiscResources.DailyCreatedCustomersReport_SheetName;
+                ExcelWorksheet workSheet = worksheets.Add(sheetName);
+                workSheet.ExportEmptyReport(0, 0, ref currentRow, 6);
             }
+
+            excelFile.ReponseStream(string.Format(
+                MiscResources.DailyCreatedCustomersReport_ReportName,
+                criteria.Fromdate.ToShortFormatedDateWithSlash().Replace('/', '_'),
+                criteria.Todate.ToShortFormatedDateWithSlash().Replace('/', '_')));
         }
 
         /// <summary>
@@ -208,54 +201,47 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// <param name="criteria">The criteria.</param>
         public void ExportReportDetails(GetDailyCreatedCustomersDetailsCriteria criteria)
         {
-            try
+            var report = SessionManager.Get<List<DetailInformation>>(this._dailyCreatedCustomersDetailSessionKey);
+            if (report == null)
             {
-                var report = SessionManager.Get<List<DetailInformation>>(this._dailyCreatedCustomersDetailSessionKey);
-                if (report == null)
+                report = this.GetReportDetails(criteria);
+            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            var currentRow = 0;
+            if (report != null
+                    && report.Count > 0)
+            {
+                var infoLength = report.Count;
+                var numberSheets = Math.Ceiling((decimal)infoLength / MaxRowsSheet);
+
+                for (int i = 0; i < numberSheets; i++)
                 {
-                    report = this.GetReportDetails(criteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                var currentRow = 0;
-                if (report != null
-                        && report.Count > 0)
-                {
-                    var infoLength = report.Count;
-                    var numberSheets = Math.Ceiling((decimal)infoLength / MaxRowsSheet);
-
-                    for (int i = 0; i < numberSheets; i++)
-                    {
-                        string sheetName = "Sheet " + (i + 1);
-                        ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                        int startRow = 0;
-                        int startColumn = 0;
-                        currentRow = startRow;
-                        var startIndex = i * MaxRowsSheet;
-                        var endIndex = (i == (numberSheets - 1)) ? infoLength : (i + 1) * MaxRowsSheet;
-
-                        this.ExportReportDetailsHeader(ref workSheet, startRow, startColumn, ref currentRow, criteria);
-                        this.ExportReportDetailsContent(ref workSheet, startRow, startColumn, ref currentRow, criteria, startIndex, endIndex, report);
-                    }
-                }
-                else
-                {
-                    string sheetName = string.Format(MiscResources.DailyCreatedCustomersDetailsReport_SheetName, criteria.RoleName);
+                    string sheetName = "Sheet " + (i + 1);
                     ExcelWorksheet workSheet = worksheets.Add(sheetName);
-                    workSheet.ExportEmptyReport(0, 0, ref currentRow, 3);
-                }
 
-                excelFile.ReponseStream(string.Format(
-                    MiscResources.DailyCreatedCustomersDetailsReport_ReportName,
-                    criteria.RoleName,
-                    criteria.Date.ToShortFormatedDateWithSlash().Replace('/', '_')));
+                    int startRow = 0;
+                    int startColumn = 0;
+                    currentRow = startRow;
+                    var startIndex = i * MaxRowsSheet;
+                    var endIndex = (i == (numberSheets - 1)) ? infoLength : (i + 1) * MaxRowsSheet;
+
+                    this.ExportReportDetailsHeader(ref workSheet, startRow, startColumn, ref currentRow, criteria);
+                    this.ExportReportDetailsContent(ref workSheet, startRow, startColumn, ref currentRow, criteria, startIndex, endIndex, report);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                this.HandleException(ex);
+                string sheetName = string.Format(MiscResources.DailyCreatedCustomersDetailsReport_SheetName, criteria.RoleName);
+                ExcelWorksheet workSheet = worksheets.Add(sheetName);
+                workSheet.ExportEmptyReport(0, 0, ref currentRow, 3);
             }
+
+            excelFile.ReponseStream(string.Format(
+                MiscResources.DailyCreatedCustomersDetailsReport_ReportName,
+                criteria.RoleName,
+                criteria.Date.ToShortFormatedDateWithSlash().Replace('/', '_')));
         }
 
         /// <summary>

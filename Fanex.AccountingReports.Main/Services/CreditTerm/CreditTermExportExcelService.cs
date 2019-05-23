@@ -73,29 +73,22 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
         /// <param name="criteria">The criteria.</param>
         public void ExportCreditTermReport(GetCreditTermCriteria criteria)
         {
-            try
+            var report = this._reportService.GetCreditTermReport(criteria);
+
+            HSSFWorkbook excelFile = new HSSFWorkbook();
+            var sheetName = MainResources.CreditTermPreAgreed_SheetName;
+            ISheet worksheet = excelFile.CreateSheet(sheetName);
+
+            var currentRow = 0;
+
+            if (report != null && report.Count > 0)
             {
-                var report = this._reportService.GetCreditTermReport(criteria);
-
-                HSSFWorkbook excelFile = new HSSFWorkbook();
-                var sheetName = MainResources.CreditTermPreAgreed_SheetName;
-                ISheet worksheet = excelFile.CreateSheet(sheetName);
-
-                var currentRow = 0;
-
-                if (report != null && report.Count > 0)
-                {
-                    this.InitialStyle(excelFile);
-                    this.ExportReportHeader(excelFile, ref worksheet, ref currentRow, this._headerStyle.TextStyle);
-                    this.ExportReportContent(excelFile, ref worksheet, ref currentRow, report, criteria);
-                }
-
-                excelFile.ResponseStreamExcel(MainResources.CreditTermPreAgreed_ReportName);
+                this.InitialStyle(excelFile);
+                this.ExportReportHeader(excelFile, ref worksheet, ref currentRow, this._headerStyle.TextStyle);
+                this.ExportReportContent(excelFile, ref worksheet, ref currentRow, report, criteria);
             }
-            catch (Exception ex)
-            {
-                this.HandleException(ex);
-            }
+
+            excelFile.ResponseStreamExcel(MainResources.CreditTermPreAgreed_ReportName);
         }
 
         /// <summary>

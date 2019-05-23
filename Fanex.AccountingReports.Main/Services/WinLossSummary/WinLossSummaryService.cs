@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Main.Services.Implement.WinLossSummary
 {
-    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -44,82 +43,72 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLossSummary
             Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetReport(CriteriaBase criteria)
         {
-            try
+            Hashtable outParam = new Hashtable();
+            var rawData = this._reportRepository.GetReport(criteria, ref outParam);
+            var report = new WinLossInfo
             {
-                Hashtable outParam = new Hashtable();
-                var rawData = this._reportRepository.GetReport(criteria, ref outParam);
-                var report = new WinLossInfo
+                GrandTotal = new WinLossInfo(),
+                ChildsInfo = new List<WinLossInfo>()
+            };
+
+            var detail = Converter.ToInt(outParam["_details"]);
+            var sportTypeList = rawData.Select(data => Converter.ToInt(data.SportType))
+                                         .ToList();
+            CacheRef.SaveCacheRefResponse(sportTypeList, CacheRef.GetSportName, ref this._sportTypeNameCache);
+
+            var betTypeList = rawData.Select(data => Converter.ToInt(data.bType))
+                                     .ToList();
+            CacheRef.SaveCacheRefResponse(betTypeList, CacheRef.GetBettype, ref this._betTypeNameCache);
+
+            var sportTypeGroups = rawData.GroupBy(data => data.SportType);
+            foreach (var sportTypeGroup in sportTypeGroups)
+            {
+                var sportInfo = new WinLossInfo
                 {
+                    Id = Converter.ToInt(sportTypeGroup.Key),
                     GrandTotal = new WinLossInfo(),
                     ChildsInfo = new List<WinLossInfo>()
                 };
 
-                var detail = Converter.ToInt(outParam["_details"]);
-                var sportTypeList = rawData.Select(data => Converter.ToInt(data.SportType))
-                                             .ToList();
-                CacheRef.SaveCacheRefResponse(sportTypeList, CacheRef.GetSportName, ref this._sportTypeNameCache);
-
-                var betTypeList = rawData.Select(data => Converter.ToInt(data.bType))
-                                         .ToList();
-                CacheRef.SaveCacheRefResponse(betTypeList, CacheRef.GetBettype, ref this._betTypeNameCache);
-
-                var sportTypeGroups = rawData.GroupBy(data => data.SportType);
-                foreach (var sportTypeGroup in sportTypeGroups)
+                if (sportInfo.Id == MainConstants.WinLossSummaryTotalSportId)
                 {
-                    var sportInfo = new WinLossInfo
+                    report.GrandTotal.Name = Labels.Sum.ToUpper();
+                    continue;
+                }
+
+                sportInfo.Name = this.GetSportName(sportInfo.Id);
+                foreach (var data in sportTypeGroup)
+                {
+                    var info = new WinLossInfo
                     {
-                        Id = Converter.ToInt(sportTypeGroup.Key),
-                        GrandTotal = new WinLossInfo(),
-                        ChildsInfo = new List<WinLossInfo>()
+                        Id = Converter.ToInt(data.bType),
+                        WinLoss = Converter.ToDecimal(data.WinLost),
+                        Position = Converter.ToDecimal(data.Position),
+                        Commission = Converter.ToDecimal(data.Commission),
+                        LiveType = Converter.ToInt(data.liveindicator),
+                        Status = Converter.ToString2(data.Status),
+                        IBC = Converter.ToInt(data.ibc)
                     };
 
-                    if (sportInfo.Id == MainConstants.WinLossSummaryTotalSportId)
+                    if (info.Id == MainConstants.WinLossSummaryTotalBetTypeId)
                     {
-                        report.GrandTotal.Name = Labels.Sum.ToUpper();
                         continue;
                     }
 
-                    sportInfo.Name = this.GetSportName(sportInfo.Id);
-                    foreach (var data in sportTypeGroup)
-                    {
-                        var info = new WinLossInfo
-                        {
-                            Id = Converter.ToInt(data.bType),
-                            WinLoss = Converter.ToDecimal(data.WinLost),
-                            Position = Converter.ToDecimal(data.Position),
-                            Commission = Converter.ToDecimal(data.Commission),
-                            LiveType = Converter.ToInt(data.liveindicator),
-                            Status = Converter.ToString2(data.Status),
-                            IBC = Converter.ToInt(data.ibc)
-                        };
-
-                        if (info.Id == MainConstants.WinLossSummaryTotalBetTypeId)
-                        {
-                            continue;
-                        }
-
-                        info.Name = this._betTypeNameCache[info.Id];
-                        info.LineTotal = info.WinLoss + info.Position + info.Commission;
-                        sportInfo.GrandTotal.Add(info);
-                        info = this.FormatWinLossInfo(info);
-                        sportInfo.ChildsInfo.Add(info);
-                    }
-
-                    report.GrandTotal.Add(sportInfo.GrandTotal);
-                    sportInfo.GrandTotal = this.FormatWinLossInfo(sportInfo.GrandTotal);
-                    report.ChildsInfo.Add(sportInfo);
+                    info.Name = this._betTypeNameCache[info.Id];
+                    info.LineTotal = info.WinLoss + info.Position + info.Commission;
+                    sportInfo.GrandTotal.Add(info);
+                    info = this.FormatWinLossInfo(info);
+                    sportInfo.ChildsInfo.Add(info);
                 }
 
-                SessionManager.Set<string>(MainConstants.TraderPerformanceDetailReportSessionKey, null);
-                return report;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
+                report.GrandTotal.Add(sportInfo.GrandTotal);
+                sportInfo.GrandTotal = this.FormatWinLossInfo(sportInfo.GrandTotal);
+                report.ChildsInfo.Add(sportInfo);
             }
 
             SessionManager.Set<string>(MainConstants.TraderPerformanceDetailReportSessionKey, null);
-            return null;
+            return report;
         }
 
         /// <summary>

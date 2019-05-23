@@ -349,49 +349,42 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             var result = new SuperBalance();
             string balanceType = string.Empty;
 
-            try
+            var fullReport = SessionManager.Get<SuperBalance>(_superBalanceSessionKey);
+
+            if (fullReport == null)
             {
-                var fullReport = SessionManager.Get<SuperBalance>(_superBalanceSessionKey);
-
-                if (fullReport == null)
-                {
-                    fullReport = this.GetSuperBalance(superBalanceCriteria);
-                }
-
-                balanceType = GetBalanceType(superBalanceCriteria.BalanceType);
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = BalanceResources.SuperBalance_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
-
-                this.ExportReportHeader(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    RoleConstants.Super,
-                    superBalanceCriteria);
-
-                this.ExportReportContent(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    fullReport);
-
-                var customerType = ReportService.GetRoleName(RoleConstants.Super);
-                var reportName = customerType + balanceType + Labels.Balance;
-                excelFile.ReponseStream(reportName);
+                fullReport = this.GetSuperBalance(superBalanceCriteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            balanceType = GetBalanceType(superBalanceCriteria.BalanceType);
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = BalanceResources.SuperBalance_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
+
+            this.ExportReportHeader(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                RoleConstants.Super,
+                superBalanceCriteria);
+
+            this.ExportReportContent(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                fullReport);
+
+            var customerType = ReportService.GetRoleName(RoleConstants.Super);
+            var reportName = customerType + balanceType + Labels.Balance;
+            excelFile.ReponseStream(reportName);
 
             return result;
         }
@@ -408,49 +401,42 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         {
             var result = new SuperBalance();
             string balanceType = string.Empty;
-            try
+            var fullReport = SessionManager.Get<SuperBalance>(_superDownLineSessionKey);
+
+            if (fullReport == null)
             {
-                var fullReport = SessionManager.Get<SuperBalance>(_superDownLineSessionKey);
-
-                if (fullReport == null)
-                {
-                    fullReport = this.GetSuperBalanceSuperDownLine(getSuperBalanceSuperCriteria);
-                }
-
-                balanceType = GetBalanceType(getSuperBalanceSuperCriteria.BalanceType);
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = BalanceResources.SuperBalance_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
-
-                this.ExportReportHeaderDownline(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    RoleConstants.Master,
-                    balanceType);
-
-                this.ExportReportContent(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    fullReport);
-
-                var customerType = ReportService.GetRoleName(RoleConstants.Master);
-                var reportName = customerType + balanceType + Labels.Balance;
-                excelFile.ReponseStream(reportName);
+                fullReport = this.GetSuperBalanceSuperDownLine(getSuperBalanceSuperCriteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            balanceType = GetBalanceType(getSuperBalanceSuperCriteria.BalanceType);
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = BalanceResources.SuperBalance_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
+
+            this.ExportReportHeaderDownline(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                RoleConstants.Master,
+                balanceType);
+
+            this.ExportReportContent(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                fullReport);
+
+            var customerType = ReportService.GetRoleName(RoleConstants.Master);
+            var reportName = customerType + balanceType + Labels.Balance;
+            excelFile.ReponseStream(reportName);
 
             return result;
         }
@@ -467,50 +453,42 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         {
             var result = new SuperBalance();
             string balanceType = string.Empty;
+            var fullReport = SessionManager.Get<SuperBalance>(_masterDownLineSessionKey);
 
-            try
+            if (fullReport == null)
             {
-                var fullReport = SessionManager.Get<SuperBalance>(_masterDownLineSessionKey);
-
-                if (fullReport == null)
-                {
-                    fullReport = this.GetSuperBalanceMasterDownLine(getSuperBalanceMasterCriteria);
-                }
-
-                balanceType = GetBalanceType(getSuperBalanceMasterCriteria.BalanceType);
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = BalanceResources.SuperBalance_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
-
-                this.ExportReportHeaderDownline(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    RoleConstants.Agent,
-                    balanceType);
-
-                this.ExportReportContent(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    fullReport);
-
-                var customerType = ReportService.GetRoleName(RoleConstants.Agent);
-                var reportName = customerType + balanceType + Labels.Balance;
-                excelFile.ReponseStream(reportName);
+                fullReport = this.GetSuperBalanceMasterDownLine(getSuperBalanceMasterCriteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            balanceType = GetBalanceType(getSuperBalanceMasterCriteria.BalanceType);
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = BalanceResources.SuperBalance_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
+
+            this.ExportReportHeaderDownline(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                RoleConstants.Agent,
+                balanceType);
+
+            this.ExportReportContent(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                fullReport);
+
+            var customerType = ReportService.GetRoleName(RoleConstants.Agent);
+            var reportName = customerType + balanceType + Labels.Balance;
+            excelFile.ReponseStream(reportName);
 
             return result;
         }
@@ -528,49 +506,42 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             var result = new SuperBalance();
             string balanceType = string.Empty;
 
-            try
+            var fullReport = SessionManager.Get<SuperBalance>(_agentDownLineSessionKey);
+
+            if (fullReport == null)
             {
-                var fullReport = SessionManager.Get<SuperBalance>(_agentDownLineSessionKey);
-
-                if (fullReport == null)
-                {
-                    fullReport = this.GetSuperBalanceAgentDownLine(getSuperBalanceAgentCriteria);
-                }
-
-                balanceType = GetBalanceType(getSuperBalanceAgentCriteria.BalanceType);
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = BalanceResources.SuperBalance_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
-
-                this.ExportReportHeaderDownline(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    RoleConstants.Member,
-                    balanceType);
-
-                this.ExportReportContent(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    fullReport);
-
-                var customerType = ReportService.GetRoleName(RoleConstants.Member);
-                var reportName = customerType + balanceType + Labels.Balance;
-                excelFile.ReponseStream(reportName);
+                fullReport = this.GetSuperBalanceAgentDownLine(getSuperBalanceAgentCriteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            balanceType = GetBalanceType(getSuperBalanceAgentCriteria.BalanceType);
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = BalanceResources.SuperBalance_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
+
+            this.ExportReportHeaderDownline(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                RoleConstants.Member,
+                balanceType);
+
+            this.ExportReportContent(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                fullReport);
+
+            var customerType = ReportService.GetRoleName(RoleConstants.Member);
+            var reportName = customerType + balanceType + Labels.Balance;
+            excelFile.ReponseStream(reportName);
 
             return result;
         }
@@ -582,22 +553,16 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         public List<EntityBase<int, string>> GetCurrencies()
         {
             var result = new List<EntityBase<int, string>>();
-            try
-            {
-                Dictionary<int, string> currList = ReportService.ExchangeCurrencies;
 
-                foreach (var row in currList)
-                {
-                    result.Add(new EntityBase<int, string>()
-                    {
-                        Id = row.Key,
-                        Name = row.Value
-                    });
-                }
-            }
-            catch (Exception ex)
+            Dictionary<int, string> currList = ReportService.ExchangeCurrencies;
+
+            foreach (var row in currList)
             {
-                HandleException(ex);
+                result.Add(new EntityBase<int, string>()
+                {
+                    Id = row.Key,
+                    Name = row.Value
+                });
             }
 
             return result;

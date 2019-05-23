@@ -54,30 +54,22 @@ namespace Fanex.BetList.Accounting.Services
         /// <returns>Is VN IP or not.</returns>
         public static bool IsVNIP(string ip)
         {
-            try
+            double ipNumber = 0;
+            ipNumber = IP2Number(ip);
+            List<IPVNBean> listIPVN = ReportService.IPVN;
+            int total = listIPVN.Count;
+            for (int i = 0; i < total; i++)
             {
-                double ipNumber = 0;
-                ipNumber = IP2Number(ip);
-                List<IPVNBean> listIPVN = ReportService.IPVN;
-                int total = listIPVN.Count;
-                for (int i = 0; i < total; i++)
+                IPVNBean item = listIPVN[i];
+                if (item == null)
                 {
-                    IPVNBean item = listIPVN[i];
-                    if (item == null)
-                    {
-                        return false;
-                    }
-
-                    if (item.IPFrom <= ipNumber && ipNumber <= item.IPTo)
-                    {
-                        return true;
-                    }
+                    return false;
                 }
 
-                return false;
-            }
-            catch (Exception)
-            {
+                if (item.IPFrom <= ipNumber && ipNumber <= item.IPTo)
+                {
+                    return true;
+                }
             }
 
             return false;
@@ -90,26 +82,18 @@ namespace Fanex.BetList.Accounting.Services
         /// <returns>The p2 number.</returns>
         public static double IP2Number(string ip)
         {
-            try
+            double longIP = 0;
+            if (IsValidIP(ip))
             {
-                double longIP = 0;
-                if (IsValidIP(ip))
-                {
-                    string[] sIP = ip.Split('.');
-                    longIP =
-                        (double.Parse(sIP[0]) * Math.Pow(256, 3))
-                        + (double.Parse(sIP[1]) * Math.Pow(256, 2))
-                        + (double.Parse(sIP[2]) * 256)
-                        + double.Parse(sIP[3]);
-                }
-
-                return longIP;
-            }
-            catch (Exception)
-            {
+                string[] sIP = ip.Split('.');
+                longIP =
+                    (double.Parse(sIP[0]) * Math.Pow(256, 3))
+                    + (double.Parse(sIP[1]) * Math.Pow(256, 2))
+                    + (double.Parse(sIP[2]) * 256)
+                    + double.Parse(sIP[3]);
             }
 
-            return 0.0;
+            return longIP;
         }
 
         /// <summary>

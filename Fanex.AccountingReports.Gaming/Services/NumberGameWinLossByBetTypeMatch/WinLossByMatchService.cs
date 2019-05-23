@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByBetTypeMatch
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
@@ -250,49 +249,42 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
         /// <param name="criteria">The criteria.</param>
         public void ExportMainReport(GetWinLossByMatchMainReportCriteria criteria)
         {
-            try
+            WinLossInfo report = SessionManager.Get<WinLossInfo>(_winLossByMatchMainReportSessionKey);
+            if (report == null)
             {
-                WinLossInfo report = SessionManager.Get<WinLossInfo>(_winLossByMatchMainReportSessionKey);
-                if (report == null)
-                {
-                    report = GetMainReport(criteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = GamingResources.NumberGameWinLossByBetTypeMatch_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                int maxColumnIndex = 8;
-                var currentRow = startRow;
-
-                this.ExportReport_WinLossByMatchMainReportHeader(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    maxColumnIndex,
-                    criteria);
-                this.ExportReport_WinLossByMatchMainReportContent(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    maxColumnIndex,
-                    criteria,
-                    report);
-
-                var reportName = string.Format(
-                    GamingResources.NumberGameWinLossByBetTypeMatch_ReportName,
-                    Converter.ToDateTime(criteria.ReportDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
-                excelFile.ReponseStream(reportName);
+                report = GetMainReport(criteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = GamingResources.NumberGameWinLossByBetTypeMatch_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            int maxColumnIndex = 8;
+            var currentRow = startRow;
+
+            this.ExportReport_WinLossByMatchMainReportHeader(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                maxColumnIndex,
+                criteria);
+            this.ExportReport_WinLossByMatchMainReportContent(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                maxColumnIndex,
+                criteria,
+                report);
+
+            var reportName = string.Format(
+                GamingResources.NumberGameWinLossByBetTypeMatch_ReportName,
+                Converter.ToDateTime(criteria.ReportDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>
@@ -304,49 +296,42 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportDetailReport(GetWinLossByMatchDetailReportCriteria criteria)
         {
-            try
+            WinLossInfo report = SessionManager.Get<WinLossInfo>(_winLossByMatchDetailReportSessionKey);
+            if (report == null)
             {
-                WinLossInfo report = SessionManager.Get<WinLossInfo>(_winLossByMatchDetailReportSessionKey);
-                if (report == null)
-                {
-                    report = GetDetailReport(criteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = GamingResources.NumberGameWinLossByBetTypeMatch_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                int maxColumnIndex = 15;
-                var currentRow = startRow;
-                this.ExportReport_WinLossByMatchDetailReportHeader(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    maxColumnIndex,
-                    report != null ? report.Name : string.Empty);
-
-                this.ExportReport_WinLossByMatchDetailReportContent(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    maxColumnIndex,
-                    criteria,
-                    report);
-
-                var reportName = string.Format(
-                    GamingResources.NumberGameWinLossByBetTypeMatch_ReportName,
-                    Converter.ToDateTime(criteria.ReportDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
-                excelFile.ReponseStream(reportName);
+                report = GetDetailReport(criteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = GamingResources.NumberGameWinLossByBetTypeMatch_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            int maxColumnIndex = 15;
+            var currentRow = startRow;
+            this.ExportReport_WinLossByMatchDetailReportHeader(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                maxColumnIndex,
+                report != null ? report.Name : string.Empty);
+
+            this.ExportReport_WinLossByMatchDetailReportContent(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                maxColumnIndex,
+                criteria,
+                report);
+
+            var reportName = string.Format(
+                GamingResources.NumberGameWinLossByBetTypeMatch_ReportName,
+                Converter.ToDateTime(criteria.ReportDate).ToShortFormatedDateWithSlash().Replace('/', '_'));
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>

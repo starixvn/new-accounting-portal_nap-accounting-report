@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByProduct
 {
-    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
@@ -58,31 +57,24 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
         public List<EntityBase<int, string>> GetCurrencies()
         {
             var result = new List<EntityBase<int, string>>();
-            try
-            {
-                Dictionary<int, string> currencies = ReportService.GetExchangeCurrencies(
-                    new GetExchangeCurrenciesCriteria
-                    {
-                        ExcludeTest = true
-                    });
-
-                foreach (var currency in currencies)
+            Dictionary<int, string> currencies = ReportService.GetExchangeCurrencies(
+                new GetExchangeCurrenciesCriteria
                 {
-                    if (ReportService.IsExcludeCurrency(currency.Value))
-                    {
-                        continue;
-                    }
+                    ExcludeTest = true
+                });
 
-                    result.Add(new EntityBase<int, string>()
-                    {
-                        Id = currency.Key,
-                        Name = currency.Value
-                    });
-                }
-            }
-            catch (Exception ex)
+            foreach (var currency in currencies)
             {
-                HandleException(ex);
+                if (ReportService.IsExcludeCurrency(currency.Value))
+                {
+                    continue;
+                }
+
+                result.Add(new EntityBase<int, string>()
+                {
+                    Id = currency.Key,
+                    Name = currency.Value
+                });
             }
 
             return result.OrderBy(r => r.Name).ToList();

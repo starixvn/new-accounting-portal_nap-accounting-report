@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Misc.Services.Implement
 {
-    using System;
     using System.Collections.Generic;
     using System.Drawing;
     using ExcelUtil.Spreadsheet;
@@ -42,39 +41,32 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// <returns>The report.</returns>
         public Transaction GetReport(GetCreditSitesBetCountsCriteria criteria)
         {
-            try
+            if (criteria.IsValid())
             {
-                if (criteria.IsValid())
+                var rawData = GetReportData<dynamic>(criteria);
+                var report = new Transaction
                 {
-                    var rawData = GetReportData<dynamic>(criteria);
-                    var report = new Transaction
+                    TransactionList = new List<Transaction>(),
+                    Total = new Transaction
                     {
-                        TransactionList = new List<Transaction>(),
-                        Total = new Transaction
-                        {
-                            SiteName = Labels.Total
-                        }
+                        SiteName = Labels.Total
+                    }
+                };
+
+                foreach (var row in rawData)
+                {
+                    Transaction transaction = new Transaction
+                    {
+                        SiteName = row.site,
+                        BetCount = row.betcount
                     };
 
-                    foreach (var row in rawData)
-                    {
-                        Transaction transaction = new Transaction
-                        {
-                            SiteName = row.site,
-                            BetCount = row.betcount
-                        };
-
-                        report.TransactionList.Add(transaction);
-                        report.Total.BetCount += transaction.BetCount;
-                    }
-
-                    SessionManager.Set<Transaction>(MiscConstants.CreditSiteBetCountsSessionKey, report);
-                    return report;
+                    report.TransactionList.Add(transaction);
+                    report.Total.BetCount += transaction.BetCount;
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
+
+                SessionManager.Set<Transaction>(MiscConstants.CreditSiteBetCountsSessionKey, report);
+                return report;
             }
 
             SessionManager.Set<Transaction>(MiscConstants.CreditSiteBetCountsSessionKey, null);
@@ -89,47 +81,40 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// <param name="criteria">The criteria.</param>
         public void ExportReport(GetCreditSitesBetCountsCriteria criteria)
         {
-            try
+            var report = SessionManager.Get<Transaction>(MiscConstants.CreditSiteBetCountsSessionKey);
+            if (report == null)
             {
-                var report = SessionManager.Get<Transaction>(MiscConstants.CreditSiteBetCountsSessionKey);
-                if (report == null)
-                {
-                    report = this.GetReport(criteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = MiscResources.CreditSitesBetCounts_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
-
-                this.ExportReportHeader(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    criteria);
-
-                this.ExportReportContent(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    criteria,
-                    report);
-
-                excelFile.ReponseStream(string.Format(
-                    MiscResources.CreditSitesBetCounts_ReportName,
-                    criteria.Datestart.ToShortFormatedDateWithSlash().Replace('/', '_'),
-                    criteria.Dateend.ToShortFormatedDateWithSlash().Replace('/', '_')));
+                report = this.GetReport(criteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = MiscResources.CreditSitesBetCounts_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
+
+            this.ExportReportHeader(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                criteria);
+
+            this.ExportReportContent(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                criteria,
+                report);
+
+            excelFile.ReponseStream(string.Format(
+                MiscResources.CreditSitesBetCounts_ReportName,
+                criteria.Datestart.ToShortFormatedDateWithSlash().Replace('/', '_'),
+                criteria.Dateend.ToShortFormatedDateWithSlash().Replace('/', '_')));
         }
 
         /// <summary>
