@@ -21,6 +21,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
     using Fanex.NAP.Core.Web.Session;
     using NAP.Core.Models;
     using NAP.Core.Models.ParameterObject;
+    using NAP.Core.Web.Attribute;
 
     /// <summary>
     /// TODO: Update summary.
@@ -216,6 +217,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         /// Recheck login.
         /// </summary>
         /// <returns>Recheck login result.</returns>
+        [NapSuperAuth]
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         [HttpPost]
         public ActionResult ReCheckLogin()

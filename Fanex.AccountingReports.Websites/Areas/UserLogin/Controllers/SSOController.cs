@@ -20,7 +20,6 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 
     /// <summary>
     /// TODO: Update summary.
-    /// </summary>
     public class SsoController : BaseController
     {
         #region members
