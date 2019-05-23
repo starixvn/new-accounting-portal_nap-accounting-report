@@ -58,34 +58,6 @@
       <HintPath>..\packages\Fanex.BetDetails.Lucky3.1.0.0.1\lib\Fanex.BetDetails.Lucky3.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.BetList.BetTrade, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.82.0-beta02\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.Core, Version=2.82.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.82.0-beta02\lib\net40\Fanex.BetList.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.Core.RemotingRef, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.RemotingRef.1.0.0\lib\net461\Fanex.BetList.Core.RemotingRef.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.ESports, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.ESports.1.0.0\lib\net40\Fanex.BetList.ESports.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.Lucky3, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Lucky3.1.1.0\lib\net40\Fanex.BetList.Lucky3.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.NumberGame, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.NumberGame.1.2.0\lib\net40\Fanex.BetList.NumberGame.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.VirtualSports, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.VirtualSports.1.4.0\lib\net40\Fanex.BetList.VirtualSports.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Fanex.Caching, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Caching.2.1.0\lib\net461\Fanex.Caching.dll</HintPath>
       <Private>True</Private>
@@ -283,81 +255,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResources\BetList.Designer.cs" />
     <Compile Include="BetListAreaRegistration.cs" />
     <Compile Include="Constants\BetListConstants.cs" />
-    <Compile Include="Constants\BetTypeContants.cs" />
-    <Compile Include="Constants\CombinationTypeConstants.cs" />
     <Compile Include="Constants\CommonConstants.cs" />
-    <Compile Include="Constants\DateTimeFormatConstants.cs" />
-    <Compile Include="Constants\LanguageTypeConstants.cs" />
-    <Compile Include="Controllers\BetListController.cs" />
     <Compile Include="Controllers\ScoreInformationController.cs" />
-    <Compile Include="Criteria\GetBetBuilderDetailCriteria.cs" />
-    <Compile Include="Criteria\GetCashOutDetailCriteria.cs" />
-    <Compile Include="Extensions\BetListExtension.cs" />
-    <Compile Include="Core\BetListHelper.cs" />
-    <Compile Include="Core\CacheRef.cs" />
-    <Compile Include="Extensions\DateTimeExtensions.cs" />
-    <Compile Include="Extensions\NumberExtensions.cs" />
     <Compile Include="Core\SessionManager.cs" />
-    <Compile Include="Criteria\BetListByRefNoCriteria.cs" />
-    <Compile Include="Criteria\CombinationParlayDetailCriteria.cs" />
     <Compile Include="Criteria\GetScoreInformationCriteria.cs" />
-    <Compile Include="Criteria\MixParlayDetailCriteria.cs" />
-    <Compile Include="Extensions\WinLoss.htm.cs" />
-    <Compile Include="Extensions\WinLost.cs" />
-    <Compile Include="Models\BetBuilderDetailModel.cs" />
-    <Compile Include="Models\BetListRacingToteWinLoss.cs" />
-    <Compile Include="Models\CashOutHistory.cs" />
-    <Compile Include="Models\CashOutTicket.cs" />
     <Compile Include="Models\ScoreInformation\BadmintonInfo.cs" />
     <Compile Include="Models\BalanceUp.cs" />
     <Compile Include="Models\ScoreInformation\BaseballInfo.cs" />
     <Compile Include="Models\ScoreInformation\BasketballInfo.cs" />
-    <Compile Include="Models\BetListDetail.cs" />
-    <Compile Include="Models\BetType.cs" />
-    <Compile Include="Models\CombinationParlay.cs" />
-    <Compile Include="Models\Event.cs" />
-    <Compile Include="Models\GroupParlayEvent.cs" />
-    <Compile Include="Models\Match.cs" />
-    <Compile Include="Models\ParlayEvent.cs" />
     <Compile Include="Models\ScoreInformation\ScoreInfo.cs" />
     <Compile Include="Models\ScoreInformation\ScoreInformation.cs" />
     <Compile Include="Models\ScoreInformation\SetX_Info.cs" />
-    <Compile Include="Models\SystemParlayDetail.cs" />
     <Compile Include="Models\ScoreInformation\TennisInfo.cs" />
     <Compile Include="Models\TennisResult\TennisLeagueResult.cs" />
     <Compile Include="Models\TennisResult\TennisGameResult.cs" />
     <Compile Include="Models\TennisResult\TennisMatchResult.cs" />
     <Compile Include="Models\TennisResult\TennisResultEntity.cs" />
     <Compile Include="Models\TennisResult\TennisSetResult.cs" />
-    <Compile Include="Models\TicketDetail.cs" />
-    <Compile Include="Models\SystemParlayModel.cs" />
     <Compile Include="Models\IPVNBean.cs" />
     <Compile Include="Models\ScoreInformation\TwoTimesMatchInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\BetListCashoutDetailRepository.cs" />
-    <Compile Include="Repositories\BetListRepository.cs" />
     <Compile Include="Repositories\ScoreInformationRepository.cs" />
-    <Compile Include="Resources\BetListGlobalResources.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BetListGlobalResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Resources\BetListResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BetListResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Labels.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\BetListService.cs" />
-    <Compile Include="Services\BetListCashoutDetailService.cs" />
-    <Compile Include="Services\IpService.cs" />
     <Compile Include="Services\ReportService.cs" />
     <Compile Include="Services\ScoreInformationService.cs" />
   </ItemGroup>
@@ -365,16 +290,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_GlobalResources\BetList.resx" />
-    <EmbeddedResource Include="Resources\BetListGlobalResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>BetListGlobalResources.designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\BetListResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>BetListResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Labels.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Labels.Designer.cs</LastGenOutput>
@@ -390,7 +305,6 @@
     <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
     <Content Include="Content\Fanex.Result\fanex.result.css" />
     <Content Include="Content\Fanex.Result\images\goal-icon.png" />
-    <Content Include="Content\lucky3.css" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

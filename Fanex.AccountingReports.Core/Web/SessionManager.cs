@@ -1,5 +1,6 @@
 namespace Fanex.AccountingReports.Core.Web
 {
+    using System;
     using System.Web;
 
     /// <summary>
@@ -27,9 +28,15 @@ namespace Fanex.AccountingReports.Core.Web
         /// <returns>Value from Session with specific Type.</returns>
         public static T Get<T>(string sessionKey)
         {
-
-            T value = (T)HttpContext.Current.Session[sessionKey];
-            return value;
+            try
+            {
+                T value = (T)HttpContext.Current.Session[sessionKey];
+                return value;
+            }
+            catch (Exception)
+            {
+                return default(T);
+            }
 
         }
 

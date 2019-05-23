@@ -9,7 +9,6 @@ namespace Fanex.AccountingReports.Websites
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
-    using BetList.Core;
     using Fanex.AccountingReports.Core.Services.Impl.Worker;
     using Fanex.AccountingReports.Websites.App_Start;
     using RemotingRef;
@@ -39,7 +38,6 @@ namespace Fanex.AccountingReports.Websites
             FanexData.Register();
             FanexLogging.Register();
 
-            BetListManager.RegisterRemotingRef(new BetList.Core.RemotingRef.CacheRef());
             ResultCoreManager.RegisterRefDataHelper(new RefDataHelper());
 
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);

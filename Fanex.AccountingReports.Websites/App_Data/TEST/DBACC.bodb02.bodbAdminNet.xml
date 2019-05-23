@@ -5,7 +5,6 @@
     <Setting Key="Misc_DailyCreatedCustomers_GetDetailReport" SpName="Acc_DailyCreatedCustomer_Details" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
   <Function Name="Core - Bet List Core">
-    <Setting Key="Acc_BetList_CashOut_Detail" SpName="Acc_BetList_CashOut_Detail" DbName="DBACC.bodb02.bodbAdminNet" />
     <Setting Key="BetList_ScoreInformation_SelScoreInformation" SpName="Acc_Rpt_DailyWLDirect_Result" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
     <Setting Key="BetList_ScoreInformation_SelScoreInformation_WH" SpName="Acc_Rpt_DailyWLDirect_Result_Old" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
@@ -101,9 +100,5 @@
   </Function>
   <Function Name="Special - Margin Report">
     <Setting Key ="Special_MarginReport_BetRatioByUser" SpName="Acc_Rpt_BetRatioByUser" DbName="DBACC.bodb02.bodbAdminNet"></Setting>
-  </Function>
-  <Function Name="Core - Bet List Core">
-    <Setting Key="BetList_RefNoSel" SpName="Acc_BetList_CheckBet" DbName="DBACC.bodb02.bodbAdminNet" />
-    <Setting Key="Acc_BetList_BetBuilder_Detail" SpName="Acc_Rpt_BetList_BetBuilder_Detail" DbName="DBACC.bodb02.bodbAdminNet" />
   </Function>
 </Functions>
