@@ -33,42 +33,34 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
         /// <returns>The licensee support bingo.</returns>
         public List<EntityBase<int, string>> GetLicensee_SupportBingo()
         {
-            try
+            var licenseeList = new List<EntityBase<int, string>>();
+            EntityBase<int, string> info = new EntityBase<int, string>
             {
-                var licenseeList = new List<EntityBase<int, string>>();
-                EntityBase<int, string> info = new EntityBase<int, string>
-                {
-                    Id = CompanyConstants.IBC,
-                    Name = Labels.IBC
-                };
+                Id = CompanyConstants.IBC,
+                Name = Labels.IBC
+            };
 
-                licenseeList.Add(info);
-                var rawData = ReportService.GetLicensee_SupportByProduct(new GetLicensee_SupportByProductCriteria
-                {
-                    ProductPrefix = ProductPrefixConstants.Bingo
-                });
+            licenseeList.Add(info);
+            var rawData = ReportService.GetLicensee_SupportByProduct(new GetLicensee_SupportByProductCriteria
+            {
+                ProductPrefix = ProductPrefixConstants.Bingo
+            });
 
-                if (rawData != null)
+            if (rawData != null)
+            {
+                foreach (var data in rawData)
                 {
-                    foreach (var data in rawData)
+                    info = new EntityBase<int, string>
                     {
-                        info = new EntityBase<int, string>
-                        {
-                            Id = data.Id,
-                            Name = data.Name
-                        };
+                        Id = data.Id,
+                        Name = data.Name
+                    };
 
-                        licenseeList.Add(info);
-                    }
+                    licenseeList.Add(info);
                 }
+            }
 
-                return licenseeList;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+            return licenseeList;
         }
 
         /// <summary>
@@ -78,53 +70,45 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
         /// <returns>The company list.</returns>
         public CompanyInfo GetNumberGameCompanyList(GetNumberGameCompanyListCriteria criteria)
         {
-            try
+            var result = new CompanyInfo
             {
-                var result = new CompanyInfo
-                {
-                    ChildInfo = new List<CompanyInfo>()
-                };
+                ChildInfo = new List<CompanyInfo>()
+            };
 
-                CompanyInfo info = new CompanyInfo
-                {
-                    Id = CompanyConstants.IBC,
-                    Name = Labels.IBC_Group,
-                    ChildInfo = new List<CompanyInfo>()
-                };
+            CompanyInfo info = new CompanyInfo
+            {
+                Id = CompanyConstants.IBC,
+                Name = Labels.IBC_Group,
+                ChildInfo = new List<CompanyInfo>()
+            };
 
-                result.ChildInfo.Add(info);
+            result.ChildInfo.Add(info);
 
-                info = new CompanyInfo
-                {
-                    Id = CompanyConstants.Licensee,
-                    Name = Labels.Licensee,
-                    ChildInfo = new List<CompanyInfo>()
-                };
+            info = new CompanyInfo
+            {
+                Id = CompanyConstants.Licensee,
+                Name = Labels.Licensee,
+                ChildInfo = new List<CompanyInfo>()
+            };
 
-                var rawData = GetReportData<dynamic>(criteria);
-                if (rawData == null)
-                {
-                    result.ChildInfo.Add(info);
-                    return result;
-                }
-
-                foreach (var row in rawData)
-                {
-                    info.ChildInfo.Add(new CompanyInfo
-                    {
-                        Id = Converter.ToInt(row.LicenseeID),
-                        Name = Converter.ToString2(row.Licenseename)
-                    });
-                }
-
+            var rawData = GetReportData<dynamic>(criteria);
+            if (rawData == null)
+            {
                 result.ChildInfo.Add(info);
                 return result;
             }
-            catch (Exception ex)
+
+            foreach (var row in rawData)
             {
-                HandleException(ex);
-                throw;
+                info.ChildInfo.Add(new CompanyInfo
+                {
+                    Id = Converter.ToInt(row.LicenseeID),
+                    Name = Converter.ToString2(row.Licenseename)
+                });
             }
+
+            result.ChildInfo.Add(info);
+            return result;
         }
 
         public List<NumberGameSport> GetBetTypes(GetNumberGameBetTypeListCriteria criteria)
@@ -154,53 +138,45 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
         /// <returns>The company list.</returns>
         public CompanyInfo GetLiveCasinoLicenseeList(GetLiveCasinoGameCompanyListCriteria criteria)
         {
-            try
+            var result = new CompanyInfo
             {
-                var result = new CompanyInfo
-                {
-                    ChildInfo = new List<CompanyInfo>()
-                };
+                ChildInfo = new List<CompanyInfo>()
+            };
 
-                CompanyInfo info = new CompanyInfo
-                {
-                    Id = CompanyConstants.IBC,
-                    Name = Labels.IBC_Group,
-                    ChildInfo = new List<CompanyInfo>()
-                };
+            CompanyInfo info = new CompanyInfo
+            {
+                Id = CompanyConstants.IBC,
+                Name = Labels.IBC_Group,
+                ChildInfo = new List<CompanyInfo>()
+            };
 
-                result.ChildInfo.Add(info);
+            result.ChildInfo.Add(info);
 
-                info = new CompanyInfo
-                {
-                    Id = CompanyConstants.Licensee,
-                    Name = Labels.Licensee,
-                    ChildInfo = new List<CompanyInfo>()
-                };
+            info = new CompanyInfo
+            {
+                Id = CompanyConstants.Licensee,
+                Name = Labels.Licensee,
+                ChildInfo = new List<CompanyInfo>()
+            };
 
-                var rawData = GetReportData<dynamic>(criteria);
-                if (rawData == null)
-                {
-                    result.ChildInfo.Add(info);
-                    return result;
-                }
-
-                foreach (var row in rawData)
-                {
-                    info.ChildInfo.Add(new CompanyInfo
-                    {
-                        Id = Converter.ToInt(row.LicenseeID),
-                        Name = Converter.ToString2(row.Licenseename)
-                    });
-                }
-
+            var rawData = GetReportData<dynamic>(criteria);
+            if (rawData == null)
+            {
                 result.ChildInfo.Add(info);
                 return result;
             }
-            catch (Exception ex)
+
+            foreach (var row in rawData)
             {
-                HandleException(ex);
-                throw;
+                info.ChildInfo.Add(new CompanyInfo
+                {
+                    Id = Converter.ToInt(row.LicenseeID),
+                    Name = Converter.ToString2(row.Licenseename)
+                });
             }
+
+            result.ChildInfo.Add(info);
+            return result;
         }
 
         /// <summary>
@@ -214,55 +190,47 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
         Justification = "Reviewed. Suppression is OK here.")]
         public CompanyInfo GetLicenseesByProduct(GetLicenseesByProductCriteria criteria)
         {
-            try
+            var result = new CompanyInfo
             {
-                var result = new CompanyInfo
+                ChildInfo = new List<CompanyInfo>()
+            };
+
+            CompanyInfo info = new CompanyInfo
+            {
+                Id = CompanyConstants.IBC,
+                Name = Labels.IBC_Group,
+                ChildInfo = new List<CompanyInfo>()
+            };
+
+            result.ChildInfo.Add(info);
+
+            info = new CompanyInfo
+            {
+                Id = CompanyConstants.Licensee,
+                Name = Labels.Licensee,
+                ChildInfo = new List<CompanyInfo>()
+            };
+
+            using (var reader = _gamingRepository.GetLicenseesByProduct(criteria))
+            {
+                if (reader == null)
                 {
-                    ChildInfo = new List<CompanyInfo>()
-                };
-
-                CompanyInfo info = new CompanyInfo
-                {
-                    Id = CompanyConstants.IBC,
-                    Name = Labels.IBC_Group,
-                    ChildInfo = new List<CompanyInfo>()
-                };
-
-                result.ChildInfo.Add(info);
-
-                info = new CompanyInfo
-                {
-                    Id = CompanyConstants.Licensee,
-                    Name = Labels.Licensee,
-                    ChildInfo = new List<CompanyInfo>()
-                };
-
-                using (var reader = _gamingRepository.GetLicenseesByProduct(criteria))
-                {
-                    if (reader == null)
-                    {
-                        result.ChildInfo.Add(info);
-                        return result;
-                    }
-
-                    while (reader.Read())
-                    {
-                        info.ChildInfo.Add(new CompanyInfo
-                        {
-                            Id = Converter.ToInt(reader["LicenseeID"]),
-                            Name = Converter.ToString2(reader["LicenseeName"])
-                        });
-                    }
+                    result.ChildInfo.Add(info);
+                    return result;
                 }
 
-                result.ChildInfo.Add(info);
-                return result;
+                while (reader.Read())
+                {
+                    info.ChildInfo.Add(new CompanyInfo
+                    {
+                        Id = Converter.ToInt(reader["LicenseeID"]),
+                        Name = Converter.ToString2(reader["LicenseeName"])
+                    });
+                }
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+
+            result.ChildInfo.Add(info);
+            return result;
         }
     }
 }

@@ -101,46 +101,6 @@
       <HintPath>..\packages\Fanex.BetDetails.Lucky3.1.0.0.1\lib\Fanex.BetDetails.Lucky3.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Fanex.BetList.BetTrade, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.82.0-beta02\lib\net40\Fanex.BetList.BetTrade.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.CashOut, Version=1.0.0.7, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.CashOut.1.0.0.7\lib\net40\Fanex.BetList.CashOut.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.Core, Version=2.82.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.2.82.0-beta02\lib\net40\Fanex.BetList.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.Core.RemotingRef, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Core.RemotingRef.1.0.0\lib\net461\Fanex.BetList.Core.RemotingRef.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.ESports, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.ESports.1.0.0\lib\net40\Fanex.BetList.ESports.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.Lucky3, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.Lucky3.1.1.0\lib\net40\Fanex.BetList.Lucky3.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.MetricGaming, Version=1.0.4.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.MetricGaming.1.0.4.5\lib\net40\Fanex.BetList.MetricGaming.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.MyanmarOdds, Version=1.0.1.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.MyanmarOdds.1.0.1.4\lib\net40\Fanex.BetList.MyanmarOdds.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.NumberGame, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.NumberGame.1.2.0\lib\net40\Fanex.BetList.NumberGame.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.BetList.VirtualSports, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.BetList.VirtualSports.1.4.0\lib\net40\Fanex.BetList.VirtualSports.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Fanex.Caching, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Caching.2.1.0\lib\net461\Fanex.Caching.dll</HintPath>
       <Private>True</Private>
@@ -523,10 +483,6 @@
     <Compile Include="App_Start\FanexData.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Content Include="App_Data\TEST\DBBET.bk.bodbAdminNet.xml">
-      <SubType>
-      </SubType>
-    </Content>
     <Content Include="App_Data\TEST\DBACC.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -557,10 +513,6 @@
       <SubType>
       </SubType>
     </Content>
-    <Content Include="App_Data\TEST\DBCUST.IPDB.bodbAdminNet.xml">
-      <SubType>
-      </SubType>
-    </Content>
     <Content Include="App_Data\LIVE\DBACC.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -572,7 +524,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\LIVE\DBWH.bodb02.bodbAdminNet.xml" />
-    <Content Include="App_Data\LIVE\DBBET.bk.bodbAdminNet.xml" />
     <Content Include="App_Data\LIVE\DBEXT.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -586,7 +537,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\LIVE\DBCUST.CustDB.bodbAdminNet.xml" />
-    <Content Include="App_Data\LIVE\DBCUST.IPDB.bodbAdminNet.xml" />
     <Content Include="App_Readme\Transformer.NET\LICENSE.txt" />
     <Content Include="App_Readme\Transformer.NET\README.txt" />
     <Content Include="Areas\Balance\Views\CompanyBalanceDifference\Index.cshtml" />
@@ -609,15 +559,6 @@
     <Content Include="Areas\Betlist\Views\ScoreInformation\Scripts\VirtualSoccerInfo.js" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\Styles\Images\firstGoal.gif" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\Styles\Images\lastGoal.gif" />
-    <Content Include="Areas\Betlist\Views\Style\BetList.css" />
-    <Content Include="Areas\Betlist\Views\Style\Images\bgHeader.jpg" />
-    <Content Include="Areas\Betlist\Views\Style\Images\firstGoal.gif" />
-    <Content Include="Areas\Betlist\Views\Style\Images\green-star.gif" />
-    <Content Include="Areas\Betlist\Views\Style\Images\lastGoal.gif" />
-    <Content Include="Areas\Betlist\Views\Style\Images\loading.gif" />
-    <Content Include="Areas\Betlist\Views\Style\Images\q_Icon2_1.png" />
-    <Content Include="Areas\Betlist\Views\Style\Images\q_Icon_2.png" />
-    <Content Include="Areas\Betlist\Views\BetlistReport\_BetListByRefNo.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\BadmintonInfo.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\BaseballInfo.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\BasketballInfo.cshtml" />
@@ -632,21 +573,6 @@
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisInfo.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\VirtualSoccerInfo.cshtml" />
     <Content Include="Areas\Betlist\Views\Web.config" />
-    <Content Include="Areas\Betlist\Views\_AgentPTCom.cshtml" />
-    <Content Include="Areas\Betlist\Views\_MasterPTCom.cshtml" />
-    <Content Include="Areas\Betlist\Views\_MixParlayDetail.cshtml" />
-    <Content Include="Areas\Betlist\Views\MemberBetListReport\_BetBuilderDetail.cshtml" />
-    <Content Include="Areas\Betlist\Views\_Status.cshtml" />
-    <Content Include="Areas\Betlist\Views\_SuperPTCom.cshtml" />
-    <Content Include="Areas\Betlist\Views\_VirtualHRPopup.cshtml" />
-    <Content Include="Areas\Betlist\Views\_VirtualTennisPopup.cshtml" />
-    <Content Include="Areas\Betlist\Views\_WinLoss.cshtml" />
-    <Content Include="Areas\Betlist\Views\_LicenseeWinLoss.cshtml" />
-    <Content Include="Areas\Betlist\Views\_StatusMember.cshtml" />
-    <Content Include="Areas\Betlist\Views\_CombinationMPDetail.cshtml" />
-    <Content Include="Areas\Betlist\Views\_RacingToteWinLoss.cshtml">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Index.cshtml" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Styles\NumberGameWinLossByBetTypeMatch.less" />
@@ -793,7 +719,6 @@
     <Content Include="Content\Fanex.Result\images\bg_header03.jpg" />
     <Content Include="Content\Fanex.Result\images\bg_header04.jpg" />
     <Content Include="Content\Fanex.Result\images\goal-icon.png" />
-    <Content Include="Content\lucky3.css" />
     <Content Include="proxy.html" />
     <Content Include="scripts\ReCheckIn.js" />
     <Content Include="scripts\_lib\Autocomplete\jquery.autocomplete.js" />
@@ -1163,14 +1088,10 @@
     <Content Include="Areas\Misc\Views\DailyCreatedCustomers\DailyCreatedCustomersDetails.js" />
     <Content Include="Areas\Misc\Views\DailyCreatedCustomers\ReportManager.js" />
     <Content Include="Areas\Misc\Views\DuplicateTickets\DuplicateTickets.js" />
-    <Content Include="Areas\Special\Views\CheckBet\Scripts\RejectChangedTickets.js" />
-    <Content Include="Areas\Special\Views\CheckBet\Scripts\NormalChangedTickets.js" />
-    <Content Include="Areas\Special\Views\CheckBet\Scripts\ReportManager.js" />
     <Content Include="Areas\Special\Views\ParlayWon\Scripts\ReportManager.js" />
     <Content Include="Areas\Misc\Views\BetCount\Scripts\ReportManager.js" />
     <Content Include="Areas\Misc\Views\BetCount\Scripts\HistoryReport.js" />
     <Content Include="Areas\Misc\Views\BetCount\Scripts\NormalReport.js" />
-    <Content Include="Areas\Special\Views\CheckBet\Scripts\CheckBet.js" />
     <Content Include="Areas\UserLogin\scripts\lib\jquery-1.8.0.min.js" />
     <Content Include="Areas\UserLogin\scripts\Plugin\jquery-1.6.2.js" />
     <Content Include="Areas\UserLogin\scripts\ReCheckIn.js" />
@@ -1742,7 +1663,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Betlist\Views\BetlistReport\Scripts\" />
     <Folder Include="Areas\LegendManagement\Views\LegendManagement\UploadedImage\" />
     <Folder Include="Areas\UserControl\Views\Shared\" />
     <Folder Include="Areas\UserLogin\Models\" />
@@ -1866,9 +1786,6 @@
     <Content Include="Areas\Special\Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Special\Views\CheckBet\Index.cshtml" />
-    <Content Include="Areas\Special\Views\CheckBet\NormalChangedTickets.cshtml" />
-    <Content Include="Areas\Special\Views\CheckBet\RejectChangedTickets.cshtml" />
     <Content Include="Areas\Misc\Views\CreditSitesBetCounts\Index.cshtml" />
     <Content Include="Areas\Main\Views\Web.config">
       <SubType>Designer</SubType>
@@ -1904,7 +1821,6 @@
     <Content Include="Areas\Racing\Views\NumberOfActiveMembersForRacing\Index.cshtml" />
     <Content Include="Areas\Racing\Views\NumberOfActiveMembersForRacing\Styles\NumberOfActiveMembers.less" />
     <Content Include="Areas\Racing\Views\Web.config" />
-    <Content Include="Areas\Special\Views\CheckBet\Style\CheckBet.less" />
     <Content Include="Areas\Special\Views\ParlayWon\Index.cshtml" />
     <Content Include="Areas\Special\Views\DailyTurnover\Index.cshtml" />
     <Content Include="Areas\Special\Views\MarginReport\Index.cshtml" />
@@ -1961,8 +1877,6 @@
     <Content Include="Areas\Misc\Views\BetCount\Styles\BetCount.less" />
     <Content Include="Areas\Misc\Views\BetCount\BetCountReport.cshtml" />
     <Content Include="Areas\Misc\Views\BetCount\HistoryBetCountReport.cshtml" />
-    <Content Include="Areas\Betlist\Views\CashOut\History.cshtml" />
-    <Content Include="Areas\Betlist\Views\MemberBetListReport\_MixParlayDetail.cshtml" />
     <Content Include="App_Data\Templates\TraderPerformance_Soccer_Detail.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1988,7 +1902,6 @@
     <Content Include="App_Data\Fanex.Result\Basketball.xls" />
     <Content Include="App_Data\Fanex.Result\BaseBall.xls" />
     <Content Include="App_Data\Fanex.Result\Badminton.xls" />
-    <Content Include="Areas\Betlist\Views\_Odds.cshtml" />
     <Content Include="Areas\Gaming\Views\Test\Index.cshtml" />
     <None Include="Areas\UserLogin\themes\fonts\Abel.woff" />
     <None Include="Areas\UserLogin\themes\fonts\OpenSans.woff" />

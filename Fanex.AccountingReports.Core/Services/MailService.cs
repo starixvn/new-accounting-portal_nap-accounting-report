@@ -61,50 +61,42 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         /// <returns>Send mail result.</returns>
         public static bool SendMail(MailItem mailItem)
         {
-            try
+            var mailRecord = new MailDeliverModel.MailRecord
             {
-                var mailRecord = new MailDeliverModel.MailRecord
-                {
-                    MailTo = mailItem.To,
-                    MailCc = mailItem.Cc,
-                    MailBcc = mailItem.Bcc,
-                    Title = mailItem.Title,
-                    Subject = mailItem.Subject,
-                    Body = mailItem.Body,
-                    Attachments = GetMailAttachments(mailItem)
-                };
+                MailTo = mailItem.To,
+                MailCc = mailItem.Cc,
+                MailBcc = mailItem.Bcc,
+                Title = mailItem.Title,
+                Subject = mailItem.Subject,
+                Body = mailItem.Body,
+                Attachments = GetMailAttachments(mailItem)
+            };
 
-                //// AltView
+            //// AltView
 
-                if (mailItem.AltView != null &&
-                    mailItem.AltView.LinkedResources.Count > 0)
+            if (mailItem.AltView != null &&
+                mailItem.AltView.LinkedResources.Count > 0)
+            {
+                mailRecord.AlternateView = new List<MailDeliverModel.MailLinkedResource>();
+                var linkedResource = mailItem.AltView.LinkedResources;
+                foreach (var linked in linkedResource)
                 {
-                    mailRecord.AlternateView = new List<MailDeliverModel.MailLinkedResource>();
-                    var linkedResource = mailItem.AltView.LinkedResources;
-                    foreach (var linked in linkedResource)
+                    var stream = linked.ContentStream;
+                    var resource = new MailDeliverModel.MailLinkedResource
                     {
-                        var stream = linked.ContentStream;
-                        var resource = new MailDeliverModel.MailLinkedResource
-                        {
-                            FileName = string.Empty,
-                            ImageType = MailDeliverModel.FileExtentions.IMG_GIF,
-                            ContentCID = linked.ContentId,
-                            StreamContent = CreateMemoryStream(stream)
-                        };
+                        FileName = string.Empty,
+                        ImageType = MailDeliverModel.FileExtentions.IMG_GIF,
+                        ContentCID = linked.ContentId,
+                        StreamContent = CreateMemoryStream(stream)
+                    };
 
-                        mailRecord.AlternateView.Add(resource);
-                    }
+                    mailRecord.AlternateView.Add(resource);
                 }
-
-                //// AltView
-
-                Task.Factory.StartNew(SendMailWithEmailService, mailRecord);
             }
-            catch (Exception ex)
-            {
-                LoggingHandler.Log(ex);
-                return false;
-            }
+
+            //// AltView
+
+            Task.Factory.StartNew(SendMailWithEmailService, mailRecord);
 
             return true;
         }
@@ -134,16 +126,9 @@ namespace Fanex.AccountingReports.Core.Services.Impl
                 return;
             }
 
-            try
+            using (var mailClient = new MailDeliver())
             {
-                using (var mailClient = new MailDeliver())
-                {
-                    mailClient.SendMail(mailRecord);
-                }
-            }
-            catch (Exception ex)
-            {
-                LoggingHandler.Log(ex);
+                mailClient.SendMail(mailRecord);
             }
         }
     }

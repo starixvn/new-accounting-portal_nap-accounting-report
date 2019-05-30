@@ -30,35 +30,28 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         {
             List<SportLeague> sportLeagues = new List<SportLeague>();
 
-            try
-            {
-                var data = GetReportData<dynamic>(criteria);
+            var data = GetReportData<dynamic>(criteria);
 
-                var sports = data.Select(s => s.sporttype).Distinct().ToList();
-                foreach (var sportId in sports)
+            var sports = data.Select(s => s.sporttype).Distinct().ToList();
+            foreach (var sportId in sports)
+            {
+                SportLeague sportLeague = new SportLeague();
+                sportLeague.Id = sportId;
+                sportLeague.Name = CacheRef.GetSportName(sportId);
+                sportLeague.Leagues = new List<League>();
+                sportLeagues.Add(sportLeague);
+
+                var leagues = data.Where(s => s.sporttype == sportId).Select(s => s.leagueid).ToList();
+                foreach (var leagueId in leagues)
                 {
-                    SportLeague sportLeague = new SportLeague();
-                    sportLeague.Id = sportId;
-                    sportLeague.Name = CacheRef.GetSportName(sportId);
-                    sportLeague.Leagues = new List<League>();
-                    sportLeagues.Add(sportLeague);
-
-                    var leagues = data.Where(s => s.sporttype == sportId).Select(s => s.leagueid).ToList();
-                    foreach (var leagueId in leagues)
+                    League league = new League()
                     {
-                        League league = new League()
-                        {
-                            Id = leagueId,
-                            Name = CacheRef.GetLeagueName(leagueId)
-                        };
+                        Id = leagueId,
+                        Name = CacheRef.GetLeagueName(leagueId)
+                    };
 
-                        sportLeague.Leagues.Add(league);
-                    }
+                    sportLeague.Leagues.Add(league);
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
             }
 
             return sportLeagues;
@@ -72,48 +65,41 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         public List<LeagueMatch> GetLeagueMatch(GetLeageMatchCriteria criteria)
         {
             List<LeagueMatch> leagueMatches = new List<LeagueMatch>();
-            try
-            {
-                var data = GetReportData<dynamic>(criteria);
-                var leagues = data.Select(s => s.leagueid).Distinct().ToList();
+            var data = GetReportData<dynamic>(criteria);
+            var leagues = data.Select(s => s.leagueid).Distinct().ToList();
 
-                foreach (var leagueId in leagues)
+            foreach (var leagueId in leagues)
+            {
+                LeagueMatch leagueMatch = new LeagueMatch();
+                leagueMatch.Id = leagueId;
+                leagueMatch.Name = CacheRef.GetLeagueName(leagueId);
+                leagueMatches.Add(leagueMatch);
+
+                var matches = data.Where(s => s.leagueid == leagueId).ToList();
+                foreach (var match in matches)
                 {
-                    LeagueMatch leagueMatch = new LeagueMatch();
-                    leagueMatch.Id = leagueId;
-                    leagueMatch.Name = CacheRef.GetLeagueName(leagueId);
-                    leagueMatches.Add(leagueMatch);
-
-                    var matches = data.Where(s => s.leagueid == leagueId).ToList();
-                    foreach (var match in matches)
+                    leagueMatch.Matches.Add(new Match()
                     {
-                        leagueMatch.Matches.Add(new Match()
+                        MatchId = match.matchid,
+                        MatchCode = match.matchcode,
+                        ShowTime = match.showtime,
+                        Sport = new BaseModel()
                         {
-                            MatchId = match.matchid,
-                            MatchCode = match.matchcode,
-                            ShowTime = match.showtime,
-                            Sport = new BaseModel()
-                            {
-                                Id = match.sporttype,
-                                Name = CacheRef.GetSportName(match.sporttype)
-                            },
-                            Home = new BaseModel()
-                            {
-                                Id = match.homeid,
-                                Name = CacheRef.GetTeamName(match.homeid)
-                            },
-                            Away = new BaseModel()
-                            {
-                                Id = match.awayid,
-                                Name = CacheRef.GetTeamName(match.awayid)
-                            }
-                        });
-                    }
+                            Id = match.sporttype,
+                            Name = CacheRef.GetSportName(match.sporttype)
+                        },
+                        Home = new BaseModel()
+                        {
+                            Id = match.homeid,
+                            Name = CacheRef.GetTeamName(match.homeid)
+                        },
+                        Away = new BaseModel()
+                        {
+                            Id = match.awayid,
+                            Name = CacheRef.GetTeamName(match.awayid)
+                        }
+                    });
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
             }
 
             return leagueMatches;
@@ -127,21 +113,14 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         public List<Bettype> GetBetType(GetBetTypeCriteria criteria)
         {
             List<Bettype> bettypes = new List<Bettype>();
-            try
+            var data = GetReportData<dynamic>(criteria);
+            foreach (var d in data)
             {
-                var data = GetReportData<dynamic>(criteria);
-                foreach (var d in data)
+                bettypes.Add(new Bettype()
                 {
-                    bettypes.Add(new Bettype()
-                    {
-                        Id = d.bettype,
-                        Name = CacheRef.GetBettype(d.bettype)
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
+                    Id = d.bettype,
+                    Name = CacheRef.GetBettype(d.bettype)
+                });
             }
 
             return bettypes;
@@ -160,141 +139,133 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             MatchAnalysisView matchAnalysis = new MatchAnalysisView();
             var currencies = ReportService.ExchangeCurrencies;
 
-            try
+            var getMatchAnalysisCriteria = GetMatchAnalysisCriteria(criteria);
+            var data = GetReportData<dynamic>(getMatchAnalysisCriteria);
+            MatchAnalysis chargedCommission = null;
+            foreach (var d in data)
             {
-                var getMatchAnalysisCriteria = GetMatchAnalysisCriteria(criteria);
-                var data = GetReportData<dynamic>(getMatchAnalysisCriteria);
-                MatchAnalysis chargedCommission = null;
-                foreach (var d in data)
+                MatchAnalysis row = new MatchAnalysis()
                 {
-                    MatchAnalysis row = new MatchAnalysis()
-                    {
-                        SMAWL = ((double)d.SMAWinLost).Format(2),
-                        SMATO = ((double)d.SMATurnover).Format(2),
+                    SMAWL = ((double)d.SMAWinLost).Format(2),
+                    SMATO = ((double)d.SMATurnover).Format(2),
 
-                        HouseWL = ((double)d.HouseWinloss).Format(2),
-                        HouseTO = ((double)d.HouseTurnover).Format(2),
+                    HouseWL = ((double)d.HouseWinloss).Format(2),
+                    HouseTO = ((double)d.HouseTurnover).Format(2),
 
-                        MemberWL = ((double)d.MemberWinLost).Format(2),
-                        MemberTO = ((double)d.MemberTurnover).Format(2),
+                    MemberWL = ((double)d.MemberWinLost).Format(2),
+                    MemberTO = ((double)d.MemberTurnover).Format(2),
 
-                        BetCount = ((int)d.betcount).Format(0),
-                    };
-
-                    switch (criteria.Reporttype)
-                    {
-                        case ReportType.Currency:
-                            row.Currency = currencies[d.currency];
-                            row.Name = row.Currency;
-                            break;
-
-                        case ReportType.Bettype:
-                            row.Id = d.bettype;
-                            row.Name = CacheRef.GetBettype(d.bettype);
-                            break;
-
-                        case ReportType.Super:
-                            row.Currency = currencies[d.Currency];
-                            row.Id = d.srecommend;
-                            row.Name = d.username;
-                            break;
-
-                        case ReportType.Member:
-                            row.Currency = currencies[d.currency];
-                            row.Name = d.username;
-                            break;
-
-                        case ReportType.SuperViewOnMaster:
-                            row.Currency = currencies[d.Currency];
-                            row.Id = d.mrecommend;
-                            row.Name = d.username;
-                            break;
-
-                        case ReportType.MasterViewOnAgent:
-                            row.Currency = currencies[d.Currency];
-                            row.Id = d.recommend;
-                            row.Name = d.username;
-                            break;
-
-                        case ReportType.AgentViewOnMember:
-                            row.Currency = currencies[d.Currency];
-                            row.Id = d.custid;
-                            row.Name = d.username;
-                            break;
-                    }
-
-                    int chargedComissionBetType = 500;
-                    if (row.Id == chargedComissionBetType && criteria.Reporttype == ReportType.Bettype)
-                    {
-                        chargedCommission = row;
-                        chargedCommission.Name = "Charged Commission";
-                        chargedCommission.BetCount = "0";
-                    }
-                    else
-                    {
-                        matchAnalysis.Rows.Add(row);
-                    }
-                }
-
-                var total = new MatchAnalysis()
-                {
-                    SMAWL = data.Sum(s => (double)s.SMAWinLost).Format(2),
-                    SMATO = data.Sum(s => (double)s.SMATurnover).Format(2),
-
-                    HouseWL = data.Sum(s => (double)s.HouseWinloss).Format(2),
-                    HouseTO = data.Sum(s => (double)s.HouseTurnover).Format(2),
-
-                    MemberWL = data.Sum(s => (double)s.MemberWinLost).Format(2),
-                    MemberTO = data.Sum(s => (double)s.MemberTurnover).Format(2),
-
-                    BetCount = data.Sum(s => (int)s.betcount).Format(0),
-                    Name = Labels.Total
+                    BetCount = ((int)d.betcount).Format(0),
                 };
-                matchAnalysis.Total = new List<MatchAnalysis> { total };
 
-                if (chargedCommission != null)
+                switch (criteria.Reporttype)
                 {
-                    matchAnalysis.Total.Add(chargedCommission);
+                    case ReportType.Currency:
+                        row.Currency = currencies[d.currency];
+                        row.Name = row.Currency;
+                        break;
 
-                    var grandTotal = new MatchAnalysis
-                    {
-                        Name = "All Total",
-                        SMAWL = total.SMAWL,
-                        SMATO = total.SMATO,
-                        HouseWL = total.HouseWL,
-                        HouseTO = total.HouseTO,
-                        MemberWL = total.MemberWL,
-                        MemberTO = total.MemberTO,
-                        BetCount = total.BetCount,
-                    };
+                    case ReportType.Bettype:
+                        row.Id = d.bettype;
+                        row.Name = CacheRef.GetBettype(d.bettype);
+                        break;
 
-                    matchAnalysis.Total.Add(grandTotal);
-                    matchAnalysis.Total.First().SMAWL = Converter.ToString2(Converter.ToDecimal(total.SMAWL)
-                                   - Converter.ToDecimal(chargedCommission.SMAWL));
-                    matchAnalysis.Total.First().SMATO = Converter.ToString2(Converter.ToDecimal(total.SMATO)
-                                   - Converter.ToDecimal(chargedCommission.SMATO));
+                    case ReportType.Super:
+                        row.Currency = currencies[d.Currency];
+                        row.Id = d.srecommend;
+                        row.Name = d.username;
+                        break;
 
-                    matchAnalysis.Total.First().HouseWL = Converter.ToString2(Converter.ToDecimal(total.HouseWL)
-                                   - Converter.ToDecimal(chargedCommission.HouseWL));
-                    matchAnalysis.Total.First().HouseTO = Converter.ToString2(Converter.ToDecimal(total.HouseTO)
-                                   - Converter.ToDecimal(chargedCommission.HouseTO));
+                    case ReportType.Member:
+                        row.Currency = currencies[d.currency];
+                        row.Name = d.username;
+                        break;
 
-                    matchAnalysis.Total.First().MemberWL = Converter.ToString2(Converter.ToDecimal(total.MemberWL)
-                                    - Converter.ToDecimal(chargedCommission.MemberWL));
-                    matchAnalysis.Total.First().MemberTO = Converter.ToString2(Converter.ToDecimal(total.MemberTO)
-                                    - Converter.ToDecimal(chargedCommission.MemberTO));
+                    case ReportType.SuperViewOnMaster:
+                        row.Currency = currencies[d.Currency];
+                        row.Id = d.mrecommend;
+                        row.Name = d.username;
+                        break;
 
-                    matchAnalysis.Total.First().BetCount = Converter.ToString2(Converter.ToDecimal(total.BetCount)
-                                    - Converter.ToDecimal(chargedCommission.BetCount));
+                    case ReportType.MasterViewOnAgent:
+                        row.Currency = currencies[d.Currency];
+                        row.Id = d.recommend;
+                        row.Name = d.username;
+                        break;
+
+                    case ReportType.AgentViewOnMember:
+                        row.Currency = currencies[d.Currency];
+                        row.Id = d.custid;
+                        row.Name = d.username;
+                        break;
                 }
 
-                SessionManager.Set(SpecialConstants.MatchAnalysisSessionKey + GetReportTypeName(criteria.Reporttype), matchAnalysis);
+                int chargedComissionBetType = 500;
+                if (row.Id == chargedComissionBetType && criteria.Reporttype == ReportType.Bettype)
+                {
+                    chargedCommission = row;
+                    chargedCommission.Name = "Charged Commission";
+                    chargedCommission.BetCount = "0";
+                }
+                else
+                {
+                    matchAnalysis.Rows.Add(row);
+                }
             }
-            catch (Exception ex)
+
+            var total = new MatchAnalysis()
             {
-                HandleException(ex);
-                throw;
+                SMAWL = data.Sum(s => (double)s.SMAWinLost).Format(2),
+                SMATO = data.Sum(s => (double)s.SMATurnover).Format(2),
+
+                HouseWL = data.Sum(s => (double)s.HouseWinloss).Format(2),
+                HouseTO = data.Sum(s => (double)s.HouseTurnover).Format(2),
+
+                MemberWL = data.Sum(s => (double)s.MemberWinLost).Format(2),
+                MemberTO = data.Sum(s => (double)s.MemberTurnover).Format(2),
+
+                BetCount = data.Sum(s => (int)s.betcount).Format(0),
+                Name = Labels.Total
+            };
+            matchAnalysis.Total = new List<MatchAnalysis> { total };
+
+            if (chargedCommission != null)
+            {
+                matchAnalysis.Total.Add(chargedCommission);
+
+                var grandTotal = new MatchAnalysis
+                {
+                    Name = "All Total",
+                    SMAWL = total.SMAWL,
+                    SMATO = total.SMATO,
+                    HouseWL = total.HouseWL,
+                    HouseTO = total.HouseTO,
+                    MemberWL = total.MemberWL,
+                    MemberTO = total.MemberTO,
+                    BetCount = total.BetCount,
+                };
+
+                matchAnalysis.Total.Add(grandTotal);
+                matchAnalysis.Total.First().SMAWL = Converter.ToString2(Converter.ToDecimal(total.SMAWL)
+                               - Converter.ToDecimal(chargedCommission.SMAWL));
+                matchAnalysis.Total.First().SMATO = Converter.ToString2(Converter.ToDecimal(total.SMATO)
+                               - Converter.ToDecimal(chargedCommission.SMATO));
+
+                matchAnalysis.Total.First().HouseWL = Converter.ToString2(Converter.ToDecimal(total.HouseWL)
+                               - Converter.ToDecimal(chargedCommission.HouseWL));
+                matchAnalysis.Total.First().HouseTO = Converter.ToString2(Converter.ToDecimal(total.HouseTO)
+                               - Converter.ToDecimal(chargedCommission.HouseTO));
+
+                matchAnalysis.Total.First().MemberWL = Converter.ToString2(Converter.ToDecimal(total.MemberWL)
+                                - Converter.ToDecimal(chargedCommission.MemberWL));
+                matchAnalysis.Total.First().MemberTO = Converter.ToString2(Converter.ToDecimal(total.MemberTO)
+                                - Converter.ToDecimal(chargedCommission.MemberTO));
+
+                matchAnalysis.Total.First().BetCount = Converter.ToString2(Converter.ToDecimal(total.BetCount)
+                                - Converter.ToDecimal(chargedCommission.BetCount));
             }
+
+            SessionManager.Set(SpecialConstants.MatchAnalysisSessionKey + GetReportTypeName(criteria.Reporttype), matchAnalysis);
 
             return matchAnalysis;
         }
@@ -305,36 +276,29 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         /// <param name="criteria">The criteria.</param>
         public void ExportReport(GetMatchAnalysisCriteria criteria)
         {
-            try
+            var matchAnalysis = SessionManager.Get<MatchAnalysisView>(SpecialConstants.MatchAnalysisSessionKey + GetReportTypeName(criteria.Reporttype));
+            if (matchAnalysis == null)
             {
-                var matchAnalysis = SessionManager.Get<MatchAnalysisView>(SpecialConstants.MatchAnalysisSessionKey + GetReportTypeName(criteria.Reporttype));
-                if (matchAnalysis == null)
-                {
-                    matchAnalysis = GetMatchAnalysis(criteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = SpecialResources.MatchAnalysis_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
-
-                this.ExportReportHeader(ref workSheet, startRow, startColumn, ref currentRow, criteria);
-                currentRow++;
-                this.ExportReportContent(ref workSheet, currentRow, startColumn, ref currentRow, criteria, matchAnalysis);
-
-                var reportName = string.Format(
-                    SpecialResources.MatchAnalysis_SheetName.Replace(" ", "_"),
-                    criteria.EventDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
-                excelFile.ReponseStream(reportName);
+                matchAnalysis = GetMatchAnalysis(criteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = SpecialResources.MatchAnalysis_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
+
+            this.ExportReportHeader(ref workSheet, startRow, startColumn, ref currentRow, criteria);
+            currentRow++;
+            this.ExportReportContent(ref workSheet, currentRow, startColumn, ref currentRow, criteria, matchAnalysis);
+
+            var reportName = string.Format(
+                SpecialResources.MatchAnalysis_SheetName.Replace(" ", "_"),
+                criteria.EventDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>
@@ -686,81 +650,74 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                 false,
                 true);
 
-            try
+            //// Rows
+            foreach (MatchAnalysis row in matchAnalysis.Rows)
             {
-                //// Rows
-                foreach (MatchAnalysis row in matchAnalysis.Rows)
+                currentColumn = startColumn;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = row.Name;
+                currentCellRange.Style = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false, HorizontalAlignmentStyle.Center);
+
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Convert.ToDecimal(row.MemberTO);
+                currentCellRange.Style = twoDecimalNumberStyle;
+
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Convert.ToDecimal(row.MemberWL);
+                currentCellRange.Style = twoDecimalNumberStyle;
+
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Convert.ToDecimal(row.BetCount);
+                currentCellRange.Style = intStyle;
+
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Convert.ToDecimal(row.HouseTO);
+                currentCellRange.Style = twoDecimalNumberStyle;
+
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Convert.ToDecimal(row.HouseWL);
+                currentCellRange.Style = twoDecimalNumberStyleNegative;
+
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Convert.ToDecimal(row.SMATO);
+                currentCellRange.Style = twoDecimalNumberStyle;
+
+                currentColumn++;
+                currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = Convert.ToDecimal(row.SMAWL);
+                currentCellRange.Style = twoDecimalNumberStyle;
+
+                if (isAddMoreCurrencyColumn)
                 {
-                    currentColumn = startColumn;
+                    currentColumn++;
                     currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = row.Name;
+                    currentCellRange.Value = row.Currency;
                     currentCellRange.Style = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false, HorizontalAlignmentStyle.Center);
-
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = Convert.ToDecimal(row.MemberTO);
-                    currentCellRange.Style = twoDecimalNumberStyle;
-
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = Convert.ToDecimal(row.MemberWL);
-                    currentCellRange.Style = twoDecimalNumberStyle;
-
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = Convert.ToDecimal(row.BetCount);
-                    currentCellRange.Style = intStyle;
-
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = Convert.ToDecimal(row.HouseTO);
-                    currentCellRange.Style = twoDecimalNumberStyle;
-
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = Convert.ToDecimal(row.HouseWL);
-                    currentCellRange.Style = twoDecimalNumberStyleNegative;
-
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = Convert.ToDecimal(row.SMATO);
-                    currentCellRange.Style = twoDecimalNumberStyle;
-
-                    currentColumn++;
-                    currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = Convert.ToDecimal(row.SMAWL);
-                    currentCellRange.Style = twoDecimalNumberStyle;
-
-                    if (isAddMoreCurrencyColumn)
-                    {
-                        currentColumn++;
-                        currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
-                        currentCellRange.Merged = true;
-                        currentCellRange.Value = row.Currency;
-                        currentCellRange.Style = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false, HorizontalAlignmentStyle.Center);
-                    }
-
-                    currentRow++;
                 }
 
-                //// Total
-                foreach (var total in matchAnalysis.Total)
-                {
-                    ExportReportTotalContent(currentRow, startColumn, isAddMoreCurrencyColumn, worksheet, total);
-                    currentRow++;
-                }
+                currentRow++;
             }
-            catch (Exception ex)
+
+            //// Total
+            foreach (var total in matchAnalysis.Total)
             {
-                HandleException(ex);
+                ExportReportTotalContent(currentRow, startColumn, isAddMoreCurrencyColumn, worksheet, total);
+                currentRow++;
             }
         }
 

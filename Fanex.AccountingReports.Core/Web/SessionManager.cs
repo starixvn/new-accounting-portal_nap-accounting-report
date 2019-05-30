@@ -2,7 +2,6 @@ namespace Fanex.AccountingReports.Core.Web
 {
     using System;
     using System.Web;
-    using Fanex.AccountingReports.Core.Services.Impl;
 
     /// <summary>
     /// TODO: Update summary.
@@ -17,14 +16,8 @@ namespace Fanex.AccountingReports.Core.Web
         /// <param name="value">The value.</param>
         public static void Set<T>(string sessionKey, T value)
         {
-            try
-            {
-                HttpContext.Current.Session[sessionKey] = value;
-            }
-            catch (Exception ex)
-            {
-                LoggingHandler.Log(ex);
-            }
+
+            HttpContext.Current.Session[sessionKey] = value;
         }
 
         /// <summary>
@@ -44,6 +37,7 @@ namespace Fanex.AccountingReports.Core.Web
             {
                 return default(T);
             }
+
         }
 
         /// <summary>

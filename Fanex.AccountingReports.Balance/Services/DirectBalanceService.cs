@@ -55,48 +55,41 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         {
             var result = new DirectBalance();
             var directBalanceList = new List<DirectBalanceDetail>();
-            try
+            if (directBalanceCriteria.Currency == 0)
             {
-                if (directBalanceCriteria.Currency == 0)
-                {
-                    directBalanceCriteria.Currency = null;
-                }
-
-                if (string.IsNullOrEmpty(directBalanceCriteria.Username))
-                {
-                    directBalanceCriteria.Username = string.Empty;
-                }
-
-                var currencies = ReportService.ExchangeCurrencies;
-
-                var rawData = GetReportData<dynamic>(directBalanceCriteria);
-                if (rawData != null)
-                {
-                    decimal baseBalanceTotal = 0;
-                    foreach (var row in rawData)
-                    {
-                        var currencyId = Converter.ToInt(row.currency);
-                        decimal balance = Converter.ToDecimal(row.Balance);
-                        decimal baseBalance = Converter.ToDecimal(row.BaseBalance);
-                        directBalanceList.Add(new DirectBalanceDetail()
-                        {
-                            CustId = Converter.ToString2(row.custid),
-                            Username = Converter.ToString2(row.username),
-                            Currency = currencies[currencyId],
-                            Balance = balance.Format(2),
-                            BaseBalance = baseBalance.Format(2)
-                        });
-
-                        baseBalanceTotal += baseBalance;
-                    }
-
-                    result.DirectBalanceList = directBalanceList;
-                    result.BaseBalanceTotal = baseBalanceTotal.Format(2);
-                }
+                directBalanceCriteria.Currency = null;
             }
-            catch (Exception ex)
+
+            if (string.IsNullOrEmpty(directBalanceCriteria.Username))
             {
-                HandleException(ex);
+                directBalanceCriteria.Username = string.Empty;
+            }
+
+            var currencies = ReportService.ExchangeCurrencies;
+
+            var rawData = GetReportData<dynamic>(directBalanceCriteria);
+            if (rawData != null)
+            {
+                decimal baseBalanceTotal = 0;
+                foreach (var row in rawData)
+                {
+                    var currencyId = Converter.ToInt(row.currency);
+                    decimal balance = Converter.ToDecimal(row.Balance);
+                    decimal baseBalance = Converter.ToDecimal(row.BaseBalance);
+                    directBalanceList.Add(new DirectBalanceDetail()
+                    {
+                        CustId = Converter.ToString2(row.custid),
+                        Username = Converter.ToString2(row.username),
+                        Currency = currencies[currencyId],
+                        Balance = balance.Format(2),
+                        BaseBalance = baseBalance.Format(2)
+                    });
+
+                    baseBalanceTotal += baseBalance;
+                }
+
+                result.DirectBalanceList = directBalanceList;
+                result.BaseBalanceTotal = baseBalanceTotal.Format(2);
             }
 
             SessionManager.Set<DirectBalance>(BalanceConstants.DirectBalanceSessionKey, result);
@@ -111,42 +104,35 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         public DirectBalance GetDirectBalanceMasterDownLine(GetDirectBalanceMasterDownlineCriteria directBalanceMasterDownLineCriteria)
         {
             var result = new DirectBalance();
-            try
+            var directBalanceDownlineList = new List<DirectBalanceDetail>();
+            var currencies = ReportService.ExchangeCurrencies;
+
+            var rawData = GetReportData<dynamic>(directBalanceMasterDownLineCriteria);
+            if (rawData != null)
             {
-                var directBalanceDownlineList = new List<DirectBalanceDetail>();
-                var currencies = ReportService.ExchangeCurrencies;
-
-                var rawData = GetReportData<dynamic>(directBalanceMasterDownLineCriteria);
-                if (rawData != null)
+                decimal baseBalanceDownlineTotal = 0;
+                foreach (var row in rawData)
                 {
-                    decimal baseBalanceDownlineTotal = 0;
-                    foreach (var row in rawData)
+                    var currencyId = Converter.ToInt(row.currency);
+                    decimal balance = Converter.ToDecimal(row.bal);
+                    decimal baseBalance = Converter.ToDecimal(row.baseBalance);
+                    if (balance != 0)
                     {
-                        var currencyId = Converter.ToInt(row.currency);
-                        decimal balance = Converter.ToDecimal(row.bal);
-                        decimal baseBalance = Converter.ToDecimal(row.baseBalance);
-                        if (balance != 0)
+                        directBalanceDownlineList.Add(new DirectBalanceDetail()
                         {
-                            directBalanceDownlineList.Add(new DirectBalanceDetail()
-                            {
-                                CustId = Converter.ToString2(row.custid),
-                                Username = Converter.ToString2(row.username),
-                                Currency = currencies[currencyId],
-                                Balance = balance.Format(2),
-                                BaseBalance = baseBalance.Format(2)
-                            });
-                        }
-
-                        baseBalanceDownlineTotal += baseBalance;
+                            CustId = Converter.ToString2(row.custid),
+                            Username = Converter.ToString2(row.username),
+                            Currency = currencies[currencyId],
+                            Balance = balance.Format(2),
+                            BaseBalance = baseBalance.Format(2)
+                        });
                     }
 
-                    result.DirectBalanceList = directBalanceDownlineList;
-                    result.BaseBalanceTotal = baseBalanceDownlineTotal.Format(2);
+                    baseBalanceDownlineTotal += baseBalance;
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
+
+                result.DirectBalanceList = directBalanceDownlineList;
+                result.BaseBalanceTotal = baseBalanceDownlineTotal.Format(2);
             }
 
             SessionManager.Set<DirectBalance>(BalanceConstants.DirectBalanceMasterDownLineSessionKey, result);
@@ -164,39 +150,32 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             var directBalanceDownlineList = new List<DirectBalanceDetail>();
             var currencies = ReportService.ExchangeCurrencies;
 
-            try
+            var rawData = GetReportData<dynamic>(directBalanceAgentDownLineCriteria);
+            if (rawData != null)
             {
-                var rawData = GetReportData<dynamic>(directBalanceAgentDownLineCriteria);
-                if (rawData != null)
+                decimal baseBalanceDownlineTotal = 0;
+                foreach (var row in rawData)
                 {
-                    decimal baseBalanceDownlineTotal = 0;
-                    foreach (var row in rawData)
+                    var currencyId = Converter.ToInt(row.currency);
+                    decimal balance = Converter.ToDecimal(row.Balance);
+                    decimal baseBalance = Converter.ToDecimal(row.BaseBalance);
+                    if (balance != 0)
                     {
-                        var currencyId = Converter.ToInt(row.currency);
-                        decimal balance = Converter.ToDecimal(row.Balance);
-                        decimal baseBalance = Converter.ToDecimal(row.BaseBalance);
-                        if (balance != 0)
+                        directBalanceDownlineList.Add(new DirectBalanceDetail()
                         {
-                            directBalanceDownlineList.Add(new DirectBalanceDetail()
-                            {
-                                CustId = Converter.ToString2(row.custid),
-                                Username = Converter.ToString2(row.username),
-                                Currency = currencies[currencyId],
-                                Balance = balance.Format(2),
-                                BaseBalance = baseBalance.Format(2)
-                            });
-                        }
-
-                        baseBalanceDownlineTotal += baseBalance;
+                            CustId = Converter.ToString2(row.custid),
+                            Username = Converter.ToString2(row.username),
+                            Currency = currencies[currencyId],
+                            Balance = balance.Format(2),
+                            BaseBalance = baseBalance.Format(2)
+                        });
                     }
 
-                    result.DirectBalanceList = directBalanceDownlineList;
-                    result.BaseBalanceTotal = baseBalanceDownlineTotal.Format(2);
+                    baseBalanceDownlineTotal += baseBalance;
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
+
+                result.DirectBalanceList = directBalanceDownlineList;
+                result.BaseBalanceTotal = baseBalanceDownlineTotal.Format(2);
             }
 
             SessionManager.Set<DirectBalance>(BalanceConstants.DirectBalanceAgentdownLineSessionKey, result);
@@ -211,45 +190,38 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         public DirectBalance ExportDirectBalanceReport(GetDirectBalanceCriteria directBalanceCriteria)
         {
             var result = new DirectBalance();
-            try
+            var fullReport = SessionManager.Get<DirectBalance>(BalanceConstants.DirectBalanceSessionKey);
+            if (fullReport == null)
             {
-                var fullReport = SessionManager.Get<DirectBalance>(BalanceConstants.DirectBalanceSessionKey);
-                if (fullReport == null)
-                {
-                    fullReport = this.GetDirectBalance(directBalanceCriteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = BalanceResources.DirectBalance_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
-
-                this.ExportReportHeader(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    directBalanceCriteria);
-
-                this.ExportReportContent(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    fullReport);
-
-                var customerType = ReportService.GetRoleName(directBalanceCriteria.RoleID);
-                var reportName = Labels.DirectBalance + Labels.Symbol_ReportNameSeparator + customerType;
-                excelFile.ReponseStream(reportName);
+                fullReport = this.GetDirectBalance(directBalanceCriteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = BalanceResources.DirectBalance_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
+
+            this.ExportReportHeader(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                directBalanceCriteria);
+
+            this.ExportReportContent(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                fullReport);
+
+            var customerType = ReportService.GetRoleName(directBalanceCriteria.RoleID);
+            var reportName = Labels.DirectBalance + Labels.Symbol_ReportNameSeparator + customerType;
+            excelFile.ReponseStream(reportName);
 
             return result;
         }
@@ -262,42 +234,35 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         public DirectBalance ExportBalanceMasterDownLineReport(GetDirectBalanceMasterDownlineCriteria getDirectBalanceMasterCriteria)
         {
             var result = new DirectBalance();
-            try
+            var fullReport = SessionManager.Get<DirectBalance>(BalanceConstants.DirectBalanceMasterDownLineSessionKey);
+            if (fullReport == null)
             {
-                var fullReport = SessionManager.Get<DirectBalance>(BalanceConstants.DirectBalanceMasterDownLineSessionKey);
-                if (fullReport == null)
-                {
-                    fullReport = this.GetDirectBalanceMasterDownLine(getDirectBalanceMasterCriteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = BalanceResources.DirectBalance_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
-
-                this.ExportReportHeaderDownLine(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    3);
-                this.ExportReportContent(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    fullReport);
-
-                excelFile.ReponseStream(BalanceResources.DirectBalance_MasterDownline_ReportName);
+                fullReport = this.GetDirectBalanceMasterDownLine(getDirectBalanceMasterCriteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = BalanceResources.DirectBalance_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
+
+            this.ExportReportHeaderDownLine(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                3);
+            this.ExportReportContent(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                fullReport);
+
+            excelFile.ReponseStream(BalanceResources.DirectBalance_MasterDownline_ReportName);
 
             return result;
         }
@@ -310,43 +275,36 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         public DirectBalance ExportBalanceAgentDownLineReport(GetDirectBalanceAgentDownlineCriteria getDirectBalanceAgentCriteria)
         {
             var result = new DirectBalance();
-            try
+            var fullReport = SessionManager.Get<DirectBalance>(BalanceConstants.DirectBalanceAgentdownLineSessionKey);
+            if (fullReport == null)
             {
-                var fullReport = SessionManager.Get<DirectBalance>(BalanceConstants.DirectBalanceAgentdownLineSessionKey);
-                if (fullReport == null)
-                {
-                    fullReport = this.GetDirectBalanceAgentDownLine(getDirectBalanceAgentCriteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = BalanceResources.DirectBalance_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
-
-                this.ExportReportHeaderDownLine(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    4);
-
-                this.ExportReportContent(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    fullReport);
-
-                excelFile.ReponseStream(BalanceResources.DirectBalance_AgentDownline_ReportName);
+                fullReport = this.GetDirectBalanceAgentDownLine(getDirectBalanceAgentCriteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = BalanceResources.DirectBalance_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
+
+            this.ExportReportHeaderDownLine(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                4);
+
+            this.ExportReportContent(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                fullReport);
+
+            excelFile.ReponseStream(BalanceResources.DirectBalance_AgentDownline_ReportName);
 
             return result;
         }
@@ -358,26 +316,19 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         public List<EntityBase<int, string>> GetCurrencies()
         {
             var result = new List<EntityBase<int, string>>();
-            try
-            {
-                Dictionary<int, string> currList = ReportService.GetExchangeCurrencies(
-                    new GetExchangeCurrenciesCriteria
-                    {
-                        ExcludeTest = false
-                    });
+            Dictionary<int, string> currList = ReportService.GetExchangeCurrencies(
+                     new GetExchangeCurrenciesCriteria
+                     {
+                         ExcludeTest = false
+                     });
 
-                foreach (var row in currList)
-                {
-                    result.Add(new EntityBase<int, string>()
-                    {
-                        Id = row.Key,
-                        Name = row.Value
-                    });
-                }
-            }
-            catch (Exception ex)
+            foreach (var row in currList)
             {
-                HandleException(ex);
+                result.Add(new EntityBase<int, string>()
+                {
+                    Id = row.Key,
+                    Name = row.Value
+                });
             }
 
             return result;

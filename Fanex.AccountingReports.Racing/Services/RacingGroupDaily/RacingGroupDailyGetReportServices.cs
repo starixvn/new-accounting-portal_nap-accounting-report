@@ -45,48 +45,40 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.RacingGroupDaily
         /// <returns>The list RacingGroupDaily.</returns>
         public List<RacingGroupDaily> GetReport(GetWinLostRacingGroupCriteria criteria)
         {
-            try
+            var fullReport = new List<RacingGroupDaily>();
+            var pagingReport = new List<RacingGroupDaily>();
+
+            if (!criteria.IsValid())
             {
-                var fullReport = new List<RacingGroupDaily>();
-                var pagingReport = new List<RacingGroupDaily>();
-
-                if (!criteria.IsValid())
-                {
-                    return fullReport;
-                }
-
-                if (!criteria.IsPagingCallback)
-                {
-                    fullReport = this.GetAndConvertData(criteria);
-                    SessionManager.Set<List<RacingGroupDaily>>(
-                            this._racingGroupDailySessionKey,
-                            fullReport);
-                }
-                else
-                {
-                    fullReport = SessionManager.Get<List<RacingGroupDaily>>(
-                            this._racingGroupDailySessionKey);
-                }
-
-                if (fullReport != null && fullReport.Count > 1)
-                {
-                    string pagingSessionKey = this._racingGroupDailySessionKey
-                            + "." + criteria.FromDate + "." + criteria.ToDate
-                            + "." + criteria.StartIndex + "." + criteria.DatesPerPage;
-                    pagingReport = this.GetPagingReport(
-                                        fullReport,
-                                        pagingReport,
-                                        criteria,
-                                        pagingSessionKey);
-                }
-
-                return pagingReport;
+                return fullReport;
             }
-            catch (Exception ex)
+
+            if (!criteria.IsPagingCallback)
             {
-                this.HandleException(ex);
-                throw;
+                fullReport = this.GetAndConvertData(criteria);
+                SessionManager.Set<List<RacingGroupDaily>>(
+                        this._racingGroupDailySessionKey,
+                        fullReport);
             }
+            else
+            {
+                fullReport = SessionManager.Get<List<RacingGroupDaily>>(
+                        this._racingGroupDailySessionKey);
+            }
+
+            if (fullReport != null && fullReport.Count > 1)
+            {
+                string pagingSessionKey = this._racingGroupDailySessionKey
+                        + "." + criteria.FromDate + "." + criteria.ToDate
+                        + "." + criteria.StartIndex + "." + criteria.DatesPerPage;
+                pagingReport = this.GetPagingReport(
+                                    fullReport,
+                                    pagingReport,
+                                    criteria,
+                                    pagingSessionKey);
+            }
+
+            return pagingReport;
         }
 
         #region get and convert date from database.

@@ -47,20 +47,12 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         {
             Check.Argument.IsNotNull(criteria, "criteria");
 
-            try
+            if (criteria.IsValid())
             {
-                if (criteria.IsValid())
-                {
-                    return DynamicRepository.Fetch<T>(criteria);
-                }
+                return DynamicRepository.Fetch<T>(criteria);
+            }
 
-                return new List<T>();
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+            return new List<T>();
         }
     }
 }

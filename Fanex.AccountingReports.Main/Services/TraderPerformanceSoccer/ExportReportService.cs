@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSoccer
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web;
@@ -25,45 +24,38 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
         {
             var traderSportType = criteria.IsSoccer ? SoccerTitle : OtherSportTitle;
 
-            try
+            var report = SessionManager.Get<TraderPerformanceSoccer>(_traderPerformanceSessionKey + traderSportType);
+
+            if (report == null)
             {
-                var report = SessionManager.Get<TraderPerformanceSoccer>(_traderPerformanceSessionKey + traderSportType);
-
-                if (report == null)
-                {
-                    report = this.GetReport(criteria);
-                }
-
-                HSSFWorkbook excelFile = new HSSFWorkbook();
-                string sheetName = criteria.IsSoccer ?
-                    MainResources.TraderPerformanceSoccer_SheetName :
-                    MainResources.TraderPerformanceOtherSports_SheetName;
-
-                ISheet worksheet = excelFile.CreateSheet(sheetName);
-                int currentRow = 0;
-
-                if (report.ReportRows.Count > 0)
-                {
-                    this.ExportReportHeader(excelFile, ref worksheet, ref currentRow, criteria);
-                    currentRow += 1;
-                    this.ExportReportContent(excelFile, ref worksheet, ref currentRow, report);
-                }
-
-                string reportTypeName = criteria.IsSoccer ?
-                    MainResources.TraderPerformanceSoccer_ReportName :
-                    MainResources.TraderPerformanceOtherSports_ReportName;
-
-                string reportName = string.Format(
-                        reportTypeName,
-                        criteria.Fromdate.ToShortFormatedDateWithSlash(),
-                        criteria.Todate.ToShortFormatedDateWithSlash());
-
-                NpoiExcelExtensions.ResponseStreamExcel(excelFile, reportName);
+                report = this.GetReport(criteria);
             }
-            catch (Exception ex)
+
+            HSSFWorkbook excelFile = new HSSFWorkbook();
+            string sheetName = criteria.IsSoccer ?
+                MainResources.TraderPerformanceSoccer_SheetName :
+                MainResources.TraderPerformanceOtherSports_SheetName;
+
+            ISheet worksheet = excelFile.CreateSheet(sheetName);
+            int currentRow = 0;
+
+            if (report.ReportRows.Count > 0)
             {
-                HandleException(ex);
+                this.ExportReportHeader(excelFile, ref worksheet, ref currentRow, criteria);
+                currentRow += 1;
+                this.ExportReportContent(excelFile, ref worksheet, ref currentRow, report);
             }
+
+            string reportTypeName = criteria.IsSoccer ?
+                MainResources.TraderPerformanceSoccer_ReportName :
+                MainResources.TraderPerformanceOtherSports_ReportName;
+
+            string reportName = string.Format(
+                    reportTypeName,
+                    criteria.Fromdate.ToShortFormatedDateWithSlash(),
+                    criteria.Todate.ToShortFormatedDateWithSlash());
+
+            NpoiExcelExtensions.ResponseStreamExcel(excelFile, reportName);
         }
 
         /// <summary>
@@ -243,7 +235,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Labels._1st_Total_Bookings, headerStyle);
             this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Labels.Total_Bookings, headerStyle);
             this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Labels._15min_Total_Booking_OU, headerStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Labels.Next_Booking, headerStyle);            
+            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Labels.Next_Booking, headerStyle);
             this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Labels.Overall, headerStyle);
         }
 
@@ -279,7 +271,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
 
             ICellStyle intNumberStyle = NpoiExcelExtensions.IntStyle(excelFile, HSSFColor.White.Index, false);
             ICellStyle intNumberCenterStyle = NpoiExcelExtensions.IntStyle(excelFile, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Center);
-            ICellStyle textStyle = NpoiExcelExtensions.TextStyle(excelFile, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Left); 
+            ICellStyle textStyle = NpoiExcelExtensions.TextStyle(excelFile, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Left);
             ICellStyle intNumberEvenRowStyle = NpoiExcelExtensions.IntStyle(excelFile, EvenColorIndex, false);
             ICellStyle intNumberCenterEvenRowStyle = NpoiExcelExtensions.IntStyle(excelFile, EvenColorIndex, false, NpoiExcelExtensions.Alignment.Center);
             ICellStyle textEvenRowStyle = NpoiExcelExtensions.TextStyle(excelFile, EvenColorIndex, false, NpoiExcelExtensions.Alignment.Left);
@@ -386,7 +378,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, childInfo.FirstHalfTotalBookings, cellStyle);
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, childInfo.TotalBookings, cellStyle);
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, childInfo.TotalBookingsFifteenMinOU, cellStyle);
-            this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, childInfo.NextBookings, cellStyle);            
+            this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, childInfo.NextBookings, cellStyle);
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, childInfo.Overall, cellStyle);
         }
 
@@ -427,7 +419,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, marginInfo.FirstHalfTotalBookings / 100, cellStyle);
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, marginInfo.TotalBookings / 100, cellStyle);
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, marginInfo.TotalBookingsFifteenMinOU / 100, cellStyle);
-            this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, marginInfo.NextBookings / 100, cellStyle);            
+            this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, marginInfo.NextBookings / 100, cellStyle);
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, marginInfo.Overall / 100, cellStyle);
         }
     }

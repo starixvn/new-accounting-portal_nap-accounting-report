@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOtherSports
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web;
@@ -24,38 +23,31 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
         public void ExportDetailReport(GetDetailReportCriteria criteria)
         {
             var traderSportType = criteria.IsSoccer ? SoccerTitle : OtherSportTitle;
-            try
+            var report = SessionManager.Get<TraderPerformanceOtherSportsDetail>(_traderPerformanceDetailSessionKey + traderSportType);
+
+            if (report == null)
             {
-                var report = SessionManager.Get<TraderPerformanceOtherSportsDetail>(_traderPerformanceDetailSessionKey + traderSportType);
-
-                if (report == null)
-                {
-                    report = this.GetDetailReport(criteria);
-                }
-
-                HSSFWorkbook excelFile = new HSSFWorkbook();
-                string sheetName = MainResources.TraderPerformanceOtherSportsDetail_SheetName;
-                ISheet worksheet = excelFile.CreateSheet(sheetName);
-                int currentRow = 0;
-
-                if (report.ReportRows.Count > 0)
-                {
-                    this.ExportDetailReportHeader(excelFile, ref worksheet, ref currentRow, criteria);
-                    currentRow += 1;
-                    this.ExportDetailReportContent(excelFile, ref worksheet, ref currentRow, report);
-                }
-
-                string reportName = string.Format(
-                        MainResources.TraderPerformanceOtherSportsDetail_ReportName,
-                        criteria.Fromdate.ToShortFormatedDateWithSlash(),
-                        criteria.Todate.ToShortFormatedDateWithSlash());
-
-                NpoiExcelExtensions.ResponseStreamExcel(excelFile, reportName);
+                report = this.GetDetailReport(criteria);
             }
-            catch (Exception ex)
+
+            HSSFWorkbook excelFile = new HSSFWorkbook();
+            string sheetName = MainResources.TraderPerformanceOtherSportsDetail_SheetName;
+            ISheet worksheet = excelFile.CreateSheet(sheetName);
+            int currentRow = 0;
+
+            if (report.ReportRows.Count > 0)
             {
-                HandleException(ex);
+                this.ExportDetailReportHeader(excelFile, ref worksheet, ref currentRow, criteria);
+                currentRow += 1;
+                this.ExportDetailReportContent(excelFile, ref worksheet, ref currentRow, report);
             }
+
+            string reportName = string.Format(
+                    MainResources.TraderPerformanceOtherSportsDetail_ReportName,
+                    criteria.Fromdate.ToShortFormatedDateWithSlash(),
+                    criteria.Todate.ToShortFormatedDateWithSlash());
+
+            NpoiExcelExtensions.ResponseStreamExcel(excelFile, reportName);
         }
 
         /// <summary>

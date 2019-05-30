@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Balance.Services.Implement
 {
-    using System;
     using System.Collections.Generic;
     using Fanex.AccountingReports.Balance.Criteria.CompanyBalanceDifference;
     using Fanex.AccountingReports.Balance.Models.CompanyBalanceDifference;
@@ -18,29 +17,20 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         /// <returns>The company balance difference.</returns>
         public List<DifferenceInfo> GetCompanyBalanceDifference()
         {
-            try
+            var rawData = GetReportData<dynamic>(new GetCompanyBalanceDifferenceCriteria());
+            var differences = new List<DifferenceInfo>();
+            foreach (var row in rawData)
             {
-                var rawData = GetReportData<dynamic>(new GetCompanyBalanceDifferenceCriteria());
-                var differences = new List<DifferenceInfo>();
-                foreach (var row in rawData)
+                differences.Add(new DifferenceInfo
                 {
-                    differences.Add(new DifferenceInfo
-                    {
-                        BalanceUpDate = Converter.ToDateTime(row.BalanceUpDay).ToString("MMM dd, yyyy"),
-                        BalanceBeforeBalanceUpDate = Converter.ToDecimal(row.CompBalBefore),
-                        BalanceAfterBalanceUpDate = Converter.ToDecimal(row.CompBalAfter),
-                        Difference = Converter.ToDecimal(row.DIFFERENCE)
-                    });
-                }
-
-                return differences;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
+                    BalanceUpDate = Converter.ToDateTime(row.BalanceUpDay).ToString("MMM dd, yyyy"),
+                    BalanceBeforeBalanceUpDate = Converter.ToDecimal(row.CompBalBefore),
+                    BalanceAfterBalanceUpDate = Converter.ToDecimal(row.CompBalAfter),
+                    Difference = Converter.ToDecimal(row.DIFFERENCE)
+                });
             }
 
-            return null;
+            return differences;
         }
     }
 }

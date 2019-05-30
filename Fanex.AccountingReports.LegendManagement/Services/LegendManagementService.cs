@@ -40,16 +40,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             Justification = "Reviewed. Suppression is OK here.")]
         public List<MenuItem> GetMenuList(GetSystemMenuCriteria criteria)
         {
-            try
-            {
-                return this._menuService.GetMenuList(criteria);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            return null;
+            return this._menuService.GetMenuList(criteria);
         }
 
         /// <summary>
@@ -62,23 +53,14 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             Justification = "Reviewed. Suppression is OK here.")]
         public string SaveReportLegend(SaveReportLegendCriteria criteria)
         {
-            try
+            criteria.LegendId = this.MappingLegendId(new GetReportLegendCriteria
             {
-                criteria.LegendId = this.MappingLegendId(new GetReportLegendCriteria
-                {
-                    MenuId = criteria.MenuId,
-                    System = WebSettings.System
-                });
+                MenuId = criteria.MenuId,
+                System = WebSettings.System
+            });
 
-                Hashtable outputParams = this._reportRepository.SaveReportLegend(criteria);
-                return Converter.ToString2(outputParams[Labels.SP_Contants_Error]);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            return Labels.Error;
+            Hashtable outputParams = this._reportRepository.SaveReportLegend(criteria);
+            return Converter.ToString2(outputParams[Labels.SP_Contants_Error]);
         }
 
         /// <summary>
@@ -91,38 +73,25 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             Justification = "Reviewed. Suppression is OK here.")]
         public LegendResultModel GetReportLegend(GetReportLegendCriteria criteria)
         {
-            try
+            var rawData = GetReportData<dynamic>(criteria).FirstOrDefault();
+            if (rawData != null)
             {
-                // return Labels.SampleTemplate;
-                var rawData = GetReportData<dynamic>(criteria).FirstOrDefault();
-                if (rawData != null)
-                {
-                    var reportLegendContent = rawData.Legend;
-                    return new LegendResultModel
-                    {
-                        Content = reportLegendContent,
-                        IsDefault = false
-                    };
-                }
-
-                criteria.LegendId = this.MappingLegendId(new GetReportLegendCriteria());
-                rawData = GetReportData<dynamic>(criteria).FirstOrDefault();
-
+                var reportLegendContent = rawData.Legend;
                 return new LegendResultModel
                 {
-                    Content = rawData != null ? rawData.Legend : Labels.SampleTemplate,
-                    IsDefault = true
-                };
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                return new LegendResultModel
-                {
-                    Content = string.Empty,
+                    Content = reportLegendContent,
                     IsDefault = false
                 };
             }
+
+            criteria.LegendId = this.MappingLegendId(new GetReportLegendCriteria());
+            rawData = GetReportData<dynamic>(criteria).FirstOrDefault();
+
+            return new LegendResultModel
+            {
+                Content = rawData != null ? rawData.Legend : Labels.SampleTemplate,
+                IsDefault = true
+            };
         }
 
         /// <summary>
@@ -135,22 +104,16 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             Justification = "Reviewed. Suppression is OK here.")]
         public string GetJsonpReportLegend(GetReportLegendCriteria criteria)
         {
-            try
+            if (!HasPermission(criteria))
             {
-                if (!HasPermission(criteria))
-                {
-                    return string.Empty;
-                }
-
-                var rawData = GetReportData<dynamic>(criteria).FirstOrDefault();
-                if (rawData != null)
-                {
-                    var reportLegendContent = rawData.Legend;
-                    return reportLegendContent;
-                }
+                return string.Empty;
             }
-            catch
+
+            var rawData = GetReportData<dynamic>(criteria).FirstOrDefault();
+            if (rawData != null)
             {
+                var reportLegendContent = rawData.Legend;
+                return reportLegendContent;
             }
 
             return string.Empty;
@@ -166,21 +129,12 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             Justification = "Reviewed. Suppression is OK here.")]
         public string UploadImage(UploadFileCriteria criteria)
         {
-            try
-            {
-                var fileName = criteria.FileName.Substring(criteria.FileName.LastIndexOf('\\') + 1);
-                var savePath = criteria.SavePath + "/" + fileName;
-                criteria.File.SaveAs(savePath);
-                var inlineData = MakeInlineImage(criteria.File.InputStream);
-                this.SaveInlineData(inlineData, savePath + InlineFileDataSuffix);
-                return criteria.FileName;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            return string.Empty;
+            var fileName = criteria.FileName.Substring(criteria.FileName.LastIndexOf('\\') + 1);
+            var savePath = criteria.SavePath + "/" + fileName;
+            criteria.File.SaveAs(savePath);
+            var inlineData = MakeInlineImage(criteria.File.InputStream);
+            this.SaveInlineData(inlineData, savePath + InlineFileDataSuffix);
+            return criteria.FileName;
         }
 
         /// <summary>
@@ -194,36 +148,29 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             Justification = "Reviewed. Suppression is OK here.")]
         public List<string> MakeInlineImages(List<string> imagesPath, string imageFolder)
         {
-            try
+            if (imagesPath != null)
             {
-                if (imagesPath != null)
+                var inlineImages = new List<string>();
+                var imageLength = imagesPath.Count;
+                for (int i = 0; i < imageLength; i++)
                 {
-                    var inlineImages = new List<string>();
-                    var imageLength = imagesPath.Count;
-                    for (int i = 0; i < imageLength; i++)
+                    var imagePath = imagesPath[i];
+                    if (imagePath.Contains("data:image"))
                     {
-                        var imagePath = imagesPath[i];
-                        if (imagePath.Contains("data:image"))
-                        {
-                            continue;
-                        }
-
-                        // HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imagePath);
-                        // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                        // Stream stream = response.GetResponseStream();
-                        // var base64String = this.MakeInlineImage(stream);
-                        // response.Close();
-                        // inlineImages.Add(base64String);
-                        var base64String = this.GetInlineData(imagePath, imageFolder);
-                        inlineImages.Add(base64String);
+                        continue;
                     }
 
-                    return inlineImages;
+                    // HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imagePath);
+                    // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                    // Stream stream = response.GetResponseStream();
+                    // var base64String = this.MakeInlineImage(stream);
+                    // response.Close();
+                    // inlineImages.Add(base64String);
+                    var base64String = this.GetInlineData(imagePath, imageFolder);
+                    inlineImages.Add(base64String);
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
+
+                return inlineImages;
             }
 
             return null;
@@ -239,28 +186,19 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             Justification = "Reviewed. Suppression is OK here.")]
         public string SaveReportLegendMapping(SaveReportLegendMappingCriteria criteria)
         {
-            try
+            criteria.LegendId = this.MappingLegendId(new GetReportLegendCriteria
             {
-                criteria.LegendId = this.MappingLegendId(new GetReportLegendCriteria
-                {
-                    MenuId = criteria.AccMenuId,
-                    System = WebSettings.System
-                });
+                MenuId = criteria.AccMenuId,
+                System = WebSettings.System
+            });
 
-                if (criteria.LegendId != 0)
-                {
-                    Hashtable outputParams = this._reportRepository.SaveReportLegendMapping(criteria);
-                    return Converter.ToString2(outputParams[Labels.SP_Contants_Error]);
-                }
-
-                return Labels.NotExistLegend;
-            }
-            catch (Exception ex)
+            if (criteria.LegendId != 0)
             {
-                HandleException(ex);
+                Hashtable outputParams = this._reportRepository.SaveReportLegendMapping(criteria);
+                return Converter.ToString2(outputParams[Labels.SP_Contants_Error]);
             }
 
-            return Labels.Error;
+            return Labels.NotExistLegend;
         }
 
         /// <summary>
@@ -273,43 +211,32 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             Justification = "Reviewed. Suppression is OK here.")]
         public List<InputedLegend> GetInputedLegendReport(GetInputedLegendReportCriteria criteria)
         {
-            try
+            List<InputedLegend> result = new List<InputedLegend>();
+            result.Add(new InputedLegend
             {
-                // var rawData = GetReportData<InputedLegend>(criteria);
-                // var result = rawData.ToList();
-                List<InputedLegend> result = new List<InputedLegend>();
-                result.Add(new InputedLegend
-                {
-                    System = "Accounting",
-                    ReportId = 101,
-                    ReportName = "Daily Win Loss 2h",
-                    Content = "abc"
-                });
+                System = "Accounting",
+                ReportId = 101,
+                ReportName = "Daily Win Loss 2h",
+                Content = "abc"
+            });
 
-                result.Add(new InputedLegend
-                {
-                    System = "NAP",
-                    ReportId = 101,
-                    ReportName = "Daily Win Loss 2h",
-                    Content = "abc"
-                });
-
-                result.Add(new InputedLegend
-                {
-                    System = "NAP",
-                    ReportId = 103,
-                    ReportName = "Bet Count",
-                    Content = "Bet Count"
-                });
-
-                return result;
-            }
-            catch (Exception ex)
+            result.Add(new InputedLegend
             {
-                HandleException(ex);
-            }
+                System = "NAP",
+                ReportId = 101,
+                ReportName = "Daily Win Loss 2h",
+                Content = "abc"
+            });
 
-            return null;
+            result.Add(new InputedLegend
+            {
+                System = "NAP",
+                ReportId = 103,
+                ReportName = "Bet Count",
+                Content = "Bet Count"
+            });
+
+            return result;
         }
 
         /// <summary>

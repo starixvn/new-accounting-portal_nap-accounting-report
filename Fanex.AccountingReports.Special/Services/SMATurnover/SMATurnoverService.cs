@@ -28,31 +28,23 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SMATurnover
         /// <returns>List account status information.</returns>
         public List<EntityBase<int, string>> GetAccountStatus()
         {
-            try
+            List<EntityBase<int, string>> result = new List<EntityBase<int, string>>();
+            SMAsTurnoverCollection collection = SMAsTurnoverSection.Instance.AccountStatus;
+            foreach (SMAsTurnoverElement element in collection)
             {
-                List<EntityBase<int, string>> result = new List<EntityBase<int, string>>();
-                SMAsTurnoverCollection collection = SMAsTurnoverSection.Instance.AccountStatus;
-                foreach (SMAsTurnoverElement element in collection)
+                if (!element.IsActive)
                 {
-                    if (!element.IsActive)
-                    {
-                        continue;
-                    }
-
-                    result.Add(new EntityBase<int, string>()
-                    {
-                        Id = Converter.ToInt(element.Id),
-                        Name = Converter.ToString2(element.Name)
-                    });
+                    continue;
                 }
 
-                return result;
+                result.Add(new EntityBase<int, string>()
+                {
+                    Id = Converter.ToInt(element.Id),
+                    Name = Converter.ToString2(element.Name)
+                });
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+
+            return result;
         }
 
         /// <summary>
@@ -61,44 +53,36 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SMATurnover
         /// <returns>List sport products.</returns>
         public List<BaseModel> GetProducts()
         {
-            try
+            List<BaseModel> result = new List<BaseModel>();
+            var sportBooksBaseModel = new BaseModel();
+            SMAsTurnoverCollection collection = SMAsTurnoverSection.Instance.Products;
+            foreach (SMAsTurnoverElement element in collection)
             {
-                List<BaseModel> result = new List<BaseModel>();
-                var sportBooksBaseModel = new BaseModel();
-                SMAsTurnoverCollection collection = SMAsTurnoverSection.Instance.Products;
-                foreach (SMAsTurnoverElement element in collection)
+                if (!element.IsActive)
                 {
-                    if (!element.IsActive)
-                    {
-                        continue;
-                    }
-
-                    if (element.Name == "Sportsbook")
-                    {
-                        sportBooksBaseModel.Id = Converter.ToInt(element.Id);
-                        sportBooksBaseModel.Name = Converter.ToString2(element.Name);
-                        sportBooksBaseModel.AliasName = Converter.ToString2(element.AliasName);
-                        continue;
-                    }
-
-                    result.Add(new BaseModel()
-                    {
-                        Id = Converter.ToInt(element.Id),
-                        Name = Converter.ToString2(element.Name),
-                        AliasName = Converter.ToString2(element.AliasName)
-                    });
+                    continue;
                 }
 
-                result = result.OrderBy(x => x.Name).ToList();
-                result.Insert(0, sportBooksBaseModel);
+                if (element.Name == "Sportsbook")
+                {
+                    sportBooksBaseModel.Id = Converter.ToInt(element.Id);
+                    sportBooksBaseModel.Name = Converter.ToString2(element.Name);
+                    sportBooksBaseModel.AliasName = Converter.ToString2(element.AliasName);
+                    continue;
+                }
 
-                return result;
+                result.Add(new BaseModel()
+                {
+                    Id = Converter.ToInt(element.Id),
+                    Name = Converter.ToString2(element.Name),
+                    AliasName = Converter.ToString2(element.AliasName)
+                });
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+
+            result = result.OrderBy(x => x.Name).ToList();
+            result.Insert(0, sportBooksBaseModel);
+
+            return result;
         }
 
         /// <summary>
@@ -113,18 +97,10 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SMATurnover
                 Total = new SMATurnover()
             };
 
-            try
-            {
-                DataTable smasTurnoverDataTable = this.GetSMAsTurnoverData(criteria);
-                var smasTurnover = this.BuildSMAsTurnoverData(smasTurnoverDataTable);
-                result = this.BuildSMAsTurnoverByGroupHeadline(smasTurnover);
-                SessionManager.Set<SMATurnover>(_smasTurnoverSessionKey, result);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+            DataTable smasTurnoverDataTable = this.GetSMAsTurnoverData(criteria);
+            var smasTurnover = this.BuildSMAsTurnoverData(smasTurnoverDataTable);
+            result = this.BuildSMAsTurnoverByGroupHeadline(smasTurnover);
+            SessionManager.Set<SMATurnover>(_smasTurnoverSessionKey, result);
 
             return result;
         }
@@ -190,18 +166,10 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SMATurnover
         private DataTable GetSMAsTurnoverData(SMATurnoverCriteria criteria)
         {
             DataSet ds = null;
-            try
+            using (var objDb = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var objDb = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    var _params = criteria.GetSpParams();
-                    ds = objDb.ExecuteDataSet(_params);
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
+                var _params = criteria.GetSpParams();
+                ds = objDb.ExecuteDataSet(_params);
             }
 
             return ds.Tables[0];
@@ -215,28 +183,20 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SMATurnover
         private SMATurnover BuildSMAsTurnoverData(DataTable smasTurnoverDataTable)
         {
             SMATurnover result = new SMATurnover();
-            try
+            foreach (DataRow row in smasTurnoverDataTable.Rows)
             {
-                foreach (DataRow row in smasTurnoverDataTable.Rows)
+                result.ReportRows.Add(new SMATurnover
                 {
-                    result.ReportRows.Add(new SMATurnover
-                    {
-                        GroupId = Converter.ToInt(row["GroupID"]),
-                        GroupHeadline = Converter.ToString2(row["GroupHeadline"]),
-                        UserName = Converter.ToString2(row["UserName"]),
-                        Currency = Converter.ToString2(row["Currency"]),
-                        RoleId = Converter.ToInt(row["RoleID"]),
-                        TurnOver = Converter.ToDecimal(row["TurnOverAfterPT"]),
-                        RMTurnOver = Converter.ToDecimal(row["TurnOverAfterPTMYR"]),
-                        MemberTurnOver = Converter.ToDecimal(row["MemberTurnOver"]),
-                        MemberRMTurnOver = Converter.ToDecimal(row["MemberTurnOverMYR"])
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
+                    GroupId = Converter.ToInt(row["GroupID"]),
+                    GroupHeadline = Converter.ToString2(row["GroupHeadline"]),
+                    UserName = Converter.ToString2(row["UserName"]),
+                    Currency = Converter.ToString2(row["Currency"]),
+                    RoleId = Converter.ToInt(row["RoleID"]),
+                    TurnOver = Converter.ToDecimal(row["TurnOverAfterPT"]),
+                    RMTurnOver = Converter.ToDecimal(row["TurnOverAfterPTMYR"]),
+                    MemberTurnOver = Converter.ToDecimal(row["MemberTurnOver"]),
+                    MemberRMTurnOver = Converter.ToDecimal(row["MemberTurnOverMYR"])
+                });
             }
 
             return result;
@@ -251,45 +211,37 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SMATurnover
         {
             SMATurnover result = new SMATurnover();
 
-            try
+            SMATurnover grandTotal = new SMATurnover
             {
-                SMATurnover grandTotal = new SMATurnover
+                TurnOver = smasTurnover.ReportRows.Sum(x => x.TurnOver),
+                RMTurnOver = smasTurnover.ReportRows.Sum(x => x.RMTurnOver),
+                MemberTurnOver = smasTurnover.ReportRows.Sum(x => x.MemberTurnOver),
+                MemberRMTurnOver = smasTurnover.ReportRows.Sum(x => x.MemberRMTurnOver),
+            };
+
+            result.Total = grandTotal;
+            result.ReportLength = smasTurnover.ReportRows.Count;
+
+            smasTurnover.ReportRows.GroupBy(x => x.GroupId).ToList()
+            .ForEach(group =>
+            {
+                var headlineGroupTotal = new SMATurnover
                 {
-                    TurnOver = smasTurnover.ReportRows.Sum(x => x.TurnOver),
-                    RMTurnOver = smasTurnover.ReportRows.Sum(x => x.RMTurnOver),
-                    MemberTurnOver = smasTurnover.ReportRows.Sum(x => x.MemberTurnOver),
-                    MemberRMTurnOver = smasTurnover.ReportRows.Sum(x => x.MemberRMTurnOver),
+                    TurnOver = group.Sum(x => x.TurnOver),
+                    RMTurnOver = group.Sum(x => x.RMTurnOver),
+                    MemberTurnOver = group.Sum(x => x.MemberTurnOver),
+                    MemberRMTurnOver = group.Sum(x => x.MemberRMTurnOver)
                 };
 
-                result.Total = grandTotal;
-                result.ReportLength = smasTurnover.ReportRows.Count;
-
-                smasTurnover.ReportRows.GroupBy(x => x.GroupId).ToList()
-                .ForEach(group =>
+                var groupByHeadline = new SMATurnover
                 {
-                    var headlineGroupTotal = new SMATurnover
-                    {
-                        TurnOver = group.Sum(x => x.TurnOver),
-                        RMTurnOver = group.Sum(x => x.RMTurnOver),
-                        MemberTurnOver = group.Sum(x => x.MemberTurnOver),
-                        MemberRMTurnOver = group.Sum(x => x.MemberRMTurnOver)
-                    };
+                    Total = headlineGroupTotal,
+                    GroupHeadline = group.Select(x => x.GroupHeadline).FirstOrDefault(),
+                    ReportRows = group.ToList()
+                };
 
-                    var groupByHeadline = new SMATurnover
-                    {
-                        Total = headlineGroupTotal,
-                        GroupHeadline = group.Select(x => x.GroupHeadline).FirstOrDefault(),
-                        ReportRows = group.ToList()
-                    };
-
-                    result.ReportRows.Add(groupByHeadline);
-                });
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+                result.ReportRows.Add(groupByHeadline);
+            });
 
             return result;
         }

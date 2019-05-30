@@ -55,23 +55,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         Justification = "Reviewed. Suppression is OK here.")]
         public TreeWinLoss GetTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria)
         {
-            try
-            {
-                var isShowNotAvailableTurnover = IsShowAvailableTurnoverByProduct(criteria);
-                criteria.Products = criteria.ProductSelection;
+            var isShowNotAvailableTurnover = IsShowAvailableTurnoverByProduct(criteria);
+            criteria.Products = criteria.ProductSelection;
 
-                var treeWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
-                treeWinLoss.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
+            var treeWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
+            treeWinLoss.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
 
-                SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByProductSession, treeWinLoss);
-                return treeWinLoss;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByProductSession, null);
-                throw;
-            }
+            SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByProductSession, treeWinLoss);
+            return treeWinLoss;
         }
 
         /// <summary>
@@ -84,39 +75,32 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         Justification = "Reviewed. Suppression is OK here.")]
         public TreeWinLoss GetTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
-            try
+            bool isShowNotAvailableTurnover = IsShowAvailableTurnoverByLevel(criteria);
+            criteria.Products = criteria.ProductSelection;
+
+            var winLossByComm = GetTreeWinLossDateRangeByLevel(criteria);
+            winLossByComm.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
+
+            switch (criteria.RoleId)
             {
-                bool isShowNotAvailableTurnover = IsShowAvailableTurnoverByLevel(criteria);
-                criteria.Products = criteria.ProductSelection;
+                case 5:
+                    SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByCommSession, winLossByComm);
+                    break;
 
-                var winLossByComm = GetTreeWinLossDateRangeByLevel(criteria);
-                winLossByComm.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
+                case 4:
+                    SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossBySuperSession, winLossByComm);
+                    break;
 
-                switch (criteria.RoleId)
-                {
-                    case 5:
-                        SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByCommSession, winLossByComm);
-                        break;
+                case 3:
+                    SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByMasterSession, winLossByComm);
+                    break;
 
-                    case 4:
-                        SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossBySuperSession, winLossByComm);
-                        break;
-
-                    case 3:
-                        SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByMasterSession, winLossByComm);
-                        break;
-
-                    case 2:
-                        SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByAgentSession, winLossByComm);
-                        break;
-                }
-
-                return winLossByComm;
+                case 2:
+                    SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByAgentSession, winLossByComm);
+                    break;
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            return winLossByComm;
 
             return null;
         }
@@ -192,79 +176,71 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 TotalInfo = new List<TreeWinLossInfo>(),
                 IsShowNotAvailableTurnover = isShowNotAvailableTurnover
             };
-            try
+            var currencies = ReportService.ExchangeCurrencies;
+            var outputParam = new Hashtable();
+            var rawData = this._treeWinLossRepository.GetTreeWinLossByProduct(criteria, ref outputParam);
+            if (rawData != null)
             {
-                var currencies = ReportService.ExchangeCurrencies;
-                var outputParam = new Hashtable();
-                var rawData = this._treeWinLossRepository.GetTreeWinLossByProduct(criteria, ref outputParam);
-                if (rawData != null)
+                var totalWinLoss = new TreeWinLossInfo
                 {
-                    var totalWinLoss = new TreeWinLossInfo
+                    Name = string.Empty
+                };
+                var grandTotalWinLoss = new TreeWinLossInfo
+                {
+                    Name = Labels.Total
+                };
+                var total8RMWinLoss = new TreeWinLossInfo
+                {
+                    Name = Labels._8RM
+                };
+                var totalBARMWinLoss = new TreeWinLossInfo
+                {
+                    Name = Labels.BARM
+                };
+                foreach (TreeWinLossInfo row in rawData)
+                {
+                    var winLoss = new TreeWinLossInfo()
                     {
-                        Name = string.Empty
+                        Id = row.Id,
+                        Name = currencies[row.Id],
+                        Turnover = row.Turnover,
+                        WinLoss = row.WinLoss,
+                        Comm = row.Comm,
+                        WinLossTotal = row.WinLossTotal,
+                        BaseRMTurnover = row.BaseRMTurnover,
+                        BaseRMVirtualTurnover = row.BaseRMVirtualTurnover,
+                        BaseRMTOVariancePlus = row.BaseRMTOVariancePlus,
+                        BaseRMTOVarianceMinus = row.BaseRMTOVarianceMinus,
+                        BaseRMWLVariancePlus = row.BaseRMWLVariancePlus,
+                        BaseRMWLVarianceMinus = row.BaseRMWLVarianceMinus,
+                        BaseRMTotal = row.BaseRMTotal,
+                        BaseRMVirtualTotal = row.BaseRMVirtualTotal,
+                        BaseRMTOVarianceAbsoluteTotal = row.BaseRMTOVarianceAbsoluteTotal,
+                        BaseRMWinlostVarianceTotal = row.BaseRMWinlostVarianceTotal,
+                        ExtraAmount = row.ExtraAmount
                     };
-                    var grandTotalWinLoss = new TreeWinLossInfo
-                    {
-                        Name = Labels.Total
-                    };
-                    var total8RMWinLoss = new TreeWinLossInfo
-                    {
-                        Name = Labels._8RM
-                    };
-                    var totalBARMWinLoss = new TreeWinLossInfo
-                    {
-                        Name = Labels.BARM
-                    };
-                    foreach (TreeWinLossInfo row in rawData)
-                    {
-                        var winLoss = new TreeWinLossInfo()
-                        {
-                            Id = row.Id,
-                            Name = currencies[row.Id],
-                            Turnover = row.Turnover,
-                            WinLoss = row.WinLoss,
-                            Comm = row.Comm,
-                            WinLossTotal = row.WinLossTotal,
-                            BaseRMTurnover = row.BaseRMTurnover,
-                            BaseRMVirtualTurnover = row.BaseRMVirtualTurnover,
-                            BaseRMTOVariancePlus = row.BaseRMTOVariancePlus,
-                            BaseRMTOVarianceMinus = row.BaseRMTOVarianceMinus,
-                            BaseRMWLVariancePlus = row.BaseRMWLVariancePlus,
-                            BaseRMWLVarianceMinus = row.BaseRMWLVarianceMinus,
-                            BaseRMTotal = row.BaseRMTotal,
-                            BaseRMVirtualTotal = row.BaseRMVirtualTotal,
-                            BaseRMTOVarianceAbsoluteTotal = row.BaseRMTOVarianceAbsoluteTotal,
-                            BaseRMWinlostVarianceTotal = row.BaseRMWinlostVarianceTotal,
-                            ExtraAmount = row.ExtraAmount
-                        };
 
-                        winLoss = TreeWinLossUtil.RoundTreeWinLossInfo(winLoss);
-                        treeWinLoss.ChildsInfo.Add(winLoss);
-                        TreeWinLossUtil.AddToTotal(winLoss, ref totalWinLoss);
-                        TreeWinLossUtil.AddToTotal(winLoss, ref grandTotalWinLoss);
-                    }
-
-                    treeWinLoss.TotalInfo.Add(totalWinLoss);
-                    total8RMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_8rm"]);
-                    TreeWinLossUtil.AddToTotal(total8RMWinLoss, ref grandTotalWinLoss);
-                    total8RMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_8rm"]);
-                    total8RMWinLoss.BaseRMTurnover = Converter.ToDecimal(outputParam["turnover_8rm"]);
-                    total8RMWinLoss.BaseRMVirtualTurnover = Converter.ToDecimal(outputParam["turnover_8rm"]);
-                    treeWinLoss.TotalInfo.Add(total8RMWinLoss);
-
-                    totalBARMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_barm"]);
-                    TreeWinLossUtil.AddToTotal(totalBARMWinLoss, ref grandTotalWinLoss);
-                    totalBARMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_barm"]);
-                    totalBARMWinLoss.BaseRMTurnover = Converter.ToDecimal(outputParam["turnover_barm"]);
-                    totalBARMWinLoss.BaseRMVirtualTurnover = totalBARMWinLoss.BaseRMTurnover;
-                    treeWinLoss.TotalInfo.Add(totalBARMWinLoss);
-                    treeWinLoss.TotalInfo.Add(grandTotalWinLoss);
+                    winLoss = TreeWinLossUtil.RoundTreeWinLossInfo(winLoss);
+                    treeWinLoss.ChildsInfo.Add(winLoss);
+                    TreeWinLossUtil.AddToTotal(winLoss, ref totalWinLoss);
+                    TreeWinLossUtil.AddToTotal(winLoss, ref grandTotalWinLoss);
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
+
+                treeWinLoss.TotalInfo.Add(totalWinLoss);
+                total8RMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_8rm"]);
+                TreeWinLossUtil.AddToTotal(total8RMWinLoss, ref grandTotalWinLoss);
+                total8RMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_8rm"]);
+                total8RMWinLoss.BaseRMTurnover = Converter.ToDecimal(outputParam["turnover_8rm"]);
+                total8RMWinLoss.BaseRMVirtualTurnover = Converter.ToDecimal(outputParam["turnover_8rm"]);
+                treeWinLoss.TotalInfo.Add(total8RMWinLoss);
+
+                totalBARMWinLoss.BaseRMTotal = Converter.ToDecimal(outputParam["total_barm"]);
+                TreeWinLossUtil.AddToTotal(totalBARMWinLoss, ref grandTotalWinLoss);
+                totalBARMWinLoss.BaseRMVirtualTotal = Converter.ToDecimal(outputParam["virtualtotal_barm"]);
+                totalBARMWinLoss.BaseRMTurnover = Converter.ToDecimal(outputParam["turnover_barm"]);
+                totalBARMWinLoss.BaseRMVirtualTurnover = totalBARMWinLoss.BaseRMTurnover;
+                treeWinLoss.TotalInfo.Add(totalBARMWinLoss);
+                treeWinLoss.TotalInfo.Add(grandTotalWinLoss);
             }
 
             return treeWinLoss;

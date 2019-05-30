@@ -27,17 +27,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
         /// <returns>The list Credit Term.</returns>
         public List<CreditTerm> GetCreditTermReport(GetCreditTermCriteria criteira)
         {
-            try
-            {
-                var report = this._creditTermRepository.GetCreditTerm(criteira);
+            var report = this._creditTermRepository.GetCreditTerm(criteira);
 
-                return report;
-            }
-            catch (Exception ex)
-            {
-                this.HandleException(ex);
-                throw;
-            }
+            return report;
         }
 
         /// <summary>
@@ -47,24 +39,16 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
         /// <returns>The GetRemarkEditedCriteria.</returns>
         public EditedRemarkResult EditRemark(GetRemarkEditedCriteria criteria)
         {
-            try
+            var editRemark = new EditedRemarkResult();
+
+            if (AppSession.CurrentUser != null)
             {
-                var editRemark = new EditedRemarkResult();
-
-                if (AppSession.CurrentUser != null)
-                {
-                    criteria.UserID = AppSession.CurrentUser.Id;
-                }
-
-                editRemark = this._creditTermRepository.EditRemark(criteria);
-
-                return editRemark;
+                criteria.UserID = AppSession.CurrentUser.Id;
             }
-            catch (Exception ex)
-            {
-                this.HandleException(ex);
-                throw;
-            }
+
+            editRemark = this._creditTermRepository.EditRemark(criteria);
+
+            return editRemark;
         }
     }
 }

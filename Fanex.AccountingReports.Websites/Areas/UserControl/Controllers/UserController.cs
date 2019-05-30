@@ -1,11 +1,9 @@
 namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
 {
-    using System;
     using System.Web.Mvc;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.Common;
-    using Fanex.Logging;
     using Fanex.NAP.Core.Service.Impl;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web;
@@ -46,31 +44,24 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
         [HttpPost]
         public ActionResult ChangePassword(UpdatePasswordModel criteria)
         {
-            try
+
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                var user = _userService.Get(AppSession.CurrentUser.Id);
+                string oldPwd = Cryptography.CfsEnCode(criteria.OldUserPwd);
+
+                if (oldPwd.Equals(user.Password))
                 {
-                    var user = _userService.Get(AppSession.CurrentUser.Id);
-                    string oldPwd = Cryptography.CfsEnCode(criteria.OldUserPwd);
+                    var password = Cryptography.CfsEnCode(criteria.UserPwd);
 
-                    if (oldPwd.Equals(user.Password))
-                    {
-                        var password = Cryptography.CfsEnCode(criteria.UserPwd);
-
-                        var result = securityService.UpdatePassword(NapSettings.Settings.SiteId, user.Id, password);
-                        ViewBag.Success = result;
-                        ViewBag.Message = result ? string.Empty : "Sorry, an error occurred while processing your request, please notify the administrators.";
-                    }
-                    else
-                    {
-                        ViewBag.Message = ViewResources.Wrong_password;
-                    }
+                    var result = securityService.UpdatePassword(NapSettings.Settings.SiteId, user.Id, password);
+                    ViewBag.Success = result;
+                    ViewBag.Message = result ? string.Empty : "Sorry, an error occurred while processing your request, please notify the administrators.";
                 }
-            }
-            catch (Exception ex)
-            {
-                LogService.Error(ex.Message, ex);
-                throw;
+                else
+                {
+                    ViewBag.Message = ViewResources.Wrong_password;
+                }
             }
 
             return View(criteria);
@@ -87,17 +78,9 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
         [HttpGet]
         public ActionResult UserProfile()
         {
-            try
-            {
-                var user = _userService.Get(AppSession.CurrentUser.Id);
+            var user = _userService.Get(AppSession.CurrentUser.Id);
 
-                return View(user);
-            }
-            catch (Exception ex)
-            {
-                LogService.Error(ex.Message, ex);
-                throw;
-            }
+            return View(user);
         }
 
         /// <summary>
@@ -108,31 +91,23 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
         [HttpPost]
         public ActionResult UserProfile(User user)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                var oldUser = _userService.Get(CurrentSession.UserId);
+                var parameter = new UpdateUserInfoParameter
                 {
-                    var oldUser = _userService.Get(CurrentSession.UserId);
-                    var parameter = new UpdateUserInfoParameter
-                    {
-                        CustId = oldUser.Id,
-                        Username = oldUser.Username,
-                        FirstName = user.FirstName ?? oldUser.FirstName,
-                        LastName = user.LastName ?? oldUser.LastName,
-                        Email = user.Email ?? oldUser.Email,
-                        GroupId = oldUser.Group == null ? 0 : oldUser.Group.Id
-                    };
+                    CustId = oldUser.Id,
+                    Username = oldUser.Username,
+                    FirstName = user.FirstName ?? oldUser.FirstName,
+                    LastName = user.LastName ?? oldUser.LastName,
+                    Email = user.Email ?? oldUser.Email,
+                    GroupId = oldUser.Group == null ? 0 : oldUser.Group.Id
+                };
 
-                    var result = securityService.UpdateProfile(this.SiteId, parameter);
+                var result = securityService.UpdateProfile(this.SiteId, parameter);
 
-                    ViewBag.Success = result;
-                    ViewBag.Message = result ? string.Empty : "Sorry, an error occurred while processing your request, please notify the administrators.";
-                }
-            }
-            catch (Exception ex)
-            {
-                LogService.Error(ex.Message, ex);
-                throw;
+                ViewBag.Success = result;
+                ViewBag.Message = result ? string.Empty : "Sorry, an error occurred while processing your request, please notify the administrators.";
             }
 
             return View(user);

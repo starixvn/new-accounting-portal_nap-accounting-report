@@ -33,329 +33,342 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportReport(GetReportCriteria criteria)
         {
-            try
+            WinLoss3rdInfo report = SessionManager.Get<WinLoss3rdInfo>(MainConstants.WinLossSummary3rdReportSessionKey);
+            if (report == null)
             {
-                WinLoss3rdInfo report = SessionManager.Get<WinLoss3rdInfo>(MainConstants.WinLossSummary3rdReportSessionKey);
-                if (report == null)
+                report = this.GetReport(criteria);
+                if (report == null || report.SportTypeWinLosses.Count == 0)
                 {
-                    report = this.GetReport(criteria);
-                    if (report == null || report.SportTypeWinLosses.Count == 0)
-                    {
-                        return;
-                    }
+                    return;
                 }
+            }
 
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = MainResources.WinLossSummary3rd_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = MainResources.WinLossSummary3rd_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
 
-                int numberOfGroupColumnsTotal = 0;
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
+            int numberOfGroupColumnsTotal = 0;
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
 
-                var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
-                var parentStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.ParentColor, true, HorizontalAlignmentStyle.Center);
-                var textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, true, HorizontalAlignmentStyle.Left);
-                var text8RM_BARMStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false, HorizontalAlignmentStyle.Center);
+            var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
+            var parentStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.ParentColor, true, HorizontalAlignmentStyle.Center);
+            var textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, true, HorizontalAlignmentStyle.Left);
+            var text8RM_BARMStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false, HorizontalAlignmentStyle.Center);
 
-                var soccerTotalStyle = Color.FromArgb(221, 221, 221);
-                var subTotalTitleStyle = ExcelExtensions.GetCellTextStyle(soccerTotalStyle, true, HorizontalAlignmentStyle.Right);
-                var titleStyle_Total = ExcelExtensions.GetCellTextStyle(ExcelExtensions.TotalRowColor, true, HorizontalAlignmentStyle.Right);
+            var soccerTotalStyle = Color.FromArgb(221, 221, 221);
+            var subTotalTitleStyle = ExcelExtensions.GetCellTextStyle(soccerTotalStyle, true, HorizontalAlignmentStyle.Right);
+            var titleStyle_Total = ExcelExtensions.GetCellTextStyle(ExcelExtensions.TotalRowColor, true, HorizontalAlignmentStyle.Right);
 
-                // Grand total style
-                var grandTotalRowTextStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true, HorizontalAlignmentStyle.Right);
-                var grandTotalRowTextStyleWithBorder = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true, HorizontalAlignmentStyle.Right);
-                grandTotalRowTextStyleWithBorder.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, spreadsheetLineStyle.LineStyle.Medium);
+            // Grand total style
+            var grandTotalRowTextStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true, HorizontalAlignmentStyle.Right);
+            var grandTotalRowTextStyleWithBorder = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true, HorizontalAlignmentStyle.Right);
+            grandTotalRowTextStyleWithBorder.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, spreadsheetLineStyle.LineStyle.Medium);
 
-                // fomular
-                var fomularStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false, HorizontalAlignmentStyle.Left);
+            // fomular
+            var fomularStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false, HorizontalAlignmentStyle.Left);
 
-                var currentColumn = startColumn;
-                CellRange currentCellRange;
-                ExcelCell currentCell;
+            var currentColumn = startColumn;
+            CellRange currentCellRange;
+            ExcelCell currentCell;
 
-                var maxColumIndex = 10;
-                workSheet.Columns[0].Width = 200 * ExcelExtensions.FontWidth;
-                workSheet.Columns[1].Width = 150 * ExcelExtensions.FontWidth;
-                for (int colIndex = 2; colIndex <= maxColumIndex; colIndex++)
+            var maxColumIndex = 10;
+            workSheet.Columns[0].Width = 200 * ExcelExtensions.FontWidth;
+            workSheet.Columns[1].Width = 150 * ExcelExtensions.FontWidth;
+            for (int colIndex = 2; colIndex <= maxColumIndex; colIndex++)
+            {
+                workSheet.Columns[startColumn + colIndex].Width = 120 * ExcelExtensions.FontWidth;
+            }
+
+            var title = string.Format(
+                MainResources.WinLossSummary3rd_SummaryReportTitle,
+                criteria.Fromdate.ToShortFormatedDate(),
+                 criteria.Todate.ToShortFormatedDate());
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + maxColumIndex);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = title;
+            currentCellRange.Style = headerTextStyle;
+            currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
+            currentRow += 2;
+
+            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumIndex);
+
+            // First Row
+            currentColumn = startColumn;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Style = headerTextStyle;
+            currentCellRange.Value = Labels.Bettype;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Style = headerTextStyle;
+            currentCellRange.Value = Labels.Member_Win_Loss;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Style = headerTextStyle;
+            currentCellRange.Value = Labels.SMA_Win_Loss;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Style = headerTextStyle;
+            currentCellRange.Value = Labels.Comm;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+            currentCellRange.Merged = true;
+            currentCellRange.Style = headerTextStyle;
+            currentCellRange.Value = Labels.House_Income;
+            currentColumn += 2;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Style = headerTextStyle;
+            currentCellRange.Value = Labels.Variance;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+            currentCellRange.Merged = true;
+            currentCellRange.Style = headerTextStyle;
+            currentCellRange.Value = Labels.House_Turnover;
+            currentColumn += 2;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+            currentCellRange.Merged = true;
+            currentCellRange.Style = headerTextStyle;
+            currentCellRange.Value = Labels.Margin;
+            currentColumn += 2;
+
+            // Second Row
+            currentRow++;
+            currentColumn = startColumn + 4;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Real;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Virtual;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            // Variance
+            currentColumn++; // ignore Variance column
+
+            // Real Turnover
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Real;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Virtual;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            // Real Margin
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Real;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Virtual;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            int sportLen, betLen;
+            SportTypeWinLossInfo sportWinLoss = null;
+            BetTypeWinLossInfo betWinLoss = null;
+            string betTypeName = string.Empty;
+            bool liveIndicator = false;
+            if (report != null && (sportLen = report.SportTypeWinLosses.Count) > 0)
+            {
+                for (int i = 0; i < sportLen; i++)
                 {
-                    workSheet.Columns[startColumn + colIndex].Width = 120 * ExcelExtensions.FontWidth;
-                }
+                    currentRow++;
+                    sportWinLoss = report.SportTypeWinLosses[i];
 
-                var title = string.Format(
-                    MainResources.WinLossSummary3rd_SummaryReportTitle,
-                    criteria.Fromdate.ToShortFormatedDate(),
-                     criteria.Todate.ToShortFormatedDate());
-                currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + maxColumIndex);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = title;
-                currentCellRange.Style = headerTextStyle;
-                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
-                currentRow += 2;
+                    currentColumn = startColumn;
 
-                workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumIndex);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + maxColumIndex);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = sportWinLoss.Name;
+                    currentCellRange.Style = parentStyle;
 
-                // First Row
-                currentColumn = startColumn;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Style = headerTextStyle;
-                currentCellRange.Value = Labels.Bettype;
-                currentColumn++;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Style = headerTextStyle;
-                currentCellRange.Value = Labels.Member_Win_Loss;
-                currentColumn++;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Style = headerTextStyle;
-                currentCellRange.Value = Labels.SMA_Win_Loss;
-                currentColumn++;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Style = headerTextStyle;
-                currentCellRange.Value = Labels.Comm;
-                currentColumn++;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
-                currentCellRange.Merged = true;
-                currentCellRange.Style = headerTextStyle;
-                currentCellRange.Value = Labels.House_Income;
-                currentColumn += 2;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Style = headerTextStyle;
-                currentCellRange.Value = Labels.Variance;
-                currentColumn++;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
-                currentCellRange.Merged = true;
-                currentCellRange.Style = headerTextStyle;
-                currentCellRange.Value = Labels.House_Turnover;
-                currentColumn += 2;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
-                currentCellRange.Merged = true;
-                currentCellRange.Style = headerTextStyle;
-                currentCellRange.Value = Labels.Margin;
-                currentColumn += 2;
-
-                // Second Row
-                currentRow++;
-                currentColumn = startColumn + 4;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Real;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Virtual;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                // Variance
-                currentColumn++; // ignore Variance column
-
-                // Real Turnover
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Real;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Virtual;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                // Real Margin
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Real;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Virtual;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                int sportLen, betLen;
-                SportTypeWinLossInfo sportWinLoss = null;
-                BetTypeWinLossInfo betWinLoss = null;
-                string betTypeName = string.Empty;
-                bool liveIndicator = false;
-                if (report != null && (sportLen = report.SportTypeWinLosses.Count) > 0)
-                {
-                    for (int i = 0; i < sportLen; i++)
+                    // Bet type
+                    var isNewCricket = false;
+                    var betWinLossNewCricket = sportWinLoss.BetTypeWinLosses[0];
+                    betLen = sportWinLoss.BetTypeWinLosses.Count;
+                    for (int j = 0; j < betLen; j++)
                     {
-                        currentRow++;
-                        sportWinLoss = report.SportTypeWinLosses[i];
-
-                        currentColumn = startColumn;
-
-                        currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + maxColumIndex);
-                        currentCellRange.Merged = true;
-                        currentCellRange.Value = sportWinLoss.Name;
-                        currentCellRange.Style = parentStyle;
-
-                        // Bet type
-                        var isNewCricket = false;
-                        var betWinLossNewCricket = sportWinLoss.BetTypeWinLosses[0];
-                        betLen = sportWinLoss.BetTypeWinLosses.Count;
-                        for (int j = 0; j < betLen; j++)
+                        betWinLoss = sportWinLoss.BetTypeWinLosses[j];
+                        if (betWinLoss.Id == 500)
                         {
-                            betWinLoss = sportWinLoss.BetTypeWinLosses[j];
-                            if (betWinLoss.Id == 500)
-                            {
-                                isNewCricket = true;
-                                betWinLossNewCricket = betWinLoss;
-                                continue;
-                            }
-
-                            var backgroundColor = j % 2 == 0 ? ExcelExtensions.BackGroundColor : ExcelExtensions.EvenRowColor;
-                            textStyle.FillPattern.SetSolid(backgroundColor);
-                            text8RM_BARMStyle.FillPattern.SetSolid(backgroundColor);
-
-                            {
-                                var winloss = betWinLoss.Total;
-                                if (betWinLoss.Id < 221 && betWinLoss.Id > 212)
-                                {
-                                    // Total of each total sport type
-                                    currentRow++;
-                                    currentColumn = startColumn;
-                                    this.WriteWinLossSummaryTotal(
-                                        workSheet,
-                                        currentRow,
-                                        currentColumn,
-                                        winloss.Name + " " + Labels.Total + ":",
-                                        subTotalTitleStyle,
-                                        numberOfGroupColumnsTotal,
-                                        betWinLoss.Total,
-                                        soccerTotalStyle);
-                                    continue;
-                                }
-
-                                currentRow++;
-                                currentColumn = startColumn;
-                                betTypeName = winloss.Name;
-                                liveIndicator = Convert.ToBoolean(winloss.LiveIndicator);
-
-                                this.WriteWinLossSummary(
-                                    workSheet,
-                                    currentRow,
-                                    currentColumn,
-                                    winloss,
-                                    textStyle,
-                                    backgroundColor);
-                            }
-
-                            // 8RM winloss
-                            if (betWinLoss.EightRM != null)
-                            {
-                                currentRow++;
-                                currentColumn = startColumn;
-
-                                this.WriteWinLossSummary(
-                                    workSheet,
-                                    currentRow,
-                                    currentColumn,
-                                    betWinLoss.EightRM,
-                                    text8RM_BARMStyle,
-                                    backgroundColor);
-                            }
-
-                            // BARM winloss
-                            if (betWinLoss.BARM != null)
-                            {
-                                currentRow++;
-                                currentColumn = startColumn;
-
-                                this.WriteWinLossSummary(
-                                    workSheet,
-                                    currentRow,
-                                    currentColumn,
-                                    betWinLoss.BARM,
-                                    text8RM_BARMStyle,
-                                    backgroundColor);
-                            }
-
-                            // Hedge
-                            if (betWinLoss.Hedge != null)
-                            {
-                                currentRow++;
-                                currentColumn = startColumn;
-
-                                this.WriteHedgeWinLossSummary(
-                                    workSheet,
-                                    currentRow,
-                                    currentColumn,
-                                    Labels.Hedge_title,
-                                    betWinLoss.Hedge,
-                                    text8RM_BARMStyle,
-                                    backgroundColor);
-                            }
-                            var hasOtherMatchType = betWinLoss.EightRM != null || betWinLoss.BARM != null || betWinLoss.Hedge != null;
-                            var showNormal = betWinLoss.Normal != null && hasOtherMatchType;
-                            if (showNormal)
-                            {
-                                currentRow++;
-                                currentColumn = startColumn;
-
-                                this.WriteHedgeWinLossSummary(
-                                    workSheet,
-                                    currentRow,
-                                    currentColumn,
-                                    Labels.Normal_title,
-                                    betWinLoss.Normal,
-                                    text8RM_BARMStyle,
-                                    backgroundColor);
-                            }
+                            isNewCricket = true;
+                            betWinLossNewCricket = betWinLoss;
+                            continue;
                         }
 
-                        // for NewCricket
-                        if (isNewCricket == true)
+                        var backgroundColor = j % 2 == 0 ? ExcelExtensions.BackGroundColor : ExcelExtensions.EvenRowColor;
+                        textStyle.FillPattern.SetSolid(backgroundColor);
+                        text8RM_BARMStyle.FillPattern.SetSolid(backgroundColor);
+
                         {
-                            // for Total
-                            currentRow++;
-                            currentColumn = startColumn;
-                            this.WriteWinLossSummaryTotal(
-                                workSheet,
-                                currentRow,
-                                currentColumn,
-                                "Total:",
-                                titleStyle_Total,
-                                numberOfGroupColumnsTotal,
-                                sportWinLoss.TotalForNewCricket,
-                                ExcelExtensions.TotalRowColor);
-
-                            // for Charge Commisson
-
+                            var winloss = betWinLoss.Total;
+                            if (betWinLoss.Id < 221 && betWinLoss.Id > 212)
                             {
-                                var winloss = betWinLossNewCricket.Total;
+                                // Total of each total sport type
                                 currentRow++;
                                 currentColumn = startColumn;
                                 this.WriteWinLossSummaryTotal(
                                     workSheet,
                                     currentRow,
                                     currentColumn,
-                                    winloss.Name,
-                                    titleStyle_Total,
+                                    winloss.Name + " " + Labels.Total + ":",
+                                    subTotalTitleStyle,
                                     numberOfGroupColumnsTotal,
-                                    winloss,
-                                    ExcelExtensions.TotalRowColor);
+                                    betWinLoss.Total,
+                                    soccerTotalStyle);
+                                continue;
                             }
+
+                            currentRow++;
+                            currentColumn = startColumn;
+                            betTypeName = winloss.Name;
+                            liveIndicator = Convert.ToBoolean(winloss.LiveIndicator);
+
+                            this.WriteWinLossSummary(
+                                workSheet,
+                                currentRow,
+                                currentColumn,
+                                winloss,
+                                textStyle,
+                                backgroundColor);
                         }
 
-                        // Total of Sport
+                        // 8RM winloss
+                        if (betWinLoss.EightRM != null)
+                        {
+                            currentRow++;
+                            currentColumn = startColumn;
+
+                            this.WriteWinLossSummary(
+                                workSheet,
+                                currentRow,
+                                currentColumn,
+                                betWinLoss.EightRM,
+                                text8RM_BARMStyle,
+                                backgroundColor);
+                        }
+
+                        // BARM winloss
+                        if (betWinLoss.BARM != null)
+                        {
+                            currentRow++;
+                            currentColumn = startColumn;
+
+                            this.WriteWinLossSummary(
+                                workSheet,
+                                currentRow,
+                                currentColumn,
+                                betWinLoss.BARM,
+                                text8RM_BARMStyle,
+                                backgroundColor);
+                        }
+
+                        // Hedge
+                        if (betWinLoss.Hedge != null)
+                        {
+                            currentRow++;
+                            currentColumn = startColumn;
+
+                            this.WriteHedgeWinLossSummary(
+                                workSheet,
+                                currentRow,
+                                currentColumn,
+                                Labels.Hedge_title,
+                                betWinLoss.Hedge,
+                                text8RM_BARMStyle,
+                                backgroundColor);
+                        }
+                        var hasOtherMatchType = betWinLoss.EightRM != null || betWinLoss.BARM != null || betWinLoss.Hedge != null;
+                        var showNormal = betWinLoss.Normal != null && hasOtherMatchType;
+                        if (showNormal)
+                        {
+                            currentRow++;
+                            currentColumn = startColumn;
+
+                            this.WriteHedgeWinLossSummary(
+                                workSheet,
+                                currentRow,
+                                currentColumn,
+                                Labels.Normal_title,
+                                betWinLoss.Normal,
+                                text8RM_BARMStyle,
+                                backgroundColor);
+                        }
+                    }
+
+                    // for NewCricket
+                    if (isNewCricket == true)
+                    {
+                        // for Total
+                        currentRow++;
+                        currentColumn = startColumn;
+                        this.WriteWinLossSummaryTotal(
+                            workSheet,
+                            currentRow,
+                            currentColumn,
+                            "Total:",
+                            titleStyle_Total,
+                            numberOfGroupColumnsTotal,
+                            sportWinLoss.TotalForNewCricket,
+                            ExcelExtensions.TotalRowColor);
+
+                        // for Charge Commisson
+
+                        {
+                            var winloss = betWinLossNewCricket.Total;
+                            currentRow++;
+                            currentColumn = startColumn;
+                            this.WriteWinLossSummaryTotal(
+                                workSheet,
+                                currentRow,
+                                currentColumn,
+                                winloss.Name,
+                                titleStyle_Total,
+                                numberOfGroupColumnsTotal,
+                                winloss,
+                                ExcelExtensions.TotalRowColor);
+                        }
+                    }
+
+                    // Total of Sport
+                    currentRow++;
+                    currentColumn = startColumn;
+
+                    this.WriteWinLossSummaryTotal(
+                        workSheet,
+                        currentRow,
+                        currentColumn,
+                        string.Format("{0} {1}:", sportWinLoss.Name, Labels.Total),
+                        titleStyle_Total,
+                        numberOfGroupColumnsTotal,
+                        sportWinLoss.Total,
+                        ExcelExtensions.TotalRowColor);
+
+                    if (sportWinLoss.IBCTotal != null)
+                    {
                         currentRow++;
                         currentColumn = startColumn;
 
@@ -363,120 +376,99 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                             workSheet,
                             currentRow,
                             currentColumn,
-                            string.Format("{0} {1}:", sportWinLoss.Name, Labels.Total),
+                            Labels._8RM_BARM + ":",
                             titleStyle_Total,
                             numberOfGroupColumnsTotal,
-                            sportWinLoss.Total,
+                            sportWinLoss.IBCTotal,
                             ExcelExtensions.TotalRowColor);
-
-                        if (sportWinLoss.IBCTotal != null)
-                        {
-                            currentRow++;
-                            currentColumn = startColumn;
-
-                            this.WriteWinLossSummaryTotal(
-                                workSheet,
-                                currentRow,
-                                currentColumn,
-                                Labels._8RM_BARM + ":",
-                                titleStyle_Total,
-                                numberOfGroupColumnsTotal,
-                                sportWinLoss.IBCTotal,
-                                ExcelExtensions.TotalRowColor);
-                        }
-
-                        if (sportWinLoss.HedgeTotal != null)
-                        {
-                            currentRow++;
-                            currentColumn = startColumn;
-
-                            this.WriteWinLossSummaryTotal(
-                                workSheet,
-                                currentRow,
-                                currentColumn,
-                                Labels.Hedge_title + ":",
-                                titleStyle_Total,
-                                numberOfGroupColumnsTotal,
-                                sportWinLoss.HedgeTotal,
-                                ExcelExtensions.TotalRowColor);
-                        }
-                        var totalHasOtherMatchType = sportWinLoss.IBCTotal != null || sportWinLoss.HedgeTotal != null;
-                        var showTotalNormal = sportWinLoss.NormalTotal != null && totalHasOtherMatchType;
-
-                        if (showTotalNormal)
-                        {
-                            currentRow++;
-                            currentColumn = startColumn;
-
-                            this.WriteWinLossSummaryTotal(
-                                workSheet,
-                                currentRow,
-                                currentColumn,
-                                Labels.Normal_title + ":",
-                                titleStyle_Total,
-                                numberOfGroupColumnsTotal,
-                                sportWinLoss.NormalTotal,
-                                ExcelExtensions.TotalRowColor);
-                        }
                     }
 
-                    // All Total
-                    currentRow++;
-                    currentColumn = startColumn;
+                    if (sportWinLoss.HedgeTotal != null)
+                    {
+                        currentRow++;
+                        currentColumn = startColumn;
 
-                    this.WriteWinLossSummaryTotal(
-                        workSheet,
-                        currentRow,
-                        currentColumn,
-                        Labels.Grand_Total.ToUpper() + ":",
-                        grandTotalRowTextStyleWithBorder,
-                        numberOfGroupColumnsTotal,
-                        report.AllTotal,
-                        ExcelExtensions.GrandTotalRowColor,
-                        true,
-                        true);
+                        this.WriteWinLossSummaryTotal(
+                            workSheet,
+                            currentRow,
+                            currentColumn,
+                            Labels.Hedge_title + ":",
+                            titleStyle_Total,
+                            numberOfGroupColumnsTotal,
+                            sportWinLoss.HedgeTotal,
+                            ExcelExtensions.TotalRowColor);
+                    }
+                    var totalHasOtherMatchType = sportWinLoss.IBCTotal != null || sportWinLoss.HedgeTotal != null;
+                    var showTotalNormal = sportWinLoss.NormalTotal != null && totalHasOtherMatchType;
 
-                    // IBC (8RM + BARM)
-                    currentRow++;
-                    currentColumn = startColumn;
+                    if (showTotalNormal)
+                    {
+                        currentRow++;
+                        currentColumn = startColumn;
 
-                    this.WriteWinLossSummaryTotal(
-                        workSheet,
-                        currentRow,
-                        currentColumn,
-                        "(8RM + BARM) Total:",
-                        grandTotalRowTextStyle,
-                        numberOfGroupColumnsTotal,
-                        report.IBCTotal,
-                        ExcelExtensions.GrandTotalRowColor,
-                        true,
-                        false);
-                }
-                else
-                {
-                    workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + maxColumIndex);
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow - 1, currentColumn, currentRow - 1, currentColumn + maxColumIndex);
-                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
+                        this.WriteWinLossSummaryTotal(
+                            workSheet,
+                            currentRow,
+                            currentColumn,
+                            Labels.Normal_title + ":",
+                            titleStyle_Total,
+                            numberOfGroupColumnsTotal,
+                            sportWinLoss.NormalTotal,
+                            ExcelExtensions.TotalRowColor);
+                    }
                 }
 
+                // All Total
                 currentRow++;
                 currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + maxColumIndex);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = MainResources.WinLossSummary3rd_Note;
-                currentCellRange.Style = fomularStyle;
 
-                var reportName = string.Format(
-                    MainResources.WinLossSummary3rd_ReportName,
-                    criteria.Fromdate.ToShortFormatedDateWithSlash(),
-                    criteria.Todate.ToShortFormatedDateWithSlash()).Replace("/", "_");
-                excelFile.ReponseStream(reportName);
+                this.WriteWinLossSummaryTotal(
+                    workSheet,
+                    currentRow,
+                    currentColumn,
+                    Labels.Grand_Total.ToUpper() + ":",
+                    grandTotalRowTextStyleWithBorder,
+                    numberOfGroupColumnsTotal,
+                    report.AllTotal,
+                    ExcelExtensions.GrandTotalRowColor,
+                    true,
+                    true);
+
+                // IBC (8RM + BARM)
+                currentRow++;
+                currentColumn = startColumn;
+
+                this.WriteWinLossSummaryTotal(
+                    workSheet,
+                    currentRow,
+                    currentColumn,
+                    "(8RM + BARM) Total:",
+                    grandTotalRowTextStyle,
+                    numberOfGroupColumnsTotal,
+                    report.IBCTotal,
+                    ExcelExtensions.GrandTotalRowColor,
+                    true,
+                    false);
             }
-            catch (Exception ex)
+            else
             {
-                HandleException(ex);
-                throw;
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + maxColumIndex);
+                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow - 1, currentColumn, currentRow - 1, currentColumn + maxColumIndex);
+                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
             }
+
+            currentRow++;
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + maxColumIndex);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = MainResources.WinLossSummary3rd_Note;
+            currentCellRange.Style = fomularStyle;
+
+            var reportName = string.Format(
+                MainResources.WinLossSummary3rd_ReportName,
+                criteria.Fromdate.ToShortFormatedDateWithSlash(),
+                criteria.Todate.ToShortFormatedDateWithSlash()).Replace("/", "_");
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>
@@ -488,50 +480,42 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportDetails(GetMatchGameDetailsCriteria criteria)
         {
-            try
+            MatchGame3rdInfo report = SessionManager.Get<MatchGame3rdInfo>(MainConstants.WinLossSummary3rdReportDetailSessionKEy);
+            if (report == null)
             {
-                MatchGame3rdInfo report = SessionManager.Get<MatchGame3rdInfo>(MainConstants.WinLossSummary3rdReportDetailSessionKEy);
-                if (report == null)
+                report = this.GetDetails(criteria);
+                if (report == null || report.MatchGameBetTypes.Count == 0)
                 {
-                    report = this.GetDetails(criteria);
-                    if (report == null || report.MatchGameBetTypes.Count == 0)
-                    {
-                        return;
-                    }
+                    return;
                 }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = MainResources.WinLossSummary3rdDetail_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                string title = string.Format(
-                    MainResources.WinLossSummary3rd_SummaryReportDetailTitle,
-                    criteria.ParentName,
-                    criteria.FromDate.ToShortFormatedDate(),
-                    criteria.ToDate.ToShortFormatedDate());
-
-                SportTypeWinLoss type = report.Type;
-                if (type == SportTypeWinLoss.SportBook || type == SportTypeWinLoss.VirtualSports)
-                {
-                    this.ExportHomeAwayTemplateDetails(report, title, ref workSheet);
-                }
-                else
-                {
-                    this.ExportTemplateDetails(report, title, ref workSheet);
-                }
-
-                var reportName = string.Format(
-                    MainResources.WinLossSummary3rdDetail_ReportName,
-                    criteria.FromDate.ToShortFormatedDateWithSlash(),
-                    criteria.ToDate.ToShortFormatedDateWithSlash()).Replace("/", "_");
-                excelFile.ReponseStream(reportName);
             }
-            catch (Exception ex)
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = MainResources.WinLossSummary3rdDetail_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            string title = string.Format(
+                MainResources.WinLossSummary3rd_SummaryReportDetailTitle,
+                criteria.ParentName,
+                criteria.FromDate.ToShortFormatedDate(),
+                criteria.ToDate.ToShortFormatedDate());
+
+            SportTypeWinLoss type = report.Type;
+            if (type == SportTypeWinLoss.SportBook || type == SportTypeWinLoss.VirtualSports)
             {
-                HandleException(ex);
-                throw;
+                this.ExportHomeAwayTemplateDetails(report, title, ref workSheet);
             }
+            else
+            {
+                this.ExportTemplateDetails(report, title, ref workSheet);
+            }
+
+            var reportName = string.Format(
+                MainResources.WinLossSummary3rdDetail_ReportName,
+                criteria.FromDate.ToShortFormatedDateWithSlash(),
+                criteria.ToDate.ToShortFormatedDateWithSlash()).Replace("/", "_");
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>

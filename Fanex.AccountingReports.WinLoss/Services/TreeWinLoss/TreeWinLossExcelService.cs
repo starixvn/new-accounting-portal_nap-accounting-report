@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
@@ -87,67 +86,61 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         Justification = "Reviewed. Suppression is OK here.")]
         public void ExportExcelTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria)
         {
-            try
+
+            var report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByProductSession);
+            if (report == null)
             {
-                var report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByProductSession);
-                if (report == null)
-                {
-                    report = _reportService.GetTreeWinLossByProduct(criteria);
-                }
-
-                var excelFile = new ExcelFile();
-                ExcelWorksheetCollection workSheets = excelFile.Worksheets;
-                string sheetName = WinLossResources.TreeWinLoss_SheetName;
-                ExcelWorksheet workSheet = workSheets.Add(sheetName);
-                var isShowNA = report.IsShowNotAvailableTurnover;
-                int startRow = 0;
-                int startColumn = 0;
-                int maxColumnIndex = 19;
-
-                var currentColumn = startColumn;
-                CellRange currentCellRange;
-
-                workSheet.Columns[startColumn].Width = 80 * ExcelExtensions.FontWidth;
-                for (var colIndex = 1; colIndex <= maxColumnIndex; colIndex++)
-                {
-                    workSheet.Columns[startColumn + colIndex].Width = 120 * ExcelExtensions.FontWidth;
-                }
-
-                var title = string.Format(
-                    "{0} From {1} To {2}",
-                    WinLossResources.TreeWinLoss_WLByCurrency,
-                    criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
-                    criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
-                var currentRow = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + maxColumnIndex - 1);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = title;
-                currentCellRange.Style = headerTextStyle;
-                currentRow++;
-                workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex - 1);
-                this.ExportTreeWinLossByProductHeader(ref workSheet, ref currentRow, startColumn);
-
-                var childsInfoLength = report.ChildsInfo.Count;
-                if (childsInfoLength > 0)
-                {
-                    this.ExportTreeWinLossByProductAssignBodyData(isShowNA, ref workSheet, report.ChildsInfo, ref currentRow, startColumn);
-                    this.ExportTreeWinLossByProductAssignFooterData(isShowNA, ref workSheet, report.TotalInfo, ref currentRow, startColumn);
-                }
-                else
-                {
-                    workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 16);
-                }
-
-                var reportName = string.Format(
-                    WinLossResources.TreeWinLoss_ReportName,
-                    criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
-                    criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
-                excelFile.ReponseStream(reportName);
+                report = _reportService.GetTreeWinLossByProduct(criteria);
             }
-            catch (Exception ex)
+
+            var excelFile = new ExcelFile();
+            ExcelWorksheetCollection workSheets = excelFile.Worksheets;
+            string sheetName = WinLossResources.TreeWinLoss_SheetName;
+            ExcelWorksheet workSheet = workSheets.Add(sheetName);
+            var isShowNA = report.IsShowNotAvailableTurnover;
+            int startRow = 0;
+            int startColumn = 0;
+            int maxColumnIndex = 19;
+
+            var currentColumn = startColumn;
+            CellRange currentCellRange;
+
+            workSheet.Columns[startColumn].Width = 80 * ExcelExtensions.FontWidth;
+            for (var colIndex = 1; colIndex <= maxColumnIndex; colIndex++)
             {
-                HandleException(ex);
+                workSheet.Columns[startColumn + colIndex].Width = 120 * ExcelExtensions.FontWidth;
             }
+
+            var title = string.Format(
+                "{0} From {1} To {2}",
+                WinLossResources.TreeWinLoss_WLByCurrency,
+                criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
+                criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+            var currentRow = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + maxColumnIndex - 1);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = title;
+            currentCellRange.Style = headerTextStyle;
+            currentRow++;
+            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex - 1);
+            this.ExportTreeWinLossByProductHeader(ref workSheet, ref currentRow, startColumn);
+
+            var childsInfoLength = report.ChildsInfo.Count;
+            if (childsInfoLength > 0)
+            {
+                this.ExportTreeWinLossByProductAssignBodyData(isShowNA, ref workSheet, report.ChildsInfo, ref currentRow, startColumn);
+                this.ExportTreeWinLossByProductAssignFooterData(isShowNA, ref workSheet, report.TotalInfo, ref currentRow, startColumn);
+            }
+            else
+            {
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 16);
+            }
+
+            var reportName = string.Format(
+                WinLossResources.TreeWinLoss_ReportName,
+                criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
+                criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>
@@ -159,51 +152,45 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         Justification = "Reviewed. Suppression is OK here.")]
         public void ExportExcelTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
-            try
+
+            var report = new TreeWinLoss();
+            switch (criteria.RoleId)
             {
-                var report = new TreeWinLoss();
-                switch (criteria.RoleId)
-                {
-                    case 5:
-                        report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByCommSession);
-                        break;
+                case 5:
+                    report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByCommSession);
+                    break;
 
-                    case 4:
-                        report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossBySuperSession);
-                        break;
+                case 4:
+                    report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossBySuperSession);
+                    break;
 
-                    case 3:
-                        report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByMasterSession);
-                        break;
+                case 3:
+                    report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByMasterSession);
+                    break;
 
-                    case 2:
-                        report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByAgentSession);
-                        break;
-                }
-
-                if (report == null)
-                {
-                    report = _reportService.GetTreeWinLossByLevel(criteria);
-                }
-
-                var allVirtualRate = _reportService.GetAllVirtualRate(report);
-
-                var excelFile = new ExcelFile();
-                ExcelWorksheetCollection workSheets = excelFile.Worksheets;
-
-                this.ExportTreeWinLossInfo(report, allVirtualRate.EnabledVirtualRateUser, criteria, workSheets);
-                this.ExportVirtualRateInfo(allVirtualRate, criteria, workSheets);
-
-                var reportName = string.Format(
-                    WinLossResources.TreeWinLoss_ReportName,
-                    criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
-                    criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
-                excelFile.ReponseStream(reportName);
+                case 2:
+                    report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByAgentSession);
+                    break;
             }
-            catch (Exception ex)
+
+            if (report == null)
             {
-                HandleException(ex);
+                report = _reportService.GetTreeWinLossByLevel(criteria);
             }
+
+            var allVirtualRate = _reportService.GetAllVirtualRate(report);
+
+            var excelFile = new ExcelFile();
+            ExcelWorksheetCollection workSheets = excelFile.Worksheets;
+
+            this.ExportTreeWinLossInfo(report, allVirtualRate.EnabledVirtualRateUser, criteria, workSheets);
+            this.ExportVirtualRateInfo(allVirtualRate, criteria, workSheets);
+
+            var reportName = string.Format(
+                WinLossResources.TreeWinLoss_ReportName,
+                criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
+                criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+            excelFile.ReponseStream(reportName);
         }
 
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",

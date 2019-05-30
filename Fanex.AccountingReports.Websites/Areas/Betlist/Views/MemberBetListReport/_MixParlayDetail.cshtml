@@ -1,9 +1,0 @@
-@using Fanex.BetList.Accounting.Models
-@model IList<TicketDetail>
-
-<div class="ticketDetailContent display-none">
-    @foreach (TicketDetail ticketdetail in Model)
-    {
-        @Html.Raw(ticketdetail.ChoiceHtml)
-    }
-</div>

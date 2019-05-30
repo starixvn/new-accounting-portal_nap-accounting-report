@@ -28,29 +28,21 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
         public Sport GetSports(GetSportsCriteria criteria)
         {
             var result = new Sport();
-            try
+            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+                var _params = criteria.GetSpParams();
+                var reader = objectDb.ExecuteReader(_params);
+
+                while (reader.Read())
                 {
-                    var _params = criteria.GetSpParams();
-                    var reader = objectDb.ExecuteReader(_params);
-
-                    while (reader.Read())
+                    var sportInfo = new Sport
                     {
-                        var sportInfo = new Sport
-                        {
-                            SportType = Converter.ToInt(reader["SportType"]),
-                            SportName = Converter.ToString2(reader["SportName"])
-                        };
+                        SportType = Converter.ToInt(reader["SportType"]),
+                        SportName = Converter.ToString2(reader["SportName"])
+                    };
 
-                        result.Sports.Add(sportInfo);
-                    }
+                    result.Sports.Add(sportInfo);
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
             }
 
             return result;
@@ -65,29 +57,21 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
         {
             var result = new League();
 
-            try
+            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+                var _params = criteria.GetSpParams();
+                var reader = objectDb.ExecuteReader(_params);
+
+                while (reader.Read())
                 {
-                    var _params = criteria.GetSpParams();
-                    var reader = objectDb.ExecuteReader(_params);
-
-                    while (reader.Read())
+                    var leagueInfo = new League
                     {
-                        var leagueInfo = new League
-                        {
-                            LeagueId = Converter.ToInt(reader["leagueid"]),
-                            LeagueName = Converter.ToString2(reader["leaguename"])
-                        };
+                        LeagueId = Converter.ToInt(reader["leagueid"]),
+                        LeagueName = Converter.ToString2(reader["leaguename"])
+                    };
 
-                        result.Leagues.Add(leagueInfo);
-                    }
+                    result.Leagues.Add(leagueInfo);
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
             }
 
             return result;
@@ -102,34 +86,26 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
         {
             var result = new Match();
 
-            try
+            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+                var _params = criteria.GetSpParams();
+                var reader = objectDb.ExecuteReader(_params);
+
+                while (reader.Read())
                 {
-                    var _params = criteria.GetSpParams();
-                    var reader = objectDb.ExecuteReader(_params);
-
-                    while (reader.Read())
+                    var matchInfo = new Match()
                     {
-                        var matchInfo = new Match()
-                        {
-                            MatchId = Converter.ToInt(reader["MatchID"]),
-                            MatchCode = new RemotingRefService().GetBetRadarMatchCodeFormat(Converter.ToString2(reader["MatchCode"]), "en"),
-                            HomeTeam = Converter.ToString2(reader["Home"]),
-                            AwayTeam = Converter.ToString2(reader["Away"]),
-                            EventDate = Converter.ToDateTime(reader["EventDate"]).ToShortFormatedDateWithSlash().Replace("/", "_"),
+                        MatchId = Converter.ToInt(reader["MatchID"]),
+                        MatchCode = new RemotingRefService().GetBetRadarMatchCodeFormat(Converter.ToString2(reader["MatchCode"]), "en"),
+                        HomeTeam = Converter.ToString2(reader["Home"]),
+                        AwayTeam = Converter.ToString2(reader["Away"]),
+                        EventDate = Converter.ToDateTime(reader["EventDate"]).ToShortFormatedDateWithSlash().Replace("/", "_"),
 
-                            SportType = Converter.ToInt(reader["SportType"])
-                        };
+                        SportType = Converter.ToInt(reader["SportType"])
+                    };
 
-                        result.Matchs.Add(matchInfo);
-                    }
+                    result.Matchs.Add(matchInfo);
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
             }
 
             return result;

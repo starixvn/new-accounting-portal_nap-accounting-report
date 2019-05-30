@@ -46,103 +46,94 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetCombinationWinLossReport(GetCombinationWinLossReportCriteria criteria)
         {
-            try
+            WinLossInfo report = new WinLossInfo
             {
-                WinLossInfo report = new WinLossInfo
+                GrandTotal = new WinLossInfo
                 {
-                    GrandTotal = new WinLossInfo
-                    {
-                        Name = Labels.Grand_Total
-                    },
-                    ChildsInfo = new List<WinLossInfo>()
-                };
+                    Name = Labels.Grand_Total
+                },
+                ChildsInfo = new List<WinLossInfo>()
+            };
 
-                var rawData = this._reportRepository.GetCombinationWinLossReport(criteria);
-                if (rawData != null)
+            var rawData = this._reportRepository.GetCombinationWinLossReport(criteria);
+            if (rawData != null)
+            {
+                var combinationGroups = rawData.GroupBy(data => data.Combinations);
+                foreach (var combinationGroup in combinationGroups)
                 {
-                    var combinationGroups = rawData.GroupBy(data => data.Combinations);
-                    foreach (var combinationGroup in combinationGroups)
+                    var combinationWinLoss = new WinLossInfo
                     {
-                        var combinationWinLoss = new WinLossInfo
+                        ChildsInfo = new List<WinLossInfo>(),
+                        GrandTotal = new WinLossInfo
                         {
+                            Name = Labels.Total
+                        }
+                    };
+
+                    combinationWinLoss.Name = this.ConvertCombinationType(Converter.ToString2(combinationGroup.Key));
+                    var liveTypeGroups = combinationGroup.GroupBy(data => data.LiveType);
+                    foreach (var liveTypeGroup in liveTypeGroups)
+                    {
+                        var liveTypeWinLoss = new WinLossInfo
+                        {
+                            Id = Converter.ToInt(liveTypeGroup.Key),
                             ChildsInfo = new List<WinLossInfo>(),
                             GrandTotal = new WinLossInfo
                             {
-                                Name = Labels.Total
+                                Name = Labels.Sub_Total
                             }
                         };
 
-                        combinationWinLoss.Name = this.ConvertCombinationType(Converter.ToString2(combinationGroup.Key));
-                        var liveTypeGroups = combinationGroup.GroupBy(data => data.LiveType);
-                        foreach (var liveTypeGroup in liveTypeGroups)
+                        liveTypeWinLoss.Name = this.ConvertLiveType(liveTypeWinLoss.Id);
+                        foreach (var data in liveTypeGroup)
                         {
-                            var liveTypeWinLoss = new WinLossInfo
+                            WinLossInfo info = new WinLossInfo
                             {
-                                Id = Converter.ToInt(liveTypeGroup.Key),
-                                ChildsInfo = new List<WinLossInfo>(),
-                                GrandTotal = new WinLossInfo
-                                {
-                                    Name = Labels.Sub_Total
-                                }
+                                Status = Converter.ToString2(data.Status),
+                                MemberWinLoss = Converter.ToDecimal(data.MemberWinLoss),
+                                MemberTurnover = Converter.ToDecimal(data.MemberTurnover),
+                                BetCount = Converter.ToInt(data.BetCount),
+                                SMAWinLoss = Converter.ToDecimal(data.SMAWinLoss),
+                                Commission = Converter.ToDecimal(data.Commission),
+                                RealIncome = Converter.ToDecimal(data.RealIncome),
+                                RealTurnover = Converter.ToDecimal(data.RealTurnover),
+                                ExtraPT = Converter.ToDecimal(data.ExtraPT)
                             };
 
-                            liveTypeWinLoss.Name = this.ConvertLiveType(liveTypeWinLoss.Id);
-                            foreach (var data in liveTypeGroup)
-                            {
-                                WinLossInfo info = new WinLossInfo
-                                {
-                                    Status = Converter.ToString2(data.Status),
-                                    MemberWinLoss = Converter.ToDecimal(data.MemberWinLoss),
-                                    MemberTurnover = Converter.ToDecimal(data.MemberTurnover),
-                                    BetCount = Converter.ToInt(data.BetCount),
-                                    SMAWinLoss = Converter.ToDecimal(data.SMAWinLoss),
-                                    Commission = Converter.ToDecimal(data.Commission),
-                                    RealIncome = Converter.ToDecimal(data.RealIncome),
-                                    RealTurnover = Converter.ToDecimal(data.RealTurnover),
-                                    ExtraPT = Converter.ToDecimal(data.ExtraPT)
-                                };
+                            info.Name = string.Format(Labels.Mix_Parlay + " ({0})", info.Status);
+                            info.Margin = this.CalculateMargin(info.RealIncome, info.RealTurnover);
+                            liveTypeWinLoss.GrandTotal.Add(info);
+                            info = this.FormatWinLossInfo(info);
+                            liveTypeWinLoss.ChildsInfo.Add(info);
 
-                                info.Name = string.Format(Labels.Mix_Parlay + " ({0})", info.Status);
-                                info.Margin = this.CalculateMargin(info.RealIncome, info.RealTurnover);
-                                liveTypeWinLoss.GrandTotal.Add(info);
-                                info = this.FormatWinLossInfo(info);
-                                liveTypeWinLoss.ChildsInfo.Add(info);
-
-                                liveTypeWinLoss.TotalRowDetail++;
-                                combinationWinLoss.TotalRowDetail++;
-                            }
-
-                            liveTypeWinLoss.GrandTotal.Margin = this.CalculateMargin(
-                                liveTypeWinLoss.GrandTotal.RealIncome,
-                                liveTypeWinLoss.GrandTotal.RealTurnover);
-                            combinationWinLoss.GrandTotal.Add(liveTypeWinLoss.GrandTotal);
-                            liveTypeWinLoss.GrandTotal = this.FormatWinLossInfo(liveTypeWinLoss.GrandTotal);
-                            combinationWinLoss.ChildsInfo.Add(liveTypeWinLoss);
+                            liveTypeWinLoss.TotalRowDetail++;
+                            combinationWinLoss.TotalRowDetail++;
                         }
 
-                        combinationWinLoss.GrandTotal.Margin = this.CalculateMargin(
-                            combinationWinLoss.GrandTotal.RealIncome,
-                            combinationWinLoss.GrandTotal.RealTurnover);
-                        report.GrandTotal.Add(combinationWinLoss.GrandTotal);
-                        combinationWinLoss.GrandTotal = this.FormatWinLossInfo(combinationWinLoss.GrandTotal);
-                        report.ChildsInfo.Add(combinationWinLoss);
+                        liveTypeWinLoss.GrandTotal.Margin = this.CalculateMargin(
+                            liveTypeWinLoss.GrandTotal.RealIncome,
+                            liveTypeWinLoss.GrandTotal.RealTurnover);
+                        combinationWinLoss.GrandTotal.Add(liveTypeWinLoss.GrandTotal);
+                        liveTypeWinLoss.GrandTotal = this.FormatWinLossInfo(liveTypeWinLoss.GrandTotal);
+                        combinationWinLoss.ChildsInfo.Add(liveTypeWinLoss);
                     }
 
-                    report.GrandTotal.Margin = this.CalculateMargin(
-                        report.GrandTotal.RealIncome,
-                        report.GrandTotal.RealTurnover);
-                    report.GrandTotal = this.FormatWinLossInfo(report.GrandTotal);
+                    combinationWinLoss.GrandTotal.Margin = this.CalculateMargin(
+                        combinationWinLoss.GrandTotal.RealIncome,
+                        combinationWinLoss.GrandTotal.RealTurnover);
+                    report.GrandTotal.Add(combinationWinLoss.GrandTotal);
+                    combinationWinLoss.GrandTotal = this.FormatWinLossInfo(combinationWinLoss.GrandTotal);
+                    report.ChildsInfo.Add(combinationWinLoss);
                 }
 
-                SessionManager.Set<WinLossInfo>(WinLossContants.DailyMixParlayCombinationReport, report);
-                return report;
+                report.GrandTotal.Margin = this.CalculateMargin(
+                    report.GrandTotal.RealIncome,
+                    report.GrandTotal.RealTurnover);
+                report.GrandTotal = this.FormatWinLossInfo(report.GrandTotal);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                SessionManager.Set<WinLossInfo>(WinLossContants.DailyMixParlayCombinationReport, null);
-                throw;
-            }
+
+            SessionManager.Set<WinLossInfo>(WinLossContants.DailyMixParlayCombinationReport, report);
+            return report;
         }
 
         /// <summary>
@@ -155,107 +146,98 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             Justification = "Reviewed. Suppression is OK here.")]
         public WinLossInfo GetAdvanceMixParlayReport(GetAdvanceMixParlayReportCriteria criteria)
         {
-            try
+            WinLossInfo report = new WinLossInfo
             {
-                WinLossInfo report = new WinLossInfo
+                GrandTotal = new WinLossInfo
                 {
-                    GrandTotal = new WinLossInfo
-                    {
-                        Name = Labels.Grand_Total
-                    },
-                    ChildsInfo = new List<WinLossInfo>()
-                };
+                    Name = Labels.Grand_Total
+                },
+                ChildsInfo = new List<WinLossInfo>()
+            };
 
-                var rawData = this.GetReportData<dynamic>(criteria);
-                if (rawData != null)
+            var rawData = this.GetReportData<dynamic>(criteria);
+            if (rawData != null)
+            {
+                var sportTypeList = rawData.Select(data => Converter.ToInt(data.SportType))
+                                           .ToList();
+                this.GetSportName(sportTypeList, ref this._sportTypeNameCache);
+
+                var liveTypeGroups = rawData.GroupBy(data => data.LiveType);
+                foreach (var liveTypeGroup in liveTypeGroups)
                 {
-                    var sportTypeList = rawData.Select(data => Converter.ToInt(data.SportType))
-                                               .ToList();
-                    this.GetSportName(sportTypeList, ref this._sportTypeNameCache);
-
-                    var liveTypeGroups = rawData.GroupBy(data => data.LiveType);
-                    foreach (var liveTypeGroup in liveTypeGroups)
+                    var liveTypeWinLoss = new WinLossInfo
                     {
-                        var liveTypeWinLoss = new WinLossInfo
+                        Id = Converter.ToInt(liveTypeGroup.Key),
+                        ChildsInfo = new List<WinLossInfo>(),
+                        GrandTotal = new WinLossInfo
                         {
-                            Id = Converter.ToInt(liveTypeGroup.Key),
+                            Name = Labels.Total
+                        }
+                    };
+
+                    liveTypeWinLoss.Name = this.ConvertLiveType(liveTypeWinLoss.Id);
+                    var sportGroups = liveTypeGroup.GroupBy(data => data.SportType);
+                    foreach (var sportGroup in sportGroups)
+                    {
+                        var sportWinLoss = new WinLossInfo
+                        {
+                            Id = Converter.ToInt(sportGroup.Key),
                             ChildsInfo = new List<WinLossInfo>(),
                             GrandTotal = new WinLossInfo
                             {
-                                Name = Labels.Total
+                                Name = Labels.Sub_Total
                             }
                         };
 
-                        liveTypeWinLoss.Name = this.ConvertLiveType(liveTypeWinLoss.Id);
-                        var sportGroups = liveTypeGroup.GroupBy(data => data.SportType);
-                        foreach (var sportGroup in sportGroups)
+                        sportWinLoss.Name = this._sportTypeNameCache[sportWinLoss.Id];
+                        foreach (var data in sportGroup)
                         {
-                            var sportWinLoss = new WinLossInfo
+                            WinLossInfo info = new WinLossInfo
                             {
-                                Id = Converter.ToInt(sportGroup.Key),
-                                ChildsInfo = new List<WinLossInfo>(),
-                                GrandTotal = new WinLossInfo
-                                {
-                                    Name = Labels.Sub_Total
-                                }
+                                Id = criteria.Bettype,
+                                Status = Converter.ToString2(data.status),
+                                MemberWinLoss = Converter.ToDecimal(data.MemberWinLoss),
+                                SMAWinLoss = Converter.ToDecimal(data.SMAWinLoss),
+                                Commission = Converter.ToDecimal(data.Commission),
+                                RealIncome = Converter.ToDecimal(data.RealIncome),
+                                RealTurnover = Converter.ToDecimal(data.RealTurnover),
+                                ExtraPT = Converter.ToDecimal(data.ExtraPT)
                             };
 
-                            sportWinLoss.Name = this._sportTypeNameCache[sportWinLoss.Id];
-                            foreach (var data in sportGroup)
-                            {
-                                WinLossInfo info = new WinLossInfo
-                                {
-                                    Id = criteria.Bettype,
-                                    Status = Converter.ToString2(data.status),
-                                    MemberWinLoss = Converter.ToDecimal(data.MemberWinLoss),
-                                    SMAWinLoss = Converter.ToDecimal(data.SMAWinLoss),
-                                    Commission = Converter.ToDecimal(data.Commission),
-                                    RealIncome = Converter.ToDecimal(data.RealIncome),
-                                    RealTurnover = Converter.ToDecimal(data.RealTurnover),
-                                    ExtraPT = Converter.ToDecimal(data.ExtraPT)
-                                };
+                            info.Name = string.Format(Labels.Mix_Parlay + " ({0})", info.Status);
+                            info.Margin = this.CalculateMargin(info.RealIncome, info.RealTurnover);
+                            sportWinLoss.GrandTotal.Add(info);
+                            info = this.FormatWinLossInfo(info);
+                            sportWinLoss.ChildsInfo.Add(info);
 
-                                info.Name = string.Format(Labels.Mix_Parlay + " ({0})", info.Status);
-                                info.Margin = this.CalculateMargin(info.RealIncome, info.RealTurnover);
-                                sportWinLoss.GrandTotal.Add(info);
-                                info = this.FormatWinLossInfo(info);
-                                sportWinLoss.ChildsInfo.Add(info);
-
-                                sportWinLoss.TotalRowDetail++;
-                                liveTypeWinLoss.TotalRowDetail++;
-                            }
-
-                            sportWinLoss.GrandTotal.Margin = this.CalculateMargin(
-                               sportWinLoss.GrandTotal.RealIncome,
-                               sportWinLoss.GrandTotal.RealTurnover);
-                            liveTypeWinLoss.GrandTotal.Add(sportWinLoss.GrandTotal);
-                            sportWinLoss.GrandTotal = this.FormatWinLossInfo(sportWinLoss.GrandTotal);
-                            liveTypeWinLoss.ChildsInfo.Add(sportWinLoss);
+                            sportWinLoss.TotalRowDetail++;
+                            liveTypeWinLoss.TotalRowDetail++;
                         }
 
-                        liveTypeWinLoss.GrandTotal.Margin = this.CalculateMargin(
-                          liveTypeWinLoss.GrandTotal.RealIncome,
-                          liveTypeWinLoss.GrandTotal.RealTurnover);
-                        report.GrandTotal.Add(liveTypeWinLoss.GrandTotal);
-                        liveTypeWinLoss.GrandTotal = this.FormatWinLossInfo(liveTypeWinLoss.GrandTotal);
-                        report.ChildsInfo.Add(liveTypeWinLoss);
+                        sportWinLoss.GrandTotal.Margin = this.CalculateMargin(
+                           sportWinLoss.GrandTotal.RealIncome,
+                           sportWinLoss.GrandTotal.RealTurnover);
+                        liveTypeWinLoss.GrandTotal.Add(sportWinLoss.GrandTotal);
+                        sportWinLoss.GrandTotal = this.FormatWinLossInfo(sportWinLoss.GrandTotal);
+                        liveTypeWinLoss.ChildsInfo.Add(sportWinLoss);
                     }
 
-                    report.GrandTotal.Margin = this.CalculateMargin(
-                        report.GrandTotal.RealIncome,
-                        report.GrandTotal.RealTurnover);
-                    report.GrandTotal = this.FormatWinLossInfo(report.GrandTotal);
+                    liveTypeWinLoss.GrandTotal.Margin = this.CalculateMargin(
+                      liveTypeWinLoss.GrandTotal.RealIncome,
+                      liveTypeWinLoss.GrandTotal.RealTurnover);
+                    report.GrandTotal.Add(liveTypeWinLoss.GrandTotal);
+                    liveTypeWinLoss.GrandTotal = this.FormatWinLossInfo(liveTypeWinLoss.GrandTotal);
+                    report.ChildsInfo.Add(liveTypeWinLoss);
                 }
 
-                SessionManager.Set<WinLossInfo>(WinLossContants.DailyMixParlayAdvanceMixParlayReport, report);
-                return report;
+                report.GrandTotal.Margin = this.CalculateMargin(
+                    report.GrandTotal.RealIncome,
+                    report.GrandTotal.RealTurnover);
+                report.GrandTotal = this.FormatWinLossInfo(report.GrandTotal);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                SessionManager.Set<WinLossInfo>(WinLossContants.DailyMixParlayAdvanceMixParlayReport, null);
-                throw;
-            }
+
+            SessionManager.Set<WinLossInfo>(WinLossContants.DailyMixParlayAdvanceMixParlayReport, report);
+            return report;
         }
 
         /// <summary>
@@ -306,516 +288,510 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportCombinationWinLossReport(GetCombinationWinLossReportCriteria criteria)
         {
-            try
+            var report = SessionManager.Get<WinLossInfo>(WinLossContants.DailyMixParlayCombinationReport);
+            if (report == null)
             {
-                var report = SessionManager.Get<WinLossInfo>(WinLossContants.DailyMixParlayCombinationReport);
-                if (report == null)
+                report = this.GetCombinationWinLossReport(criteria);
+            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = WinLossResources.DailyMixParlayWinLoss_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            int maxColumnIndex = 11;
+            var currentRow = startRow;
+
+            var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
+
+            var backgroundColor = ExcelExtensions.BackGroundColor;
+            var textStyle = ExcelExtensions.GetCellTextStyle(backgroundColor, false);
+            var intStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.IntNumberFormat, backgroundColor, false, false, false);
+            var twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, false, false, false);
+            var twoDecimalPositiveNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, false, true, false);
+            var positiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                backgroundColor,
+                false,
+                true,
+                false);
+
+            var subRowColor = ExcelExtensions.TotalRowColor;
+            var subRowTextStyle = ExcelExtensions.GetCellTextStyle(subRowColor, true);
+            var subRowIntStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.IntNumberFormat, subRowColor, true, false, false);
+            var subRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                subRowColor,
+                true,
+                false,
+                false);
+            var subRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                subRowColor,
+                true,
+                true,
+                false);
+            var subRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                subRowColor,
+                true,
+                true,
+                false);
+
+            var liveTypeTotalColor = Color.FromArgb(222, 210, 190);
+            var totalRowTextStyle = ExcelExtensions.GetCellTextStyle(liveTypeTotalColor, true);
+            var totalRowIntStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.IntNumberFormat,
+                liveTypeTotalColor,
+                true,
+                false,
+                false);
+            var totalRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                liveTypeTotalColor,
+                true,
+                false,
+                false);
+            var totalRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                liveTypeTotalColor,
+                true,
+                true,
+                false);
+            var totalRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                liveTypeTotalColor,
+                true,
+                true,
+                false);
+
+            var grandTotalRowColor = ExcelExtensions.GrandTotalRowColor;
+            var grandTotalRowTextStyle = ExcelExtensions.GetCellTextStyle(grandTotalRowColor, true);
+            var grandTotalRowIntStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.IntNumberFormat, grandTotalRowColor, true, false, false);
+            var grandTotalRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                grandTotalRowColor,
+                true,
+                false,
+                false);
+            var grandTotalRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                grandTotalRowColor,
+                true,
+                true,
+                false);
+            var grandTotalRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                grandTotalRowColor,
+                true,
+                true,
+                false);
+
+            var currentColumn = startColumn;
+            CellRange currentCellRange;
+            ExcelCell currentCell;
+
+            for (int colIndex = 0; colIndex <= maxColumnIndex; colIndex++)
+            {
+                workSheet.Columns[startColumn + colIndex].Width = 150 * ExcelExtensions.FontWidth;
+            }
+
+            workSheet.Columns[startColumn + 1].Width = 160 * ExcelExtensions.FontWidth;
+            workSheet.Columns[startColumn + 10].Width = 120 * ExcelExtensions.FontWidth;
+
+            var title = string.Format(
+                WinLossResources.DailyMixParlayWinLoss_CombinationWinLoss_ReportTitle,
+                ReportService.GetSiteTypeName(criteria.Site),
+                criteria.FromDate.ToShortFormatedDate(),
+                criteria.ToDate.ToShortFormatedDate());
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + maxColumnIndex);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = title;
+            currentCellRange.Style = headerTextStyle;
+            currentRow += 2;
+
+            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
+
+            // 1stRow
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Combinations;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Type;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Bet_Type;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 2);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Member;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn += 3;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.SMA_Win_Loss;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.ExtraPT;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Commission;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 2);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.House;
+            currentCellRange.Style = headerTextStyle;
+            currentColumn += 3;
+            currentRow++;
+
+            // 2ndRow
+            currentColumn = startColumn + 3;
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Win_Loss;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Turnover;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Bet_Count;
+            currentCell.Style = headerTextStyle;
+            currentColumn += 4;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.RealIncome;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.RealTurnover;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Margin;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+            currentRow++;
+
+            if (report != null && report.ChildsInfo.Count > 0)
+            {
+                var len = report.ChildsInfo.Count;
+                WinLossInfo info;
+                for (var i = 0; i < len; i++)
                 {
-                    report = this.GetCombinationWinLossReport(criteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = WinLossResources.DailyMixParlayWinLoss_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                int maxColumnIndex = 11;
-                var currentRow = startRow;
-
-                var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
-
-                var backgroundColor = ExcelExtensions.BackGroundColor;
-                var textStyle = ExcelExtensions.GetCellTextStyle(backgroundColor, false);
-                var intStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.IntNumberFormat, backgroundColor, false, false, false);
-                var twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, false, false, false);
-                var twoDecimalPositiveNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, false, true, false);
-                var positiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitPercentFormat,
-                    backgroundColor,
-                    false,
-                    true,
-                    false);
-
-                var subRowColor = ExcelExtensions.TotalRowColor;
-                var subRowTextStyle = ExcelExtensions.GetCellTextStyle(subRowColor, true);
-                var subRowIntStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.IntNumberFormat, subRowColor, true, false, false);
-                var subRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    subRowColor,
-                    true,
-                    false,
-                    false);
-                var subRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    subRowColor,
-                    true,
-                    true,
-                    false);
-                var subRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitPercentFormat,
-                    subRowColor,
-                    true,
-                    true,
-                    false);
-
-                var liveTypeTotalColor = Color.FromArgb(222, 210, 190);
-                var totalRowTextStyle = ExcelExtensions.GetCellTextStyle(liveTypeTotalColor, true);
-                var totalRowIntStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.IntNumberFormat,
-                    liveTypeTotalColor,
-                    true,
-                    false,
-                    false);
-                var totalRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    liveTypeTotalColor,
-                    true,
-                    false,
-                    false);
-                var totalRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    liveTypeTotalColor,
-                    true,
-                    true,
-                    false);
-                var totalRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitPercentFormat,
-                    liveTypeTotalColor,
-                    true,
-                    true,
-                    false);
-
-                var grandTotalRowColor = ExcelExtensions.GrandTotalRowColor;
-                var grandTotalRowTextStyle = ExcelExtensions.GetCellTextStyle(grandTotalRowColor, true);
-                var grandTotalRowIntStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.IntNumberFormat, grandTotalRowColor, true, false, false);
-                var grandTotalRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    grandTotalRowColor,
-                    true,
-                    false,
-                    false);
-                var grandTotalRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    grandTotalRowColor,
-                    true,
-                    true,
-                    false);
-                var grandTotalRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitPercentFormat,
-                    grandTotalRowColor,
-                    true,
-                    true,
-                    false);
-
-                var currentColumn = startColumn;
-                CellRange currentCellRange;
-                ExcelCell currentCell;
-
-                for (int colIndex = 0; colIndex <= maxColumnIndex; colIndex++)
-                {
-                    workSheet.Columns[startColumn + colIndex].Width = 150 * ExcelExtensions.FontWidth;
-                }
-
-                workSheet.Columns[startColumn + 1].Width = 160 * ExcelExtensions.FontWidth;
-                workSheet.Columns[startColumn + 10].Width = 120 * ExcelExtensions.FontWidth;
-
-                var title = string.Format(
-                    WinLossResources.DailyMixParlayWinLoss_CombinationWinLoss_ReportTitle,
-                    ReportService.GetSiteTypeName(criteria.Site),
-                    criteria.FromDate.ToShortFormatedDate(),
-                    criteria.ToDate.ToShortFormatedDate());
-                currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + maxColumnIndex);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = title;
-                currentCellRange.Style = headerTextStyle;
-                currentRow += 2;
-
-                workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
-
-                // 1stRow
-                currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.Combinations;
-                currentCellRange.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.Type;
-                currentCellRange.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.Bet_Type;
-                currentCellRange.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 2);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.Member;
-                currentCellRange.Style = headerTextStyle;
-                currentColumn += 3;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.SMA_Win_Loss;
-                currentCellRange.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.ExtraPT;
-                currentCellRange.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.Commission;
-                currentCellRange.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 2);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = Labels.House;
-                currentCellRange.Style = headerTextStyle;
-                currentColumn += 3;
-                currentRow++;
-
-                // 2ndRow
-                currentColumn = startColumn + 3;
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Win_Loss;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Turnover;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Bet_Count;
-                currentCell.Style = headerTextStyle;
-                currentColumn += 4;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.RealIncome;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.RealTurnover;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Margin;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-                currentRow++;
-
-                if (report != null && report.ChildsInfo.Count > 0)
-                {
-                    var len = report.ChildsInfo.Count;
-                    WinLossInfo info;
-                    for (var i = 0; i < len; i++)
+                    var combinationGroup = report.ChildsInfo[i];
+                    var combinationGroupLength = combinationGroup.ChildsInfo.Count;
+                    for (var j = 0; j < combinationGroupLength; j++)
                     {
-                        var combinationGroup = report.ChildsInfo[i];
-                        var combinationGroupLength = combinationGroup.ChildsInfo.Count;
-                        for (var j = 0; j < combinationGroupLength; j++)
+                        var liveTypeGroup = combinationGroup.ChildsInfo[j];
+                        var liveTypeGroupLength = liveTypeGroup.ChildsInfo.Count;
+                        for (var k = 0; k < liveTypeGroupLength; k++)
                         {
-                            var liveTypeGroup = combinationGroup.ChildsInfo[j];
-                            var liveTypeGroupLength = liveTypeGroup.ChildsInfo.Count;
-                            for (var k = 0; k < liveTypeGroupLength; k++)
+                            info = liveTypeGroup.ChildsInfo[k];
+                            currentColumn = startColumn;
+
+                            if (j == 0 && k == 0)
                             {
-                                info = liveTypeGroup.ChildsInfo[k];
-                                currentColumn = startColumn;
-
-                                if (j == 0 && k == 0)
-                                {
-                                    var combinationColor = this.GetExcelCombinationColor(combinationGroup.Name);
-                                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(
-                                        currentRow,
-                                        currentColumn,
-                                        currentRow + combinationGroup.TotalRowDetail + combinationGroupLength,
-                                        currentColumn);
-                                    currentCellRange.Merged = true;
-                                    currentCellRange.Value = combinationGroup.Name;
-                                    currentCellRange.Style = textStyle;
-                                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-                                    currentCellRange.Style.Font.Weight = ExcelFont.BoldWeight;
-                                    currentCellRange.Style.FillPattern.SetSolid(combinationColor);
-                                }
-
-                                currentColumn++;
-                                if (k == 0)
-                                {
-                                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + liveTypeGroupLength, currentColumn);
-                                    currentCellRange.Merged = true;
-                                    currentCellRange.Value = liveTypeGroup.Name;
-                                    currentCellRange.Style = textStyle;
-                                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-                                    currentCellRange.Style.Font.Weight = ExcelFont.BoldWeight;
-                                }
-
-                                currentColumn++;
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.Name;
-                                currentCell.Style = textStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.MemberWinLoss;
-                                currentCell.Style = twoDecimalPositiveNumberStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.MemberTurnover;
-                                currentCell.Style = twoDecimalNumberStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.BetCount;
-                                currentCell.Style = intStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.SMAWinLoss;
-                                currentCell.Style = twoDecimalNumberStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.ExtraPT;
-                                currentCell.Style = twoDecimalNumberStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.Commission;
-                                currentCell.Style = twoDecimalNumberStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.RealIncome;
-                                currentCell.Style = twoDecimalPositiveNumberStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.RealTurnover;
-                                currentCell.Style = twoDecimalNumberStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.Margin;
-                                currentCell.Style = positiveTwoDecimalPercentNumberStyle;
-                                currentColumn++;
-                                currentRow++;
+                                var combinationColor = this.GetExcelCombinationColor(combinationGroup.Name);
+                                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(
+                                    currentRow,
+                                    currentColumn,
+                                    currentRow + combinationGroup.TotalRowDetail + combinationGroupLength,
+                                    currentColumn);
+                                currentCellRange.Merged = true;
+                                currentCellRange.Value = combinationGroup.Name;
+                                currentCellRange.Style = textStyle;
+                                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+                                currentCellRange.Style.Font.Weight = ExcelFont.BoldWeight;
+                                currentCellRange.Style.FillPattern.SetSolid(combinationColor);
                             }
 
-                            info = liveTypeGroup.GrandTotal;
-                            currentColumn = startColumn + 1;
+                            currentColumn++;
+                            if (k == 0)
+                            {
+                                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + liveTypeGroupLength, currentColumn);
+                                currentCellRange.Merged = true;
+                                currentCellRange.Value = liveTypeGroup.Name;
+                                currentCellRange.Style = textStyle;
+                                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+                                currentCellRange.Style.Font.Weight = ExcelFont.BoldWeight;
+                            }
 
                             currentColumn++;
                             currentCell = workSheet.Cells[currentRow, currentColumn];
                             currentCell.Value = info.Name;
-                            currentCell.Style = totalRowTextStyle;
-                            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+                            currentCell.Style = textStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
                             currentCell.Value = info.MemberWinLoss;
-                            currentCell.Style = totalRowPositiveTwoDecimalNumberStyle;
+                            currentCell.Style = twoDecimalPositiveNumberStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
                             currentCell.Value = info.MemberTurnover;
-                            currentCell.Style = totalRowTwoDecimalNumberStyle;
+                            currentCell.Style = twoDecimalNumberStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
                             currentCell.Value = info.BetCount;
-                            currentCell.Style = totalRowIntStyle;
+                            currentCell.Style = intStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
                             currentCell.Value = info.SMAWinLoss;
-                            currentCell.Style = totalRowTwoDecimalNumberStyle;
+                            currentCell.Style = twoDecimalNumberStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
                             currentCell.Value = info.ExtraPT;
-                            currentCell.Style = totalRowTwoDecimalNumberStyle;
+                            currentCell.Style = twoDecimalNumberStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
                             currentCell.Value = info.Commission;
-                            currentCell.Style = totalRowTwoDecimalNumberStyle;
+                            currentCell.Style = twoDecimalNumberStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
                             currentCell.Value = info.RealIncome;
-                            currentCell.Style = totalRowPositiveTwoDecimalNumberStyle;
+                            currentCell.Style = twoDecimalPositiveNumberStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
                             currentCell.Value = info.RealTurnover;
-                            currentCell.Style = totalRowTwoDecimalNumberStyle;
+                            currentCell.Style = twoDecimalNumberStyle;
                             currentColumn++;
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
                             currentCell.Value = info.Margin;
-                            currentCell.Style = totalRowPositiveTwoDecimalPercentNumberStyle;
+                            currentCell.Style = positiveTwoDecimalPercentNumberStyle;
                             currentColumn++;
                             currentRow++;
                         }
 
-                        info = combinationGroup.GrandTotal;
-                        currentColumn = startColumn;
-
-                        currentColumn++;
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Style = subRowTextStyle;
+                        info = liveTypeGroup.GrandTotal;
+                        currentColumn = startColumn + 1;
 
                         currentColumn++;
                         currentCell = workSheet.Cells[currentRow, currentColumn];
                         currentCell.Value = info.Name;
-                        currentCell.Style = subRowTextStyle;
+                        currentCell.Style = totalRowTextStyle;
                         currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
                         currentCell.Value = info.MemberWinLoss;
-                        currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
+                        currentCell.Style = totalRowPositiveTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
                         currentCell.Value = info.MemberTurnover;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
+                        currentCell.Style = totalRowTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
                         currentCell.Value = info.BetCount;
-                        currentCell.Style = subRowIntStyle;
+                        currentCell.Style = totalRowIntStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
                         currentCell.Value = info.SMAWinLoss;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
+                        currentCell.Style = totalRowTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
                         currentCell.Value = info.ExtraPT;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
+                        currentCell.Style = totalRowTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
                         currentCell.Value = info.Commission;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
+                        currentCell.Style = totalRowTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
                         currentCell.Value = info.RealIncome;
-                        currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
+                        currentCell.Style = totalRowPositiveTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
                         currentCell.Value = info.RealTurnover;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
+                        currentCell.Style = totalRowTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
                         currentCell.Value = info.Margin;
-                        currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
+                        currentCell.Style = totalRowPositiveTwoDecimalPercentNumberStyle;
                         currentColumn++;
                         currentRow++;
                     }
 
-                    info = report.GrandTotal;
+                    info = combinationGroup.GrandTotal;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 2);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = info.Name;
-                    currentCellRange.Style = grandTotalRowTextStyle;
-                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-                    currentCellRange.Style.Font.Weight = ExcelFont.BoldWeight;
-                    currentCellRange.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                    currentColumn += 3;
+
+                    currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Style = subRowTextStyle;
+
+                    currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.Name;
+                    currentCell.Style = subRowTextStyle;
+                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+                    currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.MemberWinLoss;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.MemberTurnover;
-                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentCell.Style = subRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.BetCount;
-                    currentCell.Style = grandTotalRowIntStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentCell.Style = subRowIntStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.SMAWinLoss;
-                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentCell.Style = subRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.ExtraPT;
-                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentCell.Style = subRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.Commission;
-                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentCell.Style = subRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.RealIncome;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                    currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
+                    currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.RealTurnover;
-                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentCell.Style = subRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.Margin;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
                     currentColumn++;
                     currentRow++;
                 }
-                else
-                {
-                    workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
-                }
 
-                var reportName = string.Format(
-                    WinLossResources.DailyMixParlayWinLoss_CombinationWinLoss_ReportName,
-                    criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
-                    criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
-                excelFile.ReponseStream(reportName);
+                info = report.GrandTotal;
+                currentColumn = startColumn;
+                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 2);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = info.Name;
+                currentCellRange.Style = grandTotalRowTextStyle;
+                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+                currentCellRange.Style.Font.Weight = ExcelFont.BoldWeight;
+                currentCellRange.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn += 3;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.MemberWinLoss;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.MemberTurnover;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.BetCount;
+                currentCell.Style = grandTotalRowIntStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.SMAWinLoss;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.ExtraPT;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.Commission;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.RealIncome;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.RealTurnover;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.Margin;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+                currentRow++;
             }
-            catch (Exception ex)
+            else
             {
-                HandleException(ex);
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
             }
+
+            var reportName = string.Format(
+                WinLossResources.DailyMixParlayWinLoss_CombinationWinLoss_ReportName,
+                criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
+                criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+            excelFile.ReponseStream(reportName);
+
         }
 
         /// <summary>
@@ -827,653 +803,206 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportAdvanceMixParlayReport(GetAdvanceMixParlayReportCriteria criteria)
         {
-            try
+            var report = SessionManager.Get<WinLossInfo>(WinLossContants.DailyMixParlayAdvanceMixParlayReport);
+            if (report == null)
             {
-                var report = SessionManager.Get<WinLossInfo>(WinLossContants.DailyMixParlayAdvanceMixParlayReport);
-                if (report == null)
+                report = this.GetAdvanceMixParlayReport(criteria);
+            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = WinLossResources.DailyMixParlayWinLoss_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            int maxColumnIndex = 9;
+            var currentRow = startRow;
+
+            var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
+
+            var backgroundColor = ExcelExtensions.BackGroundColor;
+            var textStyle = ExcelExtensions.GetCellTextStyle(backgroundColor, false);
+            var twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, false, false, false);
+            var twoDecimalPositiveNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, false, true, false);
+            var positiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                backgroundColor,
+                false,
+                true,
+                false);
+
+            var subRowColor = ExcelExtensions.TotalRowColor;
+            var subRowTextStyle = ExcelExtensions.GetCellTextStyle(subRowColor, true);
+            var subRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, subRowColor, true, false, false);
+            var subRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, subRowColor, true, true, false);
+            var subRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                subRowColor,
+                true,
+                true,
+                false);
+
+            var sportTypeTotalColor = Color.FromArgb(222, 210, 190);
+            var totalRowTextStyle = ExcelExtensions.GetCellTextStyle(sportTypeTotalColor, true);
+            var totalRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, sportTypeTotalColor, true, false, false);
+            var totalRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                sportTypeTotalColor,
+                true,
+                true,
+                false);
+            var totalRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                sportTypeTotalColor,
+                true,
+                true,
+                false);
+
+            var grandTotalRowColor = ExcelExtensions.GrandTotalRowColor;
+            var grandTotalRowTextStyle = ExcelExtensions.GetCellTextStyle(grandTotalRowColor, true);
+            var grandTotalRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                grandTotalRowColor,
+                true,
+                false,
+                false);
+            var grandTotalRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                grandTotalRowColor,
+                true,
+                true,
+                false);
+            var grandTotalRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                grandTotalRowColor,
+                true,
+                true,
+                false);
+
+            var currentColumn = startColumn;
+            CellRange currentCellRange;
+            ExcelCell currentCell;
+
+            for (int colIndex = 1; colIndex <= maxColumnIndex; colIndex++)
+            {
+                workSheet.Columns[startColumn + colIndex].Width = 150 * ExcelExtensions.FontWidth;
+            }
+
+            workSheet.Columns[startColumn].Width = 160 * ExcelExtensions.FontWidth;
+            workSheet.Columns[startColumn + 8].Width = 120 * ExcelExtensions.FontWidth;
+
+            var title = string.Format(
+                "Parlay Win Loss by Product by {0}  - From {1} To {2}",
+                ReportService.GetSiteTypeName(criteria.Site),
+                criteria.FromDate.ToShortFormatedDate(),
+                criteria.ToDate.ToShortFormatedDate());
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + maxColumnIndex);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = title;
+            currentCellRange.Style = headerTextStyle;
+            currentRow += 2;
+
+            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
+
+            currentColumn = startColumn;
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Sport_Type;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Bet_Type;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Member_Win_Loss;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.SMA_Win_Loss;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.ExtraPT;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Commission;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.RealIncome;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.RealTurnover;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Margin;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+            currentRow++;
+
+            if (report != null && report.ChildsInfo.Count > 0)
+            {
+                var len = report.ChildsInfo.Count;
+                WinLossInfo info;
+                for (var i = 0; i < len; i++)
                 {
-                    report = this.GetAdvanceMixParlayReport(criteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = WinLossResources.DailyMixParlayWinLoss_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                int maxColumnIndex = 9;
-                var currentRow = startRow;
-
-                var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
-
-                var backgroundColor = ExcelExtensions.BackGroundColor;
-                var textStyle = ExcelExtensions.GetCellTextStyle(backgroundColor, false);
-                var twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, false, false, false);
-                var twoDecimalPositiveNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, false, true, false);
-                var positiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitPercentFormat,
-                    backgroundColor,
-                    false,
-                    true,
-                    false);
-
-                var subRowColor = ExcelExtensions.TotalRowColor;
-                var subRowTextStyle = ExcelExtensions.GetCellTextStyle(subRowColor, true);
-                var subRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, subRowColor, true, false, false);
-                var subRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, subRowColor, true, true, false);
-                var subRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitPercentFormat,
-                    subRowColor,
-                    true,
-                    true,
-                    false);
-
-                var sportTypeTotalColor = Color.FromArgb(222, 210, 190);
-                var totalRowTextStyle = ExcelExtensions.GetCellTextStyle(sportTypeTotalColor, true);
-                var totalRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, sportTypeTotalColor, true, false, false);
-                var totalRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    sportTypeTotalColor,
-                    true,
-                    true,
-                    false);
-                var totalRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitPercentFormat,
-                    sportTypeTotalColor,
-                    true,
-                    true,
-                    false);
-
-                var grandTotalRowColor = ExcelExtensions.GrandTotalRowColor;
-                var grandTotalRowTextStyle = ExcelExtensions.GetCellTextStyle(grandTotalRowColor, true);
-                var grandTotalRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    grandTotalRowColor,
-                    true,
-                    false,
-                    false);
-                var grandTotalRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    grandTotalRowColor,
-                    true,
-                    true,
-                    false);
-                var grandTotalRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitPercentFormat,
-                    grandTotalRowColor,
-                    true,
-                    true,
-                    false);
-
-                var currentColumn = startColumn;
-                CellRange currentCellRange;
-                ExcelCell currentCell;
-
-                for (int colIndex = 1; colIndex <= maxColumnIndex; colIndex++)
-                {
-                    workSheet.Columns[startColumn + colIndex].Width = 150 * ExcelExtensions.FontWidth;
-                }
-
-                workSheet.Columns[startColumn].Width = 160 * ExcelExtensions.FontWidth;
-                workSheet.Columns[startColumn + 8].Width = 120 * ExcelExtensions.FontWidth;
-
-                var title = string.Format(
-                    "Parlay Win Loss by Product by {0}  - From {1} To {2}",
-                    ReportService.GetSiteTypeName(criteria.Site),
-                    criteria.FromDate.ToShortFormatedDate(),
-                    criteria.ToDate.ToShortFormatedDate());
-                currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + maxColumnIndex);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = title;
-                currentCellRange.Style = headerTextStyle;
-                currentRow += 2;
-
-                workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
-
-                currentColumn = startColumn;
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Sport_Type;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Bet_Type;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Member_Win_Loss;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.SMA_Win_Loss;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.ExtraPT;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Commission;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.RealIncome;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.RealTurnover;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Margin;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-                currentRow++;
-
-                if (report != null && report.ChildsInfo.Count > 0)
-                {
-                    var len = report.ChildsInfo.Count;
-                    WinLossInfo info;
-                    for (var i = 0; i < len; i++)
+                    var liveTypeGroup = report.ChildsInfo[i];
+                    var liveTypeGroupLength = liveTypeGroup.ChildsInfo.Count;
+                    for (var j = 0; j < liveTypeGroupLength; j++)
                     {
-                        var liveTypeGroup = report.ChildsInfo[i];
-                        var liveTypeGroupLength = liveTypeGroup.ChildsInfo.Count;
-                        for (var j = 0; j < liveTypeGroupLength; j++)
+                        var sportGroup = liveTypeGroup.ChildsInfo[j];
+                        var sportGroupLength = sportGroup.ChildsInfo.Count;
+                        for (var k = 0; k < sportGroupLength; k++)
                         {
-                            var sportGroup = liveTypeGroup.ChildsInfo[j];
-                            var sportGroupLength = sportGroup.ChildsInfo.Count;
-                            for (var k = 0; k < sportGroupLength; k++)
+                            info = sportGroup.ChildsInfo[k];
+                            currentColumn = startColumn;
+                            if (j == 0 && k == 0)
                             {
-                                info = sportGroup.ChildsInfo[k];
-                                currentColumn = startColumn;
-                                if (j == 0 && k == 0)
-                                {
-                                    var liveTypeColor = this.GetExcelLiveTypeColor(liveTypeGroup.Id);
-                                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(
-                                        currentRow,
-                                        currentColumn,
-                                        currentRow + liveTypeGroup.TotalRowDetail + liveTypeGroupLength,
-                                        currentColumn);
-                                    currentCellRange.Merged = true;
-                                    currentCellRange.Value = liveTypeGroup.Name;
-                                    currentCellRange.Style = textStyle;
-                                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-                                    currentCellRange.Style.Font.Weight = ExcelFont.BoldWeight;
-                                    currentCellRange.Style.FillPattern.SetSolid(liveTypeColor);
-                                }
-
-                                currentColumn++;
-                                if (k == 0)
-                                {
-                                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + sportGroupLength, currentColumn);
-                                    currentCellRange.Merged = true;
-                                    currentCellRange.Value = sportGroup.Name;
-                                    currentCellRange.Style = textStyle;
-                                    currentCellRange.Style.Font.Weight = ExcelFont.BoldWeight;
-                                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-                                }
-
-                                currentColumn++;
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.Name;
-                                currentCell.Style = textStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.MemberWinLoss;
-                                currentCell.Style = twoDecimalPositiveNumberStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.SMAWinLoss;
-                                currentCell.Style = twoDecimalNumberStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.ExtraPT;
-                                currentCell.Style = twoDecimalNumberStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.Commission;
-                                currentCell.Style = twoDecimalNumberStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.RealIncome;
-                                currentCell.Style = twoDecimalPositiveNumberStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.RealTurnover;
-                                currentCell.Style = twoDecimalNumberStyle;
-                                currentColumn++;
-
-                                currentCell = workSheet.Cells[currentRow, currentColumn];
-                                currentCell.Value = info.Margin;
-                                currentCell.Style = positiveTwoDecimalPercentNumberStyle;
-                                currentColumn++;
-                                currentRow++;
+                                var liveTypeColor = this.GetExcelLiveTypeColor(liveTypeGroup.Id);
+                                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(
+                                    currentRow,
+                                    currentColumn,
+                                    currentRow + liveTypeGroup.TotalRowDetail + liveTypeGroupLength,
+                                    currentColumn);
+                                currentCellRange.Merged = true;
+                                currentCellRange.Value = liveTypeGroup.Name;
+                                currentCellRange.Style = textStyle;
+                                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+                                currentCellRange.Style.Font.Weight = ExcelFont.BoldWeight;
+                                currentCellRange.Style.FillPattern.SetSolid(liveTypeColor);
                             }
 
-                            info = sportGroup.GrandTotal;
-                            currentColumn = startColumn + 1;
+                            currentColumn++;
+                            if (k == 0)
+                            {
+                                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + sportGroupLength, currentColumn);
+                                currentCellRange.Merged = true;
+                                currentCellRange.Value = sportGroup.Name;
+                                currentCellRange.Style = textStyle;
+                                currentCellRange.Style.Font.Weight = ExcelFont.BoldWeight;
+                                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+                            }
 
                             currentColumn++;
                             currentCell = workSheet.Cells[currentRow, currentColumn];
                             currentCell.Value = info.Name;
-                            currentCell.Style = totalRowTextStyle;
-                            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-                            currentColumn++;
-
-                            currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.MemberWinLoss;
-                            currentCell.Style = totalRowPositiveTwoDecimalNumberStyle;
-                            currentColumn++;
-
-                            currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.SMAWinLoss;
-                            currentCell.Style = totalRowTwoDecimalNumberStyle;
-                            currentColumn++;
-
-                            currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.ExtraPT;
-                            currentCell.Style = totalRowTwoDecimalNumberStyle;
-                            currentColumn++;
-
-                            currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.Commission;
-                            currentCell.Style = totalRowTwoDecimalNumberStyle;
-                            currentColumn++;
-
-                            currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.RealIncome;
-                            currentCell.Style = totalRowPositiveTwoDecimalNumberStyle;
-                            currentColumn++;
-
-                            currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.RealTurnover;
-                            currentCell.Style = totalRowTwoDecimalNumberStyle;
-                            currentColumn++;
-
-                            currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = info.Margin;
-                            currentCell.Style = totalRowPositiveTwoDecimalPercentNumberStyle;
-                            currentColumn++;
-                            currentRow++;
-                        }
-
-                        info = liveTypeGroup.GrandTotal;
-                        currentColumn = startColumn;
-
-                        currentColumn++;
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Style = subRowTextStyle;
-
-                        currentColumn++;
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Name;
-                        currentCell.Style = subRowTextStyle;
-                        currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.MemberWinLoss;
-                        currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.SMAWinLoss;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.ExtraPT;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Commission;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.RealIncome;
-                        currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.RealTurnover;
-                        currentCell.Style = subRowTwoDecimalNumberStyle;
-                        currentColumn++;
-
-                        currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Margin;
-                        currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
-                        currentColumn++;
-                        currentRow++;
-                    }
-
-                    info = report.GrandTotal;
-                    currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 2);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = info.Name;
-                    currentCellRange.Style = grandTotalRowTextStyle;
-                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
-                    currentCellRange.Style.Font.Weight = ExcelFont.BoldWeight;
-                    currentCellRange.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                    currentColumn += 3;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.MemberWinLoss;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.SMAWinLoss;
-                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.ExtraPT;
-                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Commission;
-                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.RealIncome;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                    currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.RealTurnover;
-                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                    currentColumn++;
-
-                    currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Margin;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                    currentColumn++;
-                    currentRow++;
-                }
-                else
-                {
-                    workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
-                }
-
-                var reportName = string.Format(
-                    WinLossResources.DailyMixParlayWinLoss_AdvanceMixParlay_ReportName,
-                    criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
-                    criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
-                excelFile.ReponseStream(reportName);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-        }
-
-        /// <summary>
-        /// Gets the mix parlay report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The mix parlay report.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
-        public WinLossInfo GetMixParlayReport(GetMixParlayReportCriteria criteria)
-        {
-            try
-            {
-                var rawData = this.GetReportData<dynamic>(criteria);
-                WinLossInfo report = new WinLossInfo
-                {
-                    GrandTotal = new WinLossInfo
-                    {
-                        Name = Labels.All_Total
-                    },
-                    ChildsInfo = new List<WinLossInfo>()
-                };
-
-                if (rawData != null)
-                {
-                    var sportGroups = rawData.GroupBy(data => data.sporttype);
-                    var betTypeList = rawData.Select(data => Converter.ToInt(data.bettype))
-                                             .ToList();
-                    CacheRef.SaveCacheRefResponse(betTypeList, CacheRef.GetBettype, ref this._betTypeNameCache);
-                    foreach (var sportGroup in sportGroups)
-                    {
-                        var sportWinLoss = new WinLossInfo
-                        {
-                            Id = Converter.ToInt(sportGroup.Key),
-                            ChildsInfo = new List<WinLossInfo>(),
-                            GrandTotal = new WinLossInfo()
-                        };
-
-                        sportWinLoss.Name = this.GetSportName(sportWinLoss.Id);
-                        sportWinLoss.GrandTotal.Name = sportWinLoss.Name + " " + Labels.Total;
-                        foreach (var data in sportGroup)
-                        {
-                            WinLossInfo info = new WinLossInfo
-                            {
-                                Id = Converter.ToInt(data.bettype),
-                                Status = Converter.ToString2(data.status),
-                                MemberWinLoss = Converter.ToDecimal(data.WinLost),
-                                SMAWinLoss = Converter.ToDecimal(data.Position),
-                                Commission = Converter.ToDecimal(data.Commission),
-                                RealIncome = Converter.ToDecimal(data.LineTotal),
-                                RealTurnover = Converter.ToDecimal(data.Turnover)
-                            };
-
-                            info.Name = this._betTypeNameCache[info.Id];
-                            info.Margin = this.CalculateMargin(info.RealIncome, info.RealTurnover);
-                            sportWinLoss.GrandTotal.Add(info);
-                            info = this.FormatWinLossInfo(info);
-                            sportWinLoss.ChildsInfo.Add(info);
-                        }
-
-                        sportWinLoss.ChildsInfo = sportWinLoss.ChildsInfo.OrderBy(info => info.Id).ToList();
-                        sportWinLoss.GrandTotal.Margin = this.CalculateMargin(
-                            sportWinLoss.GrandTotal.RealIncome,
-                            sportWinLoss.GrandTotal.RealTurnover);
-                        report.GrandTotal.Add(sportWinLoss.GrandTotal);
-                        sportWinLoss.GrandTotal = this.FormatWinLossInfo(sportWinLoss.GrandTotal);
-                        report.ChildsInfo.Add(sportWinLoss);
-                    }
-
-                    report.ChildsInfo = report.ChildsInfo.OrderBy(sportGroup => sportGroup.Id).ToList();
-                    report.GrandTotal.Margin = this.CalculateMargin(
-                        report.GrandTotal.RealIncome,
-                        report.GrandTotal.RealTurnover);
-                    report.GrandTotal = this.FormatWinLossInfo(report.GrandTotal);
-                    SessionManager.Set<WinLossInfo>(WinLossContants.DailyMixParlayNormalMixParlayReport, report);
-                    return report;
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            SessionManager.Set<WinLossInfo>(WinLossContants.DailyMixParlayNormalMixParlayReport, null);
-            return null;
-        }
-
-        /// <summary>
-        /// Exports the mix parlay report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
-        public void ExportMixParlayReport(GetMixParlayReportCriteria criteria)
-        {
-            try
-            {
-                var report = SessionManager.Get<WinLossInfo>(WinLossContants.DailyMixParlayNormalMixParlayReport);
-                if (report == null)
-                {
-                    report = this.GetMixParlayReport(criteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = WinLossResources.DailyMixParlayWinLoss_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                int maxColumnIndex = 6;
-                var currentRow = startRow;
-
-                var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
-
-                var backgroundColor = ExcelExtensions.BackGroundColor;
-                var textStyle = ExcelExtensions.GetCellTextStyle(backgroundColor, false);
-                var twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, false, false, false);
-                var twoDecimalPositiveNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, false, true, false);
-                var positiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitPercentFormat,
-                    backgroundColor,
-                    false,
-                    true,
-                    false);
-
-                var sportTypeTotalColor = ExcelExtensions.TotalRowColor;
-                var totalRowTextStyle = ExcelExtensions.GetCellTextStyle(sportTypeTotalColor, true);
-                var totalRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, sportTypeTotalColor, true, false, false);
-                var totalRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    sportTypeTotalColor,
-                    true,
-                    true,
-                    false);
-                var totalRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitPercentFormat,
-                    sportTypeTotalColor,
-                    true,
-                    true,
-                    false);
-
-                var grandTotalRowColor = ExcelExtensions.GrandTotalRowColor;
-                var grandTotalRowTextStyle = ExcelExtensions.GetCellTextStyle(grandTotalRowColor, true);
-                var grandTotalRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    grandTotalRowColor,
-                    true,
-                    false,
-                    false);
-                var grandTotalRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitFormat,
-                    grandTotalRowColor,
-                    true,
-                    true,
-                    false);
-                var grandTotalRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
-                    NumberFormatConstants.TwoDecimalDigitPercentFormat,
-                    grandTotalRowColor,
-                    true,
-                    true,
-                    false);
-
-                var currentColumn = startColumn;
-                CellRange currentCellRange;
-                ExcelCell currentCell;
-
-                for (int colIndex = 1; colIndex <= maxColumnIndex; colIndex++)
-                {
-                    workSheet.Columns[startColumn + colIndex].Width = 150 * ExcelExtensions.FontWidth;
-                }
-
-                workSheet.Columns[startColumn].Width = 160 * ExcelExtensions.FontWidth;
-                workSheet.Columns[startColumn + 6].Width = 120 * ExcelExtensions.FontWidth;
-
-                var title = WinLossResources.DailyMixParlayWinLoss_NormalMixParlay_ReportTitle;
-                currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + maxColumnIndex);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = title;
-                currentCellRange.Style = headerTextStyle;
-                currentRow += 2;
-
-                workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Bet_Type;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Win_Loss;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Position;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Comm;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Line_Total;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Turnover;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = Labels.Margin;
-                currentCell.Style = headerTextStyle;
-                currentColumn++;
-                currentRow++;
-
-                if (report != null && report.ChildsInfo.Count > 0)
-                {
-                    var len = report.ChildsInfo.Count;
-                    WinLossInfo info;
-                    for (var i = 0; i < len; i++)
-                    {
-                        var sportGroup = report.ChildsInfo[i];
-                        var sportGroupLength = sportGroup.ChildsInfo.Count;
-                        for (var j = 0; j < sportGroupLength; j++)
-                        {
-                            info = sportGroup.ChildsInfo[j];
-                            currentColumn = startColumn;
-                            currentCell = workSheet.Cells[currentRow, currentColumn];
-                            currentCell.Value = string.Format("{0} ({1})", info.Name, info.Status);
                             currentCell.Style = textStyle;
                             currentColumn++;
 
@@ -1484,6 +1013,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
 
                             currentCell = workSheet.Cells[currentRow, currentColumn];
                             currentCell.Value = info.SMAWinLoss;
+                            currentCell.Style = twoDecimalNumberStyle;
+                            currentColumn++;
+
+                            currentCell = workSheet.Cells[currentRow, currentColumn];
+                            currentCell.Value = info.ExtraPT;
                             currentCell.Style = twoDecimalNumberStyle;
                             currentColumn++;
 
@@ -1510,11 +1044,13 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                         }
 
                         info = sportGroup.GrandTotal;
-                        currentColumn = startColumn;
+                        currentColumn = startColumn + 1;
+
+                        currentColumn++;
                         currentCell = workSheet.Cells[currentRow, currentColumn];
                         currentCell.Value = info.Name;
                         currentCell.Style = totalRowTextStyle;
-                        currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
+                        currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -1524,6 +1060,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
                         currentCell.Value = info.SMAWinLoss;
+                        currentCell.Style = totalRowTwoDecimalNumberStyle;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+                        currentCell.Value = info.ExtraPT;
                         currentCell.Style = totalRowTwoDecimalNumberStyle;
                         currentColumn++;
 
@@ -1547,70 +1088,484 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                         currentCell.Style = totalRowPositiveTwoDecimalPercentNumberStyle;
                         currentColumn++;
                         currentRow++;
-
-                        workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
                     }
 
-                    info = report.GrandTotal;
+                    info = liveTypeGroup.GrandTotal;
                     currentColumn = startColumn;
+
+                    currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Style = subRowTextStyle;
+
+                    currentColumn++;
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.Name;
-                    currentCell.Style = grandTotalRowTextStyle;
-                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentCell.Style = subRowTextStyle;
+                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.MemberWinLoss;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.SMAWinLoss;
-                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentCell.Style = subRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.ExtraPT;
+                    currentCell.Style = subRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.Commission;
-                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentCell.Style = subRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.RealIncome;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
-                    currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
+                    currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.RealTurnover;
-                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentCell.Style = subRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.Margin;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
-                    currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                    currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
                     currentColumn++;
                     currentRow++;
                 }
-                else
+
+                info = report.GrandTotal;
+                currentColumn = startColumn;
+                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 2);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = info.Name;
+                currentCellRange.Style = grandTotalRowTextStyle;
+                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
+                currentCellRange.Style.Font.Weight = ExcelFont.BoldWeight;
+                currentCellRange.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn += 3;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.MemberWinLoss;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.SMAWinLoss;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.ExtraPT;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.Commission;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.RealIncome;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.RealTurnover;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.Margin;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+                currentRow++;
+            }
+            else
+            {
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
+            }
+
+            var reportName = string.Format(
+                WinLossResources.DailyMixParlayWinLoss_AdvanceMixParlay_ReportName,
+                criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
+                criteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+            excelFile.ReponseStream(reportName);
+        }
+
+        /// <summary>
+        /// Gets the mix parlay report.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>The mix parlay report.</returns>
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        public WinLossInfo GetMixParlayReport(GetMixParlayReportCriteria criteria)
+        {
+            var rawData = this.GetReportData<dynamic>(criteria);
+            WinLossInfo report = new WinLossInfo
+            {
+                GrandTotal = new WinLossInfo
                 {
-                    workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
+                    Name = Labels.All_Total
+                },
+                ChildsInfo = new List<WinLossInfo>()
+            };
+
+            if (rawData != null)
+            {
+                var sportGroups = rawData.GroupBy(data => data.sporttype);
+                var betTypeList = rawData.Select(data => Converter.ToInt(data.bettype))
+                                         .ToList();
+                CacheRef.SaveCacheRefResponse(betTypeList, CacheRef.GetBettype, ref this._betTypeNameCache);
+                foreach (var sportGroup in sportGroups)
+                {
+                    var sportWinLoss = new WinLossInfo
+                    {
+                        Id = Converter.ToInt(sportGroup.Key),
+                        ChildsInfo = new List<WinLossInfo>(),
+                        GrandTotal = new WinLossInfo()
+                    };
+
+                    sportWinLoss.Name = this.GetSportName(sportWinLoss.Id);
+                    sportWinLoss.GrandTotal.Name = sportWinLoss.Name + " " + Labels.Total;
+                    foreach (var data in sportGroup)
+                    {
+                        WinLossInfo info = new WinLossInfo
+                        {
+                            Id = Converter.ToInt(data.bettype),
+                            Status = Converter.ToString2(data.status),
+                            MemberWinLoss = Converter.ToDecimal(data.WinLost),
+                            SMAWinLoss = Converter.ToDecimal(data.Position),
+                            Commission = Converter.ToDecimal(data.Commission),
+                            RealIncome = Converter.ToDecimal(data.LineTotal),
+                            RealTurnover = Converter.ToDecimal(data.Turnover)
+                        };
+
+                        info.Name = this._betTypeNameCache[info.Id];
+                        info.Margin = this.CalculateMargin(info.RealIncome, info.RealTurnover);
+                        sportWinLoss.GrandTotal.Add(info);
+                        info = this.FormatWinLossInfo(info);
+                        sportWinLoss.ChildsInfo.Add(info);
+                    }
+
+                    sportWinLoss.ChildsInfo = sportWinLoss.ChildsInfo.OrderBy(info => info.Id).ToList();
+                    sportWinLoss.GrandTotal.Margin = this.CalculateMargin(
+                        sportWinLoss.GrandTotal.RealIncome,
+                        sportWinLoss.GrandTotal.RealTurnover);
+                    report.GrandTotal.Add(sportWinLoss.GrandTotal);
+                    sportWinLoss.GrandTotal = this.FormatWinLossInfo(sportWinLoss.GrandTotal);
+                    report.ChildsInfo.Add(sportWinLoss);
                 }
 
-                var reportName = WinLossResources.DailyMixParlayWinLoss_NormalMixParlay_ReportName;
-                excelFile.ReponseStream(reportName);
+                report.ChildsInfo = report.ChildsInfo.OrderBy(sportGroup => sportGroup.Id).ToList();
+                report.GrandTotal.Margin = this.CalculateMargin(
+                    report.GrandTotal.RealIncome,
+                    report.GrandTotal.RealTurnover);
+                report.GrandTotal = this.FormatWinLossInfo(report.GrandTotal);
+                SessionManager.Set<WinLossInfo>(WinLossContants.DailyMixParlayNormalMixParlayReport, report);
+                return report;
             }
-            catch (Exception ex)
+
+            SessionManager.Set<WinLossInfo>(WinLossContants.DailyMixParlayNormalMixParlayReport, null);
+            return null;
+        }
+
+        /// <summary>
+        /// Exports the mix parlay report.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        public void ExportMixParlayReport(GetMixParlayReportCriteria criteria)
+        {
+            var report = SessionManager.Get<WinLossInfo>(WinLossContants.DailyMixParlayNormalMixParlayReport);
+            if (report == null)
             {
-                HandleException(ex);
+                report = this.GetMixParlayReport(criteria);
             }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = WinLossResources.DailyMixParlayWinLoss_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            int maxColumnIndex = 6;
+            var currentRow = startRow;
+
+            var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
+
+            var backgroundColor = ExcelExtensions.BackGroundColor;
+            var textStyle = ExcelExtensions.GetCellTextStyle(backgroundColor, false);
+            var twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, false, false, false);
+            var twoDecimalPositiveNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, backgroundColor, false, true, false);
+            var positiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                backgroundColor,
+                false,
+                true,
+                false);
+
+            var sportTypeTotalColor = ExcelExtensions.TotalRowColor;
+            var totalRowTextStyle = ExcelExtensions.GetCellTextStyle(sportTypeTotalColor, true);
+            var totalRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(NumberFormatConstants.TwoDecimalDigitFormat, sportTypeTotalColor, true, false, false);
+            var totalRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                sportTypeTotalColor,
+                true,
+                true,
+                false);
+            var totalRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                sportTypeTotalColor,
+                true,
+                true,
+                false);
+
+            var grandTotalRowColor = ExcelExtensions.GrandTotalRowColor;
+            var grandTotalRowTextStyle = ExcelExtensions.GetCellTextStyle(grandTotalRowColor, true);
+            var grandTotalRowTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                grandTotalRowColor,
+                true,
+                false,
+                false);
+            var grandTotalRowPositiveTwoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitFormat,
+                grandTotalRowColor,
+                true,
+                true,
+                false);
+            var grandTotalRowPositiveTwoDecimalPercentNumberStyle = ExcelExtensions.GetCellNumberStyle(
+                NumberFormatConstants.TwoDecimalDigitPercentFormat,
+                grandTotalRowColor,
+                true,
+                true,
+                false);
+
+            var currentColumn = startColumn;
+            CellRange currentCellRange;
+            ExcelCell currentCell;
+
+            for (int colIndex = 1; colIndex <= maxColumnIndex; colIndex++)
+            {
+                workSheet.Columns[startColumn + colIndex].Width = 150 * ExcelExtensions.FontWidth;
+            }
+
+            workSheet.Columns[startColumn].Width = 160 * ExcelExtensions.FontWidth;
+            workSheet.Columns[startColumn + 6].Width = 120 * ExcelExtensions.FontWidth;
+
+            var title = WinLossResources.DailyMixParlayWinLoss_NormalMixParlay_ReportTitle;
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + maxColumnIndex);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = title;
+            currentCellRange.Style = headerTextStyle;
+            currentRow += 2;
+
+            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Bet_Type;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Win_Loss;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Position;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Comm;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Line_Total;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Turnover;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Margin;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+            currentRow++;
+
+            if (report != null && report.ChildsInfo.Count > 0)
+            {
+                var len = report.ChildsInfo.Count;
+                WinLossInfo info;
+                for (var i = 0; i < len; i++)
+                {
+                    var sportGroup = report.ChildsInfo[i];
+                    var sportGroupLength = sportGroup.ChildsInfo.Count;
+                    for (var j = 0; j < sportGroupLength; j++)
+                    {
+                        info = sportGroup.ChildsInfo[j];
+                        currentColumn = startColumn;
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+                        currentCell.Value = string.Format("{0} ({1})", info.Name, info.Status);
+                        currentCell.Style = textStyle;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+                        currentCell.Value = info.MemberWinLoss;
+                        currentCell.Style = twoDecimalPositiveNumberStyle;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+                        currentCell.Value = info.SMAWinLoss;
+                        currentCell.Style = twoDecimalNumberStyle;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+                        currentCell.Value = info.Commission;
+                        currentCell.Style = twoDecimalNumberStyle;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+                        currentCell.Value = info.RealIncome;
+                        currentCell.Style = twoDecimalPositiveNumberStyle;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+                        currentCell.Value = info.RealTurnover;
+                        currentCell.Style = twoDecimalNumberStyle;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+                        currentCell.Value = info.Margin;
+                        currentCell.Style = positiveTwoDecimalPercentNumberStyle;
+                        currentColumn++;
+                        currentRow++;
+                    }
+
+                    info = sportGroup.GrandTotal;
+                    currentColumn = startColumn;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.Name;
+                    currentCell.Style = totalRowTextStyle;
+                    currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.MemberWinLoss;
+                    currentCell.Style = totalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.SMAWinLoss;
+                    currentCell.Style = totalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.Commission;
+                    currentCell.Style = totalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = totalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealTurnover;
+                    currentCell.Style = totalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.Margin;
+                    currentCell.Style = totalRowPositiveTwoDecimalPercentNumberStyle;
+                    currentColumn++;
+                    currentRow++;
+
+                    workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
+                }
+
+                info = report.GrandTotal;
+                currentColumn = startColumn;
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.Name;
+                currentCell.Style = grandTotalRowTextStyle;
+                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                currentCell.Style.Font.Weight = ExcelFont.BoldWeight;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.MemberWinLoss;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.SMAWinLoss;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.Commission;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.RealIncome;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentCell.Style.FillPattern.SetSolid(ExcelExtensions.NoteInformationCellColor);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.RealTurnover;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.Margin;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, ExcelExtensions.GrandTotalSeparatorColor, LineStyle.Medium);
+                currentColumn++;
+                currentRow++;
+            }
+            else
+            {
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + maxColumnIndex);
+            }
+
+            var reportName = WinLossResources.DailyMixParlayWinLoss_NormalMixParlay_ReportName;
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>

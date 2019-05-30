@@ -1,6 +1,5 @@
 namespace Fanex.BetList.Accounting.Core
 {
-    using System;
     using System.Web;
 
     /// <summary>
@@ -27,15 +26,8 @@ namespace Fanex.BetList.Accounting.Core
         /// <returns>Value from Session with specific Type.</returns>
         public static T Get<T>(string sessionKey)
         {
-            try
-            {
-                T value = (T)HttpContext.Current.Session[sessionKey];
-                return value;
-            }
-            catch (Exception)
-            {
-                return default(T);
-            }
+            T value = (T)HttpContext.Current.Session[sessionKey];
+            return value;
         }
 
         public static void Set(string sessionKey, object value)

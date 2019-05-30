@@ -34,77 +34,69 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
         public List<NumberGameWinLossByCurrencyMain> GetNumberGameWinLossByCurrencyMain(NumberGameWinLossByCurrencyMainCriteria criteria)
         {
             var numberGameMainList = new List<NumberGameWinLossByCurrencyMain>();
-            try
+            var rawData = GetReportData<dynamic>(criteria);
+            if (rawData != null)
             {
-                var rawData = GetReportData<dynamic>(criteria);
-                if (rawData != null)
+                NumberGameWinLossByCurrencyMain grandTotal = new NumberGameWinLossByCurrencyMain
                 {
-                    NumberGameWinLossByCurrencyMain grandTotal = new NumberGameWinLossByCurrencyMain
+                    Currency = Labels.Grand_Total,
+                    Turnover = 0,
+                    MemberWinLoss = 0,
+                    GamePayout = 0,
+                    NetTurnover = 0,
+                    PTWinLoss = 0,
+                    CommExpense = 0,
+                    NetIncome = 0,
+                    Margin = 0
+                };
+
+                decimal turnoverTmp = 0;
+                decimal memberWinLossTmp = 0;
+                decimal netTurnoverTmp = 0;
+                decimal winLossPTTmp = 0;
+                decimal comExpenseTmp = 0;
+                decimal netIncomeTmp = 0;
+
+                foreach (var row in rawData)
+                {
+                    turnoverTmp = Converter.ToDecimal(row.TurnOver);
+                    memberWinLossTmp = Converter.ToDecimal(row.MemberWinloss);
+                    netTurnoverTmp = Converter.ToDecimal(row.NetTurnOver);
+                    winLossPTTmp = Converter.ToDecimal(row.PTWinloss);
+                    comExpenseTmp = Converter.ToDecimal(row.CommExpense);
+                    netIncomeTmp = Converter.ToDecimal(row.NetIncome);
+
+                    grandTotal.Turnover += turnoverTmp;
+                    grandTotal.MemberWinLoss += memberWinLossTmp;
+                    grandTotal.NetTurnover += netTurnoverTmp;
+                    grandTotal.PTWinLoss += winLossPTTmp;
+                    grandTotal.CommExpense += comExpenseTmp;
+                    grandTotal.NetIncome += netIncomeTmp;
+
+                    numberGameMainList.Add(new NumberGameWinLossByCurrencyMain
                     {
-                        Currency = Labels.Grand_Total,
-                        Turnover = 0,
-                        MemberWinLoss = 0,
-                        GamePayout = 0,
-                        NetTurnover = 0,
-                        PTWinLoss = 0,
-                        CommExpense = 0,
-                        NetIncome = 0,
-                        Margin = 0
-                    };
-
-                    decimal turnoverTmp = 0;
-                    decimal memberWinLossTmp = 0;
-                    decimal netTurnoverTmp = 0;
-                    decimal winLossPTTmp = 0;
-                    decimal comExpenseTmp = 0;
-                    decimal netIncomeTmp = 0;
-
-                    foreach (var row in rawData)
-                    {
-                        turnoverTmp = Converter.ToDecimal(row.TurnOver);
-                        memberWinLossTmp = Converter.ToDecimal(row.MemberWinloss);
-                        netTurnoverTmp = Converter.ToDecimal(row.NetTurnOver);
-                        winLossPTTmp = Converter.ToDecimal(row.PTWinloss);
-                        comExpenseTmp = Converter.ToDecimal(row.CommExpense);
-                        netIncomeTmp = Converter.ToDecimal(row.NetIncome);
-
-                        grandTotal.Turnover += turnoverTmp;
-                        grandTotal.MemberWinLoss += memberWinLossTmp;
-                        grandTotal.NetTurnover += netTurnoverTmp;
-                        grandTotal.PTWinLoss += winLossPTTmp;
-                        grandTotal.CommExpense += comExpenseTmp;
-                        grandTotal.NetIncome += netIncomeTmp;
-
-                        numberGameMainList.Add(new NumberGameWinLossByCurrencyMain
-                        {
-                            Currency = row.CurrencyName.ToString(),
-                            Turnover = turnoverTmp,
-                            MemberWinLoss = memberWinLossTmp,
-                            GamePayout = Converter.ToDecimal(row.GamePayOut),
-                            NetTurnover = netTurnoverTmp,
-                            PTWinLoss = winLossPTTmp,
-                            CommExpense = comExpenseTmp,
-                            NetIncome = netIncomeTmp,
-                            Margin = Converter.ToDecimal(row.Margin)
-                        });
-                    }
-
-                    if (numberGameMainList.Count > 0)
-                    {
-                        grandTotal.GamePayout = grandTotal.MemberWinLoss / grandTotal.Turnover;
-                        grandTotal.Margin = grandTotal.NetIncome / grandTotal.NetTurnover;
-                        numberGameMainList.Add(grandTotal);
-                    }
+                        Currency = row.CurrencyName.ToString(),
+                        Turnover = turnoverTmp,
+                        MemberWinLoss = memberWinLossTmp,
+                        GamePayout = Converter.ToDecimal(row.GamePayOut),
+                        NetTurnover = netTurnoverTmp,
+                        PTWinLoss = winLossPTTmp,
+                        CommExpense = comExpenseTmp,
+                        NetIncome = netIncomeTmp,
+                        Margin = Converter.ToDecimal(row.Margin)
+                    });
                 }
 
-                SessionManager.Set<List<NumberGameWinLossByCurrencyMain>>(GamingConstants.NumberGameWinLossByCurrencyMainSessionKey, numberGameMainList);
-                return numberGameMainList;
+                if (numberGameMainList.Count > 0)
+                {
+                    grandTotal.GamePayout = grandTotal.MemberWinLoss / grandTotal.Turnover;
+                    grandTotal.Margin = grandTotal.NetIncome / grandTotal.NetTurnover;
+                    numberGameMainList.Add(grandTotal);
+                }
             }
-            catch (Exception ex)
-            {
-                this.HandleException(ex);
-                throw;
-            }
+
+            SessionManager.Set<List<NumberGameWinLossByCurrencyMain>>(GamingConstants.NumberGameWinLossByCurrencyMainSessionKey, numberGameMainList);
+            return numberGameMainList;
         }
 
         /// <summary>
@@ -118,117 +110,110 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
         public List<NumberGameWinLossByCurrencyDetail> GetNumberGameWinLossByCurrencyDetail(NumberGameWinLossByCurrencyDetailCriteria criteria)
         {
             var numberGameDetailList = new List<NumberGameWinLossByCurrencyDetail>();
-            try
+            var rawData = GetReportData<dynamic>(criteria);
+            if (rawData != null)
             {
-                var rawData = GetReportData<dynamic>(criteria);
-                if (rawData != null)
+                NumberGameWinLossByCurrencyDetail grandTotal = new NumberGameWinLossByCurrencyDetail
                 {
-                    NumberGameWinLossByCurrencyDetail grandTotal = new NumberGameWinLossByCurrencyDetail
+                    Username = "Total",
+                    Turnover = 0,
+                    GrossComm = 0,
+                    MemberWinLoss = 0,
+                    MemberComm = 0,
+                    MemberTotal = 0,
+                    AgentWinLoss = 0,
+                    AgentComm = 0,
+                    AgentTotal = 0,
+                    MasterWinLoss = 0,
+                    MasterComm = 0,
+                    MasterTotal = 0,
+                    SuperWinLoss = 0,
+                    SuperComm = 0,
+                    SuperTotal = 0,
+                    Company = 0,
+                    RoleID = -1,
+                    CustID = 0
+                };
+
+                string userNameTmp = string.Empty;
+                decimal turnoverTmp = 0;
+                decimal grossCommTmp = 0;
+                decimal memberWinLossTmp = 0;
+                decimal memberCommTmp = 0;
+                decimal memberTotalTmp = 0;
+                decimal agentWinLossTmp = 0;
+                decimal agentCommTmp = 0;
+                decimal agentTotalTmp = 0;
+                decimal masterWinLossTmp = 0;
+                decimal masterCommTmp = 0;
+                decimal masterTotalTmp = 0;
+                decimal superWinLossTmp = 0;
+                decimal superCommTmp = 0;
+                decimal superTotalTmp = 0;
+                decimal companyTmp = 0;
+
+                foreach (var row in rawData)
+                {
+                    turnoverTmp = Converter.ToDecimal(row.TurnOver);
+                    grossCommTmp = Converter.ToDecimal(row.GrossComm);
+                    memberWinLossTmp = Converter.ToDecimal(row.memberWL);
+                    memberCommTmp = Converter.ToDecimal(row.memberComm);
+                    memberTotalTmp = Converter.ToDecimal(row.memberTotal);
+                    agentWinLossTmp = Converter.ToDecimal(row.agentWL);
+                    agentCommTmp = Converter.ToDecimal(row.agentComm);
+                    agentTotalTmp = Converter.ToDecimal(row.agentTotal);
+                    masterWinLossTmp = Converter.ToDecimal(row.masterWL);
+                    masterCommTmp = Converter.ToDecimal(row.masterComm);
+                    masterTotalTmp = Converter.ToDecimal(row.masterTotal);
+                    superWinLossTmp = Converter.ToDecimal(row.superWL);
+                    superCommTmp = Converter.ToDecimal(row.superComm);
+                    superTotalTmp = Converter.ToDecimal(row.superTotal);
+                    companyTmp = Converter.ToDecimal(row.Company);
+
+                    grandTotal.Turnover += turnoverTmp;
+                    grandTotal.GrossComm += grossCommTmp;
+                    grandTotal.MemberWinLoss += memberWinLossTmp;
+                    grandTotal.MemberComm += memberCommTmp;
+                    grandTotal.MemberTotal += memberTotalTmp;
+                    grandTotal.AgentWinLoss += agentWinLossTmp;
+                    grandTotal.AgentComm += agentCommTmp;
+                    grandTotal.AgentTotal += agentTotalTmp;
+                    grandTotal.MasterWinLoss += masterWinLossTmp;
+                    grandTotal.MasterComm += masterCommTmp;
+                    grandTotal.MasterTotal += masterTotalTmp;
+                    grandTotal.SuperWinLoss += superWinLossTmp;
+                    grandTotal.SuperComm += superCommTmp;
+                    grandTotal.SuperTotal += superTotalTmp;
+                    grandTotal.Company += companyTmp;
+
+                    numberGameDetailList.Add(new NumberGameWinLossByCurrencyDetail
                     {
-                        Username = "Total",
-                        Turnover = 0,
-                        GrossComm = 0,
-                        MemberWinLoss = 0,
-                        MemberComm = 0,
-                        MemberTotal = 0,
-                        AgentWinLoss = 0,
-                        AgentComm = 0,
-                        AgentTotal = 0,
-                        MasterWinLoss = 0,
-                        MasterComm = 0,
-                        MasterTotal = 0,
-                        SuperWinLoss = 0,
-                        SuperComm = 0,
-                        SuperTotal = 0,
-                        Company = 0,
-                        RoleID = -1,
-                        CustID = 0
-                    };
-
-                    string userNameTmp = string.Empty;
-                    decimal turnoverTmp = 0;
-                    decimal grossCommTmp = 0;
-                    decimal memberWinLossTmp = 0;
-                    decimal memberCommTmp = 0;
-                    decimal memberTotalTmp = 0;
-                    decimal agentWinLossTmp = 0;
-                    decimal agentCommTmp = 0;
-                    decimal agentTotalTmp = 0;
-                    decimal masterWinLossTmp = 0;
-                    decimal masterCommTmp = 0;
-                    decimal masterTotalTmp = 0;
-                    decimal superWinLossTmp = 0;
-                    decimal superCommTmp = 0;
-                    decimal superTotalTmp = 0;
-                    decimal companyTmp = 0;
-
-                    foreach (var row in rawData)
-                    {
-                        turnoverTmp = Converter.ToDecimal(row.TurnOver);
-                        grossCommTmp = Converter.ToDecimal(row.GrossComm);
-                        memberWinLossTmp = Converter.ToDecimal(row.memberWL);
-                        memberCommTmp = Converter.ToDecimal(row.memberComm);
-                        memberTotalTmp = Converter.ToDecimal(row.memberTotal);
-                        agentWinLossTmp = Converter.ToDecimal(row.agentWL);
-                        agentCommTmp = Converter.ToDecimal(row.agentComm);
-                        agentTotalTmp = Converter.ToDecimal(row.agentTotal);
-                        masterWinLossTmp = Converter.ToDecimal(row.masterWL);
-                        masterCommTmp = Converter.ToDecimal(row.masterComm);
-                        masterTotalTmp = Converter.ToDecimal(row.masterTotal);
-                        superWinLossTmp = Converter.ToDecimal(row.superWL);
-                        superCommTmp = Converter.ToDecimal(row.superComm);
-                        superTotalTmp = Converter.ToDecimal(row.superTotal);
-                        companyTmp = Converter.ToDecimal(row.Company);
-
-                        grandTotal.Turnover += turnoverTmp;
-                        grandTotal.GrossComm += grossCommTmp;
-                        grandTotal.MemberWinLoss += memberWinLossTmp;
-                        grandTotal.MemberComm += memberCommTmp;
-                        grandTotal.MemberTotal += memberTotalTmp;
-                        grandTotal.AgentWinLoss += agentWinLossTmp;
-                        grandTotal.AgentComm += agentCommTmp;
-                        grandTotal.AgentTotal += agentTotalTmp;
-                        grandTotal.MasterWinLoss += masterWinLossTmp;
-                        grandTotal.MasterComm += masterCommTmp;
-                        grandTotal.MasterTotal += masterTotalTmp;
-                        grandTotal.SuperWinLoss += superWinLossTmp;
-                        grandTotal.SuperComm += superCommTmp;
-                        grandTotal.SuperTotal += superTotalTmp;
-                        grandTotal.Company += companyTmp;
-
-                        numberGameDetailList.Add(new NumberGameWinLossByCurrencyDetail
-                        {
-                            Username = row.username.ToString(),
-                            Turnover = turnoverTmp,
-                            GrossComm = grossCommTmp,
-                            MemberWinLoss = memberWinLossTmp,
-                            MemberComm = memberCommTmp,
-                            MemberTotal = memberTotalTmp,
-                            AgentWinLoss = agentWinLossTmp,
-                            AgentComm = agentCommTmp,
-                            AgentTotal = agentTotalTmp,
-                            MasterWinLoss = masterWinLossTmp,
-                            MasterComm = masterCommTmp,
-                            MasterTotal = masterTotalTmp,
-                            SuperWinLoss = superWinLossTmp,
-                            SuperComm = superCommTmp,
-                            SuperTotal = superTotalTmp,
-                            Company = companyTmp,
-                            RoleID = Converter.To<int>(row.RoleID),
-                            CustID = Converter.To<int>(row.CustID),
-                            Currency = criteria.Currency
-                        });
-                    }
-
-                    if (numberGameDetailList.Count > 0)
-                    {
-                        numberGameDetailList.Add(grandTotal);
-                    }
+                        Username = row.username.ToString(),
+                        Turnover = turnoverTmp,
+                        GrossComm = grossCommTmp,
+                        MemberWinLoss = memberWinLossTmp,
+                        MemberComm = memberCommTmp,
+                        MemberTotal = memberTotalTmp,
+                        AgentWinLoss = agentWinLossTmp,
+                        AgentComm = agentCommTmp,
+                        AgentTotal = agentTotalTmp,
+                        MasterWinLoss = masterWinLossTmp,
+                        MasterComm = masterCommTmp,
+                        MasterTotal = masterTotalTmp,
+                        SuperWinLoss = superWinLossTmp,
+                        SuperComm = superCommTmp,
+                        SuperTotal = superTotalTmp,
+                        Company = companyTmp,
+                        RoleID = Converter.To<int>(row.RoleID),
+                        CustID = Converter.To<int>(row.CustID),
+                        Currency = criteria.Currency
+                    });
                 }
-            }
-            catch (Exception ex)
-            {
-                this.HandleException(ex);
+
+                if (numberGameDetailList.Count > 0)
+                {
+                    numberGameDetailList.Add(grandTotal);
+                }
             }
 
             switch (criteria.RoleID)
@@ -260,31 +245,24 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
         public List<EntityBase<int, string>> GetCurrencies()
         {
             var result = new List<EntityBase<int, string>>();
-            try
-            {
-                Dictionary<int, string> currList = ReportService.GetExchangeCurrencies(
-                    new GetExchangeCurrenciesCriteria
-                    {
-                        ExcludeTest = true
-                    });
-
-                foreach (var row in currList)
+            Dictionary<int, string> currList = ReportService.GetExchangeCurrencies(
+                new GetExchangeCurrenciesCriteria
                 {
-                    if (ReportService.IsExcludeCurrency(row.Value))
-                    {
-                        continue;
-                    }
+                    ExcludeTest = true
+                });
 
-                    result.Add(new EntityBase<int, string>()
-                    {
-                        Id = row.Key,
-                        Name = row.Value
-                    });
-                }
-            }
-            catch (Exception ex)
+            foreach (var row in currList)
             {
-                HandleException(ex);
+                if (ReportService.IsExcludeCurrency(row.Value))
+                {
+                    continue;
+                }
+
+                result.Add(new EntityBase<int, string>()
+                {
+                    Id = row.Key,
+                    Name = row.Value
+                });
             }
 
             return result;
@@ -381,7 +359,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Style = backGroundHeaderFormat;
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + nextCol, startRow, startCol + nextCol).Value = Labels.Currency;
             workSheetReport.Columns[startCol + nextCol].Width = 255 * 15;
-            
+
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol + 1), startRow - 1, startCol + nextCol + 2).Merged = true;
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol + 1), startRow - 1, startCol + nextCol + 2).Style = backGroundHeaderFormat;
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol + 1), startRow - 1, startCol + nextCol + 2).Value = "Member";
@@ -404,7 +382,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol + 1), startRow - 1, startCol + nextCol + 5).Style = backGroundHeaderFormat;
             workSheetReport.Cells.GetSubrangeAbsolute(startRow - 1, startCol + (nextCol + 1), startRow - 1, startCol + nextCol + 5).Value = "House";
 
-            
+
 
             workSheetReport.Cells[startRow, startCol + (nextCol += 1)].Style = backGroundHeaderFormat;
             workSheetReport.Cells[startRow, startCol + nextCol].Value = Labels.Net_Turnover;

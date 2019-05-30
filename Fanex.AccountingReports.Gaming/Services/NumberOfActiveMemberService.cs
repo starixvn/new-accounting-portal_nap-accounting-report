@@ -31,17 +31,9 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
         public List<Product> GetProduct()
         {
             List<Product> products = new List<Product>();
-            try
-            {
-                var criteria = new GetProductCriteria();
-                products = this.GetReportData<Product>(criteria).ToList();
-                SessionManager.Set<List<Product>>(this._numberOfActiveMemberProductsSessionKey, products);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-                throw;
-            }
+            var criteria = new GetProductCriteria();
+            products = this.GetReportData<Product>(criteria).ToList();
+            SessionManager.Set<List<Product>>(this._numberOfActiveMemberProductsSessionKey, products);
 
             return products;
         }
@@ -102,18 +94,10 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
         ///// <returns>The report.</returns>
         public GridOptions GetReport(GetNumberOfActiveMemberCriteria criteria)
         {
-            try
-            {
-                List<NumberActiveMemeberByCombination> report = GetReportCombinationData(criteria);
-                GridOptions gridOptions = GetNumberOfActiveMemberGridOptions(report, criteria);
-                SessionManager.Set<GridOptions>(this._numberOfActiveMemberSessionKey, gridOptions);
-                return gridOptions;
-            }
-            catch (Exception e)
-            {
-                this.HandleException(e);
-                throw;
-            }
+            List<NumberActiveMemeberByCombination> report = GetReportCombinationData(criteria);
+            GridOptions gridOptions = GetNumberOfActiveMemberGridOptions(report, criteria);
+            SessionManager.Set<GridOptions>(this._numberOfActiveMemberSessionKey, gridOptions);
+            return gridOptions;
         }
 
         public GridOptions GetReportFromCache(GetNumberOfActiveMemberCriteria criteria)
@@ -130,48 +114,40 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
 
         public GridOptions SearchNumberOfActiveMemberByProduct(SearchNumberActiveMemberCriteria criteria)
         {
-            try
+            List<NumberActiveMemeberByCombination> numberActiveMemeberByCombination = new List<NumberActiveMemeberByCombination>();
+            var reportByComBinationGroups = SessionManager.Get<List<NumberActiveMemeberByCombination>>(this._numberOfActiveMemberRawDataSessionKey);
+            var getNumberOfActiveMemberCriteria = new GetNumberOfActiveMemberCriteria()
             {
-                List<NumberActiveMemeberByCombination> numberActiveMemeberByCombination = new List<NumberActiveMemeberByCombination>();
-                var reportByComBinationGroups = SessionManager.Get<List<NumberActiveMemeberByCombination>>(this._numberOfActiveMemberRawDataSessionKey);
-                var getNumberOfActiveMemberCriteria = new GetNumberOfActiveMemberCriteria()
-                {
-                    FromDate = criteria.FromDate,
-                    ToDate = criteria.ToDate,
-                    ProductList = criteria.ProductList
-                };
+                FromDate = criteria.FromDate,
+                ToDate = criteria.ToDate,
+                ProductList = criteria.ProductList
+            };
 
-                if (reportByComBinationGroups == null)
-                {
-                    reportByComBinationGroups = GetReportCombinationData(getNumberOfActiveMemberCriteria);
-                }
+            if (reportByComBinationGroups == null)
+            {
+                reportByComBinationGroups = GetReportCombinationData(getNumberOfActiveMemberCriteria);
+            }
 
-                if (string.IsNullOrEmpty(criteria.ProductName))
+            if (string.IsNullOrEmpty(criteria.ProductName))
+            {
+                numberActiveMemeberByCombination = reportByComBinationGroups;
+            }
+            else
+            {
+                foreach (var combination in reportByComBinationGroups)
                 {
-                    numberActiveMemeberByCombination = reportByComBinationGroups;
-                }
-                else
-                {
-                    foreach (var combination in reportByComBinationGroups)
+                    var combinationByProduct = combination.NumberActiveMemberByProduct.Where(s => s.GameName.ToLower().Contains(criteria.ProductName.ToLower())).ToList();
+                    numberActiveMemeberByCombination.Add(new NumberActiveMemeberByCombination()
                     {
-                        var combinationByProduct = combination.NumberActiveMemberByProduct.Where(s => s.GameName.ToLower().Contains(criteria.ProductName.ToLower())).ToList();
-                        numberActiveMemeberByCombination.Add(new NumberActiveMemeberByCombination()
-                        {
-                            CombinationName = combination.CombinationName,
-                            NumberActiveMemberByProduct = combinationByProduct
-                        });
-                    }
+                        CombinationName = combination.CombinationName,
+                        NumberActiveMemberByProduct = combinationByProduct
+                    });
                 }
+            }
 
-                GridOptions gridOptions = GetNumberOfActiveMemberGridOptions(numberActiveMemeberByCombination, getNumberOfActiveMemberCriteria);
-                SessionManager.Set<GridOptions>(this._numberOfActiveMemberSessionKey, gridOptions);
-                return gridOptions;
-            }
-            catch (Exception e)
-            {
-                this.HandleException(e);
-                throw;
-            }
+            GridOptions gridOptions = GetNumberOfActiveMemberGridOptions(numberActiveMemeberByCombination, getNumberOfActiveMemberCriteria);
+            SessionManager.Set<GridOptions>(this._numberOfActiveMemberSessionKey, gridOptions);
+            return gridOptions;
         }
 
         private List<NumberOfActiveMember> GetReportData(GetNumberOfActiveMemberCriteria criteria)

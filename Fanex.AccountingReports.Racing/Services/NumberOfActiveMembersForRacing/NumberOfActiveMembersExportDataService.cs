@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Racing.Services.Implement.NumberOActiveMembersForRacing
 {
-    using System;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
@@ -33,48 +32,41 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.NumberOActiveMembers
         {
             var result = new NumberOfActiveMembers();
 
-            try
+            var fullReport = SessionManager.Get<NumberOfActiveMembers>(_numberOfActiveMemberReportSessionKey);
+
+            if (fullReport == null)
             {
-                var fullReport = SessionManager.Get<NumberOfActiveMembers>(_numberOfActiveMemberReportSessionKey);
-
-                if (fullReport == null)
-                {
-                    fullReport = _numberOfActiveMemberService.GetNumberOfActiveMembers(getNumberOfActiveMembersCriteria);
-                }
-
-                ExcelFile excelFile = new ExcelFile();
-                ExcelWorksheetCollection worksheets = excelFile.Worksheets;
-                string sheetName = RacingResources.NumberOfActiveMember_SheetName;
-                ExcelWorksheet workSheet = worksheets.Add(sheetName);
-
-                int startRow = 0;
-                int startColumn = 0;
-                var currentRow = startRow;
-
-                this.ExportReportTitle(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    getNumberOfActiveMembersCriteria);
-
-                this.ExportNumberOfActiveMembersContent(
-                    ref workSheet,
-                    startRow,
-                    startColumn,
-                    ref currentRow,
-                    fullReport);
-
-                string reportName = string.Format(
-                   RacingResources.NumberOfActiveMember_ReportName,
-                   getNumberOfActiveMembersCriteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
-                   getNumberOfActiveMembersCriteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
-                excelFile.ReponseStream(reportName);
+                fullReport = _numberOfActiveMemberService.GetNumberOfActiveMembers(getNumberOfActiveMembersCriteria);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            ExcelFile excelFile = new ExcelFile();
+            ExcelWorksheetCollection worksheets = excelFile.Worksheets;
+            string sheetName = RacingResources.NumberOfActiveMember_SheetName;
+            ExcelWorksheet workSheet = worksheets.Add(sheetName);
+
+            int startRow = 0;
+            int startColumn = 0;
+            var currentRow = startRow;
+
+            this.ExportReportTitle(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                getNumberOfActiveMembersCriteria);
+
+            this.ExportNumberOfActiveMembersContent(
+                ref workSheet,
+                startRow,
+                startColumn,
+                ref currentRow,
+                fullReport);
+
+            string reportName = string.Format(
+               RacingResources.NumberOfActiveMember_ReportName,
+               getNumberOfActiveMembersCriteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
+               getNumberOfActiveMembersCriteria.ToDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+            excelFile.ReponseStream(reportName);
         }
 
         /// <summary>

@@ -1,13 +1,11 @@
 namespace Fanex.AccountingReports.Special.Controllers
 {
-    using System;
     using System.IO;
     using System.Net;
     using System.Web.Mvc;
     using Core.Web;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Exceptions;
-    using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Special.Criteria.SaveBetReport;
     using Fanex.AccountingReports.Special.Services.Implement.SaveBetReport;
@@ -128,27 +126,17 @@ namespace Fanex.AccountingReports.Special.Controllers
         [HandleAjaxError]
         public ActionResult DownLoadSaveBetReport(DownloadReportCriteria criteria)
         {
-            try
+            if (AppSettings.IsAuthenticate)
             {
-                if (AppSettings.IsAuthenticate)
-                {
-                    using (new NetworkConnection(@"\\" + ip, _networkCredential))
-                    {
-                        return DownloadExcelFiles(criteria);
-                    }
-                }
-                else
+                using (new NetworkConnection(@"\\" + ip, _networkCredential))
                 {
                     return DownloadExcelFiles(criteria);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                ServiceBase serviceBase = new ServiceBase();
-                serviceBase.HandleException(ex);
+                return DownloadExcelFiles(criteria);
             }
-
-            return new EmptyResult();
         }
 
         private ActionResult DownloadExcelFiles(DownloadReportCriteria criteria)

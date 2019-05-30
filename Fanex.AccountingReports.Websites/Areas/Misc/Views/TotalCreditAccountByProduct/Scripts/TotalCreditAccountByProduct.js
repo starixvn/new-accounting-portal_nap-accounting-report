@@ -469,7 +469,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 productName = "Virtual Sports";
                 break;
             case productEnums.Keno:
-                productName = "Keno";
+                productName = "RNG Keno";
                 break;
             case productEnums.ColossusBets:
                 productName = "Colossus Bets";

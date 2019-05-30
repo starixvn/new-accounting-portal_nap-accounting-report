@@ -57,26 +57,18 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
         /// <returns>The list DailyTurnover.</returns>
         public List<DailyTurnover> GetReport(GetDailyTurnoverCriteria criteria)
         {
-            try
+            var report = new List<DailyTurnover>();
+
+            if (!criteria.IsValid())
             {
-                var report = new List<DailyTurnover>();
-
-                if (!criteria.IsValid())
-                {
-                    return report;
-                }
-
-                report = this.ConvertReportData(criteria);
-
-                SessionManager.Set<List<DailyTurnover>>(this._dailyTurnoverSessionKey, report);
-
                 return report;
             }
-            catch (Exception ex)
-            {
-                this.HandleException(ex);
-                throw;
-            }
+
+            report = this.ConvertReportData(criteria);
+
+            SessionManager.Set<List<DailyTurnover>>(this._dailyTurnoverSessionKey, report);
+
+            return report;
         }
 
         /// <summary>
@@ -85,36 +77,29 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
         /// <param name="criteria">The criteria.</param>
         public void ExportReport(GetDailyTurnoverCriteria criteria)
         {
-            try
+            var report = SessionManager.Get<List<DailyTurnover>>(this._dailyTurnoverSessionKey);
+
+            if (report == null)
             {
-                var report = SessionManager.Get<List<DailyTurnover>>(this._dailyTurnoverSessionKey);
-
-                if (report == null)
-                {
-                    report = this.GetReport(criteria);
-                }
-
-                HSSFWorkbook excelFile = new HSSFWorkbook();
-
-                ISheet worksheet = excelFile.CreateSheet();
-
-                int currentRow = 0;
-
-                if (report.Count > 0)
-                {
-                    this.InitStyle(excelFile);
-                    this.ExportReportHeader(ref worksheet, ref currentRow, criteria);
-                    this.ExportReportContent(ref worksheet, ref currentRow, report);
-                }
-
-                excelFile.ToReponseStream(string.Format(
-                    SpecialResources.DailyTurnover_ReportName,
-                    criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_')));
+                report = this.GetReport(criteria);
             }
-            catch (Exception ex)
+
+            HSSFWorkbook excelFile = new HSSFWorkbook();
+
+            ISheet worksheet = excelFile.CreateSheet();
+
+            int currentRow = 0;
+
+            if (report.Count > 0)
             {
-                this.HandleException(ex);
+                this.InitStyle(excelFile);
+                this.ExportReportHeader(ref worksheet, ref currentRow, criteria);
+                this.ExportReportContent(ref worksheet, ref currentRow, report);
             }
+
+            excelFile.ToReponseStream(string.Format(
+                SpecialResources.DailyTurnover_ReportName,
+                criteria.FromDate.ToShortFormatedDateWithSlash().Replace('/', '_')));
         }
 
         /// <summary>

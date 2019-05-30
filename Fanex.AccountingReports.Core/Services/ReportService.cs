@@ -172,20 +172,11 @@ namespace Fanex.AccountingReports.Core.Services.Impl
                 DataInfo = new string[] { string.Empty }
             };
 
-            try
+            var rawData = ReportHelperRepository.UserNameSuggestion(criteria);
+            foreach (var data in rawData)
             {
-                var rawData = ReportHelperRepository.UserNameSuggestion(criteria);
-                foreach (var data in rawData)
-                {
-                    var info = Converter.ToString2(data.UserName);
-                    suggestionResult.Suggestions.Add(info);
-                }
-
-                return suggestionResult;
-            }
-            catch (Exception ex)
-            {
-                LoggingHandler.Log(ex);
+                var info = Converter.ToString2(data.UserName);
+                suggestionResult.Suggestions.Add(info);
             }
 
             return suggestionResult;
@@ -199,36 +190,29 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         public static List<EntityBase<int, string>> GetCurrencyByLicensee(GetCurrencyByLicenseeCriteria criteria)
         {
             var currencyList = new List<EntityBase<int, string>>();
-            try
+            var rawData = ReportHelperRepository.GetCurrencyByLicensee(criteria);
+            EntityBase<int, string> info = new EntityBase<int, string>
             {
-                var rawData = ReportHelperRepository.GetCurrencyByLicensee(criteria);
-                EntityBase<int, string> info = new EntityBase<int, string>
+                Id = CommonConstants.CurrencyIdBaseRM,
+                Name = Labels.BaseRM
+            };
+
+            currencyList.Add(info);
+
+            foreach (var data in rawData)
+            {
+                if (IsExcludeCurrency(data.Currency))
                 {
-                    Id = CommonConstants.CurrencyIdBaseRM,
-                    Name = Labels.BaseRM
+                    continue;
+                }
+
+                info = new EntityBase<int, string>
+                {
+                    Id = Converter.ToInt(data.ExchangeID),
+                    Name = Converter.ToString2(data.Currency)
                 };
 
                 currencyList.Add(info);
-
-                foreach (var data in rawData)
-                {
-                    if (IsExcludeCurrency(data.Currency))
-                    {
-                        continue;
-                    }
-
-                    info = new EntityBase<int, string>
-                    {
-                        Id = Converter.ToInt(data.ExchangeID),
-                        Name = Converter.ToString2(data.Currency)
-                    };
-
-                    currencyList.Add(info);
-                }
-            }
-            catch (Exception ex)
-            {
-                LoggingHandler.Log(ex);
             }
 
             return currencyList;
@@ -241,30 +225,21 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         /// <returns>The licensee_ support by product.</returns>
         public static List<EntityBase<int, string>> GetLicensee_SupportByProduct(GetLicensee_SupportByProductCriteria criteria)
         {
-            try
+            var licenseeList = new List<EntityBase<int, string>>();
+            var rawData = ReportHelperRepository.GetLicensee_SupportByProduct(criteria);
+            EntityBase<int, string> info;
+            foreach (var data in rawData)
             {
-                var licenseeList = new List<EntityBase<int, string>>();
-                var rawData = ReportHelperRepository.GetLicensee_SupportByProduct(criteria);
-                EntityBase<int, string> info;
-                foreach (var data in rawData)
+                info = new EntityBase<int, string>
                 {
-                    info = new EntityBase<int, string>
-                    {
-                        Id = Converter.ToInt(data.LicenseeID),
-                        Name = Converter.ToString2(data.Licenseename)
-                    };
+                    Id = Converter.ToInt(data.LicenseeID),
+                    Name = Converter.ToString2(data.Licenseename)
+                };
 
-                    licenseeList.Add(info);
-                }
-
-                return licenseeList;
-            }
-            catch (Exception ex)
-            {
-                LoggingHandler.Log(ex);
+                licenseeList.Add(info);
             }
 
-            return null;
+            return licenseeList;
         }
 
         /// <summary>
@@ -350,23 +325,16 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         public static Dictionary<int, string> GetExchangeCurrencies(GetExchangeCurrenciesCriteria criteria)
         {
             var exchangeCurrencies = new Dictionary<int, string>();
-            try
+            var rawData = (new ExchangeCurrencyRepository()).GetExchangeCurrencies(criteria);
+            if (rawData != null)
             {
-                var rawData = (new ExchangeCurrencyRepository()).GetExchangeCurrencies(criteria);
-                if (rawData != null)
+                rawData.ForEach(currency =>
                 {
-                    rawData.ForEach(currency =>
+                    if (!exchangeCurrencies.ContainsKey(currency.CurrencyId))
                     {
-                        if (!exchangeCurrencies.ContainsKey(currency.CurrencyId))
-                        {
-                            exchangeCurrencies.Add(currency.CurrencyId, currency.CurrencyName);
-                        }
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                LoggingHandler.Log(ex);
+                        exchangeCurrencies.Add(currency.CurrencyId, currency.CurrencyName);
+                    }
+                });
             }
 
             return exchangeCurrencies;

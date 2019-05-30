@@ -48,18 +48,11 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         /// <returns>The menu by identifier.</returns>
         public MenuItem GetMenuById(int menuId)
         {
-            try
+            if (AppSession.CurrentUserMenu != null)
             {
-                if (AppSession.CurrentUserMenu != null)
-                {
-                    MenuItem menu = AppSession.CurrentUserMenu
-                        .FirstOrDefault<MenuItem>(m => m.Id == menuId);
-                    return menu;
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
+                MenuItem menu = AppSession.CurrentUserMenu
+                    .FirstOrDefault<MenuItem>(m => m.Id == menuId);
+                return menu;
             }
 
             return null;
@@ -72,20 +65,13 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         /// <returns>The menu by URL.</returns>
         public MenuItem GetMenuByURL(string menuURL)
         {
-            try
+            if (!string.IsNullOrEmpty(menuURL) &&
+                !string.Equals(menuURL, UrlSeparator.ToString()) &&
+                AppSession.CurrentUserMenu != null)
             {
-                if (!string.IsNullOrEmpty(menuURL) &&
-                    !string.Equals(menuURL, UrlSeparator.ToString()) &&
-                    AppSession.CurrentUserMenu != null)
-                {
-                    MenuItem menu = AppSession.CurrentUserMenu
-                        .FirstOrDefault<MenuItem>(m => m.Url.ToLower().StartsWith(menuURL.ToLower()));
-                    return menu;
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
+                MenuItem menu = AppSession.CurrentUserMenu
+                    .FirstOrDefault<MenuItem>(m => m.Url.ToLower().StartsWith(menuURL.ToLower()));
+                return menu;
             }
 
             return null;
@@ -99,23 +85,16 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         /// <returns>The menu by URL.</returns>
         public MenuItem GetMenuByURL(string menuURL, IList<MenuItem> menuList)
         {
-            try
+            if (!string.IsNullOrEmpty(menuURL) &&
+                !string.Equals(menuURL, UrlSeparator.ToString()) &&
+                AppSession.CurrentUserMenu != null)
             {
-                if (!string.IsNullOrEmpty(menuURL) &&
-                    !string.Equals(menuURL, UrlSeparator.ToString()) &&
-                    AppSession.CurrentUserMenu != null)
-                {
-                    MenuItem menu = menuList.FirstOrDefault<MenuItem>(m => m.Url.StartsWith(menuURL));
-                    return menu;
-                }
-                else
-                {
-                    return null;
-                }
+                MenuItem menu = menuList.FirstOrDefault<MenuItem>(m => m.Url.StartsWith(menuURL));
+                return menu;
             }
-            catch (Exception ex)
+            else
             {
-                HandleException(ex);
+                return null;
             }
 
             return null;
@@ -128,20 +107,13 @@ namespace Fanex.AccountingReports.Core.Services.Impl
         /// <returns>The menu name by URL.</returns>
         public string GetMenuNameByURL(string menuURL)
         {
-            try
+            if (!string.IsNullOrEmpty(menuURL) &&
+                !string.Equals(menuURL, UrlSeparator.ToString()) &&
+                AppSession.CurrentUserMenu != null)
             {
-                if (!string.IsNullOrEmpty(menuURL) &&
-                    !string.Equals(menuURL, UrlSeparator.ToString()) &&
-                    AppSession.CurrentUserMenu != null)
-                {
-                    MenuItem menu = AppSession.CurrentUserMenu
-                        .FirstOrDefault<MenuItem>(m => m.Url.StartsWith(menuURL));
-                    return menu.Name;
-                }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
+                MenuItem menu = AppSession.CurrentUserMenu
+                    .FirstOrDefault<MenuItem>(m => m.Url.StartsWith(menuURL));
+                return menu.Name;
             }
 
             return null;

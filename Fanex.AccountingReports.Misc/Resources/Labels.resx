@@ -1106,7 +1106,7 @@
     <value>Enabled</value>
   </data>
   <data name="Keno" xml:space="preserve">
-    <value>Keno</value>
+    <value>RNG Keno</value>
   </data>
   <data name="RunningBetCount" xml:space="preserve">
     <value>Running Bet Count</value>

@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Licensee.Services.Implement
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using ExcelUtil.Spreadsheet;
@@ -27,39 +26,32 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
         {
             var peakCocurrentUser = new PeakConcurrentUser();
             peakConcurrentUserCriteria.ToDate = peakConcurrentUserCriteria.ToDate.AddDays(1).AddSeconds(-1);
-            try
+            var rawData = GetReportData<dynamic>(peakConcurrentUserCriteria);
+            if (rawData != null && (rawData.Count() > 0))
             {
-                var rawData = GetReportData<dynamic>(peakConcurrentUserCriteria);
-                if (rawData != null && (rawData.Count() > 0))
+                var concurrentUserList = new List<ConcurrentUser>();
+                var listTmp = new List<double>();
+                double totalUser = 0;
+                foreach (var row in rawData)
                 {
-                    var concurrentUserList = new List<ConcurrentUser>();
-                    var listTmp = new List<double>();
-                    double totalUser = 0;
-                    foreach (var row in rawData)
+                    var cocurrentUser = new ConcurrentUser()
                     {
-                        var cocurrentUser = new ConcurrentUser()
-                        {
-                            Date = string.Format("{0:MM/dd/yyyy}", row.logdate),
-                            TotalUser = ((double)row.totalUser).Format(0)
-                        };
-                        listTmp.Add(row.totalUser);
-                        concurrentUserList.Add(cocurrentUser);
-                        totalUser += (int)row.totalUser;
-                    }
-
-                    peakCocurrentUser.ListConcurrentUser = concurrentUserList;
-                    peakCocurrentUser.AverageUsers = (totalUser / concurrentUserList.Count).Format(2);
-                    peakCocurrentUser.Total = totalUser.Format(0);
-                    peakCocurrentUser.MinUsers = listTmp.Min().Format(0);
-                    peakCocurrentUser.MaxUsers = listTmp.Max().Format(0);
+                        Date = string.Format("{0:MM/dd/yyyy}", row.logdate),
+                        TotalUser = ((double)row.totalUser).Format(0)
+                    };
+                    listTmp.Add(row.totalUser);
+                    concurrentUserList.Add(cocurrentUser);
+                    totalUser += (int)row.totalUser;
                 }
 
-                SessionManager.Set<PeakConcurrentUser>(LicenseeConstants.PickConcurrentUserSessionKey, peakCocurrentUser);
+                peakCocurrentUser.ListConcurrentUser = concurrentUserList;
+                peakCocurrentUser.AverageUsers = (totalUser / concurrentUserList.Count).Format(2);
+                peakCocurrentUser.Total = totalUser.Format(0);
+                peakCocurrentUser.MinUsers = listTmp.Min().Format(0);
+                peakCocurrentUser.MaxUsers = listTmp.Max().Format(0);
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            SessionManager.Set<PeakConcurrentUser>(LicenseeConstants.PickConcurrentUserSessionKey, peakCocurrentUser);
 
             return peakCocurrentUser;
         }
@@ -70,45 +62,38 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
         /// <param name="peakConcurrentUserCriteria">The peak concurrent user criteria.</param>
         public void PeakExport2Excel(PeakConcurrentUserCriteria peakConcurrentUserCriteria)
         {
-            try
+            int startCol = 0;
+            int startRow = 2;
+            var reportName = LicenseeResources.PeakConcurrentUser_ReportFileName;
+            var excelFile = new ExcelFile();
+            var getCache = SessionManager.Get<PeakConcurrentUser>(LicenseeConstants.PickConcurrentUserSessionKey);
+            getCache = getCache ?? this.GetConcurrentUserList(peakConcurrentUserCriteria);
+            var excelReport = excelFile.Worksheets.Add(string.Format("PeakConcurrentUser"));
+
+            var excelFileName = string.Format(
+                "Peak Concurrent Users Report for {0} ",
+                peakConcurrentUserCriteria.LicenseeName);
+            this.ExportExcelPeakConcurrentReportAssignHeader(
+                startRow,
+                startCol,
+                ref excelReport,
+                excelFileName);
+
+            int nextRow = 1;
+            if (getCache != null && getCache.ListConcurrentUser != null && getCache.ListConcurrentUser.Count > 0)
             {
-                int startCol = 0;
-                int startRow = 2;
-                var reportName = LicenseeResources.PeakConcurrentUser_ReportFileName;
-                var excelFile = new ExcelFile();
-                var getCache = SessionManager.Get<PeakConcurrentUser>(LicenseeConstants.PickConcurrentUserSessionKey);
-                getCache = getCache ?? this.GetConcurrentUserList(peakConcurrentUserCriteria);
-                var excelReport = excelFile.Worksheets.Add(string.Format("PeakConcurrentUser"));
-
-                var excelFileName = string.Format(
-                    "Peak Concurrent Users Report for {0} ",
-                    peakConcurrentUserCriteria.LicenseeName);
-                this.ExportExcelPeakConcurrentReportAssignHeader(
-                    startRow,
-                    startCol,
-                    ref excelReport,
-                    excelFileName);
-
-                int nextRow = 1;
-                if (getCache != null && getCache.ListConcurrentUser != null && getCache.ListConcurrentUser.Count > 0)
+                foreach (var cocurrent in getCache.ListConcurrentUser)
                 {
-                    foreach (var cocurrent in getCache.ListConcurrentUser)
-                    {
-                        this.ExportExcelPeakConcurrentReportAssignBody(startRow, startCol, ref nextRow, ref excelReport, cocurrent);
-                    }
+                    this.ExportExcelPeakConcurrentReportAssignBody(startRow, startCol, ref nextRow, ref excelReport, cocurrent);
                 }
-
-                this.ExportExcelPeakConcurrentReportAssignFooter(startRow, startCol, ref nextRow, ref excelReport, ref getCache);
-
-                excelFile.ReponseStream(string.Format(
-                    "{0}_For_{1}",
-                    reportName,
-                    peakConcurrentUserCriteria.LicenseeName));
             }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+
+            this.ExportExcelPeakConcurrentReportAssignFooter(startRow, startCol, ref nextRow, ref excelReport, ref getCache);
+
+            excelFile.ReponseStream(string.Format(
+                "{0}_For_{1}",
+                reportName,
+                peakConcurrentUserCriteria.LicenseeName));
         }
 
         /// <summary>

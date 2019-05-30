@@ -42,91 +42,84 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
         public NegativeBalanceModel GetNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria)
         {
             var model = new NegativeBalanceModel();
-            try
+            var rawData = new List<NegativeBalanceUser>();
+            if (negativeBalanceCriteria.IsGetCache)
             {
-                var rawData = new List<NegativeBalanceUser>();
-                if (negativeBalanceCriteria.IsGetCache)
-                {
-                    rawData = SessionManager.Get<List<NegativeBalanceUser>>(LicenseeConstants.NegativeBalanceSessionKey + negativeBalanceCriteria.Site);
-                }
-
-                var negativeBalanceList = new List<NegativeBalance>();
-                if (object.ReferenceEquals(rawData, null) || !rawData.Any())
-                {
-                    rawData = this._negativeBalanceRepository.GetNegativeBalanceUser(negativeBalanceCriteria).ToList();
-                    SessionManager.Set<List<NegativeBalanceUser>>(LicenseeConstants.NegativeBalanceSessionKey + negativeBalanceCriteria.Site, rawData);
-                }
-
-                List<NegativeBalanceUser> _listUserTemp = new List<NegativeBalanceUser>();
-                if (rawData != null && (rawData.Count() > 0))
-                {
-                    int from = negativeBalanceCriteria.PageSize * (negativeBalanceCriteria.PageIndex - 1);
-                    int to = negativeBalanceCriteria.PageSize * negativeBalanceCriteria.PageIndex;
-                    for (int i = from; i < rawData.Count && i < to; i++)
-                    {
-                        _listUserTemp.Add(rawData[i]);
-                    }
-
-                    NegativeBalance currentNegative = null;
-                    _listUserTemp.OrderBy(negativeBalanceUser => negativeBalanceUser.Site).ForEach(data =>
-                        {
-                            if (currentNegative == null || currentNegative.LicenseeSite != data.Site)
-                            {
-                                currentNegative = new NegativeBalance
-                                {
-                                    LicenseeSite = data.Site,
-                                    NegativeBalanceUserList = new List<NegativeBalanceUser>()
-                                };
-                                model.NegativeBalanceList.Add(currentNegative);
-                            }
-
-                            currentNegative.NegativeBalanceUserList.Add(data);
-                        });
-
-                    List<string> licensees = rawData.Select(s => s.Site).Distinct().ToList();
-                    foreach (var licensee in licensees)
-                    {
-                        var defaultMail = new NegativeBalanceMemberMailFormat();
-                        var mail = new NegativeBalanceMemberMailFormat();
-                        bool isDefault = false;
-                        bool isExist = false;
-                        foreach (MailElement mailRow in LicenseeEmailSection.Instance.Mails)
-                        {
-                            if (mailRow.Name.ToLower() == "default" && !isDefault)
-                            {
-                                defaultMail.Bcc = mailRow.Bcc;
-                                defaultMail.To = mailRow.To;
-                                defaultMail.Cc = mailRow.Cc;
-                                defaultMail.Site = mailRow.Name;
-                                isDefault = true;
-                            }
-
-                            if (mailRow.Name.ToLower() == licensee.ToLower())
-                            {
-                                isExist = true;
-                                mail.Bcc = mailRow.Bcc;
-                                mail.To = mailRow.To;
-                                mail.Cc = mailRow.Cc;
-                                mail.Site = mailRow.Name;
-                                continue;
-                            }
-                        }
-
-                        if (!isExist)
-                        {
-                            mail = defaultMail;
-                            mail.Site = licensee;
-                        }
-
-                        model.MailList.Add(mail);
-                    }
-
-                    model.TotalNegativeBalanceUser = rawData.Count();
-                }
+                rawData = SessionManager.Get<List<NegativeBalanceUser>>(LicenseeConstants.NegativeBalanceSessionKey + negativeBalanceCriteria.Site);
             }
-            catch (Exception ex)
+
+            var negativeBalanceList = new List<NegativeBalance>();
+            if (object.ReferenceEquals(rawData, null) || !rawData.Any())
             {
-                HandleException(ex);
+                rawData = this._negativeBalanceRepository.GetNegativeBalanceUser(negativeBalanceCriteria).ToList();
+                SessionManager.Set<List<NegativeBalanceUser>>(LicenseeConstants.NegativeBalanceSessionKey + negativeBalanceCriteria.Site, rawData);
+            }
+
+            List<NegativeBalanceUser> _listUserTemp = new List<NegativeBalanceUser>();
+            if (rawData != null && (rawData.Count() > 0))
+            {
+                int from = negativeBalanceCriteria.PageSize * (negativeBalanceCriteria.PageIndex - 1);
+                int to = negativeBalanceCriteria.PageSize * negativeBalanceCriteria.PageIndex;
+                for (int i = from; i < rawData.Count && i < to; i++)
+                {
+                    _listUserTemp.Add(rawData[i]);
+                }
+
+                NegativeBalance currentNegative = null;
+                _listUserTemp.OrderBy(negativeBalanceUser => negativeBalanceUser.Site).ForEach(data =>
+                    {
+                        if (currentNegative == null || currentNegative.LicenseeSite != data.Site)
+                        {
+                            currentNegative = new NegativeBalance
+                            {
+                                LicenseeSite = data.Site,
+                                NegativeBalanceUserList = new List<NegativeBalanceUser>()
+                            };
+                            model.NegativeBalanceList.Add(currentNegative);
+                        }
+
+                        currentNegative.NegativeBalanceUserList.Add(data);
+                    });
+
+                List<string> licensees = rawData.Select(s => s.Site).Distinct().ToList();
+                foreach (var licensee in licensees)
+                {
+                    var defaultMail = new NegativeBalanceMemberMailFormat();
+                    var mail = new NegativeBalanceMemberMailFormat();
+                    bool isDefault = false;
+                    bool isExist = false;
+                    foreach (MailElement mailRow in LicenseeEmailSection.Instance.Mails)
+                    {
+                        if (mailRow.Name.ToLower() == "default" && !isDefault)
+                        {
+                            defaultMail.Bcc = mailRow.Bcc;
+                            defaultMail.To = mailRow.To;
+                            defaultMail.Cc = mailRow.Cc;
+                            defaultMail.Site = mailRow.Name;
+                            isDefault = true;
+                        }
+
+                        if (mailRow.Name.ToLower() == licensee.ToLower())
+                        {
+                            isExist = true;
+                            mail.Bcc = mailRow.Bcc;
+                            mail.To = mailRow.To;
+                            mail.Cc = mailRow.Cc;
+                            mail.Site = mailRow.Name;
+                            continue;
+                        }
+                    }
+
+                    if (!isExist)
+                    {
+                        mail = defaultMail;
+                        mail.Site = licensee;
+                    }
+
+                    model.MailList.Add(mail);
+                }
+
+                model.TotalNegativeBalanceUser = rawData.Count();
             }
 
             return model;
@@ -141,44 +134,37 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
         public NegativeBalanceMemberSendMailFail SendMail(MailParam mailParam, NegativeBalanceCriteria negativeBalanceCriteria)
         {
             var failList = new NegativeBalanceMemberSendMailFail();
-            try
+            //// Send Mail Example
+            foreach (var mail in mailParam.Mails)
             {
-                //// Send Mail Example
-                foreach (var mail in mailParam.Mails)
+                var isSuccess = false;
+                if (!string.IsNullOrEmpty(mail.To))
                 {
-                    var isSuccess = false;
-                    if (!string.IsNullOrEmpty(mail.To))
+                    isSuccess = MailService.SendMail(new MailItem
                     {
-                        isSuccess = MailService.SendMail(new MailItem
-                        {
-                            To = mail.To,
-                            Title = mailParam.ReportTitle,
-                            Subject = "Accounting system - Negative Balance Report for " +
-                                (mail.Site == "All" ? "All Licensees" : mail.Site) +
-                                " (" + DateTime.Now.ToShortDateString() + ")",
-                            Body = mailParam.MailContent,
-                            Attachments = new List<MailAttachment>
+                        To = mail.To,
+                        Title = mailParam.ReportTitle,
+                        Subject = "Accounting system - Negative Balance Report for " +
+                            (mail.Site == "All" ? "All Licensees" : mail.Site) +
+                            " (" + DateTime.Now.ToShortDateString() + ")",
+                        Body = mailParam.MailContent,
+                        Attachments = new List<MailAttachment>
                             {
                                 this.GetExportExcelNegativeBalanceMailAttachment(negativeBalanceCriteria, mail.Site)
                             }
-                        });
-                    }
-
-                    if (!isSuccess)
-                    {
-                        failList.IsFail = true;
-                        failList.Licensees.Add(new NegativeBalanceMemberSendMailResult()
-                        {
-                            IsSuccess = false,
-                            Site = mail.Site,
-                            ErrorMessage = Labels.SendMailFail
-                        });
-                    }
+                    });
                 }
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
+
+                if (!isSuccess)
+                {
+                    failList.IsFail = true;
+                    failList.Licensees.Add(new NegativeBalanceMemberSendMailResult()
+                    {
+                        IsSuccess = false,
+                        Site = mail.Site,
+                        ErrorMessage = Labels.SendMailFail
+                    });
+                }
             }
 
             return failList;
@@ -292,21 +278,14 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
         /// <param name="negativeBalanceCriteria">The negative balance criteria.</param>
         public void ExportExcelNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria)
         {
-            try
-            {
-                var reportName = LicenseeResources.NegativeBalance_ReportFileName +
-                    (negativeBalanceCriteria.Site == "All" ?
-                    "_All_Licensees" :
-                    "_" + negativeBalanceCriteria.Site);
+            var reportName = LicenseeResources.NegativeBalance_ReportFileName +
+                (negativeBalanceCriteria.Site == "All" ?
+                "_All_Licensees" :
+                "_" + negativeBalanceCriteria.Site);
 
-                ExcelFile excelFile = this.GetExcelNegativeBalance(negativeBalanceCriteria, false, string.Empty);
-                excelFile.ReponseStream(
-                    string.Format("{0}", reportName));
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
+            ExcelFile excelFile = this.GetExcelNegativeBalance(negativeBalanceCriteria, false, string.Empty);
+            excelFile.ReponseStream(
+                string.Format("{0}", reportName));
         }
 
         /// <summary>

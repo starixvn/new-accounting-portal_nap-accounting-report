@@ -72,38 +72,31 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
         /// <param name="criteria">The criteria.</param>
         public void ExportDetailReport(GetDailyTurnoverChangedDetailCriteria criteria)
         {
-            try
+            var report = SessionManager.Get<List<DailyDetailChangedTurnover>>(
+                                                this._dailyTurnoverDetailSessionKey);
+
+            if (report == null)
             {
-                var report = SessionManager.Get<List<DailyDetailChangedTurnover>>(
-                                                    this._dailyTurnoverDetailSessionKey);
-
-                if (report == null)
-                {
-                    report = this._detailReportService.GetDetailReport(criteria);
-                }
-
-                HSSFWorkbook excelFile = new HSSFWorkbook();
-
-                string sheetName = SpecialResources.DailyTurnoverDetail_SheetName;
-                ISheet worksheet = excelFile.CreateSheet(sheetName);
-
-                var currentRow = 0;
-
-                if (report != null && report.Count > 0)
-                {
-                    this.InitStyleDetailReport(excelFile);
-                    this.ExportReportHeader(ref worksheet, ref currentRow, criteria);
-                    this.ExportReportContent(ref worksheet, ref currentRow, report);
-                }
-
-                excelFile.ToReponseStream(string.Format(
-                        SpecialResources.DailyTurnoverDetail_ReportName,
-                        criteria.FromDate.ToShortFormatedDateWithSlash()));
+                report = this._detailReportService.GetDetailReport(criteria);
             }
-            catch (Exception ex)
+
+            HSSFWorkbook excelFile = new HSSFWorkbook();
+
+            string sheetName = SpecialResources.DailyTurnoverDetail_SheetName;
+            ISheet worksheet = excelFile.CreateSheet(sheetName);
+
+            var currentRow = 0;
+
+            if (report != null && report.Count > 0)
             {
-                this.HandleException(ex);
+                this.InitStyleDetailReport(excelFile);
+                this.ExportReportHeader(ref worksheet, ref currentRow, criteria);
+                this.ExportReportContent(ref worksheet, ref currentRow, report);
             }
+
+            excelFile.ToReponseStream(string.Format(
+                    SpecialResources.DailyTurnoverDetail_ReportName,
+                    criteria.FromDate.ToShortFormatedDateWithSlash()));
         }
 
         /// <summary>
@@ -116,52 +109,45 @@ namespace Fanex.AccountingReports.Special.Services.Implement.DailyTurnover
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportDetailDifferenceReport(string index, string fromDate)
         {
-            try
+            string actionName = string.Empty;
+            string date = string.Empty;
+
+            var report = SessionManager.Get<List<DailyDetailChangedTurnover>>(
+                                this._dailyTurnoverDetailSessionKey);
+
+            if (report == null)
             {
-                string actionName = string.Empty;
-                string date = string.Empty;
-
-                var report = SessionManager.Get<List<DailyDetailChangedTurnover>>(
-                                    this._dailyTurnoverDetailSessionKey);
-
-                if (report == null)
-                {
-                    report = GetDetailReportFromSession(fromDate);
-                }
-
-                if (report != null)
-                {
-                    HSSFWorkbook excelFile = new HSSFWorkbook();
-
-                    var currentRow = 0;
-                    var eventDetail = report[Convert.ToInt32(index)];
-
-                    if (eventDetail != null)
-                    {
-                        actionName = eventDetail.ActionName;
-                        date = eventDetail.Date;
-
-                        string sheetName = string.Format(
-                            SpecialResources.DailyTurnoverDetailAction_SheetName,
-                            actionName.Replace(" ", "_"),
-                            date.Replace("/", "_").Replace(":", "_").Replace(" ", "_"));
-                        ISheet worksheet = excelFile.CreateSheet(sheetName);
-
-                        this.InitStyleDetailDifferenceReport(excelFile);
-                        this.ExportDetailActionReportHeader(ref worksheet, ref currentRow, eventDetail);
-                        this.ExportDetailActionReportContent(ref worksheet, ref currentRow, eventDetail);
-                    }
-
-                    var reportDate = DateTimeExtensions.ToShortFormatedDateWithSlash(Convert.ToDateTime(date));
-                    excelFile.ToReponseStream(string.Format(
-                        SpecialResources.DailyTurnoverDetailAction_ReportName,
-                        actionName.Replace(" ", "_"),
-                        reportDate.Replace("/", "_")));
-                }
+                report = GetDetailReportFromSession(fromDate);
             }
-            catch (Exception ex)
+
+            if (report != null)
             {
-                this.HandleException(ex);
+                HSSFWorkbook excelFile = new HSSFWorkbook();
+
+                var currentRow = 0;
+                var eventDetail = report[Convert.ToInt32(index)];
+
+                if (eventDetail != null)
+                {
+                    actionName = eventDetail.ActionName;
+                    date = eventDetail.Date;
+
+                    string sheetName = string.Format(
+                        SpecialResources.DailyTurnoverDetailAction_SheetName,
+                        actionName.Replace(" ", "_"),
+                        date.Replace("/", "_").Replace(":", "_").Replace(" ", "_"));
+                    ISheet worksheet = excelFile.CreateSheet(sheetName);
+
+                    this.InitStyleDetailDifferenceReport(excelFile);
+                    this.ExportDetailActionReportHeader(ref worksheet, ref currentRow, eventDetail);
+                    this.ExportDetailActionReportContent(ref worksheet, ref currentRow, eventDetail);
+                }
+
+                var reportDate = DateTimeExtensions.ToShortFormatedDateWithSlash(Convert.ToDateTime(date));
+                excelFile.ToReponseStream(string.Format(
+                    SpecialResources.DailyTurnoverDetailAction_ReportName,
+                    actionName.Replace(" ", "_"),
+                    reportDate.Replace("/", "_")));
             }
         }
 

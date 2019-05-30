@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOtherSports
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Web;
@@ -25,45 +24,38 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
         {
             var traderSportType = criteria.IsSoccer ? SoccerTitle : OtherSportTitle;
 
-            try
+            var report = SessionManager.Get<TraderPerformanceOtherSports>(_traderPerformanceSessionKey + traderSportType);
+
+            if (report == null)
             {
-                var report = SessionManager.Get<TraderPerformanceOtherSports>(_traderPerformanceSessionKey + traderSportType);
-
-                if (report == null)
-                {
-                    report = this.GetReport(criteria);
-                }
-
-                HSSFWorkbook excelFile = new HSSFWorkbook();
-                string sheetName = criteria.IsSoccer ?
-                    MainResources.TraderPerformanceSoccer_SheetName :
-                    MainResources.TraderPerformanceOtherSports_SheetName;
-
-                ISheet worksheet = excelFile.CreateSheet(sheetName);
-                int currentRow = 0;
-
-                if (report.ReportRows.Count > 0)
-                {
-                    this.ExportReportHeader(excelFile, ref worksheet, ref currentRow, criteria);
-                    currentRow += 1;
-                    this.ExportReportContent(excelFile, ref worksheet, ref currentRow, report);
-                }
-
-                string reportTypeName = criteria.IsSoccer ?
-                    MainResources.TraderPerformanceSoccer_ReportName :
-                    MainResources.TraderPerformanceOtherSports_ReportName;
-
-                string reportName = string.Format(
-                        reportTypeName,
-                        criteria.Fromdate.ToShortFormatedDateWithSlash(),
-                        criteria.Todate.ToShortFormatedDateWithSlash());
-
-                NpoiExcelExtensions.ResponseStreamExcel(excelFile, reportName);
+                report = this.GetReport(criteria);
             }
-            catch (Exception ex)
+
+            HSSFWorkbook excelFile = new HSSFWorkbook();
+            string sheetName = criteria.IsSoccer ?
+                MainResources.TraderPerformanceSoccer_SheetName :
+                MainResources.TraderPerformanceOtherSports_SheetName;
+
+            ISheet worksheet = excelFile.CreateSheet(sheetName);
+            int currentRow = 0;
+
+            if (report.ReportRows.Count > 0)
             {
-                HandleException(ex);
+                this.ExportReportHeader(excelFile, ref worksheet, ref currentRow, criteria);
+                currentRow += 1;
+                this.ExportReportContent(excelFile, ref worksheet, ref currentRow, report);
             }
+
+            string reportTypeName = criteria.IsSoccer ?
+                MainResources.TraderPerformanceSoccer_ReportName :
+                MainResources.TraderPerformanceOtherSports_ReportName;
+
+            string reportName = string.Format(
+                    reportTypeName,
+                    criteria.Fromdate.ToShortFormatedDateWithSlash(),
+                    criteria.Todate.ToShortFormatedDateWithSlash());
+
+            NpoiExcelExtensions.ResponseStreamExcel(excelFile, reportName);
         }
 
         /// <summary>

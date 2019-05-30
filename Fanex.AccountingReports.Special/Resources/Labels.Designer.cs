@@ -1276,7 +1276,7 @@ namespace Fanex.AccountingReports.Special.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Keno.
+        ///   Looks up a localized string similar to RNG Keno.
         /// </summary>
         public static string Keno {
             get {
