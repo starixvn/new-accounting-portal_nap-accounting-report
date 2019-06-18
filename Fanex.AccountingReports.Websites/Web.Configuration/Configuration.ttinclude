@@ -239,7 +239,7 @@
 					case SiteEnvironment.SIT:
                         return @"FormatName:DIRECT=tcp:172.16.4.106\private$\entlib";
                     case SiteEnvironment.PRO:
-                        return @"FormatName:DIRECT=tcp:10.40.40.127\private$\entlib";
+                        return @"FormatName:DIRECT=tcp:10.40.40.22\private$\entlib";
                     case SiteEnvironment.MNL:
                         return @"FormatName:DIRECT=tcp:10.2.98.3\private$\entlib";
                     default:

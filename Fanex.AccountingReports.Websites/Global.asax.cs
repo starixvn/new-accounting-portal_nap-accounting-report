@@ -9,6 +9,7 @@ namespace Fanex.AccountingReports.Websites
     using System.Web.Mvc;
     using System.Web.Optimization;
     using System.Web.Routing;
+    using System.Web.Security;
     using Fanex.AccountingReports.Core.Services.Impl.Worker;
     using Fanex.AccountingReports.Websites.App_Start;
     using RemotingRef;
@@ -56,6 +57,7 @@ namespace Fanex.AccountingReports.Websites
         protected void Session_End(object sender, EventArgs e)
         {
             AuthConfig.SignOut();
+            FormsAuthentication.SignOut();
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
