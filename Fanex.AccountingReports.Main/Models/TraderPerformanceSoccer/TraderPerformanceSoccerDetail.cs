@@ -80,6 +80,8 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceSoccer
 
         public decimal TotalBookingsFifteenMinOU { get; set; }
 
+        public decimal TotalBookingsFifteenMinHDP { get; set; }
+
         public decimal NextBookings { get; set; }
 
         public decimal Overall { get; set; }
@@ -121,6 +123,7 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceSoccer
             this.FirstHalfTotalBookings += traderInfo.FirstHalfTotalBookings;
             this.TotalBookings += traderInfo.TotalBookings;
             this.TotalBookingsFifteenMinOU += traderInfo.TotalBookingsFifteenMinOU;
+            this.TotalBookingsFifteenMinHDP += traderInfo.TotalBookingsFifteenMinHDP;
             this.NextBookings += traderInfo.NextBookings;            
             this.NextCorner += traderInfo.NextCorner;
             this.Overall += traderInfo.Overall;
@@ -189,6 +192,9 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceSoccer
             this.TotalBookingsFifteenMinOU = turnOverInfo.TotalBookingsFifteenMinOU == 0 ?
                 0 :
                 (winLossInfo.TotalBookingsFifteenMinOU / turnOverInfo.TotalBookingsFifteenMinOU) * 100;
+            this.TotalBookingsFifteenMinHDP = turnOverInfo.TotalBookingsFifteenMinHDP == 0 ?
+                0 :
+                (winLossInfo.TotalBookingsFifteenMinHDP / turnOverInfo.TotalBookingsFifteenMinHDP) * 100;
             this.NextBookings = turnOverInfo.NextBookings == 0 ?
                 0 :
                 (winLossInfo.NextBookings / turnOverInfo.NextBookings) * 100;            
@@ -229,6 +235,7 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceSoccer
             this.FirstHalfTotalBookings = Math.Round(traderInfo.FirstHalfTotalBookings, 2, MidpointRounding.AwayFromZero);
             this.TotalBookings = Math.Round(traderInfo.TotalBookings, 2, MidpointRounding.AwayFromZero);
             this.TotalBookingsFifteenMinOU = Math.Round(traderInfo.TotalBookingsFifteenMinOU, 2, MidpointRounding.AwayFromZero);
+            this.TotalBookingsFifteenMinHDP = Math.Round(traderInfo.TotalBookingsFifteenMinHDP, 2, MidpointRounding.AwayFromZero);
             this.NextBookings = Math.Round(traderInfo.NextBookings, 2, MidpointRounding.AwayFromZero);            
             this.NextCorner = Math.Round(traderInfo.NextCorner, 2, MidpointRounding.AwayFromZero);
             this.Overall = Math.Round(traderInfo.Overall, 2, MidpointRounding.AwayFromZero);
@@ -259,6 +266,7 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceSoccer
             this.FirstHalfTotalBookings = 100 * marginInfo.FirstHalfTotalBookings;
             this.TotalBookings = 100 * marginInfo.TotalBookings;
             this.TotalBookingsFifteenMinOU = 100 * marginInfo.TotalBookingsFifteenMinOU;
+            this.TotalBookingsFifteenMinHDP = 100 * marginInfo.TotalBookingsFifteenMinHDP;
             this.NextBookings = 100 * marginInfo.NextBookings;            
             this.NextCorner = 100 * marginInfo.NextCorner;
             this.Overall = 100 * marginInfo.Overall;
