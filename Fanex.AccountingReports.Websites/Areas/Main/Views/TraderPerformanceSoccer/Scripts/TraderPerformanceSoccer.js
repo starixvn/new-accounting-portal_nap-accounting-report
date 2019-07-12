@@ -52,7 +52,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
                 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
                 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-                100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 
+                100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 
             ],
             numberFreezeCol: 8
         },
@@ -71,7 +71,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
                 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
                 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
-                100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 
+                100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100 
             ],
             numberFreezeCol: 6
         },
@@ -691,6 +691,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="winLossGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].FirstHalfTotalBookings) + '</div></td>\
                                         <td class="winLossGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].TotalBookings) + '</div></td>\
                                         <td class="winLossGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].TotalBookingsFifteenMinOU) + '</div></td>\
+                                        <td class="winLossGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].TotalBookingsFifteenMinHDP) + '</div></td>\
                                         <td class="winLossGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].NextBookings) + '</div></td>\
                                         <td class="winLossGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].Overall) + '</div></td>\
                                         <td class="turnOverGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].FirstHalfOneXTwo) + '</div></td>\
@@ -713,6 +714,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="turnOverGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].FirstHalfTotalBookings) + '</div></td>\
                                         <td class="turnOverGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].TotalBookings) + '</div></td>\
                                         <td class="turnOverGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].TotalBookingsFifteenMinOU) + '</div></td>\
+                                        <td class="turnOverGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].TotalBookingsFifteenMinHDP) + '</div></td>\
                                         <td class="turnOverGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].NextBookings) + '</div></td>\
                                         <td class="turnOverGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].Overall) + '</div></td>\
                                         <td class="liveBetCountGroup"><div class="col100 align-right">' + numeral(row.ChildInfo[2].FirstHalfOneXTwo).format(FormatConstant.INT_NUMBER) + '</div></td>\
@@ -735,6 +737,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="liveBetCountGroup"><div class="col100 align-right">' + numeral(row.ChildInfo[2].FirstHalfTotalBookings).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="liveBetCountGroup"><div class="col100 align-right">' + numeral(row.ChildInfo[2].TotalBookings).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="liveBetCountGroup"><div class="col100 align-right">' + numeral(row.ChildInfo[2].TotalBookingsFifteenMinOU).format(FormatConstant.INT_NUMBER) + '</div></td>\
+                                        <td class="liveBetCountGroup"><div class="col100 align-right">' + numeral(row.ChildInfo[2].TotalBookingsFifteenMinHDP).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="liveBetCountGroup"><div class="col100 align-right">' + numeral(row.ChildInfo[2].NextBookings).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="liveBetCountGroup"><div class="col100 align-right">' + numeral(row.ChildInfo[2].Overall).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="marginGroup"><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].FirstHalfOneXTwo) + '</div></td>\
@@ -757,6 +760,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="marginGroup"><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].FirstHalfTotalBookings) + '</div></td>\
                                         <td class="marginGroup"><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].TotalBookings) + '</div></td>\
                                         <td class="marginGroup"><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].TotalBookingsFifteenMinOU) + '</div></td>\
+                                        <td class="marginGroup"><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].TotalBookingsFifteenMinHDP) + '</div></td>\
                                         <td class="marginGroup"><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].NextBookings) + '</div></td>\
                                         <td class="marginGroup"><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].Overall) + '</div></td>\
                                         <td class="commissionGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].FirstHalfOneXTwo) + '</div></td>\
@@ -779,6 +783,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="commissionGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].FirstHalfTotalBookings) + '</div></td>\
                                         <td class="commissionGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].TotalBookings) + '</div></td>\
                                         <td class="commissionGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].TotalBookingsFifteenMinOU) + '</div></td>\
+                                        <td class="commissionGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].TotalBookingsFifteenMinHDP) + '</div></td>\
                                         <td class="commissionGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].NextBookings) + '</div></td>\
                                         <td class="commissionGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].Overall) + '</div></td>\
                                     </tr>';
@@ -817,6 +822,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].FirstHalfTotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].TotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].TotalBookingsFifteenMinOU) + '</div></th>\
+                                        <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].TotalBookingsFifteenMinHDP) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].NextBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].Overall) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].FirstHalfOneXTwo) + '</div></th>\
@@ -839,6 +845,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].FirstHalfTotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].TotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].TotalBookingsFifteenMinOU) + '</div></th>\
+                                        <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].TotalBookingsFifteenMinHDP) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].NextBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].Overall) + '</div></th>\
                                         <th><div class="col100 align-right">' + numeral(row.ChildInfo[2].FirstHalfOneXTwo).format(FormatConstant.INT_NUMBER) + '</div></th>\
@@ -861,6 +868,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <th><div class="col100 align-right">' + numeral(row.ChildInfo[2].FirstHalfTotalBookings).format(FormatConstant.INT_NUMBER) + '</div></th>\
                                         <th><div class="col100 align-right">' + numeral(row.ChildInfo[2].TotalBookings).format(FormatConstant.INT_NUMBER) + '</div></th>\
                                         <th><div class="col100 align-right">' + numeral(row.ChildInfo[2].TotalBookingsFifteenMinOU).format(FormatConstant.INT_NUMBER) + '</div></th>\
+                                        <th><div class="col100 align-right">' + numeral(row.ChildInfo[2].TotalBookingsFifteenMinHDP).format(FormatConstant.INT_NUMBER) + '</div></th>\
                                         <th><div class="col100 align-right">' + numeral(row.ChildInfo[2].NextBookings).format(FormatConstant.INT_NUMBER) + '</div></th>\
                                         <th><div class="col100 align-right">' + numeral(row.ChildInfo[2].Overall).format(FormatConstant.INT_NUMBER) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].FirstHalfOneXTwo) + '</div></th>\
@@ -883,6 +891,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <th><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].FirstHalfTotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].TotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].TotalBookingsFifteenMinOU) + '</div></th>\
+                                        <th><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].TotalBookingsFifteenMinHDP) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].NextBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].Overall) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].FirstHalfOneXTwo) + '</div></th>\
@@ -905,6 +914,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].FirstHalfTotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].TotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].TotalBookingsFifteenMinOU) + '</div></th>\
+                                        <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].TotalBookingsFifteenMinHDP) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].NextBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].Overall) + '</div></th>\
                                     </tr>';
@@ -995,6 +1005,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="winLossGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].FirstHalfTotalBookings) + '</div></td>\
                                         <td class="winLossGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].TotalBookings) + '</div></td>\
                                         <td class="winLossGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].TotalBookingsFifteenMinOU) + '</div></td>\
+                                        <td class="winLossGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].TotalBookingsFifteenMinHDP) + '</div></td>\
                                         <td class="winLossGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].NextBookings) + '</div></td>\
                                         <td class="winLossGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].Overall) + '</div></td>\
                                         <td class="turnOverGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].FirstHalfOneXTwo) + '</div></td>\
@@ -1017,6 +1028,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="turnOverGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].FirstHalfTotalBookings) + '</div></td>\
                                         <td class="turnOverGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].TotalBookings) + '</div></td>\
                                         <td class="turnOverGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].TotalBookingsFifteenMinOU) + '</div></td>\
+                                        <td class="turnOverGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].TotalBookingsFifteenMinHDP) + '</div></td>\
                                         <td class="turnOverGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].NextBookings) + '</div></td>\
                                         <td class="turnOverGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].Overall) + '</div></td>\
                                         <td class="liveBetCountGroup"><div class="col100 align-right">' + numeral(row.ChildInfo[2].FirstHalfOneXTwo).format(FormatConstant.INT_NUMBER) + '</div></td>\
@@ -1039,6 +1051,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="liveBetCountGroup"><div class="col100 align-right">' + numeral(row.ChildInfo[2].FirstHalfTotalBookings).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="liveBetCountGroup"><div class="col100 align-right">' + numeral(row.ChildInfo[2].TotalBookings).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="liveBetCountGroup"><div class="col100 align-right">' + numeral(row.ChildInfo[2].TotalBookingsFifteenMinOU).format(FormatConstant.INT_NUMBER) + '</div></td>\
+                                        <td class="liveBetCountGroup"><div class="col100 align-right">' + numeral(row.ChildInfo[2].TotalBookingsFifteenMinHDP).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="liveBetCountGroup"><div class="col100 align-right">' + numeral(row.ChildInfo[2].NextBookings).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="liveBetCountGroup"><div class="col100 align-right">' + numeral(row.ChildInfo[2].Overall).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="marginGroup"><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].FirstHalfOneXTwo) + '</div></td>\
@@ -1061,6 +1074,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="marginGroup"><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].FirstHalfTotalBookings) + '</div></td>\
                                         <td class="marginGroup"><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].TotalBookings) + '</div></td>\
                                         <td class="marginGroup"><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].TotalBookingsFifteenMinOU) + '</div></td>\
+                                        <td class="marginGroup"><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].TotalBookingsFifteenMinHDP) + '</div></td>\
                                         <td class="marginGroup"><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].NextBookings) + '</div></td>\
                                         <td class="marginGroup"><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].Overall) + '</div></td>\
                                         <td class="commissionGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].FirstHalfOneXTwo) + '</div></td>\
@@ -1083,6 +1097,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="commissionGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].FirstHalfTotalBookings) + '</div></td>\
                                         <td class="commissionGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].TotalBookings) + '</div></td>\
                                         <td class="commissionGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].TotalBookingsFifteenMinOU) + '</div></td>\
+                                        <td class="commissionGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].TotalBookingsFifteenMinHDP) + '</div></td>\
                                         <td class="commissionGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].NextBookings) + '</div></td>\
                                         <td class="commissionGroup"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].Overall) + '</div></td>\
                                     </tr>';
@@ -1118,6 +1133,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[0].FirstHalfTotalBookings) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[0].TotalBookings) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[0].TotalBookingsFifteenMinOU) + '</div></td>\
+                                        <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[0].TotalBookingsFifteenMinHDP) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[0].NextBookings) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[0].Overall) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[1].FirstHalfOneXTwo) + '</div></td>\
@@ -1140,6 +1156,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[1].FirstHalfTotalBookings) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[1].TotalBookings) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[1].TotalBookingsFifteenMinOU) + '</div></td>\
+                                        <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[1].TotalBookingsFifteenMinHDP) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[1].NextBookings) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[1].Overall) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + numeral(totalInfo.ChildInfo[2].FirstHalfOneXTwo).format(FormatConstant.INT_NUMBER) + '</div></td>\
@@ -1162,6 +1179,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + numeral(totalInfo.ChildInfo[2].FirstHalfTotalBookings).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + numeral(totalInfo.ChildInfo[2].TotalBookings).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + numeral(totalInfo.ChildInfo[2].TotalBookingsFifteenMinOU).format(FormatConstant.INT_NUMBER) + '</div></td>\
+                                        <td class="' + cssClass + '"><div class="col100 align-right">' + numeral(totalInfo.ChildInfo[2].TotalBookingsFifteenMinHDP).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + numeral(totalInfo.ChildInfo[2].NextBookings).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + numeral(totalInfo.ChildInfo[2].Overall).format(FormatConstant.INT_NUMBER) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderPercentCustomCell(totalInfo.ChildInfo[3].FirstHalfOneXTwo) + '</div></td>\
@@ -1184,6 +1202,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderPercentCustomCell(totalInfo.ChildInfo[3].FirstHalfTotalBookings) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderPercentCustomCell(totalInfo.ChildInfo[3].TotalBookings) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderPercentCustomCell(totalInfo.ChildInfo[3].TotalBookingsFifteenMinOU) + '</div></td>\
+                                        <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderPercentCustomCell(totalInfo.ChildInfo[3].TotalBookingsFifteenMinHDP) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderPercentCustomCell(totalInfo.ChildInfo[3].NextBookings) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderPercentCustomCell(totalInfo.ChildInfo[3].Overall) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[4].FirstHalfOneXTwo) + '</div></td>\
@@ -1206,6 +1225,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[4].FirstHalfTotalBookings) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[4].TotalBookings) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[4].TotalBookingsFifteenMinOU) + '</div></td>\
+                                        <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[4].TotalBookingsFifteenMinHDP) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[4].NextBookings) + '</div></td>\
                                         <td class="' + cssClass + '"><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(totalInfo.ChildInfo[4].Overall) + '</div></td>\
                                     </tr>';
@@ -1241,6 +1261,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].FirstHalfTotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].TotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].TotalBookingsFifteenMinOU) + '</div></th>\
+                                        <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].TotalBookingsFifteenMinHDP) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].NextBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[0].Overall) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].FirstHalfOneXTwo) + '</div></th>\
@@ -1263,6 +1284,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].FirstHalfTotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].TotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].TotalBookingsFifteenMinOU) + '</div></th>\
+                                        <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].TotalBookingsFifteenMinHDP) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].NextBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[1].Overall) + '</div></th>\
                                         <th><div class="col100 align-right">' + numeral(row.ChildInfo[2].FirstHalfOneXTwo).format(FormatConstant.INT_NUMBER) + '</div></th>\
@@ -1285,6 +1307,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <th><div class="col100 align-right">' + numeral(row.ChildInfo[2].FirstHalfTotalBookings).format(FormatConstant.INT_NUMBER) + '</div></th>\
                                         <th><div class="col100 align-right">' + numeral(row.ChildInfo[2].TotalBookings).format(FormatConstant.INT_NUMBER) + '</div></th>\
                                         <th><div class="col100 align-right">' + numeral(row.ChildInfo[2].TotalBookingsFifteenMinOU).format(FormatConstant.INT_NUMBER) + '</div></th>\
+                                        <th><div class="col100 align-right">' + numeral(row.ChildInfo[2].TotalBookingsFifteenMinHDP).format(FormatConstant.INT_NUMBER) + '</div></th>\
                                         <th><div class="col100 align-right">' + numeral(row.ChildInfo[2].NextBookings).format(FormatConstant.INT_NUMBER) + '</div></th>\
                                         <th><div class="col100 align-right">' + numeral(row.ChildInfo[2].Overall).format(FormatConstant.INT_NUMBER) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].FirstHalfOneXTwo) + '</div></th>\
@@ -1307,6 +1330,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <th><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].FirstHalfTotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].TotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].TotalBookingsFifteenMinOU) + '</div></th>\
+                                        <th><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].TotalBookingsFifteenMinHDP) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].NextBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderPercentCustomCell(row.ChildInfo[3].Overall) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].FirstHalfOneXTwo) + '</div></th>\
@@ -1329,6 +1353,7 @@ Fanex.AccountingReports.Main.TraderPerformanceSoccer = function () {
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].FirstHalfTotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].TotalBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].TotalBookingsFifteenMinOU) + '</div></th>\
+                                        <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].TotalBookingsFifteenMinHDP) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].NextBookings) + '</div></th>\
                                         <th><div class="col100 align-right">' + self.renderDecimalNumberCustomCell(row.ChildInfo[4].Overall) + '</div></th>\
                                     </tr>';

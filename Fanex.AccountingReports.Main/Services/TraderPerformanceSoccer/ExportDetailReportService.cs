@@ -65,7 +65,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
         {
             ICellStyle headerStyle = NpoiExcelExtensions.HeaderStyle(excelFile);
 
-            for (var i = 0; i < 118; i++)
+            for (var i = 0; i < 123; i++)
             {
                 worksheet.SetColumnWidth(i, 140 * ExcelExtensions.FontWidth);
             }
@@ -108,9 +108,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
                     criteria.Todate.ToShortFormatedDate());
             IRow row = worksheet.CreateRow(currentRow);
 
-            this.RenderMergeCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn + 117, reportTitle, headerStyle);
+            this.RenderMergeCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn + 122, reportTitle, headerStyle);
             currentRow += 2;
-            worksheet.AddMergedRegion(new CellRangeAddress(currentRow, currentRow, 0, 117));
+            worksheet.AddMergedRegion(new CellRangeAddress(currentRow, currentRow, 0, 122));
             currentRow++;
             row = worksheet.CreateRow(currentRow);
             currentColumn = 0;
@@ -156,11 +156,11 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow, currentColumn, Labels.Match, headerStyle);
             this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow, currentColumn, Labels.Maxbet, headerStyle);
             this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow - 1, currentColumn + 1, Labels.HT, headerStyle);
-            this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow - 1, currentColumn + 21, Labels._1st_1x2, headerStyle);
-            this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow - 1, currentColumn + 21, Labels._1st_1x2, headerStyle);
-            this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow - 1, currentColumn + 21, Labels._1st_1x2, headerStyle);
-            this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow - 1, currentColumn + 21, Labels._1st_1x2, headerStyle);
-            this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow - 1, currentColumn + 21, Labels._1st_1x2, headerStyle);
+            this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow - 1, currentColumn + 22, Labels._1st_1x2, headerStyle);
+            this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow - 1, currentColumn + 22, Labels._1st_1x2, headerStyle);
+            this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow - 1, currentColumn + 22, Labels._1st_1x2, headerStyle);
+            this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow - 1, currentColumn + 22, Labels._1st_1x2, headerStyle);
+            this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow - 1, currentColumn + 22, Labels._1st_1x2, headerStyle);
         }
 
         /// <summary>
@@ -348,6 +348,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, childInfo.FirstHalfTotalBookings, cellStyle);
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, childInfo.TotalBookings, cellStyle);
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, childInfo.TotalBookingsFifteenMinOU, cellStyle);
+            this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, childInfo.TotalBookingsFifteenMinHDP, cellStyle);
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, childInfo.NextBookings, cellStyle);
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, childInfo.Overall, cellStyle);
         }
@@ -389,6 +390,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, marginInfo.FirstHalfTotalBookings / 100, cellStyle);
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, marginInfo.TotalBookings / 100, cellStyle);
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, marginInfo.TotalBookingsFifteenMinOU / 100, cellStyle);
+            this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, marginInfo.TotalBookingsFifteenMinHDP / 100, cellStyle);
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, marginInfo.NextBookings / 100, cellStyle);
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, marginInfo.Overall / 100, cellStyle);
         }
