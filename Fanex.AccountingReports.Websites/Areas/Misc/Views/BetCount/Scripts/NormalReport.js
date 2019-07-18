@@ -37,10 +37,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
             fullHeight: true,
             fullWidth: true,
             gridWidth: 1230,
-            gridHeight: 195,
-            freezeWidth: 80,
-            freezeHeight: 280,
-            numberFreezeCol: 1
+            gridHeight: 195
         }
     };
 
