@@ -38,6 +38,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.Exchange,
             SportContants.Pragmatic,
             SportContants.PockerGame,
+            SportContants.CardClub
         };
 
         public SportTypeWinLossInfo()
