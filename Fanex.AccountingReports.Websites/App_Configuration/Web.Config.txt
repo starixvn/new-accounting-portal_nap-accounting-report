@@ -1,0 +1,10 @@
+﻿
+
+// Generated helper templates
+// Generated items
+// Fanex.AccountingReports.Websites\App_Configuration\Web.PRO.config
+// Fanex.AccountingReports.Websites\App_Configuration\Web.MNL.config
+// Fanex.AccountingReports.Websites\App_Configuration\Web.UAT.config
+// Fanex.AccountingReports.Websites\App_Configuration\Web.SIT.config
+// Fanex.AccountingReports.Websites\App_Configuration\Web.LOCAL.config
+// Fanex.AccountingReports.Websites\App_Configuration\Web.DEV.config

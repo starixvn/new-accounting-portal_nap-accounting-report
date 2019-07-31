@@ -42,21 +42,6 @@
         public SiteEnvironment Environment { get; set; }
 
         #region For Webconfig file
-
-	   public string FanexDataPath
-	   {
-		  get
-            {
-                switch(Environment)
-                {
-                    case SiteEnvironment.PRO:
-                    case SiteEnvironment.MNL:
-                        return "LIVE";
-				default:
-                        return "TEST";
-                }
-            }
-	   }
 	   
 	   public string NapEnvironment
         {

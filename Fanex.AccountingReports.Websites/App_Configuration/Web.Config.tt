@@ -1,4 +1,15 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ output extension=".txt" #>
+<#@ include file="$(SolutionDir)\Packages\T4.TemplateFileManager.2.2.1\tools\ttinc\TemplateFilemanager.CS.ttinclude" #>
+<#@ include file="Configuration.ttinclude" #>
+<#
+    var manager = TemplateFileManager.Create(this);
+    foreach(var site in sites)
+    {
+        var fileName = string.Format("Web.{0}.config", site.Environment);
+        manager.StartNewFile(fileName);
+#>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   For more information on how to configure your ASP.NET application, please visit
   http://go.microsoft.com/fwlink/?LinkId=169433
@@ -39,20 +50,20 @@
         </connectionSettings>
     </Fanex.Caching>
   <NapSettings
-      Environment="LIVE"
+      Environment="<#= site.NapEnvironment #>"
       EnableDirectLogin="1"
-      SiteId="4"
+      SiteId="<#= site.NapSiteId #>"
       UnauthorizeUrl="~/UserLogin/Common/AccessDenied"
-      EnableReCheckin="false"
+      EnableReCheckin="<#= site.NapEnableReCheckin #>"
       HubUrl=""
-      ServiceUrls="http://10.40.40.202:1710/api"
-      AccessKey="ZU5inpesUej+dCIxitApgXAiRhK0N7uCuVHCCjPyT9o=" >
+      ServiceUrls="<#= site.NapServiceUrls #>"
+      AccessKey="<#= site.NapAccessKey #>" >
     <Domain>
-       <add Name="nap-report.ibcbk.com" Path="/AccReport" />
+       <add Name="<#= site.NapDomainName #>" Path="<#= site.NapDomainPath #>" />
     </Domain>
   </NapSettings>
-  <ONEbook.UM ServiceUris="http://10.40.40.202:8889/api"
-              EnableCheckUM="true"
+  <ONEbook.UM ServiceUris="<#=site.ONEbookUMAddress#>"
+              EnableCheckUM="<#=site.EnableCheckUM#>"
               EnableUnscheduledUM="false"
               UMFrom="01:00"
               UMTo="23:00"
@@ -60,21 +71,21 @@
   </ONEbook.UM>
   <Fanex.Data.DbSettingProvider default="XmlDbSettingProvider">
     <providers>
-      <add name="XmlDbSettingProvider" type="Fanex.Data.DbSettingProviderExtension.XmlDbSettingProvider3, Fanex.Data.DbSettingProviderExtension" resourcePath="~/App_Data/LIVE/" enableWatching="0" />
+      <add name="XmlDbSettingProvider" type="Fanex.Data.DbSettingProviderExtension.XmlDbSettingProvider3, Fanex.Data.DbSettingProviderExtension" resourcePath="~/App_Data/Fanex.Data/" enableWatching="0" />
     </providers>
   </Fanex.Data.DbSettingProvider>
-  <Fanex.Logging msmqPath="FormatName:DIRECT=tcp:10.2.98.3\private$\entlib" defaultCategory="NAP-Report"/>
-  <LicenseeEmailSection configSource="Web.Configuration\LicenseeEmailSection.config" />
-  <VirtualSportsWinLossSection configSource="Web.Configuration\VirtualSportsWinLossSection.config" />
-  <RacingSection configSource="Web.Configuration\RacingSection.config" />
-  <RMSection configSource="Web.Configuration\RMSection.config" />
-  <MAMonitorSection configSource="Web.Configuration\MAMonitorSection.config" />
-  <LegendSection configSource="Web.Configuration\LegendSection.config" />
-  <SMAsTurnoverSection configSource="Web.Configuration\SMAsTurnoverSection.config" />
-  <TotalCreditAccountByProductSection configSource="Web.Configuration\TotalCreditAccountByProductSection.config" />
-  <LiveCasinoProductSection configSource="Web.Configuration\LiveCasinoProductSection.config" />  
-  <connectionStrings configSource="Web.Configuration\Web.MNL.ConnectionString.config" />
-  <appSettings file="Web.Configuration\Web.MNL.AppSettings.config">
+  <Fanex.Logging msmqPath="<#=site.LoggingMsmqPath#>" defaultCategory="<#=site.LoggingDefaultCategory#>"/>
+  <LicenseeEmailSection configSource="App_Configuration\LicenseeEmailSection.config" />
+  <VirtualSportsWinLossSection configSource="App_Configuration\VirtualSportsWinLossSection.config" />
+  <RacingSection configSource="App_Configuration\RacingSection.config" />
+  <RMSection configSource="App_Configuration\RMSection.config" />
+  <MAMonitorSection configSource="App_Configuration\MAMonitorSection.config" />
+  <LegendSection configSource="App_Configuration\LegendSection.config" />
+  <SMAsTurnoverSection configSource="App_Configuration\SMAsTurnoverSection.config" />
+  <TotalCreditAccountByProductSection configSource="App_Configuration\TotalCreditAccountByProductSection.config" />
+  <LiveCasinoProductSection configSource="App_Configuration\LiveCasinoProductSection.config" />  
+  <connectionStrings configSource="App_Configuration\Web.<#=site.Environment#>.ConnectionString.config" />
+  <appSettings file="App_Configuration\Web.<#=site.Environment#>.AppSettings.config">
     <add key="aspnet:UseTaskFriendlySynchronizationContext" value="true" />
     <add key="webpages:Version" value="2.0.0.0" />
     <add key="webpages:Enabled" value="false" />
@@ -83,12 +94,12 @@
     <add key="UnobtrusiveJavaScriptEnabled" value="true" />
   </appSettings>
   <system.web>
-    <compilation debug="false" targetFramework="4.6">
+    <compilation debug="<#= site.DebugMode #>" targetFramework="4.6">
 	   <assemblies>
 		  <add assembly="System.Runtime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
 	   </assemblies>
     </compilation>
-	<customErrors mode="On" defaultRedirect="~/Views/Errors/GeneralError.htm">
+	<customErrors mode="<#=site.ErrorMode#>" defaultRedirect="~/Views/Errors/GeneralError.htm">
       <error statusCode="404" redirect="~/Views/Errors/Error404.htm" />
       <error statusCode="500" redirect="~/Views/Errors/GeneralError.htm" />
     </customErrors>
@@ -113,7 +124,7 @@
     </pages>
     <sessionState
 	cookieName=".Report_ASP.NET_SessionId"
-	mode="StateServer" timeout="40" stateConnectionString="tcpip=10.2.12.10:42424" cookieless="false" />
+	mode="StateServer" timeout="40" <#=site.StateConnectionString#> cookieless="false" />
 	<machineKey validationKey="82DD5F7E8AEE17163191F82D6E74F88716B3A834BD6D1DC5F32CB2F613222E36144B019843C69D711C8EE551F341FDFD60B1AB77F943B02A00467A0D2D632EEB"
         decryptionKey="436E102A02B3582E206F1111DC137F5F2BFC57EBFB8ECD6736596ABDA63B9A65"
         validation="SHA1" decryption="AES" />
@@ -243,3 +254,9 @@
     </core>
   </jsEngineSwitcher>
 </configuration>
+<#
+    }
+    manager.Process();
+	var currentDirectory = Path.GetDirectoryName(Host.TemplateFile);
+    File.Copy(currentDirectory + "\\Web.Local.config", currentDirectory + "\\..\\Web.config", true);
+#>

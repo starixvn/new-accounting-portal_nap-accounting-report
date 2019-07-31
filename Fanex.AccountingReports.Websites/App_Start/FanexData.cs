@@ -1,5 +1,4 @@
 ﻿using Fanex.Data;
-using Fanex.NAP.Core.Configuration;
 
 namespace Fanex.AccountingReports.Websites.App_Start
 {
@@ -7,14 +6,10 @@ namespace Fanex.AccountingReports.Websites.App_Start
     {
         public static void Register()
         {
-            var resourceFolder = NapSettings.Settings.Environment == "LIVE"
-                ? "LIVE"
-                : "TEST";
             DbSettingProviderManager
              .StartNewSession()
              .UseDefaultConnectionStringProvider()
-             .UseDefaultDbSettingProvider(
-               $"~/App_Data/{resourceFolder}")
+             .UseDefaultDbSettingProvider($"~/App_Data/Fanex.Data")
              .Run();
         }
     }
