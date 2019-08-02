@@ -44,5 +44,10 @@ namespace Fanex.AccountingReports.Websites.Controllers
         {
             return Redirect("../../UniversalReports/DailyWinLoss2hSoccerMinor");
         }
+
+        public ActionResult CN88WinLossByProducts()
+        {
+            return Redirect("../../UniversalReports/CN88WinLossByProducts");
+        }
     }
 }
