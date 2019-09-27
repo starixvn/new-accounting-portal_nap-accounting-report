@@ -222,7 +222,13 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         [HttpPost]
         public ActionResult ReCheckLogin()
         {
-            var recheckIn = securityService.ReCheckIn(currentSession.OnUserId, NapSettings.Settings.SiteId);
+            var recheckIn = 0;
+
+            if (currentSession.OnUserId > 0)
+            {
+                recheckIn = securityService.ReCheckIn(currentSession.OnUserId, NapSettings.Settings.SiteId);
+            }
+
             var isKickedOut = currentSession.OnUserId <= 0 || NapSettings.Settings.EnableReCheckIn && recheckIn > 0;
             return Json(isKickedOut);
         }
