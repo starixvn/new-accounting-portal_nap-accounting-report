@@ -156,7 +156,8 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                         Username = row.Username,
                         Currency = row.Currency,
                         Balance = balance,
-                        BaseBalance = baseBalance
+                        BaseBalance = baseBalance,
+                        HeadlineEnabled = row.HeadlineEnabled
                     };
 
                     result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);

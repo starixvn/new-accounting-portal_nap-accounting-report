@@ -148,8 +148,16 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
         if (customerType != 'Member') {
             columns = [
                 { HeaderText: "No", Width: 60, Name: "Number", HeaderAlign: "center", CellAlign: "center" },
-                { HeaderText: customerType, Width: 150, Name: "CustomerType", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell)
-                { return '<div class="link" onclick="viewSuperBalanceDownline(\'' + customerType + '\',' + currentCell.Value.CustId + ',\'' + currentCell.Value.Username + '\')">' + currentCell.Value.Username + '</div>'; }
+                {
+                    HeaderText: customerType, Width: 150, Name: "CustomerType", HeaderAlign: "center", CellAlign: "left", CustomCellRender: function (currentCell)
+                    {
+                        if (currentCell.Value.HeadlineEnabled) {
+                            return currentCell.Value.Username;                            
+                        }
+                        else {
+                            return '<div class="link" onclick="viewSuperBalanceDownline(\'' + customerType + '\',' + currentCell.Value.CustId + ',\'' + currentCell.Value.Username + '\')">' + currentCell.Value.Username + '</div>';
+                        }
+                    }
                 },
                 { HeaderText: "Currency", Width: 80, Name: "Currency", HeaderAlign: "center", CellAlign: "center" },
                 { HeaderText: "Balance", Width: 150, Name: "Balance", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
