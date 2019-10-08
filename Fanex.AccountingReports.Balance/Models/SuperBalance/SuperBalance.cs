@@ -15,6 +15,8 @@ namespace Fanex.AccountingReports.Balance.Models.SuperBalance
 
         public string Currency { get; set; }
 
+        public bool HeadlineEnabled { get; set; }
+
         public decimal Balance { get; set; }
 
         public decimal BaseBalance { get; set; }
