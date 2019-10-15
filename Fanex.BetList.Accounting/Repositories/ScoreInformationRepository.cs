@@ -32,6 +32,7 @@ namespace Fanex.BetList.Accounting.Repositories
                 objDb.SetParameterValue("MatchID", criteria.MatchId);
                 objDb.SetParameterValue("Bettype", criteria.Bettype);
                 objDb.SetParameterValue("tradername", "Unassigned");
+                objDb.SetParameterValue("LiveIndicator", criteria.LiveIndicator);
 
                 using (var reader = objDb.ExecuteReader())
                 {
