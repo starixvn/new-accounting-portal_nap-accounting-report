@@ -315,7 +315,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 sportInfo.BetTypeWinLosses.Add(betInfo);
             }
 
-            if (isNewCricket == true)
+            if (isNewCricket)
             {
                 sportInfo = CalculatorForNewCricket(dataForNewCricket, isShowNotAvalable, sportInfo, sportId);
             }
