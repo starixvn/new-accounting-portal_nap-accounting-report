@@ -124,7 +124,7 @@
     </script>
     @RenderSection("Scripts", false)
     @RenderSection("Foot", false)
-    @{ 
+    @{
         var currentUsername = HttpContext.Current.User.Identity.Name;
         var environment = Fanex.NAP.Core.Configuration.NapSettings.Settings.Environment;
         var enableMatomo = !string.IsNullOrEmpty(currentUsername) && !currentUsername.Contains("starix") && environment == "LIVE";
@@ -139,7 +139,7 @@
 	  _paq.push(['trackPageView']);
 	  _paq.push(['enableLinkTracking']);
 	  (function() {
-		var u="//matomo.nexdev.net/";
+		var u="//matomo.starific.net/";
 		_paq.push(['setTrackerUrl', u+'matomo.php']);
 		_paq.push(['setSiteId', '6']);
 		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
@@ -147,6 +147,7 @@
 	  })();
         </script>
 	<!-- End Matomo Code -->
-    }	
+    }
+    <input type="hidden" id="matomo-username" value="@currentUsername" />
 </body>
 </html>
