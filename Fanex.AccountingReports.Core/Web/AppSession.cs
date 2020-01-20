@@ -2,6 +2,7 @@ namespace Fanex.AccountingReports.Core.Web
 {
     using Fanex.AccountingReports.Core.Constants;
     using NAP.Core.Models;
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
@@ -9,6 +10,23 @@ namespace Fanex.AccountingReports.Core.Web
     /// </summary>
     public static class AppSession
     {
+        private static readonly User UnauthorizedUser = new User
+        {
+            CreatedDate = DateTime.Today,
+            Creator = null,
+            Email = string.Empty,
+            FirstName = string.Empty,
+            Group = null,
+            Id = 0,
+            Username = string.Empty,
+            LastLoginDate = DateTime.Today,
+            LastName = string.Empty,
+            ModifiedDate = DateTime.Today,
+            Name = string.Empty,
+            Modifier = null,
+            Password = string.Empty
+        };
+
         /// <summary>
         /// Gets or sets current login user.
         /// </summary>
@@ -19,7 +37,8 @@ namespace Fanex.AccountingReports.Core.Web
         {
             get
             {
-                return SessionManager.Get<User>(CommonConstants.CurrentLogInUser);
+                return SessionManager.Get<User>(CommonConstants.CurrentLogInUser)?? UnauthorizedUser;
+                
             }
 
             set
