@@ -400,12 +400,23 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
                             { Name: "ColUserName", Value: currentUser.UserName, MergeRowNumber: mergeRowNumber, TdClass: tdClass },
                             { Name: "ColCustId", Value: currentUser.CustId, MergeRowNumber: mergeRowNumber, TdClass: tdClass },
                             { Name: "ColBetType", Value: currentUser.BetType, MergeRowNumber: mergeRowNumber, TdClass: tdClass },
-                            { Name: "ColWinLostDate", Value: currentUser.WinLostDate, MergeRowNumber: mergeRowNumber, TdClass: tdClass },
-                            { Name: "ColBalanceBeforeBet", Value: currentUser.BalanceBeforeBet, MergeRowNumber: mergeRowNumber, TdClass: tdClass },
+                            { Name: "ColWinLostDate", Value: currentUser.WinLostDate, MergeRowNumber: mergeRowNumber, TdClass: tdClass }
+                        );
+                    }
+
+                    currentTicketByUser.push(
+                        { Name: "ColBalanceBeforeBet", Value: currentTicketInfo.BalanceBeforeBet, TdClass: tdClass }
+                    );
+
+
+                    if (j == 0 || bodyData.length === 0) {
+                        var mergeRowNumber = numberDuplicateTicketsByUser - j;
+                        currentTicketByUser.push(
                             { Name: "ColStake", Value: currentUser.Stake, MergeRowNumber: mergeRowNumber, TdClass: tdClass },
                             { Name: "ColOdds", Value: currentUser.Odds, MergeRowNumber: mergeRowNumber, TdClass: tdClass }
                         );
                     }
+
                     var timeDiff = (currentTicketInfo.TimeDifference == 0 && j == 0) ? "-" : currentTicketInfo.TimeDifference
                     currentTicketByUser.push(
                         { Name: "ColStatus", Value: currentTicketInfo.Status, TdClass: tdClass },

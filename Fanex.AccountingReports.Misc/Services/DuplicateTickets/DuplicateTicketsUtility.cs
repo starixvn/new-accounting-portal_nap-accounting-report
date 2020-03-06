@@ -1,14 +1,14 @@
 namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
 {
+    using Fanex.AccountingReports.Core.Extensions;
+    using Fanex.AccountingReports.Misc.Models.DuplicateTickets;
+    using Fanex.Common;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Security.Cryptography;
     using System.Text;
-    using Fanex.AccountingReports.Core.Extensions;
-    using Fanex.AccountingReports.Misc.Models.DuplicateTickets;
-    using Fanex.Common;
 
     /// <summary>
     /// TODO: Update summary.
@@ -28,12 +28,12 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
         public List<TicketInfo> AssignSubTicketInfo(IGrouping<dynamic, dynamic> duplicateTicketByUserName)
         {
             List<TicketInfo> groups = new List<TicketInfo>();
-            DateTime prevBetTimeGroup = new DateTime(2014, 7, 11); 
+            DateTime prevBetTimeGroup = new DateTime(2014, 7, 11);
             DateTime prevBetTimeTicket = new DateTime(2014, 7, 11);
             int ticketIndex = 0;
             double timeDifferenceGroup = 0;
             double timeDifferenceTicket = 0;
-            int groupNo = 0;           
+            int groupNo = 0;
 
             foreach (var duplicateTicket in duplicateTicketByUserName)
             {
@@ -57,7 +57,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                 if (timeDifferenceGroup >= TotalMilliseconds)
                 {
                     groupNo++;
-                    ticketIndex = 0;                    
+                    ticketIndex = 0;
                     timeDifferenceTicket = 0;
                 }
 
@@ -68,7 +68,8 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                     BetTime = betTime.ToLongMMMddFormatedDate(),
                     TimeDifference = timeDifferenceTicket,
                     GroupNo = groupNo,
-                    TransDesc = duplicateTicket.transdesc
+                    TransDesc = duplicateTicket.transdesc,
+                    BalanceBeforeBet = duplicateTicket.balance
                 };
 
                 if (ticketIndex == 0)
@@ -99,7 +100,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                 CustId = Converter.ToInt(duplicateTicketByUserName.Key.custid),
                 BetType = Converter.ToString2(duplicateTicketByUserName.Key.typename),
                 WinLostDate = winlostDate.ToShortFormatedDate(),
-                BalanceBeforeBet = Converter.ToDecimal(duplicateTicketByUserName.Key.balance),
                 Stake = Converter.ToDecimal(duplicateTicketByUserName.Key.stake),
                 Odds = Converter.ToDecimal(duplicateTicketByUserName.Key.odds),
                 BetTypeId = Converter.To<int>(duplicateTicketByUserName.Key.bettype)
