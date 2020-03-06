@@ -71,9 +71,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                     if (mainTicket.BetTypeId != 911 || isDuplicateCashOut)
                     {
                         mainTicket.TicketInfo.AddRange(group);
-                        result.Add(mainTicket);
                     }
                 }
+
+                result.Add(mainTicket);
             }
 
             duplicateTicketsInfo.Rows = result;
