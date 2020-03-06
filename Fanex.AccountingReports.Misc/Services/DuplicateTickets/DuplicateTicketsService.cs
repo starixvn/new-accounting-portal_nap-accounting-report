@@ -267,15 +267,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                     currentColumn,
                     ticketByUser.WinLostDate,
                     i % 2 == 0 ? evenRowTextStyle : textStyle);
-                NpoiExcelExtensions.RenderCell(
-                    ref worksheet,
-                    ref row,
-                    currentRow,
-                    ref currentColumn,
-                    currentRow + numberDuplicateTickets - 1,
-                    currentColumn,
-                    ticketByUser.BalanceBeforeBet,
-                    i % 2 == 0 ? evenRowDecimalStyle : decimalStyle);
+                currentColumn++;
                 NpoiExcelExtensions.RenderCell(
                     ref worksheet,
                     ref row,
@@ -308,6 +300,16 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                         currentColumn,
                         rowIndex + 1,
                         i % 2 == 0 ? evenRowNumberStyle : numberStyle);
+                    currentColumn = 5;
+                    NpoiExcelExtensions.RenderCell(
+                       ref worksheet,
+                       ref row,
+                       currentRow,
+                       ref currentColumn,
+                       currentRow,
+                       currentColumn,
+                       ticketInfo.BalanceBeforeBet,
+                       i % 2 == 0 ? evenRowDecimalStyle : decimalStyle);
                     currentColumn = 8;
                     NpoiExcelExtensions.RenderCell(
                         ref worksheet,
