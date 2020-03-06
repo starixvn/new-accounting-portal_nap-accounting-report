@@ -1,9 +1,5 @@
 namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
@@ -16,6 +12,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
     using NPOI.HSSF.UserModel;
     using NPOI.HSSF.Util;
     using NPOI.SS.UserModel;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -50,7 +50,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                 x.custid,
                 x.typename,
                 x.winlostdate,
-                x.balance,
                 x.stake,
                 x.odds,
                 x.bettype,
