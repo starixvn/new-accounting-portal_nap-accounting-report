@@ -76,5 +76,6 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int PockerGame = 163;
         public const int CardClub = 165;
         public const int NPH = 246;
+        public const int VirtualGames = 245;
     }
 }

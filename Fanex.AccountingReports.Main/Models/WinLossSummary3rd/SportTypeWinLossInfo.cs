@@ -1,9 +1,9 @@
 namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
 {
-    using System;
-    using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Main.Common;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// TODO: Update summary.
@@ -39,7 +39,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.Pragmatic,
             SportContants.PockerGame,
             SportContants.CardClub,
-            SportContants.NPH
+            SportContants.NPH,
+            SportContants.VirtualGames
         };
 
         public SportTypeWinLossInfo()
@@ -61,7 +62,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             };
         }
 
-        public int Id { get; set; }        
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
