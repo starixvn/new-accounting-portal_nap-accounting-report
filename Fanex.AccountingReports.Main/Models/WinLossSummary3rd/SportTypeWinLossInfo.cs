@@ -40,7 +40,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.PockerGame,
             SportContants.CardClub,
             SportContants.NPH,
-            SportContants.VirtualGames
+            SportContants.VirtualGames,
+            SportContants.Spedagaming
         };
 
         public SportTypeWinLossInfo()
