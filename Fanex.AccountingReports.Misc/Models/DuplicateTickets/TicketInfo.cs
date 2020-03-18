@@ -19,7 +19,5 @@ namespace Fanex.AccountingReports.Misc.Models.DuplicateTickets
         public int GroupNo { get; set; }
 
         public string TransDesc { get; set; }
-
-        public decimal BalanceBeforeBet { get; set; }
     }
 }

@@ -51,7 +51,7 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
         self.playSound();
     };
 
-    self.repeatPlaySound = function () {                
+    self.repeatPlaySound = function () {
         cachedData.countPlaySoundInAPatchEvent = setInterval(self.repeatPlaySoundEvent, 3000);
         self.playSound();
     };
@@ -298,41 +298,50 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
 
     self.renderDuplicateTicketGrid = function (bodyData, reportTitle, rowIndex, pageIndex, pageSize) {
         var columns = [
-            { HeaderText: "#", Width: 60, Name: "ColNo", HeaderAlign: "center",
+            {
+                HeaderText: "#", Width: 60, Name: "ColNo", HeaderAlign: "center",
                 CellAlign: "center", FormatNumber: FormatConstant.INT_NUMBER
             },
-            { HeaderText: "Username", Width: 130, Name: "ColUserName", HeaderAlign: "center",
+            {
+                HeaderText: "Username", Width: 130, Name: "ColUserName", HeaderAlign: "center",
                 CellAlign: "center"
             },
-            { HeaderText: "CustId", Width: 80, Name: "ColCustId", HeaderAlign: "center",
+            {
+                HeaderText: "CustId", Width: 80, Name: "ColCustId", HeaderAlign: "center",
                 CellAlign: "right"
             },
-            { HeaderText: "Bet Type", Width: 100, Name: "ColBetType", HeaderAlign: "center",
+            {
+                HeaderText: "Bet Type", Width: 100, Name: "ColBetType", HeaderAlign: "center",
                 CellAlign: "center"
             },
-            { HeaderText: "Winlostdate", Width: 100, Name: "ColWinLostDate", HeaderAlign: "center",
+            {
+                HeaderText: "Winlostdate", Width: 100, Name: "ColWinLostDate", HeaderAlign: "center",
                 CellAlign: "center"
             },
-            { HeaderText: "Balance Before Bet", Width: 100, Name: "ColBalanceBeforeBet", HeaderAlign: "center",
+            {
+                HeaderText: "Balance Before Bet", Width: 100, Name: "ColBalanceBeforeBet", HeaderAlign: "center",
                 CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER
             },
             { HeaderText: "Stake", Width: 80, Name: "ColStake", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
             { HeaderText: "Odds", Width: 50, Name: "ColOdds", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
             { HeaderText: "Status", Width: 60, Name: "ColStatus", HeaderAlign: "center", CellAlign: "center" },
-            { HeaderText: "Refno", Width: 100, Name: "ColRefNo",
+            {
+                HeaderText: "Refno", Width: 100, Name: "ColRefNo",
                 HeaderAlign: "center", CellAlign: "right"
             },
-            { HeaderText: "BetTime", Width: 90, Name: "ColBetTime", HeaderAlign: "center",
+            {
+                HeaderText: "BetTime", Width: 90, Name: "ColBetTime", HeaderAlign: "center",
                 CellAlign: "center"
             },
-            { HeaderText: "Time Diff (milisecond)", Width: 70, Name: "ColTimeDiff", HeaderAlign: "center",
+            {
+                HeaderText: "Time Diff (milisecond)", Width: 70, Name: "ColTimeDiff", HeaderAlign: "center",
                 CellAlign: "right", FormatNumber: FormatConstant.INT_NUMBER
             },
             {
                 HeaderText: "TransDesc", Width: 700, Name: "ColTransDesc", HeaderAlign: "center",
-                CellAlign: "left" 
+                CellAlign: "left"
             }
-            ];
+        ];
 
 
         var gridOptions = {
@@ -400,23 +409,12 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
                             { Name: "ColUserName", Value: currentUser.UserName, MergeRowNumber: mergeRowNumber, TdClass: tdClass },
                             { Name: "ColCustId", Value: currentUser.CustId, MergeRowNumber: mergeRowNumber, TdClass: tdClass },
                             { Name: "ColBetType", Value: currentUser.BetType, MergeRowNumber: mergeRowNumber, TdClass: tdClass },
-                            { Name: "ColWinLostDate", Value: currentUser.WinLostDate, MergeRowNumber: mergeRowNumber, TdClass: tdClass }
-                        );
-                    }
-
-                    currentTicketByUser.push(
-                        { Name: "ColBalanceBeforeBet", Value: currentTicketInfo.BalanceBeforeBet, TdClass: tdClass }
-                    );
-
-
-                    if (j == 0 || bodyData.length === 0) {
-                        var mergeRowNumber = numberDuplicateTicketsByUser - j;
-                        currentTicketByUser.push(
+                            { Name: "ColWinLostDate", Value: currentUser.WinLostDate, MergeRowNumber: mergeRowNumber, TdClass: tdClass },
+                            { Name: "ColBalanceBeforeBet", Value: currentUser.BalanceBeforeBet, MergeRowNumber: mergeRowNumber, TdClass: tdClass },
                             { Name: "ColStake", Value: currentUser.Stake, MergeRowNumber: mergeRowNumber, TdClass: tdClass },
                             { Name: "ColOdds", Value: currentUser.Odds, MergeRowNumber: mergeRowNumber, TdClass: tdClass }
                         );
                     }
-
                     var timeDiff = (currentTicketInfo.TimeDifference == 0 && j == 0) ? "-" : currentTicketInfo.TimeDifference
                     currentTicketByUser.push(
                         { Name: "ColStatus", Value: currentTicketInfo.Status, TdClass: tdClass },

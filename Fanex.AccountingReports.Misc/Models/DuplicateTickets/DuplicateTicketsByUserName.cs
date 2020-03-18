@@ -24,6 +24,8 @@ namespace Fanex.AccountingReports.Misc.Models.DuplicateTickets
 
         public string WinLostDate { get; set; }
 
+        public decimal BalanceBeforeBet { get; set; }
+
         public decimal Stake { get; set; }
 
         public decimal Odds { get; set; }
