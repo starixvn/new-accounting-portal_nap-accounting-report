@@ -38,5 +38,7 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int GoldDeluxe = 255;
 
         public const int PockerGames = 163;
+
+        public const int VirtualGames = 245;
     }
 }
