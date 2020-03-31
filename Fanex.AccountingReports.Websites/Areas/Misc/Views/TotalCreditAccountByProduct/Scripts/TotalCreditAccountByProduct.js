@@ -43,7 +43,10 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         Bullfighting: 207,
         GoldDeluxe: 255,
         PockerGames: 163,
-        VirtualGames: 245
+        VirtualGames: 245,
+        SAGaming: 244,
+        SexyGaming: 243,
+        SabaClub: 200
     };
 
     var cachedData = {
@@ -504,6 +507,15 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 break;
             case productEnums.VirtualGames:
                 productName = "Virtual Games";
+                break;
+            case productEnums.SAGaming:
+                productName = "SA Gaming";
+                break;
+            case productEnums.SexyGaming:
+                productName = "SexyGaming";
+                break;
+            case productEnums.SabaClub:
+                productName = "Saba.club";
                 break;
             default:
                 productName = "Unknown";

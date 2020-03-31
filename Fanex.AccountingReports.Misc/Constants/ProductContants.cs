@@ -40,5 +40,11 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int PockerGames = 163;
 
         public const int VirtualGames = 245;
+
+        public const int SAGaming = 244;
+
+        public const int SexyGaming = 243;
+
+        public const int SabaClub = 200;
     }
 }

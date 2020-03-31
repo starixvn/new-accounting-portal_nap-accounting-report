@@ -465,6 +465,18 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     product = "Virtual Games";
                     break;
 
+                case ProductContants.SAGaming:
+                    product = "SA Gaming";
+                    break;
+
+                case ProductContants.SabaClub:
+                    product = "Saba.club";
+                    break;
+
+                case ProductContants.SexyGaming:
+                    product = "Sexy Gaming";
+                    break;
+
                 default:
                     break;
             }
