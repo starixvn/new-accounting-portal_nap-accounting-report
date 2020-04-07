@@ -477,6 +477,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     product = "Sexy Gaming";
                     break;
 
+                case ProductContants.TableGames:
+                    product = "Table Games";
+                    break;
+
                 default:
                     break;
             }

@@ -46,7 +46,8 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         VirtualGames: 245,
         SAGaming: 244,
         SexyGaming: 243,
-        SabaClub: 200
+        SabaClub: 200,
+        TableGames: 222
     };
 
     var cachedData = {
@@ -516,6 +517,9 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 break;
             case productEnums.SabaClub:
                 productName = "Saba.club";
+                break;
+            case productEnums.TableGames:
+                productName = "Table Games";
                 break;
             default:
                 productName = "Unknown";
