@@ -46,7 +46,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.SexyGaming,
             SportContants.SabaClub,
             SportContants.Indo4D,
-            SportContants.TableGames
+            SportContants.TableGames,
+            SportContants.BBin
         };
 
         public SportTypeWinLossInfo()
