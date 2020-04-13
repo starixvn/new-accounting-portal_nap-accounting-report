@@ -47,7 +47,8 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         SAGaming: 244,
         SexyGaming: 243,
         SabaClub: 200,
-        TableGames: 222
+        TableGames: 222,
+        BBin: 241
     };
 
     var cachedData = {
@@ -520,6 +521,9 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 break;
             case productEnums.TableGames:
                 productName = "Table Games";
+                break;
+            case productEnums.BBin:
+                productName = "BBIN";
                 break;
             default:
                 productName = "Unknown";

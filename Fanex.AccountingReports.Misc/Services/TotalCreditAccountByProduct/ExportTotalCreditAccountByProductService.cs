@@ -481,6 +481,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     product = "Table Games";
                     break;
 
+                case ProductContants.BBin:
+                    product = "BBIN";
+                    break;
+
                 default:
                     break;
             }

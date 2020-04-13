@@ -83,5 +83,6 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int SabaClub = 200;
         public const int Indo4D = 223;
         public const int TableGames = 222;
+        public const int BBin = 241;
     }
 }
