@@ -48,7 +48,8 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         SexyGaming: 243,
         SabaClub: 200,
         TableGames: 222,
-        BBin: 241
+        BBin: 241,
+        IBCBetLiveCasino: 242
     };
 
     var cachedData = {
@@ -524,6 +525,9 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 break;
             case productEnums.BBin:
                 productName = "BBIN";
+                break;
+            case productEnums.IBCBetLiveCasino:
+                productName = "IBCBet Live Casino";
                 break;
             default:
                 productName = "Unknown";

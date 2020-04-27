@@ -485,6 +485,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     product = "BBIN";
                     break;
 
+                case ProductContants.IBCBetLiveCasino:
+                    product = "IBCBet Live Casino";
+                    break;
+
                 default:
                     break;
             }
