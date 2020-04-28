@@ -50,5 +50,7 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int TableGames = 222;
 
         public const int BBin = 241;
+
+        public const int IBCBetLiveCasino = 242;
     }
 }
