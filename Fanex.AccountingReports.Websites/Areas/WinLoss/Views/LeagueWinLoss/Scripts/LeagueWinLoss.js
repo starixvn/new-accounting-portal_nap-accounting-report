@@ -7,26 +7,58 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         btnGenerate: null,
         datepickerplugin: null,
         reportContainer: null,
-        report: null
+        report: null,
+        ddlSport: null,
+        btnToday: null,
+        btnYesterday: null,
+        monthpickerplugin: null,
+        btnReportMode: null,
+        bettransMode: null,
+        warehouseMode: null
     };
 
     self.Params = {
         reportParams: {
             Winlostdate: null
-        }
+        },
+
+        isHistoryMode: false
     };
 
     self.initPage = function () {
         cachedDOMElements();
+        setDayValueForButtons();
+        renderMonthPicker();
         renderDatePicker();
+        getSport();
+        hideWarehouseMode();
         bindingEvent();
+
     };
     var cachedDOMElements = function () {
         _tables.btnGenerate = $("#btnGenerate");
         _tables.reportContainer = $("#leagueWinLossReportContainer");
         _tables.report = $("#leagueWinLossReport");
+        _tables.ddlSport = $("#dropdown-sport");
+        _tables.btnToday = $("#btnToday");
+        _tables.btnYesterday = $("#btnYesterday");
+        _tables.monthpickerplugin = $("#dvMonth");
+        _tables.btnReportMode = $("#btnReportMode");
+        _tables.bettransMode = $("#bettrans-mode");
+        _tables.warehouseMode = $("#warehouse-mode");
 
     };
+
+    var setDayValueForButtons = function () {
+        _tables.btnToday.attr('value', todayStr);
+        _tables.btnYesterday.attr('value', yesterdayStr);
+    };
+
+
+    var hideWarehouseMode = function () {
+        _tables.warehouseMode.addClass("display-none");
+    };
+
     var renderDatePicker = function () {
         $('#datepickerplugin').nexDatePicker({
             nexDatePickerType: "single",
@@ -49,34 +81,65 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 
         _tables.datepickerplugin = $("#datepickerplugin");
     };
+
+    var getSport = function () {
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "WinLoss/LeagueWinLoss/GetSport",
+            null,
+            self.RenderSport,
+            self.RenderSport,
+            AccReport.enableInput,
+            false);
+    };
+
+    var renderMonthPicker = function () {
+        $('#dvMonth').monPickr({
+            plugInId: '#dvMonth',
+            today: toDay,
+            maxDate: toDay,
+            minDate: minWareHouseDate,
+            showDateRange: true,
+            log: function (msg) {
+                console.warn(msg);
+            }
+        });
+
+        _tables.monthpickerplugin = $('#dvMonth');
+    };
+
     var bindingEvent = function () {
         _tables.btnGenerate.click(function () {
             self.btnGenerateClick();
         });
+
+        _tables.btnReportMode.click(function () {
+            if (self.Params.isHistoryMode) {
+                self.Params.isHistoryMode = false;
+                _tables.bettransMode.removeClass("display-none");
+                _tables.warehouseMode.addClass("display-none");
+                _tables.btnReportMode.attr('value', "HISTORY REPORT");
+            } else {
+                self.Params.isHistoryMode = true;
+                _tables.bettransMode.addClass("display-none");
+                _tables.warehouseMode.removeClass("display-none");
+                _tables.btnReportMode.attr('value', "BACK");
+            }
+
+        });
     };
+
     self.btnGenerateClick = function () {
         AccReport.disableInput();
         hideLeagueWinLossBySport();
         getParams();
-        $.ajax({
-            type: "POST",
-            url: window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify(self.Params.reportParams),
-            beforeSend: function () {
-                AccReport.disableInput();
-            },
-            success: function (rs) {
-                renderLeagueWinLoss(rs);
-            },
-            error: function (event, jqXHR, ajaxSettings) {
-                renderLeagueWinLoss([]);
-            },
-            complete: function () {
-                AccReport.enableInput();
-            }
-        });
+
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
+            self.Params.reportParams,
+            renderLeagueWinLoss,
+            renderLeagueWinLoss,
+            AccReport.enableInput,
+            false);
     };
     var getParams = function () {
         self.Params.reportParams.Winlostdate = _tables.datepickerplugin.nexDatePicker("getSingleDate");
@@ -262,5 +325,53 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
     };
     self.exportReport = function () {
         AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLoss", self.Params.reportParams);
+    };
+
+    self.RenderSport = function (rs) {
+        var id = "ddl-sport";
+        var sportGroups = [];
+        var sportGroupLength = rs.length;
+        for (var i = 0; i < sportGroupLength; i++) {
+            var sportGroup = rs[i];
+            var sports = [];
+            var sportLength = sportGroup.ChildItems.length;
+            for (var j = 0; j < sportLength; j++) {
+                var sport = sportGroup.ChildItems[j];
+                sports.push({
+                    Id: id + "-" + sport.SportType + "-" + sport.SportName,
+                    Value: sport.SportType,
+                    Text: sport.SportName,
+                    Checked: true,
+                    Enable: true,
+                    CssClass: "",
+                    Items: []
+                });
+            }
+
+            sportGroups.push({
+                Id: id + "-group" + sportGroup.GroupId,
+                Value: sportGroup.GroupId,
+                Text: sportGroup.GroupName,
+                Checked: true,
+                Enable: true,
+                CssClass: "",
+                Items: sports
+            });
+        }
+
+        _tables.ddlSport.multiSelect(
+         {
+             minWidth: 160,
+             maxHeight: 450,
+             shadow: true,
+             showHeader: true,
+             isCheckAll: true,
+             showFooter: false,
+             checkAllText: "All",
+             isUsedCustomCheckAllText: true,
+             customCheckAllText: "All",
+             noItemText: "No sport found.",
+             listData: sportGroups
+         });
     };
 }

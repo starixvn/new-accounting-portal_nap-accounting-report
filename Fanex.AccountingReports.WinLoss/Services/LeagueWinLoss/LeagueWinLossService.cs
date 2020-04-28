@@ -1,10 +1,5 @@
 namespace Fanex.AccountingReports.WinLoss.Services.Implement
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
@@ -17,6 +12,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
     using Fanex.AccountingReports.WinLoss.Repositories.Implement;
     using Fanex.AccountingReports.WinLoss.Resources;
     using Fanex.Common;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -126,6 +126,42 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             SessionManager.Set<LeagueWinLossInfo>(WinLossContants.LeagueWinLossSessionKey, null);
             return null;
+        }
+
+        public List<SportGroup> GetSports()
+        {
+            var sportGroups = new List<SportGroup>();
+            var criteria = new GetSportCriteria();
+            var rawData = this._reportRepository.GetSport(criteria);
+            var groups = rawData.GroupBy(x => new { x.SportGroupType, x.SportGroupName });
+            foreach (var group in groups)
+            {
+                var sportGroup = new SportGroup
+                {
+                    GroupId = group.Key.SportGroupType,
+                    GroupName = group.Key.SportGroupName,
+                    ChildItems = new List<Models.LeagueWinLoss.Sport>()
+                };
+
+                if (group.Count() == 1)
+                {
+                    sportGroups.Add(sportGroup);
+                    continue;
+                }
+
+                foreach (var item in group)
+                {
+                    sportGroup.ChildItems.Add(new Models.LeagueWinLoss.Sport
+                    {
+                        SportType = item.SportType,
+                        SportName = item.SportName
+                    });
+                }
+
+                sportGroups.Add(sportGroup);
+            }
+
+            return sportGroups;
         }
 
         private LeagueWinLossInfo CalculateNormalSports(IGrouping<dynamic, dynamic> sportGroup)

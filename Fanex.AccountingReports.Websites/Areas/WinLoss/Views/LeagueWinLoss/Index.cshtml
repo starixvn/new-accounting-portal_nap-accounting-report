@@ -9,8 +9,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
-    @Styles.Render("~/scripts/_lib/MultipleSelect/style", "~/scripts/_lib/MonthPicker/style")
-    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    @Styles.Render("~/scripts/_lib/MultipleSelect/style", "~/scripts/_lib/MonthPicker/style", "~/scripts/_lib/Fanex.Grid/style")
+<link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+<link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css?ver=1" />
+<link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less?ver=2" />
     <link rel="stylesheet" type="text/css" href="~/Areas/WinLoss/Views/LeagueWinLoss/Styles/LeagueWinLoss.less?ver=10" />
 }
 @section Headline {
@@ -24,10 +26,40 @@
     <div class="filter-form">
         <div class="filter-row">
             <div class="filter-cell">
+                <div class="lbl-field col_3 align-right">
+                    @Labels.Sport
+                </div>
+                <div class="edit-field col_7 align-left">
+                    <select id="dropdown-sport"></select>
+                </div>
+            </div>
+            <div id="bettrans-mode" class="filter-cell">
                 <div id="datepickerplugin" class="lbl-field col_7 align-right">
                 </div>
                 <div class="submit width-auto col_4">
+                    <input id="btnToday" name="btnToday" type="submit" value="Today" class="" />
+                </div>
+                <div class="submit width-auto col_4">
+                    <input id="btnYesterday" name="btnYesterday" type="submit" value="Yesterday" class="" />
+                </div>
+            </div>
+            <div id="warehouse-mode" class="filter-cell">
+                <div class="lbl-field col_3 align-right">
+                    @Labels.Month
+                </div>
+                <div class="edit-field col_14">
+                    <div id="dvMonth">
+                    </div>
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="submit width-auto col_4">
                     <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" class="" />
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="submit width-auto col_4">
+                    <input id="btnReportMode" name="btnReportMode" type="submit" value="HISTORY REPORT" class="" />
                 </div>
             </div>
         </div>
@@ -63,14 +95,19 @@
 {
     <script type="text/javascript">
         var labelDate = '@Labels.Date';
-        var minDate = '@(DateTime.Today.AddDays((ReportService.BalanceUp.BalanceUpDay - DateTime.Today).Days).ToShortDateString())';
-        var maxDate = '@(DateTime.Today.AddDays(7).ToShortDateString())';
+        var minDate = '@(ReportService.BalanceUp.MoveBetsDay.AddDays(1).ToShortDateString())';
+        var maxDate = '@(DateTime.Today.ToShortDateString())';
         var toDay = '@DateTime.Now.ToShortDateString()';
         var is8RMActive = '@RMSection.Instance.Report[ReportName.LeagueWinLoss.ToString()].ReportConfigs[RMSection.RMType.EightRM.ToString()].IsActive';
         var isBARMActive = '@RMSection.Instance.Report[ReportName.LeagueWinLoss.ToString()].ReportConfigs[RMSection.RMType.BARM.ToString()].IsActive';
+        var todayStr = '@DateTime.Now.ToString("MMM dd, yyyy")';
+        var yesterdayStr = '@DateTime.Now.AddDays(-1).ToString("MMM dd, yyyy")';
+        var minWareHouseDate = '@(new DateTime(2017, 1, 1))';
+
     </script>
 }
 @section Foot {
+    @Scripts.Render("~/scripts/_lib/multiselect", "~/scripts/_lib/monPickr")
     <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
     <script type="text/javascript" src="~/Areas/WinLoss/Views/LeagueWinLoss/Scripts/LeagueWinLoss.js"></script>

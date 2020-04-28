@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.WinLoss.Controllers
 {
-    using System.Web.Mvc;
     using Core.Web;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss;
@@ -8,6 +7,7 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
     using Services.Implement.LeagueWinLoss;
+    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -29,6 +29,13 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult GetSport()
+        {
+            var sports = this._reportService.GetSports();
+            return Json(sports, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]

@@ -1,11 +1,11 @@
 namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
 {
+    using Fanex.Data;
+    using Fanex.Data.Repository;
     using System.Collections;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
-    using Fanex.Data;
-    using Fanex.Data.Repository;
 
     /// <summary>
     /// TODO: Update summary.
@@ -170,6 +170,36 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                 }
 
                 return leagueWinLoss;
+            }
+
+            return null;
+        }
+
+        public List<dynamic> GetSport(ICriteria criteria)
+        {
+            DataSet result = null;
+
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                result = db.ExecuteDataSet(criteria.GetSpParams());
+            }
+
+            if (result != null && result.Tables.Count > 0)
+            {
+                var sportTable = result.Tables[0];
+                var sport = new List<dynamic>();
+                foreach (DataRow row in sportTable.Rows)
+                {
+                    sport.Add(new
+                    {
+                        SportGroupType = row["SportGroupType"],
+                        SportGroupName = row["SportGroupName"],
+                        SportType = row["SportType"],
+                        SportName = row["SportName"]
+                    });
+                }
+
+                return sport;
             }
 
             return null;
