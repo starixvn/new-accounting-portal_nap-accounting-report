@@ -1,5 +1,7 @@
 namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
 {
+    using Common;
+    using Entities.LeagueWinLoss;
     using Fanex.Data;
     using Fanex.Data.Repository;
     using System.Collections;
@@ -18,39 +20,40 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
         /// <param name="criteria">The criteria.</param>
         /// <param name="outputParam">The output parameter.</param>
         /// <returns>The league win loss.</returns>
-        public List<dynamic> GetLeagueWinLoss(ICriteria criteria, ref Hashtable outputParam)
+        public List<LeagueWinLossEntity> GetLeagueWinLoss(ICriteria criteria)
         {
             DataSet result = null;
+            var leagueWinLoss = new List<LeagueWinLossEntity>();
 
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
                 result = db.ExecuteDataSet(criteria.GetSpParams());
-                outputParam = db.GetOuputParams();
             }
 
             if (result != null && result.Tables.Count > 0)
             {
                 var winLossTable = result.Tables[0];
-                var leagueWinLoss = new List<dynamic>();
                 foreach (DataRow row in winLossTable.Rows)
                 {
-                    leagueWinLoss.Add(new
+                    leagueWinLoss.Add(new LeagueWinLossEntity
                     {
-                        sporttype = row["sporttype"],
-                        bettype = row["bettype"],
-                        leagueid = row["leagueid"],
-                        WinLost = row["WinLost"],
-                        Position = row["Position"],
-                        Commission = row["Commission"],
-                        LineTotal = row["LineTotal"],
-                        Turnover = row["Turnover"]
+                        SportType = Converter.ToInt(row["SportType"]),
+                        Sport = Converter.ToString2(row["Sport"]),
+                        LeagueId = Converter.ToInt(row["LeagueID"]),
+                        LeagueName = Converter.ToString2(row["LeagueName"]),
+                        MemberWinLoss = Converter.ToDecimal(row["MemberWinLoss"]),
+                        SMAWinLoss = Converter.ToDecimal(row["SMAWinLoss"]),
+                        ExtraPT = Converter.ToDecimal(row["ExtraPT"]),
+                        Commission = Converter.ToDecimal(row["Commission"]),
+                        RealIncome = Converter.ToDecimal(row["RealInCome"]),
+                        VirtualWinLoss = Converter.ToDecimal(row["VirtualIncome"]),
+                        RealTurnover = Converter.ToDecimal(row["RealTurnover"]),
+                        VirtualTurnover = Converter.ToDecimal(row["VirtualTurnover"])
                     });
                 }
-
-                return leagueWinLoss;
             }
 
-            return null;
+            return leagueWinLoss;
         }
 
         /// <summary>
