@@ -1108,4 +1108,13 @@
   <data name="SMA" xml:space="preserve">
     <value>SMA</value>
   </data>
+  <data name="Extra_PT" xml:space="preserve">
+    <value>Extra PT</value>
+  </data>
+  <data name="Real_Income" xml:space="preserve">
+    <value>Real Income</value>
+  </data>
+  <data name="Virtual_Win_Loss" xml:space="preserve">
+    <value>Virtual Win Loss</value>
+  </data>
 </root>

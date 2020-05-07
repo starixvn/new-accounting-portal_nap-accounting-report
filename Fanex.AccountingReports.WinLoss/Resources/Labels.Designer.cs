@@ -907,6 +907,15 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Extra PT.
+        /// </summary>
+        public static string Extra_PT {
+            get {
+                return ResourceManager.GetString("Extra_PT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ExtraPT.
         /// </summary>
         public static string ExtraPT {
@@ -1458,7 +1467,8 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Match.
         /// </summary>
-        public static string Match {
+        public static string LeagueMatch
+        {
             get {
                 return ResourceManager.GetString("Match", resourceCulture);
             }
@@ -2056,6 +2066,15 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         public static string Real {
             get {
                 return ResourceManager.GetString("Real", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Real Income.
+        /// </summary>
+        public static string Real_Income {
+            get {
+                return ResourceManager.GetString("Real_Income", resourceCulture);
             }
         }
         
@@ -2857,6 +2876,15 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         public static string Virtual_Sports {
             get {
                 return ResourceManager.GetString("Virtual_Sports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Win Loss.
+        /// </summary>
+        public static string Virtual_Win_Loss {
+            get {
+                return ResourceManager.GetString("Virtual_Win_Loss", resourceCulture);
             }
         }
         

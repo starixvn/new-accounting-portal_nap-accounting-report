@@ -8,7 +8,7 @@ namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
     {
         public string SportName { get; set; }
 
-        public IEnumerable<LeagueWinLossItem> Leagues { get; set; }
+        public List<LeagueWinLossItem> Leagues { get; set; }
 
         public LeagueWinLossItem Total { get; set; }
     }

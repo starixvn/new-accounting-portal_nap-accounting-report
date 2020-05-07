@@ -1,5 +1,7 @@
 namespace Fanex.AccountingReports.WinLoss.Services.Implement
 {
+    using Constants;
+    using Core.Web;
     using Entities.LeagueWinLoss;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
@@ -80,7 +82,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 var sportWinLoss = new SportWinLoss
                 {
                     SportName = sportName,
-                    Leagues = leagues,
+                    Leagues = leagues.ToList(),
                     Total = sportTotal
                 };
 
@@ -110,7 +112,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var grandTotal = CalculateSportTotal("Grand Total", rawData);
             leagueWinLoss.GrandTotal = grandTotal;
 
-            //  SessionManager.Set(WinLossContants.LeagueWinLossSessionKey, leagueWinLoss);
+            SessionManager.Set(WinLossContants.LeagueWinLossSessionKey, leagueWinLoss);
             return leagueWinLoss;
         }
 
