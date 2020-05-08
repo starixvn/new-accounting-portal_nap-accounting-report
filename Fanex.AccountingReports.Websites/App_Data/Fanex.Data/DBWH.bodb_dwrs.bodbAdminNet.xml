@@ -75,4 +75,9 @@
   <Function Name="Core - Get DWH Date Range">
     <Setting Key="Core_GetDWH_DateRange" SpName="BI_GetDWStatusByCube" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
   </Function>
+  <Function Name="Win Loss - League Win Loss">
+    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLoss_WH" SpName="Acc_Rpt_LeagueWL_Sporttype_Old_xtest" DbName="DBWH.bodb_dwrs.bodbAdminNet"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossBySport_WH" SpName="Acc_Rpt_LeagueWL_Bettype_Old_xtest" DbName="DBWH.bodb_dwrs.bodbAdminNet"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLossByBetType_WH" SpName="Acc_Rpt_LeagueWL_Details_Old_xtest" DbName="DBWH.bodb_dwrs.bodbAdminNet"></Setting>
+  </Function>
 </Functions>

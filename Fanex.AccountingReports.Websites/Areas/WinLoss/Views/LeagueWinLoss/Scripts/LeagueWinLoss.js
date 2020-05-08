@@ -21,10 +21,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         reportParams: {
             StartDate: null,
             EndDate: null,
-            SportTypeList: null
+            SportTypeList: null,
+            IsNormalMode: true
         },
 
-        isHistoryMode: false
+        isNormalMode: true
     };
 
     self.initPage = function () {
@@ -115,16 +116,17 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         });
 
         _tables.btnReportMode.click(function () {
-            if (self.Params.isHistoryMode) {
-                self.Params.isHistoryMode = false;
-                _tables.bettransMode.removeClass("display-none");
-                _tables.warehouseMode.addClass("display-none");
-                _tables.btnReportMode.attr('value', "HISTORY REPORT");
-            } else {
-                self.Params.isHistoryMode = true;
+            if (self.Params.isNormalMode) {
+                self.Params.isNormalMode = false;
                 _tables.bettransMode.addClass("display-none");
                 _tables.warehouseMode.removeClass("display-none");
                 _tables.btnReportMode.attr('value', "BACK");
+              
+            } else {
+                self.Params.isNormalMode = true;
+                _tables.bettransMode.removeClass("display-none");
+                _tables.warehouseMode.addClass("display-none");
+                _tables.btnReportMode.attr('value', "HISTORY REPORT");
             }
 
         });
@@ -133,6 +135,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
     self.btnGenerateClick = function () {
         AccReport.disableInput();
         hideLeagueWinLossBySport();
+        hideLeagueWinLossByBetType();
         getParams();
 
         AccReport.utility.CallAjax(this,
@@ -144,10 +147,17 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             false);
     };
     var getParams = function () {
-        var date = _tables.datepickerplugin.nexDatePicker("getSingleDate");
-        self.Params.reportParams.StartDate = date;
-        self.Params.reportParams.EndDate = date;
+        if (self.Params.isNormalMode) {
+            var date = _tables.datepickerplugin.nexDatePicker("getSingleDate");
+            self.Params.reportParams.StartDate = date;
+            self.Params.reportParams.EndDate = date;
+        } else {
+            self.Params.reportParams.StartDate = _tables.monthpickerplugin.monPickr("getFromDate", FormatConstant.MMM_DD_YY_STRING_MONTH_PICKER);
+            self.Params.reportParams.EndDate = _tables.monthpickerplugin.monPickr("getToDate", FormatConstant.MMM_DD_YY_STRING_MONTH_PICKER);
+        }
+      
         self.Params.reportParams.SportTypeList = _tables.ddlSport.multiSelect('getCheckedItems').toString();
+        self.Params.reportParams.IsNormalMode = self.Params.isNormalMode;
     };
     function mappingDataRow(info, cssClass) {
         return {
@@ -168,6 +178,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
     };
     
     var renderLeagueWinLoss = function (report) {
+        var title = self.Params.isNormalMode ? "League Win Loss Report on " + self.Params.reportParams.StartDate
+            : "League Win Loss Report From " + self.Params.reportParams.StartDate + " To " + self.Params.reportParams.EndDate;
         self.showReport();
         _tables.reportContainer.removeClass("display-none");
         _tables.report.addClass("display-none");
@@ -322,7 +334,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                         { HeaderText: "Commission", Width: 120, Name: "ColCommision", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                         { HeaderText: "Variance", Width: 120, Name: "ColVariance", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                         { HeaderText: "Virtual Win Loss", Width: 120, Name: "ColVirtualWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
-                        { HeaderText: "Real Income Total", Width: 120, Name: "ColRealIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
+                        { HeaderText: "Real Income", Width: 120, Name: "ColRealIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                         { HeaderText: "Virtual", Width: 120, Name: "ColVirtualTurnOver", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                         { HeaderText: "Real", Width: 120, Name: "ColRealTurnOver", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                         { HeaderText: "Virtual", Width: 120, Name: "ColVirtualMargin", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$' },
@@ -331,7 +343,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             showFooter: true,
             titleInfo:
             {
-                text: "League Win Loss Report on " + self.Params.reportParams.Winlostdate,
+                text: title,
                 showExcelButton: true,
                 exportExcelFunction: function () {
                     self.exportReport();

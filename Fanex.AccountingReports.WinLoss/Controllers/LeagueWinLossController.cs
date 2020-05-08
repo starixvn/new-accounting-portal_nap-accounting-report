@@ -45,19 +45,19 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
             return Json(report, JsonRequestBehavior.AllowGet);
         }
 
-        //[HttpPost]
-        //public JsonResult GetLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria)
-        //{
-        //    var report = this._reportService.GetLeagueWinLossBySport(criteria);
-        //    return Json(report, JsonRequestBehavior.AllowGet);
-        //}
+        [HttpPost]
+        public JsonResult GetLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria)
+        {
+            var report = this._reportService.GetLeagueWinLossBySport(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
 
-        //[HttpPost]
-        //public JsonResult GetLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
-        //{
-        //    var report = this._reportService.GetLeagueWinLossByBetType(criteria);
-        //    return Json(report, JsonRequestBehavior.AllowGet);
-        //}
+        [HttpPost]
+        public JsonResult GetLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
+        {
+            var report = this._reportService.GetLeagueWinLossByBetType(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult ExportLeagueWinLoss(GetLeagueWinLossCriteria criteria)
         {
@@ -65,16 +65,16 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
             return new EmptyResult();
         }
 
-        //public ActionResult ExportLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria)
-        //{
-        //    this._excelService.ExportLeagueWinLossBySport(criteria);
-        //    return new EmptyResult();
-        //}
+        public ActionResult ExportLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria)
+        {
+            this._excelService.ExportLeagueWinLossBySport(criteria);
+            return new EmptyResult();
+        }
 
-        //public ActionResult ExportLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
-        //{
-        //    this._excelService.ExportLeagueWinLossByBetType(criteria);
-        //    return new EmptyResult();
-        //}
+        public ActionResult ExportLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
+        {
+            this._excelService.ExportLeagueWinLossByBetType(criteria);
+            return new EmptyResult();
+        }
     }
 }

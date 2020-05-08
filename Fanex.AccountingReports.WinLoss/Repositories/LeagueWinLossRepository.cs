@@ -4,7 +4,6 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
     using Entities.LeagueWinLoss;
     using Fanex.Data;
     using Fanex.Data.Repository;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
@@ -66,15 +65,10 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        public List<dynamic> GetLeagueWinLossBySport(
-            ICriteria criteria,
-            out List<dynamic> eightRMTable,
-            out List<dynamic> barmTable)
+        public List<BettypeWinLossEntity> GetLeagueWinLossBySport(ICriteria criteria)
         {
             DataSet result = null;
-            var leagueWinLoss = new List<dynamic>();
-            eightRMTable = new List<dynamic>();
-            barmTable = new List<dynamic>();
+            var bettypeWinLoss = new List<BettypeWinLossEntity>();
 
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
@@ -83,54 +77,32 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
 
             if (result != null)
             {
-                if (result.Tables.Count >= 1)
+                if (result.Tables.Count > 0)
                 {
                     var winLossTable = result.Tables[0];
 
                     foreach (DataRow row in winLossTable.Rows)
                     {
-                        leagueWinLoss.Add(new
+                        bettypeWinLoss.Add(new BettypeWinLossEntity
                         {
-                            liveindicator = row["liveindicator"],
-                            Bettype = row["Bettype"],
-                            isHedge = row["isHedge"],
-                            WinLost = row["WinLost"],
-                            Position = row["Position"],
-                            Commission = row["Commission"],
-                            LineTotal = row["LineTotal"],
-                            Turnover = row["Turnover"]
-                        });
-                    }
-                }
-
-                if (result.Tables.Count >= 2)
-                {
-                    var raw8RMTable = result.Tables[1];
-                    foreach (DataRow row in raw8RMTable.Rows)
-                    {
-                        eightRMTable.Add(new
-                        {
-                            liveindicator = row["liveindicator"],
-                            Winlost8RM = row["Winlost8RM"]
-                        });
-                    }
-                }
-
-                if (result.Tables.Count >= 3)
-                {
-                    var rawBARMTable = result.Tables[2];
-                    foreach (DataRow row in rawBARMTable.Rows)
-                    {
-                        barmTable.Add(new
-                        {
-                            liveindicator = row["liveindicator"],
-                            WinlostBARM = row["WinlostBARM"]
+                            LiveIndicator = Converter.ToInt(row["LiveIndicator"]) == 1,
+                            Bettype = Converter.ToInt(row["Bettype"]),
+                            BettypeName = Converter.ToString2(row["BettypeName"]),
+                            IsHedge = Converter.ToBool(row["IsHedge"]),
+                            MemberWinLoss = Converter.ToDecimal(row["MemberWinLoss"]),
+                            SMAWinLoss = Converter.ToDecimal(row["SMAWinLoss"]),
+                            ExtraPT = Converter.ToDecimal(row["ExtraPT"]),
+                            Commission = Converter.ToDecimal(row["Commission"]),
+                            RealIncome = Converter.ToDecimal(row["RealInCome"]),
+                            VirtualWinLoss = Converter.ToDecimal(row["VirtualIncome"]),
+                            RealTurnover = Converter.ToDecimal(row["RealTurnover"]),
+                            VirtualTurnover = Converter.ToDecimal(row["VirtualTurnover"])
                         });
                     }
                 }
             }
 
-            return leagueWinLoss;
+            return bettypeWinLoss;
         }
 
         /// <summary>
@@ -139,36 +111,33 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
         /// <param name="criteria">The criteria.</param>
         /// <param name="outputParam">The output parameter.</param>
         /// <returns>The league win loss by bet type.</returns>
-        public List<dynamic> GetLeagueWinLossByBetType(ICriteria criteria, ref Hashtable outputParam)
+        public List<MatchEntity> GetLeagueWinLossByBetType(ICriteria criteria)
         {
             DataSet result = null;
 
             using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
                 result = db.ExecuteDataSet(criteria.GetSpParams());
-                outputParam = db.GetOuputParams();
             }
 
             if (result != null && result.Tables.Count > 0)
             {
                 var winLossTable = result.Tables[0];
-                var leagueWinLoss = new List<dynamic>();
+                var leagueWinLoss = new List<MatchEntity>();
                 foreach (DataRow row in winLossTable.Rows)
                 {
-                    leagueWinLoss.Add(new
+                    leagueWinLoss.Add(new MatchEntity
                     {
-                        matchcode = row["matchcode"],
-                        HomeId = row["HomeId"],
-                        AwayId = row["AwayId"],
-                        liveindicator = row["liveindicator"],
-                        BetType = row["BetType"],
-                        leagueid = row["leagueid"],
-                        WinLost = row["WinLost"],
-                        Position = row["Position"],
-                        Commission = row["Commission"],
-                        LineTotal = row["LineTotal"],
-                        Turnover = row["Turnover"],
-                        IsNeutral = row["IsNeutral"]
+                        MatchCode = Converter.ToString2(row["MatchCode"]),
+                        MatchEvent = Converter.ToString2(row["MatchEvent"]),
+                        MemberWinLoss = Converter.ToDecimal(row["MemberWinLoss"]),
+                        SMAWinLoss = Converter.ToDecimal(row["SMAWinLoss"]),
+                        ExtraPT = Converter.ToDecimal(row["ExtraPT"]),
+                        Commission = Converter.ToDecimal(row["Commission"]),
+                        RealIncome = Converter.ToDecimal(row["RealInCome"]),
+                        VirtualWinLoss = Converter.ToDecimal(row["VirtualIncome"]),
+                        RealTurnover = Converter.ToDecimal(row["RealTurnover"]),
+                        VirtualTurnover = Converter.ToDecimal(row["VirtualTurnover"])
                     });
                 }
 

@@ -1,5 +1,6 @@
 namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 {
+    using Data;
     using Fanex.Data.Repository;
     using System;
 
@@ -15,10 +16,13 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public string SportTypeList { get; set; }
 
+        [SpParam(Ignored = true)]
+        public bool IsNormalMode { get; set; }
+
         public override string GetSettingKey()
         {
-
-            return "WinLoss_LeagueWinLoss_GetLeagueWinLoss";
+            var suffix = IsNormalMode ? string.Empty : "_WH";
+            return "WinLoss_LeagueWinLoss_GetLeagueWinLoss" + suffix;
         }
 
         public override bool IsValid()

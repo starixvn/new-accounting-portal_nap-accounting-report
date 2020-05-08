@@ -1,18 +1,19 @@
 namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 {
-    using System;
     using Data;
-    using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.Data.Repository;
+    using System;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class GetLeagueWinLossByBetTypeCriteria : CriteriaBase
     {
-        public DateTime Winlostdate { get; set; }
+        public DateTime StartDate { get; set; }
 
-        public int Leagueid { get; set; }
+        public DateTime EndDate { get; set; }
+
+        public int LeagueID { get; set; }
 
         [SpParam(Ignored = true)]
         public string LeagueName { get; set; }
@@ -27,35 +28,17 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
         [SpParam(Ignored = true)]
         public string BetTypeName { get; set; }
 
-        public bool Liveindicator { get; set; }
+        public bool LiveIndicator { get; set; }
 
         public bool IsHedge { get; set; }
-
-        public double WinLost_8RM
-        {
-            get
-            {
-                return 0;
-            }
-        }
-
-        public double WinLost_BARM
-        {
-            get
-            {
-                return 0;
-            }
-        }
+        [SpParam(Ignored = true)]
+        public bool IsNormalMode { get; set; }
 
         public override string GetSettingKey()
         {
-            var storeProcedureSuffix = ReportService.GetStoreMappingSuffix(Winlostdate);
-            if (storeProcedureSuffix == ReportService.WarehouseSPSuffix)
-            {
-                storeProcedureSuffix = ReportService.BetTrans14SPSuffix;
-            }
+            var suffix = IsNormalMode ? string.Empty : "_WH";
 
-            return "WinLoss_LeagueWinLoss_GetLeagueWinLossByBetType" + storeProcedureSuffix;
+            return "WinLoss_LeagueWinLoss_GetLeagueWinLossByBetType" + suffix;
         }
 
         public override bool IsValid()
