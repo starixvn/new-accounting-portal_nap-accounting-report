@@ -115,6 +115,14 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             self.btnGenerateClick();
         });
 
+        _tables.btnToday.click(function () {
+            self.btnTodayClick();
+        });
+
+        _tables.btnYesterday.click(function () {
+            self.btnYesterdayClick();
+        });
+
         _tables.btnReportMode.click(function () {
             if (self.Params.isNormalMode) {
                 self.Params.isNormalMode = false;
@@ -146,6 +154,44 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             AccReport.enableInput,
             false);
     };
+
+    self.btnTodayClick = function () {
+        AccReport.disableInput();
+        hideLeagueWinLossBySport();
+        hideLeagueWinLossByBetType();
+        getParamByDate(todayStr);
+
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
+            self.Params.reportParams,
+            renderLeagueWinLoss,
+            renderLeagueWinLoss,
+            AccReport.enableInput,
+            false);
+    };
+
+    self.btnYesterdayClick = function () {
+        AccReport.disableInput();
+        hideLeagueWinLossBySport();
+        hideLeagueWinLossByBetType();
+        getParamByDate(yesterdayStr);
+
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
+            self.Params.reportParams,
+            renderLeagueWinLoss,
+            renderLeagueWinLoss,
+            AccReport.enableInput,
+            false);
+    };
+
+    var getParamByDate = function (date) {
+        self.Params.reportParams.StartDate = date;
+        self.Params.reportParams.EndDate = date;
+        self.Params.reportParams.SportTypeList = _tables.ddlSport.multiSelect('getCheckedItems').toString();
+        self.Params.reportParams.IsNormalMode = self.Params.isNormalMode;
+    };
+
     var getParams = function () {
         if (self.Params.isNormalMode) {
             var date = _tables.datepickerplugin.nexDatePicker("getSingleDate");
@@ -155,10 +201,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             self.Params.reportParams.StartDate = _tables.monthpickerplugin.monPickr("getFromDate", FormatConstant.MMM_DD_YY_STRING_MONTH_PICKER);
             self.Params.reportParams.EndDate = _tables.monthpickerplugin.monPickr("getToDate", FormatConstant.MMM_DD_YY_STRING_MONTH_PICKER);
         }
-      
+
         self.Params.reportParams.SportTypeList = _tables.ddlSport.multiSelect('getCheckedItems').toString();
         self.Params.reportParams.IsNormalMode = self.Params.isNormalMode;
     };
+
     function mappingDataRow(info, cssClass) {
         return {
             Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "colLeague align-right" },
