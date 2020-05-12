@@ -21,7 +21,7 @@ namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
         {
             get
             {
-                return VirtualWinLoss - RealIncome;
+                return RealIncome - VirtualWinLoss;
             }
         }
 
