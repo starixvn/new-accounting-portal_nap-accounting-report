@@ -1,5 +1,8 @@
-﻿namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
+﻿using System;
+
+namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
 {
+    [Serializable]
     public class LiveNonLiveWinLossModel
     {
         public int Id { get; set; }

@@ -1,5 +1,8 @@
-﻿namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
+﻿using System;
+
+namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
 {
+    [Serializable]
     public class BettypeWinLossItem : BaseWinLoss
     {
         public bool LiveIndicator { get; set; }

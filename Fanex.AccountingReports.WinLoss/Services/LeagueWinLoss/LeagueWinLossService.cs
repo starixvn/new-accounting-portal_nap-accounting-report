@@ -1,5 +1,7 @@
 namespace Fanex.AccountingReports.WinLoss.Services.Implement
 {
+    using Constants;
+    using Core.Web;
     using Entities.LeagueWinLoss;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
@@ -104,7 +106,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var grandTotal = CalculateSportTotal("Grand Total", rawData);
             leagueWinLoss.GrandTotal = grandTotal;
 
-            // SessionManager.Set(WinLossContants.LeagueWinLossSessionKey, leagueWinLoss);
+            SessionManager.Set(WinLossContants.LeagueWinLossSessionKey, leagueWinLoss);
             return leagueWinLoss;
         }
 
@@ -183,7 +185,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             result.Add(nonLiveBettypeWinLossModel);
 
-            // SessionManager.Set(WinLossContants.LeagueWinLossBySportSessionKey, result);
+            SessionManager.Set(WinLossContants.LeagueWinLossBySportSessionKey, result);
             return result;
         }
 
@@ -223,7 +225,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", rawData);
 
-            //SessionManager.Set(WinLossContants.LeagueWinLossByBetTypeSessionKey, leagueWinLoss);
+            SessionManager.Set(WinLossContants.LeagueWinLossByBetTypeSessionKey, leagueWinLoss);
             return leagueWinLoss;
         }
 
@@ -261,12 +263,13 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 GrandTotal = new BettypeWinLossItem()
             };
 
-            var bettypeWinLoss = BindingBettypes(rawData);
+            var bettypes = rawData.Where(x => !x.BettypeName.Contains("8RM")
+                                      && !x.BettypeName.Contains("BARM"));
+
+            var bettypeWinLoss = BindingBettypes(bettypes);
             report.BettypeWinLoss = bettypeWinLoss.ToList();
 
-            var total = rawData.Where(x => !x.BettypeName.Contains("R8M")
-                                       && !x.BettypeName.Contains("BARM"));
-            var allTotal = CalculateBettypeTotal(total);
+            var allTotal = CalculateBettypeTotal(bettypes);
             report.Total = allTotal;
 
             var eightRM = rawData.FirstOrDefault(x => x.BettypeName.Contains("8RM"));

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
 {
+    [Serializable]
     public class BettypeWinLossModel
     {
         public List<BettypeWinLossItem> BettypeWinLoss { get; set; }

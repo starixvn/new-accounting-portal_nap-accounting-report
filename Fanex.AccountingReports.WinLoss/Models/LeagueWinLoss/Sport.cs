@@ -1,5 +1,8 @@
-﻿namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
+﻿using System;
+
+namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
 {
+    [Serializable]
     public class Sport
     {
         public int SportGroupType { get; set; }
