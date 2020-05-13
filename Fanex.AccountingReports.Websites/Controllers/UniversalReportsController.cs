@@ -1,5 +1,5 @@
-using System.Web.Mvc;
 using Fanex.AccountingReports.Core.Web.Controllers;
+using System.Web.Mvc;
 
 namespace Fanex.AccountingReports.Websites.Controllers
 {
@@ -48,6 +48,11 @@ namespace Fanex.AccountingReports.Websites.Controllers
         public ActionResult CN88WinLossByProducts()
         {
             return Redirect("../../UniversalReports/CN88WinLossByProducts");
+        }
+
+        public ActionResult AbnormalBet()
+        {
+            return Redirect("../../UniversalReports/AbnormalBet");
         }
     }
 }
