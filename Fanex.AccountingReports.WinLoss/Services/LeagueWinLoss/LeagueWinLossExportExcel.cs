@@ -215,12 +215,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
                         currentCell.Value = info.VirtualWinLoss;
-                        currentCell.Style = twoDecimalNumberStyle;
+                        currentCell.Style = positiveTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
                         currentCell.Value = info.RealIncome;
-                        currentCell.Style = twoDecimalNumberStyle;
+                        currentCell.Style = positiveTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -303,19 +303,19 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = info.VarianceIncome;
-                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = info.VirtualWinLoss;
-                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = info.RealIncome;
-                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
 
@@ -608,22 +608,22 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.Commission;
-            currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
+            currentCell.Style = subRowTwoDecimalNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.VarianceIncome;
-            currentCell.Style = subRowTwoDecimalNumberStyle;
+            currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.VirtualWinLoss;
-            currentCell.Style = subRowTwoDecimalNumberStyle;
+            currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.RealIncome;
-            currentCell.Style = subRowTwoDecimalNumberStyle;
+            currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -1578,7 +1578,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.VirtualWinLoss;
-            currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+            currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
             currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
             currentColumn++;
 

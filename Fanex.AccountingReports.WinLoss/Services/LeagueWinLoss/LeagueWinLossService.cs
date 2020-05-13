@@ -179,7 +179,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var nonLiveBettypeWinLossModel = new LiveNonLiveWinLossModel
             {
                 Id = LiveTypeConstants.NonLive,
-                Name = Labels.None_live.ToUpper(),
+                Name = Labels.Non_Live.ToUpper(),
                 BetTypeWinLoss = nonLiveReport
             };
 

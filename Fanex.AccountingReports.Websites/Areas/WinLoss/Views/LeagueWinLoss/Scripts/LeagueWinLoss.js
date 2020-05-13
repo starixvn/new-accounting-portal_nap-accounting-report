@@ -14,7 +14,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         monthpickerplugin: null,
         btnReportMode: null,
         bettransMode: null,
-        warehouseMode: null
+        warehouseMode: null,
+        bettransModeBtn: null
     };
 
     self.Params = {
@@ -49,6 +50,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         _tables.btnReportMode = $("#btnReportMode");
         _tables.bettransMode = $("#bettrans-mode");
         _tables.warehouseMode = $("#warehouse-mode");
+        _tables.bettransModeBtn = $("#bettrans-mode-btn");
 
     };
 
@@ -127,12 +129,14 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             if (self.Params.isNormalMode) {
                 self.Params.isNormalMode = false;
                 _tables.bettransMode.addClass("display-none");
+                _tables.bettransModeBtn.addClass("display-none");
                 _tables.warehouseMode.removeClass("display-none");
                 _tables.btnReportMode.attr('value', "BACK");
 
             } else {
                 self.Params.isNormalMode = true;
                 _tables.bettransMode.removeClass("display-none");
+                _tables.bettransModeBtn.removeClass("display-none");
                 _tables.warehouseMode.addClass("display-none");
                 _tables.btnReportMode.attr('value', "HISTORY REPORT");
             }
@@ -141,10 +145,15 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
     };
 
     self.btnGenerateClick = function () {
+        getParams();
+        if (!checkReportParams(self.Params.reportParams)) {
+            AccReport.enableInput();
+            return;
+        }
+
         AccReport.disableInput();
         hideLeagueWinLossBySport();
         hideLeagueWinLossByBetType();
-        getParams();
 
         AccReport.utility.CallAjax(this,
             window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
@@ -156,10 +165,15 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
     };
 
     self.btnTodayClick = function () {
+        getParamByDate(todayStr);
+        if (!checkReportParams(self.Params.reportParams)) {
+            AccReport.enableInput();
+            return;
+        }
+
         AccReport.disableInput();
         hideLeagueWinLossBySport();
         hideLeagueWinLossByBetType();
-        getParamByDate(todayStr);
 
         AccReport.utility.CallAjax(this,
             window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
@@ -171,10 +185,15 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
     };
 
     self.btnYesterdayClick = function () {
+        getParamByDate(yesterdayStr);
+        if (!checkReportParams(self.Params.reportParams)) {
+            AccReport.enableInput();
+            return;
+        }
+
         AccReport.disableInput();
         hideLeagueWinLossBySport();
         hideLeagueWinLossByBetType();
-        getParamByDate(yesterdayStr);
 
         AccReport.utility.CallAjax(this,
             window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
@@ -204,6 +223,16 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 
         self.Params.reportParams.SportTypeList = _tables.ddlSport.multiSelect('getCheckedItems').toString();
         self.Params.reportParams.IsNormalMode = self.Params.isNormalMode;
+    };
+
+    var checkReportParams = function (params) {
+        AccReport.popUp.removeHighLight();
+        if (self.Params.reportParams.SportTypeList == '') {
+            AccReport.popUp.show("Please select  at least one sport!", "dropdown-sport");
+            return false;
+        }
+
+        return true;
     };
 
     function mappingDataRow(info, cssClass) {
