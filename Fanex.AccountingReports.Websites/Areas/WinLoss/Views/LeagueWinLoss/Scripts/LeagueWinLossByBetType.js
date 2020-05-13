@@ -140,18 +140,21 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
                 footerData.push(currentRow);
             }
 
-            info = report.GrandTotal;
-            currentRow =
-             {
-                 Columns: [{ Name: "ColCode", Value: info.MatchEvent, CssClass: "align-right", MergeColNumber: 7 },
-                            { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
-                            { Name: "ColRealIncome", Value: info.RealIncome },
-                            { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
-                            { Name: "ColRealTurnOver", Value: info.RealTurnover },
-                            { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
-             };
+            if (self.isShowGrandTotalRow(report)) {
+                info = report.GrandTotal;
+                var totalInfo = report.Total;
+                currentRow =
+                 {
+                     Columns: [{ Name: "ColCode", Value: info.MatchEvent, CssClass: "align-right", MergeColNumber: 7 },
+                                { Name: "ColVirtualWinLoss", Value: totalInfo.VirtualWinLoss },
+                                { Name: "ColRealIncome", Value: info.RealIncome },
+                                { Name: "ColVirtualTurnOver", Value: totalInfo.VirtualTurnover },
+                                { Name: "ColRealTurnOver", Value: totalInfo.RealTurnover },
+                                { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
+                 };
 
-            footerData.push(currentRow);
+                footerData.push(currentRow);
+            }
         }
 
         var gridOptions = {
@@ -161,7 +164,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
                           { HeaderText: "Event", Name: "ColEvent", MergeRowNumber: 2 },
                           { HeaderText: "Member Win Loss", Name: "ColMemberWinLoss", MergeRowNumber: 2 },
                           { HeaderText: "SMA Win Loss", Name: "ColSMAWinLoss", MergeRowNumber: 2 },
-                          { HeaderText: "Extra PT", Width: 100, Name: "ColExtraPT", MergeRowNumber: 2 },
+                          { HeaderText: "Extra PT", Name: "ColExtraPT", MergeRowNumber: 2 },
 						  { HeaderText: "Commission", Name: "ColCommision", MergeRowNumber: 2 },
 						  { HeaderText: "House", Name: "ColVariance", MergeColNumber: 3 },
 						  { HeaderText: "House Turnover", Name: "ColVirtualTurnOver", MergeColNumber: 2 },
@@ -170,10 +173,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
             columns: [{ HeaderText: "Code", Width: 100, Name: "ColCode", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Event", Width: 200, Name: "ColEvent", HeaderAlign: "center", CellAlign: "center" },
                     { HeaderText: "Member Win Loss", Width: 120, Name: "ColMemberWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
-                    { HeaderText: "SMA Win Loss", Width: 120, Name: "ColSMAWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
+                    { HeaderText: "SMA Win Loss", Width: 120, Name: "ColSMAWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                     { HeaderText: "Extra PT", Width: 100, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                     { HeaderText: "Commission", Width: 120, Name: "ColCommision", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-                    { HeaderText: "Variance", Width: 120, Name: "ColVariance", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                    { HeaderText: "Variance", Width: 120, Name: "ColVariance", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                     { HeaderText: "Virtual Win Loss", Width: 120, Name: "ColVirtualWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                     { HeaderText: "Real Income", Width: 120, Name: "ColRealIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                     { HeaderText: "Virtual", Width: 120, Name: "ColVirtualTurnOver", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
@@ -215,5 +218,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
 
     self.isShowTotalRow = function (total) {
         return total.VirtualWinLoss != 0 || total.RealIncome != 0 || total.VirtualTurnover != 0 || total.RealTurnover != 0;
+    };
+
+    self.isShowGrandTotalRow = function (report) {
+        return self.isShowTotalRow(report.RM)
+        || self.isShowTotalRow(report.BARM);
     }
 }

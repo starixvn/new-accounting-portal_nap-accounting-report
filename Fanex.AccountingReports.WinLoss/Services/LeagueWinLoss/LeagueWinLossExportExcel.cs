@@ -264,7 +264,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     }
 
                     info = sport.Total;
-                    ExportLeagueWinLossNormalSportsTotal(startColumn, currentRow, info, workSheet, textStyle, subRowPositiveTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle, subRowPositiveTwoDecimalPercentNumberStyle);
+                    ExportLeagueWinLossNormalSportsTotal(startColumn, currentRow, info, workSheet, subRowTextStyle, subRowPositiveTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle, subRowPositiveTwoDecimalPercentNumberStyle);
                     currentRow++;
                 }
 
@@ -297,7 +297,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
                 currentCell.Value = info.Commission;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
 
@@ -383,12 +383,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.RealTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -422,12 +422,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.RealTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -461,12 +461,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.RealTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -500,12 +500,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.RealTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -516,41 +516,47 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentRow++;
                 }
 
-                info = report.GrandTotal;
-                currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = info.LeagueName;
-                currentCellRange.Style = grandTotalRowTextStyle;
-                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentColumn += 6;
+                if (IsShowTotal(report.SoccerRM)
+                    || IsShowTotal(report.OtherSportRM)
+                    || IsShowTotal(report.SoccerBARM)
+                    || IsShowTotal(report.SoccerBARM))
+                {
+                    info = report.GrandTotal;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = info.LeagueName;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 6;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.VirtualWinLoss;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.RealIncome;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.VirtualTurnover;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.RealTurnover;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = string.Empty;
-                currentCellRange.Style = grandTotalRowTextStyle;
-                currentColumn += 2;
-                currentRow++;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
             }
             else
             {
@@ -920,7 +926,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualTurnover;
-                    currentCell.Style = positiveTwoDecimalNumberStyle;
+                    currentCell.Style = twoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -1072,12 +1078,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.RealTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -1111,12 +1117,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.RealTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -1127,41 +1133,45 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentRow++;
                 }
 
-                info = report.GrandTotal;
-                currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = info.MatchEvent;
-                currentCellRange.Style = grandTotalRowTextStyle;
-                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentColumn += 7;
+                if (IsShowTotal(report.RM)
+                    || IsShowTotal(report.BARM))
+                {
+                    info = report.GrandTotal;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = info.MatchEvent;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 7;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.VirtualWinLoss;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.RealIncome;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.VirtualTurnover;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.RealTurnover;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = string.Empty;
-                currentCellRange.Style = grandTotalRowTextStyle;
-                currentColumn += 2;
-                currentRow++;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
             }
             else
             {
@@ -1307,12 +1317,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.RealTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -1346,12 +1356,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.RealTurnover;
-                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -1362,41 +1372,45 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentRow++;
                 }
 
-                info = bettypeWinLoss.GrandTotal;
-                currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = info.BettypeName;
-                currentCellRange.Style = grandTotalRowTextStyle;
-                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentColumn += 6;
+                if (IsShowTotal(bettypeWinLoss.RM)
+                    || IsShowTotal(bettypeWinLoss.BARM))
+                {
+                    info = bettypeWinLoss.GrandTotal;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = info.BettypeName;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 6;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.VirtualWinLoss;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = bettypeWinLoss.Total.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.RealIncome;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.VirtualTurnover;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = bettypeWinLoss.Total.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.RealTurnover;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = bettypeWinLoss.Total.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = string.Empty;
-                currentCellRange.Style = grandTotalRowTextStyle;
-                currentColumn += 2;
-                currentRow++;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
             }
             else
             {
@@ -1558,7 +1572,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.VarianceIncome;
-            currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+            currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
             currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
             currentColumn++;
 

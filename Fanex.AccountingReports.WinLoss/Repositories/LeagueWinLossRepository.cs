@@ -88,7 +88,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                             LiveIndicator = Converter.ToInt(row["LiveIndicator"]) == 1,
                             Bettype = Converter.ToInt(row["Bettype"]),
                             BettypeName = Converter.ToString2(row["BettypeName"]),
-                            IsHedge = Converter.ToBool(row["IsHedge"]),
+                            IsHedge = Converter.ToInt(row["IsHedge"]) == 1,
                             MemberWinLoss = Converter.ToDecimal(row["MemberWinLoss"]),
                             SMAWinLoss = Converter.ToDecimal(row["SMAWinLoss"]),
                             ExtraPT = Converter.ToDecimal(row["ExtraPT"]),
