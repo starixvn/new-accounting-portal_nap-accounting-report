@@ -23,10 +23,12 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             StartDate: null,
             EndDate: null,
             SportTypeList: null,
+            SportTypeListName: null,
             IsNormalMode: true
         },
 
-        isNormalMode: true
+        isNormalMode: true,
+        cachedNumberSports: null
     };
 
     self.initPage = function () {
@@ -208,6 +210,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         self.Params.reportParams.StartDate = date;
         self.Params.reportParams.EndDate = date;
         self.Params.reportParams.SportTypeList = _tables.ddlSport.multiSelect('getCheckedItems').toString();
+        self.Params.reportParams.SportTypeListName = _tables.ddlSport.multiSelect('getCheckedItems').length === self.Params.cachedNumberSports ?
+             "All" :
+             _tables.ddlSport.multiSelect('getCheckedItemsByText').toString();
         self.Params.reportParams.IsNormalMode = self.Params.isNormalMode;
     };
 
@@ -222,6 +227,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         }
 
         self.Params.reportParams.SportTypeList = _tables.ddlSport.multiSelect('getCheckedItems').toString();
+        self.Params.reportParams.SportTypeListName = _tables.ddlSport.multiSelect('getCheckedItems').length === self.Params.cachedNumberSports ?
+            "All" :
+            _tables.ddlSport.multiSelect('getCheckedItemsByText').toString();
         self.Params.reportParams.IsNormalMode = self.Params.isNormalMode;
     };
 
@@ -450,6 +458,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
     };
 
     self.RenderSport = function (rs) {
+        self.Params.cachedNumberSports = 0;
         var id = "ddl-sport";
         var sportGroups = [];
         var sportGroupLength = rs.length;
@@ -457,6 +466,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             var sportGroup = rs[i];
             var sports = [];
             var sportLength = sportGroup.ChildItems.length;
+            self.Params.cachedNumberSports += sportLength === 0 ? 1 : sportLength;
             for (var j = 0; j < sportLength; j++) {
                 var sport = sportGroup.ChildItems[j];
                 sports.push({
@@ -483,7 +493,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 
         _tables.ddlSport.multiSelect(
          {
-             minWidth: 160,
+             minWidth: 200,
              maxHeight: 450,
              shadow: true,
              showHeader: true,

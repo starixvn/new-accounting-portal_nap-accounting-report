@@ -17,6 +17,9 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
         public string SportTypeList { get; set; }
 
         [SpParam(Ignored = true)]
+        public string SportTypeListName { get; set; }
+
+        [SpParam(Ignored = true)]
         public bool IsNormalMode { get; set; }
 
         public override string GetSettingKey()

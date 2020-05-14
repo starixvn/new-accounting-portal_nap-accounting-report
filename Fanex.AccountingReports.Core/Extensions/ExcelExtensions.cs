@@ -1,12 +1,12 @@
 namespace Fanex.AccountingReports.Core.Extensions
 {
+    using ExcelUtil.Spreadsheet;
+    using Fanex.AccountingReports.Core.Resources;
+    using NPOI.SS.UserModel;
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.Web;
-    using ExcelUtil.Spreadsheet;
-    using Fanex.AccountingReports.Core.Resources;
-    using NPOI.SS.UserModel;
 
     /// <summary>
     /// TODO: Update summary.
@@ -344,7 +344,7 @@ namespace Fanex.AccountingReports.Core.Extensions
             var currentColumn = startColumn;
             var currentCellRange = ws.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, endColumn);
             currentCellRange.Merged = true;
-            currentCellRange.Value = Labels.EmptyReportMessage;
+            currentCellRange.Value = Labels.There_is_no_data;
             currentCellRange.Style.FormatCellText(Color.White, true);
             currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
             currentRow++;

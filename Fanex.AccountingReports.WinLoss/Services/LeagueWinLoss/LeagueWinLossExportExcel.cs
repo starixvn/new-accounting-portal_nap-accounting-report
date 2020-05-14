@@ -141,10 +141,21 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentCellRange.Merged = true;
             currentCellRange.Value = title;
             currentCellRange.Style.FormatTitleCell(titleColor);
+            currentCellRange.Style.Font.Size = 200;
+            currentCellRange.Style.Font.Weight = 700;
             currentRow += 2;
 
             workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 11);
 
+            var sportList = string.Format("Sports: {0}", criteria.SportTypeListName);
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 11);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = sportList;
+            currentCellRange.Style.FormatTitleCell(titleColor);
+            currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
+
+            currentRow += 2;
             ExportHeader(ref workSheet, startColumn, ref currentRow, Labels.League);
 
             if (report.SportWinLoss.Count > 0)
@@ -560,7 +571,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             }
             else
             {
-                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 6);
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 11);
             }
 
             var reportName = criteria.IsNormalMode ? string.Format(
@@ -714,6 +725,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentCellRange.Merged = true;
             currentCellRange.Value = title;
             currentCellRange.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
+            currentCellRange.Style.Font.Size = 200;
+            currentCellRange.Style.Font.Weight = 700;
             currentRow += 2;
 
             if (report != null && report.Count > 0)
@@ -829,21 +842,40 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
             workSheet.Columns[startColumn + 1].Width = 100 * ExcelExtensions.FontWidth;
             workSheet.Columns[startColumn + 1].Width = 360 * ExcelExtensions.FontWidth;
-            var title = string.Format(
-                WinLossResources.LeagueWinLossByBetType_ReportTitle,
-                criteria.SportName,
-                criteria.LeagueName,
-                criteria.BetTypeName,
-                criteria.LiveIndicator ? "Live" : "Non-Live");
+
+            var title = criteria.IsNormalMode ?
+              string.Format(
+                  WinLossResources.LeagueWinLoss_ReportTitle,
+                  criteria.StartDate.ToShortFormatedDate()) :
+              string.Format("League Win Loss Report From {0} To {1}",
+                  criteria.StartDate.ToShortFormatedDate(),
+                  criteria.EndDate.ToShortFormatedDate());
 
             currentColumn = startColumn;
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 12);
             currentCellRange.Merged = true;
             currentCellRange.Value = title;
-            currentCellRange.Style = headerTextStyle;
+            currentCellRange.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
+            currentCellRange.Style.Font.Size = 200;
+            currentCellRange.Style.Font.Weight = 700;
             currentRow += 2;
 
             workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 12);
+
+            var matchTitle = string.Format(
+              WinLossResources.LeagueWinLossByBetType_ReportTitle,
+              criteria.SportName,
+              criteria.LeagueName,
+              criteria.BetTypeName,
+              criteria.LiveIndicator ? "Live" : "Non-Live");
+
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 12);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = matchTitle;
+            currentCellRange.Style = headerTextStyle;
+            currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
+            currentRow += 2;
 
             currentColumn = startColumn;
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
@@ -853,7 +885,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentColumn++;
 
             ExportHeader(ref workSheet, currentColumn, ref currentRow, Labels.Event);
-            currentRow++;
 
             if (report.Match.Count > 0)
             {
@@ -896,12 +927,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.SMAWinLoss;
-                    currentCell.Style = positiveTwoDecimalNumberStyle;
+                    currentCell.Style = twoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.ExtraPT;
-                    currentCell.Style = positiveTwoDecimalNumberStyle;
+                    currentCell.Style = twoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -1175,7 +1206,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             }
             else
             {
-                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 7);
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 12);
             }
 
             var reportName = criteria.IsNormalMode ? string.Format(
@@ -1414,7 +1445,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             }
             else
             {
-                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 6);
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 11);
             }
         }
 
@@ -1460,12 +1491,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.SMAWinLoss;
-            currentCell.Style = positiveTwoDecimalNumberStyle;
+            currentCell.Style = twoDecimalNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.ExtraPT;
-            currentCell.Style = positiveTwoDecimalNumberStyle;
+            currentCell.Style = twoDecimalNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -1490,7 +1521,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.VirtualTurnover;
-            currentCell.Style = positiveTwoDecimalNumberStyle;
+            currentCell.Style = twoDecimalNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
