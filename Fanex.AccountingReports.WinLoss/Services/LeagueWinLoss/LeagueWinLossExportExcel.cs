@@ -1,7 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Drawing;
 using ExcelUtil.Spreadsheet;
-using Fanex.AccountingReports.Core.Configurations;
 using Fanex.AccountingReports.Core.Constants;
 using Fanex.AccountingReports.Core.Extensions;
 using Fanex.AccountingReports.Core.Web;
@@ -10,14 +7,15 @@ using Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss;
 using Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss;
 using Fanex.AccountingReports.WinLoss.Resources;
 using Fanex.Common;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 
 namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 {
     public class LeagueWinLossExportExcel
     {
         private readonly LeagueWinLossService _reportService;
-        private RMElement _8rmConfig;
-        private RMElement _barmConfig;
 
         public LeagueWinLossExportExcel() : this(null)
         {
@@ -26,10 +24,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
         public LeagueWinLossExportExcel(LeagueWinLossService reportService)
         {
             _reportService = reportService ?? new LeagueWinLossService();
-            this._8rmConfig = RMSection.Instance.Report[ReportName.LeagueWinLoss.ToString()]
-                .ReportConfigs[RMSection.RMType.EightRM.ToString()];
-            this._barmConfig = RMSection.Instance.Report[ReportName.LeagueWinLoss.ToString()]
-                .ReportConfigs[RMSection.RMType.BARM.ToString()];
         }
 
         /// <summary>
@@ -44,11 +38,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
            Justification = "Reviewed. Suppression is OK here.")]
         public void ExportLeagueWinLoss(GetLeagueWinLossCriteria criteria)
         {
-            var report = SessionManager.Get<LeagueWinLossInfo>(WinLossContants.LeagueWinLossSessionKey);
+            var report = SessionManager.Get<LeagueWinLossModel>(WinLossContants.LeagueWinLossSessionKey);
             if (report == null)
             {
-                LeagueWinLossService service = new LeagueWinLossService();
-                report = service.GetLeagueWinLoss(criteria);
+                report = _reportService.GetLeagueWinLoss(criteria);
             }
 
             ExcelFile excelFile = new ExcelFile();
@@ -129,79 +122,59 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             ExcelCell currentCell;
 
             currentColumn = startColumn;
-            for (int colIndex = 0; colIndex < 7; colIndex++)
+            for (int colIndex = 0; colIndex < 12; colIndex++)
             {
                 workSheet.Columns[startColumn + colIndex].Width = 140 * ExcelExtensions.FontWidth;
             }
 
             workSheet.Columns[startColumn].Width = 350 * ExcelExtensions.FontWidth;
-            var title = string.Format(
-                WinLossResources.LeagueWinLoss_ReportTitle,
-                criteria.Winlostdate.ToShortFormatedDate());
+            var title = criteria.IsNormalMode ?
+                string.Format(
+                    WinLossResources.LeagueWinLoss_ReportTitle,
+                    criteria.StartDate.ToShortFormatedDate()) :
+                string.Format("League Win Loss Report From {0} To {1}",
+                    criteria.StartDate.ToShortFormatedDate(),
+                    criteria.EndDate.ToShortFormatedDate());
 
             currentColumn = startColumn;
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 6);
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 11);
             currentCellRange.Merged = true;
             currentCellRange.Value = title;
             currentCellRange.Style.FormatTitleCell(titleColor);
+            currentCellRange.Style.Font.Size = 200;
+            currentCellRange.Style.Font.Weight = 700;
             currentRow += 2;
 
-            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 6);
+            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 11);
 
+            var sportList = string.Format("Sports: {0}", criteria.SportTypeListName);
             currentColumn = startColumn;
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.League;
-            currentCell.Style.FormatTitleCell(headerColor);
-            currentColumn++;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 11);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = sportList;
+            currentCellRange.Style.FormatTitleCell(titleColor);
+            currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
 
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Win_Loss;
-            currentCell.Style.FormatTitleCell(headerColor);
-            currentColumn++;
+            currentRow += 2;
+            ExportHeader(ref workSheet, startColumn, ref currentRow, Labels.League);
 
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Position;
-            currentCell.Style.FormatTitleCell(headerColor);
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Comm;
-            currentCell.Style.FormatTitleCell(headerColor);
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.LineTotal;
-            currentCell.Style.FormatTitleCell(headerColor);
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Turnover;
-            currentCell.Style.FormatTitleCell(headerColor);
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Margin;
-            currentCell.Style.FormatTitleCell(headerColor);
-            currentColumn++;
-            currentRow++;
-
-            if (report.ChildsInfo.Count > 0)
+            if (report.SportWinLoss.Count > 0)
             {
-                var len = report.ChildsInfo.Count;
-                LeagueWinLossInfo info;
+                var len = report.SportWinLoss.Count;
+                LeagueWinLossItem info;
                 for (var i = 0; i < len; i++)
                 {
-                    var sport = report.ChildsInfo[i];
+                    var sport = report.SportWinLoss[i];
 
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 11);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = sport.Name;
+                    currentCellRange.Value = sport.SportName;
                     currentCellRange.Style.FormatCellText(groupHeadLineColor, true);
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
                     currentRow++;
 
-                    var childsLength = sport.ChildsInfo.Count;
+                    var childsLength = sport.Leagues.Count;
                     for (var j = 0; j < childsLength; j++)
                     {
                         if (j % 2 == 0)
@@ -219,20 +192,25 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                             positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
                         }
 
-                        info = sport.ChildsInfo[j];
+                        info = sport.Leagues[j];
                         currentColumn = startColumn;
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Name;
+                        currentCell.Value = info.LeagueName;
                         currentCell.Style = textStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.WinLoss;
+                        currentCell.Value = info.MemberWinLoss;
                         currentCell.Style = positiveTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.Position;
+                        currentCell.Value = info.SMAWinLoss;
+                        currentCell.Style = twoDecimalNumberStyle;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+                        currentCell.Value = info.ExtraPT;
                         currentCell.Style = twoDecimalNumberStyle;
                         currentColumn++;
 
@@ -242,23 +220,53 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.LineTotal;
+                        currentCell.Value = info.VarianceIncome;
                         currentCell.Style = positiveTwoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        currentCell.Value = info.TurnOver;
+                        currentCell.Value = info.VirtualWinLoss;
+                        currentCell.Style = positiveTwoDecimalNumberStyle;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+                        currentCell.Value = info.RealIncome;
+                        currentCell.Style = positiveTwoDecimalNumberStyle;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+                        currentCell.Value = info.VirtualTurnover;
                         currentCell.Style = twoDecimalNumberStyle;
                         currentColumn++;
 
                         currentCell = workSheet.Cells[currentRow, currentColumn];
-                        if (info.TurnOver > 0)
+                        currentCell.Value = info.RealTurnover;
+                        currentCell.Style = twoDecimalNumberStyle;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+
+                        if (info.VirtualTurnover != 0)
                         {
-                            currentCell.Value = Converter.ToDecimal(info.Margin);
+                            currentCell.Value = info.VirtualMargin;
                         }
                         else
                         {
-                            currentCell.Value = info.Margin.ToString();
+                            currentCell.Value = Labels.NotAvailable;
+                        }
+
+                        currentCell.Style = positiveTwoDecimalPercentNumberStyle;
+                        currentColumn++;
+
+                        currentCell = workSheet.Cells[currentRow, currentColumn];
+
+                        if (info.RealTurnover != 0)
+                        {
+                            currentCell.Value = info.RealMargin;
+                        }
+                        else
+                        {
+                            currentCell.Value = Labels.NotAvailable;
                         }
 
                         currentCell.Style = positiveTwoDecimalPercentNumberStyle;
@@ -266,32 +274,34 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                         currentRow++;
                     }
 
-                    info = sport.GrandTotal;
-                    const int NewCricketSportType = 50;
-                    var sportTotalRowCount = sport.Id != NewCricketSportType
-                        ? ExportLeagueWinLossNormalSportsTotal(startColumn, currentRow, info, workSheet, textStyle, positiveTwoDecimalNumberStyle, twoDecimalNumberStyle, positiveTwoDecimalPercentNumberStyle)
-                        : ExportLeagueWinLossNewCricketTotal(startColumn, currentRow, info, workSheet, textStyle, positiveTwoDecimalNumberStyle, twoDecimalNumberStyle, positiveTwoDecimalPercentNumberStyle);
-
-                    currentRow += sportTotalRowCount;
+                    info = sport.Total;
+                    ExportLeagueWinLossNormalSportsTotal(startColumn, currentRow, info, workSheet, subRowTextStyle, subRowPositiveTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle, subRowPositiveTwoDecimalPercentNumberStyle);
+                    currentRow++;
                 }
 
                 info = report.Total;
                 currentColumn = startColumn;
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.Name;
+                currentCell.Value = info.LeagueName;
                 currentCell.Style = grandTotalRowTextStyle;
                 currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.WinLoss;
+                currentCell.Value = info.MemberWinLoss;
                 currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.Position;
+                currentCell.Value = info.SMAWinLoss;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.ExtraPT;
                 currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
@@ -303,25 +313,57 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.LineTotal;
+                currentCell.Value = info.VarianceIncome;
                 currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.TurnOver;
+                currentCell.Value = info.VirtualWinLoss;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.RealIncome;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.VirtualTurnover;
                 currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                if (info.TurnOver > 0)
+                currentCell.Value = info.RealTurnover;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                if (info.VirtualTurnover != 0)
                 {
-                    currentCell.Value = Converter.ToDecimal(info.Margin);
+                    currentCell.Value = info.VirtualMargin;
                 }
                 else
                 {
-                    currentCell.Value = info.Margin.ToString();
+                    currentCell.Value = Labels.NotAvailable;
+                }
+
+                currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                if (info.RealTurnover != 0)
+                {
+                    currentCell.Value = info.RealMargin;
+                }
+                else
+                {
+                    currentCell.Value = Labels.NotAvailable;
                 }
 
                 currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
@@ -329,20 +371,35 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 currentColumn++;
                 currentRow++;
 
-                if (this._8rmConfig.IsActive)
+                if (IsShowTotal(report.SoccerRM))
                 {
-                    info = report.EightRM;
+                    info = report.SoccerRM;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 3);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = info.Name;
+                    currentCellRange.Value = info.LeagueName;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 4;
+                    currentColumn += 6;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.LineTotal;
+                    currentCell.Value = info.VirtualWinLoss;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -353,20 +410,35 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentRow++;
                 }
 
-                if (this._barmConfig.IsActive)
+                if (IsShowTotal(report.OtherSportRM))
                 {
-                    info = report.BARM;
+                    info = report.OtherSportRM;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 3);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = info.Name;
+                    currentCellRange.Value = info.LeagueName;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 4;
+                    currentColumn += 6;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.LineTotal;
+                    currentCell.Value = info.VirtualWinLoss;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -377,108 +449,146 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentRow++;
                 }
 
-                info = report.GrandTotal;
-                currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 3);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = info.Name;
-                currentCellRange.Style = grandTotalRowTextStyle;
-                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentColumn += 4;
+                if (IsShowTotal(report.SoccerBARM))
+                {
+                    info = report.SoccerBARM;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = info.LeagueName;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 6;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.LineTotal;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = string.Empty;
-                currentCellRange.Style = grandTotalRowTextStyle;
-                currentColumn += 2;
-                currentRow++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
+
+                if (IsShowTotal(report.OtherSportBARM))
+                {
+                    info = report.OtherSportBARM;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = info.LeagueName;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 6;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
+
+                if (IsShowTotal(report.SoccerRM)
+                    || IsShowTotal(report.OtherSportRM)
+                    || IsShowTotal(report.SoccerBARM)
+                    || IsShowTotal(report.SoccerBARM))
+                {
+                    info = report.GrandTotal;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = info.LeagueName;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 6;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
             }
             else
             {
-                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 6);
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 11);
             }
 
-            var reportName = string.Format(
-                WinLossResources.LeagueWinLoss_ReportName,
-                criteria.Winlostdate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+            var reportName = criteria.IsNormalMode ? string.Format(
+                    WinLossResources.LeagueWinLoss_ReportName,
+                    criteria.StartDate.ToShortFormatedDateWithSlash().Replace('/', '_')) :
+                string.Format(
+                    "League_Win_Loss_Report_From_{0}_To_{1}",
+                    criteria.StartDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
+                    criteria.EndDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
             excelFile.ReponseStream(reportName);
 
-        }
-
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
-        private int ExportLeagueWinLossNewCricketTotal(
-            int startColumn,
-            int currentRow,
-            LeagueWinLossInfo cricketGrandTotalInfo,
-            ExcelWorksheet workSheet,
-            CellStyle subRowTextStyle,
-            CellStyle subRowPositiveTwoDecimalNumberStyle,
-            CellStyle subRowTwoDecimalNumberStyle,
-            CellStyle subRowPositiveTwoDecimalPercentNumberStyle)
-        {
-            for (var i = 0; i < cricketGrandTotalInfo.ChildsInfo.Count; i++)
-            {
-                var info = cricketGrandTotalInfo.ChildsInfo[i];
-                var currentColumn = startColumn;
-                var currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.Name;
-                currentCell.Style = subRowTextStyle;
-                currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.WinLoss;
-                currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.Position;
-                currentCell.Style = subRowTwoDecimalNumberStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.Commission;
-                currentCell.Style = subRowTwoDecimalNumberStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.LineTotal;
-                currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.TurnOver;
-                currentCell.Style = subRowTwoDecimalNumberStyle;
-                currentColumn++;
-
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                if (info.TurnOver > 0)
-                {
-                    currentCell.Value = Converter.ToDecimal(info.Margin);
-                }
-                else
-                {
-                    currentCell.Value = info.Margin.ToString();
-                }
-
-                currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
-                currentRow++;
-            }
-
-            return cricketGrandTotalInfo.ChildsInfo.Count;
         }
 
         private int ExportLeagueWinLossNormalSportsTotal(
             int startColumn,
             int currentRow,
-            LeagueWinLossInfo info,
+            LeagueWinLossItem info,
             ExcelWorksheet workSheet,
             CellStyle subRowTextStyle,
             CellStyle subRowPositiveTwoDecimalNumberStyle,
@@ -487,18 +597,23 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
         {
             var currentColumn = startColumn;
             var currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.Name;
+            currentCell.Value = info.LeagueName;
             currentCell.Style = subRowTextStyle;
             currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.WinLoss;
+            currentCell.Value = info.MemberWinLoss;
             currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.Position;
+            currentCell.Value = info.SMAWinLoss;
+            currentCell.Style = subRowTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.ExtraPT;
             currentCell.Style = subRowTwoDecimalNumberStyle;
             currentColumn++;
 
@@ -508,27 +623,56 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.LineTotal;
+            currentCell.Value = info.VarianceIncome;
             currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.TurnOver;
+            currentCell.Value = info.VirtualWinLoss;
+            currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.RealIncome;
+            currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.VirtualTurnover;
             currentCell.Style = subRowTwoDecimalNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            if (info.TurnOver > 0)
+            currentCell.Value = info.RealTurnover;
+            currentCell.Style = subRowTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+
+            if (info.VirtualTurnover != 0)
             {
-                currentCell.Value = Converter.ToDecimal(info.Margin);
+                currentCell.Value = Converter.ToDecimal(info.VirtualMargin);
             }
             else
             {
-                currentCell.Value = info.Margin.ToString();
+                currentCell.Value = Labels.NotAvailable;
             }
 
             currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
             currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+
+            if (info.RealTurnover != 0)
+            {
+                currentCell.Value = Converter.ToDecimal(info.RealMargin);
+            }
+            else
+            {
+                currentCell.Value = Labels.NotAvailable;
+            }
+
+            currentCell.Style = subRowPositiveTwoDecimalPercentNumberStyle;
 
             return 1;
         }
@@ -543,7 +687,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
         public void ExportLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria)
         {
 
-            var report = SessionManager.Get<LeagueWinLossInfo>(WinLossContants.LeagueWinLossBySportSessionKey);
+            var report = SessionManager.Get<List<LiveNonLiveWinLossModel>>(WinLossContants.LeagueWinLossBySportSessionKey);
             if (report == null)
             {
                 report = _reportService.GetLeagueWinLossBySport(criteria);
@@ -562,35 +706,41 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             var currentColumn = startColumn;
             CellRange currentCellRange;
 
-            for (int colIndex = 0; colIndex < 7; colIndex++)
+            for (int colIndex = 0; colIndex < 12; colIndex++)
             {
                 workSheet.Columns[startColumn + colIndex].Width = 140 * ExcelExtensions.FontWidth;
             }
 
             workSheet.Columns[startColumn].Width = 140 * ExcelExtensions.FontWidth;
-            var title = string.Format(
-                WinLossResources.LeagueWinLoss_ReportTitle,
-                criteria.Winlostdate.ToShortFormatedDate());
+            var title = criteria.IsNormalMode ?
+                string.Format(
+                    WinLossResources.LeagueWinLoss_ReportTitle,
+                    criteria.StartDate.ToShortFormatedDate()) :
+                string.Format("League Win Loss Report From {0} To {1}",
+                    criteria.StartDate.ToShortFormatedDate(),
+                    criteria.EndDate.ToShortFormatedDate());
 
             currentColumn = startColumn;
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 6);
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 11);
             currentCellRange.Merged = true;
             currentCellRange.Value = title;
             currentCellRange.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
+            currentCellRange.Style.Font.Size = 200;
+            currentCellRange.Style.Font.Weight = 700;
             currentRow += 2;
 
-            if (report != null && report.ChildsInfo.Count > 0)
+            if (report != null && report.Count > 0)
             {
-                var reportLength = report.ChildsInfo.Count;
+                var reportLength = report.Count;
                 for (var i = 0; i < reportLength; i++)
                 {
-                    workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 6);
+                    workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 11);
                     this.ExportLeagueWinLossBySport(
                         ref workSheet,
                         startRow,
                         startColumn,
                         ref currentRow,
-                        report.ChildsInfo[i],
+                        report[i],
                         criteria);
                 }
             }
@@ -605,22 +755,26 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     criteria);
             }
 
-            var reportName = string.Format(
-                WinLossResources.LeagueWinLoss_ReportName,
-                criteria.Winlostdate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+            var reportName = criteria.IsNormalMode ? string.Format(
+                     WinLossResources.LeagueWinLoss_ReportName,
+                     criteria.StartDate.ToShortFormatedDateWithSlash().Replace('/', '_')) :
+                 string.Format(
+                     "League_Win_Loss_Report_From_{0}_To_{1}",
+                     criteria.StartDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
+                     criteria.EndDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
             excelFile.ReponseStream(reportName);
         }
 
         /// <summary>
         /// Exports the type of the league win loss by bet.
         /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        /// <param name = "criteria" > The criteria.</param>
+        //[SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
+        //    "SP2101:MethodMustNotContainMoreLinesThan",
+        //    Justification = "Reviewed. Suppression is OK here.")]
         public void ExportLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
         {
-            var report = SessionManager.Get<LeagueWinLossInfo>(WinLossContants.LeagueWinLossByBetTypeSessionKey);
+            var report = SessionManager.Get<MatchWinLossModel>(WinLossContants.LeagueWinLossByBetTypeSessionKey);
             if (report == null)
             {
                 report = _reportService.GetLeagueWinLossByBetType(criteria);
@@ -639,6 +793,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             var currentColumn = startColumn;
             CellRange currentCellRange;
             ExcelCell currentCell;
+            var headerColor = ExcelExtensions.HeaderTitleColor;
 
             var textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);
             var twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
@@ -680,77 +835,64 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 true,
                 false);
 
-            for (int colIndex = 0; colIndex < 7; colIndex++)
+            for (int colIndex = 0; colIndex < 13; colIndex++)
             {
                 workSheet.Columns[startColumn + colIndex].Width = 140 * ExcelExtensions.FontWidth;
             }
 
             workSheet.Columns[startColumn + 1].Width = 100 * ExcelExtensions.FontWidth;
             workSheet.Columns[startColumn + 1].Width = 360 * ExcelExtensions.FontWidth;
-            var title = string.Format(
-                WinLossResources.LeagueWinLossByBetType_ReportTitle,
-                criteria.SportName,
-                criteria.LeagueName,
-                criteria.BetTypeName);
+
+            var title = criteria.IsNormalMode ?
+              string.Format(
+                  WinLossResources.LeagueWinLoss_ReportTitle,
+                  criteria.StartDate.ToShortFormatedDate()) :
+              string.Format("League Win Loss Report From {0} To {1}",
+                  criteria.StartDate.ToShortFormatedDate(),
+                  criteria.EndDate.ToShortFormatedDate());
 
             currentColumn = startColumn;
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 7);
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 12);
             currentCellRange.Merged = true;
             currentCellRange.Value = title;
-            currentCellRange.Style = headerTextStyle;
+            currentCellRange.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
+            currentCellRange.Style.Font.Size = 200;
+            currentCellRange.Style.Font.Weight = 700;
             currentRow += 2;
 
-            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 7);
+            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 12);
+
+            var matchTitle = string.Format(
+              WinLossResources.LeagueWinLossByBetType_ReportTitle,
+              criteria.SportName,
+              criteria.LeagueName,
+              criteria.BetTypeName,
+              criteria.LiveIndicator ? "Live" : "Non-Live");
 
             currentColumn = startColumn;
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Code;
-            currentCell.Style = headerTextStyle;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 12);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = matchTitle;
+            currentCellRange.Style = headerTextStyle;
+            currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
+            currentRow += 2;
+
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Code;
+            currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
 
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Event;
-            currentCell.Style = headerTextStyle;
-            currentColumn++;
+            ExportHeader(ref workSheet, currentColumn, ref currentRow, Labels.Event);
 
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Win_Loss;
-            currentCell.Style = headerTextStyle;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Position;
-            currentCell.Style = headerTextStyle;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Comm;
-            currentCell.Style = headerTextStyle;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.LineTotal;
-            currentCell.Style = headerTextStyle;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Turnover;
-            currentCell.Style = headerTextStyle;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Margin;
-            currentCell.Style = headerTextStyle;
-            currentColumn++;
-            currentRow++;
-
-            if (report.ChildsInfo.Count > 0)
+            if (report.Match.Count > 0)
             {
-                var len = report.ChildsInfo.Count;
-                LeagueWinLossInfo info;
+                var len = report.Match.Count;
+                MatchWinLossItem info;
                 for (var i = 0; i < len; i++)
                 {
-                    info = report.ChildsInfo[i];
+                    info = report.Match[i];
                     if (i % 2 == 0)
                     {
                         textStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
@@ -773,18 +915,23 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Event;
+                    currentCell.Value = info.MatchEvent;
                     currentCell.Style = textStyle;
                     currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Center;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.WinLoss;
+                    currentCell.Value = info.MemberWinLoss;
                     currentCell.Style = positiveTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.Position;
+                    currentCell.Value = info.SMAWinLoss;
+                    currentCell.Style = twoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.ExtraPT;
                     currentCell.Style = twoDecimalNumberStyle;
                     currentColumn++;
 
@@ -794,19 +941,54 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.LineTotal;
+                    currentCell.Value = info.VarianceIncome;
                     currentCell.Style = positiveTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.TurnOver;
+                    currentCell.Value = info.VirtualWinLoss;
+                    currentCell.Style = positiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = positiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualTurnover;
                     currentCell.Style = twoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    AssignMargin(currentCell, info);
+                    currentCell.Value = info.RealTurnover;
+                    currentCell.Style = twoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    if (info.VirtualTurnover != 0)
+                    {
+                        currentCell.Value = info.VirtualMargin;
+                    }
+                    else
+                    {
+                        currentCell.Value = Labels.NotAvailable;
+                    }
+
                     currentCell.Style = positiveTwoDecimalPercentNumberStyle;
                     currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    if (info.RealTurnover != 0)
+                    {
+                        currentCell.Value = info.RealMargin;
+                    }
+                    else
+                    {
+                        currentCell.Value = Labels.NotAvailable;
+                    }
+
+                    currentCell.Style = positiveTwoDecimalPercentNumberStyle;
                     currentRow++;
                 }
 
@@ -814,20 +996,26 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 currentColumn = startColumn;
                 currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
                 currentCellRange.Merged = true;
-                currentCellRange.Value = info.Name;
+                currentCellRange.Value = info.MatchEvent;
                 currentCellRange.Style = grandTotalRowTextStyle;
                 currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                 currentCellRange.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn += 2;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.WinLoss;
+                currentCell.Value = info.MemberWinLoss;
                 currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.Position;
+                currentCell.Value = info.SMAWinLoss;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.ExtraPT;
                 currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
@@ -839,39 +1027,94 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.LineTotal;
+                currentCell.Value = info.VarianceIncome;
                 currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.TurnOver;
+                currentCell.Value = info.VirtualWinLoss;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.RealIncome;
+                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.VirtualTurnover;
                 currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
 
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                AssignMargin(currentCell, info);
+                currentCell.Value = info.RealTurnover;
+                currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+
+                if (info.VirtualTurnover != 0)
+                {
+                    currentCell.Value = info.VirtualMargin;
+                }
+                else
+                {
+                    currentCell.Value = Labels.NotAvailable;
+                }
+
+                currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                if (info.RealTurnover != 0)
+                {
+                    currentCell.Value = info.RealMargin;
+                }
+                else
+                {
+                    currentCell.Value = Labels.NotAvailable;
+                }
 
                 currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
                 currentRow++;
 
-                if (this._8rmConfig.IsActive)
+                if (IsShowTotal(report.RM))
                 {
-                    info = report.EightRM;
+                    info = report.RM;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 4);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = info.Name;
+                    currentCellRange.Value = info.MatchEvent;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 5;
+                    currentColumn += 7;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.LineTotal;
+                    currentCell.Value = info.VirtualWinLoss;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -882,20 +1125,35 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentRow++;
                 }
 
-                if (this._barmConfig.IsActive)
+                if (IsShowTotal(report.BARM))
                 {
                     info = report.BARM;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 4);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = info.Name;
+                    currentCellRange.Value = info.MatchEvent;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 5;
+                    currentColumn += 7;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.LineTotal;
+                    currentCell.Value = info.VirtualWinLoss;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -906,35 +1164,58 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentRow++;
                 }
 
-                info = report.GrandTotal;
-                currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 4);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = info.Name;
-                currentCellRange.Style = grandTotalRowTextStyle;
-                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentColumn += 5;
+                if (IsShowTotal(report.RM)
+                    || IsShowTotal(report.BARM))
+                {
+                    info = report.GrandTotal;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = info.MatchEvent;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 7;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.LineTotal;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = string.Empty;
-                currentCellRange.Style = grandTotalRowTextStyle;
-                currentColumn += 2;
-                currentRow++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
             }
             else
             {
-                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 7);
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 12);
             }
 
-            var reportName = string.Format(
-                WinLossResources.LeagueWinLoss_ReportName,
-                criteria.Winlostdate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+            var reportName = criteria.IsNormalMode ? string.Format(
+                    WinLossResources.LeagueWinLoss_ReportName,
+                    criteria.StartDate.ToShortFormatedDateWithSlash().Replace('/', '_')) :
+                string.Format(
+                    "League_Win_Loss_Report_From_{0}_To_{1}",
+                    criteria.StartDate.ToShortFormatedDateWithSlash().Replace('/', '_'),
+                    criteria.EndDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
             excelFile.ReponseStream(reportName);
 
         }
@@ -959,9 +1240,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             int startRow,
             int startColumn,
             ref int currentRow,
-            LeagueWinLossInfo report,
+            LiveNonLiveWinLossModel report,
             GetLeagueWinLossBySportCriteria criteria)
         {
+            var bettypeWinLoss = report.BetTypeWinLoss;
             var textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);
             var twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
                 NumberFormatConstants.TwoDecimalDigitFormat,
@@ -1007,7 +1289,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             ExcelCell currentCell;
 
             currentColumn = startColumn;
-            for (int colIndex = 0; colIndex < 7; colIndex++)
+            for (int colIndex = 0; colIndex < 11; colIndex++)
             {
                 workSheet.Columns[startColumn + colIndex].Width = 140 * ExcelExtensions.FontWidth;
             }
@@ -1017,95 +1299,61 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 WinLossResources.LeagueWinLossBySport_ReportTitle,
                 criteria.SportName,
                 criteria.LeagueName,
-                (report.ChildsInfo.Count > 0) ? " - " + report.Name : string.Empty);
+                (bettypeWinLoss.BettypeWinLoss.Count > 0) ? " - " + report.Name : string.Empty);
 
             currentColumn = startColumn;
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 11);
             currentCellRange.Merged = true;
             currentCellRange.Value = title;
             currentCellRange.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
             currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
             currentRow++;
 
-            currentColumn = startColumn;
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Bet_Type;
-            currentCell.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Win_Loss;
-            currentCell.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Position;
-            currentCell.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Comm;
-            currentCell.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.LineTotal;
-            currentCell.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Turnover;
-            currentCell.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Margin;
-            currentCell.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
-            currentColumn++;
-            currentRow++;
-            LeagueWinLossInfo chargedCommissionTotal = null;
-            if (report.ChildsInfo.Count > 0)
+            ExportHeader(ref workSheet, startColumn, ref currentRow, Labels.Bet_Type);
+            if (bettypeWinLoss.BettypeWinLoss.Count > 0)
             {
-                var len = report.ChildsInfo.Count;
-                LeagueWinLossInfo info;
+                var len = bettypeWinLoss.BettypeWinLoss.Count;
+                BettypeWinLossItem info;
                 for (var i = 0; i < len; i++)
                 {
-                    info = report.ChildsInfo[i];
-                    const int ChargedCommissionBetType = 500;
-                    if (info.Id != ChargedCommissionBetType)
-                    {
-                        ExportLeagueWinLossByBetTypeNormalBetType(i, currentRow, startColumn, info, workSheet, textStyle, twoDecimalNumberStyle, positiveTwoDecimalNumberStyle, positiveTwoDecimalPercentNumberStyle);
-                        currentRow++;
-                    }
-                    else
-                    {
-                        chargedCommissionTotal = info;
-                    }
-                }
-
-                info = report.Total;
-                ExportLeaguWinLossByBetTypeTotal(currentRow, startColumn, info, workSheet, grandTotalRowTextStyle, grandTotalRowPositiveTwoDecimalNumberStyle, grandTotalRowTwoDecimalNumberStyle, grandTotalRowPositiveTwoDecimalPercentNumberStyle);
-                currentRow++;
-                if (chargedCommissionTotal != null)
-                {
-                    ExportLeaguWinLossByBetTypeTotal(currentRow, startColumn, chargedCommissionTotal, workSheet, grandTotalRowTextStyle, grandTotalRowPositiveTwoDecimalNumberStyle, grandTotalRowTwoDecimalNumberStyle, grandTotalRowPositiveTwoDecimalPercentNumberStyle);
+                    info = bettypeWinLoss.BettypeWinLoss[i];
+                    ExportLeagueWinLossByBetTypeNormalBetType(i, currentRow, startColumn, info, workSheet, textStyle, twoDecimalNumberStyle, positiveTwoDecimalNumberStyle, positiveTwoDecimalPercentNumberStyle);
                     currentRow++;
                 }
 
-                if (this._8rmConfig.IsActive)
+                info = bettypeWinLoss.Total;
+                ExportLeagueWinLossByBetTypeTotal(currentRow, startColumn, info, workSheet, grandTotalRowTextStyle, grandTotalRowPositiveTwoDecimalNumberStyle, grandTotalRowTwoDecimalNumberStyle, grandTotalRowPositiveTwoDecimalPercentNumberStyle);
+                currentRow++;
+
+                if (IsShowTotal(bettypeWinLoss.RM))
                 {
-                    info = report.EightRM;
+                    info = bettypeWinLoss.RM;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 3);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = info.Name;
+                    currentCellRange.Value = info.BettypeName;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 4;
+                    currentColumn += 6;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.LineTotal;
+                    currentCell.Value = info.VirtualWinLoss;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -1116,20 +1364,35 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentRow++;
                 }
 
-                if (this._barmConfig.IsActive)
+                if (IsShowTotal(bettypeWinLoss.BARM))
                 {
-                    info = report.BARM;
+                    info = bettypeWinLoss.BARM;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 3);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = info.Name;
+                    currentCellRange.Value = info.BettypeName;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 4;
+                    currentColumn += 6;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.LineTotal;
+                    currentCell.Value = info.VirtualWinLoss;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
@@ -1140,30 +1403,49 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentRow++;
                 }
 
-                info = report.GrandTotal;
-                currentColumn = startColumn;
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 3);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = info.Name;
-                currentCellRange.Style = grandTotalRowTextStyle;
-                currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                currentColumn += 4;
+                if (IsShowTotal(bettypeWinLoss.RM)
+                    || IsShowTotal(bettypeWinLoss.BARM))
+                {
+                    info = bettypeWinLoss.GrandTotal;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = info.BettypeName;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 6;
 
-                currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = info.LineTotal;
-                currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
-                currentColumn++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = bettypeWinLoss.Total.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
 
-                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
-                currentCellRange.Merged = true;
-                currentCellRange.Value = string.Empty;
-                currentCellRange.Style = grandTotalRowTextStyle;
-                currentColumn += 2;
-                currentRow++;
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = bettypeWinLoss.Total.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = bettypeWinLoss.Total.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
             }
             else
             {
-                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 6);
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 11);
             }
         }
 
@@ -1174,7 +1456,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             int i,
             int currentRow,
             int startColumn,
-            LeagueWinLossInfo info,
+            BettypeWinLossItem info,
             ExcelWorksheet workSheet,
             CellStyle textStyle,
             CellStyle twoDecimalNumberStyle,
@@ -1198,17 +1480,22 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
             var currentColumn = startColumn;
             var currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.Name;
+            currentCell.Value = info.BettypeName;
             currentCell.Style = textStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.WinLoss;
+            currentCell.Value = info.MemberWinLoss;
             currentCell.Style = positiveTwoDecimalNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.Position;
+            currentCell.Value = info.SMAWinLoss;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.ExtraPT;
             currentCell.Style = twoDecimalNumberStyle;
             currentColumn++;
 
@@ -1218,37 +1505,64 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.LineTotal;
+            currentCell.Value = info.VarianceIncome;
             currentCell.Style = positiveTwoDecimalNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.TurnOver;
+            currentCell.Value = info.VirtualWinLoss;
+            currentCell.Style = positiveTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.RealIncome;
+            currentCell.Style = positiveTwoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.VirtualTurnover;
             currentCell.Style = twoDecimalNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            if (info.TurnOver > 0)
+            currentCell.Value = info.RealTurnover;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            if (info.VirtualTurnover != 0)
             {
-                currentCell.Value = Converter.ToDecimal(info.Margin);
+                currentCell.Value = info.VirtualMargin;
             }
             else
             {
-                currentCell.Value = info.Margin.ToString();
+                currentCell.Value = Labels.NotAvailable;
             }
 
             currentCell.Style = positiveTwoDecimalPercentNumberStyle;
             currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            if (info.RealTurnover != 0)
+            {
+                currentCell.Value = info.RealMargin;
+            }
+            else
+            {
+                currentCell.Value = Labels.NotAvailable;
+            }
+
+            currentCell.Style = positiveTwoDecimalPercentNumberStyle;
             return 1;
         }
 
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        private void ExportLeaguWinLossByBetTypeTotal(
+        private void ExportLeagueWinLossByBetTypeTotal(
             int currentRow,
             int startColumn,
-            LeagueWinLossInfo info,
+            BettypeWinLossItem info,
             ExcelWorksheet workSheet,
             CellStyle grandTotalRowTextStyle,
             CellStyle grandTotalRowPositiveTwoDecimalNumberStyle,
@@ -1257,20 +1571,26 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
         {
             var currentColumn = startColumn;
             var currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.Name;
+            currentCell.Value = info.BettypeName;
             currentCell.Style = grandTotalRowTextStyle;
             currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
             currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.WinLoss;
+            currentCell.Value = info.MemberWinLoss;
             currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
             currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.Position;
+            currentCell.Value = info.SMAWinLoss;
+            currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.ExtraPT;
             currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
             currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
             currentColumn++;
@@ -1282,42 +1602,163 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.LineTotal;
+            currentCell.Value = info.VarianceIncome;
             currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
             currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.TurnOver;
+            currentCell.Value = info.VirtualWinLoss;
+            currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.RealIncome;
+            currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.VirtualTurnover;
             currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
             currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            if (info.TurnOver > 0)
+            currentCell.Value = info.RealTurnover;
+            currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            if (info.VirtualTurnover != 0)
             {
-                currentCell.Value = Converter.ToDecimal(info.Margin);
+                currentCell.Value = info.VirtualMargin;
             }
             else
             {
-                currentCell.Value = info.Margin.ToString();
+                currentCell.Value = Labels.NotAvailable;
+            }
+
+            currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
+            currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            if (info.RealTurnover != 0)
+            {
+                currentCell.Value = info.RealMargin;
+            }
+            else
+            {
+                currentCell.Value = Labels.NotAvailable;
             }
 
             currentCell.Style = grandTotalRowPositiveTwoDecimalPercentNumberStyle;
             currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
         }
 
-        private void AssignMargin(ExcelCell currentCell, LeagueWinLossInfo info)
+        private bool IsShowTotal(BaseWinLoss winloss)
         {
-            decimal tempDecimal;
-            if (decimal.TryParse(info.Margin, out tempDecimal))
-            {
-                currentCell.Value = Converter.ToDecimal(info.Margin);
-            }
-            else
-            {
-                currentCell.Value = info.Margin;
-            }
+            return winloss.VirtualWinLoss != 0 || winloss.RealIncome != 0 || winloss.VirtualTurnover != 0 || winloss.RealTurnover != 0;
+        }
+
+        private void ExportHeader(
+            ref ExcelWorksheet workSheet,
+            int startColumn,
+            ref int currentRow,
+            string firstHeader)
+        {
+            var currentColumn = 0;
+            CellRange currentCellRange;
+            ExcelCell currentCell;
+            var headerColor = ExcelExtensions.HeaderTitleColor;
+
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = firstHeader;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Member_Win_Loss;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.SMA_Win_Loss;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Extra_PT;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn++; ;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Commission;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 2);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.House;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn += 3;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.House_Turnover;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn += 2;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Margin;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentRow++;
+
+            currentColumn = startColumn + 5;
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Variance;
+            currentCell.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Virtual_Win_Loss;
+            currentCell.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Real_Income;
+            currentCell.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Virtual;
+            currentCell.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Real;
+            currentCell.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Virtual;
+            currentCell.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Real;
+            currentCell.Style.FormatTitleCell(headerColor);
+            currentRow++;
         }
     }
 }

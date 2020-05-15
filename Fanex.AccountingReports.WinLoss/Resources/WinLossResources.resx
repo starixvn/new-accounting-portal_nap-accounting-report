@@ -172,7 +172,7 @@
     <value>Daily Mix Parlay Win Loss</value>
   </data>
   <data name="LeagueWinLossByBetType_ReportTitle" xml:space="preserve">
-    <value>{0} - {1} - {2}</value>
+    <value>{0} - {1} - {2} - {3}</value>
   </data>
   <data name="LeagueWinLossBySport_ReportTitle" xml:space="preserve">
     <value>{0} - {1}{2}</value>

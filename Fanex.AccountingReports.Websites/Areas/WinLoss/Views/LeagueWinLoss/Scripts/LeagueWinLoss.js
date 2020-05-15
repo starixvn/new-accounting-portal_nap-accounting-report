@@ -7,26 +7,65 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         btnGenerate: null,
         datepickerplugin: null,
         reportContainer: null,
-        report: null
+        report: null,
+        ddlSport: null,
+        btnToday: null,
+        btnYesterday: null,
+        monthpickerplugin: null,
+        btnReportMode: null,
+        bettransMode: null,
+        warehouseMode: null,
+        bettransModeBtn: null
     };
 
     self.Params = {
         reportParams: {
-            Winlostdate: null
-        }
+            StartDate: null,
+            EndDate: null,
+            SportTypeList: null,
+            SportTypeListName: null,
+            IsNormalMode: true
+        },
+
+        isNormalMode: true,
+        cachedNumberSports: null
     };
 
     self.initPage = function () {
         cachedDOMElements();
+        setDayValueForButtons();
+        renderMonthPicker();
         renderDatePicker();
+        getSport();
+        hideWarehouseMode();
         bindingEvent();
+
     };
     var cachedDOMElements = function () {
         _tables.btnGenerate = $("#btnGenerate");
         _tables.reportContainer = $("#leagueWinLossReportContainer");
         _tables.report = $("#leagueWinLossReport");
+        _tables.ddlSport = $("#dropdown-sport");
+        _tables.btnToday = $("#btnToday");
+        _tables.btnYesterday = $("#btnYesterday");
+        _tables.monthpickerplugin = $("#dvMonth");
+        _tables.btnReportMode = $("#btnReportMode");
+        _tables.bettransMode = $("#bettrans-mode");
+        _tables.warehouseMode = $("#warehouse-mode");
+        _tables.bettransModeBtn = $("#bettrans-mode-btn");
 
     };
+
+    var setDayValueForButtons = function () {
+        _tables.btnToday.attr('value', todayStr);
+        _tables.btnYesterday.attr('value', yesterdayStr);
+    };
+
+
+    var hideWarehouseMode = function () {
+        _tables.warehouseMode.addClass("display-none");
+    };
+
     var renderDatePicker = function () {
         $('#datepickerplugin').nexDatePicker({
             nexDatePickerType: "single",
@@ -49,102 +88,211 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 
         _tables.datepickerplugin = $("#datepickerplugin");
     };
+
+    var getSport = function () {
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "WinLoss/LeagueWinLoss/GetSport",
+            null,
+            self.RenderSport,
+            self.RenderSport,
+            AccReport.enableInput,
+            false);
+    };
+
+    var renderMonthPicker = function () {
+        $('#dvMonth').monPickr({
+            plugInId: '#dvMonth',
+            today: toDay,
+            maxDate: toDay,
+            minDate: minWareHouseDate,
+            showDateRange: true,
+            log: function (msg) {
+                console.warn(msg);
+            }
+        });
+
+        _tables.monthpickerplugin = $('#dvMonth');
+    };
+
     var bindingEvent = function () {
         _tables.btnGenerate.click(function () {
             self.btnGenerateClick();
         });
-    };
-    self.btnGenerateClick = function () {
-        AccReport.disableInput();
-        hideLeagueWinLossBySport();
-        getParams();
-        $.ajax({
-            type: "POST",
-            url: window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify(self.Params.reportParams),
-            beforeSend: function () {
-                AccReport.disableInput();
-            },
-            success: function (rs) {
-                renderLeagueWinLoss(rs);
-            },
-            error: function (event, jqXHR, ajaxSettings) {
-                renderLeagueWinLoss([]);
-            },
-            complete: function () {
-                AccReport.enableInput();
+
+        _tables.btnToday.click(function () {
+            self.btnTodayClick();
+        });
+
+        _tables.btnYesterday.click(function () {
+            self.btnYesterdayClick();
+        });
+
+        _tables.btnReportMode.click(function () {
+            if (self.Params.isNormalMode) {
+                self.Params.isNormalMode = false;
+                _tables.bettransMode.addClass("display-none");
+                _tables.bettransModeBtn.addClass("display-none");
+                _tables.warehouseMode.removeClass("display-none");
+                _tables.btnReportMode.attr('value', "BACK");
+
+            } else {
+                self.Params.isNormalMode = true;
+                _tables.bettransMode.removeClass("display-none");
+                _tables.bettransModeBtn.removeClass("display-none");
+                _tables.warehouseMode.addClass("display-none");
+                _tables.btnReportMode.attr('value', "HISTORY REPORT");
             }
+
         });
     };
-    var getParams = function () {
-        self.Params.reportParams.Winlostdate = _tables.datepickerplugin.nexDatePicker("getSingleDate");
-    };
-    function showNormalSportsTotal(grandTotal, currentRow) {
 
-        var totalRow = {
-            Columns: [{ Name: "ColLeague", Value: grandTotal.Name, CssClass: "colLeague align-right" },
-                      { Name: "ColWinLoss", Value: grandTotal.WinLoss },
-                      { Name: "ColPosition", Value: grandTotal.Position },
-                      { Name: "ColCommision", Value: grandTotal.Commission },
-                      { Name: "ColLineTotal", Value: grandTotal.LineTotal },
-                      { Name: "ColTurnOver", Value: grandTotal.TurnOver },
-                      { Name: "ColMargin", Value: grandTotal.Margin }],
-            CssClass: " subTotal"
-        };
-
-        currentRow.SubRows.push(totalRow);
-    };
-
-    function showNewCritketTotal(grandTotal, currentRow) {
-        var childTotals = grandTotal.ChildsInfo;
-        var grandTotalLength = childTotals.length;
-        for (var k = 0; k < grandTotalLength; k++) {
-            var info = childTotals[k];
-            var totalRow = {
-                Columns: [{ Name: "ColLeague", Value: info.Name, CssClass: "colLeague align-right" },
-                          { Name: "ColWinLoss", Value: info.WinLoss },
-                          { Name: "ColPosition", Value: info.Position },
-                          { Name: "ColCommision", Value: info.Commission },
-                          { Name: "ColLineTotal", Value: info.LineTotal },
-                          { Name: "ColTurnOver", Value: info.TurnOver },
-                          { Name: "ColMargin", Value: info.Margin }],
-                CssClass: " subTotal"
-            };
-            currentRow.SubRows.push(totalRow);
+    self.btnGenerateClick = function () {
+        getParams();
+        if (!checkReportParams(self.Params.reportParams)) {
+            AccReport.enableInput();
+            return;
         }
+
+        AccReport.disableInput();
+        hideLeagueWinLossBySport();
+        hideLeagueWinLossByBetType();
+
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
+            self.Params.reportParams,
+            renderLeagueWinLoss,
+            renderLeagueWinLoss,
+            AccReport.enableInput,
+            false);
     };
+
+    self.btnTodayClick = function () {
+        getParamByDate(todayStr);
+        if (!checkReportParams(self.Params.reportParams)) {
+            AccReport.enableInput();
+            return;
+        }
+
+        AccReport.disableInput();
+        hideLeagueWinLossBySport();
+        hideLeagueWinLossByBetType();
+
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
+            self.Params.reportParams,
+            renderLeagueWinLoss,
+            renderLeagueWinLoss,
+            AccReport.enableInput,
+            false);
+    };
+
+    self.btnYesterdayClick = function () {
+        getParamByDate(yesterdayStr);
+        if (!checkReportParams(self.Params.reportParams)) {
+            AccReport.enableInput();
+            return;
+        }
+
+        AccReport.disableInput();
+        hideLeagueWinLossBySport();
+        hideLeagueWinLossByBetType();
+
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
+            self.Params.reportParams,
+            renderLeagueWinLoss,
+            renderLeagueWinLoss,
+            AccReport.enableInput,
+            false);
+    };
+
+    var getParamByDate = function (date) {
+        self.Params.reportParams.StartDate = date;
+        self.Params.reportParams.EndDate = date;
+        self.Params.reportParams.SportTypeList = _tables.ddlSport.multiSelect('getCheckedItems').toString();
+        self.Params.reportParams.SportTypeListName = _tables.ddlSport.multiSelect('getCheckedItems').length === self.Params.cachedNumberSports ?
+             "All" :
+             _tables.ddlSport.multiSelect('getCheckedItemsByText').toString();
+        self.Params.reportParams.IsNormalMode = self.Params.isNormalMode;
+    };
+
+    var getParams = function () {
+        if (self.Params.isNormalMode) {
+            var date = _tables.datepickerplugin.nexDatePicker("getSingleDate");
+            self.Params.reportParams.StartDate = date;
+            self.Params.reportParams.EndDate = date;
+        } else {
+            self.Params.reportParams.StartDate = _tables.monthpickerplugin.monPickr("getFromDate", FormatConstant.MMM_DD_YY_STRING_MONTH_PICKER);
+            self.Params.reportParams.EndDate = _tables.monthpickerplugin.monPickr("getToDate", FormatConstant.MMM_DD_YY_STRING_MONTH_PICKER);
+        }
+
+        self.Params.reportParams.SportTypeList = _tables.ddlSport.multiSelect('getCheckedItems').toString();
+        self.Params.reportParams.SportTypeListName = _tables.ddlSport.multiSelect('getCheckedItems').length === self.Params.cachedNumberSports ?
+            "All" :
+            _tables.ddlSport.multiSelect('getCheckedItemsByText').toString();
+        self.Params.reportParams.IsNormalMode = self.Params.isNormalMode;
+    };
+
+    var checkReportParams = function (params) {
+        AccReport.popUp.removeHighLight();
+        if (self.Params.reportParams.SportTypeList == '') {
+            AccReport.popUp.show("Please select  at least one sport!", "dropdown-sport");
+            return false;
+        }
+
+        return true;
+    };
+
+    function mappingDataRow(info, cssClass) {
+        return {
+            Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right" },
+                    { Name: "ColMemberWinLoss", Value: info.MemberWinLoss },
+                    { Name: "ColSMAWinLoss", Value: info.SMAWinLoss },
+                    { Name: "ColExtraPT", Value: info.ExtraPT },
+                    { Name: "ColCommision", Value: info.Commission },
+                    { Name: "ColVariance", Value: info.VarianceIncome },
+                    { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
+                    { Name: "ColRealIncome", Value: info.RealIncome },
+                    { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
+                    { Name: "ColRealTurnOver", Value: info.RealTurnover },
+                    { Name: "ColVirtualMargin", Value: info.VirtualMargin },
+                    { Name: "ColRealMargin", Value: info.RealMargin }],
+            CssClass: cssClass
+        };
+    };
+
     var renderLeagueWinLoss = function (report) {
+        var title = self.Params.isNormalMode ? "League Win Loss Report on " + self.Params.reportParams.StartDate
+            : "League Win Loss Report From " + self.Params.reportParams.StartDate + " To " + self.Params.reportParams.EndDate;
         self.showReport();
         _tables.reportContainer.removeClass("display-none");
         _tables.report.addClass("display-none");
         var bodyData = [];
         var footerData = [];
 
-        if (report.ChildsInfo.length > 0) {
-            var len = report.ChildsInfo.length;
+        if (report.SportWinLoss.length > 0) {
+            var len = report.SportWinLoss.length;
             var currentSubRow = null;
             var info = null;
             for (var i = 0; i < len; i++) {
-                var sport = report.ChildsInfo[i];
+                var sport = report.SportWinLoss[i];
                 var currentRow =
                 {
-                    Columns: [{ Name: "ColLeague", Value: sport.Name, MergeColNumber: 7 }],
+                    Columns: [{ Name: "ColLeague", Value: sport.SportName, MergeColNumber: 12 }],
                     SubRows: []
                 };
 
-                var childsLength = sport.ChildsInfo.length;
+                var childsLength = sport.Leagues.length;
                 for (var j = 0; j < childsLength; j++) {
-                    info = sport.ChildsInfo[j];
+                    info = sport.Leagues[j];
                     currentSubRow =
                     {
                         Columns: [{
                             Name: "ColLeague", Value: {
-                                sportId: sport.Id,
-                                sportName: sport.Name,
-                                leagueId: info.Id,
-                                leagueName: info.Name
+                                sportId: info.SportType,
+                                sportName: info.Sport,
+                                leagueId: info.LeagueId,
+                                leagueName: info.LeagueName
                             }, CssClass: "colLeague",
                             CustomCellRender: function (currentCell) {
                                 var clickEvent = ' onclick = "viewLeagueWinLossBySport(' + currentCell.Value.sportId + ', ' + currentCell.Value.leagueId + ',\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
@@ -152,92 +300,137 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                 return html;
                             }
                         },
-                                  { Name: "ColWinLoss", Value: info.WinLoss },
-                                  { Name: "ColPosition", Value: info.Position },
+                                  { Name: "ColMemberWinLoss", Value: info.MemberWinLoss },
+                                  { Name: "ColSMAWinLoss", Value: info.SMAWinLoss },
+                                  { Name: "ColExtraPT", Value: info.ExtraPT },
                                   { Name: "ColCommision", Value: info.Commission },
-                                  { Name: "ColLineTotal", Value: info.LineTotal },
-                                  { Name: "ColTurnOver", Value: info.TurnOver },
-                                  { Name: "ColMargin", Value: info.Margin }],
+                                  { Name: "ColVariance", Value: info.VarianceIncome },
+                                  { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
+                                  { Name: "ColRealIncome", Value: info.RealIncome },
+                                  { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
+                                  { Name: "ColRealTurnOver", Value: info.RealTurnover },
+                                  { Name: "ColVirtualMargin", Value: info.VirtualMargin },
+                                  { Name: "ColRealMargin", Value: info.RealMargin }],
                         CssClass: j % 2 == 0 ? "even" : ""
                     };
 
                     currentRow.SubRows.push(currentSubRow);
                 }
 
-                if (sport.Id == 50) {
-                    showNewCritketTotal(sport.GrandTotal, currentRow);
-                }
-                else {
-                    showNormalSportsTotal(sport.GrandTotal, currentRow);
-                }
-
+                var sportTotalRow = mappingDataRow(sport.Total, "subTotal");
+                currentRow.SubRows.push(sportTotalRow);
                 bodyData.push(currentRow);
             }
 
-            info = report.Total;
-            currentRow =
-            {
-                Columns: [{ Name: "ColLeague", Value: info.Name, CssClass: "align-right" },
-                          { Name: "ColWinLoss", Value: info.WinLoss },
-                          { Name: "ColPosition", Value: info.Position },
-                          { Name: "ColCommision", Value: info.Commission },
-                          { Name: "ColLineTotal", Value: info.LineTotal },
-                          { Name: "ColTurnOver", Value: info.TurnOver },
-                          { Name: "ColMargin", Value: info.Margin }]
-            };
-
+            currentRow = mappingDataRow(report.Total, "");
             footerData.push(currentRow);
 
-            if (is8RMActive.toLowerCase() == 'true') {
-                info = report.EightRM;
+            if (self.isShowTotalRow(report.SoccerRM)) {
+                info = report.SoccerRM;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColLeague", Value: info.Name, CssClass: "align-right", MergeColNumber: 4 },
-                              { Name: "ColLineTotal", Value: info.LineTotal },
-                              { Name: "ColTurnOver", Value: "", MergeColNumber: 2 }]
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
+                            { Name: "ColRealIncome", Value: info.RealIncome },
+                            { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
+                            { Name: "ColRealTurnOver", Value: info.RealTurnover },
+                            { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
                 };
 
                 footerData.push(currentRow);
             }
 
-            if (isBARMActive.toLowerCase() == 'true') {
-                info = report.BARM;
+            if (self.isShowTotalRow(report.OtherSportRM)) {
+                info = report.OtherSportRM;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColLeague", Value: info.Name, CssClass: "align-right", MergeColNumber: 4 },
-                              { Name: "ColLineTotal", Value: info.LineTotal },
-                              { Name: "ColTurnOver", Value: "&nbsp;", MergeColNumber: 2 }]
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
+                            { Name: "ColRealIncome", Value: info.RealIncome },
+                            { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
+                            { Name: "ColRealTurnOver", Value: info.RealTurnover },
+                            { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
                 };
 
                 footerData.push(currentRow);
             }
 
-            info = report.GrandTotal;
-            currentRow =
-            {
-                Columns: [{ Name: "ColLeague", Value: info.Name, CssClass: "align-right", MergeColNumber: 4 },
-                          { Name: "ColLineTotal", Value: info.LineTotal },
-                          { Name: "ColTurnOver", Value: "", MergeColNumber: 2 }]
-            };
+            if (self.isShowTotalRow(report.SoccerBARM)) {
+                info = report.SoccerBARM;
+                currentRow =
+                {
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
+                            { Name: "ColRealIncome", Value: info.RealIncome },
+                            { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
+                            { Name: "ColRealTurnOver", Value: info.RealTurnover },
+                            { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
+                };
 
-            footerData.push(currentRow);
+                footerData.push(currentRow);
+            }
 
+            if (self.isShowTotalRow(report.OtherSportBARM)) {
+                info = report.OtherSportBARM;
+                currentRow =
+                {
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
+                            { Name: "ColRealIncome", Value: info.RealIncome },
+                            { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
+                            { Name: "ColRealTurnOver", Value: info.RealTurnover },
+                            { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
+                };
 
+                footerData.push(currentRow);
+            }
+
+            if (self.isShowGrandTotalRow(report)) {
+                info = report.GrandTotal;
+                var totalInfo = report.Total;
+                currentRow =
+                {
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                               { Name: "ColVirtualWinLoss", Value: totalInfo.VirtualWinLoss },
+                               { Name: "ColRealIncome", Value: info.RealIncome },
+                               { Name: "ColVirtualTurnOver", Value: totalInfo.VirtualTurnover },
+                               { Name: "ColRealTurnOver", Value: totalInfo.RealTurnover },
+                               { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
+                };
+
+                footerData.push(currentRow);
+            }
         }
 
         var gridOptions = {
+            customizeHeader: true,
+            groupHeaderRows: [{
+                Columns: [{ HeaderText: "League", Name: "ColLeague", MergeRowNumber: 2 },
+                          { HeaderText: "Member Win Loss", Name: "ColMemberWinLoss", MergeRowNumber: 2 },
+                          { HeaderText: "SMA Win Loss", Name: "ColSMAWinLoss", MergeRowNumber: 2 },
+                          { HeaderText: "Extra PT", Name: "ColExtraPT", MergeRowNumber: 2 },
+						  { HeaderText: "Commission", Name: "ColCommision", MergeRowNumber: 2 },
+						  { HeaderText: "House", Name: "ColVariance", MergeColNumber: 3 },
+						  { HeaderText: "House Turnover", Name: "ColVirtualTurnOver", MergeColNumber: 2 },
+						  { HeaderText: "Margin", Name: 'ColVirtualMargin', MergeColNumber: 2 }]
+            }],
             columns: [{ HeaderText: "League", Width: 300, Name: "ColLeague", HeaderAlign: "center", CellAlign: "left", ShowCollapseExpand: true },
-                      { HeaderText: "Win Loss", Width: 100, Name: "ColWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
-                      { HeaderText: "Position", Width: 100, Name: "ColPosition", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-                      { HeaderText: "Comm", Width: 100, Name: "ColCommision", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-                      { HeaderText: "Line Total", Width: 100, Name: "ColLineTotal", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
-                      { HeaderText: "Turnover", Width: 100, Name: "ColTurnOver", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-                      { HeaderText: "Margin", Width: 100, Name: "ColMargin", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$' }],
+                        { HeaderText: "Member Win Loss", Width: 120, Name: "ColMemberWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
+                        { HeaderText: "SMA Win Loss", Width: 120, Name: "ColSMAWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                        { HeaderText: "Extra PT", Width: 100, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                        { HeaderText: "Commission", Width: 120, Name: "ColCommision", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                        { HeaderText: "Variance", Width: 120, Name: "ColVariance", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
+                        { HeaderText: "Virtual Win Loss", Width: 120, Name: "ColVirtualWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
+                        { HeaderText: "Real Income", Width: 120, Name: "ColRealIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
+                        { HeaderText: "Virtual", Width: 120, Name: "ColVirtualTurnOver", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                        { HeaderText: "Real", Width: 120, Name: "ColRealTurnOver", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
+                        { HeaderText: "Virtual", Width: 120, Name: "ColVirtualMargin", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$' },
+                        { HeaderText: "Real", Width: 120, Name: "ColRealMargin", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$' }],
             showTitle: true,
             showFooter: true,
             titleInfo:
             {
-                text: "League Win Loss Report on " + self.Params.reportParams.Winlostdate,
+                text: title,
                 showExcelButton: true,
                 exportExcelFunction: function () {
                     self.exportReport();
@@ -249,7 +442,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             bodyRows: bodyData,
             showDistinctRow: false,
             footerRows: footerData,
-            gridExpandHeight: 165
+            gridExpandHeight: 300
         };
 
         _tables.report.removeClass("display-none").fanexGrid(gridOptions);
@@ -262,5 +455,68 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
     };
     self.exportReport = function () {
         AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLoss", self.Params.reportParams);
+    };
+
+    self.RenderSport = function (rs) {
+        self.Params.cachedNumberSports = 0;
+        var id = "ddl-sport";
+        var sportGroups = [];
+        var sportGroupLength = rs.length;
+        for (var i = 0; i < sportGroupLength; i++) {
+            var sportGroup = rs[i];
+            var sports = [];
+            var sportLength = sportGroup.ChildItems.length;
+            self.Params.cachedNumberSports += sportLength === 0 ? 1 : sportLength;
+            for (var j = 0; j < sportLength; j++) {
+                var sport = sportGroup.ChildItems[j];
+                sports.push({
+                    Id: id + "-" + sport.SportType + "-" + sport.SportName,
+                    Value: sport.SportType,
+                    Text: sport.SportName,
+                    Checked: true,
+                    Enable: true,
+                    CssClass: "",
+                    Items: []
+                });
+            }
+
+            sportGroups.push({
+                Id: id + "-group" + sportGroup.GroupId,
+                Value: sportGroup.GroupId,
+                Text: sportGroup.GroupName,
+                Checked: true,
+                Enable: true,
+                CssClass: "",
+                Items: sports
+            });
+        }
+
+        _tables.ddlSport.multiSelect(
+         {
+             minWidth: 200,
+             maxHeight: 450,
+             shadow: true,
+             showHeader: true,
+             isCheckAll: true,
+             showFooter: false,
+             checkAllText: "All",
+             isUsedCustomCheckAllText: true,
+             customCheckAllText: "All",
+             noItemText: "No sport found.",
+             listData: sportGroups
+         });
+
+        _tables.ddlSport = $("#dropdown-sport");
+    };
+
+    self.isShowTotalRow = function (total) {
+        return total.VirtualWinLoss != 0 || total.RealIncome != 0 || total.VirtualTurnover != 0 || total.RealTurnover != 0;
+    };
+
+    self.isShowGrandTotalRow = function (report) {
+        return self.isShowTotalRow(report.SoccerRM)
+           || self.isShowTotalRow(report.OtherSportRM)
+           || self.isShowTotalRow(report.SoccerBARM)
+           || self.isShowTotalRow(report.OtherSportBARM);
     };
 }

@@ -250,7 +250,7 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} - {1} - {2}.
+        ///   Looks up a localized string similar to {0} - {1} - {2} - {3}.
         /// </summary>
         public static string LeagueWinLossByBetType_ReportTitle {
             get {

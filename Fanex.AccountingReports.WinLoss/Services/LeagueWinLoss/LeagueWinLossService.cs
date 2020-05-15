@@ -1,22 +1,18 @@
 namespace Fanex.AccountingReports.WinLoss.Services.Implement
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
+    using Constants;
+    using Core.Web;
+    using Entities.LeagueWinLoss;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
-    using Fanex.AccountingReports.Core.Extensions;
-    using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.AccountingReports.Core.Web;
-    using Fanex.AccountingReports.WinLoss.Constants;
     using Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss;
     using Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss;
     using Fanex.AccountingReports.WinLoss.Repositories.Implement;
     using Fanex.AccountingReports.WinLoss.Resources;
-    using Fanex.Common;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -40,10 +36,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
         public LeagueWinLossService(LeagueWinLossRepository reportRepository)
         {
             this._reportRepository = reportRepository ?? new LeagueWinLossRepository();
-            this._8rmConfig = RMSection.Instance.Report[ReportName.LeagueWinLoss.ToString()]
-                .ReportConfigs[RMSection.RMType.EightRM.ToString()];
-            this._barmConfig = RMSection.Instance.Report[ReportName.LeagueWinLoss.ToString()]
-                .ReportConfigs[RMSection.RMType.BARM.ToString()];
         }
 
         /// <summary>
@@ -54,257 +46,106 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        public LeagueWinLossInfo GetLeagueWinLoss(GetLeagueWinLossCriteria criteria)
+        public LeagueWinLossModel GetLeagueWinLoss(GetLeagueWinLossCriteria criteria)
         {
-            var outputParam = new Hashtable();
-            var rawData = this._reportRepository.GetLeagueWinLoss(criteria, ref outputParam);
-            var leagueWinLoss = new LeagueWinLossInfo
+            var rawData = this._reportRepository.GetLeagueWinLoss(criteria);
+            var leagueWinLoss = new LeagueWinLossModel
             {
-                ChildsInfo = new List<LeagueWinLossInfo>(),
-                EightRM = new LeagueWinLossInfo
-                {
-                    Name = Labels.EightRM + " " + Labels.Total
-                },
-                BARM = new LeagueWinLossInfo
-                {
-                    Name = Labels.BARM + " " + Labels.Total
-                },
-                Total = new LeagueWinLossInfo
-                {
-                    Name = Labels.Total
-                },
-                GrandTotal = new LeagueWinLossInfo
-                {
-                    Name = Labels.Grand_Total
-                }
+                SportWinLoss = new List<SportWinLoss>(),
+                SoccerBARM = new LeagueWinLossItem(),
+                OtherSportBARM = new LeagueWinLossItem(),
+                SoccerRM = new LeagueWinLossItem(),
+                OtherSportRM = new LeagueWinLossItem(),
+                Total = new LeagueWinLossItem(),
+                GrandTotal = new LeagueWinLossItem()
             };
 
-            var sportGroups = rawData.OrderBy(rawWinLossInfo => rawWinLossInfo.sporttype)
-                                     .GroupBy(rawWinLossInfo => rawWinLossInfo.sporttype);
+            var sportGroups = rawData.Where(x => x.LeagueName != "Soccer 8RM"
+                                                && x.LeagueName != "Other Sports 8RM"
+                                                && x.LeagueName != "Soccer BARM"
+                                                && x.LeagueName != "Other Sports BARM")
+                                                 .GroupBy(x => new { x.SportType, x.Sport });
+
             foreach (var sportGroup in sportGroups)
             {
-                const int NewCricketSportstype = 50;
-                var sportWinLoss = Converter.ToInt(sportGroup.Key) == NewCricketSportstype
-                    ? CalculateNewCricket(sportGroup)
-                    : CalculateNormalSports(sportGroup);
-                sportWinLoss.Id = Converter.ToInt(sportGroup.Key);
-                leagueWinLoss.AddToTotal(sportWinLoss.GrandTotal);
-                leagueWinLoss.ChildsInfo.Add(sportWinLoss);
-            }
+                var rawSports = rawData.Where(x => x.SportType == sportGroup.Key.SportType);
+                var sportName = sportGroup.Key.Sport;
+                var leagues = BindingLeagues(rawSports);
+                var sportTotal = CalculateSportTotal(sportName + " " + "Total", rawSports);
 
-            leagueWinLoss.EightRM.LineTotal = Converter.ToDecimal(outputParam["winlost_8rm"]);
-            leagueWinLoss.BARM.LineTotal = Converter.ToDecimal(outputParam["winlost_barm"]);
-            leagueWinLoss.AddToGrandTotal(leagueWinLoss.Total);
-            if (this._8rmConfig.IsActive)
-            {
-                leagueWinLoss.AddToGrandTotal(leagueWinLoss.EightRM);
-                leagueWinLoss.EightRM = this.RoundLeagueWinLossInfo(leagueWinLoss.EightRM);
-            }
-
-            if (this._barmConfig.IsActive)
-            {
-                leagueWinLoss.AddToGrandTotal(leagueWinLoss.BARM);
-                leagueWinLoss.BARM = this.RoundLeagueWinLossInfo(leagueWinLoss.BARM);
-            }
-
-            leagueWinLoss.Total.Margin = this.GetWinLossMargin(
-                leagueWinLoss.Total.TurnOver,
-                leagueWinLoss.Total.LineTotal,
-                4,
-                false);
-            leagueWinLoss.Total = this.RoundLeagueWinLossInfo(leagueWinLoss.Total);
-
-            leagueWinLoss.GrandTotal.Margin = this.GetWinLossMargin(
-                leagueWinLoss.GrandTotal.TurnOver,
-                leagueWinLoss.GrandTotal.LineTotal,
-                4,
-                false);
-            leagueWinLoss.GrandTotal = this.RoundLeagueWinLossInfo(leagueWinLoss.GrandTotal);
-
-            SessionManager.Set<LeagueWinLossInfo>(WinLossContants.LeagueWinLossSessionKey, leagueWinLoss);
-            return leagueWinLoss;
-
-            SessionManager.Set<LeagueWinLossInfo>(WinLossContants.LeagueWinLossSessionKey, null);
-            return null;
-        }
-
-        private LeagueWinLossInfo CalculateNormalSports(IGrouping<dynamic, dynamic> sportGroup)
-        {
-            var sportWinLoss = new LeagueWinLossInfo
-            {
-                Id = Converter.ToInt(sportGroup.Key),
-                ChildsInfo = new List<LeagueWinLossInfo>(),
-                GrandTotal = new LeagueWinLossInfo()
-            };
-
-            sportWinLoss.Name = this.GetSportName(sportWinLoss.Id);
-            sportWinLoss.GrandTotal.Name = sportWinLoss.Name + " " + Labels.Total;
-            var leagueList = sportGroup.Select(rawWinLossInfo => Converter.ToInt(rawWinLossInfo.leagueid))
-                                       .ToList();
-            CacheRef.SaveCacheRefResponse(leagueList, CacheRef.GetLeagueName, ref this._leagueNameCache);
-            var orderedSportGroup = sportGroup.OrderBy(rawWinLossInfo => this._leagueNameCache[rawWinLossInfo.leagueid]);
-
-            foreach (var info in orderedSportGroup)
-            {
-                var winLoss = new LeagueWinLossInfo
+                var sportWinLoss = new SportWinLoss
                 {
-                    Id = Converter.ToInt(info.leagueid),
-                    WinLoss = Converter.ToDecimal(info.WinLost),
-                    Position = Converter.ToDecimal(info.Position),
-                    Commission = Converter.ToDecimal(info.Commission),
-                    LineTotal = Converter.ToDecimal(info.LineTotal),
-                    TurnOver = Converter.ToDecimal(info.Turnover)
+                    SportName = sportName,
+                    Leagues = leagues.ToList(),
+                    Total = sportTotal
                 };
 
-                winLoss.Name = this._leagueNameCache[winLoss.Id];
-                winLoss.Margin = this.GetWinLossMargin(
-                    winLoss.TurnOver,
-                    winLoss.LineTotal,
-                    4,
-                    true);
-
-                sportWinLoss.AddToGrandTotal(winLoss);
-                winLoss = this.RoundLeagueWinLossInfo(winLoss);
-                sportWinLoss.ChildsInfo.Add(winLoss);
+                leagueWinLoss.SportWinLoss.Add(sportWinLoss);
             }
 
-            sportWinLoss.ChildsInfo = sportWinLoss.ChildsInfo.OrderBy(winLossInfo => winLossInfo.Name).ToList();
-            sportWinLoss.GrandTotal.Margin = this.GetWinLossMargin(
-                sportWinLoss.GrandTotal.TurnOver,
-                sportWinLoss.GrandTotal.LineTotal,
-                4,
-                true);
+            var soccerRM = rawData.FirstOrDefault(x => x.LeagueName == "Soccer 8RM");
+            leagueWinLoss.SoccerRM = BindingLeague(soccerRM);
 
-            sportWinLoss.GrandTotal = this.RoundLeagueWinLossInfo(sportWinLoss.GrandTotal);
+            var otherRM = rawData.FirstOrDefault(x => x.LeagueName == "Other Sports 8RM");
+            leagueWinLoss.OtherSportRM = BindingLeague(otherRM);
 
-            return sportWinLoss;
+            var soccerBARM = rawData.FirstOrDefault(x => x.LeagueName == "Soccer BARM");
+            leagueWinLoss.SoccerBARM = BindingLeague(soccerBARM);
+
+
+            var otherBARM = rawData.FirstOrDefault(x => x.LeagueName == "Other Sports BARM");
+            leagueWinLoss.OtherSportBARM = BindingLeague(otherBARM);
+
+            var total = rawData.Where(x => x.LeagueName != "Soccer 8RM"
+                                        && x.LeagueName != "Other Sports 8RM"
+                                        && x.LeagueName != "Soccer BARM"
+                                        && x.LeagueName != "Other Sports BARM");
+            var allTotal = CalculateSportTotal("Total", total);
+            leagueWinLoss.Total = allTotal;
+
+            var grandTotal = CalculateSportTotal("Grand Total", rawData);
+            leagueWinLoss.GrandTotal = grandTotal;
+
+            SessionManager.Set(WinLossContants.LeagueWinLossSessionKey, leagueWinLoss);
+            return leagueWinLoss;
         }
 
-        private LeagueWinLossInfo CalculateNewCricket(IGrouping<dynamic, dynamic> sportGroup)
+        public List<SportGroup> GetSports()
         {
-            var sportWinLoss = CalculateNewCricketLeagueWinLoss(sportGroup);
-            var matchWinnerTotal = CalculateNewCricketNonChargeCommissionTotal(sportGroup);
-            var chargedCommisionTotal = CalculateNewCricketChargedCommissionTotal(sportGroup);
-            var grandTotal = CalculateNewCricketGrandTotal(sportGroup);
-            sportWinLoss.GrandTotal = new LeagueWinLossInfo
+            var sportGroups = new List<SportGroup>();
+            var criteria = new GetSportCriteria();
+            var rawData = this._reportRepository.GetSport(criteria);
+            var groups = rawData.GroupBy(x => new { x.SportGroupType, x.SportGroupName });
+            foreach (var group in groups)
             {
-                ChildsInfo = new List<LeagueWinLossInfo> { matchWinnerTotal, chargedCommisionTotal, grandTotal }
-            };
-            sportWinLoss.AddToGrandTotal(grandTotal);
+                var sportGroup = new SportGroup
+                {
+                    GroupId = group.Key.SportGroupType,
+                    GroupName = group.Key.SportGroupName,
+                    ChildItems = new List<Models.LeagueWinLoss.Sport>()
+                };
 
-            return sportWinLoss;
-        }
+                if (group.Count() == 1)
+                {
+                    sportGroups.Add(sportGroup);
+                    continue;
+                }
 
-        private LeagueWinLossInfo CalculateNewCricketLeagueWinLoss(IGrouping<dynamic, dynamic> sportGroup)
-        {
-            var leagueWinLosses = sportGroup.Where(r => r.bettype != CHARGECOMMISSION).ToList();
-            var sportWinLoss = new LeagueWinLossInfo
-            {
-                Id = Converter.ToInt(sportGroup.Key),
-                ChildsInfo = new List<LeagueWinLossInfo>(),
-            };
+                foreach (var item in group)
+                {
+                    sportGroup.ChildItems.Add(new Models.LeagueWinLoss.Sport
+                    {
+                        SportType = item.SportType,
+                        SportName = item.SportName
+                    });
+                }
 
-            sportWinLoss.Name = this.GetSportName(sportWinLoss.Id);
-
-            var leagueList = leagueWinLosses
-                                       .Select(rawWinLossInfo => Converter.ToInt(rawWinLossInfo.leagueid))
-                                       .ToList();
-            CacheRef.SaveCacheRefResponse(leagueList, CacheRef.GetLeagueName, ref this._leagueNameCache);
-            var orderedSportGroup = leagueWinLosses
-                                    .OrderBy(rawWinLossInfo => this._leagueNameCache[rawWinLossInfo.leagueid])
-                                    .ToList();
-            foreach (var info in orderedSportGroup)
-            {
-                var winLoss = new LeagueWinLossInfo { Id = Converter.ToInt(info.leagueid) };
-                winLoss.WinLoss = Converter.ToDecimal(info.WinLost);
-                winLoss.Position = Converter.ToDecimal(info.Position);
-                winLoss.Commission = Converter.ToDecimal(info.Commission);
-                winLoss.LineTotal = Converter.ToDecimal(info.LineTotal);
-                winLoss.TurnOver = Converter.ToDecimal(info.Turnover);
-
-                winLoss.Name = this._leagueNameCache[winLoss.Id];
-                winLoss.Margin = this.GetWinLossMargin(
-                    winLoss.TurnOver,
-                    winLoss.LineTotal,
-                    4,
-                    true);
-
-                winLoss = RoundLeagueWinLossInfo(winLoss);
-                sportWinLoss.ChildsInfo.Add(winLoss);
+                sportGroups.Add(sportGroup);
             }
 
-            sportWinLoss.ChildsInfo = sportWinLoss.ChildsInfo.OrderBy(winLossInfo => winLossInfo.Name).ToList();
-
-            return sportWinLoss;
+            return sportGroups;
         }
 
-        private LeagueWinLossInfo CalculateNewCricketNonChargeCommissionTotal(IGrouping<dynamic, dynamic> sportGroup)
-        {
-            var matchWinner = sportGroup.Where(r => r.bettype != CHARGECOMMISSION).ToList();
-            var matchWinnerTotal = new LeagueWinLossInfo { Name = "Total" };
-            foreach (var info in matchWinner)
-            {
-                matchWinnerTotal.WinLoss += Converter.ToDecimal(info.WinLost);
-                matchWinnerTotal.Position += Converter.ToDecimal(info.Position);
-                matchWinnerTotal.Commission += Converter.ToDecimal(info.Commission);
-                matchWinnerTotal.LineTotal += Converter.ToDecimal(info.LineTotal);
-                matchWinnerTotal.TurnOver += Converter.ToDecimal(info.Turnover);
-            }
-
-            matchWinnerTotal.Margin = this.GetWinLossMargin(
-                   matchWinnerTotal.TurnOver,
-                   matchWinnerTotal.LineTotal,
-                   4,
-                   true);
-            return RoundLeagueWinLossInfo(matchWinnerTotal);
-        }
-
-        private LeagueWinLossInfo CalculateNewCricketChargedCommissionTotal(IGrouping<dynamic, dynamic> sportGroup)
-        {
-            var chargedCommision = sportGroup.Where(r => r.bettype == CHARGECOMMISSION).ToList();
-            var chargedCommisionTotal = new LeagueWinLossInfo
-            {
-                Name = "Charged Commission"
-            };
-            foreach (var info in chargedCommision)
-            {
-                chargedCommisionTotal.WinLoss += Converter.ToDecimal(info.WinLost);
-                chargedCommisionTotal.Position += Converter.ToDecimal(info.Position);
-                chargedCommisionTotal.Commission += Converter.ToDecimal(info.Commission);
-                chargedCommisionTotal.LineTotal += Converter.ToDecimal(info.LineTotal);
-                chargedCommisionTotal.TurnOver += Converter.ToDecimal(info.Turnover);
-            }
-
-            chargedCommisionTotal.Margin = this.GetWinLossMargin(
-                   chargedCommisionTotal.TurnOver,
-                   chargedCommisionTotal.LineTotal,
-                   4,
-                   true);
-            return RoundLeagueWinLossInfo(chargedCommisionTotal);
-        }
-
-        private LeagueWinLossInfo CalculateNewCricketGrandTotal(IGrouping<dynamic, dynamic> sportGroup)
-        {
-            var grandTotal = new LeagueWinLossInfo
-            {
-                Name = this.GetSportName(Convert.ToInt32(sportGroup.Key)) + " " + Labels.Total
-            };
-            foreach (var info in sportGroup)
-            {
-                grandTotal.WinLoss += Converter.ToDecimal(info.WinLost);
-                grandTotal.Position += Converter.ToDecimal(info.Position);
-                grandTotal.Commission += Converter.ToDecimal(info.Commission);
-                grandTotal.LineTotal += Converter.ToDecimal(info.LineTotal);
-                grandTotal.TurnOver += Converter.ToDecimal(info.Turnover);
-            }
-
-            grandTotal.Margin = this.GetWinLossMargin(
-                   grandTotal.TurnOver,
-                   grandTotal.LineTotal,
-                   4,
-                   true);
-            return this.RoundLeagueWinLossInfo(grandTotal);
-        }
 
         /// <summary>
         /// Gets the league win loss by sport.
@@ -314,118 +155,38 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        public LeagueWinLossInfo GetLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria)
+        public List<LiveNonLiveWinLossModel> GetLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria)
         {
-            List<dynamic> eightRMTable;
-            List<dynamic> barmTable;
-            var rawData = this._reportRepository.GetLeagueWinLossBySport(
-                criteria,
-                out eightRMTable,
-                out barmTable);
+            var result = new List<LiveNonLiveWinLossModel>();
+            var rawData = this._reportRepository.GetLeagueWinLossBySport(criteria);
 
-            var liveWinLoss = rawData.Where(data => Converter.ToBool(data.liveindicator));
-            var nonLiveWinLoss = rawData.Where(data => !Converter.ToBool(data.liveindicator));
-            var liveReport = this.GetLeagueWinLossBySport(liveWinLoss);
-            liveReport.Name = Labels.Live.ToUpper();
-            liveReport.Id = LiveTypeConstants.Live;
-
-            var nonLiveReport = this.GetLeagueWinLossBySport(nonLiveWinLoss);
-            nonLiveReport.Name = Labels.None_live.ToUpper();
-            nonLiveReport.Id = LiveTypeConstants.NonLive;
-            if (eightRMTable != null)
+            if (!rawData.Any())
             {
-                eightRMTable.ForEach(data =>
-                {
-                    if (Converter.ToBool(data.liveindicator))
-                    {
-                        liveReport.EightRM.LineTotal += Converter.ToDecimal(data.Winlost8RM);
-                    }
-                    else
-                    {
-                        nonLiveReport.EightRM.LineTotal += Converter.ToDecimal(data.Winlost8RM);
-                    }
-                });
+                return result;
             }
 
-            if (barmTable != null)
+            var liveReport = GetLeagueWinLossBySportLive(rawData);
+            var liveBettypeWinLossModel = new LiveNonLiveWinLossModel
             {
-                barmTable.ForEach(data =>
-                {
-                    if (Converter.ToBool(data.liveindicator))
-                    {
-                        liveReport.BARM.LineTotal += Converter.ToDecimal(data.WinlostBARM);
-                    }
-                    else
-                    {
-                        nonLiveReport.BARM.LineTotal += Converter.ToDecimal(data.WinlostBARM);
-                    }
-                });
-            }
-
-            liveReport.Total.Margin = this.GetWinLossMargin(
-                liveReport.Total.TurnOver,
-                liveReport.Total.LineTotal,
-                4,
-                true);
-            liveReport.Total = this.RoundLeagueWinLossInfo(liveReport.Total);
-
-            nonLiveReport.Total.Margin = this.GetWinLossMargin(
-                nonLiveReport.Total.TurnOver,
-                nonLiveReport.Total.LineTotal,
-                4,
-                true);
-            nonLiveReport.Total = this.RoundLeagueWinLossInfo(nonLiveReport.Total);
-
-            if (this._8rmConfig.IsActive)
-            {
-                liveReport.AddToGrandTotal(liveReport.EightRM);
-                nonLiveReport.AddToGrandTotal(nonLiveReport.EightRM);
-                liveReport.EightRM = this.RoundLeagueWinLossInfo(liveReport.EightRM);
-                nonLiveReport.EightRM = this.RoundLeagueWinLossInfo(nonLiveReport.EightRM);
-            }
-
-            if (this._barmConfig.IsActive)
-            {
-                liveReport.AddToGrandTotal(liveReport.BARM);
-                nonLiveReport.AddToGrandTotal(nonLiveReport.BARM);
-                liveReport.BARM = this.RoundLeagueWinLossInfo(liveReport.BARM);
-                nonLiveReport.BARM = this.RoundLeagueWinLossInfo(nonLiveReport.BARM);
-            }
-
-            liveReport.GrandTotal.Margin = this.GetWinLossMargin(
-                liveReport.GrandTotal.TurnOver,
-                liveReport.GrandTotal.LineTotal,
-                4,
-                true);
-            liveReport.GrandTotal = this.RoundLeagueWinLossInfo(liveReport.GrandTotal);
-
-            nonLiveReport.GrandTotal.Margin = this.GetWinLossMargin(
-                nonLiveReport.GrandTotal.TurnOver,
-                nonLiveReport.GrandTotal.LineTotal,
-                4,
-                true);
-            nonLiveReport.GrandTotal = this.RoundLeagueWinLossInfo(nonLiveReport.GrandTotal);
-
-            var leagueWinLoss = new LeagueWinLossInfo
-            {
-                ChildsInfo = new List<LeagueWinLossInfo>()
+                Id = LiveTypeConstants.Live,
+                Name = Labels.Live.ToUpper(),
+                BetTypeWinLoss = liveReport
             };
 
-            if (liveReport.ChildsInfo.Count > 0)
+            result.Add(liveBettypeWinLossModel);
+
+            var nonLiveReport = GetLeagueWinLossBySportNonLive(rawData);
+            var nonLiveBettypeWinLossModel = new LiveNonLiveWinLossModel
             {
-                leagueWinLoss.ChildsInfo.Add(liveReport);
-            }
+                Id = LiveTypeConstants.NonLive,
+                Name = Labels.Non_Live.ToUpper(),
+                BetTypeWinLoss = nonLiveReport
+            };
 
-            if (nonLiveReport.ChildsInfo.Count > 0)
-            {
-                leagueWinLoss.ChildsInfo.Add(nonLiveReport);
-            }
+            result.Add(nonLiveBettypeWinLossModel);
 
-            SessionManager.Set<LeagueWinLossInfo>(WinLossContants.LeagueWinLossBySportSessionKey, leagueWinLoss);
-            return leagueWinLoss;
-
-            SessionManager.Set<LeagueWinLossInfo>(WinLossContants.LeagueWinLossBySportSessionKey, null);
-            return null;
+            SessionManager.Set(WinLossContants.LeagueWinLossBySportSessionKey, result);
+            return result;
         }
 
         /// <summary>
@@ -436,172 +197,36 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        public LeagueWinLossInfo GetLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
+        public MatchWinLossModel GetLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
         {
-            var outputParam = new Hashtable();
-            var rawData = this._reportRepository.GetLeagueWinLossByBetType(criteria, ref outputParam);
-            var leagueWinLoss = new LeagueWinLossInfo
+            var rawData = this._reportRepository.GetLeagueWinLossByBetType(criteria);
+            var leagueWinLoss = new MatchWinLossModel
             {
-                ChildsInfo = new List<LeagueWinLossInfo>(),
-                EightRM = new LeagueWinLossInfo
-                {
-                    Name = Labels.EightRM + " " + Labels.Total,
-                    LineTotal = Converter.ToDecimal(outputParam["winlost_8rm"])
-                },
-                BARM = new LeagueWinLossInfo
-                {
-                    Name = Labels.BARM + " " + Labels.Total,
-                    LineTotal = Converter.ToDecimal(outputParam["winlost_barm"])
-                },
-                Total = new LeagueWinLossInfo
-                {
-                    Name = Labels.Total
-                },
-                GrandTotal = new LeagueWinLossInfo
-                {
-                    Name = Labels.Grand_Total
-                }
+                Match = new List<MatchWinLossItem>(),
+                RM = new MatchWinLossItem(),
+                BARM = new MatchWinLossItem(),
+                Total = new MatchWinLossItem(),
+                GrandTotal = new MatchWinLossItem()
             };
 
-            List<dynamic> leagueList = new List<dynamic>();
-            List<dynamic> teamList = new List<dynamic>();
-            rawData.ForEach(data =>
-            {
-                leagueList.Add(Converter.ToInt(data.leagueid));
-                teamList.Add(Converter.ToInt(data.HomeId));
-                teamList.Add(Converter.ToInt(data.AwayId));
-            });
+            var rawMatches = rawData.Where(x =>
+                !x.MatchEvent.Contains(criteria.SportName + " " + "BARM")
+                && !x.MatchEvent.Contains(criteria.SportName + " " + "8RM"));
+            var matches = BindingMatches(rawMatches);
+            leagueWinLoss.Match = matches.ToList();
 
-            CacheRef.SaveCacheRefResponse(leagueList, CacheRef.GetLeagueName, ref this._leagueNameCache);
-            CacheRef.SaveCacheRefResponse(teamList, CacheRef.GetTeamName, ref this._teamNameCache);
-            rawData.ForEach(data =>
-            {
-                var info = new LeagueWinLossInfo
-                {
-                    MatchCode = Converter.ToString2(data.matchcode),
-                    HomeTeam = new EntityBase<int, string>
-                    {
-                        Id = Converter.ToInt(data.HomeId)
-                    },
-                    AwayTeam = new EntityBase<int, string>
-                    {
-                        Id = Converter.ToInt(data.AwayId)
-                    },
-                    IsLive = Converter.ToBool(data.liveindicator),
-                    BetType = new EntityBase<int, string>
-                    {
-                        Id = Converter.ToInt(data.BetType)
-                    },
-                    League = new EntityBase<int, string>
-                    {
-                        Id = Converter.ToInt(data.leagueid)
-                    },
-                    WinLoss = Converter.ToDecimal(data.WinLost),
-                    Position = Converter.ToDecimal(data.Position),
-                    Commission = Converter.ToDecimal(data.Commission),
-                    LineTotal = Converter.ToDecimal(data.LineTotal),
-                    TurnOver = Converter.ToDecimal(data.Turnover),
-                    IsNeutral = Converter.ToBool(data.IsNeutral)
-                };
+            leagueWinLoss.Total = CalculateMatchTotal("Total", rawMatches);
 
-                info.HomeTeam.Name = this._teamNameCache[info.HomeTeam.Id];
-                info.AwayTeam.Name = this._teamNameCache[info.AwayTeam.Id];
-                info.League.Name = this._leagueNameCache[info.League.Id];
-                info.Margin = GetWinLossMargin(
-                    info.TurnOver,
-                    info.LineTotal,
-                    4,
-                    true);
-                leagueWinLoss.ChildsInfo.Add(info);
-                leagueWinLoss.AddToTotal(info);
-                leagueWinLoss.AddToGrandTotal(info);
-                info = this.RoundLeagueWinLossInfo(info);
-            });
+            var eightRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains(criteria.SportName + " " + "8RM"));
+            leagueWinLoss.RM = BindingMatch(eightRM);
 
-            if (this._8rmConfig.IsActive)
-            {
-                leagueWinLoss.AddToGrandTotal(leagueWinLoss.EightRM);
-                leagueWinLoss.EightRM = this.RoundLeagueWinLossInfo(leagueWinLoss.EightRM);
-            }
+            var barRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains(criteria.SportName + " " + "BARM"));
+            leagueWinLoss.BARM = BindingMatch(barRM);
 
-            if (this._barmConfig.IsActive)
-            {
-                leagueWinLoss.AddToGrandTotal(leagueWinLoss.BARM);
-                leagueWinLoss.BARM = this.RoundLeagueWinLossInfo(leagueWinLoss.BARM);
-            }
+            leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", rawData);
 
-            leagueWinLoss.Total.Margin = this.GetWinLossMargin(
-                leagueWinLoss.Total.TurnOver,
-                leagueWinLoss.Total.LineTotal,
-                4,
-                true);
-            leagueWinLoss.Total = this.RoundLeagueWinLossInfo(leagueWinLoss.Total);
-
-            leagueWinLoss.GrandTotal.Margin = this.GetWinLossMargin(
-                leagueWinLoss.GrandTotal.TurnOver,
-                leagueWinLoss.GrandTotal.LineTotal,
-                4,
-                true);
-            leagueWinLoss.GrandTotal = this.RoundLeagueWinLossInfo(leagueWinLoss.GrandTotal);
-
-            SessionManager.Set<LeagueWinLossInfo>(WinLossContants.LeagueWinLossByBetTypeSessionKey, leagueWinLoss);
+            SessionManager.Set(WinLossContants.LeagueWinLossByBetTypeSessionKey, leagueWinLoss);
             return leagueWinLoss;
-
-            SessionManager.Set<LeagueWinLossInfo>(WinLossContants.LeagueWinLossByBetTypeSessionKey, null);
-            return null;
-        }
-
-        private string GetSportName(int sportId)
-        {
-            if (sportId == SportContants.MixParlay)
-            {
-                return Labels.Mix_Parlay;
-            }
-
-            return CacheRef.GetSportName(sportId);
-        }
-
-        /// <summary>
-        /// Gets the win loss margin.
-        /// </summary>
-        /// <param name="turnover">The turn over.</param>
-        /// <param name="lineTotal">The line total.</param>
-        /// <param name="decsFormat">The DECS format.</param>
-        /// <param name="isUseNA">If set to <c>true</c> [is use na].</param>
-        /// <returns>The win loss margin.</returns>
-        private string GetWinLossMargin(decimal turnover, decimal lineTotal, byte decsFormat, bool isUseNA)
-        {
-            if (turnover != 0)
-            {
-                return Math.Round(lineTotal / turnover, decsFormat).ToString();
-            }
-
-            if (isUseNA)
-            {
-                return Labels.NotAvailable;
-            }
-
-            return 0.Format(decsFormat);
-        }
-
-        /// <summary>
-        /// Rounds the league win loss information.
-        /// </summary>
-        /// <param name="winLoss">The win loss.</param>
-        /// <returns>The league win loss information.</returns>
-        private LeagueWinLossInfo RoundLeagueWinLossInfo(LeagueWinLossInfo winLoss)
-        {
-            if (winLoss == null)
-            {
-                return winLoss;
-            }
-
-            winLoss.WinLoss = Math.Round(winLoss.WinLoss, 2);
-            winLoss.Position = Math.Round(winLoss.Position, 2);
-            winLoss.Commission = Math.Round(winLoss.Commission, 2);
-            winLoss.LineTotal = Math.Round(winLoss.LineTotal, 2);
-            winLoss.TurnOver = Math.Round(winLoss.TurnOver, 2);
-            return winLoss;
         }
 
         /// <summary>
@@ -612,92 +237,185 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        private LeagueWinLossInfo GetLeagueWinLossBySport(IEnumerable<dynamic> rawData)
+        private BettypeWinLossModel GetLeagueWinLossBySportLive(IEnumerable<BettypeWinLossEntity> rawData)
         {
-            var report = new LeagueWinLossInfo
-            {
-                ChildsInfo = new List<LeagueWinLossInfo>(),
-                EightRM = new LeagueWinLossInfo
-                {
-                    Name = Labels.EightRM + " " + Labels.Total
-                },
-                BARM = new LeagueWinLossInfo
-                {
-                    Name = Labels.BARM + " " + Labels.Total
-                },
-                Total = new LeagueWinLossInfo
-                {
-                    Name = Labels.Total
-                },
-                GrandTotal = new LeagueWinLossInfo
-                {
-                    Name = Labels.Grand_Total
-                }
-            };
-
-            var betTypeList = rawData.Select(rawWinLossInfo => Converter.ToInt(rawWinLossInfo.Bettype))
-                                                     .ToList();
-            CacheRef.SaveCacheRefResponse(betTypeList, CacheRef.GetBettype, ref this._betTypeNameCache);
-            var chargedCommission = rawData.FirstOrDefault();
-            var ischargedCommission = false;
-            foreach (var row in rawData)
-            {
-                var info = new LeagueWinLossInfo
-                {
-                    Id = Converter.ToInt(row.Bettype),
-                    Hedge = Converter.ToString2(row.isHedge),
-                    WinLoss = Converter.ToDecimal(row.WinLost),
-                    Position = Converter.ToDecimal(row.Position),
-                    Commission = Converter.ToDecimal(row.Commission),
-                    LineTotal = Converter.ToDecimal(row.LineTotal),
-                    TurnOver = Converter.ToDecimal(row.Turnover),
-                    IsLive = Converter.ToBool(row.liveindicator)
-                };
-                if (info.Id == 500)
-                {
-                    chargedCommission = info;
-                    ischargedCommission = true;
-                    continue;
-                }
-
-                info.Name = this._betTypeNameCache[info.Id];
-                info.Margin = this.GetWinLossMargin(info.TurnOver, info.LineTotal, 4, true);
-
-                report.AddToTotal(info);
-                info = this.RoundLeagueWinLossInfo(info);
-                report.ChildsInfo.Add(info);
-            }
-
-            if (ischargedCommission == true)
-            {
-                chargedCommission.Name = "Charged Commission";
-                chargedCommission.Margin = this.GetWinLossMargin(chargedCommission.TurnOver, chargedCommission.LineTotal, 4, true);
-                report.ChildsInfo.Add(chargedCommission);
-                report.AddToGrandTotal(chargedCommission);
-            }
-
-            report.Total.Margin = this.GetWinLossMargin(report.Total.TurnOver, report.Total.LineTotal, 4, false);
-            report.AddToGrandTotal(report.Total);
-            report.Total = this.RoundLeagueWinLossInfo(report.Total);
+            var liveWinLoss = rawData.Where(data => data.LiveIndicator);
+            var report = CalculateBettypeByLiveNonLive(liveWinLoss);
 
             return report;
         }
 
-        private bool IsShowReport(LeagueWinLossInfo report)
+        private BettypeWinLossModel GetLeagueWinLossBySportNonLive(IEnumerable<BettypeWinLossEntity> rawData)
         {
-            return report != null &&
-                   report.ChildsInfo.Count > 0 &&
-                  (report.EightRM.LineTotal != 0 ||
-                   report.BARM.LineTotal != 0 ||
-                   report.GrandTotal.LineTotal != 0);
+            var nonLiveWinLoss = rawData.Where(data => !data.LiveIndicator);
+            var report = CalculateBettypeByLiveNonLive(nonLiveWinLoss);
+            return report;
         }
 
-        /// <summary>
-        /// TODO: Update summary.
-        /// </summary>
-        public static class BetTypeContants
+        private BettypeWinLossModel CalculateBettypeByLiveNonLive(IEnumerable<BettypeWinLossEntity> rawData)
         {
-            public const int MixParlay2 = 10;
+            var report = new BettypeWinLossModel
+            {
+                BettypeWinLoss = new List<BettypeWinLossItem>(),
+                RM = new BettypeWinLossItem(),
+                BARM = new BettypeWinLossItem(),
+                Total = new BettypeWinLossItem(),
+                GrandTotal = new BettypeWinLossItem()
+            };
+
+            var bettypes = rawData.Where(x => !x.BettypeName.Contains("8RM")
+                                      && !x.BettypeName.Contains("BARM"));
+
+            var bettypeWinLoss = BindingBettypes(bettypes);
+            report.BettypeWinLoss = bettypeWinLoss.ToList();
+
+            var allTotal = CalculateBettypeTotal(bettypes);
+            report.Total = allTotal;
+
+            var eightRM = rawData.FirstOrDefault(x => x.BettypeName.Contains("8RM"));
+            report.RM = BindingBettype(eightRM);
+
+            var barRM = rawData.FirstOrDefault(x => x.BettypeName.Contains("BARM"));
+            report.BARM = BindingBettype(barRM);
+
+            var grandTotal = CalculateBettypeTotal(rawData);
+            grandTotal.BettypeName = Labels.Grand_Total;
+            report.GrandTotal = grandTotal;
+
+            return report;
+        }
+
+        private LeagueWinLossItem CalculateSportTotal(string sport, IEnumerable<LeagueWinLossEntity> sportGroup)
+        {
+            return new LeagueWinLossItem
+            {
+                LeagueName = sport,
+                MemberWinLoss = sportGroup.Sum(x => x.MemberWinLoss),
+                SMAWinLoss = sportGroup.Sum(x => x.SMAWinLoss),
+                ExtraPT = sportGroup.Sum(x => x.ExtraPT),
+                Commission = sportGroup.Sum(x => x.Commission),
+                VirtualWinLoss = sportGroup.Sum(x => x.VirtualWinLoss),
+                RealIncome = sportGroup.Sum(x => x.RealIncome),
+                VirtualTurnover = sportGroup.Sum(x => x.VirtualTurnover),
+                RealTurnover = sportGroup.Sum(x => x.RealTurnover)
+            };
+        }
+
+        private IEnumerable<LeagueWinLossItem> BindingLeagues(IEnumerable<LeagueWinLossEntity> sportGroup)
+        {
+            return sportGroup.Select(x => BindingLeague(x));
+        }
+
+        private LeagueWinLossItem BindingLeague(LeagueWinLossEntity rawData)
+        {
+            if (rawData == null)
+            {
+                return new LeagueWinLossItem();
+            }
+
+            return new LeagueWinLossItem
+            {
+                Sport = rawData.Sport,
+                SportType = rawData.SportType,
+                LeagueId = rawData.LeagueId,
+                LeagueName = rawData.LeagueName,
+                MemberWinLoss = rawData.MemberWinLoss,
+                SMAWinLoss = rawData.SMAWinLoss,
+                ExtraPT = rawData.ExtraPT,
+                Commission = rawData.Commission,
+                VirtualWinLoss = rawData.VirtualWinLoss,
+                RealIncome = rawData.RealIncome,
+                VirtualTurnover = rawData.VirtualTurnover,
+                RealTurnover = rawData.RealTurnover
+            };
+        }
+
+        private BettypeWinLossItem CalculateBettypeTotal(IEnumerable<BettypeWinLossEntity> bettypes)
+        {
+            return new BettypeWinLossItem
+            {
+                BettypeName = Labels.Total,
+                MemberWinLoss = bettypes.Sum(x => x.MemberWinLoss),
+                SMAWinLoss = bettypes.Sum(x => x.SMAWinLoss),
+                ExtraPT = bettypes.Sum(x => x.ExtraPT),
+                Commission = bettypes.Sum(x => x.Commission),
+                VirtualWinLoss = bettypes.Sum(x => x.VirtualWinLoss),
+                RealIncome = bettypes.Sum(x => x.RealIncome),
+                VirtualTurnover = bettypes.Sum(x => x.VirtualTurnover),
+                RealTurnover = bettypes.Sum(x => x.RealTurnover)
+            };
+        }
+
+        private IEnumerable<BettypeWinLossItem> BindingBettypes(IEnumerable<BettypeWinLossEntity> bettypeGroup)
+        {
+            return bettypeGroup.Select(x => BindingBettype(x));
+        }
+
+        private BettypeWinLossItem BindingBettype(BettypeWinLossEntity rawData)
+        {
+            if (rawData == null)
+            {
+                return new BettypeWinLossItem();
+            }
+
+            return new BettypeWinLossItem
+            {
+                LiveIndicator = rawData.LiveIndicator,
+                Bettype = rawData.Bettype,
+                BettypeName = rawData.BettypeName,
+                IsHedge = rawData.IsHedge,
+                MemberWinLoss = rawData.MemberWinLoss,
+                SMAWinLoss = rawData.SMAWinLoss,
+                ExtraPT = rawData.ExtraPT,
+                Commission = rawData.Commission,
+                VirtualWinLoss = rawData.VirtualWinLoss,
+                RealIncome = rawData.RealIncome,
+                VirtualTurnover = rawData.VirtualTurnover,
+                RealTurnover = rawData.RealTurnover
+            };
+        }
+
+        private MatchWinLossItem CalculateMatchTotal(string title, IEnumerable<MatchEntity> matches)
+        {
+            return new MatchWinLossItem
+            {
+                MatchEvent = title,
+                MemberWinLoss = matches.Sum(x => x.MemberWinLoss),
+                SMAWinLoss = matches.Sum(x => x.SMAWinLoss),
+                ExtraPT = matches.Sum(x => x.ExtraPT),
+                Commission = matches.Sum(x => x.Commission),
+                VirtualWinLoss = matches.Sum(x => x.VirtualWinLoss),
+                RealIncome = matches.Sum(x => x.RealIncome),
+                VirtualTurnover = matches.Sum(x => x.VirtualTurnover),
+                RealTurnover = matches.Sum(x => x.RealTurnover)
+            };
+        }
+
+        private IEnumerable<MatchWinLossItem> BindingMatches(IEnumerable<MatchEntity> matches)
+        {
+            return matches.Select(x => BindingMatch(x));
+        }
+
+        private MatchWinLossItem BindingMatch(MatchEntity rawData)
+        {
+            if (rawData == null)
+            {
+                return new MatchWinLossItem();
+            }
+
+            return new MatchWinLossItem
+            {
+                MatchCode = rawData.MatchCode,
+                MatchEvent = rawData.MatchEvent,
+                MemberWinLoss = rawData.MemberWinLoss,
+                SMAWinLoss = rawData.SMAWinLoss,
+                ExtraPT = rawData.ExtraPT,
+                Commission = rawData.Commission,
+                VirtualWinLoss = rawData.VirtualWinLoss,
+                RealIncome = rawData.RealIncome,
+                VirtualTurnover = rawData.VirtualTurnover,
+                RealTurnover = rawData.RealTurnover
+            };
         }
     }
 }
