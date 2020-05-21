@@ -478,7 +478,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     break;
 
                 case ProductContants.TableGames:
-                    product = "Table Games";
+                    product = "Table Game";
                     break;
 
                 case ProductContants.BBin:

@@ -521,7 +521,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 productName = "Saba.club";
                 break;
             case productEnums.TableGames:
-                productName = "Table Games";
+                productName = "Table Game";
                 break;
             case productEnums.BBin:
                 productName = "BBIN";
