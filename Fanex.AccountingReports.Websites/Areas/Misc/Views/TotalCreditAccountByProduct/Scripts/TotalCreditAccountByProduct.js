@@ -49,7 +49,9 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         SabaClub: 200,
         TableGames: 222,
         BBin: 241,
-        IBCBetLiveCasino: 242
+        IBCBetLiveCasino: 242,
+        RNGWar:224,
+        ION: 225
     };
 
     var cachedData = {
@@ -528,6 +530,12 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 break;
             case productEnums.IBCBetLiveCasino:
                 productName = "IBCBet Live Casino";
+                break;
+            case productEnums.RNGWar:
+                productName = "RNG War";
+                break;
+            case productEnums.ION:
+                productName = "ION";
                 break;
             default:
                 productName = "Unknown";

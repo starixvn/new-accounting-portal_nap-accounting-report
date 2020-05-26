@@ -489,6 +489,14 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     product = "IBCBet Live Casino";
                     break;
 
+                case ProductContants.RNGWar:
+                    product = "RNG War";
+                    break;
+
+                case ProductContants.ION:
+                    product = "ION";
+                    break;
+
                 default:
                     break;
             }
