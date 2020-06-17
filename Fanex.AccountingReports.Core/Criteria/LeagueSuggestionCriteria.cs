@@ -17,7 +17,7 @@ namespace Fanex.AccountingReports.Core.Criteria
 
         public override string GetSettingKey()
         {
-            return "WinLoss_LeagueWinLoss_GetLeagueBySport";
+            return "WinLoss_LeagueWinLoss_GetLeagueSuggestion";
         }
 
         public override bool IsValid()

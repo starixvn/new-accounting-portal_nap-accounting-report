@@ -233,24 +233,24 @@ var AccReport = function ($) {
             }
         },
         reCheckIn: function () {
-            $.ajax({
-                url: AccReport.accReportRoot + "UserLogin/Login/ReCheckLogin",
-                type: "POST",
-                dataType: "json",
-                success: function (result) {
-                    if (typeof (result) != 'undefined' && result != null) {
-                        if (result.IsKickedOut == "1" || result.IsKickedOut == "2") {
-                            alert('Another session has been logged in or your session is expired. Forced to logout!');
-                            window.location.href = AccReport.accReportRoot + "UserLogin/Login/LogOut";
-                        }
-                        else if (result.IsKickedOut == "3") {
-                            window.location.href = AccReport.accReportRoot + "UserLogin/Common/Offline";
-                        }
-                    }
-                },
-                error: function (request, status, error) {
-                }
-            });
+            //$.ajax({
+            //    url: AccReport.accReportRoot + "UserLogin/Login/ReCheckLogin",
+            //    type: "POST",
+            //    dataType: "json",
+            //    success: function (result) {
+            //        if (typeof (result) != 'undefined' && result != null) {
+            //            if (result.IsKickedOut == "1" || result.IsKickedOut == "2") {
+            //                alert('Another session has been logged in or your session is expired. Forced to logout!');
+            //                window.location.href = AccReport.accReportRoot + "UserLogin/Login/LogOut";
+            //            }
+            //            else if (result.IsKickedOut == "3") {
+            //                window.location.href = AccReport.accReportRoot + "UserLogin/Common/Offline";
+            //            }
+            //        }
+            //    },
+            //    error: function (request, status, error) {
+            //    }
+            //});
         },
         gridSorterManager: {
             sortColumn: function (column, sortFunction) {
