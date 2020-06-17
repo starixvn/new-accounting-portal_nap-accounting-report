@@ -19,8 +19,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
             LeagueName: '',
             SportName: '',
             IsNormalMode: true,
-            IsNoDraw: false,
-            LeagueId: 0
+            IsNoDraw: false
         }
     };
     self.initPage = function () {

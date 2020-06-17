@@ -71,7 +71,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 var rawSports = rawData.Where(x => x.SportType == sportGroup.Key.SportType);
                 var sportName = sportGroup.Key.Sport;
                 var leagues = BindingLeagues(rawSports);
-                var sportTotal = CalculateSportTotal(sportName + " " + "Total", rawSports);
+                var sportTotal = CalculateSportTotal(sportName, rawSports);
 
                 var sportWinLoss = new SportWinLoss
                 {

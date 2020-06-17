@@ -13,7 +13,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public DateTime EndDate { get; set; }
 
-        public int LeagueID { get; set; }
+        public int LeagueId { get; set; }
 
         [SpParam(Ignored = true)]
         public string LeagueName { get; set; }
@@ -35,8 +35,6 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
         public bool IsNormalMode { get; set; }
 
         public bool IsNoDraw { get; set; }
-
-        public int LeagueId { get; set; }
 
         public override string GetSettingKey()
         {

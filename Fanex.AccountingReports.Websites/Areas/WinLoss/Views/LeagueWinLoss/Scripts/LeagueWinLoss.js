@@ -324,7 +324,19 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 var sport = report.SportWinLoss[i];
                 var currentRow =
                 {
-                    Columns: [{ Name: "ColLeague", Value: sport.SportName, MergeColNumber: 12 }],
+                    Columns: [
+                        { Name: "ColLeague", Value: sport.SportName },
+                        { Name: "ColMemberWinLoss", Value: sport.Total.MemberWinLoss },
+                        { Name: "ColSMAWinLoss", Value: sport.Total.SMAWinLoss },
+                        { Name: "ColExtraPT", Value: sport.Total.ExtraPT },
+                        { Name: "ColCommision", Value: sport.Total.Commission },
+                        { Name: "ColVariance", Value: sport.Total.VarianceIncome },
+                        { Name: "ColVirtualWinLoss", Value: sport.Total.VirtualWinLoss },
+                        { Name: "ColRealIncome", Value: sport.Total.RealIncome },
+                        { Name: "ColVirtualTurnOver", Value: sport.Total.VirtualTurnover },
+                        { Name: "ColRealTurnOver", Value: sport.Total.RealTurnover },
+                        { Name: "ColVirtualMargin", Value: sport.Total.VirtualMargin },
+                        { Name: "ColRealMargin", Value: sport.Total.RealMargin }],
                     SubRows: []
                 };
 
@@ -341,7 +353,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                 leagueName: info.LeagueName
                             }, CssClass: "colLeague",
                             CustomCellRender: function (currentCell) {
-                                var clickEvent = ' onclick = "viewLeagueWinLossBySport(' + currentCell.Value.leagueId + ',\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
+                                var clickEvent = ' onclick = "viewLeagueWinLossBySport(' + currentCell.Value.sportId + ', ' + currentCell.Value.leagueId + ',\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
                                 var html = '<div class="link " ' + clickEvent + '>' + currentCell.Value.leagueName + '</div>';
                                 return html;
                             }
@@ -363,8 +375,6 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                     currentRow.SubRows.push(currentSubRow);
                 }
 
-                var sportTotalRow = mappingDataRow(sport.Total, "subTotal");
-                currentRow.SubRows.push(sportTotalRow);
                 bodyData.push(currentRow);
             }
 

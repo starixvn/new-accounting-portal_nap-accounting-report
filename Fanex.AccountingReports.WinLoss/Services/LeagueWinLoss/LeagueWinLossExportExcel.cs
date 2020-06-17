@@ -158,11 +158,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     var sport = report.SportWinLoss[i];
 
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 11);
-                    currentCellRange.Merged = true;
-                    currentCellRange.Value = sport.SportName;
-                    currentCellRange.Style.FormatCellText(groupHeadLineColor, true);
-                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
+                    info = sport.Total;
+                    ExportLeagueWinLossNormalSportsTotal(startColumn, currentRow, info, workSheet, subRowTextStyle, subRowPositiveTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle, subRowPositiveTwoDecimalPercentNumberStyle);
                     currentRow++;
 
                     var childsLength = sport.Leagues.Count;
@@ -264,10 +261,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                         currentColumn++;
                         currentRow++;
                     }
-
-                    info = sport.Total;
-                    ExportLeagueWinLossNormalSportsTotal(startColumn, currentRow, info, workSheet, subRowTextStyle, subRowPositiveTwoDecimalNumberStyle, subRowTwoDecimalNumberStyle, subRowPositiveTwoDecimalPercentNumberStyle);
-                    currentRow++;
                 }
 
                 info = report.Total;
