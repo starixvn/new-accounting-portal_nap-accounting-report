@@ -146,16 +146,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentRow += 2;
 
             workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 11);
-
-            var sportList = string.Format("Sports: {0}", criteria.SportTypeListName);
-            currentColumn = startColumn;
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 11);
-            currentCellRange.Merged = true;
-            currentCellRange.Value = sportList;
-            currentCellRange.Style.FormatTitleCell(titleColor);
-            currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
-
-            currentRow += 2;
+          
             ExportHeader(ref workSheet, startColumn, ref currentRow, Labels.League);
 
             if (report.SportWinLoss.Count > 0)

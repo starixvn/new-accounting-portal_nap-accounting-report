@@ -14,10 +14,12 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossBySport = function ()
             StartDate: null,
             EndDate: null,
             LeagueId: null,
-            SportType: null,
+            SportBettype: null,
             LeagueName: '',
             SportName: '',
-            IsNormalMode: true
+            IsNormalMode: true,
+            IsNoDraw: false,
+            LeagueId: 0
         }
     };
     self.initPage = function () {

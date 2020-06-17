@@ -355,6 +355,30 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             return newDateTime;
         }
 
+        public static LeagueSuggestion LeagueSuggestion(LeagueSuggestionCriteria criteria)
+        {
+            var suggestionResult = new LeagueSuggestion
+            {
+                QueryValue = criteria.SearchText,
+                Suggestions = new List<LeagueModel>(),
+                DataInfo = new List<LeagueModel>()
+            };
+
+            var rawData = ReportHelperRepository.LeagueSuggestion(criteria);
+            foreach (var data in rawData)
+            {
+                var info = new LeagueModel
+                {
+                    LeagueId = Converter.ToInt(data.LeagueId),
+                    LeagueName = Converter.ToString2(data.LeagueName)
+                };
+
+                suggestionResult.Suggestions.Add(info);
+            }
+
+            return suggestionResult;
+        }
+
         #endregion StaticMethods
     }
 }

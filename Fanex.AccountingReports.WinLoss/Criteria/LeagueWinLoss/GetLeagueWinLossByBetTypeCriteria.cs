@@ -34,6 +34,10 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
         [SpParam(Ignored = true)]
         public bool IsNormalMode { get; set; }
 
+        public bool IsNoDraw { get; set; }
+
+        public int LeagueId { get; set; }
+
         public override string GetSettingKey()
         {
             var suffix = IsNormalMode ? string.Empty : "_WH";

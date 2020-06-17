@@ -1117,4 +1117,13 @@
   <data name="Virtual_Win_Loss" xml:space="preserve">
     <value>Virtual Win Loss</value>
   </data>
+  <data name="League_Name" xml:space="preserve">
+    <value>League Name</value>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="No_Draw" xml:space="preserve">
+    <value>No Draw</value>
+  </data>
 </root>

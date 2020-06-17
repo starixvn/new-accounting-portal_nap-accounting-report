@@ -14,13 +14,14 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public DateTime EndDate { get; set; }
 
-        public string SportTypeList { get; set; }
-
-        [SpParam(Ignored = true)]
-        public string SportTypeListName { get; set; }
+        public string SportBettype { get; set; }
 
         [SpParam(Ignored = true)]
         public bool IsNormalMode { get; set; }
+
+        public bool IsNoDraw { get; set; }
+
+        public int LeagueId { get; set; }
 
         public override string GetSettingKey()
         {

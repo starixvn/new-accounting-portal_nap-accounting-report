@@ -261,6 +261,7 @@
     <Compile Include="Criteria\GetDWHDateRangeCriteria.cs" />
     <Compile Include="Criteria\GetExchangeCurrenciesCriteria.cs" />
     <Compile Include="Criteria\GetLicensee_SupportByProductCriteria.cs" />
+    <Compile Include="Criteria\LeagueSuggestionCriteria.cs" />
     <Compile Include="Criteria\SelectMostvisitedPageCriteria.cs" />
     <Compile Include="Criteria\UpdateMostVisitedPageCountCriteria.cs" />
     <Compile Include="Criteria\UpdateMostVisitedPagePositionCriteria.cs" />
@@ -278,6 +279,7 @@
     <Compile Include="Helper\SportHelper\CalcOdds.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\IEntity.cs" />
+    <Compile Include="Models\LeagueModel.cs" />
     <Compile Include="Models\SiteEntity.cs" />
     <Compile Include="Models\Sport.cs" />
     <Compile Include="Models\League.cs" />
@@ -288,6 +290,7 @@
     <Compile Include="Models\MailItem.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\UserGroup.cs" />
+    <Compile Include="Models\LeagueSuggestion.cs" />
     <Compile Include="Models\UserNameSuggestion.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\ExchangeCurrencyRepository.cs" />
