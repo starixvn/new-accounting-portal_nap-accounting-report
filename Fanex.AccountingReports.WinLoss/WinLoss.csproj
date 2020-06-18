@@ -239,6 +239,7 @@
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Services\LeagueWinLoss\LeagueWinLossExportExcel.cs" />
+    <Compile Include="Services\LeagueWinLoss\SortingService.cs" />
     <Compile Include="Services\TreeWinLoss\TreeWinLossExcelService.cs" />
     <Compile Include="Services\TreeWinLoss\TreeWinLossService.cs" />
     <Compile Include="Services\TreeWinLoss\TreeWinLossUtil.cs" />

@@ -10,6 +10,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
     using Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss;
     using Fanex.AccountingReports.WinLoss.Repositories.Implement;
     using Fanex.AccountingReports.WinLoss.Resources;
+    using Services.LeagueWinLoss;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
@@ -105,6 +106,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             var grandTotal = CalculateSportTotal("Grand Total", rawData);
             leagueWinLoss.GrandTotal = grandTotal;
+
+            if(!string.IsNullOrEmpty(criteria.SortColumnName) && !string.IsNullOrEmpty(criteria.SortDirection))
+            {
+                var sortingService = new SortingService();
+                leagueWinLoss = sortingService.SortData(leagueWinLoss, criteria.SortDirection, criteria.SortColumnName);
+            }
 
             SessionManager.Set(WinLossContants.LeagueWinLossSessionKey, leagueWinLoss);
             return leagueWinLoss;
