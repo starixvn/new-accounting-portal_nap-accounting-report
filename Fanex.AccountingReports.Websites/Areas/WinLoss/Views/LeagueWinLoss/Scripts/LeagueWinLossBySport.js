@@ -262,8 +262,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossBySport = function ()
             showDistinctRow: false,
             footerRows: footerData,
             fullHeight: report.Id == 0,
-            gridExpandHeight: report.Id == 0 ? 220 + _tables.reportLive.height() : 0,
-            gridHeight: report.Id == 0 ? 0 : ($(window).height() - 200) / 2
+            gridExpandHeight: report.Id == 0 ? 260 + _tables.reportLive.height() : 0,
+            gridHeight: report.Id == 0 ? 0 : ($(window).height() - 240) / 2
         };
 
         reportTable.removeClass("display-none").fanexGrid(gridOptions);

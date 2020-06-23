@@ -359,8 +359,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                 leagueName: info.LeagueName
                             }, CssClass: "colLeague",
                             CustomCellRender: function (currentCell) {
+                                var leagueText = currentCell.Value.leagueName.length > 50 ? currentCell.Value.leagueName.substring(0, 51) + '...' : currentCell.Value.leagueName;
                                 var clickEvent = ' onclick = "viewLeagueWinLossBySport(' + currentCell.Value.sportId + ', ' + currentCell.Value.leagueId + ',\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
-                                var html = '<div class="link " ' + clickEvent + '>' + currentCell.Value.leagueName + '</div>';
+                                var html = '<div class="link " ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
                                 return html;
                             }
                         },
@@ -476,7 +477,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 						  { HeaderText: "House Turnover", Name: "ColVirtualTurnOver", MergeColNumber: 2 },
 						  { HeaderText: "Margin", Name: 'ColVirtualMargin', MergeColNumber: 2 }]
             }],
-            columns: [{ HeaderText: "League", Width: 300, Name: "ColLeague", HeaderAlign: "center", CellAlign: "left", ShowCollapseExpand: true },
+            columns: [{ HeaderText: "League", Width: 380, Name: "ColLeague", HeaderAlign: "center", CellAlign: "left", ShowCollapseExpand: true },
                         { HeaderText: "Member Win Loss", Width: 120, Name: "ColMemberWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                         { HeaderText: "SMA Win Loss", Width: 120, Name: "ColSMAWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                         { HeaderText: "Extra PT", Width: 100, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
