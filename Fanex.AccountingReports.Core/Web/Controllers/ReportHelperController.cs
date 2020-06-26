@@ -51,5 +51,27 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
             jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             return jsonResult;
         }
+
+        [HandleAjaxError]
+        public JsonResult LeagueSuggestion(string sportBettype, string query, bool searchExactly)
+        {
+            var criteria = new LeagueSuggestionCriteria
+            {
+                SportBettype = sportBettype,
+                SearchText = query,
+                SearchExactly = searchExactly
+            };
+
+            var result = ReportService.LeagueSuggestion(criteria);
+            var jsonResult = Json(new
+            {
+                query = result.QueryValue,
+                suggestions = result.Suggestions,
+                data = result.DataInfo
+            });
+
+            jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+            return jsonResult;
+        }
     }
 }

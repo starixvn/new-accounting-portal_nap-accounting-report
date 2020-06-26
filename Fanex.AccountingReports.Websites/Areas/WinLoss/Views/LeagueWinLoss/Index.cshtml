@@ -9,10 +9,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
-    @Styles.Render("~/scripts/_lib/MultipleSelect/style", "~/scripts/_lib/MonthPicker/style", "~/scripts/_lib/Fanex.Grid/style")
-<link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
-<link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css?ver=1" />
-<link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less?ver=2" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MultipleSelect/jquery.multiselect.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Multiselect/fanex.multiSelect.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/DatePicker/jquery.nexDatePicker.css" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css?ver=1" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3-custom.less?ver=2" />
+    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Autocomplete/styles.css" />
     <link rel="stylesheet" type="text/css" href="~/Areas/WinLoss/Views/LeagueWinLoss/Styles/LeagueWinLoss.less?ver=10" />
 }
 @section Headline {
@@ -29,7 +33,7 @@
                 <div class="lbl-field col_3 align-right">
                     @Labels.Sport
                 </div>
-                <div class="edit-field col_8 align-left">
+                <div class="edit-field col_12 align-left">
                     <select id="dropdown-sport"></select>
                 </div>
             </div>
@@ -47,7 +51,40 @@
                 </div>
             </div>
             <div class="filter-cell">
-                <div class="submit width-auto col_4">
+                <div class="lbl-field col_4 align-right bold">
+                    @Labels.Turnover
+                </div>
+                <div class="lbl-field col_9 align-right">
+                    <div class="col_3 alpha">
+                        <input id="radio-turnover-normal" type="radio" value="0" checked="checked" name="radio-turnover"
+                               class="radio-turnover" />
+                        <label for="radio-turnover-normal">
+                            @Labels.Normal
+                        </label>
+                    </div>
+                    <div class="col_3">
+                        <input id="radio-turnover-nodraw" type="radio" value="1" name="radio-turnover"
+                               class="radio-turnover" />
+                        <label for="radio-turnover-nodraw">
+                            @Labels.No_Draw
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="lbl-field col_3 align-right">
+                    @Labels.League
+                </div>
+                <div class="edit-field col_8 align-left">
+                    <input id="txt-league" type="text" maxlength="200" placeholder="@Labels.League_Name" class="default-suggestionbox" />
+                </div>
+            </div>
+        </div>
+        <div class="filter-row">
+            <div class="filter-cell">
+                <div class="submit width-auto col_4 mr-left-80">
                     <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" class="" />
                 </div>
             </div>
@@ -109,9 +146,12 @@
     </script>
 }
 @section Foot {
-    @Scripts.Render("~/scripts/_lib/multiselect", "~/scripts/_lib/monPickr")
+    <script type="text/javascript" src="~/scripts/_lib/MultipleSelect/jquery.multiselect.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Fanex.Multiselect/fanex.multiSelect.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/MonthPicker/monPickr-0.0.3.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/Autocomplete/jquery.autocomplete.js"></script>
     <script type="text/javascript" src="~/Areas/WinLoss/Views/LeagueWinLoss/Scripts/LeagueWinLoss.js"></script>
     <script type="text/javascript" src="~/Areas/WinLoss/Views/LeagueWinLoss/Scripts/LeagueWinLossBySport.js"></script>
     <script type="text/javascript" src="~/Areas/WinLoss/Views/LeagueWinLoss/Scripts/LeagueWinLossByBetType.js"></script>

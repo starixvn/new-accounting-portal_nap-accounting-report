@@ -126,5 +126,31 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
 
             return result;
         }
+
+        public List<dynamic> LeagueSuggestion(LeagueSuggestionCriteria criteria)
+        {
+            DataSet result = null;
+            var settingKey = criteria.GetSettingKey();
+            using (var objectDb = new ObjectDb(settingKey))
+            {
+                result = objectDb.ExecuteDataSet(criteria.GetSpParams());
+            }
+
+            List<dynamic> report = new List<dynamic>();
+            if (result != null && result.Tables.Count >= 1)
+            {
+                var dataTable = result.Tables[0];
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    report.Add(new
+                    {
+                        LeagueId = row["leagueid"],
+                        LeagueName =  row["leaguename"]
+                    });
+                }
+            }
+
+            return report;
+        }
     }
 }

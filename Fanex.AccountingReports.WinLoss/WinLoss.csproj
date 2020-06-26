@@ -194,11 +194,13 @@
     <Compile Include="Entities\LeagueWinLoss\BettypeWinLossEntity.cs" />
     <Compile Include="Entities\LeagueWinLoss\LeagueWinLossEntity.cs" />
     <Compile Include="Entities\LeagueWinLoss\MatchEntity.cs" />
+    <Compile Include="Entities\LeagueWinLoss\SportEntity.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Models\AllCustomerTurnOver\CustomerTurnOverBySite.cs" />
     <Compile Include="Models\AllCustomerTurnOver\CustomerTurnoverBySiteDetail.cs" />
     <Compile Include="Models\DailyMixParlayWinLoss\WinLossInfo.cs" />
     <Compile Include="Models\LeagueWinLoss\BaseWinLoss.cs" />
+    <Compile Include="Models\LeagueWinLoss\BetType.cs" />
     <Compile Include="Models\LeagueWinLoss\BettypeWinLossItem.cs" />
     <Compile Include="Models\LeagueWinLoss\BettypeWinLossModel.cs" />
     <Compile Include="Models\LeagueWinLoss\LeagueWinLossModel.cs" />
@@ -237,6 +239,7 @@
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Services\LeagueWinLoss\LeagueWinLossExportExcel.cs" />
+    <Compile Include="Services\LeagueWinLoss\SortingService.cs" />
     <Compile Include="Services\TreeWinLoss\TreeWinLossExcelService.cs" />
     <Compile Include="Services\TreeWinLoss\TreeWinLossService.cs" />
     <Compile Include="Services\TreeWinLoss\TreeWinLossUtil.cs" />

@@ -1294,6 +1294,15 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to League Name.
+        /// </summary>
+        public static string League_Name {
+            get {
+                return ResourceManager.GetString("League_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Licensee.
         /// </summary>
         public static string Licensee {
@@ -1467,8 +1476,7 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Match.
         /// </summary>
-        public static string LeagueMatch
-        {
+        public static string Match {
             get {
                 return ResourceManager.GetString("Match", resourceCulture);
             }
@@ -1710,6 +1718,15 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Draw.
+        /// </summary>
+        public static string No_Draw {
+            get {
+                return ResourceManager.GetString("No_Draw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No. of Corner.
         /// </summary>
         public static string No_of_Corner {
@@ -1769,6 +1786,15 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         public static string NoneLicensee {
             get {
                 return ResourceManager.GetString("NoneLicensee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Normal.
+        /// </summary>
+        public static string Normal {
+            get {
+                return ResourceManager.GetString("Normal", resourceCulture);
             }
         }
         

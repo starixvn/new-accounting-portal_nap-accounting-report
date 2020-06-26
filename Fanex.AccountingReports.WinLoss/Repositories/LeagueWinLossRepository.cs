@@ -147,7 +147,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
             return null;
         }
 
-        public List<dynamic> GetSport(ICriteria criteria)
+        public List<SportEntity> GetSport(ICriteria criteria)
         {
             DataSet result = null;
 
@@ -159,15 +159,17 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
             if (result != null && result.Tables.Count > 0)
             {
                 var sportTable = result.Tables[0];
-                var sport = new List<dynamic>();
+                var sport = new List<SportEntity>();
                 foreach (DataRow row in sportTable.Rows)
                 {
-                    sport.Add(new
+                    sport.Add(new SportEntity
                     {
-                        SportGroupType = row["SportGroupType"],
-                        SportGroupName = row["SportGroupName"],
-                        SportType = row["SportType"],
-                        SportName = row["SportName"]
+                        SportGroupType = Converter.ToInt(row["SportGroupType"]),
+                        SportGroupName = Converter.ToString2(row["SportGroupName"]),
+                        SportType = Converter.ToInt(row["SportType"]),
+                        SportName = Converter.ToString2(row["SportName"]),
+                        Bettype = Converter.ToInt(row["Bettype"]),
+                        BettypeName = Converter.ToString2(row["BettypeName"])
                     });
                 }
 

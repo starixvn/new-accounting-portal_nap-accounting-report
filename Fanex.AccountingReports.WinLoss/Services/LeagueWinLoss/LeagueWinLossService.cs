@@ -10,6 +10,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
     using Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss;
     using Fanex.AccountingReports.WinLoss.Repositories.Implement;
     using Fanex.AccountingReports.WinLoss.Resources;
+    using Services.LeagueWinLoss;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
@@ -71,7 +72,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 var rawSports = rawData.Where(x => x.SportType == sportGroup.Key.SportType);
                 var sportName = sportGroup.Key.Sport;
                 var leagues = BindingLeagues(rawSports);
-                var sportTotal = CalculateSportTotal(sportName + " " + "Total", rawSports);
+                var sportTotal = CalculateSportTotal(sportName, rawSports);
 
                 var sportWinLoss = new SportWinLoss
                 {
@@ -106,6 +107,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var grandTotal = CalculateSportTotal("Grand Total", rawData);
             leagueWinLoss.GrandTotal = grandTotal;
 
+            if(!string.IsNullOrEmpty(criteria.SortColumnName) && !string.IsNullOrEmpty(criteria.SortDirection))
+            {
+                var sortingService = new SortingService();
+                leagueWinLoss = sortingService.SortData(leagueWinLoss, criteria.SortDirection, criteria.SortColumnName);
+            }
+
             SessionManager.Set(WinLossContants.LeagueWinLossSessionKey, leagueWinLoss);
             return leagueWinLoss;
         }
@@ -125,19 +132,30 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     ChildItems = new List<Models.LeagueWinLoss.Sport>()
                 };
 
-                if (group.Count() == 1)
-                {
-                    sportGroups.Add(sportGroup);
-                    continue;
-                }
+                var sports = group.ToList().GroupBy(x => new { x.SportType, x.SportName });
 
-                foreach (var item in group)
+                foreach (var sport in sports)
                 {
-                    sportGroup.ChildItems.Add(new Models.LeagueWinLoss.Sport
+                    var sportItem = new Models.LeagueWinLoss.Sport
                     {
-                        SportType = item.SportType,
-                        SportName = item.SportName
-                    });
+                        SportType = sport.Key.SportType,
+                        SportName = sport.Key.SportName,
+                        Bettypes = new List<BetType>()
+                    };
+
+                    var sportBettypes = rawData.Where(x => x.SportType == sport.Key.SportType
+                        && x.SportName == sport.Key.SportName);
+
+                    foreach(var bettype in sportBettypes)
+                    {
+                        sportItem.Bettypes.Add(new BetType
+                        {
+                            Bettype = bettype.Bettype,
+                            BettypeName = bettype.BettypeName
+                        });
+                    }
+
+                    sportGroup.ChildItems.Add(sportItem);
                 }
 
                 sportGroups.Add(sportGroup);

@@ -13,18 +13,20 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public DateTime EndDate { get; set; }
 
-        public int LeagueID { get; set; }
+        public int LeagueId { get; set; }
 
         [SpParam(Ignored = true)]
         public string LeagueName { get; set; }
 
-        public int Sporttype { get; set; }
+        public string SportBettype { get; set; }
 
         [SpParam(Ignored = true)]
         public string SportName { get; set; }
 
         [SpParam(Ignored = true)]
         public bool IsNormalMode { get; set; }
+
+        public bool IsNoDraw { get; set; }
 
         public override string GetSettingKey()
         {
