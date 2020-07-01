@@ -1,5 +1,3 @@
-
-
 Namespace.Register("Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss");
 Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
     var self = this;
@@ -52,7 +50,6 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         hideWarehouseMode();
         makeUserNameSuggestion();
         bindingEvent();
-
     };
     var cachedDOMElements = function () {
         _tables.btnGenerate = $("#btnGenerate");
@@ -67,14 +64,12 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         _tables.warehouseMode = $("#warehouse-mode");
         _tables.bettransModeBtn = $("#bettrans-mode-btn");
         _tables.txtLeague = $("#txt-league");
-
     };
 
     var setDayValueForButtons = function () {
         _tables.btnToday.attr('value', todayStr);
         _tables.btnYesterday.attr('value', yesterdayStr);
     };
-
 
     var hideWarehouseMode = function () {
         _tables.warehouseMode.addClass("display-none");
@@ -148,7 +143,6 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 _tables.bettransModeBtn.addClass("display-none");
                 _tables.warehouseMode.removeClass("display-none");
                 _tables.btnReportMode.attr('value', "BACK");
-
             } else {
                 self.Params.isNormalMode = true;
                 _tables.bettransMode.removeClass("display-none");
@@ -157,6 +151,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 _tables.btnReportMode.attr('value', "HISTORY REPORT");
             }
 
+            $("#leagueWinLossReportContainer").addClass("display-none");
+            $("#leagueWinLossReportBySportContainer").addClass("display-none");
+            $("#leagueWinLossReportByBetTypeContainer").addClass("display-none");
         });
     };
 
@@ -184,7 +181,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         if (!self.Params.isFirstLoad) {
             sportTypes = $("#dropdown-sport").fanexMultiSelect('getItems', true).toString();
         }
-       
+
         if (sportTypes == undefined || sportTypes == null) {
             sportTypes = '';
         }
@@ -544,8 +541,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 var bettypes = [];
                 var sport = sportGroup.ChildItems[j];
                 var bettypeLength = sport.Bettypes.length;
-                for (k = 0; k < bettypeLength; k++)
-                {
+                for (k = 0; k < bettypeLength; k++) {
                     var bettype = sport.Bettypes[k];
                     bettypes.push({
                         id: id + "-" + bettype.Bettype + "-" + bettype.BettypeName,
@@ -691,8 +687,6 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
     };
 
     self.sortReport = function () {
-        getParams();
-
         AccReport.disableInput();
         AccReport.utility.CallAjax(this,
                                     window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
