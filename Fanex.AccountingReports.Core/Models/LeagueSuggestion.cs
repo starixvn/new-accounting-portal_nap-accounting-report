@@ -10,8 +10,8 @@ namespace Fanex.AccountingReports.Core.Models
         public string QueryValue { get; set; }
 
         // JQuery Plugin user suggestions field name to get data back
-        public List<LeagueModel> Suggestions { get; set; }
+        public List<string> Suggestions { get; set; }
 
-        public List<LeagueModel> DataInfo { get; set; }
+        public string[] DataInfo { get; set; }
     }
 }

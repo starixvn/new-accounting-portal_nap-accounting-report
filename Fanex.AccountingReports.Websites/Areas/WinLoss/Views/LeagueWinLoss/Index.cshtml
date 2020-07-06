@@ -9,7 +9,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section Head {
-    <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MultipleSelect/jquery.multiselect.css" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/MonthPicker/monPickr-0.0.3.css" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Grid/Fanex.Pagination.css" />
     <link rel="stylesheet" type="text/css" href="~/scripts/_lib/Fanex.Multiselect/fanex.multiSelect.css" />
@@ -142,11 +141,9 @@
         var todayStr = '@DateTime.Now.ToString("MMM dd, yyyy")';
         var yesterdayStr = '@DateTime.Now.AddDays(-1).ToString("MMM dd, yyyy")';
         var minWareHouseDate = '@(new DateTime(2017, 1, 1))';
-
     </script>
 }
 @section Foot {
-    <script type="text/javascript" src="~/scripts/_lib/MultipleSelect/jquery.multiselect.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/Fanex.Multiselect/fanex.multiSelect.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/Namespace.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>

@@ -360,19 +360,14 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             var suggestionResult = new LeagueSuggestion
             {
                 QueryValue = criteria.SearchText,
-                Suggestions = new List<LeagueModel>(),
-                DataInfo = new List<LeagueModel>()
+                Suggestions = new List<string>(),
+                DataInfo = new string[] { string.Empty }
             };
 
             var rawData = ReportHelperRepository.LeagueSuggestion(criteria);
             foreach (var data in rawData)
             {
-                var info = new LeagueModel
-                {
-                    LeagueId = Converter.ToInt(data.LeagueId),
-                    LeagueName = Converter.ToString2(data.LeagueName)
-                };
-
+                var info = Converter.ToString2(data.LeagueName);
                 suggestionResult.Suggestions.Add(info);
             }
 

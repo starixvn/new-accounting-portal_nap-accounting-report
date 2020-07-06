@@ -9,7 +9,6 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
     /// </summary>
     public class GetLeagueWinLossCriteria : CriteriaBase
     {
-
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
@@ -21,7 +20,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public bool IsNoDraw { get; set; }
 
-        public int LeagueId { get; set; }
+        public string LeagueName { get; set; }
 
         [SpParam(Ignored = true)]
         public string SortColumnName { get; set; }

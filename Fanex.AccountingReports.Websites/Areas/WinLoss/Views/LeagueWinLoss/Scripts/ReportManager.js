@@ -24,12 +24,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
     hideLeagueWinLossByBetType = function () {
         _leagueWinLossByBetType.hideReport();
     };
-    viewLeagueWinLossBySport = function (sportId, leagueId, sportName, leagueName) {
+    viewLeagueWinLossBySport = function (sportId, sportName, leagueName) {
         _leagueWinLoss.hideReport();
         _leagueWinLossBySport.getReport({
             StartDate: _leagueWinLoss.Params.reportParams.StartDate,
             EndDate: _leagueWinLoss.Params.reportParams.EndDate,
-            LeagueId: leagueId,
             SportBettype: _leagueWinLoss.Params.reportParams.SportBettype,
             LeagueName: leagueName,
             SportName: sportName,
@@ -43,7 +42,6 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
         _leagueWinLossByBetType.getReport({
             StartDate: _leagueWinLossBySport.Params.reportParams.StartDate,
             EndDate: _leagueWinLossBySport.Params.reportParams.EndDate,
-            LeagueId: _leagueWinLossBySport.Params.reportParams.LeagueId,
             SportType: _leagueWinLossBySport.Params.reportParams.SportType,
             BetType: betTypeId,
             BetTypeName: betTypeName,

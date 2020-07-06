@@ -38,7 +38,6 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                     {
                         SportType = Converter.ToInt(row["SportType"]),
                         Sport = Converter.ToString2(row["Sport"]),
-                        LeagueId = Converter.ToInt(row["LeagueID"]),
                         LeagueName = Converter.ToString2(row["LeagueName"]),
                         MemberWinLoss = Converter.ToDecimal(row["MemberWinLoss"]),
                         SMAWinLoss = Converter.ToDecimal(row["SMAWinLoss"]),

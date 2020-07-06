@@ -13,9 +13,6 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public DateTime EndDate { get; set; }
 
-        public int LeagueId { get; set; }
-
-        [SpParam(Ignored = true)]
         public string LeagueName { get; set; }
 
         public int Sporttype { get; set; }
@@ -31,6 +28,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
         public bool LiveIndicator { get; set; }
 
         public bool IsHedge { get; set; }
+
         [SpParam(Ignored = true)]
         public bool IsNormalMode { get; set; }
 
