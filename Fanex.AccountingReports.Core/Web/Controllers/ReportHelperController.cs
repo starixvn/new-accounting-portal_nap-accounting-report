@@ -53,13 +53,12 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
         }
 
         [HandleAjaxError]
-        public JsonResult LeagueSuggestion(string sportBettype, string query, bool searchExactly)
+        public JsonResult LeagueSuggestion(string sportBettype, string query)
         {
             var criteria = new LeagueSuggestionCriteria
             {
                 SportBettype = sportBettype,
-                SearchText = query,
-                SearchExactly = searchExactly
+                SearchText = query
             };
 
             var result = ReportService.LeagueSuggestion(criteria);

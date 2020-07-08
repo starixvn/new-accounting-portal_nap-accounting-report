@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace Fanex.AccountingReports.Core.Criteria
 {
-   public class LeagueSuggestionCriteria : CriteriaBase
+    public class LeagueSuggestionCriteria : CriteriaBase
     {
         public string SportBettype { get; set; }
 
         public string SearchText { get; set; }
-
-        public bool SearchExactly { get; set; }
 
         public override string GetSettingKey()
         {

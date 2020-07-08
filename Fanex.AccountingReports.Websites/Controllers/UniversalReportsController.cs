@@ -54,5 +54,10 @@ namespace Fanex.AccountingReports.Websites.Controllers
         {
             return Redirect("../../UniversalReports/AbnormalBet");
         }
+
+        public ActionResult SBPerformanceMonitor()
+        {
+            return Redirect("../../UniversalReports/SBPerformanceMonitor");
+        }
     }
 }

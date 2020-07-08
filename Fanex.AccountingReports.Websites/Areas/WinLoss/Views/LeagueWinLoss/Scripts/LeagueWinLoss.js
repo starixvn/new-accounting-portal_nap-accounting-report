@@ -25,7 +25,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             SportBettype: null,
             IsNormalMode: true,
             IsNoDraw: false,
-            LeagueId: 0,
+            LeagueName: '',
             SortColumnName: '',
             SortDirection: ''
         },
@@ -38,7 +38,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         isDefaultTextboxLeague: true,
         isOnAuto: false,
         isFirstLoad: true,
-        LeagueId: 0
+        LeagueName: ''
     };
 
     self.initPage = function () {
@@ -48,7 +48,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         renderDatePicker();
         getSport();
         hideWarehouseMode();
-        makeUserNameSuggestion();
+        makeLeagueSuggestion();
         bindingEvent();
     };
     var cachedDOMElements = function () {
@@ -82,7 +82,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 Id: "CheckDate",
                 Label: labelDate,
                 InitDate: toDay,
-                LabelCss: "lbl-field col_2",
+                LabelCss: "lbl-field col_2 bold",
                 TextboxCss: "edit-field col_5"
             },
 
@@ -157,19 +157,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         });
     };
 
-    var makeUserNameSuggestion = function () {
-        var reEscape = new RegExp('(\\' + ['/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\'].join('|\\') + ')', 'g');
+    var makeLeagueSuggestion = function () {
         self.Params.autoCompleteManager = _tables.txtLeague.autocomplete({
             serviceUrl: window.rootWebPath.replace(/\/$/g, '') + '/ReportHelper/LeagueSuggestion?' +
             $.param(getLeagueSuggestionParams()),
-            fnFormatResult: function (value, data, currentValue) {
-                var pattern = '(' + currentValue.replace(reEscape, '\\$1') + ')';
-                return value.LeagueName.replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>');
-            },
-            onSelect: function (suggestion) {
-                $("#txt-league").val(suggestion.LeagueName);
-                self.Params.LeagueId = suggestion.LeagueId;
-            },
             minChars: 2
         });
 
@@ -188,8 +179,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 
         self.Params.isFirstLoad = false;
         return {
-            sportBettype: sportTypes,
-            searchExactly: false
+            sportBettype: sportTypes
         };
     };
 
@@ -263,7 +253,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         self.Params.reportParams.SportBettype = _tables.ddlSport.fanexMultiSelect('getItems', true).toString();
         self.Params.reportParams.IsNormalMode = self.Params.isNormalMode;
         self.Params.reportParams.IsNoDraw = $('input[name=radio-turnover]:checked').val() == 1;
-        self.Params.reportParams.LeagueId = self.Params.LeagueId;
+        self.Params.reportParams.LeagueName = self.Params.isDefaultTextboxUserName ?
+                      "" :
+                      _tables.txtLeague.val();
     };
 
     var getParams = function () {
@@ -279,7 +271,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         self.Params.reportParams.SportBettype = _tables.ddlSport.fanexMultiSelect('getItems', true).toString();
         self.Params.reportParams.IsNormalMode = self.Params.isNormalMode;
         self.Params.reportParams.IsNoDraw = $('input[name=radio-turnover]:checked').val() == 1;
-        self.Params.reportParams.LeagueId = self.Params.LeagueId;
+        self.Params.reportParams.LeagueName = self.Params.isDefaultTextboxUserName ?
+                      "" :
+                      _tables.txtLeague.val();
     };
 
     var checkReportParams = function (params) {
@@ -352,12 +346,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                             Name: "ColLeague", Value: {
                                 sportId: info.SportType,
                                 sportName: info.Sport,
-                                leagueId: info.LeagueId,
                                 leagueName: info.LeagueName
                             }, CssClass: "colLeague",
                             CustomCellRender: function (currentCell) {
                                 var leagueText = currentCell.Value.leagueName.length > 50 ? currentCell.Value.leagueName.substring(0, 51) + '...' : currentCell.Value.leagueName;
-                                var clickEvent = ' onclick = "viewLeagueWinLossBySport(' + currentCell.Value.sportId + ', ' + currentCell.Value.leagueId + ',\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
+                                var clickEvent = ' onclick = "viewLeagueWinLossBySport(' + currentCell.Value.sportId + ',\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
                                 var html = '<div class="link " ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
                                 return html;
                             }
@@ -606,7 +599,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             disabled: false,
             listData: sportGroups,
             onCheck: function () {
-                makeUserNameSuggestion();
+                makeLeagueSuggestion();
             },
             onOpen: function () {
                 if (isSetDefaultCollapse) {

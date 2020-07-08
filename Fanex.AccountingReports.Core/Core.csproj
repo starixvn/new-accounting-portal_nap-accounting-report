@@ -279,7 +279,6 @@
     <Compile Include="Helper\SportHelper\CalcOdds.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\IEntity.cs" />
-    <Compile Include="Models\LeagueModel.cs" />
     <Compile Include="Models\SiteEntity.cs" />
     <Compile Include="Models\Sport.cs" />
     <Compile Include="Models\League.cs" />

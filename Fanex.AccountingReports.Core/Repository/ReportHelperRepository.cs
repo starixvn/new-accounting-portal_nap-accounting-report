@@ -144,8 +144,7 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
                 {
                     report.Add(new
                     {
-                        LeagueId = row["leagueid"],
-                        LeagueName =  row["leaguename"]
+                        LeagueName = row["leaguename"]
                     });
                 }
             }
