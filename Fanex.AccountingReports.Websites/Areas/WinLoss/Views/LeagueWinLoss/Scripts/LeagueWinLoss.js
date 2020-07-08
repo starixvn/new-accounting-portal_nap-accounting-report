@@ -82,7 +82,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 Id: "CheckDate",
                 Label: labelDate,
                 InitDate: toDay,
-                LabelCss: "lbl-field col_2",
+                LabelCss: "lbl-field col_2 bold",
                 TextboxCss: "edit-field col_5"
             },
 
