@@ -41,8 +41,21 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
 
         [HttpPost]
         [HandleAjaxError]
+        public JsonResult GetSport()
+        {
+            var result = this.TreeWinLossService.GetSport();
+            return Json(result);
+        }
+
+        [HttpPost]
+        [HandleAjaxError]
         public JsonResult GetTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria)
         {
+            if (string.IsNullOrEmpty(criteria.SportType))
+            {
+                criteria.SportType = string.Empty;
+            }
+
             var report = this.TreeWinLossService.GetTreeWinLossByProduct(criteria);
             var jsonResult = Json(report, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;
@@ -53,6 +66,11 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         [HandleAjaxError]
         public JsonResult GetTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
+            if (string.IsNullOrEmpty(criteria.SportType))
+            {
+                criteria.SportType = string.Empty;
+            }
+
             var report = this.TreeWinLossService.GetTreeWinLossByLevel(criteria);
             var jsonResult = Json(report, JsonRequestBehavior.AllowGet);
             jsonResult.MaxJsonLength = int.MaxValue;

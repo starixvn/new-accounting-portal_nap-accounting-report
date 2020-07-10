@@ -21,6 +21,8 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
 
         public string Products { get; set; }
 
+        public string SportType { get; set; }
+
         public override bool IsValid()
         {
             return true;

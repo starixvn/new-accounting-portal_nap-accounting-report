@@ -1,4 +1,3 @@
-
 Namespace.Register("Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss");
 Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
     var self = this;
@@ -7,7 +6,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         btnMode: null,
         normalModeDatepickerPlugin: null,
         historyModeDatepickerPlugin: null,
-        dateOptionSelector:null,
+        dateOptionSelector: null,
         normalMode: null,
         historyMode: null,
         reportContainer: null,
@@ -23,7 +22,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             bingo: null,
             poker: null
         },
-        ddlProduct: null
+        ddlProduct: null,
+        ddlSport: null
     };
 
     self.Params = {
@@ -32,8 +32,10 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             FromDate: new Date(),
             ToDate: new Date(),
             ProductSelection: null,
-            Products: null
-        }
+            Products: null,
+            SportType: null
+        },
+        isShowSport: true
     };
 
     self.initPage = function () {
@@ -41,6 +43,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         renderSingleDatePicker();
         renderDateRangeDatePicker();
         getProduct();
+        getSport();
         renderFilterNote(noteMessage);
         bindingEvent();
     };
@@ -55,7 +58,6 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         _tables.normalMode = $("#normalMode");
         _tables.historyMode = $("#historyMode");
     };
-
 
     var renderSingleDatePicker = function () {
         $('#normalModeDatepickerPlugin').nexDatePicker({
@@ -146,6 +148,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
     }
 
     var renderProductsDropdown = function (products) {
+        var sportBookId = "1";
         var noItemText = 'No product found.';
         var len = products.length;
         var ddwnProducts = [];
@@ -176,10 +179,85 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             isUsedCustomCheckAllText: true,
             customCheckAllText: 'All Products',
             noItemText: noItemText,
-            listData: ddwnProducts
+            listData: ddwnProducts,
+            onCheck: function () {
+                var products = _tables.ddlProduct.multiSelect("getCheckedItems");
+
+                if (products.length == 0) {
+                    self.Params.isShowSport = false;
+                } else {
+                    if (products.includes(sportBookId)) {
+                        self.Params.isShowSport = true;
+                    } else {
+                        self.Params.isShowSport = false;
+                    }
+                }
+
+                getSport();
+            }
         });
 
         _tables.ddlProduct = $("#ddlProduct");
+    };
+
+    var getSport = function () {
+        AccReport.disableInput();
+        AccReport.utility.CallAjax(this,
+        window.rootUrl + "WinLoss/TreeWinLoss/GetSport",
+        null,
+        renderSportDropdown,
+        renderSportDropdown,
+        AccReport.enableInput);
+    }
+
+    var renderSportDropdown = function (sports) {
+        var noItemText = 'No sport found.';
+        var len = sports.length;
+        var ddwnSports = [];
+        var prefixId = 'ddlSport_';
+        if (self.Params.isShowSport) {
+            for (var i = 0; i < len; i++) {
+                var sport = sports[i];
+                ddwnSports.push({
+                    Id: prefixId + sport.SportType,
+                    Value: sport.SportType,
+                    Text: sport.SportName,
+                    Checked: true,
+                    Enable: true,
+                    CssClass: "",
+                    Items: []
+                });
+            }
+        } else {
+            ddwnSports.push({
+                Id: prefixId + 'not_applicable',
+                Value: 0,
+                Text: 'Not applicable',
+                Checked: true,
+                Enable: true,
+                CssClass: "",
+                Items: []
+            });
+        }
+
+        $("#ddlSport").multiSelect(
+        {
+            minWidth: 140,
+            maxHeight: 450,
+            shadow: true,
+            showHeader: true,
+            isCheckAll: true,
+            showFooter: false,
+            showTooltip: true,
+            checkAllText: self.Params.isShowSport ? 'All Sports' : 'Not applicable',
+            isUsedCustomCheckAllText: true,
+            customCheckAllText: self.Params.isShowSport ? 'All Sports' : 'Not applicable',
+            noItemText: noItemText,
+            listData: ddwnSports,
+            disabled: !self.Params.isShowSport
+        });
+
+        _tables.ddlSport = $("#ddlSport");
     };
 
     var checkBoxIsChecked = function (checkBox) {
@@ -237,7 +315,6 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
             var date = _tables.normalModeDatepickerPlugin.nexDatePicker("getSingleDate");
             self.Params.reportParams.FromDate = date;
             self.Params.reportParams.ToDate = date;
-
         } else {
             var dateRange = _tables.historyModeDatepickerPlugin.nexDatePicker("getDateRange");
             self.Params.reportParams.FromDate = dateRange.FromDate;
@@ -245,6 +322,9 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
         }
 
         self.Params.reportParams.ProductSelection = _tables.ddlProduct.multiSelect("getCheckedItems").join(',');
+        self.Params.reportParams.SportType = self.Params.isShowSport ?
+            _tables.ddlSport.multiSelect("getCheckedItems").join(',') :
+            '';
     };
 
     var validateParams = function () {
@@ -257,6 +337,14 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLoss = function () {
                 message = "Please select at least one product!";
             }
             notifyIds.push("ddlProduct");
+            isValid = false;
+        }
+
+        if (self.Params.isShowSport && self.Params.reportParams.SportType.length == 0) {
+            if (message == '') {
+                message = "Please select at least one sport!";
+            }
+            notifyIds.push("ddlSport");
             isValid = false;
         }
 

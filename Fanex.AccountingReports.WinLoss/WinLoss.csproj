@@ -180,6 +180,7 @@
     <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossBySportCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetSportCriteria.cs" />
+    <Compile Include="Criteria\TreeWinLoss\GetSportCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetTreeWinLossByAgentCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetTreeWinLossByMasterCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetTreeWinLossByComCriteria.cs" />
@@ -212,6 +213,7 @@
     <Compile Include="Models\LeagueWinLoss\SportGroup.cs" />
     <Compile Include="Models\LeagueWinLoss\SportWinLoss.cs" />
     <Compile Include="Models\TreeWinLoss\SMAVirtualRate.cs" />
+    <Compile Include="Models\TreeWinLoss\Sport.cs" />
     <Compile Include="Models\TreeWinLoss\TreeWinLoss.cs" />
     <Compile Include="Models\TreeWinLoss\TreeWinLossInfo.cs" />
     <Compile Include="Models\TreeWinLoss\TreeWinLossProduct.cs" />

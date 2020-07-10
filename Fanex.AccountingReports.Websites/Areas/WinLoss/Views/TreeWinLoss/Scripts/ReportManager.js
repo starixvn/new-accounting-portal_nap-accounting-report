@@ -30,7 +30,6 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
         maxGridHeight: 10000
     };
 
-
     viewTreeWinLossByComm = function (currencyId, currencyName) {
         _treeWinLoss.hideReport();
         _treeWinLossByComm.getReport({
@@ -41,7 +40,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             Name: currencyName,
             ProductSelection: _treeWinLoss.Params.reportParams.ProductSelection,
             Products: _treeWinLoss.Params.reportParams.Products,
-            IsNormalMode: _treeWinLoss.Params.reportParams.IsNormalMode
+            IsNormalMode: _treeWinLoss.Params.reportParams.IsNormalMode,
+            SportType: _treeWinLoss.Params.reportParams.SportType
         });
     };
 
@@ -55,7 +55,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             Name: Username,
             ProductSelection: _treeWinLoss.Params.reportParams.ProductSelection,
             Products: _treeWinLoss.Params.reportParams.Products,
-            IsNormalMode: _treeWinLoss.Params.reportParams.IsNormalMode
+            IsNormalMode: _treeWinLoss.Params.reportParams.IsNormalMode,
+            SportType: _treeWinLoss.Params.reportParams.SportType
         });
     };
 
@@ -69,7 +70,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             Name: Username,
             ProductSelection: _treeWinLoss.Params.reportParams.ProductSelection,
             Products: _treeWinLoss.Params.reportParams.Products,
-            IsNormalMode: _treeWinLoss.Params.reportParams.IsNormalMode
+            IsNormalMode: _treeWinLoss.Params.reportParams.IsNormalMode,
+            SportType: _treeWinLoss.Params.reportParams.SportType
         });
     };
 
@@ -83,7 +85,8 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.ReportManager = function () {
             Name: Username,
             ProductSelection: _treeWinLoss.Params.reportParams.ProductSelection,
             Products: _treeWinLoss.Params.reportParams.Products,
-            IsNormalMode: _treeWinLoss.Params.reportParams.IsNormalMode
+            IsNormalMode: _treeWinLoss.Params.reportParams.IsNormalMode,
+            SportType: _treeWinLoss.Params.reportParams.SportType
         });
     };
 

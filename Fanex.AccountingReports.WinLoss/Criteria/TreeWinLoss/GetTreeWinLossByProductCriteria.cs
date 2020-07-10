@@ -34,6 +34,8 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
 
         public double VirtualTotal_BARM { get; set; }
 
+        public string SportType { get; set; }
+
         public override bool IsValid()
         {
             return true;

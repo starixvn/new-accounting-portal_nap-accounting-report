@@ -45,6 +45,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return dynamicRipository.Fetch<TreeWinLossProduct>(new GetTreeWinLossListProduct()).ToList();
         }
 
+        public List<Sport> GetSport()
+        {
+            var dynamicRipository = new DynamicRepository();
+            return dynamicRipository.Fetch<Sport>(new GetSportCriteria()).ToList();
+        }
+
         /// <summary>
         /// Get Tree Win Loss By Product.
         /// </summary>
@@ -267,7 +273,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             ToDate = criteria.ToDate,
                             ProductSelection = criteria.ProductSelection,
                             Products = criteria.Products,
-                            IsNormalMode = criteria.IsNormalMode
+                            IsNormalMode = criteria.IsNormalMode,
+                            SportType = criteria.SportType
                         },
                     criteria.RoleId);
 
@@ -280,7 +287,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             ToDate = criteria.ToDate,
                             ProductSelection = criteria.ProductSelection,
                             Products = criteria.Products,
-                            IsNormalMode = criteria.IsNormalMode
+                            IsNormalMode = criteria.IsNormalMode,
+                            SportType = criteria.SportType
                         },
                     criteria.RoleId);
 
@@ -293,7 +301,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             ToDate = criteria.ToDate,
                             ProductSelection = criteria.ProductSelection,
                             Products = criteria.Products,
-                            IsNormalMode = criteria.IsNormalMode
+                            IsNormalMode = criteria.IsNormalMode,
+                            SportType = criteria.SportType
                         },
                     criteria.RoleId);
 
@@ -306,7 +315,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                             ToDate = criteria.ToDate,
                             ProductSelection = criteria.ProductSelection,
                             Products = criteria.Products,
-                            IsNormalMode = criteria.IsNormalMode
+                            IsNormalMode = criteria.IsNormalMode,
+                            SportType = criteria.SportType
                         },
                     criteria.RoleId);
             }
