@@ -41,6 +41,8 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
 
         public string Products { get; set; }
 
+        public string SportType { get; set; }
+
         public override bool IsValid()
         {
             return true;
@@ -63,15 +65,19 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
                 case 2:
                     settingKey = "WinLoss_TreeWinLoss_GetDataByAgent";
                     break;
+
                 case 3:
                     settingKey = "WinLoss_TreeWinLoss_GetDataByMaster";
                     break;
+
                 case 4:
                     settingKey = "WinLoss_TreeWinLoss_GetDataBySuper";
                     break;
+
                 case 5:
                     settingKey = "WinLoss_TreeWinLoss_GetDataByCom";
                     break;
+
                 default:
                     settingKey = "WinLoss_TreeWinLoss_GetDataByAgent";
                     break;
