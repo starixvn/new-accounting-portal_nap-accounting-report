@@ -60,7 +60,6 @@ namespace Fanex.BetList.Accounting.Repositories
             return result;
         }
 
-
         /// <summary>
         /// Binds the SPORTSBOOK.
         /// </summary>
@@ -88,8 +87,8 @@ namespace Fanex.BetList.Accounting.Repositories
                 Color = string.Empty,
                 MatchCode = criteria.MatchCode,
                 GoalRecord = Converter.ToString2(reader["goalrecord"]),
-                IsHTCal = false,
-                Calculate = false,
+                IsHTCal = Converter.ToBool(reader["IsHTCal"]),
+                Calculate = Converter.ToBool(reader["Calculate"]),
                 Bettype = criteria.Bettype,
                 RefNo = string.Empty,
                 GameDetails = new List<GameDetail>(),

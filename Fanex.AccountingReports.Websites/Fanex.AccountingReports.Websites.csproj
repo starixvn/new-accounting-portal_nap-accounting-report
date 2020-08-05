@@ -483,6 +483,13 @@
     <Compile Include="App_Start\FanexData.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="WhoAmI1.aspx.cs">
+      <DependentUpon>WhoAmI1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WhoAmI1.aspx.designer.cs">
+      <DependentUpon>WhoAmI1.aspx</DependentUpon>
+    </Compile>
     <Content Include="App_Data\Fanex.Data\DBACC.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -1045,6 +1052,7 @@
     </Content>
     <Content Include="App_Configuration\TotalCreditAccountByProductSection.config" />
     <Content Include="App_Configuration\RacingSection.config" />
+    <Content Include="WhoAmI1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Balance\Views\CompanyBalanceDifference\Scripts\CompanyBalanceDifference.js" />

@@ -59,5 +59,10 @@ namespace Fanex.AccountingReports.Websites.Controllers
         {
             return Redirect("../../UniversalReports/SBPerformanceMonitor");
         }
+
+        public ActionResult SMAWinLoss()
+        {
+            return Redirect("../../UniversalReports/SMAWinLoss");
+        }
     }
 }
