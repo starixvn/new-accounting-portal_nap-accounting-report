@@ -783,11 +783,35 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
         public List<ProductInfo> CalculateSportData(IEnumerable<dynamic> rawData, List<ProductInfo> sports)
         {
-            CreateSportBookGroups(rawData, sports);
-            CreateVirtualSportGroup(rawData, sports);
-            CreateNG2SportGroup(rawData, sports);
-            CreateNGSportGroup(rawData, sports);
-            CreateBetradarVirtualSportGroup(rawData, sports);
+            if (rawData.Where(x => x.ProductID == MiscConstants.MiscSportbookId).Any())
+            {
+                CreateSportBookGroups(rawData, sports);
+            }
+
+            if (rawData.Where(x => x.ProductID == MiscConstants.MiscVirtualSportsId).Any())
+            {
+                CreateVirtualSportGroup(rawData, sports);
+            }
+
+            if (rawData.Where(x => x.ProductID == MiscConstants.MiscNG2ProductID).Any())
+            {
+                CreateNG2SportGroup(rawData, sports);
+            }
+
+            if (rawData.Where(x => x.ProductID == 3).Any())
+            {
+                CreateNGSportGroup(rawData, sports);
+            }
+
+            if (rawData.Where(x => x.ProductID == MiscConstants.MiscBetradarVirtualSportsId).Any())
+            {
+                CreateBetradarVirtualSportGroup(rawData, sports);
+            }
+
+            if (rawData.Where(x => x.ProductID == MiscConstants.BetBuilderProductID).Any())
+            {
+                CreateBetBuilderSportGroup(rawData, sports);
+            }
 
             return sports;
         }
@@ -850,6 +874,32 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             foreach (var numberGamesportGroup in numberGamesportGroups)
             {
                 sports.Add(AddSportGroup(numberGamesportGroup));
+            }
+
+            return sports;
+        }
+
+        public List<ProductInfo> CreateBetBuilderSportGroup(IEnumerable<dynamic> rawData, List<ProductInfo> sports)
+        {
+            var betBuilderRaw = rawData.Where(r => r.ProductID == MiscConstants.BetBuilderProductID);
+            var betBuilderSportGroups = betBuilderRaw.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
+            foreach (var group in betBuilderSportGroups)
+            {
+                if (sports.FirstOrDefault(x => x.Name == group.Key.SportName) != null)
+                {
+                    foreach (var item in group)
+                    {
+                        sports.FirstOrDefault(x => x.Name == group.Key.SportName).ChildsInfo.Add(new ProductInfo
+                        {
+                            Id = item.Bettype,
+                            Name = item.BettypeName
+                        });
+                    }
+                }
+                else
+                {
+                    sports.Add(AddSportGroup(group));
+                }
             }
 
             return sports;
