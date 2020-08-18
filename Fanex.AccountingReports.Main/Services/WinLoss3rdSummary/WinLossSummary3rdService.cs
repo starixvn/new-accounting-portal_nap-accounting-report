@@ -224,7 +224,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 betInfo = new BetTypeWinLossInfo();
                 betInfo.Id = data.Key.bettype;
                 betInfo.LiveIndicator = (bool)data.Key.liveindicator ? 1 : 0;
-                betInfo.Name = isFreePlay ? bettypeName + "(Free Play)" : bettypeName;                
+                betInfo.Name = isFreePlay ? bettypeName + "(Free Play)" : bettypeName;
 
                 if (data.Key.bettype == 500)
                 {
@@ -278,10 +278,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                         }
                         else if (sportInfo.Id == 161 || sportInfo.Id == 164)
                         {
-                            betInfo.Name = this.GetSportName(sportId);                            
+                            betInfo.Name = this.GetSportName(sportId);
                             sportInfo.Name = "Number Game";
-                            winloss.Id = item.bettype;                            
-                            
+                            winloss.Id = item.bettype;
                         }
                         else if (sportInfo.Id >= MainConstants.WinLossSummaryBeginBetradarVirtualSportId &&
                             sportInfo.Id <= MainConstants.WinLossSummaryEndBetradarVirtualSportId)
@@ -1005,6 +1004,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
         {
             return new WinLossInfo
             {
+                SportId = Converter.ToInt(param.sporttype),
                 WinLoss = Converter.ToDecimal(param.realWinLost),
                 Position = Converter.ToDecimal(param.realPosition),
                 Commission = Converter.ToDecimal(param.realCommission),
@@ -1138,7 +1138,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 FromDate = criteria.FromDate,
                 ToDate = criteria.ToDate,
                 SportType = criteria.SportType,
-                BetType = criteria.BetType                
+                BetType = criteria.BetType
             };
         }
 
