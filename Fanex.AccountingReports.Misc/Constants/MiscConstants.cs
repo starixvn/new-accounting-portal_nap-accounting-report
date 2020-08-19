@@ -16,6 +16,8 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int MiscSportbookId = 1;
         public const int MiscNG2ProductID = 23;
         public const int BetBuilderProductID = -38;
+        public const int MiscBasketballGroupId = 2;
+        public const int MiscEsportsGroupId = 43;
 
         public static readonly string BetCountSessionKey = "Fanex.AccountingReports.Misc.BetCount.BetCountReport";
         public static readonly string BetCountHistoryReportSessionKey = "Fanex.AccountingReports.Misc.BetCount.HistoryBetCountReport";

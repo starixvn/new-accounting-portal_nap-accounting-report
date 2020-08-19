@@ -64,7 +64,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         NG2_ProductId: "23",
         NG_ProductId: "3",
         Sports: [],
-        Sportbook_SportID: [1, 999, -9],
+        Sportbook_SportID: [1, 999, -9, 2, 43],
         SelectedSportBettype: [],
         BetBuilder_ProductId: "-38",
         productSelectedIds: ["1"],

@@ -717,6 +717,12 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
                 case MiscConstants.MiscParLayGroupId:
                     return MiscConstants.MiscParLayGroupId;
+
+                case MiscConstants.MiscBasketballGroupId:
+                    return MiscConstants.MiscBasketballGroupId;
+
+                case MiscConstants.MiscEsportsGroupId:
+                    return MiscConstants.MiscEsportsGroupId;
             }
 
             return -111;
@@ -821,10 +827,17 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             var sportbookRaw = rawData.Where(r => r.ProductID == MiscConstants.MiscSportbookId);
             var soccerGroupData = sportbookRaw.Where(r => r.SportID == MiscConstants.MiscSoccerGroupId);
             var otherSportGroupData = sportbookRaw.Where(r =>
-                r.SportID != MiscConstants.MiscSoccerGroupId && r.SportID != MiscConstants.MiscParLaySportId);
+                r.SportID != MiscConstants.MiscSoccerGroupId
+                && r.SportID != MiscConstants.MiscParLaySportId
+                && r.SportID != MiscConstants.MiscBasketballGroupId
+                && r.SportID != MiscConstants.MiscEsportsGroupId);
             var parlayGroupData = sportbookRaw.Where(r => r.SportID == MiscConstants.MiscParLaySportId);
+            var basketballGroupData = sportbookRaw.Where(r => r.SportID == MiscConstants.MiscBasketballGroupId);
+            var esportsGroupData = sportbookRaw.Where(r => r.SportID == MiscConstants.MiscEsportsGroupId);
 
             sports.Add(GenerateSports(soccerGroupData));
+            sports.Add(GenerateSports(basketballGroupData));
+            sports.Add(GenerateSports(esportsGroupData));
             sports.Add(GenerateOtherSports(otherSportGroupData));
             sports.Add(GenerateSports(parlayGroupData));
 
@@ -926,6 +939,12 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
                 case MiscConstants.MiscParLayGroupId:
                     return Labels.Parlay;
+
+                case MiscConstants.MiscBasketballGroupId:
+                    return CacheRef.GetSportName(SportContants.Basketball);
+
+                case MiscConstants.MiscEsportsGroupId:
+                    return "E-Sports";
             }
 
             return string.Empty;

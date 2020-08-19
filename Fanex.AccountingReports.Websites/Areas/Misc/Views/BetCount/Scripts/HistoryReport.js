@@ -59,7 +59,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
         BetBuilder_ProductId: "-38",
         SelectedSportBettype: [],
         Sports: [],
-        Sportbook_SportID: [1, 999, -9],
+        Sportbook_SportID: [1, 999, -9, 2, 43],
         productSelectedIds: ["1"],
         BetBuilder_SportID: [1, 2]
     };
