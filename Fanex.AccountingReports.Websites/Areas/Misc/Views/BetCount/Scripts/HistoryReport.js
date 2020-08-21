@@ -61,7 +61,8 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
         Sports: [],
         Sportbook_SportID: [1, 999, -9, 2, 43],
         productSelectedIds: ["1"],
-        BetBuilder_SportID: [1, 2]
+        BetBuilder_SportID: [1, 2],
+        isSelectedAllProduct: false
     };
 
     self.initPage = function () {
@@ -318,8 +319,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                     this.value == _cachedData.BetradarVirtualSport_GroupId ||
                     this.value == _cachedData.NG2_ProductId ||
                     this.value == _cachedData.NG_ProductId ||
-                    this.value == _cachedData.BetBuilder_ProductId ||
-                    this.id == 'ddlProduct_HistoryReportHeaderCheckBox') {
+                    this.value == _cachedData.BetBuilder_ProductId) {
                     if ($.inArray(productId, _cachedData.productSelectedIds) != -1) {
                         _cachedData.productSelectedIds = $.grep(_cachedData.productSelectedIds, function (value) {
                             return value != productId;
@@ -327,10 +327,20 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                     } else {
                         _cachedData.productSelectedIds.push(productId);
                     }
-
-                    var productIds = _cachedData.productSelectedIds.join(",");
-                    self.getDropdownSport(productIds);
                 }
+
+                if (this.id == 'ddlProduct_HistoryReportHeaderCheckBox') {
+                    if (_cachedData.isSelectedAllProduct) {
+                        _cachedData.productSelectedIds = [];
+                        _cachedData.isSelectedAllProduct = false;
+                    } else {
+                        _cachedData.productSelectedIds = ["1", "5", "23", "27", "3", "-38"];
+                        _cachedData.isSelectedAllProduct = true;
+                    }
+                }
+
+                var productIds = _cachedData.productSelectedIds.join(",");
+                self.getDropdownSport(productIds);
             },
             onOpen: function () {
                 if (isSetDefaultCollapse) {

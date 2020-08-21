@@ -68,7 +68,8 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         SelectedSportBettype: [],
         BetBuilder_ProductId: "-38",
         productSelectedIds: ["1"],
-        BetBuilder_SportID: [1, 2]
+        BetBuilder_SportID: [1, 2],
+        isSelectedAllProduct: false
     };
 
     var productsHasSport = ["1", "5", "23", "27", "3", "-38"];
@@ -356,8 +357,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
             listData: ddProduct,
             onCheck: function () {
                 var productId = this.value;
-                if ($.inArray(productId, productsHasSport) != -1
-                    || this.id == 'ddlProductHeaderCheckBox') {
+                if ($.inArray(productId, productsHasSport) != -1) {
                     if ($.inArray(productId, _cachedData.productSelectedIds) != -1) {
                         _cachedData.productSelectedIds = $.grep(_cachedData.productSelectedIds, function (value) {
                             return value != productId;
@@ -365,10 +365,20 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                     } else {
                         _cachedData.productSelectedIds.push(productId);
                     }
-
-                    var productIds = _cachedData.productSelectedIds.join(",");
-                    self.getDropdownSport(productIds);
                 }
+
+                if (this.id == 'ddlProductHeaderCheckBox') {
+                    if (_cachedData.isSelectedAllProduct) {
+                        _cachedData.productSelectedIds = [];
+                        _cachedData.isSelectedAllProduct = false;
+                    } else {
+                        _cachedData.productSelectedIds = ["1", "5", "23", "27", "3", "-38"];
+                        _cachedData.isSelectedAllProduct = true;
+                    }
+                }
+
+                var productIds = _cachedData.productSelectedIds.join(",");
+                self.getDropdownSport(productIds);
             },
             onOpen: function () {
                 if (isSetDefaultCollapse) {
