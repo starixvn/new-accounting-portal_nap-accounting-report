@@ -357,15 +357,6 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
             listData: ddProduct,
             onCheck: function () {
                 var productId = this.value;
-                if ($.inArray(productId, productsHasSport) != -1) {
-                    if ($.inArray(productId, _cachedData.productSelectedIds) != -1) {
-                        _cachedData.productSelectedIds = $.grep(_cachedData.productSelectedIds, function (value) {
-                            return value != productId;
-                        });
-                    } else {
-                        _cachedData.productSelectedIds.push(productId);
-                    }
-                }
 
                 if (this.id == 'ddlProductHeaderCheckBox') {
                     if (_cachedData.isSelectedAllProduct) {
@@ -374,6 +365,20 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                     } else {
                         _cachedData.productSelectedIds = ["1", "5", "23", "27", "3", "-38"];
                         _cachedData.isSelectedAllProduct = true;
+                    }
+                } else {
+                    if ($.inArray(productId, productsHasSport) != -1) {
+                        if ($.inArray(productId, _cachedData.productSelectedIds) != -1) {
+                            _cachedData.productSelectedIds = $.grep(_cachedData.productSelectedIds, function (value) {
+                                return value != productId;
+                            });
+                        } else {
+                            _cachedData.productSelectedIds.push(productId);
+                        }
+                    }
+
+                    if (_cachedData.isSelectedAllProduct) {
+                        _cachedData.isSelectedAllProduct = false;
                     }
                 }
 

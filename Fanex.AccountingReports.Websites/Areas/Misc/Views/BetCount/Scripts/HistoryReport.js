@@ -314,20 +314,6 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
             listData: ddProduct,
             onCheck: function () {
                 var productId = this.value;
-                if (this.value == _cachedData.Sportbook_ProductId ||
-                    this.value == _cachedData.VirtualSport_GroupId ||
-                    this.value == _cachedData.BetradarVirtualSport_GroupId ||
-                    this.value == _cachedData.NG2_ProductId ||
-                    this.value == _cachedData.NG_ProductId ||
-                    this.value == _cachedData.BetBuilder_ProductId) {
-                    if ($.inArray(productId, _cachedData.productSelectedIds) != -1) {
-                        _cachedData.productSelectedIds = $.grep(_cachedData.productSelectedIds, function (value) {
-                            return value != productId;
-                        });
-                    } else {
-                        _cachedData.productSelectedIds.push(productId);
-                    }
-                }
 
                 if (this.id == 'ddlProduct_HistoryReportHeaderCheckBox') {
                     if (_cachedData.isSelectedAllProduct) {
@@ -336,6 +322,25 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                     } else {
                         _cachedData.productSelectedIds = ["1", "5", "23", "27", "3", "-38"];
                         _cachedData.isSelectedAllProduct = true;
+                    }
+                } else {
+                    if (this.value == _cachedData.Sportbook_ProductId ||
+                    this.value == _cachedData.VirtualSport_GroupId ||
+                    this.value == _cachedData.BetradarVirtualSport_GroupId ||
+                    this.value == _cachedData.NG2_ProductId ||
+                    this.value == _cachedData.NG_ProductId ||
+                    this.value == _cachedData.BetBuilder_ProductId) {
+                        if ($.inArray(productId, _cachedData.productSelectedIds) != -1) {
+                            _cachedData.productSelectedIds = $.grep(_cachedData.productSelectedIds, function (value) {
+                                return value != productId;
+                            });
+                        } else {
+                            _cachedData.productSelectedIds.push(productId);
+                        }
+
+                        if (_cachedData.isSelectedAllProduct) {
+                            _cachedData.isSelectedAllProduct = false;
+                        }
                     }
                 }
 
