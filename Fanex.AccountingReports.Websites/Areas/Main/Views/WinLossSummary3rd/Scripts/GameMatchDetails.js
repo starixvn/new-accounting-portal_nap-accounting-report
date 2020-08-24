@@ -142,7 +142,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
 						  { HeaderText: viewResources.LineTotal, Name: 'ColRealLineTotal', MergeColNumber: 2 },
 						  { HeaderText: viewResources.Variance, Name: 'ColVariance', MergeRowNumber: 2 },
 						  { HeaderText: viewResources.Turnover, Name: 'ColRealTurnover', MergeColNumber: 2 },
-						  { HeaderText: viewResources.Margin, Name: 'ColRealMargin', MergeColNumber: 2}]
+						  { HeaderText: viewResources.Margin, Name: 'ColRealMargin', MergeColNumber: 2 }]
             });
         }
         else {
@@ -154,7 +154,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
 						  { HeaderText: viewResources.LineTotal, Name: 'ColRealLineTotal', MergeColNumber: 2 },
 						  { HeaderText: viewResources.Variance, Name: 'ColVariance', MergeRowNumber: 2 },
 						  { HeaderText: viewResources.Turnover, Name: 'ColRealTurnover', MergeColNumber: 2 },
-						  { HeaderText: viewResources.Margin, Name: 'ColRealMargin', MergeColNumber: 2}]
+						  { HeaderText: viewResources.Margin, Name: 'ColRealMargin', MergeColNumber: 2 }]
             });
         }
 
@@ -228,7 +228,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
             // BetType (header)
             body.push({
                 CssClass: 'betDetailHeader',
-                Columns: [{ Name: 'ColCode', Value: betTypeName, MergeColNumber: 14}]
+                Columns: [{ Name: 'ColCode', Value: betTypeName, MergeColNumber: 14 }]
             });
             // League
             leagues = data.MatchGameLeagues;
@@ -239,7 +239,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
                 body.push({
                     CssClass: 'leagueDetailHeader',
                     Columns: [{ Name: 'ColCode' },
-							  { Name: 'ColWinLoss', Value: league.Key.Name, MergeColNumber: 13, CellAlign: 'left'}]
+							  { Name: 'ColWinLoss', Value: league.Key.Name, MergeColNumber: 13, CellAlign: 'left' }]
                 });
                 // WinLoss info
                 var winlosses = league.MatchGameWinLosses;
@@ -253,7 +253,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
                     }
 
                     var openScoreInfoEvent = "scoreInfoManager.GetReport('" + _params.reportParams.FromDate + "'," + //*
-													_params.reportParams.SportType + ",'" +
+													winloss.WinLossDetail.SportId + ",'" +
                                                     _tables.parentName + "','" + //*
                                                     betTypeId + "','" + //*
                                                     data.Key.Name + "'," + //*
@@ -270,7 +270,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
                     openScoreInfoEvent = (type == _type.SportBook && betTypeId != betTypeOutright) // BetType != Outright
 						? '<div class="link bold" title="' + winloss.MatchCode + '" onclick="' + openScoreInfoEvent + '">' + matchCode + '</div>'
 						: winloss.MatchCode;
-                    var winlossColumns = [{ Name: 'ColCode', Value: openScoreInfoEvent}];
+                    var winlossColumns = [{ Name: 'ColCode', Value: openScoreInfoEvent }];
                     if (betTypeId == betTypeOutright) { // outright
                         winlossColumns.push({ Name: 'ColHome', Value: winloss.HomeTeam.Name, MergeColNumber: 3, CellAlign: 'left' });
                     }
@@ -305,7 +305,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
 							{ Name: 'ColRealTurnover', Value: leagueTotal.RealTurnoverStr },
 							{ Name: 'ColVirtualTurnover', Value: leagueTotal.VirtualTurnoverStr },
 							{ Name: 'ColRealMargin', Value: formatNumberCell(leagueTotal.RealMarginStr, true, false, true) },
-							{ Name: 'ColVirtualMargin', Value: formatNumberCell(leagueTotal.VirtualMarginStr, true, false, true)}]
+							{ Name: 'ColVirtualMargin', Value: formatNumberCell(leagueTotal.VirtualMarginStr, true, false, true) }]
                 });
             }
             // Total for each Bet
@@ -322,7 +322,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
 							{ Name: 'ColRealTurnover', Value: betTotal.RealTurnoverStr },
 							{ Name: 'ColVirtualTurnover', Value: betTotal.VirtualTurnoverStr },
 							{ Name: 'ColRealMargin', Value: formatNumberCell(betTotal.RealMarginStr, true, false, true) },
-							{ Name: 'ColVirtualMargin', Value: formatNumberCell(betTotal.VirtualMarginStr, true, false, true)}]
+							{ Name: 'ColVirtualMargin', Value: formatNumberCell(betTotal.VirtualMarginStr, true, false, true) }]
             });
         }
         return body;
@@ -341,7 +341,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
             // BetType (header)
             body.push({
                 CssClass: 'betDetailHeader',
-                Columns: [{ Name: 'ColCode', Value: betTypeName, MergeColNumber: 11}]
+                Columns: [{ Name: 'ColCode', Value: betTypeName, MergeColNumber: 11 }]
             });
             // League
             leagues = data.MatchGameLeagues;
@@ -352,7 +352,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
                 body.push({
                     CssClass: 'leagueDetailHeader',
                     Columns: [{ Name: 'ColCode' },
-							  { Name: 'ColWinLoss', Value: league.Key.Name, MergeColNumber: 10, CellAlign: 'left'}]
+							  { Name: 'ColWinLoss', Value: league.Key.Name, MergeColNumber: 10, CellAlign: 'left' }]
                 });
                 // WinLoss info
                 var winlosses = league.MatchGameWinLosses;
@@ -371,7 +371,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
 							{ Name: 'ColRealTurnover', Value: winloss.WinLossDetail.RealTurnoverStr },
 							{ Name: 'ColVirtualTurnover', Value: winloss.WinLossDetail.VirtualTurnoverStr },
 							{ Name: 'ColRealMargin', Value: formatNumberCell(winloss.WinLossDetail.RealMarginStr, true, false, true) },
-							{ Name: 'ColVirtualMargin', Value: formatNumberCell(winloss.WinLossDetail.VirtualMarginStr, true, false, true)}]
+							{ Name: 'ColVirtualMargin', Value: formatNumberCell(winloss.WinLossDetail.VirtualMarginStr, true, false, true) }]
                     });
                 }
                 // Total for each League
@@ -388,7 +388,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
 							{ Name: 'ColRealTurnover', Value: leagueTotal.RealTurnoverStr },
 							{ Name: 'ColVirtualTurnover', Value: leagueTotal.VirtualTurnoverStr },
 							{ Name: 'ColRealMargin', Value: formatNumberCell(leagueTotal.RealMarginStr, true, false, true) },
-							{ Name: 'ColVirtualMargin', Value: formatNumberCell(leagueTotal.VirtualMarginStr, true, false, true)}]
+							{ Name: 'ColVirtualMargin', Value: formatNumberCell(leagueTotal.VirtualMarginStr, true, false, true) }]
                 });
             }
             // Total for each Bet
@@ -405,7 +405,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
 							{ Name: 'ColRealTurnover', Value: betTotal.RealTurnoverStr },
 							{ Name: 'ColVirtualTurnover', Value: betTotal.VirtualTurnoverStr },
 							{ Name: 'ColRealMargin', Value: formatNumberCell(betTotal.RealMarginStr, true, false, true) },
-							{ Name: 'ColVirtualMargin', Value: formatNumberCell(betTotal.VirtualMarginStr, true, false, true)}]
+							{ Name: 'ColVirtualMargin', Value: formatNumberCell(betTotal.VirtualMarginStr, true, false, true) }]
             });
         }
         return body;
@@ -424,7 +424,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
 							{ Name: 'ColRealTurnover', Value: total.RealTurnoverStr },
 							{ Name: 'ColVirtualTurnover', Value: total.VirtualTurnoverStr },
 							{ Name: 'ColRealMargin', Value: formatNumberCell(total.RealMarginStr, true, false, true) },
-							{ Name: 'ColVirtualMargin', Value: formatNumberCell(total.VirtualMarginStr, true, false, true)}]
+							{ Name: 'ColVirtualMargin', Value: formatNumberCell(total.VirtualMarginStr, true, false, true) }]
             });
         }
         else {
@@ -439,7 +439,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.GameMatchDetails = function () {
 							{ Name: 'ColRealTurnover', Value: total.RealTurnoverStr },
 							{ Name: 'ColVirtualTurnover', Value: total.VirtualTurnoverStr },
 							{ Name: 'ColRealMargin', Value: formatNumberCell(total.RealMarginStr, true, false, true) },
-							{ Name: 'ColVirtualMargin', Value: formatNumberCell(total.VirtualMarginStr, true, false, true)}]
+							{ Name: 'ColVirtualMargin', Value: formatNumberCell(total.VirtualMarginStr, true, false, true) }]
             });
         }
 

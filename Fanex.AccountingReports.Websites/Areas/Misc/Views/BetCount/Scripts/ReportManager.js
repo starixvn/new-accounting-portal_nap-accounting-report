@@ -61,13 +61,14 @@ Fanex.AccountingReports.Misc.BetCount.ReportManager = function () {
 
     getDropdownSport = function () {
         var self = this;
+        var data = { ProductID: '1' };
         $.ajax({
             type: "POST",
             async: false,
             url: window.rootUrl + "Misc/BetCount/GetSports",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            data: null,
+            data: JSON.stringify(data),
             beforeSend: function () {
                 AccReport.disableInput();
             },

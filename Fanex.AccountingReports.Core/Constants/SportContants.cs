@@ -86,5 +86,6 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int BBin = 241;
         public const int RNGWar = 224;
         public const int ION = 225;
+        public const int IBCBetLiveCasino = 242;
     }
 }
