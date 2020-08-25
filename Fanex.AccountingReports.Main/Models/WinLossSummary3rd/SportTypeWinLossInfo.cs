@@ -50,7 +50,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.BBin,
             SportContants.RNGWar,
             SportContants.ION,
-            SportContants.IBCBetLiveCasino
+            SportContants.IBCBetLiveCasino,
+            SportContants.PGSoft
         };
 
         public SportTypeWinLossInfo()
