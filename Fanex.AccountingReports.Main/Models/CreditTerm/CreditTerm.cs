@@ -31,13 +31,13 @@ namespace Fanex.AccountingReports.Main.Models.CreditTerm
 
         public string CurrencyName { get; set; }
 
-        public decimal PreAgreeAmount { get; set; }
+        public double PreAgreeAmount { get; set; }
 
-        public decimal Balance { get; set; }
+        public double Balance { get; set; }
 
-        public decimal BalanceBase { get; set; }
+        public double BalanceBase { get; set; }
 
-        public decimal BalanceGroup { get; set; }
+        public double BalanceGroup { get; set; }
 
         public string AccountRemark { get; set; }
 

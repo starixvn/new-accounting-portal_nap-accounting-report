@@ -604,7 +604,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
         /// <param name="cssClass">The class of cell.</param>
         /// <returns>The new style with color.</returns>
         private ICellStyle SetColorToDecimal(
-            decimal cellValue,
+            double cellValue,
             ICellStyle decimalStyle,
             string cssClass)
         {
