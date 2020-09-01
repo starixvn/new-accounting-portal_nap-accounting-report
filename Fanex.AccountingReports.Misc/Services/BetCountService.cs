@@ -819,6 +819,11 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 CreateBetBuilderSportGroup(rawData, sports);
             }
 
+            if (rawData.Where(x => x.ProductID == MiscConstants.SabaClubProductId).Any())
+            {
+                CreateSabaClubSportGroup(rawData, sports);
+            }
+
             return sports;
         }
 
@@ -913,6 +918,18 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 {
                     sports.Add(AddSportGroup(group));
                 }
+            }
+
+            return sports;
+        }
+
+        public List<ProductInfo> CreateSabaClubSportGroup(IEnumerable<dynamic> rawData, List<ProductInfo> sports)
+        {
+            var sportRaw = rawData.Where(r => r.ProductID == 42);
+            var sportGroups = sportRaw.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
+            foreach (var sportGroup in sportGroups)
+            {
+                sports.Add(AddSportGroup(sportGroup));
             }
 
             return sports;
