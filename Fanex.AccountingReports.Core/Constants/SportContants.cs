@@ -88,5 +88,6 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int ION = 225;
         public const int IBCBetLiveCasino = 242;
         public const int PGSoft = 232;
+        public const int SabaClubFreeBet = 150;
     }
 }

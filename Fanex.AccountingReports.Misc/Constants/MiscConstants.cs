@@ -18,6 +18,7 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int BetBuilderProductID = -38;
         public const int MiscBasketballGroupId = 2;
         public const int MiscEsportsGroupId = 43;
+        public const int SabaClubProductId = 42;
 
         public static readonly string BetCountSessionKey = "Fanex.AccountingReports.Misc.BetCount.BetCountReport";
         public static readonly string BetCountHistoryReportSessionKey = "Fanex.AccountingReports.Misc.BetCount.HistoryBetCountReport";
@@ -37,7 +38,8 @@ namespace Fanex.AccountingReports.Misc.Constants
             "ng2",
             "virtual sports 2",
             "number game",
-            "bet builder"
+            "bet builder",
+            "saba.club"
         };
 
         /// <summary>
