@@ -1,16 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
 {
     [Serializable]
-    public class BettypeWinLossItem : BaseWinLoss
+    public class BetTypeWinLossItem
     {
-        public bool LiveIndicator { get; set; }
+        public BettypeWinLossBySite Total { get; set; }
 
-        public int Bettype { get; set; }
-
-        public string BettypeName { get; set; }
-
-        public bool IsHedge { get; set; }
+        public List<BettypeWinLossBySite> BetTypes { get; set; }
     }
 }

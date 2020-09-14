@@ -93,7 +93,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var soccerBARM = rawData.FirstOrDefault(x => x.LeagueName == "Soccer BARM");
             leagueWinLoss.SoccerBARM = BindingLeague(soccerBARM);
 
-
             var otherBARM = rawData.FirstOrDefault(x => x.LeagueName == "Other Sports BARM");
             leagueWinLoss.OtherSportBARM = BindingLeague(otherBARM);
 
@@ -107,7 +106,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var grandTotal = CalculateSportTotal("Grand Total", rawData);
             leagueWinLoss.GrandTotal = grandTotal;
 
-            if(!string.IsNullOrEmpty(criteria.SortColumnName) && !string.IsNullOrEmpty(criteria.SortDirection))
+            if (!string.IsNullOrEmpty(criteria.SortColumnName) && !string.IsNullOrEmpty(criteria.SortDirection))
             {
                 var sortingService = new SortingService();
                 leagueWinLoss = sortingService.SortData(leagueWinLoss, criteria.SortDirection, criteria.SortColumnName);
@@ -146,7 +145,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     var sportBettypes = rawData.Where(x => x.SportType == sport.Key.SportType
                         && x.SportName == sport.Key.SportName);
 
-                    foreach(var bettype in sportBettypes)
+                    foreach (var bettype in sportBettypes)
                     {
                         sportItem.Bettypes.Add(new BetType
                         {
@@ -164,7 +163,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             return sportGroups;
         }
 
-
         /// <summary>
         /// Gets the league win loss by sport.
         /// </summary>
@@ -173,9 +171,17 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        public List<LiveNonLiveWinLossModel> GetLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria)
+        public BettypeWinLossModel GetBetTypes(GetBetTypesCriteria criteria)
         {
-            var result = new List<LiveNonLiveWinLossModel>();
+            var result = new BettypeWinLossModel
+            {
+                BettypeWinLoss = new List<BetTypeWinLossItem>(),
+                RM = new BettypeWinLossBySite(),
+                BARM = new BettypeWinLossBySite(),
+                Total = new BettypeWinLossBySite(),
+                GrandTotal = new BettypeWinLossBySite()
+            };
+
             var rawData = this._reportRepository.GetLeagueWinLossBySport(criteria);
 
             if (!rawData.Any())
@@ -183,25 +189,22 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 return result;
             }
 
-            var liveReport = GetLeagueWinLossBySportLive(rawData);
-            var liveBettypeWinLossModel = new LiveNonLiveWinLossModel
+            var rawBettypes = rawData.Where(x => !x.SiteType.Contains("8RM")
+                                     && !x.SiteType.Contains("BARM"));
+
+            var betTypeGroups = rawBettypes.GroupBy(x => new { x.Bettype, x.BettypeName });
+            foreach (var group in betTypeGroups)
             {
-                Id = LiveTypeConstants.Live,
-                Name = Labels.Live.ToUpper(),
-                BetTypeWinLoss = liveReport
-            };
+                var bettypes = rawBettypes.Where(x => x.Bettype == group.Key.Bettype && x.BettypeName == group.Key.BettypeName);
+                var betTypesBySite = BindingBettypes(bettypes);
+                var betTypeItem = new BetTypeWinLossItem
+                {
+                    Total = CalculateBettypeTotal(bettypes),
+                    BetTypes = betTypesBySite.ToList()
+                };
 
-            result.Add(liveBettypeWinLossModel);
-
-            var nonLiveReport = GetLeagueWinLossBySportNonLive(rawData);
-            var nonLiveBettypeWinLossModel = new LiveNonLiveWinLossModel
-            {
-                Id = LiveTypeConstants.NonLive,
-                Name = Labels.Non_Live.ToUpper(),
-                BetTypeWinLoss = nonLiveReport
-            };
-
-            result.Add(nonLiveBettypeWinLossModel);
+                result.BettypeWinLoss.Add(betTypeItem);
+            }
 
             SessionManager.Set(WinLossContants.LeagueWinLossBySportSessionKey, result);
             return result;
@@ -215,23 +218,35 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        public MatchWinLossModel GetLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
+        public MatchWinLossModel GetMatches(GetMatchesCriteria criteria)
         {
             var rawData = this._reportRepository.GetLeagueWinLossByBetType(criteria);
             var leagueWinLoss = new MatchWinLossModel
             {
                 Match = new List<MatchWinLossItem>(),
-                RM = new MatchWinLossItem(),
-                BARM = new MatchWinLossItem(),
-                Total = new MatchWinLossItem(),
-                GrandTotal = new MatchWinLossItem()
+                RM = new MatchWinLossByLiveStatus(),
+                BARM = new MatchWinLossByLiveStatus(),
+                Total = new MatchWinLossByLiveStatus(),
+                GrandTotal = new MatchWinLossByLiveStatus()
             };
 
             var rawMatches = rawData.Where(x =>
                 !x.MatchEvent.Contains(criteria.SportName + " " + "BARM")
                 && !x.MatchEvent.Contains(criteria.SportName + " " + "8RM"));
-            var matches = BindingMatches(rawMatches);
-            leagueWinLoss.Match = matches.ToList();
+
+            var matchGroups = rawMatches.GroupBy(x => new { x.MatchID, x.MatchEvent });
+            foreach (var group in matchGroups)
+            {
+                var matches = rawMatches.Where(x => x.MatchID == group.Key.MatchID && x.MatchEvent == group.Key.MatchEvent);
+                var matchesByLiveStatus = BindingMatches(matches);
+                var matchWinLossItem = new MatchWinLossItem
+                {
+                    Total = CalculateMatchTotal(group.Key.MatchEvent, matches),
+                    Matches = matchesByLiveStatus.ToList()
+                };
+
+                leagueWinLoss.Match.Add(matchWinLossItem);
+            }
 
             leagueWinLoss.Total = CalculateMatchTotal("Total", rawMatches);
 
@@ -245,62 +260,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             SessionManager.Set(WinLossContants.LeagueWinLossByBetTypeSessionKey, leagueWinLoss);
             return leagueWinLoss;
-        }
-
-        /// <summary>
-        /// Gets the league win loss by sport.
-        /// </summary>
-        /// <param name="rawData">The raw data.</param>
-        /// <returns>The league win loss by sport.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
-        private BettypeWinLossModel GetLeagueWinLossBySportLive(IEnumerable<BettypeWinLossEntity> rawData)
-        {
-            var liveWinLoss = rawData.Where(data => data.LiveIndicator);
-            var report = CalculateBettypeByLiveNonLive(liveWinLoss);
-
-            return report;
-        }
-
-        private BettypeWinLossModel GetLeagueWinLossBySportNonLive(IEnumerable<BettypeWinLossEntity> rawData)
-        {
-            var nonLiveWinLoss = rawData.Where(data => !data.LiveIndicator);
-            var report = CalculateBettypeByLiveNonLive(nonLiveWinLoss);
-            return report;
-        }
-
-        private BettypeWinLossModel CalculateBettypeByLiveNonLive(IEnumerable<BettypeWinLossEntity> rawData)
-        {
-            var report = new BettypeWinLossModel
-            {
-                BettypeWinLoss = new List<BettypeWinLossItem>(),
-                RM = new BettypeWinLossItem(),
-                BARM = new BettypeWinLossItem(),
-                Total = new BettypeWinLossItem(),
-                GrandTotal = new BettypeWinLossItem()
-            };
-
-            var bettypes = rawData.Where(x => !x.BettypeName.Contains("8RM")
-                                      && !x.BettypeName.Contains("BARM"));
-
-            var bettypeWinLoss = BindingBettypes(bettypes);
-            report.BettypeWinLoss = bettypeWinLoss.ToList();
-
-            var allTotal = CalculateBettypeTotal(bettypes);
-            report.Total = allTotal;
-
-            var eightRM = rawData.FirstOrDefault(x => x.BettypeName.Contains("8RM"));
-            report.RM = BindingBettype(eightRM);
-
-            var barRM = rawData.FirstOrDefault(x => x.BettypeName.Contains("BARM"));
-            report.BARM = BindingBettype(barRM);
-
-            var grandTotal = CalculateBettypeTotal(rawData);
-            grandTotal.BettypeName = Labels.Grand_Total;
-            report.GrandTotal = grandTotal;
-
-            return report;
         }
 
         private LeagueWinLossItem CalculateSportTotal(string sport, IEnumerable<LeagueWinLossEntity> sportGroup)
@@ -348,9 +307,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             };
         }
 
-        private BettypeWinLossItem CalculateBettypeTotal(IEnumerable<BettypeWinLossEntity> bettypes)
+        private BettypeWinLossBySite CalculateBettypeTotal(IEnumerable<BettypeWinLossEntity> bettypes)
         {
-            return new BettypeWinLossItem
+            return new BettypeWinLossBySite
             {
                 BettypeName = Labels.Total,
                 MemberWinLoss = bettypes.Sum(x => x.MemberWinLoss),
@@ -364,24 +323,23 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             };
         }
 
-        private IEnumerable<BettypeWinLossItem> BindingBettypes(IEnumerable<BettypeWinLossEntity> bettypeGroup)
+        private IEnumerable<BettypeWinLossBySite> BindingBettypes(IEnumerable<BettypeWinLossEntity> bettypeGroup)
         {
             return bettypeGroup.Select(x => BindingBettype(x));
         }
 
-        private BettypeWinLossItem BindingBettype(BettypeWinLossEntity rawData)
+        private BettypeWinLossBySite BindingBettype(BettypeWinLossEntity rawData)
         {
             if (rawData == null)
             {
-                return new BettypeWinLossItem();
+                return new BettypeWinLossBySite();
             }
 
-            return new BettypeWinLossItem
+            return new BettypeWinLossBySite
             {
-                LiveIndicator = rawData.LiveIndicator,
                 Bettype = rawData.Bettype,
                 BettypeName = rawData.BettypeName,
-                IsHedge = rawData.IsHedge,
+                SiteType = rawData.SiteType,
                 MemberWinLoss = rawData.MemberWinLoss,
                 SMAWinLoss = rawData.SMAWinLoss,
                 ExtraPT = rawData.ExtraPT,
@@ -393,9 +351,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             };
         }
 
-        private MatchWinLossItem CalculateMatchTotal(string title, IEnumerable<MatchEntity> matches)
+        private MatchWinLossByLiveStatus CalculateMatchTotal(string title, IEnumerable<MatchEntity> matches)
         {
-            return new MatchWinLossItem
+            return new MatchWinLossByLiveStatus
             {
                 MatchEvent = title,
                 MemberWinLoss = matches.Sum(x => x.MemberWinLoss),
@@ -409,21 +367,22 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             };
         }
 
-        private IEnumerable<MatchWinLossItem> BindingMatches(IEnumerable<MatchEntity> matches)
+        private IEnumerable<MatchWinLossByLiveStatus> BindingMatches(IEnumerable<MatchEntity> matches)
         {
             return matches.Select(x => BindingMatch(x));
         }
 
-        private MatchWinLossItem BindingMatch(MatchEntity rawData)
+        private MatchWinLossByLiveStatus BindingMatch(MatchEntity rawData)
         {
             if (rawData == null)
             {
-                return new MatchWinLossItem();
+                return new MatchWinLossByLiveStatus();
             }
 
-            return new MatchWinLossItem
+            return new MatchWinLossByLiveStatus
             {
-                MatchCode = rawData.MatchCode,
+                MatchId = rawData.MatchID,
+                LiveIndicator = rawData.LiveIndicator,
                 MatchEvent = rawData.MatchEvent,
                 MemberWinLoss = rawData.MemberWinLoss,
                 SMAWinLoss = rawData.SMAWinLoss,

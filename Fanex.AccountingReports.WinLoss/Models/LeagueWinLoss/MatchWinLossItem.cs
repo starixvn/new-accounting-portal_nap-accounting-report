@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
 {
     [Serializable]
-    public class MatchWinLossItem : BaseWinLoss
+    public class MatchWinLossItem
     {
-        public string MatchCode { get; set; }
+        public MatchWinLossByLiveStatus Total { get; set; }
 
-        public string MatchEvent { get; set; }
+        public List<MatchWinLossByLiveStatus> Matches { get; set; }
     }
 }

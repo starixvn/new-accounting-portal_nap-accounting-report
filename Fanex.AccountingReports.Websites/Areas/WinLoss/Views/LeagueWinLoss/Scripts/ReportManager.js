@@ -7,62 +7,62 @@ Namespace.Register("Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager"
 Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
     var self = this;
     var _leagueWinLoss = new Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss();
-    var _leagueWinLossBySport = new Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossBySport();
-    var _leagueWinLossByBetType = new Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType();
+    var _leagueWinLossViewBetTypes = new Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes();
+    //var _leagueWinLossByBetType = new Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType();
+    var _leagueWinLossViewMatches = new Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches();
 
     self.initPage = function () {
         _leagueWinLoss.initPage();
-        _leagueWinLossBySport.initPage();
-        _leagueWinLossByBetType.initPage();
+        _leagueWinLossViewBetTypes.initPage();
+        _leagueWinLossViewMatches.initPage();
     };
     hideLeagueWinLoss = function () {
         _leagueWinLoss.hideReport();
     };
     hideLeagueWinLossBySport = function () {
-        _leagueWinLossBySport.hideReport();
+        _leagueWinLossViewBetTypes.hideReport();
     };
-    hideLeagueWinLossByBetType = function () {
-        _leagueWinLossByBetType.hideReport();
+    //hideLeagueWinLossByBetType = function () {
+    //    _leagueWinLossByBetType.hideReport();
+    //};
+    hideMatches = function () {
+        _leagueWinLossViewMatches.hideReport();
     };
-    viewLeagueWinLossBySport = function (sportId, sportName, leagueName) {
+    viewMatches = function (sportName, leagueName) {
         _leagueWinLoss.hideReport();
-        _leagueWinLossBySport.getReport({
+        _leagueWinLossViewMatches.getReport({
             StartDate: _leagueWinLoss.Params.reportParams.StartDate,
             EndDate: _leagueWinLoss.Params.reportParams.EndDate,
             SportBettype: _leagueWinLoss.Params.reportParams.SportBettype,
             LeagueName: leagueName,
             SportName: sportName,
             IsNormalMode: _leagueWinLoss.Params.reportParams.IsNormalMode,
-            IsNoDraw: _leagueWinLoss.Params.reportParams.IsNoDraw,
-            SportType: sportId
+            IsNoDraw: _leagueWinLoss.Params.reportParams.IsNoDraw
         });
     };
-    viewLeagueWinLossByBetType = function (betTypeId, betTypeName, isLive, isHedge) {
-        _leagueWinLossBySport.hideReport();
-        _leagueWinLossByBetType.getReport({
-            StartDate: _leagueWinLossBySport.Params.reportParams.StartDate,
-            EndDate: _leagueWinLossBySport.Params.reportParams.EndDate,
-            SportType: _leagueWinLossBySport.Params.reportParams.SportType,
-            BetType: betTypeId,
-            BetTypeName: betTypeName,
+    viewBetTypes = function (matchId, isLive) {
+        _leagueWinLossViewMatches.hideReport();
+        _leagueWinLossViewBetTypes.getReport({
+            StartDate: _leagueWinLossViewMatches.Params.reportParams.StartDate,
+            EndDate: _leagueWinLossViewMatches.Params.reportParams.EndDate,
+            MatchID: matchId,
             LiveIndicator: isLive,
-            IsHedge: isHedge,
-            LeagueName: _leagueWinLossBySport.Params.reportParams.LeagueName,
-            SportName: _leagueWinLossBySport.Params.reportParams.SportName,
-            IsNormalMode: _leagueWinLossBySport.Params.reportParams.IsNormalMode,
-            IsNoDraw: _leagueWinLossBySport.Params.reportParams.IsNoDraw
+            SportBettype: _leagueWinLossViewMatches.Params.reportParams.SportBettype,
+            IsNormalMode: _leagueWinLossViewMatches.Params.reportParams.IsNormalMode,
+            IsNoDraw: _leagueWinLossViewMatches.Params.reportParams.IsNoDraw
         });
     };
     backToLeagueWinLoss = function () {
         hideLeagueWinLossBySport();
-        hideLeagueWinLossByBetType();
+        // hideLeagueWinLossByBetType();
+        hideMatches();
         _leagueWinLoss.showReport();
     };
 
     backToLeagueWinLossBySport = function () {
         hideLeagueWinLoss();
-        hideLeagueWinLossByBetType();
-        _leagueWinLossBySport.showReport();
+        // hideLeagueWinLossByBetType();
+        _leagueWinLossViewBetTypes.showReport();
     };
 
     isShowReport = function (report) {

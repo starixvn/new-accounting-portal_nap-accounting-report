@@ -1,12 +1,9 @@
-
-
-Namespace.Register("Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossBySport");
-Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossBySport = function () {
+Namespace.Register("Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes");
+Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = function () {
     var self = this;
     var _tables = {
         reportContainer: null,
-        reportLive: null,
-        reportNoneLive: null
+        report: null
     };
 
     self.Params = {
@@ -15,36 +12,25 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossBySport = function ()
             EndDate: null,
             LeagueId: null,
             SportBettype: null,
-            LeagueName: '',
-            SportName: '',
+            MatchID: null,
+            LiveIndicator: false,
             IsNormalMode: true,
-            IsNoDraw: false,
-            SportType: null
+            IsNoDraw: false
         }
     };
     self.initPage = function () {
         cachedDOMElements();
     };
     var cachedDOMElements = function () {
-        _tables.reportContainer = $("#leagueWinLossReportBySportContainer");
-        _tables.reportLiveContainer = $("#liveReport");
-        _tables.reportNoneLiveContainer = $("#noneLiveReport");
-
-        _tables.reportLive = $("#leagueWinLossLiveReportBySport");
-        _tables.reportNoneLive = $("#leagueWinLossNoneLiveReportBySport");
+        _tables.reportContainer = $("#leagueWinLossBetTypeContainer");
+        _tables.report = $("#leagueWinLossBetType");
     };
     self.hideReport = function () {
         _tables.reportContainer.addClass("display-none");
-        _tables.reportLiveContainer.addClass("display-none");
-        _tables.reportNoneLiveContainer.addClass("display-none");
-        _tables.reportLive.addClass("display-none");
-        _tables.reportNoneLive.addClass("display-none");
+        _tables.report.addClass("display-none");
     };
     self.showReport = function () {
-        _tables.reportLive.removeClass("display-none");
-        _tables.reportNoneLive.removeClass("display-none");
-        _tables.reportLiveContainer.removeClass("display-none");
-        _tables.reportNoneLiveContainer.removeClass("display-none");
+        _tables.report.removeClass("display-none");
         _tables.reportContainer.removeClass("display-none");
     };
     self.getReport = function (params) {
@@ -52,7 +38,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossBySport = function ()
         getParams(params);
         $.ajax({
             type: "POST",
-            url: window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLossBySport",
+            url: window.rootUrl + "WinLoss/LeagueWinLoss/GetBetTypes",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(self.Params.reportParams),
@@ -61,23 +47,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossBySport = function ()
             },
             success: function (rs) {
                 self.hideReport();
-                if (rs && rs.length > 0) {
-                    var gridHeight = $(window).height();
-
-                    gridHeight = gridHeight * 2 / 3 - 20;
-
-                    for (var i = 0; i < rs.length; i++) {
-                        renderReport(rs[i], gridHeight);
-                    }
-                }
-                else {
-                    renderReport(rs);
-                }
+                renderReport(rs);
             },
             error: function (event, jqXHR, ajaxSettings) {
                 self.hideReport();
-                var gridHeight = $(window).height();
-                renderReport([], gridHeight);
+                renderReport([]);
             },
             complete: function () {
                 AccReport.enableInput();
@@ -101,7 +75,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossBySport = function ()
                     var html = '<div class="link" ' + clickEvent + '>' + currentCell.Value.BettypeName + '</div>';
                     return html;
                 }
-                },
+            },
                 { Name: "ColMemberWinLoss", Value: info.MemberWinLoss },
                 { Name: "ColSMAWinLoss", Value: info.SMAWinLoss },
                 { Name: "ColExtraPT", Value: info.ExtraPT },
@@ -120,21 +94,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossBySport = function ()
         bodyData.push(currentRow);
     };
 
-
-
-    var renderReport = function (report, gridHeight) {
-        var reportTable = _tables.reportLive;
-        var reportTableContainer = _tables.reportLiveContainer;
-        if (report) {
-            if (report.Name != null && report.Name.toLowerCase() != "live") {
-                reportTable = _tables.reportNoneLive;
-                reportTableContainer = _tables.reportNoneLiveContainer;
-            }
-        }
-
+    var renderReport = function (report) {
         _tables.reportContainer.removeClass("display-none");
-        reportTableContainer.removeClass("display-none");
-        reportTable.addClass("display-none");
+        _tables.report.addClass("display-none");
         var bodyData = [];
         var footerData = [];
         if (report.BetTypeWinLoss != null) {
@@ -255,15 +217,13 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossBySport = function ()
                     backToLeagueWinLoss();
                 },
 
-                showCollapseExpandButton: false
+                showCollapseExpandButton: true
             },
-            showTree: false,
+            showTree: true,
             bodyRows: bodyData,
             showDistinctRow: false,
             footerRows: footerData,
-            fullHeight: report.Id == 0,
-            gridExpandHeight: report.Id == 0 ? 260 + _tables.reportLive.height() : 0,
-            gridHeight: report.Id == 0 ? 0 : ($(window).height() - 240) / 2
+            gridExpandHeight: 300
         };
 
         reportTable.removeClass("display-none").fanexGrid(gridOptions);

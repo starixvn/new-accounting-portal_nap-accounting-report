@@ -84,10 +84,9 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                     {
                         bettypeWinLoss.Add(new BettypeWinLossEntity
                         {
-                            LiveIndicator = Converter.ToInt(row["LiveIndicator"]) == 1,
                             Bettype = Converter.ToInt(row["Bettype"]),
                             BettypeName = Converter.ToString2(row["BettypeName"]),
-                            IsHedge = Converter.ToInt(row["IsHedge"]) == 1,
+                            SiteType = Converter.ToString2(row["SiteType"]),
                             MemberWinLoss = Converter.ToDecimal(row["MemberWinLoss"]),
                             SMAWinLoss = Converter.ToDecimal(row["SMAWinLoss"]),
                             ExtraPT = Converter.ToDecimal(row["ExtraPT"]),
@@ -127,7 +126,8 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                 {
                     leagueWinLoss.Add(new MatchEntity
                     {
-                        MatchCode = Converter.ToString2(row["MatchCode"]),
+                        MatchID = Converter.ToInt(row["MatchID"]),
+                        LiveIndicator = Converter.ToBool(row["LiveIndicator"]),
                         MatchEvent = Converter.ToString2(row["MatchEvent"]),
                         MemberWinLoss = Converter.ToDecimal(row["MemberWinLoss"]),
                         SMAWinLoss = Converter.ToDecimal(row["SMAWinLoss"]),

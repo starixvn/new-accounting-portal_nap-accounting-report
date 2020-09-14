@@ -670,7 +670,7 @@
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\ReportManager.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\WinLossByProduct.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\WinLossByProduct_HistoryReport.js" />
-    <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLossByBetType.js" />
+    <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLossViewMatches.js" />
     <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\ReportManager.js" />
     <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLossBySport.js" />
     <Compile Include="Controllers\DownloadReportController.cs" />

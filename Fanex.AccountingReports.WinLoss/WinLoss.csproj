@@ -176,7 +176,8 @@
     <Compile Include="Criteria\DailyMixParlayWinLoss\GetAdvanceMixParlayReportCriteria.cs" />
     <Compile Include="Criteria\DailyMixParlayWinLoss\GetCombinationWinLossReportCriteria.cs" />
     <Compile Include="Criteria\DailyMixParlayWinLoss\GetMixParlayReportCriteria.cs" />
-    <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossByBetTypeCriteria.cs" />
+    <Compile Include="Criteria\LeagueWinLoss\GetBetTypesCriteria.cs" />
+    <Compile Include="Criteria\LeagueWinLoss\GetMatchesCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossBySportCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetSportCriteria.cs" />
@@ -202,11 +203,13 @@
     <Compile Include="Models\DailyMixParlayWinLoss\WinLossInfo.cs" />
     <Compile Include="Models\LeagueWinLoss\BaseWinLoss.cs" />
     <Compile Include="Models\LeagueWinLoss\BetType.cs" />
-    <Compile Include="Models\LeagueWinLoss\BettypeWinLossItem.cs" />
+    <Compile Include="Models\LeagueWinLoss\BettypeWinLossBySite.cs" />
+    <Compile Include="Models\LeagueWinLoss\BetTypeWinLossItem.cs" />
     <Compile Include="Models\LeagueWinLoss\BettypeWinLossModel.cs" />
     <Compile Include="Models\LeagueWinLoss\LeagueWinLossModel.cs" />
     <Compile Include="Models\LeagueWinLoss\LeagueWinLossItem.cs" />
     <Compile Include="Models\LeagueWinLoss\LiveNonLiveWinLossModel.cs" />
+    <Compile Include="Models\LeagueWinLoss\MatchWinLossByLiveStatus.cs" />
     <Compile Include="Models\LeagueWinLoss\MatchWinLossItem.cs" />
     <Compile Include="Models\LeagueWinLoss\MatchWinLossModel.cs" />
     <Compile Include="Models\LeagueWinLoss\Sport.cs" />

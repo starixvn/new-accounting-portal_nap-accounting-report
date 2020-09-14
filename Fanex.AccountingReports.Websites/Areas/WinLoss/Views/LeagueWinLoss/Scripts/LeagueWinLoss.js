@@ -192,7 +192,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 
         AccReport.disableInput();
         hideLeagueWinLossBySport();
-        hideLeagueWinLossByBetType();
+        hideMatches();
 
         AccReport.utility.CallAjax(this,
             window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
@@ -344,13 +344,12 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                     {
                         Columns: [{
                             Name: "ColLeague", Value: {
-                                sportId: info.SportType,
                                 sportName: info.Sport,
                                 leagueName: info.LeagueName
                             }, CssClass: "colLeague",
                             CustomCellRender: function (currentCell) {
                                 var leagueText = currentCell.Value.leagueName.length > 50 ? currentCell.Value.leagueName.substring(0, 51) + '...' : currentCell.Value.leagueName;
-                                var clickEvent = ' onclick = "viewLeagueWinLossBySport(' + currentCell.Value.sportId + ',\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
+                                var clickEvent = ' onclick = "viewMatches(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
                                 var html = '<div class="link " ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
                                 return html;
                             }
