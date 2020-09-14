@@ -497,6 +497,7 @@
     <Content Include="App_Data\Fanex.Data\DBAGE.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\Fanex.Data\DBSUM.bodb_Summary.bodbAdminNet.xml" />
     <Content Include="App_Data\Fanex.Data\DBWH.bodb_dwrs.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
