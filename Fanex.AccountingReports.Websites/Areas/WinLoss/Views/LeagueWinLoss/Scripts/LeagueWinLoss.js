@@ -191,7 +191,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         }
 
         AccReport.disableInput();
-        hideLeagueWinLossBySport();
+        hideBettypes();
         hideMatches();
 
         AccReport.utility.CallAjax(this,

@@ -182,15 +182,15 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 GrandTotal = new BettypeWinLossBySite()
             };
 
-            var rawData = this._reportRepository.GetLeagueWinLossBySport(criteria);
+            var rawData = this._reportRepository.GetBetTypes(criteria);
 
             if (!rawData.Any())
             {
                 return result;
             }
 
-            var rawBettypes = rawData.Where(x => !x.SiteType.Contains("8RM")
-                                     && !x.SiteType.Contains("BARM"));
+            var rawBettypes = rawData.Where(x => !x.SiteType.Contains(criteria.SportName + " " + "8RM")
+                                     && !x.SiteType.Contains(criteria.SportName + " " + "BARM"));
 
             var betTypeGroups = rawBettypes.GroupBy(x => new { x.Bettype, x.BettypeName });
             foreach (var group in betTypeGroups)
@@ -199,14 +199,24 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 var betTypesBySite = BindingBettypes(bettypes);
                 var betTypeItem = new BetTypeWinLossItem
                 {
-                    Total = CalculateBettypeTotal(bettypes),
+                    Total = CalculateBettypeTotal(group.Key.BettypeName, bettypes),
                     BetTypes = betTypesBySite.ToList()
                 };
 
                 result.BettypeWinLoss.Add(betTypeItem);
             }
 
-            SessionManager.Set(WinLossContants.LeagueWinLossBySportSessionKey, result);
+            result.Total = CalculateBettypeTotal("Total", rawBettypes);
+
+            var eightRM = rawData.FirstOrDefault(x => x.SiteType.Contains("8RM"));
+            result.RM = BindingBettype(eightRM);
+
+            var barRM = rawData.FirstOrDefault(x => x.SiteType.Contains("BARM"));
+            result.BARM = BindingBettype(barRM);
+
+            result.GrandTotal = CalculateBettypeTotal("Grand Total", rawData);
+
+            SessionManager.Set(WinLossContants.LeagueWinLosViewBetTypesSessionKey, result);
             return result;
         }
 
@@ -220,7 +230,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             Justification = "Reviewed. Suppression is OK here.")]
         public MatchWinLossModel GetMatches(GetMatchesCriteria criteria)
         {
-            var rawData = this._reportRepository.GetLeagueWinLossByBetType(criteria);
+            var rawData = this._reportRepository.GetMatches(criteria);
             var leagueWinLoss = new MatchWinLossModel
             {
                 Match = new List<MatchWinLossItem>(),
@@ -258,7 +268,115 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", rawData);
 
-            SessionManager.Set(WinLossContants.LeagueWinLossByBetTypeSessionKey, leagueWinLoss);
+            SessionManager.Set(WinLossContants.LeagueWinLossViewMatchesSessionKey, leagueWinLoss);
+            return leagueWinLoss;
+        }
+
+        /// <summary>
+        /// Gets sites.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Sites model.</returns>
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        public SiteWinLossModel GetSites(GetSitesCriteria criteria)
+        {
+            var rawData = this._reportRepository.GetSites(criteria);
+            var leagueWinLoss = new SiteWinLossModel
+            {
+                Sites = new List<SiteWinLossItem>(),
+                RM = new SiteWinLossItem(),
+                BARM = new SiteWinLossItem(),
+                Total = new SiteWinLossItem(),
+                GrandTotal = new SiteWinLossItem()
+            };
+
+            var rawSites = rawData.Where(x =>
+                !x.SiteName.Contains(criteria.SportName + " " + "BARM")
+                && !x.SiteName.Contains(criteria.SportName + " " + "8RM"));
+
+            var sites = BindingSites(rawSites);
+            leagueWinLoss.Sites = sites.ToList();
+
+            leagueWinLoss.Total = CalculateSiteTotal("Total", rawSites);
+
+            var eightRM = rawData.FirstOrDefault(x => x.SiteName.Contains(criteria.SportName + " " + "8RM"));
+            leagueWinLoss.RM = BindingSite(eightRM);
+
+            var barRM = rawData.FirstOrDefault(x => x.SiteName.Contains(criteria.SportName + " " + "BARM"));
+            leagueWinLoss.BARM = BindingSite(barRM);
+
+            leagueWinLoss.GrandTotal = CalculateSiteTotal("Grand Total", rawData);
+
+            SessionManager.Set(WinLossContants.LeagueWinLosViewSitesSessionKey, leagueWinLoss);
+            return leagueWinLoss;
+        }
+
+        /// <summary>
+        /// Gets supers.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Super model.</returns>
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        public SuperWinLossModel GetSupers(GetSuperCriteria criteria)
+        {
+            var rawData = this._reportRepository.GetSupers(criteria);
+            var leagueWinLoss = new SuperWinLossModel
+            {
+                Supers = new List<SuperWinLossItem>(),
+                RM = new SuperWinLossItem(),
+                BARM = new SuperWinLossItem(),
+                Total = new SuperWinLossItem(),
+                GrandTotal = new SuperWinLossItem()
+            };
+
+            var rawSupers = rawData.Where(x =>
+                 !x.SuperName.Contains(criteria.SportName + " " + "BARM")
+                 && !x.SuperName.Contains(criteria.SportName + " " + "8RM"));
+
+            var supers = BindingSupers(rawSupers);
+            leagueWinLoss.Supers = supers.ToList();
+
+            leagueWinLoss.Total = CalculateSuperTotal("Total", rawSupers);
+
+            var eightRM = rawData.FirstOrDefault(x => x.SuperName.Contains(criteria.SportName + " " + "8RM"));
+            leagueWinLoss.RM = BindingSuper(eightRM);
+
+            var barRM = rawData.FirstOrDefault(x => x.SuperName.Contains(criteria.SportName + " " + "BARM"));
+            leagueWinLoss.BARM = BindingSuper(barRM);
+
+            leagueWinLoss.GrandTotal = CalculateSuperTotal("Grand Total", rawData);
+
+            SessionManager.Set(WinLossContants.LeagueWinLosViewSupersSessionKey, leagueWinLoss);
+            return leagueWinLoss;
+        }
+
+        /// <summary>
+        /// Gets virtual rate.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>virtual rate model.</returns>
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        public List<VirtualRateModel> GetVirtualRate(GetVirtualRateCriteria criteria)
+        {
+            var rawData = this._reportRepository.GetVirtualRate(criteria);
+            var leagueWinLoss = new List<VirtualRateModel>();
+            foreach (var item in rawData)
+            {
+                leagueWinLoss.Add(new VirtualRateModel
+                {
+                    Sport = item.Sport,
+                    BetType = item.BetType,
+                    LiveStatus = item.LiveStatus,
+                    VirtualRate = item.VirtualRate
+                });
+            }
+
             return leagueWinLoss;
         }
 
@@ -307,11 +425,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             };
         }
 
-        private BettypeWinLossBySite CalculateBettypeTotal(IEnumerable<BettypeWinLossEntity> bettypes)
+        private BettypeWinLossBySite CalculateBettypeTotal(string bettype, IEnumerable<BettypeWinLossEntity> bettypes)
         {
             return new BettypeWinLossBySite
             {
-                BettypeName = Labels.Total,
+                BettypeName = bettype,
                 MemberWinLoss = bettypes.Sum(x => x.MemberWinLoss),
                 SMAWinLoss = bettypes.Sum(x => x.SMAWinLoss),
                 ExtraPT = bettypes.Sum(x => x.ExtraPT),
@@ -392,6 +510,93 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 RealIncome = rawData.RealIncome,
                 VirtualTurnover = rawData.VirtualTurnover,
                 RealTurnover = rawData.RealTurnover
+            };
+        }
+
+        private SiteWinLossItem CalculateSiteTotal(string title, IEnumerable<SiteEntity> sites)
+        {
+            return new SiteWinLossItem
+            {
+                SiteName = title,
+                MemberWinLoss = sites.Sum(x => x.MemberWinLoss),
+                SMAWinLoss = sites.Sum(x => x.SMAWinLoss),
+                ExtraPT = sites.Sum(x => x.ExtraPT),
+                Commission = sites.Sum(x => x.Commission),
+                VirtualWinLoss = sites.Sum(x => x.VirtualWinLoss),
+                RealIncome = sites.Sum(x => x.RealIncome),
+                VirtualTurnover = sites.Sum(x => x.VirtualTurnover),
+                RealTurnover = sites.Sum(x => x.RealTurnover)
+            };
+        }
+
+        private IEnumerable<SiteWinLossItem> BindingSites(IEnumerable<SiteEntity> sites)
+        {
+            return sites.Select(x => BindingSite(x));
+        }
+
+        private SiteWinLossItem BindingSite(SiteEntity rawData)
+        {
+            if (rawData == null)
+            {
+                return new SiteWinLossItem();
+            }
+
+            return new SiteWinLossItem
+            {
+                SiteId = rawData.SiteID,
+                SiteName = rawData.SiteName,
+                MemberWinLoss = rawData.MemberWinLoss,
+                SMAWinLoss = rawData.SMAWinLoss,
+                ExtraPT = rawData.ExtraPT,
+                Commission = rawData.Commission,
+                VirtualWinLoss = rawData.VirtualWinLoss,
+                RealIncome = rawData.RealIncome,
+                VirtualTurnover = rawData.VirtualTurnover,
+                RealTurnover = rawData.RealTurnover
+            };
+        }
+
+        private SuperWinLossItem CalculateSuperTotal(string title, IEnumerable<SuperEntity> sites)
+        {
+            return new SuperWinLossItem
+            {
+                SuperName = title,
+                MemberWinLoss = sites.Sum(x => x.MemberWinLoss),
+                SMAWinLoss = sites.Sum(x => x.SMAWinLoss),
+                ExtraPT = sites.Sum(x => x.ExtraPT),
+                Commission = sites.Sum(x => x.Commission),
+                VirtualWinLoss = sites.Sum(x => x.VirtualWinLoss),
+                RealIncome = sites.Sum(x => x.RealIncome),
+                VirtualTurnover = sites.Sum(x => x.VirtualTurnover),
+                RealTurnover = sites.Sum(x => x.RealTurnover)
+            };
+        }
+
+        private IEnumerable<SuperWinLossItem> BindingSupers(IEnumerable<SuperEntity> sites)
+        {
+            return sites.Select(x => BindingSuper(x));
+        }
+
+        private SuperWinLossItem BindingSuper(SuperEntity rawData)
+        {
+            if (rawData == null)
+            {
+                return new SuperWinLossItem();
+            }
+
+            return new SuperWinLossItem
+            {
+                SuperId = rawData.SuperID,
+                SuperName = rawData.SuperName,
+                MemberWinLoss = rawData.MemberWinLoss,
+                SMAWinLoss = rawData.SMAWinLoss,
+                ExtraPT = rawData.ExtraPT,
+                Commission = rawData.Commission,
+                VirtualWinLoss = rawData.VirtualWinLoss,
+                RealIncome = rawData.RealIncome,
+                VirtualTurnover = rawData.VirtualTurnover,
+                RealTurnover = rawData.RealTurnover,
+                HasVR = rawData.HasVR
             };
         }
     }

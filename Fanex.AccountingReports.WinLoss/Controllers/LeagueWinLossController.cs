@@ -59,6 +59,27 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
             return Json(report, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult GetSites(GetSitesCriteria criteria)
+        {
+            var report = this._reportService.GetSites(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetVirtualRate(GetVirtualRateCriteria criteria)
+        {
+            var report = this._reportService.GetVirtualRate(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetSupers(GetSuperCriteria criteria)
+        {
+            var report = this._reportService.GetSupers(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult ExportLeagueWinLoss(GetLeagueWinLossCriteria criteria)
         {
             this._excelService.ExportLeagueWinLoss(criteria);

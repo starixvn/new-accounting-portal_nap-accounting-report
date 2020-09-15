@@ -670,9 +670,12 @@
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\ReportManager.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\WinLossByProduct.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\WinLossByProduct_HistoryReport.js" />
+    <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLossViewVirtualRate.js" />
+    <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLossViewSupers.js" />
+    <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLossViewSites.js" />
+    <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLossViewBetTypes.js" />
     <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLossViewMatches.js" />
     <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\ReportManager.js" />
-    <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLossBySport.js" />
     <Compile Include="Controllers\DownloadReportController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs">

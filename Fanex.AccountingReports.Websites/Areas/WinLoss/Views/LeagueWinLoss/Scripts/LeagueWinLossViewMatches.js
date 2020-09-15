@@ -94,7 +94,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                                 },
                                 CustomCellRender: function (currentCell) {
                                     var liveStatus = currentCell.Value.LiveIndicator ? "Live" : "Non-Live";
-                                    var clickEvent = ' onclick = "viewBetTypes(' + currentCell.Value.matchId + ',' + currentCell.Value.LiveIndicator + ")\"";
+                                    var clickEvent = ' onclick = "viewBetTypes(' + currentCell.Value.matchId + ',' + currentCell.Value.LiveIndicator + ',\'' + currentCell.Value.event + '\'' + ")\"";
                                     var html = '<div class="link " ' + clickEvent + ' title="' + currentCell.Value.event + '">' + liveStatus + '</div>';
                                     return html;
                                 }
@@ -221,7 +221,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                 },
                 showBackButton: true,
                 backFunction: function () {
-                    backToLeagueWinLossBySport();
+                    backToLeagueWinLoss();
                 },
 
                 showCollapseExpandButton: true
@@ -237,6 +237,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
     };
     self.hideReport = function () {
         _tables.reportContainer.addClass("display-none");
+    };
+    self.showReport = function () {
+        _tables.reportContainer.removeClass("display-none");
     };
     self.exportReport = function () {
         AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLossByBetType", self.Params.reportParams);

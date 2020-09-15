@@ -10,9 +10,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
         reportParams: {
             StartDate: null,
             EndDate: null,
-            LeagueId: null,
+            LeagueName: '',
+            SportName: '',
             SportBettype: null,
             MatchID: null,
+            MatchEvent: '',
             LiveIndicator: false,
             IsNormalMode: true,
             IsNoDraw: false
@@ -62,119 +64,142 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
         self.Params.reportParams = params;
     };
 
-    var showBetType = function (i, info, bodyData) {
+    var showBetType = function (info, bodyData) {
+        var bettypeTotal = info.Total;
         var currentRow = {
-            Columns: [{
-                Name: "ColBetType", Value: info, CssClass: "colBetType",
-                CustomCellRender: function (currentCell) {
-                    var clickEvent = ' onclick = "viewLeagueWinLossByBetType(' + currentCell.Value.Bettype
-                                + ',\'' + currentCell.Value.BettypeName
-                                + '\',' + currentCell.Value.LiveIndicator
-                                + '\,' + currentCell.Value.IsHedge
-                                + ");\"";
-                    var html = '<div class="link" ' + clickEvent + '>' + currentCell.Value.BettypeName + '</div>';
-                    return html;
-                }
-            },
-                { Name: "ColMemberWinLoss", Value: info.MemberWinLoss },
-                { Name: "ColSMAWinLoss", Value: info.SMAWinLoss },
-                { Name: "ColExtraPT", Value: info.ExtraPT },
-                { Name: "ColCommision", Value: info.Commission },
-                { Name: "ColVariance", Value: info.VarianceIncome },
-                { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
-                { Name: "ColRealIncome", Value: info.RealIncome },
-                { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
-                { Name: "ColRealTurnOver", Value: info.RealTurnover },
-                { Name: "ColVirtualMargin", Value: info.VirtualMargin },
-                { Name: "ColRealMargin", Value: info.RealMargin }],
-            CssClass: i % 2 == 0 ? "even" : "",
+            Columns: [
+                { Name: "ColBetType", Value: bettypeTotal.BettypeName },
+                { Name: "ColMemberWinLoss", Value: bettypeTotal.MemberWinLoss },
+                { Name: "ColSMAWinLoss", Value: bettypeTotal.SMAWinLoss },
+                { Name: "ColExtraPT", Value: bettypeTotal.ExtraPT },
+                { Name: "ColCommision", Value: bettypeTotal.Commission },
+                { Name: "ColVariance", Value: bettypeTotal.VarianceIncome },
+                { Name: "ColVirtualWinLoss", Value: bettypeTotal.VirtualWinLoss },
+                { Name: "ColRealIncome", Value: bettypeTotal.RealIncome },
+                { Name: "ColVirtualTurnOver", Value: bettypeTotal.VirtualTurnover },
+                { Name: "ColRealTurnOver", Value: bettypeTotal.RealTurnover },
+                { Name: "ColVirtualMargin", Value: bettypeTotal.VirtualMargin },
+                { Name: "ColRealMargin", Value: bettypeTotal.RealMargin }],
             SubRows: []
         };
+
+        var bettypesLength = info.BetTypes.length;
+
+        if (bettypesLength > 0) {
+            for (var j = 0; j < bettypesLength; j++) {
+                var bettypeInfo = info.BetTypes[j];
+
+                var currentSubRow = {
+                    Columns: [
+                        {
+                            Name: "ColBetType", Value: bettypeInfo, CssClass: "colBetType",
+                            CustomCellRender: function (currentCell) {
+                                var clickEvent = ' onclick = "viewSite(' + currentCell.Value.Bettype
+                                            + ',\'' + currentCell.Value.BettypeName
+                                            + '\',\'' + currentCell.Value.SiteType
+                                            + '\'' + ");\"";
+                                var html = '<div class="link" ' + clickEvent + '>' + currentCell.Value.SiteType + '</div>';
+                                return html;
+                            }
+                        },
+                        { Name: "ColMemberWinLoss", Value: bettypeInfo.MemberWinLoss },
+                        { Name: "ColSMAWinLoss", Value: bettypeInfo.SMAWinLoss },
+                        { Name: "ColExtraPT", Value: bettypeInfo.ExtraPT },
+                        { Name: "ColCommision", Value: bettypeInfo.Commission },
+                        { Name: "ColVariance", Value: bettypeInfo.VarianceIncome },
+                        { Name: "ColVirtualWinLoss", Value: bettypeInfo.VirtualWinLoss },
+                        { Name: "ColRealIncome", Value: bettypeInfo.RealIncome },
+                        { Name: "ColVirtualTurnOver", Value: bettypeInfo.VirtualTurnover },
+                        { Name: "ColRealTurnOver", Value: bettypeInfo.RealTurnover },
+                        { Name: "ColVirtualMargin", Value: bettypeInfo.VirtualMargin },
+                        { Name: "ColRealMargin", Value: bettypeInfo.RealMargin }],
+                };
+
+                currentRow.SubRows.push(currentSubRow);
+            }
+        }
 
         bodyData.push(currentRow);
     };
 
     var renderReport = function (report) {
+        var liveStatus = self.Params.reportParams.LiveIndicator ? "Live" : "Non-Live";
         _tables.reportContainer.removeClass("display-none");
         _tables.report.addClass("display-none");
         var bodyData = [];
         var footerData = [];
-        if (report.BetTypeWinLoss != null) {
-            var bettypeWinloss = report.BetTypeWinLoss;
-            if (bettypeWinloss.BettypeWinLoss.length > 0) {
-                var len = bettypeWinloss.BettypeWinLoss.length;
-                var currentRow = null;
-                var info = null;
-                for (var i = 0; i < len; i++) {
-                    info = bettypeWinloss.BettypeWinLoss[i];
-                    showBetType(i, info, bodyData);
-                }
-
-                info = bettypeWinloss.Total;
-                currentRow =
-                {
-                    Columns: [{ Name: "ColBetType", Value: info.BettypeName, CssClass: "align-right" },
-                            { Name: "ColMemberWinLoss", Value: info.MemberWinLoss },
-                            { Name: "ColSMAWinLoss", Value: info.SMAWinLoss },
-                            { Name: "ColExtraPT", Value: info.ExtraPT },
-                            { Name: "ColCommision", Value: info.Commission },
-                            { Name: "ColVariance", Value: info.VarianceIncome },
-                            { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
-                            { Name: "ColRealIncome", Value: info.RealIncome },
-                            { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
-                            { Name: "ColRealTurnOver", Value: info.RealTurnover },
-                            { Name: "ColVirtualMargin", Value: info.VirtualMargin },
-                            { Name: "ColRealMargin", Value: info.RealMargin }]
-                };
-
-                footerData.splice(0, 0, currentRow);
-
-                if (self.isShowTotalRow(bettypeWinloss.RM)) {
-                    info = bettypeWinloss.RM;
-                    currentRow =
-                    {
-                        Columns: [{ Name: "ColBetType", Value: info.BettypeName, CssClass: "align-right", MergeColNumber: 6 },
-                                { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
-                                { Name: "ColRealIncome", Value: info.RealIncome },
-                                { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
-                                { Name: "ColRealTurnOver", Value: info.RealTurnover },
-                                { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
-                    };
-
-                    footerData.push(currentRow);
-                }
-
-                if (self.isShowTotalRow(bettypeWinloss.BARM)) {
-                    info = bettypeWinloss.BARM;
-                    currentRow =
-                    {
-                        Columns: [{ Name: "ColBetType", Value: info.BettypeName, CssClass: "align-right", MergeColNumber: 6 },
-                                { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
-                                { Name: "ColRealIncome", Value: info.RealIncome },
-                                { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
-                                { Name: "ColRealTurnOver", Value: info.RealTurnover },
-                                { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
-                    };
-
-                    footerData.push(currentRow);
-                }
-
-                if (self.isShowGrandTotalRow(bettypeWinloss)) {
-                    info = bettypeWinloss.GrandTotal;
-                    var totalInfo = bettypeWinloss.Total;
-                    currentRow =
-                    {
-                        Columns: [{ Name: "ColBetType", Value: info.BettypeName, CssClass: "align-right", MergeColNumber: 6 },
-                                   { Name: "ColVirtualWinLoss", Value: totalInfo.VirtualWinLoss },
-                                   { Name: "ColRealIncome", Value: info.RealIncome },
-                                   { Name: "ColVirtualTurnOver", Value: totalInfo.VirtualTurnover },
-                                   { Name: "ColRealTurnOver", Value: totalInfo.RealTurnover },
-                                   { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
-                    };
-
-                    footerData.push(currentRow);
-                }
+        var info = null;
+        if (report.BettypeWinLoss.length > 0) {
+            var len = report.BettypeWinLoss.length;
+            for (var i = 0; i < len; i++) {
+                info = report.BettypeWinLoss[i];
+                showBetType(info, bodyData);
             }
+        }
+
+        info = report.Total;
+        currentRow =
+        {
+            Columns: [{ Name: "ColBetType", Value: info.BettypeName, CssClass: "align-right" },
+                    { Name: "ColMemberWinLoss", Value: info.MemberWinLoss },
+                    { Name: "ColSMAWinLoss", Value: info.SMAWinLoss },
+                    { Name: "ColExtraPT", Value: info.ExtraPT },
+                    { Name: "ColCommision", Value: info.Commission },
+                    { Name: "ColVariance", Value: info.VarianceIncome },
+                    { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
+                    { Name: "ColRealIncome", Value: info.RealIncome },
+                    { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
+                    { Name: "ColRealTurnOver", Value: info.RealTurnover },
+                    { Name: "ColVirtualMargin", Value: info.VirtualMargin },
+                    { Name: "ColRealMargin", Value: info.RealMargin }]
+        };
+
+        footerData.splice(0, 0, currentRow);
+
+        if (self.isShowTotalRow(report.RM)) {
+            info = report.RM;
+            currentRow =
+            {
+                Columns: [{ Name: "ColBetType", Value: info.SiteType, CssClass: "align-right", MergeColNumber: 6 },
+                        { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
+                        { Name: "ColRealIncome", Value: info.RealIncome },
+                        { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
+                        { Name: "ColRealTurnOver", Value: info.RealTurnover },
+                        { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
+            };
+
+            footerData.push(currentRow);
+        }
+
+        if (self.isShowTotalRow(report.BARM)) {
+            info = report.BARM;
+            currentRow =
+            {
+                Columns: [{ Name: "ColBetType", Value: info.SiteType, CssClass: "align-right", MergeColNumber: 6 },
+                        { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
+                        { Name: "ColRealIncome", Value: info.RealIncome },
+                        { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
+                        { Name: "ColRealTurnOver", Value: info.RealTurnover },
+                        { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
+            };
+
+            footerData.push(currentRow);
+        }
+
+        if (self.isShowGrandTotalRow(report)) {
+            info = report.GrandTotal;
+            var totalInfo = report.Total;
+            currentRow =
+            {
+                Columns: [{ Name: "ColBetType", Value: info.BettypeName, CssClass: "align-right", MergeColNumber: 6 },
+                           { Name: "ColVirtualWinLoss", Value: totalInfo.VirtualWinLoss },
+                           { Name: "ColRealIncome", Value: totalInfo.RealIncome },
+                           { Name: "ColVirtualTurnOver", Value: totalInfo.VirtualTurnover },
+                           { Name: "ColRealTurnOver", Value: totalInfo.RealTurnover },
+                           { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
+            };
+
+            footerData.push(currentRow);
         }
 
         var gridOptions = {
@@ -184,12 +209,12 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
                           { HeaderText: "Member Win Loss", Name: "ColMemberWinLoss", MergeRowNumber: 2 },
                           { HeaderText: "SMA Win Loss", Name: "ColSMAWinLoss", MergeRowNumber: 2 },
                           { HeaderText: "Extra PT", Name: "ColExtraPT", MergeRowNumber: 2 },
-						  { HeaderText: "Commission", Name: "ColCommision", MergeRowNumber: 2 },
-						  { HeaderText: "House", Name: "ColVariance", MergeColNumber: 3 },
-						  { HeaderText: "House Turnover", Name: "ColVirtualTurnOver", MergeColNumber: 2 },
-						  { HeaderText: "Margin", Name: 'ColVirtualMargin', MergeColNumber: 2 }]
+                          { HeaderText: "Commission", Name: "ColCommision", MergeRowNumber: 2 },
+                          { HeaderText: "House", Name: "ColVariance", MergeColNumber: 3 },
+                          { HeaderText: "House Turnover", Name: "ColVirtualTurnOver", MergeColNumber: 2 },
+                          { HeaderText: "Margin", Name: 'ColVirtualMargin', MergeColNumber: 2 }]
             }],
-            columns: [{ HeaderText: "Bet Type", Width: 300, Name: "ColBetType", HeaderAlign: "center", CellAlign: "left" },
+            columns: [{ HeaderText: "Bet Type", Width: 300, Name: "ColBetType", HeaderAlign: "center", CellAlign: "left", ShowCollapseExpand: true },
                     { HeaderText: "Member Win Loss", Width: 120, Name: "ColMemberWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                     { HeaderText: "SMA Win Loss", Width: 120, Name: "ColSMAWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                     { HeaderText: "Extra PT", Width: 100, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
@@ -206,7 +231,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
             titleInfo:
             {
                 text: self.Params.reportParams.SportName + " - " +
-                      self.Params.reportParams.LeagueName + ((report != null && report.Name != null) ? " - " + report.Name : ""),
+                      self.Params.reportParams.LeagueName + " - " +
+                      self.Params.reportParams.MatchEvent + " - " +
+                      liveStatus,
                 showExcelButton: true,
                 exportExcelFunction: function () {
                     self.exportReport();
@@ -214,7 +241,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
 
                 showBackButton: true,
                 backFunction: function () {
-                    backToLeagueWinLoss();
+                    backToMatches();
                 },
 
                 showCollapseExpandButton: true
@@ -226,7 +253,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
             gridExpandHeight: 300
         };
 
-        reportTable.removeClass("display-none").fanexGrid(gridOptions);
+        _tables.report.removeClass("display-none").fanexGrid(gridOptions);
     }
     self.exportReport = function () {
         AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLossBySport", self.Params.reportParams);
@@ -236,8 +263,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
         return total.VirtualWinLoss != 0 || total.RealIncome != 0 || total.VirtualTurnover != 0 || total.RealTurnover != 0;
     };
 
-    self.isShowGrandTotalRow = function (bettypeWinloss) {
-        return self.isShowTotalRow(bettypeWinloss.RM)
-        || self.isShowTotalRow(bettypeWinloss.BARM);
+    self.isShowGrandTotalRow = function (report) {
+        return self.isShowTotalRow(report.RM)
+        || self.isShowTotalRow(report.BARM);
     };
 }

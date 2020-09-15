@@ -8,25 +8,33 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
     var self = this;
     var _leagueWinLoss = new Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss();
     var _leagueWinLossViewBetTypes = new Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes();
-    //var _leagueWinLossByBetType = new Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType();
     var _leagueWinLossViewMatches = new Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches();
+    var _leagueWinLossViewSites = new Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSites();
+    var _leagueWinLossViewSupers = new Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSupers();
+    var _leagueWinLossViewVirtualRate = new Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewVirtualRate();
 
     self.initPage = function () {
         _leagueWinLoss.initPage();
         _leagueWinLossViewBetTypes.initPage();
         _leagueWinLossViewMatches.initPage();
+        _leagueWinLossViewSites.initPage();
+        _leagueWinLossViewSupers.initPage();
+        _leagueWinLossViewVirtualRate.initPage();
     };
     hideLeagueWinLoss = function () {
         _leagueWinLoss.hideReport();
     };
-    hideLeagueWinLossBySport = function () {
+    hideBettypes = function () {
         _leagueWinLossViewBetTypes.hideReport();
     };
-    //hideLeagueWinLossByBetType = function () {
-    //    _leagueWinLossByBetType.hideReport();
-    //};
     hideMatches = function () {
         _leagueWinLossViewMatches.hideReport();
+    };
+    hideSites = function () {
+        _leagueWinLossViewSites.hideReport();
+    };
+    hideSupers = function () {
+        _leagueWinLossViewSupers.hideReport();
     };
     viewMatches = function (sportName, leagueName) {
         _leagueWinLoss.hideReport();
@@ -40,29 +48,83 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             IsNoDraw: _leagueWinLoss.Params.reportParams.IsNoDraw
         });
     };
-    viewBetTypes = function (matchId, isLive) {
+    viewBetTypes = function (matchId, isLive, matchEvent) {
         _leagueWinLossViewMatches.hideReport();
         _leagueWinLossViewBetTypes.getReport({
             StartDate: _leagueWinLossViewMatches.Params.reportParams.StartDate,
             EndDate: _leagueWinLossViewMatches.Params.reportParams.EndDate,
-            MatchID: matchId,
-            LiveIndicator: isLive,
+            LeagueName: _leagueWinLossViewMatches.Params.reportParams.LeagueName,
+            SportName: _leagueWinLossViewMatches.Params.reportParams.SportName,
             SportBettype: _leagueWinLossViewMatches.Params.reportParams.SportBettype,
+            MatchID: matchId,
+            MatchEvent: matchEvent,
+            LiveIndicator: isLive,
             IsNormalMode: _leagueWinLossViewMatches.Params.reportParams.IsNormalMode,
             IsNoDraw: _leagueWinLossViewMatches.Params.reportParams.IsNoDraw
         });
     };
+    viewSite = function (bettype, bettypeName, siteType) {
+        _leagueWinLossViewBetTypes.hideReport();
+        _leagueWinLossViewSites.getReport({
+            StartDate: _leagueWinLossViewBetTypes.Params.reportParams.StartDate,
+            EndDate: _leagueWinLossViewBetTypes.Params.reportParams.EndDate,
+            LeagueName: _leagueWinLossViewBetTypes.Params.reportParams.LeagueName,
+            SportName: _leagueWinLossViewBetTypes.Params.reportParams.SportName,
+            MatchID: _leagueWinLossViewBetTypes.Params.reportParams.MatchID,
+            MatchEvent: _leagueWinLossViewBetTypes.Params.reportParams.MatchEvent,
+            LiveIndicator: _leagueWinLossViewBetTypes.Params.reportParams.LiveIndicator,
+            SiteType: siteType,
+            BetType: bettype,
+            BetTypeName: bettypeName,
+            IsNormalMode: _leagueWinLossViewBetTypes.Params.reportParams.IsNormalMode,
+            IsNoDraw: _leagueWinLossViewBetTypes.Params.reportParams.IsNoDraw
+        });
+    };
+
+    viewSuper = function (siteId, siteName) {
+        _leagueWinLossViewSites.hideReport();
+        _leagueWinLossViewSupers.getReport({
+            StartDate: _leagueWinLossViewSites.Params.reportParams.StartDate,
+            EndDate: _leagueWinLossViewSites.Params.reportParams.EndDate,
+            LeagueName: _leagueWinLossViewSites.Params.reportParams.LeagueName,
+            SportName: _leagueWinLossViewSites.Params.reportParams.SportName,
+            MatchID: _leagueWinLossViewSites.Params.reportParams.MatchID,
+            MatchEvent: _leagueWinLossViewSites.Params.reportParams.MatchEvent,
+            LiveIndicator: _leagueWinLossViewSites.Params.reportParams.LiveIndicator,
+            SiteID: siteId,
+            SiteType: _leagueWinLossViewSites.Params.reportParams.SiteType,
+            siteName: siteName,
+            BetType: _leagueWinLossViewSites.Params.reportParams.BetType,
+            BetTypeName: _leagueWinLossViewSites.Params.reportParams.BetTypeName,
+            IsNormalMode: _leagueWinLossViewSites.Params.reportParams.IsNormalMode,
+            IsNoDraw: _leagueWinLossViewSites.Params.reportParams.IsNoDraw
+        });
+    };
+    viewVirtualRate = function (superId, superName) {
+        _leagueWinLossViewVirtualRate.getReport({
+            CustID: superId,
+            SuperName: superName
+        });
+    };
+
     backToLeagueWinLoss = function () {
-        hideLeagueWinLossBySport();
-        // hideLeagueWinLossByBetType();
         hideMatches();
         _leagueWinLoss.showReport();
     };
 
-    backToLeagueWinLossBySport = function () {
-        hideLeagueWinLoss();
-        // hideLeagueWinLossByBetType();
+    backToMatches = function () {
+        hideBettypes();
+        _leagueWinLossViewMatches.showReport();
+    };
+
+    backToBetTypes = function () {
+        hideSites();
         _leagueWinLossViewBetTypes.showReport();
+    };
+
+    backToSites = function () {
+        hideSupers();
+        _leagueWinLossViewSites.showReport();
     };
 
     isShowReport = function (report) {
