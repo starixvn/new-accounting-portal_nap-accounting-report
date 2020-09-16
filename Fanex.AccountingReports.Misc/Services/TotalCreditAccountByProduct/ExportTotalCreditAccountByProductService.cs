@@ -457,6 +457,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                 case ProductContants.GoldDeluxe:
                     product = "Gold Deluxe";
                     break;
+
                 case ProductContants.PockerGames:
                     product = "Poker Games";
                     break;
@@ -473,8 +474,8 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     product = "Saba.club";
                     break;
 
-                case ProductContants.SexyGaming:
-                    product = "Sexy Gaming";
+                case ProductContants.AECasino:
+                    product = "AE Casino";
                     break;
 
                 case ProductContants.TableGames:

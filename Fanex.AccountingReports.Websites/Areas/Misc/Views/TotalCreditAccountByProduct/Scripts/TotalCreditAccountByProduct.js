@@ -45,12 +45,12 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         PockerGames: 163,
         VirtualGames: 245,
         SAGaming: 244,
-        SexyGaming: 243,
+        AECasino: 243,
         SabaClub: 200,
         TableGames: 222,
         BBin: 241,
         IBCBetLiveCasino: 242,
-        RNGWar:224,
+        RNGWar: 224,
         ION: 225
     };
 
@@ -275,10 +275,11 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                     { Name: "ColMasterDisable", Value: currentRow.MasterDisable },
                     { Name: "ColAgentEnable", Value: currentRow.AgentEnable },
                     { Name: "ColAgentDisable", Value: currentRow.AgentDisable },
-                    { Name: "ColMemberEnable", Value: currentRow, CustomCellRender: function (currentCell) {
-                        return "<a class='link' onclick='getBetCountDetailByCustId(\"" + currentCell.Value.CustId + "\",\"" + currentCell.Value.UserName + "\")'>" +
-                            numeral(currentCell.Value.MemberEnable).format(FormatConstant.INT_NUMBER) + "</a>";
-                    }
+                    {
+                        Name: "ColMemberEnable", Value: currentRow, CustomCellRender: function (currentCell) {
+                            return "<a class='link' onclick='getBetCountDetailByCustId(\"" + currentCell.Value.CustId + "\",\"" + currentCell.Value.UserName + "\")'>" +
+                                numeral(currentCell.Value.MemberEnable).format(FormatConstant.INT_NUMBER) + "</a>";
+                        }
                     },
                     { Name: "ColMemberDisable", Value: currentRow.MemberDisable }
                 ];
@@ -394,7 +395,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 { Name: "ColStatus", Value: currentRow.IsDisable ? "Disabled" : "Enabled" },
                 { Name: "ColSettledBetCount", Value: currentRow.SettledBetCount },
                 { Name: "ColRunningBetCount", Value: currentRow.RunningBetCount }
-            ];
+                ];
 
                 bodyRows.push({
                     Columns: currentRowData
@@ -516,8 +517,8 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
             case productEnums.SAGaming:
                 productName = "SA Gaming";
                 break;
-            case productEnums.SexyGaming:
-                productName = "SexyGaming";
+            case productEnums.AECasino:
+                productName = "AE Casino";
                 break;
             case productEnums.SabaClub:
                 productName = "Saba.club";

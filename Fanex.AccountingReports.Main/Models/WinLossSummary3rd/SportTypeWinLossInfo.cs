@@ -43,7 +43,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.VirtualGames,
             SportContants.Spedagaming,
             SportContants.SAGaming,
-            SportContants.SexyGaming,
+            SportContants.AECasino,
             SportContants.SabaClub,
             SportContants.Indo4D,
             SportContants.TableGames,
