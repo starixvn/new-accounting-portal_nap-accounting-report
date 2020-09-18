@@ -178,7 +178,6 @@
     <Compile Include="Criteria\DailyMixParlayWinLoss\GetMixParlayReportCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetBetTypesCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetMatchesCriteria.cs" />
-    <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossBySportCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetSuperCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetSitesCriteria.cs" />

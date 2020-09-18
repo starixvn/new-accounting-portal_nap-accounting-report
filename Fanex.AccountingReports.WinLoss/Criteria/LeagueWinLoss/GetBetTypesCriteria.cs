@@ -17,7 +17,13 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public int MatchID { get; set; }
 
+        [SpParam(Ignored = true)]
+        public string MatchEvent { get; set; }
+
         public string SportBettype { get; set; }
+
+        [SpParam(Ignored = true)]
+        public string LeagueName { get; set; }
 
         [SpParam(Ignored = true)]
         public string SportName { get; set; }

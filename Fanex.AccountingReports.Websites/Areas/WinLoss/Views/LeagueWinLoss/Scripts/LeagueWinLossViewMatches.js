@@ -242,7 +242,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
         _tables.reportContainer.removeClass("display-none");
     };
     self.exportReport = function () {
-        AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLossByBetType", self.Params.reportParams);
+        AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLossViewMatches", self.Params.reportParams);
     };
 
     self.isShowTotalRow = function (total) {

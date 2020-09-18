@@ -256,7 +256,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
         _tables.report.removeClass("display-none").fanexGrid(gridOptions);
     }
     self.exportReport = function () {
-        AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLossBySport", self.Params.reportParams);
+        AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLossViewBetTypes", self.Params.reportParams);
     };
 
     self.isShowTotalRow = function (total) {

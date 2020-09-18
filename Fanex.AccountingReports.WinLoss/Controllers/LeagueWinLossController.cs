@@ -6,6 +6,7 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     using Fanex.AccountingReports.WinLoss.Services.Implement;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+
     using Services.Implement.LeagueWinLoss;
     using System.Web.Mvc;
 
@@ -86,16 +87,28 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
             return new EmptyResult();
         }
 
-        //public ActionResult ExportLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria)
-        //{
-        //    this._excelService.ExportLeagueWinLossBySport(criteria);
-        //    return new EmptyResult();
-        //}
+        public ActionResult ExportLeagueWinLossViewMatches(GetMatchesCriteria criteria)
+        {
+            this._excelService.ExportLeagueWinLossViewMatches(criteria);
+            return new EmptyResult();
+        }
 
-        //public ActionResult ExportLeagueWinLossByBetType(GetMatchesCriteria criteria)
-        //{
-        //    this._excelService.ExportLeagueWinLossByBetType(criteria);
-        //    return new EmptyResult();
-        //}
+        public ActionResult ExportLeagueWinLossViewBetTypes(GetBetTypesCriteria criteria)
+        {
+            this._excelService.ExportLeagueWinLossViewBetTypes(criteria);
+            return new EmptyResult();
+        }
+
+        public ActionResult ExportLeagueWinLossViewSites(GetSitesCriteria criteria)
+        {
+            this._excelService.ExportLeagueWinLossViewSites(criteria);
+            return new EmptyResult();
+        }
+
+        public ActionResult ExportLeagueWinLossViewSupers(GetSuperCriteria criteria)
+        {
+            this._excelService.ExportLeagueWinLossViewSupers(criteria);
+            return new EmptyResult();
+        }
     }
 }

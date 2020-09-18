@@ -243,7 +243,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSupers = function
     };
 
     self.exportReport = function () {
-        AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLossBySport", self.Params.reportParams);
+        AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLossViewSupers", self.Params.reportParams);
     };
 
     self.isShowTotalRow = function (total) {
