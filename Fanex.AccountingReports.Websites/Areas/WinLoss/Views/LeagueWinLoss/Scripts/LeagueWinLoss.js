@@ -38,7 +38,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         isDefaultTextboxLeague: true,
         isOnAuto: false,
         isFirstLoad: true,
-        LeagueName: ''
+        LeagueName: '',
+        SoccerID: 1,
+        BasketballID: 2,
+        ParlayID: 10000
     };
 
     self.initPage = function () {
@@ -526,50 +529,44 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         var sportGroupLength = rs.length;
         for (var i = 0; i < sportGroupLength; i++) {
             var sportGroup = rs[i];
-            var sports = [];
+            var bettypeGroups = [];
+            var bettypes = [];
             var sportLength = sportGroup.ChildItems.length;
             self.Params.cachedNumberSports += sportLength === 0 ? 1 : sportLength;
             for (var j = 0; j < sportLength; j++) {
-                var bettypes = [];
                 var sport = sportGroup.ChildItems[j];
-                var bettypeLength = sport.Bettypes.length;
-                for (k = 0; k < bettypeLength; k++) {
-                    var bettype = sport.Bettypes[k];
-                    bettypes.push({
-                        id: id + "-" + bettype.Bettype + "-" + bettype.BettypeName,
-                        value: sport.SportType + "_" + bettype.Bettype,
-                        text: bettype.BettypeName,
-                        checked: true,
-                        enable: true,
-                        cssClass: ""
-                    });
-                }
+                var bettypeGroupLength = sport.BettypeGroups.length;
+                for (var l = 0; l < bettypeGroupLength; l++) {
+                    bettypes = [];
+                    var bettypeGroup = sport.BettypeGroups[l];
+                    var bettypeLength = bettypeGroup.BetTypes.length;
+                    for (m = 0; m < bettypeLength; m++) {
+                        var bettype = bettypeGroup.BetTypes[m];
+                        bettypes.push({
+                            id: id + "-" + bettype.Bettype + "-" + bettype.BettypeName,
+                            value: sport.SportType + "_" + bettype.Bettype,
+                            text: bettype.BettypeName,
+                            checked: true,
+                            enable: true,
+                            cssClass: ""
+                        });
+                    }
 
-                if (sportLength == 1 && sport.SportName == sportGroup.GroupName) {
-                    sportGroups.push({
-                        id: id + "-group" + sportGroup.GroupId,
-                        value: sportGroup.GroupId,
-                        text: sportGroup.GroupName,
-                        checked: true,
-                        enable: true,
-                        cssClass: "",
-                        items: bettypes
-                    });
-                }
-                else {
-                    sports.push({
-                        id: id + "-" + sport.SportType + "-" + sport.SportName,
-                        value: sportGroup.GroupId + "_" + sport.SportType,
-                        text: sport.SportName,
-                        checked: true,
-                        enable: true,
-                        cssClass: "",
-                        items: bettypes
-                    });
+                    if (sport.SportType != self.Params.ParlayID) {
+                        bettypeGroups.push({
+                            id: id + "-" + sport.SportName + "-" + bettypeGroup.BetTypeGroupName,
+                            value: sport.SportType,
+                            text: bettypeGroup.BetTypeGroupName,
+                            checked: true,
+                            enable: true,
+                            cssClass: "",
+                            items: bettypes
+                        });
+                    }
                 }
             }
 
-            if (sports.length > 0) {
+            if (bettypeGroups.length > 0 || bettypes.length > 0) {
                 sportGroups.push({
                     id: id + "-group" + sportGroup.GroupId,
                     value: sportGroup.GroupId,
@@ -577,7 +574,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                     checked: true,
                     enable: true,
                     cssClass: "",
-                    items: sports
+                    items: sportGroup.GroupId != self.Params.ParlayID ? bettypeGroups : bettypes
                 });
             }
         }

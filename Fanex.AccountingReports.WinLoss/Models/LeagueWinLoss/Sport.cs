@@ -10,6 +10,6 @@ namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
 
         public string SportName { get; set; }
 
-        public List<BetType> Bettypes { get; set; }
+        public List<BetTypeGroup> BettypeGroups { get; set; }
     }
 }

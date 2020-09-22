@@ -126,19 +126,34 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     {
                         SportType = sport.Key.SportType,
                         SportName = sport.Key.SportName,
-                        Bettypes = new List<BetType>()
+                        BettypeGroups = new List<BetTypeGroup>()
                     };
 
                     var sportBettypes = rawData.Where(x => x.SportType == sport.Key.SportType
                         && x.SportName == sport.Key.SportName);
 
-                    foreach (var bettype in sportBettypes)
+                    var groupBettypes = sportBettypes.GroupBy(x => x.BetTypeGroupName);
+
+                    foreach(var groupBettype in groupBettypes)
                     {
-                        sportItem.Bettypes.Add(new BetType
+                        var bettypeGroup = new BetTypeGroup
                         {
-                            Bettype = bettype.Bettype,
-                            BettypeName = bettype.BettypeName
-                        });
+                            BetTypeGroupName = groupBettype.Key,
+                            BetTypes = new List<BetType>()
+                        };
+
+                        var bettypes = sportBettypes.Where(x => x.BetTypeGroupName == groupBettype.Key);
+
+                        foreach (var bettype in bettypes)
+                        {
+                            bettypeGroup.BetTypes.Add(new BetType
+                            {
+                                Bettype = bettype.Bettype,
+                                BettypeName = bettype.BettypeName
+                            });
+                        }
+
+                        sportItem.BettypeGroups.Add(bettypeGroup);
                     }
 
                     sportGroup.ChildItems.Add(sportItem);

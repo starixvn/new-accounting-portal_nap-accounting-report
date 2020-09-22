@@ -16,6 +16,8 @@ namespace Fanex.AccountingReports.WinLoss.Entities.LeagueWinLoss
 
         public string SportName { get; set; }
 
+        public string BetTypeGroupName { get; set; }
+
         public int Bettype { get; set; }
 
         public string BettypeName { get; set; }

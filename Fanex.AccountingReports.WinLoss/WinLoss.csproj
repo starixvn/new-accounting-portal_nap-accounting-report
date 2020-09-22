@@ -208,6 +208,7 @@
     <Compile Include="Models\DailyMixParlayWinLoss\WinLossInfo.cs" />
     <Compile Include="Models\LeagueWinLoss\BaseWinLoss.cs" />
     <Compile Include="Models\LeagueWinLoss\BetType.cs" />
+    <Compile Include="Models\LeagueWinLoss\BetTypeGroup.cs" />
     <Compile Include="Models\LeagueWinLoss\BettypeWinLossBySite.cs" />
     <Compile Include="Models\LeagueWinLoss\BetTypeWinLossItem.cs" />
     <Compile Include="Models\LeagueWinLoss\BettypeWinLossModel.cs" />

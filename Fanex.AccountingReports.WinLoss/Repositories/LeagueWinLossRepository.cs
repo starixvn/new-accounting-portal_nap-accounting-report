@@ -270,6 +270,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                         SportGroupName = Converter.ToString2(row["SportGroupName"]),
                         SportType = Converter.ToInt(row["SportType"]),
                         SportName = Converter.ToString2(row["SportName"]),
+                        BetTypeGroupName = Converter.ToString2(row["BetGroupName"]),
                         Bettype = Converter.ToInt(row["Bettype"]),
                         BettypeName = Converter.ToString2(row["BettypeName"])
                     });
