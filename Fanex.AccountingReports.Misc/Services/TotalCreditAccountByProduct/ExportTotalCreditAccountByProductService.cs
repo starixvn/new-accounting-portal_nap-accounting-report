@@ -498,6 +498,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     product = "ION";
                     break;
 
+                case ProductContants.WM:
+                    product = "WM";
+                    break;
+
                 default:
                     break;
             }
