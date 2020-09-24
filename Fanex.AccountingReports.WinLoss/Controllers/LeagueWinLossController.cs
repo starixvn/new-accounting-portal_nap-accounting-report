@@ -40,6 +40,13 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         }
 
         [HttpPost]
+        public JsonResult GetSiteFilter()
+        {
+            var sports = this._reportService.GetSiteFilter();
+            return Json(sports, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public JsonResult GetLeagueWinLoss(GetLeagueWinLossCriteria criteria)
         {
             var report = this._reportService.GetLeagueWinLoss(criteria);

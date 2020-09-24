@@ -19,7 +19,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSites = function 
             BetType: null,
             BetTypeName: null,
             IsNormalMode: true,
-            IsNoDraw: false
+            IsNoDraw: false,
+            SiteName: ''
         }
     };
     self.initPage = function () {

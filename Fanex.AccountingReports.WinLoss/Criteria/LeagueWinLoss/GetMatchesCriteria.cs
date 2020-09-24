@@ -25,6 +25,8 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public bool IsNoDraw { get; set; }
 
+        public string SiteName { get; set; }
+
         public override string GetSettingKey()
         {
             var suffix = IsNormalMode ? string.Empty : "_WH";

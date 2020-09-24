@@ -16,6 +16,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         bettransModeBtn: null,
         txtLeague: null,
         autocomplete: null,
+        ddlDivision: null
     };
 
     self.Params = {
@@ -27,7 +28,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             IsNoDraw: false,
             LeagueName: '',
             SortColumnName: '',
-            SortDirection: ''
+            SortDirection: '',
+            SiteName: ''
         },
 
         isNormalMode: true,
@@ -50,6 +52,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         renderMonthPicker();
         renderDatePicker();
         getSport();
+        getDivision();
         hideWarehouseMode();
         makeLeagueSuggestion();
         bindingEvent();
@@ -67,6 +70,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         _tables.warehouseMode = $("#warehouse-mode");
         _tables.bettransModeBtn = $("#bettrans-mode-btn");
         _tables.txtLeague = $("#txt-league");
+        _tables.ddlDivision = $("#dropdown-division");
     };
 
     var setDayValueForButtons = function () {
@@ -85,7 +89,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 Id: "CheckDate",
                 Label: labelDate,
                 InitDate: toDay,
-                LabelCss: "lbl-field col_2 bold",
+                LabelCss: "lbl-field col_3 bold",
                 TextboxCss: "edit-field col_5"
             },
 
@@ -107,6 +111,16 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             null,
             self.RenderSport,
             self.RenderSport,
+            AccReport.enableInput,
+            false);
+    };
+
+    var getDivision = function () {
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "WinLoss/LeagueWinLoss/GetSiteFilter",
+            null,
+            self.RenderDivision,
+            self.RenderDivision,
             AccReport.enableInput,
             false);
     };
@@ -155,8 +169,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             }
 
             $("#leagueWinLossReportContainer").addClass("display-none");
-            $("#leagueWinLossReportBySportContainer").addClass("display-none");
-            $("#leagueWinLossReportByBetTypeContainer").addClass("display-none");
+            $("#leagueWinLossReportMatchesContainer").addClass("display-none");
+            $("#leagueWinLossBetTypeContainer").addClass("display-none");
+            $("#leagueWinLossSiteContainer").addClass("display-none");
+            $("#leagueWinLossSuperContainer").addClass("display-none");
+            $("#leagueWinLossVirtualRateContainer").addClass("display-none");
         });
     };
 
@@ -196,6 +213,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         AccReport.disableInput();
         hideBettypes();
         hideMatches();
+        hideSites();
+        hideSupers();
 
         AccReport.utility.CallAjax(this,
             window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
@@ -214,8 +233,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         }
 
         AccReport.disableInput();
-        hideLeagueWinLossBySport();
-        hideLeagueWinLossByBetType();
+        hideBettypes();
+        hideMatches();
+        hideSites();
+        hideSupers();
 
         AccReport.utility.CallAjax(this,
             window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
@@ -234,8 +255,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         }
 
         AccReport.disableInput();
-        hideLeagueWinLossBySport();
-        hideLeagueWinLossByBetType();
+        hideBettypes();
+        hideMatches();
+        hideSites();
+        hideSupers();
 
         AccReport.utility.CallAjax(this,
             window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
@@ -259,6 +282,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         self.Params.reportParams.LeagueName = self.Params.isDefaultTextboxUserName ?
                       "" :
                       _tables.txtLeague.val();
+        self.Params.reportParams.SiteName = _tables.ddlDivision.fanexMultiSelect('getItems', true).toString();
     };
 
     var getParams = function () {
@@ -277,12 +301,18 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         self.Params.reportParams.LeagueName = self.Params.isDefaultTextboxUserName ?
                       "" :
                       _tables.txtLeague.val();
+        self.Params.reportParams.SiteName = _tables.ddlDivision.fanexMultiSelect('getItems', true).toString();
     };
 
     var checkReportParams = function (params) {
         AccReport.popUp.removeHighLight();
         if (self.Params.reportParams.SportBettype == '') {
             AccReport.popUp.show("Please select  at least one sport!", "dropdown-sport");
+            return false;
+        }
+
+        if (self.Params.reportParams.SiteName == '') {
+            AccReport.popUp.show("Please select  at least one division!", "dropdown-division");
             return false;
         }
 
@@ -712,5 +742,67 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         }
 
         return sortColumnName;
+    };
+
+    self.RenderDivision = function (rs) {
+        var isSetDefaultCollapse = true;
+        var id = "ddl-division";
+        var siteGroups = [];
+        var siteGroupLength = rs.length;
+        for (var i = 0; i < siteGroupLength; i++) {
+            var siteGroup = rs[i];
+            var sites = [];
+            var siteLength = siteGroup.Sites.length;
+            for (var j = 0; j < siteLength; j++) {
+                var site = siteGroup.Sites[j];
+                sites.push({
+                    id: id + "-" + site.SiteGroup + "-" + site.SiteName,
+                    value: site.SiteName,
+                    text: site.SiteName,
+                    checked: true,
+                    enable: true,
+                    cssClass: ""
+                });
+            }
+
+            if (sites.length > 0) {
+                siteGroups.push({
+                    id: id + "-group" + siteGroup.GroupName,
+                    value: siteGroup.GroupName,
+                    text: siteGroup.GroupName,
+                    checked: true,
+                    enable: true,
+                    cssClass: "",
+                    items: sites
+                });
+            }
+        }
+
+        _tables.ddlDivision.fanexMultiSelect({
+            minWidth: 120,
+            maxHeight: 450,
+            showFilter: true,
+            shadow: true,
+            showHeader: true,
+            isCheckAll: true,
+            showFooter: false,
+            checkAllText: 'All',
+            isUsedCustomCheckAllText: true,
+            useCustomCheckAllText: 'All',
+            noneSelectedText: 'Select an option',
+            noItemText: 'No division found.',
+            disabled: false,
+            listData: siteGroups,
+            onCheck: function () {
+            },
+            onOpen: function () {
+                if (isSetDefaultCollapse) {
+                    $('#ddlDivisionCollapseButton').trigger('click')
+                    isSetDefaultCollapse = false;
+                }
+            }
+        });
+
+        _tables.ddlDivision = $("#dropdown-division");
     };
 }

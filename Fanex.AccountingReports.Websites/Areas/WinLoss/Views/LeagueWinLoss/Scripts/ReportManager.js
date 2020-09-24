@@ -45,7 +45,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             LeagueName: leagueName,
             SportName: sportName,
             IsNormalMode: _leagueWinLoss.Params.reportParams.IsNormalMode,
-            IsNoDraw: _leagueWinLoss.Params.reportParams.IsNoDraw
+            IsNoDraw: _leagueWinLoss.Params.reportParams.IsNoDraw,
+            SiteName: _leagueWinLoss.Params.reportParams.SiteName
         });
     };
     viewBetTypes = function (matchId, isLive, matchEvent) {
@@ -60,7 +61,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             MatchEvent: matchEvent,
             LiveIndicator: isLive,
             IsNormalMode: _leagueWinLossViewMatches.Params.reportParams.IsNormalMode,
-            IsNoDraw: _leagueWinLossViewMatches.Params.reportParams.IsNoDraw
+            IsNoDraw: _leagueWinLossViewMatches.Params.reportParams.IsNoDraw,
+            SiteName: _leagueWinLossViewMatches.Params.reportParams.SiteName
         });
     };
     viewSite = function (bettype, bettypeName, siteType) {
@@ -77,7 +79,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             BetType: bettype,
             BetTypeName: bettypeName,
             IsNormalMode: _leagueWinLossViewBetTypes.Params.reportParams.IsNormalMode,
-            IsNoDraw: _leagueWinLossViewBetTypes.Params.reportParams.IsNoDraw
+            IsNoDraw: _leagueWinLossViewBetTypes.Params.reportParams.IsNoDraw,
+            SiteName: _leagueWinLossViewBetTypes.Params.reportParams.SiteName
         });
     };
 

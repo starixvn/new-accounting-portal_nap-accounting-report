@@ -165,6 +165,36 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             return sportGroups;
         }
 
+        public List<SiteGroup> GetSiteFilter()
+        {
+            var result = new List<SiteGroup>();
+            var criteria = new GetSiteFilterCriteria();
+            var rawData = this._reportRepository.GetSiteFilter(criteria);
+            var groups = rawData.GroupBy(x => x.SiteGroup);
+            foreach (var group in groups)
+            {
+                var siteGroup = new SiteGroup
+                {
+                    GroupName = group.Key,
+                    Sites = new List<Site>()
+                };
+                var sites = rawData.Where(x => x.SiteGroup == group.Key);
+
+                foreach (var site in sites)
+                {
+                    siteGroup.Sites.Add(new Site
+                    {
+                        SiteGroup = site.SiteGroup,
+                        SiteName = site.SiteName
+                    });
+                }
+
+                result.Add(siteGroup);
+            }
+
+            return result;
+        }
+
         public BettypeWinLossModel GetBetTypes(GetBetTypesCriteria criteria)
         {
             var result = new BettypeWinLossModel

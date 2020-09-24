@@ -179,6 +179,7 @@
     <Compile Include="Criteria\LeagueWinLoss\GetBetTypesCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetMatchesCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossCriteria.cs" />
+    <Compile Include="Criteria\LeagueWinLoss\GetSiteFilterCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetSuperCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetSitesCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetSportCriteria.cs" />
@@ -199,6 +200,7 @@
     <Compile Include="Entities\LeagueWinLoss\LeagueWinLossEntity.cs" />
     <Compile Include="Entities\LeagueWinLoss\MatchEntity.cs" />
     <Compile Include="Entities\LeagueWinLoss\SiteEntity.cs" />
+    <Compile Include="Entities\LeagueWinLoss\SiteFilterEntity.cs" />
     <Compile Include="Entities\LeagueWinLoss\SportEntity.cs" />
     <Compile Include="Entities\LeagueWinLoss\SuperEntity.cs" />
     <Compile Include="Entities\LeagueWinLoss\VirtualRateEntity.cs" />
@@ -218,6 +220,8 @@
     <Compile Include="Models\LeagueWinLoss\MatchWinLossByLiveStatus.cs" />
     <Compile Include="Models\LeagueWinLoss\MatchWinLossItem.cs" />
     <Compile Include="Models\LeagueWinLoss\MatchWinLossModel.cs" />
+    <Compile Include="Models\LeagueWinLoss\Site.cs" />
+    <Compile Include="Models\LeagueWinLoss\SiteGroup.cs" />
     <Compile Include="Models\LeagueWinLoss\SuperWinLossModel.cs" />
     <Compile Include="Models\LeagueWinLoss\SuperWinLossItem.cs" />
     <Compile Include="Models\LeagueWinLoss\SiteWinLossItem.cs" />

@@ -281,5 +281,33 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
 
             return null;
         }
+
+        public List<SiteFilterEntity> GetSiteFilter(ICriteria criteria)
+        {
+            DataSet result = null;
+
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                result = db.ExecuteDataSet(criteria.GetSpParams());
+            }
+
+            if (result != null && result.Tables.Count > 0)
+            {
+                var siteTable = result.Tables[0];
+                var sites = new List<SiteFilterEntity>();
+                foreach (DataRow row in siteTable.Rows)
+                {
+                    sites.Add(new SiteFilterEntity
+                    {
+                        SiteGroup = Converter.ToString2(row["SiteGroup"]),
+                        SiteName = Converter.ToString2(row["SiteName"])
+                    });
+                }
+
+                return sites;
+            }
+
+            return null;
+        }
     }
 }
