@@ -56,5 +56,7 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int RNGWar = 224;
 
         public const int ION = 225;
+
+        public const int WM = 233;
     }
 }

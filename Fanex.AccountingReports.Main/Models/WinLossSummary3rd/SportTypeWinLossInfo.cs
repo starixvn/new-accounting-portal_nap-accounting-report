@@ -52,7 +52,9 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.ION,
             SportContants.IBCBetLiveCasino,
             SportContants.PGSoft,
-            SportContants.SabaClubFreeBet
+            SportContants.SabaClubFreeBet,
+            SportContants.WM,
+            SportContants.Joker
         };
 
         public SportTypeWinLossInfo()
