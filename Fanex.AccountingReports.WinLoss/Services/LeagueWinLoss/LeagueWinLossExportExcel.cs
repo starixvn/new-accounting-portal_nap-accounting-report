@@ -1909,7 +1909,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             var currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.SiteName;
             currentCell.Style = isTotalRow ? grandTotalRowTextStyle : textStyle;
-            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -2191,7 +2191,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             var currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.SuperName;
             currentCell.Style = isTotalRow ? grandTotalRowTextStyle : textStyle;
-            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+            currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];

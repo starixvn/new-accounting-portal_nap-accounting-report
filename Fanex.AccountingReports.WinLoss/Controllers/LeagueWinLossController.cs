@@ -88,30 +88,35 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
             return Json(report, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public ActionResult ExportLeagueWinLoss(GetLeagueWinLossCriteria criteria)
         {
             this._excelService.ExportLeagueWinLoss(criteria);
             return new EmptyResult();
         }
 
+        [HttpPost]
         public ActionResult ExportLeagueWinLossViewMatches(GetMatchesCriteria criteria)
         {
             this._excelService.ExportLeagueWinLossViewMatches(criteria);
             return new EmptyResult();
         }
 
+        [HttpPost]
         public ActionResult ExportLeagueWinLossViewBetTypes(GetBetTypesCriteria criteria)
         {
             this._excelService.ExportLeagueWinLossViewBetTypes(criteria);
             return new EmptyResult();
         }
 
+        [HttpPost]
         public ActionResult ExportLeagueWinLossViewSites(GetSitesCriteria criteria)
         {
             this._excelService.ExportLeagueWinLossViewSites(criteria);
             return new EmptyResult();
         }
 
+        [HttpPost]
         public ActionResult ExportLeagueWinLossViewSupers(GetSuperCriteria criteria)
         {
             this._excelService.ExportLeagueWinLossViewSupers(criteria);
