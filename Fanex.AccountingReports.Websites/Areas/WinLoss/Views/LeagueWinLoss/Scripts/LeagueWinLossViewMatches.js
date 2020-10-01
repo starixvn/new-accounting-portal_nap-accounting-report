@@ -91,11 +91,12 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                                 Name: "ColEvent", Value: {
                                     event: matchInfo.MatchEvent,
                                     matchId: matchInfo.MatchId,
-                                    LiveIndicator: matchInfo.LiveIndicator
+                                    LiveIndicator: matchInfo.LiveIndicator,
+                                    isHedge: matchInfo.IsHedge
                                 },
                                 CustomCellRender: function (currentCell) {
                                     var liveStatus = currentCell.Value.LiveIndicator ? "Live" : "Non-Live";
-                                    var clickEvent = ' onclick = "viewBetTypes(' + currentCell.Value.matchId + ',' + currentCell.Value.LiveIndicator + ',\'' + currentCell.Value.event + '\'' + ")\"";
+                                    var clickEvent = ' onclick = "viewBetTypes(' + currentCell.Value.matchId + ',' + currentCell.Value.LiveIndicator + ',\'' + currentCell.Value.event + '\'' + ',' + currentCell.Value.isHedge + ")\"";
                                     var html = '<div class="link " ' + clickEvent + ' title="' + currentCell.Value.event + '">' + liveStatus + '</div>';
                                     return html;
                                 }

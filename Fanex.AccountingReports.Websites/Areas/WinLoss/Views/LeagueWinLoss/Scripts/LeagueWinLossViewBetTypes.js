@@ -18,7 +18,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
             LiveIndicator: false,
             IsNormalMode: true,
             IsNoDraw: false,
-            SiteName: ''
+            SiteName: '',
+            IsHedge: false
         }
     };
     self.initPage = function () {
@@ -67,9 +68,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
 
     var showBetType = function (info, bodyData) {
         var bettypeTotal = info.Total;
+        var hedgeText = self.Params.reportParams.IsHedge ? " (hedge) " : "";
         var currentRow = {
             Columns: [
-                { Name: "ColBetType", Value: bettypeTotal.BettypeName },
+                { Name: "ColBetType", Value: bettypeTotal.BettypeName + hedgeText },
                 { Name: "ColMemberWinLoss", Value: bettypeTotal.MemberWinLoss },
                 { Name: "ColSMAWinLoss", Value: bettypeTotal.SMAWinLoss },
                 { Name: "ColExtraPT", Value: bettypeTotal.ExtraPT },

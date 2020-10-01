@@ -209,6 +209,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSites = function 
                        self.Params.reportParams.LeagueName + " - " +
                        self.Params.reportParams.MatchEvent + " - " +
                        liveStatus + " - " +
+                       self.Params.reportParams.BetTypeName + " - " +
                        self.Params.reportParams.SiteType,
                 showExcelButton: true,
                 exportExcelFunction: function () {

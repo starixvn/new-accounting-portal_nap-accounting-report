@@ -1260,7 +1260,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 for (var i = 0; i < len; i++)
                 {
                     info = report.BettypeWinLoss[i];
-                    ExportLeagueWinLossBetTypeDataRow(startColumn, currentRow, info.Total, workSheet, true);
+                    ExportLeagueWinLossBetTypeDataRow(startColumn, currentRow, info.Total, workSheet, true, criteria.IsHedge);
                     currentRow++;
 
                     var childsLength = info.BetTypes.Count;
@@ -1420,13 +1420,15 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             int currentRow,
             BettypeWinLossBySite info,
             ExcelWorksheet workSheet,
-            bool isTotalRow)
+            bool isTotalRow,
+            bool isHedge = false)
         {
             var currentColumn = startColumn;
             var currentCell = workSheet.Cells[currentRow, currentColumn];
             if (isTotalRow)
             {
-                currentCell.Value = info.BettypeName;
+                var hedgeText = isHedge ? " (hedge) " : "";
+                currentCell.Value = info.BettypeName + hedgeText;
             }
             else
             {
@@ -1725,11 +1727,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
             workSheet.Columns[startColumn].Width = 240 * ExcelExtensions.FontWidth;
             var title = string.Format(
-                "{0} - {1} - {2} - {3} - {4}",
+                "{0} - {1} - {2} - {3} - {4} - {5}",
                 criteria.SportName,
                 criteria.LeagueName,
                 criteria.MatchEvent,
                 criteria.LiveIndicator ? "Live" : "Non-Live",
+                criteria.BetTypeName,
                 criteria.SiteType);
 
             currentColumn = startColumn;
@@ -2005,11 +2008,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
             workSheet.Columns[startColumn].Width = 240 * ExcelExtensions.FontWidth;
             var title = string.Format(
-                "{0} - {1} - {2} - {3} - {4} - {5}",
+                "{0} - {1} - {2} - {3} - {4} - {5} - {6}",
                 criteria.SportName,
                 criteria.LeagueName,
                 criteria.MatchEvent,
                 criteria.LiveIndicator ? "Live" : "Non-Live",
+                criteria.BetTypeName,
                 criteria.SiteType,
                 criteria.SiteName);
 

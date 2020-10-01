@@ -779,7 +779,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         }
 
         _tables.ddlDivision.fanexMultiSelect({
-            minWidth: 120,
+            minWidth: 250,
             maxHeight: 450,
             showFilter: true,
             shadow: true,

@@ -7,5 +7,7 @@
         public bool LiveIndicator { get; set; }
 
         public string MatchEvent { get; set; }
+
+        public bool IsHedge { get; set; }
     }
 }
