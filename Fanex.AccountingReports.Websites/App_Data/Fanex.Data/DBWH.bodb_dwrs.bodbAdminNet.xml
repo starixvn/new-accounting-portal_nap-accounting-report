@@ -81,5 +81,6 @@
     <Setting Key="WinLoss_LeagueWinLoss_GetMatches_WH" SpName="Acc_Rpt_LeagueWL_Match_Old_xtest" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="WinLoss_LeagueWinLoss_GetSites_WH" SpName="Acc_Rpt_LeagueWL_Site_Old_xtest" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="WinLoss_LeagueWinLoss_GetSuper_WH" SpName="Acc_Rpt_LeagueWL_Super_Old_xtest" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetSiteFilter" SpName="Acc_Rpt_LeagueWL_SiteSel" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
   </Function>
 </Functions>
