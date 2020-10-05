@@ -34,11 +34,14 @@
                         <div class="col_5 alpha">
                             <input type="radio" name="rdBalance" id="rdTotalBalance" checked="checked" value="1" />
                             <label for="rdTotalBalance">
-                                @Labels.TotalBalance</label></div>
+                                @Labels.TotalBalance
+                            </label>
+                        </div>
                         <div class="col_6 omega">
                             <input type="radio" name="rdBalance" id="rdYesterdayBalance" value="2" />
                             <label for="rdYesterdayBalance">
-                                @Labels.YesterdayBalance</label>
+                                @Labels.YesterdayBalance
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -55,8 +58,13 @@
                         @Labels.Currency
                     </div>
                     <div class="edit-field col_5 align-left">
-                        <select id="ddlCurrency">
-                        </select>
+                        <select id="ddlCurrency"></select>
+                    </div>
+                    <div class="lbl-field col_6 align-left">
+                        <input type="checkbox" id="checkbox-excludetest" class="checkbox-excludetest" name="chbExcludeTest" checked="checked" />
+                        <label for="chbExcludeTest">
+                            Exclude test data
+                        </label>
                     </div>
                     <div class="submit col_6 width-auto">
                         <input id="btnGenerate" name="btnGenerate" type="submit" value="GENERATE" />
