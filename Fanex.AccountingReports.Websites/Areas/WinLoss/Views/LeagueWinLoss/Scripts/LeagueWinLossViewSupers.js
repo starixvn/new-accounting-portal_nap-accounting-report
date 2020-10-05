@@ -210,7 +210,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSupers = function
                     { HeaderText: "Real", Width: 120, Name: "ColRealTurnOver", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                     { HeaderText: "Virtual", Width: 120, Name: "ColVirtualMargin", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$' },
                     { HeaderText: "Real", Width: 120, Name: "ColRealMargin", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$' },
-                    { HeaderText: "Virtual Rate", Width: 200, Name: "ColRate", HeaderAlign: "center", CellAlign: "right" }],
+                    { HeaderText: "Virtual Rate", Width: 150, Name: "ColRate", HeaderAlign: "center", CellAlign: "center" }],
             showTitle: true,
             showFooter: true,
             titleInfo:

@@ -196,7 +196,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
             {
                 Columns: [{ Name: "ColBetType", Value: info.BettypeName, CssClass: "align-right", MergeColNumber: 6 },
                            { Name: "ColVirtualWinLoss", Value: totalInfo.VirtualWinLoss },
-                           { Name: "ColRealIncome", Value: totalInfo.RealIncome },
+                           { Name: "ColRealIncome", Value: info.RealIncome },
                            { Name: "ColVirtualTurnOver", Value: totalInfo.VirtualTurnover },
                            { Name: "ColRealTurnOver", Value: totalInfo.RealTurnover },
                            { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]

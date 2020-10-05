@@ -89,14 +89,18 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewVirtualRate = fun
             columns: [{ HeaderText: "Sport", Width: 200, Name: "ColSport", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Event", Width: 120, Name: "ColEvent", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Bet Type", Width: 120, Name: "ColBetType", HeaderAlign: "center", CellAlign: "left" },
-                    { HeaderText: "VirtualRate", Width: 100, Name: "ColVirtualRate", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER }],
+                    { HeaderText: "Virtual Rate (%)", Width: 100, Name: "ColVirtualRate", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER }],
             showTitle: false,
             showFooter: true,
             showTree: false,
             bodyRows: bodyData,
             showDistinctRow: false,
             footerRows: footerData,
-            gridExpandHeight: 300
+            gridExpandHeight: 0,
+            gridWidth: 540,
+            gridHeight: 450,
+            fullWidth: true,
+            fullHeight: false,
         };
 
         _tables.report.removeClass("display-none").fanexGrid(gridOptions);
