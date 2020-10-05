@@ -142,7 +142,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSupers = function
                 info = report.RM;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColUsername", Value: info.SiteName, CssClass: "align-right", MergeColNumber: 6 },
+                    Columns: [{ Name: "ColUsername", Value: info.SuperName, CssClass: "align-right", MergeColNumber: 6 },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -157,7 +157,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSupers = function
                 info = report.BARM;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColUsername", Value: info.SiteName, CssClass: "align-right", MergeColNumber: 6 },
+                    Columns: [{ Name: "ColUsername", Value: info.SuperName, CssClass: "align-right", MergeColNumber: 6 },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -173,7 +173,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSupers = function
                 var totalInfo = report.Total;
                 currentRow =
                  {
-                     Columns: [{ Name: "ColUsername", Value: info.SiteName, CssClass: "align-right", MergeColNumber: 6 },
+                     Columns: [{ Name: "ColUsername", Value: info.SuperName, CssClass: "align-right", MergeColNumber: 6 },
                                 { Name: "ColVirtualWinLoss", Value: totalInfo.VirtualWinLoss },
                                 { Name: "ColRealIncome", Value: info.RealIncome },
                                 { Name: "ColVirtualTurnOver", Value: totalInfo.VirtualTurnover },

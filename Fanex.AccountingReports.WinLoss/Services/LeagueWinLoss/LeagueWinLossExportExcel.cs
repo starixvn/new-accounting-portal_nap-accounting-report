@@ -1086,7 +1086,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn += 6;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = matchByLiveStatus.VirtualWinLoss;
+                    currentCell.Value = report.Total.VirtualWinLoss;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                     currentColumn++;
 
@@ -1096,12 +1096,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = matchByLiveStatus.VirtualTurnover;
+                    currentCell.Value = report.Total.VirtualTurnover;
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = matchByLiveStatus.RealTurnover;
+                    currentCell.Value = report.Total.RealTurnover;
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
@@ -1382,7 +1382,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn += 6;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = betTypeBySite.VirtualWinLoss;
+                    currentCell.Value = report.Total.VirtualWinLoss;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                     currentColumn++;
 
@@ -1392,12 +1392,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = betTypeBySite.VirtualTurnover;
+                    currentCell.Value = report.Total.VirtualTurnover;
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = betTypeBySite.RealTurnover;
+                    currentCell.Value = report.Total.RealTurnover;
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
@@ -1865,7 +1865,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn += 6;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.VirtualWinLoss;
+                    currentCell.Value = report.Total.VirtualWinLoss;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                     currentColumn++;
 
@@ -1875,12 +1875,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Value = report.Total.VirtualTurnover;
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.RealTurnover;
+                    currentCell.Value = report.Total.RealTurnover;
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
@@ -2147,7 +2147,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn += 6;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.VirtualWinLoss;
+                    currentCell.Value = report.Total.VirtualWinLoss;
                     currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
                     currentColumn++;
 
@@ -2157,12 +2157,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Value = report.Total.VirtualTurnover;
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
-                    currentCell.Value = info.RealTurnover;
+                    currentCell.Value = report.Total.RealTurnover;
                     currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
                     currentColumn++;
 
