@@ -7,7 +7,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class GetLeagueWinLossBySportCriteria : CriteriaBase
+    public class GetMatchesCriteria : CriteriaBase
     {
         public DateTime StartDate { get; set; }
 
@@ -17,21 +17,21 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public string SportBettype { get; set; }
 
-        public int SportType { get; set; }
+        [SpParam(Ignored = true)]
+        public bool IsNormalMode { get; set; }
 
         [SpParam(Ignored = true)]
         public string SportName { get; set; }
 
-        [SpParam(Ignored = true)]
-        public bool IsNormalMode { get; set; }
-
         public bool IsNoDraw { get; set; }
+
+        public string SiteName { get; set; }
 
         public override string GetSettingKey()
         {
             var suffix = IsNormalMode ? string.Empty : "_WH";
 
-            return "WinLoss_LeagueWinLoss_GetLeagueWinLossBySport" + suffix;
+            return "WinLoss_LeagueWinLoss_GetMatches" + suffix;
         }
 
         public override bool IsValid()

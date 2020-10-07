@@ -799,6 +799,15 @@ namespace Fanex.AccountingReports.WinLoss.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Division.
+        /// </summary>
+        public static string Division {
+            get {
+                return ResourceManager.GetString("Division", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Draw.
         /// </summary>
         public static string Draw {

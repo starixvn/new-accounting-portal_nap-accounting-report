@@ -8,12 +8,12 @@ namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
     {
         public List<MatchWinLossItem> Match { get; set; }
 
-        public MatchWinLossItem Total { get; set; }
+        public MatchWinLossByLiveStatus Total { get; set; }
 
-        public MatchWinLossItem RM { get; set; }
+        public MatchWinLossByLiveStatus RM { get; set; }
 
-        public MatchWinLossItem BARM { get; set; }
+        public MatchWinLossByLiveStatus BARM { get; set; }
 
-        public MatchWinLossItem GrandTotal { get; set; }
+        public MatchWinLossByLiveStatus GrandTotal { get; set; }
     }
 }

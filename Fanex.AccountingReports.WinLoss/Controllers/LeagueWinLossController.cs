@@ -6,6 +6,7 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     using Fanex.AccountingReports.WinLoss.Services.Implement;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+
     using Services.Implement.LeagueWinLoss;
     using System.Web.Mvc;
 
@@ -39,6 +40,13 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         }
 
         [HttpPost]
+        public JsonResult GetSiteFilter()
+        {
+            var sports = this._reportService.GetSiteFilter();
+            return Json(sports, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public JsonResult GetLeagueWinLoss(GetLeagueWinLossCriteria criteria)
         {
             var report = this._reportService.GetLeagueWinLoss(criteria);
@@ -46,34 +54,72 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria)
+        public JsonResult GetBetTypes(GetBetTypesCriteria criteria)
         {
-            var report = this._reportService.GetLeagueWinLossBySport(criteria);
+            var report = this._reportService.GetBetTypes(criteria);
             return Json(report, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public JsonResult GetLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
+        public JsonResult GetMatches(GetMatchesCriteria criteria)
         {
-            var report = this._reportService.GetLeagueWinLossByBetType(criteria);
+            var report = this._reportService.GetMatches(criteria);
             return Json(report, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult GetSites(GetSitesCriteria criteria)
+        {
+            var report = this._reportService.GetSites(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetVirtualRate(GetVirtualRateCriteria criteria)
+        {
+            var report = this._reportService.GetVirtualRate(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetSupers(GetSuperCriteria criteria)
+        {
+            var report = this._reportService.GetSupers(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public ActionResult ExportLeagueWinLoss(GetLeagueWinLossCriteria criteria)
         {
             this._excelService.ExportLeagueWinLoss(criteria);
             return new EmptyResult();
         }
 
-        public ActionResult ExportLeagueWinLossBySport(GetLeagueWinLossBySportCriteria criteria)
+        [HttpPost]
+        public ActionResult ExportLeagueWinLossViewMatches(GetMatchesCriteria criteria)
         {
-            this._excelService.ExportLeagueWinLossBySport(criteria);
+            this._excelService.ExportLeagueWinLossViewMatches(criteria);
             return new EmptyResult();
         }
 
-        public ActionResult ExportLeagueWinLossByBetType(GetLeagueWinLossByBetTypeCriteria criteria)
+        [HttpPost]
+        public ActionResult ExportLeagueWinLossViewBetTypes(GetBetTypesCriteria criteria)
         {
-            this._excelService.ExportLeagueWinLossByBetType(criteria);
+            this._excelService.ExportLeagueWinLossViewBetTypes(criteria);
+            return new EmptyResult();
+        }
+
+        [HttpPost]
+        public ActionResult ExportLeagueWinLossViewSites(GetSitesCriteria criteria)
+        {
+            this._excelService.ExportLeagueWinLossViewSites(criteria);
+            return new EmptyResult();
+        }
+
+        [HttpPost]
+        public ActionResult ExportLeagueWinLossViewSupers(GetSuperCriteria criteria)
+        {
+            this._excelService.ExportLeagueWinLossViewSupers(criteria);
             return new EmptyResult();
         }
     }

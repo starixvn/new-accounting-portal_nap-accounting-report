@@ -34,9 +34,9 @@
     @if (AppSession.IsAccountingLogin != null && AppSession.IsAccountingLogin)
     {
         <style type="text/css">
-             #dialog-popup {
-                 top: 3px !important;
-             }
+            #dialog-popup {
+                top: 3px !important;
+            }
         </style>
     }
 </head>
@@ -68,7 +68,6 @@
     <section id="body">
         <div class="content" id="dvcontent">
             @RenderBody()
-
         </div>
     </section>
     <div id="dialog-message">
@@ -120,7 +119,6 @@
             var width = $(window).width() - 20; //padding-right: 10 + padding-left: 10
             $("#filter-bar").css("width", width + "px");
         });
-
     </script>
     @RenderSection("Scripts", false)
     @RenderSection("Foot", false)
@@ -133,18 +131,18 @@
     {
         <!-- Matomo -->
         <script type="text/javascript">
-	  var _paq = window._paq || [];
-	  _paq.push(['setCustomVariable', 1, 'username', '@HttpContext.Current.User.Identity.Name', "visit"]);
-	  _paq.push(['setCustomDimension', customDimensionId = 1, customDimensionValue = '@HttpContext.Current.User.Identity.Name']);
-	  _paq.push(['trackPageView']);
-	  _paq.push(['enableLinkTracking']);
-	  (function() {
-		var u="//matomo.starific.net/";
-		_paq.push(['setTrackerUrl', u+'matomo.php']);
-		_paq.push(['setSiteId', '6']);
-		var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-		g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-	  })();
+            var _paq = window._paq || [];
+            _paq.push(['setCustomVariable', 1, 'username', '@HttpContext.Current.User.Identity.Name', "visit"]);
+            _paq.push(['setCustomDimension', customDimensionId = 1, customDimensionValue = '@HttpContext.Current.User.Identity.Name']);
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+                var u="//matomo.starixplay.com//";
+                _paq.push(['setTrackerUrl', u+'matomo.php']);
+                _paq.push(['setSiteId', '6']);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+            })();
         </script>
 	<!-- End Matomo Code -->
     }

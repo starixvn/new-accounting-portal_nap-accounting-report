@@ -302,9 +302,11 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                     });
                 }
 
+                var isMetricGaming = productGroup.Name == "Metric Gaming - Super Live";
+
                 ddProduct.push({
                     id: "#" + ddId + "_Product_Sport" + sportGroup.Id,
-                    value: sportGroup.Id,
+                    value: isMetricGaming ? -1 : sportGroup.Id,
                     text: productGroup.Name,
                     checked: false,
                     enable: true,

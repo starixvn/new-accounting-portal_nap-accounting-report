@@ -14,7 +14,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.LeagueWinLoss
         public LeagueWinLossModel SortData(LeagueWinLossModel reportModel, string sortDirection, string sortColumnName)
         {
             SortStatisticsForPerChildGroup(reportModel, sortDirection, sortColumnName);
-            SortStatisticsForParentGroup(reportModel, sortDirection, sortColumnName);
             return reportModel;
         }
 
@@ -24,21 +23,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.LeagueWinLoss
             {
                 ListExtensions.SortDataByProperty(row.Leagues, sortDirection, sortColumnName, "number");
             }
-        }
-
-        private static void SortStatisticsForParentGroup(LeagueWinLossModel reportModel, string sortDirection, string sortColumnName)
-        {
-            var propInfo = typeof(LeagueWinLossItem).GetProperty(sortColumnName);
-            var isAsc = string.Equals(sortDirection, SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
-            reportModel.SportWinLoss = isAsc ?
-            reportModel
-                .SportWinLoss
-                .OrderBy(s => propInfo.GetValue(s.Total, null))
-                .ToList() :
-            reportModel
-                 .SportWinLoss
-                .OrderByDescending(s => propInfo.GetValue(s.Total, null))
-                .ToList();
         }
     }
 }

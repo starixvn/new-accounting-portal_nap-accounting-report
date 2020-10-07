@@ -8,12 +8,10 @@ namespace Fanex.AccountingReports.WinLoss.Entities.LeagueWinLoss
 {
     public class BettypeWinLossEntity : BaseEntity
     {
-        public bool LiveIndicator { get; set; }
-
         public int Bettype { get; set; }
 
         public string BettypeName { get; set; }
 
-        public bool IsHedge { get; set; }
+        public string SiteType { get; set; }
     }
 }

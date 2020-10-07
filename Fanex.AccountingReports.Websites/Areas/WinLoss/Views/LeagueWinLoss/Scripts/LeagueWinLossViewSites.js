@@ -1,5 +1,5 @@
-Namespace.Register("Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType");
-Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function () {
+Namespace.Register("Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSites");
+Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSites = function () {
     var self = this;
     var _tables = {
         reportContainer: null,
@@ -10,32 +10,40 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
         reportParams: {
             StartDate: null,
             EndDate: null,
-            LeagueId: null,
-            SportType: null,
+            LeagueName: '',
+            SportName: null,
+            MatchID: null,
+            MatchEvent: '',
+            LiveIndicator: false,
+            SiteType: null,
             BetType: null,
             BetTypeName: null,
-            LiveIndicator: null,
-            IsHedge: null,
-            LeagueName: '',
-            SportName: '',
             IsNormalMode: true,
-            IsNoDraw: false
+            IsNoDraw: false,
+            SiteName: ''
         }
     };
     self.initPage = function () {
         cachedDOMElements();
     };
     var cachedDOMElements = function () {
-        _tables.reportParentContainer = $("#parentContainer");
-        _tables.reportContainer = $('#leagueWinLossReportByBetTypeContainer');
-        _tables.report = $('#leagueWinLossReportByBetType');
+        _tables.reportContainer = $("#leagueWinLossSiteContainer");
+        _tables.report = $("#leagueWinLossSite");
+    };
+    self.hideReport = function () {
+        _tables.reportContainer.addClass("display-none");
+        _tables.report.addClass("display-none");
+    };
+    self.showReport = function () {
+        _tables.report.removeClass("display-none");
+        _tables.reportContainer.removeClass("display-none");
     };
     self.getReport = function (params) {
         AccReport.disableInput();
         getParams(params);
         $.ajax({
             type: "POST",
-            url: window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLossByBetType",
+            url: window.rootUrl + "WinLoss/LeagueWinLoss/GetSites",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(self.Params.reportParams),
@@ -43,10 +51,12 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
                 AccReport.disableInput();
             },
             success: function (rs) {
+                self.hideReport();
                 renderReport(rs);
             },
             error: function (event, jqXHR, ajaxSettings) {
-                renderReport(null);
+                self.hideReport();
+                renderReport([]);
             },
             complete: function () {
                 AccReport.enableInput();
@@ -56,23 +66,34 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
     var getParams = function (params) {
         self.Params.reportParams = params;
     };
+
     var renderReport = function (report) {
-        var liveStr = self.Params.reportParams.LiveIndicator == true ? "Live" : "Non-Live";
+        var liveStatus = self.Params.reportParams.LiveIndicator ? "Live" : "Non-Live";
         _tables.reportContainer.removeClass("display-none");
         _tables.report.addClass("display-none");
         var bodyData = [];
         var footerData = [];
 
-        if (report.Match.length > 0) {
-            var len = report.Match.length;
+        var len = report.Sites.length;
+
+        if (len > 0) {
             var currentRow = null;
             var info = null;
             for (var i = 0; i < len; i++) {
-                info = report.Match[i];
+                info = report.Sites[i];
                 currentRow =
                 {
-                    Columns: [{ Name: "ColCode", Value: info.MatchCode },
-                            { Name: "ColEvent", Value: info.MatchEvent },
+                    Columns: [
+                             {
+                                 Name: "ColSite", Value: info, CssClass: "colBetType",
+                                 CustomCellRender: function (currentCell) {
+                                     var clickEvent = ' onclick = "viewSuper(' + currentCell.Value.SiteId
+                                                 + ',\'' + currentCell.Value.SiteName
+                                                 + '\'' + ");\"";
+                                     var html = '<div class="link" ' + clickEvent + '>' + currentCell.Value.SiteName + '</div>';
+                                     return html;
+                                 }
+                             },
                             { Name: "ColMemberWinLoss", Value: info.MemberWinLoss },
                             { Name: "ColSMAWinLoss", Value: info.SMAWinLoss },
                             { Name: "ColExtraPT", Value: info.ExtraPT },
@@ -84,7 +105,6 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
                             { Name: "ColRealTurnOver", Value: info.RealTurnover },
                             { Name: "ColVirtualMargin", Value: info.VirtualMargin },
                             { Name: "ColRealMargin", Value: info.RealMargin }],
-                    CssClass: i % 2 == 0 ? "even" : "",
                     SubRows: []
                 };
 
@@ -94,7 +114,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
             info = report.Total;
             currentRow =
             {
-                Columns: [{ Name: "ColCode", Value: info.MatchEvent, CssClass: "align-right", MergeColNumber: 2 },
+                Columns: [{ Name: "ColSite", Value: info.SiteName, CssClass: "align-right" },
                         { Name: "ColMemberWinLoss", Value: info.MemberWinLoss },
                         { Name: "ColSMAWinLoss", Value: info.SMAWinLoss },
                         { Name: "ColExtraPT", Value: info.ExtraPT },
@@ -110,12 +130,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
 
             footerData.push(currentRow);
 
-
             if (self.isShowTotalRow(report.RM)) {
                 info = report.RM;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColCode", Value: info.MatchEvent, CssClass: "align-right", MergeColNumber: 7 },
+                    Columns: [{ Name: "ColSite", Value: info.SiteName, CssClass: "align-right", MergeColNumber: 6 },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -130,7 +149,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
                 info = report.BARM;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColCode", Value: info.MatchEvent, CssClass: "align-right", MergeColNumber: 7 },
+                    Columns: [{ Name: "ColSite", Value: info.SiteName, CssClass: "align-right", MergeColNumber: 6 },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -146,7 +165,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
                 var totalInfo = report.Total;
                 currentRow =
                  {
-                     Columns: [{ Name: "ColCode", Value: info.MatchEvent, CssClass: "align-right", MergeColNumber: 7 },
+                     Columns: [{ Name: "ColSite", Value: info.SiteName, CssClass: "align-right", MergeColNumber: 6 },
                                 { Name: "ColVirtualWinLoss", Value: totalInfo.VirtualWinLoss },
                                 { Name: "ColRealIncome", Value: info.RealIncome },
                                 { Name: "ColVirtualTurnOver", Value: totalInfo.VirtualTurnover },
@@ -161,18 +180,16 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
         var gridOptions = {
             customizeHeader: true,
             groupHeaderRows: [{
-                Columns: [{ HeaderText: "Code", Name: "ColCode", MergeRowNumber: 2 },
-                          { HeaderText: "Event", Name: "ColEvent", MergeRowNumber: 2 },
+                Columns: [{ HeaderText: "Site", Name: "ColSite", MergeRowNumber: 2 },
                           { HeaderText: "Member Win Loss", Name: "ColMemberWinLoss", MergeRowNumber: 2 },
                           { HeaderText: "SMA Win Loss", Name: "ColSMAWinLoss", MergeRowNumber: 2 },
                           { HeaderText: "Extra PT", Name: "ColExtraPT", MergeRowNumber: 2 },
-						  { HeaderText: "Commission", Name: "ColCommision", MergeRowNumber: 2 },
-						  { HeaderText: "House", Name: "ColVariance", MergeColNumber: 3 },
-						  { HeaderText: "House Turnover", Name: "ColVirtualTurnOver", MergeColNumber: 2 },
-						  { HeaderText: "Margin", Name: 'ColVirtualMargin', MergeColNumber: 2 }]
+                          { HeaderText: "Commission", Name: "ColCommision", MergeRowNumber: 2 },
+                          { HeaderText: "House", Name: "ColVariance", MergeColNumber: 3 },
+                          { HeaderText: "House Turnover", Name: "ColVirtualTurnOver", MergeColNumber: 2 },
+                          { HeaderText: "Margin", Name: 'ColVirtualMargin', MergeColNumber: 2 }]
             }],
-            columns: [{ HeaderText: "Code", Width: 100, Name: "ColCode", HeaderAlign: "center", CellAlign: "center" },
-                    { HeaderText: "Event", Width: 200, Name: "ColEvent", HeaderAlign: "center", CellAlign: "center" },
+            columns: [{ HeaderText: "Site", Width: 200, Name: "ColSite", HeaderAlign: "center", CellAlign: "left" },
                     { HeaderText: "Member Win Loss", Width: 120, Name: "ColMemberWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                     { HeaderText: "SMA Win Loss", Width: 120, Name: "ColSMAWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                     { HeaderText: "Extra PT", Width: 100, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
@@ -189,14 +206,18 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
             titleInfo:
             {
                 text: self.Params.reportParams.SportName + " - " +
-                      self.Params.reportParams.LeagueName + " - " + self.Params.reportParams.BetTypeName + " - " + liveStr,
+                       self.Params.reportParams.LeagueName + " - " +
+                       self.Params.reportParams.MatchEvent + " - " +
+                       liveStatus + " - " +
+                       self.Params.reportParams.BetTypeName + " - " +
+                       self.Params.reportParams.SiteType,
                 showExcelButton: true,
                 exportExcelFunction: function () {
                     self.exportReport();
                 },
                 showBackButton: true,
                 backFunction: function () {
-                    backToLeagueWinLossBySport();
+                    backToBetTypes();
                 },
 
                 showCollapseExpandButton: false
@@ -210,11 +231,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
 
         _tables.report.removeClass("display-none").fanexGrid(gridOptions);
     };
-    self.hideReport = function () {
-        _tables.reportContainer.addClass("display-none");
-    };
+
     self.exportReport = function () {
-        AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLossByBetType", self.Params.reportParams);
+        AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLossViewSites", self.Params.reportParams);
     };
 
     self.isShowTotalRow = function (total) {
@@ -224,5 +243,5 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossByBetType = function 
     self.isShowGrandTotalRow = function (report) {
         return self.isShowTotalRow(report.RM)
         || self.isShowTotalRow(report.BARM);
-    }
+    };
 }

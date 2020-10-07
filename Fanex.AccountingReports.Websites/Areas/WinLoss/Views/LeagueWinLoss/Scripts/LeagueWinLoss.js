@@ -16,6 +16,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         bettransModeBtn: null,
         txtLeague: null,
         autocomplete: null,
+        ddlDivision: null
     };
 
     self.Params = {
@@ -27,7 +28,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             IsNoDraw: false,
             LeagueName: '',
             SortColumnName: '',
-            SortDirection: ''
+            SortDirection: '',
+            SiteName: ''
         },
 
         isNormalMode: true,
@@ -38,7 +40,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         isDefaultTextboxLeague: true,
         isOnAuto: false,
         isFirstLoad: true,
-        LeagueName: ''
+        LeagueName: '',
+        SoccerID: 1,
+        BasketballID: 2,
+        ParlayID: 10000
     };
 
     self.initPage = function () {
@@ -47,6 +52,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         renderMonthPicker();
         renderDatePicker();
         getSport();
+        getDivision();
         hideWarehouseMode();
         makeLeagueSuggestion();
         bindingEvent();
@@ -64,6 +70,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         _tables.warehouseMode = $("#warehouse-mode");
         _tables.bettransModeBtn = $("#bettrans-mode-btn");
         _tables.txtLeague = $("#txt-league");
+        _tables.ddlDivision = $("#dropdown-division");
     };
 
     var setDayValueForButtons = function () {
@@ -82,7 +89,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 Id: "CheckDate",
                 Label: labelDate,
                 InitDate: toDay,
-                LabelCss: "lbl-field col_2 bold",
+                LabelCss: "lbl-field col_3 bold",
                 TextboxCss: "edit-field col_5"
             },
 
@@ -104,6 +111,16 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             null,
             self.RenderSport,
             self.RenderSport,
+            AccReport.enableInput,
+            false);
+    };
+
+    var getDivision = function () {
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "WinLoss/LeagueWinLoss/GetSiteFilter",
+            null,
+            self.RenderDivision,
+            self.RenderDivision,
             AccReport.enableInput,
             false);
     };
@@ -152,8 +169,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             }
 
             $("#leagueWinLossReportContainer").addClass("display-none");
-            $("#leagueWinLossReportBySportContainer").addClass("display-none");
-            $("#leagueWinLossReportByBetTypeContainer").addClass("display-none");
+            $("#leagueWinLossReportMatchesContainer").addClass("display-none");
+            $("#leagueWinLossBetTypeContainer").addClass("display-none");
+            $("#leagueWinLossSiteContainer").addClass("display-none");
+            $("#leagueWinLossSuperContainer").addClass("display-none");
+            $("#leagueWinLossVirtualRateContainer").addClass("display-none");
         });
     };
 
@@ -191,8 +211,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         }
 
         AccReport.disableInput();
-        hideLeagueWinLossBySport();
-        hideLeagueWinLossByBetType();
+        hideBettypes();
+        hideMatches();
+        hideSites();
+        hideSupers();
 
         AccReport.utility.CallAjax(this,
             window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
@@ -211,8 +233,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         }
 
         AccReport.disableInput();
-        hideLeagueWinLossBySport();
-        hideLeagueWinLossByBetType();
+        hideBettypes();
+        hideMatches();
+        hideSites();
+        hideSupers();
 
         AccReport.utility.CallAjax(this,
             window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
@@ -231,8 +255,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         }
 
         AccReport.disableInput();
-        hideLeagueWinLossBySport();
-        hideLeagueWinLossByBetType();
+        hideBettypes();
+        hideMatches();
+        hideSites();
+        hideSupers();
 
         AccReport.utility.CallAjax(this,
             window.rootUrl + "WinLoss/LeagueWinLoss/GetLeagueWinLoss",
@@ -256,6 +282,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         self.Params.reportParams.LeagueName = self.Params.isDefaultTextboxUserName ?
                       "" :
                       _tables.txtLeague.val();
+        self.Params.reportParams.SiteName = _tables.ddlDivision.fanexMultiSelect('getItems', true).toString();
     };
 
     var getParams = function () {
@@ -274,12 +301,18 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         self.Params.reportParams.LeagueName = self.Params.isDefaultTextboxUserName ?
                       "" :
                       _tables.txtLeague.val();
+        self.Params.reportParams.SiteName = _tables.ddlDivision.fanexMultiSelect('getItems', true).toString();
     };
 
     var checkReportParams = function (params) {
         AccReport.popUp.removeHighLight();
         if (self.Params.reportParams.SportBettype == '') {
             AccReport.popUp.show("Please select  at least one sport!", "dropdown-sport");
+            return false;
+        }
+
+        if (self.Params.reportParams.SiteName == '') {
+            AccReport.popUp.show("Please select  at least one division!", "dropdown-division");
             return false;
         }
 
@@ -344,13 +377,12 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                     {
                         Columns: [{
                             Name: "ColLeague", Value: {
-                                sportId: info.SportType,
                                 sportName: info.Sport,
                                 leagueName: info.LeagueName
                             }, CssClass: "colLeague",
                             CustomCellRender: function (currentCell) {
                                 var leagueText = currentCell.Value.leagueName.length > 50 ? currentCell.Value.leagueName.substring(0, 51) + '...' : currentCell.Value.leagueName;
-                                var clickEvent = ' onclick = "viewLeagueWinLossBySport(' + currentCell.Value.sportId + ',\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
+                                var clickEvent = ' onclick = "viewMatches(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
                                 var html = '<div class="link " ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
                                 return html;
                             }
@@ -527,50 +559,44 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         var sportGroupLength = rs.length;
         for (var i = 0; i < sportGroupLength; i++) {
             var sportGroup = rs[i];
-            var sports = [];
+            var bettypeGroups = [];
+            var bettypes = [];
             var sportLength = sportGroup.ChildItems.length;
             self.Params.cachedNumberSports += sportLength === 0 ? 1 : sportLength;
             for (var j = 0; j < sportLength; j++) {
-                var bettypes = [];
                 var sport = sportGroup.ChildItems[j];
-                var bettypeLength = sport.Bettypes.length;
-                for (k = 0; k < bettypeLength; k++) {
-                    var bettype = sport.Bettypes[k];
-                    bettypes.push({
-                        id: id + "-" + bettype.Bettype + "-" + bettype.BettypeName,
-                        value: sport.SportType + "_" + bettype.Bettype,
-                        text: bettype.BettypeName,
-                        checked: true,
-                        enable: true,
-                        cssClass: ""
-                    });
-                }
+                var bettypeGroupLength = sport.BettypeGroups.length;
+                for (var l = 0; l < bettypeGroupLength; l++) {
+                    bettypes = [];
+                    var bettypeGroup = sport.BettypeGroups[l];
+                    var bettypeLength = bettypeGroup.BetTypes.length;
+                    for (m = 0; m < bettypeLength; m++) {
+                        var bettype = bettypeGroup.BetTypes[m];
+                        bettypes.push({
+                            id: id + "-" + bettype.Bettype + "-" + bettype.BettypeName,
+                            value: sport.SportType + "_" + bettype.Bettype,
+                            text: bettype.BettypeName,
+                            checked: true,
+                            enable: true,
+                            cssClass: ""
+                        });
+                    }
 
-                if (sportLength == 1 && sport.SportName == sportGroup.GroupName) {
-                    sportGroups.push({
-                        id: id + "-group" + sportGroup.GroupId,
-                        value: sportGroup.GroupId,
-                        text: sportGroup.GroupName,
-                        checked: true,
-                        enable: true,
-                        cssClass: "",
-                        items: bettypes
-                    });
-                }
-                else {
-                    sports.push({
-                        id: id + "-" + sport.SportType + "-" + sport.SportName,
-                        value: sportGroup.GroupId + "_" + sport.SportType,
-                        text: sport.SportName,
-                        checked: true,
-                        enable: true,
-                        cssClass: "",
-                        items: bettypes
-                    });
+                    if (sport.SportType != self.Params.ParlayID) {
+                        bettypeGroups.push({
+                            id: id + "-" + sport.SportName + "-" + bettypeGroup.BetTypeGroupName,
+                            value: sport.SportType,
+                            text: bettypeGroup.BetTypeGroupName,
+                            checked: true,
+                            enable: true,
+                            cssClass: "",
+                            items: bettypes
+                        });
+                    }
                 }
             }
 
-            if (sports.length > 0) {
+            if (bettypeGroups.length > 0 || bettypes.length > 0) {
                 sportGroups.push({
                     id: id + "-group" + sportGroup.GroupId,
                     value: sportGroup.GroupId,
@@ -578,7 +604,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                     checked: true,
                     enable: true,
                     cssClass: "",
-                    items: sports
+                    items: sportGroup.GroupId != self.Params.ParlayID ? bettypeGroups : bettypes
                 });
             }
         }
@@ -716,5 +742,67 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         }
 
         return sortColumnName;
+    };
+
+    self.RenderDivision = function (rs) {
+        var isSetDefaultCollapse = true;
+        var id = "ddl-division";
+        var siteGroups = [];
+        var siteGroupLength = rs.length;
+        for (var i = 0; i < siteGroupLength; i++) {
+            var siteGroup = rs[i];
+            var sites = [];
+            var siteLength = siteGroup.Sites.length;
+            for (var j = 0; j < siteLength; j++) {
+                var site = siteGroup.Sites[j];
+                sites.push({
+                    id: id + "-" + site.SiteGroup + "-" + site.SiteName,
+                    value: site.SiteName,
+                    text: site.SiteName,
+                    checked: true,
+                    enable: true,
+                    cssClass: ""
+                });
+            }
+
+            if (sites.length > 0) {
+                siteGroups.push({
+                    id: id + "-group" + siteGroup.GroupName,
+                    value: siteGroup.GroupName,
+                    text: siteGroup.GroupName,
+                    checked: true,
+                    enable: true,
+                    cssClass: "",
+                    items: sites
+                });
+            }
+        }
+
+        _tables.ddlDivision.fanexMultiSelect({
+            minWidth: 250,
+            maxHeight: 450,
+            showFilter: true,
+            shadow: true,
+            showHeader: true,
+            isCheckAll: true,
+            showFooter: false,
+            checkAllText: 'All',
+            isUsedCustomCheckAllText: true,
+            useCustomCheckAllText: 'All',
+            noneSelectedText: 'Select an option',
+            noItemText: 'No division found.',
+            disabled: false,
+            listData: siteGroups,
+            onCheck: function () {
+            },
+            onOpen: function () {
+                if (isSetDefaultCollapse) {
+                    $('#ddlDivisionCollapseButton').trigger('click')
+                    isSetDefaultCollapse = false;
+                }
+            }
+        });
+
+        _tables.ddlDivision = $("#dropdown-division");
     };
 }

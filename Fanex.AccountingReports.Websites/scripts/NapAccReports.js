@@ -28,7 +28,6 @@ var FormatConstant = {
     PERCENT_NUMBER: '0%'
 };
 
-
 var AccReportData = {
     Constants: {
         HtmlErrorCode: {
@@ -175,7 +174,6 @@ var AccReport = function ($) {
                         control.next().addClass("input-validation-error");
                     }
                 }
-
             },
             removeHighLight: function () {
                 var controlIds = AccReport.popUp.arrayHighLightControl;
@@ -217,7 +215,7 @@ var AccReport = function ($) {
             if (url && data) {
                 //data can be string of parameters or array/object
                 data = typeof data == 'string' ? data : $.param(data);
-                if (url.indexOf('MAMonitorTool') > 0) {
+                if (url.indexOf('MAMonitorTool') > 0 || url.indexOf('ExportLeagueWinLoss') > 0) {
                     $.fileDownload(url, { httpMethod: "POST", data: data });
                 }
                 else {
@@ -360,7 +358,7 @@ var AccReport = function ($) {
             }
         }
     };
-} (jQuery);
+}(jQuery);
 
 String.prototype.format = function () {
     var str = this;

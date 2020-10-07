@@ -1126,4 +1126,7 @@
   <data name="No_Draw" xml:space="preserve">
     <value>No Draw</value>
   </data>
+  <data name="Division" xml:space="preserve">
+    <value>Division</value>
+  </data>
 </root>
