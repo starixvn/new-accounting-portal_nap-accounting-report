@@ -91,5 +91,6 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int SabaClubFreeBet = 150;
         public const int WM = 233;
         public const int Joker = 234;
+        public const int SBAjusment = 96;
     }
 }
