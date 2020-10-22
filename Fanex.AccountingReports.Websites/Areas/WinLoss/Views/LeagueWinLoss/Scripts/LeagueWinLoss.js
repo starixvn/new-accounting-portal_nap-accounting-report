@@ -43,7 +43,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         LeagueName: '',
         SoccerID: 1,
         BasketballID: 2,
-        ParlayID: 10000
+        ParlayID: 10000,
+        SBAdjustmentId: 10001
     };
 
     self.initPage = function () {
@@ -582,7 +583,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                         });
                     }
 
-                    if (sport.SportType != self.Params.ParlayID) {
+                    if (sport.SportType != self.Params.ParlayID && sport.SportType != self.Params.SBAdjustmentId) {
                         bettypeGroups.push({
                             id: id + "-" + sport.SportName + "-" + bettypeGroup.BetTypeGroupName,
                             value: sport.SportType,
@@ -597,6 +598,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             }
 
             if (bettypeGroups.length > 0 || bettypes.length > 0) {
+                var isRenderBetTypeGroup = sportGroup.GroupId != self.Params.ParlayID && sport.SportType != self.Params.SBAdjustmentId;
                 sportGroups.push({
                     id: id + "-group" + sportGroup.GroupId,
                     value: sportGroup.GroupId,
@@ -604,7 +606,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                     checked: true,
                     enable: true,
                     cssClass: "",
-                    items: sportGroup.GroupId != self.Params.ParlayID ? bettypeGroups : bettypes
+                    items: isRenderBetTypeGroup ? bettypeGroups : bettypes
                 });
             }
         }
