@@ -64,5 +64,10 @@ namespace Fanex.AccountingReports.Websites.Controllers
         {
             return Redirect("../../UniversalReports/SMAWinLoss");
         }
+
+        public ActionResult VoidingSettledTickets()
+        {
+            return Redirect("../../UniversalReports/VoidingSettledTickets");
+        }
     }
 }
