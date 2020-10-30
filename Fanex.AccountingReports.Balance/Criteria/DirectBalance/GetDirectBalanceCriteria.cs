@@ -19,6 +19,8 @@ namespace Fanex.AccountingReports.Balance.Criteria.DirectBalance
 
         public string Username { get; set; }
 
+        public bool ExclTestCurr { get; set; }
+
         public override bool IsValid()
         {
             return true;
@@ -36,9 +38,11 @@ namespace Fanex.AccountingReports.Balance.Criteria.DirectBalance
                 case RoleConstants.Master:
                     storeProcedureName = "Balance_DirectBalance_DirectMaster";
                     break;
+
                 case RoleConstants.Agent:
                     storeProcedureName = "Balance_DirectBalance_DirectAgent";
                     break;
+
                 case RoleConstants.Member:
                     storeProcedureName = "Balance_DirectBalance_DirectMember";
                     break;

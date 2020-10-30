@@ -35,11 +35,9 @@ Fanex.AccountingReports.Balance.ReportManager = function () {
         else if (customerType == "Member" && _directBalanceDownline._params.masterId != null) {
             _directBalanceDownline.BackBalanceDownline(customerType);
         }
-
     };
 
     ResetMasterId = function () {
         _directBalanceDownline._params.masterId = null;
     };
-
 }

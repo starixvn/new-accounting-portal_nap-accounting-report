@@ -2,13 +2,10 @@ Namespace.Register("Fanex.AccountingReports.Balance.DirectBalanceDownline");
 Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
     var self = this;
 
-
     var _tables = {
         reportContainer: null,
         report: null
     };
-
-    
 
     self.InitPage = function () {
         cachedDOMElements();
@@ -19,7 +16,8 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
     };
     self._params = {
         masterId: null,
-        agentId: null
+        agentId: null,
+        exclTestCurr: false,
     };
 
     self.RenderGrid = function (customerType, title, bodyData, footerData) {
@@ -27,15 +25,15 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
         if (customerType != "Member") {
             columns = [
                     { HeaderText: "No", Width: 60, Name: "Number", CellAlign: "center" },
-                    { HeaderText: customerType, Width: 150, Name: "CustomerType", CustomCellRender: function (currentCell) {
-                        return '<div class="link" onclick="ViewDownline(\'' + customerType + '\',\'' + currentCell.Value.CustId + '\')">' + currentCell.Value.Username + '</div>';
-
-                    }
+                    {
+                        HeaderText: customerType, Width: 150, Name: "CustomerType", CustomCellRender: function (currentCell) {
+                            return '<div class="link" onclick="ViewDownline(\'' + customerType + '\',\'' + currentCell.Value.CustId + '\')">' + currentCell.Value.Username + '</div>';
+                        }
                     },
                     { HeaderText: "Currency", Width: 80, Name: "Currency", CellAlign: "center" },
                     { HeaderText: "Balance", Width: 150, Name: "Balance", CellAlign: "right", HeaderAlign: "center" },
                     { HeaderText: "Base (RM)", Width: 150, Name: "BaseRM", CellAlign: "right", HeaderAlign: "center" }
-                ];
+            ];
         }
         else {
             columns = [
@@ -44,7 +42,7 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
                     { HeaderText: "Currency", Width: 80, Name: "Currency", CellAlign: "center" },
                     { HeaderText: "Balance", Width: 150, Name: "Balance", CellAlign: "right", HeaderAlign: "center" },
                     { HeaderText: "Base (RM)", Width: 150, Name: "BaseRM", CellAlign: "right", HeaderAlign: "center" }
-                ];
+            ];
         }
         var gridOption = {
             columns: columns,
@@ -82,8 +80,7 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
         _tables.report.fanexGrid(gridOption);
     };
 
-
-    self.ViewDirectBalanceMasterDownline = function (masterId) {
+    self.ViewDirectBalanceMasterDownline = function (masterId, excludeTestData) {
         self._params.masterId = masterId;
         $.ajax({
             type: "POST",
@@ -113,7 +110,7 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
                                         { Name: "Currency", Value: currentCustomer.Currency },
                                         { Name: "Balance", Value: currentCustomer.Balance },
                                         { Name: "BaseRM", Value: currentCustomer.BaseBalance }
-                                    ]
+                                ]
                             });
                     }
 
@@ -123,28 +120,24 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
                             Columns: [
                                         { Name: "Number", Value: "Total", MergeColNumber: 4 },
                                         { Name: "BaseRM", Value: rs.BaseBalanceTotal }
-                                    ]
+                            ]
                         }]
                         self.RenderGrid("Agent", _title, bodyData, footerData);
                     }
                     else {
                         self.RenderGrid("Agent", _title, bodyData);
                     }
-
                 }
             },
             complete: function () {
                 AccReport.enableInput();
-
             },
             error: function () {
             }
-
         });
     };
 
     self.ViewDirectBalanceAgentDownline = function (agentId) {
-        
         self._params.agentId = agentId;
         $.ajax({
             type: "POST",
@@ -174,7 +167,7 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
                                         { Name: "Currency", Value: currentCustomer.Currency },
                                         { Name: "Balance", Value: currentCustomer.Balance },
                                         { Name: "BaseRM", Value: currentCustomer.BaseBalance }
-                                    ]
+                                ]
                             });
                     }
                     if (rs.DirectBalanceList.length > 0) {
@@ -183,7 +176,7 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
                             Columns: [
                                         { Name: "Number", Value: "Total", MergeColNumber: 4 },
                                         { Name: "BaseRM", Value: rs.BaseBalanceTotal }
-                                    ]
+                            ]
                         }]
                         self.RenderGrid("Member", _title, bodyData, footerData);
                     }
@@ -230,5 +223,4 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
     self.showReport = function () {
         _tables.reportContainer.removeClass("display-none");
     };
-
 };

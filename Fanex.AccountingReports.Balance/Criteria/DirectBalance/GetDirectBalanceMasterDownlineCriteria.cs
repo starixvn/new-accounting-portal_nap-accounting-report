@@ -5,7 +5,7 @@ namespace Fanex.AccountingReports.Balance.Criteria.DirectBalance
 
     /// <summary>
     /// TODO: Update summary.
-    /// </summary>   
+    /// </summary>
     public class GetDirectBalanceMasterDownlineCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]
