@@ -50,12 +50,12 @@
     <Setting Key="Main_WinLossSummary3rd_Exec_CalculateWinLoss" SpName="Task_rptWinLost_UpdateTable" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
   <Function Name="Balance - Direct Balance">
-    <Setting Key="Balance_DirectBalance_DirectMaster" SpName="Acc_Rpt_Balance_Direct_Master_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
-    <Setting Key="Balance_DirectBalance_DirectAgent" SpName="Acc_Rpt_Balance_Direct_Agent_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
-    <Setting Key="Balance_DirectBalance_DirectMember" SpName="Acc_Rpt_Balance_Direct_Member_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
-    <Setting Key="Balance_DirectBalance_DirectMasterYesterday" SpName="Acc_Rpt_Balance_Direct_Master_Yesterday_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
-    <Setting Key="Balance_DirectBalance_DirectAgentYesterday" SpName="Acc_Rpt_Balance_Direct_Agent_Yesterday_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
-    <Setting Key="Balance_DirectBalance_DirectMemberYesterday" SpName="Acc_Rpt_Balance_Direct_Member_Yesterday_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_DirectBalance_DirectMaster" SpName="Acc_Rpt_Balance_Direct_Master" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_DirectBalance_DirectAgent" SpName="Acc_Rpt_Balance_Direct_Agent" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_DirectBalance_DirectMember" SpName="Acc_Rpt_Balance_Direct_Member" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_DirectBalance_DirectMasterYesterday" SpName="Acc_Rpt_Balance_Direct_Master_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_DirectBalance_DirectAgentYesterday" SpName="Acc_Rpt_Balance_Direct_Agent_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="Balance_DirectBalance_DirectMemberYesterday" SpName="Acc_Rpt_Balance_Direct_Member_Yesterday" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="Balance_SuperBalance_Super" SpName="Acc_Rpt_Balance_Super" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="Balance_SuperBalance_Master" SpName="Acc_Rpt_Balance_Master" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="Balance_SuperBalance_Agent" SpName="Acc_Rpt_Balance_Agent" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
