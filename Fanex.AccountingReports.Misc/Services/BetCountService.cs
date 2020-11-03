@@ -723,6 +723,9 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
                 case MiscConstants.MiscEsportsGroupId:
                     return MiscConstants.MiscEsportsGroupId;
+
+                case MiscConstants.SBAdjustmentId:
+                    return MiscConstants.SBAdjustmentId;
             }
 
             return -111;
@@ -835,16 +838,19 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 r.SportID != MiscConstants.MiscSoccerGroupId
                 && r.SportID != MiscConstants.MiscParLaySportId
                 && r.SportID != MiscConstants.MiscBasketballGroupId
-                && r.SportID != MiscConstants.MiscEsportsGroupId);
+                && r.SportID != MiscConstants.MiscEsportsGroupId
+                && r.SportID != MiscConstants.SBAdjustmentId);
             var parlayGroupData = sportbookRaw.Where(r => r.SportID == MiscConstants.MiscParLaySportId);
             var basketballGroupData = sportbookRaw.Where(r => r.SportID == MiscConstants.MiscBasketballGroupId);
             var esportsGroupData = sportbookRaw.Where(r => r.SportID == MiscConstants.MiscEsportsGroupId);
+            var sbAdjustmentGroupData = sportbookRaw.Where(r => r.SportID == MiscConstants.SBAdjustmentId);
 
             sports.Add(GenerateSports(soccerGroupData));
             sports.Add(GenerateSports(basketballGroupData));
             sports.Add(GenerateSports(esportsGroupData));
             sports.Add(GenerateOtherSports(otherSportGroupData));
             sports.Add(GenerateSports(parlayGroupData));
+            sports.Add(GenerateSports(sbAdjustmentGroupData));
 
             return sports;
         }
@@ -962,6 +968,9 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
                 case MiscConstants.MiscEsportsGroupId:
                     return "E-Sports";
+
+                case MiscConstants.SBAdjustmentId:
+                    return "SB Adjustment";
             }
 
             return string.Empty;
