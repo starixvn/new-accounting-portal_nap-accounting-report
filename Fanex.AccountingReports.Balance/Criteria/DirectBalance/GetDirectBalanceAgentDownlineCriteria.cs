@@ -20,7 +20,7 @@ namespace Fanex.AccountingReports.Balance.Criteria.DirectBalance
 
         public override string GetSettingKey()
         {
-            return "Balance_MasterBalance_MemberDownline";
+            return "Balance_SuperBalance_Member";
         }
     }
 }
