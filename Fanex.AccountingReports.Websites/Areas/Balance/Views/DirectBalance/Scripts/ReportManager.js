@@ -13,13 +13,13 @@ Fanex.AccountingReports.Balance.ReportManager = function () {
         _directBalanceDownline.InitPage();
     }
 
-    ViewDownline = function (customerType, custId) {
+    ViewDownline = function (customerType, custId, balanceType) {
         _directBalance.hideReport();
         if (customerType == "Master") {
-            _directBalanceDownline.ViewDirectBalanceMasterDownline(custId);
+            _directBalanceDownline.ViewDirectBalanceMasterDownline(custId, balanceType);
         }
         else if (customerType == "Agent") {
-            _directBalanceDownline.ViewDirectBalanceAgentDownline(custId);
+            _directBalanceDownline.ViewDirectBalanceAgentDownline(custId, balanceType);
         }
     };
 

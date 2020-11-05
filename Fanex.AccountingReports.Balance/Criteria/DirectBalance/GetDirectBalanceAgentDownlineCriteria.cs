@@ -9,6 +9,9 @@ namespace Fanex.AccountingReports.Balance.Criteria.DirectBalance
     public class GetDirectBalanceAgentDownlineCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]
+        public int BalanceType { get; set; }
+
+        [SpParam(Ignored = true)]
         public string CustomerType { get; set; }
 
         public int AgentId { get; set; }
@@ -20,7 +23,14 @@ namespace Fanex.AccountingReports.Balance.Criteria.DirectBalance
 
         public override string GetSettingKey()
         {
-            return "Balance_SuperBalance_Member";
+            var storeProcedureName = "Balance_SuperBalance_Member";
+
+            if (BalanceType == 2)
+            {
+                storeProcedureName += "Yesterday";
+            }
+
+            return storeProcedureName;
         }
     }
 }

@@ -18,6 +18,7 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
         masterId: null,
         agentId: null,
         exclTestCurr: false,
+        balanceType: null
     };
 
     self.RenderGrid = function (customerType, title, bodyData, footerData) {
@@ -27,7 +28,7 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
                     { HeaderText: "No", Width: 60, Name: "Number", CellAlign: "center" },
                     {
                         HeaderText: customerType, Width: 150, Name: "CustomerType", CustomCellRender: function (currentCell) {
-                            return '<div class="link" onclick="ViewDownline(\'' + customerType + '\',\'' + currentCell.Value.CustId + '\')">' + currentCell.Value.Username + '</div>';
+                            return '<div class="link" onclick="ViewDownline(\'' + customerType + '\',\'' + currentCell.Value.CustId + '\',' + self._params.balanceType + ')">' + currentCell.Value.Username + '</div>';
                         }
                     },
                     { HeaderText: "Currency", Width: 80, Name: "Currency", CellAlign: "center" },
@@ -80,15 +81,17 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
         _tables.report.fanexGrid(gridOption);
     };
 
-    self.ViewDirectBalanceMasterDownline = function (masterId, excludeTestData) {
+    self.ViewDirectBalanceMasterDownline = function (masterId, balanceType) {
         self._params.masterId = masterId;
+        self._params.balanceType = balanceType;
         $.ajax({
             type: "POST",
             url: window.rootUrl + "Balance/DirectBalance/GetDirectBalanceMasterDownline",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify({
-                MasterId: masterId
+                MasterId: masterId,
+                BalanceType: balanceType
             })
                 ,
             beforeSend: function () {
@@ -137,15 +140,17 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
         });
     };
 
-    self.ViewDirectBalanceAgentDownline = function (agentId) {
+    self.ViewDirectBalanceAgentDownline = function (agentId, balanceType) {
         self._params.agentId = agentId;
+        self._params.balanceType = balanceType;
         $.ajax({
             type: "POST",
             url: window.rootUrl + "Balance/DirectBalance/GetDirectBalanceAgentDownline",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify({
-                AgentId: agentId
+                AgentId: agentId,
+                BalanceType: balanceType
             })
                 ,
             beforeSend: function () {
@@ -194,7 +199,7 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
     };
 
     self.BackBalanceDownline = function (customerType) {
-        self.ViewDirectBalanceMasterDownline(self._params.masterId);
+        self.ViewDirectBalanceMasterDownline(self._params.masterId, self._params.balanceType);
         _tables.report.fanexGrid("resizeGrid");
         // _params.masterId = null;
     };
@@ -202,7 +207,8 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
     self.exportAgentBalance = function () {
         var exportParams = {
             MasterId: self._params.masterId,
-            customerType: "Agent"
+            customerType: "Agent",
+            BalanceType: self._params.balanceType
         };
 
         AccReport.downloadFile(window.rootUrl + "Balance/DirectBalance/ExportAgentBalance", exportParams);
@@ -211,7 +217,8 @@ Fanex.AccountingReports.Balance.DirectBalanceDownline = function () {
     self.exportMemberBalance = function () {
         var exportParams = {
             AgentId: self._params.agentId,
-            customerType: "Member"
+            customerType: "Member",
+            BalanceType: self._params.balanceType
         };
         AccReport.downloadFile(window.rootUrl + "Balance/DirectBalance/ExportMemberBalance", exportParams);
     };
