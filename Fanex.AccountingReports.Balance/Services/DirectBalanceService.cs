@@ -114,8 +114,8 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                 foreach (var row in rawData)
                 {
                     var currencyId = Converter.ToInt(row.currency);
-                    decimal balance = Converter.ToDecimal(row.bal);
-                    decimal baseBalance = Converter.ToDecimal(row.baseBalance);
+                    decimal balance = Converter.ToDecimal(row.Balance);
+                    decimal baseBalance = Converter.ToDecimal(row.BaseBalance);
                     if (balance != 0)
                     {
                         directBalanceDownlineList.Add(new DirectBalanceDetail()
