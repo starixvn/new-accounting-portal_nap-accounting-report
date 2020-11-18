@@ -11,7 +11,9 @@ namespace Fanex.AccountingReports.WinLoss.Constants
 
         public static readonly string LeagueWinLossSessionKey = "Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss";
         public static readonly string LeagueWinLossViewMatchesSessionKey = "Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches";
+        public static readonly string LeagueWinLossViewMatchesFromBetTypeStatusSessionKey = "Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatchesFromBetTypeStatus";
         public static readonly string LeagueWinLosViewBetTypesSessionKey = "Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes";
+        public static readonly string LeagueWinLosViewBetTypesByStatusSessionKey = "Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus";
         public static readonly string LeagueWinLosViewSitesSessionKey = "Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSites";
         public static readonly string LeagueWinLosViewSupersSessionKey = "Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSupers";
 

@@ -61,9 +61,23 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         }
 
         [HttpPost]
+        public JsonResult GetBetTypesByStatus(GetBetTypesCriteria criteria)
+        {
+            var report = this._reportService.GetBetTypesByLiveNonLiveStatus(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public JsonResult GetMatches(GetMatchesCriteria criteria)
         {
             var report = this._reportService.GetMatches(criteria);
+            return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult GetMatchesFromBetTypeStatus(GetMatchesCriteria criteria)
+        {
+            var report = this._reportService.GetMatchesFromBetTypeStatus(criteria);
             return Json(report, JsonRequestBehavior.AllowGet);
         }
 
@@ -103,9 +117,23 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         }
 
         [HttpPost]
+        public ActionResult ExportLeagueWinLossViewMatchesFromBetTypeStatus(GetMatchesCriteria criteria)
+        {
+            this._excelService.ExportLeagueWinLossViewMatchesFromBetTypeStatus(criteria);
+            return new EmptyResult();
+        }
+
+        [HttpPost]
         public ActionResult ExportLeagueWinLossViewBetTypes(GetBetTypesCriteria criteria)
         {
             this._excelService.ExportLeagueWinLossViewBetTypes(criteria);
+            return new EmptyResult();
+        }
+
+        [HttpPost]
+        public ActionResult ExportLeagueWinLossViewBetTypesByStatus(GetBetTypesCriteria criteria)
+        {
+            this._excelService.ExportLeagueWinLossViewBetTypesByStatus(criteria);
             return new EmptyResult();
         }
 
