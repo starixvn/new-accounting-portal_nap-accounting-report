@@ -399,6 +399,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             leagueWinLoss.GrandTotal = CalculateSiteTotal("Grand Total", rawData);
 
+            if (!string.IsNullOrEmpty(criteria.SortColumnName) && !string.IsNullOrEmpty(criteria.SortDirection))
+            {
+                var sortingService = new SortingService();
+                leagueWinLoss = sortingService.SortSiteData(leagueWinLoss, criteria.SortDirection, criteria.SortColumnName);
+            }
+
             SessionManager.Set(WinLossContants.LeagueWinLosViewSitesSessionKey, leagueWinLoss);
             return leagueWinLoss;
         }
