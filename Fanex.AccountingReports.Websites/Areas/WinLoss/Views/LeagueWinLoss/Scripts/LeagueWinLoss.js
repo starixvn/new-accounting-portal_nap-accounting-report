@@ -398,8 +398,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                       },
                                       CustomCellRender: function (currentCell) {
                                           var cssClass = currentCell.Value.winLoss > 0 ? 'format-positive' : '';
+                                          var winLossValue = currentCell.Value.winLoss.toFixed(2);
                                           var clickEvent = ' onclick = "viewBetTypesByStatus(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
-                                          var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + currentCell.Value.winLoss + '</div>';
+                                          var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + parseFloat(winLossValue).toLocaleString('en') + '</div>';
                                           return html;
                                       }
                                   },
