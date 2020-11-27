@@ -10,5 +10,7 @@ namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
         public string BettypeName { get; set; }
 
         public string SiteType { get; set; }
+
+        public bool IsHedge { get; set; }
     }
 }

@@ -24,5 +24,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.LeagueWinLoss
                 ListExtensions.SortDataByProperty(row.Leagues, sortDirection, sortColumnName, "number");
             }
         }
+
+        public SiteWinLossModel SortSiteData(SiteWinLossModel reportModel, string sortDirection, string sortColumnName)
+        {
+            ListExtensions.SortDataByProperty(reportModel.Sites, sortDirection, sortColumnName, "number");
+            return reportModel;
+        }
     }
 }

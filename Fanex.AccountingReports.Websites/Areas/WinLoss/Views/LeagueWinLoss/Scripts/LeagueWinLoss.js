@@ -175,6 +175,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             $("#leagueWinLossSiteContainer").addClass("display-none");
             $("#leagueWinLossSuperContainer").addClass("display-none");
             $("#leagueWinLossVirtualRateContainer").addClass("display-none");
+            $("#leagueWinLossBetTypeByStatusContainer").addClass("display-none");
         });
     };
 
@@ -388,7 +389,21 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                 return html;
                             }
                         },
-                                  { Name: "ColMemberWinLoss", Value: info.MemberWinLoss },
+                                  {
+                                      Name: "ColMemberWinLoss",
+                                      Value: {
+                                          winLoss: info.MemberWinLoss,
+                                          sportName: info.Sport,
+                                          leagueName: info.LeagueName
+                                      },
+                                      CustomCellRender: function (currentCell) {
+                                          var cssClass = currentCell.Value.winLoss > 0 ? 'format-positive' : '';
+                                          var winLossValue = currentCell.Value.winLoss.toFixed(2);
+                                          var clickEvent = ' onclick = "viewBetTypesByStatus(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
+                                          var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + parseFloat(winLossValue).toLocaleString('en') + '</div>';
+                                          return html;
+                                      }
+                                  },
                                   { Name: "ColSMAWinLoss", Value: info.SMAWinLoss },
                                   { Name: "ColExtraPT", Value: info.ExtraPT },
                                   { Name: "ColCommision", Value: info.Commission },

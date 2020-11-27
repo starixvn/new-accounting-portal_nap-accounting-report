@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Fanex.AccountingReports.WinLoss.Entities.LeagueWinLoss
+﻿namespace Fanex.AccountingReports.WinLoss.Entities.LeagueWinLoss
 {
     public class BettypeWinLossEntity : BaseEntity
     {
@@ -13,5 +7,7 @@ namespace Fanex.AccountingReports.WinLoss.Entities.LeagueWinLoss
         public string BettypeName { get; set; }
 
         public string SiteType { get; set; }
+
+        public bool IsHedge { get; set; }
     }
 }

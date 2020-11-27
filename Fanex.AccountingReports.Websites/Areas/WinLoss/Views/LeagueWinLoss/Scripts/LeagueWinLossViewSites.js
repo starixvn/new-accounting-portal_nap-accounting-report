@@ -20,7 +20,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSites = function 
             BetTypeName: null,
             IsNormalMode: true,
             IsNoDraw: false,
-            SiteName: ''
+            SiteName: '',
+            SortColumnName: '',
+            SortDirection: ''
         }
     };
     self.initPage = function () {
@@ -194,13 +196,13 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSites = function 
                     { HeaderText: "SMA Win Loss", Width: 120, Name: "ColSMAWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                     { HeaderText: "Extra PT", Width: 100, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                     { HeaderText: "Commission", Width: 120, Name: "ColCommision", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-                    { HeaderText: "Variance", Width: 120, Name: "ColVariance", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
-                    { HeaderText: "Virtual Win Loss", Width: 120, Name: "ColVirtualWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
-                    { HeaderText: "Real Income", Width: 120, Name: "ColRealIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
-                    { HeaderText: "Virtual", Width: 120, Name: "ColVirtualTurnOver", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-                    { HeaderText: "Real", Width: 120, Name: "ColRealTurnOver", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
-                    { HeaderText: "Virtual", Width: 120, Name: "ColVirtualMargin", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$' },
-                    { HeaderText: "Real", Width: 120, Name: "ColRealMargin", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$' }],
+                    { HeaderText: "Variance", Width: 120, Name: "ColVariance", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$', Sort: true, SortDirection: getSortDirection("VarianceIncome") },
+                    { HeaderText: "Virtual Win Loss", Width: 120, Name: "ColVirtualWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$', Sort: true, SortDirection: getSortDirection("VirtualWinLoss") },
+                    { HeaderText: "Real Income", Width: 120, Name: "ColRealIncome", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$', Sort: true, SortDirection: getSortDirection("RealIncome") },
+                    { HeaderText: "Virtual", Width: 120, Name: "ColVirtualTurnOver", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true, SortDirection: getSortDirection("VirtualTurnover") },
+                    { HeaderText: "Real", Width: 120, Name: "ColRealTurnOver", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, Sort: true, SortDirection: getSortDirection("RealTurnover") },
+                    { HeaderText: "Virtual", Width: 120, Name: "ColVirtualMargin", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$', Sort: true, SortDirection: getSortDirection("VirtualMargin") },
+                    { HeaderText: "Real", Width: 120, Name: "ColRealMargin", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$', Sort: true, SortDirection: getSortDirection("RealMargin") }],
             showTitle: true,
             showFooter: true,
             titleInfo:
@@ -226,7 +228,16 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSites = function 
             bodyRows: bodyData,
             showDistinctRow: false,
             footerRows: footerData,
-            gridExpandHeight: 300
+            gridExpandHeight: 300,
+            sortOption:
+           {
+               serverSortFunction: function (sortColumnName, sortDirection) {
+                   var sortColumnName = getSortColumnName(sortColumnName);
+                   self.Params.reportParams.SortDirection = sortDirection.toLowerCase();
+                   self.Params.reportParams.SortColumnName = sortColumnName;
+                   self.sortReport();
+               }
+           },
         };
 
         _tables.report.removeClass("display-none").fanexGrid(gridOptions);
@@ -243,5 +254,48 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSites = function 
     self.isShowGrandTotalRow = function (report) {
         return self.isShowTotalRow(report.RM)
         || self.isShowTotalRow(report.BARM);
+    };
+
+    var getSortColumnName = function (columnName) {
+        var sortColumnName = null;
+        switch (columnName) {
+            case "ColVariance":
+                sortColumnName = "VarianceIncome";
+                break;
+            case "ColVirtualWinLoss":
+                sortColumnName = "VirtualWinLoss";
+                break
+            case "ColRealIncome":
+                sortColumnName = "RealIncome";
+                break;
+            case "ColVirtualTurnOver":
+                sortColumnName = "VirtualTurnover";
+                break;
+            case "ColRealTurnOver":
+                sortColumnName = "RealTurnover";
+                break;
+            case "ColVirtualMargin":
+                sortColumnName = "VirtualMargin";
+                break;
+            case "ColRealMargin":
+                sortColumnName = "RealMargin";
+                break;
+        }
+
+        return sortColumnName;
+    };
+
+    var getSortDirection = function (columnName) {
+        return columnName == self.Params.reportParams.SortColumnName ? self.Params.reportParams.SortDirection : '';
+    };
+
+    self.sortReport = function () {
+        AccReport.disableInput();
+        AccReport.utility.CallAjax(this,
+                                    window.rootUrl + "WinLoss/LeagueWinLoss/GetSites",
+                                    self.Params.reportParams,
+                                    renderReport,
+                                    renderReport,
+                                    AccReport.enableInput);
     };
 }

@@ -94,7 +94,8 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                             RealIncome = Converter.ToDecimal(row["RealInCome"]),
                             VirtualWinLoss = Converter.ToDecimal(row["VirtualIncome"]),
                             RealTurnover = Converter.ToDecimal(row["RealTurnover"]),
-                            VirtualTurnover = Converter.ToDecimal(row["VirtualTurnover"])
+                            VirtualTurnover = Converter.ToDecimal(row["VirtualTurnover"]),
+                            IsHedge = Converter.ToBool(row["IsHedge"])
                         });
                     }
                 }

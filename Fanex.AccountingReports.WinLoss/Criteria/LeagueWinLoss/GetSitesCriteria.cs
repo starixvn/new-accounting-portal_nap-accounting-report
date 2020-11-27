@@ -41,6 +41,12 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public string SiteName { get; set; }
 
+        [SpParam(Ignored = true)]
+        public string SortColumnName { get; set; }
+
+        [SpParam(Ignored = true)]
+        public string SortDirection { get; set; }
+
         public override string GetSettingKey()
         {
             var suffix = IsNormalMode ? string.Empty : "_WH";

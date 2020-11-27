@@ -27,6 +27,15 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public string SiteName { get; set; }
 
+        public string LiveIndicatorVarchar { get; set; }
+
+        public bool ShowHedgeMatchOnly { get; set; }
+
+        public int BetType { get; set; }
+
+        [SpParam(Ignored = true)]
+        public string BetTypeName { get; set; }
+
         public override string GetSettingKey()
         {
             var suffix = IsNormalMode ? string.Empty : "_WH";

@@ -212,6 +212,7 @@
     <Compile Include="Models\LeagueWinLoss\BetType.cs" />
     <Compile Include="Models\LeagueWinLoss\BetTypeGroup.cs" />
     <Compile Include="Models\LeagueWinLoss\BettypeWinLossBySite.cs" />
+    <Compile Include="Models\LeagueWinLoss\BetTypeWinLossByStatusModel.cs" />
     <Compile Include="Models\LeagueWinLoss\BetTypeWinLossItem.cs" />
     <Compile Include="Models\LeagueWinLoss\BettypeWinLossModel.cs" />
     <Compile Include="Models\LeagueWinLoss\LeagueWinLossModel.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Models\LeagueWinLoss\LiveNonLiveWinLossModel.cs" />
     <Compile Include="Models\LeagueWinLoss\MatchWinLossByLiveStatus.cs" />
     <Compile Include="Models\LeagueWinLoss\MatchWinLossItem.cs" />
+    <Compile Include="Models\LeagueWinLoss\MatchWinLossFromBetTypeStatusModel.cs" />
     <Compile Include="Models\LeagueWinLoss\MatchWinLossModel.cs" />
     <Compile Include="Models\LeagueWinLoss\Site.cs" />
     <Compile Include="Models\LeagueWinLoss\SiteGroup.cs" />

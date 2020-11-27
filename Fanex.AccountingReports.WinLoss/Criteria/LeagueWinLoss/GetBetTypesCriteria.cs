@@ -22,7 +22,6 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public string SportBettype { get; set; }
 
-        [SpParam(Ignored = true)]
         public string LeagueName { get; set; }
 
         [SpParam(Ignored = true)]
@@ -37,6 +36,10 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         [SpParam(Ignored = true)]
         public bool IsHedge { get; set; }
+
+        public bool IsIncludeSiteType { get; set; }
+
+        public bool IsIncludeHedge { get; set; }
 
         public override string GetSettingKey()
         {
