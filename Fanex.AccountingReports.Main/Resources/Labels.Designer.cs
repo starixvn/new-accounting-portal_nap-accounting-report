@@ -3356,6 +3356,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Virtual Sports 3.
+        /// </summary>
+        public static string VirtualSports3 {
+            get {
+                return ResourceManager.GetString("VirtualSports3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Virtual Total.
         /// </summary>
         public static string VirtualTotal {

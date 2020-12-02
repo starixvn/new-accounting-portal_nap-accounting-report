@@ -87,7 +87,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
         {
             get
             {
-                return !SportIdsWithoutDetails.Contains(Id);
+                return !SportIdsWithoutDetails.Contains(Id) && Id != 0;
             }
         }
 

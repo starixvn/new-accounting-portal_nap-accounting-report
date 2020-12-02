@@ -1258,4 +1258,7 @@
   <data name="CashOut" xml:space="preserve">
     <value>Cash Out</value>
   </data>
+  <data name="VirtualSports3" xml:space="preserve">
+    <value>Virtual Sports 3</value>
+  </data>
 </root>
