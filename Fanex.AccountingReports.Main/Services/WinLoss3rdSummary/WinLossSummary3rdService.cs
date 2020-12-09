@@ -85,7 +85,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
             CacheRef.SaveCacheRefResponse(betTypeHash.Values.ToList(), CacheRef.GetBettype, ref this._betTypeNameCache);
 
-            var sportTypeGroups = rawData.Where(x => x.bettype != 913 && x.bettype != 914).GroupBy(data => data.sporttype);
+            var sportTypeGroups = rawData.GroupBy(data => data.sporttype);
+            //var sportTypeGroups = rawData.Where(x => x.bettype != 913 && x.bettype != 914).GroupBy(data => data.sporttype);
             var sportsNG2Groups = new List<IGrouping<dynamic, dynamic>>();
 
             foreach (var sportTypeGroup in sportTypeGroups)
@@ -111,8 +112,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 CalculateNG2Product(report, isBeforeSingleWalletCasinoLaunchDate, sportsNG2Groups);
             }
 
-            var cashOutData = rawData.Where(x => x.bettype == 913 || x.bettype == 914).ToList();
-            CalculateCashOutProduct(report, isBeforeSingleWalletCasinoLaunchDate, cashOutData);
+            //var cashOutData = rawData.Where(x => x.bettype == 913 || x.bettype == 914).ToList();
+            //CalculateCashOutProduct(report, isBeforeSingleWalletCasinoLaunchDate, cashOutData);
 
             this.CalculateHedgeTotalBySport(report);
             this.CalculateNormalTotalBySport(report);
