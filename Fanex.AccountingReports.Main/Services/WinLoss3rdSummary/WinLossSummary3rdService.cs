@@ -86,6 +86,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             CacheRef.SaveCacheRefResponse(betTypeHash.Values.ToList(), CacheRef.GetBettype, ref this._betTypeNameCache);
 
             var sportTypeGroups = rawData.GroupBy(data => data.sporttype);
+            //var sportTypeGroups = rawData.Where(x => x.bettype != 913 && x.bettype != 914).GroupBy(data => data.sporttype);
             var sportsNG2Groups = new List<IGrouping<dynamic, dynamic>>();
 
             foreach (var sportTypeGroup in sportTypeGroups)
@@ -110,6 +111,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             {
                 CalculateNG2Product(report, isBeforeSingleWalletCasinoLaunchDate, sportsNG2Groups);
             }
+
+            //var cashOutData = rawData.Where(x => x.bettype == 913 || x.bettype == 914).ToList();
+            //CalculateCashOutProduct(report, isBeforeSingleWalletCasinoLaunchDate, cashOutData);
 
             this.CalculateHedgeTotalBySport(report);
             this.CalculateNormalTotalBySport(report);
@@ -176,6 +180,47 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                 var totalSportType = new BetTypeWinLossInfo();
                 totalSportType.Id = sportTypeGroup.Key;
                 totalSportType.Name = this.GetSportName(sportTypeGroup.Key);
+                totalSportType.Normal = winlossTotal;
+
+                sportInfo.BetTypeWinLosses.Add(totalSportType);
+            }
+
+            report.SportTypeWinLosses.Add(sportInfo);
+            return report;
+        }
+
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        public WinLoss3rdInfo CalculateCashOutProduct(WinLoss3rdInfo report, bool isBeforeDate, List<dynamic> cashOutItems)
+        {
+            var sportId = 0;
+            bool isShowNotAvalable = sportId == Constants.SportContants._2dReportCasino && isBeforeDate;
+            var sportInfo = new SportTypeWinLossInfo
+            {
+                Id = sportId,
+                Name = "CashOut",
+            };
+
+            var sportTypeGroups = cashOutItems.GroupBy(x => new { x.sporttype, x.liveindicator });
+
+            foreach (var sportTypeGroup in sportTypeGroups)
+            {
+                var winlossTotal = new WinLossInfo();
+                winlossTotal.Name = this.GetSportName(sportTypeGroup.Key.sporttype);
+
+                foreach (var item in sportTypeGroup)
+                {
+                    WinLossInfo winloss = CreateWinlossInfo(item, isShowNotAvalable);
+                    sportInfo.CalculateTotal(winloss);
+                    winlossTotal = CalculateWinlossTotal(winlossTotal, winloss);
+                }
+
+                winlossTotal.LiveIndicator = (bool)sportTypeGroup.Key.liveindicator ? 1 : 0;
+                var totalSportType = new BetTypeWinLossInfo();
+                totalSportType.Id = sportTypeGroup.Key.sporttype;
+                totalSportType.Name = this.GetSportName(sportTypeGroup.Key.sporttype);
+                totalSportType.LiveIndicator = (bool)sportTypeGroup.Key.liveindicator ? 1 : 0;
                 totalSportType.Normal = winlossTotal;
 
                 sportInfo.BetTypeWinLosses.Add(totalSportType);
@@ -715,6 +760,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 
                 case SportContants.CashOut:
                     sportName = Labels.CashOut;
+                    break;
+
+                case SportContants.VirtualSports3:
+                    sportName = Labels.VirtualSports3;
                     break;
 
                 default:

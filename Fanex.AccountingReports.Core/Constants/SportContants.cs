@@ -92,5 +92,7 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int WM = 233;
         public const int Joker = 234;
         public const int SBAjusment = 96;
+        public const int VirtualSports3 = 231;
+        public const int GDG = 236;
     }
 }

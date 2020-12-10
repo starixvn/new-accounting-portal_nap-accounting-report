@@ -55,7 +55,9 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.SabaClubFreeBet,
             SportContants.WM,
             SportContants.Joker,
-            SportContants.SBAjusment
+            SportContants.SBAjusment,
+            SportContants.VirtualSports3,
+            SportContants.GDG
         };
 
         public SportTypeWinLossInfo()
@@ -85,7 +87,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
         {
             get
             {
-                return !SportIdsWithoutDetails.Contains(Id);
+                return !SportIdsWithoutDetails.Contains(Id) && Id != 0;
             }
         }
 
