@@ -94,5 +94,7 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int SBAjusment = 96;
         public const int VirtualSports3 = 231;
         public const int GDG = 236;
+        public const int MaxGame = 237;
+        public const int BG = 239;
     }
 }

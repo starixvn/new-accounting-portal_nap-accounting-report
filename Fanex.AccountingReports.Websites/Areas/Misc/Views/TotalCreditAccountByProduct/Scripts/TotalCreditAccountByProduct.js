@@ -52,7 +52,8 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         IBCBetLiveCasino: 242,
         RNGWar: 224,
         ION: 225,
-        WM: 233
+        WM: 233,
+        BG: 239
     };
 
     var cachedData = {
@@ -541,6 +542,9 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 break;
             case productEnums.WM:
                 productName = "WM";
+                break;
+            case productEnums.BG:
+                productName = "BG";
                 break;
             default:
                 productName = "Unknown";

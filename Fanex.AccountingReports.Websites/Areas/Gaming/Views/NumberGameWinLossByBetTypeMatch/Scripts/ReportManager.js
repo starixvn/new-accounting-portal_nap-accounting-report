@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     reportManager.InitPage();
 });
@@ -105,7 +104,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.ReportManager = f
         });
     };
 
-    self.LoadFilter = function () {        
+    self.LoadFilter = function () {
         self.GetCurrencyList();
         self.GetBetTypeList();
         self.RenderDatePicker();
@@ -263,7 +262,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.ReportManager = f
 
         $("#dropdown-bettype").multiSelect(
         {
-            minWidth: 150,
+            minWidth: 230,
             maxHeight: 450,
             shadow: true,
             showHeader: true,
@@ -398,8 +397,6 @@ Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.ReportManager = f
         AccReport.disableInput();
         self.GetCompanyList();
     };
-
 };
 
 var reportManager = new Fanex.AccountingReports.Gaming.NumberGameWinLossByBetTypeMatch.ReportManager();
-

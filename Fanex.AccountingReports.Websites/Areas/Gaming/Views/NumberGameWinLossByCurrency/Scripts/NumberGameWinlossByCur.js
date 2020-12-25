@@ -103,7 +103,6 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
         _isMainPage = false;
         _detailParams.RoleID = 3;
         _detailParams.Username = SupperName;
-
     };
     self.BackToMasterReport = function () {
         $("#numberGameWLByDateMainGridContainer").addClass("display-none");
@@ -438,7 +437,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
 
         $("#ddlBettype").multiSelect(
 		{
-		    minWidth: 150,
+		    minWidth: 230,
 		    maxHeight: 450,
 		    shadow: true,
 		    showHeader: true,
@@ -477,7 +476,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
             {
                 Columns: [
                     { HeaderText: "Currency", Name: "Currency", MergeRowNumber: 2 },
-                    { HeaderText: "Member", Name: "Turnover", MergeColNumber: 2, HeaderAlign: "center" },					
+                    { HeaderText: "Member", Name: "Turnover", MergeColNumber: 2, HeaderAlign: "center" },
                     { HeaderText: "Game Payout", Name: "GamePayout", MergeRowNumber: 2 },
 					{ HeaderText: "House", Name: "CompanyTurnover", MergeColNumber: 5, HeaderAlign: "center" }
                 ]
@@ -485,9 +484,10 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
         ]
 
         var columns = [
-					{ HeaderText: "Currency", Width: 150, Name: "Currency", CustomCellRender: function (currentCell) {
-					    return "<div class='link centerAlign' onclick='numberGameWLByCur.getNumberGameWinlossByCurDetail(\"" + currentCell.Value + "\",0,0)'>" + currentCell.Value + "</div>";
-					}
+					{
+					    HeaderText: "Currency", Width: 150, Name: "Currency", CustomCellRender: function (currentCell) {
+					        return "<div class='link centerAlign' onclick='numberGameWLByCur.getNumberGameWinlossByCurDetail(\"" + currentCell.Value + "\",0,0)'>" + currentCell.Value + "</div>";
+					    }
 					},
 					{ HeaderText: "Turnover", Width: 120, Name: "Turnover", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center" },
                     { HeaderText: "Win Loss", Width: 120, Name: "MemberWinLoss", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", FormatPositive: '$' },
@@ -497,7 +497,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
                     { HeaderText: "Comm Expense", Width: 120, Name: "CommExpense", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                     { HeaderText: "Net Income", Width: 120, Name: "NetIncome", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
 					{ HeaderText: "Margin", Width: 120, Name: "Margin", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$' }
-				];
+        ];
 
         var gridOptions = {
             columns: columns,
@@ -540,7 +540,6 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
     };
 
     self.getNumberGameWinlossByCur = function () {
-
         AccReport.disableInput();
 
         _params.paramReport.Currency = $('#ddlCurrency').multiSelect('getCheckedItems').toString();
@@ -624,7 +623,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
                                { Name: "CommExpense", Value: wlDate.CommExpense },
                                { Name: "NetIncome", Value: wlDate.NetIncome },
                                { Name: "Margin", Value: wlDate.Margin }
-                            ],
+                    ],
                     SubRows: []
                 };
                 bodyData.push(currentRow);
@@ -643,11 +642,10 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
                                { Name: "CommExpense", Value: footerdataTemp.CommExpense },
                                { Name: "NetIncome", Value: footerdataTemp.NetIncome },
                                { Name: "Margin", Value: footerdataTemp.Margin }
-                               									]
+						    ]
 						}]
         }
         self.RenderGrid("Main", bodyData, footerData);
-
     };
 
     self.RenderGridDetail = function (title, bodyData, footerData, roleId) {
@@ -667,15 +665,15 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
         ]
 
         var columns = [
-                    { HeaderText: "Username", Width: 150, Name: "Username", CustomCellRender: function (currentCell) {
-                        if (currentCell.Value.RoleID == 1) {
-                            return "<div class='centerAlign'>" + currentCell.Value.Username + "</div>";
+                    {
+                        HeaderText: "Username", Width: 150, Name: "Username", CustomCellRender: function (currentCell) {
+                            if (currentCell.Value.RoleID == 1) {
+                                return "<div class='centerAlign'>" + currentCell.Value.Username + "</div>";
+                            }
+                            else {
+                                return "<div class='link centerAlign' onclick='numberGameWLByCur.getNumberGameWinlossByCurDetail(\"" + currentCell.Value.Currency + "\"," + currentCell.Value.RoleID + "," + currentCell.Value.CustID + ",\"" + currentCell.Value.Username + "\")'>" + currentCell.Value.Username + "</div>";
+                            }
                         }
-                        else {
-                            return "<div class='link centerAlign' onclick='numberGameWLByCur.getNumberGameWinlossByCurDetail(\"" + currentCell.Value.Currency + "\"," + currentCell.Value.RoleID + "," + currentCell.Value.CustID + ",\"" + currentCell.Value.Username + "\")'>" + currentCell.Value.Username + "</div>";
-                        }
-
-                    }
                     },
 					{ HeaderText: "Member Turnover", Width: 120, Name: "CustomerTurnover", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center" },
                     { HeaderText: "Gross Comm", Width: 120, Name: "CustomerGrossComm", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, HeaderAlign: "center", FormatPositive: '$' },
@@ -698,7 +696,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
 
                     { HeaderText: "House", Width: 100, Name: "CompanyTurnover", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' }
 
-                ];
+        ];
 
         var gridOptions = {
             columns: columns,
@@ -795,7 +793,6 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
     };
 
     self.getNumberGameWinlossByCurDetail = function (currency, roleId, custId, username) {
-
         AccReport.disableInput();
         _detailParams.Currency = currency.toString();
         _detailParams.Bettype = $('#ddlBettype').multiSelect('getCheckedItems').toString();
@@ -817,50 +814,50 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
             _detailParams.RoleID = roleId - 1;
             _detailParams.CustID = custId;
         }
-        
-        $.ajax({
-                    type: "POST",
-                    url: window.rootUrl + "Gaming/NumberGameWinLossByCurrency/GetNumberGameWinlossDetailByCur",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    data: JSON.stringify(_detailParams),
-                    beforeSend: function () {
-                    },
-                    success: function (rs) {
-                        AccReport.popUp.hide();
-                        switch (roleId) {
-                            case 0:
-                                _superModelTmp.model = rs.clone();
-                                _superModelTmp.currency = currency;
-                                break;
-                            case 4:
-                                _masterModelTmp.model = rs.clone();
-                                _masterModelTmp.superId = custId;
-                                break;
-                            case 3:
-                                _agentModelTmp.model = rs.clone();
-                                _agentModelTmp.masterId = custId;
-                                break;
-                            case 2:
-                                _memberModelTmp.model = rs.clone();
-                                _memberModelTmp.agentId = custId;
-                                break;
-                        }
 
-                        self.mapDataDetail(rs, roleId);
-                    },
-                    error: function (jqXHR, event, ajaxSettings) {
-                        if (jqXHR.status &&
-                            jqXHR.status == AccReportData.Constants.HtmlErrorCode.SystemError) {
-                            var r = jQuery.parseJSON(jqXHR.responseText);
-                            AccReport.popUp.show(r.message);
-                            self.mapDataDetail([], roleId);
-                        }
-                    },
-                    complete: function () {
-                        AccReport.enableInput();
-                    }
-                });
+        $.ajax({
+            type: "POST",
+            url: window.rootUrl + "Gaming/NumberGameWinLossByCurrency/GetNumberGameWinlossDetailByCur",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(_detailParams),
+            beforeSend: function () {
+            },
+            success: function (rs) {
+                AccReport.popUp.hide();
+                switch (roleId) {
+                    case 0:
+                        _superModelTmp.model = rs.clone();
+                        _superModelTmp.currency = currency;
+                        break;
+                    case 4:
+                        _masterModelTmp.model = rs.clone();
+                        _masterModelTmp.superId = custId;
+                        break;
+                    case 3:
+                        _agentModelTmp.model = rs.clone();
+                        _agentModelTmp.masterId = custId;
+                        break;
+                    case 2:
+                        _memberModelTmp.model = rs.clone();
+                        _memberModelTmp.agentId = custId;
+                        break;
+                }
+
+                self.mapDataDetail(rs, roleId);
+            },
+            error: function (jqXHR, event, ajaxSettings) {
+                if (jqXHR.status &&
+                    jqXHR.status == AccReportData.Constants.HtmlErrorCode.SystemError) {
+                    var r = jQuery.parseJSON(jqXHR.responseText);
+                    AccReport.popUp.show(r.message);
+                    self.mapDataDetail([], roleId);
+                }
+            },
+            complete: function () {
+                AccReport.enableInput();
+            }
+        });
     };
 
     self.mapDataDetail = function (dataDetail, roleId) {
@@ -893,7 +890,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
                                { Name: "SuperTotal", Value: wlDate.SuperTotal },
 
                                 { Name: "CompanyTurnover", Value: wlDate.Company }
-                            ],
+                    ],
                     SubRows: []
                 };
                 bodyData.push(currentRow);
@@ -903,9 +900,10 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
             footerData = [
 						{
 						    Columns: [
-							  { Name: "Username", Value: footerdataTemp, CellAlign: 'center', CustomCellRender: function () {
-							      return "Total";
-							  }
+							  {
+							      Name: "Username", Value: footerdataTemp, CellAlign: 'center', CustomCellRender: function () {
+							          return "Total";
+							      }
 							  },
                                { Name: "CustomerTurnover", Value: footerdataTemp.Turnover },
                                { Name: "CustomerGrossComm", Value: footerdataTemp.GrossComm },
@@ -926,11 +924,10 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByCur = function () {
                                { Name: "MasterTotal", Value: footerdataTemp.SuperTotal },
 
                                 { Name: "CompanyTurnover", Value: footerdataTemp.Company }
-									]
+						    ]
 						}]
         }
         self.RenderGridDetail(self.Title, bodyData, footerData, roleId);
-
     };
 
     self.exportReport = function () {

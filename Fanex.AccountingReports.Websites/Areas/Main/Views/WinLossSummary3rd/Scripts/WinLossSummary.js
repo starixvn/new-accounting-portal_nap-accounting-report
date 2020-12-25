@@ -198,7 +198,6 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
             Columns: [{
                 Name: 'ColView', CellAlign: 'center', CustomCellRender: function () {
                     if (sportDrillDown) {
-
                         return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
                                                 _params.reportParams.FromDate + '\',\'' +
                                                 _params.reportParams.ToDate + '\',' +
@@ -207,7 +206,6 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                                                 sportName + '\',' +
                                                 drillDownByType.bySport + '\,\'' +
                                                 subProduct + '\')">&nbsp;</div>';
-
                     }
                     else {
                         return '<div>&nbsp;</div>';
@@ -232,20 +230,18 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 
                 //for new *Cricket
                 if (id == 50) {
-                        if (total.Id == 500) {
-                            isNewCricket = true;
-                            betTypeNewCricket = total;
-                            continue;
-                        }
-                        sportType.SubRows.push(renderWinLossCricket(total, true, sportWinloss.Id, id > 0 ? sportName : total.Name, betTypeDrillDown, i));
-
+                    if (total.Id == 500) {
+                        isNewCricket = true;
+                        betTypeNewCricket = total;
+                        continue;
+                    }
+                    sportType.SubRows.push(renderWinLossCricket(total, true, sportWinloss.Id, id > 0 ? sportName : total.Name, betTypeDrillDown, i));
                 }
                 else {
-
                     if (betType.Id < 221 && betType.Id > 212) {
                         sportType.SubRows.push(renderTotalNew(total, 'total', total.Name + ' ' + viewResources.Total));
                     }
-                    else {                        
+                    else {
                         sportType.SubRows.push(renderWinLoss(total, true, sportWinloss.Id, id > 0 ? sportName : total.Name, betTypeDrillDown, i));
                     }
                 }
@@ -262,7 +258,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 
                 var hasOtherMatchType = betType.EightRM || betType.BARM || betType.Hedge;
                 var showNormal = betType.Normal && hasOtherMatchType;
-                if (showNormal) { // Normal                    
+                if (showNormal) { // Normal
                     sportType.SubRows.push(renderWinLoss(betType.Normal, false, sportWinloss.Id, id > 0 ? sportName : betType.Normal.Name, false, i));
                 }
             }
@@ -318,7 +314,6 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                                     winloss.LiveIndicator + ',\'' +
                                     sportName + '\',' +
                                     drillDownByType.byBettype + ')">&nbsp;</div>';
-
                     }
                     else {
                         return '<div>&nbsp;</div>';
@@ -348,7 +343,6 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                 TdClass: css,
                 CustomCellRender: function () {
                     if (showDetailLink) {
-
                         return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
                                     _params.reportParams.FromDate + '\',\'' +
                                     _params.reportParams.ToDate + '\',' +
@@ -374,7 +368,6 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 						{ Name: 'ColVirtualTurnover', Value: total.VirtualTurnoverStr },
 						{ Name: 'ColRealMargin', Value: formatNumberCell(total.RealMarginStr, true, false, true) },
 						{ Name: 'ColVirtualMargin', Value: formatNumberCell(total.VirtualMarginStr, true, false, true) }]
-
         }
     }
     var renderWinLoss = function (winloss, ibc, sportId, sportName, showDetailLink, bettypeIndex) {
@@ -391,13 +384,16 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
             sportName = winloss.Name;
         }
 
+        if (sportId == 168) {
+            showDetailLink = false;
+        }
+
         return {
             Columns: [{
                 Name: 'ColView',
                 TdClass: cssClass,
                 CustomCellRender: function () {
                     if (showDetailLink) {
-
                         return '<div class="viewicon" onclick="ViewMatchGameDetails(\'' +
                                     _params.reportParams.FromDate + '\',\'' +
                                     _params.reportParams.ToDate + '\',' +
@@ -406,7 +402,6 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                                     winloss.LiveIndicator + ',\'' +
                                     sportName + '\',' +
                                     drillDownByType.byBettype + ')">&nbsp;</div>';
-
                     }
                     else {
                         return '<div>&nbsp;</div>';
@@ -441,7 +436,6 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 						{ Name: 'ColVirtualTurnover', Value: total.VirtualTurnoverStr },
 						{ Name: 'ColRealMargin', Value: formatNumberCell(total.RealMarginStr, true, false, true) },
 						{ Name: 'ColVirtualMargin', Value: formatNumberCell(total.VirtualMarginStr, true, false, true) }]
-
         }
     };
     var renderTotalNew = function (total, css, title) {
@@ -460,7 +454,6 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
 						{ Name: 'ColRealMargin', Value: formatNumberCell(total.RealMarginStr, true, false, true), TdClass: css },
 						{ Name: 'ColVirtualMargin', Value: formatNumberCell(total.VirtualMarginStr, true, false, true), TdClass: css }],
             CssClass: GetSiteTypeRowCss(groupdId, winLossSummary.Enums.RowType.InfoRow)
-
         }
     };
     var renderTotalFooter = function (totalStr, total) {
