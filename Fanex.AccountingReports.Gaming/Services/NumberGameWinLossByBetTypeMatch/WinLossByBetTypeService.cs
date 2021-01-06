@@ -120,7 +120,15 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
                     GrandTotal = new WinLossInfo()
                 };
 
-                leagueWinLoss.Name = CacheRef.GetLeagueName(leagueWinLoss.Id);
+                if (criteria.BetTypeId < 3601 || criteria.BetTypeId > 3610)
+                {
+                    leagueWinLoss.Name = CacheRef.GetLeagueName(leagueWinLoss.Id);
+                }
+                else
+                {
+                    leagueWinLoss.Name = "Happy 5 Linked Games";
+                }
+
                 foreach (var data in leagueGroup)
                 {
                     WinLossInfo info = new WinLossInfo
@@ -462,7 +470,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             WinLossInfo info;
             for (var i = 0; i < reportLength; i++)
             {
-                var sportTotal = report.DetailInfo[i].GrandTotal;                
+                var sportTotal = report.DetailInfo[i].GrandTotal;
 
                 NumberGameWinLossByBetTypeMatchService.SetOddEvenColor_ExportExcel(
                     ref textBoldStyle,
