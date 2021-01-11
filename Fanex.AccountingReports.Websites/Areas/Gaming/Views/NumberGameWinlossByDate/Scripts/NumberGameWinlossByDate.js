@@ -232,7 +232,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
                 for (var i = 0; i < rs.length; i++) {
                     var sport = rs[i];
                     var bettypes = [];
-                    for (j = 0; j < sport.Bettypes.length; j++){
+                    for (j = 0; j < sport.Bettypes.length; j++) {
                         var bettype = sport.Bettypes[j];
                         bettypes.push({
                             Id: "" + bettype.Id.toString(),
@@ -255,7 +255,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
                         Items: bettypes
                     });
                 }
-            
+
                 self.renderBettypesDropdown(sports);
             },
             error: function (event, jqXHR, ajaxSettings) {
@@ -275,7 +275,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
 
         $("#ddlBettype").multiSelect(
 		{
-		    minWidth: 150,
+		    minWidth: 230,
 		    maxHeight: 450,
 		    shadow: true,
 		    showHeader: true,
@@ -312,7 +312,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
                     { HeaderText: "Virtual Win Loss", Width: 120, Name: "VirtualTotal", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                     { HeaderText: "Variance", Width: 120, Name: "Variance", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
 					{ HeaderText: "Margin", Width: 120, Name: "Margin", CellAlign: "right", HeaderAlign: "center", FormatNumber: FormatConstant.TWO_DECIMAL_PERCENT_NUMBER, FormatPositive: '$' }
-				];
+        ];
 
         var gridOption = {
             columns: columns,
@@ -342,7 +342,6 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
     };
 
     self.getNumberGameWinlossByDate = function () {
-
         AccReport.disableInput();
         _params.paramReport.Currencies = $('#ddlCurrency').multiSelect('getCheckedItems').toString();
         _params.paramReport.Bettypes = $('#ddlBettype').multiSelect('getCheckedItems').toString();
@@ -397,7 +396,6 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
         var title = "Number Game Win Loss By Date - From " + _params.paramReport.FromDate + " To " + _params.paramReport.ToDate;
         var footerData = [];
         if (rs && rs.ChildInfo.length > 0) {
-
             var wlDateLength = rs.ChildInfo.length;
             for (var i = 0; i < wlDateLength; i++) {
                 var wlDate = rs.ChildInfo[i];
@@ -412,7 +410,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
                                { Name: "VirtualTotal", Value: wlDate.GrandTotal.VirtualTotal },
                                { Name: "Variance", Value: wlDate.GrandTotal.Variance },
                                { Name: "Margin", Value: wlDate.GrandTotal.Margin }
-                            ],
+                    ],
                     SubRows: []
                 };
                 if (wlDate.ChildInfo.length > 0) {
@@ -430,7 +428,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
                                         { Name: "VirtualTotal", Value: wlStatus.GrandTotal.VirtualTotal },
                                         { Name: "Variance", Value: wlStatus.GrandTotal.Variance },
                                         { Name: "Margin", Value: wlStatus.GrandTotal.Margin }
-                                    ],
+                            ],
                             SubRows: []
                         };
 
@@ -449,15 +447,13 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
                                             { Name: "VirtualTotal", Value: wlDetail.VirtualTotal },
                                             { Name: "Variance", Value: wlDetail.Variance },
                                             { Name: "Margin", Value: wlDetail.Margin }
-                                        ]
+                                    ]
                                 };
                                 currStatusRow.SubRows.push(currDetailRow);
                             }
-
                         }
                         currentRow.SubRows.push(currStatusRow);
                     }
-
                 }
                 bodyData.push(currentRow);
             }
@@ -475,7 +471,7 @@ Fanex.AccountingReports.Gaming.NumberGameWinlossByDate = function () {
                                         { Name: "VirtualTotal", Value: rs.GrandTotal.VirtualTotal },
                                         { Name: "Variance", Value: rs.GrandTotal.Variance },
                                         { Name: "Margin", Value: rs.GrandTotal.Margin }
-									]
+						    ]
 						}]
             }
         }

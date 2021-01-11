@@ -69,5 +69,10 @@ namespace Fanex.AccountingReports.Websites.Controllers
         {
             return Redirect("../../UniversalReports/VoidingSettledTickets");
         }
+
+        public ActionResult DailyTurnoverComparison()
+        {
+            return Redirect("../../UniversalReports/DailyTurnoverComparison");
+        }
     }
 }

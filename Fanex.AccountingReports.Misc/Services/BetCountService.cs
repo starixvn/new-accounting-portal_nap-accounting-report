@@ -1,9 +1,5 @@
 namespace Fanex.AccountingReports.Misc.Services.Implement
 {
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Drawing;
-    using System.Linq;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Extensions;
@@ -15,6 +11,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
     using Fanex.AccountingReports.Misc.Resources;
     using Fanex.Common;
     using Models.BetCount;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -693,6 +693,15 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
         public ProductInfo GenerateSports(IEnumerable<dynamic> rawData)
         {
+            if (rawData.Count() == 0)
+            {
+                return new ProductInfo
+                {
+                    Id = 0,
+                    ChildsInfo = new List<ProductInfo>()
+                };
+            }
+
             var indGroup = new ProductInfo
             {
                 Id = Converter.ToInt(rawData.FirstOrDefault().SportID),

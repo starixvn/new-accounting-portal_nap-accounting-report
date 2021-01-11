@@ -35,7 +35,7 @@
     <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeMainReport_WH" SpName="Acc_Rpt_NumberGameWinlossByBettype" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="Gaming_NumberGameWinLoss_WinLossByBetTypeDetailReport_WH" SpName="Acc_Rpt_NumberGameWinlossByBettypeDetail" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="Gaming_NumberGameWinLoss_WinLossByMatchMainReport" SpName="Acc_Rpt_NumberGameMemberWinlossByMatch" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600"></Setting>
-    <Setting Key="Gaming_NumberGameWinLoss_WinLossByMatchDetailReport" SpName="Acc_Rpt_NumberGameMemberWinlossByMatch_details" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600">
+    <Setting Key="Gaming_NumberGameWinLoss_WinLossByMatchDetailReport" SpName="Acc_Rpt_NumberGameMemberWinlossByMatch_Details" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600">
       <Mapping DataField="custid" ObjectProperty="CustomerId" />
       <Mapping DataField="Username" ObjectProperty="UserName" />
       <Mapping DataField="turnover" ObjectProperty="CompanyTurnover" />

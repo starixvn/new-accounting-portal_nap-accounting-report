@@ -1,9 +1,5 @@
 namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Models;
@@ -16,6 +12,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
     using Fanex.AccountingReports.Main.Resources;
     using Fanex.Common;
     using Fanex.Data.Repository;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -321,7 +321,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                             sportInfo.Name = Labels.VirtualSport;
                             winloss.Id = sportId;
                         }
-                        else if (sportInfo.Id == 161 || sportInfo.Id == 164)
+                        else if (sportInfo.Id == 161 || sportInfo.Id == 164 || sportInfo.Id == 168)
                         {
                             betInfo.Name = this.GetSportName(sportId);
                             sportInfo.Name = "Number Game";
@@ -394,7 +394,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
                     virtualSport.CalculateTotal(winloss);
                 }
             }
-            else if (sportInfo.Id == 161 || sportInfo.Id == 164)
+            else if (sportInfo.Id == 161 || sportInfo.Id == 164 || sportInfo.Id == 168)
             {
                 SportTypeWinLossInfo ng = report.SportTypeWinLosses.FirstOrDefault(sport => sport.Id == 161);
                 if (ng == null)

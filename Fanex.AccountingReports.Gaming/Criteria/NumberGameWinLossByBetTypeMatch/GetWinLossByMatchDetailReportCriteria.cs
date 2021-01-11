@@ -1,9 +1,9 @@
 namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByBetTypeMatch
 {
-    using System;
     using Data;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.Data.Repository;
+    using System;
 
     /// <summary>
     /// TODO: Update summary.
@@ -22,7 +22,7 @@ namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByBetTypeMatc
         [SpParam(SqlParamName = "matchid")]
         public int MatchId { get; set; }
 
-        [SpParam(SqlParamName = "balanceupday")]
+        [SpParam(Ignored = true)]
         public DateTime BalanceUpDay
         {
             get
@@ -37,7 +37,6 @@ namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByBetTypeMatc
         [SpParam(SqlParamName = "bettype")]
         public int BetTypeId { get; set; }
 
-        [SpParam(Ignored = true)]
         public string MatchCode { get; set; }
 
         public bool TrialData { get; set; }

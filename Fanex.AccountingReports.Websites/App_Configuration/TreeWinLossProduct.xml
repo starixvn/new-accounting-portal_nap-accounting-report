@@ -1,30 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ROOT>
-  <Product ProductID="1" ProductName ="SportsBook" IsNoTurnover="0" IsNoVirtual="0"/>
-  <Product ProductID="3" ProductName ="Number Game" IsNoTurnover="0" IsNoVirtual="0"/>
-  <Product ProductID="2" ProductName ="Racing" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="7" ProductName ="Bingo" IsNoTurnover="1" IsNoVirtual="1"/>
-  <Product ProductID="6" ProductName ="MBC - RNG Casino" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="14" ProductName ="Macau" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="4" ProductName ="Live Casino" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="12" ProductName ="Gold Deluxe" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="11" ProductName ="AG Casino" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="9" ProductName ="Poker" IsNoTurnover="1" IsNoVirtual="1"/>
-  <Product ProductID="5" ProductName ="Virtual Sports" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="8" ProductName ="RNG Keno" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="-1" ProductName ="Metric Gaming - Super Live" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="13" ProductName ="Microgaming - Live Casino" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="17" ProductName ="Microgaming - RNG Casino" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="15" ProductName ="Colossus Bets" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="21" ProductName ="Allbet" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="22" ProductName ="Macau Games" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="23" ProductName ="NG2" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="24" ProductName ="Fishing World" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="25" ProductName ="Cash Out" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="27" ProductName ="Virtual Sports 2" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="28" ProductName ="Lottery" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="26" ProductName ="Lucky 3" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="30" ProductName ="Bullfighting" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="31" ProductName ="Exchange" IsNoTurnover="0" IsNoVirtual="1"/>
-  <Product ProductID="32" ProductName ="PP" IsNoTurnover="0" IsNoVirtual="1"/>
+  <Product ProductID="1" ProductName ="SportsBook" IsNoTurnover="0" IsNoVirtual="0" />
+  <Product ProductID="3" ProductName ="Number Game" IsNoTurnover="0" IsNoVirtual="0" />
+  <Product ProductID="2" ProductName ="Racing" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="7" ProductName ="Bingo" IsNoTurnover="1" IsNoVirtual="1" />
+  <Product ProductID="6" ProductName ="MBC - RNG Casino" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="14" ProductName ="Macau" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="4" ProductName ="Live Casino" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="12" ProductName ="Gold Deluxe" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="11" ProductName ="AG Casino" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="9" ProductName ="Poker" IsNoTurnover="1" IsNoVirtual="1" />
+  <Product ProductID="5" ProductName ="Virtual Sports" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="8" ProductName ="RNG Keno" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="-1" ProductName ="Metric Gaming - Super Live" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="13" ProductName ="Microgaming - Live Casino" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="17" ProductName ="Microgaming - RNG Casino" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="15" ProductName ="Colossus Bets" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="21" ProductName ="Allbet" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="22" ProductName ="Macau Games" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="23" ProductName ="NG2" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="24" ProductName ="Fishing World" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="25" ProductName ="Cash Out" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="27" ProductName ="Virtual Sports 2" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="28" ProductName ="Lottery" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="26" ProductName ="Lucky 3" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="30" ProductName ="Bullfighting" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="31" ProductName ="Exchange" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="32" ProductName ="PP" IsNoTurnover="0" IsNoVirtual="1" />
+  <Product ProductID="57" ProductName ="BG" IsNoTurnover="0" IsNoVirtual="1" />
 </ROOT>
