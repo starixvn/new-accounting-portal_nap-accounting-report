@@ -57,9 +57,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             IsNormalMode: _leagueWinLoss.Params.reportParams.IsNormalMode,
             IsNoDraw: _leagueWinLoss.Params.reportParams.IsNoDraw,
             SiteName: _leagueWinLoss.Params.reportParams.SiteName,
-            LiveIndicatorVarchar: 'none',
             ShowHedgeMatchOnly: false,
-            BetType: -1
+            BetType: -1,
+            GlobalShowTime: _leagueWinLoss.Params.reportParams.GlobalShowTime,
+            LiveIndicator: _leagueWinLoss.Params.reportParams.LiveIndicator
         });
     };
     viewBetTypesByStatus = function (sportName, leagueName) {
@@ -78,7 +79,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             SiteName: _leagueWinLoss.Params.reportParams.SiteName,
             IsHedge: false,
             IsIncludeSiteType: false,
-            IsIncludeHedge: true
+            IsIncludeHedge: true,
+            GlobalShowTime: _leagueWinLoss.Params.reportParams.GlobalShowTime
         });
     };
     viewBetTypes = function (matchId, isLive, matchEvent, isHedge) {
@@ -97,7 +99,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             SiteName: _leagueWinLossViewMatches.Params.reportParams.SiteName,
             IsHedge: isHedge,
             IsIncludeSiteType: true,
-            IsIncludeHedge: false
+            IsIncludeHedge: false,
+            GlobalShowTime: _leagueWinLossViewMatches.Params.reportParams.GlobalShowTime
         });
     };
     viewSite = function (bettype, bettypeName, siteType) {
@@ -159,7 +162,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             LiveIndicatorVarchar: liveStatus,
             ShowHedgeMatchOnly: isHedge,
             BetType: betType,
-            BetTypeName: betTypeName
+            BetTypeName: betTypeName,
+            GlobalShowTime: _leagueWinLossViewBetTypesByStatus.Params.reportParams.GlobalShowTime
         });
     };
 

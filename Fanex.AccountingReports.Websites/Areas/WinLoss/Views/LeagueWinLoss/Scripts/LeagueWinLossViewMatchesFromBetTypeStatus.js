@@ -19,7 +19,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatchesFromBetTyp
             LiveIndicatorVarchar: '',
             ShowHedgeMatchOnly: false,
             BetType: 0,
-            BetTypeName: ''
+            BetTypeName: '',
+            GlobalShowTime: ''
         }
     };
     self.initPage = function () {

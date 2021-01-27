@@ -30,6 +30,10 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public string SiteName { get; set; }
 
+        public int LiveIndicator { get; set; }
+
+        public string GlobalShowTime { get; set; }
+
         public override string GetSettingKey()
         {
             var suffix = IsNormalMode ? string.Empty : "_WH";

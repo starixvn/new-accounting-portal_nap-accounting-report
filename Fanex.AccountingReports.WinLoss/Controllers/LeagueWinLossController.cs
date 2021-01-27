@@ -40,6 +40,13 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         }
 
         [HttpPost]
+        public JsonResult GetGlobalShowTime()
+        {
+            var results = this._reportService.GetGlobalShowTime();
+            return Json(results, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public JsonResult GetSiteFilter()
         {
             var sports = this._reportService.GetSiteFilter();
