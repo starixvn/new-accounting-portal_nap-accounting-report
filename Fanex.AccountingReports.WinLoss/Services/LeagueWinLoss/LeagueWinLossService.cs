@@ -51,7 +51,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var sportGroups = rawData.Where(x => x.LeagueName != "Soccer 8RM"
                                                 && x.LeagueName != "Other Sports 8RM"
                                                 && x.LeagueName != "Soccer BARM"
-                                                && x.LeagueName != "Other Sports BARM")
+                                                && x.LeagueName != "Other Sports BARM"
+                                                && x.LeagueName != "SABA Soccer 8RM"
+                                                && x.LeagueName != "SABA Soccer BARM")
                                                  .GroupBy(x => new { x.SportType, x.Sport, x.IsSabaSport });
 
             foreach (var sportGroup in sportGroups)
@@ -74,18 +76,26 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var soccerRM = rawData.FirstOrDefault(x => x.LeagueName == "Soccer 8RM");
             leagueWinLoss.SoccerRM = BindingLeague(soccerRM);
 
+            var sabaSoccerRM = rawData.FirstOrDefault(x => x.LeagueName == "SABA Soccer 8RM");
+            leagueWinLoss.SabaSoccerRM = BindingLeague(sabaSoccerRM);
+
             var otherRM = rawData.FirstOrDefault(x => x.LeagueName == "Other Sports 8RM");
             leagueWinLoss.OtherSportRM = BindingLeague(otherRM);
 
             var soccerBARM = rawData.FirstOrDefault(x => x.LeagueName == "Soccer BARM");
             leagueWinLoss.SoccerBARM = BindingLeague(soccerBARM);
 
+            var sabaSoccerBARM = rawData.FirstOrDefault(x => x.LeagueName == "SABA Soccer BARM");
+            leagueWinLoss.SabaSoccerBARM = BindingLeague(sabaSoccerBARM);
+
             var otherBARM = rawData.FirstOrDefault(x => x.LeagueName == "Other Sports BARM");
             leagueWinLoss.OtherSportBARM = BindingLeague(otherBARM);
 
             var total = rawData.Where(x => x.LeagueName != "Soccer 8RM"
+                                        && x.LeagueName != "SABA Soccer 8RM"
                                         && x.LeagueName != "Other Sports 8RM"
                                         && x.LeagueName != "Soccer BARM"
+                                        && x.LeagueName != "SABA Soccer BARM"
                                         && x.LeagueName != "Other Sports BARM");
             var allTotal = CalculateSportTotal("Total", total);
             leagueWinLoss.Total = allTotal;

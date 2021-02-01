@@ -510,6 +510,21 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 footerData.push(currentRow);
             }
 
+            if (self.isShowTotalRow(report.SabaSoccerRM)) {
+                info = report.SabaSoccerRM;
+                currentRow =
+                {
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
+                            { Name: "ColRealIncome", Value: info.RealIncome },
+                            { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
+                            { Name: "ColRealTurnOver", Value: info.RealTurnover },
+                            { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
+                };
+
+                footerData.push(currentRow);
+            }
+
             if (self.isShowTotalRow(report.OtherSportRM)) {
                 info = report.OtherSportRM;
                 currentRow =
@@ -526,6 +541,21 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             }
 
             if (self.isShowTotalRow(report.SoccerBARM)) {
+                info = report.SoccerBARM;
+                currentRow =
+                {
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
+                            { Name: "ColRealIncome", Value: info.RealIncome },
+                            { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
+                            { Name: "ColRealTurnOver", Value: info.RealTurnover },
+                            { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
+                };
+
+                footerData.push(currentRow);
+            }
+
+            if (self.isShowTotalRow(report.SabaSoccerBARM)) {
                 info = report.SoccerBARM;
                 currentRow =
                 {
