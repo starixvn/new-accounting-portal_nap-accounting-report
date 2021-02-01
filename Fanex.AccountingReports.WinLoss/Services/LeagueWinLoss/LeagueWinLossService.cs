@@ -272,7 +272,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 new GlobalShowTime { Value = 6, Time = "17:00 - 17:59"},
                 new GlobalShowTime { Value = 7, Time = "18:00 - 18:59"},
                 new GlobalShowTime { Value = 8, Time = "19:00 - 19:59"},
-                new GlobalShowTime { Value = 8, Time = "20:00 - 20:59"},
+                new GlobalShowTime { Value = 9, Time = "20:00 - 20:59"},
                 new GlobalShowTime { Value = 10, Time = "21:00 - 21:59"},
                 new GlobalShowTime { Value = 11, Time = "22:00 - 22:59"},
                 new GlobalShowTime { Value = 12, Time = "23:00 - 23:59"},
