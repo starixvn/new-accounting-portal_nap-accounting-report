@@ -179,18 +179,6 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             maxDate: new Date(toDay)
         });
 
-
-        $('#dvMonth').monPickr({
-            plugInId: '#dvMonth',
-            today: toDay,
-            maxDate: toDay,
-            minDate: minWareHouseDate,
-            showDateRange: true,
-            log: function (msg) {
-                console.warn(msg);
-            }
-        });
-
         _tables.historyDatepickerplugin = $('#historyDatepickerplugin');
     };
 
