@@ -360,17 +360,27 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 
     var checkReportParams = function (params) {
         AccReport.popUp.removeHighLight();
-        if (self.Params.reportParams.SportBettype == '') {
+
+        var startDate = params.StartDate;
+        var endDate = params.EndDate;
+        var diffDays = moment(endDate).diff(moment(startDate), 'days');
+
+        if (parseInt(diffDays) > 90) {
+            AccReport.popUp.show("Date range should not exceed 90 days!");
+            return false;
+        }
+
+        if (params.SportBettype == '') {
             AccReport.popUp.show("Please select  at least one sport!", "dropdown-sport");
             return false;
         }
 
-        if (self.Params.reportParams.SiteName == '') {
+        if (params.SiteName == '') {
             AccReport.popUp.show("Please select  at least one division!", "dropdown-division");
             return false;
         }
 
-        if (self.Params.reportParams.GlobalShowTime == '') {
+        if (params.GlobalShowTime == '') {
             AccReport.popUp.show("Please select at least one Global Show Time (GMT +8)!", "ddlGlobalShowTime");
             return false;
         }
