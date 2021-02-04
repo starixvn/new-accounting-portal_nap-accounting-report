@@ -16,10 +16,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatchesFromBetTyp
             IsNormalMode: true,
             IsNoDraw: false,
             SiteName: '',
-            LiveIndicatorVarchar: '',
+            LiveIndicator: 0,
             ShowHedgeMatchOnly: false,
             BetType: 0,
-            BetTypeName: ''
+            BetTypeName: '',
+            GlobalShowTime: ''
         }
     };
     self.initPage = function () {
@@ -61,6 +62,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatchesFromBetTyp
         _tables.report.addClass("display-none");
         var bodyData = [];
         var footerData = [];
+        var liveText = self.Params.reportParams.LiveIndicator ? "Live" : "Non-Live";
 
         if (report.Match.length > 0) {
             var len = report.Match.length;
@@ -187,7 +189,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatchesFromBetTyp
                     + " - "
                     + self.Params.reportParams.BetTypeName
                     + " - "
-                    + self.Params.reportParams.LiveIndicatorVarchar,
+                    + liveText,
                 showExcelButton: true,
                 exportExcelFunction: function () {
                     self.exportReport();

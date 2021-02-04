@@ -104,8 +104,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
                     CustomCellRender: function (currentCell) {
                         var clickEvent = ' onclick = "viewMatchesFromBetTypeStatus(' + currentCell.Value.Bettype
                                     + ',\'' + currentCell.Value.BettypeName
-                                    + '\',\'' + liveStatus
-                                    + '\',' + currentCell.Value.IsHedge + ");\"";
+                                    + '\',' + liveStatus
+                                    + ',' + currentCell.Value.IsHedge + ");\"";
                         var displayBettype = currentCell.Value.IsHedge ? currentCell.Value.BettypeName + ' (hedge)' : currentCell.Value.BettypeName;
                         var html = '<div class="link" ' + clickEvent + '>' + displayBettype + '</div>';
                         return html;
@@ -131,6 +131,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
         var reportTable = _tables.reportLive;
         var reportTableContainer = _tables.reportLiveContainer;
         var liveStatus = index === 0 ? "Live" : "Non-Live";
+        var isLive = index === 0;
 
         if (index !== 0) {
             reportTable = _tables.reportNonLive;
@@ -147,7 +148,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
         if (length > 0) {
             for (var i = 0; i < length; i++) {
                 info = report.BettypeWinLoss[i];
-                showBetType(info, bodyData, liveStatus);
+                showBetType(info, bodyData, isLive);
             }
         }
 

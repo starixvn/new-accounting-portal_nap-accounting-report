@@ -9,14 +9,16 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         ddlSport: null,
         btnToday: null,
         btnYesterday: null,
-        monthpickerplugin: null,
+        historyDatepickerplugin: null,
         btnReportMode: null,
         bettransMode: null,
         warehouseMode: null,
         bettransModeBtn: null,
         txtLeague: null,
         autocomplete: null,
-        ddlDivision: null
+        ddlDivision: null,
+        ddlGlobalShowTime: null,
+        ddlStatus: null
     };
 
     self.Params = {
@@ -29,7 +31,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             LeagueName: '',
             SortColumnName: '',
             SortDirection: '',
-            SiteName: ''
+            SiteName: '',
+            LiveIndicator: 2,
+            GlobalShowTime: ''
         },
 
         isNormalMode: true,
@@ -50,9 +54,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
     self.initPage = function () {
         cachedDOMElements();
         setDayValueForButtons();
-        renderMonthPicker();
+        renderHistoryDatePicker();
         renderDatePicker();
         getSport();
+        getGlobalShowTime();
         getDivision();
         hideWarehouseMode();
         makeLeagueSuggestion();
@@ -65,13 +70,15 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         _tables.ddlSport = $("#dropdown-sport");
         _tables.btnToday = $("#btnToday");
         _tables.btnYesterday = $("#btnYesterday");
-        _tables.monthpickerplugin = $("#dvMonth");
+        _tables.historyDatepickerplugin = $("#historyDatepickerplugin");
         _tables.btnReportMode = $("#btnReportMode");
         _tables.bettransMode = $("#bettrans-mode");
         _tables.warehouseMode = $("#warehouse-mode");
         _tables.bettransModeBtn = $("#bettrans-mode-btn");
         _tables.txtLeague = $("#txt-league");
         _tables.ddlDivision = $("#dropdown-division");
+        _tables.ddlGlobalShowTime = $("#ddlGlobalShowTime");
+        _tables.ddlStatus = $("#ddlStatus");
     };
 
     var setDayValueForButtons = function () {
@@ -116,6 +123,16 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             false);
     };
 
+    var getGlobalShowTime = function () {
+        AccReport.utility.CallAjax(this,
+            window.rootUrl + "WinLoss/LeagueWinLoss/GetGlobalShowTime",
+            null,
+            self.RenderGlobalShowTime,
+            self.RenderGlobalShowTime,
+            AccReport.enableInput,
+            false);
+    };
+
     var getDivision = function () {
         AccReport.utility.CallAjax(this,
             window.rootUrl + "WinLoss/LeagueWinLoss/GetSiteFilter",
@@ -126,19 +143,43 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             false);
     };
 
-    var renderMonthPicker = function () {
-        $('#dvMonth').monPickr({
-            plugInId: '#dvMonth',
-            today: toDay,
-            maxDate: toDay,
-            minDate: minWareHouseDate,
-            showDateRange: true,
-            log: function (msg) {
-                console.warn(msg);
-            }
+    var renderHistoryDatePicker = function () {
+        $('#historyDatepickerplugin').nexDatePicker({
+            nexDatePickerType: "quickchoose",
+            datePickerFormat: {
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: FormatConstant.M_DD_YY_STRING
+            },
+            dropDownList:
+            {
+                Id: "dropDownListId",
+                Label: "Date ",
+                LabelCss: "lbl-field col_2 bold",
+                OptionCss: "edit-field col_6"
+            },
+            firstDatePicker: {
+                Id: "firstDatePickerId1",
+                Label: labelFrom,
+                InitDate: toDay,
+                LabelCss: "lbl-field col_2 bold",
+                TextboxCss: "edit-field col_6"
+            },
+            secondDatePicker: {
+                Id: "secondDatePickerId1",
+                Label: labelTo,
+                InitDate: toDay,
+                LabelCss: "lbl-field col_2 bold",
+                TextboxCss: "edit-field col_6"
+            },
+            selectedItem: 1,
+            onSelectDatePicker: function () {
+            },
+            minDate: new Date(minWareHouseDate),
+            maxDate: new Date(toDay)
         });
 
-        _tables.monthpickerplugin = $('#dvMonth');
+        _tables.historyDatepickerplugin = $('#historyDatepickerplugin');
     };
 
     var bindingEvent = function () {
@@ -214,6 +255,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 
         AccReport.disableInput();
         hideBettypes();
+        hideBettypesByStatus();
+        hideMatchesFromBetTypeStatus();
         hideMatches();
         hideSites();
         hideSupers();
@@ -236,6 +279,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 
         AccReport.disableInput();
         hideBettypes();
+        hideBettypesByStatus();
+        hideMatchesFromBetTypeStatus();
         hideMatches();
         hideSites();
         hideSupers();
@@ -258,6 +303,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 
         AccReport.disableInput();
         hideBettypes();
+        hideBettypesByStatus();
+        hideMatchesFromBetTypeStatus();
         hideMatches();
         hideSites();
         hideSupers();
@@ -285,6 +332,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                       "" :
                       _tables.txtLeague.val();
         self.Params.reportParams.SiteName = _tables.ddlDivision.fanexMultiSelect('getItems', true).toString();
+        self.Params.reportParams.GlobalShowTime = _tables.ddlGlobalShowTime.fanexMultiSelect('getItems', true).toString();
+        self.Params.reportParams.LiveIndicator = _tables.ddlStatus.val();
     };
 
     var getParams = function () {
@@ -293,8 +342,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             self.Params.reportParams.StartDate = date;
             self.Params.reportParams.EndDate = date;
         } else {
-            self.Params.reportParams.StartDate = _tables.monthpickerplugin.monPickr("getFromDate", FormatConstant.MMM_DD_YY_STRING_MONTH_PICKER);
-            self.Params.reportParams.EndDate = _tables.monthpickerplugin.monPickr("getToDate", FormatConstant.MMM_DD_YY_STRING_MONTH_PICKER);
+            var dateRange = _tables.historyDatepickerplugin.nexDatePicker("getDateRange");
+            self.Params.reportParams.StartDate = dateRange.FromDate;
+            self.Params.reportParams.EndDate = dateRange.ToDate;
         }
 
         self.Params.reportParams.SportBettype = _tables.ddlSport.fanexMultiSelect('getItems', true).toString();
@@ -304,17 +354,34 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                       "" :
                       _tables.txtLeague.val();
         self.Params.reportParams.SiteName = _tables.ddlDivision.fanexMultiSelect('getItems', true).toString();
+        self.Params.reportParams.GlobalShowTime = _tables.ddlGlobalShowTime.fanexMultiSelect('getItems', true).toString();
+        self.Params.reportParams.LiveIndicator = _tables.ddlStatus.val();
     };
 
     var checkReportParams = function (params) {
         AccReport.popUp.removeHighLight();
-        if (self.Params.reportParams.SportBettype == '') {
+
+        var startDate = params.StartDate;
+        var endDate = params.EndDate;
+        var diffDays = moment(endDate).diff(moment(startDate), 'days');
+
+        if (parseInt(diffDays) > 90) {
+            AccReport.popUp.show("Date range should not exceed 90 days!");
+            return false;
+        }
+
+        if (params.SportBettype == '') {
             AccReport.popUp.show("Please select  at least one sport!", "dropdown-sport");
             return false;
         }
 
-        if (self.Params.reportParams.SiteName == '') {
+        if (params.SiteName == '') {
             AccReport.popUp.show("Please select  at least one division!", "dropdown-division");
+            return false;
+        }
+
+        if (params.GlobalShowTime == '') {
+            AccReport.popUp.show("Please select at least one Global Show Time (GMT +8)!", "ddlGlobalShowTime");
             return false;
         }
 
@@ -441,6 +508,21 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 footerData.push(currentRow);
             }
 
+            if (self.isShowTotalRow(report.SabaSoccerRM)) {
+                info = report.SabaSoccerRM;
+                currentRow =
+                {
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
+                            { Name: "ColRealIncome", Value: info.RealIncome },
+                            { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
+                            { Name: "ColRealTurnOver", Value: info.RealTurnover },
+                            { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
+                };
+
+                footerData.push(currentRow);
+            }
+
             if (self.isShowTotalRow(report.OtherSportRM)) {
                 info = report.OtherSportRM;
                 currentRow =
@@ -457,6 +539,21 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             }
 
             if (self.isShowTotalRow(report.SoccerBARM)) {
+                info = report.SoccerBARM;
+                currentRow =
+                {
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
+                            { Name: "ColRealIncome", Value: info.RealIncome },
+                            { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
+                            { Name: "ColRealTurnOver", Value: info.RealTurnover },
+                            { Name: "ColVirtualMargin", Value: "", MergeColNumber: 2 }]
+                };
+
+                footerData.push(currentRow);
+            }
+
+            if (self.isShowTotalRow(report.SabaSoccerBARM)) {
                 info = report.SoccerBARM;
                 currentRow =
                 {
@@ -821,5 +918,52 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         });
 
         _tables.ddlDivision = $("#dropdown-division");
+    };
+
+    self.RenderGlobalShowTime = function (globalShowTimes) {
+        var isSetDefaultCollapse = true;
+        var noItemText = 'No item found.';
+        var len = globalShowTimes.length;
+        var ddwnGlobalShowTimes = [];
+        var prefixId = 'ddlGlobalShowTime_';
+        for (var i = 0; i < len; i++) {
+            var showTime = globalShowTimes[i];
+            ddwnGlobalShowTimes.push({
+                id: prefixId + showTime.Value,
+                value: showTime.Value,
+                text: showTime.Time,
+                checked: true,
+                enable: true,
+                cssClass: "",
+                items: []
+            });
+        }
+
+        _tables.ddlGlobalShowTime.fanexMultiSelect({
+            minWidth: 150,
+            maxHeight: 450,
+            showFilter: true,
+            shadow: true,
+            showHeader: true,
+            isCheckAll: true,
+            showFooter: false,
+            checkAllText: 'All',
+            isUsedCustomCheckAllText: true,
+            useCustomCheckAllText: 'All',
+            noneSelectedText: 'Select an option',
+            noItemText: 'No item found.',
+            disabled: false,
+            listData: ddwnGlobalShowTimes,
+            onCheck: function () {
+            },
+            onOpen: function () {
+                if (isSetDefaultCollapse) {
+                    $('#ddlGlobalShowTimeCollapseButton').trigger('click')
+                    isSetDefaultCollapse = false;
+                }
+            }
+        });
+
+        _tables.ddlGlobalShowTime = $("#ddlGlobalShowTime");
     };
 }

@@ -27,7 +27,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public string SiteName { get; set; }
 
-        public string LiveIndicatorVarchar { get; set; }
+        public int LiveIndicator { get; set; }
 
         public bool ShowHedgeMatchOnly { get; set; }
 
@@ -35,6 +35,8 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         [SpParam(Ignored = true)]
         public string BetTypeName { get; set; }
+
+        public string GlobalShowTime { get; set; }
 
         public override string GetSettingKey()
         {

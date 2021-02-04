@@ -16,9 +16,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
             IsNormalMode: true,
             IsNoDraw: false,
             SiteName: '',
-            LiveIndicatorVarchar: 'none',
+            LiveIndicator: 0,
             ShowHedgeMatchOnly: false,
-            BetType: 0
+            BetType: 0,
+            GlobalShowTime: ''
         }
     };
     self.initPage = function () {

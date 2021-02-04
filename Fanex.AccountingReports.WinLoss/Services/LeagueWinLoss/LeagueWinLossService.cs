@@ -51,12 +51,14 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var sportGroups = rawData.Where(x => x.LeagueName != "Soccer 8RM"
                                                 && x.LeagueName != "Other Sports 8RM"
                                                 && x.LeagueName != "Soccer BARM"
-                                                && x.LeagueName != "Other Sports BARM")
-                                                 .GroupBy(x => new { x.SportType, x.Sport });
+                                                && x.LeagueName != "Other Sports BARM"
+                                                && x.LeagueName != "SABA Soccer 8RM"
+                                                && x.LeagueName != "SABA Soccer BARM")
+                                                 .GroupBy(x => new { x.SportType, x.Sport, x.IsSabaSport });
 
             foreach (var sportGroup in sportGroups)
             {
-                var rawSports = rawData.Where(x => x.SportType == sportGroup.Key.SportType);
+                var rawSports = rawData.Where(x => x.SportType == sportGroup.Key.SportType && x.IsSabaSport == sportGroup.Key.IsSabaSport);
                 var sportName = sportGroup.Key.Sport;
                 var leagues = BindingLeagues(rawSports);
                 var sportTotal = CalculateSportTotal(sportName, rawSports);
@@ -74,18 +76,26 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var soccerRM = rawData.FirstOrDefault(x => x.LeagueName == "Soccer 8RM");
             leagueWinLoss.SoccerRM = BindingLeague(soccerRM);
 
+            var sabaSoccerRM = rawData.FirstOrDefault(x => x.LeagueName == "SABA Soccer 8RM");
+            leagueWinLoss.SabaSoccerRM = BindingLeague(sabaSoccerRM);
+
             var otherRM = rawData.FirstOrDefault(x => x.LeagueName == "Other Sports 8RM");
             leagueWinLoss.OtherSportRM = BindingLeague(otherRM);
 
             var soccerBARM = rawData.FirstOrDefault(x => x.LeagueName == "Soccer BARM");
             leagueWinLoss.SoccerBARM = BindingLeague(soccerBARM);
 
+            var sabaSoccerBARM = rawData.FirstOrDefault(x => x.LeagueName == "SABA Soccer BARM");
+            leagueWinLoss.SabaSoccerBARM = BindingLeague(sabaSoccerBARM);
+
             var otherBARM = rawData.FirstOrDefault(x => x.LeagueName == "Other Sports BARM");
             leagueWinLoss.OtherSportBARM = BindingLeague(otherBARM);
 
             var total = rawData.Where(x => x.LeagueName != "Soccer 8RM"
+                                        && x.LeagueName != "SABA Soccer 8RM"
                                         && x.LeagueName != "Other Sports 8RM"
                                         && x.LeagueName != "Soccer BARM"
+                                        && x.LeagueName != "SABA Soccer BARM"
                                         && x.LeagueName != "Other Sports BARM");
             var allTotal = CalculateSportTotal("Total", total);
             leagueWinLoss.Total = allTotal;
@@ -256,6 +266,40 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             result.Add(nonLiveBetTypes);
 
             SessionManager.Set(WinLossContants.LeagueWinLosViewBetTypesByStatusSessionKey, result);
+            return result;
+        }
+
+        public List<GlobalShowTime> GetGlobalShowTime()
+        {
+            var result = new List<GlobalShowTime>
+            {
+                new GlobalShowTime { Value = 0, Time = "00:00 - 23:59"},
+                new GlobalShowTime { Value = 1, Time = "12:00 - 12:59"},
+                new GlobalShowTime { Value = 2, Time = "13:00 - 13:59"},
+                new GlobalShowTime { Value = 3, Time = "14:00 - 15:59"},
+                new GlobalShowTime { Value = 4, Time = "15:00 - 15:59"},
+                new GlobalShowTime { Value = 5, Time = "16:00 - 16:59"},
+                new GlobalShowTime { Value = 6, Time = "17:00 - 17:59"},
+                new GlobalShowTime { Value = 7, Time = "18:00 - 18:59"},
+                new GlobalShowTime { Value = 8, Time = "19:00 - 19:59"},
+                new GlobalShowTime { Value = 9, Time = "20:00 - 20:59"},
+                new GlobalShowTime { Value = 10, Time = "21:00 - 21:59"},
+                new GlobalShowTime { Value = 11, Time = "22:00 - 22:59"},
+                new GlobalShowTime { Value = 12, Time = "23:00 - 23:59"},
+                new GlobalShowTime { Value = 13, Time = "00:00 - 00:59"},
+                new GlobalShowTime { Value = 14, Time = "01:00 - 01:59"},
+                new GlobalShowTime { Value = 15, Time = "02:00 - 02:59"},
+                new GlobalShowTime { Value = 16, Time = "03:00 - 03:59"},
+                new GlobalShowTime { Value = 17, Time = "04:00 - 04:59"},
+                new GlobalShowTime { Value = 18, Time = "05:00 - 05:59"},
+                new GlobalShowTime { Value = 19, Time = "06:00 - 06:59"},
+                new GlobalShowTime { Value = 20, Time = "07:00 - 07:59"},
+                new GlobalShowTime { Value = 21, Time = "08:00 - 08:59"},
+                new GlobalShowTime { Value = 22, Time = "09:00 - 09:59"},
+                new GlobalShowTime { Value = 23, Time = "10:00 - 10:59"},
+                new GlobalShowTime { Value = 24, Time = "11:00 - 11:59"}
+            };
+
             return result;
         }
 

@@ -12,9 +12,13 @@ namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
 
         public LeagueWinLossItem SoccerRM { get; set; }
 
+        public LeagueWinLossItem SabaSoccerRM { get; set; }
+
         public LeagueWinLossItem OtherSportRM { get; set; }
 
         public LeagueWinLossItem SoccerBARM { get; set; }
+
+        public LeagueWinLossItem SabaSoccerBARM { get; set; }
 
         public LeagueWinLossItem OtherSportBARM { get; set; }
 

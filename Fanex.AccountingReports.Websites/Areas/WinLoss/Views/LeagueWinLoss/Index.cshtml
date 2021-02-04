@@ -37,16 +37,11 @@
                 </div>
             </div>
             <div id="bettrans-mode" class="filter-cell">
-                <div id="datepickerplugin" class="lbl-field col_7 align-right">
+                <div id="datepickerplugin" class="lbl-field col_23 align-right">
                 </div>
             </div>
             <div id="warehouse-mode" class="filter-cell">
-                <div class="lbl-field col_3 align-right bold">
-                    @Labels.Month
-                </div>
-                <div class="edit-field col_13">
-                    <div id="dvMonth">
-                    </div>
+                <div id="historyDatepickerplugin" class="lbl-field col_23 align-right">
                 </div>
             </div>
             <div class="filter-cell">
@@ -84,8 +79,28 @@
                 <div class="lbl-field col_3 align-right bold">
                     @Labels.Division
                 </div>
-                <div class="edit-field col_12 align-left ddl-division">
+                <div class="edit-field col_11 align-left ddl-division">
                     <select id="dropdown-division"></select>
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="lbl-field col_2 align-right bold">
+                    @Labels.Status
+                </div>
+                <div class="edit-field col_4 align-left">
+                    <select id="ddlStatus" class="alpha">
+                        <option value="2">All</option>
+                        <option value="1">Live</option>
+                        <option value="0">Non-Live</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-cell">
+                <div class="lbl-field col_8 align-right bold">
+                   Global Show Time(GMT+8)
+                </div>
+                <div class="edit-field col_6 align-left">
+                    <select id="ddlGlobalShowTime"></select>
                 </div>
             </div>
         </div>
@@ -165,6 +180,8 @@
         var todayStr = '@DateTime.Now.ToString("MMM dd, yyyy")';
         var yesterdayStr = '@DateTime.Now.AddDays(-1).ToString("MMM dd, yyyy")';
         var minWareHouseDate = '@(new DateTime(2017, 1, 1))';
+        var labelFrom = '@Labels.From';
+        var labelTo = '@Labels.To';
     </script>
 }
 @section Foot {
@@ -173,6 +190,7 @@
     <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/MonthPicker/monPickr-0.0.3.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/Autocomplete/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="~/scripts/_lib/FormatLibs/DateTimeFormat/moment.js"></script>
     <script type="text/javascript" src="~/Areas/WinLoss/Views/LeagueWinLoss/Scripts/LeagueWinLoss.js"></script>
     <script type="text/javascript" src="~/Areas/WinLoss/Views/LeagueWinLoss/Scripts/LeagueWinLossViewBetTypes.js"></script>
     <script type="text/javascript" src="~/Areas/WinLoss/Views/LeagueWinLoss/Scripts/LeagueWinLossViewBetTypesByStatus.js"></script>

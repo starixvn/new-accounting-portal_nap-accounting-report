@@ -12,5 +12,7 @@ namespace Fanex.AccountingReports.WinLoss.Entities.LeagueWinLoss
         public int LeagueId { get; set; }
 
         public string LeagueName { get; set; }
+
+        public bool IsSabaSport { get; set; }
     }
 }

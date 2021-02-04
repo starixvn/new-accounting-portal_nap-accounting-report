@@ -1279,7 +1279,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 criteria.SportName,
                 criteria.LeagueName,
                 criteria.BetTypeName,
-                criteria.LiveIndicatorVarchar);
+                criteria.LiveIndicator == 1 ? "Live" : "Non-Live");
 
             currentColumn = startColumn;
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 11);
