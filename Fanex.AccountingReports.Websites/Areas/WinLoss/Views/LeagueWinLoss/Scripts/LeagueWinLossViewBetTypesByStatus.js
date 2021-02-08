@@ -18,7 +18,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
             SportBettype: null,
             MatchID: null,
             MatchEvent: '',
-            LiveIndicator: false,
+            LiveIndicator: 2,
             IsNormalMode: true,
             IsNoDraw: false,
             SiteName: '',
@@ -130,10 +130,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
     var renderReport = function (report, gridHeight, index) {
         var reportTable = _tables.reportLive;
         var reportTableContainer = _tables.reportLiveContainer;
-        var liveStatus = index === 0 ? "Live" : "Non-Live";
-        var isLive = index === 0;
+        var liveStatus = report.LiveIndicator ? "Live" : "Non-Live";
+        var isLive = report.LiveIndicator;
 
-        if (index !== 0) {
+        if (!isLive) {
             reportTable = _tables.reportNonLive;
             reportTableContainer = _tables.reportNonLiveContainer
         }

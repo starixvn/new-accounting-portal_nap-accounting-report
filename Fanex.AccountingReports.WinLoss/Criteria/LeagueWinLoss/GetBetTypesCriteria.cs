@@ -13,7 +13,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public DateTime EndDate { get; set; }
 
-        public bool LiveIndicator { get; set; }
+        public int LiveIndicator { get; set; }
 
         public int MatchID { get; set; }
 

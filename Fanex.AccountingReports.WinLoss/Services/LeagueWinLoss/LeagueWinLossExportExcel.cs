@@ -1567,7 +1567,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 criteria.SportName,
                 criteria.LeagueName,
                 criteria.MatchEvent,
-                criteria.LiveIndicator ? "Live" : "Non-Live");
+                criteria.LiveIndicator == 1 ? "Live" : "Non-Live");
 
             currentColumn = startColumn;
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 11);
@@ -1768,7 +1768,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 "{0} - {1} - {2}",
                 criteria.SportName,
                 criteria.LeagueName,
-                index == 0 ? "Live" : "Non-Live");
+                report.LiveIndicator ? "Live" : "Non-Live");
 
             currentColumn = startColumn;
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 11);
