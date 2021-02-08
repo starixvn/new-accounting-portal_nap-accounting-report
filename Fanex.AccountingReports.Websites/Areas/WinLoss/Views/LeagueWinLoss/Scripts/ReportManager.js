@@ -73,7 +73,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             SportBettype: _leagueWinLoss.Params.reportParams.SportBettype,
             MatchID: -1,
             MatchEvent: '',
-            LiveIndicator: false,
+            LiveIndicator:  _leagueWinLoss.Params.reportParams.LiveIndicator,
             IsNormalMode: _leagueWinLoss.Params.reportParams.IsNormalMode,
             IsNoDraw: _leagueWinLoss.Params.reportParams.IsNoDraw,
             SiteName: _leagueWinLoss.Params.reportParams.SiteName,

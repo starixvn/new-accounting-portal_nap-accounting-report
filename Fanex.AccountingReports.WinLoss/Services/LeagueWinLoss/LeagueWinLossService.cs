@@ -257,13 +257,22 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
         public List<BetTypeWinLossByStatusModel> GetBetTypesByLiveNonLiveStatus(GetBetTypesCriteria criteria)
         {
             var result = new List<BetTypeWinLossByStatusModel>();
-            criteria.LiveIndicator = true;
-            var liveBetTypes = GetBetTypesByStatus(criteria);
-            result.Add(liveBetTypes);
+            var liveIndicator = criteria.LiveIndicator;
+            if (liveIndicator == 1 || liveIndicator == 2)
+            {
+                criteria.LiveIndicator = 1;
+                var liveBetTypes = GetBetTypesByStatus(criteria);
+                liveBetTypes.LiveIndicator = true;
+                result.Add(liveBetTypes);
+            }
 
-            criteria.LiveIndicator = false;
-            var nonLiveBetTypes = GetBetTypesByStatus(criteria);
-            result.Add(nonLiveBetTypes);
+            if (liveIndicator == 0 || liveIndicator == 2)
+            {
+                criteria.LiveIndicator = 0;
+                var nonLiveBetTypes = GetBetTypesByStatus(criteria);
+                nonLiveBetTypes.LiveIndicator = false;
+                result.Add(nonLiveBetTypes);
+            }
 
             SessionManager.Set(WinLossContants.LeagueWinLosViewBetTypesByStatusSessionKey, result);
             return result;

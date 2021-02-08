@@ -15,7 +15,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
             SportBettype: null,
             MatchID: null,
             MatchEvent: '',
-            LiveIndicator: false,
+            LiveIndicator: 2,
             IsNormalMode: true,
             IsNoDraw: false,
             SiteName: '',
