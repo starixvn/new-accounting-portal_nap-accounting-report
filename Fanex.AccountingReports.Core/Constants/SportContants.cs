@@ -81,7 +81,7 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int SAGaming = 244;
         public const int AECasino = 243;
         public const int SabaClub = 200;
-        public const int Indo4D = 223;
+        public const int Togel4D = 223;
         public const int TableGames = 222;
         public const int BBin = 241;
         public const int RNGWar = 224;
