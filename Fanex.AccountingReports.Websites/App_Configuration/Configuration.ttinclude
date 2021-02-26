@@ -24,6 +24,10 @@
         new SiteInfo
         {
             Environment = SiteEnvironment.PRO
+        },
+        new SiteInfo
+        {
+            Environment = SiteEnvironment.PROAWS
         }
     };
 #>
@@ -35,7 +39,8 @@
         SIT,
         UAT,
         MNL,
-        PRO
+        PRO,
+        PROAWS
     }
     class SiteInfo
     {
@@ -50,6 +55,7 @@
                 switch(Environment)
                 {
                     case SiteEnvironment.PRO:
+                    case SiteEnvironment.PROAWS:
                     case SiteEnvironment.MNL:
                         return "LIVE";
                     default:
@@ -65,6 +71,7 @@
                 switch(Environment)
                 {
                     case SiteEnvironment.PRO:
+                    case SiteEnvironment.PROAWS:
                     case SiteEnvironment.MNL:
                     case SiteEnvironment.UAT:
 					case SiteEnvironment.SIT:
@@ -103,6 +110,7 @@
                     case SiteEnvironment.UAT:
 						return "http://10.40.40.248:1710/v1/api";
 					case SiteEnvironment.PRO:
+                    case SiteEnvironment.PROAWS:
 						return "http://10.99.99.51:1710/api";
 					case SiteEnvironment.MNL:
                         return "http://10.40.40.202:1710/api";
@@ -125,6 +133,7 @@
 						return "ZU5inpesUej+dCIxitApgXAiRhK0N7uCuVHCCjPyT9o=";
                     case SiteEnvironment.UAT:
 					case SiteEnvironment.PRO:
+                    case SiteEnvironment.PROAWS:
 					case SiteEnvironment.MNL:
                         return "ZU5inpesUej+dCIxitApgXAiRhK0N7uCuVHCCjPyT9o=";
 					default:
@@ -148,6 +157,8 @@
 						return "qa-accrpt.starific.net";
 					case SiteEnvironment.PRO:
                         return "nap.oneops.net";
+                    case SiteEnvironment.PROAWS:
+                        return "reports.sportsfun.app";
 					case SiteEnvironment.MNL:
                         return "nap-report.ibcbk.com";
 					default:
@@ -167,6 +178,7 @@
                     case SiteEnvironment.SIT:
                     case SiteEnvironment.UAT:
 					case SiteEnvironment.PRO:
+                    case SiteEnvironment.PROAWS:
 					case SiteEnvironment.MNL:
 						return "/AccReport";
 					default:
@@ -185,6 +197,7 @@
 					case SiteEnvironment.LOCAL:
 					    return "http://ha.nexdev.net:8889/api";
                     case SiteEnvironment.PRO:
+                    case SiteEnvironment.PROAWS:
                         return "http://10.99.99.51:8889/api";
                     case SiteEnvironment.UAT:
                         return "http://10.40.40.248:8889/api";
@@ -224,6 +237,7 @@
 					case SiteEnvironment.SIT:
                         return @"FormatName:DIRECT=tcp:172.16.4.106\private$\entlib";
                     case SiteEnvironment.PRO:
+                    case SiteEnvironment.PROAWS:
                         return @"FormatName:DIRECT=tcp:10.40.40.22\private$\entlib";
                     case SiteEnvironment.MNL:
                         return @"FormatName:DIRECT=tcp:10.2.98.3\private$\entlib";
@@ -244,6 +258,7 @@
                     case SiteEnvironment.SIT:
 						return "NAP-Report-SIT";
 					case SiteEnvironment.PRO:
+                    case SiteEnvironment.PROAWS:
                     case SiteEnvironment.MNL:
                         return "NAP-Report";
                     default:
@@ -259,6 +274,7 @@
                 switch(Environment)
                 {
 					case SiteEnvironment.PRO:
+                    case SiteEnvironment.PROAWS:
                     case SiteEnvironment.MNL:
 						return "false";
                     default:
@@ -274,6 +290,7 @@
                 switch(Environment)
                 {
 				    case SiteEnvironment.PRO:
+                    case SiteEnvironment.PROAWS:
                     case SiteEnvironment.MNL:
 						return "On";
                     default:
@@ -293,6 +310,7 @@
                     case SiteEnvironment.SIT:
                         return "stateConnectionString=\"tcpip=172.16.4.107:42424\"";
                     case SiteEnvironment.PRO:
+                    case SiteEnvironment.PROAWS:
                         return "stateConnectionString=\"tcpip=10.99.99.51:42424\"";
                     case SiteEnvironment.MNL:
                         return "stateConnectionString=\"tcpip=10.2.12.10:42424\"";

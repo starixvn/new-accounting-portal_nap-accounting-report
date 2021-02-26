@@ -32,6 +32,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1890,6 +1891,17 @@
     <Content Include="App_Data\Fanex.Result\BaseBall.xls" />
     <Content Include="App_Data\Fanex.Result\Badminton.xls" />
     <Content Include="Areas\Gaming\Views\Test\Index.cshtml" />
+    <None Include="App_Configuration\Web.AWS.ConnectionString.config" />
+    <None Include="App_Configuration\Web.AWS.AppSettings.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App_Configuration\Web.PROAWS.ConnectionString.config" />
+    <None Include="App_Configuration\Web.PROAWS.AppSettings.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App_Configuration\Web.PROAWS.config">
+      <DependentUpon>Web.Config.tt</DependentUpon>
+    </None>
     <None Include="Areas\UserLogin\themes\fonts\Abel.woff" />
     <None Include="Areas\UserLogin\themes\fonts\OpenSans.woff" />
     <None Include="Areas\UserLogin\themes\fonts\YanoneKaffeesatz.woff" />
