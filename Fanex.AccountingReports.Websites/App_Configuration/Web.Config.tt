@@ -9,7 +9,7 @@
         var fileName = string.Format("Web.{0}.config", site.Environment);
         manager.StartNewFile(fileName);
 #>
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?> 
 <!--
   For more information on how to configure your ASP.NET application, please visit
   http://go.microsoft.com/fwlink/?LinkId=169433
