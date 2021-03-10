@@ -1077,21 +1077,36 @@
     <Content Include="Areas\UserLogin\Views\Common\Style\expirednotification.less" />
     <Content Include="Views\Errors\Error404.htm" />
     <Content Include="Views\Errors\GeneralError.htm" />
-    <Content Include="App_Configuration\RMSection.config" />
+    <Content Include="App_Configuration\RMSection.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Configuration\MAMonitorSection.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Configuration\TreeWinLossProduct.xml" />
-    <Content Include="App_Configuration\VirtualSportsWinLossSection.config" />
+    <Content Include="App_Configuration\TreeWinLossProduct.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Configuration\VirtualSportsWinLossSection.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Configuration\LegendSection.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Configuration\RacingSection.config" />
+    <Content Include="App_Configuration\RacingSection.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Configuration\SMAsTurnoverSection.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Configuration\TotalCreditAccountByProductSection.config" />
-    <Content Include="App_Configuration\RacingSection.config" />
+    <Content Include="App_Configuration\TotalCreditAccountByProductSection.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Configuration\RacingSection.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="WhoAmI1.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -1924,17 +1939,24 @@
     <Content Include="App_Data\Fanex.Result\BaseBall.xls" />
     <Content Include="App_Data\Fanex.Result\Badminton.xls" />
     <Content Include="Areas\Gaming\Views\Test\Index.cshtml" />
-    <None Include="App_Configuration\Web.AWS.ConnectionString.config" />
-    <None Include="App_Configuration\Web.AWS.AppSettings.config">
+    <Content Include="App_Configuration\Web.AWS.ConnectionString.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Configuration\Web.AWS.AppSettings.config">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="App_Configuration\Web.PROAWS.ConnectionString.config" />
-    <None Include="App_Configuration\Web.PROAWS.AppSettings.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Configuration\Web.PROAWS.ConnectionString.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Configuration\Web.PROAWS.AppSettings.config">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="App_Configuration\Web.PROAWS.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Configuration\Web.PROAWS.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
-    </None>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Areas\UserLogin\themes\fonts\Abel.woff" />
     <None Include="Areas\UserLogin\themes\fonts\OpenSans.woff" />
     <None Include="Areas\UserLogin\themes\fonts\YanoneKaffeesatz.woff" />
@@ -1945,17 +1967,21 @@
     <Content Include="App_Configuration\Web.Config.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Web.Config.txt</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.Config.txt">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Web.Config.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.DEV.ConnectionString.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.DEV.AppSettings.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
@@ -1969,13 +1995,18 @@
     <Content Include="themes\base\themes.less" />
     <Content Include="App_Configuration\Web.LOCAL.AppSettings.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.LOCAL.ConnectionString.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Configuration\Web.MNL.AppSettings.config" />
+    <Content Include="App_Configuration\Web.MNL.AppSettings.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Configuration\Web.MNL.ConnectionString.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="deployment.ignore" />
     <Content Include="packages.config">
@@ -1994,39 +2025,58 @@
     <Content Include="Views\Home\MostVisitedPages\Styles\MostVisitedPages.less" />
     <Content Include="App_Configuration\LicenseeEmailSection.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="App_Configuration\Web.PRO.AppSettings.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.UAT.AppSettings.config">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Configuration\Web.UAT.ConnectionString.config" />
+    <Content Include="App_Configuration\Web.UAT.ConnectionString.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Areas\UserLogin\Views\Common\ExpiredNotification.cshtml" />
-    <Content Include="App_Configuration\LiveCasinoProductSection.config" />
-    <Content Include="App_Configuration\Web.SIT.AppSettings.config" />
-    <Content Include="App_Configuration\Web.SIT.ConnectionString.config" />
+    <Content Include="App_Configuration\LiveCasinoProductSection.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Configuration\Web.SIT.AppSettings.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Configuration\Web.SIT.ConnectionString.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="App_Configuration\Configuration.ttinclude" />
     <Content Include="App_Configuration\Web.DEV.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.LOCAL.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.MNL.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.PRO.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.SIT.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.UAT.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Configuration\Web.PRO.ConnectionString.config" />
+    <Content Include="App_Configuration\Web.PRO.ConnectionString.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -309,9 +309,10 @@
 						return "stateConnectionString=\"tcpip=10.99.99.51:42424\"";
                     case SiteEnvironment.SIT:
                         return "stateConnectionString=\"tcpip=172.16.4.107:42424\"";
-                    case SiteEnvironment.PRO:
-                    case SiteEnvironment.PROAWS:
+                    case SiteEnvironment.PRO:                    
                         return "stateConnectionString=\"tcpip=10.99.99.51:42424\"";
+                    case SiteEnvironment.PROAWS:
+                        return "stateConnectionString=\"tcpip=10.2.27.19:42424\"";
                     case SiteEnvironment.MNL:
                         return "stateConnectionString=\"tcpip=10.2.12.10:42424\"";
 
