@@ -5,7 +5,7 @@ namespace Fanex.AccountingReports.Core.Web
 
     public static class CacheExtension
     {
-        private static CacheService cacheService = new CacheServiceImpl();
+        private static CacheService cacheService = new CacheService();
 
         public static T Get<T>(string key)
         {

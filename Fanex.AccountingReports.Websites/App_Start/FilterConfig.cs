@@ -1,7 +1,12 @@
 namespace Fanex.AccountingReports.Websites
 {
+    using Caching;
+    using ONEbook.UM;
+    using ONEbook.UM.AspNetMVC.Filters;
+    using ONEbook.UM.Helpers;
+    using ONEbook.UM.Services;
+    using ONEbook.UM.Transport;
     using System.Web.Mvc;
-    using ONEbook.UM.Filters;
 
     /// <summary>
     /// TODO: Update summary.
@@ -10,8 +15,16 @@ namespace Fanex.AccountingReports.Websites
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            var umConfig = UMClientManager.UMClientConfigs;
+
+            var maintenanceService = new MaintenanceService(
+                                  UMClientManager.RestClient,
+                                  UMClientManager.CacheService,
+                                  UMClientManager.UMClientConfigs,
+                                  UMClientManager.HttpContext);
+
             filters.Add(new HandleErrorAttribute());
-            filters.Add(new CheckUMFilter());
+            filters.Add(new CheckUMFilterAttribute(maintenanceService, umConfig));
             filters.Add(new UserActivityDetailFilter());
         }
     }
