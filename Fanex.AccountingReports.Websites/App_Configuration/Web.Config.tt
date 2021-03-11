@@ -32,7 +32,6 @@
     <sectionGroup name="AuthenticationFilter">
       <section name="Security" type="Fanex.AuthenticationFilter.Configurations.AuthenticationFilterSection, Fanex.AuthenticationFilter" />
     </sectionGroup>
-    <section name="ONEbook.UM" type="ONEbook.UM.Configurations.UMClientConfiguration, ONEbook.UM" />
     <section name="dotless" type="dotless.Core.configuration.DotlessConfigurationSectionHandler, dotless.AspNet" />
     <sectionGroup name="jsEngineSwitcher">
       <section name="core" type="JavaScriptEngineSwitcher.Core.Configuration.CoreConfiguration, JavaScriptEngineSwitcher.Core" />
@@ -62,13 +61,6 @@
        <add Name="<#= site.NapDomainName #>" Path="<#= site.NapDomainPath #>" />
     </Domain>
   </NapSettings>
-  <ONEbook.UM ServiceUris="<#=site.ONEbookUMAddress#>"
-              EnableCheckUM="<#=site.EnableCheckUM#>"
-              EnableUnscheduledUM="false"
-              UMFrom="01:00"
-              UMTo="23:00"
-              SiteId="2000000" UMPageUrl="~/UserLogin/Common/Offline">
-  </ONEbook.UM>
   <Fanex.Data.DbSettingProvider default="XmlDbSettingProvider">
     <providers>
       <add name="XmlDbSettingProvider" type="Fanex.Data.DbSettingProviderExtension.XmlDbSettingProvider3, Fanex.Data.DbSettingProviderExtension" resourcePath="~/App_Data/Fanex.Data/" enableWatching="0" />

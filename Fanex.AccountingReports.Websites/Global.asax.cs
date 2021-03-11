@@ -1,5 +1,10 @@
 namespace Fanex.AccountingReports.Websites
 {
+    using Fanex.AccountingReports.Core.Services.Impl.Worker;
+    using Fanex.AccountingReports.Websites.App_Start;
+    using RemotingRef;
+    using Result.Core.Base;
+    using Result.Core.RemotingRef;
     using System;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
@@ -10,11 +15,6 @@ namespace Fanex.AccountingReports.Websites
     using System.Web.Optimization;
     using System.Web.Routing;
     using System.Web.Security;
-    using Fanex.AccountingReports.Core.Services.Impl.Worker;
-    using Fanex.AccountingReports.Websites.App_Start;
-    using RemotingRef;
-    using Result.Core.Base;
-    using Result.Core.RemotingRef;
 
     // Note: For instructions on enabling IIS6 or IIS7 classic mode,
     // visit http://go.microsoft.com/?LinkId=9394801
@@ -38,7 +38,7 @@ namespace Fanex.AccountingReports.Websites
 
             FanexData.Register();
             FanexLogging.Register();
-
+            OnebookUMInitializer.InitializeUMClientManager();
             ResultCoreManager.RegisterRefDataHelper(new RefDataHelper());
 
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
@@ -48,7 +48,6 @@ namespace Fanex.AccountingReports.Websites
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
 
             MostVisitedPageSavingWorker mostVisitedPageSavingWorker = new MostVisitedPageSavingWorker("MostVisitedPage Saving Worker");
             mostVisitedPageSavingWorker.Start();

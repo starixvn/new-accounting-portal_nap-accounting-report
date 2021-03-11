@@ -1,20 +1,18 @@
 namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 {
+    using App_Start;
+    using ONEbook.UM;
+    using ONEbook.UM.Services;
     using System.Web.Mvc;
     using System.Web.Security;
-    using ONEbook.UM.Services;
-    using ONEbook.UM.Services.Impl;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class CommonController : Controller
     {
-        private readonly IMaintenanceService _maintenanceService;
-
         public CommonController()
         {
-            _maintenanceService = new MaintenanceService();
         }
 
         /// <summary>
@@ -23,7 +21,12 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
         /// <returns>Goes offline result.</returns>
         public ActionResult Offline()
         {
-            var downTime = _maintenanceService.GetUnderMaintenanceTime();
+            var maintenanceService = new MaintenanceService(UMClientManager.RestClient,
+                UMClientManager.CacheService,
+                UMClientManager.UMClientConfigs,
+                UMClientManager.HttpContext);
+
+            var downTime = maintenanceService.GetUnderMaintenanceTime();
 
             if (!downTime.IsUnderMaintenanceTime)
             {
