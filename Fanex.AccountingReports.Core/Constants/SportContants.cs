@@ -97,6 +97,6 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int MaxGame = 237;
         public const int BG = 239;
         public const int Habanero = 238;
-        public const int SportsLottery = 269;
+        public const int SportsLottery = 169;
     }
 }
