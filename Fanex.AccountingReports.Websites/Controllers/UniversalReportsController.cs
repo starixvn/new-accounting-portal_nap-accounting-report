@@ -74,5 +74,10 @@ namespace Fanex.AccountingReports.Websites.Controllers
         {
             return Redirect("../../UniversalReports/DailyTurnoverComparison");
         }
+
+        public ActionResult SBCustomerPerformanceByDangers()
+        {
+            return Redirect("../../UniversalReports/SBCustomerPerformanceByDangers");
+        }
     }
 }
