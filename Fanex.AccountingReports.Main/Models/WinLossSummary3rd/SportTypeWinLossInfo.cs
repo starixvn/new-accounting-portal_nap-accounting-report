@@ -59,7 +59,9 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.VirtualSports3,
             SportContants.GDG,
             SportContants.MaxGame,
-            SportContants.BG
+            SportContants.BG,
+            SportContants.Habanero,
+            SportContants.SportsLottery
         };
 
         public SportTypeWinLossInfo()
