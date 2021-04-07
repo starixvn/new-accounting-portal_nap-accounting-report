@@ -10,6 +10,7 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+    using System;
 
     public class WinLossSummary3RdController : BaseController
     {
@@ -48,7 +49,7 @@ namespace Fanex.AccountingReports.Main.Controllers
             var details = this._reportService.GetDetails(criteria);
 
             var jsonResult = Json(details, JsonRequestBehavior.DenyGet);
-            jsonResult.MaxJsonLength = CommonConstants.MaxJsonLength;
+            jsonResult.MaxJsonLength = Int32.MaxValue;
 
             return jsonResult;
         }

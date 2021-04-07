@@ -222,6 +222,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
             var betType = null;
             var betTypeNewCricket = null;
             var isNewCricket = false;
+            var hasChargedCommission = false;
             var len = betTypeWinLosses.length;
             for (var i = 0; i < len; i++) {
                 betType = betTypeWinLosses[i];
@@ -233,6 +234,7 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
                     if (total.Id == 500) {
                         isNewCricket = true;
                         betTypeNewCricket = total;
+                        hasChargedCommission = true;
                         continue;
                     }
                     sportType.SubRows.push(renderWinLossCricket(total, true, sportWinloss.Id, id > 0 ? sportName : total.Name, betTypeDrillDown, i));
@@ -264,11 +266,11 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.WinLossSummary = function () {
             }
 
             // Total for New Cricket
-            if (id == 50) {
+            if (id == 50 && hasChargedCommission) {
                 var footerTotal = sportWinloss.TotalForNewCricket;
                 sportType.SubRows.push(renderTotal(footerTotal, 'subTotal', viewResources.Total));
             }
-            if (isNewCricket == true) {
+            if (isNewCricket == true && hasChargedCommission) {
                 sportType.SubRows.push(renderTotalWinLossCricket(betTypeNewCricket, 'subTotal', betTypeNewCricket.Name, betTypeDrillDown, id, id > 0 ? sportName : total.Name));
             }
 

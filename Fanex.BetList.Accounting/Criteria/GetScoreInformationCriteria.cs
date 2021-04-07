@@ -47,10 +47,7 @@ namespace Fanex.BetList.Accounting.Criteria
 
         public override string GetSettingKey()
         {
-            return "BetList_ScoreInformation_SelScoreInformation" +
-                (this.ReportDate < ReportService.BalanceUp.BalanceUpDay ?
-                 ReportService.WarehouseSPSuffix :
-                 string.Empty);
+            return "BetList_ScoreInformation_SelScoreInformation";
         }
 
         public override bool IsValid()
