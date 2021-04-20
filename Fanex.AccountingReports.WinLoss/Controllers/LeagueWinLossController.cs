@@ -6,8 +6,12 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     using Fanex.AccountingReports.WinLoss.Services.Implement;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
-
+    using NAP.Core.Configuration;
+    using NAP.Core.Service.Impl;
+    using NAP.Core.Service.Interface;
+    using NAP.Core.Web.Session;
     using Services.Implement.LeagueWinLoss;
+    using System.Linq;
     using System.Web.Mvc;
 
     /// <summary>
@@ -17,11 +21,15 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     {
         private readonly LeagueWinLossService _reportService;
         private readonly LeagueWinLossExportExcel _excelService;
+        private readonly ICurrentSession _currentSession;
+        private readonly IUserService _userService;
 
         public LeagueWinLossController()
         {
             _reportService = new LeagueWinLossService();
             _excelService = new LeagueWinLossExportExcel(_reportService);
+            _currentSession = new CurrentSession();
+            _userService = new UserService();
         }
 
         [HttpGet]
@@ -35,6 +43,13 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         [HttpPost]
         public JsonResult GetSport()
         {
+            var userId = _currentSession.UserId;
+            var productPermission = this._userService.GetPermissions(
+              _currentSession.UserId,
+              NapSettings.Settings.SiteId,
+              AccReportFunctionKeys.LeagueWinLossProductPermission)
+              .Where(p => p.Policy >= (int)Constant.Policy.Read)
+              .Select(p => p.Function.Key);
             var sports = this._reportService.GetSports();
             return Json(sports, JsonRequestBehavior.AllowGet);
         }
