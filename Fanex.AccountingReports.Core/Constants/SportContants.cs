@@ -99,5 +99,6 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int Habanero = 238;
         public const int SportsLottery = 169;
         public const int PPLiveCasino = 170;
+        public const int CG = 167;
     }
 }

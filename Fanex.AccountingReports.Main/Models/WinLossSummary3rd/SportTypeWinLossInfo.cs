@@ -62,7 +62,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.BG,
             SportContants.Habanero,
             SportContants.SportsLottery,
-            SportContants.PPLiveCasino
+            SportContants.PPLiveCasino,
+            SportContants.CG
         };
 
         public SportTypeWinLossInfo()
