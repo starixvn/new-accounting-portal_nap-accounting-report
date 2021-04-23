@@ -170,6 +170,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\LeagueWinLossPermissionConstants.cs" />
     <Compile Include="Constants\WinLossContants.cs" />
     <Compile Include="Controllers\AllCustomerTurnOverController.cs" />
     <Compile Include="Controllers\DailyMixParlayWinLossController.cs" />
@@ -229,6 +230,7 @@
     <Compile Include="Models\LeagueWinLoss\MatchWinLossModel.cs" />
     <Compile Include="Models\LeagueWinLoss\Site.cs" />
     <Compile Include="Models\LeagueWinLoss\SiteGroup.cs" />
+    <Compile Include="Models\LeagueWinLoss\Status.cs" />
     <Compile Include="Models\LeagueWinLoss\SuperWinLossModel.cs" />
     <Compile Include="Models\LeagueWinLoss\SuperWinLossItem.cs" />
     <Compile Include="Models\LeagueWinLoss\SiteWinLossItem.cs" />

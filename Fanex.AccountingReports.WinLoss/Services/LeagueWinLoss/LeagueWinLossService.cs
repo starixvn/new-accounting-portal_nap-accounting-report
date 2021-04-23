@@ -113,12 +113,15 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             return leagueWinLoss;
         }
 
-        public List<SportGroup> GetSports()
+        public List<SportGroup> GetSports(IEnumerable<string> productsPermission)
         {
             var sportGroups = new List<SportGroup>();
             var criteria = new GetSportCriteria();
             var rawData = this._reportRepository.GetSport(criteria);
-            var groups = rawData.GroupBy(x => new { x.SportGroupType, x.SportGroupName });
+
+            var rawDataByPermission = GetSportsByPermission(rawData, productsPermission);
+
+            var groups = rawDataByPermission.GroupBy(x => new { x.SportGroupType, x.SportGroupName });
             foreach (var group in groups)
             {
                 var sportGroup = new SportGroup
@@ -139,7 +142,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                         BettypeGroups = new List<BetTypeGroup>()
                     };
 
-                    var sportBettypes = rawData.Where(x => x.SportType == sport.Key.SportType
+                    var sportBettypes = rawDataByPermission.Where(x => x.SportType == sport.Key.SportType
                         && x.SportName == sport.Key.SportName);
 
                     var groupBettypes = sportBettypes.GroupBy(x => x.BetTypeGroupName);
@@ -310,6 +313,36 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             };
 
             return result;
+        }
+
+        public List<Status> GetStatus(IEnumerable<string> productsPermission)
+        {
+            var firstPermission = productsPermission.FirstOrDefault();
+
+            if (productsPermission.Count() == 1 && firstPermission == LeagueWinLossPermissionConstants.LeagueWinLoss_SoccerLive)
+            {
+                return new List<Status>
+                {
+                    new Status { Name = "Live", Value = 1 }
+                };
+            }
+            else if (productsPermission.Count() == 1 && firstPermission == LeagueWinLossPermissionConstants.LeagueWinLoss_SoccerNonLive)
+            {
+                return new List<Status>
+                {
+                    new Status { Name = "Non-Live", Value = 0 }
+                };
+            }
+            else
+            {
+                return new List<Status>
+                {
+                    new Status { Name = "All", Value = 2 },
+                    new Status { Name = "Live", Value = 1 },
+                    new Status { Name = "Non-Live", Value = 0 }
+                };
+            }
+
         }
 
         private BetTypeWinLossByStatusModel GetBetTypesByStatus(GetBetTypesCriteria criteria)
@@ -733,6 +766,23 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 RealTurnover = rawData.RealTurnover,
                 HasVR = rawData.HasVR
             };
+        }
+
+        private List<SportEntity> GetSportsByPermission(List<SportEntity> rawData, IEnumerable<string> productsPermission)
+        {
+            var result = new List<SportEntity>();
+
+            if (productsPermission.Count() > 1 || productsPermission.Contains(LeagueWinLossPermissionConstants.AllProducts))
+            {
+                result = rawData;
+            }
+            else
+            {
+                var productPermission = productsPermission.FirstOrDefault();
+                result = rawData.Where(x => x.SportGroupName == LeagueWinLossPermissionConstants.Products[productPermission]).ToList();
+            }
+
+            return result;
         }
     }
 }

@@ -48,7 +48,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         SoccerID: 1,
         BasketballID: 2,
         ParlayID: 10000,
-        SBAdjustmentId: 10001
+        SBAdjustmentId: 10001,
+        EsportsId: 43
     };
 
     self.initPage = function () {
@@ -59,7 +60,13 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         getSport();
         getGlobalShowTime();
         getDivision();
-        hideWarehouseMode();
+
+        if (isFullModePermission === 'True' || isNormalModePermission === 'True') {
+            hideWarehouseMode();
+        }
+
+        renderMode(isFullModePermission, isNormalModePermission);
+
         makeLeagueSuggestion();
         bindingEvent();
     };
@@ -210,14 +217,46 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 _tables.btnReportMode.attr('value', "HISTORY REPORT");
             }
 
-            $("#leagueWinLossReportContainer").addClass("display-none");
-            $("#leagueWinLossReportMatchesContainer").addClass("display-none");
-            $("#leagueWinLossBetTypeContainer").addClass("display-none");
-            $("#leagueWinLossSiteContainer").addClass("display-none");
-            $("#leagueWinLossSuperContainer").addClass("display-none");
-            $("#leagueWinLossVirtualRateContainer").addClass("display-none");
-            $("#leagueWinLossBetTypeByStatusContainer").addClass("display-none");
+            hideAllReportContainer();
         });
+    };
+
+    var renderMode = function (isFullModePermission, isNormalModePermission) {
+        if (isFullModePermission !== 'True' && isNormalModePermission === 'True') {
+            renderNormalMode();
+        }
+
+        if (isFullModePermission !== 'True' && isNormalModePermission !== 'True') {
+            renderHistoryMode();
+        }
+    }
+
+    var renderHistoryMode = function () {
+        self.Params.isNormalMode = false;
+        _tables.bettransMode.addClass("display-none");
+        _tables.bettransModeBtn.addClass("display-none");
+        _tables.warehouseMode.removeClass("display-none");
+        _tables.btnReportMode.addClass("display-none");
+        hideAllReportContainer();
+    };
+
+    var renderNormalMode = function () {
+        self.Params.isNormalMode = true;
+        _tables.bettransMode.removeClass("display-none");
+        _tables.bettransModeBtn.removeClass("display-none");
+        _tables.warehouseMode.addClass("display-none");
+        _tables.btnReportMode.addClass("display-none");
+        hideAllReportContainer();
+    };
+
+    var hideAllReportContainer = function () {
+        $("#leagueWinLossReportContainer").addClass("display-none");
+        $("#leagueWinLossReportMatchesContainer").addClass("display-none");
+        $("#leagueWinLossBetTypeContainer").addClass("display-none");
+        $("#leagueWinLossSiteContainer").addClass("display-none");
+        $("#leagueWinLossSuperContainer").addClass("display-none");
+        $("#leagueWinLossVirtualRateContainer").addClass("display-none");
+        $("#leagueWinLossBetTypeByStatusContainer").addClass("display-none");
     };
 
     var makeLeagueSuggestion = function () {
@@ -695,7 +734,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                         });
                     }
 
-                    if (sport.SportType != self.Params.ParlayID && sport.SportType != self.Params.SBAdjustmentId) {
+                    if (sport.SportType != self.Params.ParlayID && sport.SportType != self.Params.SBAdjustmentId && sport.SportType != self.Params.EsportsId) {
                         bettypeGroups.push({
                             id: id + "-" + sport.SportName + "-" + bettypeGroup.BetTypeGroupName,
                             value: sport.SportType,
@@ -710,7 +749,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             }
 
             if (bettypeGroups.length > 0 || bettypes.length > 0) {
-                var isRenderBetTypeGroup = sportGroup.GroupId != self.Params.ParlayID && sport.SportType != self.Params.SBAdjustmentId;
+                var isRenderBetTypeGroup = sportGroup.GroupId != self.Params.ParlayID && sport.SportType != self.Params.SBAdjustmentId && sport.SportType != self.Params.EsportsId;
                 sportGroups.push({
                     id: id + "-group" + sportGroup.GroupId,
                     value: sportGroup.GroupId,

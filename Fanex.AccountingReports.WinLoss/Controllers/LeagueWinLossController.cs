@@ -1,5 +1,6 @@
 namespace Fanex.AccountingReports.WinLoss.Controllers
 {
+    using Constants;
     using Core.Web;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss;
@@ -37,20 +38,36 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         [NapAuth(FunctionKey = AccReportFunctionKeys.LeagueWinLoss, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
+            var modePermission = this._userService.GetPermissions(
+                _currentSession.UserId,
+                NapSettings.Settings.SiteId,
+                AccReportFunctionKeys.LeagueWinLossModePermission)
+                .Where(p => p.Policy >= (int)Constant.Policy.Read)
+                .Select(p => p.Function.Key);
+
+            var productPermission = this._userService.GetPermissions(
+             _currentSession.UserId,
+             NapSettings.Settings.SiteId,
+             AccReportFunctionKeys.LeagueWinLossProductPermission)
+             .Where(p => p.Policy >= (int)Constant.Policy.Read)
+             .Select(p => p.Function.Key);
+
+            ViewBag.IsFullModePermission = modePermission.Count() > 1;
+            ViewBag.IsNormalMode = modePermission.FirstOrDefault() == LeagueWinLossPermissionConstants.LeagueWinLoss_NormalMode;
+            ViewBag.Status = _reportService.GetStatus(productPermission);
             return View();
         }
 
         [HttpPost]
         public JsonResult GetSport()
         {
-            var userId = _currentSession.UserId;
             var productPermission = this._userService.GetPermissions(
               _currentSession.UserId,
               NapSettings.Settings.SiteId,
               AccReportFunctionKeys.LeagueWinLossProductPermission)
               .Where(p => p.Policy >= (int)Constant.Policy.Read)
               .Select(p => p.Function.Key);
-            var sports = this._reportService.GetSports();
+            var sports = this._reportService.GetSports(productPermission);
             return Json(sports, JsonRequestBehavior.AllowGet);
         }
 
