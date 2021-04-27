@@ -475,7 +475,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     break;
 
                 case ProductContants.AECasino:
-                    product = "AE Casino";
+                    product = "AE Sexy";
                     break;
 
                 case ProductContants.TableGames:
