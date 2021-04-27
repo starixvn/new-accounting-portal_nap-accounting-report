@@ -520,7 +520,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 productName = "SA Gaming";
                 break;
             case productEnums.AECasino:
-                productName = "AE Casino";
+                productName = "AE Sexy";
                 break;
             case productEnums.SabaClub:
                 productName = "Saba.club";
