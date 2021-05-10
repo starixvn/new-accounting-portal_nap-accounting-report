@@ -100,5 +100,7 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int SportsLottery = 169;
         public const int PPLiveCasino = 170;
         public const int CG = 167;
+        public const int Vgaming = 171;
+        public const int VgamingFreeBets = 173;
     }
 }
