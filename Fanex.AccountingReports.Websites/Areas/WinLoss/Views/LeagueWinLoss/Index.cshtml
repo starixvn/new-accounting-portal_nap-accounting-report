@@ -89,9 +89,10 @@
                 </div>
                 <div class="edit-field col_4 align-left">
                     <select id="ddlStatus" class="alpha">
-                        <option value="2">All</option>
-                        <option value="1">Live</option>
-                        <option value="0">Non-Live</option>
+                      @foreach (var item in ViewBag.Status)
+                      {
+                        <option value="@item.Value">@item.Name</option>
+                      }
                     </select>
                 </div>
             </div>
@@ -182,6 +183,8 @@
         var minWareHouseDate = '@(new DateTime(2017, 1, 1))';
         var labelFrom = '@Labels.From';
         var labelTo = '@Labels.To';
+        var isFullModePermission = '@ViewBag.IsFullModePermission';
+        var isNormalModePermission = '@ViewBag.IsNormalMode';
     </script>
 }
 @section Foot {

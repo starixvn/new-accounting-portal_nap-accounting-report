@@ -28,7 +28,7 @@
     <Setting Key="WinLoss_LeagueWinLoss_GetBetTypes" SpName="Acc_Rpt_LeagueWL_Bettype" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="WinLoss_LeagueWinLoss_GetMatches" SpName="Acc_Rpt_LeagueWL_Match_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="WinLoss_AllCustomerTurnOver_GetReport" SpName="Acc_Rpt_CustomerTurnoverBySite" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
-    <Setting Key="WinLoss_LeagueWinLoss_GetSports" SpName="Acc_Rpt_LeagueWL_SporttypeSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="WinLoss_LeagueWinLoss_GetSports" SpName="Acc_Rpt_LeagueWL_SporttypeSel_xtest" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
     <Setting Key="WinLoss_LeagueWinLoss_GetLeagueSuggestion" SpName="Acc_Rpt_LeagueWL_GetLeagueBySport" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
     <Setting Key="WinLoss_LeagueWinLoss_GetSites" SpName="Acc_Rpt_LeagueWL_Site" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="WinLoss_LeagueWinLoss_GetSuper" SpName="Acc_Rpt_LeagueWL_Super" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
