@@ -502,6 +502,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     product = "WM";
                     break;
 
+                case ProductContants.VGaming:
+                    product = "Vgaming";
+                    break;
+
                 default:
                     break;
             }

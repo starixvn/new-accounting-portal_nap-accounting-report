@@ -53,7 +53,8 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         RNGWar: 224,
         ION: 225,
         WM: 233,
-        BG: 239
+        BG: 239,
+        VGaming: 171
     };
 
     var cachedData = {
@@ -545,6 +546,9 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 break;
             case productEnums.BG:
                 productName = "BG";
+                break;
+            case productEnums.VGaming:
+                productName = "VGaming";
                 break;
             default:
                 productName = "Unknown";
