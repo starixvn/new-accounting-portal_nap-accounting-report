@@ -527,7 +527,6 @@
     <Content Include="App_Data\Fanex.Data\DBACC.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\Fanex.Data\DBACC.bodb_ACC.bodbAdminNet.xml" />
     <Content Include="App_Data\Fanex.Data\DBAGE.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
     </Content>
