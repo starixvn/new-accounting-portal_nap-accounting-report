@@ -548,7 +548,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 productName = "BG";
                 break;
             case productEnums.VGaming:
-                productName = "VGaming";
+                productName = "Vgaming";
                 break;
             default:
                 productName = "Unknown";
