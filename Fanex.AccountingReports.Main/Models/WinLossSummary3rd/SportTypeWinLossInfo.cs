@@ -65,7 +65,8 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.PPLiveCasino,
             SportContants.CG,
             SportContants.Vgaming,
-            SportContants.VgamingFreeBets
+            SportContants.VgamingFreeBets,
+            SportContants.AdvantPlay
         };
 
         public SportTypeWinLossInfo()

@@ -102,5 +102,6 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int CG = 167;
         public const int Vgaming = 171;
         public const int VgamingFreeBets = 173;
+        public const int AdvantPlay = 172;
     }
 }
