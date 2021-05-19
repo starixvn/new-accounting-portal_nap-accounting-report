@@ -58,5 +58,7 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int ION = 225;
 
         public const int WM = 233;
+
+        public const int VGaming = 171;
     }
 }

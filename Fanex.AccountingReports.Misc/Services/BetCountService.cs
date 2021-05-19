@@ -833,7 +833,12 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
             if (rawData.Where(x => x.ProductID == MiscConstants.SabaClubProductId).Any())
             {
-                CreateSabaClubSportGroup(rawData, sports);
+                CreateSportGroup(rawData, sports, MiscConstants.SabaClubProductId);
+            }
+
+            if (rawData.Where(x => x.ProductID == MiscConstants.VGaming).Any())
+            {
+                CreateSportGroup(rawData, sports, MiscConstants.VGaming);
             }
 
             return sports;
@@ -938,9 +943,9 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             return sports;
         }
 
-        public List<ProductInfo> CreateSabaClubSportGroup(IEnumerable<dynamic> rawData, List<ProductInfo> sports)
+        public List<ProductInfo> CreateSportGroup(IEnumerable<dynamic> rawData, List<ProductInfo> sports, int productId)
         {
-            var sportRaw = rawData.Where(r => r.ProductID == 42);
+            var sportRaw = rawData.Where(r => r.ProductID == productId);
             var sportGroups = sportRaw.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
             foreach (var sportGroup in sportGroups)
             {
