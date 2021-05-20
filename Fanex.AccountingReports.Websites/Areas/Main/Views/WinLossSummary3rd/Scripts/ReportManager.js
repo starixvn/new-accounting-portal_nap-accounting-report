@@ -132,15 +132,15 @@ Fanex.AccountingReports.Main.WinLossSummary3rd.ReportManager = function () {
             showCurrentReport();
         });
         // recalculate
-        _tables.recalcualteToday.unbind('click');
-        _tables.recalcualteToday.click(function () {
-            RecalculateWinLoss(calToday);
-        });
+        //_tables.recalcualteToday.unbind('click');
+        //_tables.recalcualteToday.click(function () {
+        //    RecalculateWinLoss(calToday);
+        //});
 
-        _tables.recalculateYesterday.unbind('click');
-        _tables.recalculateYesterday.click(function () {
-            RecalculateWinLoss(calYesterday);
-        });
+        //_tables.recalculateYesterday.unbind('click');
+        //_tables.recalculateYesterday.click(function () {
+        //    RecalculateWinLoss(calYesterday);
+        //});
         // note
         _tables.noteTitle.unbind('click');
         _tables.noteTitle.click(function () {

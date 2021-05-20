@@ -791,7 +791,7 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;ul&gt;&lt;li&gt;- You can see the report data up to 3 months. For more historical data, please click to HISTORY REPORT&lt;/li&gt;&lt;li&gt;- The Virtual Rate is applied to Sportsbook only. Other products are based on Actual Rate&lt;/li&gt;&lt;li&gt;- The report will be recalculated automatically every 2 hours. Click following date to recalculate the report right now&lt;/li&gt;&lt;li&gt;&lt;span id=&quot;recalculateToday&quot; class=&quot;link recalculate bold&quot;&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span id=&quot;recalculateYesterday&quot; class=&quot;link bold&quot;&gt;&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;.
+        ///   Looks up a localized string similar to &lt;ul&gt;&lt;li&gt;- You can see the report data up to 3 months. For more historical data, please click to HISTORY REPORT&lt;/li&gt;&lt;li&gt;- The Virtual Rate is applied to Sportsbook only. Other products are based on Actual Rate&lt;/li&gt;&lt;li&gt;- The report will be recalculated automatically every 2 hours. Click following date to recalculate the report right now&lt;/li&gt;&lt;li&gt;&lt;span id=&quot;recalculateToday&quot; class=&quot;recalculate bold&quot;&gt;&lt;/span&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;span id=&quot;recalculateYesterday&quot; class=&quot;bold&quot;&gt;&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;.
         /// </summary>
         public static string WinLossSummary_FilterNote {
             get {
