@@ -88,4 +88,13 @@
     <Setting Key="Special_SaveBet_GetListLeague" SpName="NAP_SaveBet_ListLeagueBySport" DbName="DBWH.bodb_dwrs.bodbAdminNet"></Setting>
     <Setting Key="Special_SaveBet_GetListMatch" SpName="NAP_SaveBet_ListMatchByLeague" DbName="DBWH.bodb_dwrs.bodbAdminNet"></Setting>
   </Function>
+  <Function Name="Main - Win Loss Summary 3rd">
+    <Setting Key="Main_WinLossSummary3rd_GetReport" SpName="Acc_Rpt_WinlostSummary_Sporttype" DbName="DBWH.bodb_dwrs.bodbAdminNet" />
+    <Setting Key="Main_WinLossSummary3rd_Get_Sporttype_SB" SpName="Acc_Rpt_WinlostSummary_Sporttype_SB" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Main_WinLossSummary3rd_Get_Sporttype_NG" SpName="Acc_Rpt_WinlostSummary_Sporttype_NG" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Main_WinLossSummary3rd_Get_Racing" SpName="Acc_Rpt_WinlostSummary_Sporttype_Racing" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Main_WinLossSummary3rd_Get_VirtualSports" SpName="Acc_Rpt_WinLostSummary_Sporttype_VirtualSports" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Main_WinLossSummary3rd_Get_VirtualRacing" SpName="Acc_Rpt_WinLostSummary_Sporttype_VirtualRacing" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Acc_Rpt_WinlostSummary_Sporttype_BF" SpName="Acc_Rpt_WinlostSummary_Sporttype_BF" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
+  </Function>
 </Functions>
