@@ -490,11 +490,16 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                             }, CssClass: "colLeague",
                             CustomCellRender: function (currentCell) {
                                 var leagueText = currentCell.Value.leagueName.length > 50 ? currentCell.Value.leagueName.substring(0, 51) + '...' : currentCell.Value.leagueName;
-                                var clickEvent = ' onclick = "viewMatches(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
-                                var html = '<div class="link " ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
-                                return html;
+                                if (currentCell.Value.sportName !== 'Parlay') {
+                                    var clickEvent = ' onclick = "viewMatches(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
+                                    var html = '<div class="link " ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
+                                    return html;
+                                } else {
+                                    var html = '<div title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
+                                    return html;
+                                }
                             }
-                        },
+                            },
                                   {
                                       Name: "ColMemberWinLoss",
                                       Value: {
@@ -505,9 +510,14 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                       CustomCellRender: function (currentCell) {
                                           var cssClass = currentCell.Value.winLoss > 0 ? 'format-positive' : '';
                                           var winLossValue = currentCell.Value.winLoss.toFixed(2);
-                                          var clickEvent = ' onclick = "viewBetTypesByStatus(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
-                                          var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + parseFloat(winLossValue).toLocaleString('en') + '</div>';
-                                          return html;
+                                          if (currentCell.Value.sportName !== 'Parlay') {
+                                              var clickEvent = ' onclick = "viewBetTypesByStatus(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
+                                              var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + parseFloat(winLossValue).toLocaleString('en') + '</div>';
+                                              return html;
+                                          } else {
+                                              var html = '<div class="' + cssClass + '">' + parseFloat(winLossValue).toLocaleString('en') + '</div>';
+                                              return html;
+                                          }
                                       }
                                   },
                                   { Name: "ColSMAWinLoss", Value: info.SMAWinLoss },
