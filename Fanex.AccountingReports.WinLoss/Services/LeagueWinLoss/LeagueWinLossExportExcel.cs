@@ -590,9 +590,13 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 }
 
                 if (IsShowTotal(report.SoccerRM)
+                    || IsShowTotal(report.SabaSoccerRM)
+                    || IsShowTotal(report.SabaPinGoalRM)
                     || IsShowTotal(report.OtherSportRM)
                     || IsShowTotal(report.SoccerBARM)
-                    || IsShowTotal(report.SoccerBARM))
+                    || IsShowTotal(report.SabaSoccerBARM)
+                    || IsShowTotal(report.SabaPinGoalBARM)
+                    || IsShowTotal(report.OtherSportBARM))
                 {
                     info = report.GrandTotal;
                     currentColumn = startColumn;

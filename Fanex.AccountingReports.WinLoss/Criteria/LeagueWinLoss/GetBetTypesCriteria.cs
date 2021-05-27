@@ -24,7 +24,6 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public string LeagueName { get; set; }
 
-        [SpParam(Ignored = true)]
         public string SportName { get; set; }
 
         [SpParam(Ignored = true)]
