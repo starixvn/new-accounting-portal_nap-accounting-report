@@ -316,6 +316,84 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentRow++;
                 }
 
+                if (IsShowTotal(report.SabaSoccerRM))
+                {
+                    info = report.SabaSoccerRM;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = info.LeagueName;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 6;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
+
+                if (IsShowTotal(report.SabaPinGoalRM))
+                {
+                    info = report.SabaPinGoalRM;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = info.LeagueName;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 6;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
+
                 if (IsShowTotal(report.OtherSportRM))
                 {
                     info = report.OtherSportRM;
@@ -358,6 +436,84 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 if (IsShowTotal(report.SoccerBARM))
                 {
                     info = report.SoccerBARM;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = info.LeagueName;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 6;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
+
+                if (IsShowTotal(report.SabaSoccerBARM))
+                {
+                    info = report.SabaSoccerBARM;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = info.LeagueName;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 6;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = info.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
+
+                if (IsShowTotal(report.SabaPinGoalBARM))
+                {
+                    info = report.SabaPinGoalBARM;
                     currentColumn = startColumn;
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
                     currentCellRange.Merged = true;
