@@ -53,14 +53,16 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                                                 && x.LeagueName != "Soccer BARM"
                                                 && x.LeagueName != "Other Sports BARM"
                                                 && x.LeagueName != "SABA Soccer 8RM"
-                                                && x.LeagueName != "SABA Soccer BARM")
+                                                && x.LeagueName != "SABA Soccer BARM"
+                                                && x.LeagueName != "SABA Soccer PinGoal 8RM"
+                                                && x.LeagueName != "SABA Soccer PinGoal BARM")
                                                  .GroupBy(x => new { x.SportType, x.Sport, x.IsSabaSport });
 
             foreach (var sportGroup in sportGroups)
             {
                 var rawSports = rawData.Where(x => x.SportType == sportGroup.Key.SportType && x.IsSabaSport == sportGroup.Key.IsSabaSport);
                 var sportName = sportGroup.Key.Sport;
-                var leagues = BindingLeagues(rawSports);
+                var leagues = BindingLeagues(rawSports);    
                 var sportTotal = CalculateSportTotal(sportName, rawSports);
 
                 var sportWinLoss = new SportWinLoss
@@ -79,6 +81,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var sabaSoccerRM = rawData.FirstOrDefault(x => x.LeagueName == "SABA Soccer 8RM");
             leagueWinLoss.SabaSoccerRM = BindingLeague(sabaSoccerRM);
 
+            var sabaPinGoalRM = rawData.FirstOrDefault(x => x.LeagueName == "SABA Soccer PinGoal 8RM");
+            leagueWinLoss.SabaPinGoalRM = BindingLeague(sabaPinGoalRM);
+
             var otherRM = rawData.FirstOrDefault(x => x.LeagueName == "Other Sports 8RM");
             leagueWinLoss.OtherSportRM = BindingLeague(otherRM);
 
@@ -88,14 +93,20 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var sabaSoccerBARM = rawData.FirstOrDefault(x => x.LeagueName == "SABA Soccer BARM");
             leagueWinLoss.SabaSoccerBARM = BindingLeague(sabaSoccerBARM);
 
+
+            var sabaPinGoalBARM = rawData.FirstOrDefault(x => x.LeagueName == "SABA Soccer PinGoal BARM");
+            leagueWinLoss.SabaPinGoalBARM = BindingLeague(sabaPinGoalBARM);
+
             var otherBARM = rawData.FirstOrDefault(x => x.LeagueName == "Other Sports BARM");
             leagueWinLoss.OtherSportBARM = BindingLeague(otherBARM);
 
             var total = rawData.Where(x => x.LeagueName != "Soccer 8RM"
                                         && x.LeagueName != "SABA Soccer 8RM"
+                                        && x.LeagueName != "SABA Soccer PinGoal 8RM"
                                         && x.LeagueName != "Other Sports 8RM"
                                         && x.LeagueName != "Soccer BARM"
                                         && x.LeagueName != "SABA Soccer BARM"
+                                         && x.LeagueName != "SABA Soccer PinGoal BARM"
                                         && x.LeagueName != "Other Sports BARM");
             var allTotal = CalculateSportTotal("Total", total);
             leagueWinLoss.Total = allTotal;
