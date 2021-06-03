@@ -102,7 +102,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossBySuper = function () {
     };
 
     var renderTreeWinLossBySuper = function (report) {
-      //  report = report.TreeWinLoss;
+        //  report = report.TreeWinLoss;
         _tables.reportContainer.removeClass("display-none");
         _tables.report.addClass("display-none");
         var bodyData = [];
@@ -119,10 +119,11 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossBySuper = function () {
                 info.BaseRMMargin = isShowNA ? "N/A" : info.BaseRMMargin;
                 bodyData.push({
                     Columns: [{ Name: "ColNo", Value: i + 1 },
-                    { Name: "ColUserName", Value: {
-                        custId: info.Id,
-                        Name: info.Name
-                    },
+                    {
+                        Name: "ColUserName", Value: {
+                            custId: info.Id,
+                            Name: info.Name
+                        },
                         CustomCellRender: function (currentCell) {
                             var clickEvent = ' onclick = "viewTreeWinLossByMaster(' + currentCell.Value.custId + ',\'' + currentCell.Value.Name + "');\"";
                             var html = '<div class="link " ' + clickEvent + '>' + currentCell.Value.Name + '</div>';
@@ -147,15 +148,20 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossBySuper = function () {
                         { Name: "ColBaseRMVirtualTotal", Value: info.BaseRMVirtualTotal },
                         { Name: "ColBaseRMMargin", Value: info.BaseRMMargin },
                         { Name: "ColVirtualBaseRMMargin", Value: info.VirtualBaseRMMargin },
-                        { Name: "ColVirtualRate", Value: {
-                            custId: info.Id,
-                            userName: info.Name,
-                            virtualRate: info.VirtualRate
-                        },
+                        {
+                            Name: "ColVirtualRate", Value: {
+                                custId: info.Id,
+                                userName: info.Name,
+                                virtualRate: info.VirtualRate
+                            },
                             CustomCellRender: function (currentCell) {
-                                var clickEvent = ' onclick = "viewVirtualRateHistory(' + currentCell.Value.custId + ',\'' + currentCell.Value.userName + "');\"";
-                                var html = '<div class="link " ' + clickEvent + '>View</div>';
-                                return html;
+                                if (currentCell.Value.virtualRate == "N/A" || currentCell.Value.virtualRate == "Disabled") {
+                                    return '<div>' + currentCell.Value.virtualRate + '</div>';
+                                } else {
+                                    var clickEvent = ' onclick = "viewVirtualRateHistory(' + currentCell.Value.custId + ',\'' + currentCell.Value.userName + "');\"";
+                                    var html = '<div class="link " ' + clickEvent + '>View</div>';
+                                    return html;
+                                }
                             }
                         }
                     ]
@@ -201,7 +207,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossBySuper = function () {
                 { HeaderText: "Comm", Name: "ColCommission", MergeRowNumber: 3 },
                 { HeaderText: "Real Income", Name: "ColWinLossTotal", MergeRowNumber: 3 },
                 { HeaderText: "BaseRM", Name: "ColBaseRMTurnover", MergeColNumber: 13 },
-                { HeaderText: "Virtual Rate(%)", Name: "ColVirtualRate", MergeRowNumber: 3}]
+                { HeaderText: "Virtual Rate(%)", Name: "ColVirtualRate", MergeRowNumber: 3 }]
             },
             {
                 Columns: [{ HeaderText: "Real Turnover", Name: "ColBaseRMTurnover", MergeRowNumber: 2 },
@@ -234,7 +240,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossBySuper = function () {
                 { HeaderText: "Virtual WinLoss", Width: 120, Name: "ColBaseRMVirtualTotal", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatPositive: '$', FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                 { HeaderText: "Real Margin(%)", Width: 120, Name: "ColBaseRMMargin", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatPositive: '$', FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, CustomSortFunction: self.customSortNumber },
                 { HeaderText: "Virtual Margin(%)", Width: 150, Name: "ColVirtualBaseRMMargin", HeaderAlign: "center", CellAlign: "right", Sort: true, FormatPositive: '$', FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, CustomSortFunction: self.customSortNumber },
-                { HeaderText: "Virtual Rate(%)", Width: 80, Name: "ColVirtualRate", HeaderAlign: "center", CellAlign: "right"}],
+                { HeaderText: "Virtual Rate(%)", Width: 80, Name: "ColVirtualRate", HeaderAlign: "center", CellAlign: "right" }],
             showTitle: true,
             showFooter: true,
             titleInfo:

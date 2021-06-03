@@ -1099,9 +1099,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
                 currentColumn++;
 
-                bool isDisabledVirtualRate = info.VirtualRate != 1;
+                bool isDisabledVirtualRate = info.VirtualRate == "N/A" || info.VirtualRate == "Disabled";
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = isDisabledVirtualRate ? "Disabled" :
+                currentCell.Value = isDisabledVirtualRate ? info.VirtualRate :
                     GetVirtualRateColumnValue(enabledVirtualRateUser[info.Name]);
                 currentCell.Style = isDisabledVirtualRate ? redTextStyle : rightTextStyle;
 

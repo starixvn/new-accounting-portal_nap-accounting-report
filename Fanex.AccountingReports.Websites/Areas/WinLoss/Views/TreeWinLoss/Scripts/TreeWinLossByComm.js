@@ -104,7 +104,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByComm = function () {
     };
 
     var renderTreeWinLossByComm = function (report) {
-       // report = report.TreeWinLoss;
+        // report = report.TreeWinLoss;
         _tables.reportContainer.removeClass("display-none");
         _tables.report.addClass("display-none");
         var bodyData = [];
@@ -157,9 +157,13 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByComm = function () {
                                 userName: info.Name
                             },
                             CustomCellRender: function (currentCell) {
-                                var clickEvent = ' onclick = "viewVirtualRateHistory(' + currentCell.Value.custId + ',\'' + currentCell.Value.userName + "');\"";
-                                var html = '<div class="link " ' + clickEvent + '>View</div>';
-                                return html;
+                                if (currentCell.Value.virtualRate == "N/A" || currentCell.Value.virtualRate == "Disabled") {
+                                    return '<div>' + currentCell.Value.virtualRate + '</div>';
+                                } else {
+                                    var clickEvent = ' onclick = "viewVirtualRateHistory(' + currentCell.Value.custId + ',\'' + currentCell.Value.userName + "');\"";
+                                    var html = '<div class="link " ' + clickEvent + '>View</div>';
+                                    return html;
+                                }
                             }
                         }
                     ]
