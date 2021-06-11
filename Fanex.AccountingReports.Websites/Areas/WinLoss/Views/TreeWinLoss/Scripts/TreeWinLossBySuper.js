@@ -159,7 +159,7 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossBySuper = function () {
                                     return '<div>' + currentCell.Value.virtualRate + '</div>';
                                 } else {
                                     var clickEvent = ' onclick = "viewVirtualRateHistory(' + currentCell.Value.custId + ',\'' + currentCell.Value.userName + "');\"";
-                                    var html = '<div class="link " ' + clickEvent + '>View</div>';
+                                    var html = '<div class="link " ' + clickEvent + '>' + currentCell.Value.virtualRate + '</div>';
                                     return html;
                                 }
                             }
