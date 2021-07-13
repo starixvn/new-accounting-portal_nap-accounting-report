@@ -155,9 +155,13 @@ Fanex.AccountingReports.WinLoss.TreeWinLoss.TreeWinLossByMaster = function () {
                                 userName: info.Name
                             },
                             CustomCellRender: function (currentCell) {
-                                var clickEvent = ' onclick = "viewVirtualRateHistory(' + currentCell.Value.custId + ',\'' + currentCell.Value.userName + "');\"";
-                                var html = '<div class="link " ' + clickEvent + '>View</div>';
-                                return html;
+                                if (currentCell.Value.virtualRate == "N/A" || currentCell.Value.virtualRate == "Disabled") {
+                                    return '<div>' + currentCell.Value.virtualRate + '</div>';
+                                } else {
+                                    var clickEvent = ' onclick = "viewVirtualRateHistory(' + currentCell.Value.custId + ',\'' + currentCell.Value.userName + "');\"";
+                                    var html = '<div class="link " ' + clickEvent + '>' + currentCell.Value.virtualRate + '</div>';
+                                    return html;
+                                }
                             }
                         }
                     ]
