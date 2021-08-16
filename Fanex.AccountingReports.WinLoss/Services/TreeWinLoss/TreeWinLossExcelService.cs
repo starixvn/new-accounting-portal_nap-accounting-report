@@ -86,7 +86,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         Justification = "Reviewed. Suppression is OK here.")]
         public void ExportExcelTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria)
         {
-
             var report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByProductSession);
             if (report == null)
             {
@@ -152,7 +151,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         Justification = "Reviewed. Suppression is OK here.")]
         public void ExportExcelTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
-
             var report = new TreeWinLoss();
             switch (criteria.RoleId)
             {
@@ -1101,8 +1099,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
 
                 bool isDisabledVirtualRate = info.VirtualRate == "N/A" || info.VirtualRate == "Disabled";
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = isDisabledVirtualRate ? info.VirtualRate :
-                    GetVirtualRateColumnValue(enabledVirtualRateUser[info.Name]);
+                currentCell.Value = info.VirtualRate;
                 currentCell.Style = isDisabledVirtualRate ? redTextStyle : rightTextStyle;
 
                 currentRow++;
