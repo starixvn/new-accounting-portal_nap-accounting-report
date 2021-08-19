@@ -506,6 +506,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     product = "Vgaming";
                     break;
 
+                case ProductContants.Bitcoin:
+                    product = "Bitcoin";
+                    break;
+
                 default:
                     break;
             }
