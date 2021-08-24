@@ -486,12 +486,13 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                         Columns: [{
                             Name: "ColLeague", Value: {
                                 sportName: info.Sport,
-                                leagueName: info.LeagueName
+                                leagueName: info.LeagueName,
+                                sportType: info.SportType
                             }, CssClass: "colLeague",
                             CustomCellRender: function (currentCell) {
                                 var leagueText = currentCell.Value.leagueName.length > 50 ? currentCell.Value.leagueName.substring(0, 51) + '...' : currentCell.Value.leagueName;
                                 if (currentCell.Value.sportName !== 'Parlay') {
-                                    var clickEvent = ' onclick = "viewMatches(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
+                                    var clickEvent = ' onclick = "viewMatches(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + '\',' + currentCell.Value.sportType + ");\"";
                                     var html = '<div class="link " ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
                                     return html;
                                 } else {
@@ -505,13 +506,14 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                       Value: {
                                           winLoss: info.MemberWinLoss,
                                           sportName: info.Sport,
-                                          leagueName: info.LeagueName
+                                          leagueName: info.LeagueName,
+                                          sportType: info.SportType
                                       },
                                       CustomCellRender: function (currentCell) {
                                           var cssClass = currentCell.Value.winLoss > 0 ? 'format-positive' : '';
                                           var winLossValue = currentCell.Value.winLoss.toFixed(2);
                                           if (currentCell.Value.sportName !== 'Parlay') {
-                                              var clickEvent = ' onclick = "viewBetTypesByStatus(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + "');\"";
+                                              var clickEvent = ' onclick = "viewBetTypesByStatus(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + '\',' + currentCell.Value.sportType + ");\"";
                                               var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + parseFloat(winLossValue).toLocaleString('en') + '</div>';
                                               return html;
                                           } else {

@@ -20,7 +20,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatchesFromBetTyp
             ShowHedgeMatchOnly: false,
             BetType: 0,
             BetTypeName: '',
-            GlobalShowTime: ''
+            GlobalShowTime: '',
+            SportType: 0
         }
     };
     self.initPage = function () {

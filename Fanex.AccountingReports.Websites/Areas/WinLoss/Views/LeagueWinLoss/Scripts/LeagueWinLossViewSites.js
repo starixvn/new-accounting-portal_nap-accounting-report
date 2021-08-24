@@ -22,7 +22,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSites = function 
             IsNoDraw: false,
             SiteName: '',
             SortColumnName: '',
-            SortDirection: ''
+            SortDirection: '',
+            SportType: 0
         }
     };
     self.initPage = function () {
