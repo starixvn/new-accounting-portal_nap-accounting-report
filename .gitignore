@@ -46,3 +46,5 @@ Fanex.AccountingReports.sln
 .vs/config/applicationhost.config
 /Fanex.AccountingReports.Websites/App_Data/user-activity
 /Fanex.AccountingReports.Websites/App_Data/user-activity*.json
+**/node_modules/**
+/package-lock.json
