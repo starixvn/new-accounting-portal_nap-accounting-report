@@ -54,7 +54,8 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         ION: 225,
         WM: 233,
         BG: 239,
-        VGaming: 171
+        VGaming: 171,
+        Bitcoin: 175
     };
 
     var cachedData = {
@@ -549,6 +550,9 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 break;
             case productEnums.VGaming:
                 productName = "Vgaming";
+                break;
+            case productEnums.Bitcoin:
+                productName = "Bitcoin";
                 break;
             default:
                 productName = "Unknown";

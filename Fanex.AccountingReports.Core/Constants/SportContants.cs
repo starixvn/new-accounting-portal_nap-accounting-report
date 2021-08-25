@@ -104,5 +104,6 @@ namespace Fanex.AccountingReports.Core.Constants
         public const int VgamingFreeBets = 173;
         public const int AdvantPlay = 172;
         public const int AdvantPlayMini = 174;
+        public const int Bitcoin = 175;
     }
 }
