@@ -46,7 +46,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
     hideMatchesFromBetTypeStatus = function () {
         _leagueWinLossViewMatchesFromBetTypeStatus.hideReport();
     };
-    viewMatches = function (sportName, leagueName, sportType) {
+    viewMatches = function (sportName, leagueName, sportType, leagueId) {
         _leagueWinLoss.hideReport();
         _leagueWinLossViewMatches.getReport({
             StartDate: _leagueWinLoss.Params.reportParams.StartDate,
@@ -61,10 +61,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             BetType: -1,
             GlobalShowTime: _leagueWinLoss.Params.reportParams.GlobalShowTime,
             LiveIndicator: _leagueWinLoss.Params.reportParams.LiveIndicator,
-            SportType: sportType
+            SportType: sportType,
+            LeagueId: leagueId
         });
     };
-    viewBetTypesByStatus = function (sportName, leagueName, sportType) {
+    viewBetTypesByStatus = function (sportName, leagueName, sportType, leagueId) {
         _leagueWinLoss.hideReport();
         _leagueWinLossViewBetTypesByStatus.getReport({
             StartDate: _leagueWinLoss.Params.reportParams.StartDate,
@@ -82,7 +83,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             IsIncludeSiteType: false,
             IsIncludeHedge: true,
             GlobalShowTime: _leagueWinLoss.Params.reportParams.GlobalShowTime,
-            SportType: sportType
+            SportType: sportType,
+            LeagueId: leagueId
         });
     };
     viewBetTypes = function (matchId, isLive, matchEvent, isHedge) {
@@ -103,7 +105,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             IsIncludeSiteType: true,
             IsIncludeHedge: false,
             GlobalShowTime: _leagueWinLossViewMatches.Params.reportParams.GlobalShowTime,
-            SportType: _leagueWinLossViewMatches.Params.reportParams.SportType
+            SportType: _leagueWinLossViewMatches.Params.reportParams.SportType,
+            LeagueId: _leagueWinLossViewMatches.Params.reportParams.LeagueId
         });
     };
     viewSite = function (bettype, bettypeName, siteType) {
@@ -169,7 +172,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             BetType: betType,
             BetTypeName: betTypeName,
             GlobalShowTime: _leagueWinLossViewBetTypesByStatus.Params.reportParams.GlobalShowTime,
-            SportType: _leagueWinLossViewBetTypesByStatus.Params.reportParams.SportType
+            SportType: _leagueWinLossViewBetTypesByStatus.Params.reportParams.SportType,
+            LeagueId: _leagueWinLossViewBetTypesByStatus.Params.reportParams.LeagueId
         });
     };
 

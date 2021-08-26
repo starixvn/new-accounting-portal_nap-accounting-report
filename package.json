@@ -16,5 +16,8 @@
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
     "husky": "^7.0.2"
+  },
+  "dependencies": {
+    "conventional-changelog-conventionalcommits": "^4.6.0"
   }
 }

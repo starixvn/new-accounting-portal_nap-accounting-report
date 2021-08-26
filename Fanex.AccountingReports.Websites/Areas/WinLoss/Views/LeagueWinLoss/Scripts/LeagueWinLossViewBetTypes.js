@@ -22,7 +22,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
             IsHedge: false,
             IsIncludeSiteType: true,
             IsIncludeHedge: false,
-            GlobalShowTime: ''
+            GlobalShowTime: '',
+            SportType: 0,
+            LeagueId: ''
         }
     };
     self.initPage = function () {
