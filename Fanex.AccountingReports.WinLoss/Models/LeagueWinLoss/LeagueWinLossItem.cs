@@ -9,7 +9,7 @@ namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
 
         public string Sport { get; set; }
 
-        public int LeagueId { get; set; }
+        public string LeagueId { get; set; }
 
         public string LeagueName { get; set; }
     }

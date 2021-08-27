@@ -4,6 +4,7 @@
 @using Fanex.AccountingReports.Core.Resources;
 @using Fanex.AccountingReports.Core.Web;
 @using Fanex.NAP.Core.Web;
+@using Fanex.NAP.Core.Configuration;
 @using Newtonsoft.Json;
 <!DOCTYPE html>
 <!--[if IEMobile 7]><html class="no-js iem7 oldie"><![endif]-->
@@ -100,6 +101,12 @@
         if(isUsingPort == 'False')
         {
             window.rootWebPath = window.rootWebPath.replace(':' + port, '');
+        }
+
+        var isLiveEnviroment = '@NapSettings.Settings.Environment' == 'LIVE';
+        if (isLiveEnviroment = 'True')
+        {
+            window.rootWebPath = window.rootWebPath.replace('http://', 'https://');
         }
 
         var currentMenuId = @(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Id : 0);

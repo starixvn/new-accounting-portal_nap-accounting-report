@@ -13,6 +13,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public DateTime EndDate { get; set; }
 
+        [SpParam(Ignored = true)]
         public string LeagueName { get; set; }
 
         public string SportBettype { get; set; }
@@ -36,6 +37,10 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
         public string BetTypeName { get; set; }
 
         public string GlobalShowTime { get; set; }
+
+        public int SportType { get; set; }
+
+        public string LeagueId { get; set; }
 
         public override string GetSettingKey()
         {

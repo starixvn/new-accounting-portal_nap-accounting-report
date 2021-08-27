@@ -47,7 +47,8 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                         VirtualWinLoss = Converter.ToDecimal(row["VirtualIncome"]),
                         RealTurnover = Converter.ToDecimal(row["RealTurnover"]),
                         VirtualTurnover = Converter.ToDecimal(row["VirtualTurnover"]),
-                        IsSabaSport = Converter.ToInt(row["IsSabaSport"])
+                        IsSabaSport = Converter.ToInt(row["IsSabaSport"]),
+                        LeagueId = Converter.ToString2(row["LeagueId"])
                     });
                 }
             }
