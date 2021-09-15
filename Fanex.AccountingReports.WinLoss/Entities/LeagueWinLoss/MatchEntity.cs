@@ -4,6 +4,8 @@
     {
         public int MatchID { get; set; }
 
+        public string MatchCode { get; set; }
+
         public bool LiveIndicator { get; set; }
 
         public string MatchEvent { get; set; }

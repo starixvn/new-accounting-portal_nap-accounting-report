@@ -89,16 +89,16 @@
                 </div>
                 <div class="edit-field col_4 align-left">
                     <select id="ddlStatus" class="alpha">
-                      @foreach (var item in ViewBag.Status)
-                      {
-                        <option value="@item.Value">@item.Name</option>
-                      }
+                        @foreach (var item in ViewBag.Status)
+                        {
+                            <option value="@item.Value">@item.Name</option>
+                        }
                     </select>
                 </div>
             </div>
             <div class="filter-cell">
                 <div class="lbl-field col_8 align-right bold">
-                   Global Show Time(GMT+8)
+                    Global Show Time(GMT+8)
                 </div>
                 <div class="edit-field col_6 align-left">
                     <select id="ddlGlobalShowTime"></select>
@@ -168,6 +168,7 @@
             </div>
         </div>
     </div>
+    @Html.Partial("~/Areas/BetList/Views/ScoreInformation/ScoreInformation.cshtml")
 </div>
 @section scripts
 {

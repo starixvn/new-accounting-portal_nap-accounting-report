@@ -5,16 +5,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
     using Constants;
     using Core.Web;
     using Entities.LeagueWinLoss;
-    using Fanex.AccountingReports.Core.Configurations;
-    using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss;
     using Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss;
     using Fanex.AccountingReports.WinLoss.Repositories.Implement;
-    using Fanex.AccountingReports.WinLoss.Resources;
     using Services.LeagueWinLoss;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
     /// <summary>
@@ -614,7 +610,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 VirtualWinLoss = bettypes.Sum(x => x.VirtualWinLoss),
                 RealIncome = bettypes.Sum(x => x.RealIncome),
                 VirtualTurnover = bettypes.Sum(x => x.VirtualTurnover),
-                RealTurnover = bettypes.Sum(x => x.RealTurnover)
+                RealTurnover = bettypes.Sum(x => x.RealTurnover),
+                TraderName = bettypes.FirstOrDefault()?.TraderName
             };
         }
 
@@ -652,6 +649,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             return new MatchWinLossByLiveStatus
             {
                 MatchEvent = title,
+                MatchId = (matches.FirstOrDefault() ?? new MatchEntity()).MatchID,
+                MatchCode = matches.FirstOrDefault()?.MatchCode,
                 MemberWinLoss = matches.Sum(x => x.MemberWinLoss),
                 SMAWinLoss = matches.Sum(x => x.SMAWinLoss),
                 ExtraPT = matches.Sum(x => x.ExtraPT),
