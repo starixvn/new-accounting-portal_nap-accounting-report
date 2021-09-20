@@ -70,28 +70,37 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
             var info = null;
             for (var i = 0; i < len; i++) {
                 info = report.Match[i];
-                var openScoreInfoEvent = "scoreInfoManager.GetReport('" + self.Params.reportParams.StartDate + "'," + //*
-                    self.Params.reportParams.SportType + ",'" +
-                    self.Params.reportParams.SportName + "','" + //*
-                    0 + "','" + //*
-                    null + "'," + //*
-                    null + ",'" + //*
-                    info.Total.IsHedge + "','" +
-                    self.Params.reportParams.LeagueId + "','" +
-                    self.Params.reportParams.LeagueName + "'," + //*
-                    info.Total.MatchId + ",'" + //*
-                    info.Total.MatchCode + "','" +
-                    null + "','" +
-                    null + "','" + //*
-                    null + "','" +
-                    null + "');"
+
                 currentRow =
                 {
                     Columns: [{
                         Name: "ColEvent", Value: {
+                            startDate: self.Params.reportParams.StartDate,
+                            sportType: self.Params.reportParams.SportType,
+                            sportName: self.Params.reportParams.SportName,
+                            isHedge: info.Total.IsHedge,
+                            leagueId: self.Params.reportParams.LeagueId,
+                            leagueName: self.Params.reportParams.LeagueName,
+                            matchId: info.Total.MatchId,
+                            matchCode: info.Total.MatchCode,
                             event: info.Total.MatchEvent,
                         },
                         CustomCellRender: function (currentCell) {
+                            var openScoreInfoEvent = "scoreInfoManager.GetReport('" + currentCell.Value.startDate + "'," + //*
+                                currentCell.Value.sportType + ",'" +
+                                currentCell.Value.sportName + "','" + //*
+                                0 + "','" + //*
+                                null + "'," + //*
+                                null + ",'" + //*
+                                currentCell.Value.isHedge + "','" +
+                                currentCell.Value.leagueId + "','" +
+                                currentCell.Value.leagueName + "'," + //*
+                                currentCell.Value.matchId + ",'" + //*
+                                currentCell.Value.matchCode + "','" +
+                                null + "','" +
+                                null + "','" + //*
+                                null + "','" +
+                                null + "');"
                             return '<span class="link" onclick="event.stopPropagation();' + openScoreInfoEvent + '">' + currentCell.Value.event + '<span>';
                         }
                     },
