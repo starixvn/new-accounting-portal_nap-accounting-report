@@ -7,6 +7,8 @@ namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
     {
         public int MatchId { get; set; }
 
+        public string MatchCode { get; set; }
+
         public bool LiveIndicator { get; set; }
 
         public string MatchEvent { get; set; }

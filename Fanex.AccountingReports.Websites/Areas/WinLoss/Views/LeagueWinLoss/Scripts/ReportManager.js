@@ -24,6 +24,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
         _leagueWinLossViewVirtualRate.initPage();
         _leagueWinLossViewBetTypesByStatus.initPage();
         _leagueWinLossViewMatchesFromBetTypeStatus.initPage();
+        scoreInfoManager.InitPage();
     };
     hideLeagueWinLoss = function () {
         _leagueWinLoss.hideReport();
@@ -75,7 +76,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
             SportBettype: _leagueWinLoss.Params.reportParams.SportBettype,
             MatchID: -1,
             MatchEvent: '',
-            LiveIndicator:  _leagueWinLoss.Params.reportParams.LiveIndicator,
+            LiveIndicator: _leagueWinLoss.Params.reportParams.LiveIndicator,
             IsNormalMode: _leagueWinLoss.Params.reportParams.IsNormalMode,
             IsNoDraw: _leagueWinLoss.Params.reportParams.IsNoDraw,
             SiteName: _leagueWinLoss.Params.reportParams.SiteName,
@@ -205,9 +206,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.ReportManager = function () {
 
     isShowReport = function (report) {
         return report &&
-               report.ChildsInfo.length > 0 &&
-              (report.EightRM.LineTotal != 0 ||
-                    report.BARM.LineTotal != 0 ||
-                    report.GrandTotal.LineTotal != 0);
+            report.ChildsInfo.length > 0 &&
+            (report.EightRM.LineTotal != 0 ||
+                report.BARM.LineTotal != 0 ||
+                report.GrandTotal.LineTotal != 0);
     };
 }

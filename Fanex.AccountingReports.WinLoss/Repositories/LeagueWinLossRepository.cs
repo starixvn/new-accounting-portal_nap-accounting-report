@@ -97,7 +97,8 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                             VirtualWinLoss = Converter.ToDecimal(row["VirtualIncome"]),
                             RealTurnover = Converter.ToDecimal(row["RealTurnover"]),
                             VirtualTurnover = Converter.ToDecimal(row["VirtualTurnover"]),
-                            IsHedge = Converter.ToBool(row["IsHedge"])
+                            IsHedge = Converter.ToBool(row["IsHedge"]),
+                            TraderName = Converter.ToString2(row["TraderName"])
                         });
                     }
                 }
@@ -130,6 +131,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                     leagueWinLoss.Add(new MatchEntity
                     {
                         MatchID = Converter.ToInt(row["MatchID"]),
+                        MatchCode = Converter.ToString2(row["MatchCode"]),
                         LiveIndicator = Converter.ToBool(row["LiveIndicator"]),
                         MatchEvent = Converter.ToString2(row["MatchEvent"]),
                         MemberWinLoss = Converter.ToDecimal(row["MemberWinLoss"]),

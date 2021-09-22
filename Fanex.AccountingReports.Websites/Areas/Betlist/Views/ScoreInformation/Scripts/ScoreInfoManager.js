@@ -270,12 +270,20 @@ ScoreInfoManager.prototype.RenderReport = function (report) {
 ScoreInfoManager.prototype.RenderScoreTitle = function (report) {
     var self = this;
     var headerTitle = "<span class='sportTypeName_Header'>" + self.Params.reportParams.SportTypeName + "</span>" + " - " + self.Params.reportParams.LeagueName;
-    headerTitle += "<br />";
-    headerTitle += "Bettype: " + (self.Params.reportParams.LiveIndicator ? "<font color='red'>Live!</font> " : "NON-LIVE ") + self.Params.reportParams.BetTypeName;
-    headerTitle += "<br />";
-    headerTitle += "Trader: " + (report && report.TraderName && report.TraderName != '' ? report.TraderName : "Unassigned");
-    headerTitle += "<br />";
-    headerTitle += "MatchID: " + report.MatchId;
+    if (self.Params.reportParams.Bettype > 0) {
+        headerTitle += "<br />";
+        headerTitle += "Bettype: " + (self.Params.reportParams.LiveIndicator ? "<font color='red'>Live!</font> " : "NON-LIVE ") + self.Params.reportParams.BetTypeName;
+        headerTitle += "<br />";
+        headerTitle += "Trader: " + (report && report.TraderName && report.TraderName != '' ? report.TraderName : "Unassigned");
+        headerTitle += "<br />";
+        headerTitle += "MatchID: " + report.MatchId;
+    } else {
+        headerTitle += "<br />";
+        headerTitle += "MatchID: " + report.MatchId;
+        headerTitle += "<br />";
+        headerTitle += "MatchCode: " + self.Params.reportParams.MatchCode;
+    }
+
     return headerTitle;
 };
 
