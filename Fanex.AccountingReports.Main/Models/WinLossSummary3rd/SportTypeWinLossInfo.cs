@@ -48,7 +48,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.Togel4D,
             SportContants.TableGames,
             SportContants.BBin,
-            SportContants.RNGWar,
+            SportContants.FunkyGames,
             SportContants.ION,
             SportContants.IBCBetLiveCasino,
             SportContants.PGSoft,

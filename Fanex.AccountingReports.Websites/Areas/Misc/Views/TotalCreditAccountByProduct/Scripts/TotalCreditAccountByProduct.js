@@ -50,7 +50,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         TableGames: 222,
         BBin: 241,
         IBCBetLiveCasino: 242,
-        RNGWar: 224,
+        FunkyGames: 224,
         ION: 225,
         WM: 233,
         BG: 239,
@@ -536,8 +536,8 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
             case productEnums.IBCBetLiveCasino:
                 productName = "IBCBet Live Casino";
                 break;
-            case productEnums.RNGWar:
-                productName = "RNG War";
+            case productEnums.FunkyGames:
+                productName = "Funky Games";
                 break;
             case productEnums.ION:
                 productName = "ION";

@@ -53,7 +53,7 @@ namespace Fanex.AccountingReports.Misc.Constants
 
         public const int IBCBetLiveCasino = 242;
 
-        public const int RNGWar = 224;
+        public const int FunkyGames = 224;
 
         public const int ION = 225;
 
