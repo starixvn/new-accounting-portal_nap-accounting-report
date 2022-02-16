@@ -403,7 +403,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             var rawMatches = rawData.Where(x =>
                 !x.MatchEvent.Contains(criteria.SportName + " " + "BARM")
-                && !x.MatchEvent.Contains(criteria.SportName + " " + "8RM"));
+                && !x.MatchEvent.Contains(criteria.SportName + " " + "8RM")
+                && !x.MatchEvent.Contains("Other Sports 8RM")
+                && !x.MatchEvent.Contains("Other Sports BARM"));
 
             var matchGroups = rawMatches.GroupBy(x => new { x.MatchID, x.MatchEvent });
             foreach (var group in matchGroups)
@@ -421,10 +423,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             leagueWinLoss.Total = CalculateMatchTotal("Total", rawMatches);
 
-            var eightRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains(criteria.SportName + " " + "8RM"));
+            var eightRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains(criteria.SportName + " " + "8RM") 
+                || x.MatchEvent.Contains("Other Sports 8RM"));
             leagueWinLoss.RM = BindingMatch(eightRM);
 
-            var barRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains(criteria.SportName + " " + "BARM"));
+            var barRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains(criteria.SportName + " " + "BARM")
+                || x.MatchEvent.Contains("Other Sports BARM"));
             leagueWinLoss.BARM = BindingMatch(barRM);
 
             leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", rawData);
