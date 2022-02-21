@@ -5,7 +5,6 @@ using Fanex.Logging;
 using Fanex.Logging.Extensions;
 using Fanex.Logging.Extensions.Database;
 using Fanex.Logging.Extensions.Web;
-using Fanex.Logging.RabbitMQ;
 using Fanex.Logging.Sentry.RavenClient;
 using SharpRaven;
 
@@ -19,7 +18,6 @@ namespace Fanex.AccountingReports.Websites.App_Start
             .SetDefaultLogCategory(ConfigurationManager.AppSettings["SiteCategory"])
             .Use(new List<ILogEngine>
             {
-                 new RabbitMQLogging(ConfigurationManager.AppSettings["RabbitMQConnectionString"]),
                  new SentryLogging(new SentryEngineOptions
                  {
                      Dsn = new Dsn(ConfigurationManager.AppSettings["SentryToken"]),

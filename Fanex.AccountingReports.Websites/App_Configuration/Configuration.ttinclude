@@ -108,7 +108,7 @@
                     case SiteEnvironment.SIT:
 						return "http://172.16.4.106:1710/api";
                     case SiteEnvironment.UAT:
-						return "http://10.40.40.248:1710/v1/api";
+						return "http://10.99.99.51:1710/api";
 					case SiteEnvironment.PRO:
                     case SiteEnvironment.PROAWS:
 						return "http://10.99.99.51:1710/api";
@@ -200,7 +200,7 @@
                     case SiteEnvironment.PROAWS:
                         return "http://10.99.99.51:8889/api";
                     case SiteEnvironment.UAT:
-                        return "http://10.40.40.248:8889/api";
+                        return "http://10.99.99.51:8889/api";
                     case SiteEnvironment.SIT:
                         return "http://172.16.4.106:8889/api";
                     case SiteEnvironment.MNL:
@@ -226,26 +226,6 @@
             }
         }
 
-		public string LoggingMsmqPath
-        {
-            get
-            {
-                switch(Environment)
-                {
-                    case SiteEnvironment.UAT:
-                        return @"FormatName:DIRECT=tcp:10.40.40.73\private$\entlib";
-					case SiteEnvironment.SIT:
-                        return @"FormatName:DIRECT=tcp:172.16.4.106\private$\entlib";
-                    case SiteEnvironment.PRO:
-                    case SiteEnvironment.PROAWS:
-                        return @"FormatName:DIRECT=tcp:10.40.40.22\private$\entlib";
-                    case SiteEnvironment.MNL:
-                        return @"FormatName:DIRECT=tcp:10.2.98.3\private$\entlib";
-                    default:
-                        return @"FormatName:DIRECT=tcp:10.18.200.103\private$\entlib";
-                }
-            }
-        }
 
         public string LoggingDefaultCategory
         {
