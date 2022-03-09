@@ -41,7 +41,7 @@ namespace Fanex.AccountingReports.Misc.Constants
             "virtual sports 2",
             "number game",
             "bet builder",
-            "saba.club",
+            "saba.games",
             "vgaming"
         };
 

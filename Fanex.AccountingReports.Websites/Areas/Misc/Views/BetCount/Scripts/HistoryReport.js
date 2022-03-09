@@ -274,7 +274,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
                 continue;
             }
 
-            if (productGroup.Name.toLowerCase() == "saba.club") {
+            if (productGroup.Name.toLowerCase() == "saba.games") {
                 ddProduct.push({
                     id: "#" + ddId + "_Product42",
                     value: "42",

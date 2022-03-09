@@ -317,7 +317,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                 continue;
             }
 
-            if (productGroup.Name.toLowerCase() == "saba.club") {
+            if (productGroup.Name.toLowerCase() == "saba.games") {
                 ddProduct.push({
                     id: "#" + ddId + "_Product42",
                     value: "42",
