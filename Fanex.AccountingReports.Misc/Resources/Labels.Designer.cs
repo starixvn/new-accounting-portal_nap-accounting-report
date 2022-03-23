@@ -466,7 +466,7 @@ namespace Fanex.AccountingReports.Misc.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MBC - RNG Casino.
+        ///   Looks up a localized string similar to Saba Casino.
         /// </summary>
         public static string Casino {
             get {
