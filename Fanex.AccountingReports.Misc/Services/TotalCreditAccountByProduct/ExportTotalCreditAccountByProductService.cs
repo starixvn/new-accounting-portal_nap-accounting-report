@@ -395,7 +395,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
             switch (id)
             {
                 case ProductContants.Casino:
-                    product = Labels.Casino;
+                    product = "Saba Casino";
                     break;
 
                 case ProductContants.Racing:

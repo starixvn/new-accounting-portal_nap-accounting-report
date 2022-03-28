@@ -466,7 +466,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
 
         switch (parseInt(sportId)) {
             case productEnums.Casino:
-                productName = "Casino";
+                productName = "Saba Casino";
                 break;
             case productEnums.Racing:
                 productName = "Racing";
