@@ -62,5 +62,8 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int VGaming = 171;
 
         public const int Bitcoin = 175;
+
+
+        public const int FGG = 176;
     }
 }
