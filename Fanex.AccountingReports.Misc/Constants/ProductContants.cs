@@ -65,5 +65,7 @@ namespace Fanex.AccountingReports.Misc.Constants
 
 
         public const int FGG = 176;
+
+        public const int SabaCasino = 208;
     }
 }

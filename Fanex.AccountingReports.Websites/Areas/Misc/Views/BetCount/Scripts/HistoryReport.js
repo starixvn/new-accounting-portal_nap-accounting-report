@@ -206,7 +206,7 @@ Fanex.AccountingReports.Misc.BetCount.HistoryReport = function () {
 
                 continue;
             }
-            if (productGroup.Name.toLowerCase() == "mbc-rng casino") {
+            if (productGroup.Name.toLowerCase() == "saba casino") {
                 var values = '';
 
                 for (var currentProduct = 0; currentProduct < productGroup.ChildsInfo.length; currentProduct++) {

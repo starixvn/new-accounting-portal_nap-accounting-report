@@ -80,7 +80,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.WinLoss3rdSummary
             CacheRef.SaveCacheRefResponse(sportTypeHash.Values.ToList(), CacheRef.GetSportName, ref this._sportTypeNameCache);
             if (_sportTypeNameCache.ContainsKey(_casinoSportType))
             {
-                _sportTypeNameCache[_casinoSportType] = Labels.MBC_RNG_Casino;
+                _sportTypeNameCache[_casinoSportType] = Labels.Saba_Casino;
             }
 
             CacheRef.SaveCacheRefResponse(betTypeHash.Values.ToList(), CacheRef.GetBettype, ref this._betTypeNameCache);

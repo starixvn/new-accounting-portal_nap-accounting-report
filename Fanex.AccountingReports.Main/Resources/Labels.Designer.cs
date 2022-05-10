@@ -1807,15 +1807,6 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MBC - RNG Casino.
-        /// </summary>
-        public static string MBC_RNG_Casino {
-            get {
-                return ResourceManager.GetString("MBC_RNG_Casino", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Member.
         /// </summary>
         public static string Member {
@@ -2578,6 +2569,15 @@ namespace Fanex.AccountingReports.Main.Resources {
         public static string Role {
             get {
                 return ResourceManager.GetString("Role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saba Casino.
+        /// </summary>
+        public static string Saba_Casino {
+            get {
+                return ResourceManager.GetString("Saba_Casino", resourceCulture);
             }
         }
         

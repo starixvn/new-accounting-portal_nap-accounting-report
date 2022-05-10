@@ -214,7 +214,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MBC_RNG_Casino_Daily_Report_{0}.
+        ///   Looks up a localized string similar to Saba_Casino_Daily_Report_{0}.
         /// </summary>
         public static string CasinoWinLoss_ReportName {
             get {
@@ -223,7 +223,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MBC - RNG Casino Daily Report: {0}.
+        ///   Looks up a localized string similar to Saba Casino Daily Report: {0}.
         /// </summary>
         public static string CasinoWinLoss_ReportTitle {
             get {
@@ -232,7 +232,7 @@ namespace Fanex.AccountingReports.Gaming.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MBC - RNG Casino Daily Report.
+        ///   Looks up a localized string similar to Saba Casino Daily Report.
         /// </summary>
         public static string CasinoWinLoss_SheetName {
             get {
