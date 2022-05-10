@@ -394,7 +394,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
             string product = string.Empty;
             switch (id)
             {
-                case ProductContants.Casino:
+                case ProductContants.SabaCasino:
                     product = "Saba Casino";
                     break;
 

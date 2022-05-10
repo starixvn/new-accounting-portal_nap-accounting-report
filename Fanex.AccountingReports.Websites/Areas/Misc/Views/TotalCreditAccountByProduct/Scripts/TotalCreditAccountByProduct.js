@@ -56,7 +56,8 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         BG: 239,
         VGaming: 171,
         Bitcoin: 175,
-        FGG: 176
+        FGG: 176,
+        SabaCasino: 208
     };
 
     var cachedData = {
@@ -465,7 +466,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         var productName = null;
 
         switch (parseInt(sportId)) {
-            case productEnums.Casino:
+            case productEnums.SabaCasino:
                 productName = "Saba Casino";
                 break;
             case productEnums.Racing:
