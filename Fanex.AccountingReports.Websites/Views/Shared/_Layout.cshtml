@@ -55,7 +55,6 @@
                         Welcome <span class="info-acc">@HttpContext.Current.User.Identity.Name</span><span class="info-more"></span>
                     </h2>
                     <ul>
-                        <li>@Html.ActionLink(ViewResources.Profile, "UserProfile", "User", new { Area = "UserControl" }, new { })</li>
                         <li>@Html.ActionLink(ViewResources.Change_Password, "ChangePassword", "User", new { Area = "UserControl" }, new { })</li>
                         <li>@Html.ActionLink(ViewResources.Sign_Out, "LogOut", "Login", new { Area = "UserLogin" }, new { })</li>
                     </ul>
@@ -117,7 +116,7 @@
         var inlineImageExpand = "@Labels.ReportLegend_SubTabHeadLineIcon_Expand_Image";
         var inlineImageCollapse = "@Labels.ReportLegend_SubTabHeadLineIcon_Collapse_Image";
         var menuId = "@(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Id : -1)";
-        var functionName = "@(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Function.Name : string.Empty)";
+        var functionName = "@(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.FunctionName : string.Empty)";
         var menuName = "@(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Name : string.Empty)";
 
         //Set fix width for filter-bar
