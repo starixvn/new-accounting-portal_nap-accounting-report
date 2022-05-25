@@ -51,9 +51,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl
                         MenuId = menu.Id,
                         Count = row.Count,
                         Position = Converter.ToInt(row.Position),
-                        Title = (menu.Parent != null
-                                    ? menu.Parent.Name + MenuService.UrlSeparator
-                                    : string.Empty) + menu.Name
+                        Title = menu.ParentName + MenuService.UrlSeparator + menu.Name
                     });
                 }
             }

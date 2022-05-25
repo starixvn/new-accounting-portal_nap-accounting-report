@@ -43,14 +43,14 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
                 NapSettings.Settings.SiteId,
                 AccReportFunctionKeys.LeagueWinLossModePermission)
                 .Where(p => p.Policy >= (int)Constant.Policy.Read)
-                .Select(p => p.Function.Key);
+                .Select(p => p.Key);
 
             var productPermission = this._userService.GetPermissions(
              _currentSession.UserId,
              NapSettings.Settings.SiteId,
              AccReportFunctionKeys.LeagueWinLossProductPermission)
              .Where(p => p.Policy >= (int)Constant.Policy.Read)
-             .Select(p => p.Function.Key);
+             .Select(p => p.Key);
 
             ViewBag.IsFullModePermission = modePermission.Count() > 1;
             ViewBag.IsNormalMode = modePermission.FirstOrDefault() == LeagueWinLossPermissionConstants.LeagueWinLoss_NormalMode;
@@ -66,7 +66,7 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
               NapSettings.Settings.SiteId,
               AccReportFunctionKeys.LeagueWinLossProductPermission)
               .Where(p => p.Policy >= (int)Constant.Policy.Read)
-              .Select(p => p.Function.Key);
+              .Select(p => p.Key);
             var sports = this._reportService.GetSports(productPermission);
             return Json(sports, JsonRequestBehavior.AllowGet);
         }

@@ -83,36 +83,6 @@ namespace Fanex.AccountingReports.Websites.Areas.UserControl.Controllers
             return View(user);
         }
 
-        /// <summary>
-        /// The User profile.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The User profile page.</returns>
-        [HttpPost]
-        public ActionResult UserProfile(User user)
-        {
-            if (ModelState.IsValid)
-            {
-                var oldUser = _userService.Get(CurrentSession.UserId);
-                var parameter = new UpdateUserInfoParameter
-                {
-                    CustId = oldUser.Id,
-                    Username = oldUser.Username,
-                    FirstName = user.FirstName ?? oldUser.FirstName,
-                    LastName = user.LastName ?? oldUser.LastName,
-                    Email = user.Email ?? oldUser.Email,
-                    GroupId = oldUser.Group == null ? 0 : oldUser.Group.Id
-                };
-
-                var result = securityService.UpdateProfile(this.SiteId, parameter);
-
-                ViewBag.Success = result;
-                ViewBag.Message = result ? string.Empty : "Sorry, an error occurred while processing your request, please notify the administrators.";
-            }
-
-            return View(user);
-        }
-
         #endregion
     }
 }

@@ -12,18 +12,12 @@ namespace Fanex.AccountingReports.Core.Web
     {
         private static readonly User UnauthorizedUser = new User
         {
-            CreatedDate = DateTime.Today,
-            Creator = null,
             Email = string.Empty,
             FirstName = string.Empty,
-            Group = null,
             Id = 0,
             Username = string.Empty,
-            LastLoginDate = DateTime.Today,
             LastName = string.Empty,
-            ModifiedDate = DateTime.Today,
             Name = string.Empty,
-            Modifier = null,
             Password = string.Empty
         };
 

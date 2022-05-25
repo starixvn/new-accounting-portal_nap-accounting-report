@@ -79,7 +79,7 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
 
                     if (password == hashPassword)
                     {
-                        var group = user.Group == null ? null : groupService.Get(user.Group.Id);
+                        var group = groupService.Get(user.GroupId);
                         var siteLevelList = _userService.GetSiteLevel(user.Id, Environment); // gets all sites of logging-in user
 
                         if ((group == null || group.IsActive) &&
@@ -126,13 +126,13 @@ namespace Fanex.AccountingReports.Websites.Areas.UserLogin.Controllers
                             //// saves user session
 
                             if (AppSession.CurrentUserMenu != null &&
-                                AppSession.CurrentUserMenu.Where(m => m.Parent == null).ToList().Count > 0)
+                                AppSession.CurrentUserMenu.Where(m => m.ParentId <= 0).ToList().Count > 0)
                             {
                                 bool userIsActiveOnThisSite = false;
 
                                 foreach (var siteLevel in siteLevelList)
                                 {
-                                    if (siteLevel.Site.Id == this.SiteId && siteLevel.IsActive)
+                                    if (siteLevel.SiteId == this.SiteId && siteLevel.IsActive)
                                     {
                                         userIsActiveOnThisSite = true;
                                     }

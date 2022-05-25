@@ -89,8 +89,8 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             if (rawData.Any())
             {
                 var rows = rawData.Where(menuItem =>
-                    (parentId == null && menuItem.Parent == null) ||
-                    (menuItem.Parent != null && menuItem.Parent.Id == parentId));
+                    (parentId == null && menuItem.ParentId == 0) ||
+                    (menuItem.ParentId != 0 && menuItem.ParentId == parentId));
 
                 if (rows != null && rows.Any())
                 {
@@ -104,7 +104,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
                             Href = Converter.ToString2(row.Url),
                             System = Constants.SystemName.AccNapReport,
                             ParentId = Converter.ToInt(parentId),
-                            FunctionName = Converter.ToString2(row.Function.Name),
+                            FunctionName = Converter.ToString2(row.FunctionName),
                             IsHide = !Converter.ToBool(row.IsActive),
                             Order = Converter.ToInt(row.DisplayOrder),
                             SubMenu = this.MappingNapMenuToAccountingMenu(rawData, row.Id)
