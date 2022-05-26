@@ -106,14 +106,15 @@
 					case SiteEnvironment.LOCAL:
 						return "http://nap_api_netcore.nexdev.net:8787";
                     case SiteEnvironment.SIT:
-						return "http://172.16.4.106:1710/api";
+						return "http://172.16.2.44:8788";
                     case SiteEnvironment.UAT:
-						return "http://10.99.99.51:1710/api";
+						return "http://10.2.27.8:8788";
 					case SiteEnvironment.PRO:
+                        return "http://10.2.27.8:8788";
                     case SiteEnvironment.PROAWS:
-						return "http://10.99.99.51:1710/api";
+						return "http://vn-net-lb-fb2f50db9dc92512.elb.ap-northeast-1.amazonaws.com:8788";
 					case SiteEnvironment.MNL:
-                        return "http://10.40.40.202:1710/api";
+                        return "http://10.2.27.8:8788";
 					default:
                         return string.Empty;
                 }

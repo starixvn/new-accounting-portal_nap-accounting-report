@@ -55,8 +55,12 @@
                         Welcome <span class="info-acc">@HttpContext.Current.User.Identity.Name</span><span class="info-more"></span>
                     </h2>
                     <ul>
-                        <li>@Html.ActionLink(ViewResources.Change_Password, "ChangePassword", "User", new { Area = "UserControl" }, new { })</li>
-                        <li>@Html.ActionLink(ViewResources.Sign_Out, "LogOut", "Login", new { Area = "UserLogin" }, new { })</li>
+                        <li>
+                            <a href='@Url.Content("~/Auth/ChangePassword")'>Change Password</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Content("~/Auth/LogOut")'>Sign out</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -91,7 +95,7 @@
     <script type="text/javascript" src="~/scripts/_lib/jquery.fileDownload.js"></script>
     <script type="text/javascript" src="~/Areas/Uncategorized/ReportLegend/FanexLegend.js"></script>
     <script type="text/javascript" src="~/Areas/Uncategorized/ims/ims.js"></script>
-    <script type="text/javascript" src="~/scripts/ReCheckIn.js?ver=12"></script>
+    <script src="@Url.Content("~/auth/recheckinscript")" type="text/javascript"></script>
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~")';
         window.rootWebPath = '@(Request.Url.GetLeftPart(UriPartial.Authority) + Request.ApplicationPath)';

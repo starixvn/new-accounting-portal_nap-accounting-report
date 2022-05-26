@@ -16,18 +16,12 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
     using System.Drawing;
     using System.Linq;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class BetCountService : ServiceBase
     {
         private static Dictionary<object, string> _sportTypeNameCache;
 
         private enum ReportRowType
         {
-            /// <summary>
-            /// The normal row.
-            /// </summary>
             NormalRow = 1,
 
             /// <summary>
@@ -119,9 +113,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             report.Total.MarginPercent = this.CalculateMargin(report.Total.MemberWinLoss, report.Total.Turnover);
             SessionManager.Set<Transaction>(sessionKey, report);
             return report;
-
-            SessionManager.Set<Transaction>(sessionKey, null);
-            return null;
         }
 
         /// <summary>
@@ -157,9 +148,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
             SessionManager.Set<Transaction>(sessionKey, report);
             return report;
-
-            SessionManager.Set<Transaction>(sessionKey, null);
-            return null;
         }
 
         #region ExportExcel
@@ -693,7 +681,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
         public ProductInfo GenerateSports(IEnumerable<dynamic> rawData)
         {
-            if (rawData.Count() == 0)
+            if (!rawData.Any())
             {
                 return new ProductInfo
                 {

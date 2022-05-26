@@ -6,9 +6,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
     using Fanex.AccountingReports.Core.Web;
     using NAP.Core.Models;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class MenuService : ServiceBase
     {
         public const char UrlSeparator = '/';
@@ -96,8 +93,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             {
                 return null;
             }
-
-            return null;
         }
 
         /// <summary>

@@ -16,9 +16,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
     using Fanex.AccountingReports.Special.Resources;
     using Fanex.Common;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class ParlayWonService : ServiceBase
     {
         private enum ReportRowType
@@ -75,9 +72,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             };
 
             return pagingReport;
-
-            SessionManager.Set<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey, null);
-            return null;
         }
 
         /// <summary>
@@ -528,8 +522,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             }
 
             return fullReport;
-
-            return null;
         }
 
         /// <summary>

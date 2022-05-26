@@ -150,6 +150,9 @@
       <HintPath>..\packages\Fanex.NAP.Core.Client.2.0.0\lib\net40\Fanex.NAP.Core.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Fanex.NAP.Core.SignIn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.NAP.Core.SignIn.2.0.0\lib\net461\Fanex.NAP.Core.SignIn.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.RemotingRef, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.RemotingRef.1.5.0\lib\net461\Fanex.RemotingRef.dll</HintPath>
       <Private>True</Private>
@@ -164,10 +167,6 @@
     </Reference>
     <Reference Include="Fanex.Result.Core.Base, Version=2.3.8.6, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Result.Core-NPOI.2.0.6.2.3.8.6\lib\net40\Fanex.Result.Core.Base.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Fanex.Result.Core.GoldDeluxe, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.Result.Core-GoldDeluxe.1.0.3\lib\net40\Fanex.Result.Core.GoldDeluxe.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.Result.Core.LiveCasino, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -588,10 +587,6 @@
     <Compile Include="Areas\UserControl\Controllers\UserController.cs" />
     <Compile Include="Areas\UserControl\Models\UpdatePasswordModel.cs" />
     <Compile Include="Areas\UserControl\UserControlAreaRegistration.cs" />
-    <Compile Include="Areas\UserLogin\Controllers\CommonController.cs" />
-    <Compile Include="Areas\UserLogin\Controllers\LoginController.cs" />
-    <Compile Include="Areas\UserLogin\Controllers\SSOController.cs" />
-    <Compile Include="Areas\UserLogin\UserLoginAreaRegistration.cs" />
     <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Scripts\NumberGameMonthlyWinLoss.js" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\ReportManager.js" />
     <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByBetType.js" />
@@ -677,8 +672,6 @@
     <Content Include="Areas\Uncategorized\ReportLegend\FanexLegend.js" />
     <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon.png" />
     <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon2-hover.png" />
-    <Content Include="Areas\UserLogin\scripts\lib\CryptoJS.js" />
-    <Content Include="Areas\UserLogin\themes\img\chrome.png" />
     <Content Include="Areas\WinLoss\Views\AllCustomerTurnOver\Scripts\AllCustomerTurnOver.js" />
     <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon2.png" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\AdvanceMixParlayReport.js" />
@@ -1066,10 +1059,6 @@
     <Content Include="themes\base\img\expand-icon.png" />
     <Content Include="themes\base\img\icn-collpase.png" />
     <Content Include="themes\base\img\icn-expand.png" />
-    <Content Include="Areas\UserLogin\Views\Common\Images\AccReport_banner.png" />
-    <Content Include="Areas\UserLogin\Views\Common\Images\notice.png" />
-    <Content Include="Areas\UserLogin\Views\Common\Images\notice32.png" />
-    <Content Include="Areas\UserLogin\Views\Common\Style\expirednotification.less" />
     <Content Include="Views\Errors\Error404.htm" />
     <Content Include="Views\Errors\GeneralError.htm" />
     <Content Include="App_Configuration\RMSection.config">
@@ -1103,6 +1092,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="WhoAmI1.aspx" />
+    <Content Include="wwwroot\nap-auth\auth.css" />
+    <Content Include="wwwroot\nap-auth\auth-sample.css" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Balance\Views\CompanyBalanceDifference\Scripts\CompanyBalanceDifference.js" />
@@ -1123,29 +1114,6 @@
     <Content Include="Areas\Misc\Views\BetCount\Scripts\ReportManager.js" />
     <Content Include="Areas\Misc\Views\BetCount\Scripts\HistoryReport.js" />
     <Content Include="Areas\Misc\Views\BetCount\Scripts\NormalReport.js" />
-    <Content Include="Areas\UserLogin\scripts\lib\jquery-1.8.0.min.js" />
-    <Content Include="Areas\UserLogin\scripts\Plugin\jquery-1.6.2.js" />
-    <Content Include="Areas\UserLogin\scripts\ReCheckIn.js" />
-    <Content Include="Areas\UserLogin\themes\Copy of login.css" />
-    <Content Include="Areas\UserLogin\themes\img\auth-bg.png" />
-    <Content Include="Areas\UserLogin\themes\img\bg.png" />
-    <Content Include="Areas\UserLogin\themes\img\bkg-pat.png" />
-    <Content Include="Areas\UserLogin\themes\img\firefox_original.png" />
-    <Content Include="Areas\UserLogin\themes\img\header_bg.jpg" />
-    <Content Include="Areas\UserLogin\themes\img\ie.png" />
-    <Content Include="Areas\UserLogin\themes\img\lock.png" />
-    <Content Include="Areas\UserLogin\themes\img\logo.png" />
-    <Content Include="Areas\UserLogin\themes\img\password.png" />
-    <Content Include="Areas\UserLogin\themes\img\pattern.png" />
-    <Content Include="Areas\UserLogin\themes\img\title-bg.jpg" />
-    <Content Include="Areas\UserLogin\themes\img\username.png" />
-    <Content Include="Areas\UserLogin\themes\img\warn.png" />
-    <Content Include="Areas\UserLogin\themes\img\welcome.png" />
-    <Content Include="Areas\UserLogin\themes\img\welcome2.png" />
-    <Content Include="Areas\UserLogin\themes\login.css" />
-    <Content Include="Areas\UserLogin\Views\Common\Style\AccessDenied.css" />
-    <Content Include="Areas\UserLogin\Views\Common\Style\Images\accessDenied.gif" />
-    <Content Include="Areas\UserLogin\Views\Common\Style\Images\UnderMaintenance.gif" />
     <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLoss.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -1379,7 +1347,6 @@
     <Content Include="themes\base\img\logo2.png" />
     <Content Include="themes\base\img\logo3.png" />
     <Content Include="themes\base\img\moreinfo.png" />
-    <Content Include="Areas\UserLogin\themes\img\pattern6.png" />
     <Content Include="themes\base\img\report-icon.png" />
     <Content Include="themes\base\img\seperation.png" />
     <Content Include="themes\base\img\setting.png" />
@@ -1696,7 +1663,6 @@
   <ItemGroup>
     <Folder Include="Areas\LegendManagement\Views\LegendManagement\UploadedImage\" />
     <Folder Include="Areas\UserControl\Views\Shared\" />
-    <Folder Include="Areas\UserLogin\Models\" />
     <Folder Include="scripts\_lib\BlockUI\img\" />
   </ItemGroup>
   <ItemGroup>
@@ -1797,9 +1763,6 @@
     <Content Include="Areas\UserControl\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\UserLogin\Views\Web.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Areas\Balance\Views\DirectBalance\Index.cshtml" />
     <Content Include="Areas\Balance\Views\Web.config">
       <SubType>Designer</SubType>
@@ -1867,8 +1830,6 @@
     <Content Include="Areas\Special\Views\SMATurnover\Index.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Styles\SpecialMatchAnalysis.less" />
     <Content Include="Areas\Misc\Views\TotalCreditAccountByProduct\Index.cshtml" />
-    <Content Include="Areas\UserLogin\Views\Common\Offline.cshtml" />
-    <Content Include="Areas\UserLogin\Views\Common\AccessDenied.cshtml" />
     <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Index.cshtml" />
     <Content Include="Areas\WinLoss\Web.config" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Index.cshtml" />
@@ -1951,13 +1912,6 @@
       <DependentUpon>Web.Config.tt</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Areas\UserLogin\themes\fonts\Abel.woff" />
-    <None Include="Areas\UserLogin\themes\fonts\OpenSans.woff" />
-    <None Include="Areas\UserLogin\themes\fonts\YanoneKaffeesatz.woff" />
-    <Content Include="Areas\UserLogin\themes\select-site.less" />
-    <Content Include="Areas\UserLogin\Views\Login\Index.cshtml" />
-    <Content Include="Areas\UserLogin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\UserLogin\Views\SSO\SSOIndex.cshtml" />
     <Content Include="App_Configuration\Web.Config.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Web.Config.txt</LastGenOutput>
@@ -2033,7 +1987,6 @@
     <Content Include="App_Configuration\Web.UAT.ConnectionString.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Areas\UserLogin\Views\Common\ExpiredNotification.cshtml" />
     <Content Include="App_Configuration\LiveCasinoProductSection.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -2071,6 +2024,12 @@
     <Content Include="App_Configuration\Web.PRO.ConnectionString.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Auth\Offline.cshtml" />
+    <Content Include="Views\Auth\NotFound.cshtml" />
+    <Content Include="Views\Auth\Index.cshtml" />
+    <Content Include="Views\Auth\Error.cshtml" />
+    <Content Include="Views\Auth\ChangePassword.cshtml" />
+    <Content Include="Views\Auth\AccessDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
