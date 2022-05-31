@@ -107,8 +107,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
 
             return winLossByComm;
-
-            return null;
         }
 
         /// <summary>

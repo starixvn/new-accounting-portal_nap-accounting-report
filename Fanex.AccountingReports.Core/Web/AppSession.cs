@@ -2,6 +2,7 @@ namespace Fanex.AccountingReports.Core.Web
 {
     using Fanex.AccountingReports.Core.Constants;
     using NAP.Core.Models;
+    using NAP.Core.Web.Session;
     using System;
     using System.Collections.Generic;
 
@@ -10,6 +11,9 @@ namespace Fanex.AccountingReports.Core.Web
     /// </summary>
     public static class AppSession
     {
+
+        private static CurrentSession currentSession = new CurrentSession();
+
         private static readonly User UnauthorizedUser = new User
         {
             Email = string.Empty,
@@ -51,12 +55,7 @@ namespace Fanex.AccountingReports.Core.Web
         {
             get
             {
-                return SessionManager.Get<IList<MenuItem>>(CommonConstants.CurrentUserMenu);
-            }
-
-            set
-            {
-                SessionManager.Set<IList<MenuItem>>(CommonConstants.CurrentUserMenu, value);
+                return currentSession.MenuItemList;
             }
         }
 
