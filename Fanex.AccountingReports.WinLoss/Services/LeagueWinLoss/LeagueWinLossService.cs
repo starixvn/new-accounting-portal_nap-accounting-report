@@ -352,6 +352,16 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
         }
 
+        public int GetPermissionProfileId(string functionKeyValue)
+        {
+            var criteria = new PermissionCriteria
+            {
+                FunctionKey = functionKeyValue
+            };
+
+            return _reportRepository.GetPermissionProfileID(criteria);
+        }
+
         private BetTypeWinLossByStatusModel GetBetTypesByStatus(GetBetTypesCriteria criteria)
         {
             var result = new BetTypeWinLossByStatusModel
@@ -598,7 +608,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 VirtualWinLoss = rawData.VirtualWinLoss,
                 RealIncome = rawData.RealIncome,
                 VirtualTurnover = rawData.VirtualTurnover,
-                RealTurnover = rawData.RealTurnover
+                RealTurnover = rawData.RealTurnover,
+                MatchCount = rawData.MatchCount
             };
         }
 

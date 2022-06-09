@@ -22,7 +22,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatchesFromBetTyp
             BetTypeName: '',
             GlobalShowTime: '',
             SportType: 0,
-            LeagueId: ''
+            LeagueId: '',
+            PermissionProfileID: permissionProfileID
         }
     };
     self.initPage = function () {

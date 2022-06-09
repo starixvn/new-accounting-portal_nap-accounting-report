@@ -188,6 +188,7 @@
     <Compile Include="Criteria\LeagueWinLoss\GetSitesCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetSportCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetVirtualRateCriteria.cs" />
+    <Compile Include="Criteria\LeagueWinLoss\PermissionCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetSportCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetTreeWinLossByAgentCriteria.cs" />
     <Compile Include="Criteria\TreeWinLoss\GetTreeWinLossByMasterCriteria.cs" />

@@ -50,7 +50,11 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
              NapSettings.Settings.SiteId,
              AccReportFunctionKeys.LeagueWinLossProductPermission)
              .Where(p => p.Policy >= (int)Constant.Policy.Read)
+             .OrderBy(x => x.Name)
              .Select(p => p.Key);
+
+            var permission = productPermission.Any() ? productPermission.FirstOrDefault() : string.Empty;
+            ViewBag.PermissionProfileID = _reportService.GetPermissionProfileId(permission);
 
             ViewBag.IsFullModePermission = modePermission.Count() > 1;
             ViewBag.IsNormalMode = modePermission.FirstOrDefault() == LeagueWinLossPermissionConstants.LeagueWinLoss_NormalMode;

@@ -48,7 +48,8 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                         RealTurnover = Converter.ToDecimal(row["RealTurnover"]),
                         VirtualTurnover = Converter.ToDecimal(row["VirtualTurnover"]),
                         IsSabaSport = Converter.ToInt(row["IsSabaSport"]),
-                        LeagueId = Converter.ToString2(row["LeagueId"])
+                        LeagueId = Converter.ToString2(row["LeagueId"]),
+                        MatchCount = Converter.ToInt(row["MatchCount"])
                     });
                 }
             }
@@ -314,6 +315,26 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
             }
 
             return null;
+        }
+
+        public int GetPermissionProfileID(ICriteria criteria)
+        {
+            DataSet result = null;
+
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                result = db.ExecuteDataSet(criteria.GetSpParams());
+            }
+
+            if (result != null && result.Tables.Count > 0 && result.Tables[0].Rows.Count > 0)
+            {
+                var firstRow = result.Tables[0].Rows[0];
+                var permissionProfileId = Converter.ToInt(firstRow["PermisionProfileID"]);
+
+                return permissionProfileId;
+            }
+
+            return 0;
         }
     }
 }

@@ -1,10 +1,6 @@
 ﻿using Fanex.Data;
 using Fanex.Data.Repository;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 {
@@ -48,11 +44,11 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public int SportType { get; set; }
 
+        public int PermissionProfileID { get; set; }
+
         public override string GetSettingKey()
         {
-            var suffix = IsNormalMode ? string.Empty : "_WH";
-
-            return "WinLoss_LeagueWinLoss_GetSites" + suffix;
+            return "WinLoss_LeagueWinLoss_GetSites";
         }
 
         public override bool IsValid()
