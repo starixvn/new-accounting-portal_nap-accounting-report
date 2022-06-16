@@ -350,7 +350,7 @@
             var lastDate = new Date(today);
             var day = date.getDay();
             var diff = date.getDate() - day; // adjust when day is sunday
-            var startDate = new Date(date.setDate(diff));
+            var startDate = day === 1 ? date : new Date(date.setDate(diff + 1));
 
             startDate = date.getMonth() < lastDate.getMonth() ? new Date(lastDate.getFullYear(), lastDate.getMonth(), 1) : startDate;
 
@@ -359,7 +359,7 @@
         getDateRangeOfLastWeek: function (today) {
             var lastWeek = new Date(today);
             // set the date to last week's Sunday
-            lastWeek.setDate(lastWeek.getDate() - lastWeek.getDay() - 7);
+            lastWeek.setDate(lastWeek.getDate() - lastWeek.getDay() - 6);
             var startDate = NexDatePickerHelper.getShortDateString(lastWeek);
             // set the date to last week's Saturday
             lastWeek.setDate(lastWeek.getDate() + 6);
