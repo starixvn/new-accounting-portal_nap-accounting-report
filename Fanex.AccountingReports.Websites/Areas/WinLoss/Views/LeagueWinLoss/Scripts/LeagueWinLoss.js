@@ -506,7 +506,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                 }
                             }
                         },
-                         { Name: "ColMatchCount", Value: info.MatchCount },
+                         { Name: "ColMatchCount", Value: info.Sport.includes('Soccer') ? info.MatchCount : '-' },
                                   {
                                       Name: "ColMemberWinLoss",
                                       Value: {
