@@ -350,7 +350,7 @@
             var lastDate = new Date(today);
             var day = date.getDay();
             var diff = date.getDate() - day; // adjust when day is sunday
-            var startDate = day === 1 ? date : new Date(date.setDate(diff + 1));
+            var startDate = day === 0 ?  new Date(date.setDate(diff - 6)) : new Date(date.setDate(diff + 1));
 
             startDate = date.getMonth() < lastDate.getMonth() ? new Date(lastDate.getFullYear(), lastDate.getMonth(), 1) : startDate;
 
