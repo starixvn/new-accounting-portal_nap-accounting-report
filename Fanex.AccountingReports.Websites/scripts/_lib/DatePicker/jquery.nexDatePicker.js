@@ -358,8 +358,10 @@
         },
         getDateRangeOfLastWeek: function (today) {
             var lastWeek = new Date(today);
+            var day = lastWeek.getDay();
+            var setDate = day === 0 ? lastWeek.getDate() - lastWeek.getDay() - 13 : lastWeek.getDate() - lastWeek.getDay() - 6;
             // set the date to last week's Sunday
-            lastWeek.setDate(lastWeek.getDate() - lastWeek.getDay() - 6);
+            lastWeek.setDate(setDate);
             var startDate = NexDatePickerHelper.getShortDateString(lastWeek);
             // set the date to last week's Saturday
             lastWeek.setDate(lastWeek.getDate() + 6);
