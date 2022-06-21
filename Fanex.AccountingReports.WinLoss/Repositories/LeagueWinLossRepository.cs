@@ -133,7 +133,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                     {
                         MatchID = Converter.ToInt(row["MatchID"]),
                         MatchCode = Converter.ToString2(row["MatchCode"]),
-                        LiveIndicator = Converter.ToBool(row["LiveIndicator"]),
+                        LiveIndicator = Converter.ToInt(row["LiveIndicator"]) == 1,
                         MatchEvent = Converter.ToString2(row["MatchEvent"]),
                         MemberWinLoss = Converter.ToDecimal(row["MemberWinLoss"]),
                         SMAWinLoss = Converter.ToDecimal(row["SMAWinLoss"]),
