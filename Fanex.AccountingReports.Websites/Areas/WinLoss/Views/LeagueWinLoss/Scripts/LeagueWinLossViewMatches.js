@@ -17,7 +17,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
             IsNoDraw: false,
             SiteName: '',
             LiveIndicator: 0,
-            ShowHedgeMatchOnly: false,
+            ShowHedgeOrNormalMatchOnly: 0,
             BetType: 0,
             GlobalShowTime: '',
             SportType: 0,

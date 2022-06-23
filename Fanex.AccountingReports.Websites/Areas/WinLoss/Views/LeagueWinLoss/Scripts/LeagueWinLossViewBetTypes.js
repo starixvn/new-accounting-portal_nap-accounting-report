@@ -19,7 +19,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
             IsNormalMode: true,
             IsNoDraw: false,
             SiteName: '',
-            IsHedge: false,
+            IsHedge: 0,
             IsIncludeSiteType: true,
             IsIncludeHedge: false,
             GlobalShowTime: '',

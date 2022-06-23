@@ -29,7 +29,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public int LiveIndicator { get; set; }
 
-        public bool ShowHedgeMatchOnly { get; set; }
+        public int ShowHedgeOrNormalMatchOnly { get; set; }
 
         public int BetType { get; set; }
 
