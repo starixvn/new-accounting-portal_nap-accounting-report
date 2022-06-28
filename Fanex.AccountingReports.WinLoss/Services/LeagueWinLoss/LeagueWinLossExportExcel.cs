@@ -769,7 +769,16 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = info.MatchCount;
+
+            if (info.Sport.Contains("Soccer"))
+            {
+                currentCell.Value = string.Empty;
+            }
+            else
+            {
+                currentCell.Value = info.MatchCount;
+            }
+           
             currentCell.Style = intNumberStyle;
             currentColumn++;
 
