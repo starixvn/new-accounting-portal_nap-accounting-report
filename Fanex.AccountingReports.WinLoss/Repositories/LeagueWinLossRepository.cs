@@ -4,6 +4,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
     using Entities.LeagueWinLoss;
     using Fanex.Data;
     using Fanex.Data.Repository;
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
@@ -34,7 +35,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                 var winLossTable = result.Tables[0];
                 foreach (DataRow row in winLossTable.Rows)
                 {
-                    leagueWinLoss.Add(new LeagueWinLossEntity
+                    var entity = new LeagueWinLossEntity
                     {
                         SportType = Converter.ToInt(row["SportType"]),
                         Sport = Converter.ToString2(row["Sport"]),
@@ -48,9 +49,19 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                         RealTurnover = Converter.ToDecimal(row["RealTurnover"]),
                         VirtualTurnover = Converter.ToDecimal(row["VirtualTurnover"]),
                         IsSabaSport = Converter.ToInt(row["IsSabaSport"]),
-                        LeagueId = Converter.ToString2(row["LeagueId"]),
-                        MatchCount = Converter.ToInt(row["MatchCount"])
-                    });
+                        LeagueId = Converter.ToString2(row["LeagueId"])
+                    };
+
+                    if(row["MatchCount"] == DBNull.Value)
+                    {
+                        entity.MatchCount = null;
+                    }
+                    else
+                    {
+                        entity.MatchCount = Converter.ToInt(row["MatchCount"]);
+                    }
+
+                    leagueWinLoss.Add(entity);
                 }
             }
 

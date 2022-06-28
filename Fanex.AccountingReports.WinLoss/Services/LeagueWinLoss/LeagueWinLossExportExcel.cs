@@ -21,6 +21,13 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
         private static CellStyle textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);
 
+        private static CellStyle intNumberStyle = ExcelExtensions.GetCellNumberStyle(
+           NumberFormatConstants.IntNumberFormat,
+           ExcelExtensions.BackGroundColor,
+           false,
+           false,
+           false);
+
         private static CellStyle twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
             NumberFormatConstants.TwoDecimalDigitFormat,
             ExcelExtensions.BackGroundColor,
@@ -136,7 +143,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     criteria.EndDate.ToShortFormatedDate());
 
             currentColumn = startColumn;
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 11);
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 12);
             currentCellRange.Merged = true;
             currentCellRange.Value = title;
             currentCellRange.Style.FormatTitleCell(titleColor);
@@ -144,7 +151,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentCellRange.Style.Font.Weight = 700;
             currentRow += 2;
 
-            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 11);
+            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 12);
 
             ExportHeader(ref workSheet, startColumn, ref currentRow, Labels.League);
 
@@ -167,6 +174,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                         if (j % 2 == 0)
                         {
                             textStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+                            intNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
                             twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
                             positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
                             positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
@@ -174,6 +182,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                         else
                         {
                             textStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+                            intNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
                             twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
                             positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
                             positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
@@ -191,6 +200,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 currentCell.Value = info.LeagueName;
                 currentCell.Style = grandTotalRowTextStyle;
                 currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = info.MatchCount;
+                currentCell.Style = grandTotalRowTextStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
 
@@ -664,6 +679,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.MatchCount;
+            currentCell.Style = subRowTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.MemberWinLoss;
             currentCell.Style = subRowPositiveTwoDecimalNumberStyle;
             currentColumn++;
@@ -746,6 +766,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             var currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.LeagueName;
             currentCell.Style = textStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = info.MatchCount;
+            currentCell.Style = intNumberStyle;
             currentColumn++;
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -2973,6 +2998,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
+            currentCellRange.Value = "Match Count";
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
             currentCellRange.Value = Labels.Member_Win_Loss;
             currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
@@ -3013,7 +3044,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentCellRange.Style.FormatTitleCell(headerColor);
             currentRow++;
 
-            currentColumn = startColumn + 5;
+            currentColumn = startColumn + 6;
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = Labels.Variance;
             currentCell.Style.FormatTitleCell(headerColor);
