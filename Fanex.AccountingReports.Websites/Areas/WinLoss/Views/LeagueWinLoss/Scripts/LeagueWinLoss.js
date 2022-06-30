@@ -521,10 +521,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                           var winLossValue = currentCell.Value.winLoss.toFixed(2);
                                           if (currentCell.Value.sportName !== 'Parlay' && currentCell.Value.sportName !== 'SB Adjustment') {
                                               var clickEvent = ' onclick = "viewBetTypesByStatus(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + '\',' + currentCell.Value.sportType + ',\'' + currentCell.Value.leagueId + "');\"";
-                                              var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + parseFloat(winLossValue).toLocaleString('en') + '</div>';
+                                              var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + winLossValue.toLocaleString('en') + '</div>';
                                               return html;
                                           } else {
-                                              var html = '<div class="' + cssClass + '">' + parseFloat(winLossValue).toLocaleString('en') + '</div>';
+                                              var html = '<div class="' + cssClass + '">' + winLossValue.toLocaleString('en') + '</div>';
                                               return html;
                                           }
                                       }
