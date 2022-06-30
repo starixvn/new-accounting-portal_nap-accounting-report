@@ -496,7 +496,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                             }, CssClass: "colLeague",
                             CustomCellRender: function (currentCell) {
                                 var leagueText = currentCell.Value.leagueName.length > 50 ? currentCell.Value.leagueName.substring(0, 51) + '...' : currentCell.Value.leagueName;
-                                if (currentCell.Value.sportName !== 'Parlay') {
+                                if (currentCell.Value.sportName !== 'Parlay' && currentCell.Value.sportName !== 'SB Adjustment') {
                                     var clickEvent = ' onclick = "viewMatches(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + '\',' + currentCell.Value.sportType + ',\'' + currentCell.Value.leagueId + "');\"";
                                     var html = '<div class="link " ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
                                     return html;
@@ -519,7 +519,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                       CustomCellRender: function (currentCell) {
                                           var cssClass = currentCell.Value.winLoss > 0 ? 'format-positive' : '';
                                           var winLossValue = currentCell.Value.winLoss.toFixed(2);
-                                          if (currentCell.Value.sportName !== 'Parlay' || currentCell.Value.sportName !== 'SB Adjustment') {
+                                          if (currentCell.Value.sportName !== 'Parlay' && currentCell.Value.sportName !== 'SB Adjustment') {
                                               var clickEvent = ' onclick = "viewBetTypesByStatus(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + '\',' + currentCell.Value.sportType + ',\'' + currentCell.Value.leagueId + "');\"";
                                               var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + parseFloat(winLossValue).toLocaleString('en') + '</div>';
                                               return html;
