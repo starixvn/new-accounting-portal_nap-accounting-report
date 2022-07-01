@@ -485,6 +485,12 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 var childsLength = sport.Leagues.length;
                 for (var j = 0; j < childsLength; j++) {
                     info = sport.Leagues[j];
+
+                    if (info.Sport === 'Parlay' || info.Sport === 'SB Adjustment')
+                    {
+                        continue;
+                    }
+
                     currentSubRow =
                     {
                         Columns: [{
@@ -496,14 +502,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                             }, CssClass: "colLeague",
                             CustomCellRender: function (currentCell) {
                                 var leagueText = currentCell.Value.leagueName.length > 50 ? currentCell.Value.leagueName.substring(0, 51) + '...' : currentCell.Value.leagueName;
-                                if (currentCell.Value.sportName !== 'Parlay' && currentCell.Value.sportName !== 'SB Adjustment') {
-                                    var clickEvent = ' onclick = "viewMatches(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + '\',' + currentCell.Value.sportType + ',\'' + currentCell.Value.leagueId + "');\"";
-                                    var html = '<div class="link " ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
-                                    return html;
-                                } else {
-                                    var html = '<div title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
-                                    return html;
-                                }
+                                var clickEvent = ' onclick = "viewMatches(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + '\',' + currentCell.Value.sportType + ',\'' + currentCell.Value.leagueId + "');\"";
+                                var html = '<div class="link " ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
+                                return html;
                             }
                         },
                          { Name: "ColMatchCount", Value: info.Sport.includes('Soccer') ? info.MatchCount : '' },
@@ -517,16 +518,14 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                           leagueId: info.LeagueId
                                       },
                                       CustomCellRender: function (currentCell) {
-                                          var cssClass = currentCell.Value.winLoss > 0 ? 'format-positive' : '';
-                                          var winLossValue = currentCell.Value.winLoss.toFixed(2);
-                                          if (currentCell.Value.sportName !== 'Parlay' && currentCell.Value.sportName !== 'SB Adjustment') {
-                                              var clickEvent = ' onclick = "viewBetTypesByStatus(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + '\',' + currentCell.Value.sportType + ',\'' + currentCell.Value.leagueId + "');\"";
-                                              var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + winLossValue.toLocaleString('en') + '</div>';
-                                              return html;
-                                          } else {
-                                              var html = '<div class="' + cssClass + '">' + winLossValue.toLocaleString('en') + '</div>';
-                                              return html;
-                                          }
+                                        var cssClass = currentCell.Value.winLoss > 0 ? 'format-positive' : '';
+                                        var winLossValue = currentCell.Value.winLoss;
+                                        var clickEvent = ' onclick = "viewBetTypesByStatus(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + '\',' + currentCell.Value.sportType + ',\'' + currentCell.Value.leagueId + "');\"";
+                                        var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + winLossValue.toLocaleString('en-US', {
+                                            minimumFractionDigits: 2,
+                                            maximumFractionDigits: 2
+                                        }) + '</div>';
+                                        return html;
                                       }
                                   },
                                   { Name: "ColSMAWinLoss", Value: info.SMAWinLoss },

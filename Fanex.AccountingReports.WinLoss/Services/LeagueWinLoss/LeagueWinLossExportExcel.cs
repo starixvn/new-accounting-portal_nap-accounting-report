@@ -189,6 +189,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                         }
 
                         info = sport.Leagues[j];
+
+                        if(info.Sport == "Parlay" || info.Sport == "SB Adjustment")
+                        {
+                            continue;
+                        }
+
                         ExportLeagueWinLossDataRow(startColumn, currentRow, info, workSheet);
                         currentRow++;
                     }
