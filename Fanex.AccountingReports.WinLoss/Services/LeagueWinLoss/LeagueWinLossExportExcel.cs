@@ -133,7 +133,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 workSheet.Columns[startColumn + colIndex].Width = 140 * ExcelExtensions.FontWidth;
             }
 
-            workSheet.Columns[startColumn].Width = 350 * ExcelExtensions.FontWidth;
+            workSheet.Columns[startColumn].Width = 500 * ExcelExtensions.FontWidth;
             var title = criteria.IsNormalMode ?
                 string.Format(
                     WinLossResources.LeagueWinLoss_ReportTitle,
@@ -1831,7 +1831,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn = startColumn;
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = betTypeBySite.BettypeName;
+                    currentCellRange.Value = betTypeBySite.SiteType;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                     currentColumn += 6;
@@ -1870,7 +1870,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn = startColumn;
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = betTypeBySite.BettypeName;
+                    currentCellRange.Value = betTypeBySite.SiteType;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                     currentColumn += 6;
@@ -2025,7 +2025,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn = startColumn;
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = betTypeBySite.BettypeName;
+                    currentCellRange.Value = betTypeBySite.SiteType;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                     currentColumn += 6;
@@ -2064,7 +2064,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn = startColumn;
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = betTypeBySite.BettypeName;
+                    currentCellRange.Value = betTypeBySite.SiteType;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                     currentColumn += 6;
