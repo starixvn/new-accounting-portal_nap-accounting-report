@@ -76,11 +76,11 @@
     <Setting Key="Core_GetDWH_DateRange" SpName="BI_GetDWStatusByCube" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
   </Function>
   <Function Name="Win Loss - League Win Loss">
-    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLoss" SpName="Acc_Rpt_LeagueWL_Sporttype_Old_xpre" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400"></Setting>
-    <Setting Key="WinLoss_LeagueWinLoss_GetBetTypes" SpName="Acc_Rpt_LeagueWL_Bettype_Old_xpre" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400"></Setting>
-    <Setting Key="WinLoss_LeagueWinLoss_GetMatches" SpName="Acc_Rpt_LeagueWL_Match_Old_xpre" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400"></Setting>
-    <Setting Key="WinLoss_LeagueWinLoss_GetSites" SpName="Acc_Rpt_LeagueWL_Site_Old_xpre" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400"></Setting>
-    <Setting Key="WinLoss_LeagueWinLoss_GetSuper" SpName="Acc_Rpt_LeagueWL_Super_Old_xpre" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetLeagueWinLoss" SpName="Acc_Rpt_LeagueWL_Sporttype_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetBetTypes" SpName="Acc_Rpt_LeagueWL_Bettype_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetMatches" SpName="Acc_Rpt_LeagueWL_Match_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetSites" SpName="Acc_Rpt_LeagueWL_Site_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetSuper" SpName="Acc_Rpt_LeagueWL_Super_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400"></Setting>
     <Setting Key="WinLoss_LeagueWinLoss_GetSiteFilter" SpName="Acc_Rpt_LeagueWL_SiteSel" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400" />
     <Setting Key="WinLoss_LeagueWinLoss_GetPermisionProfileID" SpName="Acc_Rpt_GetPermisionProfileID" DbName="DBWH.bodb_dwrs.bodbAdminNet" />
   </Function>
