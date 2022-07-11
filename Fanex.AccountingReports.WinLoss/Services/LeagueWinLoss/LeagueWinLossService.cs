@@ -232,7 +232,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             }
 
             var rawBettypes = rawData.Where(x => !x.SiteType.Contains(criteria.SportName + " " + "8RM")
-                                     && !x.SiteType.Contains(criteria.SportName + " " + "BARM"));
+                                     && !x.SiteType.Contains(criteria.SportName + " " + "BARM")
+                                     && !x.SiteType.Contains("Other Sports 8RM")
+                                     && !x.SiteType.Contains("Other Sports BARM"));
 
             var betTypeGroups = rawBettypes.GroupBy(x => new { x.Bettype, x.BettypeName });
             foreach (var group in betTypeGroups)
@@ -359,7 +361,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             }
 
             var rawBettypes = rawData.Where(x => !x.SiteType.Contains(criteria.SportName + " " + "8RM")
-                                     && !x.SiteType.Contains(criteria.SportName + " " + "BARM"));
+                                     && !x.SiteType.Contains(criteria.SportName + " " + "BARM")
+                                     && !x.SiteType.Contains("Other Sports 8RM")
+                                     && !x.SiteType.Contains("Other Sports BARM"));
 
             result.BettypeWinLoss = BindingBettypes(rawBettypes).ToList();
 
