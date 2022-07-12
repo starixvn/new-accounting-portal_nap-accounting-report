@@ -165,7 +165,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                     currentColumn = startColumn;
                     info = sport.Total;
-                    ExportLeagueWinLossNormalSportsTotal(startColumn, currentRow, info, workSheet, true);
+                    ExportLeagueWinLossNormalSportsTotal(startColumn, currentRow, info, workSheet, sport.SportName, true);
                     currentRow++;
 
                     var childsLength = sport.Leagues.Count;
@@ -676,6 +676,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             int currentRow,
             LeagueWinLossItem info,
             ExcelWorksheet workSheet,
+            string sportName,
             bool isExportMatchCountColumn = false)
         {
             var currentColumn = startColumn;
@@ -688,7 +689,16 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             if (isExportMatchCountColumn)
             {
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-                currentCell.Value = string.Empty;
+
+                if (sportName.Contains("Soccer"))
+                {
+                    currentCell.Value = info.MatchCount;
+                }
+                else
+                {
+                    currentCell.Value = string.Empty;
+                }
+               
                 currentCell.Style = subRowTextStyle;
                 currentColumn++;
             }

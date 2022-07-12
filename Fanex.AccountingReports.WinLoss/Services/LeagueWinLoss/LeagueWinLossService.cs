@@ -473,7 +473,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             var rawSites = rawData.Where(x =>
                 !x.SiteName.Contains(criteria.SportName + " " + "BARM")
-                && !x.SiteName.Contains(criteria.SportName + " " + "8RM"));
+                && !x.SiteName.Contains(criteria.SportName + " " + "8RM")
+                && !x.SiteName.Contains("Other Sports 8RM")
+                && !x.SiteName.Contains("Other Sports BARM"));
 
             var sites = BindingSites(rawSites);
             leagueWinLoss.Sites = sites.ToList();
@@ -512,7 +514,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             var rawSupers = rawData.Where(x =>
                  !x.SuperName.Contains(criteria.SportName + " " + "BARM")
-                 && !x.SuperName.Contains(criteria.SportName + " " + "8RM"));
+                 && !x.SuperName.Contains(criteria.SportName + " " + "8RM")
+                 && !x.SuperName.Contains("Other Sports 8RM")
+                 && !x.SuperName.Contains("Other Sports BARM"));
 
             var supers = BindingSupers(rawSupers);
             leagueWinLoss.Supers = supers.ToList();
@@ -555,6 +559,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             {
                 LeagueName = sport,
                 MemberWinLoss = sportGroup.Sum(x => x.MemberWinLoss),
+                MatchCount = sportGroup.Sum(x => x.MatchCount),
                 SMAWinLoss = sportGroup.Sum(x => x.SMAWinLoss),
                 ExtraPT = sportGroup.Sum(x => x.ExtraPT),
                 Commission = sportGroup.Sum(x => x.Commission),
