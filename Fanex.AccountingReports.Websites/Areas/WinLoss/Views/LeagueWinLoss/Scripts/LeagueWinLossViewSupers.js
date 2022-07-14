@@ -22,7 +22,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSupers = function
             BetTypeName: null,
             IsNormalMode: true,
             IsNoDraw: false,
-            SportType: 0
+            SportType: 0,
+            PermissionProfileID: permissionProfileID
         }
     };
     self.initPage = function () {

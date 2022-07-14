@@ -33,7 +33,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             SortDirection: '',
             SiteName: '',
             LiveIndicator: 2,
-            GlobalShowTime: ''
+            GlobalShowTime: '',
+            PermissionProfileID: permissionProfileID
         },
 
         isNormalMode: true,
@@ -395,6 +396,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         self.Params.reportParams.SiteName = _tables.ddlDivision.fanexMultiSelect('getItems', true).toString();
         self.Params.reportParams.GlobalShowTime = _tables.ddlGlobalShowTime.fanexMultiSelect('getItems', true).toString();
         self.Params.reportParams.LiveIndicator = _tables.ddlStatus.val();
+        self.Params.reportParams.PermissionProfileID = permissionProfileID;
     };
 
     var checkReportParams = function (params) {
@@ -427,9 +429,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         return true;
     };
 
-    function mappingDataRow(info, cssClass) {
+    function mappingDataRow(info, cssClass, isTotal) {
         return {
             Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right" },
+                    { Name: "ColMatchCount", Value: isTotal ? '' : info.MatchCount },
                     { Name: "ColMemberWinLoss", Value: info.MemberWinLoss },
                     { Name: "ColSMAWinLoss", Value: info.SMAWinLoss },
                     { Name: "ColExtraPT", Value: info.ExtraPT },
@@ -464,6 +467,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 {
                     Columns: [
                         { Name: "ColLeague", Value: sport.SportName },
+                        { Name: "ColMatchCount", Value: sport.SportName.includes('Soccer') ? sport.Total.MatchCount : '' },
                         { Name: "ColMemberWinLoss", Value: sport.Total.MemberWinLoss },
                         { Name: "ColSMAWinLoss", Value: sport.Total.SMAWinLoss },
                         { Name: "ColExtraPT", Value: sport.Total.ExtraPT },
@@ -481,6 +485,12 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 var childsLength = sport.Leagues.length;
                 for (var j = 0; j < childsLength; j++) {
                     info = sport.Leagues[j];
+
+                    if (info.Sport === 'Parlay' || info.Sport === 'SB Adjustment')
+                    {
+                        continue;
+                    }
+
                     currentSubRow =
                     {
                         Columns: [{
@@ -492,16 +502,12 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                             }, CssClass: "colLeague",
                             CustomCellRender: function (currentCell) {
                                 var leagueText = currentCell.Value.leagueName.length > 50 ? currentCell.Value.leagueName.substring(0, 51) + '...' : currentCell.Value.leagueName;
-                                if (currentCell.Value.sportName !== 'Parlay') {
-                                    var clickEvent = ' onclick = "viewMatches(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + '\',' + currentCell.Value.sportType + ',\'' + currentCell.Value.leagueId + "');\"";
-                                    var html = '<div class="link " ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
-                                    return html;
-                                } else {
-                                    var html = '<div title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
-                                    return html;
-                                }
+                                var clickEvent = ' onclick = "viewMatches(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + '\',' + currentCell.Value.sportType + ',\'' + currentCell.Value.leagueId + "');\"";
+                                var html = '<div class="link " ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + leagueText + '</div>';
+                                return html;
                             }
-                            },
+                        },
+                         { Name: "ColMatchCount", Value: info.Sport.includes('Soccer') ? info.MatchCount : '' },
                                   {
                                       Name: "ColMemberWinLoss",
                                       Value: {
@@ -512,16 +518,14 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                                           leagueId: info.LeagueId
                                       },
                                       CustomCellRender: function (currentCell) {
-                                          var cssClass = currentCell.Value.winLoss > 0 ? 'format-positive' : '';
-                                          var winLossValue = currentCell.Value.winLoss.toFixed(2);
-                                          if (currentCell.Value.sportName !== 'Parlay') {
-                                              var clickEvent = ' onclick = "viewBetTypesByStatus(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + '\',' + currentCell.Value.sportType + ',\'' + currentCell.Value.leagueId + "');\"";
-                                              var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + parseFloat(winLossValue).toLocaleString('en') + '</div>';
-                                              return html;
-                                          } else {
-                                              var html = '<div class="' + cssClass + '">' + parseFloat(winLossValue).toLocaleString('en') + '</div>';
-                                              return html;
-                                          }
+                                        var cssClass = currentCell.Value.winLoss > 0 ? 'format-positive' : '';
+                                        var winLossValue = currentCell.Value.winLoss;
+                                        var clickEvent = ' onclick = "viewBetTypesByStatus(\'' + currentCell.Value.sportName + '\',\'' + currentCell.Value.leagueName + '\',' + currentCell.Value.sportType + ',\'' + currentCell.Value.leagueId + "');\"";
+                                        var html = '<div class="link ' + cssClass + '" ' + clickEvent + ' title="' + currentCell.Value.leagueName + '">' + winLossValue.toLocaleString('en-US', {
+                                            minimumFractionDigits: 2,
+                                            maximumFractionDigits: 2
+                                        }) + '</div>';
+                                        return html;
                                       }
                                   },
                                   { Name: "ColSMAWinLoss", Value: info.SMAWinLoss },
@@ -543,7 +547,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 bodyData.push(currentRow);
             }
 
-            currentRow = mappingDataRow(report.Total, "");
+            currentRow = mappingDataRow(report.Total, "", true);
             footerData.push(currentRow);
 
             if (self.isShowTotalRow(report.SoccerRM)) {
@@ -551,6 +555,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 currentRow =
                 {
                     Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColMatchCount", Value: "" },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -566,6 +571,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 currentRow =
                 {
                     Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColMatchCount", Value: "" },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -581,6 +587,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 currentRow =
                 {
                     Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColMatchCount", Value: "" },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -596,6 +603,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 currentRow =
                 {
                     Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColMatchCount", Value: "" },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -611,6 +619,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 currentRow =
                 {
                     Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColMatchCount", Value: "" },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -626,6 +635,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 currentRow =
                 {
                     Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColMatchCount", Value: "" },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -641,6 +651,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 currentRow =
                 {
                     Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColMatchCount", Value: "" },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -656,6 +667,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 currentRow =
                 {
                     Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                            { Name: "ColMatchCount", Value: "" },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -672,6 +684,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 currentRow =
                 {
                     Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
+                               { Name: "ColMatchCount", Value: "" },
                                { Name: "ColVirtualWinLoss", Value: totalInfo.VirtualWinLoss },
                                { Name: "ColRealIncome", Value: info.RealIncome },
                                { Name: "ColVirtualTurnOver", Value: totalInfo.VirtualTurnover },
@@ -687,6 +700,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
             customizeHeader: true,
             groupHeaderRows: [{
                 Columns: [{ HeaderText: "League", Name: "ColLeague", MergeRowNumber: 2 },
+                          { HeaderText: "Match Count", Name: "ColMatchCount", MergeRowNumber: 2 },
                           { HeaderText: "Member Win Loss", Name: "ColMemberWinLoss", MergeRowNumber: 2 },
                           { HeaderText: "SMA Win Loss", Name: "ColSMAWinLoss", MergeRowNumber: 2 },
                           { HeaderText: "Extra PT", Name: "ColExtraPT", MergeRowNumber: 2 },
@@ -696,6 +710,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
 						  { HeaderText: "Margin", Name: 'ColVirtualMargin', MergeColNumber: 2 }]
             }],
             columns: [{ HeaderText: "League", Width: 380, Name: "ColLeague", HeaderAlign: "center", CellAlign: "left", ShowCollapseExpand: true },
+                        { HeaderText: "Match Count", Width: 100, Name: "ColMatchCount", HeaderAlign: "center", CellAlign: "right" },
                         { HeaderText: "Member Win Loss", Width: 120, Name: "ColMemberWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER, FormatPositive: '$' },
                         { HeaderText: "SMA Win Loss", Width: 120, Name: "ColSMAWinLoss", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
                         { HeaderText: "Extra PT", Width: 100, Name: "ColExtraPT", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },

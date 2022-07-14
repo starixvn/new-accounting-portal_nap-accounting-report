@@ -17,12 +17,13 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatchesFromBetTyp
             IsNoDraw: false,
             SiteName: '',
             LiveIndicator: 0,
-            ShowHedgeMatchOnly: false,
+            ShowHedgeOrNormalMatchOnly: 0,
             BetType: 0,
             BetTypeName: '',
             GlobalShowTime: '',
             SportType: 0,
-            LeagueId: ''
+            LeagueId: '',
+            PermissionProfileID: permissionProfileID
         }
     };
     self.initPage = function () {

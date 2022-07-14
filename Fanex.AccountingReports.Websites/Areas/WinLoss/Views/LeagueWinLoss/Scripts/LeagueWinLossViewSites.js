@@ -23,7 +23,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewSites = function 
             SiteName: '',
             SortColumnName: '',
             SortDirection: '',
-            SportType: 0
+            SportType: 0,
+            PermissionProfileID: permissionProfileID
         }
     };
     self.initPage = function () {

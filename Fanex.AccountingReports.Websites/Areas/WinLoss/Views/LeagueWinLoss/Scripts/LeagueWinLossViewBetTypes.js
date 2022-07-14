@@ -19,12 +19,13 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
             IsNormalMode: true,
             IsNoDraw: false,
             SiteName: '',
-            IsHedge: false,
+            IsHedge: 0,
             IsIncludeSiteType: true,
             IsIncludeHedge: false,
             GlobalShowTime: '',
             SportType: 0,
-            LeagueId: ''
+            LeagueId: '',
+            PermissionProfileID: permissionProfileID
         }
     };
     self.initPage = function () {

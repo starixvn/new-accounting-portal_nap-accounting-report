@@ -29,7 +29,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public int LiveIndicator { get; set; }
 
-        public bool ShowHedgeMatchOnly { get; set; }
+        public int ShowHedgeOrNormalMatchOnly { get; set; }
 
         public int BetType { get; set; }
 
@@ -42,11 +42,11 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public string LeagueId { get; set; }
 
+        public int PermissionProfileID { get; set; }
+
         public override string GetSettingKey()
         {
-            var suffix = IsNormalMode ? string.Empty : "_WH";
-
-            return "WinLoss_LeagueWinLoss_GetMatches" + suffix;
+            return "WinLoss_LeagueWinLoss_GetMatches";
         }
 
         public override bool IsValid()

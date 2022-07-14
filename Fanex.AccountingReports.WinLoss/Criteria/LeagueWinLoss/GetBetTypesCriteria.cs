@@ -47,11 +47,11 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public string LeagueId { get; set; }
 
+        public int PermissionProfileID { get; set; }
+
         public override string GetSettingKey()
         {
-            var suffix = IsNormalMode ? string.Empty : "_WH";
-
-            return "WinLoss_LeagueWinLoss_GetBetTypes" + suffix;
+            return "WinLoss_LeagueWinLoss_GetBetTypes";
         }
 
         public override bool IsValid()

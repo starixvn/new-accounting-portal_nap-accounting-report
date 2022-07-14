@@ -42,11 +42,11 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public int SportType { get; set; }
 
+        public int PermissionProfileID { get; set; }
+
         public override string GetSettingKey()
         {
-            var suffix = IsNormalMode ? string.Empty : "_WH";
-
-            return "WinLoss_LeagueWinLoss_GetSuper" + suffix;
+            return "WinLoss_LeagueWinLoss_GetSuper";
         }
 
         public override bool IsValid()

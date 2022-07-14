@@ -4,6 +4,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
     using Entities.LeagueWinLoss;
     using Fanex.Data;
     using Fanex.Data.Repository;
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
@@ -34,7 +35,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                 var winLossTable = result.Tables[0];
                 foreach (DataRow row in winLossTable.Rows)
                 {
-                    leagueWinLoss.Add(new LeagueWinLossEntity
+                    var entity = new LeagueWinLossEntity
                     {
                         SportType = Converter.ToInt(row["SportType"]),
                         Sport = Converter.ToString2(row["Sport"]),
@@ -49,7 +50,18 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                         VirtualTurnover = Converter.ToDecimal(row["VirtualTurnover"]),
                         IsSabaSport = Converter.ToInt(row["IsSabaSport"]),
                         LeagueId = Converter.ToString2(row["LeagueId"])
-                    });
+                    };
+
+                    if(row["MatchCount"] == DBNull.Value)
+                    {
+                        entity.MatchCount = null;
+                    }
+                    else
+                    {
+                        entity.MatchCount = Converter.ToInt(row["MatchCount"]);
+                    }
+
+                    leagueWinLoss.Add(entity);
                 }
             }
 
@@ -97,7 +109,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                             VirtualWinLoss = Converter.ToDecimal(row["VirtualIncome"]),
                             RealTurnover = Converter.ToDecimal(row["RealTurnover"]),
                             VirtualTurnover = Converter.ToDecimal(row["VirtualTurnover"]),
-                            IsHedge = Converter.ToBool(row["IsHedge"]),
+                            IsHedge = Converter.ToInt(row["IsHedge"]) == 1,
                             TraderName = Converter.ToString2(row["TraderName"])
                         });
                     }
@@ -132,7 +144,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                     {
                         MatchID = Converter.ToInt(row["MatchID"]),
                         MatchCode = Converter.ToString2(row["MatchCode"]),
-                        LiveIndicator = Converter.ToBool(row["LiveIndicator"]),
+                        LiveIndicator = Converter.ToInt(row["LiveIndicator"]) == 1,
                         MatchEvent = Converter.ToString2(row["MatchEvent"]),
                         MemberWinLoss = Converter.ToDecimal(row["MemberWinLoss"]),
                         SMAWinLoss = Converter.ToDecimal(row["SMAWinLoss"]),
@@ -314,6 +326,26 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
             }
 
             return null;
+        }
+
+        public int GetPermissionProfileID(ICriteria criteria)
+        {
+            DataSet result = null;
+
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                result = db.ExecuteDataSet(criteria.GetSpParams());
+            }
+
+            if (result != null && result.Tables.Count > 0 && result.Tables[0].Rows.Count > 0)
+            {
+                var firstRow = result.Tables[0].Rows[0];
+                var permissionProfileId = Converter.ToInt(firstRow["PermisionProfileID"]);
+
+                return permissionProfileId;
+            }
+
+            return 0;
         }
     }
 }

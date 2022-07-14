@@ -34,10 +34,11 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
         public string GlobalShowTime { get; set; }
 
+        public int PermissionProfileID { get; set; }
+
         public override string GetSettingKey()
         {
-            var suffix = IsNormalMode ? string.Empty : "_WH";
-            return "WinLoss_LeagueWinLoss_GetLeagueWinLoss" + suffix;
+            return "WinLoss_LeagueWinLoss_GetLeagueWinLoss";
         }
 
         public override bool IsValid()

@@ -21,6 +21,13 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
         private static CellStyle textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);
 
+        private static CellStyle intNumberStyle = ExcelExtensions.GetCellNumberStyle(
+           NumberFormatConstants.IntNumberFormat,
+           ExcelExtensions.BackGroundColor,
+           false,
+           false,
+           false);
+
         private static CellStyle twoDecimalNumberStyle = ExcelExtensions.GetCellNumberStyle(
             NumberFormatConstants.TwoDecimalDigitFormat,
             ExcelExtensions.BackGroundColor,
@@ -126,7 +133,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 workSheet.Columns[startColumn + colIndex].Width = 140 * ExcelExtensions.FontWidth;
             }
 
-            workSheet.Columns[startColumn].Width = 350 * ExcelExtensions.FontWidth;
+            workSheet.Columns[startColumn].Width = 500 * ExcelExtensions.FontWidth;
             var title = criteria.IsNormalMode ?
                 string.Format(
                     WinLossResources.LeagueWinLoss_ReportTitle,
@@ -136,7 +143,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     criteria.EndDate.ToShortFormatedDate());
 
             currentColumn = startColumn;
-            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 11);
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn + 12);
             currentCellRange.Merged = true;
             currentCellRange.Value = title;
             currentCellRange.Style.FormatTitleCell(titleColor);
@@ -144,9 +151,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentCellRange.Style.Font.Weight = 700;
             currentRow += 2;
 
-            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 11);
+            workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 12);
 
-            ExportHeader(ref workSheet, startColumn, ref currentRow, Labels.League);
+            ExportHeader(ref workSheet, startColumn, ref currentRow, Labels.League, true);
 
             if (report.SportWinLoss.Count > 0)
             {
@@ -158,7 +165,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
                     currentColumn = startColumn;
                     info = sport.Total;
-                    ExportLeagueWinLossNormalSportsTotal(startColumn, currentRow, info, workSheet);
+                    ExportLeagueWinLossNormalSportsTotal(startColumn, currentRow, info, workSheet, sport.SportName, true);
                     currentRow++;
 
                     var childsLength = sport.Leagues.Count;
@@ -167,6 +174,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                         if (j % 2 == 0)
                         {
                             textStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+                            intNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
                             twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
                             positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
                             positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
@@ -174,13 +182,20 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                         else
                         {
                             textStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+                            intNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
                             twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
                             positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
                             positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
                         }
 
                         info = sport.Leagues[j];
-                        ExportLeagueWinLossDataRow(startColumn, currentRow, info, workSheet);
+
+                        if(info.Sport == "Parlay" || info.Sport == "SB Adjustment")
+                        {
+                            continue;
+                        }
+
+                        ExportLeagueWinLossDataRow(startColumn, currentRow, info, workSheet, true);
                         currentRow++;
                     }
                 }
@@ -191,6 +206,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 currentCell.Value = info.LeagueName;
                 currentCell.Style = grandTotalRowTextStyle;
                 currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
+                currentColumn++;
+
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+                currentCell.Value = string.Empty;
+                currentCell.Style = grandTotalRowTextStyle;
                 currentCell.Style.Borders.SetBorders(MultipleBorders.Top, Color.FromArgb(255, 102, 0), LineStyle.Medium);
                 currentColumn++;
 
@@ -281,12 +302,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 {
                     info = report.SoccerRM;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
                     currentCellRange.Merged = true;
                     currentCellRange.Value = info.LeagueName;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 6;
+                    currentColumn += 7;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualWinLoss;
@@ -320,12 +341,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 {
                     info = report.SabaSoccerRM;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
                     currentCellRange.Merged = true;
                     currentCellRange.Value = info.LeagueName;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 6;
+                    currentColumn += 7;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualWinLoss;
@@ -359,12 +380,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 {
                     info = report.SabaPinGoalRM;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
                     currentCellRange.Merged = true;
                     currentCellRange.Value = info.LeagueName;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 6;
+                    currentColumn += 7;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualWinLoss;
@@ -398,12 +419,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 {
                     info = report.OtherSportRM;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
                     currentCellRange.Merged = true;
                     currentCellRange.Value = info.LeagueName;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 6;
+                    currentColumn += 7;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualWinLoss;
@@ -437,12 +458,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 {
                     info = report.SoccerBARM;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
                     currentCellRange.Merged = true;
                     currentCellRange.Value = info.LeagueName;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 6;
+                    currentColumn += 7;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualWinLoss;
@@ -476,12 +497,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 {
                     info = report.SabaSoccerBARM;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
                     currentCellRange.Merged = true;
                     currentCellRange.Value = info.LeagueName;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 6;
+                    currentColumn += 7;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualWinLoss;
@@ -515,12 +536,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 {
                     info = report.SabaPinGoalBARM;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
                     currentCellRange.Merged = true;
                     currentCellRange.Value = info.LeagueName;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 6;
+                    currentColumn += 7;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualWinLoss;
@@ -554,12 +575,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 {
                     info = report.OtherSportBARM;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
                     currentCellRange.Merged = true;
                     currentCellRange.Value = info.LeagueName;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 6;
+                    currentColumn += 7;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = info.VirtualWinLoss;
@@ -600,12 +621,12 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 {
                     info = report.GrandTotal;
                     currentColumn = startColumn;
-                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
                     currentCellRange.Merged = true;
                     currentCellRange.Value = info.LeagueName;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
-                    currentColumn += 6;
+                    currentColumn += 7;
 
                     currentCell = workSheet.Cells[currentRow, currentColumn];
                     currentCell.Value = report.Total.VirtualWinLoss;
@@ -654,7 +675,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             int startColumn,
             int currentRow,
             LeagueWinLossItem info,
-            ExcelWorksheet workSheet)
+            ExcelWorksheet workSheet,
+            string sportName,
+            bool isExportMatchCountColumn = false)
         {
             var currentColumn = startColumn;
             var currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -662,6 +685,23 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentCell.Style = subRowTextStyle;
             currentCell.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
             currentColumn++;
+
+            if (isExportMatchCountColumn)
+            {
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+
+                if (sportName.Contains("Soccer"))
+                {
+                    currentCell.Value = info.MatchCount;
+                }
+                else
+                {
+                    currentCell.Value = string.Empty;
+                }
+               
+                currentCell.Style = subRowTextStyle;
+                currentColumn++;
+            }
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.MemberWinLoss;
@@ -740,13 +780,31 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             int startColumn,
             int currentRow,
             LeagueWinLossItem info,
-            ExcelWorksheet workSheet)
+            ExcelWorksheet workSheet,
+            bool isExportMatchCountColumn = false)
         {
             var currentColumn = startColumn;
             var currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.LeagueName;
             currentCell.Style = textStyle;
             currentColumn++;
+
+            if (isExportMatchCountColumn)
+            {
+                currentCell = workSheet.Cells[currentRow, currentColumn];
+
+                if (info.Sport.Contains("Soccer"))
+                {
+                    currentCell.Value = info.MatchCount;
+                }
+                else
+                {
+                    currentCell.Value = string.Empty;
+                }
+
+                currentCell.Style = intNumberStyle;
+                currentColumn++;
+            }
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = info.MemberWinLoss;
@@ -1783,7 +1841,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn = startColumn;
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = betTypeBySite.BettypeName;
+                    currentCellRange.Value = betTypeBySite.SiteType;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                     currentColumn += 6;
@@ -1822,7 +1880,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn = startColumn;
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = betTypeBySite.BettypeName;
+                    currentCellRange.Value = betTypeBySite.SiteType;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                     currentColumn += 6;
@@ -1977,7 +2035,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn = startColumn;
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = betTypeBySite.BettypeName;
+                    currentCellRange.Value = betTypeBySite.SiteType;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                     currentColumn += 6;
@@ -2016,7 +2074,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     currentColumn = startColumn;
                     currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
                     currentCellRange.Merged = true;
-                    currentCellRange.Value = betTypeBySite.BettypeName;
+                    currentCellRange.Value = betTypeBySite.SiteType;
                     currentCellRange.Style = grandTotalRowTextStyle;
                     currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
                     currentColumn += 6;
@@ -2957,7 +3015,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             ref ExcelWorksheet workSheet,
             int startColumn,
             ref int currentRow,
-            string firstHeader)
+            string firstHeader,
+            bool isExportMatchCountColumn = false)
         {
             var currentColumn = 0;
             CellRange currentCellRange;
@@ -2970,6 +3029,15 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentCellRange.Value = firstHeader;
             currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
+
+            if (isExportMatchCountColumn)
+            {
+                currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+                currentCellRange.Merged = true;
+                currentCellRange.Value = "Match Count";
+                currentCellRange.Style.FormatTitleCell(headerColor);
+                currentColumn++;
+            }
 
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
@@ -3013,7 +3081,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentCellRange.Style.FormatTitleCell(headerColor);
             currentRow++;
 
-            currentColumn = startColumn + 5;
+            currentColumn = isExportMatchCountColumn ? startColumn + 6 : startColumn + 5;
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = Labels.Variance;
             currentCell.Style.FormatTitleCell(headerColor);

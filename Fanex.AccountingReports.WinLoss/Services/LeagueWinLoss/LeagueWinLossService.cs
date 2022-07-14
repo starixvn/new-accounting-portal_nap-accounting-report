@@ -58,7 +58,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             {
                 var rawSports = rawData.Where(x => x.SportType == sportGroup.Key.SportType && x.IsSabaSport == sportGroup.Key.IsSabaSport);
                 var sportName = sportGroup.Key.Sport;
-                var leagues = BindingLeagues(rawSports);    
+                var leagues = BindingLeagues(rawSports);
                 var sportTotal = CalculateSportTotal(sportName, rawSports);
 
                 var sportWinLoss = new SportWinLoss
@@ -120,15 +120,13 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             return leagueWinLoss;
         }
 
-        public List<SportGroup> GetSports(IEnumerable<string> productsPermission)
+        public List<SportGroup> GetSports()
         {
             var sportGroups = new List<SportGroup>();
             var criteria = new GetSportCriteria();
             var rawData = this._reportRepository.GetSport(criteria);
 
-            var rawDataByPermission = GetSportsByPermission(rawData, productsPermission);
-
-            var groups = rawDataByPermission.GroupBy(x => new { x.SportGroupType, x.SportGroupName });
+            var groups = rawData.GroupBy(x => new { x.SportGroupType, x.SportGroupName });
             foreach (var group in groups)
             {
                 var sportGroup = new SportGroup
@@ -149,7 +147,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                         BettypeGroups = new List<BetTypeGroup>()
                     };
 
-                    var sportBettypes = rawDataByPermission.Where(x => x.SportType == sport.Key.SportType
+                    var sportBettypes = rawData.Where(x => x.SportType == sport.Key.SportType
                         && x.SportName == sport.Key.SportName);
 
                     var groupBettypes = sportBettypes.GroupBy(x => x.BetTypeGroupName);
@@ -234,7 +232,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             }
 
             var rawBettypes = rawData.Where(x => !x.SiteType.Contains(criteria.SportName + " " + "8RM")
-                                     && !x.SiteType.Contains(criteria.SportName + " " + "BARM"));
+                                     && !x.SiteType.Contains(criteria.SportName + " " + "BARM")
+                                     && !x.SiteType.Contains("Other Sports 8RM")
+                                     && !x.SiteType.Contains("Other Sports BARM"));
 
             var betTypeGroups = rawBettypes.GroupBy(x => new { x.Bettype, x.BettypeName });
             foreach (var group in betTypeGroups)
@@ -322,34 +322,24 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             return result;
         }
 
-        public List<Status> GetStatus(IEnumerable<string> productsPermission)
+        public List<Status> GetStatus()
         {
-            var firstPermission = productsPermission.FirstOrDefault();
-
-            if (productsPermission.Count() == 1 && firstPermission == LeagueWinLossPermissionConstants.LeagueWinLoss_SoccerLive)
-            {
-                return new List<Status>
-                {
-                    new Status { Name = "Live", Value = 1 }
-                };
-            }
-            else if (productsPermission.Count() == 1 && firstPermission == LeagueWinLossPermissionConstants.LeagueWinLoss_SoccerNonLive)
-            {
-                return new List<Status>
-                {
-                    new Status { Name = "Non-Live", Value = 0 }
-                };
-            }
-            else
-            {
-                return new List<Status>
+            return new List<Status>
                 {
                     new Status { Name = "All", Value = 2 },
                     new Status { Name = "Live", Value = 1 },
                     new Status { Name = "Non-Live", Value = 0 }
                 };
-            }
+        }
 
+        public int GetPermissionProfileId(string functionKeyValue)
+        {
+            var criteria = new PermissionCriteria
+            {
+                FunctionKey = functionKeyValue
+            };
+
+            return _reportRepository.GetPermissionProfileID(criteria);
         }
 
         private BetTypeWinLossByStatusModel GetBetTypesByStatus(GetBetTypesCriteria criteria)
@@ -371,7 +361,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             }
 
             var rawBettypes = rawData.Where(x => !x.SiteType.Contains(criteria.SportName + " " + "8RM")
-                                     && !x.SiteType.Contains(criteria.SportName + " " + "BARM"));
+                                     && !x.SiteType.Contains(criteria.SportName + " " + "BARM")
+                                     && !x.SiteType.Contains("Other Sports 8RM")
+                                     && !x.SiteType.Contains("Other Sports BARM"));
 
             result.BettypeWinLoss = BindingBettypes(rawBettypes).ToList();
 
@@ -423,12 +415,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             leagueWinLoss.Total = CalculateMatchTotal("Total", rawMatches);
 
-            var eightRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains(criteria.SportName + " " + "8RM") 
-                || x.MatchEvent.Contains("Other Sports 8RM"));
+            var eightRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains("8RM"));
             leagueWinLoss.RM = BindingMatch(eightRM);
 
-            var barRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains(criteria.SportName + " " + "BARM")
-                || x.MatchEvent.Contains("Other Sports BARM"));
+            var barRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains("BARM"));
             leagueWinLoss.BARM = BindingMatch(barRM);
 
             leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", rawData);
@@ -451,14 +441,16 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             var rawMatches = rawData.Where(x =>
                 !x.MatchEvent.Contains(criteria.SportName + " " + "BARM")
-                && !x.MatchEvent.Contains(criteria.SportName + " " + "8RM"));
+                && !x.MatchEvent.Contains(criteria.SportName + " " + "8RM")
+                && !x.MatchEvent.Contains("Other Sports 8RM")
+                && !x.MatchEvent.Contains("Other Sports BARM"));
             leagueWinLoss.Match = BindingMatches(rawMatches).ToList();
 
             leagueWinLoss.Total = CalculateMatchTotal("Total", rawMatches);
-            var eightRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains(criteria.SportName + " " + "8RM"));
+            var eightRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains("8RM"));
             leagueWinLoss.RM = BindingMatch(eightRM);
 
-            var barRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains(criteria.SportName + " " + "BARM"));
+            var barRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains("BARM"));
             leagueWinLoss.BARM = BindingMatch(barRM);
 
             leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", rawData);
@@ -481,17 +473,19 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             var rawSites = rawData.Where(x =>
                 !x.SiteName.Contains(criteria.SportName + " " + "BARM")
-                && !x.SiteName.Contains(criteria.SportName + " " + "8RM"));
+                && !x.SiteName.Contains(criteria.SportName + " " + "8RM")
+                && !x.SiteName.Contains("Other Sports 8RM")
+                && !x.SiteName.Contains("Other Sports BARM"));
 
             var sites = BindingSites(rawSites);
             leagueWinLoss.Sites = sites.ToList();
 
             leagueWinLoss.Total = CalculateSiteTotal("Total", rawSites);
 
-            var eightRM = rawData.FirstOrDefault(x => x.SiteName.Contains(criteria.SportName + " " + "8RM"));
+            var eightRM = rawData.FirstOrDefault(x => x.SiteName.Contains("8RM"));
             leagueWinLoss.RM = BindingSite(eightRM);
 
-            var barRM = rawData.FirstOrDefault(x => x.SiteName.Contains(criteria.SportName + " " + "BARM"));
+            var barRM = rawData.FirstOrDefault(x => x.SiteName.Contains("BARM"));
             leagueWinLoss.BARM = BindingSite(barRM);
 
             leagueWinLoss.GrandTotal = CalculateSiteTotal("Grand Total", rawData);
@@ -520,17 +514,19 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             var rawSupers = rawData.Where(x =>
                  !x.SuperName.Contains(criteria.SportName + " " + "BARM")
-                 && !x.SuperName.Contains(criteria.SportName + " " + "8RM"));
+                 && !x.SuperName.Contains(criteria.SportName + " " + "8RM")
+                 && !x.SuperName.Contains("Other Sports 8RM")
+                 && !x.SuperName.Contains("Other Sports BARM"));
 
             var supers = BindingSupers(rawSupers);
             leagueWinLoss.Supers = supers.ToList();
 
             leagueWinLoss.Total = CalculateSuperTotal("Total", rawSupers);
 
-            var eightRM = rawData.FirstOrDefault(x => x.SuperName.Contains(criteria.SportName + " " + "8RM"));
+            var eightRM = rawData.FirstOrDefault(x => x.SuperName.Contains("8RM"));
             leagueWinLoss.RM = BindingSuper(eightRM);
 
-            var barRM = rawData.FirstOrDefault(x => x.SuperName.Contains(criteria.SportName + " " + "BARM"));
+            var barRM = rawData.FirstOrDefault(x => x.SuperName.Contains("BARM"));
             leagueWinLoss.BARM = BindingSuper(barRM);
 
             leagueWinLoss.GrandTotal = CalculateSuperTotal("Grand Total", rawData);
@@ -563,6 +559,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             {
                 LeagueName = sport,
                 MemberWinLoss = sportGroup.Sum(x => x.MemberWinLoss),
+                MatchCount = sportGroup.Sum(x => x.MatchCount),
                 SMAWinLoss = sportGroup.Sum(x => x.SMAWinLoss),
                 ExtraPT = sportGroup.Sum(x => x.ExtraPT),
                 Commission = sportGroup.Sum(x => x.Commission),
@@ -598,7 +595,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 VirtualWinLoss = rawData.VirtualWinLoss,
                 RealIncome = rawData.RealIncome,
                 VirtualTurnover = rawData.VirtualTurnover,
-                RealTurnover = rawData.RealTurnover
+                RealTurnover = rawData.RealTurnover,
+                MatchCount = rawData.MatchCount
             };
         }
 
@@ -780,23 +778,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 RealTurnover = rawData.RealTurnover,
                 HasVR = rawData.HasVR
             };
-        }
-
-        private List<SportEntity> GetSportsByPermission(List<SportEntity> rawData, IEnumerable<string> productsPermission)
-        {
-            var result = new List<SportEntity>();
-
-            if (productsPermission.Count() > 1 || productsPermission.Contains(LeagueWinLossPermissionConstants.AllProducts))
-            {
-                result = rawData;
-            }
-            else
-            {
-                var productPermission = productsPermission.FirstOrDefault();
-                result = rawData.Where(x => x.SportGroupName == LeagueWinLossPermissionConstants.Products[productPermission]).ToList();
-            }
-
-            return result;
         }
     }
 }
