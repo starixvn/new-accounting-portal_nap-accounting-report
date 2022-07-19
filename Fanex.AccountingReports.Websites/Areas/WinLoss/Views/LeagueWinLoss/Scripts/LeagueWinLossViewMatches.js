@@ -85,7 +85,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                             matchId: info.Total.MatchId,
                             matchCode: info.Total.MatchCode,
                             event: info.Total.MatchEvent,
-                            isOutright: info.IsOutright
+                            isOutright: info.Total.IsOutright
                         },
                         CustomCellRender: function (currentCell) {
                             var openScoreInfoEvent = "scoreInfoManager.GetReport('" + currentCell.Value.startDate + "'," + //*

@@ -660,7 +660,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 VirtualWinLoss = matches.Sum(x => x.VirtualWinLoss),
                 RealIncome = matches.Sum(x => x.RealIncome),
                 VirtualTurnover = matches.Sum(x => x.VirtualTurnover),
-                RealTurnover = matches.Sum(x => x.RealTurnover)
+                RealTurnover = matches.Sum(x => x.RealTurnover),
+                IsOutright = matches.Select(x => x.IsOutright).FirstOrDefault()
             };
         }
 
