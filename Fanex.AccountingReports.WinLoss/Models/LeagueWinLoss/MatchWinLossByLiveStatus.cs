@@ -14,5 +14,7 @@ namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
         public string MatchEvent { get; set; }
 
         public bool IsHedge { get; set; }
+
+        public bool IsOutright { get; set; }
     }
 }

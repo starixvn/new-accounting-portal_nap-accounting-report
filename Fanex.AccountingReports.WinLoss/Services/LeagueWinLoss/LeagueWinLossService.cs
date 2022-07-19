@@ -689,7 +689,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 RealIncome = rawData.RealIncome,
                 VirtualTurnover = rawData.VirtualTurnover,
                 RealTurnover = rawData.RealTurnover,
-                IsHedge = rawData.IsHedge
+                IsHedge = rawData.IsHedge,
+                IsOutright = rawData.IsOutright
             };
         }
 
