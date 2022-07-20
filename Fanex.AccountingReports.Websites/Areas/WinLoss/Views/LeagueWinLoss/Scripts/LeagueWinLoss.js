@@ -554,8 +554,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 info = report.SoccerRM;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
-                            { Name: "ColMatchCount", Value: "" },
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 7 },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -570,8 +569,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 info = report.SabaSoccerRM;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
-                            { Name: "ColMatchCount", Value: "" },
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 7 },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -586,8 +584,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 info = report.SabaPinGoalRM;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
-                            { Name: "ColMatchCount", Value: "" },
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 7 },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -602,8 +599,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 info = report.OtherSportRM;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
-                            { Name: "ColMatchCount", Value: "" },
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 7 },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -618,8 +614,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 info = report.SoccerBARM;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
-                            { Name: "ColMatchCount", Value: "" },
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 7 },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -634,8 +629,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 info = report.SabaSoccerBARM    ;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
-                            { Name: "ColMatchCount", Value: "" },
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 7 },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -650,8 +644,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 info = report.SabaPinGoalBARM;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
-                            { Name: "ColMatchCount", Value: "" },
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 7 },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -666,8 +659,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 info = report.OtherSportBARM;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
-                            { Name: "ColMatchCount", Value: "" },
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 7 },
                             { Name: "ColVirtualWinLoss", Value: info.VirtualWinLoss },
                             { Name: "ColRealIncome", Value: info.RealIncome },
                             { Name: "ColVirtualTurnOver", Value: info.VirtualTurnover },
@@ -683,8 +675,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
                 var totalInfo = report.Total;
                 currentRow =
                 {
-                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 6 },
-                               { Name: "ColMatchCount", Value: "" },
+                    Columns: [{ Name: "ColLeague", Value: info.LeagueName, CssClass: "align-right", MergeColNumber: 7 },
                                { Name: "ColVirtualWinLoss", Value: totalInfo.VirtualWinLoss },
                                { Name: "ColRealIncome", Value: info.RealIncome },
                                { Name: "ColVirtualTurnOver", Value: totalInfo.VirtualTurnover },

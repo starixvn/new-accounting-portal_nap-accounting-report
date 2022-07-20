@@ -85,6 +85,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                             matchId: info.Total.MatchId,
                             matchCode: info.Total.MatchCode,
                             event: info.Total.MatchEvent,
+                            isOutright: info.Total.IsOutright
                         },
                         CustomCellRender: function (currentCell) {
                             var openScoreInfoEvent = "scoreInfoManager.GetReport('" + currentCell.Value.startDate + "'," + //*
@@ -102,7 +103,12 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                                 null + "','" + //*
                                 null + "','" +
                                 null + "');"
-                            return '<span class="link" onclick="event.stopPropagation();' + openScoreInfoEvent + '">' + currentCell.Value.event + '<span>';
+
+                            if (currentCell.Value.isOutright) {
+                                return '<span>' + currentCell.Value.event + '<span>';
+                            } else {
+                                return '<span class="link" onclick="event.stopPropagation();' + openScoreInfoEvent + '">' + currentCell.Value.event + '<span>';
+                            }
                         }
                     },
                     { Name: "ColMemberWinLoss", Value: info.Total.MemberWinLoss },
