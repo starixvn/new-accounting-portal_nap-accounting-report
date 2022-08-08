@@ -326,7 +326,7 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
             { HeaderText: "Odds", Width: 50, Name: "ColOdds", HeaderAlign: "center", CellAlign: "right", FormatNumber: FormatConstant.TWO_DECIMAL_NUMBER },
             { HeaderText: "Status", Width: 60, Name: "ColStatus", HeaderAlign: "center", CellAlign: "center" },
             {
-                HeaderText: "Refno", Width: 100, Name: "ColRefNo",
+                HeaderText: "Refno", Width: 130, Name: "ColRefNo",
                 HeaderAlign: "center", CellAlign: "right"
             },
             {
@@ -418,7 +418,7 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
                     var timeDiff = (currentTicketInfo.TimeDifference == 0 && j == 0) ? "-" : currentTicketInfo.TimeDifference
                     currentTicketByUser.push(
                         { Name: "ColStatus", Value: currentTicketInfo.Status, TdClass: tdClass },
-                        { Name: "ColRefNo", Value: currentTicketInfo.ReferenceNumber, TdClass: tdClass },
+                        { Name: "ColRefNo", Value: " " + currentTicketInfo.ReferenceNumber, TdClass: tdClass },
                         { Name: "ColBetTime", Value: currentTicketInfo.BetTime, TdClass: tdClass },
                         { Name: "ColTimeDiff", Value: timeDiff, TdClass: tdClass },
                         { Name: "ColTransDesc", Value: currentTicketInfo.TransDesc, TdClass: tdClass }
