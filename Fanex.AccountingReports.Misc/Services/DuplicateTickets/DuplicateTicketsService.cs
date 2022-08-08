@@ -327,7 +327,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                         ref currentColumn,
                         currentRow,
                         currentColumn,
-                        ticketInfo.ReferenceNumber,
+                        string.Empty + ticketInfo.ReferenceNumber,
                         i % 2 == 0 ? evenRowRightTextStyle : rightTextStyle);
                     NpoiExcelExtensions.RenderCell(
                         ref worksheet,
