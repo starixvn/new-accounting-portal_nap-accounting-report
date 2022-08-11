@@ -55,7 +55,11 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                 x.odds,
                 x.bettype,
                 x.refnoGroup,
-                x.matchid
+                x.matchid,
+                x.ip,
+                x.WalletType,
+                x.betteam,
+                x.oddsid
             }).ToList();
 
             DuplicateTicketsUtility utility = new DuplicateTicketsUtility();
