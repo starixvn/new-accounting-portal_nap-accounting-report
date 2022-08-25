@@ -55,7 +55,11 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                 x.odds,
                 x.bettype,
                 x.refnoGroup,
-                x.matchid
+                x.matchid,
+                x.ip,
+                x.WalletType,
+                x.betteam,
+                x.oddsid
             }).ToList();
 
             DuplicateTicketsUtility utility = new DuplicateTicketsUtility();
@@ -73,9 +77,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                     if (mainTicket.BetTypeId != 911 || isDuplicateCashOut)
                     {
                         mainTicket.TicketInfo.AddRange(group);
-                        result.Add(mainTicket);
                     }
                 }
+
+                result.Add(mainTicket);
             }
 
             duplicateTicketsInfo.Rows = result;

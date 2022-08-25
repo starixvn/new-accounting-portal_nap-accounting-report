@@ -10,7 +10,7 @@ namespace Fanex.AccountingReports.Misc.Models.DuplicateTickets
     {
         public string Status { get; set; }
 
-        public long ReferenceNumber { get; set; }
+        public string ReferenceNumber { get; set; }
 
         public string BetTime { get; set; }
 
