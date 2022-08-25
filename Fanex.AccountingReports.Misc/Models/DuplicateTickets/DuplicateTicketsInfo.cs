@@ -18,5 +18,7 @@ namespace Fanex.AccountingReports.Misc.Models.DuplicateTickets
         public List<DuplicateTicketsByUserName> Rows { get; set; }
 
         public string MD5Hash { get; set; }
+
+        public bool HaveDuplicateTickets { get; set; }
     }
 }

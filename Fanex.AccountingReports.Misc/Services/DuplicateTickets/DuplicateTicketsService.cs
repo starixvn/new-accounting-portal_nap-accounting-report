@@ -85,6 +85,11 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
 
             duplicateTicketsInfo.Rows = result;
             duplicateTicketsInfo.MD5Hash = utility.GetMD5Hash(JsonConvert.SerializeObject(result));
+      
+            var numOfDuplicateTickets = result.Sum(x => x.TicketInfo.Count);
+
+            duplicateTicketsInfo.HaveDuplicateTickets = numOfDuplicateTickets > 0;
+
             SessionManager.Set<DuplicateTicketsInfo>(this._duplicateTicketsSessionKey, duplicateTicketsInfo);
 
             if (result.Count > 0)
