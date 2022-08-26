@@ -630,6 +630,7 @@
     <Content Include="Areas\Misc\Views\DuplicateTickets\Images\refresh.png" />
     <Content Include="Areas\Misc\Views\DuplicateTickets\Media\big_ben.mp3" />
     <Content Include="Areas\Misc\Views\DuplicateTickets\Media\koekoeksklok.mp3" />
+    <Content Include="Areas\Misc\Views\DuplicateTickets\Media\oohnanana.mp3" />
     <Content Include="Areas\Misc\Views\DuplicateTickets\player.swf" />
     <Content Include="Areas\Misc\Views\MAMonitorTool\Scripts\BaseReport.js" />
     <Content Include="Areas\Misc\Views\MAMonitorTool\Scripts\HistoryReport.js" />

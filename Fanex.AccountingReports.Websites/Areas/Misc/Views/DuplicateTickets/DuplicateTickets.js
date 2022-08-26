@@ -37,7 +37,7 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
     };
 
     self.playSound = function () {
-        var audio = new Audio(window.rootUrl + "Areas/Misc/Views/DuplicateTickets/Media/koekoeksklok.mp3");
+        var audio = new Audio(window.rootUrl + "Areas/Misc/Views/DuplicateTickets/Media/oohnanana.mp3");
         audio.play();
     };
 
