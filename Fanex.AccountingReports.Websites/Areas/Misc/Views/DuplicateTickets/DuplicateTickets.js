@@ -37,7 +37,7 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
     };
 
     self.playSound = function () {
-        var audio = new Audio(window.rootUrl + "Areas/Misc/Views/DuplicateTickets/Media/koekoeksklok.mp3");
+        var audio = new Audio(window.rootUrl + "Areas/Misc/Views/DuplicateTickets/Media/oohnanana.mp3");
         audio.play();
     };
 
@@ -77,7 +77,8 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
         CountAlertSound: 0,
         isGenerateReport: false,
         countPlaySoundInAPatch: 0,
-        countPlaySoundInAPatchEvent: null
+        countPlaySoundInAPatchEvent: null,
+        haveDuplicateTickets: false
     };
 
     var renderDatePicker = function () {
@@ -202,12 +203,14 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
                 cachedData.CountAlertSound = cachedData.CountAlertSound + 1;
             }
 
-            if (cachedData.CountAlertSound <= 2 && cachedData.duplicateTicketData.length > 0) {
+            if (cachedData.CountAlertSound <= 2 && cachedData.haveDuplicateTickets) {
                 self.playNotificationAudio();
             }
 
-            AccReport.popUp.show("There are duplicate tickets. Please check again.", '', 4);
-            cachedData.showDuplicateTicketPopUpNotification = true;
+            if (cachedData.haveDuplicateTickets) {
+                AccReport.popUp.show("There are duplicate tickets. Please check again.", '', 4);
+                cachedData.showDuplicateTicketPopUpNotification = true;
+            }
         }
 
         if (cachedData.duplicateTicketData.length == 0) {
@@ -262,6 +265,7 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
                     }
                     cachedData.MD5Hash_Current = rs.MD5Hash;
                     cachedData.duplicateTicketData = rs.Rows;
+                    cachedData.haveDuplicateTickets = rs.HaveDuplicateTickets;
                     self.notifyDuplicateTickets();
                     self.renderDuplicateTicketData(rs.Rows);
                 },
