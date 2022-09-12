@@ -266,18 +266,18 @@
                 switch(Environment)
                 {
                     case SiteEnvironment.UAT:
-						return "stateConnectionString=\"tcpip=10.99.99.51:42424\"";
+						return "stateConnectionString=\"tcpip=10.2.190.41:42424\"";
                     case SiteEnvironment.SIT:
                         return "stateConnectionString=\"tcpip=172.16.4.107:42424\"";
                     case SiteEnvironment.PRO:                    
-                        return "stateConnectionString=\"tcpip=10.99.99.51:42424\"";
+                        return "stateConnectionString=\"tcpip=10.2.27.8:42424\"";
                     case SiteEnvironment.PROAWS:
                         return "stateConnectionString=\"tcpip=10.2.27.19:42424\"";
                     case SiteEnvironment.MNL:
                         return "stateConnectionString=\"tcpip=10.2.12.10:42424\"";
 
                     default:
-                        return "stateConnectionString=\"tcpip=ha.nexdev.net:42424\"";
+                        return "stateConnectionString=\"tcpip=10.18.200.131:42424\"";
                 }
             }
         }
