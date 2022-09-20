@@ -1900,7 +1900,6 @@
     </Content>
     <Content Include="App_Configuration\Web.PROAWS.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.Config.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1989,27 +1988,21 @@
     <Content Include="App_Configuration\Configuration.ttinclude" />
     <Content Include="App_Configuration\Web.DEV.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.LOCAL.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.MNL.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.PRO.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.SIT.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.UAT.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.PRO.ConnectionString.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
