@@ -63,7 +63,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
 
                 TicketInfo ticketInfo = new TicketInfo()
                 {
-                    Status = Converter.ToString2(duplicateTicket.status),
+                    Status = Converter.ToString2(duplicateTicket.STATUS),
                     ReferenceNumber = Converter.ToString2(duplicateTicket.refno),
                     BetTime = betTime.ToLongMMMddFormatedDate(),
                     TimeDifference = timeDifferenceTicket,
