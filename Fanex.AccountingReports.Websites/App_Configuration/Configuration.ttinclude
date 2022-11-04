@@ -175,14 +175,14 @@
                 {
                     case SiteEnvironment.DEV:
 					case SiteEnvironment.LOCAL:
-					    return "http://ha.nexdev.net:8889/api";
+					    return "https://onebookum-dev.nexdev.net/api";
                     case SiteEnvironment.PRO:
                     case SiteEnvironment.PROAWS:
-                        return "http://10.99.99.51:8889/api";
+                        return "http://10.2.27.8:7446/api";
                     case SiteEnvironment.UAT:
-                        return "http://10.99.99.51:8889/api";
+                        return "http://10.2.190.41:7446/api";
                     case SiteEnvironment.SIT:
-                        return "http://172.16.4.106:8889/api";
+                        return "http://172.16.2.44:7446/api";
                     case SiteEnvironment.MNL:
                         return "http://10.40.40.202:8889/api";
                     default:
