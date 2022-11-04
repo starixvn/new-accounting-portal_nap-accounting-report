@@ -214,6 +214,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             ISheet worksheet,
             ref int currentRow)
         {
+            var index = 0;
             int currentColumn = 0;
             int rowIndex = 0;
             IRow row = null;
@@ -231,6 +232,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
 
             for (int i = 0; i < report.Count; i++)
             {
+              
                 var ticketByUser = report[i];
                 if (ticketByUser.TicketInfo != null && ticketByUser.TicketInfo.Any())
                 {
@@ -251,7 +253,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                         currentRow + numberDuplicateTickets - 1,
                         currentColumn,
                         ticketByUser.UserName,
-                        i % 2 == 0 ? evenRowTextStyle : textStyle);
+                        index % 2 == 0 ? evenRowTextStyle : textStyle);
                     NpoiExcelExtensions.RenderCell(
                         ref worksheet,
                         ref row,
@@ -260,7 +262,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                         currentRow + numberDuplicateTickets - 1,
                         currentColumn,
                         ticketByUser.CustId,
-                        i % 2 == 0 ? evenRowTextStyle : textStyle);
+                        index % 2 == 0 ? evenRowTextStyle : textStyle);
                     NpoiExcelExtensions.RenderCell(
                         ref worksheet,
                         ref row,
@@ -269,7 +271,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                         currentRow + numberDuplicateTickets - 1,
                         currentColumn,
                         ticketByUser.BetType,
-                        i % 2 == 0 ? evenRowTextStyle : textStyle);
+                        index % 2 == 0 ? evenRowTextStyle : textStyle);
                     NpoiExcelExtensions.RenderCell(
                         ref worksheet,
                         ref row,
@@ -278,7 +280,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                         currentRow + numberDuplicateTickets - 1,
                         currentColumn,
                         ticketByUser.WinLostDate,
-                        i % 2 == 0 ? evenRowTextStyle : textStyle);
+                        index % 2 == 0 ? evenRowTextStyle : textStyle);
                     NpoiExcelExtensions.RenderCell(
                         ref worksheet,
                         ref row,
@@ -287,7 +289,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                         currentRow + numberDuplicateTickets - 1,
                         currentColumn,
                         ticketByUser.BalanceBeforeBet,
-                        i % 2 == 0 ? evenRowDecimalStyle : decimalStyle);
+                        index % 2 == 0 ? evenRowDecimalStyle : decimalStyle);
                     NpoiExcelExtensions.RenderCell(
                         ref worksheet,
                         ref row,
@@ -296,7 +298,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                         currentRow + numberDuplicateTickets - 1,
                         currentColumn,
                         ticketByUser.Stake,
-                        i % 2 == 0 ? evenRowDecimalStyle : decimalStyle);
+                        index % 2 == 0 ? evenRowDecimalStyle : decimalStyle);
                     NpoiExcelExtensions.RenderCell(
                         ref worksheet,
                         ref row,
@@ -305,7 +307,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                         currentRow + numberDuplicateTickets - 1,
                         currentColumn,
                         ticketByUser.Odds,
-                        i % 2 == 0 ? evenRowDecimalStyle : decimalStyle);
+                        index % 2 == 0 ? evenRowDecimalStyle : decimalStyle);
 
                     int subCount = 0;
 
@@ -320,7 +322,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                             currentRow,
                             currentColumn,
                             rowIndex + 1,
-                            i % 2 == 0 ? evenRowNumberStyle : numberStyle);
+                            index % 2 == 0 ? evenRowNumberStyle : numberStyle);
                         currentColumn = 8;
                         NpoiExcelExtensions.RenderCell(
                             ref worksheet,
@@ -330,7 +332,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                             currentRow,
                             currentColumn,
                             ticketInfo.Status,
-                            i % 2 == 0 ? evenRowTextStyle : textStyle);
+                            index % 2 == 0 ? evenRowTextStyle : textStyle);
                         NpoiExcelExtensions.RenderCell(
                             ref worksheet,
                             ref row,
@@ -339,7 +341,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                             currentRow,
                             currentColumn,
                             ticketInfo.ReferenceNumber,
-                            i % 2 == 0 ? evenRowRightTextStyle : rightTextStyle);
+                            index % 2 == 0 ? evenRowRightTextStyle : rightTextStyle);
                         NpoiExcelExtensions.RenderCell(
                             ref worksheet,
                             ref row,
@@ -348,7 +350,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                             currentRow,
                             currentColumn,
                             ticketInfo.BetTime,
-                            i % 2 == 0 ? evenRowTextStyle : textStyle);
+                            index % 2 == 0 ? evenRowTextStyle : textStyle);
                         if (Math.Abs(ticketInfo.TimeDifference) < 0 && subCount == 0)
                         {
                             NpoiExcelExtensions.RenderCell(
@@ -359,7 +361,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                                 currentRow,
                                 currentColumn,
                                 "-",
-                                i % 2 == 0 ? evenRowRightTextStyle : rightTextStyle);
+                                index % 2 == 0 ? evenRowRightTextStyle : rightTextStyle);
                         }
                         else
                         {
@@ -371,7 +373,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                                 currentRow,
                                 currentColumn,
                                 ticketInfo.TimeDifference,
-                                i % 2 == 0 ? evenRowRightNumberStyle : rightNumberStyle);
+                                index % 2 == 0 ? evenRowRightNumberStyle : rightNumberStyle);
                         }
 
                         NpoiExcelExtensions.RenderCell(
@@ -382,12 +384,14 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                             currentRow,
                             currentColumn,
                             ticketInfo.TransDesc,
-                            i % 2 == 0 ? evenRowTextStyle : textStyle);
+                            index % 2 == 0 ? evenRowTextStyle : textStyle);
 
                         currentRow++;
                         rowIndex++;
                         subCount++;
                     }
+
+                    index++;
                 }
             }
         }

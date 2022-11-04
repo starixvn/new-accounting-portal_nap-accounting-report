@@ -390,9 +390,10 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
             var rowIndex = 0;
             var startIndex = pageIndex * itemsPerPage;
             var endIndex = startIndex + itemsPerPage;
+            var index = 0;
 
             for (var i = 0; i < numberUsers; i++) {
-                var tdClass = i % 2 == 0 ? "evenRow" : '';
+                var tdClass = index % 2 == 0 ? "evenRow" : '';
                 var currentUser = report[i];
                 var numberDuplicateTicketsByUser = currentUser.TicketInfo.length;
                 for (var j = 0; j < numberDuplicateTicketsByUser; j++) {
@@ -418,6 +419,8 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
                             { Name: "ColStake", Value: currentUser.Stake, MergeRowNumber: mergeRowNumber, TdClass: tdClass },
                             { Name: "ColOdds", Value: currentUser.Odds, MergeRowNumber: mergeRowNumber, TdClass: tdClass }
                         );
+
+                        index++;
                     }
                     var timeDiff = (currentTicketInfo.TimeDifference == 0 && j == 0) ? "-" : currentTicketInfo.TimeDifference
                     currentTicketByUser.push(
@@ -429,6 +432,7 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
                     );
 
                     rowIndex++;
+                   
                     bodyData.push(
                         { Columns: currentTicketByUser }
                     );
