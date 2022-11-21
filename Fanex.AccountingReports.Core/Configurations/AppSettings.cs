@@ -45,6 +45,8 @@ namespace Fanex.AccountingReports.Core.Configurations
 
         private static DateTime _newSaveBetReportDate;
 
+        private static DateTime _saveBetDateWithZipFolder;
+
         private static bool _isDisplayTotalCurrency;
         private static bool _isApply50PercentRacingReport;
 
@@ -86,6 +88,7 @@ namespace Fanex.AccountingReports.Core.Configurations
             _saveBetReportDataDirectory = ConfigurationManager.AppSettings["SaveBetReportDataDirectory"];
             _oldSaveBetReportDataDirectory = ConfigurationManager.AppSettings["OldSaveBetReportDataDirectory"];
             _newSaveBetReportDate = Convert.ToDateTime(ConfigurationManager.AppSettings["NewSaveBetReportDate"]);
+            _saveBetDateWithZipFolder = Convert.ToDateTime(ConfigurationManager.AppSettings["SaveBetDateWithZipFolder"]);
 
             _isDisplayTotalCurrency = ConfigurationManager.AppSettings["Gaming.CasinoWinLoss.IsDisplayTotalCurrency"] == "1";
             _isApply50PercentRacingReport = ConfigurationManager.AppSettings["IsApply50PercentRacingReport"] == "1";
@@ -268,6 +271,14 @@ namespace Fanex.AccountingReports.Core.Configurations
             get
             {
                 return _newSaveBetReportDate;
+            }
+        }
+
+        public static DateTime SaveBetDateWithZipFolder
+        {
+            get
+            {
+                return _saveBetDateWithZipFolder;
             }
         }
 
