@@ -1,7 +1,5 @@
 namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
 {
-    using System;
-    using System.IO;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -9,7 +7,11 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
     using Fanex.AccountingReports.Special.Models.SaveBetReport;
     using Fanex.Common;
     using Fanex.Data;
+    using Fanex.ServiceManagement.Utility;
     using RemotingRef;
+    using System;
+    using System.IO;
+    using System.Net;
 
     /// <summary>
     /// TODO: Update summary.
@@ -139,11 +141,30 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
                 parentDirectory = Path.Combine(saveBetReportPath, reportFolderContainer);
                 formatFileName = string.Join(".", new string[] { criteria.ReportName, "zip" });
                 filePath = Path.Combine(parentDirectory, formatFileName);
-                LoggingHandler.Log($"file: {filePath} - exists: {File.Exists(filePath)}", LogType.Info);
-                if (!File.Exists(filePath))
+
+                if (AppSettings.IsAuthenticate)
                 {
-                    formatFileName = string.Join(".", new string[] { criteria.ReportName, "xlsx" });
-                    filePath = Path.Combine(parentDirectory, formatFileName);
+                    string password = AppSettings.Password;
+                    if (AppSettings.IsEncryptPassword)
+                    {
+                        password = Common.Cryptography.CfsDeCrypt(password);
+                    }
+                    using (new NetworkConnection(@"\\" + AppSettings.IP, new NetworkCredential(AppSettings.UserName, password)))
+                    {
+                        if (!File.Exists(filePath))
+                        {
+                            formatFileName = string.Join(".", new string[] { criteria.ReportName, "xlsx" });
+                            filePath = Path.Combine(parentDirectory, formatFileName);
+                        }
+                    }
+                }
+                else
+                {
+                    if (!File.Exists(filePath))
+                    {
+                        formatFileName = string.Join(".", new string[] { criteria.ReportName, "xlsx" });
+                        filePath = Path.Combine(parentDirectory, formatFileName);
+                    }
                 }
             }
             else
