@@ -139,6 +139,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
                 parentDirectory = Path.Combine(saveBetReportPath, reportFolderContainer);
                 formatFileName = string.Join(".", new string[] { criteria.ReportName, "zip" });
                 filePath = Path.Combine(parentDirectory, formatFileName);
+                LoggingHandler.Log($"file: {filePath} - exists: {File.Exists(filePath)}", LogType.Info);
                 if (!File.Exists(filePath))
                 {
                     formatFileName = string.Join(".", new string[] { criteria.ReportName, "xlsx" });
