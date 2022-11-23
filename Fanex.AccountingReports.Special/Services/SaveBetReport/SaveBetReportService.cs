@@ -1,7 +1,5 @@
 namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
 {
-    using System;
-    using System.IO;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
@@ -9,7 +7,11 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
     using Fanex.AccountingReports.Special.Models.SaveBetReport;
     using Fanex.Common;
     using Fanex.Data;
+    using Fanex.ServiceManagement.Utility;
     using RemotingRef;
+    using System;
+    using System.IO;
+    using System.Net;
 
     /// <summary>
     /// TODO: Update summary.
@@ -128,25 +130,59 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
             string eventMonth = reportDate.ToString("MM");
             string eventDateStr = reportDate.ToString("dd");
             string reportFolderContainer = string.Join(string.Empty, new string[] { eventYear, eventMonth, eventDateStr });
+            string saveBetReportPath = AppSettings.SaveBetReportDataDirectory;
 
             DateTime matchEventDate = Convert.ToDateTime(eventDate);
             var compareReportDate = DateTime.Compare(matchEventDate, AppSettings.NewSaveBetReportDate);
+            var compareReportDateForZipFolder = DateTime.Compare(matchEventDate, AppSettings.SaveBetDateWithZipFolder);
 
-            if (compareReportDate >= 0)
+            if (compareReportDateForZipFolder >= 0)
             {
-                string saveBetReportPath = AppSettings.SaveBetReportDataDirectory;
                 parentDirectory = Path.Combine(saveBetReportPath, reportFolderContainer);
-                formatFileName = string.Join(".", new string[] { criteria.ReportName, "xlsx" });
+                formatFileName = string.Join(".", new string[] { criteria.ReportName, "zip" });
                 filePath = Path.Combine(parentDirectory, formatFileName);
+
+                if (AppSettings.IsAuthenticate)
+                {
+                    string password = AppSettings.Password;
+                    if (AppSettings.IsEncryptPassword)
+                    {
+                        password = Common.Cryptography.CfsDeCrypt(password);
+                    }
+                    using (new NetworkConnection(@"\\" + AppSettings.IP, new NetworkCredential(AppSettings.UserName, password)))
+                    {
+                        if (!File.Exists(filePath))
+                        {
+                            formatFileName = string.Join(".", new string[] { criteria.ReportName, "xlsx" });
+                            filePath = Path.Combine(parentDirectory, formatFileName);
+                        }
+                    }
+                }
+                else
+                {
+                    if (!File.Exists(filePath))
+                    {
+                        formatFileName = string.Join(".", new string[] { criteria.ReportName, "xlsx" });
+                        filePath = Path.Combine(parentDirectory, formatFileName);
+                    }
+                }
             }
             else
             {
-                string oldSaveBetReportPath = AppSettings.OldSaveBetReportDataDirectory;
-                parentDirectory = Path.Combine(oldSaveBetReportPath, reportFolderContainer);
-                formatFileName = string.Join(".", new string[] { criteria.ReportName, "xls" });
-                filePath = Path.Combine(parentDirectory, formatFileName);
+                if (compareReportDate >= 0)
+                {
+                    parentDirectory = Path.Combine(saveBetReportPath, reportFolderContainer);
+                    formatFileName = string.Join(".", new string[] { criteria.ReportName, "xlsx" });
+                    filePath = Path.Combine(parentDirectory, formatFileName);
+                }
+                else
+                {
+                    string oldSaveBetReportPath = AppSettings.OldSaveBetReportDataDirectory;
+                    parentDirectory = Path.Combine(oldSaveBetReportPath, reportFolderContainer);
+                    formatFileName = string.Join(".", new string[] { criteria.ReportName, "xls" });
+                    filePath = Path.Combine(parentDirectory, formatFileName);
+                }
             }
-
             return filePath;
         }
 
@@ -155,23 +191,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>The file name.</returns>
-        public string GetFileName(DownloadReportCriteria criteria)
+        public string GetFileName(DownloadReportCriteria criteria, string fileExtension)
         {
-            string fileName = string.Empty;
-            var eventDate = criteria.EventDate.Replace("_", "-");
-            DateTime matchEventDate = Convert.ToDateTime(eventDate);
-            var compareReportDate = DateTime.Compare(matchEventDate, AppSettings.NewSaveBetReportDate);
-
-            if (compareReportDate >= 0)
-            {
-                fileName = string.Join(".", new string[] { criteria.ReportName, "xlsx" });
-            }
-            else
-            {
-                fileName = string.Join(".", new string[] { criteria.ReportName, "xls" });
-            }
-
-            return fileName;
+            return string.Join(".", new string[] { criteria.ReportName, fileExtension });
         }
 
         /// <summary>

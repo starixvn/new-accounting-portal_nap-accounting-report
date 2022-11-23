@@ -145,7 +145,7 @@ namespace Fanex.AccountingReports.Special.Controllers
             byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
             string fileExtension = Path.GetExtension(filePath);
             var mimeType = this._saveBetReportService.GetMimeType(fileExtension);
-            string fileName = _saveBetReportService.GetFileName(criteria);
+            string fileName = _saveBetReportService.GetFileName(criteria, fileExtension);
             var contentResult = File(fileBytes, mimeType, fileName);
             return contentResult;
         }
