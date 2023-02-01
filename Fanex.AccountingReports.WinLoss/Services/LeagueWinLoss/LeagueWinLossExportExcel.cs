@@ -689,16 +689,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             if (isExportMatchCountColumn)
             {
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-
-                if (sportName.Contains("Soccer"))
-                {
-                    currentCell.Value = info.MatchCount;
-                }
-                else
-                {
-                    currentCell.Value = string.Empty;
-                }
-               
+                currentCell.Value = info.MatchCount;
                 currentCell.Style = subRowTextStyle;
                 currentColumn++;
             }
@@ -792,16 +783,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             if (isExportMatchCountColumn)
             {
                 currentCell = workSheet.Cells[currentRow, currentColumn];
-
-                if (info.Sport.Contains("Soccer"))
-                {
-                    currentCell.Value = info.MatchCount;
-                }
-                else
-                {
-                    currentCell.Value = string.Empty;
-                }
-
+                currentCell.Value = info.MatchCount;
                 currentCell.Style = intNumberStyle;
                 currentColumn++;
             }
