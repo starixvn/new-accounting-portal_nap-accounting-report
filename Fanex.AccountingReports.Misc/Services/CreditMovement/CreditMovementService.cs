@@ -79,7 +79,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
         /// Gets the sites.
         /// </summary>
         /// <returns>All the site.</returns>
-        public List<Site> GetSites()
+        public IEnumerable<SiteGroup> GetSites()
         {
             List<Site> sites = new List<Site>();
             using (ObjectDb objectDb = new ObjectDb("Misc_CreditMovement_GetSites"))
@@ -87,13 +87,45 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
                 IDataReader reader = objectDb.ExecuteReader();
                 while (reader.Read())
                 {
-                    sites.Add(new Site { SiteId = Converter.ToInt(reader["siteid"]), SiteName = Converter.ToString2(reader["site"]) });
+                    sites.Add(new Site { SiteId = Converter.ToInt(reader["SiteId"]), SiteName = Converter.ToString2(reader["SiteName"]),
+                        SiteGroup = Converter.ToString2(reader["SiteGroup"]), SiteLabel = Converter.ToString2(reader["SiteLabel"])
+                    });
                 }
 
                 reader.Close();
             }
+            var siteGroups = GetSiteGroup(sites);
+            return siteGroups;
+        }
 
-            return sites;
+        public IEnumerable<SiteGroup> GetSiteGroup(List<Site> list)
+        {
+            var result = new List<SiteGroup>();
+            var groups = list.GroupBy(x => x.SiteGroup).Select(x => x.Key);
+            foreach (var group in groups)
+            {
+                var siteGroup = new SiteGroup
+                {
+                    GroupName = group,
+                    Sites = new List<Site>()
+                };
+                var sites = list.Where(x => x.SiteGroup == group);
+
+                foreach (var site in sites)
+                {
+                    siteGroup.Sites.Add(new Site
+                    {
+                        SiteGroup = site.SiteGroup,
+                        SiteName = site.SiteName,
+                        SiteLabel = site.SiteLabel,
+                        SiteId = site.SiteId
+                    });
+                }
+
+                result.Add(siteGroup);
+            }
+
+            return result;
         }
 
         /// <summary>

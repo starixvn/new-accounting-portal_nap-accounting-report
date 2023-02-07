@@ -35,7 +35,6 @@ Fanex.AccountingReports.Misc.CreditMovement = function () {
     };
 
     var _cachedTotalItems = 0;
-    var _cachedNumberSites = 0;
     var _cachedFromDate = today;
     var _cachedToDate = today;
 
@@ -123,40 +122,103 @@ Fanex.AccountingReports.Misc.CreditMovement = function () {
     };
 
     var renderSites = function (rs) {
-        _cachedNumberSites = rs.length;
-        var noItemText = 'No site found.';
-        var ddwnSites = [];
-        var prefixId = 'ddlSite_';
-        var numberSites = rs.length;
+        var isSetDefaultCollapse = true;
+        var id = "ddlSite";
+        var siteGroups = [];
+        var siteGroupLength = rs.length;
+        for (var i = 0; i < siteGroupLength; i++) {
+            var siteGroup = rs[i];
+            var siteLength = siteGroup.Sites.length;
+            if (siteGroup.GroupName == "Credit") {
+                var siteLabels = [];
+                for (var j = 0; j < siteLength; j++) {
+                    var site = siteGroup.Sites[j];
+                    var item = {
+                        id: id + "-" + site.SiteName,
+                        value: site.SiteId,
+                        text: site.SiteName,
+                        checked: true,
+                        enable: true,
+                        cssClass: "",
+                    };
+                    var index = siteLabels.length === 0 ? -1 : siteLabels.findIndex(function (item) { return item.text === site.SiteLabel });
+                    if (index === -1) {
+                        siteLabels.push({
+                            id: id + "-siteLabel-" + site.SiteLabel,
+                            value: site.SiteLabel,
+                            text: site.SiteLabel,
+                            checked: true,
+                            enable: true,
+                            cssClass: "",
+                            items: [item]
+                        });
+                    } else {
+                        siteLabels[index].items.push(item);
+                    }
+                }
 
-        for (var i = 0; i < numberSites; i++) {
-            var currentSite = rs[i];
-            ddwnSites.push({
-                Id: prefixId + currentSite.SiteId,
-                Value: currentSite.SiteId,
-                Text: currentSite.SiteName,
-                Checked: true,
-                Enable: true,
-                CssClass: "",
-                Items: []
-            });
+                if (siteLabels.length > 0) {
+                    siteGroups.push({
+                        id: id + "-group" + siteGroup.GroupName,
+                        value: siteGroup.GroupName,
+                        text: siteGroup.GroupName,
+                        checked: true,
+                        enable: true,
+                        cssClass: "",
+                        items: siteLabels
+                    });
+                }
+            } else {
+                var sites = [];
+                for (var j = 0; j < siteLength; j++) {
+                    var site = siteGroup.Sites[j];
+                    sites.push({
+                        id: id + "-" + site.SiteGroup + "-" + site.SiteName,
+                        value: site.SiteId,
+                        text: site.SiteName,
+                        checked: true,
+                        enable: true,
+                        cssClass: "",
+                    });
+                }
+
+                if (sites.length > 0) {
+                    siteGroups.push({
+                        id: id + "-group" + siteGroup.GroupName,
+                        value: siteGroup.GroupName,
+                        text: siteGroup.GroupName,
+                        checked: true,
+                        enable: true,
+                        cssClass: "",
+                        items: sites
+                    });
+                }
+            }
         }
 
-        $("#ddlSite").multiSelect(
-        {
-            minWidth: 140,
+        _tables.ddlSite.fanexMultiSelect({
+            minWidth: 250,
             maxHeight: 450,
+            showFilter: true,
             shadow: true,
             showHeader: true,
             isCheckAll: true,
             showFooter: false,
-            showTooltip: false,
-            checkAllText: 'All Sites',
+            checkAllText: 'All',
             isUsedCustomCheckAllText: true,
-            customCheckAllText: 'All Sites',
-            noItemText: noItemText,
-            selectedList: 3,
-            listData: ddwnSites
+            useCustomCheckAllText: 'All',
+            noneSelectedText: 'Select an option',
+            noItemText: 'No site found.',
+            disabled: false,
+            listData: siteGroups,
+            onCheck: function () {
+            },
+            onOpen: function () {
+                if (isSetDefaultCollapse) {
+                    $('#ddlDivisionCollapseButton').trigger('click')
+                    isSetDefaultCollapse = false;
+                }
+            }
         });
 
         _tables.ddlSite = $("#ddlSite");
@@ -234,11 +296,11 @@ Fanex.AccountingReports.Misc.CreditMovement = function () {
         var dateRange = _tables.datepickerplugin.nexDatePicker("getDateRange");
         _params.fromDate = dateRange.FromDate + " 00:00:00";
         _params.toDate = dateRange.ToDate + " 23:59:59";
-        if (_tables.ddlSite.multiSelect("getCheckedItems").length === _cachedNumberSites) {
+        if ($("#ddlSiteHeaderCheckBox").is(':checked')) {
             _params.siteList = "All";
         }
         else {
-            _params.siteList = _tables.ddlSite.multiSelect("getCheckedItems").join(',');
+            _params.siteList = _tables.ddlSite.fanexMultiSelect("getItems", true).toString();
         }
         var amount = $("#txtAmount").val().replace(/\,/g, "");
         _params.amount = parseInt(amount);

@@ -319,7 +319,8 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                     sites.Add(new SiteFilterEntity
                     {
                         SiteGroup = Converter.ToString2(row["SiteGroup"]),
-                        SiteName = Converter.ToString2(row["SiteName"])
+                        SiteName = Converter.ToString2(row["SiteName"]),
+                        SiteLabel = Converter.ToString2(row["SiteLabel"])
                     });
                 }
 

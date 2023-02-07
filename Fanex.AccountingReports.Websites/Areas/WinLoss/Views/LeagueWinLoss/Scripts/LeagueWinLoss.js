@@ -954,30 +954,71 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLoss = function () {
         var siteGroupLength = rs.length;
         for (var i = 0; i < siteGroupLength; i++) {
             var siteGroup = rs[i];
-            var sites = [];
             var siteLength = siteGroup.Sites.length;
-            for (var j = 0; j < siteLength; j++) {
-                var site = siteGroup.Sites[j];
-                sites.push({
-                    id: id + "-" + site.SiteGroup + "-" + site.SiteName,
-                    value: site.SiteName,
-                    text: site.SiteName,
-                    checked: true,
-                    enable: true,
-                    cssClass: ""
-                });
-            }
+            if (siteGroup.GroupName == "Credit") {
+                var siteLabels = [];
+                for (var j = 0; j < siteLength; j++) {
+                    var site = siteGroup.Sites[j];
+                    var item = {
+                        id: id + "-" + site.SiteName,
+                        value: site.SiteName,
+                        text: site.SiteName,
+                        checked: true,
+                        enable: true,
+                        cssClass: "",
+                    };
+                    var index = siteLabels.length === 0 ? -1 : siteLabels.findIndex(function (item) { return item.text === site.SiteLabel });
+                    if (index === -1) {
+                        siteLabels.push({
+                            id: id + "-siteLabel-" + site.SiteLabel,
+                            value: site.SiteLabel,
+                            text: site.SiteLabel,
+                            checked: true,
+                            enable: true,
+                            cssClass: "",
+                            items: [item]
+                        });
+                    } else {
+                        siteLabels[index].items.push(item);
+                    }
+                }
 
-            if (sites.length > 0) {
-                siteGroups.push({
-                    id: id + "-group" + siteGroup.GroupName,
-                    value: siteGroup.GroupName,
-                    text: siteGroup.GroupName,
-                    checked: true,
-                    enable: true,
-                    cssClass: "",
-                    items: sites
-                });
+                if (siteLabels.length > 0) {
+                    siteGroups.push({
+                        id: id + "-group" + siteGroup.GroupName,
+                        value: siteGroup.GroupName,
+                        text: siteGroup.GroupName,
+                        checked: true,
+                        enable: true,
+                        cssClass: "",
+                        items: siteLabels
+                    });
+                }
+            } else {
+                var sites = [];
+                for (var j = 0; j < siteLength; j++) {
+                    var site = siteGroup.Sites[j];
+                    sites.push({
+                        id: id + "-" + site.SiteGroup + "-" + site.SiteName,
+                        value: site.SiteName,
+                        text: site.SiteName,
+                        checked: true,
+                        enable: true,
+                        cssClass: "",
+                    });
+                }
+
+                if (sites.length > 0) {
+                    siteGroups.push({
+                        id: id + "-group" + siteGroup.GroupName,
+                        value: siteGroup.GroupName,
+                        text: siteGroup.GroupName,
+                        checked: true,
+                        enable: true,
+                        cssClass: "",
+                        items: sites
+                    });
+                }
             }
         }
 

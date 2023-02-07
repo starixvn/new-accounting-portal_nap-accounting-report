@@ -81,7 +81,7 @@
     <Setting Key="WinLoss_LeagueWinLoss_GetMatches" SpName="Acc_Rpt_LeagueWL_Match_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400"></Setting>
     <Setting Key="WinLoss_LeagueWinLoss_GetSites" SpName="Acc_Rpt_LeagueWL_Site_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400"></Setting>
     <Setting Key="WinLoss_LeagueWinLoss_GetSuper" SpName="Acc_Rpt_LeagueWL_Super_Old" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400"></Setting>
-    <Setting Key="WinLoss_LeagueWinLoss_GetSiteFilter" SpName="Acc_Rpt_LeagueWL_SiteSel" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400" />
+    <Setting Key="WinLoss_LeagueWinLoss_GetSiteFilter" SpName="Acc_Rpt_SiteList" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="2400" />
     <Setting Key="WinLoss_LeagueWinLoss_GetPermisionProfileID" SpName="Acc_Rpt_GetPermisionProfileID" DbName="DBWH.bodb_dwrs.bodbAdminNet" />
   </Function>
   <Function Name="Special - Save Bet Report">
@@ -97,5 +97,8 @@
     <Setting Key="Main_WinLossSummary3rd_Get_VirtualSports" SpName="Acc_Rpt_WinLostSummary_Sporttype_VirtualSports" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
     <Setting Key="Main_WinLossSummary3rd_Get_VirtualRacing" SpName="Acc_Rpt_WinLostSummary_Sporttype_VirtualRacing" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
     <Setting Key="Acc_Rpt_WinlostSummary_Sporttype_BF" SpName="Acc_Rpt_WinlostSummary_Sporttype_BF" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
+  </Function>
+  <Function Name="Misc - Credit Movement">
+	<Setting Key="Misc_CreditMovement_GetSites" SpName="Acc_Rpt_SiteList" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
   </Function>
 </Functions>
