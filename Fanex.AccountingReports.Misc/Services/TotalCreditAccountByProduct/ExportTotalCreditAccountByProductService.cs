@@ -435,7 +435,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                     break;
 
                 case ProductContants.MacauGames:
-                    product = Labels.MacauGames;
+                    product = "RNG Slot";
                     break;
 
                 case ProductContants.NG2:

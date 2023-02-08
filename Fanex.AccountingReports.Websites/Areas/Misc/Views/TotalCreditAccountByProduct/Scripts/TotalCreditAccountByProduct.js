@@ -497,7 +497,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 productName = "Metric Gaming - Superlive";
                 break;
             case productEnums.MacauGames:
-                productName = "Macau Games";
+                productName = "RNG Slot";
                 break;
             case productEnums.NG2:
                 productName = "NG2";
