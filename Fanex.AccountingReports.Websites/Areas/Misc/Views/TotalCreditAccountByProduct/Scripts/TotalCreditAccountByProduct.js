@@ -36,7 +36,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         ColossusBets: 204,
         AllBet: 211,
         MetricGamingSuperLive: -1,
-        MacauGames: 212,
+        MacauGames: 9906,
         NG2: 213,
         Lottery: 220,
         Lucky3: 160,
