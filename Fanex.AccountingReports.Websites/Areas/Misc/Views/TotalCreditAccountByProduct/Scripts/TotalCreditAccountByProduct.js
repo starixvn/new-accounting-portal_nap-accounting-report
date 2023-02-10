@@ -36,7 +36,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         ColossusBets: 204,
         AllBet: 211,
         MetricGamingSuperLive: -1,
-        MacauGames: 212,
+        MacauGames: 9906,
         NG2: 213,
         Lottery: 220,
         Lucky3: 160,
@@ -497,7 +497,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
                 productName = "Metric Gaming - Superlive";
                 break;
             case productEnums.MacauGames:
-                productName = "Macau Games";
+                productName = "RNG Slot";
                 break;
             case productEnums.NG2:
                 productName = "NG2";

@@ -28,7 +28,7 @@ namespace Fanex.AccountingReports.Main.Models.WinLossSummary3rd
             SportContants.Bettrade,
             SportContants.ColossusBet,
             SportContants.Allbet,
-            SportContants.MacauGames,
+            SportContants.RNGSlot,
             SportContants.NG2,
             SportContants.FishingWorld,
             SportContants.CashOut,

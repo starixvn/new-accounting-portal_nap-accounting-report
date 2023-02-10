@@ -23,7 +23,7 @@ namespace Fanex.AccountingReports.Misc.Constants
 
         public const int Allbet = 211;
 
-        public const int MacauGames = 212;
+        public const int RNGSlot = 9906;
 
         public const int NG2 = 213;
 
