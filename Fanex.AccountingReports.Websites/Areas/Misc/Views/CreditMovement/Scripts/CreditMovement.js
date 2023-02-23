@@ -135,7 +135,7 @@ Fanex.AccountingReports.Misc.CreditMovement = function () {
                     var site = siteGroup.Sites[j];
                     var item = {
                         id: id + "-" + site.SiteName,
-                        value: site.SiteId,
+                        value: site.SiteName,
                         text: site.SiteName,
                         checked: true,
                         enable: true,
@@ -174,7 +174,7 @@ Fanex.AccountingReports.Misc.CreditMovement = function () {
                     var site = siteGroup.Sites[j];
                     sites.push({
                         id: id + "-" + site.SiteGroup + "-" + site.SiteName,
-                        value: site.SiteId,
+                        value: site.SiteName,
                         text: site.SiteName,
                         checked: true,
                         enable: true,
