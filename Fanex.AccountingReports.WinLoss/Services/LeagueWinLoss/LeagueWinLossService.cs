@@ -264,24 +264,22 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             return result;
         }
 
-        public List<BetTypeWinLossByStatusModel> GetBetTypesByLiveNonLiveStatus(GetBetTypesCriteria criteria)
+        public BetTypeWinLossByStatusModel GetBetTypesByLiveNonLiveStatus(GetBetTypesCriteria criteria)
         {
-            var result = new List<BetTypeWinLossByStatusModel>();
+            var result = new BetTypeWinLossByStatusModel();
             var liveIndicator = criteria.LiveIndicator;
             if (liveIndicator == 1 || liveIndicator == 2)
             {
                 criteria.LiveIndicator = 1;
-                var liveBetTypes = GetBetTypesByStatus(criteria);
-                liveBetTypes.LiveIndicator = true;
-                result.Add(liveBetTypes);
+                var liveBetTypes = GetBetTypesLive(criteria);
+                result.BetTypeWinLossLive = liveBetTypes;
             }
 
             if (liveIndicator == 0 || liveIndicator == 2)
             {
                 criteria.LiveIndicator = 0;
-                var nonLiveBetTypes = GetBetTypesByStatus(criteria);
-                nonLiveBetTypes.LiveIndicator = false;
-                result.Add(nonLiveBetTypes);
+                var nonLiveBetTypes = GetBetTypesNonLive(criteria);
+                result.BetTypeWinLossNonLive = nonLiveBetTypes;
             }
 
             SessionManager.Set(WinLossContants.LeagueWinLosViewBetTypesByStatusSessionKey, result);
@@ -342,9 +340,68 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             return _reportRepository.GetPermissionProfileID(criteria);
         }
 
-        private BetTypeWinLossByStatusModel GetBetTypesByStatus(GetBetTypesCriteria criteria)
+        private BetTypeWinLossLiveModel GetBetTypesLive(GetBetTypesCriteria criteria)
         {
-            var result = new BetTypeWinLossByStatusModel
+            var maxValueOfPenaltyBettype = -1000;
+            var result = new BetTypeWinLossLiveModel
+            {
+                BetTypeWinLossLiveGroups = new List<BetTypeWinLossLiveGroupModel>(),
+                RM = new BettypeWinLossBySite(),
+                BARM = new BettypeWinLossBySite(),
+                GrandTotal = new BettypeWinLossBySite()
+            };
+
+            var rawData = this._reportRepository.GetBetTypes(criteria);
+
+            if (!rawData.Any())
+            {
+                return result;
+            }
+
+            var rawBettypes = rawData.Where(x => !x.SiteType.Contains(criteria.SportName + " " + "8RM")
+                                     && !x.SiteType.Contains(criteria.SportName + " " + "BARM")
+                                     && !x.SiteType.Contains("Other Sports 8RM")
+                                     && !x.SiteType.Contains("Other Sports BARM"));
+
+            var rawBetTypesWithOutPenalty = rawBettypes.Where(x => x.Bettype > maxValueOfPenaltyBettype);
+
+            var betTypesWithOutPenalty = new BetTypeWinLossLiveGroupModel
+            {
+                BettypeWinLoss = new List<BettypeWinLossBySite>(),
+                Total = new BettypeWinLossBySite()
+            };
+
+            betTypesWithOutPenalty.BettypeWinLoss = BindingBettypes(rawBetTypesWithOutPenalty).ToList();
+            betTypesWithOutPenalty.Total = CalculateBettypeTotal("Total", rawBetTypesWithOutPenalty);
+            result.BetTypeWinLossLiveGroups.Add(betTypesWithOutPenalty);
+
+
+            var rawPenaltyBetTypes = rawBettypes.Where(x => x.Bettype <= maxValueOfPenaltyBettype);
+            var penaltyBetTypes = new BetTypeWinLossLiveGroupModel
+            {
+                BettypeWinLoss = new List<BettypeWinLossBySite>(),
+                Total = new BettypeWinLossBySite()
+            };
+
+            penaltyBetTypes.BettypeWinLoss = BindingBettypes(rawPenaltyBetTypes).ToList();
+            penaltyBetTypes.Total = CalculateBettypeTotal("Total", rawPenaltyBetTypes);
+            result.BetTypeWinLossLiveGroups.Add(penaltyBetTypes);
+
+            var eightRM = rawData.FirstOrDefault(x => x.SiteType.Contains("8RM"));
+            result.RM = BindingBettype(eightRM);
+
+            var barRM = rawData.FirstOrDefault(x => x.SiteType.Contains("BARM"));
+            result.BARM = BindingBettype(barRM);
+
+            result.GrandTotal = CalculateBettypeTotal("Grand Total", rawData);
+
+
+            return result;
+        }
+
+        private BetTypeWinLossNonLiveModel GetBetTypesNonLive(GetBetTypesCriteria criteria)
+        {
+            var result = new BetTypeWinLossNonLiveModel
             {
                 BettypeWinLoss = new List<BettypeWinLossBySite>(),
                 RM = new BettypeWinLossBySite(),
@@ -376,7 +433,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             result.BARM = BindingBettype(barRM);
 
             result.GrandTotal = CalculateBettypeTotal("Grand Total", rawData);
-
 
             return result;
         }
