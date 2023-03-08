@@ -8,6 +8,8 @@ namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
     {
         public List<BetTypeWinLossLiveGroupModel> BetTypeWinLossLiveGroups { get; set; }
 
+        public BettypeWinLossBySite Total { get; set; }
+
         public BettypeWinLossBySite RM { get; set; }
 
         public BettypeWinLossBySite BARM { get; set; }

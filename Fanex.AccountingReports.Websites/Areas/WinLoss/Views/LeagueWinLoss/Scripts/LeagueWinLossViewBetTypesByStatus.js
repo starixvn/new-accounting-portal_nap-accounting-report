@@ -97,7 +97,6 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
     };
 
     var showBetType = function (info, bodyData, liveStatus) {
-        var bettypeTotal = info.Total;
         var hedgeText = self.Params.reportParams.IsHedge ? " (hedge) " : "";
         var currentRow = {
             Columns: [
@@ -132,7 +131,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
     var showGroupBetTypeTotal = function (total, bodyData) {
         var currentRow = {
             Columns: [
-                { Name: "ColBetType", Value: "Total" },
+                { Name: "ColBetType", Value: total.BettypeName, CssClass: "align-right" },
                 { Name: "ColMemberWinLoss", Value: total.MemberWinLoss },
                 { Name: "ColSMAWinLoss", Value: total.SMAWinLoss },
                 { Name: "ColExtraPT", Value: total.ExtraPT },
@@ -144,6 +143,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
                 { Name: "ColRealTurnOver", Value: total.RealTurnover },
                 { Name: "ColVirtualMargin", Value: total.VirtualMargin },
                 { Name: "ColRealMargin", Value: total.RealMargin }],
+            CssClass: 'subTotal'
         };
 
         bodyData.push(currentRow);
@@ -318,8 +318,16 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
         if (length > 0) {
             for (var i = 0; i < length; i++) {
                 info = report.BetTypeWinLossLiveGroups[i];
-                showBetType(info, bodyData, isLive);
-                showGroupBetTypeTotal(info.Total, bodyData)
+                var betTypeLength = info.BettypeWinLoss.length;
+                if (betTypeLength > 0) {
+                    for (var j = 0; j < betTypeLength; j++) {
+                        var betTypeInfo = info.BettypeWinLoss[j];
+                        showBetType(betTypeInfo, bodyData, isLive);
+                    }
+
+
+                    showGroupBetTypeTotal(info.Total, bodyData);
+                }
             }
         }
 

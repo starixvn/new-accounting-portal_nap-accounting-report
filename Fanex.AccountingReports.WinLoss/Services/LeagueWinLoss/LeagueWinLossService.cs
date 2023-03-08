@@ -346,6 +346,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             var result = new BetTypeWinLossLiveModel
             {
                 BetTypeWinLossLiveGroups = new List<BetTypeWinLossLiveGroupModel>(),
+                Total = new BettypeWinLossBySite(),
                 RM = new BettypeWinLossBySite(),
                 BARM = new BettypeWinLossBySite(),
                 GrandTotal = new BettypeWinLossBySite()
@@ -372,9 +373,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             };
 
             betTypesWithOutPenalty.BettypeWinLoss = BindingBettypes(rawBetTypesWithOutPenalty).ToList();
-            betTypesWithOutPenalty.Total = CalculateBettypeTotal("Total", rawBetTypesWithOutPenalty);
+            betTypesWithOutPenalty.Total = CalculateBettypeTotal("Main Total", rawBetTypesWithOutPenalty);
             result.BetTypeWinLossLiveGroups.Add(betTypesWithOutPenalty);
-
 
             var rawPenaltyBetTypes = rawBettypes.Where(x => x.Bettype <= maxValueOfPenaltyBettype);
             var penaltyBetTypes = new BetTypeWinLossLiveGroupModel
@@ -384,8 +384,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             };
 
             penaltyBetTypes.BettypeWinLoss = BindingBettypes(rawPenaltyBetTypes).ToList();
-            penaltyBetTypes.Total = CalculateBettypeTotal("Total", rawPenaltyBetTypes);
+            penaltyBetTypes.Total = CalculateBettypeTotal("Pen Total", rawPenaltyBetTypes);
             result.BetTypeWinLossLiveGroups.Add(penaltyBetTypes);
+
+            var total = CalculateBettypeTotal("Total", rawBettypes);
+            result.Total = total;
 
             var eightRM = rawData.FirstOrDefault(x => x.SiteType.Contains("8RM"));
             result.RM = BindingBettype(eightRM);
