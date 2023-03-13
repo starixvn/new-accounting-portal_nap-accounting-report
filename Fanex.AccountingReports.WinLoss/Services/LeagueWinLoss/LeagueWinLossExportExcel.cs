@@ -1056,7 +1056,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
         public void ExportLeagueWinLossViewBetTypesByStatus(GetBetTypesCriteria criteria)
         {
-            var report = SessionManager.Get<List<BetTypeWinLossByStatusModel>>(WinLossContants.LeagueWinLosViewBetTypesByStatusSessionKey);
+            var report = SessionManager.Get<BetTypeWinLossByStatusModel>(WinLossContants.LeagueWinLosViewBetTypesByStatusSessionKey);
             if (report == null)
             {
                 report = _reportService.GetBetTypesByLiveNonLiveStatus(criteria);
@@ -1097,20 +1097,23 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentCellRange.Style.Font.Weight = 700;
             currentRow += 2;
 
-            if (report != null && report.Count > 0)
+            if (report != null)
             {
-                for (int i = 0; i < report.Count; i++)
-                {
-                    workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 11);
-                    this.ExportLeagueWinLossBetTypesByStatus(
-                        ref workSheet,
-                        startRow,
-                        startColumn,
-                        ref currentRow,
-                        report[i],
-                        criteria,
-                        i);
-                }
+                this.ExportLeagueWinLossBetTypesLive(
+                   ref workSheet,
+                   startRow,
+                   startColumn,
+                   ref currentRow,
+                   report.BetTypeWinLossLive,
+                   criteria);
+                workSheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 11);
+                this.ExportLeagueWinLossBetTypesNonLive(
+                    ref workSheet,
+                    startRow,
+                    startColumn,
+                    ref currentRow,
+                    report.BetTypeWinLossNonLive,
+                    criteria);
             }
 
             var reportName = criteria.IsNormalMode ? string.Format(
@@ -1941,14 +1944,13 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             }
         }
 
-        private void ExportLeagueWinLossBetTypesByStatus(
+        private void ExportLeagueWinLossBetTypesNonLive(
             ref ExcelWorksheet workSheet,
             int startRow,
             int startColumn,
             ref int currentRow,
-            BetTypeWinLossByStatusModel report,
-            GetBetTypesCriteria criteria,
-            int index)
+            BetTypeWinLossNonLiveModel report,
+            GetBetTypesCriteria criteria)
         {
             var bettypes = report.BettypeWinLoss;
 
@@ -1968,7 +1970,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                 "{0} - {1} - {2}",
                 criteria.SportName,
                 criteria.LeagueName,
-                report.LiveIndicator ? "Live" : "Non-Live");
+                "Non-Live");
 
             currentColumn = startColumn;
             currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 11);
@@ -3098,6 +3100,212 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             currentCell.Value = Labels.Real;
             currentCell.Style.FormatTitleCell(headerColor);
             currentRow++;
+        }
+
+        private void ExportLeagueWinLossBetTypesLive(
+            ref ExcelWorksheet workSheet,
+            int startRow,
+            int startColumn,
+            ref int currentRow,
+            BetTypeWinLossLiveModel report,
+            GetBetTypesCriteria criteria)
+        {
+            var currentColumn = startColumn;
+            CellRange currentCellRange;
+            ExcelCell currentCell;
+            BettypeWinLossBySite betTypeBySite;
+
+            currentColumn = startColumn;
+
+            for (int colIndex = 0; colIndex < 12; colIndex++)
+            {
+                workSheet.Columns[startColumn + colIndex].Width = 140 * ExcelExtensions.FontWidth;
+            }
+
+            workSheet.Columns[startColumn].Width = 240 * ExcelExtensions.FontWidth;
+            var title = string.Format(
+                "{0} - {1} - {2}",
+                criteria.SportName,
+                criteria.LeagueName,
+                "Non-Live");
+
+            currentColumn = startColumn;
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 11);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = title;
+            currentCellRange.Style.FormatTitleCell(ExcelExtensions.HeaderTitleColor);
+            currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Left;
+            currentRow++;
+
+            ExportHeader(ref workSheet, startColumn, ref currentRow, Labels.Bet_Type);
+
+            if (report.BetTypeWinLossLiveGroups.Count > 0)
+            {
+                var len = report.BetTypeWinLossLiveGroups.Count;
+
+                for (var i = 0; i < len; i++)
+                {
+
+                    var group = report.BetTypeWinLossLiveGroups[i];
+
+                    if (group.BettypeWinLoss.Count > 0)
+                    {
+                        for (var j = 0; j < group.BettypeWinLoss.Count; j++)
+                        {
+                            betTypeBySite = group.BettypeWinLoss[j];
+
+
+                            if (j % 2 == 0)
+                            {
+                                textStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+                                twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+                                positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+                                positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
+                            }
+                            else
+                            {
+                                textStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+                                twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+                                positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+                                positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
+                            }
+
+                            ExportLeagueWinLossBetTypeDataRow(startColumn, currentRow, betTypeBySite, workSheet, false, betTypeBySite.IsHedge, true);
+                            currentRow++;
+                        }
+
+                        betTypeBySite = group.Total;
+                        ExportLeagueWinLossBetTypeTotal(currentRow, startColumn, betTypeBySite, workSheet);
+                        currentRow++;
+                    }
+                }
+
+                betTypeBySite = report.Total;
+                ExportLeagueWinLossBetTypeTotal(currentRow, startColumn, betTypeBySite, workSheet);
+                currentRow++;
+
+                if (IsShowTotal(report.RM))
+                {
+                    betTypeBySite = report.RM;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = betTypeBySite.SiteType;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 6;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = betTypeBySite.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = betTypeBySite.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = betTypeBySite.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = betTypeBySite.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
+
+                if (IsShowTotal(report.BARM))
+                {
+                    betTypeBySite = report.BARM;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = betTypeBySite.SiteType;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 6;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = betTypeBySite.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = betTypeBySite.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = betTypeBySite.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = betTypeBySite.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
+
+                if (IsShowTotal(report.RM)
+                    || IsShowTotal(report.BARM))
+                {
+                    betTypeBySite = report.GrandTotal;
+                    currentColumn = startColumn;
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 5);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = betTypeBySite.BettypeName;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentCellRange.Style.HorizontalAlignment = HorizontalAlignmentStyle.Right;
+                    currentColumn += 6;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.VirtualWinLoss;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = betTypeBySite.RealIncome;
+                    currentCell.Style = grandTotalRowPositiveTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.VirtualTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCell = workSheet.Cells[currentRow, currentColumn];
+                    currentCell.Value = report.Total.RealTurnover;
+                    currentCell.Style = grandTotalRowTwoDecimalNumberStyle;
+                    currentColumn++;
+
+                    currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+                    currentCellRange.Merged = true;
+                    currentCellRange.Value = string.Empty;
+                    currentCellRange.Style = grandTotalRowTextStyle;
+                    currentColumn += 2;
+                    currentRow++;
+                }
+            }
+            else
+            {
+                workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 11);
+            }
         }
     }
 }
