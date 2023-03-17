@@ -76,8 +76,13 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypesByStatus 
 
                     gridHeight = gridHeight * 2 / 3 - 20;
 
-                    renderLiveReport(rs.BetTypeWinLossLive, gridHeight);
-                    renderNonLiveReport(rs.BetTypeWinLossNonLive, gridHeight);
+                    if (rs.BetTypeWinLossLive != null) {
+                        renderLiveReport(rs.BetTypeWinLossLive, gridHeight);
+                    }
+
+                    if (rs.BetTypeWinLossNonLive != null) {
+                        renderNonLiveReport(rs.BetTypeWinLossNonLive, gridHeight);
+                    }
                 }
                 else {
                     renderReport(rs);
