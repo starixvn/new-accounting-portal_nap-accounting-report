@@ -89,10 +89,6 @@
   <Function Name="Racing - Win Lost Group Daily">
     <Setting Key="Racing_WinLostGroupDaily" SpName="Acc_Rpt_WinlostRacing_Group_Daily" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
-
-  <Function Name="Misc - Credit Movement">
-    <Setting Key="Misc_CreditMovement_GetSites" SpName="SiteSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
-  </Function>
   <Function Name="Special - Total Credit Account By Product">
     <Setting Key="Acc_Rpt_EnableDisableAccount_ByProduct" SpName="Acc_Rpt_EnableDisableAccount_ByProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>

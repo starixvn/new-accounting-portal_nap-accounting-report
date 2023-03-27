@@ -203,7 +203,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                     siteGroup.Sites.Add(new Site
                     {
                         SiteGroup = site.SiteGroup,
-                        SiteName = site.SiteName
+                        SiteName = site.SiteName,
+                        SiteLabel = site.SiteLabel
                     });
                 }
 

@@ -3,6 +3,7 @@
   <Function Name="Misc - Total SMA Member Active">
     <Setting Key="Misc_TotalSMAMemberActive_GetReport" SpName="Acc_rpt_CustStatus" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="600" />
     <Setting Key="Misc_TotalSMAMemberActive_GetStatusDetail" SpName="Acc_rpt_CustStatusDetails" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="600" />
+	<Setting Key="Misc_TotalSMAMemberActive_GetSites" SpName="Acc_Rpt_TotalSMAMemberActive_SiteSel" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="600" />
   </Function>
   <Function Name="Main - Win Loss Summary">
     <Setting Key="Main_WinLossSummary_GetReport" SpName="Acc_Rpt_WinLostSummary" DbName="DBRPT.bodb_Report.bodbAdminNet" TimeOut="600" />
