@@ -65,7 +65,7 @@
     <Setting Key="WinLoss_TreeWinLoss_GetDataBySuper" SpName="Acc_Rpt_TreeWinlostBySAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="WinLoss_TreeWinLoss_GetDataByMaster" SpName="Acc_Rpt_TreeWinlostByMAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="WinLoss_TreeWinLoss_GetDataByAgent" SpName="Acc_Rpt_TreeWinlostByAg" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
-    <Setting Key="WinLoss_TreeWinLoss_GetVirtualRate" SpName="Acc_CustomerSelVirtualMultiplier" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
+    <Setting Key="WinLoss_TreeWinLoss_GetVirtualRate" SpName="Acc_Rpt_TreeWinlost_CustomerSelVirtualMultiplier" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="WinLoss_TreeWinLoss_GetAllVirtualRate" SpName="Acc_Rpt_TreeWinlostBulkGetVR" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="Acc_Rpt_TreeWinlostListProduct" SpName="Acc_Rpt_TreeWinlostListProduct" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
     <Setting Key="WinLoss_TreeWinLoss_GetSport" SpName="Acc_Rpt_TreeWinlost_SporttypeSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
