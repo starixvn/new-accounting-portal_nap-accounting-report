@@ -342,7 +342,15 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
                 CellAlign: "right", FormatNumber: FormatConstant.INT_NUMBER
             },
             {
-                HeaderText: "TransDesc", Width: 700, Name: "ColTransDesc", HeaderAlign: "center",
+                HeaderText: "Site", Width: 90, Name: "ColSite", HeaderAlign: "center",
+                CellAlign: "center"
+            },
+            {
+                HeaderText: "Betfrom", Width: 90, Name: "ColBetfrom", HeaderAlign: "center",
+                CellAlign: "center"
+            },
+            {
+                HeaderText: "TransDesc", Width: 500, Name: "ColTransDesc", HeaderAlign: "center",
                 CellAlign: "left"
             }
         ];
@@ -422,12 +430,15 @@ Fanex.AccountingReports.Misc.DuplicateTickets = function () {
 
                         index++;
                     }
-                    var timeDiff = (currentTicketInfo.TimeDifference == 0 && j == 0) ? "-" : currentTicketInfo.TimeDifference
+                    var isFirstTicket = (currentTicketInfo.TimeDifference == 0 && j == 0);
+                    var timeDiff = isFirstTicket ? "-" : currentTicketInfo.TimeDifference
                     currentTicketByUser.push(
                         { Name: "ColStatus", Value: currentTicketInfo.Status, TdClass: tdClass },
-                        { Name: "ColRefNo", Value: " " + currentTicketInfo.ReferenceNumber, TdClass: tdClass },
+                        { Name: "ColRefNo", Value: " " + currentTicketInfo.ReferenceNumber, TdClass: tdClass, CssClass: isFirstTicket ? '' : 'txtRed' },
                         { Name: "ColBetTime", Value: currentTicketInfo.BetTime, TdClass: tdClass },
                         { Name: "ColTimeDiff", Value: timeDiff, TdClass: tdClass },
+                        { Name: "ColSite", Value: currentTicketInfo.Site, TdClass: tdClass },
+                        { Name: "ColBetfrom", Value: currentTicketInfo.BetFrom, TdClass: tdClass },
                         { Name: "ColTransDesc", Value: currentTicketInfo.TransDesc, TdClass: tdClass }
                     );
 

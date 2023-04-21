@@ -68,7 +68,9 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                     BetTime = betTime.ToLongMMMddFormatedDate(),
                     TimeDifference = timeDifferenceTicket,
                     GroupNo = groupNo,
-                    TransDesc = duplicateTicket.transdesc
+                    TransDesc = duplicateTicket.transdesc,
+                    Site = Converter.ToString2(duplicateTicket.sitename),
+                    BetFrom = Converter.ToString2(duplicateTicket.betfrom)
                 };
 
                 if (ticketIndex == 0)
