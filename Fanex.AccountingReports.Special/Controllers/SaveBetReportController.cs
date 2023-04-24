@@ -1,8 +1,5 @@
 namespace Fanex.AccountingReports.Special.Controllers
 {
-    using System.IO;
-    using System.Net;
-    using System.Web.Mvc;
     using Core.Web;
     using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Exceptions;
@@ -13,6 +10,9 @@ namespace Fanex.AccountingReports.Special.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
     using Fanex.ServiceManagement.Utility;
+    using System.IO;
+    using System.Net;
+    using System.Web.Mvc;
 
     /// <summary>
     /// Save bet report controller.
@@ -90,8 +90,8 @@ namespace Fanex.AccountingReports.Special.Controllers
         [HandleAjaxError]
         public ActionResult CheckFileExist(DownloadReportCriteria criteria)
         {
-            string filePath = _saveBetReportService.GetFilePath(criteria);
             bool exists = false;
+            string filePath = _saveBetReportService.GetFilePath(criteria);
 
             if (AppSettings.IsAuthenticate)
             {
@@ -105,14 +105,8 @@ namespace Fanex.AccountingReports.Special.Controllers
                 exists = System.IO.File.Exists(filePath);
             }
 
-            if (exists)
-            {
-                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                return Json(new { success = false }, JsonRequestBehavior.AllowGet);
-            }
+            return Json(new { success = exists }, JsonRequestBehavior.AllowGet);
+
         }
 
         /// <summary>
@@ -137,6 +131,7 @@ namespace Fanex.AccountingReports.Special.Controllers
             {
                 return DownloadExcelFiles(criteria);
             }
+
         }
 
         private ActionResult DownloadExcelFiles(DownloadReportCriteria criteria)

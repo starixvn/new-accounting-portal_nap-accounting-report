@@ -34,6 +34,13 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
         downloadReportParams: {
             ReportName: null,
             EventDate: null
+        },
+
+        downloadReportParamsForDocker: {
+            FileName: null,
+            SubFolder: null,
+            ContentType: "application/x-zip-compressed",
+            Folder: "save-bet"
         }
     };
 
@@ -140,30 +147,102 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
     };
 
     downloadSaveBetReport = function (reportName, eventDate) {
-        _params.downloadReportParams.ReportName = reportName;
-        _params.downloadReportParams.EventDate = eventDate;
+        if (new Date(_params.saveBetReportParams.Date) >= new Date(saveBetDateWithDockerFile)) {
+            var reportDate = eventDate.split('_');
+            _params.downloadReportParamsForDocker.FileName = reportName + ".zip";
+            _params.downloadReportParamsForDocker.SubFolder = reportDate[2] + '' + reportDate[0] + '' + reportDate[1];
+            $.ajax({
+                type: "POST",
+                url: dockerFileApi + "/check-file",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(_params.downloadReportParamsForDocker),
+                dataType: 'json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function (response) {
+                    if (response.success == false) {
+                        AccReport.popUp.show("Sorry, File not found. " + response.error);
+                    }
+                    else {
+                        self.downFileFromDocker(_params.downloadReportParamsForDocker);
+                    }
 
+                },
+                error: function (jqXHR, event, ajaxSettings) {
+                    if (jqXHR.status &&
+                        jqXHR.status == AccReportData.Constants.HtmlErrorCode.SystemError) {
+                        var r = jQuery.parseJSON(jqXHR.responseText);
+                        AccReport.popUp.show(r.message);
+                    }
+                }
+            });
+        } else {
+            _params.downloadReportParams.ReportName = reportName;
+            _params.downloadReportParams.EventDate = eventDate;
+
+            $.ajax({
+                type: "GET",
+                url: window.rootUrl + "Special/SaveBetReport/CheckFileExist",
+                data: _params.downloadReportParams,
+                dataType: "json",
+                success: function (response) {
+                    if (response.success == false) {
+                        AccReport.popUp.show("Sorry, File not found.");
+                    }
+                    else {
+                        AccReport.downloadFile(window.rootUrl + "Special/SaveBetReport/DownLoadSaveBetReport", _params.downloadReportParams);
+                    }
+                },
+                error: function (jqXHR, event, ajaxSettings) {
+                    if (jqXHR.status &&
+                        jqXHR.status == AccReportData.Constants.HtmlErrorCode.SystemError) {
+                        var r = jQuery.parseJSON(jqXHR.responseText);
+                        AccReport.popUp.show(r.message);
+                    }
+                }
+            });
+        }
+    };
+
+    self.downFileFromDocker = function (data) {
         $.ajax({
-            type: "GET",
-            url: window.rootUrl + "Special/SaveBetReport/CheckFileExist",
-            data: _params.downloadReportParams,
-            dataType: "json",
-            success: function (response) {
-                if (response.success == false) {
-                    AccReport.popUp.show("Sorry, File not found.");
-                }
-                else {
-                    AccReport.downloadFile(window.rootUrl + "Special/SaveBetReport/DownLoadSaveBetReport", _params.downloadReportParams);
-                }
+            type: 'POST',
+            url: dockerFileApi + "/download",
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify(data),
+            xhrFields: {
+                withCredentials: true
             },
-            error: function (jqXHR, event, ajaxSettings) {
-                if (jqXHR.status &&
-                    jqXHR.status == AccReportData.Constants.HtmlErrorCode.SystemError) {
-                    var r = jQuery.parseJSON(jqXHR.responseText);
-                    AccReport.popUp.show(r.message);
+            success: function (rs) {
+                var bytes = self.base64ToBytes(rs.fileContents);
+                var blob = new Blob([bytes], { type: rs.contentType });
+                var isIE = false || !!document.documentMode;
+                if (isIE) {
+                    window.navigator.msSaveBlob(blob, rs.fileDownloadName);
+                } else {
+                    var url = window.URL || window.webkitURL;
+                    link = url.createObjectURL(blob);
+                    var a = $("<a />");
+                    a.attr("download", rs.fileDownloadName);
+                    a.attr("href", link);
+                    a.attr("id", 'file_' + rs.fileDownloadName);
+                    $("body").append(a);
+                    a[0].click();
+                    $(a).remove();
                 }
             }
         });
+    }
+
+    self.base64ToBytes = function (base64) {
+        var s = window.atob(base64);
+        var bytes = new Uint8Array(s.length);
+        for (var i = 0; i < s.length; i++) {
+            bytes[i] = s.charCodeAt(i);
+        }
+        return bytes;
     };
 
     self.getSaveBetReportParams = function () {

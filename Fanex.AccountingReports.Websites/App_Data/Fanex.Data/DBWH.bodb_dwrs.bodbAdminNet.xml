@@ -101,4 +101,7 @@
   <Function Name="Misc - Credit Movement">
 	<Setting Key="Misc_CreditMovement_GetSites" SpName="Acc_Rpt_SiteList" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
   </Function>
+  <Function Name="Misc - Auto-Generated Report">
+	<Setting Key="Acc_UserLog_AttachmentDownload_TrackingIns" SpName="Acc_UserLog_AttachmentDownload_TrackingIns" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="600" />
+  </Function>
 </Functions>

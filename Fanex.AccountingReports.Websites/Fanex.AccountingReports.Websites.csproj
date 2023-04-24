@@ -141,11 +141,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Fanex.NAP.Core.Client, Version=1.2.1.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.Client.2.0.0\lib\net40\Fanex.NAP.Core.Client.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Fanex.NAP.Core.Client.2.0.0.1\lib\net40\Fanex.NAP.Core.Client.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.NAP.Core.SignIn, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.NAP.Core.SignIn.2.0.0\lib\net461\Fanex.NAP.Core.SignIn.dll</HintPath>
+      <HintPath>..\packages\Fanex.NAP.Core.SignIn.2.0.0.3\lib\net461\Fanex.NAP.Core.SignIn.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.RemotingRef, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.RemotingRef.1.5.0\lib\net461\Fanex.RemotingRef.dll</HintPath>
@@ -1082,8 +1081,20 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="WhoAmI1.aspx" />
-    <Content Include="wwwroot\nap-auth\auth.css" />
+    <Content Include="wwwroot\nap-auth\AccessDenied.css" />
     <Content Include="wwwroot\nap-auth\auth-sample.css" />
+    <Content Include="wwwroot\nap-auth\auth.css" />
+    <Content Include="wwwroot\nap-auth\changepassword.css" />
+    <Content Include="wwwroot\nap-auth\cryptojs.js" />
+    <Content Include="wwwroot\nap-auth\error.css" />
+    <Content Include="wwwroot\nap-auth\jquery-1.8.0.min.js" />
+    <Content Include="wwwroot\nap-auth\jquery.validate.min.js" />
+    <Content Include="wwwroot\nap-auth\jquery.validate.unobtrusive.min.js" />
+    <Content Include="wwwroot\nap-auth\jquery.validationEngine-en.js" />
+    <Content Include="wwwroot\nap-auth\jquery.validationEngine.js" />
+    <Content Include="wwwroot\nap-auth\otp.css" />
+    <Content Include="wwwroot\nap-auth\ReCheckIn.js" />
+    <Content Include="wwwroot\nap-auth\validationEngine.jquery.css" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Balance\Views\CompanyBalanceDifference\Scripts\CompanyBalanceDifference.js" />
@@ -2007,6 +2018,7 @@
     <Content Include="App_Configuration\Web.PRO.ConnectionString.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Auth\OtpLoginFlow.cshtml" />
     <Content Include="Views\Auth\Offline.cshtml" />
     <Content Include="Views\Auth\NotFound.cshtml" />
     <Content Include="Views\Auth\Index.cshtml" />
