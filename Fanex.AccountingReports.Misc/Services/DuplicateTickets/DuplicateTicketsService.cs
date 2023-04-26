@@ -144,7 +144,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
 
         private void InitColumn(ref ISheet worksheet)
         {
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 14; i++)
             {
                 worksheet.SetColumnWidth(i, 170 * NpoiExcelExtensions.FontWidth);
             }
@@ -169,7 +169,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                 MiscResources.DuplicateTickets_ReportTitle,
                 criteria.Date.ToShortFormatedDate());
 
-            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn + 12, reportTitle, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn + 14, reportTitle, headerStyle);
         }
 
         /// <summary>
@@ -195,6 +195,8 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Reference_Number, headerStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.BetTime, headerStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.TimeDifference, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, Labels.Site, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, "Betfrom", headerStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, "TransDesc", headerStyle);
         }
 
@@ -230,6 +232,9 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             ICellStyle evenRowNumberStyle = NpoiExcelExtensions.IntStyle(excelFile, EvenRowColorIndex, false, NpoiExcelExtensions.Alignment.Center);
             ICellStyle evenRowRightNumberStyle = NpoiExcelExtensions.IntStyle(excelFile, EvenRowColorIndex, false, NpoiExcelExtensions.Alignment.Right);
 
+            ICellStyle textRedStyle = NpoiExcelExtensions.TextStyle(excelFile, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Center, IndexedColors.Red.Index);
+            ICellStyle evenRowRedTextStyle = NpoiExcelExtensions.TextStyle(excelFile, EvenRowColorIndex, false, NpoiExcelExtensions.Alignment.Center, IndexedColors.Red.Index);
+
             for (int i = 0; i < report.Count; i++)
             {
               
@@ -241,7 +246,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                     int numberDuplicateTickets = ticketByUser.TicketInfo.Count;
                     string refNo = ticketByUser.TicketInfo.Any() ? ticketByUser.TicketInfo.FirstOrDefault().ReferenceNumber.ToString() : string.Empty;
                     string duplicateTicketOfUser = string.Format(MiscResources.DuplicateTicket_OfUser, refNo);
-                    NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn + 12, duplicateTicketOfUser, userTitle);
+                    NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn + 14, duplicateTicketOfUser, userTitle);
                     currentRow++;
                     row = worksheet.GetRow(currentRow) ?? worksheet.CreateRow(currentRow);
                     currentColumn = 1;
@@ -313,6 +318,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
 
                     foreach (var ticketInfo in ticketByUser.TicketInfo)
                     {
+                        var isFistTicket = Math.Abs(ticketInfo.TimeDifference) <= 0 && subCount == 0;
                         currentColumn = 0;
                         NpoiExcelExtensions.RenderCell(
                             ref worksheet,
@@ -333,7 +339,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                             currentColumn,
                             ticketInfo.Status,
                             index % 2 == 0 ? evenRowTextStyle : textStyle);
-                        NpoiExcelExtensions.RenderCell(
+
+                        if(index % 2 == 0 && isFistTicket)
+                        {
+                            NpoiExcelExtensions.RenderCell(
                             ref worksheet,
                             ref row,
                             currentRow,
@@ -341,7 +350,45 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                             currentRow,
                             currentColumn,
                             ticketInfo.ReferenceNumber,
-                            index % 2 == 0 ? evenRowRightTextStyle : rightTextStyle);
+                            evenRowTextStyle);
+                        }
+                        else if(index % 2 != 0 && isFistTicket)
+                        {
+                            NpoiExcelExtensions.RenderCell(
+                            ref worksheet,
+                            ref row,
+                            currentRow,
+                            ref currentColumn,
+                            currentRow,
+                            currentColumn,
+                            ticketInfo.ReferenceNumber,
+                            textStyle);
+                        }
+                        else if(index % 2 == 0 && !isFistTicket)
+                        {
+                            NpoiExcelExtensions.RenderCell(
+                               ref worksheet,
+                               ref row,
+                               currentRow,
+                               ref currentColumn,
+                               currentRow,
+                               currentColumn,
+                               ticketInfo.ReferenceNumber,
+                               evenRowRedTextStyle);
+                        }
+                        else
+                        {
+                            NpoiExcelExtensions.RenderCell(
+                              ref worksheet,
+                              ref row,
+                              currentRow,
+                              ref currentColumn,
+                              currentRow,
+                              currentColumn,
+                              ticketInfo.ReferenceNumber,
+                              textRedStyle);
+                        }
+
                         NpoiExcelExtensions.RenderCell(
                             ref worksheet,
                             ref row,
@@ -351,7 +398,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                             currentColumn,
                             ticketInfo.BetTime,
                             index % 2 == 0 ? evenRowTextStyle : textStyle);
-                        if (Math.Abs(ticketInfo.TimeDifference) < 0 && subCount == 0)
+                        if (isFistTicket)
                         {
                             NpoiExcelExtensions.RenderCell(
                                 ref worksheet,
@@ -375,6 +422,26 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
                                 ticketInfo.TimeDifference,
                                 index % 2 == 0 ? evenRowRightNumberStyle : rightNumberStyle);
                         }
+
+                        NpoiExcelExtensions.RenderCell(
+                           ref worksheet,
+                           ref row,
+                           currentRow,
+                           ref currentColumn,
+                           currentRow,
+                           currentColumn,
+                           ticketInfo.Site,
+                           index % 2 == 0 ? evenRowTextStyle : textStyle);
+
+                        NpoiExcelExtensions.RenderCell(
+                           ref worksheet,
+                           ref row,
+                           currentRow,
+                           ref currentColumn,
+                           currentRow,
+                           currentColumn,
+                           ticketInfo.BetFrom,
+                           index % 2 == 0 ? evenRowTextStyle : textStyle);
 
                         NpoiExcelExtensions.RenderCell(
                             ref worksheet,
