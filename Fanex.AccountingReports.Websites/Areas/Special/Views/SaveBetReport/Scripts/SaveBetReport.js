@@ -40,7 +40,8 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
             FileName: null,
             SubFolder: null,
             ContentType: "application/x-zip-compressed",
-            Folder: "save-bet"
+            FunctionFolder: "save-bet",
+            Folders: null,
         }
     };
 
@@ -147,90 +148,71 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
     };
 
     downloadSaveBetReport = function (reportName, eventDate) {
-        if (new Date(_params.saveBetReportParams.Date) >= new Date(saveBetDateWithDockerFile)) {
-            var reportDate = eventDate.split('_');
-            _params.downloadReportParamsForDocker.FileName = reportName + ".zip";
-            _params.downloadReportParamsForDocker.SubFolder = reportDate[2] + '' + reportDate[0] + '' + reportDate[1];
-            $.ajax({
-                type: "POST",
-                url: dockerFileApi + "/check-file",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify(_params.downloadReportParamsForDocker),
-                dataType: 'json',
-                xhrFields: {
-                    withCredentials: true
-                },
-                success: function (response) {
-                    if (response.success == false) {
-                        AccReport.popUp.show("Sorry, File not found. " + response.error);
-                    }
-                    else {
-                        self.downFileFromDocker(_params.downloadReportParamsForDocker);
-                    }
-
-                },
-                error: function (jqXHR, event, ajaxSettings) {
-                    if (jqXHR.status &&
-                        jqXHR.status == AccReportData.Constants.HtmlErrorCode.SystemError) {
-                        var r = jQuery.parseJSON(jqXHR.responseText);
-                        AccReport.popUp.show(r.message);
-                    }
-                }
-            });
-        } else {
-            _params.downloadReportParams.ReportName = reportName;
-            _params.downloadReportParams.EventDate = eventDate;
-
-            $.ajax({
-                type: "GET",
-                url: window.rootUrl + "Special/SaveBetReport/CheckFileExist",
-                data: _params.downloadReportParams,
-                dataType: "json",
-                success: function (response) {
-                    if (response.success == false) {
-                        AccReport.popUp.show("Sorry, File not found.");
-                    }
-                    else {
-                        AccReport.downloadFile(window.rootUrl + "Special/SaveBetReport/DownLoadSaveBetReport", _params.downloadReportParams);
-                    }
-                },
-                error: function (jqXHR, event, ajaxSettings) {
-                    if (jqXHR.status &&
-                        jqXHR.status == AccReportData.Constants.HtmlErrorCode.SystemError) {
-                        var r = jQuery.parseJSON(jqXHR.responseText);
-                        AccReport.popUp.show(r.message);
-                    }
-                }
-            });
-        }
-    };
-
-    self.downFileFromDocker = function (data) {
+        var reportDate = eventDate.split('_');
+        _params.downloadReportParamsForDocker.FileName = reportName + ".zip";
+        _params.downloadReportParamsForDocker.SubFolder = reportDate[2] + '' + reportDate[0] + '' + reportDate[1];
+        _params.downloadReportParamsForDocker.Folders = dockerFolders;
         $.ajax({
-            type: 'POST',
+            type: "POST",
             url: dockerFileApi + "/download",
-            contentType: 'application/json; charset=utf-8',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(_params.downloadReportParamsForDocker),
             dataType: 'json',
-            data: JSON.stringify(data),
             xhrFields: {
                 withCredentials: true
             },
-            success: function (rs) {
-                var bytes = self.base64ToBytes(rs.fileContents);
-                var blob = new Blob([bytes], { type: rs.contentType });
-                var isIE = false || !!document.documentMode;
-                if (isIE) {
-                    window.navigator.msSaveBlob(blob, rs.fileDownloadName);
-                } else {
-                    var url = window.URL || window.webkitURL;
-                    link = url.createObjectURL(blob);
-                    var a = $("<a />");
-                    a.attr("download", rs.fileDownloadName);
-                    a.attr("href", link);
-                    a.attr("id", 'file_' + rs.fileDownloadName);
-                    $("body").append(a);
-                    a[0].click();
-                    $(a).remove();
+            success: function (response) {
+                if (response.success == false) {
+                    self.downFileFromWindow(reportName, eventDate);
+                }
+                else {
+                    var bytes = self.base64ToBytes(response.data.fileContents);
+                    var blob = new Blob([bytes], { type: response.data.contentType });
+                    var isIE = false || !!document.documentMode;
+                    if (isIE) {
+                        window.navigator.msSaveBlob(blob, response.data.fileDownloadName);
+                    } else {
+                        var url = window.URL || window.webkitURL;
+                        link = url.createObjectURL(blob);
+                        var a = $("<a />");
+                        a.attr("download", response.data.fileDownloadName);
+                        a.attr("href", link);
+                        a.attr("id", 'file_' + response.data.fileDownloadName);
+                        $("body").append(a);
+                        a[0].click();
+                        $(a).remove();
+                    }
+                }
+
+            },
+            error: function () {
+                AccReport.popUp.show("Sorry, File not found. Access Denied !!!");
+            }
+        });
+    };
+
+    self.downFileFromWindow = function (reportName, eventDate) {
+        _params.downloadReportParams.ReportName = reportName;
+        _params.downloadReportParams.EventDate = eventDate;
+
+        $.ajax({
+            type: "GET",
+            url: window.rootUrl + "Special/SaveBetReport/CheckFileExist",
+            data: _params.downloadReportParams,
+            dataType: "json",
+            success: function (response) {
+                if (response.success == false) {
+                    AccReport.popUp.show("Sorry, File not found.");
+                }
+                else {
+                    AccReport.downloadFile(window.rootUrl + "Special/SaveBetReport/DownLoadSaveBetReport", _params.downloadReportParams);
+                }
+            },
+            error: function (jqXHR, event, ajaxSettings) {
+                if (jqXHR.status &&
+                    jqXHR.status == AccReportData.Constants.HtmlErrorCode.SystemError) {
+                    var r = jQuery.parseJSON(jqXHR.responseText);
+                    AccReport.popUp.show(r.message);
                 }
             }
         });

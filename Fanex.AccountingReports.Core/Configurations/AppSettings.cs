@@ -46,7 +46,7 @@ namespace Fanex.AccountingReports.Core.Configurations
         private static DateTime _newSaveBetReportDate;
 
         private static DateTime _saveBetDateWithZipFolder;
-        private static DateTime _saveBetDateWithDockerFile;
+        private static string _dockerFolders;
 
         private static bool _isDisplayTotalCurrency;
         private static bool _isApply50PercentRacingReport;
@@ -92,7 +92,7 @@ namespace Fanex.AccountingReports.Core.Configurations
             _oldSaveBetReportDataDirectory = ConfigurationManager.AppSettings["OldSaveBetReportDataDirectory"];
             _newSaveBetReportDate = Convert.ToDateTime(ConfigurationManager.AppSettings["NewSaveBetReportDate"]);
             _saveBetDateWithZipFolder = Convert.ToDateTime(ConfigurationManager.AppSettings["SaveBetDateWithZipFolder"]);
-            _saveBetDateWithDockerFile = Convert.ToDateTime(ConfigurationManager.AppSettings["SaveBetDateWithDockerFile"]);
+            _dockerFolders = ConfigurationManager.AppSettings["DockerFolders"];
 
             _isDisplayTotalCurrency = ConfigurationManager.AppSettings["Gaming.CasinoWinLoss.IsDisplayTotalCurrency"] == "1";
             _isApply50PercentRacingReport = ConfigurationManager.AppSettings["IsApply50PercentRacingReport"] == "1";
@@ -280,11 +280,11 @@ namespace Fanex.AccountingReports.Core.Configurations
             }
         }
 
-        public static DateTime SaveBetDateWithDockerFile
+        public static string DockerFolders
         {
             get
             {
-                return _saveBetDateWithDockerFile;
+                return _dockerFolders;
             }
         }
 
