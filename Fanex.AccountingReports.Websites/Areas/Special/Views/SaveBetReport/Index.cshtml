@@ -70,6 +70,8 @@
         var minDate = '@DateTime.Today.AddMonths(-3).ToShortDateString()';
         var noneSportAndLeagueMsg = '@Labels.There_are_no_sports_and_leagues';
         var newSaveBetReportDate = '@AppSettings.NewSaveBetReportDate';
+        var dockerFileApi = '@AppSettings.DockerFileApi';
+        var dockerFolders = '@AppSettings.DockerFolders';
     </script>
 }
 @section Foot {
@@ -77,5 +79,5 @@
     <script type="text/javascript" src="~/scripts/_lib/DatePicker/jquery.nexDatePicker.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/Utils/jquery.fixBugsBrowser.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/MultipleSelect/jquery.multiselect.js"></script>
-    <script type="text/javascript" src="~/Areas/Special/Views/SaveBetReport/Scripts/SaveBetReport.js"></script>
+    <script type="text/javascript" src="~/Areas/Special/Views/SaveBetReport/Scripts/SaveBetReport.js?v=2"></script>
 }

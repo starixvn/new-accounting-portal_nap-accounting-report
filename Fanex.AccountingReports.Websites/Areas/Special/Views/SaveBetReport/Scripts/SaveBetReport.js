@@ -34,6 +34,14 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
         downloadReportParams: {
             ReportName: null,
             EventDate: null
+        },
+
+        downloadReportParamsForDocker: {
+            FileName: null,
+            SubFolder: null,
+            ContentType: "application/x-zip-compressed",
+            FunctionFolder: "save-bet",
+            Folders: null,
         }
     };
 
@@ -140,6 +148,50 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
     };
 
     downloadSaveBetReport = function (reportName, eventDate) {
+        var reportDate = eventDate.split('_');
+        _params.downloadReportParamsForDocker.FileName = reportName + ".zip";
+        _params.downloadReportParamsForDocker.SubFolder = reportDate[2] + '' + reportDate[0] + '' + reportDate[1];
+        _params.downloadReportParamsForDocker.Folders = dockerFolders;
+        $.ajax({
+            type: "POST",
+            url: dockerFileApi + "/download",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(_params.downloadReportParamsForDocker),
+            dataType: 'json',
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (response) {
+                if (response.success == false) {
+                    self.downFileFromWindow(reportName, eventDate);
+                }
+                else {
+                    var bytes = self.base64ToBytes(response.data.fileContents);
+                    var blob = new Blob([bytes], { type: response.data.contentType });
+                    var isIE = false || !!document.documentMode;
+                    if (isIE) {
+                        window.navigator.msSaveBlob(blob, response.data.fileDownloadName);
+                    } else {
+                        var url = window.URL || window.webkitURL;
+                        link = url.createObjectURL(blob);
+                        var a = $("<a />");
+                        a.attr("download", response.data.fileDownloadName);
+                        a.attr("href", link);
+                        a.attr("id", 'file_' + response.data.fileDownloadName);
+                        $("body").append(a);
+                        a[0].click();
+                        $(a).remove();
+                    }
+                }
+
+            },
+            error: function () {
+                AccReport.popUp.show("Sorry, File not found. Access Denied !!!");
+            }
+        });
+    };
+
+    self.downFileFromWindow = function (reportName, eventDate) {
         _params.downloadReportParams.ReportName = reportName;
         _params.downloadReportParams.EventDate = eventDate;
 
@@ -164,6 +216,15 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
                 }
             }
         });
+    }
+
+    self.base64ToBytes = function (base64) {
+        var s = window.atob(base64);
+        var bytes = new Uint8Array(s.length);
+        for (var i = 0; i < s.length; i++) {
+            bytes[i] = s.charCodeAt(i);
+        }
+        return bytes;
     };
 
     self.getSaveBetReportParams = function () {

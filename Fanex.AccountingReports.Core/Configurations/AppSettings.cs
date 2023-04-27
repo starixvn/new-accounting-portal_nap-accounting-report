@@ -46,6 +46,7 @@ namespace Fanex.AccountingReports.Core.Configurations
         private static DateTime _newSaveBetReportDate;
 
         private static DateTime _saveBetDateWithZipFolder;
+        private static string _dockerFolders;
 
         private static bool _isDisplayTotalCurrency;
         private static bool _isApply50PercentRacingReport;
@@ -60,6 +61,8 @@ namespace Fanex.AccountingReports.Core.Configurations
         private static string _unit3GroupName;
 
         private static DateTime _casinoSigleWalletLaunchDate;
+
+        private static string _dockerFileApi;
 
         static AppSettings()
         {
@@ -89,6 +92,7 @@ namespace Fanex.AccountingReports.Core.Configurations
             _oldSaveBetReportDataDirectory = ConfigurationManager.AppSettings["OldSaveBetReportDataDirectory"];
             _newSaveBetReportDate = Convert.ToDateTime(ConfigurationManager.AppSettings["NewSaveBetReportDate"]);
             _saveBetDateWithZipFolder = Convert.ToDateTime(ConfigurationManager.AppSettings["SaveBetDateWithZipFolder"]);
+            _dockerFolders = ConfigurationManager.AppSettings["DockerFolders"];
 
             _isDisplayTotalCurrency = ConfigurationManager.AppSettings["Gaming.CasinoWinLoss.IsDisplayTotalCurrency"] == "1";
             _isApply50PercentRacingReport = ConfigurationManager.AppSettings["IsApply50PercentRacingReport"] == "1";
@@ -101,6 +105,8 @@ namespace Fanex.AccountingReports.Core.Configurations
             _unit3UserGroupId = Converter.To<int>(ConfigurationManager.AppSettings["U3AccountGroupId"]);
             _unit3GroupName = ConfigurationManager.AppSettings["U3AccountGroupName"];
             _casinoSigleWalletLaunchDate = Converter.ToDateTime(ConfigurationManager.AppSettings["CasinoSingleWalletLaunchDate"]);
+
+            _dockerFileApi = ConfigurationManager.AppSettings["DockerFileApi"];
         }
 
         /// <summary>
@@ -274,6 +280,14 @@ namespace Fanex.AccountingReports.Core.Configurations
             }
         }
 
+        public static string DockerFolders
+        {
+            get
+            {
+                return _dockerFolders;
+            }
+        }
+
         public static DateTime SaveBetDateWithZipFolder
         {
             get
@@ -377,6 +391,14 @@ namespace Fanex.AccountingReports.Core.Configurations
             get
             {
                 return _unit3GroupName;
+            }
+        }
+
+        public static string DockerFileApi
+        {
+            get
+            {
+                return _dockerFileApi;
             }
         }
 
