@@ -472,7 +472,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         var isExistsVirtualSportsThird = $.inArray(_cachedData.VirtualSportThird_GroupId, selectedProducts) != -1;
         var isExistsVirtualSportsThirdOld = $.inArray(_cachedData.VirtualSportOld_GroupId, selectedProducts) != -1;
         var isSetDefaultCollapse = true;
-        if (isExistsSportbook || isExistsVirtualSports || isExistsNG2 || isExistsNG || isExistsBetradarVirtualSports || isExistsBetBuilder || isExistsSabaClub || isExistsVGaming || isExistsVirtualSportsThird) {
+        if (isExistsSportbook || isExistsVirtualSports || isExistsNG2 || isExistsNG || isExistsBetradarVirtualSports || isExistsBetBuilder || isExistsSabaClub || isExistsVGaming || isExistsVirtualSportsThird || isExistsVirtualSportsThirdOld) {
             var sportGrouplength = sports ? sports.length : 0;
             for (var i = 0; i < sportGrouplength; i++) {
                 var sportGroup = sports[i];
@@ -507,7 +507,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
             useCustomCheckAllText: 'All',
             noneSelectedText: 'Select an option',
             noItemText: 'No sport found.',
-            disabled: (!isExistsSportbook && !isExistsVirtualSports && !isExistsNG2 && !isExistsNG && !isExistsBetradarVirtualSports && !isExistsBetBuilder && !isExistsSabaClub && !isExistsVGaming && !isExistsVirtualSportsThird),
+            disabled: (!isExistsSportbook && !isExistsVirtualSports && !isExistsNG2 && !isExistsNG && !isExistsBetradarVirtualSports && !isExistsBetBuilder && !isExistsSabaClub && !isExistsVGaming && !isExistsVirtualSportsThird && !isExistsVirtualSportsThirdOld),
             listData: ddSport,
             onCheck: function () {
             },
@@ -520,7 +520,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         });
 
         _tables.ddlSport = $("#ddlSport");
-        if (!isExistsSportbook && !isExistsVirtualSports && !isExistsNG2 && !isExistsNG && !isExistsBetradarVirtualSports && !isExistsBetBuilder && !isExistsSabaClub && !isExistsVGaming && !isExistsVirtualSportsThird) {
+        if (!isExistsSportbook && !isExistsVirtualSports && !isExistsNG2 && !isExistsNG && !isExistsBetradarVirtualSports && !isExistsBetBuilder && !isExistsSabaClub && !isExistsVGaming && !isExistsVirtualSportsThird && !isExistsVirtualSportsThirdOld) {
             _tables.ddlSport.fanexMultiSelect('setCheckAll', false);
             _tables.ddlSport.children('input').eq(0).val('Not applicable');
         }
