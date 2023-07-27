@@ -829,6 +829,11 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 CreateSportGroup(rawData, sports, MiscConstants.VGaming);
             }
 
+            if (rawData.Where(x => x.ProductID == MiscConstants.MiscVirtualSportsThirdId).Any())
+            {
+                CreateVirtualSportThirdGroup(rawData, sports);
+            }
+
             return sports;
         }
 
@@ -977,5 +982,18 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
             return string.Empty;
         }
+
+        public List<ProductInfo> CreateVirtualSportThirdGroup(IEnumerable<dynamic> rawData, List<ProductInfo> sports)
+        {
+            var virtualsportRaw = rawData.Where(r => r.ProductID == MiscConstants.MiscVirtualSportsThirdId);
+            var virtualsportGroups = virtualsportRaw.GroupBy(rawinfo => new { rawinfo.SportID, rawinfo.SportName });
+            foreach (var virtualsportGroup in virtualsportGroups)
+            {
+                sports.Add(AddSportGroup(virtualsportGroup));
+            }
+
+            return sports;
+        }
+
     }
 }
