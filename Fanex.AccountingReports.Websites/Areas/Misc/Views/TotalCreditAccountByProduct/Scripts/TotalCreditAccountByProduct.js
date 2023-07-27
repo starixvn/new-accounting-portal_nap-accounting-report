@@ -31,7 +31,7 @@ Fanex.AccountingReports.Misc.TotalCreditAccountByProduct = function () {
         Bingo: 252,
         NumberGame: 161,
         LiveCasiono: 162,
-        VirtualSport: 180,
+        VirtualSport: 9908,
         Keno: 202,
         ColossusBets: 204,
         AllBet: 211,

@@ -73,10 +73,11 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         SabaClub_ProductId: "42",
         SabaClub_SportID: [150, 200],
         VGaming_ProductId: "66",
-        VGaming_SportID: [171, 173]
+        VGaming_SportID: [171, 173],
+        VirtualSportThird_GroupId: "77",
     };
 
-    var productsHasSport = ["1", "5", "23", "27", "3", "-38", "42", "66"];
+    var productsHasSport = ["1", "5", "23", "27", "3", "-38", "42", "66", "77"];
 
     self.initPage = function () {
         initGridScrollerTables();
@@ -249,6 +250,19 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                 continue;
             }
 
+            if (productGroup.Name.toLowerCase() == "virtual sports 3") {
+                ddProduct.push({
+                    id: "#" + ddId + "_Product77",
+                    value: "77",
+                    text: productGroup.Name,
+                    checked: false,
+                    enable: true,
+                    cssClass: "bold"
+                });
+
+                continue;
+            }
+
             if (productGroup.Name.toLowerCase() == "saba casino") {
                 var values = '';
 
@@ -395,7 +409,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                         _cachedData.productSelectedIds = [];
                         _cachedData.isSelectedAllProduct = false;
                     } else {
-                        _cachedData.productSelectedIds = ["1", "5", "23", "27", "3", "-38", "42", "66"];
+                        _cachedData.productSelectedIds = ["1", "5", "23", "27", "3", "-38", "42", "66", "77"];
                         _cachedData.isSelectedAllProduct = true;
                     }
                 } else {
@@ -441,6 +455,7 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
         var isExistsBetBuilder = $.inArray(_cachedData.BetBuilder_ProductId, selectedProducts) != -1;
         var isExistsSabaClub = $.inArray(_cachedData.SabaClub_ProductId, selectedProducts) != -1;
         var isExistsVGaming = $.inArray(_cachedData.VGaming_ProductId, selectedProducts) != -1;
+        var isExistsVirtualSportsThird = $.inArray(_cachedData.VirtualSportThird_GroupId, selectedProducts) != -1;
         var isSetDefaultCollapse = true;
         if (isExistsSportbook || isExistsVirtualSports || isExistsNG2 || isExistsNG || isExistsBetradarVirtualSports || isExistsBetBuilder || isExistsSabaClub || isExistsVGaming) {
             var sportGrouplength = sports ? sports.length : 0;
@@ -453,10 +468,11 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                     (sportGroup.Id <= 218 && sportGroup.Id >= 213 && isExistsNG2 == true) ||
                     ((sportGroup.Id == 161 || sportGroup.Id == 164 || sportGroup.Id == 168) && isExistsNG == true) ||
                     (sportGroup.Id <= 199 && sportGroup.Id >= 190 && isExistsBetradarVirtualSports == true) ||
-                    (sportGroup.Id <= 186 && sportGroup.Id >= 180 && isExistsVirtualSports == true) ||
+                    (sportGroup.Id == 9908 && isExistsVirtualSports == true) ||
                     (_cachedData.BetBuilder_SportID.contains(sportGroup.Id) && isExistsBetBuilder == true) ||
                     (_cachedData.SabaClub_SportID.contains(sportGroup.Id) && isExistsSabaClub == true) ||
-                    (_cachedData.VGaming_SportID.contains(sportGroup.Id) && isExistsVGaming == true)) {
+                    (_cachedData.VGaming_SportID.contains(sportGroup.Id) && isExistsVGaming == true) ||
+                    (sportGroup.Id == 178  && isExistsVirtualSportsThird == true)) {
                     self.generateSportbyProduct(sportGroup, sportLength, ddSportGroup, ddSport, ddId);
                 }
             }
@@ -612,7 +628,8 @@ Fanex.AccountingReports.Misc.BetCount.NormalReport = function () {
                 || selectedProducts[i] === "27"
                 || selectedProducts[i] === "-38"
                 || selectedProducts[i] === "42"
-                || selectedProducts[i] === "66") {
+                || selectedProducts[i] === "66"
+                || selectedProducts[i] === "77") {
                 selectedProducts.splice(i, 1);
             }
         }
