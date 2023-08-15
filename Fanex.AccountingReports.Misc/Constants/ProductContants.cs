@@ -15,7 +15,7 @@ namespace Fanex.AccountingReports.Misc.Constants
 
         public const int LiveCasino = 162;
 
-        public const int VirtualSports = 180;
+        public const int VirtualSports = 9908;
 
         public const int Keno = 202;
 

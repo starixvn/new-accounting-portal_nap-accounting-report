@@ -21,6 +21,8 @@ namespace Fanex.AccountingReports.Misc.Constants
         public const int SabaClubProductId = 42;
         public const int SBAdjustmentId = -999;
         public const int VGaming = 66;
+        public const int MiscVirtualSportsThirdId = 77;
+        public const int MiscVirtualSportsThirdIdOld = 49;
 
         public static readonly string BetCountSessionKey = "Fanex.AccountingReports.Misc.BetCount.BetCountReport";
         public static readonly string BetCountHistoryReportSessionKey = "Fanex.AccountingReports.Misc.BetCount.HistoryBetCountReport";
@@ -42,7 +44,8 @@ namespace Fanex.AccountingReports.Misc.Constants
             "number game",
             "bet builder",
             "saba.games",
-            "vgaming"
+            "vgaming",
+             "virtual sports 3"
         };
 
         /// <summary>
