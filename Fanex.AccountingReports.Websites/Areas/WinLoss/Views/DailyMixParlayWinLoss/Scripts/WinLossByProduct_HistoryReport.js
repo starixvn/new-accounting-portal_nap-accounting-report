@@ -12,7 +12,6 @@ WinLossByProduct_HistoryReport = function () {
         reportParams: {
             FromDate: null,
             ToDate: null,
-            IsHistoryReport: null,
             Site: 0
         }
     };
@@ -74,7 +73,6 @@ WinLossByProduct_HistoryReport.prototype.GetReport = function (dateType) {
 WinLossByProduct_HistoryReport.prototype.GetParams = function (dateType) {
     this.Params.reportParams.FromDate = this.Tables.monthPicker.monPickr("getFromDate", FormatConstant.MMM_DD_YY_STRING_MONTH_PICKER);
     this.Params.reportParams.ToDate = this.Tables.monthPicker.monPickr("getToDate", FormatConstant.MMM_DD_YY_STRING_MONTH_PICKER);
-    this.Params.reportParams.IsHistoryReport = true;
     this.Params.reportParams.Site = this.Tables.ddlSiteType_HistoryReport.val();
 };
 

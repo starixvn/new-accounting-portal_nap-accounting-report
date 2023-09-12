@@ -29,10 +29,6 @@
     <Setting Key="WinLoss_LeagueWinLoss_GetLeagueSuggestion" SpName="Acc_Rpt_LeagueWL_GetLeagueBySport" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
     <Setting Key="WinLoss_LeagueWinLoss_GetVirtualRate" SpName="Acc_Rpt_LeagueWL_CustVirtualMultiplierSel" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600"></Setting>
   </Function>
-  <Function Name="Win Loss - Daily Mix Parlay Win Loss">
-    <Setting Key="WinLoss_DailyMixParlayWinLoss_GetCombinationWinLoss" SpName="Acc_Rpt_DailyParlayWinloss" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
-    <Setting Key="WinLoss_DailyMixParlayWinLoss_GetAdvanceMixParlayReport" SpName="Acc_Rpt_MixParlay_Advance" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />
-  </Function>
 
   <Function Name="Main - Trader Performance">
     <Setting Key="Main_TraderPerformance_GetReport" SpName="Acc_Rpt_TraderPerformanceSum" DbName="DBACC.bodb02.bodbAdminNet" TimeOut="600" />

@@ -13,7 +13,6 @@ WinLossByProduct = function () {
         reportParams: {
             FromDate: null,
             ToDate: null,
-            IsHistoryReport: null,
             Site: 0
         }
     };
@@ -107,7 +106,6 @@ WinLossByProduct.prototype.GetParams = function (dateType) {
     }
 
     this.Params.reportParams.Site = this.Tables.ddlSiteType.val();
-    this.Params.reportParams.IsHistoryReport = false;
 };
 
 WinLossByProduct.prototype.RenderReport = function (report) {

@@ -13,7 +13,6 @@ CombinationWinLoss = function () {
         reportParams: {
             FromDate: null,
             ToDate: null,
-            IsHistoryReport: null,
             Site: 0
         }
     };
@@ -107,7 +106,6 @@ CombinationWinLoss.prototype.GetParams = function (dateType) {
     }
 
     this.Params.reportParams.Site = this.Tables.ddlSiteType.val();
-    this.Params.reportParams.IsHistoryReport = false;
 };
 
 CombinationWinLoss.prototype.RenderReport = function (report) {
@@ -246,8 +244,8 @@ CombinationWinLoss.prototype.RenderReport = function (report) {
                       { HeaderText: "Real Income", Width: 120, Name: "ColLineTotal", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Real Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Margin", Width: 100, Name: "ColMargin", HeaderAlign: "center", CellAlign: "right" },
-                     { HeaderText: "Member Bonus", Width: 120, Name: "ColMemberBonus", HeaderAlign: "center", CellAlign: "right" },
-                     { HeaderText: "House Bonus", Width: 120, Name: "ColHouseBonus", HeaderAlign: "center", CellAlign: "right" }],
+                      { HeaderText: "Member Bonus", Width: 120, Name: "ColMemberBonus", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "House Bonus", Width: 120, Name: "ColHouseBonus", HeaderAlign: "center", CellAlign: "right" }],
         showTitle: true,
         showFooter: true,
         titleInfo:

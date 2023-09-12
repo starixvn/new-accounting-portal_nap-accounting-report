@@ -1686,6 +1686,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                 winLoss.Margin_Str = Labels.NotAvailable;
             }
 
+            winLoss.MemberBonus_Str = winLoss.MemberBonus.Format(2);
+            winLoss.HouseBonus_Str = winLoss.HouseBonus.Format(2);
+
             return winLoss;
         }
 
