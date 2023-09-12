@@ -157,6 +157,8 @@ WinLossByProduct.prototype.RenderReport = function (report) {
                     columns.push({ Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) });
                     columns.push({ Name: "ColTurnover", Value: info.RealTurnover_Str });
                     columns.push({ Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) });
+                    columns.push({ Name: "ColMemberBonus", Value: info.MemberBonus_Str });
+                    columns.push({ Name: "ColHouseBonus", Value: info.HouseBonus_Str });
                     bodyData.push({
                         Columns: columns
                     });
@@ -172,7 +174,9 @@ WinLossByProduct.prototype.RenderReport = function (report) {
                     { Name: "ColComm", Value: info.Commission_Str },
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
-                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true)}]
+                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) },
+                    { Name: "ColMemberBonus", Value: info.MemberBonus_Str },
+                    { Name: "ColHouseBonus", Value: info.HouseBonus_Str }]
                 });
             }
 
@@ -187,7 +191,9 @@ WinLossByProduct.prototype.RenderReport = function (report) {
                     { Name: "ColComm", Value: info.Commission_Str },
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
-                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true)}]
+                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) },
+                    { Name: "ColMemberBonus", Value: info.MemberBonus_Str },
+                    { Name: "ColHouseBonus", Value: info.HouseBonus_Str }]
             });
         }
 
@@ -200,7 +206,9 @@ WinLossByProduct.prototype.RenderReport = function (report) {
                     { Name: "ColComm", Value: info.Commission_Str },
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false), TdClass: "colLineTotal" },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
-                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true)}]
+                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) },
+                    { Name: "ColMemberBonus", Value: info.MemberBonus_Str },
+                    { Name: "ColHouseBonus", Value: info.HouseBonus_Str }]
         });
     }
 
@@ -215,7 +223,9 @@ WinLossByProduct.prototype.RenderReport = function (report) {
                       { HeaderText: "Commission", Width: 100, Name: "ColComm", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Real Income", Width: 120, Name: "ColLineTotal", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Real Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Margin", Width: 100, Name: "ColMargin", HeaderAlign: "center", CellAlign: "right"}],
+                      { HeaderText: "Margin", Width: 100, Name: "ColMargin", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "Member Bonus", Width: 120, Name: "ColMemberBonus", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "House Bonus", Width: 120, Name: "ColHouseBonus", HeaderAlign: "center", CellAlign: "right" }],
         showTitle: true,
         showFooter: true,
         titleInfo:

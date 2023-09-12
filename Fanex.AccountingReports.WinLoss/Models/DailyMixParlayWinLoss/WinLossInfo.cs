@@ -41,6 +41,12 @@ namespace Fanex.AccountingReports.WinLoss.Models.DailyMixParlayWinLoss
         [ScriptIgnore]
         public decimal ExtraPT { get; set; }
 
+        [ScriptIgnore]
+        public decimal MemberBonus { get; set; }
+
+        [ScriptIgnore]
+        public decimal HouseBonus { get; set; }
+
         public List<WinLossInfo> ChildsInfo { get; set; }
 
         public WinLossInfo GrandTotal { get; set; }
@@ -66,6 +72,10 @@ namespace Fanex.AccountingReports.WinLoss.Models.DailyMixParlayWinLoss
 
         public string ExtraPT_Str { get; set; }
 
+        public string MemberBonus_Str { get; set; }
+
+        public string HouseBonus_Str { get; set; }
+
         public int TotalRowDetail { get; set; }
 
         #endregion FieldToDisplay
@@ -89,6 +99,8 @@ namespace Fanex.AccountingReports.WinLoss.Models.DailyMixParlayWinLoss
             this.RealIncome += winLoss.RealIncome;
             this.RealTurnover += winLoss.RealTurnover;
             this.ExtraPT += winLoss.ExtraPT;
+            this.MemberBonus += winLoss.MemberBonus;
+            this.HouseBonus += winLoss.HouseBonus;
         }
     }
 }
