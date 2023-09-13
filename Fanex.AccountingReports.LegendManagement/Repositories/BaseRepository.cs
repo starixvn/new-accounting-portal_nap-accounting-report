@@ -18,10 +18,10 @@ namespace Fanex.AccountingReports.LegendManagement.Repositories.Impls
         /// </returns>
         public virtual Hashtable ExecuteCommand(ICriteria criteria)
         {
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                db.ExecuteNonQuery(criteria.GetSpParams());
-                return db.GetOuputParams();
+                db.ExecuteNonQuery(criteria);
+                return db.GetOutputParams();
             }
         }
     }

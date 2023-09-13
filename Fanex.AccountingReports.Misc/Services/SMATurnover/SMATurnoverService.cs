@@ -154,8 +154,8 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.SMATurnover
         private IDataReader GetSMAsTurnoverData(GetSMATurnoverReportCriteria criteria)
         {
             IDataReader reader = null;
-            var objDb = new ObjectDb(criteria.GetSettingKey());
-            var _params = criteria.GetSpParams();
+            var objDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey());
+            var _params = criteria;
             reader = objDb.ExecuteReader(_params);
 
             return reader;

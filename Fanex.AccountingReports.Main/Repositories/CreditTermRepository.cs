@@ -27,9 +27,9 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             var report = new List<CreditTerm>();
             var settingKey = criteria.GetSettingKey();
 
-            using (ObjectDb db = new ObjectDb(settingKey))
+            using (var db = ObjectDbFactory.CreateInstance(settingKey))
             {
-                DataSet multipleResult = db.ExecuteDataSet(criteria.GetSpParams());
+                DataSet multipleResult = db.ExecuteDataSet(criteria);
 
                 if (multipleResult != null && multipleResult.Tables.Count >= 2)
                 {
@@ -55,11 +55,9 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
                 criteria.AccountRemark = string.Empty;
             }
 
-            using (ObjectDb objectdb = new ObjectDb(settingKey, 500))
+            using (var objectdb = ObjectDbFactory.CreateInstance(settingKey, 500))
             {
-                objectdb.AssignParamValues(criteria.GetSpParams());
-
-                objectdb.ExecuteNonQuery();
+                objectdb.ExecuteNonQuery(criteria);
 
                 editedRemark.ErrorCode = Converter.ToInt(objectdb.GetParameterValue("errcode"));
                 editedRemark.ErrorMessage = Converter.ToString2(objectdb.GetParameterValue("errmsg"));

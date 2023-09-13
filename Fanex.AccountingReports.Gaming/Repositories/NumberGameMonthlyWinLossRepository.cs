@@ -21,9 +21,9 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
         {
             var report = new NumberGameMonthlyWinLoss();
 
-            using (var db = new ObjectDb(getNumberGameMonthlyWinLossCriteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(getNumberGameMonthlyWinLossCriteria.GetSettingKey()))
             {
-                var param = getNumberGameMonthlyWinLossCriteria.GetSpParams();
+                var param = getNumberGameMonthlyWinLossCriteria;
                 var reader = db.ExecuteReader(param);
 
                 if (reader == null)

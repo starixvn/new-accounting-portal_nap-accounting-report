@@ -82,7 +82,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
         public IEnumerable<SiteGroup> GetSites()
         {
             List<Site> sites = new List<Site>();
-            using (ObjectDb objectDb = new ObjectDb("Misc_CreditMovement_GetSites"))
+            using (var objectDb = ObjectDbFactory.CreateInstance("Misc_CreditMovement_GetSites"))
             {
                 IDataReader reader = objectDb.ExecuteReader();
                 while (reader.Read())
@@ -136,9 +136,9 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
         private GridOptions GetReportData(GetCreditMovementCriteria criteria)
         {
             GridOptions gridOptions = InitCreditMovementGridOptions(criteria);
-            using (ObjectDb objectDb = new ObjectDb(criteria.GetSettingKey()))
+            using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                IDataReader reader = objectDb.ExecuteReader(criteria.GetSpParams());
+                IDataReader reader = objectDb.ExecuteReader(criteria);
                 gridOptions.BodyRows = MapReportDataRows(reader);
                 reader.Close();
             }

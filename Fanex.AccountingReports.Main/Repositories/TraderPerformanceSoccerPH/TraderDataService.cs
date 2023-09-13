@@ -9,10 +9,9 @@ namespace Fanex.AccountingReports.Main.Repositories.TraderPerformanceSoccerPH
         public DataTable Query(ICriteria criteria)
         {
             var dataTable = new DataTable();
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                db.AssignParamValues(criteria.GetSpParams());
-                var dataSet = db.ExecuteDataSet();
+                var dataSet = db.ExecuteDataSet(criteria);
                 if (dataSet != null && dataSet.Tables.Count > 0)
                 {
                     dataTable = dataSet.Tables[0];

@@ -364,9 +364,9 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.MAMonitorTool
         {
             DataSet dataSet = null;
 
-            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                var param = criteria.GetSpParams();
+                var param = criteria;
                 dataSet = objectDb.ExecuteDataSet(param);
             }
 

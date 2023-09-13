@@ -25,9 +25,9 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
             DataSet result = null;
             var leagueWinLoss = new List<LeagueWinLossEntity>();
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                result = db.ExecuteDataSet(criteria.GetSpParams());
+                result = db.ExecuteDataSet(criteria);
             }
 
             if (result != null && result.Tables.Count > 0)
@@ -83,9 +83,9 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
             DataSet result = null;
             var bettypeWinLoss = new List<BettypeWinLossEntity>();
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                result = db.ExecuteDataSet(criteria.GetSpParams());
+                result = db.ExecuteDataSet(criteria);
             }
 
             if (result != null)
@@ -129,9 +129,9 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
         {
             DataSet result = null;
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                result = db.ExecuteDataSet(criteria.GetSpParams());
+                result = db.ExecuteDataSet(criteria);
             }
 
             if (result != null && result.Tables.Count > 0)
@@ -169,9 +169,9 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
         {
             DataSet result = null;
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                result = db.ExecuteDataSet(criteria.GetSpParams());
+                result = db.ExecuteDataSet(criteria);
             }
 
             if (result != null && result.Tables.Count > 0)
@@ -205,9 +205,9 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
         {
             DataSet result = null;
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                result = db.ExecuteDataSet(criteria.GetSpParams());
+                result = db.ExecuteDataSet(criteria);
             }
 
             if (result != null && result.Tables.Count > 0)
@@ -242,9 +242,9 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
         {
             DataSet result = null;
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                result = db.ExecuteDataSet(criteria.GetSpParams());
+                result = db.ExecuteDataSet(criteria);
             }
 
             if (result != null && result.Tables.Count > 0)
@@ -272,9 +272,9 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
         {
             DataSet result = null;
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                result = db.ExecuteDataSet(criteria.GetSpParams());
+                result = db.ExecuteDataSet(criteria);
             }
 
             if (result != null && result.Tables.Count > 0)
@@ -305,9 +305,9 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
         {
             DataSet result = null;
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                result = db.ExecuteDataSet(criteria.GetSpParams());
+                result = db.ExecuteDataSet(criteria);
             }
 
             if (result != null && result.Tables.Count > 0)
@@ -334,9 +334,9 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
         {
             DataSet result = null;
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                result = db.ExecuteDataSet(criteria.GetSpParams());
+                result = db.ExecuteDataSet(criteria);
             }
 
             if (result != null && result.Tables.Count > 0 && result.Tables[0].Rows.Count > 0)

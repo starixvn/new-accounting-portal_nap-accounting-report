@@ -138,9 +138,9 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                 Total = new TotalCreditAccountByProduct()
             };
 
-            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                var _params = criteria.GetSpParams();
+                var _params = criteria;
 
                 IDataReader reader = objectDb.ExecuteReader(_params);
 
@@ -180,9 +180,9 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.TotalCreditAccountByPr
                 Total = new BetCountDetail()
             };
 
-            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                var _params = criteria.GetSpParams();
+                var _params = criteria;
 
                 IDataReader reader = objectDb.ExecuteReader(_params);
 

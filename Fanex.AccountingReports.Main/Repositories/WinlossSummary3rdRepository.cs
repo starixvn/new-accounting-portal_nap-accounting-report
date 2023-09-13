@@ -10,9 +10,9 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
     {
         public void RecalculateWinLoss(ICriteria criteria)
         {
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                db.ExecuteNonQuery(criteria.GetSpParams());
+                db.ExecuteNonQuery(criteria);
             }
         }
     }

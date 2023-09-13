@@ -25,10 +25,10 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
         {
             DataSet result = null;
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                result = db.ExecuteDataSet(criteria.GetSpParams());
-                outputParam = db.GetOuputParams();
+                result = db.ExecuteDataSet(criteria);
+                outputParam = db.GetOutputParams();
             }
 
             var superBalance = new List<dynamic>();
@@ -73,10 +73,10 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
         {
             DataSet result = null;
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                result = db.ExecuteDataSet(criteria.GetSpParams());
-                outputParam = db.GetOuputParams();
+                result = db.ExecuteDataSet(criteria);
+                outputParam = db.GetOutputParams();
             }
 
             if (result == null || result.Tables.Count == 0)
@@ -114,10 +114,10 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
         {
             DataSet result = null;
 
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                result = db.ExecuteDataSet(criteria.GetSpParams());
-                outputParam = db.GetOuputParams();
+                result = db.ExecuteDataSet(criteria);
+                outputParam = db.GetOutputParams();
             }
 
             if (result == null || result.Tables.Count == 0)

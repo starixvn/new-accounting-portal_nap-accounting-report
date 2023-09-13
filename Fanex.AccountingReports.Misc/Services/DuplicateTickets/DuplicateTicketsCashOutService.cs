@@ -15,11 +15,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
 
             var criteria = new DuplicateTicketsCheckCashOutCriteria { TransIds = transIds };
             var isDuplicate = false;
-            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                db.AssignParamValues(criteria.GetSpParams());
-                db.ExecuteNonQuery();
-                var outoutResult = db.GetOuputParams();
+                db.ExecuteNonQuery(criteria);
+                var outoutResult = db.GetOutputParams();
                 isDuplicate = Converter.To<bool>(outoutResult["isduplicated"]);
             }
 

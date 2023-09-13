@@ -19,7 +19,7 @@ namespace Fanex.BetList.Accounting.Services
             {
                 BalanceUp balanceUp = null;
 
-                using (ObjectDb objDb = new ObjectDb("Core_ReportService_GetBalanceUpDay"))
+                using (var objDb = ObjectDbFactory.CreateInstance("Core_ReportService_GetBalanceUpDay"))
                 {
                     balanceUp = objDb.QueryEntity<BalanceUp>();
                 }

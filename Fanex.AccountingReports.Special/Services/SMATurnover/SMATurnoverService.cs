@@ -166,9 +166,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SMATurnover
         private DataTable GetSMAsTurnoverData(SMATurnoverCriteria criteria)
         {
             DataSet ds = null;
-            using (var objDb = new ObjectDb(criteria.GetSettingKey()))
+            using (var objDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                var _params = criteria.GetSpParams();
+                var _params = criteria;
                 ds = objDb.ExecuteDataSet(_params);
             }
 

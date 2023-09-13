@@ -10,9 +10,8 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
     {
         public IDataReader GetLicenseesByProduct(Criteria.GetLicenseesByProductCriteria criteria)
         {
-            ObjectDb db = new ObjectDb(criteria.GetSettingKey());
-            db.AssignParamValues(criteria.GetSpParams());
-            return db.ExecuteReader();
+            var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey());
+            return db.ExecuteReader(criteria);
         }
     }
 }

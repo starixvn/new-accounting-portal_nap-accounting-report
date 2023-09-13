@@ -30,7 +30,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             };
             var settingKey = criteria.GetSettingKey();
 
-            using (var objectDb = new ObjectDb(settingKey))
+            using (var objectDb = ObjectDbFactory.CreateInstance(settingKey))
             {
                 var winLossGrandTotal = new TraderPerformanceSoccer();
                 var turnOverGrandTotal = new TraderPerformanceSoccer();
@@ -38,7 +38,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
                 var marginGrandTotal = new TraderPerformanceSoccer();
                 var commissionGrandTotal = new TraderPerformanceSoccer();
 
-                var param = criteria.GetSpParams();
+                var param = criteria;
                 var reader = objectDb.ExecuteReader(param);
 
                 if (reader == null)
@@ -140,9 +140,9 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
 
             var settingKey = criteria.GetSettingKey();
 
-            using (var objectDb = new ObjectDb(settingKey))
+            using (var objectDb = ObjectDbFactory.CreateInstance(settingKey))
             {
-                var param = criteria.GetSpParams();
+                var param = criteria;
                 var reader = objectDb.ExecuteReader(param);
 
                 if (reader == null)

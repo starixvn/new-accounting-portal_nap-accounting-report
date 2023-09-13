@@ -27,7 +27,7 @@ namespace Fanex.BetList.Accounting.Repositories
         {
             var result = new List<Sportsbook>();
 
-            using (ObjectDb objDb = new ObjectDb(criteria.GetSettingKey()))
+            using (var objDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
                 objDb.SetParameterValue("MatchID", criteria.MatchId);
                 if (criteria.Bettype > 0)
@@ -57,7 +57,7 @@ namespace Fanex.BetList.Accounting.Repositories
                     }
                 }
 
-                outputParams = objDb.GetOuputParams();
+                outputParams = objDb.GetOutputParams();
             }
 
             return result;

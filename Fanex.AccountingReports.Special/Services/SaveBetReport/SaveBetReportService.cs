@@ -30,9 +30,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
         public Sport GetSports(GetSportsCriteria criteria)
         {
             var result = new Sport();
-            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                var _params = criteria.GetSpParams();
+                var _params = criteria;
                 var reader = objectDb.ExecuteReader(_params);
 
                 while (reader.Read())
@@ -59,9 +59,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
         {
             var result = new League();
 
-            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                var _params = criteria.GetSpParams();
+                var _params = criteria;
                 var reader = objectDb.ExecuteReader(_params);
 
                 while (reader.Read())
@@ -88,9 +88,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
         {
             var result = new Match();
 
-            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                var _params = criteria.GetSpParams();
+                var _params = criteria;
                 var reader = objectDb.ExecuteReader(_params);
 
                 while (reader.Read())
