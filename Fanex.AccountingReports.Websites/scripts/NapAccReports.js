@@ -336,6 +336,52 @@ var AccReport = function ($) {
                         }
                     }
                 });
+            },
+
+            CallAjaxWithCredentials: function (reportHandler,
+                url,
+                requestParams,
+                successFunction,
+                errorFunction,
+                completeFunction,
+                isKeepingMessage) {
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: requestParams ? JSON.stringify(requestParams) : null,
+                    xhrFields: {
+                        withCredentials: true
+                    },
+                    beforeSend: function () {
+                    },
+                    success: function (rs) {
+                        if (!isKeepingMessage) {
+                            AccReport.popUp.hide();
+                        }
+
+                        if (successFunction && typeof (successFunction) == 'function') {
+                            successFunction.call(reportHandler, rs);
+                        }
+                    },
+                    error: function (jqXHR, event, ajaxSettings) {
+                        if (jqXHR.status &&
+                            jqXHR.status == AccReportData.Constants.HtmlErrorCode.SystemError) {
+                            var r = jQuery.parseJSON(jqXHR.responseText);
+                            AccReport.popUp.show(r.message);
+                        }
+
+                        if (errorFunction && typeof (errorFunction) == 'function') {
+                            errorFunction.call(reportHandler);
+                        }
+                    },
+                    complete: function () {
+                        if (completeFunction && typeof (completeFunction) == 'function') {
+                            completeFunction();
+                        }
+                    }
+                });
             }
         },
         legendManager: {
