@@ -164,7 +164,7 @@ CombinationWinLoss_HistoryReport.prototype.RenderReport = function (report) {
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
                     { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) },
-                     { Name: "ColMemberBonus", Value: info.MemberBonus_Str },
+                    { Name: "ColMemberBonus", Value: info.MemberBonus_Str },
                     { Name: "ColHouseBonus", Value: info.HouseBonus_Str }]
             });
         }
