@@ -1,9 +1,5 @@
 namespace Fanex.AccountingReports.Balance.Services.Implement
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Drawing;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Balance.Constants;
     using Fanex.AccountingReports.Balance.Criteria.DirectBalance;
@@ -16,6 +12,10 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.Common;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -331,7 +331,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                 });
             }
 
-            return result;
+            return result.OrderBy(x => x.Name).ToList(); ;
         }
 
         /// <summary>
