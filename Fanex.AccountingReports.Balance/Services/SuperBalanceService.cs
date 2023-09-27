@@ -1,10 +1,5 @@
 namespace Fanex.AccountingReports.Balance.Services.Implement
 {
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Drawing;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Balance.Criteria.SuperBalance;
     using Fanex.AccountingReports.Balance.Models.SuperBalance;
@@ -16,6 +11,12 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.Common;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -566,7 +567,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                 });
             }
 
-            return result;
+            return result.OrderBy(x => x.Name).ToList();
         }
 
         /// <summary>
