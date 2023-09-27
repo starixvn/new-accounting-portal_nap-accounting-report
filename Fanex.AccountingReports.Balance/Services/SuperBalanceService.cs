@@ -16,6 +16,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.Common;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -566,7 +567,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                 });
             }
 
-            return result;
+            return result.OrderBy(x => x.Name).ToList();
         }
 
         /// <summary>
