@@ -468,6 +468,18 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             currentCellRange.Value = Labels.House;
             currentCellRange.Style = headerTextStyle;
             currentColumn += 3;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = "Member Bonus";
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCellRange = workSheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = "House Bonus";
+            currentCellRange.Style = headerTextStyle;
+            currentColumn++;
             currentRow++;
 
             // 2ndRow
@@ -499,16 +511,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = Labels.Margin;
-            currentCell.Style = headerTextStyle;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = "Member Bonus";
-            currentCell.Style = headerTextStyle;
-            currentColumn++;
-
-            currentCell = workSheet.Cells[currentRow, currentColumn];
-            currentCell.Value = "House Bonus";
             currentCell.Style = headerTextStyle;
             currentColumn++;
             currentRow++;
