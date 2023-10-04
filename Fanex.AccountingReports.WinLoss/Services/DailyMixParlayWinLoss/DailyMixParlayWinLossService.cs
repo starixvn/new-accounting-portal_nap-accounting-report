@@ -876,7 +876,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
 
             int startRow = 0;
             int startColumn = 0;
-            int maxColumnIndex = 9;
+            int maxColumnIndex = 11;
             var currentRow = startRow;
 
             var headerTextStyle = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
@@ -1013,6 +1013,16 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
 
             currentCell = workSheet.Cells[currentRow, currentColumn];
             currentCell.Value = Labels.Margin;
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = "Member Bonus";
+            currentCell.Style = headerTextStyle;
+            currentColumn++;
+
+            currentCell = workSheet.Cells[currentRow, currentColumn];
+            currentCell.Value = "House Bonus";
             currentCell.Style = headerTextStyle;
             currentColumn++;
             currentRow++;
