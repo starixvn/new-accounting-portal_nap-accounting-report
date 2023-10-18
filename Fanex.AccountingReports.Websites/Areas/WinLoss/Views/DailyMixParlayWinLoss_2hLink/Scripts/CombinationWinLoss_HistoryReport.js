@@ -127,6 +127,8 @@ CombinationWinLoss_HistoryReport.prototype.RenderReport = function (report) {
                     columns.push({ Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) });
                     columns.push({ Name: "ColTurnover", Value: info.RealTurnover_Str });
                     columns.push({ Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) });
+                    columns.push({ Name: "ColMemberBonus", Value: info.MemberBonus_Str });
+                    columns.push({ Name: "ColHouseBonus", Value: info.HouseBonus_Str });
                     bodyData.push({
                         Columns: columns
                     });
@@ -144,7 +146,9 @@ CombinationWinLoss_HistoryReport.prototype.RenderReport = function (report) {
                     { Name: "ColComm", Value: info.Commission_Str },
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
-                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true)}]
+                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) },
+                    { Name: "ColMemberBonus", Value: info.MemberBonus_Str },
+                    { Name: "ColHouseBonus", Value: info.HouseBonus_Str }]
                 });
             }
 
@@ -161,7 +165,9 @@ CombinationWinLoss_HistoryReport.prototype.RenderReport = function (report) {
                     { Name: "ColComm", Value: info.Commission_Str },
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
-                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true)}]
+                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) },
+                    { Name: "ColMemberBonus", Value: info.MemberBonus_Str },
+                    { Name: "ColHouseBonus", Value: info.HouseBonus_Str }]
             });
         }
 
@@ -176,7 +182,9 @@ CombinationWinLoss_HistoryReport.prototype.RenderReport = function (report) {
                     { Name: "ColComm", Value: info.Commission_Str },
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false), TdClass: "colLineTotal" },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
-                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true)}]
+                    { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) },
+                    { Name: "ColMemberBonus", Value: info.MemberBonus_Str },
+                    { Name: "ColHouseBonus", Value: info.HouseBonus_Str }]
         });
     }
 
@@ -190,7 +198,9 @@ CombinationWinLoss_HistoryReport.prototype.RenderReport = function (report) {
                 { HeaderText: viewResources.SMA_Win_Loss, Name: "ColPosition", MergeRowNumber: 2 },
                 { HeaderText: "ExtraPT", Name: "ColExtraPT", MergeRowNumber: 2 },
                 { HeaderText: "Commission", Name: "ColComm", MergeRowNumber: 2 },
-                { HeaderText: viewResources.House, Name: "ColLineTotal", MergeColNumber: 3 }]
+                { HeaderText: viewResources.House, Name: "ColLineTotal", MergeColNumber: 3 },
+                { HeaderText: "Member Bonus", Name: "ColMemberBonus", MergeRowNumber: 2 },
+                { HeaderText: "House Bonus", Name: "ColHouseBonus", MergeRowNumber: 2 }]
         }],
         columns: [{ HeaderText: "Combination", Width: 140, Name: "ColCombination", HeaderAlign: "center", CellAlign: "center" },
                       { HeaderText: "Type", Width: 140, Name: "ColType", HeaderAlign: "center", CellAlign: "right" },
@@ -203,7 +213,9 @@ CombinationWinLoss_HistoryReport.prototype.RenderReport = function (report) {
                       { HeaderText: "Commission", Width: 100, Name: "ColComm", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Real Income", Width: 120, Name: "ColLineTotal", HeaderAlign: "center", CellAlign: "right" },
                       { HeaderText: "Real Turnover", Width: 120, Name: "ColTurnover", HeaderAlign: "center", CellAlign: "right" },
-                      { HeaderText: "Margin", Width: 100, Name: "ColMargin", HeaderAlign: "center", CellAlign: "right"}],
+                      { HeaderText: "Margin", Width: 100, Name: "ColMargin", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "Member Bonus", Width: 120, Name: "ColMemberBonus", HeaderAlign: "center", CellAlign: "right" },
+                      { HeaderText: "House Bonus", Width: 120, Name: "ColHouseBonus", HeaderAlign: "center", CellAlign: "right" }],
         showTitle: true,
         showFooter: true,
         titleInfo:

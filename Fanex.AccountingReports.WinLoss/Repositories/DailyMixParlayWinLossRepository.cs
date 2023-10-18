@@ -42,7 +42,9 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                         RealIncome = row["RealIncome"],
                         RealTurnover = row["RealTurnover"],
                         Combinations = row["Combinations"],
-                        ExtraPT = row["ExtraPT"]
+                        ExtraPT = row["ExtraPT"],
+                        MemberBonus = row["MemberBonus"],
+                        HouseBonus = row["HouseBonus"]
                     });
                 }
             }

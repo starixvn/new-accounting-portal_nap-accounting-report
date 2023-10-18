@@ -57,7 +57,6 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
         Justification = "Reviewed. Suppression is OK here.")]
         public override string GetSettingKey()
         {
-            var storeProcedureSuffix = IsNormalMode ? string.Empty : ReportService.WarehouseSPSuffix;
             var settingKey = string.Empty;
 
             switch (this.RoleId)
@@ -83,7 +82,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
                     break;
             }
 
-            return settingKey + storeProcedureSuffix;
+            return settingKey;
         }
     }
 }

@@ -16,18 +16,9 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.DailyMixParlayWinLoss
 
         public int Site { get; set; }
 
-        [SpParam(Ignored = true)]
-        public bool IsHistoryReport { get; set; }
-
         public override string GetSettingKey()
         {
-            var suffix = string.Empty;
-            if (this.IsHistoryReport)
-            {
-                suffix = ReportService.WarehouseSPSuffix;
-            }
-
-            return "WinLoss_DailyMixParlayWinLoss_GetCombinationWinLoss" + suffix;
+            return "WinLoss_DailyMixParlayWinLoss_GetCombinationWinLoss_WH";
         }
 
         public override bool IsValid()

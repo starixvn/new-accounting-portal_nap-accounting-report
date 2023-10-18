@@ -37,8 +37,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
         /// <returns>The store procedure name.</returns>
         public override string GetSettingKey()
         {
-            var storeProcedureSuffix = IsNormalMode ? string.Empty : ReportService.WarehouseSPSuffix;
-            return "WinLoss_TreeWinLoss_GetDataByAgent" + storeProcedureSuffix;
+            return "WinLoss_TreeWinLoss_GetDataByAgent";
         }
     }
 }
