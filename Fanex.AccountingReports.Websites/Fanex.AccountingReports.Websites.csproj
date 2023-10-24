@@ -18,10 +18,10 @@
     <UseIISExpress>true</UseIISExpress>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <IISExpressSSLPort />
-    <IISExpressAnonymousAuthentication />
-    <IISExpressWindowsAuthentication />
-    <IISExpressUseClassicPipelineMode />
+    <IISExpressSSLPort>44304</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
     <UseGlobalApplicationHostFile />
     <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
     <FileUpgradeFlags>
@@ -1043,6 +1043,7 @@
     <Content Include="scripts\_lib\TinyMCE\utils\mctabs.js" />
     <Content Include="scripts\_lib\TinyMCE\utils\validate.js" />
     <Content Include="test.htm" />
+    <Content Include="themes\base\img\ajax-loader.gif" />
     <Content Include="themes\base\img\collapse-icon.png" />
     <Content Include="themes\base\img\excel-icon.png" />
     <Content Include="themes\base\img\expand-icon.png" />
