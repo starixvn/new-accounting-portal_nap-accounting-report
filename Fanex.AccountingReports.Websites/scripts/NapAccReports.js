@@ -382,7 +382,50 @@ var AccReport = function ($) {
                         }
                     }
                 });
-            }
+            },
+
+            CallAjaxForDownload: function (reportHandler,
+                url,
+                requestParams,
+                successFunction,
+                errorFunction,
+                completeFunction,
+                isKeepingMessage) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("POST", url, true);
+                xhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+                xhttp.withCredentials = true;
+                xhttp.responseType = 'blob';
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4) {
+                        if (xhttp.status >= 200 && xhttp.status < 300) {
+                            if (!isKeepingMessage) {
+                                AccReport.popUp.hide();
+                            }
+                            if (successFunction && typeof successFunction === 'function') {
+                                var contentDisposition = xhttp.getResponseHeader('Content-Disposition');
+                                var filename = '';
+                                if (contentDisposition && contentDisposition.indexOf('attachment') !== -1) {
+                                    var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                                    var matches = filenameRegex.exec(contentDisposition);
+                                    if (matches != null && matches[1]) {
+                                        filename = matches[1].replace(/['"]/g, '');
+                                    }
+                                }
+                                successFunction(xhttp.response, filename);
+                            }
+                        } else {
+                            if (errorFunction && typeof errorFunction === 'function') {
+                                errorFunction(reportHandler);
+                            }
+                        }
+                        if (completeFunction && typeof completeFunction === 'function') {
+                            completeFunction();
+                        }
+                    }
+                };
+                xhttp.send(JSON.stringify(requestParams));
+            },
         },
         legendManager: {
             init: function () {
