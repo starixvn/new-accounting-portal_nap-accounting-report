@@ -636,10 +636,8 @@
     <Content Include="Areas\Misc\Views\SMATurnover\Styles\SMATurnover.less" />
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Scripts\ReportManager.js" />
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Scripts\StatusDetail.js" />
-    <Content Include="Areas\Racing\Views\RacingGroupDaily\Scripts\RacingGroupDaily.js" />
     <Content Include="Areas\Special\Views\DailyTurnover\Scripts\DailyTurnover.js" />
     <Content Include="Areas\Special\Views\MarginReport\Scripts\MarginReport.js" />
-    <Content Include="Areas\Racing\Views\NumberOfActiveMembersForRacing\Scripts\NumberOfActiveMembers.js" />
     <Content Include="Areas\Special\Views\SaveBetReport\Images\download.png" />
     <Content Include="Areas\Special\Views\SMATurnover\Scripts\SMATurnover.js" />
     <Content Include="Areas\Special\Views\SMATurnover\Styles\SMATurnover.less" />
@@ -1668,10 +1666,6 @@
       <Project>{26F7C78E-F834-4C35-B55E-C60BA3BCA906}</Project>
       <Name>Balance</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.AccountingReports.Racing\Racing.csproj">
-      <Project>{A6EAD323-42D7-46B6-ADAC-A31F4FCCD17B}</Project>
-      <Name>Racing</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">
       <Project>{A5608298-26C2-4F05-A7FD-AA8C0700ED38}</Project>
       <Name>Core</Name>
@@ -1802,14 +1796,6 @@
     <Content Include="Areas\Misc\Views\MAMonitorTool\Index.cshtml" />
     <Content Include="Areas\Misc\Views\MAMonitorTool\Styles\MAMonitorTool.less" />
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Styles\TotalSMAMemberActive.less" />
-    <Content Include="Areas\Racing\Views\RacingGroupDaily\Index.cshtml" />
-    <Content Include="Areas\Racing\Views\RacingGroupDaily\Styles\RacingGroupDaily.less" />
-    <Content Include="Areas\Racing\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Areas\Racing\Views\NumberOfActiveMembersForRacing\Index.cshtml" />
-    <Content Include="Areas\Racing\Views\NumberOfActiveMembersForRacing\Styles\NumberOfActiveMembers.less" />
-    <Content Include="Areas\Racing\Views\Web.config" />
     <Content Include="Areas\Special\Views\ParlayWon\Index.cshtml" />
     <Content Include="Areas\Special\Views\DailyTurnover\Index.cshtml" />
     <Content Include="Areas\Special\Views\MarginReport\Index.cshtml" />
