@@ -21,9 +21,9 @@ namespace Fanex.AccountingReports.Misc.Repositories.Implement
         /// <param name="activeDetails">The active details.</param>
         public void GetReport(ICriteria criteria, ref dynamic totalSMA, ref IList<dynamic> activeDetails)
         {
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                var result = db.ExecuteDataSet(criteria.GetSpParams());
+                var result = db.ExecuteDataSet(criteria);
                 if (result != null && result.Tables != null && result.Tables.Count == 2)
                 {
                     // Total
@@ -78,12 +78,12 @@ namespace Fanex.AccountingReports.Misc.Repositories.Implement
         {
             DataSet result = null;
             List<dynamic> detail = null;
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
                 // Starting of PageIndex of SP is 1
                 criteria.PageIndex++;
-                result = db.ExecuteDataSet(criteria.GetSpParams());
-                outputParam = db.GetOuputParams();
+                result = db.ExecuteDataSet(criteria);
+                outputParam = db.GetOutputParams();
             }
 
             if (result != null && result.Tables.Count >= 1)

@@ -31,14 +31,14 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
 
             var settingKey = criteria.GetSettingKey();
 
-            using (var objectDb = new ObjectDb(settingKey))
+            using (var objectDb = ObjectDbFactory.CreateInstance(settingKey))
             {
                 var winLossGrandTotal = new TraderPerformanceOtherSports();
                 var turnOverGrandTotal = new TraderPerformanceOtherSports();
                 var liveBetCountGrandTotal = new TraderPerformanceOtherSports();
                 var marginGrandTotal = new TraderPerformanceOtherSports();
                 var commissionGrandTotal = new TraderPerformanceOtherSports();
-                var param = criteria.GetSpParams();
+                var param = criteria;
                 var reader = objectDb.ExecuteReader(param);
 
                 if (reader == null)
@@ -138,9 +138,9 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             var commissionTotal = new TraderPerformanceOtherSportsDetail();
             var settingKey = criteria.GetSettingKey();
 
-            using (var objectDb = new ObjectDb(settingKey))
+            using (var objectDb = ObjectDbFactory.CreateInstance(settingKey))
             {
-                var param = criteria.GetSpParams();
+                var param = criteria;
                 var reader = objectDb.ExecuteReader(param);
 
                 if (reader == null)

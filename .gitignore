@@ -47,3 +47,4 @@ Fanex.AccountingReports.sln
 **/node_modules/**
 /package-lock.json
 /.vs/
+**/.vs/

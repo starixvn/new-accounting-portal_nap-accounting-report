@@ -40,7 +40,7 @@ namespace Fanex.AccountingReports.Misc.Criteria.MAMonitorTool
         /// Gets the SP parameters.
         /// </summary>
         /// <returns>The SP parameters.</returns>
-        public override Hashtable GetSpParams()
+        public Hashtable GetSpParams()
         {
             Hashtable storeProcedureParams = new Hashtable();
             storeProcedureParams.Add("sporttype", SportType);

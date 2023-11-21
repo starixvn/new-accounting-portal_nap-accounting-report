@@ -11,10 +11,9 @@ namespace Fanex.AccountingReports.Licensee.Repositories.Implement
     {
         public IDataReader GetDataFromDB(ICriteria criteria)
         {
-            ObjectDb db = new ObjectDb(criteria.GetSettingKey());
-            db.AssignParamValues(criteria.GetSpParams());
+            var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey());
 
-            return db.ExecuteReader();
+            return db.ExecuteReader(criteria);
         }
     }
 }

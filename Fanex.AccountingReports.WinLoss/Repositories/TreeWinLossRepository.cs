@@ -23,10 +23,10 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
         {
             var treeWinLoss = new List<TreeWinLossInfo>();
             DataSet result;
-            using (var db = new ObjectDb(criteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                result = db.ExecuteDataSet(criteria.GetSpParams());
-                outputParam = db.GetOuputParams();
+                result = db.ExecuteDataSet(criteria);
+                outputParam = db.GetOutputParams();
             }
 
             if (result != null && result.Tables.Count > 0)

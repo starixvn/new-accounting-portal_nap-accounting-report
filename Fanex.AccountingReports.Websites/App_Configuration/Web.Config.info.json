@@ -1,0 +1,46 @@
+{
+  "FilesToGenerate": [
+    {
+      "Filename": "Web.DEV.config",
+      "Project": "",
+      "Path": "App_Configuration",
+      "Properties": {}
+    },
+    {
+      "Filename": "Web.LOCAL.config",
+      "Project": "",
+      "Path": "App_Configuration",
+      "Properties": {}
+    },
+    {
+      "Filename": "Web.SIT.config",
+      "Project": "",
+      "Path": "App_Configuration",
+      "Properties": {}
+    },
+    {
+      "Filename": "Web.UAT.config",
+      "Project": "",
+      "Path": "App_Configuration",
+      "Properties": {}
+    },
+    {
+      "Filename": "Web.MNL.config",
+      "Project": "",
+      "Path": "App_Configuration",
+      "Properties": {}
+    },
+    {
+      "Filename": "Web.PRO.config",
+      "Project": "",
+      "Path": "App_Configuration",
+      "Properties": {}
+    },
+    {
+      "Filename": "Web.PROAWS.config",
+      "Project": "",
+      "Path": "App_Configuration",
+      "Properties": {}
+    }
+  ]
+}

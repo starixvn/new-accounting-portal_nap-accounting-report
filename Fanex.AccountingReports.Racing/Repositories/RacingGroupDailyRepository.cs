@@ -27,10 +27,9 @@ namespace Fanex.AccountingReports.Racing.Repositories.Implement
             }
             else
             {
-                using (ObjectDb objectDB = new ObjectDb(criteria.GetSettingKey(), 600))
+                using (var objectDB = ObjectDbFactory.CreateInstance(criteria.GetSettingKey(), 600))
                 {
-                    objectDB.AssignParamValues(criteria.GetSpParams());
-                    var groupDatasetResult = objectDB.ExecuteDataSet();
+                    var groupDatasetResult = objectDB.ExecuteDataSet(criteria);
 
                     if (groupDatasetResult != null && groupDatasetResult.Tables.Count > 0)
                     {
@@ -60,10 +59,9 @@ namespace Fanex.AccountingReports.Racing.Repositories.Implement
             var dailyCriteria = new GetWinLostRacingGroupDailyCriteria();
             dailyCriteria.WinLostDate = winLostDate;
 
-            using (ObjectDb objectDB = new ObjectDb(dailyCriteria.GetSettingKey(), 600))
+            using (var objectDB = ObjectDbFactory.CreateInstance(dailyCriteria.GetSettingKey(), 600))
             {
-                objectDB.AssignParamValues(dailyCriteria.GetSpParams());
-                var datasetResult = objectDB.ExecuteDataSet();
+                var datasetResult = objectDB.ExecuteDataSet(dailyCriteria);
 
                 if (datasetResult != null && datasetResult.Tables.Count > 0)
                 {

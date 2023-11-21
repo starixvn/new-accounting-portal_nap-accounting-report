@@ -24,9 +24,9 @@ namespace Fanex.AccountingReports.Racing.Services.Implement.NumberOActiveMembers
         {
             var result = new NumberOfActiveMembers();
 
-            using (var db = new ObjectDb(getNumberOfActiveMembersCriteria.GetSettingKey()))
+            using (var db = ObjectDbFactory.CreateInstance(getNumberOfActiveMembersCriteria.GetSettingKey()))
             {
-                var param = getNumberOfActiveMembersCriteria.GetSpParams();
+                var param = getNumberOfActiveMembersCriteria;
                 result = db.QueryEntity<NumberOfActiveMembers>(param);
             }
 

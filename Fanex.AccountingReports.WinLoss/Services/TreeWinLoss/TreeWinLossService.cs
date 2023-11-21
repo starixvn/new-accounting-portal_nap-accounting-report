@@ -330,9 +330,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
                 TotalInfo = new List<TreeWinLossInfo>()
             };
 
-            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                IDataReader reader = objectDb.ExecuteReader(criteria.GetSpParams());
+                IDataReader reader = objectDb.ExecuteReader(criteria);
                 var totalWinLoss = new TreeWinLossInfo
                 {
                     Name = Labels.Total
@@ -365,9 +365,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         {
             VirtualRateInfo virtualRateBySportAndLiveStatus = new VirtualRateInfo();
             bool enableVirtualRate = false;
-            using (ObjectDb objectDb = new ObjectDb(criteria.GetSettingKey()))
+            using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                IDataReader reader = objectDb.ExecuteReader(criteria.GetSpParams());
+                IDataReader reader = objectDb.ExecuteReader(criteria);
                 while (reader.Read())
                 {
                     enableVirtualRate = Converter.ToDecimal(reader["EnableVirtualrate"]) == 1;
@@ -444,9 +444,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         {
             VirtualRateInfo virtualRateInfo = new VirtualRateInfo();
 
-            using (ObjectDb objectDb = new ObjectDb(criteria.GetSettingKey()))
+            using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                IDataReader reader = objectDb.ExecuteReader(criteria.GetSpParams());
+                IDataReader reader = objectDb.ExecuteReader(criteria);
                 while (reader.Read())
                 {
                     int actionId = Converter.ToInt(reader["ActionID"]);
@@ -785,9 +785,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         {
             SMAVirtualRate virtualRate = new SMAVirtualRate();
 
-            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                IDataReader reader = objectDb.ExecuteReader(criteria.GetSpParams());
+                IDataReader reader = objectDb.ExecuteReader(criteria);
 
                 while (reader.Read())
                 {

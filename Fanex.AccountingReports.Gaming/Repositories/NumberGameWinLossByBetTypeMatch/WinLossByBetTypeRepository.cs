@@ -22,14 +22,14 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement.NumberGameWinLos
         {
             DataSet result = null;
             var settingKey = criteria.GetSettingKey();
-            using (var objectDb = new ObjectDb(settingKey))
+            using (var objectDb = ObjectDbFactory.CreateInstance(settingKey))
             {
                 if (criteria.LiveStatus == -1)
                 {
                     criteria.LiveStatus = null;
                 }
 
-                result = objectDb.ExecuteDataSet(criteria.GetSpParams());
+                result = objectDb.ExecuteDataSet(criteria);
             }
 
             List<WinLossInfo> report = new List<WinLossInfo>();
@@ -68,14 +68,14 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement.NumberGameWinLos
         {
             DataSet result = null;
             var settingKey = criteria.GetSettingKey();
-            using (var objectDb = new ObjectDb(settingKey))
+            using (var objectDb = ObjectDbFactory.CreateInstance(settingKey))
             {
                 if (criteria.LiveStatus == -1)
                 {
                     criteria.LiveStatus = null;
                 }
 
-                result = objectDb.ExecuteDataSet(criteria.GetSpParams());
+                result = objectDb.ExecuteDataSet(criteria);
             }
 
             List<WinLossDetailInfo> report = new List<WinLossDetailInfo>();

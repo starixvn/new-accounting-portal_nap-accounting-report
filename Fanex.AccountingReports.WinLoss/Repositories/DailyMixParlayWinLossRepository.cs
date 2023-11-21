@@ -19,9 +19,9 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
         {
             DataSet result = null;
             var settingKey = criteria.GetSettingKey();
-            using (var objectDb = new ObjectDb(settingKey))
+            using (var objectDb = ObjectDbFactory.CreateInstance(settingKey))
             {
-                result = objectDb.ExecuteDataSet(criteria.GetSpParams());
+                result = objectDb.ExecuteDataSet(criteria);
             }
 
             List<dynamic> report = new List<dynamic>();

@@ -21,9 +21,9 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
         {
             DataSet result = null;
             var settingKey = criteria.GetSettingKey();
-            using (var objectDb = new ObjectDb(settingKey))
+            using (var objectDb = ObjectDbFactory.CreateInstance(settingKey))
             {
-                result = objectDb.ExecuteDataSet(criteria.GetSpParams());
+                result = objectDb.ExecuteDataSet(criteria);
             }
 
             List<dynamic> report = new List<dynamic>();
@@ -51,9 +51,9 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
         {
             DataSet result = null;
             var settingKey = criteria.GetSettingKey();
-            using (var objectDb = new ObjectDb(settingKey))
+            using (var objectDb = ObjectDbFactory.CreateInstance(settingKey))
             {
-                result = objectDb.ExecuteDataSet(criteria.GetSpParams());
+                result = objectDb.ExecuteDataSet(criteria);
             }
 
             List<dynamic> report = new List<dynamic>();
@@ -82,9 +82,9 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
         {
             DataSet result = null;
             var settingKey = criteria.GetSettingKey();
-            using (var objectDb = new ObjectDb(settingKey))
+            using (var objectDb = ObjectDbFactory.CreateInstance(settingKey))
             {
-                result = objectDb.ExecuteDataSet(criteria.GetSpParams());
+                result = objectDb.ExecuteDataSet(criteria);
             }
 
             List<dynamic> report = new List<dynamic>();
@@ -113,9 +113,9 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
         {
             var result = new DWHDateRange();
 
-            using (var objectDb = new ObjectDb(criteria.GetSettingKey()))
+            using (var objectDb = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
             {
-                var reader = objectDb.ExecuteReader(criteria.GetSpParams());
+                var reader = objectDb.ExecuteReader(criteria);
 
                 while (reader.Read())
                 {
@@ -131,9 +131,9 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
         {
             DataSet result = null;
             var settingKey = criteria.GetSettingKey();
-            using (var objectDb = new ObjectDb(settingKey))
+            using (var objectDb = ObjectDbFactory.CreateInstance(settingKey))
             {
-                result = objectDb.ExecuteDataSet(criteria.GetSpParams());
+                result = objectDb.ExecuteDataSet(criteria);
             }
 
             List<dynamic> report = new List<dynamic>();
