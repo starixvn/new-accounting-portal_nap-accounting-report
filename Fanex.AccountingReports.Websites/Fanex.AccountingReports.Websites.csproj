@@ -567,23 +567,6 @@
     <Content Include="Areas\Betlist\Views\ScoreInformation\TennisInfo.cshtml" />
     <Content Include="Areas\Betlist\Views\ScoreInformation\VirtualSoccerInfo.cshtml" />
     <Content Include="Areas\Betlist\Views\Web.config" />
-    <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Styles\NumberGameWinLossByBetTypeMatch.less" />
-    <Content Include="Areas\Gaming\Views\NumberGameWinLossByCurrency\Styles\NumberGameWinlossByCur.less" />
-    <Content Include="Areas\Gaming\Views\NumberGameWinlossByDate\Styles\NumberGameWinlossByDate.less" />
-    <Content Include="Areas\Gaming\Views\NumberGameMonthlyWinLoss\Scripts\NumberGameMonthlyWinLoss.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\ReportManager.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByBetType.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByBetTypeDetailReport.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByBetTypeMainReport.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByMatch.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByMatchDetailReport.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameWinLossByBetTypeMatch\Scripts\WinLossByMatchMainReport.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameWinLossByCurrency\Scripts\NumberGameWinlossByCur.js" />
-    <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Styles\Images\icon-search.png" />
-    <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Styles\NumberOfActiveMember.less" />
-    <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Scripts\NumberOfActiveMember.js" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\CopyLegend.js" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\GuideMan.js" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\Scripts\GuideManMessage.js" />
@@ -1096,7 +1079,6 @@
     <Content Include="Areas\Balance\Views\DirectBalance\Scripts\DirectBalance.js" />
     <Content Include="Areas\Balance\Views\DirectBalance\Scripts\DirectBalanceDownline.js" />
     <Content Include="Areas\Balance\Views\DirectBalance\Scripts\ReportManager.js" />
-    <Content Include="Areas\Gaming\Views\NumberGameWinlossByDate\Scripts\NumberGameWinlossByDate.js" />
     <Content Include="Areas\Licensee\Views\NegativeBalance\NegativeBalance.js" />
     <Content Include="Areas\Licensee\Views\PeakConcurrentUsers\PeakConcurrentUser.js" />
     <Content Include="Areas\Licensee\Views\Web.config" />
@@ -1669,10 +1651,6 @@
       <Project>{A5608298-26C2-4F05-A7FD-AA8C0700ED38}</Project>
       <Name>Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fanex.AccountingReports.Gaming\Gaming.csproj">
-      <Project>{5A9082BF-0969-47A0-9C6E-3932734E0392}</Project>
-      <Name>Gaming</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fanex.AccountingReports.Licensee\Licensee.csproj">
       <Project>{972F4451-B4C2-4E68-83E8-C1D81FD6A2F9}</Project>
       <Name>Licensee</Name>
@@ -1755,12 +1733,6 @@
     <Content Include="Areas\Balance\Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Gaming\Views\NumberGameWinLossByCurrency\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\NumberGameWinlossByDate\Index.cshtml" />
-    <Content Include="Areas\Gaming\Views\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Areas\Gaming\Views\NumberOfActiveMember\Index.cshtml" />
     <Content Include="Areas\Licensee\Views\NegativeBalance\Index.cshtml" />
     <Content Include="Areas\Licensee\Views\NegativeBalance\NegativeBalance.less" />
     <Content Include="Areas\Licensee\Views\PeakConcurrentUsers\Index.cshtml" />
@@ -1852,7 +1824,6 @@
     <Content Include="App_Data\Templates\TraderPerformance_Soccer_Sum.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Areas\Gaming\Views\Test\Index.cshtml" />
     <Content Include="App_Configuration\Web.AWS.ConnectionString.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
