@@ -201,7 +201,6 @@
     <Compile Include="Controllers\DuplicateTicketsController.cs" />
     <Compile Include="Controllers\MAMonitorToolController.cs" />
     <Compile Include="Controllers\SMATurnoverController.cs" />
-    <Compile Include="Controllers\TotalCreditAccountByProductController.cs" />
     <Compile Include="Controllers\TotalSMAMemberActiveController.cs" />
     <Compile Include="Criteria\BetCount\GetBetCountReportCriteria.cs" />
     <Compile Include="Criteria\BetCount\GetProductsCriteria.cs" />
@@ -280,8 +279,6 @@
     <Compile Include="Services\MAMonitorTool\ReportTypeConstants.cs" />
     <Compile Include="Services\SMATurnover\SMATurnoverExportDataService.cs" />
     <Compile Include="Services\SMATurnover\SMATurnoverService.cs" />
-    <Compile Include="Services\TotalCreditAccountByProduct\ExportTotalCreditAccountByProductService.cs" />
-    <Compile Include="Services\TotalCreditAccountByProduct\TotalCreditAccountByProductService.cs" />
     <Compile Include="Services\TotalSMAMemberActiveService.cs" />
   </ItemGroup>
   <ItemGroup>

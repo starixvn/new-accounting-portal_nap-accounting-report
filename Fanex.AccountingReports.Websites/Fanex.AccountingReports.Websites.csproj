@@ -651,7 +651,6 @@
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\MatchAnalysisNormal.js" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\MatchSelection.js" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\ReportManager.js" />
-    <Content Include="Areas\Misc\Views\TotalCreditAccountByProduct\Scripts\TotalCreditAccountByProduct.js" />
     <Content Include="Areas\Uncategorized\IMS\ims.js" />
     <Content Include="Areas\Uncategorized\ReportLegend\FanexLegend.js" />
     <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon.png" />
@@ -1810,7 +1809,6 @@
     <Content Include="Areas\Special\Views\SaveBetReport\Index.cshtml" />
     <Content Include="Areas\Special\Views\SMATurnover\Index.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Styles\SpecialMatchAnalysis.less" />
-    <Content Include="Areas\Misc\Views\TotalCreditAccountByProduct\Index.cshtml" />
     <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Index.cshtml" />
     <Content Include="Areas\WinLoss\Web.config" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Index.cshtml" />
