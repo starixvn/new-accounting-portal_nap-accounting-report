@@ -611,10 +611,6 @@
     <Content Include="Areas\Misc\Views\DuplicateTickets\Media\koekoeksklok.mp3" />
     <Content Include="Areas\Misc\Views\DuplicateTickets\Media\oohnanana.mp3" />
     <Content Include="Areas\Misc\Views\DuplicateTickets\player.swf" />
-    <Content Include="Areas\Misc\Views\MAMonitorTool\Scripts\BaseReport.js" />
-    <Content Include="Areas\Misc\Views\MAMonitorTool\Scripts\HistoryReport.js" />
-    <Content Include="Areas\Misc\Views\MAMonitorTool\Scripts\NormalReport.js" />
-    <Content Include="Areas\Misc\Views\MAMonitorTool\Scripts\ReportManager.js" />
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Scripts\ReportManager.js" />
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Scripts\StatusDetail.js" />
     <Content Include="Areas\Special\Views\MarginReport\Scripts\MarginReport.js" />
@@ -1736,8 +1732,6 @@
     <Content Include="Areas\Misc\Views\DailyCreatedCustomers\DetailsDailyCreatedCustomers.cshtml" />
     <Content Include="Areas\Misc\Views\DuplicateTickets\Index.cshtml" />
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Index.cshtml" />
-    <Content Include="Areas\Misc\Views\MAMonitorTool\Index.cshtml" />
-    <Content Include="Areas\Misc\Views\MAMonitorTool\Styles\MAMonitorTool.less" />
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Styles\TotalSMAMemberActive.less" />
     <Content Include="Areas\Special\Views\ParlayWon\Index.cshtml" />
     <Content Include="Areas\Special\Views\MarginReport\Index.cshtml" />
