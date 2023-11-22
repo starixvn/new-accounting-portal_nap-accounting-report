@@ -23,7 +23,7 @@ namespace Fanex.AccountingReports.Balance.Criteria.SuperBalance
         [SpParam(SqlParamName = "IsViewTotalOnly")]
         public bool IsViewTotalOnly { get; set; }
 
-        public double Total { get; set; }
+        public decimal Total { get; set; }
 
         public override bool IsValid()
         {

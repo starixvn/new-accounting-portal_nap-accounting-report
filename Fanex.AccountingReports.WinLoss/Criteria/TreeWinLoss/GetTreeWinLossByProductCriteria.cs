@@ -22,17 +22,17 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
 
         public string Products { get; set; }
 
-        public double Turnover_8RM { get; set; }
+        public decimal Turnover_8RM { get; set; }
 
-        public double Total_8RM { get; set; }
+        public decimal Total_8RM { get; set; }
 
-        public double VirtualTotal_8RM { get; set; }
+        public decimal VirtualTotal_8RM { get; set; }
 
-        public double Turnover_BARM { get; set; }
+        public decimal Turnover_BARM { get; set; }
 
-        public double Total_BARM { get; set; }
+        public decimal Total_BARM { get; set; }
 
-        public double VirtualTotal_BARM { get; set; }
+        public decimal VirtualTotal_BARM { get; set; }
 
         public string SportType { get; set; }
 
