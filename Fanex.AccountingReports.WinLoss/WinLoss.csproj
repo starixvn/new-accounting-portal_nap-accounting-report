@@ -179,12 +179,10 @@
   <ItemGroup>
     <Compile Include="Constants\LeagueWinLossPermissionConstants.cs" />
     <Compile Include="Constants\WinLossContants.cs" />
-    <Compile Include="Controllers\AllCustomerTurnOverController.cs" />
     <Compile Include="Controllers\DailyMixParlayWinLossController.cs" />
     <Compile Include="Controllers\DailyMixParlayWinLoss_2hLinkController.cs" />
     <Compile Include="Controllers\LeagueWinLossController.cs" />
     <Compile Include="Controllers\TreeWinLossController.cs" />
-    <Compile Include="Criteria\AllCustomerTurnOver\GetAllCustomerTurnOverCriteria.cs" />
     <Compile Include="Criteria\DailyMixParlayWinLoss\GetAdvanceMixParlayReportCriteria.cs" />
     <Compile Include="Criteria\DailyMixParlayWinLoss\GetCombinationWinLossReportCriteria.cs" />
     <Compile Include="Criteria\DailyMixParlayWinLoss\GetMixParlayReportCriteria.cs" />
@@ -218,8 +216,6 @@
     <Compile Include="Entities\LeagueWinLoss\SuperEntity.cs" />
     <Compile Include="Entities\LeagueWinLoss\VirtualRateEntity.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Models\AllCustomerTurnOver\CustomerTurnOverBySite.cs" />
-    <Compile Include="Models\AllCustomerTurnOver\CustomerTurnoverBySiteDetail.cs" />
     <Compile Include="Models\DailyMixParlayWinLoss\WinLossInfo.cs" />
     <Compile Include="Models\LeagueWinLoss\BaseWinLoss.cs" />
     <Compile Include="Models\LeagueWinLoss\BetType.cs" />
@@ -272,8 +268,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WinLossResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\AllCustomerTurnOver\AllCustomerTurnOverExportReportService.cs" />
-    <Compile Include="Services\AllCustomerTurnOver\AllCustomerTurnOverGetReportService.cs" />
     <Compile Include="Services\DailyMixParlayWinLoss\DailyMixParlayWinLossService.cs" />
     <Compile Include="Services\LeagueWinLoss\LeagueWinLossService.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>

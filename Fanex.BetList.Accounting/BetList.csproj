@@ -231,7 +231,6 @@
     <Compile Include="BetListAreaRegistration.cs" />
     <Compile Include="Constants\BetListConstants.cs" />
     <Compile Include="Controllers\ScoreInformationController.cs" />
-    <Compile Include="Core\SessionManager.cs" />
     <Compile Include="Criteria\GetScoreInformationCriteria.cs" />
     <Compile Include="Models\ScoreInformation\BadmintonInfo.cs" />
     <Compile Include="Models\BalanceUp.cs" />
