@@ -615,8 +615,6 @@
     <Content Include="Areas\Misc\Views\MAMonitorTool\Scripts\HistoryReport.js" />
     <Content Include="Areas\Misc\Views\MAMonitorTool\Scripts\NormalReport.js" />
     <Content Include="Areas\Misc\Views\MAMonitorTool\Scripts\ReportManager.js" />
-    <Content Include="Areas\Misc\Views\SMATurnover\Scripts\SMATurnover.js" />
-    <Content Include="Areas\Misc\Views\SMATurnover\Styles\SMATurnover.less" />
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Scripts\ReportManager.js" />
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Scripts\StatusDetail.js" />
     <Content Include="Areas\Special\Views\MarginReport\Scripts\MarginReport.js" />
@@ -1766,7 +1764,6 @@
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\TreeWinLossByProduct.cshtml" />
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\TreeWinLossBySuper.cshtml" />
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\VirtualRateHistory.cshtml" />
-    <Content Include="Areas\Misc\Views\SMATurnover\Index.cshtml" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\CopyLegend.cshtml" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\InputedLegendReport.cshtml" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\UploadImagePopup.cshtml" />

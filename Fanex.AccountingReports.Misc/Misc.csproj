@@ -199,7 +199,6 @@
     </Compile>
     <Compile Include="Controllers\DuplicateTicketsController.cs" />
     <Compile Include="Controllers\MAMonitorToolController.cs" />
-    <Compile Include="Controllers\SMATurnoverController.cs" />
     <Compile Include="Controllers\TotalSMAMemberActiveController.cs" />
     <Compile Include="Criteria\BetCount\GetBetCountReportCriteria.cs" />
     <Compile Include="Criteria\BetCount\GetProductsCriteria.cs" />
@@ -213,7 +212,6 @@
     <Compile Include="Criteria\MAMonitorTool\GetLeagueListCriteria.cs" />
     <Compile Include="Criteria\MAMonitorTool\GetReportCriteria.cs" />
     <Compile Include="Criteria\MAMonitorTool\GetSportListCriteria.cs" />
-    <Compile Include="Criteria\SMATurnover\GetSMATurnoverReportCriteria.cs" />
     <Compile Include="Criteria\TotalCreditAccountByProduct\GetBetCountDetailCriteria.cs" />
     <Compile Include="Criteria\TotalCreditAccountByProduct\GetTotalCreditAccountByProductCriteria.cs" />
     <Compile Include="Criteria\TotalSMAMemberActive\GetSitesCriteria.cs" />
@@ -240,7 +238,6 @@
     <Compile Include="Models\MAMonitorTool\OptionInfo.cs" />
     <Compile Include="Models\MAMonitorTool\ProductBettype.cs" />
     <Compile Include="Models\MAMonitorTool\WinLossInfo.cs" />
-    <Compile Include="Models\SMATurnover\SMATurnover.cs" />
     <Compile Include="Models\TotalCreditAccountByProduct\BetCountDetail.cs" />
     <Compile Include="Models\TotalCreditAccountByProduct\TotalCreditAccountByProduct.cs" />
     <Compile Include="Models\TotalSMAMemberActive\GroupStatusDetailInfo.cs" />
@@ -274,8 +271,6 @@
     <Compile Include="Services\MAMonitorTool\MAMonitorToolExportExcelService.cs" />
     <Compile Include="Services\MAMonitorTool\MAMonitorToolService.cs" />
     <Compile Include="Services\MAMonitorTool\ReportTypeConstants.cs" />
-    <Compile Include="Services\SMATurnover\SMATurnoverExportDataService.cs" />
-    <Compile Include="Services\SMATurnover\SMATurnoverService.cs" />
     <Compile Include="Services\TotalSMAMemberActiveService.cs" />
   </ItemGroup>
   <ItemGroup>
