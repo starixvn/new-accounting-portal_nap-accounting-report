@@ -186,7 +186,6 @@
     <Compile Include="Constants\RoleConstants.cs" />
     <Compile Include="Constants\SpecialConstants.cs" />
     <Compile Include="Constants\ProductContants.cs" />
-    <Compile Include="Controllers\DailyTurnoverController.cs" />
     <Compile Include="Controllers\MarginReportController.cs" />
     <Compile Include="Controllers\ParlayWonController.cs" />
     <Compile Include="Controllers\SaveBetReportController.cs" />
@@ -234,11 +233,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SpecialResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\DailyTurnover\DailyDetailChangedTurnoverExportReportService.cs" />
     <Compile Include="Services\MarginReport\MarginWinLossService.cs" />
-    <Compile Include="Services\DailyTurnover\DailyDetailChangedTurnoverService.cs" />
-    <Compile Include="Services\DailyTurnover\ExcelUtil.cs" />
-    <Compile Include="Services\DailyTurnover\DailyTurnoverService.cs" />
     <Compile Include="Services\ParlayWonService.cs" />
     <Compile Include="Services\SaveBetReport\SaveBetReportService.cs" />
     <Compile Include="Services\SMATurnover\SMATurnoverExportDataService.cs" />

@@ -619,7 +619,6 @@
     <Content Include="Areas\Misc\Views\SMATurnover\Styles\SMATurnover.less" />
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Scripts\ReportManager.js" />
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Scripts\StatusDetail.js" />
-    <Content Include="Areas\Special\Views\DailyTurnover\Scripts\DailyTurnover.js" />
     <Content Include="Areas\Special\Views\MarginReport\Scripts\MarginReport.js" />
     <Content Include="Areas\Special\Views\SaveBetReport\Images\download.png" />
     <Content Include="Areas\Special\Views\SMATurnover\Scripts\SMATurnover.js" />
@@ -1756,9 +1755,7 @@
     <Content Include="Areas\Misc\Views\MAMonitorTool\Styles\MAMonitorTool.less" />
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Styles\TotalSMAMemberActive.less" />
     <Content Include="Areas\Special\Views\ParlayWon\Index.cshtml" />
-    <Content Include="Areas\Special\Views\DailyTurnover\Index.cshtml" />
     <Content Include="Areas\Special\Views\MarginReport\Index.cshtml" />
-    <Content Include="Areas\Special\Views\DailyTurnover\Styles\DailyTurnover.less" />
     <Content Include="Areas\Special\Views\ParlayWon\ParlayWon.less" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Index.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchAnalysisByAgent.cshtml" />
@@ -1966,7 +1963,7 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />  
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
