@@ -180,27 +180,13 @@
     <Compile Include="Controllers\CreditTermController.cs" />
     <Compile Include="Controllers\TraderPerformanceOtherSportsController.cs" />
     <Compile Include="Controllers\TraderPerformanceSoccerController.cs" />
-    <Compile Include="Controllers\WinLossSummary3rdController.cs" />
-    <Compile Include="Controllers\WinLossSummaryController.cs" />
     <Compile Include="Criteria\CreditTerm\GetCreditTermCriteria.cs" />
     <Compile Include="Criteria\CreditTerm\GetInstallAmountCriteria.cs" />
     <Compile Include="Criteria\CreditTerm\GetRemarkEditedCriteria.cs" />
-    <Compile Include="Criteria\DailyWinLoss2h\GetReportByBetTypeCriteria.cs" />
-    <Compile Include="Criteria\DailyWinLoss2h\GetWinLossBySite_BetTypeCriteria.cs" />
     <Compile Include="Criteria\TraderPerformance\GetDetailPHCriteria.cs" />
     <Compile Include="Criteria\TraderPerformance\GetDetailReportCriteria.cs" />
     <Compile Include="Criteria\TraderPerformance\GetReportCriteria.cs" />
     <Compile Include="Criteria\TraderPerformance\GetSummaryPHCriteria.cs" />
-    <Compile Include="Criteria\WinLossSummary3rd\GetMatchGameDetailsCriteria.cs" />
-    <Compile Include="Criteria\WinLossSummary3rd\GetRecalculateWinLossCriteria.cs" />
-    <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdBullfightingSportTypeCriteria.cs" />
-    <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdRacingSportTypeCriteria.cs" />
-    <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdNumberGameSportTypeCriteria.cs" />
-    <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdSportbookSportTypeCriteria.cs" />
-    <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdVirtualRacingSportTypeCriteria.cs" />
-    <Compile Include="Criteria\WinLossSummary3rd\GetWinLossSummary3rdVirtualSportSportTypeCriteria.cs" />
-    <Compile Include="Criteria\WinLossSummary\GetReportCriteria.cs" />
-    <Compile Include="Criteria\WinLossSummary3rd\GetReportCriteria.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MainAreaRegistration.cs" />
     <Compile Include="Models\CreditTerm\CreditTerm.cs" />
@@ -210,21 +196,10 @@
     <Compile Include="Models\TraderPerformanceOtherSports\TraderPerformanceOtherSportsDetail.cs" />
     <Compile Include="Models\TraderPerformanceSoccer\TraderPerformanceSoccer.cs" />
     <Compile Include="Models\TraderPerformanceSoccer\TraderPerformanceSoccerDetail.cs" />
-    <Compile Include="Models\WinLossSummary3rd\BetTypeWinLossInfo.cs" />
-    <Compile Include="Models\WinLossSummary3rd\MatchGame3rdInfo.cs" />
-    <Compile Include="Models\WinLossSummary3rd\MatchGameBetTypeInfo.cs" />
-    <Compile Include="Models\WinLossSummary3rd\MatchGameLeagueInfo.cs" />
-    <Compile Include="Models\WinLossSummary3rd\MatchGameWinLossInfo.cs" />
-    <Compile Include="Models\WinLossSummary3rd\SportTypeWinLossInfo.cs" />
-    <Compile Include="Models\WinLossSummary3rd\WinLoss3rdInfo.cs" />
-    <Compile Include="Models\WinLossSummary3rd\WinLossInfo.cs" />
-    <Compile Include="Models\WinLossSummary\WinLossInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CreditTermRepository.cs" />
     <Compile Include="Repositories\TraderPerformanceOtherSportsRepository.cs" />
     <Compile Include="Repositories\TraderPerformanceSoccerRepository.cs" />
-    <Compile Include="Repositories\WinlossSummary3rdRepository.cs" />
-    <Compile Include="Repositories\WinLossSummaryRepository.cs" />
     <Compile Include="Repositories\TraderPerformanceSoccerPH\TraderDataService.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -249,11 +224,6 @@
     <Compile Include="Services\TraderPerformanceSoccer\ExportDetailReportService.cs" />
     <Compile Include="Services\TraderPerformanceSoccer\ExportReportService.cs" />
     <Compile Include="Services\TraderPerformanceSoccer\TraderPerformanceSoccerService.cs" />
-    <Compile Include="Services\WinLoss3rdSummary\ExportWinLossSummary3rdService.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
-    </Compile>
-    <Compile Include="Services\WinLoss3rdSummary\WinLossSummary3rdService.cs" />
-    <Compile Include="Services\WinLossSummary\WinLossSummaryService.cs" />
     <Compile Include="Services\TraderPerformanceSoccerPH\TraderDetailExcelService.cs" />
     <Compile Include="Services\TraderPerformanceSoccerPH\TraderSumExcelService.cs" />
     <Compile Include="Services\TraderPerformanceSoccerPH\TraderDetailPivotService.cs" />
