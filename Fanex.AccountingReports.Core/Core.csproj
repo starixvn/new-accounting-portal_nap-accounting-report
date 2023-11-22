@@ -198,9 +198,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configurations\LiveCasinoProductSection\LiveCasinoProductCollection.cs" />
-    <Compile Include="Configurations\LiveCasinoProductSection\LiveCasinoProductElement.cs" />
-    <Compile Include="Configurations\LiveCasinoProductSection\LiveCasinoProductSection.cs" />
     <Compile Include="Configurations\MAMonitorSection\MAMonitorCollection.cs" />
     <Compile Include="Configurations\MAMonitorSection\MAMonitorElement.cs" />
     <Compile Include="Configurations\MAMonitorSection\MAMonitorSection.cs" />
@@ -210,9 +207,6 @@
     <Compile Include="Configurations\RMSection\RMCollection.cs" />
     <Compile Include="Configurations\RMSection\RMElement.cs" />
     <Compile Include="Configurations\RMSection\RMSection.cs" />
-    <Compile Include="Configurations\TotalCreditAccountByProductSection\TotalCreditAccountByProductCollection.cs" />
-    <Compile Include="Configurations\TotalCreditAccountByProductSection\TotalCreditAccountByProductElement.cs" />
-    <Compile Include="Configurations\TotalCreditAccountByProductSection\TotalCreditAccountByProductSection.cs" />
     <Compile Include="Configurations\SMAsTurnoverSection\SMAsTurnoverCollection.cs" />
     <Compile Include="Configurations\SMAsTurnoverSection\SMAsTurnoverElement.cs" />
     <Compile Include="Configurations\SMAsTurnoverSection\SMAsTurnoverSection.cs" />
