@@ -1005,21 +1005,10 @@
     <Content Include="themes\base\img\icn-expand.png" />
     <Content Include="Views\Errors\Error404.htm" />
     <Content Include="Views\Errors\GeneralError.htm" />
-    <Content Include="App_Configuration\RMSection.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Configuration\MAMonitorSection.config">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="App_Configuration\TreeWinLossProduct.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\LegendSection.config">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Configuration\SMAsTurnoverSection.config">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -1848,6 +1837,7 @@
     <Content Include="App_Data\Fanex.Result\Basketball.xls" />
     <Content Include="App_Data\Fanex.Result\BaseBall.xls" />
     <Content Include="App_Data\Fanex.Result\Badminton.xls" />
+    <Content Include="App_Configuration\RMSection.config" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="scripts\_lib\Fanex.Grid\images\Thumbs.db" />
@@ -1921,6 +1911,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
