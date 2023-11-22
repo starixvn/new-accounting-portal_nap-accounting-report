@@ -1060,7 +1060,6 @@
     <Content Include="Areas\Licensee\Views\PeakConcurrentUsers\PeakConcurrentUser.js" />
     <Content Include="Areas\Licensee\Views\Web.config" />
     <Content Include="Areas\Misc\Views\BetCount\Scripts\BaseReport.js" />
-    <Content Include="Areas\Misc\Views\CreditSitesBetCounts\CreditSitesBetCounts.js" />
     <Content Include="Areas\Misc\Views\DailyCreatedCustomers\DailyCreatedCustomers.js" />
     <Content Include="Areas\Misc\Views\DailyCreatedCustomers\DailyCreatedCustomersDetails.js" />
     <Content Include="Areas\Misc\Views\DailyCreatedCustomers\ReportManager.js" />
@@ -1717,7 +1716,6 @@
     <Content Include="Areas\Special\Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Areas\Misc\Views\CreditSitesBetCounts\Index.cshtml" />
     <Content Include="Areas\Main\Views\Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1734,7 +1732,6 @@
     <Content Include="Areas\Main\Views\WinLossSummary3rd\Styles\WinLossSummary.less" />
     <Content Include="Areas\Main\Views\WinLossSummary\Styles\WinLossSummary.less" />
     <Content Include="Areas\Main\Views\WinLossSummary\SummaryReport.cshtml" />
-    <Content Include="Areas\Misc\Views\CreditSitesBetCounts\CreditSitesBetCounts.less" />
     <Content Include="Areas\Misc\Views\DailyCreatedCustomers\Index.cshtml" />
     <Content Include="Areas\Misc\Views\DailyCreatedCustomers\DailyCreatedCustomers.less" />
     <Content Include="Areas\Misc\Views\DailyCreatedCustomers\SummaryDailyCreatedCustomers.cshtml" />
