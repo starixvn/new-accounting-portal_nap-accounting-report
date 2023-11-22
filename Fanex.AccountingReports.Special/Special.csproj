@@ -189,32 +189,17 @@
     <Compile Include="Controllers\MarginReportController.cs" />
     <Compile Include="Controllers\ParlayWonController.cs" />
     <Compile Include="Controllers\SaveBetReportController.cs" />
-    <Compile Include="Controllers\SpecialMatchAnalysisController.cs" />
     <Compile Include="Criteria\MarginReport\GetMarginWinLossCriteria.cs" />
     <Compile Include="Criteria\ParlayWon\GetParlayWonReportCriteria.cs" />
     <Compile Include="Criteria\SaveBetReport\DownloadReportCriteria.cs" />
     <Compile Include="Criteria\SaveBetReport\GetLeaguesCriteria.cs" />
     <Compile Include="Criteria\SaveBetReport\GetMatchsCriteria.cs" />
     <Compile Include="Criteria\SaveBetReport\GetSportsCriteria.cs" />
-    <Compile Include="Criteria\SpecialMatchAnalysis\GetBettypeCriteria.cs" />
-    <Compile Include="Criteria\SpecialMatchAnalysis\GetLeageMatchCriteria.cs" />
-    <Compile Include="Criteria\SpecialMatchAnalysis\GetMatchAnalysisByUserLevelCriteria.cs" />
-    <Compile Include="Criteria\SpecialMatchAnalysis\GetMatchAnalysisCriteria.cs" />
-    <Compile Include="Criteria\SpecialMatchAnalysis\GetSportLeagueCriteria.cs" />
     <Compile Include="Models\MarginReport\MarginWinLoss.cs" />
     <Compile Include="Models\ParlayWon\ParlayWonTransaction.cs" />
     <Compile Include="Models\SaveBetReport\League.cs" />
     <Compile Include="Models\SaveBetReport\Match.cs" />
-    <Compile Include="Models\ReportingServices\Report.cs" />
     <Compile Include="Models\SaveBetReport\Sport.cs" />
-    <Compile Include="Models\SpecialMatchAnalysis\BaseModel.cs" />
-    <Compile Include="Models\SpecialMatchAnalysis\Bettype.cs" />
-    <Compile Include="Models\SpecialMatchAnalysis\League.cs" />
-    <Compile Include="Models\SpecialMatchAnalysis\Match.cs" />
-    <Compile Include="Models\SpecialMatchAnalysis\MatchAnalysis.cs" />
-    <Compile Include="Models\SpecialMatchAnalysis\MatchAnalysisView.cs" />
-    <Compile Include="Models\SpecialMatchAnalysis\SportLeague.cs" />
-    <Compile Include="Models\SpecialMatchAnalysis\LeagueMatch.cs" />
     <Compile Include="Resources\Labels.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -225,10 +210,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SpecialResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\MarginReport\MarginWinLossService.cs" />
+    <Compile Include="Services\MarginWinLossService.cs" />
     <Compile Include="Services\ParlayWonService.cs" />
-    <Compile Include="Services\SaveBetReport\SaveBetReportService.cs" />
-    <Compile Include="Services\SpecialMatchAnalysisService.cs" />
+    <Compile Include="Services\SaveBetReportService.cs" />
     <Compile Include="SpecialAreaRegistration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
