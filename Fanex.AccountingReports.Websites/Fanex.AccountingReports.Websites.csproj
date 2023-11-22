@@ -621,8 +621,6 @@
     <Content Include="Areas\Misc\Views\TotalSMAMemberActive\Scripts\StatusDetail.js" />
     <Content Include="Areas\Special\Views\MarginReport\Scripts\MarginReport.js" />
     <Content Include="Areas\Special\Views\SaveBetReport\Images\download.png" />
-    <Content Include="Areas\Special\Views\SMATurnover\Scripts\SMATurnover.js" />
-    <Content Include="Areas\Special\Views\SMATurnover\Styles\SMATurnover.less" />
     <Content Include="Areas\Special\Views\SaveBetReport\Styles\SaveBetReport.less" />
     <Content Include="Areas\Special\Views\SaveBetReport\Scripts\SaveBetReport.js" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Scripts\MatchAnalysisBaseReport.js" />
@@ -1764,7 +1762,6 @@
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchAnalysisNormal.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\MatchSelection.cshtml" />
     <Content Include="Areas\Special\Views\SaveBetReport\Index.cshtml" />
-    <Content Include="Areas\Special\Views\SMATurnover\Index.cshtml" />
     <Content Include="Areas\Special\Views\SpecialMatchAnalysis\Styles\SpecialMatchAnalysis.less" />
     <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Index.cshtml" />
     <Content Include="Areas\WinLoss\Web.config" />
