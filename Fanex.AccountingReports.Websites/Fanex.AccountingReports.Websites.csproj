@@ -616,7 +616,6 @@
     <Content Include="Areas\Uncategorized\ReportLegend\FanexLegend.js" />
     <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon.png" />
     <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon2-hover.png" />
-    <Content Include="Areas\WinLoss\Views\AllCustomerTurnOver\Scripts\AllCustomerTurnOver.js" />
     <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon2.png" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\AdvanceMixParlayReport.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\CombinationWinLoss.js" />
@@ -1732,8 +1731,6 @@
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Index.cshtml" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\MixParlayReportPopup.cshtml" />
     <Content Include="Areas\Uncategorized\ReportLegend\FanexLegend.less" />
-    <Content Include="Areas\WinLoss\Views\AllCustomerTurnOver\Index.cshtml" />
-    <Content Include="Areas\WinLoss\Views\AllCustomerTurnOver\Styles\AllCustomerTurnOver.less" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Styles\DailyMixParlayWinLoss.less" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Styles\MixParlayPopup.less" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Index.cshtml" />
