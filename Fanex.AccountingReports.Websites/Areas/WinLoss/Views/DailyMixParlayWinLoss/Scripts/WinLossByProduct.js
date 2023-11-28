@@ -155,8 +155,8 @@ WinLossByProduct.prototype.RenderReport = function (report) {
                     columns.push({ Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) });
                     columns.push({ Name: "ColTurnover", Value: info.RealTurnover_Str });
                     columns.push({ Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) });
-                    columns.push({ Name: "ColMemberBonus", Value: info.MemberBonus_Str });
-                    columns.push({ Name: "ColHouseBonus", Value: info.HouseBonus_Str });
+                    columns.push({ Name: "ColMemberBonus", Value: reportManager.FormatNumberCell(info.MemberBonus_Str, true, false, false) });
+                    columns.push({ Name: "ColHouseBonus", Value: reportManager.FormatNumberCell(info.HouseBonus_Str, true, false, false) });
                     bodyData.push({
                         Columns: columns
                     });
@@ -173,8 +173,8 @@ WinLossByProduct.prototype.RenderReport = function (report) {
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
                     { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) },
-                    { Name: "ColMemberBonus", Value: info.MemberBonus_Str },
-                    { Name: "ColHouseBonus", Value: info.HouseBonus_Str }]
+                    { Name: "ColMemberBonus", Value: reportManager.FormatNumberCell(info.MemberBonus_Str, true, false, false) },
+                    { Name: "ColHouseBonus", Value: reportManager.FormatNumberCell(info.HouseBonus_Str, true, false, false) }]
                 });
             }
 
@@ -190,8 +190,8 @@ WinLossByProduct.prototype.RenderReport = function (report) {
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
                     { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) },
-                    { Name: "ColMemberBonus", Value: info.MemberBonus_Str },
-                    { Name: "ColHouseBonus", Value: info.HouseBonus_Str }]
+                    { Name: "ColMemberBonus", Value: reportManager.FormatNumberCell(info.MemberBonus_Str, true, false, false)},
+                    { Name: "ColHouseBonus", Value: reportManager.FormatNumberCell(info.HouseBonus_Str, true, false, false) }]
             });
         }
 
@@ -205,8 +205,8 @@ WinLossByProduct.prototype.RenderReport = function (report) {
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false), TdClass: "colLineTotal" },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
                     { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) },
-                    { Name: "ColMemberBonus", Value: info.MemberBonus_Str },
-                    { Name: "ColHouseBonus", Value: info.HouseBonus_Str }]
+                    { Name: "ColMemberBonus", Value: reportManager.FormatNumberCell(info.MemberBonus_Str, true, false, false) },
+                    { Name: "ColHouseBonus", Value: reportManager.FormatNumberCell(info.HouseBonus_Str, true, false, false) }]
         });
     }
 
