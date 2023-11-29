@@ -175,7 +175,7 @@ WinLossByProduct.prototype.RenderReport = function (report) {
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
                     { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) },
-                    { Name: "ColMemberBonus", Value: reportManager.FormatNumberCell(info.HouseBonus_Str, true, false, false)info.MemberBonus_Str },
+                    { Name: "ColMemberBonus", Value: reportManager.FormatNumberCell(info.HouseBonus_Str, true, false, false) },
                     { Name: "ColHouseBonus", Value: reportManager.FormatNumberCell(info.HouseBonus_Str, true, false, false) }]
                 });
             }
@@ -192,7 +192,7 @@ WinLossByProduct.prototype.RenderReport = function (report) {
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false) },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
                     { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) },
-                    { Name: "ColMemberBonus", Value: reportManager.FormatNumberCell(info.HouseBonus_Str, true, false, false)info.MemberBonus_Str },
+                    { Name: "ColMemberBonus", Value: reportManager.FormatNumberCell(info.HouseBonus_Str, true, false, false) },
                     { Name: "ColHouseBonus", Value: reportManager.FormatNumberCell(info.HouseBonus_Str, true, false, false) }]
             });
         }
@@ -207,7 +207,7 @@ WinLossByProduct.prototype.RenderReport = function (report) {
                     { Name: "ColLineTotal", Value: reportManager.FormatNumberCell(info.RealIncome_Str, true, false, false), TdClass: "colLineTotal" },
                     { Name: "ColTurnover", Value: info.RealTurnover_Str },
                     { Name: "ColMargin", Value: reportManager.FormatNumberCell(info.Margin_Str, true, false, true) },
-                    { Name: "ColMemberBonus", Value: reportManager.FormatNumberCell(info.HouseBonus_Str, true, false, false)info.MemberBonus_Str },
+                    { Name: "ColMemberBonus", Value: reportManager.FormatNumberCell(info.HouseBonus_Str, true, false, false) },
                     { Name: "ColHouseBonus", Value: reportManager.FormatNumberCell(info.HouseBonus_Str, true, false, false) }]
         });
     }
