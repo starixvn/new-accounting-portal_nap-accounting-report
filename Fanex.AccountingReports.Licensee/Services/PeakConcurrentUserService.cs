@@ -1,16 +1,18 @@
 namespace Fanex.AccountingReports.Licensee.Services.Implement
 {
-    using System.Collections.Generic;
-    using System.Linq;
+    using AccountingReports.Core.Configurations;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Licensee.Constants;
     using Fanex.AccountingReports.Licensee.Criteria.PeakConcurrentUser;
+    using Fanex.AccountingReports.Licensee.Models;
     using Fanex.AccountingReports.Licensee.Models.PeakConcurrentUser;
     using Fanex.AccountingReports.Licensee.Resources;
     using Fanex.Common;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
@@ -94,6 +96,31 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
                 "{0}_For_{1}",
                 reportName,
                 peakConcurrentUserCriteria.LicenseeName));
+        }
+
+        public List<Licensee> GetLicensee()
+        {
+            var licenseeSiteCriteria = new LicenseeCriteria();
+            var licenseeSiteList = new List<Licensee>();
+            var rawData = GetReportData<dynamic>(licenseeSiteCriteria);
+            if (rawData != null)
+            {
+                foreach (var row in rawData)
+                {
+                    var licenseeSite = new Licensee()
+                    {
+                        LicenseeName = row.LicenseeName,
+                        BrandName = row.Brandname,
+                        LicenseeId = row.LicenseeID,
+                        IsEnabledBA = row.EnableBA,
+                        IsMultiAgent = AppSettings.MultiAgentLicensses.Contains(row.LicenseeName)
+                    };
+
+                    licenseeSiteList.Add(licenseeSite);
+                }
+            }
+
+            return licenseeSiteList;
         }
 
         /// <summary>

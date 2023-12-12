@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.Licensee.Controllers
 {
-    using System.Web.Mvc;
     using AccountingReports.Core.Web;
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Licensee.Criteria.PeakConcurrentUser;
@@ -8,6 +7,7 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     using Fanex.AccountingReports.Licensee.Services.Implement;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
+    using System.Web.Mvc;
 
     /// <summary>
     /// TODO: Update summary.
@@ -15,12 +15,10 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     public class PeakConcurrentUsersController : BaseController
     {
         private readonly PeakConcurrentUserService _reportService;
-        private readonly LicenseeSiteService _licenseeSite;
 
         public PeakConcurrentUsersController()
         {
             _reportService = new PeakConcurrentUserService();
-            _licenseeSite = new LicenseeSiteService();
         }
 
         [HttpGet]
@@ -28,7 +26,7 @@ namespace Fanex.AccountingReports.Licensee.Controllers
         [NapAuth(FunctionKey = AccReportFunctionKeys.PeakConcurrentUsers, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
-            ViewBag.LicensseSiteList = new SelectList(_licenseeSite.GetLicenseeSiteList(), "LicenseeName", "LicenseeName");
+            ViewBag.LicensseSiteList = new SelectList(_reportService.GetLicensee(), "LicenseeName", "LicenseeName");
             return View();
         }
 

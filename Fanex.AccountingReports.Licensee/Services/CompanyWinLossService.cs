@@ -16,11 +16,12 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using Fanex.Data.Repository;
     using Fanex.Excel.Enums;
     using Fanex.Excel.Models;
+    using AccountingReports.Core.Configurations;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class CompanyWinLossService
+    public class CompanyWinLossService : ServiceBase
     {
         private const int ExtendCachedTimeOut = 2;
 
@@ -91,6 +92,31 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             GetPagingReport(gridOptions, ref pagingGridOptions, criteria);
 
             return pagingGridOptions;
+        }
+
+        public List<Licensee> GetLicensee()
+        {
+            var licenseeSiteCriteria = new LicenseeCriteria();
+            var licenseeSiteList = new List<Licensee>();
+            var rawData = GetReportData<dynamic>(licenseeSiteCriteria);
+            if (rawData != null)
+            {
+                foreach (var row in rawData)
+                {
+                    var licenseeSite = new Licensee()
+                    {
+                        LicenseeName = row.LicenseeName,
+                        BrandName = row.Brandname,
+                        LicenseeId = row.LicenseeID,
+                        IsEnabledBA = row.EnableBA,
+                        IsMultiAgent = AppSettings.MultiAgentLicensses.Contains(row.LicenseeName)
+                    };
+
+                    licenseeSiteList.Add(licenseeSite);
+                }
+            }
+
+            return licenseeSiteList;
         }
 
         private void GetPagingReport(GridOptions gridOptions, ref GridOptions pagingGridOptions, CompanyWinLossCriteria criteria)

@@ -64,5 +64,13 @@ namespace Fanex.AccountingReports.Licensee.Controllers
 
             return new EmptyResult();
         }
+
+        [HttpPost]
+        [HandleAjaxError]
+        public JsonResult GetAllLicensees()
+        {
+            var result = this._reportService.GetLicensee();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

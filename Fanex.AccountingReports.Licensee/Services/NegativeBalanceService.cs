@@ -1,11 +1,6 @@
 namespace Fanex.AccountingReports.Licensee.Services.Implement
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Drawing;
-    using System.IO;
-    using System.Linq;
+    using AccountingReports.Core.Configurations;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Models;
@@ -13,11 +8,17 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Licensee.Constants;
     using Fanex.AccountingReports.Licensee.Criteria.NegativeBalance;
+    using Fanex.AccountingReports.Licensee.Models;
     using Fanex.AccountingReports.Licensee.Models.NegativeBalance;
     using Fanex.AccountingReports.Licensee.Repositories.Implement;
     using Fanex.AccountingReports.Licensee.Resources;
     using Fanex.Common.Extensions;
-
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
+    using System.IO;
+    using System.Linq;
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
@@ -275,6 +276,31 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             };
             excelFile.SaveXls(mailAttactment.Content);
             return mailAttactment;
+        }
+
+        public List<Licensee> GetLicensee()
+        {
+            var licenseeSiteCriteria = new LicenseeCriteria();
+            var licenseeSiteList = new List<Licensee>();
+            var rawData = GetReportData<dynamic>(licenseeSiteCriteria);
+            if (rawData != null)
+            {
+                foreach (var row in rawData)
+                {
+                    var licenseeSite = new Licensee()
+                    {
+                        LicenseeName = row.LicenseeName,
+                        BrandName = row.Brandname,
+                        LicenseeId = row.LicenseeID,
+                        IsEnabledBA = row.EnableBA,
+                        IsMultiAgent = AppSettings.MultiAgentLicensses.Contains(row.LicenseeName)
+                    };
+
+                    licenseeSiteList.Add(licenseeSite);
+                }
+            }
+
+            return licenseeSiteList;
         }
 
         /// <summary>

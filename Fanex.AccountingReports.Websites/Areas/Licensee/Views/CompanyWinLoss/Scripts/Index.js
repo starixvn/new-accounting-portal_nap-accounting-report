@@ -114,7 +114,7 @@ Fanex.AccountingReports.Licensee.CompanyWinLoss = function () {
     self.getAllLicensees = function () {
         $.ajax({
             type: "POST",
-            url: window.rootUrl + "Licensee/Licensee/GetAllLicensees",
+            url: window.rootUrl + "Licensee/CompanyWinLoss/GetAllLicensees",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: null,
@@ -140,7 +140,7 @@ Fanex.AccountingReports.Licensee.CompanyWinLoss = function () {
             for (var i = 0; i < licenseeCount; i++) {
                 var licensee = licenseeList[i];
 
-                if (licensee.LicenseeName != licensee.BrandName) {
+                if (licensee.LicenseeName != licensee.BrandName && licensee.BrandName != null) {
                     options += "<option enableBA='" + licensee.IsEnabledBA +
                              "' isMultiAgent='" + licensee.IsMultiAgent +
                              "' value='" + licensee.LicenseeId + "'>" +

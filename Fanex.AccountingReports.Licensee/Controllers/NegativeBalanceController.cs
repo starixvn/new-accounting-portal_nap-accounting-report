@@ -26,7 +26,7 @@ namespace Fanex.AccountingReports.Licensee.Controllers
         [NapAuth(FunctionKey = AccReportFunctionKeys.NegativeBalance, Policy = Constant.Policy.Read)]
         public ActionResult Index()
         {
-            var licenseeSiteList = _licenseeSite.GetLicenseeSiteList();
+            var licenseeSiteList = _reportService.GetLicensee();
             var all = new Licensee { LicenseeName = "All", LicenseeId = -1 };
             licenseeSiteList.Insert(0, all);
             ViewBag.LicensseSiteList = new SelectList(licenseeSiteList, "LicenseeName", "LicenseeName");

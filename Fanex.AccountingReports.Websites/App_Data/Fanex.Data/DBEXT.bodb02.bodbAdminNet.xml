@@ -7,6 +7,7 @@
   </Function>
   <Function Name="Licensee - Negative Balance">
     <Setting Key="Licensee_NegativeBalance_GetReport" SpName="Acc_Rpt_NegativeBalanceMember_Dep" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Licensee_NegativeBalance_GetLicensee" SpName="Acc_Rpt_NegativeBalance_GetLicensees" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
   <Function Name="Gaming - Live Casino Game Statistics">
     <Setting Key="Gaming_LiveCasinoGameStatistics_GetLicensees" SpName="Acc_Rpt_LiveCasino_GameStatistics_LicenseeSel" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="600" />
@@ -19,5 +20,9 @@
   </Function>
   <Function Name="Licensee - Company Win Loss">
     <Setting Key="Acc_Rpt_CompanyWinloss" SpName="Acc_Rpt_CompanyWinloss" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="600" />
+    <Setting Key="Licensee_CompanyWinloss_GetLicensee" SpName="Acc_Rpt_CompanyWinloss_GetLicensees" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="600" />
+  </Function>
+  <Function Name="Licensee - Peak Concurrent User">
+    <Setting Key="Licensee_PeakConcurrentUser_GetLicensee" SpName="Acc_Rpt_PeakConcurrentUser_GetLicensees" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="600" />
   </Function>
 </Functions>

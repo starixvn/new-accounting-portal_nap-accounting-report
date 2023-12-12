@@ -181,9 +181,12 @@
     <Compile Include="Controllers\PeakConcurrentUsersController.cs" />
     <Compile Include="Criteria\CompanyWinLoss\CompanyWinLossCriteria.cs" />
     <Compile Include="Criteria\CompanyWinLoss\GetCurrenciesByLicenseeCriteria.cs" />
+    <Compile Include="Criteria\CompanyWinLoss\LicenseeCriteria.cs" />
     <Compile Include="Criteria\CompanyWinLoss\ProductListByLicenseCriteria.cs" />
     <Compile Include="Criteria\GetCurrenciesByLicenseeCriteria.cs" />
+    <Compile Include="Criteria\NegativeBalance\LicenseeCriteria.cs" />
     <Compile Include="Criteria\NegativeBalance\NegativeBalanceCriteria.cs" />
+    <Compile Include="Criteria\PeakConcurrentUser\LicenseeCriteria.cs" />
     <Compile Include="Criteria\PeakConcurrentUser\PeakConcurrentUserCriteria.cs" />
     <Compile Include="Criteria\GetAllLicenseeCriteria.cs" />
     <Compile Include="LicenseeAreaRegistration.cs" />
