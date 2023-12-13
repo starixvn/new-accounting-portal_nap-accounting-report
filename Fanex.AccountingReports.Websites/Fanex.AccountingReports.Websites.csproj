@@ -228,9 +228,6 @@
     <Reference Include="NapReports.UserActivityLog, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Olympus.NapReports.UserActivityLog.1.0.0.7\lib\net40\NapReports.UserActivityLog.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <HintPath>..\packages\NPOI.2.0.6\lib\net40\NPOI.dll</HintPath>
     </Reference>
@@ -1793,6 +1790,7 @@
     <Content Include="deployment.ignore" />
     <Content Include="Content\Fanex.Result\fanex.result.less" />
     <Content Include="App_Configuration\RMSection.config" />
+    <None Include="App_Configuration\Web.KLDR.config" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="scripts\_lib\Fanex.Grid\images\Thumbs.db" />
@@ -1841,6 +1839,9 @@
       <DependentUpon>Web.Config.tt</DependentUpon>
     </Content>
     <Content Include="App_Configuration\Web.UAT.config">
+      <DependentUpon>Web.Config.tt</DependentUpon>
+    </Content>
+    <Content Include="App_Configuration\Web.KLDR.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
     </Content>
     <Content Include="App_Configuration\Web.PRO.ConnectionString.config">
