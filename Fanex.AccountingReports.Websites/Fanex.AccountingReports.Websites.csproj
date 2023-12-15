@@ -1790,7 +1790,8 @@
     <Content Include="deployment.ignore" />
     <Content Include="Content\Fanex.Result\fanex.result.less" />
     <Content Include="App_Configuration\RMSection.config" />
-    <None Include="App_Configuration\Web.KLDR.config" />
+    <None Include="App_Configuration\Web.KLDR.AppSettings.config" />
+    <None Include="App_Configuration\Web.KLDR.ConnectionString.config" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="scripts\_lib\Fanex.Grid\images\Thumbs.db" />
