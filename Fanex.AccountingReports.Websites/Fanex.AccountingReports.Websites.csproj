@@ -1790,8 +1790,12 @@
     <Content Include="deployment.ignore" />
     <Content Include="Content\Fanex.Result\fanex.result.less" />
     <Content Include="App_Configuration\RMSection.config" />
-    <None Include="App_Configuration\Web.KLDR.AppSettings.config" />
-    <None Include="App_Configuration\Web.KLDR.ConnectionString.config" />
+    <Content Include="App_Configuration\Web.KLDR.AppSettings.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Configuration\Web.KLDR.ConnectionString.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />
     <None Include="scripts\_lib\Fanex.Grid\images\Thumbs.db" />
@@ -1844,6 +1848,7 @@
     </Content>
     <Content Include="App_Configuration\Web.KLDR.config">
       <DependentUpon>Web.Config.tt</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Configuration\Web.PRO.ConnectionString.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
