@@ -1,3 +1,6 @@
+using System.Diagnostics;
+using Fanex.Logging;
+
 namespace Fanex.AccountingReports.Core.Web.Controllers
 {
     using System;
@@ -78,7 +81,8 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             AppSession.CurrentActionName = filterContext.ActionDescriptor.ActionName;
-            base.OnActionExecuting(filterContext);
+            filterContext.HttpContext.Items["timer"] = Stopwatch.StartNew();
+			base.OnActionExecuting(filterContext);
         }
 
         protected override void OnResultExecuting(ResultExecutingContext filterContext)
@@ -102,5 +106,11 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
                 MaxJsonLength = Int32.MaxValue
             };
         }
+
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+			var sw = filterContext.HttpContext.Items["timer"] as Stopwatch;
+            LogService.Info($"Time action running : {sw?.ElapsedMilliseconds}");
+		}
     }
 }
