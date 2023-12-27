@@ -3,8 +3,8 @@ $(document).ready(function () {
     if (isDisableMostvisitedPage == false) {
         maxPages = parseInt(maxPages);
         fixBugsBrowser.fixIndexOfBug();
-        var mostVisitedPages = new Fanex.AccountingReports.Home.MostVisitedPages();
-        mostVisitedPages.initPage();
+        //var mostVisitedPages = new Fanex.AccountingReports.Home.MostVisitedPages();
+        //mostVisitedPages.initPage();
     }
 });
 

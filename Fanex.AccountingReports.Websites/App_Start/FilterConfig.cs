@@ -1,11 +1,8 @@
 namespace Fanex.AccountingReports.Websites
 {
-    using Caching;
     using ONEbook.UM;
     using ONEbook.UM.AspNetMVC.Filters;
-    using ONEbook.UM.Helpers;
     using ONEbook.UM.Services;
-    using ONEbook.UM.Transport;
     using System.Web.Mvc;
 
     /// <summary>
@@ -26,6 +23,7 @@ namespace Fanex.AccountingReports.Websites
             filters.Add(new HandleErrorAttribute());
             filters.Add(new CheckUMFilterAttribute(maintenanceService, umConfig));
             filters.Add(new UserActivityDetailFilter());
+            filters.Add(new LogTimeDurationAttribute());
         }
     }
 }
