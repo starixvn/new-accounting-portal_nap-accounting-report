@@ -49,8 +49,8 @@ namespace Fanex.AccountingReports.Websites
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            //MostVisitedPageSavingWorker mostVisitedPageSavingWorker = new MostVisitedPageSavingWorker("MostVisitedPage Saving Worker");
-            //mostVisitedPageSavingWorker.Start();
+            MostVisitedPageSavingWorker mostVisitedPageSavingWorker = new MostVisitedPageSavingWorker("MostVisitedPage Saving Worker");
+            mostVisitedPageSavingWorker.Start();
         }
 
         protected void Session_End(object sender, EventArgs e)
