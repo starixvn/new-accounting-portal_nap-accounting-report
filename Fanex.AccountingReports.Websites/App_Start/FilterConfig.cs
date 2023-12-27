@@ -23,7 +23,6 @@ namespace Fanex.AccountingReports.Websites
             filters.Add(new HandleErrorAttribute());
             filters.Add(new CheckUMFilterAttribute(maintenanceService, umConfig));
             filters.Add(new UserActivityDetailFilter());
-            filters.Add(new LogTimeDurationAttribute());
         }
     }
 }
