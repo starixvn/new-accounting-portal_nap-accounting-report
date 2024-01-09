@@ -531,8 +531,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\Fanex.Data\DBCUST.CustDB.bodbAdminNet.xml" />
-    <Content Include="App_Readme\Transformer.NET\LICENSE.txt" />
-    <Content Include="App_Readme\Transformer.NET\README.txt" />
     <Content Include="Areas\Balance\Views\CompanyBalanceDifference\Index.cshtml" />
     <Content Include="Areas\Balance\Views\DirectBalance\DirectBalance.less" />
     <Content Include="Areas\Balance\Views\SuperBalance\Scripts\SuperBalance.js" />
@@ -662,7 +660,6 @@
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\Scripts\TreeWinLossBySuper.js" />
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\Scripts\VirtualRateHistory.js" />
     <Content Include="Areas\WinLoss\Views\TreeWinLoss\Styles\TreeWinLoss.less" />
-    <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
     <Content Include="Content\Fanex.Result\fanex.result-customized.css" />
     <Content Include="Content\Fanex.Result\fanex.result.css" />
     <Content Include="Content\Fanex.Result\images\bg_header01.jpg" />
@@ -1006,10 +1003,6 @@
     <Content Include="Views\Errors\Error404.htm" />
     <Content Include="Views\Errors\GeneralError.htm" />
     <Content Include="App_Configuration\TreeWinLossProduct.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="App_Configuration\LegendSection.config">
-      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="WhoAmI1.aspx" />
@@ -1585,7 +1578,6 @@
     <Content Include="scripts\_lib\_references.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
@@ -1817,26 +1809,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="deployment.ignore" />
-    <Content Include="App_Browsers\ie.browser" />
-    <Content Include="App_Browsers\firefox.browser" />
     <Content Include="Content\Fanex.Result\fanex.result.less" />
-    <Content Include="App_Data\Fanex.Result\VSTennis.xls" />
-    <Content Include="App_Data\Fanex.Result\VSSpeedWay.xls" />
-    <Content Include="App_Data\Fanex.Result\VSHRacing.xls" />
-    <Content Include="App_Data\Fanex.Result\Tennis.xls" />
-    <Content Include="App_Data\Fanex.Result\Soccer.xls" />
-    <Content Include="App_Data\Fanex.Result\Racing.xls" />
-    <Content Include="App_Data\Fanex.Result\Outright.xls" />
-    <Content Include="App_Data\Fanex.Result\Other.xls" />
-    <Content Include="App_Data\Fanex.Result\NumberGame.xls" />
-    <Content Include="App_Data\Fanex.Result\MuayThai.xls" />
-    <Content Include="App_Data\Fanex.Result\LiveCasino.xls" />
-    <Content Include="App_Data\Fanex.Result\Hockey.xls" />
-    <Content Include="App_Data\Fanex.Result\GoldDeluxe.xls" />
-    <Content Include="App_Data\Fanex.Result\Billiard.xls" />
-    <Content Include="App_Data\Fanex.Result\Basketball.xls" />
-    <Content Include="App_Data\Fanex.Result\BaseBall.xls" />
-    <Content Include="App_Data\Fanex.Result\Badminton.xls" />
     <Content Include="App_Configuration\RMSection.config" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\Profile1.pubxml" />

@@ -273,7 +273,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
     <Content Include="Content\Fanex.Result\fanex.result.css" />
     <Content Include="Content\Fanex.Result\images\goal-icon.png" />
   </ItemGroup>

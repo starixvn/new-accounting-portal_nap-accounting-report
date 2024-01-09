@@ -285,7 +285,6 @@
     <Compile Include="Services\Worker\MostVisitedPageSavingWorker.cs" />
     <Compile Include="Utilities\CellStyles\BaseBodyCellStyles.cs" />
     <Compile Include="Utilities\CellStyles\BaseCellStyles.cs" />
-    <Compile Include="Utility\Impersonate.cs" />
     <Compile Include="Utility\NetworkConnection.cs" />
     <Compile Include="Utilities\CellStyles\BaseFooterCellStyles.cs" />
     <Compile Include="Utilities\CellStyles\BaseSubTotalCellStyles.cs" />
@@ -321,9 +320,6 @@
     <Compile Include="Web\AccReportFunctionKeys.cs" />
     <Compile Include="Web\JsonWithoutNullField.cs" />
     <Compile Include="Web\SessionManager.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Errors.resx">

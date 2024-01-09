@@ -114,9 +114,8 @@
 
         var currentMenuId = @(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Id : 0);
         var isDisableMostvisitedPage = @(AppSettings.IsDisableMostvisitedPage != null ? AppSettings.IsDisableMostvisitedPage.ToString().ToLower() : "false");
-
-        var isLegendEnable = '@(LegendSection.Instance.Websites["GetReportLegendUrl"].IsActive)'.toLowerCase();
-        var getReportLegendUrl = '@(LegendSection.Instance.Websites["GetReportLegendUrl"].Address)';
+        
+        var getReportLegendUrl = 'LegendManagement/LegendManagement/GetJsonpReportLegend';
         var inlineImageExpand = "@Labels.ReportLegend_SubTabHeadLineIcon_Expand_Image";
         var inlineImageCollapse = "@Labels.ReportLegend_SubTabHeadLineIcon_Collapse_Image";
         var menuId = "@(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Id : -1)";
