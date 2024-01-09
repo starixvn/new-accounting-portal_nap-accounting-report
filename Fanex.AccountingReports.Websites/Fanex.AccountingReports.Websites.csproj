@@ -610,7 +610,6 @@
     <Content Include="Areas\Special\Views\SaveBetReport\Images\download.png" />
     <Content Include="Areas\Special\Views\SaveBetReport\Styles\SaveBetReport.less" />
     <Content Include="Areas\Special\Views\SaveBetReport\Scripts\SaveBetReport.js" />
-    <Content Include="Areas\Uncategorized\IMS\ims.js" />
     <Content Include="Areas\Uncategorized\ReportLegend\FanexLegend.js" />
     <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon.png" />
     <Content Include="Areas\Uncategorized\ReportLegend\Images\information-icon2-hover.png" />
@@ -1726,7 +1725,6 @@
     <Content Include="Areas\LegendManagement\Views\LegendManagement\CopyLegend.cshtml" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\InputedLegendReport.cshtml" />
     <Content Include="Areas\LegendManagement\Views\LegendManagement\UploadImagePopup.cshtml" />
-    <Content Include="Areas\Uncategorized\IMS\ims.less" />
     <Content Include="Areas\Misc\Views\CreditMovement\Index.cshtml" />
     <Content Include="Areas\Licensee\Views\CompanyWinLoss\Index.cshtml" />
     <Content Include="Areas\Licensee\Views\CompanyWinLoss\Styles\Index.less" />
