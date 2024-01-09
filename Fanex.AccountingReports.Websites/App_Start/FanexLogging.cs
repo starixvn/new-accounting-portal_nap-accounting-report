@@ -21,7 +21,6 @@ namespace Fanex.AccountingReports.Websites.App_Start
                  new SentryLogging(new SentryEngineOptions
                  {
                      Dsn = new Dsn(ConfigurationManager.AppSettings["SentryToken"]),
-                     FrontEndDsn = new Dsn(ConfigurationManager.AppSettings["FrontEndSentryToken"]),
                  })
         });
 

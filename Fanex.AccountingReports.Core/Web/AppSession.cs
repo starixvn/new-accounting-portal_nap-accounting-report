@@ -79,25 +79,6 @@ namespace Fanex.AccountingReports.Core.Web
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether [is tracked menu].
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if [is tracked menu]; otherwise, <c>false</c>.
-        /// </value>
-        public static bool IsTrackedMenu
-        {
-            get
-            {
-                return SessionManager.Get<bool>(CommonConstants.IsTrackedMenu);
-            }
-
-            set
-            {
-                SessionManager.Set<bool>(CommonConstants.IsTrackedMenu, value);
-            }
-        }
-
-        /// <summary>
         /// Gets or sets IsTrackedMenu: determine current working on menu is
         /// tracked for page tracking or not.
         /// </summary>
@@ -114,71 +95,6 @@ namespace Fanex.AccountingReports.Core.Web
             set
             {
                 SessionManager.Set<string>(CommonConstants.CurrentActionName, value);
-            }
-        }
-
-        public static bool ViewIPVN
-        {
-            get
-            {
-                return SessionManager.Get<bool>(CommonConstants.ViewIPVN);
-            }
-
-            set
-            {
-                SessionManager.Set<bool>(CommonConstants.ViewIPVN, value);
-            }
-        }
-
-        public static bool IsAccountingLogin
-        {
-            get
-            {
-                return SessionManager.Get<bool>("IsAccountingLogin");
-            }
-
-            set
-            {
-                SessionManager.Set<bool>("IsAccountingLogin", value);
-            }
-        }
-
-        public static bool IsU3Account
-        {
-            get
-            {
-                return SessionManager.Get<bool>("IsU3Account");
-            }
-
-            set
-            {
-                SessionManager.Set<bool>("IsU3Account", value);
-            }
-        }
-
-        public static bool IsU3SpecialAccount
-        {
-            get
-            {
-                return SessionManager.Get<bool>("IsU3SpecialAccount");
-            }
-
-            set
-            {
-                SessionManager.Set<bool>("IsU3SpecialAccount", value);
-            }
-        }
-
-        public static bool IsITAccount
-        {
-            get
-            {
-                return SessionManager.Get<bool>("IsITAccount");
-            }
-
-            set
-            {
-                SessionManager.Set<bool>("IsITAccount", value);
             }
         }
     }

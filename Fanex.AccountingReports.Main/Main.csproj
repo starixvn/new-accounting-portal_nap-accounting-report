@@ -236,9 +236,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CodeAnalysis\CodeAnalysisConfiguration.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Labels.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Labels.Designer.cs</LastGenOutput>

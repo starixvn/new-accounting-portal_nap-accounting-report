@@ -17,10 +17,7 @@
         {
             Environment = SiteEnvironment.UAT
         },
-        new SiteInfo
-        {
-            Environment = SiteEnvironment.MNL
-        },
+       
         new SiteInfo
         {
             Environment = SiteEnvironment.PRO

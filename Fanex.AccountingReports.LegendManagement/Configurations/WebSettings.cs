@@ -1,6 +1,5 @@
 namespace Fanex.AccountingReports.LegendManagement.Configurations
 {
-    using System.Configuration;
     using Fanex.Common;
     using Fanex.NAP.Core.Configuration;
 
@@ -11,17 +10,12 @@ namespace Fanex.AccountingReports.LegendManagement.Configurations
     {
         static WebSettings()
         {
-            Version = ConfigurationManager.AppSettings["version"];
-            System = ConfigurationManager.AppSettings["System"];
-            DefaultReportLegendTemplate = Converter.ToInt(ConfigurationManager.AppSettings["DefaultReportLegendTemplate"]);
             NAPSiteId = Converter.ToInt(NapSettings.Settings.SiteId);
         }
 
-        public static string Version { get; set; }
+        public static string System => "ACC-NAP";
 
-        public static string System { get; set; }
-
-        public static int DefaultReportLegendTemplate { get; set; }
+        public static int DefaultReportLegendTemplate => -1;
 
         public static int NAPSiteId { get; set; }
     }

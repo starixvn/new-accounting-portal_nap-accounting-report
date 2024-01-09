@@ -30,42 +30,32 @@
     <link type="text/css" rel="stylesheet" href="~/scripts/_lib/CustomScrollbar/Styles/scrollbars-itunes.css" />
     <link type="text/css" rel="stylesheet" href="~/scripts/_lib/CustomScrollbar/Styles/scrollbars-custom.css" />
     <link type="text/css" rel="stylesheet" href="~/Areas/Uncategorized/ReportLegend/FanexLegend.less" />
-    <link type="text/css" rel="stylesheet" href="~/Areas/Uncategorized/IMS/ims.less" />
     @RenderSection("Head", false)
-    @if (AppSession.IsAccountingLogin != null && AppSession.IsAccountingLogin)
-    {
-        <style type="text/css">
-            #dialog-popup {
-                top: 3px !important;
-            }
-        </style>
-    }
 </head>
 <body>
-    @if (AppSession.IsAccountingLogin == null | AppSession.IsAccountingLogin == false)
-    {
-        <header>
-            <div class="logo">
-                <a href="~/?ref=logo">&nbsp;</a>
+    
+    <header>
+        <div class="logo">
+            <a href="~/?ref=logo">&nbsp;</a>
+        </div>
+        @Html.Action("_Menu", new RouteValueDictionary(new { controller = "Home", area = "" }))
+        <div class="user-info">
+            <div class="greeting">
+                <h2>
+                    Welcome <span class="info-acc">@HttpContext.Current.User.Identity.Name</span><span class="info-more"></span>
+                </h2>
+                <ul>
+                    <li>
+                        <a href='@Url.Content("~/Auth/ChangePassword")'>Change Password</a>
+                    </li>
+                    <li>
+                        <a href='@Url.Content("~/Auth/LogOut")'>Sign out</a>
+                    </li>
+                </ul>
             </div>
-            @Html.Action("_Menu", new RouteValueDictionary(new { controller = "Home", area = "" }))
-            <div class="user-info">
-                <div class="greeting">
-                    <h2>
-                        Welcome <span class="info-acc">@HttpContext.Current.User.Identity.Name</span><span class="info-more"></span>
-                    </h2>
-                    <ul>
-                        <li>
-                            <a href='@Url.Content("~/Auth/ChangePassword")'>Change Password</a>
-                        </li>
-                        <li>
-                            <a href='@Url.Content("~/Auth/LogOut")'>Sign out</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </header>
-    }
+        </div>
+    </header>
+
     <section id="headline">
         @RenderSection("Headline", false)
     </section>
@@ -94,7 +84,7 @@
     <script type="text/javascript" src="~/scripts/_lib/CustomScrollbar/aplweb.scrollbars.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/jquery.fileDownload.js"></script>
     <script type="text/javascript" src="~/Areas/Uncategorized/ReportLegend/FanexLegend.js"></script>
-    <script type="text/javascript" src="~/Areas/Uncategorized/ims/ims.js"></script>
+    
     <script src="@Url.Content("~/auth/recheckinscript")" type="text/javascript"></script>
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~")';
@@ -114,9 +104,8 @@
 
         var currentMenuId = @(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Id : 0);
         var isDisableMostvisitedPage = @(AppSettings.IsDisableMostvisitedPage != null ? AppSettings.IsDisableMostvisitedPage.ToString().ToLower() : "false");
-
-        var isLegendEnable = '@(LegendSection.Instance.Websites["GetReportLegendUrl"].IsActive)'.toLowerCase();
-        var getReportLegendUrl = '@(LegendSection.Instance.Websites["GetReportLegendUrl"].Address)';
+        
+        var getReportLegendUrl = 'LegendManagement/LegendManagement/GetJsonpReportLegend';
         var inlineImageExpand = "@Labels.ReportLegend_SubTabHeadLineIcon_Expand_Image";
         var inlineImageCollapse = "@Labels.ReportLegend_SubTabHeadLineIcon_Collapse_Image";
         var menuId = "@(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Id : -1)";
