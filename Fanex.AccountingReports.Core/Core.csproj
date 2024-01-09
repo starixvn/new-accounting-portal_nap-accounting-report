@@ -198,9 +198,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configurations\LegendSection\LegendCollection.cs" />
-    <Compile Include="Configurations\LegendSection\LegendElement.cs" />
-    <Compile Include="Configurations\LegendSection\LegendSection.cs" />
     <Compile Include="Configurations\RMSection\RMCollection.cs" />
     <Compile Include="Configurations\RMSection\RMElement.cs" />
     <Compile Include="Configurations\RMSection\RMSection.cs" />

@@ -15,11 +15,8 @@
   http://go.microsoft.com/fwlink/?LinkId=169433
   -->
 <configuration>
- <configSections>
-    
-    
-    <section name="LegendSection" type="Fanex.AccountingReports.Core.Configurations.LegendSection, Fanex.AccountingReports.Core, Version=1.0.0.0, Culture=neutral" />
-        <section name="RMSection" type="Fanex.AccountingReports.Core.Configurations.RMSection, Fanex.AccountingReports.Core, Version=1.0.0.0, Culture=neutral" />
+ <configSections>        
+    <section name="RMSection" type="Fanex.AccountingReports.Core.Configurations.RMSection, Fanex.AccountingReports.Core, Version=1.0.0.0, Culture=neutral" />
     <section name="NapSettings" type="Fanex.NAP.Core.Configuration.NapSettings, Fanex.NAP.Core.Client" />    
     <sectionGroup name="AuthenticationFilter">
       <section name="Security" type="Fanex.AuthenticationFilter.Configurations.AuthenticationFilterSection, Fanex.AuthenticationFilter" />
