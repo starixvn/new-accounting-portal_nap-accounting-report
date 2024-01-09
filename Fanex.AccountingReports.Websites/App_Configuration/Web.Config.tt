@@ -17,10 +17,7 @@
 <configuration>
  <configSections>        
     <section name="RMSection" type="Fanex.AccountingReports.Core.Configurations.RMSection, Fanex.AccountingReports.Core, Version=1.0.0.0, Culture=neutral" />
-    <section name="NapSettings" type="Fanex.NAP.Core.Configuration.NapSettings, Fanex.NAP.Core.Client" />    
-    <sectionGroup name="AuthenticationFilter">
-      <section name="Security" type="Fanex.AuthenticationFilter.Configurations.AuthenticationFilterSection, Fanex.AuthenticationFilter" />
-    </sectionGroup>
+    <section name="NapSettings" type="Fanex.NAP.Core.Configuration.NapSettings, Fanex.NAP.Core.Client" />        
     <section name="dotless" type="dotless.Core.configuration.DotlessConfigurationSectionHandler, dotless.AspNet" />
 
     <sectionGroup name="bundleTransformer">
@@ -39,10 +36,8 @@
     <Domain>
        <add Name="<#= site.NapDomainName #>" Path="<#= site.NapDomainPath #>" />
     </Domain>
-  </NapSettings>  
-  <LicenseeEmailSection configSource="App_Configuration\LicenseeEmailSection.config" />
-  <RMSection configSource="App_Configuration\RMSection.config" />
-  <LegendSection configSource="App_Configuration\LegendSection.config" />  
+  </NapSettings>    
+  <RMSection configSource="App_Configuration\RMSection.config" />  
   <connectionStrings configSource="App_Configuration\Web.<#=site.Environment#>.ConnectionString.config" />
   <appSettings file="App_Configuration\Web.<#=site.Environment#>.AppSettings.config">
     <add key="aspnet:UseTaskFriendlySynchronizationContext" value="true" />
