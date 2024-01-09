@@ -61,11 +61,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         Justification = "Reviewed. Suppression is OK here.")]
         public TreeWinLoss GetTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria)
         {
-            var isShowNotAvailableTurnover = IsShowAvailableTurnoverByProduct(criteria);
             criteria.Products = criteria.ProductSelection;
 
             var treeWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
-            treeWinLoss.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
+            treeWinLoss.IsShowNotAvailableTurnover = false;
 
             SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByProductSession, treeWinLoss);
             return treeWinLoss;
@@ -81,11 +80,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         Justification = "Reviewed. Suppression is OK here.")]
         public TreeWinLoss GetTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
-            bool isShowNotAvailableTurnover = IsShowAvailableTurnoverByLevel(criteria);
             criteria.Products = criteria.ProductSelection;
 
             var winLossByComm = GetTreeWinLossDateRangeByLevel(criteria);
-            winLossByComm.IsShowNotAvailableTurnover = isShowNotAvailableTurnover;
+            winLossByComm.IsShowNotAvailableTurnover = false;
 
             switch (criteria.RoleId)
             {
@@ -173,12 +171,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         Justification = "Reviewed. Suppression is OK here.")]
         private TreeWinLoss GetTreeWinLossDateRangeByProduct(GetTreeWinLossByProductCriteria criteria)
         {
-            var isShowNotAvailableTurnover = IsShowAvailableTurnoverByProduct(criteria);
             var treeWinLoss = new TreeWinLoss
             {
                 ChildsInfo = new List<TreeWinLossInfo>(),
                 TotalInfo = new List<TreeWinLossInfo>(),
-                IsShowNotAvailableTurnover = isShowNotAvailableTurnover
+                IsShowNotAvailableTurnover = false
             };
             var currencies = ReportService.ExchangeCurrencies;
             var outputParam = new Hashtable();
@@ -723,62 +720,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
 
             return enabledVirtualRateUserDictionary;
-        }
-
-        private bool IsShowAvailableTurnoverByProduct(GetTreeWinLossByProductCriteria criteria)
-        {
-            bool isShowNotAvailableTurnover = false;
-            int compareCasinoSingleWalletLaunchDate = DateTime.Compare(criteria.FromDate, AppSettings.CasinoSingleWalletLaunchDate);
-            if (criteria.ProductSelection == "6" && compareCasinoSingleWalletLaunchDate < 0)
-            {
-                isShowNotAvailableTurnover = true;
-            }
-            else if (criteria.ProductSelection == "7,6" && compareCasinoSingleWalletLaunchDate < 0)
-            {
-                isShowNotAvailableTurnover = true;
-            }
-            else if (criteria.ProductSelection == "6,9" && compareCasinoSingleWalletLaunchDate < 0)
-            {
-                isShowNotAvailableTurnover = true;
-            }
-            else if (criteria.ProductSelection == "7,6,9" && compareCasinoSingleWalletLaunchDate < 0)
-            {
-                isShowNotAvailableTurnover = true;
-            }
-            else
-            {
-                isShowNotAvailableTurnover = false;
-            }
-
-            return isShowNotAvailableTurnover;
-        }
-
-        private bool IsShowAvailableTurnoverByLevel(GetTreeWinLossByLevelCriteria criteria)
-        {
-            bool isShowNotAvailableTurnover = false;
-            int compareCasinoSingleWalletLaunchDate = DateTime.Compare(criteria.FromDate, AppSettings.CasinoSingleWalletLaunchDate);
-            if (criteria.ProductSelection == "6" && compareCasinoSingleWalletLaunchDate < 0)
-            {
-                isShowNotAvailableTurnover = true;
-            }
-            else if (criteria.ProductSelection == "7,6" && compareCasinoSingleWalletLaunchDate < 0)
-            {
-                isShowNotAvailableTurnover = true;
-            }
-            else if (criteria.ProductSelection == "6,9" && compareCasinoSingleWalletLaunchDate < 0)
-            {
-                isShowNotAvailableTurnover = true;
-            }
-            else if (criteria.ProductSelection == "7,6,9" && compareCasinoSingleWalletLaunchDate < 0)
-            {
-                isShowNotAvailableTurnover = true;
-            }
-            else
-            {
-                isShowNotAvailableTurnover = false;
-            }
-
-            return isShowNotAvailableTurnover;
         }
 
         private SMAVirtualRate GetAllVirtualRate(GetAllVirtualRateCriteria criteria)

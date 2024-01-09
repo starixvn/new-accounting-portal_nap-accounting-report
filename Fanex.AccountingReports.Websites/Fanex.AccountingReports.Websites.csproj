@@ -659,7 +659,6 @@
     <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLossViewBetTypes.js" />
     <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\LeagueWinLossViewMatches.js" />
     <Content Include="Areas\WinLoss\Views\LeagueWinLoss\Scripts\ReportManager.js" />
-    <Compile Include="Controllers\DownloadReportController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs">
       <SubType>Code</SubType>

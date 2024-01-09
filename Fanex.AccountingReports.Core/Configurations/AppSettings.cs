@@ -22,18 +22,9 @@ namespace Fanex.AccountingReports.Core.Configurations
 
         private static bool _isUsingPort = false;
 
-        private static string _saveBetReportDataDirectory;
-
-        private static string _oldSaveBetReportDataDirectory;
-
-        private static DateTime _newSaveBetReportDate;
-
-        private static DateTime _saveBetDateWithZipFolder;
         private static string _dockerFolders;
 
         private static string _smaReportDataDirectory;
-
-        private static DateTime _casinoSigleWalletLaunchDate;
 
         private static string _dockerFileApi;
 
@@ -48,16 +39,9 @@ namespace Fanex.AccountingReports.Core.Configurations
 
             _isUsingPort = ConfigurationManager.AppSettings["IsUsingPort"] == "true";
 
-            _saveBetReportDataDirectory = ConfigurationManager.AppSettings["SaveBetReportDataDirectory"];
-            _oldSaveBetReportDataDirectory = ConfigurationManager.AppSettings["OldSaveBetReportDataDirectory"];
-            _newSaveBetReportDate = Convert.ToDateTime(ConfigurationManager.AppSettings["NewSaveBetReportDate"]);
-            _saveBetDateWithZipFolder = Convert.ToDateTime(ConfigurationManager.AppSettings["SaveBetDateWithZipFolder"]);
             _dockerFolders = ConfigurationManager.AppSettings["DockerFolders"];
 
             _smaReportDataDirectory = ConfigurationManager.AppSettings["SMAReportDataDirectory"];
-            Converter.To<int>(ConfigurationManager.AppSettings["AutoGenerateReportFunctionId"]);
-
-            _casinoSigleWalletLaunchDate = Converter.ToDateTime(ConfigurationManager.AppSettings["CasinoSingleWalletLaunchDate"]);
 
             _dockerFileApi = ConfigurationManager.AppSettings["DockerFileApi"];
         }
@@ -137,37 +121,11 @@ namespace Fanex.AccountingReports.Core.Configurations
             get { return _isUsingPort; }
         }
 
-        public static string SaveBetReportDataDirectory
-        {
-            get { return _saveBetReportDataDirectory; }
-        }
-
-        public static string OldSaveBetReportDataDirectory
-        {
-            get { return _oldSaveBetReportDataDirectory; }
-        }
-
-        public static DateTime NewSaveBetReportDate
-        {
-            get
-            {
-                return _newSaveBetReportDate;
-            }
-        }
-
         public static string DockerFolders
         {
             get
             {
                 return _dockerFolders;
-            }
-        }
-
-        public static DateTime SaveBetDateWithZipFolder
-        {
-            get
-            {
-                return _saveBetDateWithZipFolder;
             }
         }
 
@@ -229,14 +187,6 @@ namespace Fanex.AccountingReports.Core.Configurations
             get
             {
                 return _dockerFileApi;
-            }
-        }
-
-        public static DateTime CasinoSingleWalletLaunchDate
-        {
-            get
-            {
-                return _casinoSigleWalletLaunchDate;
             }
         }
 

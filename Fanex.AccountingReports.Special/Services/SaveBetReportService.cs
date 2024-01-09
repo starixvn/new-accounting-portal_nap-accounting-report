@@ -1,17 +1,12 @@
 namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
 {
-    using Fanex.AccountingReports.Core.Configurations;
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Special.Criteria.SaveBetReport;
     using Fanex.AccountingReports.Special.Models.SaveBetReport;
     using Fanex.Common;
     using Fanex.Data;
-    using Fanex.ServiceManagement.Utility;
     using RemotingRef;
-    using System;
-    using System.IO;
-    using System.Net;
 
     /// <summary>
     /// TODO: Update summary.
@@ -111,129 +106,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// Gets the file path.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Path of file.</returns>
-        public string GetFilePath(DownloadReportCriteria criteria)
-        {
-            string filePath = string.Empty;
-            string formatFileName = string.Empty;
-            string parentDirectory = string.Empty;
-
-            var eventDate = criteria.EventDate.Replace("_", "-");
-            DateTime reportDate = DateTime.ParseExact(eventDate, "MM-dd-yyyy", null);
-            string eventYear = reportDate.Year.ToString();
-            string eventMonth = reportDate.ToString("MM");
-            string eventDateStr = reportDate.ToString("dd");
-            string reportFolderContainer = string.Join(eventYear, eventMonth, eventDateStr);
-            string saveBetReportPath = AppSettings.SaveBetReportDataDirectory;
-
-            DateTime matchEventDate = Convert.ToDateTime(eventDate);
-            var compareReportDate = DateTime.Compare(matchEventDate, AppSettings.NewSaveBetReportDate);
-            var compareReportDateForZipFolder = DateTime.Compare(matchEventDate, AppSettings.SaveBetDateWithZipFolder);
-
-            if (compareReportDateForZipFolder >= 0)
-            {
-                parentDirectory = Path.Combine(saveBetReportPath, reportFolderContainer);
-                formatFileName = string.Join(".",criteria.ReportName, "zip");
-                filePath = Path.Combine(parentDirectory, formatFileName);
-
-                if (AppSettings.IsAuthenticate)
-                {
-                    string password = AppSettings.Password;
-                    if (AppSettings.IsEncryptPassword)
-                    {
-                        password = Common.Cryptography.CfsDeCrypt(password);
-                    }
-                    using (new NetworkConnection(@"\\" + AppSettings.IP, new NetworkCredential(AppSettings.UserName, password)))
-                    {
-                        if (!File.Exists(filePath))
-                        {
-                            formatFileName = string.Join(".", criteria.ReportName, "xlsx");
-                            filePath = Path.Combine(parentDirectory, formatFileName);
-                        }
-                    }
-                }
-                else
-                {
-                    if (!File.Exists(filePath))
-                    {
-                        formatFileName = string.Join(".", criteria.ReportName, "xlsx");
-                        filePath = Path.Combine(parentDirectory, formatFileName);
-                    }
-                }
-            }
-            else
-            {
-                if (compareReportDate >= 0)
-                {
-                    parentDirectory = Path.Combine(saveBetReportPath, reportFolderContainer);
-                    formatFileName = string.Join(".", criteria.ReportName, "xlsx");
-                    filePath = Path.Combine(parentDirectory, formatFileName);
-                }
-                else
-                {
-                    string oldSaveBetReportPath = AppSettings.OldSaveBetReportDataDirectory;
-                    parentDirectory = Path.Combine(oldSaveBetReportPath, reportFolderContainer);
-                    formatFileName = string.Join(".", criteria.ReportName, "xls");
-                    filePath = Path.Combine(parentDirectory, formatFileName);
-                }
-            }
-            return filePath;
-        }
-
-        /// <summary>
-        /// Gets the name of the file.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The file name.</returns>
-        public string GetFileName(DownloadReportCriteria criteria, string fileExtension)
-        {
-            return string.Join(".", criteria.ReportName, fileExtension);
-        }
-
-        /// <summary>
-        /// Gets the type of the MIME.
-        /// </summary>
-        /// <param name="fileExtension">The file extension.</param>
-        /// <returns>Mime type of file.</returns>
-        /// <exception cref="System.ArgumentNullException">Extension is null.</exception>
-        public string GetMimeType(string fileExtension)
-        {
-            if (fileExtension == null)
-            {
-                throw new ArgumentNullException("extension is null");
-            }
-
-            if (fileExtension.StartsWith("."))
-            {
-                fileExtension = fileExtension.Substring(1);
-            }
-
-            switch (fileExtension.ToLower())
-            {
-                case "xls":
-                    return "application/vnd.ms-excel";
-
-                case "xlsx":
-                    return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-
-                case "doc":
-                    return "application/msword";
-
-                case "zip":
-                    return "application/x-zip-compressed";
-
-                case "pdf":
-                    return "application/pdf";
-
-                default:
-                    return System.Net.Mime.MediaTypeNames.Application.Octet;
-            }
         }
     }
 }

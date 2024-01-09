@@ -130,11 +130,11 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
 
         AccReport.disableInput();
         AccReport.utility.CallAjax(this,
-                                    window.rootUrl + "Special/SaveBetReport/GetLeaguesBySport",
-                                    data,
-                                    self.renderLeagues,
-                                    self.renderLeagues,
-                                    AccReport.enableInput);
+            window.rootUrl + "Special/SaveBetReport/GetLeaguesBySport",
+            data,
+            self.renderLeagues,
+            self.renderLeagues,
+            AccReport.enableInput);
     };
 
     self.renderLeagues = function (rs) {
@@ -163,7 +163,7 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
             },
             success: function (response) {
                 if (response.success == false) {
-                    self.downFileFromWindow(reportName, eventDate);
+                    AccReport.popUp.show("Sorry, File not found in docker. Access Denied !!!");
                 }
                 else {
                     var bytes = self.base64ToBytes(response.data.fileContents);
@@ -190,33 +190,6 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
             }
         });
     };
-
-    self.downFileFromWindow = function (reportName, eventDate) {
-        _params.downloadReportParams.ReportName = reportName;
-        _params.downloadReportParams.EventDate = eventDate;
-
-        $.ajax({
-            type: "GET",
-            url: window.rootUrl + "Special/SaveBetReport/CheckFileExist",
-            data: _params.downloadReportParams,
-            dataType: "json",
-            success: function (response) {
-                if (response.success == false) {
-                    AccReport.popUp.show("Sorry, File not found.");
-                }
-                else {
-                    AccReport.downloadFile(window.rootUrl + "Special/SaveBetReport/DownLoadSaveBetReport", _params.downloadReportParams);
-                }
-            },
-            error: function (jqXHR, event, ajaxSettings) {
-                if (jqXHR.status &&
-                    jqXHR.status == AccReportData.Constants.HtmlErrorCode.SystemError) {
-                    var r = jQuery.parseJSON(jqXHR.responseText);
-                    AccReport.popUp.show(r.message);
-                }
-            }
-        });
-    }
 
     self.base64ToBytes = function (base64) {
         var s = window.atob(base64);
@@ -246,11 +219,11 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
 
         AccReport.disableInput();
         AccReport.utility.CallAjax(this,
-                                    window.rootUrl + "Special/SaveBetReport/GetSaveBetReport",
-                                    data,
-                                    self.renderSaveBetReport,
-                                    self.renderSaveBetReport,
-                                    AccReport.enableInput);
+            window.rootUrl + "Special/SaveBetReport/GetSaveBetReport",
+            data,
+            self.renderSaveBetReport,
+            self.renderSaveBetReport,
+            AccReport.enableInput);
     };
 
     self.renderSaveBetReport = function (rs) {
@@ -273,15 +246,12 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
             { HeaderText: "HomeTeam", Width: 250, Name: "ColEvent", HeaderAlign: "center", CellAlign: "right", MergeHeaderColNumber: 3 },
             { HeaderText: "Vs", Width: 50, Name: "ColVs", HeaderAlign: "center", CellAlign: "center" },
             { HeaderText: "AwayTeam", Width: 250, Name: "ColAwayTeam", HeaderAlign: "center", CellAlign: "left" },
-            { HeaderText: "Download", Width: 120, Name: "ColDownload", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (cellValue) {
-                var eventDate = cellValue.Value.EventDate;
-                if (new Date(newSaveBetReportDate) <= new Date(_params.saveBetReportParams.Date)) {
+            {
+                HeaderText: "Download", Width: 120, Name: "ColDownload", HeaderAlign: "center", CellAlign: "center", CustomCellRender: function (cellValue) {
+                    var eventDate = cellValue.Value.EventDate;
                     var reportName = cellValue.Value.MatchId + "_" + cellValue.Value.EventDate + "_" + cellValue.Value.SportType;
                     return '<a class="downloadBtn" onclick="downloadSaveBetReport(\'' + reportName + '\', \'' + eventDate + '\')"></a>';
-                } else {
-                    return '<a class="downloadBtn" onclick="downloadSaveBetReport(\'' + cellValue.Value.MatchId + '\', \'' + eventDate + '\')"></a>';
                 }
-            }
             }
         ];
 
@@ -292,12 +262,12 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
             var match = rs.Matchs[i];
             bodyData.push({
                 Columns: [{ Name: "ColMatchId", Value: match.MatchId },
-                        { Name: "ColMatchCode", Value: match.MatchCode },
-                        { Name: "ColEvent", Value: match.HomeTeam },
-                        { Name: "ColVs", Value: "Vs" },
-                        { Name: "ColAwayTeam", Value: match.AwayTeam },
-                        { Name: "ColDownload", Value: match }
-                    ]
+                { Name: "ColMatchCode", Value: match.MatchCode },
+                { Name: "ColEvent", Value: match.HomeTeam },
+                { Name: "ColVs", Value: "Vs" },
+                { Name: "ColAwayTeam", Value: match.AwayTeam },
+                { Name: "ColDownload", Value: match }
+                ]
             });
         }
 
@@ -323,7 +293,7 @@ Fanex.AccountingReports.Special.SaveBetReport.SaveBetReport = function () {
             }
         };
 
-      
+
         _tables.report.removeClass("display-none").fanexGrid(gridOptions);
     };
 
