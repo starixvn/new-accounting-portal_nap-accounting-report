@@ -1824,10 +1824,6 @@
     <Content Include="Views\Common\AccessDenied.cshtml" />
     <Content Include="Views\Common\UnderMaintenance.cshtml" />
     <Content Include="Views\Home\MostVisitedPages\Styles\MostVisitedPages.less" />
-    <Content Include="App_Configuration\LicenseeEmailSection.config">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\Test\Index.cshtml" />
     <Content Include="App_Configuration\Web.PRO.AppSettings.config">
       <SubType>Designer</SubType>

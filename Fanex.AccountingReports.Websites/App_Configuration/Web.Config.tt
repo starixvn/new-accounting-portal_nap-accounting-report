@@ -17,7 +17,7 @@
 <configuration>
  <configSections>
     
-    <section name="LicenseeEmailSection" type="Fanex.AccountingReports.Licensee.Core.Configurations.LicenseeEmailSection, Fanex.AccountingReports.Licensee, Version=1.0.0.0, Culture=neutral" />
+    
     <section name="LegendSection" type="Fanex.AccountingReports.Core.Configurations.LegendSection, Fanex.AccountingReports.Core, Version=1.0.0.0, Culture=neutral" />
         <section name="RMSection" type="Fanex.AccountingReports.Core.Configurations.RMSection, Fanex.AccountingReports.Core, Version=1.0.0.0, Culture=neutral" />
     <section name="NapSettings" type="Fanex.NAP.Core.Configuration.NapSettings, Fanex.NAP.Core.Client" />    

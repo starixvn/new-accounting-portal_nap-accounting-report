@@ -179,9 +179,6 @@
     <Compile Include="Controllers\LicenseeController.cs" />
     <Compile Include="Controllers\NegativeBalanceController.cs" />
     <Compile Include="Controllers\PeakConcurrentUsersController.cs" />
-    <Compile Include="Core\Configurations\LicenseeEmailSection\MailCollection.cs" />
-    <Compile Include="Core\Configurations\LicenseeEmailSection\MailElement.cs" />
-    <Compile Include="Core\Configurations\LicenseeEmailSection\LicenseeEmailSection.cs" />
     <Compile Include="Criteria\CompanyWinLoss\CompanyWinLossCriteria.cs" />
     <Compile Include="Criteria\CompanyWinLoss\GetCurrenciesByLicenseeCriteria.cs" />
     <Compile Include="Criteria\CompanyWinLoss\ProductListByLicenseCriteria.cs" />
@@ -232,7 +229,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Core\Configurations\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">
       <Project>{A5608298-26C2-4F05-A7FD-AA8C0700ED38}</Project>

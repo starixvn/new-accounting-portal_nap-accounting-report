@@ -12,7 +12,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.AccountingReports.Licensee.Constants;
-    using Fanex.AccountingReports.Licensee.Core.Configurations;
     using Fanex.AccountingReports.Licensee.Criteria.NegativeBalance;
     using Fanex.AccountingReports.Licensee.Models.NegativeBalance;
     using Fanex.AccountingReports.Licensee.Repositories.Implement;
@@ -84,37 +83,8 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
                 List<string> licensees = rawData.Select(s => s.Site).Distinct().ToList();
                 foreach (var licensee in licensees)
                 {
-                    var defaultMail = new NegativeBalanceMemberMailFormat();
                     var mail = new NegativeBalanceMemberMailFormat();
-                    bool isDefault = false;
-                    bool isExist = false;
-                    foreach (MailElement mailRow in LicenseeEmailSection.Instance.Mails)
-                    {
-                        if (mailRow.Name.ToLower() == "default" && !isDefault)
-                        {
-                            defaultMail.Bcc = mailRow.Bcc;
-                            defaultMail.To = mailRow.To;
-                            defaultMail.Cc = mailRow.Cc;
-                            defaultMail.Site = mailRow.Name;
-                            isDefault = true;
-                        }
-
-                        if (mailRow.Name.ToLower() == licensee.ToLower())
-                        {
-                            isExist = true;
-                            mail.Bcc = mailRow.Bcc;
-                            mail.To = mailRow.To;
-                            mail.Cc = mailRow.Cc;
-                            mail.Site = mailRow.Name;
-                            continue;
-                        }
-                    }
-
-                    if (!isExist)
-                    {
-                        mail = defaultMail;
-                        mail.Site = licensee;
-                    }
+                    mail.Site = licensee;
 
                     model.MailList.Add(mail);
                 }
