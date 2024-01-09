@@ -1002,9 +1002,6 @@
     <Content Include="themes\base\img\icn-expand.png" />
     <Content Include="Views\Errors\Error404.htm" />
     <Content Include="Views\Errors\GeneralError.htm" />
-    <Content Include="App_Configuration\TreeWinLossProduct.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="WhoAmI1.aspx" />
     <Content Include="wwwroot\nap-auth\AccessDenied.css" />
     <Content Include="wwwroot\nap-auth\auth-sample.css" />
