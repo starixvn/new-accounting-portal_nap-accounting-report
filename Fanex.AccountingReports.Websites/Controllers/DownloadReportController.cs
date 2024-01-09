@@ -35,6 +35,7 @@ namespace Fanex.AccountingReports.Websites.Controllers
 
         public ActionResult DownloadReport(string time, string reportName)
         {
+            Fanex.Logging.Logger.Log.Error($"DownloadReportController-DownloadReport-{time}-{reportName} was called");
             DateTime currentTime = DateTime.Now;
 
             string parentReportPath = AppSettings.SMAReportDataDirectory;
