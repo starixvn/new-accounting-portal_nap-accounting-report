@@ -90,23 +90,22 @@ namespace Fanex.AccountingReports.Special.Controllers
         [HandleAjaxError]
         public ActionResult CheckFileExist(DownloadReportCriteria criteria)
         {
-            bool exists = false;
-            string filePath = _saveBetReportService.GetFilePath(criteria);
+            //bool exists = false;
+            //string filePath = _saveBetReportService.GetFilePath(criteria);
 
-            if (AppSettings.IsAuthenticate)
-            {
-                using (new NetworkConnection(@"\\" + ip, _networkCredential))
-                {
-                    exists = System.IO.File.Exists(filePath);
-                }
-            }
-            else
-            {
-                exists = System.IO.File.Exists(filePath);
-            }
+            //if (AppSettings.IsAuthenticate)
+            //{
+            //    using (new NetworkConnection(@"\\" + ip, _networkCredential))
+            //    {
+            //        exists = System.IO.File.Exists(filePath);
+            //    }
+            //}
+            //else
+            //{
+            //    exists = System.IO.File.Exists(filePath);
+            //}
 
-            return Json(new { success = exists }, JsonRequestBehavior.AllowGet);
-
+            return Json(new { success = false }, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
