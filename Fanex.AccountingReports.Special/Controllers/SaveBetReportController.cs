@@ -20,23 +20,9 @@ namespace Fanex.AccountingReports.Special.Controllers
     public class SaveBetReportController : BaseController
     {
         private readonly SaveBetReportService _saveBetReportService;
-        private NetworkCredential _networkCredential;
-        private string ip = AppSettings.IP;
-        private string username = AppSettings.UserName;
-        private string password = AppSettings.Password;
-
+        
         public SaveBetReportController()
         {
-            if (AppSettings.IsAuthenticate)
-            {
-                if (AppSettings.IsEncryptPassword)
-                {
-                    password = Cryptography.CfsDeCrypt(password);
-                }
-
-                _networkCredential = new NetworkCredential(username, password);
-            }
-
             this._saveBetReportService = new SaveBetReportService();
         }
 
