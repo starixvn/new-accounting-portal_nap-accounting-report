@@ -25,6 +25,10 @@
         new SiteInfo
         {
             Environment = SiteEnvironment.PROAWS
+        },
+		 new SiteInfo
+        {
+            Environment = SiteEnvironment.KLDR
         }
     };
 #>
@@ -37,7 +41,8 @@
         UAT,
         MNL,
         PRO,
-        PROAWS
+        PROAWS,
+		KLDR
     }
     class SiteInfo
     {
@@ -54,6 +59,7 @@
                     case SiteEnvironment.PRO:
                     case SiteEnvironment.PROAWS:
                     case SiteEnvironment.MNL:
+					case SiteEnvironment.KLDR:
                         return "LIVE";
                     default:
                         return "UAT";
@@ -72,6 +78,7 @@
                     case SiteEnvironment.MNL:
                     case SiteEnvironment.UAT:
 					case SiteEnvironment.SIT:
+					case SiteEnvironment.KLDR:
                         return "4";
                     default:
                         return "3";
@@ -112,6 +119,8 @@
 						return "http://vn-net-lb-fb2f50db9dc92512.elb.ap-northeast-1.amazonaws.com:8788";
 					case SiteEnvironment.MNL:
                         return "http://10.2.27.8:8788";
+					case SiteEnvironment.KLDR:
+                        return "http://10.143.8.200:1710";
 					default:
                         return string.Empty;
                 }
@@ -138,6 +147,8 @@
                         return "reports.sportsfun.app";
 					case SiteEnvironment.MNL:
                         return "nap-report.ibcbk.com";
+					case SiteEnvironment.KLDR:
+                        return "reports.byb6181.com";
 					default:
                         return string.Empty;
                 }
@@ -157,6 +168,7 @@
 					case SiteEnvironment.PRO:
                     case SiteEnvironment.PROAWS:
 					case SiteEnvironment.MNL:
+					case SiteEnvironment.KLDR:
 						return "/AccReport";
 					default:
                         return string.Empty;
@@ -182,6 +194,8 @@
                         return "http://172.16.2.44:7446/api";
                     case SiteEnvironment.MNL:
                         return "http://10.40.40.202:8889/api";
+					case SiteEnvironment.KLDR:
+                        return "http://10.143.8.200:8889/api";
                     default:
                         return string.Empty;
                 }
@@ -217,6 +231,7 @@
 					case SiteEnvironment.PRO:
                     case SiteEnvironment.PROAWS:
                     case SiteEnvironment.MNL:
+					case SiteEnvironment.KLDR:
                         return "NAP-Report";
                     default:
                         return "NAP-Report-LOCAL";
@@ -233,6 +248,7 @@
 					case SiteEnvironment.PRO:
                     case SiteEnvironment.PROAWS:
                     case SiteEnvironment.MNL:
+					case SiteEnvironment.KLDR:
 						return "false";
                     default:
                         return "true";
@@ -249,6 +265,7 @@
 				    case SiteEnvironment.PRO:
                     case SiteEnvironment.PROAWS:
                     case SiteEnvironment.MNL:
+					case SiteEnvironment.KLDR:
 						return "On";
                     default:
                         return "Off";
@@ -272,6 +289,8 @@
                         return "stateConnectionString=\"tcpip=10.2.27.19:42424\"";
                     case SiteEnvironment.MNL:
                         return "stateConnectionString=\"tcpip=10.2.12.10:42424\"";
+					case SiteEnvironment.KLDR:
+                        return "stateConnectionString=\"tcpip=10.143.8.200:42424\"";
 
                     default:
                         return "stateConnectionString=\"tcpip=10.18.200.131:42424\"";

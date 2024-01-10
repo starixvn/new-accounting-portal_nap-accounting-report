@@ -41,6 +41,12 @@
       "Project": "",
       "Path": "App_Configuration",
       "Properties": {}
+    },
+    {
+      "Filename": "Web.KLDR.config",
+      "Project": "",
+      "Path": "App_Configuration",
+      "Properties": {}
     }
   ]
 }

@@ -1,3 +1,6 @@
+using System.Diagnostics;
+using Fanex.Logging;
+
 namespace Fanex.AccountingReports.Core.Web.Controllers
 {
     using System;
@@ -78,7 +81,7 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             AppSession.CurrentActionName = filterContext.ActionDescriptor.ActionName;
-            base.OnActionExecuting(filterContext);
+			base.OnActionExecuting(filterContext);
         }
 
         protected override void OnResultExecuting(ResultExecutingContext filterContext)
