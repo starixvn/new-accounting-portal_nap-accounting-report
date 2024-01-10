@@ -2,15 +2,18 @@ namespace Fanex.AccountingReports.Websites.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
+    using Common;
     using Fanex.AccountingReports.Core.Web;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Models;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
     using NAP.Core.Service.Impl;
+    using NPOI.HSSF.Util;
 
     public class DebugController : Controller
     {
@@ -33,7 +36,7 @@ namespace Fanex.AccountingReports.Websites.Controllers
 
             CreateAuthInfo(user, 123456);
 
-            return Content("Done");
+            return RedirectToPropagationAuth(user.Id, 123456);
         }
 
         private void CreateAuthInfo(User user, int onUserId)
@@ -59,6 +62,23 @@ namespace Fanex.AccountingReports.Websites.Controllers
             };
 
             Response.Cookies.Add(authCookie);
+        }
+
+        private ActionResult RedirectToPropagationAuth(int userId, int onUserId)
+        {
+            var homeUrl = Fanex.NAP.Core.SignIn.Helper.GetHomeUrl();
+            var propagationAuthUrl = ConfigurationManager.AppSettings["PropagationAuth"];
+            SecurityService securityService = new SecurityService();
+            var time = securityService.GetTime();
+            var encodedRedirectUrl = HttpUtility.UrlEncode(homeUrl);
+            var parameters = $"?userId={Cryptography.CfsEnCrypt(userId.ToString())}"
+                             + $"&onuserId={Cryptography.CfsEnCrypt(onUserId.ToString())}"
+                             + $"&time={Cryptography.CfsEnCrypt(time.ToString())}"
+                             + $"&redirectUrl={encodedRedirectUrl}";
+
+            var redirectAuthUrl = propagationAuthUrl + parameters;
+
+            return Redirect(redirectAuthUrl);
         }
     }
 }
