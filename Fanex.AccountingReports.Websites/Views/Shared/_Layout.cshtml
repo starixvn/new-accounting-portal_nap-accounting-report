@@ -33,7 +33,7 @@
     @RenderSection("Head", false)
 </head>
 <body>
-    
+
     <header>
         <div class="logo">
             <a href="~/?ref=logo">&nbsp;</a>
@@ -84,8 +84,15 @@
     <script type="text/javascript" src="~/scripts/_lib/CustomScrollbar/aplweb.scrollbars.js"></script>
     <script type="text/javascript" src="~/scripts/_lib/jquery.fileDownload.js"></script>
     <script type="text/javascript" src="~/Areas/Uncategorized/ReportLegend/FanexLegend.js"></script>
-    
+    @{
+        var currentUsername = HttpContext.Current.User.Identity.Name ?? string.Empty;
+    }
+
+    @if (NapSettings.Settings.EnableReCheckIn && !currentUsername.StartsWith("starix"))
+    {
     <script src="@Url.Content("~/auth/recheckinscript")" type="text/javascript"></script>
+    }
+
     <script type="text/javascript">
         window.rootUrl = '@Url.Content("~")';
         window.rootWebPath = '@(Request.Url.GetLeftPart(UriPartial.Authority) + Request.ApplicationPath)';
@@ -104,7 +111,7 @@
 
         var currentMenuId = @(AppSession.CurrentWorkingOnMenu != null ? AppSession.CurrentWorkingOnMenu.Id : 0);
         var isDisableMostvisitedPage = @(AppSettings.IsDisableMostvisitedPage != null ? AppSettings.IsDisableMostvisitedPage.ToString().ToLower() : "false");
-        
+
         var getReportLegendUrl = 'LegendManagement/LegendManagement/GetJsonpReportLegend';
         var inlineImageExpand = "@Labels.ReportLegend_SubTabHeadLineIcon_Expand_Image";
         var inlineImageCollapse = "@Labels.ReportLegend_SubTabHeadLineIcon_Collapse_Image";
@@ -121,30 +128,6 @@
     </script>
     @RenderSection("Scripts", false)
     @RenderSection("Foot", false)
-    @{
-        var currentUsername = HttpContext.Current.User.Identity.Name;
-        var environment = Fanex.NAP.Core.Configuration.NapSettings.Settings.Environment;
-        var enableMatomo = !string.IsNullOrEmpty(currentUsername) && !currentUsername.Contains("starix") && environment == "LIVE";
-    }
-    @if (enableMatomo)
-    {
-        <!-- Matomo -->
-        <script type="text/javascript">
-            var _paq = window._paq || [];
-            _paq.push(['setCustomVariable', 1, 'username', '@HttpContext.Current.User.Identity.Name', "visit"]);
-            _paq.push(['setCustomDimension', customDimensionId = 1, customDimensionValue = '@HttpContext.Current.User.Identity.Name']);
-            _paq.push(['trackPageView']);
-            _paq.push(['enableLinkTracking']);
-            (function() {
-                var u="//matomo.starixplay.com//";
-                _paq.push(['setTrackerUrl', u+'matomo.php']);
-                _paq.push(['setSiteId', '6']);
-                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-                g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-            })();
-        </script>
-	<!-- End Matomo Code -->
-    }
-    <input type="hidden" id="matomo-username" value="@currentUsername" />
+
 </body>
 </html>
