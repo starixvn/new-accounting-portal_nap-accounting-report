@@ -500,6 +500,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\OnebookUMInitializer.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DebugController.cs" />
     <Compile Include="WhoAmI1.aspx.cs">
       <DependentUpon>WhoAmI1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
