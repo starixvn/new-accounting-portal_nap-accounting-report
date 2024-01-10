@@ -11,26 +11,6 @@ namespace Fanex.AccountingReports.Core.Extensions
         /// Formats the specified value.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>The formatted string.</returns>
-        public static string Format(this int value)
-        {
-            return DoFormat(value, 0);
-        }
-
-        /// <summary>
-        /// Formats the specified value.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <returns>The formatted string.</returns>
-        public static string Format(this object value)
-        {
-            return DoFormat(value, 0);
-        }
-
-        /// <summary>
-        /// Formats the specified value.
-        /// </summary>
-        /// <param name="value">The value.</param>
         /// <param name="decDigits">The decimal digits.</param>
         /// <returns>The formatted string.</returns>
         public static string Format(this decimal value, byte decDigits)
@@ -56,17 +36,6 @@ namespace Fanex.AccountingReports.Core.Extensions
         /// <param name="decDigits">The decimal digits.</param>
         /// <returns>The formatted string.</returns>
         public static string Format(this double value, byte decDigits)
-        {
-            return DoFormat(value, decDigits);
-        }
-
-        /// <summary>
-        /// Formats the specified value.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        /// <param name="decDigits">The decimal digits.</param>
-        /// <returns>The formatted string.</returns>
-        public static string Format(this float value, byte decDigits)
         {
             return DoFormat(value, decDigits);
         }
