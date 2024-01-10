@@ -20,12 +20,12 @@
         </div>
     </div>
 </div>
-@{     
+@{
     DateTime reportDate = DateTime.Today;
 
     int betTypeId = 0;
     string betType = string.Empty;
-    var beginSupportMPDate = AppSettings.MixParlayAdvanceSupportDate;
+    var beginSupportMPDate = new DateTime(2011, 11, 15);
     if (Request["reportDate"] != null)
     {
         reportDate = Converter.ToDateTime(Request["reportDate"]);

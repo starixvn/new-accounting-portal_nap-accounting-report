@@ -18,8 +18,6 @@ namespace Fanex.AccountingReports.Core.Configurations
 
         private static int _topRateMostVisitedPages;
 
-        private static DateTime _mixParlayAdvanceSupportDate;
-
         private static bool _isUsingPort = false;
 
         private static string _dockerFolders;
@@ -35,7 +33,6 @@ namespace Fanex.AccountingReports.Core.Configurations
             _multiAgentLicensses = GetMultiAgentLicensses();
             IntervalGetMostVisitedPage = Converter.ToInt(ConfigurationManager.AppSettings["IntervalGetMostVisitedPage"]);
             _topRateMostVisitedPages = Converter.ToInt(ConfigurationManager.AppSettings["MostVisitedPages_MaxPages"]);
-            _mixParlayAdvanceSupportDate = Converter.ToDateTime(ConfigurationManager.AppSettings["MixParlayAdvanceSupportDate"]);
 
             _isUsingPort = ConfigurationManager.AppSettings["IsUsingPort"] == "true";
 
@@ -73,14 +70,6 @@ namespace Fanex.AccountingReports.Core.Configurations
             get
             {
                 return _multiAgentLicensses;
-            }
-        }
-
-        public static DateTime MixParlayAdvanceSupportDate
-        {
-            get
-            {
-                return _mixParlayAdvanceSupportDate;
             }
         }
 
