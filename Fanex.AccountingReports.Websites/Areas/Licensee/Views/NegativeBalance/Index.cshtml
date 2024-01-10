@@ -44,56 +44,9 @@
         <div class="grid-title-label" id="reporttile">
             @LicenseeResources.NegativeBalance_Report</div>
         <div class="grid-toolbox">
-            <input type="button" id="btnSendMail" class="btnSendMail" title="Send Mail" />
             <input type="button" id="btnExport" class="btnExcel" title="Export to Excel" />
         </div>
-        <div id="divSendMailContainer" style="display: none;">
-        </div>
-        <script type="text/x-dot-template" id="scriptSendMailTemplate">
-                                <div class="wrapper" >
-                                <div class="content" style="width:580px;">
-                                <div class="boundary" >
-                                <table id="header" >
-                                   <tr>
-                                      <th style="width:30%">Licensees</th>
-                                      <th style="width:40%">To</th>
-                                      <th style="width:30%">CC</th>
-                                   </tr>
-                                </table>
-                                </div>
-                                <div id="box" class="box">
-                                <table id="tbl-content" >
-                                    {{~it.Mails :value:index}}
-                                                      <tr>
-					                                    <td style="width:30%">
-						                                   {{=value.Site}}
-					                                    </td>
-					                                    <td style="width:40%" >
-						                                   {{=negativeBalance.bindCCMail(value.To)}}
-					                                    </td>
-					                                    <td style="width:30%">
-						                                   {{=negativeBalance.bindCCMail(value.Cc)}}
-					                                    </td>                         
-				                                    </tr>           
-
-                                       {{~}}
-                                    </table>
-                                    </div><!--end #box-->
-                                    </div><!--end #content-->
-                                    </div><!--end #wrapper-->
-                                    <div class="margin-top3">
-                                        <span unselectable="on" class="textButtonTable composeHeaderButton colorBTK4" transparent="false"
-                                            title="Add receiver"><span class="buttonOutter buttonOutterflatRight colorBT3 colorBTK4">
-                                                <div class="subjectSpan">
-                                                    Subject:</div>
-                                            </span></span>
-                                        <input class="compHeaderField inputField colorK3" id="tbxSubject" value="{{=it.Subject}}"
-                                            type="text" style="width: 470px; height: 28px;" readonly />
-                                    </div>
-                                    <div class="margin-top3">
-                                        <textarea id="tbxSendMailContent" class="compHeaderField textarea colorK3 contentMail" readonly>{{=it.Content}}</textarea>
-                                    </div>
-        </script>
+        
     </div>
     <div id="negativeBalance" class="freegrid display-none">
         <div class="free-cell free-top-left">
