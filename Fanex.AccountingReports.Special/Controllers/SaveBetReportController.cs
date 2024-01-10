@@ -20,23 +20,9 @@ namespace Fanex.AccountingReports.Special.Controllers
     public class SaveBetReportController : BaseController
     {
         private readonly SaveBetReportService _saveBetReportService;
-        private NetworkCredential _networkCredential;
-        private string ip = AppSettings.IP;
-        private string username = AppSettings.UserName;
-        private string password = AppSettings.Password;
-
+        
         public SaveBetReportController()
         {
-            if (AppSettings.IsAuthenticate)
-            {
-                if (AppSettings.IsEncryptPassword)
-                {
-                    password = Cryptography.CfsDeCrypt(password);
-                }
-
-                _networkCredential = new NetworkCredential(username, password);
-            }
-
             this._saveBetReportService = new SaveBetReportService();
         }
 
@@ -79,69 +65,6 @@ namespace Fanex.AccountingReports.Special.Controllers
             jsonResult.MaxJsonLength = int.MaxValue;
             jsonResult.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
             return jsonResult;
-        }
-
-        /// <summary>
-        /// Checks the file exist.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>File is exist or not.</returns>
-        [HttpGet]
-        [HandleAjaxError]
-        public ActionResult CheckFileExist(DownloadReportCriteria criteria)
-        {
-            //bool exists = false;
-            //string filePath = _saveBetReportService.GetFilePath(criteria);
-
-            //if (AppSettings.IsAuthenticate)
-            //{
-            //    using (new NetworkConnection(@"\\" + ip, _networkCredential))
-            //    {
-            //        exists = System.IO.File.Exists(filePath);
-            //    }
-            //}
-            //else
-            //{
-            //    exists = System.IO.File.Exists(filePath);
-            //}
-
-            return Json(new { success = false }, JsonRequestBehavior.AllowGet);
-        }
-
-        /// <summary>
-        /// Down load save bet report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>
-        /// Save bet report excel file.
-        /// </returns>
-        [HttpGet]
-        [HandleAjaxError]
-        public ActionResult DownLoadSaveBetReport(DownloadReportCriteria criteria)
-        {
-            if (AppSettings.IsAuthenticate)
-            {
-                using (new NetworkConnection(@"\\" + ip, _networkCredential))
-                {
-                    return DownloadExcelFiles(criteria);
-                }
-            }
-            else
-            {
-                return DownloadExcelFiles(criteria);
-            }
-
-        }
-
-        private ActionResult DownloadExcelFiles(DownloadReportCriteria criteria)
-        {
-            string filePath = _saveBetReportService.GetFilePath(criteria);
-            byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
-            string fileExtension = Path.GetExtension(filePath);
-            var mimeType = this._saveBetReportService.GetMimeType(fileExtension);
-            string fileName = _saveBetReportService.GetFileName(criteria, fileExtension);
-            var contentResult = File(fileBytes, mimeType, fileName);
-            return contentResult;
         }
     }
 }

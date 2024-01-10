@@ -8,9 +8,6 @@ namespace Fanex.BetList.Accounting.Services
     /// </summary>
     public static class ReportService
     {
-        public const string BetTrans14SPSuffix = "_14";
-        public const string WarehouseSPSuffix = "_WH";
-
         #region StaticProperties
 
         public static BalanceUp BalanceUp
