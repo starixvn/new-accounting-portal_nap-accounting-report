@@ -80,7 +80,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
                             Id = Converter.ToInt(row.Id),
                             Name = Converter.ToString2(row.Name),
                             Href = Converter.ToString2(row.Url),
-                            System = Constants.SystemName.AccNapReport,
+                            System = WebSettings.System,
                             ParentId = Converter.ToInt(parentId),
                             FunctionName = Converter.ToString2(row.FunctionName),
                             IsHide = !Converter.ToBool(row.IsActive),
