@@ -5,16 +5,8 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
     using Fanex.AccountingReports.WinLoss.Criteria.DailyMixParlayWinLoss;
     using Fanex.Data;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class DailyMixParlayWinLossRepository
     {
-        /// <summary>
-        /// Gets the combination win loss report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The combination win loss report.</returns>
         public List<dynamic> GetCombinationWinLossReport(GetCombinationWinLossReportCriteria criteria)
         {
             DataSet result = null;

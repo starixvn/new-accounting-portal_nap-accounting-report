@@ -2,9 +2,6 @@ namespace Fanex.BetList.Accounting.Models
 {
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Tennis model.
-    /// </summary>
     public class TennisLeagueResult
     {
         public TennisLeagueResult()

@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Balance.Criteria.DirectBalance
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetDirectBalanceCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]
@@ -26,10 +23,6 @@ namespace Fanex.AccountingReports.Balance.Criteria.DirectBalance
             return true;
         }
 
-        /// <summary>
-        /// Gets the setting key.
-        /// </summary>
-        /// <returns>Setting key.</returns>
         public override string GetSettingKey()
         {
             var storeProcedureName = string.Empty;

@@ -9,17 +9,8 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
     using System.Data;
     using System.Diagnostics.CodeAnalysis;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class LeagueWinLossRepository
     {
-        /// <summary>
-        /// Gets the league win loss.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="outputParam">The output parameter.</param>
-        /// <returns>The league win loss.</returns>
         public List<LeagueWinLossEntity> GetLeagueWinLoss(ICriteria criteria)
         {
             DataSet result = null;
@@ -68,13 +59,6 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
             return leagueWinLoss;
         }
 
-        /// <summary>
-        /// Gets the league win loss by sport.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="eightRMTable">The eight RM table.</param>
-        /// <param name="barmTable">The BARM table.</param>
-        /// <returns>The league win loss by sport.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -119,12 +103,6 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
             return bettypeWinLoss;
         }
 
-        /// <summary>
-        /// Gets the league win loss by bet type.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="outputParam">The output parameter.</param>
-        /// <returns>The league win loss by bet type.</returns>
         public List<MatchEntity> GetMatches(ICriteria criteria)
         {
             DataSet result = null;

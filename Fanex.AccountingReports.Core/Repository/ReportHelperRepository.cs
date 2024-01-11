@@ -7,16 +7,8 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
     using Fanex.Common;
     using Fanex.Data;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class ReportHelperRepository
     {
-        /// <summary>
-        /// Gets the username suggestion.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The username suggestion.</returns>
         public List<dynamic> UserNameSuggestion(UserNameSuggestionCriteria criteria)
         {
             DataSet result = null;
@@ -42,11 +34,6 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
             return report;
         }
 
-        /// <summary>
-        /// Gets the currency by licensee.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The currency by licensee.</returns>
         public List<dynamic> GetCurrencyByLicensee(GetCurrencyByLicenseeCriteria criteria)
         {
             DataSet result = null;
@@ -73,11 +60,6 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
             return report;
         }
 
-        /// <summary>
-        /// Gets the licensee support by product.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The licensee support by product.</returns>
         public List<dynamic> GetLicensee_SupportByProduct(GetLicensee_SupportByProductCriteria criteria)
         {
             DataSet result = null;
@@ -104,11 +86,6 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
             return report;
         }
 
-        /// <summary>
-        /// Gets the DWH date range.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>DWH date range.</returns>
         public DWHDateRange GetDWHDateRange(GetDWHDateRangeCriteria criteria)
         {
             var result = new DWHDateRange();

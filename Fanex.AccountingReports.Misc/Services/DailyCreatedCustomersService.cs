@@ -13,29 +13,14 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
     using Fanex.AccountingReports.Misc.Resources;
     using Fanex.Common;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class DailyCreatedCustomersService : ServiceBase
     {
-        /// <summary>
-        /// The maximum number of rows that one sheet supports.
-        /// </summary>
         private static readonly int MaxRowsSheet = 65000;
 
-        /// <summary>
-        /// The name of total cell.
-        /// </summary>
         private static readonly string TotalName = "Total";
 
-        /// <summary>
-        /// The session key to get report.
-        /// </summary>
         private string _dailyCreatedCustomersSessionKey;
 
-        /// <summary>
-        /// The session key to get detail report.
-        /// </summary>
         private string _dailyCreatedCustomersDetailSessionKey;
 
         public DailyCreatedCustomersService()
@@ -46,37 +31,17 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                                                         + AppSession.CurrentUser.Username;
         }
 
-        /// <summary>
-        /// Type of Report.
-        /// </summary>
         private enum ReportRowType
         {
-            /// <summary>
-            /// The total.
-            /// </summary>
             Total = 1,
 
-            /// <summary>
-            /// The grand total.
-            /// </summary>
             GrandTotal = 2,
 
-            /// <summary>
-            /// The normal even row.
-            /// </summary>
             NormalEvenRow = 3,
 
-            /// <summary>
-            /// The normal odd row.
-            /// </summary>
             NormalOddRow = 4
         }
 
-        /// <summary>
-        /// Gets the report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The report.</returns>
         public SummaryInformation GetReport(GetDailyCreatedCustomersCriteria criteria)
         {
             var report = new SummaryInformation
@@ -111,11 +76,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             return report;
         }
 
-        /// <summary>
-        /// Gets the report details.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The report details.</returns>
         public List<DetailInformation> GetReportDetails(GetDailyCreatedCustomersDetailsCriteria criteria)
         {
             var report = new List<DetailInformation>();
@@ -144,10 +104,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
         #region ExportExcel
 
-        /// <summary>
-        /// Exports the report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         public void ExportReport(GetDailyCreatedCustomersCriteria criteria)
         {
             var report = this.GetReport(criteria);
@@ -189,10 +145,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 criteria.Todate.ToShortFormatedDateWithSlash().Replace('/', '_')));
         }
 
-        /// <summary>
-        /// Exports the report details.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         public void ExportReportDetails(GetDailyCreatedCustomersDetailsCriteria criteria)
         {
             var report = this.GetReportDetails(criteria);
@@ -234,14 +186,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 criteria.Date.ToShortFormatedDateWithSlash().Replace('/', '_')));
         }
 
-        /// <summary>
-        /// Exports the report header.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="criteria">The criteria.</param>
         private void ExportReportHeader(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -293,17 +237,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             currentRow++;
         }
 
-        /// <summary>
-        /// Exports the content of the report.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="startIndex">The start index.</param>
-        /// <param name="endIndex">The end index.</param>
-        /// <param name="report">The report.</param>
         private void ExportReportContent(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -335,15 +268,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 ReportRowType.GrandTotal);
         }
 
-        /// <summary>
-        /// Exports the row.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="info">The information.</param>
-        /// <param name="rowType">Type of the row.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -439,14 +363,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             currentRow++;
         }
 
-        /// <summary>
-        /// Exports the report details header.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="criteria">The criteria.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -510,17 +426,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             currentRow++;
         }
 
-        /// <summary>
-        /// Exports the content of the report details.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="startIndex">The start index.</param>
-        /// <param name="endIndex">The end index.</param>
-        /// <param name="report">The report.</param>
         private void ExportReportDetailsContent(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -545,16 +450,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             }
         }
 
-        /// <summary>
-        /// Exports the details row.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="info">The information.</param>
-        /// <param name="rowType">Type of the row.</param>
-        /// <param name="index">The index.</param>
         private void ExportDetailsRow(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -615,15 +510,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             currentRow++;
         }
 
-        /// <summary>
-        /// Render cell header of Daily Created Customer.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="mergedCell">The boolean variable to tell that cell is merged or not.</param>
-        /// <param name="label">The label of cell.</param>
-        /// <param name="headerColor">The color of cell.</param>
         private void RenderCellHeader(
             ref ExcelWorksheet worksheet,
             int currentRow,

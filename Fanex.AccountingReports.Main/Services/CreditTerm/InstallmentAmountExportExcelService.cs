@@ -13,9 +13,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
     using NPOI.SS.UserModel;
     using NPOI.SS.Util;
 
-    /// <summary>
-    /// The export excel service of Installment Amount report.
-    /// </summary>
     public class InstallmentAmountExportExcelService : ServiceBase
     {
         #region declare variable
@@ -71,10 +68,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
 
         #region export report
 
-        /// <summary>
-        /// Export Installment Amount report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         public void ExportInstallmentAmountReport(GetInstallAmountCriteria criteria)
         {
             var report = this._reportService.GetInstallmentAmountReport(criteria);
@@ -100,10 +93,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
                 roleName));
         }
 
-        /// <summary>
-        /// Initial the common style.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
         private void InitialStyle(HSSFWorkbook excelFile)
         {
             this._headerStyle = new CustomStyleCell(excelFile);
@@ -128,13 +117,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             this.InitCellStyle(excelFile, ref this._evenRedStyle, EvenRowRedClass);
         }
 
-        /// <summary>
-        /// Export header of report.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="roleName">The role name.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
@@ -221,13 +203,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             currentRow += 2;
         }
 
-        /// <summary>
-        /// Export report content.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="report">The report.</param>
         private void ExportReportContent(
             HSSFWorkbook excelFile,
             ref ISheet worksheet,
@@ -248,15 +223,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             }
         }
 
-        /// <summary>
-        /// Render row.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="memberRow">The member row.</param>
-        /// <param name="cssClass">The class of row.</param>
-        /// <param name="styleCell">The style of cell.</param>
         private void RenderRow(
             HSSFWorkbook excelFile,
             ref ISheet worksheet,
@@ -301,12 +267,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             currentRow++;
         }
 
-        /// <summary>
-        /// Initial the style of cell.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="styleCell">The style of cell.</param>
-        /// <param name="rowClass">The class of row.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
@@ -374,13 +334,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             }
         }
 
-        /// <summary>
-        /// Set color to decimal.
-        /// </summary>
-        /// <param name="cellValue">The value of cell.</param>
-        /// <param name="decimalStyle">The style of decimal.</param>
-        /// <param name="cssClass">The class of row.</param>
-        /// <returns>The new style with color.</returns>
         private ICellStyle SetColorToDecimal(
             double cellValue,
             ICellStyle decimalStyle,

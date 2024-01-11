@@ -10,12 +10,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
     {
         public const char UrlSeparator = '/';
 
-        /// <summary>
-        /// Gets the menu path from request file path.
-        /// </summary>
-        /// <param name="filePath">The file path.</param>
-        /// <param name="applicationPath">The application path.</param>
-        /// <returns>The menu path from request file path.</returns>
         public static string GetMenuPathFromRequestFilePath(
             string filePath,
             string applicationPath)
@@ -38,11 +32,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             return menuPath;
         }
 
-        /// <summary>
-        /// Gets the menu by identifier.
-        /// </summary>
-        /// <param name="menuId">The menu identifier.</param>
-        /// <returns>The menu by identifier.</returns>
         public MenuItem GetMenuById(int menuId)
         {
             if (AppSession.CurrentUserMenu != null)
@@ -55,11 +44,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             return null;
         }
 
-        /// <summary>
-        /// Gets the menu by URL.
-        /// </summary>
-        /// <param name="menuURL">The menu URL.</param>
-        /// <returns>The menu by URL.</returns>
         public MenuItem GetMenuByURL(string menuURL)
         {
             if (!string.IsNullOrEmpty(menuURL) &&
@@ -74,12 +58,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             return null;
         }
 
-        /// <summary>
-        /// Gets the menu by URL.
-        /// </summary>
-        /// <param name="menuURL">The menu URL.</param>
-        /// <param name="menuList">The menu list.</param>
-        /// <returns>The menu by URL.</returns>
         public MenuItem GetMenuByURL(string menuURL, IList<MenuItem> menuList)
         {
             if (!string.IsNullOrEmpty(menuURL) &&
@@ -95,11 +73,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             }
         }
 
-        /// <summary>
-        /// Gets the menu name by URL.
-        /// </summary>
-        /// <param name="menuURL">The menu URL.</param>
-        /// <returns>The menu name by URL.</returns>
         public string GetMenuNameByURL(string menuURL)
         {
             if (!string.IsNullOrEmpty(menuURL) &&

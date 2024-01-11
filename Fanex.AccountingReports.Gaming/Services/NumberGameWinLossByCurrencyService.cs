@@ -18,16 +18,8 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
     using Fanex.AccountingReports.Gaming.Resources;
     using Fanex.Common;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NumberGameWinLossByCurrencyService : ServiceBase
     {
-        /// <summary>
-        /// Gets the number game win loss by currency main.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The number game win loss by currency main.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -99,11 +91,6 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
             return numberGameMainList;
         }
 
-        /// <summary>
-        /// Gets the number game win loss by currency detail.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The number game win loss by currency detail.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -238,10 +225,6 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
             return numberGameDetailList;
         }
 
-        /// <summary>
-        /// Gets the currencies.
-        /// </summary>
-        /// <returns>The currencies.</returns>
         public List<EntityBase<int, string>> GetCurrencies()
         {
             var result = new List<EntityBase<int, string>>();
@@ -270,10 +253,6 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
 
         #region Export excel for Main
 
-        /// <summary>
-        /// Gets the export excel number game win loss by current main.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         public void GetExportExcelNumberGameWinLossByCurMain(NumberGameWinLossByCurrencyMainCriteria criteria)
         {
             var getCache = SessionManager.Get<List<NumberGameWinLossByCurrencyMain>>(GamingConstants.NumberGameWinLossByCurrencyMainSessionKey);
@@ -295,10 +274,6 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
 
         #region Export for Detail
 
-        /// <summary>
-        /// Gets the export excel number game win loss by current detail.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         public void GetExportExcelNumberGameWinLossByCurDetail(NumberGameWinLossByCurrencyDetailCriteria criteria)
         {
             var getCache = new List<NumberGameWinLossByCurrencyDetail>();
@@ -336,13 +311,6 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
             excelFile.ReponseStream(reportName);
         }
 
-        /// <summary>
-        /// Exports the number game win loss by current main assign header.
-        /// </summary>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startCol">The start col.</param>
-        /// <param name="workSheetReport">The work sheet report.</param>
-        /// <param name="criteria">The criteria.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -413,14 +381,6 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
                 Convert.ToDateTime(criteria.ToDate));
         }
 
-        /// <summary>
-        /// Exports the number game win loss by current main.
-        /// </summary>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startCol">The start col.</param>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="dataList">The data list.</param>
-        /// <param name="criteria">The criteria.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -560,13 +520,6 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
             nextColGrandTotal++;
         }
 
-        /// <summary>
-        /// Exports the excel number game win loss by current detail assign header.
-        /// </summary>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startCol">The start col.</param>
-        /// <param name="workSheetReport">The work sheet report.</param>
-        /// <param name="criteria">The criteria.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -658,15 +611,6 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
                 Convert.ToDateTime(criteria.ToDate));
         }
 
-        /// <summary>
-        /// Exports the number game win loss by current detail.
-        /// </summary>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startCol">The start col.</param>
-        /// <param name="maxItemsInSheet">The maximum items in sheet.</param>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="dataList">The data list.</param>
-        /// <param name="criteria">The criteria.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]

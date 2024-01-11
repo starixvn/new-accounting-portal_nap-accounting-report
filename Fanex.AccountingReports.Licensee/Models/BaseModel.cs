@@ -1,8 +1,5 @@
 namespace Fanex.AccountingReports.Licensee.Models
 {
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class BaseModel
     {
         public int Id { get; set; }

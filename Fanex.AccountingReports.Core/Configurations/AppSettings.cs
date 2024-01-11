@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Core.Configurations
     using System.Configuration;
     using Fanex.Common;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class AppSettings
     {
         private static bool _isUsingPort = false;

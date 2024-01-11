@@ -8,9 +8,6 @@ namespace Fanex.AccountingReports.Balance.Controllers
     using NAP.Core.Business;
     using NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class DirectBalanceController : BaseController
     {
         private readonly DirectBalanceService _directBalanceService;

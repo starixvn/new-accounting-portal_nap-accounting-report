@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByDate
 {
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetNumberGameLicenseeCriteria : CriteriaBase
     {
         public override bool IsValid()

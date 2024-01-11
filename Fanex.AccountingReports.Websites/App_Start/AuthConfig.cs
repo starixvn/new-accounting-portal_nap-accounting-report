@@ -7,15 +7,8 @@ namespace Fanex.AccountingReports.Websites.App_Start
     using System.Web;
     using System.Web.Security;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class AuthConfig
     {
-        /// <summary>
-        /// Registers the authentication.
-        /// </summary>
-        /// <param name="context">The context.</param>
         public static void RegisterAuth(HttpContext context)
         {
             var user = HttpContext.Current.User;

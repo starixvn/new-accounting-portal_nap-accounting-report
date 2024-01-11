@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Core.Criteria
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetCurrencyByLicenseeCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]

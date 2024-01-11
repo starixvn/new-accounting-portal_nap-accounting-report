@@ -3,9 +3,6 @@ namespace Fanex.BetList.Accounting.Models
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Tennis model.
-    /// </summary>
     public class TennisMatchResult
     {
         public TennisMatchResult()

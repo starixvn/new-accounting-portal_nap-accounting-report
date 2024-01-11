@@ -6,9 +6,6 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     using Fanex.AccountingReports.Gaming.Criteria;
     using Fanex.AccountingReports.Gaming.Services.Implement;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GamingController : BaseController
     {
         private readonly GamingService _reportService;

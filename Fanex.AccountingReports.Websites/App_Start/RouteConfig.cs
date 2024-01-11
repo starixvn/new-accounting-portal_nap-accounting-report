@@ -4,15 +4,8 @@ namespace Fanex.AccountingReports.Websites
     using System.Web.Mvc;
     using System.Web.Routing;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class RouteConfig
     {
-        /// <summary>
-        /// Registers the routes.
-        /// </summary>
-        /// <param name="routes">The routes.</param>
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");

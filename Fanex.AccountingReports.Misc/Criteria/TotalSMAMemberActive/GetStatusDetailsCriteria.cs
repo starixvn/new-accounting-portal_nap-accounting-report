@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Misc.Criteria.TotalSMAMemberActive
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetStatusDetailsCriteria : CriteriaBase
     {
         public DateTime FromDate { get; set; }

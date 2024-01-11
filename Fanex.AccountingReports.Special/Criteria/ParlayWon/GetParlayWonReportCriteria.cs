@@ -5,9 +5,6 @@ namespace Fanex.AccountingReports.Special.Criteria.ParlayWon
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetParlayWonReportCriteria : CriteriaBase
     {
         public DateTime WinlostDate { get; set; }
@@ -44,7 +41,6 @@ namespace Fanex.AccountingReports.Special.Criteria.ParlayWon
         [SpParam(Ignored = true)]
         public string SortDirection { get; set; }
 
-        //// PagingCriteria
 
         [SpParam(Ignored = true)]
         public bool IsGetAll { get; set; }
@@ -58,12 +54,6 @@ namespace Fanex.AccountingReports.Special.Criteria.ParlayWon
         [SpParam(Ignored = true)]
         public int CurrentPage { get; set; }
 
-        /// <summary>
-        /// Gets StartIndex: base from zero.
-        /// </summary>
-        /// <value>
-        /// The start index.
-        /// </value>
         [SpParam(Ignored = true)]
         public int StartIndex
         {
@@ -78,12 +68,6 @@ namespace Fanex.AccountingReports.Special.Criteria.ParlayWon
             }
         }
 
-        /// <summary>
-        /// Gets EndIndex: base from zero.
-        /// </summary>
-        /// <value>
-        /// The end index.
-        /// </value>
         [SpParam(Ignored = true)]
         public int EndIndex
         {
@@ -96,7 +80,6 @@ namespace Fanex.AccountingReports.Special.Criteria.ParlayWon
         [SpParam(Ignored = true)]
         public bool IsPagingCallBack { get; set; }
 
-        //// PagingCriteria
 
         public override string GetSettingKey()
         {

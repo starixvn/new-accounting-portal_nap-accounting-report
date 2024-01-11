@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Gaming.Criteria
 {
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetNumberGameBetTypeListCriteria : CriteriaBase
     {
         public override bool IsValid()

@@ -8,9 +8,6 @@ namespace Fanex.BetList.Accounting.Services
     using Fanex.Result.Core;
     using Fanex.Result.Core.Base;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class ScoreInformationService
     {
         private readonly ScoreInformationRepository _repository;
@@ -20,13 +17,6 @@ namespace Fanex.BetList.Accounting.Services
             this._repository = new ScoreInformationRepository();
         }
 
-        /// <summary>
-        /// Gets the score information.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>
-        /// The score information.
-        /// </returns>
         public ScoreInformation GetScoreInfo(GetScoreInformationCriteria criteria)
         {
             var scoreInformation = new ScoreInformation();

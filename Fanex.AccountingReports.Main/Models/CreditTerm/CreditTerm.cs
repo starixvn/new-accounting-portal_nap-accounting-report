@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Main.Models.CreditTerm
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// The model of Credit Term : Pre Agreed report.
-    /// </summary>
     [Serializable]
     public class CreditTerm
     {

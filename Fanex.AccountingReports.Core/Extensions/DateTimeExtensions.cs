@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Core.Extensions
     using System;
     using Fanex.AccountingReports.Core.Constants;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class DateTimeExtensions
     {
         public static DateTime FirstDayOfMonth(this DateTime dateTime)

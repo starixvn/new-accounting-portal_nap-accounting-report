@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Misc.Models.DailyCreatedCustomers
 {
     using System;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class DetailInformation
     {

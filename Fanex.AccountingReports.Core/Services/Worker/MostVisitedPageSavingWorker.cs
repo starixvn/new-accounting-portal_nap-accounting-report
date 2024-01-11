@@ -10,9 +10,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl.Worker
     using Fanex.AccountingReports.Core.Repository.Impl;
     using Fanex.AccountingReports.Core.Web;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class MostVisitedPageSavingWorker : BaseWorker
     {
         public MostVisitedPageSavingWorker(string threadName)
@@ -20,9 +17,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl.Worker
         {
         }
 
-        /// <summary>
-        /// Run Main Function.
-        /// </summary>
         protected override void Run()
         {
             var intervalGetMostVisitedPage = 10;
@@ -41,9 +35,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl.Worker
             }
         }
 
-        /// <summary>
-        /// Saves the most visited page count.
-        /// </summary>
         private void SaveMostVisitedPageCount()
         {
             lock (CommonConstants.MostVisitedPageLockObject)
@@ -51,7 +42,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl.Worker
                 List<MostVisitedPage> mostVisitedPages = CacheExtension.Get<List<MostVisitedPage>>(CommonConstants.MistVisitedPageCacheKey);
                 if (mostVisitedPages != null && mostVisitedPages.Count > 0)
                 {
-                    //// Save to Database
                     var criteria = new UpdateMostVisitedPageCountCriteria
                     {
                         CustId = mostVisitedPages.First().UserId,
@@ -66,7 +56,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl.Worker
                     var repository = new MostVisitedPagesRepository();
                     repository.UpdateCount(criteria);
 
-                    //// Update Cache
                     CacheExtension.Set(CommonConstants.MistVisitedPageCacheKey, new List<MostVisitedPage>());
                 }
             }

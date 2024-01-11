@@ -14,9 +14,6 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.NAP.Core.Web.Attribute;
     using OfficeOpenXml;
 
-    /// <summary>
-    /// Trader performance for soccer controller.
-    /// </summary>
     public class TraderPerformanceSoccerController : BaseController
     {
         private readonly TraderPerformanceSoccerService reportService;

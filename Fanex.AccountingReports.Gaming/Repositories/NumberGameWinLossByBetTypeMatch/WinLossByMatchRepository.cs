@@ -7,16 +7,8 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement.NumberGameWinLos
     using Fanex.Common;
     using Fanex.Data;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class WinLossByMatchRepository
     {
-        /// <summary>
-        /// Gets the main report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The main report.</returns>
         public List<WinLossDetailInfo> GetMainReport(GetWinLossByMatchMainReportCriteria criteria)
         {
             DataSet result = null;

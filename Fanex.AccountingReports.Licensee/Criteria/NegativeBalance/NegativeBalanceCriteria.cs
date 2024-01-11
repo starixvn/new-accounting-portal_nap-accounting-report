@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Licensee.Criteria.NegativeBalance
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NegativeBalanceCriteria : CriteriaBase
     {
         public string Site { get; set; }

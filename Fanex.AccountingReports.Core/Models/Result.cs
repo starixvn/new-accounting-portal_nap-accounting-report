@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Core.Models
 {
     using System;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class Result
     {

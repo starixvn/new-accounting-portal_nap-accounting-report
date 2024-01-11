@@ -13,9 +13,6 @@ namespace Fanex.AccountingReports.Special.Controllers
     using System.Net;
     using System.Web.Mvc;
 
-    /// <summary>
-    /// Save bet report controller.
-    /// </summary>
     public class SaveBetReportController : BaseController
     {
         private readonly SaveBetReportService _saveBetReportService;

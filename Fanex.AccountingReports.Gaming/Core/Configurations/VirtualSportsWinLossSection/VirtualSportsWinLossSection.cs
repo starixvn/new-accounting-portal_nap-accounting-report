@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Gaming.Core.Configurations.VirtualSportsWinLos
 {
     using System.Configuration;
 
-    /// <summary>
-    /// The section of Virtual Sports.
-    /// </summary>
     public class VirtualSportsWinLossSection : ConfigurationSection
     {
         public static VirtualSportsWinLossSection Instance 

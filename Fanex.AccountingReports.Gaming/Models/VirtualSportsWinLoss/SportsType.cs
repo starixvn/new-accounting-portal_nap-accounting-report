@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Gaming.Models.VirtualSportsWinLoss
 {
     using System;
 
-    /// <summary>
-    /// The model of the sports type.
-    /// </summary>
     [Serializable]
     public class SportsType
     {

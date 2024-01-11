@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Core.Configurations
 {
     using System.Configuration;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class RMCollection : ConfigurationElementCollection
     {
         public RMCollection()

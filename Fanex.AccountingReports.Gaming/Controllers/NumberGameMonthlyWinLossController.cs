@@ -9,9 +9,6 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// Number Game Monthly Win Loss Controller.
-    /// </summary>
     public class NumberGameMonthlyWinLossController : BaseController
     {
         private readonly NumberGameMonthlyWinLossService _numberGameMonthlyWinLossService;

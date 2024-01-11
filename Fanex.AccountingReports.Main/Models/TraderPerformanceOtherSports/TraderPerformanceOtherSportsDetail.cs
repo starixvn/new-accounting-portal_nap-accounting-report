@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceOtherSports
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    /// <summary>
-    /// Trader performance for other sports model.
-    /// </summary>
     [Serializable]
     public class TraderPerformanceOtherSportsDetail
     {
@@ -72,10 +69,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceOtherSports
 
         public int ReportLength { get; set; }
 
-        /// <summary>
-        /// Sums the specified trader information.
-        /// </summary>
-        /// <param name="traderInfo">The trader information.</param>
         public void CalculateTotal(TraderPerformanceOtherSportsDetail traderInfo)
         {
             this.FirstHalfHdp += traderInfo.FirstHalfHdp;
@@ -89,11 +82,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceOtherSports
             this.Overall += traderInfo.Overall;
         }
 
-        /// <summary>
-        /// Calculates the margin total.
-        /// </summary>
-        /// <param name="winLossInfo">The win loss information.</param>
-        /// <param name="turnOverInfo">The turn over information.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -128,10 +116,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceOtherSports
                 (winLossInfo.Overall / turnOverInfo.Overall) * 100;
         }
 
-        /// <summary>
-        /// Formats the two decimal number data.
-        /// </summary>
-        /// <param name="traderInfo">The trader information.</param>
         public void FormatTwoDecimalNumberData(TraderPerformanceOtherSportsDetail traderInfo)
         {
             this.FirstHalfHdp = Math.Round(traderInfo.FirstHalfHdp, 2, MidpointRounding.AwayFromZero);
@@ -145,10 +129,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceOtherSports
             this.Overall = Math.Round(traderInfo.Overall, 2, MidpointRounding.AwayFromZero);
         }
 
-        /// <summary>
-        /// Gets the margin value.
-        /// </summary>
-        /// <param name="marginInfo">The margin information.</param>
         public void GetMarginValue(TraderPerformanceOtherSportsDetail marginInfo)
         {
             this.FirstHalfHdp = 100 * marginInfo.FirstHalfHdp;

@@ -11,15 +11,8 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
     using NPOI.SS.UserModel;
     using NPOI.SS.Util;
 
-    /// <summary>
-    /// Trader performance export detail report service.
-    /// </summary>
     public partial class TraderPerformanceOtherSportsService
     {
-        /// <summary>
-        /// Exports the detail report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         public void ExportDetailReport(GetDetailReportCriteria criteria)
         {
             var report = this.GetDetailReport(criteria);
@@ -44,13 +37,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
             NpoiExcelExtensions.ResponseStreamExcel(excelFile, reportName);
         }
 
-        /// <summary>
-        /// Exports the report header.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="criteria">The criteria.</param>
         private void ExportDetailReportHeader(
             HSSFWorkbook excelFile,
             ref ISheet worksheet,
@@ -79,13 +65,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
                             headerStyle);
         }
 
-        /// <summary>
-        /// Renders the report header detail.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="headerStyle">The header style.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
@@ -157,13 +136,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
             this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow - 1, currentColumn + 8, Labels._1st_1x2, headerStyle);
         }
 
-        /// <summary>
-        /// Exports the content of the detail report.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="report">The report.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -305,15 +277,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
                 grandTotalDecimalPercentStyle);
         }
 
-        /// <summary>
-        /// Exports the content of the child group detail report.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row of sheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="childInfo">The child information.</param>
-        /// <param name="cellStyle">The cell style.</param>
         private void ExportChildGroupDetailReportContent(
             ref ISheet worksheet,
             ref IRow row,
@@ -333,15 +296,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, childInfo.Overall, cellStyle);
         }
 
-        /// <summary>
-        /// Exports the content of the margin group detail report.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row of sheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="marginInfo">The margin information.</param>
-        /// <param name="cellStyle">The cell style.</param>
         private void ExportMarginGroupDetailReportContent(
             ref ISheet worksheet,
             ref IRow row,
@@ -361,19 +315,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, marginInfo.Overall / 100, cellStyle);
         }
 
-        /// <summary>
-        /// Exports the detail report total information.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row of sheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="totalInfo">The total information.</param>
-        /// <param name="totalTitle">The total title.</param>
-        /// <param name="cellTextStyle">The cell text style.</param>
-        /// <param name="cellNumberStyle">The cell number style.</param>
-        /// <param name="cellDecimalNumberStyle">The cell decimal number style.</param>
-        /// <param name="cellPercentStyle">The cell percent style.</param>
         private void ExportDetailReportTotalInfo(
             ref ISheet worksheet,
             ref IRow row,

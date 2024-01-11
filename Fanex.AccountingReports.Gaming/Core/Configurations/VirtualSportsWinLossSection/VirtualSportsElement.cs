@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Gaming.Core.Configurations.VirtualSportsWinLos
 {
     using System.Configuration;
 
-    /// <summary>
-    /// The element of Virtual Sports collection.
-    /// </summary>
     public class VirtualSportsElement : ConfigurationElement
     {
         [ConfigurationProperty("id", DefaultValue = "0", IsRequired = true, IsKey = true)]

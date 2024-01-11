@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class VirtualRateInfo
     {

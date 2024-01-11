@@ -16,37 +16,17 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
     using System.Drawing;
     using System.Linq;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class DirectBalanceService : ServiceBase
     {
-        /// <summary>
-        /// TODO: Update summary.
-        /// </summary>
         private enum ReportRowType
         {
-            /// <summary>
-            /// The grand total.
-            /// </summary>
             GrandTotal = 1,
 
-            /// <summary>
-            /// The normal even row.
-            /// </summary>
             NormalEvenRow = 2,
 
-            /// <summary>
-            /// The normal odd row.
-            /// </summary>
             NormalOddRow = 3
         }
 
-        /// <summary>
-        /// Gets the direct balance.
-        /// </summary>
-        /// <param name="directBalanceCriteria">The direct balance criteria.</param>
-        /// <returns>The direct balance.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
@@ -94,11 +74,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result;
         }
 
-        /// <summary>
-        /// Gets the direct balance master down line.
-        /// </summary>
-        /// <param name="directBalanceMasterDownLineCriteria">The direct balance master down line criteria.</param>
-        /// <returns>The direct balance master down line.</returns>
         public DirectBalance GetDirectBalanceMasterDownLine(GetDirectBalanceMasterDownlineCriteria directBalanceMasterDownLineCriteria)
         {
             var result = new DirectBalance();
@@ -136,11 +111,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result;
         }
 
-        /// <summary>
-        /// Gets the direct balance agent down line.
-        /// </summary>
-        /// <param name="directBalanceAgentDownLineCriteria">The direct balance agent down line criteria.</param>
-        /// <returns>The direct balance agent down line.</returns>
         public DirectBalance GetDirectBalanceAgentDownLine(GetDirectBalanceAgentDownlineCriteria directBalanceAgentDownLineCriteria)
         {
             var result = new DirectBalance();
@@ -178,11 +148,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result;
         }
 
-        /// <summary>
-        /// Exports the direct balance report.
-        /// </summary>
-        /// <param name="directBalanceCriteria">The direct balance criteria.</param>
-        /// <returns>The direct balance report.</returns>
         public DirectBalance ExportDirectBalanceReport(GetDirectBalanceCriteria directBalanceCriteria)
         {
             var result = new DirectBalance();
@@ -218,11 +183,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result;
         }
 
-        /// <summary>
-        /// Exports the balance master down line report.
-        /// </summary>
-        /// <param name="getDirectBalanceMasterCriteria">The get direct balance master criteria.</param>
-        /// <returns>The balance master down line report.</returns>
         public DirectBalance ExportBalanceMasterDownLineReport(GetDirectBalanceMasterDownlineCriteria getDirectBalanceMasterCriteria)
         {
             var result = new DirectBalance();
@@ -255,11 +215,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result;
         }
 
-        /// <summary>
-        /// Exports the balance agent down line report.
-        /// </summary>
-        /// <param name="getDirectBalanceAgentCriteria">The get direct balance agent criteria.</param>
-        /// <returns>The balance agent down line report.</returns>
         public DirectBalance ExportBalanceAgentDownLineReport(GetDirectBalanceAgentDownlineCriteria getDirectBalanceAgentCriteria)
         {
             var result = new DirectBalance();
@@ -293,10 +248,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result;
         }
 
-        /// <summary>
-        /// Gets the currencies.
-        /// </summary>
-        /// <returns>The currencies.</returns>
         public List<EntityBase<int, string>> GetCurrencies()
         {
             var result = new List<EntityBase<int, string>>();
@@ -318,14 +269,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result.OrderBy(x => x.Name).ToList(); ;
         }
 
-        /// <summary>
-        /// Exports the report header down line.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="roleId">The role identifier.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -386,14 +329,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             currentRow++;
         }
 
-        /// <summary>
-        /// Exports the report header.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="criteria">The criteria.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -454,14 +389,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             currentRow++;
         }
 
-        /// <summary>
-        /// Exports the content of the report.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="report">The report.</param>
         private void ExportReportContent(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -504,16 +431,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             }
         }
 
-        /// <summary>
-        /// Exports the direct balance detail.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="index">The index.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="detail">The detail.</param>
-        /// <param name="rowType">Type of the row.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -586,14 +503,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             currentRow++;
         }
 
-        /// <summary>
-        /// Exports the direct balance total.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="total">The total.</param>
         private void ExportDirectBalanceTotal(
             ref ExcelWorksheet worksheet,
             int startRow,

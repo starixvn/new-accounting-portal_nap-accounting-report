@@ -13,9 +13,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
     using NPOI.SS.UserModel;
     using NPOI.SS.Util;
 
-    /// <summary>
-    /// The export excel of Credit Term report.
-    /// </summary>
     public class CreditTermExportExcelService : ServiceBase
     {
         #region declare variable
@@ -67,10 +64,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
 
         #region export report.
 
-        /// <summary>
-        /// Export Pre-Agreed report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         public void ExportCreditTermReport(GetCreditTermCriteria criteria)
         {
             var report = this._reportService.GetCreditTermReport(criteria);
@@ -91,10 +84,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             excelFile.ResponseStreamExcel(MainResources.CreditTermPreAgreed_ReportName);
         }
 
-        /// <summary>
-        /// Initial the common style.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
         private void InitialStyle(HSSFWorkbook excelFile)
         {
             this._headerStyle = new CustomStyleCell(excelFile);
@@ -125,13 +114,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             this.InitCellStyle(excelFile, ref this._limitChildRedStyle, LimitChildRowRedClass);
         }
 
-        /// <summary>
-        /// Export header of report.
-        /// </summary>
-        /// <param name="excelFile">The file excel.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="headerStyle">The header style.</param>
         private void ExportReportHeader(
             HSSFWorkbook excelFile,
             ref ISheet worksheet,
@@ -175,14 +157,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             currentRow += 2;
         }
 
-        /// <summary>
-        /// Export report content.
-        /// </summary>
-        /// <param name="excelFile">The file excel.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="report">The report.</param>
-        /// <param name="criteria">The criteria.</param>
         private void ExportReportContent(
             HSSFWorkbook excelFile,
             ref ISheet worksheet,
@@ -235,14 +209,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             }
         }
 
-        /// <summary>
-        /// Get style and class for parent and child row.
-        /// </summary>
-        /// <param name="parentStyle">The style of parent row.</param>
-        /// <param name="childStyle">The style of child row.</param>
-        /// <param name="parentMember">The parent row.</param>
-        /// <param name="cssParentClass">The class of parent row.</param>
-        /// <param name="cssChildClass">The class of child row.</param>
         private void GetStyleAndClassForParentAndChildRow(
             ref CustomStyleCell parentStyle,
             ref CustomStyleCell childStyle,
@@ -266,15 +232,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             }
         }
 
-        /// <summary>
-        /// Render parent row.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="parentMember">The parent member.</param>
-        /// <param name="styleCell">The style of cell.</param>
-        /// <param name="cssClass">The class of row.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
@@ -344,14 +301,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             currentRow++;
         }
 
-        /// <summary>
-        /// Render header of child table.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currencyParentName">The currency name of parent member.</param>
-        /// <param name="childHeader">The child header.</param>
         private void RenderChildHeader(
             HSSFWorkbook excelFile,
             ref ISheet worksheet,
@@ -373,16 +322,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             currentRow += 2;
         }
 
-        /// <summary>
-        /// Render all child row.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="childRows">The child rows.</param>
-        /// <param name="currencyParentName">The currency name of parent member.</param>
-        /// <param name="styleCell">The style cell.</param>
-        /// <param name="cssClass">The class of cell.</param>
         private void RenderAllChildRow(
             HSSFWorkbook excelFile,
             ref ISheet worksheet,
@@ -408,16 +347,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             }
         }
 
-        /// <summary>
-        /// Render each child row.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="childMember">The child member.</param>
-        /// <param name="currencyParentName">The currency name of parent.</param>
-        /// <param name="styleCell">The style of cell.</param>
-        /// <param name="cssClass">The class of cell.</param>
         private void RenderEachChildRow(
             HSSFWorkbook excelFile,
             ref ISheet worksheet,
@@ -467,12 +396,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             currentRow++;
         }
 
-        /// <summary>
-        /// Initial style of cell.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="styleCell">The style of cell.</param>
-        /// <param name="rowClass">The class of row.</param>
         private void InitCellStyle(
             HSSFWorkbook excelFile,
             ref CustomStyleCell styleCell,
@@ -493,17 +416,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
                 cellColor);
         }
 
-        /// <summary>
-        /// Set cell style by class of row.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="palette">The palette.</param>
-        /// <param name="styleCell">The style cell.</param>
-        /// <param name="rowClass">The class of row.</param>
-        /// <param name="fontBlackColor">The black color.</param>
-        /// <param name="fontRedColor">The red color.</param>
-        /// <param name="cellColor">The color of cell.</param>
-        /// <returns>The CustomStyleCell.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
@@ -596,13 +508,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             return styleCell;
         }
 
-        /// <summary>
-        /// Set color to decimal.
-        /// </summary>
-        /// <param name="cellValue">The value of cell.</param>
-        /// <param name="decimalStyle">The style of decimal.</param>
-        /// <param name="cssClass">The class of cell.</param>
-        /// <returns>The new style with color.</returns>
         private ICellStyle SetColorToDecimal(
             double cellValue,
             ICellStyle decimalStyle,

@@ -9,16 +9,8 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
     using Fanex.Common;
     using Fanex.Data;
 
-    /// <summary>
-    /// Trader performance soccer repository.
-    /// </summary>
     public class TraderPerformanceSoccerRepository
     {
-        /// <summary>
-        /// Gets the trader performance soccer report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Trader performance for soccer data.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -117,11 +109,6 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             return result;
         }
 
-        /// <summary>
-        /// Gets the trader performance soccer detail report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Trader performance for soccer detail data.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -211,13 +198,6 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             return result;
         }
 
-        /// <summary>
-        /// Gets the trader group information.
-        /// </summary>
-        /// <param name="reader">The reader.</param>
-        /// <param name="groupNamePrefix">The group name prefix.</param>
-        /// <param name="overallSuffix">The overall suffix.</param>
-        /// <returns>Trader group information.</returns>
         private TraderPerformanceSoccer GetTraderGroupInfo(
            IDataReader reader,
            string groupNamePrefix,
@@ -253,13 +233,6 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             return traderGroupInfo;
         }
 
-        /// <summary>
-        /// Gets the trader group detail information.
-        /// </summary>
-        /// <param name="reader">The reader.</param>
-        /// <param name="groupNamePrefix">The group name prefix.</param>
-        /// <param name="overallSuffix">The overall suffix.</param>
-        /// <returns>Trader group detail information.</returns>
         private TraderPerformanceSoccerDetail GetTraderGroupDetailInfo(
             IDataReader reader,
             string groupNamePrefix,

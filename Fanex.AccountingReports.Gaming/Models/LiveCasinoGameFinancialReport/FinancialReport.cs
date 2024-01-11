@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Gaming.Models.LiveCasinoGameFinancialReport
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class FinancialReport
     {

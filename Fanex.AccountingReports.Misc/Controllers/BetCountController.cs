@@ -8,9 +8,6 @@ namespace Fanex.AccountingReports.Misc.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class BetCountController : BaseController
     {
         private readonly BetCountService _reportService;

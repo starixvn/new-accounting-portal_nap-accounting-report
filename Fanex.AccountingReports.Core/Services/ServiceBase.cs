@@ -5,9 +5,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class ServiceBase
     {
         protected readonly IDynamicRepository DynamicRepository;
@@ -17,32 +14,16 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             DynamicRepository = new DynamicRepository();
         }
 
-        /// <summary>
-        /// Gets the repository.
-        /// </summary>
-        /// <value>
-        /// The repository.
-        /// </value>
         protected IDynamicRepository Repository
         {
             get { return DynamicRepository; }
         }
 
-        /// <summary>
-        /// Handler Exception.
-        /// </summary>
-        /// <param name="ex">The exception.</param>
         public void HandleException(Exception ex)
         {
             LoggingHandler.Log(ex);
         }
 
-        /// <summary>
-        /// Get Report Data with Criteria.
-        /// </summary>
-        /// <typeparam name="T">Type of Object return.</typeparam>
-        /// <param name="criteria">Criteria to Query DB.</param>
-        /// <returns>Enumerable of Type T.</returns>
         public virtual IEnumerable<T> GetReportData<T>(ICriteria criteria)
         {
             Check.Argument.IsNotNull(criteria, "criteria");

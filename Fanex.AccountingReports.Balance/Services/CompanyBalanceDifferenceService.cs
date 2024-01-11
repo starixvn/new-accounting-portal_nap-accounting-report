@@ -6,15 +6,8 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.Common;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class CompanyBalanceDifferenceService : ServiceBase
     {
-        /// <summary>
-        /// Gets the company balance difference.
-        /// </summary>
-        /// <returns>The company balance difference.</returns>
         public List<DifferenceInfo> GetCompanyBalanceDifference()
         {
             var rawData = GetReportData<dynamic>(new GetCompanyBalanceDifferenceCriteria());

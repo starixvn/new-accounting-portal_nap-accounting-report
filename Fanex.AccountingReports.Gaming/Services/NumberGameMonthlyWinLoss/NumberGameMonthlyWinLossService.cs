@@ -7,9 +7,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWin
     using Fanex.AccountingReports.Gaming.Models.NumberGameMonthlyWinLoss;
     using Fanex.AccountingReports.Gaming.Repositories.Implement;
 
-    /// <summary>
-    /// Number Game Monthly Win Loss Service.
-    /// </summary>
     public class NumberGameMonthlyWinLossService : ServiceBase
     {
         private string _numberGameMonthlyWinLossReportSessionKey = "Fanex.AccountingReports.Gaming.NumberGameMonthlyWinLoss." +
@@ -22,11 +19,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWin
             this._numberGameMonthlyWinLossRepository = new NumberGameMonthlyWinLossRepository();
         }
 
-        /// <summary>
-        /// Gets the number game monthly win loss.
-        /// </summary>
-        /// <param name="getNumberGameMonthlyWinLossCriteria">The get number game monthly win loss criteria.</param>
-        /// <returns>Number Game Monthly Win Loss Report.</returns>
         public NumberGameMonthlyWinLoss GetNumberGameMonthlyWinLoss(NumberGameMonthlyWinLossCriteria getNumberGameMonthlyWinLossCriteria)
         {
             var result = new NumberGameMonthlyWinLoss();

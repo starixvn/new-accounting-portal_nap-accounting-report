@@ -7,16 +7,8 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement
     using Fanex.Common;
     using Fanex.Data;
 
-    /// <summary>
-    /// Number Game Monthly Win Loss Repository.
-    /// </summary>
     public class NumberGameMonthlyWinLossRepository
     {
-        /// <summary>
-        /// Gets the number game monthly win loss.
-        /// </summary>
-        /// <param name="getNumberGameMonthlyWinLossCriteria">The get number game monthly win loss criteria.</param>
-        /// <returns>List report data.</returns>
         public List<NumberGameMonthlyWinLoss> GetNumberGameMonthlyWinLoss(NumberGameMonthlyWinLossCriteria getNumberGameMonthlyWinLossCriteria)
         {
             var report = new NumberGameMonthlyWinLoss();

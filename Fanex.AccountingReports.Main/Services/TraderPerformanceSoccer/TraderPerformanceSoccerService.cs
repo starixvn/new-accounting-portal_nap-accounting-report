@@ -15,9 +15,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
     using NPOI.SS.Util;
     using CoreConstants = Fanex.AccountingReports.Core.Constants;
 
-    /// <summary>
-    /// Trader performance service.
-    /// </summary>
     public partial class TraderPerformanceSoccerService : ServiceBase
     {
         private const short SubTotalColorIndex = 29;
@@ -74,11 +71,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             _traderPerformanceSoccerRepository = traderPerformanceSoccerRepository ?? new TraderPerformanceSoccerRepository();
         }
 
-        /// <summary>
-        /// Gets the report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Trader performance data.</returns>
         public TraderPerformanceSoccer GetReport(GetReportCriteria criteria)
         {
             var result = new TraderPerformanceSoccer();
@@ -87,11 +79,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             return result;
         }
 
-        /// <summary>
-        /// Sorts the report data.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Report data after sort.</returns>
         public TraderPerformanceSoccer SortReportData(GetReportCriteria criteria)
         {
             var report = this.GetReport(criteria);
@@ -101,11 +88,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             return report;
         }
 
-        /// <summary>
-        /// Gets the detail report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Trader performance detail data.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -205,11 +187,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             return reportPagingData;
         }
 
-        /// <summary>
-        /// Sorts the detail report data.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Detail report data after sort.</returns>
         public TraderPerformanceSoccerDetail SortDetailReportData(GetDetailReportCriteria criteria)
         {
             var report = this.GetDetailReport(criteria);
@@ -229,17 +206,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             return pagingReport;
         }
 
-        /// <summary>
-        /// Renders the merge cell.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row of sheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="endRow">The end row.</param>
-        /// <param name="endColumn">The end column.</param>
-        /// <param name="cellValue">The cell value.</param>
-        /// <param name="cellStyle">The cell style.</param>
         private void RenderMergeCell(
             ref ISheet worksheet,
             ref IRow row,
@@ -270,15 +236,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             currentColumn = endColumn + 1;
         }
 
-        /// <summary>
-        /// Renders the cell.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row of report.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="cellValue">The cell value.</param>
-        /// <param name="cellStyle">The cell style.</param>
         private void RenderCell(
             ref ISheet worksheet,
             ref IRow row,
@@ -306,15 +263,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             currentColumn += 1;
         }
 
-        /// <summary>
-        /// Exports the cell value.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row of sheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="cellValue">The cell value.</param>
-        /// <param name="cellStyle">The cell style.</param>
         private void ExportCellValue(
            ref ISheet worksheet,
            ref IRow row,
@@ -333,16 +281,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             }
         }
 
-        /// <summary>
-        /// Creates the decimal number style.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="backgroundColorIndex">Index of the background color.</param>
-        /// <param name="textAlign">The text align.</param>
-        /// <param name="isBold">If set to <c>true</c> [is bold].</param>
-        /// <param name="isNegative">If set to <c>true</c> [is negative].</param>
-        /// <param name="isPositive">If set to <c>true</c> [is positive].</param>
-        /// <returns>Decimal number style.</returns>
         private ICellStyle CreateDecimalNumberStyle(
             HSSFWorkbook excelFile,
             short backgroundColorIndex,
@@ -394,16 +332,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             return decimalNumberStyle;
         }
 
-        /// <summary>
-        /// Creates the decimal percent style.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="backgroundColorIndex">Index of the background color.</param>
-        /// <param name="textAlign">The text align.</param>
-        /// <param name="isBold">If set to <c>true</c> [is bold].</param>
-        /// <param name="isNegative">If set to <c>true</c> [is negative].</param>
-        /// <param name="isPositive">If set to <c>true</c> [is positive].</param>
-        /// <returns>Decimal percent style.</returns>
         private ICellStyle CreateDecimalPercentStyle(
            HSSFWorkbook excelFile,
            short backgroundColorIndex,
@@ -455,11 +383,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             return decimalPercentStyle;
         }
 
-        /// <summary>
-        /// Sets the border to cell.
-        /// </summary>
-        /// <param name="cellStyle">The cell style.</param>
-        /// <returns>The cell style to set border.</returns>
         private ICellStyle SetBorderToCell(ICellStyle cellStyle)
         {
             cellStyle.TopBorderColor = HSSFColor.Grey80Percent.Index;
@@ -474,10 +397,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             return cellStyle;
         }
 
-        /// <summary>
-        /// Sets the index of the color.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
         private void SetColorIndex(HSSFWorkbook excelFile)
         {
             HSSFPalette palette = excelFile.GetCustomPalette();
@@ -492,12 +411,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             palette.SetColorAtIndex(GrandTotalBorderColorIndex, (byte)255, (byte)102, (byte)0);
         }
 
-        /// <summary>
-        /// Sorts the report data.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Report data after sort.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -580,12 +493,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             return report;
         }
 
-        /// <summary>
-        /// Sorts the second sub level report.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Second sub level data of report.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]

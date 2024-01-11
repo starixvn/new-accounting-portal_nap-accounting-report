@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Gaming.Models.NumberGameWinLossByDate
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class NumberGameWinLossDetail
     {
@@ -35,10 +32,6 @@ namespace Fanex.AccountingReports.Gaming.Models.NumberGameWinLossByDate
 
         public List<NumberGameWinLossDetail> ChildInfo { get; set; }
 
-        /// <summary>
-        /// Adds to grand total.
-        /// </summary>
-        /// <param name="winLoss">The win loss.</param>
         public void AddToGrandTotal(NumberGameWinLossDetail winLoss)
         {
             if (winLoss == null)

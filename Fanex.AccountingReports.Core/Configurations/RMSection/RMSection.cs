@@ -2,21 +2,12 @@ namespace Fanex.AccountingReports.Core.Configurations
 {
     using System.Configuration;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class RMSection : ConfigurationSection
     {
         public enum RMType
         {
-            /// <summary>
-            /// The eight RM.
-            /// </summary>
             EightRM = 0,
 
-            /// <summary>
-            /// The BARM type.
-            /// </summary>
             BARM = 1
         }
 

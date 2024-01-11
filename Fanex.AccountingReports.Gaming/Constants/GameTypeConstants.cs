@@ -1,8 +1,5 @@
 namespace Fanex.AccountingReports.Gaming.Constants
 {
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GameTypeConstants
     {
         public const int MinLiveCasino = 1101;

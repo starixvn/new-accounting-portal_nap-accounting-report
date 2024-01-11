@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
 {
     using System;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class VirtualRateByBettypeInfo
     {

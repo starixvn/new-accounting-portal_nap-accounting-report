@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Gaming.Criteria.NumberOfActiveMember
 {
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Get product criteria.
-    /// </summary>
     public class GetProductCriteria : CriteriaBase
     {
         public override bool IsValid()

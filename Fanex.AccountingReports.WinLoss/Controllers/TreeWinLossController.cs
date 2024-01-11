@@ -9,9 +9,6 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class TreeWinLossController : BaseController
     {
         public readonly TreeWinLossService TreeWinLossService;

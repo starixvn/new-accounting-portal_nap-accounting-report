@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Misc.Models.TotalSMAMemberActive
     using System.Web.Script.Serialization;
     using Fanex.AccountingReports.Core.Extensions;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class StatusDetailInfo
     {

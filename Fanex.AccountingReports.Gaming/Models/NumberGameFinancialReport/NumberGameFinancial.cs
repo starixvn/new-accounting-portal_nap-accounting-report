@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Gaming.Models.NumberGameFinancial
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Number Game Financial Report Model.
-    /// </summary>
     [Serializable]
     public class NumberGameFinancial
     {

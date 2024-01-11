@@ -5,9 +5,6 @@ namespace Fanex.AccountingReports.Core.Utilities.CellStyles
     using NPOI.HSSF.Util;
     using NPOI.SS.UserModel;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class BaseCellStyles
     {
         public BaseCellStyles(HSSFWorkbook workbook, CustomColor customColor)

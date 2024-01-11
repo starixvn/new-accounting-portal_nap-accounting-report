@@ -15,9 +15,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
     using Fanex.AccountingReports.Gaming.Resources;
     using Fanex.Common;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class WinLossByBetTypeService : ServiceBase
     {
         private readonly WinLossByBetTypeRepository _winLossByBetTypeRepository;
@@ -35,11 +32,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             _winLossByBetTypeRepository = new WinLossByBetTypeRepository();
         }
 
-        /// <summary>
-        /// Gets the win loss by bet type main report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The win loss by bet type main report.</returns>
         public WinLossInfo GetMainReport(GetWinLossByBetTypeMainReportCriteria criteria)
         {
             var rawData = _winLossByBetTypeRepository.GetMainReport(criteria);
@@ -83,11 +75,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             return report;
         }
 
-        /// <summary>
-        /// Gets the win loss by bet type detail report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The win loss by bet type detail report.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -158,10 +145,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             return report;
         }
 
-        /// <summary>
-        /// Exports the win loss by bet type main report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         public void ExportMainReport(GetWinLossByBetTypeMainReportCriteria criteria)
         {
             WinLossInfo report = SessionManager.Get<WinLossInfo>(_winLossByBetTypeMainReportSessionKey);
@@ -207,10 +190,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             excelFile.ReponseStream(reportName);
         }
 
-        /// <summary>
-        /// Exports the win loss by bet type detail report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -261,16 +240,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             excelFile.ReponseStream(reportName);
         }
 
-        /// <summary>
-        /// Exports the report_ win loss by bet type header.
-        /// </summary>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="maxColumnIndex">Maximum index of the column.</param>
-        /// <param name="reportTitle">The report title.</param>
-        /// <param name="reportLevelType">Type of the report level.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -377,16 +346,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             currentRow++;
         }
 
-        /// <summary>
-        /// Exports the content of the report win loss by bet type main report.
-        /// </summary>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="maxColumnIndex">Maximum index of the column.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="report">The report.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -534,19 +493,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
                 info);
         }
 
-        /// <summary>
-        /// Exports the report win loss by bet type win loss row.
-        /// </summary>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="maxColumnIndex">Maximum index of the column.</param>
-        /// <param name="textStyle">The text style.</param>
-        /// <param name="twoDecimalNumberStyle">The two decimal number style.</param>
-        /// <param name="twoDecimalPositiveNumberStyle">The two decimal positive number style.</param>
-        /// <param name="twoDecimalPositivePercentNumberStyle">The two decimal positive percent number style.</param>
-        /// <param name="info">The information.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -617,19 +563,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             currentRow++;
         }
 
-        /// <summary>
-        /// Exports the report_ win loss by bet type_ grand total row.
-        /// </summary>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="maxColumnIndex">Maximum index of the column.</param>
-        /// <param name="textStyle">The text style.</param>
-        /// <param name="twoDecimalNumberStyle">The two decimal number style.</param>
-        /// <param name="twoDecimalPositiveNumberStyle">The two decimal positive number style.</param>
-        /// <param name="twoDecimalPositivePercentNumberStyle">The two decimal positive percent number style.</param>
-        /// <param name="info">The information.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
           "SP2101:MethodMustNotContainMoreLinesThan",
           Justification = "Reviewed. Suppression is OK here.")]
@@ -700,16 +633,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             currentRow++;
         }
 
-        /// <summary>
-        /// Exports the content of the report win loss by bet type detail report.
-        /// </summary>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="maxColumnIndex">Maximum index of the column.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="report">The report.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]

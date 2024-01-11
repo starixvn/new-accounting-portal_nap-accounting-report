@@ -13,9 +13,6 @@ namespace Fanex.AccountingReports.Misc.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class CreditMovementController : BaseController
     {
         private CreditMovementService _service;

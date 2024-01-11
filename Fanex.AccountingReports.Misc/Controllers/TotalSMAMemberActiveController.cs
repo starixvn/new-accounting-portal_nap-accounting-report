@@ -9,9 +9,6 @@ namespace Fanex.AccountingReports.Misc.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class TotalSMAMemberActiveController : BaseController
     {
         private readonly TotalSMAMemberActiveService _reportService;

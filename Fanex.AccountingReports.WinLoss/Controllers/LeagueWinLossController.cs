@@ -15,9 +15,6 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
     using System.Linq;
     using System.Web.Mvc;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class LeagueWinLossController : BaseController
     {
         private readonly LeagueWinLossService _reportService;

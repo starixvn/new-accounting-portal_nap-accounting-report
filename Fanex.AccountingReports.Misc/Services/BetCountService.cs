@@ -24,22 +24,11 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         {
             NormalRow = 1,
 
-            /// <summary>
-            /// The total.
-            /// </summary>
             Total = 2,
 
-            /// <summary>
-            /// The grand total.
-            /// </summary>
             GrandTotal = 3
         }
 
-        /// <summary>
-        /// Gets the report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The report.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -114,11 +103,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             return report;
         }
 
-        /// <summary>
-        /// Sorts the report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The report.</returns>
         public Transaction SortReport(GetBetCountReportCriteria criteria)
         {
             var sessionKey = criteria.IsHistoryReport ?
@@ -146,10 +130,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
         #region ExportExcel
 
-        /// <summary>
-        /// Exports the report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         public void ExportReport(GetBetCountReportCriteria criteria)
         {
             var sessionKey = criteria.IsHistoryReport ?
@@ -188,14 +168,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 criteria.Dateend.ToShortFormatedDateWithSlash().Replace('/', '_')));
         }
 
-        /// <summary>
-        /// Exports the bet count report header.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="criteria">The criteria.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -231,7 +203,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
             worksheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 11);
 
-            //// First Row
             currentColumn = startColumn;
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
             currentCellRange.Merged = true;
@@ -276,7 +247,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             currentColumn++;
             currentRow++;
 
-            //// Second Row
             currentColumn = startColumn + 2;
             currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn);
             currentCellRange.Merged = true;
@@ -322,15 +292,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             currentRow++;
         }
 
-        /// <summary>
-        /// Exports the content of the bet count report.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="report">The report.</param>
         private void ExportBetCountReportContent(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -383,15 +344,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             }
         }
 
-        /// <summary>
-        /// Exports the transaction row.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="transaction">The transaction.</param>
-        /// <param name="rowType">Type of the row.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -565,22 +517,11 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
         #endregion ExportExcel
 
-        /// <summary>
-        /// Calculates the margin.
-        /// </summary>
-        /// <param name="winLoss">The win loss.</param>
-        /// <param name="turnover">The turnover.</param>
-        /// <returns>The margin.</returns>
         private decimal CalculateMargin(decimal winLoss, decimal turnover)
         {
             return turnover != 0 ? winLoss / turnover * 100 : 0;
         }
 
-        /// <summary>
-        /// Gets the name of the sorted column.
-        /// </summary>
-        /// <param name="sortBy">The sort by.</param>
-        /// <returns>The name of the sorted column.</returns>
         private string GetSortedColumnName(string sortBy)
         {
             var columnName = string.Empty;

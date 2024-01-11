@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Misc.Criteria.TotalCreditAccountByProduct
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Get bet count detail criteria.
-    /// </summary>
     public class GetBetCountDetailCriteria : CriteriaBase
     {
         public DateTime MoveBetsDay { get; set; }

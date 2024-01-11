@@ -10,9 +10,6 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class LegendManagementController : BaseController
     {
         private readonly LegendManagementService _legendService;
@@ -62,10 +59,6 @@ namespace Fanex.AccountingReports.LegendManagement.Controllers
             return StringExtensions.JsonpFormat(criteria.CallBackFunction, legendContent);
         }
 
-        /// <summary>
-        /// Uploads the image.
-        /// </summary>
-        /// <returns>Upload result.</returns>
         public ActionResult UploadImage()
         {
             var criteria = new UploadFileCriteria

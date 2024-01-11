@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Gaming.Models.LiveCasinoGameStatistic
 {
     using System;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class WinLossInfoEntity
     {

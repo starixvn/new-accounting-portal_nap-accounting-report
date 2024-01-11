@@ -15,9 +15,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
     using Fanex.AccountingReports.Gaming.Resources;
     using Fanex.Common;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GamingService : ServiceBase
     {
         private GamingRepository _gamingRepository = null;
@@ -27,10 +24,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             _gamingRepository = new GamingRepository();
         }
 
-        /// <summary>
-        /// Gets the licensee support bingo.
-        /// </summary>
-        /// <returns>The licensee support bingo.</returns>
         public List<EntityBase<int, string>> GetLicensee_SupportBingo()
         {
             var licenseeList = new List<EntityBase<int, string>>();
@@ -63,11 +56,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             return licenseeList;
         }
 
-        /// <summary>
-        /// Gets the company list.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The company list.</returns>
         public CompanyInfo GetNumberGameCompanyList(GetNumberGameCompanyListCriteria criteria)
         {
             var result = new CompanyInfo
@@ -131,11 +119,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             return result;
         }
 
-        /// <summary>
-        /// Gets the company list.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The company list.</returns>
         public CompanyInfo GetLiveCasinoLicenseeList(GetLiveCasinoGameCompanyListCriteria criteria)
         {
             var result = new CompanyInfo
@@ -179,11 +162,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             return result;
         }
 
-        /// <summary>
-        /// Gets the company list.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The company list.</returns>
         [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1306:FieldNamesMustBeginWithLowerCaseLetter", Justification = "Reviewed.")]
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",

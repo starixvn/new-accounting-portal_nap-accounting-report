@@ -8,17 +8,8 @@ namespace Fanex.AccountingReports.Misc.Repositories.Implement
     using Fanex.Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class TotalSMAMemberActiveRepository
     {
-        /// <summary>
-        /// Gets the report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="totalSMA">The total SMA.</param>
-        /// <param name="activeDetails">The active details.</param>
         public void GetReport(ICriteria criteria, ref dynamic totalSMA, ref IList<dynamic> activeDetails)
         {
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))
@@ -68,12 +59,6 @@ namespace Fanex.AccountingReports.Misc.Repositories.Implement
             }
         }
 
-        /// <summary>
-        /// Gets the status detail.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="outputParam">The output parameter.</param>
-        /// <returns>The status detail.</returns>
         public IList<dynamic> GetStatusDetail(GetStatusDetailsCriteria criteria, ref Hashtable outputParam)
         {
             DataSet result = null;
@@ -103,12 +88,6 @@ namespace Fanex.AccountingReports.Misc.Repositories.Implement
             return detail;
         }
 
-        /// <summary>
-        /// Gets the status detail.
-        /// </summary>
-        /// <param name="dataRow">The data row.</param>
-        /// <param name="status">The status.</param>
-        /// <returns>The status detail.</returns>
         private dynamic GetStatusDetail(DataRow dataRow, Status status)
         {
             if (status == Status.NewCreated)

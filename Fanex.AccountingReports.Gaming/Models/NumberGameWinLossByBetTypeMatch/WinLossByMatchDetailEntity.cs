@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Gaming.Models.NumberGameWinLossByBetTypeMatch
 {
     using System;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class WinLossByMatchDetailEntity
     {

@@ -10,17 +10,8 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
     using Fanex.Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class SuperBalanceRepository
     {
-        /// <summary>
-        /// Gets the super balance.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="outputParam">The output parameter.</param>
-        /// <returns>The super balance parameter.</returns>
         public List<dynamic> GetSuperBalance(GetSuperBalanceCriteria criteria, ref Hashtable outputParam)
         {
             DataSet result = null;
@@ -63,12 +54,6 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
             return superBalance;
         }
 
-        /// <summary>
-        /// Gets the super balance down line.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="outputParam">The output parameter.</param>
-        /// <returns>The super balance down line parameter.</returns>
         public List<SuperBalance> GetSuperBalanceDownline(ICriteria criteria, ref Hashtable outputParam)
         {
             DataSet result = null;
@@ -104,12 +89,6 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
             return superBalance;
         }
 
-        /// <summary>
-        /// Gets the super balance master down line.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="outputParam">The output parameter.</param>
-        /// <returns>The super balance master down line.</returns>
         public List<SuperBalance> GetSuperBalanceMasterDownline(ICriteria criteria, ref Hashtable outputParam)
         {
             DataSet result = null;

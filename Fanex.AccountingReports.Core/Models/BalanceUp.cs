@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Core.Models
 {
     using System;
 
-    /// <summary>
-    /// BalanceUp: getting balance up day and move bet day.
-    /// </summary>
     public class BalanceUp
     {
         public DateTime BalanceUpDay { get; set; }

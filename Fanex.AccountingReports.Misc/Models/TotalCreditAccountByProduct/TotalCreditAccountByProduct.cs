@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Misc.Models.TotalCreditAccountByProduct
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Total credit account by product.
-    /// </summary>
     [Serializable]
     public class TotalCreditAccountByProduct
     {

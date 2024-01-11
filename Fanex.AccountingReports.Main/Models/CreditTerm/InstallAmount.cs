@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Main.Models.CreditTerm
 {
     using System;
 
-    /// <summary>
-    /// The model of Install Amount report.
-    /// </summary>
     [Serializable]
     public class InstallAmount
     {

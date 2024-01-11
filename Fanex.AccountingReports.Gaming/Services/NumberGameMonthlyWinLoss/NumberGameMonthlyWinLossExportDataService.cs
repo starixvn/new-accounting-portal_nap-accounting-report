@@ -11,9 +11,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWin
     using Fanex.AccountingReports.Gaming.Resources;
     using Fanex.Common;
 
-    /// <summary>
-    /// Number Game Monthly Win Loss Export Data Service.
-    /// </summary>
     public class NumberGameMonthlyWinLossExportDataService : ServiceBase
     {
         private string _numberGameMonthlyWinLossReportSessionKey = "Fanex.AccountingReports.Gaming.NumberGameMonthlyWinLoss." +
@@ -26,10 +23,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWin
             this._numberGameMonthlyWinLossService = new NumberGameMonthlyWinLossService();
         }
 
-        /// <summary>
-        /// Exports the number game monthly win loss report.
-        /// </summary>
-        /// <param name="getNumberGameMonthlyWinLossCriteria">The get number game monthly win loss criteria.</param>
         public void ExportNumberGameMonthlyWinLossReport(NumberGameMonthlyWinLossCriteria getNumberGameMonthlyWinLossCriteria)
         {
             var fullReport = SessionManager.Get<NumberGameMonthlyWinLoss>(_numberGameMonthlyWinLossReportSessionKey);
@@ -68,14 +61,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWin
             excelFile.ReponseStream(reportName);
         }
 
-        /// <summary>
-        /// Exports the report header.
-        /// </summary>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="getNumberGameMonthlyWinLossCriteria">The get number game monthly win loss criteria.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -157,14 +142,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWin
             currentRow += 2;
         }
 
-        /// <summary>
-        /// Exports the content of the report.
-        /// </summary>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="report">The report.</param>
         private void ExportReportContent(
             ref ExcelWorksheet workSheet,
             int startRow,
@@ -196,14 +173,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWin
             }
         }
 
-        /// <summary>
-        /// Exports the report detail.
-        /// </summary>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="detail">The detail.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -285,14 +254,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWin
             currentRow++;
         }
 
-        /// <summary>
-        /// Exports the footer report.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="grandTotal">The grand total.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]

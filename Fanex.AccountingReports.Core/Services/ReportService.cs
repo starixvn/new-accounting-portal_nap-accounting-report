@@ -10,9 +10,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
     using Fanex.Common;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class ReportService
     {
         #region StaticFields
@@ -71,11 +68,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
 
         #region StaticMethods
 
-        /// <summary>
-        /// Gets the store mapping suffix.
-        /// </summary>
-        /// <param name="reportDate">The report date.</param>
-        /// <returns>The store mapping suffix.</returns>
         public static string GetStoreMappingSuffix(DateTime reportDate)
         {
             if (reportDate > BalanceUp.MoveBetsDay)
@@ -104,20 +96,11 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             }
         }
 
-        /// <summary>
-        /// Updates the latest exchange currencies.
-        /// </summary>
         public static void UpdateLatestExchangeCurrencies()
         {
             var exchangeCurrencies = GetExchangeCurrencies(new GetExchangeCurrenciesCriteria());
         }
 
-        /// <summary>
-        /// Calculates the margin.
-        /// </summary>
-        /// <param name="lineTotal">The line total.</param>
-        /// <param name="turnover">The turnover.</param>
-        /// <returns>The margin.</returns>
         public static decimal CalculateMargin(decimal lineTotal, decimal turnover)
         {
             decimal result = 0;
@@ -130,11 +113,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             return result;
         }
 
-        /// <summary>
-        /// Gets the name of the period type.
-        /// </summary>
-        /// <param name="periodId">The period identifier.</param>
-        /// <returns>The name of the period type.</returns>
         public static string GetPeriodTypeName(int periodId)
         {
             switch (periodId)
@@ -158,11 +136,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             return string.Empty;
         }
 
-        /// <summary>
-        /// Gets the users name suggestion.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The users name suggestion.</returns>
         public static UserNameSuggestion UserNameSuggestion(UserNameSuggestionCriteria criteria)
         {
             var suggestionResult = new UserNameSuggestion
@@ -182,11 +155,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             return suggestionResult;
         }
 
-        /// <summary>
-        /// Gets the currency by licensee.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The currency by licensee.</returns>
         public static List<EntityBase<int, string>> GetCurrencyByLicensee(GetCurrencyByLicenseeCriteria criteria)
         {
             var currencyList = new List<EntityBase<int, string>>();
@@ -218,11 +186,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             return currencyList;
         }
 
-        /// <summary>
-        /// Gets the licensee support by product.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The licensee_ support by product.</returns>
         public static List<EntityBase<int, string>> GetLicensee_SupportByProduct(GetLicensee_SupportByProductCriteria criteria)
         {
             var licenseeList = new List<EntityBase<int, string>>();
@@ -242,11 +205,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             return licenseeList;
         }
 
-        /// <summary>
-        /// Gets the name of the site type.
-        /// </summary>
-        /// <param name="siteType">Type of the site.</param>
-        /// <returns>The name of the site type.</returns>
         public static string GetSiteTypeName(int siteType)
         {
             switch (siteType)
@@ -265,11 +223,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             }
         }
 
-        /// <summary>
-        /// Gets the name of the role.
-        /// </summary>
-        /// <param name="roleId">The role identifier.</param>
-        /// <returns>The name of the role.</returns>
         public static string GetRoleName(int roleId)
         {
             switch (roleId)
@@ -291,11 +244,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             }
         }
 
-        /// <summary>
-        /// Gets the live type name.
-        /// </summary>
-        /// <param name="liveType">Type of the live.</param>
-        /// <returns>The live type name.</returns>
         public static string GetLiveTypeName(int liveType)
         {
             string name = string.Empty;
@@ -317,11 +265,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             return name;
         }
 
-        /// <summary>
-        /// Gets the exchange currencies.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The exchange currencies.</returns>
         public static Dictionary<int, string> GetExchangeCurrencies(GetExchangeCurrenciesCriteria criteria)
         {
             var exchangeCurrencies = new Dictionary<int, string>();

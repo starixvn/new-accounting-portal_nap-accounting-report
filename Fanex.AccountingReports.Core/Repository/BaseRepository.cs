@@ -7,19 +7,8 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
     using Fanex.Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
-    /// <typeparam name="T">The parameter type.</typeparam>
     public class BaseRepository<T>
     {
-        /// <summary>
-        /// Fetches the specified criteria.
-        /// </summary>
-        /// <typeparam name="S">The parameter type.</typeparam>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="mapObjectFunction">The map object function.</param>
-        /// <returns>The data value.</returns>
         public virtual List<S> Fetch<S>(
             ICriteria criteria,
             Func<IDataReader, S> mapObjectFunction) where S : class
@@ -44,11 +33,6 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
             return listObject;
         }
 
-        /// <summary>
-        /// Executes the command.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The data value.</returns>
         public virtual Hashtable ExecuteCommand(ICriteria criteria)
         {
             using (var db = ObjectDbFactory.CreateInstance(criteria.GetSettingKey()))

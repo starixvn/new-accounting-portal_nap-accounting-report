@@ -13,9 +13,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
     using System.Collections.Generic;
     using System.Linq;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class LeagueWinLossService : ServiceBase
     {
         private LeagueWinLossRepository _reportRepository;

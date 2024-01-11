@@ -20,9 +20,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
     using Fanex.Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Create service for tree win loss.
-    /// </summary>
     public class TreeWinLossService : ServiceBase
     {
         private readonly TreeWinLossRepository _treeWinLossRepository;
@@ -51,11 +48,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return dynamicRipository.Fetch<Sport>(new GetSportCriteria()).ToList();
         }
 
-        /// <summary>
-        /// Get Tree Win Loss By Product.
-        /// </summary>
-        /// <param name="criteria">Tree Win Loss By Product Criteria.</param>
-        /// <returns>The Tree Win Loss.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
@@ -69,11 +61,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return treeWinLoss;
         }
 
-        /// <summary>
-        /// Get Data Tree Win Loss by level.
-        /// </summary>
-        /// <param name="criteria">The Tree win loss by level.</param>
-        /// <returns>The tree win loss.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
@@ -88,11 +75,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return winLossByComm;
         }
 
-        /// <summary>
-        /// Gets the virtual rate.
-        /// </summary>
-        /// <param name="custId">The customer identifier.</param>
-        /// <returns>Virtual rate information.</returns>
         public VirtualRateInfo GetVirtualRate(int custId)
         {
             VirtualRateInfo virtualRateInfo = new VirtualRateInfo();
@@ -142,11 +124,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return treeWinLossVirtualRate;
         }
 
-        /// <summary>
-        /// Get Tree Win Loss By Product for specified time.
-        /// </summary>
-        /// <param name="criteria">The tree win loss by product criteria.</param>
-        /// <returns>The tree win loss.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
@@ -228,11 +205,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return treeWinLoss;
         }
 
-        /// <summary>
-        /// Get tree win loss by level for specified time.
-        /// </summary>
-        /// <param name="criteria">The tree win loss by level criteria.</param>
-        /// <returns>The tree win loss.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
@@ -331,11 +303,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return treeWinLoss;
         }
 
-        /// <summary>
-        /// Gets the virtual rate by sport and live status.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Virtual rate by sport and live status.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
@@ -413,11 +380,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return virtualRateBySportAndLiveStatus;
         }
 
-        /// <summary>
-        /// Gets the virtual rate history.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Virtual rate history.</returns>
         private VirtualRateInfo GetVirtualRateHistory(GetVirtualRateHistoryCriteria criteria)
         {
             VirtualRateInfo virtualRateInfo = new VirtualRateInfo();
@@ -445,9 +407,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return virtualRateInfo;
         }
 
-        /// <summary>
-        /// Initializes the bet type data.
-        /// </summary>
         private void InitBettype()
         {
             this._bettype.Add(0, BetTypeConstants.Handicap);
@@ -467,10 +426,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return sportName;
         }
 
-        /// <summary>
-        /// Initializes the virtual rate by bet type information.
-        /// </summary>
-        /// <returns>The virtual rate by bet type.</returns>
         private List<VirtualRateByBettypeInfo> InitVirtualRateByBettypeInfo()
         {
             var virtualRateByBettype = new List<VirtualRateByBettypeInfo>(this._bettype.Count);
@@ -487,12 +442,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return virtualRateByBettype;
         }
 
-        /// <summary>
-        /// Gets the virtual rate log history.
-        /// </summary>
-        /// <param name="actionId">The action identifier.</param>
-        /// <param name="xmlTrackingValue">The XML tracking value.</param>
-        /// <returns>The virtual rate log history.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]
@@ -551,11 +500,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return virtualRateHistory;
         }
 
-        /// <summary>
-        /// Maps the SMA virtual rate data.
-        /// </summary>
-        /// <param name="reader">The reader.</param>
-        /// <returns>SMA virtual rate.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
            "SP2101:MethodMustNotContainMoreLinesThan",
            Justification = "Reviewed. Suppression is OK here.")]
@@ -629,12 +573,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return report;
         }
 
-        /// <summary>
-        /// Maps the tree win loss data.
-        /// </summary>
-        /// <param name="reader">The reader.</param>
-        /// <param name="roleId">The role identifier.</param>
-        /// <returns>Tree win loss data.</returns>
         private TreeWinLossInfo MapTreeWinLossData(IDataReader reader, int roleId)
         {
             string recommend = string.Empty;
@@ -685,11 +623,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return winLoss;
         }
 
-        /// <summary>
-        /// Maps the enabled virtual rate user data.
-        /// </summary>
-        /// <param name="enabledVirtualRateUser">The enabled virtual rate user.</param>
-        /// <returns>Enable virtual rate users. </returns>
         private Dictionary<string, int> MapEnabledVirtualRateUserData(List<TreeWinLossInfo> enabledVirtualRateUser)
         {
             int index = 0;

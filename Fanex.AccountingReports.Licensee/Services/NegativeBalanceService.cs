@@ -15,9 +15,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.Linq;
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NegativeBalanceService : ServiceBase
     {
         private readonly NegativeBalanceRepository _negativeBalanceRepository;
@@ -27,11 +24,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             this._negativeBalanceRepository = negativeBalanceRepository ?? new NegativeBalanceRepository();
         }
 
-        /// <summary>
-        /// Gets the negative balance.
-        /// </summary>
-        /// <param name="negativeBalanceCriteria">The negative balance criteria.</param>
-        /// <returns>The negative balance.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -71,18 +63,11 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             return model;
         }
 
-        /// <summary>
-        /// Gets the excel negative balance.
-        /// </summary>
-        /// <param name="negativeBalanceCriteria">The negative balance criteria.</param>
-        /// <param name="site">The site value.</param>
-        /// <returns>The excel negative balance.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public ExcelFile GetExcelNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria, string site)
         {
-            //// local varialbles
 
             int startCol = 0;
             int startRow = 2;
@@ -112,9 +97,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
 
             var excelReport = excelFile.Worksheets.Add(string.Format("NegativeBalance"));
 
-            //// local varialbles
 
-            //// header
 
             var siteName = (negativeBalanceCriteria.Site == "All" ?
                         "All Licensees" :
@@ -129,22 +112,15 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
                 ref excelReport,
                 reportName);
 
-            //// header
 
-            //// content
             int nextRow = 1;
             if (model != null && model.NegativeBalanceList != null && model.NegativeBalanceList.Count > 0)
             {
                 this.ExportExcelNegativeBalanceReportAssignBody(startRow, startCol, ref nextRow, ref excelReport, model);
             }
-            //// content
             return excelFile;
         }
 
-        /// <summary>
-        /// Exports the excel negative balance.
-        /// </summary>
-        /// <param name="negativeBalanceCriteria">The negative balance criteria.</param>
         public void ExportExcelNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria)
         {
             var reportName = LicenseeResources.NegativeBalance_ReportFileName +
@@ -182,13 +158,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             return licenseeSiteList;
         }
 
-        /// <summary>
-        /// Exports the excel negative balance report assign header.
-        /// </summary>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startCol">The start col.</param>
-        /// <param name="excelReport">The excel report.</param>
-        /// <param name="title">The title.</param>
         private void ExportExcelNegativeBalanceReportAssignHeader(int startRow, int startCol, ref ExcelWorksheet excelReport, string title)
         {
             var backgroundHeaderFormat = ExcelExtensions.GetCellTitleStyle(Color.FromArgb(60, 94, 165));
@@ -214,14 +183,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             excelReport.Cells.GetSubrangeAbsolute(startRow - 2, startCol, startRow - 2, startCol + nextCol).Value = title;
         }
 
-        /// <summary>
-        /// Exports the excel negative balance report assign body.
-        /// </summary>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startCol">The start col.</param>
-        /// <param name="nextRow">The next row.</param>
-        /// <param name="excelReport">The excel report.</param>
-        /// <param name="model">The model.</param>
         private void ExportExcelNegativeBalanceReportAssignBody(int startRow, int startCol, ref int nextRow, ref ExcelWorksheet excelReport, NegativeBalanceModel model)
         {
             var cellStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.OddRowColor, false);

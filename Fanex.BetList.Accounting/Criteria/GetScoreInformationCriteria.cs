@@ -5,9 +5,6 @@ namespace Fanex.BetList.Accounting.Criteria
     using Fanex.BetList.Accounting.Services;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetScoreInformationCriteria : CriteriaBase
     {
         [SpParam(SqlParamName = "MatchID")]

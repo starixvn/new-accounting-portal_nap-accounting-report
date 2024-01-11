@@ -18,9 +18,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using Fanex.Excel.Models;
     using AccountingReports.Core.Configurations;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class CompanyWinLossService : ServiceBase
     {
         private const int ExtendCachedTimeOut = 2;

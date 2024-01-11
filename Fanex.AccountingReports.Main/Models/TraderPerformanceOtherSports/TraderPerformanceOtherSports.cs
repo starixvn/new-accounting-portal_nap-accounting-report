@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceOtherSports
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    /// <summary>
-    /// Trader performance for other sports model..
-    /// </summary>
     [Serializable]
     public class TraderPerformanceOtherSports
     {
@@ -56,10 +53,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceOtherSports
 
         public TraderPerformanceOtherSports GrandTotal { get; set; }
 
-        /// <summary>
-        /// Sums the specified trader information.
-        /// </summary>
-        /// <param name="traderInfo">The trader information.</param>
         public void CalculateTotal(TraderPerformanceOtherSports traderInfo)
         {
             this.FirstHalfHdp += traderInfo.FirstHalfHdp;
@@ -73,11 +66,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceOtherSports
             this.Overall += traderInfo.Overall;
         }
 
-        /// <summary>
-        /// Calculates the margin total.
-        /// </summary>
-        /// <param name="winLossInfo">The win loss information.</param>
-        /// <param name="turnOverInfo">The turn over information.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -112,15 +100,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceOtherSports
                 (winLossInfo.Overall / turnOverInfo.Overall) * 100;
         }
 
-        /// <summary>
-        /// Calculates the total match and league.
-        /// </summary>
-        /// <param name="matchNumber">The match number.</param>
-        /// <param name="major">The major.</param>
-        /// <param name="minor1">The minor1.</param>
-        /// <param name="minor2">The minor2.</param>
-        /// <param name="minor3">The minor3.</param>
-        /// <param name="others">The others.</param>
         public void CalculateTotalMatchAndLeague(
             int matchNumber,
             int major,
@@ -137,10 +116,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceOtherSports
             this.Others += others;
         }
 
-        /// <summary>
-        /// Formats the two decimal number data.
-        /// </summary>
-        /// <param name="traderInfo">The trader information.</param>
         public void FormatTwoDecimalNumberData(TraderPerformanceOtherSports traderInfo)
         {
             this.FirstHalfHdp = Math.Round(traderInfo.FirstHalfHdp, 2, MidpointRounding.AwayFromZero);
@@ -154,10 +129,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceOtherSports
             this.Overall = Math.Round(traderInfo.Overall, 2, MidpointRounding.AwayFromZero);
         }
 
-        /// <summary>
-        /// Gets the margin value.
-        /// </summary>
-        /// <param name="marginInfo">The margin information.</param>
         public void GetMarginValue(TraderPerformanceOtherSports marginInfo)
         {
             this.FirstHalfHdp = 100 * marginInfo.FirstHalfHdp;

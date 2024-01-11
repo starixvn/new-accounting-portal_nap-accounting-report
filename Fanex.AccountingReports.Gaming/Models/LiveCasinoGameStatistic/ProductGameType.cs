@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Gaming.Models.LiveCasinoGameStatistic
     using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Models;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class ProductGameType
     {
         public string ProductName { get; set; }

@@ -15,9 +15,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
     using Fanex.AccountingReports.LegendManagement.Resources;
     using Fanex.Common;
 
-    /// <summary>
-    /// Legend Management Service.
-    /// </summary>
     public class LegendManagementService : ServiceBase
     {
         private const string InlineFileDataSuffix = ".inline";
@@ -30,11 +27,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             this._reportRepository = new LegendRepository();
         }
 
-        /// <summary>
-        /// Gets the menu list.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The menu list.</returns>
         [SuppressMessage("Microsoft.Design",
             "CA1031:DoNotCatchGeneralExceptionTypes",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -43,11 +35,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             return this._menuService.GetMenuList(criteria);
         }
 
-        /// <summary>
-        /// Saves the report legend.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Save result.</returns>
         [SuppressMessage("Microsoft.Design",
             "CA1031:DoNotCatchGeneralExceptionTypes",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -63,11 +50,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             return Converter.ToString2(outputParams[Labels.SP_Contants_Error]);
         }
 
-        /// <summary>
-        /// Gets the report legend.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The report legend.</returns>
         [SuppressMessage("Microsoft.Design",
             "CA1031:DoNotCatchGeneralExceptionTypes",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -94,11 +76,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             };
         }
 
-        /// <summary>
-        /// Gets the JSONP report legend.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The JSONP report legend.</returns>
         [SuppressMessage("Microsoft.Design",
             "CA1031:DoNotCatchGeneralExceptionTypes",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -119,11 +96,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             return string.Empty;
         }
 
-        /// <summary>
-        /// Uploads the image.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>File name.</returns>
         [SuppressMessage("Microsoft.Design",
             "CA1031:DoNotCatchGeneralExceptionTypes",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -137,12 +109,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             return criteria.FileName;
         }
 
-        /// <summary>
-        /// Makes the inline images.
-        /// </summary>
-        /// <param name="imagesPath">The images path.</param>
-        /// <param name="imageFolder">The image folder.</param>
-        /// <returns>The inline images.</returns>
         [SuppressMessage("Microsoft.Design",
             "CA1031:DoNotCatchGeneralExceptionTypes",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -176,11 +142,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             return null;
         }
 
-        /// <summary>
-        /// Saves the report legend mapping.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Save result.</returns>
         [SuppressMessage("Microsoft.Design",
             "CA1031:DoNotCatchGeneralExceptionTypes",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -201,11 +162,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             return Labels.NotExistLegend;
         }
 
-        /// <summary>
-        /// Gets the inputted legend report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The inputted legend report.</returns>
         [SuppressMessage("Microsoft.Design",
             "CA1031:DoNotCatchGeneralExceptionTypes",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -239,11 +195,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             return result;
         }
 
-        /// <summary>
-        /// Mappings the legend identifier.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The legend identifier.</returns>
         private int MappingLegendId(GetReportLegendCriteria criteria)
         {
             var legend = Repository.Get<dynamic>(new GetReportLegendCriteria
@@ -260,11 +211,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             return Converter.ToInt(legend.LegendID);
         }
 
-        /// <summary>
-        /// Makes the inline image.
-        /// </summary>
-        /// <param name="stream">The stream.</param>
-        /// <returns>The inline image.</returns>
         private string MakeInlineImage(Stream stream)
         {
             var base64String = string.Empty;
@@ -296,12 +242,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             }
         }
 
-        /// <summary>
-        /// Gets the inline data.
-        /// </summary>
-        /// <param name="imagePath">The image path.</param>
-        /// <param name="imageFolder">The image folder.</param>
-        /// <returns>The inline data.</returns>
         private string GetInlineData(string imagePath, string imageFolder)
         {
             var result = string.Empty;

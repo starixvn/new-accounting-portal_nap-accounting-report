@@ -8,20 +8,12 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
     using Fanex.Data;
     using RemotingRef;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class SaveBetReportService : ServiceBase
     {
         public SaveBetReportService()
         {
         }
 
-        /// <summary>
-        /// Gets the sports.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Sports data.</returns>
         public Sport GetSports(GetSportsCriteria criteria)
         {
             var result = new Sport();
@@ -45,11 +37,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
             return result;
         }
 
-        /// <summary>
-        /// Gets the leagues.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Leagues data.</returns>
         public League GetLeagues(GetLeaguesCriteria criteria)
         {
             var result = new League();
@@ -74,11 +61,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement.SaveBetReport
             return result;
         }
 
-        /// <summary>
-        /// Gets the match data.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>List match data.</returns>
         public Match GetMatchs(GetMatchsCriteria criteria)
         {
             var result = new Match();

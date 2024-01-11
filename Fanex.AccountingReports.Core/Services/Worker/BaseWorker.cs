@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl.Worker
     using System.Threading;
     using Fanex.Logging;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class BaseWorker
     {
         private Thread _workerThread;
@@ -21,9 +18,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl.Worker
 
         protected bool IsStop { get; set; }
 
-        /// <summary>
-        /// Start Worker.
-        /// </summary>
         public void Start()
         {
             if (_workerThread != null)
@@ -37,17 +31,11 @@ namespace Fanex.AccountingReports.Core.Services.Impl.Worker
             }
         }
 
-        /// <summary>
-        /// Set Stop Worker.
-        /// </summary>
         public void Stop()
         {
             IsStop = true;
         }
 
-        /// <summary>
-        /// Run main function.
-        /// </summary>
         protected virtual void Run()
         {
         }

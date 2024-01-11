@@ -6,9 +6,6 @@ namespace Fanex.AccountingReports.Core.Web
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class AppSession
     {
 
@@ -25,12 +22,6 @@ namespace Fanex.AccountingReports.Core.Web
             Password = string.Empty
         };
 
-        /// <summary>
-        /// Gets or sets current login user.
-        /// </summary>
-        /// <value>
-        /// The current user.
-        /// </value>
         public static User CurrentUser
         {
             get
@@ -45,12 +36,6 @@ namespace Fanex.AccountingReports.Core.Web
             }
         }
 
-        /// <summary>
-        /// Gets or sets menu of current login user.
-        /// </summary>
-        /// <value>
-        /// The current user menu.
-        /// </value>
         public static IList<MenuItem> CurrentUserMenu
         {
             get
@@ -59,12 +44,6 @@ namespace Fanex.AccountingReports.Core.Web
             }
         }
 
-        /// <summary>
-        /// Gets or sets current working menu url.
-        /// </summary>
-        /// <value>
-        /// The current working on menu.
-        /// </value>
         public static MenuItem CurrentWorkingOnMenu
         {
             get
@@ -78,13 +57,6 @@ namespace Fanex.AccountingReports.Core.Web
             }
         }
 
-        /// <summary>
-        /// Gets or sets IsTrackedMenu: determine current working on menu is
-        /// tracked for page tracking or not.
-        /// </summary>
-        /// <value>
-        /// The name of the current action.
-        /// </value>
         public static string CurrentActionName
         {
             get

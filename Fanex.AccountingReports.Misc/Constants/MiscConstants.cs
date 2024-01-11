@@ -2,9 +2,6 @@ using System.Collections.Generic;
 
 namespace Fanex.AccountingReports.Misc.Constants
 {
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class MiscConstants
     {
         public const int MiscSoccerGroupId = 1;

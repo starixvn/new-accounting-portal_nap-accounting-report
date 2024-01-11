@@ -17,9 +17,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
     using Fanex.AccountingReports.WinLoss.Resources;
     using Fanex.Common;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class DailyMixParlayWinLossService : ServiceBase
     {
         private Dictionary<object, string> _sportTypeNameCache;
@@ -36,11 +33,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             this._reportRepository = reportRepository ?? new DailyMixParlayWinLossRepository();
         }
 
-        /// <summary>
-        /// Gets the combination win loss report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The combination win loss report.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -137,11 +129,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             return report;
         }
 
-        /// <summary>
-        /// Gets the advance mix parlay report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The advance mix parlay report.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -242,12 +229,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             return report;
         }
 
-        /// <summary>
-        /// Gets the name of the sport.
-        /// </summary>
-        /// <param name="sportIdList">The identifier list.</param>
-        /// <param name="currentStorage">The current storage.</param>
-        /// <returns>The name of the sport.</returns>
         public Dictionary<object, string> GetSportName(
             List<dynamic> sportIdList,
             ref Dictionary<object, string> currentStorage)
@@ -281,10 +262,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             return currentStorage;
         }
 
-        /// <summary>
-        /// Exports the combination win loss report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -848,10 +825,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
 
         }
 
-        /// <summary>
-        /// Exports the advance mix parlay report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -1313,11 +1286,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
         }
 
 
-        /// <summary>
-        /// Formats the win loss information.
-        /// </summary>
-        /// <param name="winLoss">The win loss.</param>
-        /// <returns>The win loss information.</returns>
         private WinLossInfo FormatWinLossInfo(WinLossInfo winLoss)
         {
             winLoss.BetCount_Str = winLoss.BetCount.Format(0);
@@ -1345,11 +1313,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             return winLoss;
         }
 
-        /// <summary>
-        /// Converts the type of the combination.
-        /// </summary>
-        /// <param name="combination">The combination.</param>
-        /// <returns>The type of the combination.</returns>
         private string ConvertCombinationType(string combination)
         {
             string name = string.Empty;
@@ -1377,11 +1340,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             return name;
         }
 
-        /// <summary>
-        /// Converts the type of the live.
-        /// </summary>
-        /// <param name="liveType">Type of the live.</param>
-        /// <returns>The type of the live.</returns>
         private string ConvertLiveType(int liveType)
         {
             string name = string.Empty;
@@ -1414,11 +1372,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             return result;
         }
 
-        /// <summary>
-        /// Gets the color of the excel combination.
-        /// </summary>
-        /// <param name="combinationName">Name of the combination.</param>
-        /// <returns>The color of the excel combination.</returns>
         private Color GetExcelCombinationColor(string combinationName)
         {
             var color = ExcelExtensions.BackGroundColor;
@@ -1448,11 +1401,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             return color;
         }
 
-        /// <summary>
-        /// Gets the color of the excel live type.
-        /// </summary>
-        /// <param name="liveTypeId">The live type identifier.</param>
-        /// <returns>The color of the excel live type.</returns>
         private Color GetExcelLiveTypeColor(int liveTypeId)
         {
             var color = ExcelExtensions.BackGroundColor;
@@ -1474,11 +1422,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             return color;
         }
 
-        /// <summary>
-        /// Gets the name of the sport.
-        /// </summary>
-        /// <param name="sportType">Type of the sport.</param>
-        /// <returns>The name of the sport.</returns>
         private string GetSportName(int sportType)
         {
             var sportTotalName = string.Empty;

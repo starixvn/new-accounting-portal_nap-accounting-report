@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Misc.Models.TotalCreditAccountByProduct
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Bet count detail.
-    /// </summary>
     [Serializable]
     public class BetCountDetail
     {

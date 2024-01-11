@@ -14,9 +14,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
     using Fanex.Excel.Enums;
     using Fanex.Excel.Models;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class CreditMovementService
     {
         private const int ExtendCachedTimeOut = 2;
@@ -24,11 +21,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
         private readonly string _creditMovementDataCachedKey = "Fanex.AccountingReports.Misc.CreditMovement" +
             (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
 
-        /// <summary>
-        /// Gets the report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The grid options data.</returns>
         public GridOptions GetReport(GetCreditMovementCriteria criteria)
         {
             GridOptions gridOptions = null;
@@ -48,11 +40,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
             return pagingGridOptions;
         }
 
-        /// <summary>
-        /// Gets the full report from cache.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The grid options from cache.</returns>
         public GridOptions GetFullReportFromCache(GetCreditMovementCriteria criteria)
         {
             GridOptions gridOptions = null;
@@ -75,10 +62,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
                 criteria.ToDate.ToShortFormatedDateWithSlash().Replace("/", "_"));
         }
 
-        /// <summary>
-        /// Gets the sites.
-        /// </summary>
-        /// <returns>All the site.</returns>
         public IEnumerable<SiteGroup> GetSites()
         {
             List<Site> sites = new List<Site>();
@@ -128,11 +111,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
             return result;
         }
 
-        /// <summary>
-        /// Gets the report data.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The grid options.</returns>
         private GridOptions GetReportData(GetCreditMovementCriteria criteria)
         {
             GridOptions gridOptions = InitCreditMovementGridOptions(criteria);
@@ -147,11 +125,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
             return gridOptions;
         }
 
-        /// <summary>
-        /// Initializes the credit movement grid options.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The grid options.</returns>
         private GridOptions InitCreditMovementGridOptions(GetCreditMovementCriteria criteria)
         {
             return new GridOptions
@@ -170,10 +143,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
             };
         }
 
-        /// <summary>
-        /// Groups the header rows.
-        /// </summary>
-        /// <returns>The group header.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2100:CodeLineMustNotBeLongerThan",
         Justification = "Reviewed. Suppression is OK here.")]
@@ -194,10 +163,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
             return groupHeader;
         }
 
-        /// <summary>
-        /// Headers the columns.
-        /// </summary>
-        /// <returns>The header columns.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2100:CodeLineMustNotBeLongerThan",
         Justification = "Reviewed. Suppression is OK here.")]
@@ -217,11 +182,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
             return header;
         }
 
-        /// <summary>
-        /// Maps the report data rows.
-        /// </summary>
-        /// <param name="reader">The reader.</param>
-        /// <returns>The body rows data.</returns>
         private List<GridDataRow> MapReportDataRows(IDataReader reader)
         {
             int dataRowIndex = 0;

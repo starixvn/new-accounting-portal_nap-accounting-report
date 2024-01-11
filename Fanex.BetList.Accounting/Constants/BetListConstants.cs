@@ -1,8 +1,5 @@
 namespace Fanex.BetList.Accounting.Constants
 {
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class BetListConstants
     {
         public const string ScoreInformationHomeTeamId = "1";

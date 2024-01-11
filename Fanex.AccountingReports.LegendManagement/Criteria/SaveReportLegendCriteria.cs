@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.LegendManagement.Criteria
     using Fanex.AccountingReports.LegendManagement.Configurations;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Save Report Legend Criteria.
-    /// </summary>
     public class SaveReportLegendCriteria : CriteriaBase
     {
         public SaveReportLegendCriteria()
@@ -31,19 +28,11 @@ namespace Fanex.AccountingReports.LegendManagement.Criteria
         [SpParam(Ignored = true)]
         public string ConfigPath { get; set; }
 
-        /// <summary>
-        /// Get the reference SP's Name which is specified in Config file.
-        /// </summary>
-        /// <returns>Store procedure alias name.</returns>
         public override string GetSettingKey()
         {
             return "LegendManagement_SaveReportLegend";
         }
 
-        /// <summary>
-        /// Check data's constrains.
-        /// </summary>
-        /// <returns>True: valid; False: invalid.</returns>
         public override bool IsValid()
         {
             return true;

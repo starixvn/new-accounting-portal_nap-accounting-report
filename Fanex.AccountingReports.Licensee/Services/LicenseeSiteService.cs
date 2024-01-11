@@ -8,15 +8,8 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using Fanex.AccountingReports.Licensee.Criteria;
     using Fanex.AccountingReports.Licensee.Models;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class LicenseeSiteService : ServiceBase
     {
-        /// <summary>
-        /// Gets the licensee site list.
-        /// </summary>
-        /// <returns>The licensee site list.</returns>
         public List<Licensee> GetLicenseeSiteList()
         {
             var licenseeSiteCriteria = new GetAllLicenseeCriteria();
@@ -42,11 +35,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             return licenseeSiteList;
         }
 
-        /// <summary>
-        /// Gets the currencies by licensee.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The currencies by licensee.</returns>
         public List<Currency> GetCurrenciesByLicensee(GetCurrenciesByLicenseeCriteria criteria)
         {
             var currencies = new List<Currency>();

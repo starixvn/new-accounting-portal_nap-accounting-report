@@ -16,15 +16,8 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
     using Fanex.AccountingReports.Gaming.Resources;
     using Fanex.Common;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NumberGameWinlossByDateService : ServiceBase
     {
-        /// <summary>
-        /// Rounds the specified win loss.
-        /// </summary>
-        /// <param name="winLoss">The win loss.</param>
         public static void Round(ref NumberGameWinLossDetail winLoss)
         {
             if (winLoss != null)
@@ -39,11 +32,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             }
         }
 
-        /// <summary>
-        /// Gets the licensee.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The licensee.</returns>
         public List<EntityBase<int, string>> GetLicensee(GetNumberGameLicenseeCriteria criteria)
         {
             var result = new List<EntityBase<int, string>>();
@@ -65,11 +53,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
 
 
 
-        /// <summary>
-        /// Gets the number game win loss by date.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The number game win loss by date.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -144,10 +127,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             return result;
         }
 
-        /// <summary>
-        /// Gets the currencies.
-        /// </summary>
-        /// <returns>The currencies.</returns>
         public List<EntityBase<int, string>> GetCurrencies()
         {
             var result = new List<EntityBase<int, string>>();
@@ -170,10 +149,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             return result;
         }
 
-        /// <summary>
-        /// Exports the number game by date.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         public void ExportNumberGameByDate(GetNumberGameWinLossByDateCriteria criteria)
         {
             var fullReport = SessionManager.Get<NumberGameWinLossDetail>(GamingConstants.NumberGameWinLossByDateSessionKey);
@@ -219,14 +194,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             return (lineTotal / turnOver).ToString();
         }
 
-        /// <summary>
-        /// Exports the report header.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="criteria">The criteria.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -313,14 +280,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             currentRow += 2;
         }
 
-        /// <summary>
-        /// Exports the content of the report.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="report">The report.</param>
         private void ExportReportContent(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -349,14 +308,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             }
         }
 
-        /// <summary>
-        /// Exports the direct balance detail.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="winLossDateList">The win loss date list.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
@@ -589,14 +540,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             }
         }
 
-        /// <summary>
-        /// Exports the direct balance total.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="grandTotal">The grand total.</param>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]

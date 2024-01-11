@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Misc.Criteria.DailyCreatedCustomers
     using System;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetDailyCreatedCustomersCriteria : CriteriaBase
     {
         public DateTime Fromdate { get; set; }

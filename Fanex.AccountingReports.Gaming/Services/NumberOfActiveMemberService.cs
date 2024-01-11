@@ -14,9 +14,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
     using Fanex.Excel.Enums;
     using Fanex.Excel.Models;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NumberOfActiveMemberService : ServiceBase
     {
         private readonly string _numberOfActiveMemberSessionKey = "Fanex.AccountingReports.Gaming.NumberOfActiveMember." +
@@ -87,11 +84,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             return numberActiveMemberByCombinations;
         }
 
-        ///// <summary>
-        ///// Get Report.
-        ///// </summary>
-        ///// <param name="criteria">The Criteria.</param>
-        ///// <returns>The report.</returns>
         public GridOptions GetReport(GetNumberOfActiveMemberCriteria criteria)
         {
             List<NumberActiveMemeberByCombination> report = GetReportCombinationData(criteria);

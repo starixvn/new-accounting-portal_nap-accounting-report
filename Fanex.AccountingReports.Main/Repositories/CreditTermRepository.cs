@@ -12,16 +12,8 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
     using Fanex.Common;
     using Fanex.Data;
 
-    /// <summary>
-    /// The get report repository of Credit Term.
-    /// </summary>
     public class CreditTermRepository
     {
-        /// <summary>
-        /// Get Credit Term report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The list CreditTerm.</returns>
         public List<CreditTerm> GetCreditTerm(GetCreditTermCriteria criteria)
         {
             var report = new List<CreditTerm>();
@@ -40,11 +32,6 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             return report;
         }
 
-        /// <summary>
-        /// Save and write log edited remark.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The GetRemarkEditedCriteria.</returns>
         public EditedRemarkResult EditRemark(GetRemarkEditedCriteria criteria)
         {
             var editedRemark = new EditedRemarkResult();
@@ -68,12 +55,6 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             }
         }
 
-        /// <summary>
-        /// Loop, convert data and push data into report.
-        /// </summary>
-        /// <param name="multipleResult">The data set.</param>
-        /// <param name="report">The report.</param>
-        /// <returns>The list CreditTerm.</returns>
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
         "SP2101:MethodMustNotContainMoreLinesThan",
         Justification = "Reviewed. Suppression is OK here.")]

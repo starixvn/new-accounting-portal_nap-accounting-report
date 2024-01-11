@@ -11,9 +11,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
     using Fanex.Common;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class MostVisitedPagesService : ServiceBase
     {
         private readonly MostVisitedPagesRepository _mostVisitedPagesRepository;
@@ -26,10 +23,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             this._menuService = new MenuService();
         }
 
-        /// <summary>
-        /// Gets the most visited pages.
-        /// </summary>
-        /// <returns>The most visited pages.</returns>
         public IEnumerable<MostVisitedPage> GetMostVisitedPages()
         {
             if (AppSettings.IsDisableMostvisitedPage)
@@ -60,10 +53,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             return mostvisitedPages;
         }
 
-        /// <summary>
-        /// Updates the count.
-        /// </summary>
-        /// <param name="mostVisitedPage">The most visited page.</param>
         public void UpdateCount(MostVisitedPage mostVisitedPage)
         {
             if (AppSettings.IsDisableMostvisitedPage || mostVisitedPage == null)
@@ -73,7 +62,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
 
             lock (CommonConstants.MostVisitedPageLockObject)
             {
-                ////Update to Memory
                 List<MostVisitedPage> mostVisitedPages = CacheExtension.Get<List<MostVisitedPage>>(CommonConstants.MistVisitedPageCacheKey);
                 if (mostVisitedPages == null)
                 {
@@ -107,10 +95,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             }
         }
 
-        /// <summary>
-        /// Updates the position.
-        /// </summary>
-        /// <param name="mostVisitedPage">The most visited page.</param>
         public void UpdatePosition(ICriteria mostVisitedPage)
         {
             if (AppSettings.IsDisableMostvisitedPage)
@@ -121,10 +105,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             this._mostVisitedPagesRepository.UpdatePosition(mostVisitedPage);
         }
 
-        /// <summary>
-        /// Deletes the specified most visited page.
-        /// </summary>
-        /// <param name="mostVisitedPage">The most visited page.</param>
         public void Delete(ICriteria mostVisitedPage)
         {
             if (AppSettings.IsDisableMostvisitedPage)
@@ -140,10 +120,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             return position >= 1 && position <= maxPages;
         }
 
-        /// <summary>
-        /// Sorts the most visited pages.
-        /// </summary>
-        /// <param name="mostVisitedPages">The most visited pages.</param>
         private void SortMostVisitedPages(ref List<MostVisitedPage> mostVisitedPages)
         {
             if (mostVisitedPages == null)

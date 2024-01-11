@@ -9,9 +9,6 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     using Fanex.NAP.Core.Web.Attribute;
     using System.Web.Mvc;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class PeakConcurrentUsersController : BaseController
     {
         private readonly PeakConcurrentUserService _reportService;
