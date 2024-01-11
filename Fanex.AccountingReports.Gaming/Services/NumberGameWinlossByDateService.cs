@@ -53,9 +53,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
 
 
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public NumberGameWinLossDetail GetNumberGameWinLossByDate(GetNumberGameWinLossByDateCriteria criteria)
         {
             var result = new NumberGameWinLossDetail
@@ -194,9 +192,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             return (lineTotal / turnOver).ToString();
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReportHeader(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -308,9 +304,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportDirectBalanceDetail(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -540,9 +534,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportDirectBalanceTotal(
             ref ExcelWorksheet worksheet,
             int startRow,

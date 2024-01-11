@@ -166,7 +166,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurations\WebSettings.cs" />
-    <Compile Include="Constants\SystemName.cs" />
     <Compile Include="Controllers\LegendManagementController.cs" />
     <Compile Include="Criteria\GetInputedLegendReportCriteria.cs" />
     <Compile Include="Criteria\GetMenuLegendCriteria.cs" />

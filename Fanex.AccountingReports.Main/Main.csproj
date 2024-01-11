@@ -182,7 +182,6 @@
     <Compile Include="Criteria\TraderPerformance\GetDetailReportCriteria.cs" />
     <Compile Include="Criteria\TraderPerformance\GetReportCriteria.cs" />
     <Compile Include="Criteria\TraderPerformance\GetSummaryPHCriteria.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MainAreaRegistration.cs" />
     <Compile Include="Models\CreditTerm\CreditTerm.cs" />
     <Compile Include="Models\CreditTerm\EditedRemarkResult.cs" />

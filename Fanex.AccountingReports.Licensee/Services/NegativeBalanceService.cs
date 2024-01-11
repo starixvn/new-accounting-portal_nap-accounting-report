@@ -24,9 +24,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             this._negativeBalanceRepository = negativeBalanceRepository ?? new NegativeBalanceRepository();
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public NegativeBalanceModel GetNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria)
         {
             var model = new NegativeBalanceModel();
@@ -63,9 +61,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             return model;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public ExcelFile GetExcelNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria, string site)
         {
 

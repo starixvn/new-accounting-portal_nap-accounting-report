@@ -58,9 +58,7 @@ namespace Fanex.AccountingReports.Websites
             AuthConfig.RegisterAuth(Context);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         protected void Application_Error(object sender, EventArgs e)
         {
             FanexLogging.HandleApplicationError(Server);

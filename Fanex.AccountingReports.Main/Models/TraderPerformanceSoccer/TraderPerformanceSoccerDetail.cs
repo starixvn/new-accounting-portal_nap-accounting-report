@@ -124,9 +124,7 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceSoccer
             this.TenMinOneXTwo += traderInfo.TenMinOneXTwo;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public void CalculateMarginTotal(TraderPerformanceSoccerDetail winLossInfo, TraderPerformanceSoccerDetail turnOverInfo)
         {
             this.FirstHalfHdp = turnOverInfo.FirstHalfHdp == 0 ?

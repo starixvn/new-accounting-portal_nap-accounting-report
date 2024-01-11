@@ -143,9 +143,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
             };
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2100:CodeLineMustNotBeLongerThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private List<GroupHeaderRows> GroupHeaderRows()
         {
             var groupHeader = new List<GroupHeaderRows>();
@@ -163,9 +161,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.CreditMovement
             return groupHeader;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2100:CodeLineMustNotBeLongerThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private List<HeaderColumns> HeaderColumns()
         {
             var header = new List<HeaderColumns>();

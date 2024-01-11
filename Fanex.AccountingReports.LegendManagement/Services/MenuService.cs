@@ -13,9 +13,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
 
     public class MenuService : ServiceBase
     {
-        [SuppressMessage("Microsoft.Design",
-            "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public List<MenuItem> GetMenuList(GetSystemMenuCriteria criteria)
         {
             var menuList = new SiteService().GetMenuItemBySiteId(WebSettings.NAPSiteId, Constant.UAT, true);

@@ -232,9 +232,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void RenderParentRow(
             HSSFWorkbook excelFile,
             ref ISheet worksheet,
@@ -416,9 +414,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
                 cellColor);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private CustomStyleCell InitCellStyleDetail(
             HSSFWorkbook excelFile,
             HSSFPalette palette,

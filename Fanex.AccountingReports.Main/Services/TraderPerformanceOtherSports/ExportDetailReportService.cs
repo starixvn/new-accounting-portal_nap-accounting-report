@@ -65,9 +65,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
                             headerStyle);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportDetailReportHeaderInfo(
            ref ISheet worksheet,
            ref int currentRow,
@@ -136,9 +134,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
             this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow - 1, currentColumn + 8, Labels._1st_1x2, headerStyle);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportDetailReportContent(
            HSSFWorkbook excelFile,
            ref ISheet worksheet,

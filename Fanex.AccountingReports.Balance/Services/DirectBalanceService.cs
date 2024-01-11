@@ -27,9 +27,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             NormalOddRow = 3
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         public DirectBalance GetDirectBalance(GetDirectBalanceCriteria directBalanceCriteria)
         {
             var result = new DirectBalance();
@@ -269,9 +267,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result.OrderBy(x => x.Name).ToList(); ;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReportHeaderDownLine(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -329,9 +325,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReportHeader(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -431,9 +425,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportDirectBalanceDetail(
             ref ExcelWorksheet worksheet,
             int index,

@@ -80,9 +80,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         }
 
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public void ExportReport(GetParlayWonReportCriteria criteria)
         {
             var fullReport = this.GetReport(criteria);
@@ -412,9 +410,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             excelFile.ReponseStream(reportName);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private ParlayWonTransaction GetFullReportFromDatabase(GetParlayWonReportCriteria criteria)
         {
             var rawData = GetReportData<dynamic>(criteria);
@@ -482,9 +478,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             return columnName;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReportHeader(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -619,9 +613,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
 
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTransactionRow(
             ref ExcelWorksheet workSheet,
             int startRow,

@@ -33,9 +33,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             this._reportRepository = reportRepository ?? new DailyMixParlayWinLossRepository();
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public WinLossInfo GetCombinationWinLossReport(GetCombinationWinLossReportCriteria criteria)
         {
             WinLossInfo report = new WinLossInfo
@@ -129,9 +127,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             return report;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public WinLossInfo GetAdvanceMixParlayReport(GetAdvanceMixParlayReportCriteria criteria)
         {
             WinLossInfo report = new WinLossInfo
@@ -262,9 +258,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             return currentStorage;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public void ExportCombinationWinLossReport(GetCombinationWinLossReportCriteria criteria)
         {
             var report = this.GetCombinationWinLossReport(criteria);
@@ -825,9 +819,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
 
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public void ExportAdvanceMixParlayReport(GetAdvanceMixParlayReportCriteria criteria)
         {
             var report = this.GetAdvanceMixParlayReport(criteria);

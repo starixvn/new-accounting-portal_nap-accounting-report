@@ -268,9 +268,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 ReportRowType.GrandTotal);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportRow(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -363,9 +361,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReportDetailsHeader(
             ref ExcelWorksheet worksheet,
             int startRow,

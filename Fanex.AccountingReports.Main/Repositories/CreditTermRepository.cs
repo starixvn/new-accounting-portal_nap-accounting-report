@@ -55,9 +55,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private List<CreditTerm> LoopAndConvertDataIntoReport(
             DataSet multipleResult,
             List<CreditTerm> report)

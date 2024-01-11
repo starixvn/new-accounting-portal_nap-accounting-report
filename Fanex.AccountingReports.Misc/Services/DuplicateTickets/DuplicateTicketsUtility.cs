@@ -14,9 +14,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
     {
         public const int TotalMilliseconds = 1000;
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         public List<TicketInfo> AssignSubTicketInfo(IGrouping<dynamic, dynamic> duplicateTicketByUserName)
         {
             List<TicketInfo> groups = new List<TicketInfo>();

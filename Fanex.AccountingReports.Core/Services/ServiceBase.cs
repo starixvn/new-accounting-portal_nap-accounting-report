@@ -7,17 +7,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl
 
     public class ServiceBase
     {
-        protected readonly IDynamicRepository DynamicRepository;
-
-        public ServiceBase()
-        {
-            DynamicRepository = new DynamicRepository();
-        }
-
-        protected IDynamicRepository Repository
-        {
-            get { return DynamicRepository; }
-        }
+        private readonly IDynamicRepository dynamicRepository = new DynamicRepository();
 
         public void HandleException(Exception ex)
         {
@@ -30,7 +20,7 @@ namespace Fanex.AccountingReports.Core.Services.Impl
 
             if (criteria.IsValid())
             {
-                return DynamicRepository.Fetch<T>(criteria);
+                return dynamicRepository.Fetch<T>(criteria);
             }
 
             return new List<T>();

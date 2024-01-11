@@ -211,7 +211,6 @@
     <Compile Include="Entities\LeagueWinLoss\SportEntity.cs" />
     <Compile Include="Entities\LeagueWinLoss\SuperEntity.cs" />
     <Compile Include="Entities\LeagueWinLoss\VirtualRateEntity.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Models\DailyMixParlayWinLoss\WinLossInfo.cs" />
     <Compile Include="Models\LeagueWinLoss\BaseWinLoss.cs" />
     <Compile Include="Models\LeagueWinLoss\BetType.cs" />

@@ -74,9 +74,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             _reportService = reportService ?? new TreeWinLossService();
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         public void ExportExcelTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria)
         {
             var report = _reportService.GetTreeWinLossByProduct(criteria);
@@ -131,9 +129,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             excelFile.ReponseStream(reportName);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         public void ExportExcelTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
             var report = _reportService.GetTreeWinLossByLevel(criteria);
@@ -153,9 +149,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             excelFile.ReponseStream(reportName);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTreeWinLossInfo(TreeWinLoss report, Dictionary<string, int> enabledVirtualRateUser, GetTreeWinLossByLevelCriteria criteria, ExcelWorksheetCollection workSheets)
         {
             string sheetName = WinLossResources.TreeWinLoss_SheetName;
@@ -243,9 +237,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTreeWinLossByProductHeader(ref ExcelWorksheet workSheet, ref int currentRow, int currentColumn)
         {
             CellRange currentCellRange;
@@ -376,9 +368,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTreeWinLossByProductAssignBodyData(
             bool isShowNA,
             ref ExcelWorksheet workSheet,
@@ -554,9 +544,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTreeWinLossByProductAssignFooterData(
             bool isShowNA,
             ref ExcelWorksheet workSheet,
@@ -693,9 +681,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTreeWinLossByLevelHeader(ref ExcelWorksheet workSheet, ref int currentRow, int startColumn)
         {
             CellRange currentCellRange;
@@ -840,9 +826,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTreeWinLossByLevelAssignBodyData(
             bool isShowNA,
             ref ExcelWorksheet workSheet,
@@ -1034,9 +1018,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTreeWinLossByLevelAssignFooterData(
             bool isShowNA,
             ref ExcelWorksheet workSheet,
@@ -1180,9 +1162,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportVirtualRateReportHeader(ExcelWorksheet workSheet, ref int currentRow)
         {
             workSheet.Rows[currentRow].Height = 450;
@@ -1261,9 +1241,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportVirtualRateByUser(ExcelWorksheet workSheet, int userIndex, SMAVirtualRate virtualRateByUser, ref int currentRow)
         {
             int currentColumn = 0;

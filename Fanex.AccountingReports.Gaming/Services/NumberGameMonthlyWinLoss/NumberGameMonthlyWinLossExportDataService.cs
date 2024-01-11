@@ -61,9 +61,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWin
             excelFile.ReponseStream(reportName);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReportHeader(
             ref ExcelWorksheet workSheet,
             int startRow,
@@ -173,9 +171,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWin
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReportDetail(
             ref ExcelWorksheet workSheet,
             int startRow,
@@ -254,9 +250,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameMonthlyWin
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportFooterReport(
             ref ExcelWorksheet worksheet,
             int startRow,

@@ -29,9 +29,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             GrandTotal = 3
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public Transaction GetReport(GetBetCountReportCriteria criteria)
         {
             var sessionKey = criteria.IsHistoryReport ?
@@ -168,9 +166,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 criteria.Dateend.ToShortFormatedDateWithSlash().Replace('/', '_')));
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportBetCountReportHeader(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -344,9 +340,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTransactionRow(
             ref ExcelWorksheet worksheet,
             int startRow,

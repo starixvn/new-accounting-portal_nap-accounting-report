@@ -162,10 +162,8 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement
             return result;
         }
 
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1306:FieldNamesMustBeginWithLowerCaseLetter", Justification = "Reviewed.")]
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
+        
         public CompanyInfo GetLicenseesByProduct(GetLicenseesByProductCriteria criteria)
         {
             var result = new CompanyInfo

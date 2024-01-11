@@ -291,9 +291,7 @@ namespace Fanex.AccountingReports.Core.Extensions
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public static int AnalyseOneLineText(string oneLineText, int maxCharPerRow)
         {
             switch (maxCharPerRow)

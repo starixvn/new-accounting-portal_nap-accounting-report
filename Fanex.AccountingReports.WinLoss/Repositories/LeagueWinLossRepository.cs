@@ -59,9 +59,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
             return leagueWinLoss;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public List<BettypeWinLossEntity> GetBetTypes(ICriteria criteria)
         {
             DataSet result = null;

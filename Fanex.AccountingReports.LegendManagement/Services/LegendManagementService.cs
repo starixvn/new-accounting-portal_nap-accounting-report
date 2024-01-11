@@ -6,9 +6,9 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
+    using Data.Repository;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.LegendManagement.Configurations;
-    using Fanex.AccountingReports.LegendManagement.Constants;
     using Fanex.AccountingReports.LegendManagement.Criteria;
     using Fanex.AccountingReports.LegendManagement.Models;
     using Fanex.AccountingReports.LegendManagement.Repositories.Impls;
@@ -20,6 +20,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
         private const string InlineFileDataSuffix = ".inline";
         private MenuService _menuService;
         private LegendRepository _reportRepository;
+        private readonly IDynamicRepository dynamicRepository = new DynamicRepository();
 
         public LegendManagementService()
         {
@@ -27,17 +28,13 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             this._reportRepository = new LegendRepository();
         }
 
-        [SuppressMessage("Microsoft.Design",
-            "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public List<MenuItem> GetMenuList(GetSystemMenuCriteria criteria)
         {
             return this._menuService.GetMenuList(criteria);
         }
 
-        [SuppressMessage("Microsoft.Design",
-            "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public string SaveReportLegend(SaveReportLegendCriteria criteria)
         {
             criteria.LegendId = this.MappingLegendId(new GetReportLegendCriteria
@@ -50,9 +47,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             return Converter.ToString2(outputParams[Labels.SP_Contants_Error]);
         }
 
-        [SuppressMessage("Microsoft.Design",
-            "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public LegendResultModel GetReportLegend(GetReportLegendCriteria criteria)
         {
             var rawData = GetReportData<dynamic>(criteria).FirstOrDefault();
@@ -76,9 +71,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             };
         }
 
-        [SuppressMessage("Microsoft.Design",
-            "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public string GetJsonpReportLegend(GetReportLegendCriteria criteria)
         {
             if (!HasPermission(criteria))
@@ -96,9 +89,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             return string.Empty;
         }
 
-        [SuppressMessage("Microsoft.Design",
-            "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public string UploadImage(UploadFileCriteria criteria)
         {
             var fileName = criteria.FileName.Substring(criteria.FileName.LastIndexOf('\\') + 1);
@@ -109,9 +100,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             return criteria.FileName;
         }
 
-        [SuppressMessage("Microsoft.Design",
-            "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public List<string> MakeInlineImages(List<string> imagesPath, string imageFolder)
         {
             if (imagesPath != null)
@@ -126,12 +115,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
                         continue;
                     }
 
-                    // HttpWebRequest request = (HttpWebRequest)WebRequest.Create(imagePath);
-                    // HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                    // Stream stream = response.GetResponseStream();
-                    // var base64String = this.MakeInlineImage(stream);
-                    // response.Close();
-                    // inlineImages.Add(base64String);
                     var base64String = this.GetInlineData(imagePath, imageFolder);
                     inlineImages.Add(base64String);
                 }
@@ -142,9 +125,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             return null;
         }
 
-        [SuppressMessage("Microsoft.Design",
-            "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public string SaveReportLegendMapping(SaveReportLegendMappingCriteria criteria)
         {
             criteria.LegendId = this.MappingLegendId(new GetReportLegendCriteria
@@ -162,9 +143,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             return Labels.NotExistLegend;
         }
 
-        [SuppressMessage("Microsoft.Design",
-            "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public List<InputedLegend> GetInputedLegendReport(GetInputedLegendReportCriteria criteria)
         {
             List<InputedLegend> result = new List<InputedLegend>();
@@ -197,7 +176,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
 
         private int MappingLegendId(GetReportLegendCriteria criteria)
         {
-            var legend = Repository.Get<dynamic>(new GetReportLegendCriteria
+            var legend = dynamicRepository.Get<dynamic>(new GetReportLegendCriteria
             {
                 MenuId = criteria.MenuId,
                 System = WebSettings.System
@@ -259,14 +238,12 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
 
         private bool HasPermission(GetReportLegendCriteria criteria)
         {
-            switch (criteria.System)
+            if (criteria.System == WebSettings.System)
             {
-                case SystemName.AccNapReport:
-                    return (new Fanex.AccountingReports.Core.Services.Impl.MenuService()).GetMenuById(criteria.MenuId).Policy >= 1;
-
-                default:
-                    return true;
+                return (new Fanex.AccountingReports.Core.Services.Impl.MenuService()).GetMenuById(criteria.MenuId).Policy >= 1;
             }
+
+            return true;
         }
     }
 }

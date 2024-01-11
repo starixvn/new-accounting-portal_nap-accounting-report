@@ -45,9 +45,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
             return true;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         public override string GetSettingKey()
         {
             var settingKey = string.Empty;

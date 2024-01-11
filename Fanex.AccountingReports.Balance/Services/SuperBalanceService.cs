@@ -50,9 +50,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             Yesterday = 2
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public SuperBalance GetSuperBalance(GetSuperBalanceCriteria superBalanceCriteria)
         {
             var result = new SuperBalance
@@ -134,9 +132,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public SuperBalance GetSuperBalanceSuperDownLine(GetSuperBalanceSuperDownlineCriteria superBalanceSuperDownlineCriteria)
         {
             var result = new SuperBalance
@@ -183,9 +179,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public SuperBalance GetSuperBalanceMasterDownLine(GetSuperBalanceMasterDownlineCriteria superBalanceMasterDownlineCriteria)
         {
             var result = new SuperBalance
@@ -232,9 +226,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public SuperBalance GetSuperBalanceAgentDownLine(GetSuperBalanceAgentDownlineCriteria superBalanceAgentDownlineCriteria)
         {
             var result = new SuperBalance
@@ -281,9 +273,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public SuperBalance ExportSuperBalanceReport(GetSuperBalanceCriteria superBalanceCriteria)
         {
             var result = new SuperBalance();
@@ -324,9 +314,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public SuperBalance ExportBalanceSuperDownLineReport(GetSuperBalanceSuperDownlineCriteria getSuperBalanceSuperCriteria)
         {
             var result = new SuperBalance();
@@ -366,9 +354,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public SuperBalance ExportBalanceMasterDownLineReport(GetSuperBalanceMasterDownlineCriteria getSuperBalanceMasterCriteria)
         {
             var result = new SuperBalance();
@@ -408,9 +394,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return result;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public SuperBalance ExportBalanceAgentDownLineReport(GetSuperBalanceAgentDownlineCriteria getSuperBalanceAgentCriteria)
         {
             var result = new SuperBalance();
@@ -482,9 +466,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             return arrLetter;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public void ExportReportHeader(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -658,9 +640,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             }
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportSuperBalanceDetail(
            ref ExcelWorksheet worksheet,
            int index,

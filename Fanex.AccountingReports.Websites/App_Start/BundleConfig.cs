@@ -6,9 +6,7 @@ namespace Fanex.AccountingReports.Websites
 
     public static class BundleConfig
     {
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new StyleBundle("~/scripts/_lib/fanex.result/style")

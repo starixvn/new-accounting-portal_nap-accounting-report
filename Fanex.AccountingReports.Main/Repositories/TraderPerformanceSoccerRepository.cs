@@ -11,9 +11,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
 
     public class TraderPerformanceSoccerRepository
     {
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public TraderPerformanceSoccer GetTraderPerformanceSoccerReport(GetReportCriteria criteria)
         {
             var result = new TraderPerformanceSoccer
@@ -109,9 +107,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             return result;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public TraderPerformanceSoccerDetail GetTraderPerformanceSoccerDetailReport(GetDetailReportCriteria criteria)
         {
             var result = new TraderPerformanceSoccerDetail

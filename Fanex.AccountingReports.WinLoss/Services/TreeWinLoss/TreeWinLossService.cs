@@ -48,9 +48,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return dynamicRipository.Fetch<Sport>(new GetSportCriteria()).ToList();
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         public TreeWinLoss GetTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria)
         {
             criteria.Products = criteria.ProductSelection;
@@ -61,9 +59,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return treeWinLoss;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         public TreeWinLoss GetTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
             criteria.Products = criteria.ProductSelection;
@@ -124,9 +120,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return treeWinLossVirtualRate;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private TreeWinLoss GetTreeWinLossDateRangeByProduct(GetTreeWinLossByProductCriteria criteria)
         {
             var treeWinLoss = new TreeWinLoss
@@ -205,9 +199,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return treeWinLoss;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private TreeWinLoss GetTreeWinLossDateRangeByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
             switch (criteria.RoleId)
@@ -303,9 +295,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return treeWinLoss;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private VirtualRateInfo GetVirtualRateBySportAndLiveStatus(GetVirtualRateCriteria criteria)
         {
             VirtualRateInfo virtualRateBySportAndLiveStatus = new VirtualRateInfo();
@@ -442,9 +432,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return virtualRateByBettype;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private VirtualRateInfo GetVirtualRateLogHistory(int actionId, XElement xmlTrackingValue)
         {
             string preLiveAndSportType = string.Empty;
@@ -500,9 +488,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             return virtualRateHistory;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-           "SP2101:MethodMustNotContainMoreLinesThan",
-           Justification = "Reviewed. Suppression is OK here.")]
+        
         private SMAVirtualRate MapSMAVirtualRateData(IDataReader reader)
         {
             SMAVirtualRate report = new SMAVirtualRate();

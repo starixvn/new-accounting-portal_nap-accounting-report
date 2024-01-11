@@ -90,9 +90,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
             return report;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public TraderPerformanceOtherSportsDetail GetDetailReport(GetDetailReportCriteria criteria)
         {
             var result = new TraderPerformanceOtherSportsDetail
@@ -415,9 +413,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
             return cellStyle;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private TraderPerformanceOtherSports SortReportData(TraderPerformanceOtherSports report, GetReportCriteria criteria)
         {
             bool isAsc = string.Equals(criteria.SortDirection, CoreConstants.SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
@@ -497,9 +493,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
             return report;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private TraderPerformanceOtherSportsDetail SortSecondSubLevelReport(TraderPerformanceOtherSportsDetail report, GetDetailReportCriteria criteria)
         {
             bool isAsc = string.Equals(criteria.SortDirection, CoreConstants.SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);

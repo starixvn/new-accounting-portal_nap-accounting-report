@@ -44,9 +44,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
             return marginWinLoss;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-           "SP2101:MethodMustNotContainMoreLinesThan",
-           Justification = "Reviewed. Suppression is OK here.")]
+        
         public void ExcelReport(GetMarginWinLossCriteria criteria)
         {
             var marginWinLoss = new MarginWinLoss();
@@ -141,9 +139,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-           "SP2101:MethodMustNotContainMoreLinesThan",
-           Justification = "Reviewed. Suppression is OK here.")]
+        
         private void MarginReportExportBody(ref ExcelWorksheet workSheet, List<MarginWinLoss> childsInfo, int startColumn, ref int currentRow)
         {
             var textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);

@@ -20,9 +20,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
 
     public class NumberGameWinLossByCurrencyService : ServiceBase
     {
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public List<NumberGameWinLossByCurrencyMain> GetNumberGameWinLossByCurrencyMain(NumberGameWinLossByCurrencyMainCriteria criteria)
         {
             var numberGameMainList = new List<NumberGameWinLossByCurrencyMain>();
@@ -91,9 +89,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
             return numberGameMainList;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public List<NumberGameWinLossByCurrencyDetail> GetNumberGameWinLossByCurrencyDetail(NumberGameWinLossByCurrencyDetailCriteria criteria)
         {
             var numberGameDetailList = new List<NumberGameWinLossByCurrencyDetail>();
@@ -311,9 +307,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
             excelFile.ReponseStream(reportName);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportNumberGameWinLossByCurMainAssignHeader(
             int startRow,
             int startCol,
@@ -381,9 +375,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
                 Convert.ToDateTime(criteria.ToDate));
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportNumberGameWinLossByCurMain(
             int startRow,
             int startCol,
@@ -520,9 +512,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
             nextColGrandTotal++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportExcelNumberGameWinLossByCurDetailAssignHeader(
             int startRow,
             int startCol,
@@ -611,9 +601,7 @@ namespace Fanex.AccountingReports.Gaming.Services.NumberGameWinLossByCurrency
                 Convert.ToDateTime(criteria.ToDate));
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportNumberGameWinLossByCurDetail(
             int startRow,
             int startCol,

@@ -26,9 +26,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
         private readonly string _duplicateTicketsSessionKey = MiscConstants.DuplicateTicketsPrefixSessionKey +
                                              (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         public DuplicateTicketsInfo GetDuplicateTicketByUserName(GetDuplicateTicketsCriteria criteria)
         {
             DuplicateTicketsInfo duplicateTicketsInfo = new DuplicateTicketsInfo();
@@ -164,9 +162,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, "TransDesc", headerStyle);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReportContent(
             List<DuplicateTicketsByUserName> report,
             HSSFWorkbook excelFile,

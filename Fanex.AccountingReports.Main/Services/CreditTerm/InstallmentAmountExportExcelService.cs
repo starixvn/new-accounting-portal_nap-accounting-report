@@ -117,9 +117,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             this.InitCellStyle(excelFile, ref this._evenRedStyle, EvenRowRedClass);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReportHeader(
             HSSFWorkbook excelFile,
             ref ISheet worksheet,
@@ -267,9 +265,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void InitCellStyle(
            HSSFWorkbook excelFile,
            ref CustomStyleCell styleCell,

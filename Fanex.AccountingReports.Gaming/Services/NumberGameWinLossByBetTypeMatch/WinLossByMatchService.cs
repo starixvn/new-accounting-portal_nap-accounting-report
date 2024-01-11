@@ -32,9 +32,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             _winLossByMatchRepository = new WinLossByMatchRepository();
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-             "SP2101:MethodMustNotContainMoreLinesThan",
-             Justification = "Reviewed. Suppression is OK here.")]
+        
         public WinLossInfo GetMainReport(GetWinLossByMatchMainReportCriteria criteria)
         {
             var rawData = _winLossByMatchRepository.GetMainReport(criteria);
@@ -117,9 +115,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             return report;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-             "SP2101:MethodMustNotContainMoreLinesThan",
-             Justification = "Reviewed. Suppression is OK here.")]
+        
         public WinLossInfo GetDetailReport(GetWinLossByMatchDetailReportCriteria criteria)
         {
             var rawData = GetReportData<WinLossByMatchDetailEntity>(criteria);
@@ -270,9 +266,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             excelFile.ReponseStream(reportName);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public void ExportDetailReport(GetWinLossByMatchDetailReportCriteria criteria)
         {
             WinLossInfo report = SessionManager.Get<WinLossInfo>(_winLossByMatchDetailReportSessionKey);
@@ -313,9 +307,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             excelFile.ReponseStream(reportName);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-           "SP2101:MethodMustNotContainMoreLinesThan",
-           Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReport_WinLossByMatchMainReportHeader(
             ref ExcelWorksheet workSheet,
             int startRow,
@@ -411,9 +403,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-           "SP2101:MethodMustNotContainMoreLinesThan",
-           Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReport_WinLossByMatchMainReportContent(
             ref ExcelWorksheet workSheet,
             int startRow,
@@ -588,9 +578,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
                 info);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReport_WinLossByMatchMainReport_WinLossRow(
             ref ExcelWorksheet workSheet,
             int startRow,
@@ -682,9 +670,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-          "SP2101:MethodMustNotContainMoreLinesThan",
-          Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReport_WinLossByMatchMainReport_GrandTotalRow(
             ref ExcelWorksheet workSheet,
             int startRow,
@@ -752,9 +738,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-           "SP2101:MethodMustNotContainMoreLinesThan",
-           Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReport_WinLossByMatchDetailReportHeader(
             ref ExcelWorksheet workSheet,
             int startRow,
@@ -856,9 +840,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReport_WinLossByMatchDetailReportContent(
             ref ExcelWorksheet workSheet,
             int startRow,
@@ -986,9 +968,7 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
                 roleIndex);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReport_WinLossByMatchDetailReport_WinLossRow(
             ref ExcelWorksheet workSheet,
             int startRow,

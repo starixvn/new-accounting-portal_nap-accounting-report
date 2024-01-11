@@ -34,9 +34,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
         #region Implement methods
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public void ExportReport(GetTotalSMAMemberActiveCriteria criteria)
         {
             var report = this.GetReport(criteria);
@@ -227,9 +225,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             excelFile.ReponseStream(reportName);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public IList<SMASummaryInfo> GetReport(GetTotalSMAMemberActiveCriteria criteria)
         {
             IList<SMASummaryInfo> report = null;
@@ -372,9 +368,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             return report;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportStatusDetails(
             ref ExcelWorksheetCollection worksheet,
             IList<GroupStatusDetailInfo> report,
