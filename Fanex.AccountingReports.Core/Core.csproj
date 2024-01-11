@@ -62,9 +62,6 @@
     <Reference Include="Fanex.Logging, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Logging.2.0.1.1\lib\net461\Fanex.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Fanex.MailDeliver.MailClient, Version=1.0.0.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fanex.MailDeliver.MailClient.1.0.0.4\lib\net40\Fanex.MailDeliver.MailClient.dll</HintPath>
-    </Reference>
     <Reference Include="Fanex.NAP.Core.Client, Version=1.2.1.6, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.NAP.Core.Client.2.0.0.2\lib\net40\Fanex.NAP.Core.Client.dll</HintPath>
     </Reference>
@@ -264,8 +261,6 @@
     <Compile Include="Models\ProductEntity.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\DWHDateRange.cs" />
-    <Compile Include="Models\MailAttachment.cs" />
-    <Compile Include="Models\MailItem.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\LeagueSuggestion.cs" />
@@ -299,7 +294,6 @@
     <Compile Include="Utilities\CellStyles\BaseSubTotalCellStyles.cs" />
     <Compile Include="Utilities\CellStyles\CustomColor.cs" />
     <Compile Include="Web\CacheExtension.cs" />
-    <Compile Include="Services\MailService.cs" />
     <Compile Include="Services\PermissionService.cs" />
     <Compile Include="Services\ReportService.cs" />
     <Compile Include="Web\Controllers\BaseController.cs" />

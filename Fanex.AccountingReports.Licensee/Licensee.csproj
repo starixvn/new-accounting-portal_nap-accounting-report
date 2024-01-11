@@ -192,11 +192,7 @@
     <Compile Include="LicenseeAreaRegistration.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Licensee.cs" />
-    <Compile Include="Models\NegativeBalance\MailParam.cs" />
     <Compile Include="Models\NegativeBalance\NegativeBalance.cs" />
-    <Compile Include="Models\NegativeBalance\NegativeBalanceMemberMailFormat.cs" />
-    <Compile Include="Models\NegativeBalance\NegativeBalanceMemberSendMailFail.cs" />
-    <Compile Include="Models\NegativeBalance\NegativeBalanceMemberSendMailResult.cs" />
     <Compile Include="Models\NegativeBalance\NegativeBalanceModel.cs" />
     <Compile Include="Models\NegativeBalance\NegativeBalanceUser.cs" />
     <Compile Include="Models\PeakConcurrentUser\ConcurrentUser.cs" />

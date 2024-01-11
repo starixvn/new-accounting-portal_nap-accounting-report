@@ -5,7 +5,6 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.AccountingReports.Licensee.Criteria.NegativeBalance;
     using Fanex.AccountingReports.Licensee.Models;
-    using Fanex.AccountingReports.Licensee.Models.NegativeBalance;
     using Fanex.AccountingReports.Licensee.Services.Implement;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
@@ -37,13 +36,6 @@ namespace Fanex.AccountingReports.Licensee.Controllers
         public JsonResult GetNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria)
         {
             var result = _reportService.GetNegativeBalance(negativeBalanceCriteria);
-            return Json(result);
-        }
-
-        [HttpPost]
-        public JsonResult SendMail(MailParam mail, NegativeBalanceCriteria negativeBalanceCriteria)
-        {
-            var result = _reportService.SendMail(mail, negativeBalanceCriteria);
             return Json(result);
         }
 

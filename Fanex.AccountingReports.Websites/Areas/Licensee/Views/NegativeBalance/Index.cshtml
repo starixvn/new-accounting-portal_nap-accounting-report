@@ -141,11 +141,6 @@
 <iframe id="frm" width="0" height="0" style="display: none"></iframe>
 @section scripts
 {
-    <script type="text/javascript">
-        var _today = '@DateTime.Today.ToShortDateString()';
-        var _yesterday = '@DateTime.Today.AddDays(-1).ToShortDateString()';
-        var _mailContent = 'Please download the attached file for Negative Balance Member(s).<br><br><b>Sent by:</b> @AppSession.CurrentUser.Username .<br><b>Date:</b> @DateTime.Now <br><br><i>This is an auto-mail. Please do not reply.</i>';
-    </script>
 }
 @section Foot {
     @Scripts.Render("~/scripts/_lib/multiselect", "~/scripts/_lib/nexDatePicker", "~/scripts/_lib/template")
