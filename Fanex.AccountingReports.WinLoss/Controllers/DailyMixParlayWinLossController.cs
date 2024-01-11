@@ -52,14 +52,6 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
             return Json(report, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        [HandleAjaxError]
-        public JsonResult GetMixParlayReport(GetMixParlayReportCriteria criteria)
-        {
-            var report = this._reportService.GetMixParlayReport(criteria);
-            return Json(report, JsonRequestBehavior.AllowGet);
-        }
-
         public ActionResult ExportCombinationWinLossReport(GetCombinationWinLossReportCriteria criteria)
         {
             this._reportService.ExportCombinationWinLossReport(criteria);
@@ -69,12 +61,6 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         public ActionResult ExportAdvanceMixParlayReport(GetAdvanceMixParlayReportCriteria criteria)
         {
             this._reportService.ExportAdvanceMixParlayReport(criteria);
-            return new EmptyResult();
-        }
-
-        public ActionResult ExportMixParlayReport(GetMixParlayReportCriteria criteria)
-        {
-            this._reportService.ExportMixParlayReport(criteria);
             return new EmptyResult();
         }
     }

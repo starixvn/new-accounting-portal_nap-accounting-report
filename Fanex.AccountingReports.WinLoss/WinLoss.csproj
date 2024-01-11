@@ -182,7 +182,6 @@
     <Compile Include="Controllers\TreeWinLossController.cs" />
     <Compile Include="Criteria\DailyMixParlayWinLoss\GetAdvanceMixParlayReportCriteria.cs" />
     <Compile Include="Criteria\DailyMixParlayWinLoss\GetCombinationWinLossReportCriteria.cs" />
-    <Compile Include="Criteria\DailyMixParlayWinLoss\GetMixParlayReportCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetBetTypesCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetMatchesCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossCriteria.cs" />
