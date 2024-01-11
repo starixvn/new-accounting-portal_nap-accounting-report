@@ -56,8 +56,7 @@ AdvanceMixParlayReport.prototype.GetParams = function (params) {
 
 AdvanceMixParlayReport.prototype.RenderReport = function (report) {
     var self = this;
-
-    mixParlayPopupManager.HideNormalMixParlayReport();
+    
     self.Tables.reportContainer.removeClass("display-none");
     self.Tables.report.addClass("display-none");
     var bodyData = [];

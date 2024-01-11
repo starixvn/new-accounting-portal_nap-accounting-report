@@ -635,7 +635,6 @@
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\CombinationWinLoss_HistoryReport.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\HistoryReportManager.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\MixParlayPopupManager.js" />
-    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\NormalMixParlayReport.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\ReportManager.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\WinLossByProduct.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss\Scripts\WinLossByProduct_HistoryReport.js" />
@@ -644,7 +643,6 @@
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\CombinationWinLoss_HistoryReport.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\HistoryReportManager.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\MixParlayPopupManager.js" />
-    <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\NormalMixParlayReport.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\ReportManager.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\WinLossByProduct.js" />
     <Content Include="Areas\WinLoss\Views\DailyMixParlayWinLoss_2hLink\Scripts\WinLossByProduct_HistoryReport.js" />
