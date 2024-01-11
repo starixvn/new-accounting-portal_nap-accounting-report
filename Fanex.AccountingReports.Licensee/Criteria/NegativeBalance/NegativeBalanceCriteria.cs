@@ -11,9 +11,6 @@ namespace Fanex.AccountingReports.Licensee.Criteria.NegativeBalance
         public string Site { get; set; }
 
         [SpParam(Ignored = true)]
-        public bool IsGetCache { get; set; }
-
-        [SpParam(Ignored = true)]
         public int PageSize { get; set; }
 
         [SpParam(Ignored = true)]

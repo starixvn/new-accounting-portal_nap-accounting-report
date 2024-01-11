@@ -116,7 +116,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 leagueWinLoss = sortingService.SortData(leagueWinLoss, criteria.SortDirection, criteria.SortColumnName);
             }
 
-            SessionManager.Set(WinLossContants.LeagueWinLossSessionKey, leagueWinLoss);
             return leagueWinLoss;
         }
 
@@ -261,7 +260,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             result.GrandTotal = CalculateBettypeTotal("Grand Total", rawData);
 
-            SessionManager.Set(WinLossContants.LeagueWinLosViewBetTypesSessionKey, result);
             return result;
         }
 
@@ -283,7 +281,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 result.BetTypeWinLossNonLive = nonLiveBetTypes;
             }
 
-            SessionManager.Set(WinLossContants.LeagueWinLosViewBetTypesByStatusSessionKey, result);
             return result;
         }
 
@@ -483,7 +480,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", rawData);
 
-            SessionManager.Set(WinLossContants.LeagueWinLossViewMatchesSessionKey, leagueWinLoss);
             return leagueWinLoss;
         }
 
@@ -515,7 +511,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", rawData);
 
-            SessionManager.Set(WinLossContants.LeagueWinLossViewMatchesFromBetTypeStatusSessionKey, leagueWinLoss);
             return leagueWinLoss;
         }
 
@@ -556,7 +551,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 leagueWinLoss = sortingService.SortSiteData(leagueWinLoss, criteria.SortDirection, criteria.SortColumnName);
             }
 
-            SessionManager.Set(WinLossContants.LeagueWinLosViewSitesSessionKey, leagueWinLoss);
             return leagueWinLoss;
         }
 
@@ -591,7 +585,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
             leagueWinLoss.GrandTotal = CalculateSuperTotal("Grand Total", rawData);
 
-            SessionManager.Set(WinLossContants.LeagueWinLosViewSupersSessionKey, leagueWinLoss);
             return leagueWinLoss;
         }
 

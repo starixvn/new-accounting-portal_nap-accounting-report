@@ -6,7 +6,7 @@ namespace Fanex.AccountingReports.Core.Web
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
-    public class SessionManager
+    internal class SessionManager
     {
         /// <summary>
         /// Set Value to session with specific type.
@@ -14,7 +14,7 @@ namespace Fanex.AccountingReports.Core.Web
         /// <typeparam name="T">The parameter type.</typeparam>
         /// <param name="sessionKey">The session key.</param>
         /// <param name="value">The value.</param>
-        public static void Set<T>(string sessionKey, T value)
+        internal static void Set<T>(string sessionKey, T value)
         {
 
             HttpContext.Current.Session[sessionKey] = value;
@@ -26,7 +26,7 @@ namespace Fanex.AccountingReports.Core.Web
         /// <typeparam name="T">The parameter type.</typeparam>
         /// <param name="sessionKey">The session key.</param>
         /// <returns>Value from Session with specific Type.</returns>
-        public static T Get<T>(string sessionKey)
+        internal static T Get<T>(string sessionKey)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace Fanex.AccountingReports.Core.Web
         /// </summary>
         /// <param name="sessionKey">The session key.</param>
         /// <param name="value">The value.</param>
-        public static void Set(string sessionKey, object value)
+        internal static void Set(string sessionKey, object value)
         {
             SessionManager.Set<object>(sessionKey, value);
         }
@@ -57,7 +57,7 @@ namespace Fanex.AccountingReports.Core.Web
         /// <returns>
         /// Value object from Session.
         /// </returns>
-        public static object Get(string sessionKey)
+        internal static object Get(string sessionKey)
         {
             return SessionManager.Get<object>(sessionKey);
         }

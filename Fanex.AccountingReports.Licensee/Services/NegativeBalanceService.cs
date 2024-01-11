@@ -5,7 +5,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
-    using Fanex.AccountingReports.Licensee.Constants;
     using Fanex.AccountingReports.Licensee.Criteria.NegativeBalance;
     using Fanex.AccountingReports.Licensee.Models;
     using Fanex.AccountingReports.Licensee.Models.NegativeBalance;
@@ -39,19 +38,8 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
         public NegativeBalanceModel GetNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria)
         {
             var model = new NegativeBalanceModel();
-            var rawData = new List<NegativeBalanceUser>();
-            if (negativeBalanceCriteria.IsGetCache)
-            {
-                rawData = SessionManager.Get<List<NegativeBalanceUser>>(LicenseeConstants.NegativeBalanceSessionKey + negativeBalanceCriteria.Site);
-            }
-
-            var negativeBalanceList = new List<NegativeBalance>();
-            if (object.ReferenceEquals(rawData, null) || !rawData.Any())
-            {
-                rawData = this._negativeBalanceRepository.GetNegativeBalanceUser(negativeBalanceCriteria).ToList();
-                SessionManager.Set<List<NegativeBalanceUser>>(LicenseeConstants.NegativeBalanceSessionKey + negativeBalanceCriteria.Site, rawData);
-            }
-
+            var rawData =  this._negativeBalanceRepository.GetNegativeBalanceUser(negativeBalanceCriteria).ToList();
+            
             List<NegativeBalanceUser> _listUserTemp = new List<NegativeBalanceUser>();
             if (rawData != null && (rawData.Count() > 0))
             {
@@ -101,20 +89,11 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
 
             var excelFile = new ExcelFile();
 
-            var rawData = SessionManager.Get<List<NegativeBalanceUser>>(LicenseeConstants.NegativeBalanceSessionKey + negativeBalanceCriteria.Site);
-
-            if (object.ReferenceEquals(rawData, null) || !rawData.Any())
-            {
-                rawData = this._negativeBalanceRepository.GetNegativeBalanceUser(negativeBalanceCriteria).ToList();
-                SessionManager.Set<List<NegativeBalanceUser>>(LicenseeConstants.NegativeBalanceSessionKey + negativeBalanceCriteria.Site, rawData);
-            }
-
-            var getCache = SessionManager.Get<List<NegativeBalanceUser>>(LicenseeConstants.NegativeBalanceSessionKey + negativeBalanceCriteria.Site);
-            getCache = getCache ?? this._negativeBalanceRepository.GetNegativeBalanceUser(negativeBalanceCriteria).ToList();
+            var rawData =  this._negativeBalanceRepository.GetNegativeBalanceUser(negativeBalanceCriteria).ToList();
             var model = new NegativeBalanceModel();
             NegativeBalance currentNegative = null;
 
-            getCache.OrderBy(negativeBalanceUser => negativeBalanceUser.Site)
+            rawData.OrderBy(negativeBalanceUser => negativeBalanceUser.Site)
                 .Select(s => s).ForEach(data =>
                 {
                     if (currentNegative == null || currentNegative.LicenseeSite.ToLower() != data.Site.ToLower())

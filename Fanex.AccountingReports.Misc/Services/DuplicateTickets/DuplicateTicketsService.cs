@@ -88,7 +88,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             duplicateTicketsInfo.HaveDuplicateTickets = numOfDuplicateTickets > 0;
             duplicateTicketsInfo.MD5Hash = utility.GetMD5Hash(JsonConvert.SerializeObject(result));
 
-            SessionManager.Set<DuplicateTicketsInfo>(this._duplicateTicketsSessionKey, duplicateTicketsInfo);
 
             if (result.Count > 0)
             {
@@ -117,12 +116,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
         /// <param name="criteria">The criteria.</param>
         public void ExportDuplicateTicketReport(GetDuplicateTicketsCriteria criteria)
         {
-            var report = SessionManager.Get<DuplicateTicketsInfo>(this._duplicateTicketsSessionKey);
-
-            if (report == null)
-            {
-                report = this.GetDuplicateTicketByUserName(criteria);
-            }
+            var report = this.GetDuplicateTicketByUserName(criteria);
 
             HSSFWorkbook excelFile = new HSSFWorkbook();
             string sheetName = MiscResources.DuplicateTickets_SheetName;

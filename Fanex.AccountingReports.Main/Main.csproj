@@ -171,12 +171,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\BetTypeConstants.cs" />
     <Compile Include="Constants\MainConstants.cs" />
-    <Compile Include="Constants\RowType.cs" />
-    <Compile Include="Constants\SoccerBetTypeConstants.cs" />
-    <Compile Include="Constants\SportContants.cs" />
-    <Compile Include="Constants\SportTypeWinLoss.cs" />
     <Compile Include="Controllers\CreditTermController.cs" />
     <Compile Include="Controllers\TraderPerformanceOtherSportsController.cs" />
     <Compile Include="Controllers\TraderPerformanceSoccerController.cs" />

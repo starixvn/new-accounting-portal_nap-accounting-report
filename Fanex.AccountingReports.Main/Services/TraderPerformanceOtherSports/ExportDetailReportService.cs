@@ -22,13 +22,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
         /// <param name="criteria">The criteria.</param>
         public void ExportDetailReport(GetDetailReportCriteria criteria)
         {
-            var traderSportType = criteria.IsSoccer ? SoccerTitle : OtherSportTitle;
-            var report = SessionManager.Get<TraderPerformanceOtherSportsDetail>(_traderPerformanceDetailSessionKey + traderSportType);
-
-            if (report == null)
-            {
-                report = this.GetDetailReport(criteria);
-            }
+            var report = this.GetDetailReport(criteria);
 
             HSSFWorkbook excelFile = new HSSFWorkbook();
             string sheetName = MainResources.TraderPerformanceOtherSportsDetail_SheetName;
@@ -179,7 +173,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
            ref int currentRow,
            TraderPerformanceOtherSportsDetail report)
         {
-            IDataFormat dataFormat = excelFile.CreateDataFormat();
+            excelFile.CreateDataFormat();
             this.SetColorIndex(excelFile);
 
             ICellStyle decimalNumberStyle = this.CreateDecimalNumberStyle(excelFile, HSSFColor.White.Index, HorizontalAlignment.Right, false, true, false);
@@ -197,7 +191,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceOther
             ICellStyle textStyle = NpoiExcelExtensions.TextStyle(excelFile, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Left);
             ICellStyle centerTextStyle = NpoiExcelExtensions.TextStyle(excelFile, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Center);
             ICellStyle textEvenRowStyle = NpoiExcelExtensions.TextStyle(excelFile, EvenColorIndex, false, NpoiExcelExtensions.Alignment.Left);
-            ICellStyle centerTextEvenRowStyle = NpoiExcelExtensions.TextStyle(excelFile, EvenColorIndex, false, NpoiExcelExtensions.Alignment.Center);
+            NpoiExcelExtensions.TextStyle(excelFile, EvenColorIndex, false, NpoiExcelExtensions.Alignment.Center);
 
             ICellStyle subTotalTextStyle = NpoiExcelExtensions.TextStyle(excelFile, SubTotalColorIndex, true, NpoiExcelExtensions.Alignment.Center);
             ICellStyle subTotalIntNumberStyle = NpoiExcelExtensions.IntStyle(excelFile, SubTotalColorIndex, true);

@@ -108,7 +108,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 report.CreatingDetails.Add(info);
             }
 
-            SessionManager.Set<SummaryInformation>(this._dailyCreatedCustomersSessionKey, report);
             return report;
         }
 
@@ -140,7 +139,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 report.Add(info);
             }
 
-            SessionManager.Set<List<DetailInformation>>(this._dailyCreatedCustomersDetailSessionKey, report);
             return report;
         }
 
@@ -152,11 +150,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// <param name="criteria">The criteria.</param>
         public void ExportReport(GetDailyCreatedCustomersCriteria criteria)
         {
-            var report = SessionManager.Get<SummaryInformation>(this._dailyCreatedCustomersSessionKey);
-            if (report == null)
-            {
-                report = this.GetReport(criteria);
-            }
+            var report = this.GetReport(criteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
@@ -201,11 +195,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
         /// <param name="criteria">The criteria.</param>
         public void ExportReportDetails(GetDailyCreatedCustomersDetailsCriteria criteria)
         {
-            var report = SessionManager.Get<List<DetailInformation>>(this._dailyCreatedCustomersDetailSessionKey);
-            if (report == null)
-            {
-                report = this.GetReportDetails(criteria);
-            }
+            var report = this.GetReportDetails(criteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;

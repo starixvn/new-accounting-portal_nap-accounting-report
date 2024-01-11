@@ -169,7 +169,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                 result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
             }
 
-            SessionManager.Set(_superBalanceSessionKey, result);
             return result;
         }
 
@@ -224,7 +223,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             }
 
             result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
-            SessionManager.Set<SuperBalance>(_superDownLineSessionKey, result);
             return result;
         }
 
@@ -279,7 +277,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             }
 
             result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
-            SessionManager.Set<SuperBalance>(_masterDownLineSessionKey, result);
             return result;
         }
 
@@ -334,7 +331,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             }
 
             result.BaseBalanceTotal = SuperBalance.FormatInfo(result.BaseBalanceTotal);
-            SessionManager.Set<SuperBalance>(_agentDownLineSessionKey, result);
             return result;
         }
 
@@ -351,12 +347,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             var result = new SuperBalance();
             string balanceType = string.Empty;
 
-            var fullReport = SessionManager.Get<SuperBalance>(_superBalanceSessionKey);
-
-            if (fullReport == null)
-            {
-                fullReport = this.GetSuperBalance(superBalanceCriteria);
-            }
+            var fullReport = this.GetSuperBalance(superBalanceCriteria);
 
             balanceType = GetBalanceType(superBalanceCriteria.BalanceType);
 
@@ -403,12 +394,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         {
             var result = new SuperBalance();
             string balanceType = string.Empty;
-            var fullReport = SessionManager.Get<SuperBalance>(_superDownLineSessionKey);
-
-            if (fullReport == null)
-            {
-                fullReport = this.GetSuperBalanceSuperDownLine(getSuperBalanceSuperCriteria);
-            }
+            var fullReport = this.GetSuperBalanceSuperDownLine(getSuperBalanceSuperCriteria);
 
             balanceType = GetBalanceType(getSuperBalanceSuperCriteria.BalanceType);
 
@@ -455,12 +441,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         {
             var result = new SuperBalance();
             string balanceType = string.Empty;
-            var fullReport = SessionManager.Get<SuperBalance>(_masterDownLineSessionKey);
-
-            if (fullReport == null)
-            {
-                fullReport = this.GetSuperBalanceMasterDownLine(getSuperBalanceMasterCriteria);
-            }
+            var fullReport = this.GetSuperBalanceMasterDownLine(getSuperBalanceMasterCriteria);
 
             balanceType = GetBalanceType(getSuperBalanceMasterCriteria.BalanceType);
 
@@ -508,12 +489,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             var result = new SuperBalance();
             string balanceType = string.Empty;
 
-            var fullReport = SessionManager.Get<SuperBalance>(_agentDownLineSessionKey);
-
-            if (fullReport == null)
-            {
-                fullReport = this.GetSuperBalanceAgentDownLine(getSuperBalanceAgentCriteria);
-            }
+            var fullReport = this.GetSuperBalanceAgentDownLine(getSuperBalanceAgentCriteria);
 
             balanceType = GetBalanceType(getSuperBalanceAgentCriteria.BalanceType);
 

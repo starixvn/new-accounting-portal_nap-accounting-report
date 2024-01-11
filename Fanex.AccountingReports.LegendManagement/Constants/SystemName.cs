@@ -5,8 +5,6 @@ namespace Fanex.AccountingReports.LegendManagement.Constants
     /// </summary>
     public static class SystemName
     {
-        public const string AccReport = "ACC-REPORT";
-
         public const string AccNapReport = "ACC-NAP";
     }
 }

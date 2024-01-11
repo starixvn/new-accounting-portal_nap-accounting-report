@@ -46,14 +46,10 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportReport(GetTotalSMAMemberActiveCriteria criteria)
         {
-            var report = SessionManager.Get<IList<SMASummaryInfo>>(MiscConstants.TotalSMAMemberActiveSessionKey);
-            if (report == null)
+            var report = this.GetReport(criteria);
+            if (report == null || report.Count == 0)
             {
-                report = this.GetReport(criteria);
-                if (report == null || report.Count == 0)
-                {
-                    return;
-                }
+                return;
             }
 
             ExcelFile excelFile = new ExcelFile();
@@ -317,7 +313,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                     report.Add(smaSummary);
                 }
 
-                SessionManager.Set<IList<SMASummaryInfo>>(MiscConstants.TotalSMAMemberActiveSessionKey, report);
             }
 
             return report;
@@ -368,7 +363,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 criteria.TotalRow = totalRow;
                 report = this.GetStatusDetails(rawData, status);
 
-                SessionManager.Set<IList<GroupStatusDetailInfo>>(MiscConstants.TotalSMAMemberActiveDetailSessionKey, report);
             }
 
             return report;

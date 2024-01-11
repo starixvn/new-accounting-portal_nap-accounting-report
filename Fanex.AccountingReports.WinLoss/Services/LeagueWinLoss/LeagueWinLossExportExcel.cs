@@ -106,11 +106,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
         public void ExportLeagueWinLoss(GetLeagueWinLossCriteria criteria)
         {
-            var report = SessionManager.Get<LeagueWinLossModel>(WinLossContants.LeagueWinLossSessionKey);
-            if (report == null)
-            {
-                report = _reportService.GetLeagueWinLoss(criteria);
-            }
+            var report = _reportService.GetLeagueWinLoss(criteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
@@ -863,11 +859,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
         public void ExportLeagueWinLossViewMatches(GetMatchesCriteria criteria)
         {
-            var report = SessionManager.Get<MatchWinLossModel>(WinLossContants.LeagueWinLossViewMatchesSessionKey);
-            if (report == null)
-            {
-                report = _reportService.GetMatches(criteria);
-            }
+            var report = _reportService.GetMatches(criteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
@@ -927,11 +919,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
         public void ExportLeagueWinLossViewMatchesFromBetTypeStatus(GetMatchesCriteria criteria)
         {
-            var report = SessionManager.Get<MatchWinLossFromBetTypeStatusModel>(WinLossContants.LeagueWinLossViewMatchesFromBetTypeStatusSessionKey);
-            if (report == null)
-            {
-                report = _reportService.GetMatchesFromBetTypeStatus(criteria);
-            }
+            var report = _reportService.GetMatchesFromBetTypeStatus(criteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
@@ -991,11 +979,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
         public void ExportLeagueWinLossViewBetTypes(GetBetTypesCriteria criteria)
         {
-            var report = SessionManager.Get<BettypeWinLossModel>(WinLossContants.LeagueWinLosViewBetTypesSessionKey);
-            if (report == null)
-            {
-                report = _reportService.GetBetTypes(criteria);
-            }
+            var report = _reportService.GetBetTypes(criteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
@@ -1056,11 +1040,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
         public void ExportLeagueWinLossViewBetTypesByStatus(GetBetTypesCriteria criteria)
         {
-            var report = SessionManager.Get<BetTypeWinLossByStatusModel>(WinLossContants.LeagueWinLosViewBetTypesByStatusSessionKey);
-            if (report == null)
-            {
-                report = _reportService.GetBetTypesByLiveNonLiveStatus(criteria);
-            }
+            var report = _reportService.GetBetTypesByLiveNonLiveStatus(criteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
@@ -1128,11 +1108,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
         public void ExportLeagueWinLossViewSites(GetSitesCriteria criteria)
         {
-            var report = SessionManager.Get<SiteWinLossModel>(WinLossContants.LeagueWinLosViewSitesSessionKey);
-            if (report == null)
-            {
-                report = _reportService.GetSites(criteria);
-            }
+            var report = _reportService.GetSites(criteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
@@ -1193,11 +1169,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
 
         public void ExportLeagueWinLossViewSupers(GetSuperCriteria criteria)
         {
-            var report = SessionManager.Get<SuperWinLossModel>(WinLossContants.LeagueWinLosViewSupersSessionKey);
-            if (report == null)
-            {
-                report = _reportService.GetSupers(criteria);
-            }
+            var report = _reportService.GetSupers(criteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;

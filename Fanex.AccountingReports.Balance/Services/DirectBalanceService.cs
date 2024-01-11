@@ -1,7 +1,6 @@
 namespace Fanex.AccountingReports.Balance.Services.Implement
 {
     using ExcelUtil.Spreadsheet;
-    using Fanex.AccountingReports.Balance.Constants;
     using Fanex.AccountingReports.Balance.Criteria.DirectBalance;
     using Fanex.AccountingReports.Balance.Models.DirectBalance;
     using Fanex.AccountingReports.Balance.Resources;
@@ -92,7 +91,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                 result.BaseBalanceTotal = baseBalanceTotal.Format(2);
             }
 
-            SessionManager.Set<DirectBalance>(BalanceConstants.DirectBalanceSessionKey, result);
             return result;
         }
 
@@ -135,7 +133,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                 result.BaseBalanceTotal = baseBalanceDownlineTotal.Format(2);
             }
 
-            SessionManager.Set<DirectBalance>(BalanceConstants.DirectBalanceMasterDownLineSessionKey, result);
             return result;
         }
 
@@ -178,7 +175,6 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                 result.BaseBalanceTotal = baseBalanceDownlineTotal.Format(2);
             }
 
-            SessionManager.Set<DirectBalance>(BalanceConstants.DirectBalanceAgentdownLineSessionKey, result);
             return result;
         }
 
@@ -190,11 +186,7 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         public DirectBalance ExportDirectBalanceReport(GetDirectBalanceCriteria directBalanceCriteria)
         {
             var result = new DirectBalance();
-            var fullReport = SessionManager.Get<DirectBalance>(BalanceConstants.DirectBalanceSessionKey);
-            if (fullReport == null)
-            {
-                fullReport = this.GetDirectBalance(directBalanceCriteria);
-            }
+            var fullReport = this.GetDirectBalance(directBalanceCriteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
@@ -234,12 +226,8 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         public DirectBalance ExportBalanceMasterDownLineReport(GetDirectBalanceMasterDownlineCriteria getDirectBalanceMasterCriteria)
         {
             var result = new DirectBalance();
-            var fullReport = SessionManager.Get<DirectBalance>(BalanceConstants.DirectBalanceMasterDownLineSessionKey);
-            if (fullReport == null)
-            {
-                fullReport = this.GetDirectBalanceMasterDownLine(getDirectBalanceMasterCriteria);
-            }
-
+            var fullReport = this.GetDirectBalanceMasterDownLine(getDirectBalanceMasterCriteria);
+            
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
             string sheetName = BalanceResources.DirectBalance_SheetName;
@@ -275,12 +263,8 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
         public DirectBalance ExportBalanceAgentDownLineReport(GetDirectBalanceAgentDownlineCriteria getDirectBalanceAgentCriteria)
         {
             var result = new DirectBalance();
-            var fullReport = SessionManager.Get<DirectBalance>(BalanceConstants.DirectBalanceAgentdownLineSessionKey);
-            if (fullReport == null)
-            {
-                fullReport = this.GetDirectBalanceAgentDownLine(getDirectBalanceAgentCriteria);
-            }
-
+            var fullReport =  this.GetDirectBalanceAgentDownLine(getDirectBalanceAgentCriteria);
+            
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
             string sheetName = BalanceResources.DirectBalance_SheetName;

@@ -171,10 +171,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\AGCasinoWinlossConstants.cs" />
-    <Compile Include="Constants\FormatConstants.cs" />
-    <Compile Include="Constants\LicenseeConstants.cs" />
-    <Compile Include="Constants\Resellers.cs" />
     <Compile Include="Controllers\CompanyWinLossController.cs" />
     <Compile Include="Controllers\LicenseeController.cs" />
     <Compile Include="Controllers\NegativeBalanceController.cs" />
@@ -228,9 +224,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Configurations\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Fanex.AccountingReports.Core\Core.csproj">
       <Project>{A5608298-26C2-4F05-A7FD-AA8C0700ED38}</Project>

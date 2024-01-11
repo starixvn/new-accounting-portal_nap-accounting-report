@@ -134,7 +134,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                 report.GrandTotal = this.FormatWinLossInfo(report.GrandTotal);
             }
 
-            SessionManager.Set<WinLossInfo>(WinLossContants.DailyMixParlayCombinationReport, report);
             return report;
         }
 
@@ -240,7 +239,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
                 report.GrandTotal = this.FormatWinLossInfo(report.GrandTotal);
             }
 
-            SessionManager.Set<WinLossInfo>(WinLossContants.DailyMixParlayAdvanceMixParlayReport, report);
             return report;
         }
 
@@ -292,11 +290,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportCombinationWinLossReport(GetCombinationWinLossReportCriteria criteria)
         {
-            var report = SessionManager.Get<WinLossInfo>(WinLossContants.DailyMixParlayCombinationReport);
-            if (report == null)
-            {
-                report = this.GetCombinationWinLossReport(criteria);
-            }
+            var report = this.GetCombinationWinLossReport(criteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
@@ -863,11 +857,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.DailyMixParlayWinLo
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportAdvanceMixParlayReport(GetAdvanceMixParlayReportCriteria criteria)
         {
-            var report = SessionManager.Get<WinLossInfo>(WinLossContants.DailyMixParlayAdvanceMixParlayReport);
-            if (report == null)
-            {
-                report = this.GetAdvanceMixParlayReport(criteria);
-            }
+            var report = this.GetAdvanceMixParlayReport(criteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;

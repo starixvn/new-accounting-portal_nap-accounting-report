@@ -49,7 +49,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
                 marginWinLoss.ChildsInfo.Add(marginDetail);
             }
 
-            SessionManager.Set<MarginWinLoss>(MarginReportSessionKey, marginWinLoss);
             return marginWinLoss;
         }
 
@@ -63,11 +62,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
         public void ExcelReport(GetMarginWinLossCriteria criteria)
         {
             var marginWinLoss = new MarginWinLoss();
-            marginWinLoss = SessionManager.Get<MarginWinLoss>(MarginReportSessionKey);
-            if (marginWinLoss == null)
-            {
-                marginWinLoss = this.GetDataMarginReport(criteria);
-            }
+            marginWinLoss = this.GetDataMarginReport(criteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;

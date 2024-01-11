@@ -5,7 +5,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
-    using Fanex.AccountingReports.Licensee.Constants;
     using Fanex.AccountingReports.Licensee.Criteria.PeakConcurrentUser;
     using Fanex.AccountingReports.Licensee.Models;
     using Fanex.AccountingReports.Licensee.Models.PeakConcurrentUser;
@@ -53,8 +52,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
                 peakCocurrentUser.MaxUsers = listTmp.Max().Format(0);
             }
 
-            SessionManager.Set<PeakConcurrentUser>(LicenseeConstants.PickConcurrentUserSessionKey, peakCocurrentUser);
-
+            
             return peakCocurrentUser;
         }
 
@@ -68,8 +66,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             int startRow = 2;
             var reportName = LicenseeResources.PeakConcurrentUser_ReportFileName;
             var excelFile = new ExcelFile();
-            var getCache = SessionManager.Get<PeakConcurrentUser>(LicenseeConstants.PickConcurrentUserSessionKey);
-            getCache = getCache ?? this.GetConcurrentUserList(peakConcurrentUserCriteria);
+            var rawData =  this.GetConcurrentUserList(peakConcurrentUserCriteria);
             var excelReport = excelFile.Worksheets.Add(string.Format("PeakConcurrentUser"));
 
             var excelFileName = string.Format(
@@ -82,15 +79,15 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
                 excelFileName);
 
             int nextRow = 1;
-            if (getCache != null && getCache.ListConcurrentUser != null && getCache.ListConcurrentUser.Count > 0)
+            if (rawData != null && rawData.ListConcurrentUser != null && rawData.ListConcurrentUser.Count > 0)
             {
-                foreach (var cocurrent in getCache.ListConcurrentUser)
+                foreach (var cocurrent in rawData.ListConcurrentUser)
                 {
                     this.ExportExcelPeakConcurrentReportAssignBody(startRow, startCol, ref nextRow, ref excelReport, cocurrent);
                 }
             }
 
-            this.ExportExcelPeakConcurrentReportAssignFooter(startRow, startCol, ref nextRow, ref excelReport, ref getCache);
+            this.ExportExcelPeakConcurrentReportAssignFooter(startRow, startCol, ref nextRow, ref excelReport, ref rawData);
 
             excelFile.ReponseStream(string.Format(
                 "{0}_For_{1}",

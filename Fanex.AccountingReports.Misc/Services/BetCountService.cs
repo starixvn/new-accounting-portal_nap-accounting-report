@@ -111,7 +111,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             }
 
             report.Total.MarginPercent = this.CalculateMargin(report.Total.MemberWinLoss, report.Total.Turnover);
-            SessionManager.Set<Transaction>(sessionKey, report);
             return report;
         }
 
@@ -126,11 +125,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 MiscConstants.BetCountHistoryReportSessionKey :
                 MiscConstants.BetCountSessionKey;
 
-            var report = SessionManager.Get<Transaction>(sessionKey);
-            if (report == null)
-            {
-                report = this.GetReport(criteria);
-            }
+            var report = this.GetReport(criteria);
 
             if (report != null &&
                 report.TransactionList != null &&
@@ -146,7 +141,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 }
             }
 
-            SessionManager.Set<Transaction>(sessionKey, report);
             return report;
         }
 
@@ -162,11 +156,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 MiscConstants.BetCountHistoryReportSessionKey :
                 MiscConstants.BetCountSessionKey;
 
-            var report = SessionManager.Get<Transaction>(sessionKey);
-            if (report == null)
-            {
-                report = this.GetReport(criteria);
-            }
+            var report = this.GetReport(criteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
@@ -961,7 +951,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             BetCountService._sportTypeNameCache = CacheRef.SaveCacheRefResponse(
                 sportTypeList, CacheRef.GetSportName, ref BetCountService._sportTypeNameCache);
             CalculateSportData(rawData, sports);
-            SessionManager.Set<List<ProductInfo>>(MiscConstants.MiscSportsSessionKey, sports);
             return sports;
         }
 

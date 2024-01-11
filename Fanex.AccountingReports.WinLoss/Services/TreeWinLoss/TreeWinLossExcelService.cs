@@ -86,11 +86,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         Justification = "Reviewed. Suppression is OK here.")]
         public void ExportExcelTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria)
         {
-            var report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByProductSession);
-            if (report == null)
-            {
-                report = _reportService.GetTreeWinLossByProduct(criteria);
-            }
+            var report = _reportService.GetTreeWinLossByProduct(criteria);
 
             var excelFile = new ExcelFile();
             ExcelWorksheetCollection workSheets = excelFile.Worksheets;
@@ -151,30 +147,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         Justification = "Reviewed. Suppression is OK here.")]
         public void ExportExcelTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
-            var report = new TreeWinLoss();
-            switch (criteria.RoleId)
-            {
-                case 5:
-                    report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByCommSession);
-                    break;
-
-                case 4:
-                    report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossBySuperSession);
-                    break;
-
-                case 3:
-                    report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByMasterSession);
-                    break;
-
-                case 2:
-                    report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByAgentSession);
-                    break;
-            }
-
-            if (report == null)
-            {
-                report = _reportService.GetTreeWinLossByLevel(criteria);
-            }
+            var report = _reportService.GetTreeWinLossByLevel(criteria);
 
             var allVirtualRate = _reportService.GetAllVirtualRate(report);
 

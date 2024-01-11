@@ -22,14 +22,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
         /// <param name="criteria">The criteria.</param>
         public void ExportReport(GetReportCriteria criteria)
         {
-            var traderSportType = criteria.IsSoccer ? SoccerTitle : OtherSportTitle;
-
-            var report = SessionManager.Get<TraderPerformanceSoccer>(_traderPerformanceSessionKey + traderSportType);
-
-            if (report == null)
-            {
-                report = this.GetReport(criteria);
-            }
+            var report = this.GetReport(criteria);
 
             HSSFWorkbook excelFile = new HSSFWorkbook();
             string sheetName = criteria.IsSoccer ?
@@ -256,10 +249,10 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
            ref int currentRow,
            TraderPerformanceSoccer report)
         {
-            IDataFormat dataFormat = excelFile.CreateDataFormat();
+            excelFile.CreateDataFormat();
             this.SetColorIndex(excelFile);
 
-            ICellStyle decimalNumberStyle = this.CreateDecimalNumberStyle(excelFile, HSSFColor.White.Index, HorizontalAlignment.Right, false, true, false);
+            this.CreateDecimalNumberStyle(excelFile, HSSFColor.White.Index, HorizontalAlignment.Right, false, true, false);
             ICellStyle decimalNumberWinLossStyle = this.CreateDecimalNumberStyle(excelFile, WinLossGroupColorIndex, HorizontalAlignment.Right, false, true, false);
             ICellStyle decimalNumberTurnOverStyle = this.CreateDecimalNumberStyle(excelFile, TurnOverGroupColorIndex, HorizontalAlignment.Right, false, true, false);
             ICellStyle intNumberLiveBetCountStyle = NpoiExcelExtensions.IntStyle(

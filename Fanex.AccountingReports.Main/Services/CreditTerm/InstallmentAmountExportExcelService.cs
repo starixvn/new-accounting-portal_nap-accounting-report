@@ -77,14 +77,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
         /// <param name="criteria">The criteria.</param>
         public void ExportInstallmentAmountReport(GetInstallAmountCriteria criteria)
         {
-            var sessionKeyWithRoleID = this._installmentAmountSessionKey + "." + criteria.RoleID;
-
-            var report = SessionManager.Get<List<InstallAmount>>(sessionKeyWithRoleID);
-
-            if (report == null)
-            {
-                report = this._reportService.GetInstallmentAmountReport(criteria);
-            }
+            var report = this._reportService.GetInstallmentAmountReport(criteria);
 
             var currentRow = 0;
             var roleName = CreditTermExcelUtil.GetRoleNameByID(criteria.RoleID);

@@ -205,9 +205,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\RoleConstants.cs" />
-    <Compile Include="Constants\SpecialConstants.cs" />
-    <Compile Include="Constants\ProductContants.cs" />
     <Compile Include="Controllers\MarginReportController.cs" />
     <Compile Include="Controllers\ParlayWonController.cs" />
     <Compile Include="Controllers\SaveBetReportController.cs" />

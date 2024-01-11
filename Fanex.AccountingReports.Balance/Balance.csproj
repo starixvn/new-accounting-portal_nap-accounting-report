@@ -160,7 +160,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\BalanceConstants.cs" />
     <Compile Include="Controllers\CompanyBalanceDifferenceController.cs" />
     <Compile Include="Controllers\DirectBalanceController.cs" />
     <Compile Include="Controllers\SuperBalanceController.cs" />

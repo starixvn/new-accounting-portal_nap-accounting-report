@@ -10,7 +10,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
-    using Fanex.AccountingReports.Special.Constants;
     using Fanex.AccountingReports.Special.Criteria.ParlayWon;
     using Fanex.AccountingReports.Special.Models.ParlayWon;
     using Fanex.AccountingReports.Special.Resources;
@@ -52,15 +51,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             var startIndex = criteria.StartIndex;
             var endIndex = criteria.EndIndex;
 
-            if (!criteria.IsPagingCallBack)
-            {
-                fullReport = this.GetFullReportFromDatabase(criteria);
-                SessionManager.Set<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey, fullReport);
-            }
-            else
-            {
-                fullReport = SessionManager.Get<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey);
-            }
+            fullReport = this.GetFullReportFromDatabase(criteria);
 
             var pagingReport = new ParlayWonTransaction
             {
@@ -81,11 +72,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
         /// <returns>The report.</returns>
         public ParlayWonTransaction SortReport(GetParlayWonReportCriteria criteria)
         {
-            var fullReport = SessionManager.Get<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey);
-            if (fullReport == null)
-            {
-                fullReport = this.GetReport(criteria);
-            }
+            var fullReport = this.GetReport(criteria);
 
             if (fullReport != null &&
                 fullReport.TransactionList != null &&
@@ -98,7 +85,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     criteria.SortDirection,
                     propertyName);
 
-                SessionManager.Set<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey, fullReport);
 
                 var pagingReport = new ParlayWonTransaction
                 {
@@ -112,7 +98,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                 return pagingReport;
             }
 
-            SessionManager.Set<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey, null);
             return null;
         }
 
@@ -127,11 +112,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportReport(GetParlayWonReportCriteria criteria)
         {
-            var fullReport = SessionManager.Get<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey);
-            if (fullReport == null)
-            {
-                fullReport = this.GetReport(criteria);
-            }
+            var fullReport = this.GetReport(criteria);
 
             //// ExcelTypes
 

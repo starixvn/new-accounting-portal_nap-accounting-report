@@ -51,9 +51,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
 
             report = this.ConvertDataReport(criteria, report);
 
-            var sessionKey = this._installmentAmountSessionKey + "." + criteria.RoleID;
-            SessionManager.Set<List<InstallAmount>>(sessionKey, report);
-
             return report;
         }
 

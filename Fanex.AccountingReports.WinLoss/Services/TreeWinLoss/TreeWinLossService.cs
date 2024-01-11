@@ -66,7 +66,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             var treeWinLoss = GetTreeWinLossDateRangeByProduct(criteria);
             treeWinLoss.IsShowNotAvailableTurnover = false;
 
-            SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByProductSession, treeWinLoss);
             return treeWinLoss;
         }
 
@@ -85,25 +84,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             var winLossByComm = GetTreeWinLossDateRangeByLevel(criteria);
             winLossByComm.IsShowNotAvailableTurnover = false;
 
-            switch (criteria.RoleId)
-            {
-                case 5:
-                    SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByCommSession, winLossByComm);
-                    break;
-
-                case 4:
-                    SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossBySuperSession, winLossByComm);
-                    break;
-
-                case 3:
-                    SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByMasterSession, winLossByComm);
-                    break;
-
-                case 2:
-                    SessionManager.Set<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByAgentSession, winLossByComm);
-                    break;
-            }
-
+           
             return winLossByComm;
         }
 
