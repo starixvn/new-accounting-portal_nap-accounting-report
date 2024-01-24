@@ -5,7 +5,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
-    using Fanex.AccountingReports.Licensee.Constants;
     using Fanex.AccountingReports.Licensee.Criteria.PeakConcurrentUser;
     using Fanex.AccountingReports.Licensee.Models;
     using Fanex.AccountingReports.Licensee.Models.PeakConcurrentUser;
@@ -14,16 +13,8 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using System.Collections.Generic;
     using System.Linq;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class PeakConcurrentUserService : ServiceBase
     {
-        /// <summary>
-        /// Gets the concurrent user list.
-        /// </summary>
-        /// <param name="peakConcurrentUserCriteria">The peak concurrent user criteria.</param>
-        /// <returns>The concurrent user list.</returns>
         public PeakConcurrentUser GetConcurrentUserList(PeakConcurrentUserCriteria peakConcurrentUserCriteria)
         {
             var peakCocurrentUser = new PeakConcurrentUser();
@@ -53,23 +44,17 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
                 peakCocurrentUser.MaxUsers = listTmp.Max().Format(0);
             }
 
-            SessionManager.Set<PeakConcurrentUser>(LicenseeConstants.PickConcurrentUserSessionKey, peakCocurrentUser);
-
+            
             return peakCocurrentUser;
         }
 
-        /// <summary>
-        /// Peaks the export2 excel.
-        /// </summary>
-        /// <param name="peakConcurrentUserCriteria">The peak concurrent user criteria.</param>
         public void PeakExport2Excel(PeakConcurrentUserCriteria peakConcurrentUserCriteria)
         {
             int startCol = 0;
             int startRow = 2;
             var reportName = LicenseeResources.PeakConcurrentUser_ReportFileName;
             var excelFile = new ExcelFile();
-            var getCache = SessionManager.Get<PeakConcurrentUser>(LicenseeConstants.PickConcurrentUserSessionKey);
-            getCache = getCache ?? this.GetConcurrentUserList(peakConcurrentUserCriteria);
+            var rawData =  this.GetConcurrentUserList(peakConcurrentUserCriteria);
             var excelReport = excelFile.Worksheets.Add(string.Format("PeakConcurrentUser"));
 
             var excelFileName = string.Format(
@@ -82,15 +67,15 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
                 excelFileName);
 
             int nextRow = 1;
-            if (getCache != null && getCache.ListConcurrentUser != null && getCache.ListConcurrentUser.Count > 0)
+            if (rawData != null && rawData.ListConcurrentUser != null && rawData.ListConcurrentUser.Count > 0)
             {
-                foreach (var cocurrent in getCache.ListConcurrentUser)
+                foreach (var cocurrent in rawData.ListConcurrentUser)
                 {
                     this.ExportExcelPeakConcurrentReportAssignBody(startRow, startCol, ref nextRow, ref excelReport, cocurrent);
                 }
             }
 
-            this.ExportExcelPeakConcurrentReportAssignFooter(startRow, startCol, ref nextRow, ref excelReport, ref getCache);
+            this.ExportExcelPeakConcurrentReportAssignFooter(startRow, startCol, ref nextRow, ref excelReport, ref rawData);
 
             excelFile.ReponseStream(string.Format(
                 "{0}_For_{1}",
@@ -123,13 +108,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             return licenseeSiteList;
         }
 
-        /// <summary>
-        /// Exports the excel peak concurrent report assign header.
-        /// </summary>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startCol">The start col.</param>
-        /// <param name="excelReport">The excel report.</param>
-        /// <param name="title">The title.</param>
         private void ExportExcelPeakConcurrentReportAssignHeader(int startRow, int startCol, ref ExcelWorksheet excelReport, string title)
         {
             var backgroundHeaderFormat = ExcelExtensions.GetCellTitleStyle(ExcelExtensions.HeaderTitleColor);
@@ -150,14 +128,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             excelReport.Cells.GetSubrangeAbsolute(startRow - 2, startCol, startRow - 2, startCol + nextCol).Value = title;
         }
 
-        /// <summary>
-        /// Exports the excel peak concurrent report assign body.
-        /// </summary>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startCol">The start col.</param>
-        /// <param name="nextRow">The next row.</param>
-        /// <param name="excelReport">The excel report.</param>
-        /// <param name="concurrentUser">The concurrent user.</param>
         private void ExportExcelPeakConcurrentReportAssignBody(
             int startRow,
             int startCol,
@@ -178,14 +148,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             nextRow++;
         }
 
-        /// <summary>
-        /// Exports the excel peak concurrent report assign footer.
-        /// </summary>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startCol">The start col.</param>
-        /// <param name="nextRow">The next row.</param>
-        /// <param name="excelReport">The excel report.</param>
-        /// <param name="peakConcurrentUser">The peak concurrent user.</param>
         private void ExportExcelPeakConcurrentReportAssignFooter(
             int startRow,
             int startCol,

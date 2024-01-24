@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Misc.Criteria.BetCount
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetBetCountReportCriteria : CriteriaBase
     {
         public GetBetCountReportCriteria()

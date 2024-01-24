@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Core.Utilities.CellStyles
     using Fanex.AccountingReports.Core.Extensions;
     using NPOI.HSSF.UserModel;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class CustomColor
     {
         public readonly short ReportTitle = 57;

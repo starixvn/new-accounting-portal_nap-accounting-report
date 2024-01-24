@@ -9,26 +9,13 @@ namespace Fanex.AccountingReports.Core.Services.Impl
 
     public enum LogType : int
     {
-        /// <summary>
-        /// The information type.
-        /// </summary>
         Info = 1,
 
-        /// <summary>
-        /// The error type.
-        /// </summary>
         Error = 2
     }
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class LoggingHandler
     {
-        /// <summary>
-        /// Logs the specified exception.
-        /// </summary>
-        /// <param name="ex">The exception.</param>
         public static void Log(Exception ex)
         {
             SqlException sqlException = ex as SqlException;
@@ -54,11 +41,6 @@ namespace Fanex.AccountingReports.Core.Services.Impl
             Logger.Log.Error(message);
         }
 
-        /// <summary>
-        /// Logs the specified message.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        /// <param name="logType">Type of the log.</param>
         public static void Log(string message = "", LogType logType = LogType.Error)
         {
             switch (logType)

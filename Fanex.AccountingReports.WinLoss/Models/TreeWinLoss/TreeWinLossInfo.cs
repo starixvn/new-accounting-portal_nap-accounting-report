@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.WinLoss.Models.TreeWinLoss
     using System;
     using Core.Resources;
 
-    /// <summary>
-    /// Create Tree Win Loss Info Model.
-    /// </summary>
     [Serializable]
     public class TreeWinLossInfo
     {

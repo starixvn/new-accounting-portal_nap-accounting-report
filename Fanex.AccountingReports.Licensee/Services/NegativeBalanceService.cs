@@ -3,25 +3,18 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using AccountingReports.Core.Configurations;
     using ExcelUtil.Spreadsheet;
     using Fanex.AccountingReports.Core.Extensions;
-    using Fanex.AccountingReports.Core.Models;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
-    using Fanex.AccountingReports.Licensee.Constants;
     using Fanex.AccountingReports.Licensee.Criteria.NegativeBalance;
     using Fanex.AccountingReports.Licensee.Models;
     using Fanex.AccountingReports.Licensee.Models.NegativeBalance;
     using Fanex.AccountingReports.Licensee.Repositories.Implement;
     using Fanex.AccountingReports.Licensee.Resources;
     using Fanex.Common.Extensions;
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
-    using System.IO;
     using System.Linq;
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NegativeBalanceService : ServiceBase
     {
         private readonly NegativeBalanceRepository _negativeBalanceRepository;
@@ -31,30 +24,12 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             this._negativeBalanceRepository = negativeBalanceRepository ?? new NegativeBalanceRepository();
         }
 
-        /// <summary>
-        /// Gets the negative balance.
-        /// </summary>
-        /// <param name="negativeBalanceCriteria">The negative balance criteria.</param>
-        /// <returns>The negative balance.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public NegativeBalanceModel GetNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria)
         {
             var model = new NegativeBalanceModel();
-            var rawData = new List<NegativeBalanceUser>();
-            if (negativeBalanceCriteria.IsGetCache)
-            {
-                rawData = SessionManager.Get<List<NegativeBalanceUser>>(LicenseeConstants.NegativeBalanceSessionKey + negativeBalanceCriteria.Site);
-            }
-
-            var negativeBalanceList = new List<NegativeBalance>();
-            if (object.ReferenceEquals(rawData, null) || !rawData.Any())
-            {
-                rawData = this._negativeBalanceRepository.GetNegativeBalanceUser(negativeBalanceCriteria).ToList();
-                SessionManager.Set<List<NegativeBalanceUser>>(LicenseeConstants.NegativeBalanceSessionKey + negativeBalanceCriteria.Site, rawData);
-            }
-
+            var rawData =  this._negativeBalanceRepository.GetNegativeBalanceUser(negativeBalanceCriteria).ToList();
+            
             List<NegativeBalanceUser> _listUserTemp = new List<NegativeBalanceUser>();
             if (rawData != null && (rawData.Count() > 0))
             {
@@ -80,145 +55,47 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
 
                         currentNegative.NegativeBalanceUserList.Add(data);
                     });
-
-                List<string> licensees = rawData.Select(s => s.Site).Distinct().ToList();
-                foreach (var licensee in licensees)
-                {
-                    var mail = new NegativeBalanceMemberMailFormat();
-                    mail.Site = licensee;
-
-                    model.MailList.Add(mail);
-                }
-
                 model.TotalNegativeBalanceUser = rawData.Count();
             }
 
             return model;
         }
 
-        /// <summary>
-        /// Sends the mail.
-        /// </summary>
-        /// <param name="mailParam">The mail parameter.</param>
-        /// <param name="negativeBalanceCriteria">The negative balance criteria.</param>
-        /// <returns>The failed mails.</returns>
-        public NegativeBalanceMemberSendMailFail SendMail(MailParam mailParam, NegativeBalanceCriteria negativeBalanceCriteria)
+        
+        public ExcelFile GetExcelNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria, string site)
         {
-            var failList = new NegativeBalanceMemberSendMailFail();
-            //// Send Mail Example
-            foreach (var mail in mailParam.Mails)
-            {
-                var isSuccess = false;
-                if (!string.IsNullOrEmpty(mail.To))
-                {
-                    isSuccess = MailService.SendMail(new MailItem
-                    {
-                        To = mail.To,
-                        Title = mailParam.ReportTitle,
-                        Subject = "Accounting system - Negative Balance Report for " +
-                            (mail.Site == "All" ? "All Licensees" : mail.Site) +
-                            " (" + DateTime.Now.ToShortDateString() + ")",
-                        Body = mailParam.MailContent,
-                        Attachments = new List<MailAttachment>
-                            {
-                                this.GetExportExcelNegativeBalanceMailAttachment(negativeBalanceCriteria, mail.Site)
-                            }
-                    });
-                }
-
-                if (!isSuccess)
-                {
-                    failList.IsFail = true;
-                    failList.Licensees.Add(new NegativeBalanceMemberSendMailResult()
-                    {
-                        IsSuccess = false,
-                        Site = mail.Site,
-                        ErrorMessage = Labels.SendMailFail
-                    });
-                }
-            }
-
-            return failList;
-        }
-
-        /// <summary>
-        /// Gets the excel negative balance.
-        /// </summary>
-        /// <param name="negativeBalanceCriteria">The negative balance criteria.</param>
-        /// <param name="isSendMail">If set to <c>true</c> [is send mail].</param>
-        /// <param name="site">The site value.</param>
-        /// <returns>The excel negative balance.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
-        public ExcelFile GetExcelNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria, bool isSendMail, string site)
-        {
-            //// local varialbles
 
             int startCol = 0;
             int startRow = 2;
 
             var excelFile = new ExcelFile();
 
-            var rawData = SessionManager.Get<List<NegativeBalanceUser>>(LicenseeConstants.NegativeBalanceSessionKey + negativeBalanceCriteria.Site);
-            var negativeBalanceList = new List<NegativeBalance>();
-            if (object.ReferenceEquals(rawData, null) || !rawData.Any())
-            {
-                rawData = this._negativeBalanceRepository.GetNegativeBalanceUser(negativeBalanceCriteria).ToList();
-                SessionManager.Set<List<NegativeBalanceUser>>(LicenseeConstants.NegativeBalanceSessionKey + negativeBalanceCriteria.Site, rawData);
-            }
-
-            var getCache = SessionManager.Get<List<NegativeBalanceUser>>(LicenseeConstants.NegativeBalanceSessionKey + negativeBalanceCriteria.Site);
-            getCache = getCache ?? this._negativeBalanceRepository.GetNegativeBalanceUser(negativeBalanceCriteria).ToList();
+            var rawData =  this._negativeBalanceRepository.GetNegativeBalanceUser(negativeBalanceCriteria).ToList();
             var model = new NegativeBalanceModel();
             NegativeBalance currentNegative = null;
-            if (isSendMail)
-            {
-                currentNegative = new NegativeBalance
+
+            rawData.OrderBy(negativeBalanceUser => negativeBalanceUser.Site)
+                .Select(s => s).ForEach(data =>
                 {
-                    LicenseeSite = site,
-                    NegativeBalanceUserList = new List<NegativeBalanceUser>()
-                };
-
-                getCache.OrderBy(negativeBalanceUser => negativeBalanceUser.Site)
-                    .Select(s => s).ForEach(data =>
+                    if (currentNegative == null || currentNegative.LicenseeSite.ToLower() != data.Site.ToLower())
                     {
-                        if (data.Site.ToLower() == site.ToLower())
+                        currentNegative = new NegativeBalance
                         {
-                            currentNegative.NegativeBalanceUserList.Add(data);
-                        }
-                    });
+                            LicenseeSite = data.Site,
+                            NegativeBalanceUserList = new List<NegativeBalanceUser>()
+                        };
+                        model.NegativeBalanceList.Add(currentNegative);
+                    }
 
-                model.NegativeBalanceList.Add(currentNegative);
-            }
-            else
-            {
-                getCache.OrderBy(negativeBalanceUser => negativeBalanceUser.Site)
-                    .Select(s => s).ForEach(data =>
-                    {
-                        if (currentNegative == null || currentNegative.LicenseeSite.ToLower() != data.Site.ToLower())
-                        {
-                            currentNegative = new NegativeBalance
-                            {
-                                LicenseeSite = data.Site,
-                                NegativeBalanceUserList = new List<NegativeBalanceUser>()
-                            };
-                            model.NegativeBalanceList.Add(currentNegative);
-                        }
+                    currentNegative.NegativeBalanceUserList.Add(data);
+                });
 
-                        currentNegative.NegativeBalanceUserList.Add(data);
-                    });
-            }
 
             var excelReport = excelFile.Worksheets.Add(string.Format("NegativeBalance"));
 
-            //// local varialbles
 
-            //// header
 
-            var siteName = isSendMail ?
-                    site :
-                    (negativeBalanceCriteria.Site == "All" ?
+            var siteName = (negativeBalanceCriteria.Site == "All" ?
                         "All Licensees" :
                         negativeBalanceCriteria.Site);
             var reportName = string.Format(
@@ -231,22 +108,15 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
                 ref excelReport,
                 reportName);
 
-            //// header
 
-            //// content
             int nextRow = 1;
             if (model != null && model.NegativeBalanceList != null && model.NegativeBalanceList.Count > 0)
             {
                 this.ExportExcelNegativeBalanceReportAssignBody(startRow, startCol, ref nextRow, ref excelReport, model);
             }
-            //// content
             return excelFile;
         }
 
-        /// <summary>
-        /// Exports the excel negative balance.
-        /// </summary>
-        /// <param name="negativeBalanceCriteria">The negative balance criteria.</param>
         public void ExportExcelNegativeBalance(NegativeBalanceCriteria negativeBalanceCriteria)
         {
             var reportName = LicenseeResources.NegativeBalance_ReportFileName +
@@ -254,28 +124,9 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
                 "_All_Licensees" :
                 "_" + negativeBalanceCriteria.Site);
 
-            ExcelFile excelFile = this.GetExcelNegativeBalance(negativeBalanceCriteria, false, string.Empty);
+            ExcelFile excelFile = this.GetExcelNegativeBalance(negativeBalanceCriteria, string.Empty);
             excelFile.ReponseStream(
                 string.Format("{0}", reportName));
-        }
-
-        /// <summary>
-        /// Gets the export excel negative balance mail attachment.
-        /// </summary>
-        /// <param name="negativeBalanceCriteria">The negative balance criteria.</param>
-        /// <param name="site">The site value.</param>
-        /// <returns>The export excel negative balance mail attachment.</returns>
-        public MailAttachment GetExportExcelNegativeBalanceMailAttachment(NegativeBalanceCriteria negativeBalanceCriteria, string site)
-        {
-            ExcelFile excelFile = this.GetExcelNegativeBalance(negativeBalanceCriteria, true, site);
-            var mailAttactment = new MailAttachment
-            {
-                Content = new MemoryStream(),
-                ContentType = "excel",
-                FileName = "Accounting system - Negative Balance Report.xls"
-            };
-            excelFile.SaveXls(mailAttactment.Content);
-            return mailAttactment;
         }
 
         public List<Licensee> GetLicensee()
@@ -303,13 +154,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             return licenseeSiteList;
         }
 
-        /// <summary>
-        /// Exports the excel negative balance report assign header.
-        /// </summary>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startCol">The start col.</param>
-        /// <param name="excelReport">The excel report.</param>
-        /// <param name="title">The title.</param>
         private void ExportExcelNegativeBalanceReportAssignHeader(int startRow, int startCol, ref ExcelWorksheet excelReport, string title)
         {
             var backgroundHeaderFormat = ExcelExtensions.GetCellTitleStyle(Color.FromArgb(60, 94, 165));
@@ -335,14 +179,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             excelReport.Cells.GetSubrangeAbsolute(startRow - 2, startCol, startRow - 2, startCol + nextCol).Value = title;
         }
 
-        /// <summary>
-        /// Exports the excel negative balance report assign body.
-        /// </summary>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startCol">The start col.</param>
-        /// <param name="nextRow">The next row.</param>
-        /// <param name="excelReport">The excel report.</param>
-        /// <param name="model">The model.</param>
         private void ExportExcelNegativeBalanceReportAssignBody(int startRow, int startCol, ref int nextRow, ref ExcelWorksheet excelReport, NegativeBalanceModel model)
         {
             var cellStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.OddRowColor, false);

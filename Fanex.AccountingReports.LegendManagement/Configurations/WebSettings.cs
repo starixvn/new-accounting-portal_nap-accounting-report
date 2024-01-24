@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.LegendManagement.Configurations
     using Fanex.Common;
     using Fanex.NAP.Core.Configuration;
 
-    /// <summary>
-    /// Web Settings.
-    /// </summary>
     public static class WebSettings
     {
         static WebSettings()

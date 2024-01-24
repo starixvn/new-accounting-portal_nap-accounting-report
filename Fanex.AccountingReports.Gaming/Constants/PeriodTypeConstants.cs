@@ -1,8 +1,5 @@
 namespace Fanex.AccountingReports.Gaming.Constants
 {
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class PeriodTypeConstants
     {
         public const int GamingBingoStatisticDaily = 0;

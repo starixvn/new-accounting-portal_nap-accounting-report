@@ -1,8 +1,5 @@
 namespace Fanex.AccountingReports.Core.Constants
 {
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class DateTimeFormatConstants
     {
         public const string ShortDate = "MMM dd, yyyy";

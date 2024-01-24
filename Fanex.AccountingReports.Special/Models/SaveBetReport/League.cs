@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Special.Models.SaveBetReport
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// League Model.
-    /// </summary>
     [Serializable]
     public class League
     {

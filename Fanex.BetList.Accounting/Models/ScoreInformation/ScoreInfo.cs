@@ -4,9 +4,6 @@ namespace Fanex.BetList.Accounting.Models
     using Fanex.BetList.Accounting.Constants;
     using Fanex.BetList.Accounting.Resources;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class ScoreInfo
     {
@@ -32,10 +29,6 @@ namespace Fanex.BetList.Accounting.Models
 
         public string AwayFinalScore { get; set; }
 
-        /// <summary>
-        /// Checks the cancellation.
-        /// </summary>
-        /// <param name="betStatus">The bet status.</param>
         public virtual void CheckCancellation(string betStatus)
         {
             var strNotAvailable = Labels.NotAvailable;

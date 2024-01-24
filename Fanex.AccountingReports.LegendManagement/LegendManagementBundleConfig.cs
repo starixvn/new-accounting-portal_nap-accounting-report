@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.LegendManagement
 {
     using System.Web.Optimization;
 
-    /// <summary>
-    /// Legend Management Bundle Configuration.
-    /// </summary>
     public static class LegendManagementBundleConfig
     {
         public static void RegisterBundles(BundleCollection bundles)

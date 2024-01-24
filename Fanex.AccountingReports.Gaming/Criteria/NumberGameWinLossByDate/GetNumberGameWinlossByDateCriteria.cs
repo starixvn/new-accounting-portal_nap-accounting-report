@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByDate
 {
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetNumberGameWinLossByDateCriteria : CriteriaBase
     {
         public string FromDate { get; set; }

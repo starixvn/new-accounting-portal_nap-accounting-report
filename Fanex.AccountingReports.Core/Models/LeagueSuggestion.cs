@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Core.Models
 {
     using System.Collections.Generic;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class LeagueSuggestion
     {
         public string QueryValue { get; set; }

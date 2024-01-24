@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Misc.Criteria.CreditMovement
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Get credit movement criteria.
-    /// </summary>
     public class GetCreditMovementCriteria : CriteriaBase
     {
         public DateTime FromDate { get; set; }

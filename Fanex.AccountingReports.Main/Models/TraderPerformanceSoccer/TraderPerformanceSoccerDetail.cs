@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceSoccer
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
 
-    /// <summary>
-    /// Trader performance soccer detail model.
-    /// </summary>
     [Serializable]
     public class TraderPerformanceSoccerDetail
     {
@@ -100,10 +97,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceSoccer
 
         public int ReportLength { get; set; }
 
-        /// <summary>
-        /// Sums the specified trader information.
-        /// </summary>
-        /// <param name="traderInfo">The trader information.</param>
         public void CalculateTotal(TraderPerformanceSoccerDetail traderInfo)
         {
             this.FirstHalfHdp += traderInfo.FirstHalfHdp;
@@ -131,14 +124,7 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceSoccer
             this.TenMinOneXTwo += traderInfo.TenMinOneXTwo;
         }
 
-        /// <summary>
-        /// Calculates the margin total.
-        /// </summary>
-        /// <param name="winLossInfo">The win loss information.</param>
-        /// <param name="turnOverInfo">The turn over information.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public void CalculateMarginTotal(TraderPerformanceSoccerDetail winLossInfo, TraderPerformanceSoccerDetail turnOverInfo)
         {
             this.FirstHalfHdp = turnOverInfo.FirstHalfHdp == 0 ?
@@ -212,10 +198,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceSoccer
                 (winLossInfo.TenMinOneXTwo / turnOverInfo.TenMinOneXTwo) * 100; 
         }
 
-        /// <summary>
-        /// Formats the two decimal number data.
-        /// </summary>
-        /// <param name="traderInfo">The trader information.</param>
         public void FormatTwoDecimalNumberData(TraderPerformanceSoccerDetail traderInfo)
         {
             this.FirstHalfHdp = Math.Round(traderInfo.FirstHalfHdp, 2, MidpointRounding.AwayFromZero);
@@ -243,10 +225,6 @@ namespace Fanex.AccountingReports.Main.Models.TraderPerformanceSoccer
             this.TenMinOneXTwo = Math.Round(traderInfo.TenMinOneXTwo, 2, MidpointRounding.AwayFromZero); 
         }
 
-        /// <summary>
-        /// Gets the margin value.
-        /// </summary>
-        /// <param name="marginInfo">The margin information.</param>
         public void GetMarginValue(TraderPerformanceSoccerDetail marginInfo)
         {
             this.FirstHalfHdp = 100 * marginInfo.FirstHalfHdp;

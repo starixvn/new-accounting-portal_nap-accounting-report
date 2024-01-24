@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Gaming.Models.NumberOfActiveMember
 {
     using System;
 
-    /// <summary>
-    /// Product model.
-    /// </summary>
     [Serializable]
     public class Product
     {

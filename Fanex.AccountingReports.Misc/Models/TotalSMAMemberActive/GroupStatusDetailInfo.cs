@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Misc.Models.TotalSMAMemberActive
     using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Models;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class GroupStatusDetailInfo
     {

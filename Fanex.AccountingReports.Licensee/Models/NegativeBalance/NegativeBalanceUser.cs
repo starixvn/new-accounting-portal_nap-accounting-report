@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Licensee.Models.NegativeBalance
 {
     using System;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class NegativeBalanceUser
     {

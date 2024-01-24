@@ -1,8 +1,5 @@
 namespace Fanex.BetList.Accounting.Models
 {
-    /// <summary>
-    /// Tennis model.
-    /// </summary>
     public class TennisResultEntity
     {
         public string MatchId { get; set; }

@@ -17,9 +17,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class DuplicateTicketsService : ServiceBase
     {
         private const short TitleColorIndex = 51;
@@ -29,14 +26,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
         private readonly string _duplicateTicketsSessionKey = MiscConstants.DuplicateTicketsPrefixSessionKey +
                                              (AppSession.CurrentUser != null ? AppSession.CurrentUser.Username : string.Empty);
 
-        /// <summary>
-        /// Gets the name of the duplicate ticket by user.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>List duplicate ticket by user.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         public DuplicateTicketsInfo GetDuplicateTicketByUserName(GetDuplicateTicketsCriteria criteria)
         {
             DuplicateTicketsInfo duplicateTicketsInfo = new DuplicateTicketsInfo();
@@ -88,7 +78,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             duplicateTicketsInfo.HaveDuplicateTickets = numOfDuplicateTickets > 0;
             duplicateTicketsInfo.MD5Hash = utility.GetMD5Hash(JsonConvert.SerializeObject(result));
 
-            SessionManager.Set<DuplicateTicketsInfo>(this._duplicateTicketsSessionKey, duplicateTicketsInfo);
 
             if (result.Count > 0)
             {
@@ -99,11 +88,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             return duplicateTicketsInfo;
         }
 
-        /// <summary>
-        /// Gets the duplicate ticket data.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>List user ticket data.</returns>
         public List<dynamic> GetDuplicateTicketData(GetDuplicateTicketsCriteria criteria)
         {
             return GetReportData<dynamic>(criteria).ToList();
@@ -111,18 +95,9 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
 
         #region Export Report.
 
-        /// <summary>
-        /// Exports the duplicate ticket report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         public void ExportDuplicateTicketReport(GetDuplicateTicketsCriteria criteria)
         {
-            var report = SessionManager.Get<DuplicateTicketsInfo>(this._duplicateTicketsSessionKey);
-
-            if (report == null)
-            {
-                report = this.GetDuplicateTicketByUserName(criteria);
-            }
+            var report = this.GetDuplicateTicketByUserName(criteria);
 
             HSSFWorkbook excelFile = new HSSFWorkbook();
             string sheetName = MiscResources.DuplicateTickets_SheetName;
@@ -153,13 +128,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             worksheet.SetColumnWidth(0, 80 * NpoiExcelExtensions.FontWidth);
         }
 
-        /// <summary>
-        /// Exports the report title.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="criteria">The criteria.</param>
         private void ExportReportTitle(HSSFWorkbook excelFile, ref ISheet worksheet, ref int currentRow, GetDuplicateTicketsCriteria criteria)
         {
             IRow row = worksheet.CreateRow(currentRow);
@@ -172,12 +140,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn + 14, reportTitle, headerStyle);
         }
 
-        /// <summary>
-        /// Exports the report header.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
         private void ExportReportHeader(HSSFWorkbook excelFile, ref ISheet worksheet, ref int currentRow)
         {
             int currentColumn = 0;
@@ -200,16 +162,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, "TransDesc", headerStyle);
         }
 
-        /// <summary>
-        /// Exports the content of the report.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReportContent(
             List<DuplicateTicketsByUserName> report,
             HSSFWorkbook excelFile,

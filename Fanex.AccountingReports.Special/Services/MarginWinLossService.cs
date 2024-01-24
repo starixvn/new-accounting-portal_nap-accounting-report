@@ -13,18 +13,10 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
     using Fanex.AccountingReports.Special.Resources;
     using Fanex.Common;
 
-    /// <summary>
-    /// Implement Margin Win Loss Service interface.
-    /// </summary>
     public class MarginWinLossService : ServiceBase
     {
         public static readonly string MarginReportSessionKey = "Fanex.AccountingReports.Special.MarginReport";
 
-        /// <summary>
-        /// Get Data Margin Report.
-        /// </summary>
-        /// <param name="criteria">The Get margin win loss criteria.</param>
-        /// <returns>The margin win loss model.</returns>
         public MarginWinLoss GetDataMarginReport(GetMarginWinLossCriteria criteria)
         {
             var marginWinLoss = new MarginWinLoss();
@@ -49,25 +41,14 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
                 marginWinLoss.ChildsInfo.Add(marginDetail);
             }
 
-            SessionManager.Set<MarginWinLoss>(MarginReportSessionKey, marginWinLoss);
             return marginWinLoss;
         }
 
-        /// <summary>
-        /// Export excel for margin report.
-        /// </summary>
-        /// <param name="criteria">The get margin win loss criteria. </param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-           "SP2101:MethodMustNotContainMoreLinesThan",
-           Justification = "Reviewed. Suppression is OK here.")]
+        
         public void ExcelReport(GetMarginWinLossCriteria criteria)
         {
             var marginWinLoss = new MarginWinLoss();
-            marginWinLoss = SessionManager.Get<MarginWinLoss>(MarginReportSessionKey);
-            if (marginWinLoss == null)
-            {
-                marginWinLoss = this.GetDataMarginReport(criteria);
-            }
+            marginWinLoss = this.GetDataMarginReport(criteria);
 
             ExcelFile excelFile = new ExcelFile();
             ExcelWorksheetCollection worksheets = excelFile.Worksheets;
@@ -116,12 +97,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
             excelFile.ReponseStream(reportName);
         }
 
-        /// <summary>
-        /// Export header for margin report.
-        /// </summary>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
         private void MarginReportExportHeader(ref ExcelWorksheet workSheet, int startColumn, ref int currentRow)
         {
             var headerColor = ExcelExtensions.HeaderTitleColor;
@@ -164,16 +139,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement.MarginReport
             currentRow++;
         }
 
-        /// <summary>
-        /// Export body for margin report.
-        /// </summary>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="childsInfo">The list margin win loss.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-           "SP2101:MethodMustNotContainMoreLinesThan",
-           Justification = "Reviewed. Suppression is OK here.")]
+        
         private void MarginReportExportBody(ref ExcelWorksheet workSheet, List<MarginWinLoss> childsInfo, int startColumn, ref int currentRow)
         {
             var textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.BackGroundColor, false);

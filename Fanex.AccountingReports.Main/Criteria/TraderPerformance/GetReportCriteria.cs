@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Main.Criteria.TraderPerformance
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetReportCriteria : CriteriaBase
     {
         public DateTime Fromdate { get; set; }

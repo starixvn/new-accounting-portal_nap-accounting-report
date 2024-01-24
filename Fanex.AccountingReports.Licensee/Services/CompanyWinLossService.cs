@@ -18,9 +18,6 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
     using Fanex.Excel.Models;
     using AccountingReports.Core.Configurations;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class CompanyWinLossService : ServiceBase
     {
         private const int ExtendCachedTimeOut = 2;
@@ -185,9 +182,7 @@ namespace Fanex.AccountingReports.Licensee.Services.Implement
             return groupHeader;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-           "SP2100:CodeLineMustNotBeLongerThan",
-           Justification = "Reviewed. Suppression is OK here.")]
+        
         private List<HeaderColumns> CreateHeaderColumns()
         {
             var header = new List<HeaderColumns>();

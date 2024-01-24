@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Balance.Criteria.DirectBalance
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetDirectBalanceMasterDownlineCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]

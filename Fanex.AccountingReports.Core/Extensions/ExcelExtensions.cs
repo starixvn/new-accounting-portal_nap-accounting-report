@@ -8,9 +8,6 @@ namespace Fanex.AccountingReports.Core.Extensions
     using System.Drawing;
     using System.Web;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class ExcelExtensions
     {
         #region Constanst values
@@ -42,11 +39,6 @@ namespace Fanex.AccountingReports.Core.Extensions
 
         #region Response Stream
 
-        /// <summary>
-        /// Reponses the stream.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="reportName">Name of the report.</param>
         public static void ReponseStream(this ExcelFile excelFile, string reportName)
         {
             var response = HttpContext.Current.Response;
@@ -56,11 +48,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             excelFile.SaveXls(response.OutputStream);
         }
 
-        /// <summary>
-        /// Exports Excel file to response stream.
-        /// </summary>
-        /// <param name="workbook">The workbook contains the data.</param>
-        /// <param name="fileName">The file name.</param>
         public static void ToReponseStream(this IWorkbook workbook, string fileName)
         {
             var response = HttpContext.Current.Response;
@@ -74,11 +61,6 @@ namespace Fanex.AccountingReports.Core.Extensions
 
         #region Title Cell Format
 
-        /// <summary>
-        /// Formats the title cell.
-        /// </summary>
-        /// <param name="cellStyle">The cell style.</param>
-        /// <param name="backgroundColor">Color of the background.</param>
         public static void FormatTitleCell(
             this CellStyle cellStyle,
             Color backgroundColor)
@@ -90,11 +72,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             cellStyle.WrapText = true;
         }
 
-        /// <summary>
-        /// Gets the cell title style.
-        /// </summary>
-        /// <param name="backgroundColor">Color of the background.</param>
-        /// <returns>The cell title style.</returns>
         public static CellStyle GetCellTitleStyle(Color backgroundColor)
         {
             CellStyle cellStyle = new CellStyle();
@@ -154,15 +131,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             cellStyle.FormatCellText(backgroundColor, isBold, textAlign, false, Color.Black);
         }
 
-        /// <summary>
-        /// Formats the cell text.
-        /// </summary>
-        /// <param name="cellStyle">The cell style.</param>
-        /// <param name="backgroundColor">Color of the background.</param>
-        /// <param name="isBold">If set to <c>true</c> [is bold].</param>
-        /// <param name="textAlign">The text align.</param>
-        /// <param name="isItalic">If set to <c>true</c> [is italic].</param>z
-        /// <param name="fontColor">Color of the font.</param>
         public static void FormatCellText(
             this CellStyle cellStyle,
             Color backgroundColor,
@@ -222,15 +190,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             return cellStyle;
         }
 
-        /// <summary>
-        /// Formats the cell number style.
-        /// </summary>
-        /// <param name="cellStyle">The cell style.</param>
-        /// <param name="symbol">The symbol.</param>
-        /// <param name="backgroundColor">Color of the background.</param>
-        /// <param name="isBold">If set to <c>true</c> [is bold].</param>
-        /// <param name="isPositive">If set to <c>true</c> [is positive].</param>
-        /// <param name="isNegative">If set to <c>true</c> [is negative].</param>
         public static void FormatCellNumberStyle(
             this CellStyle cellStyle,
             string symbol,
@@ -248,16 +207,6 @@ namespace Fanex.AccountingReports.Core.Extensions
                 isNegative);
         }
 
-        /// <summary>
-        /// Formats the cell number style.
-        /// </summary>
-        /// <param name="cellStyle">The cell style.</param>
-        /// <param name="symbol">The symbol.</param>
-        /// <param name="backgroundColor">Color of the background.</param>
-        /// <param name="fontColor">Color of the font.</param>
-        /// <param name="isBold">If set to <c>true</c> [is bold].</param>
-        /// <param name="isPositive">If set to <c>true</c> [is positive].</param>
-        /// <param name="isNegative">If set to <c>true</c> [is negative].</param>
         public static void FormatCellNumberStyle(
             this CellStyle cellStyle,
             string symbol,
@@ -326,14 +275,6 @@ namespace Fanex.AccountingReports.Core.Extensions
         #endregion Row Format
         #region Report Format
 
-        /// <summary>
-        /// Exports the empty report.
-        /// </summary>
-        /// <param name="ws">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="endColumn">The end column.</param>
         public static void ExportEmptyReport(
             this ExcelWorksheet ws,
             int startRow,
@@ -350,15 +291,7 @@ namespace Fanex.AccountingReports.Core.Extensions
             currentRow++;
         }
 
-        /// <summary>
-        /// Analyses the one line text.
-        /// </summary>
-        /// <param name="oneLineText">The one line text.</param>
-        /// <param name="maxCharPerRow">The maximum character per row.</param>
-        /// <returns>Expand row number.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public static int AnalyseOneLineText(string oneLineText, int maxCharPerRow)
         {
             switch (maxCharPerRow)
@@ -413,15 +346,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             return actualRow;
         }
 
-        /// <summary>
-        /// Formats the long text.
-        /// </summary>
-        /// <param name="longText">The long text.</param>
-        /// <param name="excludeRowNumber">The exclude row number.</param>
-        /// <param name="textRowSpan">The text row span.</param>
-        /// <param name="width">The width.</param>
-        /// <param name="addPaddingBottom">If set to <c>true</c> [add padding bottom].</param>
-        /// <returns>Expand row number.</returns>
         public static int FormatLongText(
             string longText,
             int excludeRowNumber,

@@ -1,8 +1,5 @@
 namespace Fanex.AccountingReports.Core.Constants
 {
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class RoleConstants
     {
         public const int Super = 1;

@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.WinLoss
 {
     using System.Web.Mvc;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
    public class WinLossAreaRegistration : AreaRegistration
     {
         public override string AreaName

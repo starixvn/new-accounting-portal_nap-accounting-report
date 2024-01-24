@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Gaming.Models.VirtualSportsWinLoss
 {
     using System;
 
-    /// <summary>
-    /// The model of Virtual Sports Win Loss detail report.
-    /// </summary>
     [Serializable]
     public class VirtualSportsWinLossDetail
     {

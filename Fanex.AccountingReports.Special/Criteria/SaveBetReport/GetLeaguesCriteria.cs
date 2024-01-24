@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Special.Criteria.SaveBetReport
     using System;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetLeaguesCriteria : CriteriaBase
     {
         public DateTime Date { get; set; }

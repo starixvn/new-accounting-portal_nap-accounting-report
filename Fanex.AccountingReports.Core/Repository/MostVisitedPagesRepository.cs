@@ -8,16 +8,8 @@ namespace Fanex.AccountingReports.Core.Repository.Impl
     using Fanex.Common.Extensions;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class MostVisitedPagesRepository : BaseRepository<MostVisitedPage>
     {
-        /// <summary>
-        /// Fetches the most visited pages.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The most visited pages.</returns>
         public IEnumerable<MostVisitedPage> FetchMostVisitedPages(SelectMostVisitedPageCriteria criteria)
         {
             // Create Function will map Data from DataReader to Schedule Object

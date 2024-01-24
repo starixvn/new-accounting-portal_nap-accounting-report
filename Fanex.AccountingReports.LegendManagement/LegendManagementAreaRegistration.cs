@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Licensee
 {
     using System.Web.Mvc;
 
-    /// <summary>
-    /// Legend Management Area Registration.
-    /// </summary>
     public class LegendManagementAreaRegistration : AreaRegistration
     {
         public override string AreaName

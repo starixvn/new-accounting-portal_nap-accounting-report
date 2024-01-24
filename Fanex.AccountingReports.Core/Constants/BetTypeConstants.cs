@@ -1,8 +1,5 @@
 namespace Fanex.AccountingReports.Core.Constants
 {
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class BetTypeConstants
     {
         public const int Handicap = 1;

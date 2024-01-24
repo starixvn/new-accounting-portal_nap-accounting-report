@@ -2,9 +2,6 @@ namespace Fanex.BetList.Accounting.Models
 {
     using System;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class IPVNBean
     {

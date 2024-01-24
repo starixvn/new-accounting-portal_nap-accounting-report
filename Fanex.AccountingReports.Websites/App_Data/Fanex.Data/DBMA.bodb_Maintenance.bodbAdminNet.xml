@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
-  <Function Name="Home - Most Visited Page">
-    <Setting Key="Home_MostVisitedPage_GetFavouriteReports" SpName="Acc_FunctionFavouriteSel" DbName="DBMA.bodb_Maintenance.bodbAdminNet">
-    </Setting>
-    <Setting Key="Home_MostVisitedPage_InsFavouriteReport" SpName="Acc_FunctionFavouriteIns" DbName="DBMA.bodb_Maintenance.bodbAdminNet">
-    </Setting>
-    <Setting Key="Home_MostVisitedPage_DelFavouriteReport" SpName="Acc_FunctionFavouriteDel" DbName="DBMA.bodb_Maintenance.bodbAdminNet">
-    </Setting>
+  <Function Name="Home - Most Visited Page">    
     <Setting Key="Home_MostVisitedPage_GetMostvisitedPage" SpName="Acc_FunctionUsageSel" DbName="DBMA.bodb_Maintenance.bodbAdminNet">
     </Setting>
     <Setting Key="Home_MostVisitedPage_UpdateMostvisitedPageCount" SpName="Acc_FunctionUsageUpdVisitedCount" DbName="DBMA.bodb_Maintenance.bodbAdminNet">

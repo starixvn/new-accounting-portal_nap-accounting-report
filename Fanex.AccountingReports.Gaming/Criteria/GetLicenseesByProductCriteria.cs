@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Gaming.Criteria
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetLicenseesByProductCriteria : CriteriaBase
     {
         [SpParam(SqlParamName = "FromDate")]

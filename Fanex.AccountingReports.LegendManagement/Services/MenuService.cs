@@ -11,31 +11,15 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
     using Fanex.NAP.Core.Business;
     using NAP.Core.Service.Impl;
 
-    /// <summary>
-    /// Menu Service.
-    /// </summary>
     public class MenuService : ServiceBase
     {
-        /// <summary>
-        /// Gets the menu list.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The menu list.</returns>
-        [SuppressMessage("Microsoft.Design",
-            "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public List<MenuItem> GetMenuList(GetSystemMenuCriteria criteria)
         {
             var menuList = new SiteService().GetMenuItemBySiteId(WebSettings.NAPSiteId, Constant.UAT, true);
             return this.MappingNapMenuToAccountingMenu(menuList);
         }
 
-        /// <summary>
-        /// Recursions the menu.
-        /// </summary>
-        /// <param name="rawData">The raw data.</param>
-        /// <param name="parentId">The parent identifier.</param>
-        /// <returns>The menu list.</returns>
         private List<MenuItem> RecursionMenu(List<dynamic> rawData, int parentId)
         {
             var menuList = new List<MenuItem>();
@@ -72,12 +56,6 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
             return menuList;
         }
 
-        /// <summary>
-        /// Mappings the nap menu to accounting menu.
-        /// </summary>
-        /// <param name="rawData">The raw data.</param>
-        /// <param name="parentId">The parent identifier.</param>
-        /// <returns>Mappings result.</returns>
         private List<MenuItem> MappingNapMenuToAccountingMenu(IEnumerable<NAP.Core.Models.MenuItem> rawData, int? parentId = null)
         {
             var menuList = new List<MenuItem>();
@@ -102,7 +80,7 @@ namespace Fanex.AccountingReports.LegendManagement.Services.Impls
                             Id = Converter.ToInt(row.Id),
                             Name = Converter.ToString2(row.Name),
                             Href = Converter.ToString2(row.Url),
-                            System = Constants.SystemName.AccNapReport,
+                            System = WebSettings.System,
                             ParentId = Converter.ToInt(parentId),
                             FunctionName = Converter.ToString2(row.FunctionName),
                             IsHide = !Converter.ToBool(row.IsActive),

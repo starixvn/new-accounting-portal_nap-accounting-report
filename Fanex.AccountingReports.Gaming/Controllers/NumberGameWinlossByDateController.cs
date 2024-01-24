@@ -10,9 +10,6 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NumberGameWinlossByDateController : BaseController
     {
         private readonly NumberGameWinlossByDateService _numberGameWinlossByDateService;

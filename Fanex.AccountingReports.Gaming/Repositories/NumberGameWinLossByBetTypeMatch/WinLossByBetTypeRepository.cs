@@ -8,16 +8,8 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement.NumberGameWinLos
     using Fanex.Common;
     using Fanex.Data;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class WinLossByBetTypeRepository
     {
-        /// <summary>
-        /// Gets the main report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The main report.</returns>
         public List<WinLossInfo> GetMainReport(GetWinLossByBetTypeMainReportCriteria criteria)
         {
             DataSet result = null;
@@ -59,11 +51,6 @@ namespace Fanex.AccountingReports.Gaming.Repositories.Implement.NumberGameWinLos
             return report;
         }
 
-        /// <summary>
-        /// Gets the detail report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The detail report.</returns>
         public List<WinLossDetailInfo> GetDetailReport(GetWinLossByBetTypeDetailReportCriteria criteria)
         {
             DataSet result = null;

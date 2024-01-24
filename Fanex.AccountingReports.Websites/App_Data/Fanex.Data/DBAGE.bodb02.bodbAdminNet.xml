@@ -23,10 +23,6 @@
 		<Setting Key="Acc_Rpt_RacingActiveMember" SpName="Acc_Rpt_RacingActiveMember" DbName="DBAGE.bodb02.bodbAdminNet"  />
 	</Function>
 
-	<Function Name="Special - SMAs Turn Over">
-		<Setting Key="Special_SMAsTurnOver" SpName="Acc_Rpt_SMAs_TurnOver" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="600" />
-	</Function>
-
 	<Function Name="Special - Total Credit Account By Product">
 		<Setting Key="Acc_Rpt_BetCount_ByProduct_Super" SpName="Acc_Rpt_BetCount_ByProduct_Super" DbName="DBAGE.bodb02.bodbAdminNet" TimeOut="600" />
 	</Function>

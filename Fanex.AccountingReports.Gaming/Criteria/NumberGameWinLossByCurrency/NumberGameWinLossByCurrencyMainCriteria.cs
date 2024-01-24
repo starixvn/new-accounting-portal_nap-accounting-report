@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByCurrency
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NumberGameWinLossByCurrencyMainCriteria : CriteriaBase
     {
         public string SiteID { get; set; }

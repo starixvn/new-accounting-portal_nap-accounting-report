@@ -4,9 +4,6 @@ namespace Fanex.BetList.Accounting.Models
     using System.Collections.Generic;
     using System.Web.Script.Serialization;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class TennisInfo : ScoreInfo
     {

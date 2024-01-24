@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Gaming.Models.NumberGameMonthlyWinLoss
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Number Game Monthly Win Loss Model.
-    /// </summary>
     [Serializable]
     public class NumberGameMonthlyWinLoss
     {
@@ -32,10 +29,6 @@ namespace Fanex.AccountingReports.Gaming.Models.NumberGameMonthlyWinLoss
 
         public List<NumberGameMonthlyWinLoss> ReportRows { get; set; }
 
-        /// <summary>
-        /// Get total value of report.
-        /// </summary>
-        /// <param name="reportInfo">The report information.</param>
         public void CalculateTotal(NumberGameMonthlyWinLoss reportInfo)
         {
             if (reportInfo == null)

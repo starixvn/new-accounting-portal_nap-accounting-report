@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Balance.Criteria.SuperBalance
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetSuperBalanceCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]
@@ -30,10 +27,6 @@ namespace Fanex.AccountingReports.Balance.Criteria.SuperBalance
             return true;
         }
 
-        /// <summary>
-        /// Gets the setting key.
-        /// </summary>
-        /// <returns>Setting key.</returns>
         public override string GetSettingKey()
         {
             var storeProcedureName = "Balance_SuperBalance_Super";

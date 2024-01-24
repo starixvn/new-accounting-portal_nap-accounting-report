@@ -8,7 +8,6 @@ $(document).ready(function () {
 MixParlayPopupManager = function () {
     var self = this;
     self.AdvanceMixParlayReport = new AdvanceMixParlayReport();
-    self.NormalMixParlayReport = new NormalMixParlayReport();
 
     self.Tables = {
     };
@@ -27,31 +26,15 @@ MixParlayPopupManager = function () {
 MixParlayPopupManager.prototype.InitPage = function (reportDate, betTypeId, betType) {
     this.CachedDOMElements();
     this.AdvanceMixParlayReport.InitPage();
-    this.NormalMixParlayReport.InitPage();
 
-    var dReportDate = new Date(reportDate);
-    var dBeginSupportMPDate = new Date(beginSupportMPDate);
-    var dReportDate = new Date(2012, 1, 1);
-    if (dReportDate >= dBeginSupportMPDate) {
-        var params = {
-            FromDate: reportDate,
-            ToDate: reportDate,
-            IsHistoryReport: false
-        };
+    var params = {
+        FromDate: reportDate,
+        ToDate: reportDate,
+        IsHistoryReport: false
+    };
 
-        this.ResizePopupWidth(this.AdvanceMixParlayReport.CachedData.reportWidth);
-        this.AdvanceMixParlayReport.GetReport(params);
-    }
-    else {
-        var params = {
-            FromDate: reportDate,
-            ToDate: reportDate,
-            IsHistoryReport: false
-        };
-
-        this.ResizePopupWidth(this.NormalMixParlayReport.CachedData.reportWidth);
-        this.NormalMixParlayReport.GetReport(params);
-    }
+    this.ResizePopupWidth(this.AdvanceMixParlayReport.CachedData.reportWidth);
+    this.AdvanceMixParlayReport.GetReport(params);
 };
 
 MixParlayPopupManager.prototype.CachedDOMElements = function () {
@@ -89,10 +72,6 @@ MixParlayPopupManager.prototype.FormatNumberCell = function (cellValue,
     }
 
     return cellValue + (isNumber && isPercent ? '%' : '');
-};
-
-MixParlayPopupManager.prototype.HideNormalMixParlayReport = function () {
-    this.NormalMixParlayReport.HideReport();
 };
 
 MixParlayPopupManager.prototype.HideAdvanceMixParlayReport = function () {

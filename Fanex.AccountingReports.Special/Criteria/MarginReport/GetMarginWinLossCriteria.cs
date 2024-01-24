@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Special.Criteria.MarginReport
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetMarginWinLossCriteria : CriteriaBase
     {
         [SpParam(SqlParamName = "actual_stake")]

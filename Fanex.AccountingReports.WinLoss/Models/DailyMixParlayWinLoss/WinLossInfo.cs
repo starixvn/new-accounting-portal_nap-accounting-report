@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.WinLoss.Models.DailyMixParlayWinLoss
     using System.Collections.Generic;
     using System.Web.Script.Serialization;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class WinLossInfo
     {
@@ -80,10 +77,6 @@ namespace Fanex.AccountingReports.WinLoss.Models.DailyMixParlayWinLoss
 
         #endregion FieldToDisplay
 
-        /// <summary>
-        /// Adds the specified win loss.
-        /// </summary>
-        /// <param name="winLoss">The win loss.</param>
         public void Add(WinLossInfo winLoss)
         {
             if (winLoss == null)

@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameWinLossByBetTypeMatc
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetWinLossByMatchMainReportCriteria : CriteriaBase
     {
         [SpParam(SqlParamName = "siteid")]

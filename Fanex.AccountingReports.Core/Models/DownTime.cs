@@ -1,8 +1,5 @@
 namespace Fanex.AccountingReports.Core.Models
 {
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class DownTime
     {
         public DownTime()

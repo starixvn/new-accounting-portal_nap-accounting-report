@@ -14,9 +14,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
     using Fanex.AccountingReports.WinLoss.Resources;
     using Fanex.Common;
 
-    /// <summary>
-    /// Export excel for tree win loss report.
-    /// </summary>
     public class TreeWinLossExcelService : ServiceBase
     {
         private const int _MaxUserPerSheet = 2000;
@@ -77,20 +74,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             _reportService = reportService ?? new TreeWinLossService();
         }
 
-        /// <summary>
-        /// Export Excel for Tree Win Loss by product.
-        /// </summary>
-        /// <param name="criteria">The Tree Win Loss Product Criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         public void ExportExcelTreeWinLossByProduct(GetTreeWinLossByProductCriteria criteria)
         {
-            var report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByProductSession);
-            if (report == null)
-            {
-                report = _reportService.GetTreeWinLossByProduct(criteria);
-            }
+            var report = _reportService.GetTreeWinLossByProduct(criteria);
 
             var excelFile = new ExcelFile();
             ExcelWorksheetCollection workSheets = excelFile.Worksheets;
@@ -142,39 +129,10 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             excelFile.ReponseStream(reportName);
         }
 
-        /// <summary>
-        /// Export excel for tree win loss all levels.
-        /// </summary>
-        /// <param name="criteria">The Tree Win Loss Level Criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         public void ExportExcelTreeWinLossByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
-            var report = new TreeWinLoss();
-            switch (criteria.RoleId)
-            {
-                case 5:
-                    report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByCommSession);
-                    break;
-
-                case 4:
-                    report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossBySuperSession);
-                    break;
-
-                case 3:
-                    report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByMasterSession);
-                    break;
-
-                case 2:
-                    report = SessionManager.Get<TreeWinLoss>(TreeWinLossUtil.TreeWinLossByAgentSession);
-                    break;
-            }
-
-            if (report == null)
-            {
-                report = _reportService.GetTreeWinLossByLevel(criteria);
-            }
+            var report = _reportService.GetTreeWinLossByLevel(criteria);
 
             var allVirtualRate = _reportService.GetAllVirtualRate(report);
 
@@ -191,9 +149,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             excelFile.ReponseStream(reportName);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTreeWinLossInfo(TreeWinLoss report, Dictionary<string, int> enabledVirtualRateUser, GetTreeWinLossByLevelCriteria criteria, ExcelWorksheetCollection workSheets)
         {
             string sheetName = WinLossResources.TreeWinLoss_SheetName;
@@ -238,12 +194,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
         }
 
-        /// <summary>
-        /// Exports the virtual rate information.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="workSheets">The work sheets.</param>
         private void ExportVirtualRateInfo(TreeWinLossVirtualRate report, GetTreeWinLossByLevelCriteria criteria, ExcelWorksheetCollection workSheets)
         {
             int maxUserPerSheet = _MaxUserPerSheet;
@@ -287,15 +237,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
         }
 
-        /// <summary>
-        /// Header for export excel tree win loss by product.
-        /// </summary>
-        /// <param name="workSheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTreeWinLossByProductHeader(ref ExcelWorksheet workSheet, ref int currentRow, int currentColumn)
         {
             CellRange currentCellRange;
@@ -426,17 +368,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentRow++;
         }
 
-        /// <summary>
-        /// Assign data for body session of export excel tree win loss by product.
-        /// </summary>
-        /// <param name="isShowNA">Check show Not Available.</param>
-        /// <param name="workSheet">The worksheet.</param>
-        /// <param name="report">The list items.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="startColumn">The current column.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTreeWinLossByProductAssignBodyData(
             bool isShowNA,
             ref ExcelWorksheet workSheet,
@@ -612,17 +544,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
         }
 
-        /// <summary>
-        /// Assign data for footer of export excel tree win loss by product.
-        /// </summary>
-        /// <param name="isShowNA">Check show Not Available.</param>
-        /// <param name="workSheet">The worksheet.</param>
-        /// <param name="totalInfo">The list total items.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="startColumn">The current column.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTreeWinLossByProductAssignFooterData(
             bool isShowNA,
             ref ExcelWorksheet workSheet,
@@ -759,15 +681,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
         }
 
-        /// <summary>
-        /// Header for export excel tree win loss by level.
-        /// </summary>
-        /// <param name="workSheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="startColumn">The start column.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTreeWinLossByLevelHeader(ref ExcelWorksheet workSheet, ref int currentRow, int startColumn)
         {
             CellRange currentCellRange;
@@ -912,9 +826,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentRow++;
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTreeWinLossByLevelAssignBodyData(
             bool isShowNA,
             ref ExcelWorksheet workSheet,
@@ -1106,17 +1018,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
         }
 
-        /// <summary>
-        /// Assign data for footer session of export excel tree win loss by level.
-        /// </summary>
-        /// <param name="isShowNA">Check show Not Available.</param>
-        /// <param name="workSheet">The worksheet.</param>
-        /// <param name="totalInfo">The list total items.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="startColumn">The current column.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTreeWinLossByLevelAssignFooterData(
             bool isShowNA,
             ref ExcelWorksheet workSheet,
@@ -1260,14 +1162,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
         }
 
-        /// <summary>
-        /// Exports the virtual rate report header.
-        /// </summary>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportVirtualRateReportHeader(ExcelWorksheet workSheet, ref int currentRow)
         {
             workSheet.Rows[currentRow].Height = 450;
@@ -1346,16 +1241,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             currentRow++;
         }
 
-        /// <summary>
-        /// Exports the virtual rate by user.
-        /// </summary>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="userIndex">Index of the user.</param>
-        /// <param name="virtualRateByUser">The virtual rate by user.</param>
-        /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportVirtualRateByUser(ExcelWorksheet workSheet, int userIndex, SMAVirtualRate virtualRateByUser, ref int currentRow)
         {
             int currentColumn = 0;
@@ -1433,11 +1319,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
         }
 
-        /// <summary>
-        /// Gets the report title by level.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Report title.</returns>
         private string GetReportTitleByLevel(GetTreeWinLossByLevelCriteria criteria)
         {
             string title = string.Empty;

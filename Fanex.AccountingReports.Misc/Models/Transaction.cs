@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Misc.Models
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class Transaction
     {
@@ -37,10 +34,6 @@ namespace Fanex.AccountingReports.Misc.Models
 
         public Transaction Total { get; set; }
 
-        /// <summary>
-        /// Sums the data to total.
-        /// </summary>
-        /// <param name="transaction">The transaction.</param>
         public void SumDataToTotal(Transaction transaction)
         {
             if (transaction == null)

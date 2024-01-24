@@ -5,9 +5,6 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetTreeWinLossByAgentCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]
@@ -31,10 +28,6 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
             return true;
         }
 
-        /// <summary>
-        /// Get store procedure.
-        /// </summary>
-        /// <returns>The store procedure name.</returns>
         public override string GetSettingKey()
         {
             return "WinLoss_TreeWinLoss_GetDataByAgent";

@@ -4,15 +4,8 @@ namespace Fanex.AccountingReports.Core.Exceptions
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.AccountingReports.Core.Resources;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class HandleAjaxErrorAttribute : HandleErrorAttribute
     {
-        /// <summary>
-        /// Called when an exception occurs.
-        /// </summary>
-        /// <param name="filterContext">The action-filter context.</param>
         public override void OnException(ExceptionContext filterContext)
         {
             // if the request is AJAX return JSON else view.

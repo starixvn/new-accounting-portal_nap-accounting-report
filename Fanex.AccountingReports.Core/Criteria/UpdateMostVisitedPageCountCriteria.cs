@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Core.Criteria
 {
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class UpdateMostVisitedPageCountCriteria : CriteriaBase
     {
         public int CustId { get; set; }

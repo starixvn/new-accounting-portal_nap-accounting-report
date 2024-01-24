@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Licensee.Criteria.CompanyWinLoss
 {
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetCurrenciesByLicenseeCriteria : CriteriaBase
     {
         public int LicenseeID { get; set; }

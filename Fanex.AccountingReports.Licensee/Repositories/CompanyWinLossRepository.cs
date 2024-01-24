@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Licensee.Repositories.Implement
     using Fanex.Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class CompanyWinLossRepository
     {
         public IDataReader GetDataFromDB(ICriteria criteria)

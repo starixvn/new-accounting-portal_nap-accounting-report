@@ -15,9 +15,7 @@
   <Function Name="Gaming - Number Game Win Loss By Date">
     <Setting Key="Gaming_NumberGameWinLossByDate_GetLicensee" SpName="Acc_Rpt_NumberGame_LicenseesSel" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="600"></Setting>
   </Function>
-  <Function Name="External - Daily Win Loss">
-    <Setting Key="External_DailyWinLoss_GetReport" SpName="EAS_Rpt_WinLossDaily_Com14" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="600"></Setting>
-  </Function>
+  
   <Function Name="Licensee - Company Win Loss">
     <Setting Key="Acc_Rpt_CompanyWinloss" SpName="Acc_Rpt_CompanyWinloss" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="600" />
     <Setting Key="Licensee_CompanyWinloss_GetLicensee" SpName="Acc_Rpt_CompanyWinloss_GetLicensees" DbName="DBEXT.bodb02.bodbAdminNet" TimeOut="600" />

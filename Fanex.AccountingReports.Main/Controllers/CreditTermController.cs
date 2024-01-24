@@ -9,9 +9,6 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// The controller of Credit Term report.
-    /// </summary>
     public class CreditTermController : BaseController
     {
         private CreditTermService _getCreditReportService;

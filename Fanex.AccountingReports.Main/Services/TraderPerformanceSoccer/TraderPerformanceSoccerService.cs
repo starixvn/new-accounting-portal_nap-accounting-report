@@ -15,9 +15,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
     using NPOI.SS.Util;
     using CoreConstants = Fanex.AccountingReports.Core.Constants;
 
-    /// <summary>
-    /// Trader performance service.
-    /// </summary>
     public partial class TraderPerformanceSoccerService : ServiceBase
     {
         private const short SubTotalColorIndex = 29;
@@ -74,51 +71,24 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             _traderPerformanceSoccerRepository = traderPerformanceSoccerRepository ?? new TraderPerformanceSoccerRepository();
         }
 
-        /// <summary>
-        /// Gets the report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Trader performance data.</returns>
         public TraderPerformanceSoccer GetReport(GetReportCriteria criteria)
         {
             var result = new TraderPerformanceSoccer();
 
-            var traderSportType = criteria.IsSoccer ? SoccerTitle : OtherSportTitle;
-
             result = this._traderPerformanceSoccerRepository.GetTraderPerformanceSoccerReport(criteria);
-            SessionManager.Set<TraderPerformanceSoccer>(_traderPerformanceSessionKey + traderSportType, result);
             return result;
         }
 
-        /// <summary>
-        /// Sorts the report data.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Report data after sort.</returns>
         public TraderPerformanceSoccer SortReportData(GetReportCriteria criteria)
         {
-            var traderSportType = criteria.IsSoccer ? SoccerTitle : OtherSportTitle;
-
-            var report = SessionManager.Get<TraderPerformanceSoccer>(_traderPerformanceSessionKey + traderSportType);
-
-            if (report == null)
-            {
-                report = this.GetReport(criteria);
-            }
+            var report = this.GetReport(criteria);
 
             this.SortReportData(report, criteria);
 
             return report;
         }
 
-        /// <summary>
-        /// Gets the detail report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Trader performance detail data.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public TraderPerformanceSoccerDetail GetDetailReport(GetDetailReportCriteria criteria)
         {
             var result = new TraderPerformanceSoccerDetail
@@ -126,88 +96,79 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
                 GrandTotal = new TraderPerformanceSoccerDetail()
             };
 
-            var traderSportType = criteria.IsSoccer ? SoccerTitle : OtherSportTitle;
             var startIndex = criteria.StartIndex;
 
-            if (criteria.IsPagingCallBack)
+
+            var reportDetailData = this._traderPerformanceSoccerRepository.GetTraderPerformanceSoccerDetailReport(criteria);
+
+            var traderGroups = reportDetailData.ReportRows.GroupBy(data => new
             {
-                result = SessionManager.Get<TraderPerformanceSoccerDetail>(_traderPerformanceDetailSessionKey + traderSportType);
-            }
-            else
+                data.Id,
+                data.Name
+            });
+
+            foreach (var traderGroup in traderGroups)
             {
-                var reportDetailData = this._traderPerformanceSoccerRepository.GetTraderPerformanceSoccerDetailReport(criteria);
+                var winLossTotal = new TraderPerformanceSoccerDetail();
+                var turnOverTotal = new TraderPerformanceSoccerDetail();
+                var liveBetCountTotal = new TraderPerformanceSoccerDetail();
+                var marginTotal = new TraderPerformanceSoccerDetail();
+                var commissionTotal = new TraderPerformanceSoccerDetail();
 
-                var traderGroups = reportDetailData.ReportRows.GroupBy(data => new
+                var traderGroupInfo = new TraderPerformanceSoccerDetail
                 {
-                    data.Id,
-                    data.Name
-                });
+                    Id = traderGroup.Key.Id,
+                    Name = traderGroup.Key.Name,
+                    GrandTotal = new TraderPerformanceSoccerDetail()
+                };
 
-                foreach (var traderGroup in traderGroups)
+                foreach (var data in traderGroup)
                 {
-                    var winLossTotal = new TraderPerformanceSoccerDetail();
-                    var turnOverTotal = new TraderPerformanceSoccerDetail();
-                    var liveBetCountTotal = new TraderPerformanceSoccerDetail();
-                    var marginTotal = new TraderPerformanceSoccerDetail();
-                    var commissionTotal = new TraderPerformanceSoccerDetail();
-
-                    var traderGroupInfo = new TraderPerformanceSoccerDetail
+                    var traderInfo = new TraderPerformanceSoccerDetail
                     {
-                        Id = traderGroup.Key.Id,
-                        Name = traderGroup.Key.Name,
-                        GrandTotal = new TraderPerformanceSoccerDetail()
+                        EventDate = data.EventDate,
+                        LeagueName = data.LeagueName,
+                        HomeName = data.HomeName,
+                        AwayName = data.AwayName,
+                        HTHomeScore = data.HTHomeScore,
+                        HTAwayScore = data.HTAwayScore,
+                        FTHomeScore = data.FTHomeScore,
+                        FTAwayScore = data.FTAwayScore,
+                        Maxbet = data.Maxbet,
+                        ChildInfo = data.ChildInfo
                     };
 
-                    foreach (var data in traderGroup)
-                    {
-                        var traderInfo = new TraderPerformanceSoccerDetail
-                        {
-                            EventDate = data.EventDate,
-                            LeagueName = data.LeagueName,
-                            HomeName = data.HomeName,
-                            AwayName = data.AwayName,
-                            HTHomeScore = data.HTHomeScore,
-                            HTAwayScore = data.HTAwayScore,
-                            FTHomeScore = data.FTHomeScore,
-                            FTAwayScore = data.FTAwayScore,
-                            Maxbet = data.Maxbet,
-                            ChildInfo = data.ChildInfo
-                        };
+                    winLossTotal.CalculateTotal(traderInfo.ChildInfo[0]);
+                    turnOverTotal.CalculateTotal(traderInfo.ChildInfo[1]);
+                    liveBetCountTotal.CalculateTotal(traderInfo.ChildInfo[2]);
+                    commissionTotal.CalculateTotal(traderInfo.ChildInfo[4]);
 
-                        winLossTotal.CalculateTotal(traderInfo.ChildInfo[0]);
-                        turnOverTotal.CalculateTotal(traderInfo.ChildInfo[1]);
-                        liveBetCountTotal.CalculateTotal(traderInfo.ChildInfo[2]);
-                        commissionTotal.CalculateTotal(traderInfo.ChildInfo[4]);
+                    traderInfo.ChildInfo[0].FormatTwoDecimalNumberData(traderInfo.ChildInfo[0]);
+                    traderInfo.ChildInfo[1].FormatTwoDecimalNumberData(traderInfo.ChildInfo[1]);
+                    traderInfo.ChildInfo[3].FormatTwoDecimalNumberData(traderInfo.ChildInfo[3]);
+                    traderInfo.ChildInfo[4].FormatTwoDecimalNumberData(traderInfo.ChildInfo[4]);
 
-                        traderInfo.ChildInfo[0].FormatTwoDecimalNumberData(traderInfo.ChildInfo[0]);
-                        traderInfo.ChildInfo[1].FormatTwoDecimalNumberData(traderInfo.ChildInfo[1]);
-                        traderInfo.ChildInfo[3].FormatTwoDecimalNumberData(traderInfo.ChildInfo[3]);
-                        traderInfo.ChildInfo[4].FormatTwoDecimalNumberData(traderInfo.ChildInfo[4]);
-
-                        traderGroupInfo.ReportRows.Add(traderInfo);
-                    }
-
-                    marginTotal.CalculateMarginTotal(winLossTotal, turnOverTotal);
-
-                    winLossTotal.FormatTwoDecimalNumberData(winLossTotal);
-                    turnOverTotal.FormatTwoDecimalNumberData(turnOverTotal);
-                    marginTotal.FormatTwoDecimalNumberData(marginTotal);
-                    commissionTotal.FormatTwoDecimalNumberData(commissionTotal);
-
-                    traderGroupInfo.GrandTotal.ChildInfo.Add(winLossTotal);
-                    traderGroupInfo.GrandTotal.ChildInfo.Add(turnOverTotal);
-                    traderGroupInfo.GrandTotal.ChildInfo.Add(liveBetCountTotal);
-                    traderGroupInfo.GrandTotal.ChildInfo.Add(marginTotal);
-                    traderGroupInfo.GrandTotal.ChildInfo.Add(commissionTotal);
-
-                    result.ReportRows.Add(traderGroupInfo);
+                    traderGroupInfo.ReportRows.Add(traderInfo);
                 }
 
-                result.GrandTotal = reportDetailData.GrandTotal;
-                result.ReportLength = result.ReportRows.Count;
+                marginTotal.CalculateMarginTotal(winLossTotal, turnOverTotal);
 
-                SessionManager.Set<TraderPerformanceSoccerDetail>(_traderPerformanceDetailSessionKey + traderSportType, result);
+                winLossTotal.FormatTwoDecimalNumberData(winLossTotal);
+                turnOverTotal.FormatTwoDecimalNumberData(turnOverTotal);
+                marginTotal.FormatTwoDecimalNumberData(marginTotal);
+                commissionTotal.FormatTwoDecimalNumberData(commissionTotal);
+
+                traderGroupInfo.GrandTotal.ChildInfo.Add(winLossTotal);
+                traderGroupInfo.GrandTotal.ChildInfo.Add(turnOverTotal);
+                traderGroupInfo.GrandTotal.ChildInfo.Add(liveBetCountTotal);
+                traderGroupInfo.GrandTotal.ChildInfo.Add(marginTotal);
+                traderGroupInfo.GrandTotal.ChildInfo.Add(commissionTotal);
+
+                result.ReportRows.Add(traderGroupInfo);
             }
+
+            result.GrandTotal = reportDetailData.GrandTotal;
+            result.ReportLength = result.ReportRows.Count;
 
             this.SortSecondSubLevelReport(result, criteria);
 
@@ -224,20 +185,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             return reportPagingData;
         }
 
-        /// <summary>
-        /// Sorts the detail report data.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Detail report data after sort.</returns>
         public TraderPerformanceSoccerDetail SortDetailReportData(GetDetailReportCriteria criteria)
         {
-            var traderSportType = criteria.IsSoccer ? SoccerTitle : OtherSportTitle;
-            var report = SessionManager.Get<TraderPerformanceSoccerDetail>(_traderPerformanceDetailSessionKey + traderSportType);
-
-            if (report == null)
-            {
-                report = this.GetDetailReport(criteria);
-            }
+            var report = this.GetDetailReport(criteria);
 
             var pagingReport = new TraderPerformanceSoccerDetail
             {
@@ -254,17 +204,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             return pagingReport;
         }
 
-        /// <summary>
-        /// Renders the merge cell.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row of sheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="endRow">The end row.</param>
-        /// <param name="endColumn">The end column.</param>
-        /// <param name="cellValue">The cell value.</param>
-        /// <param name="cellStyle">The cell style.</param>
         private void RenderMergeCell(
             ref ISheet worksheet,
             ref IRow row,
@@ -295,15 +234,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             currentColumn = endColumn + 1;
         }
 
-        /// <summary>
-        /// Renders the cell.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row of report.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="cellValue">The cell value.</param>
-        /// <param name="cellStyle">The cell style.</param>
         private void RenderCell(
             ref ISheet worksheet,
             ref IRow row,
@@ -331,15 +261,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             currentColumn += 1;
         }
 
-        /// <summary>
-        /// Exports the cell value.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row of sheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="cellValue">The cell value.</param>
-        /// <param name="cellStyle">The cell style.</param>
         private void ExportCellValue(
            ref ISheet worksheet,
            ref IRow row,
@@ -358,16 +279,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             }
         }
 
-        /// <summary>
-        /// Creates the decimal number style.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="backgroundColorIndex">Index of the background color.</param>
-        /// <param name="textAlign">The text align.</param>
-        /// <param name="isBold">If set to <c>true</c> [is bold].</param>
-        /// <param name="isNegative">If set to <c>true</c> [is negative].</param>
-        /// <param name="isPositive">If set to <c>true</c> [is positive].</param>
-        /// <returns>Decimal number style.</returns>
         private ICellStyle CreateDecimalNumberStyle(
             HSSFWorkbook excelFile,
             short backgroundColorIndex,
@@ -419,16 +330,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             return decimalNumberStyle;
         }
 
-        /// <summary>
-        /// Creates the decimal percent style.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="backgroundColorIndex">Index of the background color.</param>
-        /// <param name="textAlign">The text align.</param>
-        /// <param name="isBold">If set to <c>true</c> [is bold].</param>
-        /// <param name="isNegative">If set to <c>true</c> [is negative].</param>
-        /// <param name="isPositive">If set to <c>true</c> [is positive].</param>
-        /// <returns>Decimal percent style.</returns>
         private ICellStyle CreateDecimalPercentStyle(
            HSSFWorkbook excelFile,
            short backgroundColorIndex,
@@ -480,11 +381,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             return decimalPercentStyle;
         }
 
-        /// <summary>
-        /// Sets the border to cell.
-        /// </summary>
-        /// <param name="cellStyle">The cell style.</param>
-        /// <returns>The cell style to set border.</returns>
         private ICellStyle SetBorderToCell(ICellStyle cellStyle)
         {
             cellStyle.TopBorderColor = HSSFColor.Grey80Percent.Index;
@@ -499,10 +395,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             return cellStyle;
         }
 
-        /// <summary>
-        /// Sets the index of the color.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
         private void SetColorIndex(HSSFWorkbook excelFile)
         {
             HSSFPalette palette = excelFile.GetCustomPalette();
@@ -517,15 +409,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             palette.SetColorAtIndex(GrandTotalBorderColorIndex, (byte)255, (byte)102, (byte)0);
         }
 
-        /// <summary>
-        /// Sorts the report data.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Report data after sort.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private TraderPerformanceSoccer SortReportData(TraderPerformanceSoccer report, GetReportCriteria criteria)
         {
             bool isAsc = string.Equals(criteria.SortDirection, CoreConstants.SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);
@@ -605,15 +489,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             return report;
         }
 
-        /// <summary>
-        /// Sorts the second sub level report.
-        /// </summary>
-        /// <param name="report">The report.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Second sub level data of report.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private TraderPerformanceSoccerDetail SortSecondSubLevelReport(TraderPerformanceSoccerDetail report, GetDetailReportCriteria criteria)
         {
             bool isAsc = string.Equals(criteria.SortDirection, CoreConstants.SortDirectionConstants.Asc, StringComparison.OrdinalIgnoreCase);

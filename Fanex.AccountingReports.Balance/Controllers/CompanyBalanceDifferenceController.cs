@@ -7,9 +7,6 @@ namespace Fanex.AccountingReports.Balance.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class CompanyBalanceDifferenceController : BaseController
     {
         private readonly CompanyBalanceDifferenceService _reportService;

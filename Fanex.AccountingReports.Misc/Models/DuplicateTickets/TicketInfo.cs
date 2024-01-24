@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Misc.Models.DuplicateTickets
 {
     using System;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class TicketInfo
     {

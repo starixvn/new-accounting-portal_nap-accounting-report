@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Main.Models.CreditTerm
 {
     using System;
 
-    /// <summary>
-    /// The model represented the result when edited remark.
-    /// </summary>
     [Serializable]
     public class EditedRemarkResult
     {

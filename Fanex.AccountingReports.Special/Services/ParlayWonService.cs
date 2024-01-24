@@ -10,7 +10,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
     using Fanex.AccountingReports.Core.Extensions;
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Core.Web;
-    using Fanex.AccountingReports.Special.Constants;
     using Fanex.AccountingReports.Special.Criteria.ParlayWon;
     using Fanex.AccountingReports.Special.Models.ParlayWon;
     using Fanex.AccountingReports.Special.Resources;
@@ -20,47 +19,22 @@ namespace Fanex.AccountingReports.Special.Services.Implement
     {
         private enum ReportRowType
         {
-            /// <summary>
-            /// The total.
-            /// </summary>
             Total = 1,
 
-            /// <summary>
-            /// The grand total.
-            /// </summary>
             GrandTotal = 2,
 
-            /// <summary>
-            /// The normal even row.
-            /// </summary>
             NormalEvenRow = 3,
 
-            /// <summary>
-            /// The normal odd row.
-            /// </summary>
             NormalOddRow = 4
         }
 
-        /// <summary>
-        /// Gets the report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The report.</returns>
         public ParlayWonTransaction GetReport(GetParlayWonReportCriteria criteria)
         {
             ParlayWonTransaction fullReport = null;
             var startIndex = criteria.StartIndex;
             var endIndex = criteria.EndIndex;
 
-            if (!criteria.IsPagingCallBack)
-            {
-                fullReport = this.GetFullReportFromDatabase(criteria);
-                SessionManager.Set<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey, fullReport);
-            }
-            else
-            {
-                fullReport = SessionManager.Get<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey);
-            }
+            fullReport = this.GetFullReportFromDatabase(criteria);
 
             var pagingReport = new ParlayWonTransaction
             {
@@ -74,18 +48,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             return pagingReport;
         }
 
-        /// <summary>
-        /// Sorts the report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The report.</returns>
         public ParlayWonTransaction SortReport(GetParlayWonReportCriteria criteria)
         {
-            var fullReport = SessionManager.Get<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey);
-            if (fullReport == null)
-            {
-                fullReport = this.GetReport(criteria);
-            }
+            var fullReport = this.GetReport(criteria);
 
             if (fullReport != null &&
                 fullReport.TransactionList != null &&
@@ -98,7 +63,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                     criteria.SortDirection,
                     propertyName);
 
-                SessionManager.Set<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey, fullReport);
 
                 var pagingReport = new ParlayWonTransaction
                 {
@@ -112,28 +76,15 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                 return pagingReport;
             }
 
-            SessionManager.Set<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey, null);
             return null;
         }
 
-        //// ExportExcel
 
-        /// <summary>
-        /// Exports the report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public void ExportReport(GetParlayWonReportCriteria criteria)
         {
-            var fullReport = SessionManager.Get<ParlayWonTransaction>(SpecialConstants.ParlayWonFullReportSessionKey);
-            if (fullReport == null)
-            {
-                fullReport = this.GetReport(criteria);
-            }
+            var fullReport = this.GetReport(criteria);
 
-            //// ExcelTypes
 
             ExcelFile excelFile = new ExcelFile();
             string sheetName = SpecialResources.ParlayWon_SheetName;
@@ -246,8 +197,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             ExcelCell currentCell;
             var maxItemsInSheet = 3000;
 
-            //// ExcelTypes
-            //// MakeExcelFile
 
             this.ExportReportHeader(
                 ref workSheet,
@@ -274,7 +223,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                         var transaction = fullReport.TransactionList[infoIndex];
                         if (infoIndex % 2 == 0)
                         {
-                            //// NormalEvenRow
 
                             currentColumn = startColumn;
                             currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -340,11 +288,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                             currentColumn++;
                             currentRow++;
 
-                            //// NormalEvenRow
                         }
                         else
                         {
-                            //// NormalOddRow
 
                             currentColumn = startColumn;
                             currentCell = workSheet.Cells[currentRow, currentColumn];
@@ -410,7 +356,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                             currentColumn++;
                             currentRow++;
 
-                            //// NormalOddRow
                         }
                     }
 
@@ -458,7 +403,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
                 workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 11);
             }
 
-            //// MakeExcelFile
 
             var reportName = string.Format(
                 SpecialResources.ParlayWon_ReportName,
@@ -466,14 +410,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             excelFile.ReponseStream(reportName);
         }
 
-        /// <summary>
-        /// Gets the full report from data.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The full report from data.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private ParlayWonTransaction GetFullReportFromDatabase(GetParlayWonReportCriteria criteria)
         {
             var rawData = GetReportData<dynamic>(criteria);
@@ -524,11 +461,6 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             return fullReport;
         }
 
-        /// <summary>
-        /// Gets the name of the sorted column.
-        /// </summary>
-        /// <param name="sortBy">The sort by.</param>
-        /// <returns>The name of the sorted column.</returns>
         private string GetSortedColumnName(string sortBy)
         {
             var columnName = string.Empty;
@@ -546,17 +478,7 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             return columnName;
         }
 
-        /// <summary>
-        /// Exports the report header.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportReportHeader(
             ref ExcelWorksheet worksheet,
             int startRow,
@@ -564,15 +486,12 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             ref int currentRow,
             GetParlayWonReportCriteria criteria)
         {
-            //// ExcelTypes
 
             var titleColor = ExcelExtensions.HeaderTitleColor;
             var headerColor = ExcelExtensions.HeaderTitleColor;
             var currentColumn = startColumn;
             CellRange currentCellRange;
 
-            //// ExcelTypes
-            //// Filter
 
             currentColumn = startColumn;
             for (int colIndex = 0; colIndex < 12; colIndex++)
@@ -598,11 +517,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             currentCellRange.Style.FormatTitleCell(titleColor);
             currentRow += 2;
 
-            //// Filter
 
             worksheet.ExportEmptyRow(startRow, startColumn, ref currentRow, startColumn + 11);
 
-            //// Title
 
             // First Row
             currentColumn = startColumn;
@@ -694,25 +611,9 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             currentColumn++;
             currentRow++;
 
-            //// Title
         }
 
-        /// <summary>
-        /// Exports the transaction row.
-        /// </summary>
-        /// <param name="workSheet">The work sheet.</param>
-        /// <param name="startRow">The start row.</param>
-        /// <param name="startColumn">The start column.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="transaction">The transaction.</param>
-        /// <param name="rowType">Type of the row.</param>
-        /// <param name="textStyle">The text style.</param>
-        /// <param name="intStyle">The INT style.</param>
-        /// <param name="twoDecimalNumberStyle">The two decimal number style.</param>
-        /// <param name="fourDecimalNumberStyle">The four decimal number style.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportTransactionRow(
             ref ExcelWorksheet workSheet,
             int startRow,
@@ -823,6 +724,5 @@ namespace Fanex.AccountingReports.Special.Services.Implement
             currentRow++;
         }
 
-        //// ExportExcel
     }
 }

@@ -3,15 +3,9 @@ namespace Fanex.AccountingReports.Licensee.Criteria.NegativeBalance
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NegativeBalanceCriteria : CriteriaBase
     {
         public string Site { get; set; }
-
-        [SpParam(Ignored = true)]
-        public bool IsGetCache { get; set; }
 
         [SpParam(Ignored = true)]
         public int PageSize { get; set; }

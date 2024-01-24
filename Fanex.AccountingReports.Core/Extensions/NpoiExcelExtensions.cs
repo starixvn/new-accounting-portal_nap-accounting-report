@@ -8,9 +8,6 @@ namespace Fanex.AccountingReports.Core.Extensions
     using NPOI.SS.UserModel;
     using NPOI.SS.Util;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class NpoiExcelExtensions
     {
         public const string FontName = "Tahoma";
@@ -47,27 +44,13 @@ namespace Fanex.AccountingReports.Core.Extensions
 
         public enum Alignment
         {
-            /// <summary>
-            /// Align left.
-            /// </summary>
             Left,
 
-            /// <summary>
-            /// Align center.
-            /// </summary>
             Center,
 
-            /// <summary>
-            /// Align Right.
-            /// </summary>
             Right,
         }
 
-        /// <summary>
-        /// Style for header.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <returns>The cell style.</returns>
         public static ICellStyle HeaderStyle(HSSFWorkbook excelFile)
         {
             ICellStyle cellStyle = excelFile.CreateCellStyle();
@@ -88,15 +71,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             return cellStyle;
         }
 
-        /// <summary>
-        /// Style for text.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="cellColor">The color of cell.</param>
-        /// <param name="bold">Check bold.</param>
-        /// <param name="align">Align text(value is right, left or center).</param>
-        /// <param name="fontColor">The color of font.</param>
-        /// <returns>The cell style.</returns>
         public static ICellStyle TextStyle(
             HSSFWorkbook excelFile,
             short cellColor,
@@ -140,14 +114,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             return cellStyle;
         }
 
-        /// <summary>
-        /// Style for decimal value.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="cellColor">The cell color.</param>
-        /// <param name="bold">Check bold.</param>
-        /// <param name="fontColor">The font color.</param>
-        /// <returns>The cell style.</returns>
         public static ICellStyle DecimalStyle(
             HSSFWorkbook excelFile,
             short cellColor,
@@ -177,14 +143,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             return cellStyle;
         }
 
-        /// <summary>
-        /// Style for integer value.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="cellColor">The cell color.</param>
-        /// <param name="bold">Check bold.</param>
-        /// <param name="fontColor">The font color.</param>
-        /// <returns>The cell style.</returns>
         public static ICellStyle IntStyle(
             HSSFWorkbook excelFile,
             short cellColor,
@@ -214,15 +172,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             return cellStyle;
         }
 
-        /// <summary>
-        /// Style for integer value.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="cellColor">The cell color.</param>
-        /// <param name="bold">Check bold.</param>
-        /// <param name="align">Align text(value is right, left or center).</param>
-        /// <param name="fontColor">The font color.</param>
-        /// <returns>The cell style.</returns>
         public static ICellStyle IntStyle(
             HSSFWorkbook excelFile,
             short cellColor,
@@ -267,17 +216,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             return cellStyle;
         }
 
-        /// <summary>
-        /// Render cell.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row in excel file.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="endRow">The next row.</param>
-        /// <param name="endColumn">The next column.</param>
-        /// <param name="cellValue">The label of cell.</param>
-        /// <param name="cellStyle">The style of cell.</param>
         public static void RenderCell(
              ref ISheet worksheet,
              ref IRow row,
@@ -324,11 +262,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             workbook.Write(response.OutputStream);
         }
 
-        /// <summary>
-        /// Sets the cell value.
-        /// </summary>
-        /// <param name="cell">The cell of row.</param>
-        /// <param name="cellValue">The cell value.</param>
         public static void SetCellValue(ICell cell, object cellValue)
         {
             if ((cellValue != null) && (cellValue is string))
@@ -361,11 +294,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             }
         }
 
-        /// <summary>
-        /// Set border to cell.
-        /// </summary>
-        /// <param name="cellStyle">The cell style.</param>
-        /// <returns>The style of cell.</returns>
         private static ICellStyle SetBorderToCell(ICellStyle cellStyle)
         {
             cellStyle.BorderBottom = BorderStyle.Thin;

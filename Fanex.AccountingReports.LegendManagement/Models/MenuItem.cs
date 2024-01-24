@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.LegendManagement.Models
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// Menu Item.
-    /// </summary>
     [Serializable]
     public class MenuItem
     {

@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Special.Models.ParlayWon
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class ParlayWonTransaction
     {
@@ -39,10 +36,6 @@ namespace Fanex.AccountingReports.Special.Models.ParlayWon
 
         public ParlayWonTransaction Total { get; set; }
 
-        /// <summary>
-        /// Sums the data to total.
-        /// </summary>
-        /// <param name="transaction">The transaction.</param>
         public void SumDataToTotal(ParlayWonTransaction transaction)
         {
             if (transaction == null)

@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Gaming.Models.CasinoWinLoss
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// The model CasinoWinLoss.
-    /// </summary>
     [Serializable]
     public class CasinoWinLoss
     {

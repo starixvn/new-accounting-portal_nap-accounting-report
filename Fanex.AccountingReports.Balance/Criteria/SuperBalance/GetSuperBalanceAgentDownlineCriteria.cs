@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Balance.Criteria.SuperBalance
     using Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetSuperBalanceAgentDownlineCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]

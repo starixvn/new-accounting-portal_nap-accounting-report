@@ -9,9 +9,6 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NumberGameWinLossByBetTypeMatchController : BaseController
     {
         private readonly NumberGameWinLossByBetTypeMatchService _numberGameWinLossService;

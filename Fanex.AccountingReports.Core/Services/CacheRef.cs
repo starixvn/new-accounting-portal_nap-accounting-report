@@ -1,4 +1,4 @@
-﻿namespace Fanex.AccountingReports.Core.Services.Impl
+namespace Fanex.AccountingReports.Core.Services.Impl
 {
     using System;
     using System.Collections.Generic;
@@ -6,9 +6,6 @@
     using Fanex.Common;
     using RemotingRef;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class CacheRef
     {
         private static RemotingRefService remotingRefService;

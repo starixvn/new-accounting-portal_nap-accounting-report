@@ -2,9 +2,6 @@ namespace Fanex.BetList.Accounting
 {
     using System.Web.Mvc;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class BetListAreaRegistration : AreaRegistration
     {
         public override string AreaName

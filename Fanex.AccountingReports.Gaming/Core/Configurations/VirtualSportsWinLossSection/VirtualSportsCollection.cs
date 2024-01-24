@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Gaming.Core.Configurations.VirtualSportsWinLos
 {
     using System.Configuration;
 
-    /// <summary>
-    /// Virtual Sports collection.
-    /// </summary>
     public class VirtualSportsCollection : ConfigurationElementCollection
     {
         public override ConfigurationElementCollectionType CollectionType

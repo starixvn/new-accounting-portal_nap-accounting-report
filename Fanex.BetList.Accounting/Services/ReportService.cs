@@ -3,9 +3,6 @@ namespace Fanex.BetList.Accounting.Services
     using Fanex.BetList.Accounting.Models;
     using Fanex.Data;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class ReportService
     {
         #region StaticProperties

@@ -9,9 +9,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.AccountingReports.Gaming.Resources;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NumberGameWinLossByBetTypeMatchService : ServiceBase
     {
         public static void ExportColumnMargin(
@@ -29,14 +26,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             }
         }
 
-        /// <summary>
-        /// Sets the odd even color export excel.
-        /// </summary>
-        /// <param name="textStyle">The text style.</param>
-        /// <param name="twoDecimalNumberStyle">The two decimal number style.</param>
-        /// <param name="twoDecimalPositiveNumberStyle">The two decimal positive number style.</param>
-        /// <param name="twoDecimalPositivePercentNumberStyle">The two decimal positive percent number style.</param>
-        /// <param name="isEvenRow">If set to <c>true</c> [is even row].</param>
         public static void SetOddEvenColor_ExportExcel(
             ref CellStyle textStyle,
             ref CellStyle twoDecimalNumberStyle,
@@ -62,10 +51,6 @@ namespace Fanex.AccountingReports.Gaming.Services.Implement.NumberGameWinLossByB
             }
         }
 
-        /// <summary>
-        /// Gets the currency list.
-        /// </summary>
-        /// <returns>The currency list.</returns>
         public List<EntityBase<int, string>> GetCurrencyList()
         {
             var result = new List<EntityBase<int, string>>();

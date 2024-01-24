@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.Gaming.Models.NumberGameWinLossByBetTypeMatch
     using System.Collections.Generic;
     using Fanex.AccountingReports.Core.Services.Impl;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class WinLossInfo
     {
@@ -52,11 +49,6 @@ namespace Fanex.AccountingReports.Gaming.Models.NumberGameWinLossByBetTypeMatch
 
         public WinLossInfo GrandTotal { get; set; } 
 
-        /// <summary>
-        /// Formats the specified win loss.
-        /// </summary>
-        /// <param name="winLoss">The win loss.</param>
-        /// <returns>Win Loss Info.</returns>
         public static WinLossInfo Format(WinLossInfo winLoss)
         {
             if (winLoss == null)
@@ -75,10 +67,6 @@ namespace Fanex.AccountingReports.Gaming.Models.NumberGameWinLossByBetTypeMatch
             return winLoss;
         }
 
-        /// <summary>
-        /// Adds the specified win loss.
-        /// </summary>
-        /// <param name="winLoss">The win loss.</param>
         public void Sum(WinLossInfo winLoss)
         {
             if (winLoss == null)

@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Gaming.Criteria.NumberOfActiveMember
 {
     using System;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class SearchNumberActiveMemberCriteria
     {
         public DateTime FromDate { get; set; }

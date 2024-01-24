@@ -6,9 +6,6 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
     using Fanex.AccountingReports.Core.Services.Impl;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetTreeWinLossByLevelCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]
@@ -48,13 +45,7 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.TreeWinLoss
             return true;
         }
 
-        /// <summary>
-        /// Get store procedure.
-        /// </summary>
-        /// <returns>The store procedure name.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         public override string GetSettingKey()
         {
             var settingKey = string.Empty;

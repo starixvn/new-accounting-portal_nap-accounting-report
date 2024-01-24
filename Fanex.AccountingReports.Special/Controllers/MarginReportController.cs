@@ -9,9 +9,6 @@ namespace Fanex.AccountingReports.Special.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class MarginReportController : BaseController
     {
         private MarginWinLossService _marginService;

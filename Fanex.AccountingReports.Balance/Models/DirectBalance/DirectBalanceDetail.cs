@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Balance.Models.DirectBalance
 {
     using System;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class DirectBalanceDetail
     {

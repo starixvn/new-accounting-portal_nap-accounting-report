@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Gaming.Criteria.NumberGameMonthlyWinLoss
     using System;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// Number Game Monthly Win Loss Criteria.
-    /// </summary>
     public class NumberGameMonthlyWinLossCriteria : CriteriaBase
     {
         public DateTime FromDate { get; set; }

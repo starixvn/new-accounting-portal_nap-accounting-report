@@ -8,19 +8,8 @@ namespace Fanex.BetList.Accounting.Repositories
     using Fanex.Data;
     using Fanex.Result.Core.Sportsbook.DTO;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class ScoreInformationRepository
     {
-        /// <summary>
-        /// Gets the score information.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="outputParams">The output parameters.</param>>
-        /// <returns>
-        /// The score information.
-        /// </returns>
         public List<Sportsbook> GetScoreInformation(
             GetScoreInformationCriteria criteria,
             ref Hashtable outputParams)
@@ -63,12 +52,6 @@ namespace Fanex.BetList.Accounting.Repositories
             return result;
         }
 
-        /// <summary>
-        /// Binds the SPORTSBOOK.
-        /// </summary>
-        /// <param name="reader">The reader.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The object of SPORTSBOOK.</returns>
         private static Sportsbook BindSportsbook(IDataReader reader, GetScoreInformationCriteria criteria)
         {
             return new Sportsbook()
@@ -100,10 +83,6 @@ namespace Fanex.BetList.Accounting.Repositories
             };
         }
 
-        /// Bind game detail value.
-        /// </summary>
-        /// <param name="reader">The data reader.</param>
-        /// <returns>The game detail value.</returns>
         private static GameDetail BindGameDetail(IDataReader reader)
         {
             return new GameDetail

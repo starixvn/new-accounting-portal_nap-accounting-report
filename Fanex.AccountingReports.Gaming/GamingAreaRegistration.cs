@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Gaming
 {
     using System.Web.Mvc;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GamingAreaRegistration : AreaRegistration
     {
         public override string AreaName

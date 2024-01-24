@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Licensee.Criteria.PeakConcurrentUser
     using System;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class PeakConcurrentUserCriteria : CriteriaBase, ICriteria
     {
         public DateTime FromDate { get; set; }

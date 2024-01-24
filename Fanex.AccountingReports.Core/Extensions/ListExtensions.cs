@@ -6,18 +6,8 @@ namespace Fanex.AccountingReports.Core.Extensions
     using Fanex.AccountingReports.Core.Constants;
     using Fanex.Common;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class ListExtensions
     {
-        /// <summary>
-        /// Sorts the by property.
-        /// </summary>
-        /// <typeparam name="T">The parameter type.</typeparam>
-        /// <param name="dataSource">The data source.</param>
-        /// <param name="sortType">Type of the sort.</param>
-        /// <param name="sortCol">The sort col.</param>
         public static void SortByProperty<T>(this List<T> dataSource, string sortType, string sortCol)
         {
             PropertyInfo propInfo = typeof(T).GetProperty(sortCol);
@@ -43,14 +33,6 @@ namespace Fanex.AccountingReports.Core.Extensions
             dataSource.Sort(compare);
         }
 
-        /// <summary>
-        /// Sorts the data by property.
-        /// </summary>
-        /// <typeparam name="T">The parameter type.</typeparam>
-        /// <param name="dataSource">The data source.</param>
-        /// <param name="sortDirection">The sort direction.</param>
-        /// <param name="sortColumnName">Name of the sort column.</param>
-        /// <param name="sortDataType">Type of the sort data.</param>
         public static void SortDataByProperty<T>(List<T> dataSource, string sortDirection, string sortColumnName, string sortDataType)
         {
             PropertyInfo propInfo = typeof(T).GetProperty(sortColumnName);

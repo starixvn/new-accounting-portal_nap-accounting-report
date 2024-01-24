@@ -6,15 +6,7 @@ var negativeBalance = {
         IsGetCache: true,
         PageSize: 50,
         PageIndex: 1
-    },
-    mailList: [],
-    selMailCriteria:
-    {
-        To: '',
-        Title: '',
-        Body: '',
-        Subject: ''
-    },
+    },    
     gridOpts: {
         tblContentId: 'tblContent',
         manualCopyHeader: true,
@@ -53,7 +45,6 @@ var negativeBalance = {
                 AccReport.disableInput();
             },
             success: function (result) {
-                negativeBalance.mailList = result.MailList;
                 if (result.NegativeBalanceList.length == 0) {
                     negativeBalance.gridOpts.isShowPager = false;
                 }
@@ -229,83 +220,6 @@ var negativeBalance = {
         });
         var url = window.rootUrl + "Licensee/NegativeBalance/ExportNegativeBalanceReport?" + parameters;
         $('#frm').attr('src', url);
-    },
-    sendMail: function () {
-        //create virtual mail object
-        $("#btnSendMail")[0].sendMailFormData = $("#btnSendMail").sendMailFormData ? $("#btnSendMail").sendMailFormData :
-                    {
-                        "Mails": negativeBalance.mailList
-                        , "Subject": "Accounting system - Negative Balance Report for " + (negativeBalance.selNegativeBalanceCriteria.Site == "All" ? "All Licensees" : negativeBalance.selNegativeBalanceCriteria.Site)
-                        , "MailContent": _mailContent
-                        , "ReportTitle": "Accounting system - Negative Balance Report"
-                        , "negativeBalanceCriteria": negativeBalance.selNegativeBalanceCriteria
-                    }
-
-        //assign button click on template
-
-        var template = doT.template($("#scriptSendMailTemplate").html());
-        $("#divSendMailContainer")
-        .empty()
-        .html(template($("#btnSendMail")[0].sendMailFormData));
-        $("#divSendMailContainer").dialog({
-            width: 610,
-            position: ['middle', 150],
-            modal: true,
-            resizable: false,
-            buttons: { "Send":
-                    function () {
-                        AccReport.disableInput();
-                        $.ajax({
-                            type: "Post",
-                            url: window.rootUrl + "Licensee/NegativeBalance/SendMail",
-                            contentType: "application/json; charset=utf-8",
-                            dataType: "json",
-                            data: JSON.stringify($("#btnSendMail")[0].sendMailFormData),
-                            success: function (rs) {
-                                if (rs != null && rs.IsFail == true && rs.Licensees != null) {
-                                    var arrErr = [];
-                                    var lincensees = rs.Licensees;
-                                    for (var i = 0; i < lincensees.length; i++) {
-                                        arrErr.push(lincensees[i].ErrorMessage + "<br/>");
-                                    }
-                                    $("#inforMessage").empty().append(arrErr.join(''));
-
-                                }
-                                else {
-                                    $("#inforMessage").html("");
-                                }
-                            },
-                            complete: function () {
-                                $("#divSendMailContainer").dialog("close");
-                                AccReport.enableInput();
-                            }
-                        });
-                    }
-            },
-            title: "Accounting system - Negative Balance Report for " + (negativeBalance.selNegativeBalanceCriteria.Site == "All" ? "All Licensees" : negativeBalance.selNegativeBalanceCriteria.Site)
-        });
-
-        //mapping mail oject to template
-        $('#tbxSubject').val("Accounting system - Negative Balance Report for " + (negativeBalance.selNegativeBalanceCriteria.Site == "All" ? "All Licensees" : negativeBalance.selNegativeBalanceCriteria.Site));
-        $('#tbxSendMailContent').text(_mailContent);
-
-        $('#divSendMailContainer').removeClass("display-none");
-        $("#tbl-content tr:last td").css({ "border-bottom": "none" })
-        var heightTmp = $('#tbl-content').height();
-        if (heightTmp < 100) {
-            $('#box').height(heightTmp);
-        }
-
-    },
-    bindCCMail: function (cc) {
-        var mailList = '';
-        if (cc && cc.length > 0) {
-            var arr = cc.split(";");
-            for (var i = 0; i < arr.length; i++) {
-                mailList += (arr[i] + "<br/>");
-            }
-        }
-        return mailList;
     }
 };
 
@@ -318,9 +232,5 @@ $(document).ready(function () {
 
     $('#btnExport').click(function () {
         negativeBalance.exportExcel();
-    });
-
-    $('#btnSendMail').click(function () {
-        negativeBalance.sendMail();
-    });
+    });    
 });

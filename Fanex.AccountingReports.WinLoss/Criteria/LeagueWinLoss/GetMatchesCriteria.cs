@@ -4,9 +4,6 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
     using Fanex.Data.Repository;
     using System;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class GetMatchesCriteria : CriteriaBase
     {
         public DateTime StartDate { get; set; }

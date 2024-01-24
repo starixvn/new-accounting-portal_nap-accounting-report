@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.Gaming.Models.LiveCasinoGameStatistic
     using System;
     using System.Collections.Generic;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class WinLossInfo
     {
@@ -45,11 +42,6 @@ namespace Fanex.AccountingReports.Gaming.Models.LiveCasinoGameStatistic
 
         public List<WinLossInfo> ChildsInfo { get; set; }
 
-        /// <summary>
-        /// Formats the specified win loss.
-        /// </summary>
-        /// <param name="winLoss">The win loss.</param>
-        /// <returns>The specified win loss.</returns>
         public static WinLossInfo Format(WinLossInfo winLoss)
         {
             if (winLoss == null)
@@ -69,10 +61,6 @@ namespace Fanex.AccountingReports.Gaming.Models.LiveCasinoGameStatistic
             return winLoss;
         }
 
-        /// <summary>
-        /// Sums the specified win loss.
-        /// </summary>
-        /// <param name="winLoss">The win loss.</param>
         public void Sum(WinLossInfo winLoss)
         {
             this.NumberOfPlayers += winLoss.NumberOfPlayers;

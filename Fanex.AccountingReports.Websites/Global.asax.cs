@@ -19,14 +19,8 @@ namespace Fanex.AccountingReports.Websites
     // Note: For instructions on enabling IIS6 or IIS7 classic mode,
     // visit http://go.microsoft.com/?LinkId=9394801
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class MvcApplication : System.Web.HttpApplication
     {
-        /// <summary>
-        /// Starts application.
-        /// </summary>
         protected void Application_Start()
         {
             ChangeApplicationName();
@@ -64,9 +58,7 @@ namespace Fanex.AccountingReports.Websites
             AuthConfig.RegisterAuth(Context);
         }
 
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         protected void Application_Error(object sender, EventArgs e)
         {
             FanexLogging.HandleApplicationError(Server);

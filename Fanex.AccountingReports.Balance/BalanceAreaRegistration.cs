@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Balance
 {
     using System.Web.Mvc;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class BalanceAreaRegistration : AreaRegistration
     {
         public override string AreaName

@@ -18,9 +18,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
     using Fanex.Common;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class TotalSMAMemberActiveService : ServiceBase
     {
         private readonly TotalSMAMemberActiveRepository _repositoryReport;
@@ -37,23 +34,13 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
 
         #region Implement methods
 
-        /// <summary>
-        /// Exports the report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public void ExportReport(GetTotalSMAMemberActiveCriteria criteria)
         {
-            var report = SessionManager.Get<IList<SMASummaryInfo>>(MiscConstants.TotalSMAMemberActiveSessionKey);
-            if (report == null)
+            var report = this.GetReport(criteria);
+            if (report == null || report.Count == 0)
             {
-                report = this.GetReport(criteria);
-                if (report == null || report.Count == 0)
-                {
-                    return;
-                }
+                return;
             }
 
             ExcelFile excelFile = new ExcelFile();
@@ -195,10 +182,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             excelFile.ReponseStream(reportName);
         }
 
-        /// <summary>
-        /// Exports the status details.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         public void ExportStatusDetails(GetStatusDetailsCriteria criteria)
         {
             Hashtable outputParams = null;
@@ -242,14 +225,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             excelFile.ReponseStream(reportName);
         }
 
-        /// <summary>
-        /// Gets the report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The report.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public IList<SMASummaryInfo> GetReport(GetTotalSMAMemberActiveCriteria criteria)
         {
             IList<SMASummaryInfo> report = null;
@@ -317,17 +293,11 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                     report.Add(smaSummary);
                 }
 
-                SessionManager.Set<IList<SMASummaryInfo>>(MiscConstants.TotalSMAMemberActiveSessionKey, report);
             }
 
             return report;
         }
 
-        /// <summary>
-        /// Gets the sites.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The sites.</returns>
         public IList<EntityBase<int, string>> GetSites(CriteriaBase criteria)
         {
             IList<EntityBase<int, string>> sites = null;
@@ -345,11 +315,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             return sites;
         }
 
-        /// <summary>
-        /// Gets the status details.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The status details.</returns>
         public IList<GroupStatusDetailInfo> GetStatusDetails(GetStatusDetailsCriteria criteria)
         {
             Status status = (Status)criteria.Status;
@@ -368,18 +333,11 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
                 criteria.TotalRow = totalRow;
                 report = this.GetStatusDetails(rawData, status);
 
-                SessionManager.Set<IList<GroupStatusDetailInfo>>(MiscConstants.TotalSMAMemberActiveDetailSessionKey, report);
             }
 
             return report;
         }
 
-        /// <summary>
-        /// Gets the status details.
-        /// </summary>
-        /// <param name="rawData">The raw data.</param>
-        /// <param name="status">The status.</param>
-        /// <returns>The status details.</returns>
         private IList<GroupStatusDetailInfo> GetStatusDetails(IList<dynamic> rawData, Status status)
         {
             IList<GroupStatusDetailInfo> report = new List<GroupStatusDetailInfo>();
@@ -410,17 +368,7 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             return report;
         }
 
-        /// <summary>
-        /// Exports the status details.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="report">The report.</param>
-        /// <param name="status">The status.</param>
-        /// <param name="sheetNo">The sheet no.</param>
-        /// <param name="siteNames">The site names.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportStatusDetails(
             ref ExcelWorksheetCollection worksheet,
             IList<GroupStatusDetailInfo> report,
@@ -630,11 +578,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             return string.Format("{0}/{1}/{2}", smaInfo.Super, smaInfo.Master, smaInfo.Agent);
         }
 
-        /// <summary>
-        /// Builds the SMA summary information.
-        /// </summary>
-        /// <param name="rawData">The raw data.</param>
-        /// <returns>The SMA summary information.</returns>
         private SMASummaryInfo BuildSMASummaryInfo(dynamic rawData)
         {
             string[] smaArray = Converter.ToString2(rawData.SMA)
@@ -652,12 +595,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement
             };
         }
 
-        /// <summary>
-        /// Builds the status detail.
-        /// </summary>
-        /// <param name="rawData">The raw data.</param>
-        /// <param name="status">The status.</param>
-        /// <returns>The status detail.</returns>
         private StatusDetailInfo BuildStatusDetail(dynamic rawData, Status status)
         {
             StatusDetailInfo statusDetail = new StatusDetailInfo

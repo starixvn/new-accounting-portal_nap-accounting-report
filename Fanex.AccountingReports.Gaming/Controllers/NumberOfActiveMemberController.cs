@@ -13,28 +13,15 @@ namespace Fanex.AccountingReports.Gaming.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// Number of Active Member Controller.
-    /// </summary>
     public class NumberOfActiveMemberController : BaseController
     {
-        /// <summary>
-        /// Report Service.
-        /// </summary>
         private readonly NumberOfActiveMemberService _reportService;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NumberOfActiveMemberController" /> class.
-        /// </summary>
         public NumberOfActiveMemberController()
         {
             this._reportService = new NumberOfActiveMemberService();
         }
 
-        /// <summary>
-        /// The Index.
-        /// </summary>
-        /// <returns>The index view.</returns>
         [HttpGet]
         [UserActivityFilter]
         [NapAuth(FunctionKey = AccReportFunctionKeys.NumberofActiveMembers, Policy = Constant.Policy.Read)]
@@ -51,11 +38,6 @@ namespace Fanex.AccountingReports.Gaming.Controllers
             return Json(products);
         }
 
-        /// <summary>
-        /// Get Report.
-        /// </summary>
-        /// <param name="criteria">The Criteria.</param>
-        /// <returns>The JSON Object.</returns>
         [HttpPost]
         [HandleAjaxError]
         public JsonNetResult GetReport(GetNumberOfActiveMemberCriteria criteria)
@@ -72,11 +54,6 @@ namespace Fanex.AccountingReports.Gaming.Controllers
             return new JsonNetResult(report);
         }
 
-        /// <summary>
-        /// Export Report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The empty result.</returns>
         public ActionResult ExportReport(GetNumberOfActiveMemberCriteria criteria)
         {
             string reportName = string.Format(

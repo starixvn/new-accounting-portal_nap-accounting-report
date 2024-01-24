@@ -1,8 +1,5 @@
 namespace Fanex.AccountingReports.Core.Constants
 {
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class CombinationTypeConstants
     {
         public const string _2XCombinations = "2XCombinations";

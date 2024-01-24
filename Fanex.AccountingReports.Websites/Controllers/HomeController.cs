@@ -7,9 +7,6 @@ namespace Fanex.AccountingReports.Websites.Controllers
     using Fanex.AccountingReports.Core.Web.Controllers;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [NapSuperAuth]
     public class HomeController : BaseController
     {
@@ -23,10 +20,6 @@ namespace Fanex.AccountingReports.Websites.Controllers
             _menuService = new MenuService();
         }
 
-        /// <summary>
-        /// Gets Index page.
-        /// </summary>
-        /// <returns>Index page.</returns>
         public ActionResult Index()
         {
             return View();

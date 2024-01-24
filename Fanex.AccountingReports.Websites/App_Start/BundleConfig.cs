@@ -4,18 +4,9 @@ namespace Fanex.AccountingReports.Websites
     using System.Web.Optimization;
     using Fanex.AccountingReports.LegendManagement;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public static class BundleConfig
     {
-        /// <summary>
-        /// Registers the bundles.
-        /// </summary>
-        /// <param name="bundles">The bundles.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new StyleBundle("~/scripts/_lib/fanex.result/style")

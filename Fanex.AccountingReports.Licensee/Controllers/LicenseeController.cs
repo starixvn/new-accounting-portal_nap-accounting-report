@@ -5,9 +5,6 @@ namespace Fanex.AccountingReports.Licensee.Controllers
     using Fanex.AccountingReports.Licensee.Criteria;
     using Fanex.AccountingReports.Licensee.Services.Implement;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class LicenseeController : BaseController
     {
         private readonly LicenseeSiteService _licenseeSiteService;

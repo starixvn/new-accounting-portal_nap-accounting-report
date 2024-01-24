@@ -6,9 +6,6 @@ namespace Fanex.AccountingReports.Core.Criteria
     using Fanex.Data.Repository;
     using Fanex.NAP.Core.Configuration;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class SelectMostVisitedPageCriteria : CriteriaBase
     {
         [SpParam(Ignored = true)]

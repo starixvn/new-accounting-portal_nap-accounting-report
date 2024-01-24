@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Licensee
 {
     using System.Web.Mvc;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class MainAreaRegistration : AreaRegistration
     {
         public override string AreaName

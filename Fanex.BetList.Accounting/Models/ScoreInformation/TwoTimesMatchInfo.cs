@@ -4,9 +4,6 @@ namespace Fanex.BetList.Accounting.Models
     using Fanex.BetList.Accounting.Constants;
     using Fanex.BetList.Accounting.Resources;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     [Serializable]
     public class TwoTimesMatchInfo : ScoreInfo
     {
@@ -18,10 +15,6 @@ namespace Fanex.BetList.Accounting.Models
 
         public int Final1stScoreTeam { get; set; }
 
-        /// <summary>
-        /// Checks the cancellation.
-        /// </summary>
-        /// <param name="betStatus">The bet status.</param>
         public override void CheckCancellation(string betStatus)
         {
             var strNotAvailable = Labels.NotAvailable;

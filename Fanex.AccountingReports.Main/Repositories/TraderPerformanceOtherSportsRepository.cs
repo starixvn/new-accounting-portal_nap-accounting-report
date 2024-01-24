@@ -9,19 +9,9 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
     using Fanex.Common;
     using Fanex.Data;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class TraderPerformanceOtherSportsRepository
     {
-        /// <summary>
-        /// Gets the trader performance other sports report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Trader performance for other sports data.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public TraderPerformanceOtherSports GetTraderPerformanceOtherSportsReport(GetReportCriteria criteria)
         {
             var result = new TraderPerformanceOtherSports
@@ -117,14 +107,7 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             return result;
         }
 
-        /// <summary>
-        /// Gets the trader performance other sports detail report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>Trader performance for other sports detail data.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         public TraderPerformanceOtherSportsDetail GetTraderPerformanceOtherSportsDetailReport(GetDetailReportCriteria criteria)
         {
             var result = new TraderPerformanceOtherSportsDetail
@@ -209,13 +192,6 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             return result;
         }
 
-        /// <summary>
-        /// Gets the trader group information.
-        /// </summary>
-        /// <param name="reader">The reader.</param>
-        /// <param name="groupNamePrefix">The group name prefix.</param>
-        /// <param name="overallSuffix">The overall suffix.</param>
-        /// <returns>Trader group information.</returns>
         private TraderPerformanceOtherSports GetTraderGroupInfo(
            IDataReader reader,
            string groupNamePrefix,
@@ -237,13 +213,6 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
             return traderGroupInfo;
         }
 
-        /// <summary>
-        /// Gets the trader group detail information.
-        /// </summary>
-        /// <param name="reader">The reader.</param>
-        /// <param name="groupNamePrefix">The group name prefix.</param>
-        /// <param name="overallSuffix">The overall suffix.</param>
-        /// <returns>Trader group detail information.</returns>
         private TraderPerformanceOtherSportsDetail GetTraderGroupDetailInfo(
             IDataReader reader,
             string groupNamePrefix,

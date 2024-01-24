@@ -13,9 +13,6 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
     using Fanex.NAP.Core.Web.Session;
     using NAP.Core.Context;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class BaseController : Controller
     {
         protected readonly ICurrentContext CurrentContext;
@@ -45,13 +42,6 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
             this._menuService = new MenuService();
         }
 
-        /// <summary>
-        /// Gets Indicates whether the current site allows users login directly.
-        /// If "0", users must login through NAP Hub.
-        /// </summary>
-        /// <value>
-        /// The is site login.
-        /// </value>
         public bool IsSiteLogin
         {
             get
@@ -73,11 +63,6 @@ namespace Fanex.AccountingReports.Core.Web.Controllers
             }
         }
 
-        /// <summary>
-        /// Execute before each request, if Downtime then go to Downtime page
-        /// Or not Authenticate will go to Login Page.
-        /// </summary>
-        /// <param name="filterContext">Information about the current request and action.</param>
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             AppSession.CurrentActionName = filterContext.ActionDescriptor.ActionName;

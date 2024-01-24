@@ -2,9 +2,6 @@ namespace Fanex.AccountingReports.Main.Criteria.CreditTerm
 {
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// The criteria of Install Amount report.
-    /// </summary>
     public class GetInstallAmountCriteria : CriteriaBase
     {
         public int RoleID { get; set; }

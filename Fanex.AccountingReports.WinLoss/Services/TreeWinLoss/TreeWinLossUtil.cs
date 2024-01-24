@@ -3,9 +3,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
     using System;
     using Fanex.AccountingReports.WinLoss.Models.TreeWinLoss;
 
-    /// <summary>
-    /// Class contains methods which were belonged to service.
-    /// </summary>
     public static class TreeWinLossUtil
     {
         public static readonly string TreeWinLossByProductSession = "Fanex.AccountingReports.WinLoss.TreeWinLoss.WinLossByProduct";
@@ -14,11 +11,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
         public static readonly string TreeWinLossByMasterSession = "Fanex.AccouningReports.WinLoss.TreeWinLoss.WinLossByMaster";
         public static readonly string TreeWinLossByAgentSession = "Fanex.AccouningReports.WinLoss.TreeWinLoss.WinLossByAgent";
 
-        /// <summary>
-        /// Add win loss value to Total.
-        /// </summary>
-        /// <param name="winLoss">The win loss value.</param>
-        /// <param name="total">The win loss total.</param>
         public static void AddToTotal(TreeWinLossInfo winLoss, ref TreeWinLossInfo total)
         {
             if (winLoss != null)
@@ -36,11 +28,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.TreeWinLoss
             }
         }
 
-        /// <summary>
-        /// Round object value.
-        /// </summary>
-        /// <param name="winLoss">The Tree Win Loss Info.</param>
-        /// <returns>The Tree Win Loss Info after rounding.</returns>
         public static TreeWinLossInfo RoundTreeWinLossInfo(TreeWinLossInfo winLoss)
         {
             if (winLoss == null)

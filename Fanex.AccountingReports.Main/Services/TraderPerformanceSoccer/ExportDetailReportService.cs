@@ -11,24 +11,11 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
     using NPOI.SS.UserModel;
     using NPOI.SS.Util;
 
-    /// <summary>
-    /// Trader performance export detail report service.
-    /// </summary>
     public partial class TraderPerformanceSoccerService
     {
-        /// <summary>
-        /// Exports the detail report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
         public void ExportDetailReport(GetDetailReportCriteria criteria)
         {
-            var traderSportType = criteria.IsSoccer ? SoccerTitle : OtherSportTitle;
-            var report = SessionManager.Get<TraderPerformanceSoccerDetail>(_traderPerformanceDetailSessionKey + traderSportType);
-
-            if (report == null)
-            {
-                report = this.GetDetailReport(criteria);
-            }
+            var report = this.GetDetailReport(criteria);
 
             HSSFWorkbook excelFile = new HSSFWorkbook();
             string sheetName = MainResources.TraderPerformanceSoccerDetail_SheetName;
@@ -50,13 +37,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             NpoiExcelExtensions.ResponseStreamExcel(excelFile, reportName);
         }
 
-        /// <summary>
-        /// Exports the report header.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="criteria">The criteria.</param>
         private void ExportDetailReportHeader(
             HSSFWorkbook excelFile,
             ref ISheet worksheet,
@@ -85,16 +65,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
                             headerStyle);
         }
 
-        /// <summary>
-        /// Renders the report header detail.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="headerStyle">The header style.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportDetailReportHeaderInfo(
            ref ISheet worksheet,
            ref int currentRow,
@@ -163,23 +134,14 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             this.RenderMergeCell(ref worksheet, ref row, currentRow - 1, ref currentColumn, currentRow - 1, currentColumn + 22, Labels._1st_1x2, headerStyle);
         }
 
-        /// <summary>
-        /// Exports the content of the detail report.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="report">The report.</param>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-            "SP2101:MethodMustNotContainMoreLinesThan",
-            Justification = "Reviewed. Suppression is OK here.")]
+        
         private void ExportDetailReportContent(
            HSSFWorkbook excelFile,
            ref ISheet worksheet,
            ref int currentRow,
            TraderPerformanceSoccerDetail report)
         {
-            IDataFormat dataFormat = excelFile.CreateDataFormat();
+            excelFile.CreateDataFormat();
             this.SetColorIndex(excelFile);
 
             ICellStyle decimalNumberStyle = this.CreateDecimalNumberStyle(excelFile, HSSFColor.White.Index, HorizontalAlignment.Right, false, true, false);
@@ -197,7 +159,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             ICellStyle textStyle = NpoiExcelExtensions.TextStyle(excelFile, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Left);
             ICellStyle centerTextStyle = NpoiExcelExtensions.TextStyle(excelFile, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Center);
             ICellStyle textEvenRowStyle = NpoiExcelExtensions.TextStyle(excelFile, EvenColorIndex, false, NpoiExcelExtensions.Alignment.Left);
-            ICellStyle centerTextEvenRowStyle = NpoiExcelExtensions.TextStyle(excelFile, EvenColorIndex, false, NpoiExcelExtensions.Alignment.Center);
+            NpoiExcelExtensions.TextStyle(excelFile, EvenColorIndex, false, NpoiExcelExtensions.Alignment.Center);
 
             ICellStyle subTotalTextStyle = NpoiExcelExtensions.TextStyle(excelFile, SubTotalColorIndex, true, NpoiExcelExtensions.Alignment.Center);
             ICellStyle subTotalIntNumberStyle = NpoiExcelExtensions.IntStyle(excelFile, SubTotalColorIndex, true);
@@ -311,15 +273,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
                 grandTotalDecimalPercentStyle);
         }
 
-        /// <summary>
-        /// Exports the content of the child group detail report.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row of sheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="childInfo">The child information.</param>
-        /// <param name="cellStyle">The cell style.</param>
         private void ExportChildGroupDetailReportContent(
             ref ISheet worksheet,
             ref IRow row,
@@ -353,15 +306,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, childInfo.Overall, cellStyle);
         }
 
-        /// <summary>
-        /// Exports the content of the margin group detail report.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row of sheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="marginInfo">The margin information.</param>
-        /// <param name="cellStyle">The cell style.</param>
         private void ExportMarginGroupDetailReportContent(
             ref ISheet worksheet,
             ref IRow row,
@@ -395,19 +339,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.TraderPerformanceSocce
             this.ExportCellValue(ref worksheet, ref row, ref currentRow, ref currentColumn, marginInfo.Overall / 100, cellStyle);
         }
 
-        /// <summary>
-        /// Exports the detail report total information.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row of sheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="totalInfo">The total information.</param>
-        /// <param name="totalTitle">The total title.</param>
-        /// <param name="cellTextStyle">The cell text style.</param>
-        /// <param name="cellNumberStyle">The cell number style.</param>
-        /// <param name="cellDecimalNumberStyle">The cell decimal number style.</param>
-        /// <param name="cellPercentStyle">The cell percent style.</param>
         private void ExportDetailReportTotalInfo(
             ref ISheet worksheet,
             ref IRow row,

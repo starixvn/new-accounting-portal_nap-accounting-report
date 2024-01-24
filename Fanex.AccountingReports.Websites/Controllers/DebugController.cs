@@ -13,7 +13,6 @@ namespace Fanex.AccountingReports.Websites.Controllers
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Session;
     using NAP.Core.Service.Impl;
-    using NPOI.HSSF.Util;
 
     public class DebugController : Controller
     {

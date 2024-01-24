@@ -11,9 +11,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
     using Fanex.AccountingReports.Main.Repositories.Implement;
     using Fanex.Common;
 
-    /// <summary>
-    /// The get report and export report service of Installment Amount Report.
-    /// </summary>
     public class InstallmentAmountService : ServiceBase
     {
         private readonly CreditTermRepository _creditTermRepository;
@@ -35,11 +32,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             this._creditTermRepository = new CreditTermRepository();
         }
 
-        /// <summary>
-        /// Get installment amount report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The list InstallAmount.</returns>
         public List<InstallAmount> GetInstallmentAmountReport(GetInstallAmountCriteria criteria)
         {
             var report = new List<InstallAmount>();
@@ -51,18 +43,9 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
 
             report = this.ConvertDataReport(criteria, report);
 
-            var sessionKey = this._installmentAmountSessionKey + "." + criteria.RoleID;
-            SessionManager.Set<List<InstallAmount>>(sessionKey, report);
-
             return report;
         }
 
-        /// <summary>
-        /// Convert and push data into report.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="report">The report.</param>
-        /// <returns>The list InstallAmount.</returns>
         private List<InstallAmount> ConvertDataReport(
             GetInstallAmountCriteria criteria,
             List<InstallAmount> report)

@@ -9,9 +9,6 @@ namespace Fanex.AccountingReports.Main.Controllers
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
 
-    /// <summary>
-    /// Trader performance for other sports  controller.
-    /// </summary>
     public class TraderPerformanceOtherSportsController : BaseController
     {
         private readonly TraderPerformanceOtherSportsService _reportService;

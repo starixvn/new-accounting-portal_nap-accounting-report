@@ -3,14 +3,8 @@ namespace Fanex.AccountingReports.Core.Configurations
     using System.Configuration;
     using Fanex.Common;
     
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class RMElement : ConfigurationElement
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RMElement"/> class.
-        /// </summary>
         public RMElement()
         {
         }

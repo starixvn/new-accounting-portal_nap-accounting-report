@@ -10,21 +10,11 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
     using System.Security.Cryptography;
     using System.Text;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class DuplicateTicketsUtility
     {
         public const int TotalMilliseconds = 1000;
 
-        /// <summary>
-        /// Assign sub-ticket info into a group, In a group of duplicate ticket, trans date of tickets must be compared with min(ticket) and less than 1000 millisecond.
-        /// </summary>
-        /// <param name="duplicateTicketByUserName">Duplicate ticket by user name.</param>
-        /// <returns>Return tickets list.</returns>
-        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
-        "SP2101:MethodMustNotContainMoreLinesThan",
-        Justification = "Reviewed. Suppression is OK here.")]
+        
         public List<TicketInfo> AssignSubTicketInfo(IGrouping<dynamic, dynamic> duplicateTicketByUserName)
         {
             List<TicketInfo> groups = new List<TicketInfo>();
@@ -87,11 +77,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             return groups;
         }
 
-        /// <summary>
-        /// Assign main ticket info.
-        /// </summary>
-        /// <param name="duplicateTicketByUserName">Duplicate ticket by user name.</param>
-        /// <returns>Return object list main tickets.</returns>
         public DuplicateTicketsByUserName AssignMainTicketInfo(IGrouping<dynamic, dynamic> duplicateTicketByUserName)
         {
             DateTime winlostDate = Converter.ToDateTime(duplicateTicketByUserName.Key.winlostdate);
@@ -110,13 +95,6 @@ namespace Fanex.AccountingReports.Misc.Services.Implement.DuplicateTickets
             return ticket;
         }
 
-        /// <summary>
-        /// Compress string to MD5 code.
-        /// </summary>
-        /// <param name="input">Input string.</param>
-        /// <returns>
-        /// The MD5 code of input parameter.
-        /// </returns>
         public string GetMD5Hash(string input)
         {
             MD5 md5Hash = MD5.Create();

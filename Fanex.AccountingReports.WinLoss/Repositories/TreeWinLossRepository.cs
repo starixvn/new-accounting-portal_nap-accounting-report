@@ -8,17 +8,8 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
     using Fanex.Data;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class TreeWinLossRepository
     {
-        /// <summary>
-        /// Get the tree win loss.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <param name="outputParam">The output Parameter.</param>
-        /// <returns>The tree win loss.</returns>
         public List<TreeWinLossInfo> GetTreeWinLossByProduct(ICriteria criteria, ref Hashtable outputParam)
         {
             var treeWinLoss = new List<TreeWinLossInfo>();

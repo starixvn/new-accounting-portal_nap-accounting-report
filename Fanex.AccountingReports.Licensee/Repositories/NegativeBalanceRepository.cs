@@ -8,19 +8,10 @@ namespace Fanex.AccountingReports.Licensee.Repositories.Implement
     using Fanex.Common.Extensions;
     using Fanex.Data.Repository;
 
-    /// <summary>
-    /// TODO: Update summary.
-    /// </summary>
     public class NegativeBalanceRepository : BaseRepository<NegativeBalanceUser>
     {
-        /// <summary>
-        /// Gets the negative balance user.
-        /// </summary>
-        /// <param name="criteria">The criteria.</param>
-        /// <returns>The negative balance user.</returns>
         public List<NegativeBalanceUser> GetNegativeBalanceUser(ICriteria criteria)
         {
-            //// Create Function will map Data from DataReader to Schedule Object
             Func<IDataReader, NegativeBalanceUser> mapObjectFunc = (reader) =>
             {
                 return new NegativeBalanceUser
