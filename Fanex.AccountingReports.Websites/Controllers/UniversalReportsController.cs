@@ -84,5 +84,10 @@ namespace Fanex.AccountingReports.Websites.Controllers
         {
             return Redirect("../../UniversalReports/CashOutPerformance");
         }
-    }
+
+        public ActionResult ResultAnalysis()
+        {
+	        return Redirect("../../UniversalReports/ResultAnalysis");
+        }
+	}
 }
