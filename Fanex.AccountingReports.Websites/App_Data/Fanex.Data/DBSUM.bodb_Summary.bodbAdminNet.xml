@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Functions>
-  <Function Name="Balance - Company Balance Difference">
-    <Setting Key="Balance_CompanyBalanceDifference_GetReport" SpName="Acc_Rpt_Balance_Company_History" DbName="DBSUM.bodb_Summary.bodbAdminNet" TimeOut="600"></Setting>
-  </Function>
-</Functions>

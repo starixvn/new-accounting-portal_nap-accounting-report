@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Functions>
-  <Function Name="WinLoss - Tree Win Loss">
-    <Setting Key="WinLoss_TreeWinLoss_VirtualRateHistory" SpName="Acc_CustomerSelVirtualRateHistory" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" TimeOut="600"></Setting>
-  </Function>
-  <Function Name="Misc - Credit movement">
-    <Setting Key="Misc_CreditMovement_GetReport" SpName="Acc_Rpt_CreditMovement" DbName="DBLOG.bodb_CustomerLog.bodbAdminNet" TimeOut="600" />
-  </Function>
-</Functions>

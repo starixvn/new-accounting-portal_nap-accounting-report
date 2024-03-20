@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Functions>
-  
-	<Function Name="Main - Credit Term">
-		<Setting Key="Acc_CreditTermUpdRemark" SpName="Acc_CreditTermUpdRemark" DbName="DBCUST.CustDB.bodbAdminNet" TimeOut="600" />
-	</Function>
-
-  
-</Functions>
