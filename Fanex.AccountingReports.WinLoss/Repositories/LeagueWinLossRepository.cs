@@ -101,7 +101,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
             return bettypeWinLoss;
         }
 
-        public List<MatchEntity> GetMatches(ICriteria criteria)
+        public List<MatchEntity> GetMatches(ICriteria criteria, bool isNormalMode)
         {
             DataSet result = null;
 
@@ -130,9 +130,11 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                         VirtualWinLoss = Converter.ToDecimal(row["VirtualIncome"]),
                         RealTurnover = Converter.ToDecimal(row["RealTurnover"]),
                         VirtualTurnover = Converter.ToDecimal(row["VirtualTurnover"]),
-                        IsHedge = Converter.ToInt(row["IsHedge"]) == 1,
-                        IsOutright = Converter.ToInt(row["IsOutright"]) == 1
-                    });
+                        IsHedge = Converter.ToString2(row["MatchCode"]).Contains("hedge"),
+                        IsOutright = Converter.ToInt(row["IsOutright"]) == 1,
+                        BetTypeName = isNormalMode ? Converter.ToString2(row["BetTypeName"]) : string.Empty,
+                        Choice = isNormalMode ? Converter.ToString2(row["Choice"]) : string.Empty
+					});
                 }
 
                 return leagueWinLoss;

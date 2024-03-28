@@ -13,5 +13,7 @@
         public int TraderID { get; set; }
 
         public string TraderName { get; set; }
+
+        public string Choice { get; set; }
     }
 }

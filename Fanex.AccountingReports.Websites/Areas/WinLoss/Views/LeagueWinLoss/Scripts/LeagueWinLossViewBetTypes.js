@@ -46,9 +46,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
     self.getReport = function (params) {
         AccReport.disableInput();
         getParams(params);
+        const api = self.Params.reportParams.IsNormalMode ? "WinLoss/LeagueWinLoss/GetBetTypesWithChoice" : "WinLoss/LeagueWinLoss/GetBetTypes";
         $.ajax({
             type: "POST",
-            url: window.rootUrl + "WinLoss/LeagueWinLoss/GetBetTypes",
+            url: window.rootUrl + api,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(self.Params.reportParams),
@@ -131,6 +132,87 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
         bodyData.push(currentRow);
     };
 
+    var showBetTypeWithChoice = function (info, bodyData) {
+        const bettypeTotal = info.Total;
+        const hedgeText = self.Params.reportParams.IsHedge ? " (hedge) " : "";
+        const currentRow = {
+            Columns: [
+                { Name: "ColBetType", Value: bettypeTotal.BettypeName + hedgeText + " (Trader: " + bettypeTotal.TraderName + ")" },
+                { Name: "ColMemberWinLoss", Value: bettypeTotal.MemberWinLoss },
+                { Name: "ColSMAWinLoss", Value: bettypeTotal.SMAWinLoss },
+                { Name: "ColExtraPT", Value: bettypeTotal.ExtraPT },
+                { Name: "ColCommision", Value: bettypeTotal.Commission },
+                { Name: "ColVariance", Value: bettypeTotal.VarianceIncome },
+                { Name: "ColVirtualWinLoss", Value: bettypeTotal.VirtualWinLoss },
+                { Name: "ColRealIncome", Value: bettypeTotal.RealIncome },
+                { Name: "ColVirtualTurnOver", Value: bettypeTotal.VirtualTurnover },
+                { Name: "ColRealTurnOver", Value: bettypeTotal.RealTurnover },
+                { Name: "ColVirtualMargin", Value: bettypeTotal.VirtualMargin },
+                { Name: "ColRealMargin", Value: bettypeTotal.RealMargin }],
+            SubRows: []
+        };
+
+        const bettypesLength = info.BetTypes.length;
+
+        if (bettypesLength > 0) {
+            for (let j = 0; j < bettypesLength; j++) {
+                const bettypeInfo = info.BetTypes[j].Total;
+
+                const currentSubRow = {
+                    Columns: [
+                        {
+                            Name: "ColBetType", Value: bettypeInfo, CssClass: "colBetType",
+                            CustomCellRender: function (currentCell) {
+                                const clickEvent = ' onclick = "viewSite(' + currentCell.Value.Bettype
+                                    + ',\'' + currentCell.Value.BettypeName
+                                    + '\',\'' + currentCell.Value.SiteType
+                                    + '\'' + ");\"";
+                                return '<div class="link" ' + clickEvent + '>' + currentCell.Value.SiteType + '</div>';
+                            }
+                        },
+                        { Name: "ColMemberWinLoss", Value: bettypeInfo.MemberWinLoss },
+                        { Name: "ColSMAWinLoss", Value: bettypeInfo.SMAWinLoss },
+                        { Name: "ColExtraPT", Value: bettypeInfo.ExtraPT },
+                        { Name: "ColCommision", Value: bettypeInfo.Commission },
+                        { Name: "ColVariance", Value: bettypeInfo.VarianceIncome },
+                        { Name: "ColVirtualWinLoss", Value: bettypeInfo.VirtualWinLoss },
+                        { Name: "ColRealIncome", Value: bettypeInfo.RealIncome },
+                        { Name: "ColVirtualTurnOver", Value: bettypeInfo.VirtualTurnover },
+                        { Name: "ColRealTurnOver", Value: bettypeInfo.RealTurnover },
+                        { Name: "ColVirtualMargin", Value: bettypeInfo.VirtualMargin },
+                        { Name: "ColRealMargin", Value: bettypeInfo.RealMargin }],
+                    SubRows: []
+                };
+
+                const choices = info.BetTypes[i].Choices;
+                if (choices.length > 0) {
+                    for (const choice of choices) {
+                        const currentSubSubRow = {
+                            Columns: [
+                                { Name: "ColBetType", Value: choice, CssClass: "colBetType" },
+                                { Name: "ColMemberWinLoss", Value: choice.MemberWinLoss },
+                                { Name: "ColSMAWinLoss", Value: choice.SMAWinLoss },
+                                { Name: "ColExtraPT", Value: choice.ExtraPT },
+                                { Name: "ColCommision", Value: choice.Commission },
+                                { Name: "ColVariance", Value: choice.VarianceIncome },
+                                { Name: "ColVirtualWinLoss", Value: choice.VirtualWinLoss },
+                                { Name: "ColRealIncome", Value: choice.RealIncome },
+                                { Name: "ColVirtualTurnOver", Value: choice.VirtualTurnover },
+                                { Name: "ColRealTurnOver", Value: choice.RealTurnover },
+                                { Name: "ColVirtualMargin", Value: choice.VirtualMargin },
+                                { Name: "ColRealMargin", Value: choice.RealMargin }]
+                        };
+                        currentSubRow.SubRows.push(currentSubSubRow);
+                    }
+                }
+
+                currentRow.SubRows.push(currentSubRow);
+            }
+        }
+
+        bodyData.push(currentRow);
+    };
+
     var renderReport = function (report) {
         var liveStatus = self.Params.reportParams.LiveIndicator ? "Live" : "Non-Live";
         _tables.reportContainer.removeClass("display-none");
@@ -142,7 +224,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
             var len = report.BettypeWinLoss.length;
             for (var i = 0; i < len; i++) {
                 info = report.BettypeWinLoss[i];
-                showBetType(info, bodyData);
+                if (self.Params.reportParams.IsNormalMode) {
+                    showBetTypeWithChoice(info, bodyData);
+                } else {
+                    showBetType(info, bodyData);
+                }
             }
         }
 

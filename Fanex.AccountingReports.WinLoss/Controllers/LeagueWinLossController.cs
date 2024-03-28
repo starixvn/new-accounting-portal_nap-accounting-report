@@ -95,6 +95,13 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         }
 
         [HttpPost]
+        public JsonResult GetBetTypesWithChoice(GetBetTypesWithChoiceCriteria criteria)
+        {
+	        var report = this._reportService.GetBetTypesWithChoice(criteria);
+	        return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+		[HttpPost]
         public JsonResult GetBetTypesByStatus(GetBetTypesCriteria criteria)
         {
             var report = this._reportService.GetBetTypesByLiveNonLiveStatus(criteria);
@@ -109,6 +116,15 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         }
 
         [HttpPost]
+        public JsonResult GetMatchesWithChoice(GetMatchesWithChoiceCriteria criteria)
+        {
+	        criteria.LeagueID = "89574";
+            criteria.SportBettype = "ALL";
+	        var report = this._reportService.GetMatchesWithChoice(criteria);
+	        return Json(report, JsonRequestBehavior.AllowGet);
+        }
+
+		[HttpPost]
         public JsonResult GetMatchesFromBetTypeStatus(GetMatchesCriteria criteria)
         {
             var report = this._reportService.GetMatchesFromBetTypeStatus(criteria);
