@@ -16,6 +16,8 @@
 
         public string BetTypeName { get; set; }
 
+        public int BetType { get; set; }
+
         public string Choice { get; set; }
     }
 }

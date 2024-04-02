@@ -1,3 +1,5 @@
+using System;
+
 namespace Fanex.AccountingReports.WinLoss.Controllers
 {
     using Constants;
@@ -97,7 +99,7 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         [HttpPost]
         public JsonResult GetBetTypesWithChoice(GetBetTypesWithChoiceCriteria criteria)
         {
-	        var report = this._reportService.GetBetTypesWithChoice(criteria);
+            var report = this._reportService.GetBetTypesWithChoice(criteria);
 	        return Json(report, JsonRequestBehavior.AllowGet);
         }
 
@@ -118,9 +120,7 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         [HttpPost]
         public JsonResult GetMatchesWithChoice(GetMatchesWithChoiceCriteria criteria)
         {
-	        criteria.LeagueID = "89574";
-            criteria.SportBettype = "ALL";
-	        var report = this._reportService.GetMatchesWithChoice(criteria);
+            var report = this._reportService.GetMatchesWithChoice(criteria);
 	        return Json(report, JsonRequestBehavior.AllowGet);
         }
 
@@ -167,6 +167,13 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         }
 
         [HttpPost]
+        public ActionResult ExportLeagueWinLossViewMatchesWithChoice(GetMatchesWithChoiceCriteria criteria)
+        {
+            this._excelService.ExportLeagueWinLossViewMatchesWithChoice(criteria);
+            return new EmptyResult();
+        }
+
+        [HttpPost]
         public ActionResult ExportLeagueWinLossViewMatchesFromBetTypeStatus(GetMatchesCriteria criteria)
         {
             this._excelService.ExportLeagueWinLossViewMatchesFromBetTypeStatus(criteria);
@@ -177,6 +184,13 @@ namespace Fanex.AccountingReports.WinLoss.Controllers
         public ActionResult ExportLeagueWinLossViewBetTypes(GetBetTypesCriteria criteria)
         {
             this._excelService.ExportLeagueWinLossViewBetTypes(criteria);
+            return new EmptyResult();
+        }
+
+        [HttpPost]
+        public ActionResult ExportLeagueWinLossViewBetTypesWithChoice(GetBetTypesWithChoiceCriteria criteria)
+        {
+            this._excelService.ExportLeagueWinLossViewBetTypesWithChoice(criteria);
             return new EmptyResult();
         }
 

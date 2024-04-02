@@ -152,44 +152,44 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
             SubRows: []
         };
 
-        const bettypesLength = info.BetTypes.length;
+        const siteTypeLength = info.SiteTypes.length;
 
-        if (bettypesLength > 0) {
-            for (let j = 0; j < bettypesLength; j++) {
-                const bettypeInfo = info.BetTypes[j].Total;
+        if (siteTypeLength > 0) {
+            for (let j = 0; j < siteTypeLength; j++) {
+                const siteTypes = info.SiteTypes[j].Total;
 
-                const currentSubRow = {
+                const siteTypeRow = {
                     Columns: [
                         {
-                            Name: "ColBetType", Value: bettypeInfo, CssClass: "colBetType",
+                            Name: "ColBetType", Value: siteTypes, CssClass: "colBetType",
                             CustomCellRender: function (currentCell) {
-                                const clickEvent = ' onclick = "viewSite(' + currentCell.Value.Bettype
-                                    + ',\'' + currentCell.Value.BettypeName
-                                    + '\',\'' + currentCell.Value.SiteType
+                                const clickEvent = ' onclick = "event.stopPropagation();viewSite(' + currentCell.Value.Bettype
+                                    + ',\'' + info.Total.BettypeName
+                                    + '\',\'' + currentCell.Value.BettypeName
                                     + '\'' + ");\"";
-                                return '<div class="link" ' + clickEvent + '>' + currentCell.Value.SiteType + '</div>';
+                                return '<span class="link" ' + clickEvent + '>' + currentCell.Value.BettypeName + '</span>';
                             }
                         },
-                        { Name: "ColMemberWinLoss", Value: bettypeInfo.MemberWinLoss },
-                        { Name: "ColSMAWinLoss", Value: bettypeInfo.SMAWinLoss },
-                        { Name: "ColExtraPT", Value: bettypeInfo.ExtraPT },
-                        { Name: "ColCommision", Value: bettypeInfo.Commission },
-                        { Name: "ColVariance", Value: bettypeInfo.VarianceIncome },
-                        { Name: "ColVirtualWinLoss", Value: bettypeInfo.VirtualWinLoss },
-                        { Name: "ColRealIncome", Value: bettypeInfo.RealIncome },
-                        { Name: "ColVirtualTurnOver", Value: bettypeInfo.VirtualTurnover },
-                        { Name: "ColRealTurnOver", Value: bettypeInfo.RealTurnover },
-                        { Name: "ColVirtualMargin", Value: bettypeInfo.VirtualMargin },
-                        { Name: "ColRealMargin", Value: bettypeInfo.RealMargin }],
+                        { Name: "ColMemberWinLoss", Value: siteTypes.MemberWinLoss },
+                        { Name: "ColSMAWinLoss", Value: siteTypes.SMAWinLoss },
+                        { Name: "ColExtraPT", Value: siteTypes.ExtraPT },
+                        { Name: "ColCommision", Value: siteTypes.Commission },
+                        { Name: "ColVariance", Value: siteTypes.VarianceIncome },
+                        { Name: "ColVirtualWinLoss", Value: siteTypes.VirtualWinLoss },
+                        { Name: "ColRealIncome", Value: siteTypes.RealIncome },
+                        { Name: "ColVirtualTurnOver", Value: siteTypes.VirtualTurnover },
+                        { Name: "ColRealTurnOver", Value: siteTypes.RealTurnover },
+                        { Name: "ColVirtualMargin", Value: siteTypes.VirtualMargin },
+                        { Name: "ColRealMargin", Value: siteTypes.RealMargin }],
                     SubRows: []
                 };
 
-                const choices = info.BetTypes[i].Choices;
+                const choices = info.SiteTypes[j].Choices;
                 if (choices.length > 0) {
                     for (const choice of choices) {
-                        const currentSubSubRow = {
+                        const choiceRow = {
                             Columns: [
-                                { Name: "ColBetType", Value: choice, CssClass: "colBetType" },
+                                { Name: "ColBetType", Value: choice.Choice, CssClass: "colBetType" },
                                 { Name: "ColMemberWinLoss", Value: choice.MemberWinLoss },
                                 { Name: "ColSMAWinLoss", Value: choice.SMAWinLoss },
                                 { Name: "ColExtraPT", Value: choice.ExtraPT },
@@ -202,11 +202,11 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
                                 { Name: "ColVirtualMargin", Value: choice.VirtualMargin },
                                 { Name: "ColRealMargin", Value: choice.RealMargin }]
                         };
-                        currentSubRow.SubRows.push(currentSubSubRow);
+                        siteTypeRow.SubRows.push(choiceRow);
                     }
                 }
 
-                currentRow.SubRows.push(currentSubRow);
+                currentRow.SubRows.push(siteTypeRow);
             }
         }
 
@@ -214,7 +214,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
     };
 
     var renderReport = function (report) {
-        var liveStatus = self.Params.reportParams.LiveIndicator ? "Live" : "Non-Live";
+        var liveStatus = self.Params.reportParams.LiveIndicator === "1" ? "Live" : "Non-Live";
         _tables.reportContainer.removeClass("display-none");
         _tables.report.addClass("display-none");
         var bodyData = [];
@@ -349,9 +349,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewBetTypes = functi
         };
 
         _tables.report.removeClass("display-none").fanexGrid(gridOptions);
-    }
+    };
     self.exportReport = function () {
-        AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLossViewBetTypes", self.Params.reportParams);
+        const url = self.Params.reportParams.IsNormalMode ? "WinLoss/LeagueWinLoss/ExportLeagueWinLossViewBetTypesWithChoice" : "WinLoss/LeagueWinLoss/ExportLeagueWinLossViewBetTypes";
+        AccReport.downloadFile(window.rootUrl + url, self.Params.reportParams);
     };
 
     self.isShowTotalRow = function (total) {

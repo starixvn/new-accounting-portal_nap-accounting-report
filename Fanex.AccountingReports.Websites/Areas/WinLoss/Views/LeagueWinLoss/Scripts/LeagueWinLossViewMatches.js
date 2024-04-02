@@ -224,7 +224,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                             isHedge: matchInfo.Total.IsHedge
                         },
                         CustomCellRender: function (currentCell) {
-                            const clickEvent = ' onclick = "viewBetTypes(' + currentCell.Value.matchId + ',' + currentCell.Value.liveIndicator + ',\'' + currentCell.Value.event + '\'' + ',' + currentCell.Value.isHedge + ")\"";
+                            const clickEvent = ' onclick = "event.stopPropagation();viewBetTypes(' + currentCell.Value.matchId + ',' + currentCell.Value.liveIndicator + ',\'' + info.Total.MatchEvent + '\'' + ',' + currentCell.Value.isHedge + ")\"";
                             const html = '<span class="link " ' + clickEvent + ' title="' + currentCell.Value.event + '">' + currentCell.Value.event + '</span>';
                             return html;
                         }
@@ -244,6 +244,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                     SubRows: []
                 };
                 const betTypes = info.LiveIndicators[j].BetTypes;
+                let k = 1, m = 1;
                 for (const bt of betTypes) {
                     const currentBetTypeRow =
                     {
@@ -261,9 +262,10 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                             { Name: "ColRealTurnOver", Value: bt.Total.RealTurnover },
                             { Name: "ColVirtualMargin", Value: bt.Total.VirtualMargin },
                             { Name: "ColRealMargin", Value: bt.Total.RealMargin }],
-                        CssClass: j % 2 == 0 ? "even" : "",
+                        CssClass: k % 2 == 0 ? "even" : "",
                         SubRows: []
                     };
+                    k++;
                     for (const c of bt.Choices) {
                         const currentChoiceRow =
                         {
@@ -281,8 +283,9 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                             { Name: "ColRealTurnOver", Value: c.RealTurnover },
                             { Name: "ColVirtualMargin", Value: c.VirtualMargin },
                             { Name: "ColRealMargin", Value: c.RealMargin }],
-                            CssClass: j % 2 == 0 ? "even" : ""
+                            CssClass: m % 2 == 0 ? "even" : ""
                         };
+                        m++;
                         currentBetTypeRow.SubRows.push(currentChoiceRow);
                     }
                     currentLiveIndicatorRow.SubRows.push(currentBetTypeRow);
@@ -435,7 +438,8 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
         _tables.reportContainer.removeClass("display-none");
     };
     self.exportReport = function () {
-        AccReport.downloadFile(window.rootUrl + "WinLoss/LeagueWinLoss/ExportLeagueWinLossViewMatches", self.Params.reportParams);
+        const url = self.Params.reportParams.IsNormalMode ? "WinLoss/LeagueWinLoss/ExportLeagueWinLossViewMatchesWithChoice" : "WinLoss/LeagueWinLoss/ExportLeagueWinLossViewMatches";
+        AccReport.downloadFile(window.rootUrl + url, self.Params.reportParams);
     };
 
     self.isShowTotalRow = function (total) {

@@ -60,7 +60,7 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
         }
 
         
-        public List<BettypeWinLossEntity> GetBetTypes(ICriteria criteria)
+        public List<BettypeWinLossEntity> GetBetTypes(ICriteria criteria, bool isNormal)
         {
             DataSet result = null;
             var bettypeWinLoss = new List<BettypeWinLossEntity>();
@@ -91,8 +91,9 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                             VirtualWinLoss = Converter.ToDecimal(row["VirtualIncome"]),
                             RealTurnover = Converter.ToDecimal(row["RealTurnover"]),
                             VirtualTurnover = Converter.ToDecimal(row["VirtualTurnover"]),
-                            IsHedge = Converter.ToInt(row["IsHedge"]) == 1,
-                            TraderName = Converter.ToString2(row["TraderName"])
+                            IsHedge = isNormal || Converter.ToInt(row["IsHedge"]) == 1,
+                            TraderName = Converter.ToString2(row["TraderName"]),
+                            Choice = isNormal ? Converter.ToString2(row["Choice"]) : string.Empty
                         });
                     }
                 }
@@ -133,8 +134,9 @@ namespace Fanex.AccountingReports.WinLoss.Repositories.Implement
                         IsHedge = Converter.ToString2(row["MatchCode"]).Contains("hedge"),
                         IsOutright = Converter.ToInt(row["IsOutright"]) == 1,
                         BetTypeName = isNormalMode ? Converter.ToString2(row["BetTypeName"]) : string.Empty,
-                        Choice = isNormalMode ? Converter.ToString2(row["Choice"]) : string.Empty
-					});
+                        Choice = isNormalMode ? Converter.ToString2(row["Choice"]) : string.Empty,
+                        BetType = isNormalMode ? Converter.ToInt(row["BetType"]) : 0
+                    });
                 }
 
                 return leagueWinLoss;

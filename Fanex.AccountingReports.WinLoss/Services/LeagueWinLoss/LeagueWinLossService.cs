@@ -221,7 +221,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 GrandTotal = new BettypeWinLossBySite()
             };
 
-            var rawData = this._reportRepository.GetBetTypes(criteria);
+            var rawData = this._reportRepository.GetBetTypes(criteria, false);
 
             if (!rawData.Any())
             {
@@ -271,7 +271,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 		        GrandTotal = new BettypeWinLossBySite()
 	        };
 
-	        var rawData = this._reportRepository.GetBetTypes(criteria);
+	        var rawData = this._reportRepository.GetBetTypes(criteria, true);
 
 	        if (!rawData.Any())
 	        {
@@ -291,18 +291,18 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 		        var betTypeItem = new BetTypeWinLossItemByChoice
 				{
 			        Total = CalculateBettypeTotal(group.Key.BettypeName, bettypes),
-                    BetTypes = new List<BetTypeWinLossChoiceItem>()
+                    SiteTypes = new List<BetTypeWinLossSiteTypeItem>()
 				};
-		        var betTypeGroupByChoice = group.GroupBy(x => new { x.SiteType, x.Choice });
-		        foreach (var groupByChoice in betTypeGroupByChoice)
+		        var betTypeGroupBySiteType = group.GroupBy(x => new { x.SiteType });
+		        foreach (var siteTypeGroup in betTypeGroupBySiteType)
 		        {
-			        var bettypesWithChoice = bettypes.Where(x => x.SiteType == groupByChoice.Key.SiteType && x.Choice == groupByChoice.Key.Choice);
-			        var betTypeChoiceItem = new BetTypeWinLossChoiceItem
-			        {
-				        Total = CalculateBettypeTotal(groupByChoice.Key.SiteType, bettypesWithChoice),
-				        Choices = BindingBettypes(bettypesWithChoice).ToList()
+			        var siteTypes = bettypes.Where(x => x.SiteType == siteTypeGroup.Key.SiteType);
+			        var siteTypeItem = new BetTypeWinLossSiteTypeItem
+                    {
+				        Total = CalculateBettypeTotal(siteTypeGroup.Key.SiteType, siteTypes),
+				        Choices = BindingBettypes(siteTypes).ToList()
 			        };
-                    betTypeItem.BetTypes.Add(betTypeChoiceItem);
+                    betTypeItem.SiteTypes.Add(siteTypeItem);
 		        }
 
 				result.BettypeWinLoss.Add(betTypeItem);
@@ -408,7 +408,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 GrandTotal = new BettypeWinLossBySite()
             };
 
-            var rawData = this._reportRepository.GetBetTypes(criteria);
+            var rawData = this._reportRepository.GetBetTypes(criteria, false);
 
             if (!rawData.Any())
             {
@@ -469,7 +469,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 GrandTotal = new BettypeWinLossBySite()
             };
 
-            var rawData = this._reportRepository.GetBetTypes(criteria);
+            var rawData = this._reportRepository.GetBetTypes(criteria, false);
 
             if (!rawData.Any())
             {
@@ -577,7 +577,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 				        Total = CalculateMatchTotal(liveIndicatorGroup.Key.LiveIndicator ? "Live" : "Non-Live", liveIndicators),
 				        BetTypes = new List<MatchWinLossLiveBetTypeItem>()
 			        };
-			        var matchGroupByBetType = liveIndicatorGroup.Where(x => x.BetTypeName != "Others").GroupBy(x => new { x.BetTypeName });
+			        var matchGroupByBetType = liveIndicatorGroup.Where(x => x.BetType != 0).GroupBy(x => new { x.BetTypeName });
 			        foreach (var betTypeGroup in matchGroupByBetType)
 			        {
 				        var betTypes = betTypeGroup.Where(x => x.BetTypeName == betTypeGroup.Key.BetTypeName);
@@ -790,7 +790,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 RealIncome = bettypes.Sum(x => x.RealIncome),
                 VirtualTurnover = bettypes.Sum(x => x.VirtualTurnover),
                 RealTurnover = bettypes.Sum(x => x.RealTurnover),
-                TraderName = bettypes.FirstOrDefault()?.TraderName
+                TraderName = bettypes.FirstOrDefault()?.TraderName,
+                Bettype = (bettypes.FirstOrDefault()??new BettypeWinLossEntity()).Bettype
             };
         }
 
@@ -819,7 +820,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 RealIncome = rawData.RealIncome,
                 VirtualTurnover = rawData.VirtualTurnover,
                 RealTurnover = rawData.RealTurnover,
-                IsHedge = rawData.IsHedge
+                IsHedge = rawData.IsHedge,
+                Choice = rawData.Choice
             };
         }
 
@@ -838,7 +840,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 RealIncome = matches.Sum(x => x.RealIncome),
                 VirtualTurnover = matches.Sum(x => x.VirtualTurnover),
                 RealTurnover = matches.Sum(x => x.RealTurnover),
-                IsOutright = matches.Select(x => x.IsOutright).FirstOrDefault()
+                IsOutright = matches.Select(x => x.IsOutright).FirstOrDefault(),
+                LiveIndicator = (matches.FirstOrDefault() ?? new MatchEntity()).LiveIndicator
             };
         }
 

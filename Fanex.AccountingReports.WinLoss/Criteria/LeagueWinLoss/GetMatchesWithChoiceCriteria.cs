@@ -25,6 +25,9 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
 		public string GlobalShowTime { get; set; }
 
+		[SpParam(Ignored = true)]
+		public string LeagueName { get; set; }
+
 		public override string GetSettingKey() => "Acc_Rpt_LeagueWL_Match";
 
 		public override bool IsValid() => true;

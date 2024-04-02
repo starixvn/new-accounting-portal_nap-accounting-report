@@ -8,12 +8,12 @@ namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
 	{
 		public BettypeWinLossBySite Total { get; set; }
 
-		public List<BetTypeWinLossChoiceItem> BetTypes { get; set; }
+		public List<BetTypeWinLossSiteTypeItem> SiteTypes { get; set; }
 	}
 
 	[Serializable]
-	public class BetTypeWinLossChoiceItem
-	{
+	public class BetTypeWinLossSiteTypeItem
+    {
 		public BettypeWinLossBySite Total { get; set; }
 
 		public List<BettypeWinLossBySite> Choices { get; set; }

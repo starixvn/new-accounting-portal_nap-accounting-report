@@ -23,7 +23,16 @@ namespace Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss
 
 		public int PermissionProfileID { get; set; }
 
-		public override string GetSettingKey() => "Acc_Rpt_LeagueWL_BetType";
+        [SpParam(Ignored = true)]
+        public string LeagueName { get; set; }
+
+        [SpParam(Ignored = true)]
+        public string MatchEvent { get; set; }
+
+        [SpParam(Ignored = true)]
+        public bool IsHedge { get; set; }
+
+        public override string GetSettingKey() => "Acc_Rpt_LeagueWL_BetType";
 
 		public override bool IsValid() => true;
 	}
