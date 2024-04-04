@@ -416,7 +416,18 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
         }
     };
 
+    self.downloadFile = function (rs, fileName) {
+        element = document.createElement('a');
+        element.href = window.URL.createObjectURL(rs);
+        element.download = fileName;
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        element.remove();
+    };
+
     self.ExportMainBalanceReport = function () {
+        AccReport.disableInput();
         var exportParams = {
             BalanceType: _params.superBalanceReport.BalanceType,
             Username: _params.superBalanceReport.Username,
@@ -425,37 +436,60 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
             IsViewTotalOnly: _params.superBalanceReport.ViewTotalOny
         };
 
-        AccReport.downloadFile(window.rootUrl + "Balance/SuperBalance/ExportReport", exportParams);
+        AccReport.utility.CallAjaxForDownload(this,
+            window.rootUrl + "Balance/SuperBalance/ExportReport",
+            exportParams,
+            self.downloadFile,
+            null,
+            AccReport.enableInput);
     };
 
     self.ExportMasterBalanceReport = function () {
+        AccReport.disableInput();
         var exportParams = {
             BalanceType: _params.superBalanceReport.BalanceType,
             CustomerType: _params.superBalanceReport.CustomerType,
             SuperId: _balanceUserId.superId
         };
 
-        AccReport.downloadFile(window.rootUrl + "Balance/SuperBalance/ExportMasterBalance", exportParams);
+        AccReport.utility.CallAjaxForDownload(this,
+            window.rootUrl + "Balance/SuperBalance/ExportMasterBalance",
+            exportParams,
+            self.downloadFile,
+            null,
+            AccReport.enableInput);
     };
 
     self.ExportAgentBalanceReport = function () {
+        AccReport.disableInput();
         var exportParams = {
             BalanceType: _params.superBalanceReport.BalanceType,
             CustomerType: _params.superBalanceReport.CustomerType,
             MasterId: _balanceUserId.masterId
         };
 
-        AccReport.downloadFile(window.rootUrl + "Balance/SuperBalance/ExportAgentBalance", exportParams);
+        AccReport.utility.CallAjaxForDownload(this,
+            window.rootUrl + "Balance/SuperBalance/ExportAgentBalance",
+            exportParams,
+            self.downloadFile,
+            null,
+            AccReport.enableInput);
     };
 
     self.ExportMemberBalanceReport = function () {
+        AccReport.disableInput();
         var exportParams = {
             BalanceType: _params.superBalanceReport.BalanceType,
             CustomerType: _params.superBalanceReport.CustomerType,
             AgentId: _balanceUserId.agentId
         };
 
-        AccReport.downloadFile(window.rootUrl + "Balance/SuperBalance/ExportMemberBalance", exportParams);
+        AccReport.utility.CallAjaxForDownload(this,
+            window.rootUrl + "Balance/SuperBalance/ExportMemberBalance",
+            exportParams,
+            self.downloadFile,
+            null,
+            AccReport.enableInput);
     };
 
     viewSuperBalanceDownline = function (customerType, custId, username) {
