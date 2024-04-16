@@ -240,7 +240,6 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                         { Name: "ColRealTurnOver", Value: matchInfo.Total.RealTurnover },
                         { Name: "ColVirtualMargin", Value: matchInfo.Total.VirtualMargin },
                         { Name: "ColRealMargin", Value: matchInfo.Total.RealMargin }],
-                    CssClass: j % 2 == 0 ? "even" : "",
                     SubRows: []
                 };
                 const betTypes = info.LiveIndicators[j].BetTypes;
@@ -262,7 +261,6 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                             { Name: "ColRealTurnOver", Value: bt.Total.RealTurnover },
                             { Name: "ColVirtualMargin", Value: bt.Total.VirtualMargin },
                             { Name: "ColRealMargin", Value: bt.Total.RealMargin }],
-                        CssClass: k % 2 == 0 ? "even" : "",
                         SubRows: []
                     };
                     k++;
@@ -282,8 +280,7 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                             { Name: "ColVirtualTurnOver", Value: c.VirtualTurnover },
                             { Name: "ColRealTurnOver", Value: c.RealTurnover },
                             { Name: "ColVirtualMargin", Value: c.VirtualMargin },
-                            { Name: "ColRealMargin", Value: c.RealMargin }],
-                            CssClass: m % 2 == 0 ? "even" : ""
+                            { Name: "ColRealMargin", Value: c.RealMargin }]
                         };
                         m++;
                         currentBetTypeRow.SubRows.push(currentChoiceRow);

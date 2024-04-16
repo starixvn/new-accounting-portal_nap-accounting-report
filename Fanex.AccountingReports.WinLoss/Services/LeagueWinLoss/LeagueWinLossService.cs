@@ -550,7 +550,6 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             sw.Start();
 	        var rawData = this._reportRepository.GetMatches(criteria, true);
             sw.Stop();
-            LogService.Info($"sps: {sw.ElapsedMilliseconds}");
 
             var sw1 = new Stopwatch();
             sw1.Start();
@@ -616,7 +615,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 	        leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", rawData);
 
             sw1.Stop();
-            LogService.Info($"web: {sw1.ElapsedMilliseconds}");
+			LogService.Info($"LeagueWinLoss: sps: {sw.ElapsedMilliseconds}, web: {sw1.ElapsedMilliseconds} (miliseconds)");
 			return leagueWinLoss;
         }
 
