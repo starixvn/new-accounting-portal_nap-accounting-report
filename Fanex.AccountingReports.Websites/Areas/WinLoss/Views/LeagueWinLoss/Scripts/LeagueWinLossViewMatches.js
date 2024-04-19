@@ -243,46 +243,44 @@ Fanex.AccountingReports.WinLoss.LeagueWinLoss.LeagueWinLossViewMatches = functio
                     SubRows: []
                 };
                 const betTypes = info.LiveIndicators[j].BetTypes;
-                let k = 1, m = 1;
-                for (const bt of betTypes) {
+                for (let b = 0; b < betTypes.length; b++) {
                     const currentBetTypeRow =
                     {
                         Columns: [{
-                            Name: "ColEvent", Value: bt.Total.MatchEvent
+                            Name: "ColEvent", Value: betTypes[b].Total.MatchEvent
                         },
-                            { Name: "ColMemberWinLoss", Value: bt.Total.MemberWinLoss },
-                            { Name: "ColSMAWinLoss", Value: bt.Total.SMAWinLoss },
-                            { Name: "ColExtraPT", Value: bt.Total.ExtraPT },
-                            { Name: "ColCommision", Value: bt.Total.Commission },
-                            { Name: "ColVariance", Value: bt.Total.VarianceIncome },
-                            { Name: "ColVirtualWinLoss", Value: bt.Total.VirtualWinLoss },
-                            { Name: "ColRealIncome", Value: bt.Total.RealIncome },
-                            { Name: "ColVirtualTurnOver", Value: bt.Total.VirtualTurnover },
-                            { Name: "ColRealTurnOver", Value: bt.Total.RealTurnover },
-                            { Name: "ColVirtualMargin", Value: bt.Total.VirtualMargin },
-                            { Name: "ColRealMargin", Value: bt.Total.RealMargin }],
+                            { Name: "ColMemberWinLoss", Value: betTypes[b].Total.MemberWinLoss },
+                            { Name: "ColSMAWinLoss", Value: betTypes[b].Total.SMAWinLoss },
+                            { Name: "ColExtraPT", Value: betTypes[b].Total.ExtraPT },
+                            { Name: "ColCommision", Value: betTypes[b].Total.Commission },
+                            { Name: "ColVariance", Value: betTypes[b].Total.VarianceIncome },
+                            { Name: "ColVirtualWinLoss", Value: betTypes[b].Total.VirtualWinLoss },
+                            { Name: "ColRealIncome", Value: betTypes[b].Total.RealIncome },
+                            { Name: "ColVirtualTurnOver", Value: betTypes[b].Total.VirtualTurnover },
+                            { Name: "ColRealTurnOver", Value: betTypes[b].Total.RealTurnover },
+                            { Name: "ColVirtualMargin", Value: betTypes[b].Total.VirtualMargin },
+                            { Name: "ColRealMargin", Value: betTypes[b].Total.RealMargin }],
                         SubRows: []
                     };
-                    k++;
-                    for (const c of bt.Choices) {
+                    const choices = betTypes[b].Choices;
+                    for (let c = 0; c < choices.length; c++) {
                         const currentChoiceRow =
                         {
                             Columns: [{
-                                Name: "ColEvent", Value: c.Choice
+                                Name: "ColEvent", Value: choices[c].Choice
                             },
-                            { Name: "ColMemberWinLoss", Value: c.MemberWinLoss },
-                            { Name: "ColSMAWinLoss", Value: c.SMAWinLoss },
-                            { Name: "ColExtraPT", Value: c.ExtraPT },
-                            { Name: "ColCommision", Value: c.Commission },
-                            { Name: "ColVariance", Value: c.VarianceIncome },
-                            { Name: "ColVirtualWinLoss", Value: c.VirtualWinLoss },
-                            { Name: "ColRealIncome", Value: c.RealIncome },
-                            { Name: "ColVirtualTurnOver", Value: c.VirtualTurnover },
-                            { Name: "ColRealTurnOver", Value: c.RealTurnover },
-                            { Name: "ColVirtualMargin", Value: c.VirtualMargin },
-                            { Name: "ColRealMargin", Value: c.RealMargin }]
+                                { Name: "ColMemberWinLoss", Value: choices[c].MemberWinLoss },
+                                { Name: "ColSMAWinLoss", Value: choices[c].SMAWinLoss },
+                                { Name: "ColExtraPT", Value: choices[c].ExtraPT },
+                                { Name: "ColCommision", Value: choices[c].Commission },
+                                { Name: "ColVariance", Value: choices[c].VarianceIncome },
+                                { Name: "ColVirtualWinLoss", Value: choices[c].VirtualWinLoss },
+                                { Name: "ColRealIncome", Value: choices[c].RealIncome },
+                                { Name: "ColVirtualTurnOver", Value: choices[c].VirtualTurnover },
+                                { Name: "ColRealTurnOver", Value: choices[c].RealTurnover },
+                                { Name: "ColVirtualMargin", Value: choices[c].VirtualMargin },
+                                { Name: "ColRealMargin", Value: choices[c].RealMargin }]
                         };
-                        m++;
                         currentBetTypeRow.SubRows.push(currentChoiceRow);
                     }
                     currentLiveIndicatorRow.SubRows.push(currentBetTypeRow);
