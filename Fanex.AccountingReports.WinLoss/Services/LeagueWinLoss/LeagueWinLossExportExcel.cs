@@ -1581,30 +1581,17 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     for (var j = 0; j < info.LiveIndicators.Count; j++)
                     {
                         var liveIndicators = info.LiveIndicators[j];
-                        ExportLeagueWinLossMatchDataRow(startColumn, currentRow, liveIndicators.Total, workSheet, true);
-                        currentRow++;
+						ExportLeagueWinLossMatchDataRow(startColumn, currentRow, liveIndicators.Total, workSheet, true);
+                        SetSpecificBackGroundColor(startColumn, startColumn + 11, currentRow, ExcelExtensions.LiveIndicatorsBackgroundColor, workSheet);
+						currentRow++;
                         for (var k = 0; k < liveIndicators.BetTypes.Count; k++)
                         {
                             var betTypes = liveIndicators.BetTypes[k];
                             ExportLeagueWinLossMatchDataRow(startColumn, currentRow, betTypes.Total, workSheet, true);
-                            currentRow++;
+                            SetSpecificBackGroundColor(startColumn, startColumn + 11, currentRow, ExcelExtensions.BetTypesBackgroundColor, workSheet);
+							currentRow++;
                             for (var l = 0; l < betTypes.Choices.Count; l++)
                             {
-                                if (l % 2 == 0)
-                                {
-                                    textStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
-                                    twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
-                                    positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
-                                    positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
-                                }
-                                else
-                                {
-                                    textStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
-                                    twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
-                                    positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
-                                    positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
-                                }
-
                                 matchByLiveStatus = betTypes.Choices[l];
                                 ExportLeagueWinLossMatchDataRow(startColumn, currentRow, matchByLiveStatus, workSheet, false, false, true);
                                 currentRow++;
@@ -1931,6 +1918,17 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
             {
                 workSheet.ExportEmptyReport(startRow, startColumn, ref currentRow, startColumn + 11);
             }
+        }
+
+        private void SetSpecificBackGroundColor(int startColumn, int endColumn, int currentRow, Color color, ExcelWorksheet workSheet)
+        {
+	        ExcelCell currentCell;
+	        for (int i = startColumn; i <= endColumn; i++)
+	        {
+		        currentCell = workSheet.Cells[currentRow, i];
+                currentCell.Style.FillPattern.SetSolid(color);
+
+	        }
         }
 
         private void ExportLeagueWinLossMatchDataRow(
@@ -2293,25 +2291,11 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement.LeagueWinLoss
                     {
                         var siteType = siteTypes[j];
                         ExportLeagueWinLossBetTypeDataRow(startColumn, currentRow, siteType.Total, workSheet, true, criteria.IsHedge);
+                        SetSpecificBackGroundColor(startColumn, startColumn + 11, currentRow, ExcelExtensions.SiteTypeBackgroundColor, workSheet);
                         currentRow++;
 
                         for (var k = 0; k < siteType.Choices.Count; k++)
                         {
-                            if (k % 2 == 0)
-                            {
-                                textStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
-                                twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
-                                positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
-                                positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.EvenRowColor);
-                            }
-                            else
-                            {
-                                textStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
-                                twoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
-                                positiveTwoDecimalNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
-                                positiveTwoDecimalPercentNumberStyle.FillPattern.SetSolid(ExcelExtensions.OddRowColor);
-                            }
-
                             betTypeBySite = siteType.Choices[k];
                             ExportLeagueWinLossBetTypeDataRow(startColumn, currentRow, betTypeBySite, workSheet, false, false, false, true);
                             currentRow++;
