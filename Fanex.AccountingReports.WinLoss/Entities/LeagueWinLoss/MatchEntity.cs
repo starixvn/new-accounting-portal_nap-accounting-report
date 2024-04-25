@@ -13,5 +13,11 @@
         public bool IsHedge { get; set; }
 
         public bool IsOutright { get; set; }
+
+        public string BetTypeName { get; set; }
+
+        public int BetType { get; set; }
+
+        public string Choice { get; set; }
     }
 }

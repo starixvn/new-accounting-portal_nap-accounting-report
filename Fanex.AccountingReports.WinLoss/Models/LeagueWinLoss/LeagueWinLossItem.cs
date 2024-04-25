@@ -14,5 +14,7 @@ namespace Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss
         public string LeagueName { get; set; }
 
         public int? MatchCount { get; set; }
+
+        public int Match { get; set; }
     }
 }

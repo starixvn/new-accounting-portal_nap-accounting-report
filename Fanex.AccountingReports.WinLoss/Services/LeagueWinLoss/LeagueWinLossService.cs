@@ -2,18 +2,16 @@
 
 namespace Fanex.AccountingReports.WinLoss.Services.Implement
 {
-    using Constants;
-    using Core.Web;
-    using Entities.LeagueWinLoss;
-    using Fanex.AccountingReports.Core.Services.Impl;
-    using Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss;
-    using Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss;
-    using Fanex.AccountingReports.WinLoss.Repositories.Implement;
-    using Services.LeagueWinLoss;
-    using System.Collections.Generic;
-    using System.Linq;
+	using Entities.LeagueWinLoss;
+	using Fanex.AccountingReports.Core.Services.Impl;
+	using Fanex.AccountingReports.WinLoss.Criteria.LeagueWinLoss;
+	using Fanex.AccountingReports.WinLoss.Models.LeagueWinLoss;
+	using Fanex.AccountingReports.WinLoss.Repositories.Implement;
+	using Services.LeagueWinLoss;
+	using System.Collections.Generic;
+	using System.Linq;
 
-    public class LeagueWinLossService : ServiceBase
+	public class LeagueWinLossService : ServiceBase
     {
         private LeagueWinLossRepository _reportRepository;
 
@@ -221,7 +219,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 GrandTotal = new BettypeWinLossBySite()
             };
 
-            var rawData = this._reportRepository.GetBetTypes(criteria);
+            var rawData = this._reportRepository.GetBetTypes(criteria, false);
 
             if (!rawData.Any())
             {
@@ -260,7 +258,68 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             return result;
         }
 
-        public BetTypeWinLossByStatusModel GetBetTypesByLiveNonLiveStatus(GetBetTypesCriteria criteria)
+        public BettypeWinLossWithChoiceModel GetBetTypesWithChoice(GetBetTypesWithChoiceCriteria criteria)
+        {
+	        var result = new BettypeWinLossWithChoiceModel
+			{
+		        BettypeWinLoss = new List<BetTypeWinLossItemByChoice>(),
+		        RM = new BettypeWinLossBySite(),
+		        BARM = new BettypeWinLossBySite(),
+		        Total = new BettypeWinLossBySite(),
+		        GrandTotal = new BettypeWinLossBySite()
+	        };
+
+	        var rawData = this._reportRepository.GetBetTypes(criteria, true);
+
+	        if (!rawData.Any())
+	        {
+		        return result;
+	        }
+
+	        var rawBettypes = rawData.Where(x => !x.SiteType.Contains(criteria.SportName + " " + "8RM")
+	                                             && !x.SiteType.Contains(criteria.SportName + " " + "BARM")
+	                                             && !x.SiteType.Contains("Other Sports 8RM")
+	                                             && !x.SiteType.Contains("Other Sports BARM"));
+
+	        var betTypeGroups = rawBettypes.GroupBy(x => new { x.Bettype, x.BettypeName });
+	        foreach (var group in betTypeGroups)
+	        {
+		        var bettypes = rawBettypes.Where(x => x.Bettype == group.Key.Bettype && x.BettypeName == group.Key.BettypeName);
+
+		        var betTypeItem = new BetTypeWinLossItemByChoice
+				{
+			        Total = CalculateBettypeTotal(group.Key.BettypeName, bettypes),
+                    SiteTypes = new List<BetTypeWinLossSiteTypeItem>()
+				};
+		        var betTypeGroupBySiteType = group.GroupBy(x => new { x.SiteType });
+		        foreach (var siteTypeGroup in betTypeGroupBySiteType)
+		        {
+			        var siteTypes = bettypes.Where(x => x.SiteType == siteTypeGroup.Key.SiteType);
+			        var siteTypeItem = new BetTypeWinLossSiteTypeItem
+                    {
+				        Total = CalculateBettypeTotal(siteTypeGroup.Key.SiteType, siteTypes),
+				        Choices = BindingBettypes(siteTypes.Where(x => !string.IsNullOrEmpty(x.Choice))).ToList()
+			        };
+                    betTypeItem.SiteTypes.Add(siteTypeItem);
+		        }
+
+				result.BettypeWinLoss.Add(betTypeItem);
+	        }
+
+	        result.Total = CalculateBettypeTotal("Total", rawBettypes);
+
+	        var eightRM = rawData.FirstOrDefault(x => x.SiteType.Contains("8RM"));
+	        result.RM = BindingBettype(eightRM);
+
+	        var barRM = rawData.FirstOrDefault(x => x.SiteType.Contains("BARM"));
+	        result.BARM = BindingBettype(barRM);
+
+	        result.GrandTotal = CalculateBettypeTotal("Grand Total", rawData);
+
+	        return result;
+        }
+
+		public BetTypeWinLossByStatusModel GetBetTypesByLiveNonLiveStatus(GetBetTypesCriteria criteria)
         {
             var result = new BetTypeWinLossByStatusModel();
             var liveIndicator = criteria.LiveIndicator;
@@ -347,7 +406,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 GrandTotal = new BettypeWinLossBySite()
             };
 
-            var rawData = this._reportRepository.GetBetTypes(criteria);
+            var rawData = this._reportRepository.GetBetTypes(criteria, false);
 
             if (!rawData.Any())
             {
@@ -408,7 +467,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 GrandTotal = new BettypeWinLossBySite()
             };
 
-            var rawData = this._reportRepository.GetBetTypes(criteria);
+            var rawData = this._reportRepository.GetBetTypes(criteria, false);
 
             if (!rawData.Any())
             {
@@ -437,7 +496,7 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
 
         public MatchWinLossModel GetMatches(GetMatchesCriteria criteria)
         {
-            var rawData = this._reportRepository.GetMatches(criteria);
+            var rawData = this._reportRepository.GetMatches(criteria, false);
             var leagueWinLoss = new MatchWinLossModel
             {
                 Match = new List<MatchWinLossItem>(),
@@ -480,9 +539,75 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
             return leagueWinLoss;
         }
 
-        public MatchWinLossFromBetTypeStatusModel GetMatchesFromBetTypeStatus(GetMatchesCriteria criteria)
+        public MatchWinLossWithChoiceModel GetMatchesWithChoice(GetMatchesWithChoiceCriteria criteria)
         {
-            var rawData = this._reportRepository.GetMatches(criteria);
+	        var rawData = this._reportRepository.GetMatches(criteria, true);
+
+			var leagueWinLoss = new MatchWinLossWithChoiceModel
+	        {
+		        Match = new List<MatchWinLossItemByChoice>(),
+		        RM = new MatchWinLossByLiveStatus(),
+		        BARM = new MatchWinLossByLiveStatus(),
+		        Total = new MatchWinLossByLiveStatus(),
+		        GrandTotal = new MatchWinLossByLiveStatus()
+	        };
+
+	        var rawMatches = rawData.Where(x =>
+		        !x.MatchEvent.Contains(criteria.SportName + " " + "BARM")
+		        && !x.MatchEvent.Contains(criteria.SportName + " " + "8RM")
+		        && !x.MatchEvent.Contains("Other Sports 8RM")
+		        && !x.MatchEvent.Contains("Other Sports BARM"));
+
+	        var matchGroups = rawMatches.GroupBy(x => new { x.MatchID, x.MatchEvent });
+	        foreach (var group in matchGroups)
+	        {
+		        var matches = rawMatches.Where(x => x.MatchID == group.Key.MatchID && x.MatchEvent == group.Key.MatchEvent);
+		        var matchWinLossItem = new MatchWinLossItemByChoice
+				{
+			        Total = CalculateMatchTotal(group.Key.MatchEvent, matches),
+                    LiveIndicators = new List<MatchWinLossLiveIndicatorItem>()
+				};
+		        var matchGroupByLiveIndicator = group.GroupBy(x => new { x.LiveIndicator });
+		        foreach (var liveIndicatorGroup in matchGroupByLiveIndicator)
+		        {
+			        var liveIndicators = matches.Where(x => x.LiveIndicator == liveIndicatorGroup.Key.LiveIndicator);
+			        var liveIndicatorItem = new MatchWinLossLiveIndicatorItem
+			        {
+				        Total = CalculateMatchTotal(liveIndicatorGroup.Key.LiveIndicator ? "Live" : "Non-Live", liveIndicators),
+				        BetTypes = new List<MatchWinLossLiveBetTypeItem>()
+			        };
+			        var matchGroupByBetType = liveIndicatorGroup.Where(x => x.BetType != 0).GroupBy(x => new { x.BetTypeName });
+			        foreach (var betTypeGroup in matchGroupByBetType)
+			        {
+				        var betTypes = betTypeGroup.Where(x => x.BetTypeName == betTypeGroup.Key.BetTypeName);
+				        var betTypeItem = new MatchWinLossLiveBetTypeItem
+				        {
+					        Total = CalculateMatchTotal(betTypeGroup.Key.BetTypeName, betTypes),
+					        Choices = BindingMatches(betTypes.Where(x => !string.IsNullOrEmpty(x.Choice))).ToList()
+				        };
+                        liveIndicatorItem.BetTypes.Add(betTypeItem);
+			        }
+                    matchWinLossItem.LiveIndicators.Add(liveIndicatorItem);
+		        }
+
+				leagueWinLoss.Match.Add(matchWinLossItem);
+	        }
+
+	        leagueWinLoss.Total = CalculateMatchTotal("Total", rawMatches);
+
+	        var eightRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains("8RM"));
+	        leagueWinLoss.RM = BindingMatch(eightRM);
+
+	        var barRM = rawData.FirstOrDefault(x => x.MatchEvent.Contains("BARM"));
+	        leagueWinLoss.BARM = BindingMatch(barRM);
+
+	        leagueWinLoss.GrandTotal = CalculateMatchTotal("Grand Total", rawData);
+			return leagueWinLoss;
+        }
+
+		public MatchWinLossFromBetTypeStatusModel GetMatchesFromBetTypeStatus(GetMatchesCriteria criteria)
+        {
+            var rawData = this._reportRepository.GetMatches(criteria, false);
             var leagueWinLoss = new MatchWinLossFromBetTypeStatusModel
             {
                 Match = new List<MatchWinLossByLiveStatus>(),
@@ -663,7 +788,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 RealIncome = bettypes.Sum(x => x.RealIncome),
                 VirtualTurnover = bettypes.Sum(x => x.VirtualTurnover),
                 RealTurnover = bettypes.Sum(x => x.RealTurnover),
-                TraderName = bettypes.FirstOrDefault()?.TraderName
+                TraderName = bettypes.FirstOrDefault()?.TraderName,
+                Bettype = (bettypes.FirstOrDefault()??new BettypeWinLossEntity()).Bettype
             };
         }
 
@@ -692,7 +818,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 RealIncome = rawData.RealIncome,
                 VirtualTurnover = rawData.VirtualTurnover,
                 RealTurnover = rawData.RealTurnover,
-                IsHedge = rawData.IsHedge
+                IsHedge = rawData.IsHedge,
+                Choice = rawData.Choice
             };
         }
 
@@ -711,7 +838,8 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 RealIncome = matches.Sum(x => x.RealIncome),
                 VirtualTurnover = matches.Sum(x => x.VirtualTurnover),
                 RealTurnover = matches.Sum(x => x.RealTurnover),
-                IsOutright = matches.Select(x => x.IsOutright).FirstOrDefault()
+                IsOutright = matches.Select(x => x.IsOutright).FirstOrDefault(),
+                LiveIndicator = (matches.FirstOrDefault() ?? new MatchEntity()).LiveIndicator
             };
         }
 
@@ -741,7 +869,9 @@ namespace Fanex.AccountingReports.WinLoss.Services.Implement
                 VirtualTurnover = rawData.VirtualTurnover,
                 RealTurnover = rawData.RealTurnover,
                 IsHedge = rawData.IsHedge,
-                IsOutright = rawData.IsOutright
+                IsOutright = rawData.IsOutright,
+                BetTypeName = rawData.BetTypeName,
+                Choice = rawData.Choice
             };
         }
 

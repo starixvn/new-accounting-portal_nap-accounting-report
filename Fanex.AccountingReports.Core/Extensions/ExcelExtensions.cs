@@ -17,7 +17,7 @@ namespace Fanex.AccountingReports.Core.Extensions
         public const int MaxRowPerSheet = 20000;
 
         public static readonly Color BackGroundColor = Color.White;
-        public static readonly Color HeaderTitleColor = Color.FromArgb(60, 94, 165);
+		public static readonly Color HeaderTitleColor = Color.FromArgb(60, 94, 165);
         public static readonly Color EvenRowColor = Color.FromArgb(228, 242, 253);
         public static readonly Color OddRowColor = Color.White;
         public static readonly Color SubTotalRowColor = Color.FromArgb(194, 217, 236);
@@ -29,8 +29,11 @@ namespace Fanex.AccountingReports.Core.Extensions
         public static readonly Color ChildColor = Color.FromArgb(194, 226, 236);
         public static readonly Color NoteInformationCellColor = Color.FromArgb(181, 196, 208);
         public static readonly Color BorderColor = Color.Gray;
+        public static readonly Color LiveIndicatorsBackgroundColor = Color.FromArgb(212, 237, 251);
+        public static readonly Color SiteTypeBackgroundColor = Color.FromArgb(212, 237, 251);
+		public static readonly Color BetTypesBackgroundColor = Color.FromArgb(235, 253, 253);
 
-        private const string FontName = "Tahoma";
+		private const string FontName = "Tahoma";
         private const string NegativeNumberFormat = "[>=0]#,##0{0}_);[RED][<0]-#,##0{1}";
         private const string NormalNumberFormat = "#,##0{0}_);-#,##0{1}";
         private const string PositiveNumberFormat = "[RED][>0]#,##0{0}_);[<0]-#,##0{1};#,##0{2}";

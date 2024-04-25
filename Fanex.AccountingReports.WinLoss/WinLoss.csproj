@@ -57,6 +57,9 @@
     <Reference Include="Fanex.Data.Repository, Version=4.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.Data.Repository.4.2.5\lib\net471\Fanex.Data.Repository.dll</HintPath>
     </Reference>
+    <Reference Include="Fanex.Logging, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Logging.2.0.1.1\lib\net461\Fanex.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="Fanex.NAP.Core.Client, Version=1.2.1.6, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Fanex.NAP.Core.Client.2.0.0.2\lib\net40\Fanex.NAP.Core.Client.dll</HintPath>
     </Reference>
@@ -141,8 +144,10 @@
     <Compile Include="Criteria\DailyMixParlayWinLoss\GetAdvanceMixParlayReportCriteria.cs" />
     <Compile Include="Criteria\DailyMixParlayWinLoss\GetCombinationWinLossReportCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetBetTypesCriteria.cs" />
+    <Compile Include="Criteria\LeagueWinLoss\GetBetTypesWithChoiceCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetMatchesCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetLeagueWinLossCriteria.cs" />
+    <Compile Include="Criteria\LeagueWinLoss\GetMatchesWithChoiceCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetSiteFilterCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetSuperCriteria.cs" />
     <Compile Include="Criteria\LeagueWinLoss\GetSitesCriteria.cs" />
@@ -176,9 +181,11 @@
     <Compile Include="Models\LeagueWinLoss\BettypeWinLossBySite.cs" />
     <Compile Include="Models\LeagueWinLoss\BetTypeWinLossByStatusModel.cs" />
     <Compile Include="Models\LeagueWinLoss\BetTypeWinLossItem.cs" />
+    <Compile Include="Models\LeagueWinLoss\BetTypeWinLossItemByChoice.cs" />
     <Compile Include="Models\LeagueWinLoss\BetTypeWinLossLiveGroupModel.cs" />
     <Compile Include="Models\LeagueWinLoss\BetTypeWinLossLiveModel.cs" />
     <Compile Include="Models\LeagueWinLoss\BettypeWinLossModel.cs" />
+    <Compile Include="Models\LeagueWinLoss\BettypeWinLossWithChoiceModel.cs" />
     <Compile Include="Models\LeagueWinLoss\BetTypeWinLossNonLiveModel.cs" />
     <Compile Include="Models\LeagueWinLoss\GlobalShowTime.cs" />
     <Compile Include="Models\LeagueWinLoss\LeagueWinLossModel.cs" />
@@ -187,7 +194,9 @@
     <Compile Include="Models\LeagueWinLoss\MatchWinLossByLiveStatus.cs" />
     <Compile Include="Models\LeagueWinLoss\MatchWinLossItem.cs" />
     <Compile Include="Models\LeagueWinLoss\MatchWinLossFromBetTypeStatusModel.cs" />
+    <Compile Include="Models\LeagueWinLoss\MatchWinLossItemByChoice.cs" />
     <Compile Include="Models\LeagueWinLoss\MatchWinLossModel.cs" />
+    <Compile Include="Models\LeagueWinLoss\MatchWinLossWithChoiceModel.cs" />
     <Compile Include="Models\LeagueWinLoss\Site.cs" />
     <Compile Include="Models\LeagueWinLoss\SiteGroup.cs" />
     <Compile Include="Models\LeagueWinLoss\Status.cs" />
