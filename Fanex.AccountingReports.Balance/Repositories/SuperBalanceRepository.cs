@@ -44,7 +44,7 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
                 {
                     CustId = Converter.ToString2(row["custid"]),
                     Username = row["username"],
-                    Currency = currencies[currencyId],
+                    Currency = currencies.TryGetValue(currencyId, out var currencyName) ? currencyName : string.Empty,
                     Balance = Converter.ToDecimal(row["Balance"]),
                     BaseBalance = Converter.ToDecimal(row["BaseBalance"]),
                     HeadlineEnabled = Converter.ToBool(row["HeadlineEnabled"])
@@ -80,7 +80,7 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
                 {
                     CustId = Converter.ToString2(row["custid"]),
                     Username = Converter.ToString2(row["username"]),
-                    Currency = currencies[currencyId],
+                    Currency = currencies.TryGetValue(currencyId, out var currencyName) ? currencyName : string.Empty,
                     Balance = Converter.ToDecimal(row["Balance"]),
                     BaseBalance = Converter.ToDecimal(row["BaseBalance"])
                 });
@@ -115,7 +115,7 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
                 {
                     CustId = Converter.ToString2(row["custid"]),
                     Username = Converter.ToString2(row["username"]),
-                    Currency = currencies[currencyId],
+                    Currency = currencies.TryGetValue(currencyId, out var currencyName) ? currencyName : string.Empty,
                     Balance = Converter.ToDecimal(row["Balance"]),
                     BaseBalance = Converter.ToDecimal(row["baseBalance"])
                 });
