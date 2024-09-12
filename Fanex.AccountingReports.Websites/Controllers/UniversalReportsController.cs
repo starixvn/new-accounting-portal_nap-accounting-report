@@ -89,5 +89,10 @@ namespace Fanex.AccountingReports.Websites.Controllers
         {
 	        return Redirect("../../UniversalReports/ResultAnalysis");
         }
-	}
+
+        public ActionResult BetConstructPerformance()
+        {
+            return Redirect("../../UniversalReports/BetConstructPerformance");
+        }
+    }
 }
