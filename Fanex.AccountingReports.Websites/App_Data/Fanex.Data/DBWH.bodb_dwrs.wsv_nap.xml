@@ -74,6 +74,7 @@
     <Setting Key="WinLoss_LeagueWinLoss_GetPermisionProfileID" SpName="Acc_Rpt_GetPermisionProfileID" DbName="DBWH.bodb_dwrs.wsv_nap" />
     <Setting Key="Acc_Rpt_LeagueWL_BetType" SpName="Acc_Rpt_LeagueWL_BetType" DbName="DBWH.bodb_dwrs.wsv_nap"></Setting>
     <Setting Key="Acc_Rpt_LeagueWL_Match" SpName="Acc_Rpt_LeagueWL_Match" DbName="DBWH.bodb_dwrs.wsv_nap"></Setting>
+    <Setting Key="WinLoss_LeagueWinLoss_GetSports" SpName="Acc_Rpt_LeagueWL_SporttypeSel" DbName="DBWH.bodb_dwrs.wsv_nap" TimeOut="600" />
   </Function>
   <Function Name="Special - Save Bet Report">
     <Setting Key="Special_SaveBet_GetListSport" SpName="NAP_SaveBet_ListSportByDate" DbName="DBWH.bodb_dwrs.wsv_nap"></Setting>
