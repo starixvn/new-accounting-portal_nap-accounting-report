@@ -47,7 +47,9 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
                     Currency = currencies.TryGetValue(currencyId, out var currencyName) ? currencyName : string.Empty,
                     Balance = Converter.ToDecimal(row["Balance"]),
                     BaseBalance = Converter.ToDecimal(row["BaseBalance"]),
-                    HeadlineEnabled = Converter.ToBool(row["HeadlineEnabled"])
+                    HeadlineEnabled = Converter.ToBool(row["HeadlineEnabled"]),
+                    Reward = Converter.ToDecimal(row["Reward"]),
+                    RewardRM = Converter.ToDecimal(row["RewardRM"])
                 });
             }
 
@@ -82,7 +84,9 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
                     Username = Converter.ToString2(row["username"]),
                     Currency = currencies.TryGetValue(currencyId, out var currencyName) ? currencyName : string.Empty,
                     Balance = Converter.ToDecimal(row["Balance"]),
-                    BaseBalance = Converter.ToDecimal(row["BaseBalance"])
+                    BaseBalance = Converter.ToDecimal(row["BaseBalance"]),
+                    Reward = Converter.ToDecimal(row["Reward"]),
+                    RewardRM = Converter.ToDecimal(row["RewardRM"])
                 });
             }
 
@@ -117,7 +121,9 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
                     Username = Converter.ToString2(row["username"]),
                     Currency = currencies.TryGetValue(currencyId, out var currencyName) ? currencyName : string.Empty,
                     Balance = Converter.ToDecimal(row["Balance"]),
-                    BaseBalance = Converter.ToDecimal(row["baseBalance"])
+                    BaseBalance = Converter.ToDecimal(row["baseBalance"]),
+                    Reward = Converter.ToDecimal(row["Reward"]),
+                    RewardRM = Converter.ToDecimal(row["RewardRM"])
                 });
             }
 

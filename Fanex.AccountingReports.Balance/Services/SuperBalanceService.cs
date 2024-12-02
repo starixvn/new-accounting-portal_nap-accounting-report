@@ -91,7 +91,9 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                     Username = null,
                     Currency = null,
                     Balance = 0,
-                    BaseBalance = Converter.ToDecimal(rawData[0])
+                    BaseBalance = Converter.ToDecimal(rawData[0]),
+                    Reward = 0,
+                    RewardRM = Converter.ToDecimal(rawData[1])
                 };
 
                 result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);
@@ -118,7 +120,9 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                         Currency = row.Currency,
                         Balance = balance,
                         BaseBalance = baseBalance,
-                        HeadlineEnabled = row.HeadlineEnabled
+                        HeadlineEnabled = row.HeadlineEnabled,
+                        Reward = Converter.ToDecimal(row.Reward),
+                        RewardRM = Converter.ToDecimal(row.RewardRM)
                     };
 
                     result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);
@@ -167,7 +171,9 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                     Username = row.Username,
                     Currency = row.Currency,
                     Balance = balance,
-                    BaseBalance = baseBalance
+                    BaseBalance = baseBalance,
+                    Reward = Converter.ToDecimal(row.Reward),
+                    RewardRM = Converter.ToDecimal(row.RewardRM)
                 };
 
                 result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);
@@ -214,7 +220,9 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                     Username = row.Username,
                     Currency = row.Currency,
                     Balance = balance,
-                    BaseBalance = baseBalance
+                    BaseBalance = baseBalance,
+                    Reward = Converter.ToDecimal(row.Reward),
+                    RewardRM = Converter.ToDecimal(row.RewardRM)
                 };
 
                 result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);
@@ -261,7 +269,9 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                     Username = row.Username,
                     Currency = row.Currency,
                     Balance = balance,
-                    BaseBalance = row.BaseBalance
+                    BaseBalance = row.BaseBalance,
+                    Reward = Converter.ToDecimal(row.Reward),
+                    RewardRM = Converter.ToDecimal(row.RewardRM)
                 };
 
                 result.BaseBalanceTotal.AddToBaseBalance(superBalanceInfo);
@@ -488,12 +498,14 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             worksheet.Columns[startColumn + 2].Width = 80 * ExcelExtensions.FontWidth;
             worksheet.Columns[startColumn + 3].Width = 150 * ExcelExtensions.FontWidth;
             worksheet.Columns[startColumn + 4].Width = 150 * ExcelExtensions.FontWidth;
+            worksheet.Columns[startColumn + 5].Width = 150 * ExcelExtensions.FontWidth;
+            worksheet.Columns[startColumn + 6].Width = 150 * ExcelExtensions.FontWidth;
             var currentColumn = startColumn;
 
             currentColumn = startColumn;
             var title = ReportService.GetRoleName(roleId);
             currentColumn = startColumn;
-            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 4);
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
             currentCellRange.Merged = true;
             currentCellRange.Value = string.Format("{0} {1} {2}", title, balanceType, Labels.Balance);
             currentCellRange.Style.FormatTitleCell(titleColor);
@@ -505,22 +517,37 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             }
 
             // First Row
-            currentColumn = startColumn;
-            currentCell = worksheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.No;
-            currentCell.Style.FormatTitleCell(headerColor);
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.No;
+            currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
 
-            currentCell = worksheet.Cells[currentRow, currentColumn];
-            currentCell.Value = title;
-            currentCell.Style.FormatTitleCell(headerColor);
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = title;
+            currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
 
-            currentCell = worksheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Currency;
-            currentCell.Style.FormatTitleCell(headerColor);
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Currency;
+            currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
 
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.MainWallet;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn += 2;
+
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.RewardWallet;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentRow++;
+
+            currentColumn = startColumn + 3;
             currentCell = worksheet.Cells[currentRow, currentColumn];
             currentCell.Value = Labels.Balance;
             currentCell.Style.FormatTitleCell(headerColor);
@@ -530,6 +557,17 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             currentCell.Value = Labels.BaseRM;
             currentCell.Style.FormatTitleCell(headerColor);
             currentColumn++;
+
+            currentCell = worksheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Reward;
+            currentCell.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCell = worksheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.RewardRM;
+            currentCell.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
             currentRow++;
         }
 
@@ -551,34 +589,51 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             worksheet.Columns[startColumn + 2].Width = 80 * ExcelExtensions.FontWidth;
             worksheet.Columns[startColumn + 3].Width = 150 * ExcelExtensions.FontWidth;
             worksheet.Columns[startColumn + 4].Width = 150 * ExcelExtensions.FontWidth;
+            worksheet.Columns[startColumn + 5].Width = 150 * ExcelExtensions.FontWidth;
+            worksheet.Columns[startColumn + 6].Width = 150 * ExcelExtensions.FontWidth;
             var currentColumn = startColumn;
 
             currentColumn = startColumn;
             var title = ReportService.GetRoleName(roleId);
             currentColumn = startColumn;
-            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 4);
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 6);
             currentCellRange.Merged = true;
             currentCellRange.Value = string.Format("{0} {1} {2}", title, balanceType, Labels.Balance);
             currentCellRange.Style.FormatTitleCell(titleColor);
             currentRow++;
 
             // First Row
-            currentColumn = startColumn;
-            currentCell = worksheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.No;
-            currentCell.Style.FormatTitleCell(headerColor);
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.No;
+            currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
 
-            currentCell = worksheet.Cells[currentRow, currentColumn];
-            currentCell.Value = title;
-            currentCell.Style.FormatTitleCell(headerColor);
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = title;
+            currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
 
-            currentCell = worksheet.Cells[currentRow, currentColumn];
-            currentCell.Value = Labels.Currency;
-            currentCell.Style.FormatTitleCell(headerColor);
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow + 1, currentColumn);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.Currency;
+            currentCellRange.Style.FormatTitleCell(headerColor);
             currentColumn++;
 
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.MainWallet;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentColumn += 2;
+
+            currentCellRange = worksheet.Cells.GetSubrangeAbsolute(currentRow, currentColumn, currentRow, currentColumn + 1);
+            currentCellRange.Merged = true;
+            currentCellRange.Value = Labels.RewardWallet;
+            currentCellRange.Style.FormatTitleCell(headerColor);
+            currentRow++;
+
+            currentColumn = startColumn + 3;
             currentCell = worksheet.Cells[currentRow, currentColumn];
             currentCell.Value = Labels.Balance;
             currentCell.Style.FormatTitleCell(headerColor);
@@ -588,6 +643,17 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             currentCell.Value = Labels.BaseRM;
             currentCell.Style.FormatTitleCell(headerColor);
             currentColumn++;
+
+            currentCell = worksheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.Reward;
+            currentCell.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
+            currentCell = worksheet.Cells[currentRow, currentColumn];
+            currentCell.Value = Labels.RewardRM;
+            currentCell.Style.FormatTitleCell(headerColor);
+            currentColumn++;
+
             currentRow++;
         }
 
@@ -625,14 +691,14 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
                         rowType);
                 }
 
-                this.ExportSuperBalanceTotal(ref worksheet, startRow, startColumn, ref currentRow, report.BaseBalanceTotal.BaseBalance);
+                this.ExportSuperBalanceTotal(ref worksheet, startRow, startColumn, ref currentRow, report.BaseBalanceTotal.BaseBalance, report.BaseBalanceTotal.RewardRM);
             }
             else if (report != null &&
                 report.BaseBalanceTotal != null &&
                 report.SuperBalanceList.Count == 0 &&
                 report.HasData)
             {
-                this.ExportSuperBalanceTotal(ref worksheet, startRow, startColumn, ref currentRow, report.BaseBalanceTotal.BaseBalance);
+                this.ExportSuperBalanceTotal(ref worksheet, startRow, startColumn, ref currentRow, report.BaseBalanceTotal.BaseBalance, report.BaseBalanceTotal.RewardRM);
             }
             else
             {
@@ -707,6 +773,16 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
             currentCell.Value = detail.BaseBalance;
             currentCell.Style = twoDecimalNumberStyle;
             currentColumn++;
+
+            currentCell = worksheet.Cells[currentRow, currentColumn];
+            currentCell.Value = detail.Reward;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
+
+            currentCell = worksheet.Cells[currentRow, currentColumn];
+            currentCell.Value = detail.RewardRM;
+            currentCell.Style = twoDecimalNumberStyle;
+            currentColumn++;
             currentRow++;
         }
 
@@ -715,7 +791,8 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
            int startRow,
            int startColumn,
            ref int currentRow,
-           decimal total)
+           decimal total,
+           decimal totalReward)
         {
             ExcelCell currentCell;
             var textStyle = ExcelExtensions.GetCellTextStyle(ExcelExtensions.GrandTotalRowColor, true);
@@ -737,6 +814,14 @@ namespace Fanex.AccountingReports.Balance.Services.Implement
 
             currentCell = worksheet.Cells[currentRow, startColumn + 4];
             currentCell.Value = total;
+            currentCell.Style = twoDecimalNumberStyle;
+
+            currentCell = worksheet.Cells[currentRow, startColumn + 5];
+            currentCell.Value = "";
+            currentCell.Style = textStyle;
+
+            currentCell = worksheet.Cells[currentRow, startColumn + 6];
+            currentCell.Value = totalReward;
             currentCell.Style = twoDecimalNumberStyle;
         }
 
