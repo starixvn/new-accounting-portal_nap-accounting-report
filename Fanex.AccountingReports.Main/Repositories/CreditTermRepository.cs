@@ -89,6 +89,8 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
                         PreAgreeAmount = Convert.ToDouble(parentRow["PreAgreeAmount"]),
                         Balance = Convert.ToDouble(parentRow["Balance"]),
                         BalanceBase = Convert.ToDouble(parentRow["Balance_Base"]),
+                        Reward = Convert.ToDouble(parentRow["Reward"]),
+                        RewardRM = Convert.ToDouble(parentRow["RewardRM"]),
                         AccountRemark = Converter.ToString2(parentRow["AccountRemark"]),
                         PhoneNumber = Converter.ToString2(parentRow["phone"]),
                         CheckerName = Converter.ToString2(parentRow["checkername"]),
@@ -122,6 +124,8 @@ namespace Fanex.AccountingReports.Main.Repositories.Implement
                                     CurrencyName = memberCurrencyName,
                                     Balance = Convert.ToDouble(memberRow["Balance"]),
                                     BalanceBase = Convert.ToDouble(memberRow["Balance_Base"]),
+                                    Reward = Convert.ToDouble(memberRow["Reward"]),
+                                    RewardRM = Convert.ToDouble(memberRow["RewardRM"]),
                                     BalanceGroup = Convert.ToDouble(memberRow["Balance_Group"]),
                                     AccountRemark = Converter.ToString2(memberRow["AccountRemark"]),
                                     AccountRemarkDate = Converter.ToString2(memberRow["AccountRemarkDate"])

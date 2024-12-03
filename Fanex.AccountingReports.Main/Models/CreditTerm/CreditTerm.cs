@@ -34,6 +34,10 @@ namespace Fanex.AccountingReports.Main.Models.CreditTerm
 
         public double BalanceBase { get; set; }
 
+        public double Reward { get; set; }
+
+        public double RewardRM { get; set; }
+
         public double BalanceGroup { get; set; }
 
         public string AccountRemark { get; set; }

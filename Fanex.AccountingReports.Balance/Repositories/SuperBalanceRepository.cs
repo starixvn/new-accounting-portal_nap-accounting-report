@@ -25,7 +25,8 @@ namespace Fanex.AccountingReports.Balance.Repositories.Implement
             var superBalance = new List<dynamic>();
             if (criteria.IsViewTotalOnly)
             {
-                superBalance.Add(outputParam["total"]);
+                superBalance.Add(outputParam["Total"]);
+                superBalance.Add(outputParam["TotalReward"]);
                 return superBalance;
             }
 

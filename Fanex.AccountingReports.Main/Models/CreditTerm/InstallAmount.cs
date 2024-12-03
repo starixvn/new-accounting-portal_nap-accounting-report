@@ -13,6 +13,10 @@ namespace Fanex.AccountingReports.Main.Models.CreditTerm
 
         public double BalanceBase { get; set; }
 
+        public double Reward { get; set; }
+
+        public double RewardRM { get; set; }
+
         public double InstallmentAmount { get; set; }
 
         public int NumberDayInstallment { get; set; }

@@ -47,8 +47,8 @@
   </Function>
  
   <Function Name="Main - Credit Term">
-    <Setting Key="CreditTerm" SpName="Acc_Rpt_CreditTerm" DbName="DBACC.bodb02.wsv_nap" TimeOut="600" />
-    <Setting Key="InstallAmount" SpName="Acc_Rpt_InstallAmount" DbName="DBACC.bodb02.wsv_nap" TimeOut="600" />
+    <Setting Key="CreditTerm" SpName="Acc_Rpt_CreditTerm_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600" />
+    <Setting Key="InstallAmount" SpName="Acc_Rpt_InstallAmount_xtest" DbName="DBACC.bodb02.wsv_nap" TimeOut="600" />
   </Function>   
   <Function Name="Special - Total Credit Account By Product">
     <Setting Key="Acc_Rpt_EnableDisableAccount_ByProduct" SpName="Acc_Rpt_EnableDisableAccount_ByProduct" DbName="DBACC.bodb02.wsv_nap" TimeOut="600" />

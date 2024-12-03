@@ -186,6 +186,24 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
                 ref currentColumn,
                 currentRow + 1,
                 currentColumn,
+                Labels.Reward,
+                this._headerStyle.TextStyle);
+            NpoiExcelExtensions.RenderCell(
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref currentColumn,
+                currentRow + 1,
+                currentColumn,
+                Labels.RewardRM,
+                this._headerStyle.TextStyle);
+            NpoiExcelExtensions.RenderCell(
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref currentColumn,
+                currentRow + 1,
+                currentColumn,
                 Labels.InstallmentAmount,
                 this._headerStyle.TextStyle);
             NpoiExcelExtensions.RenderCell(
@@ -240,6 +258,12 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
 
             colorDecimalStyle = this.SetColorToDecimal(memberRow.BalanceBase, styleCell.DecimalStyle, cssClass);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, memberRow.BalanceBase, colorDecimalStyle);
+
+            colorDecimalStyle = this.SetColorToDecimal(memberRow.Reward, styleCell.DecimalStyle, cssClass);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, memberRow.Reward, colorDecimalStyle);
+
+            colorDecimalStyle = this.SetColorToDecimal(memberRow.RewardRM, styleCell.DecimalStyle, cssClass);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, memberRow.RewardRM, colorDecimalStyle);
 
             colorDecimalStyle = this.SetColorToDecimal(memberRow.InstallmentAmount, styleCell.DecimalStyle, cssClass);
             NpoiExcelExtensions.RenderCell(

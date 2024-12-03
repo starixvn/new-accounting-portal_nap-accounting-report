@@ -1261,4 +1261,10 @@
   <data name="VirtualSports3" xml:space="preserve">
     <value>Virtual Sports 3</value>
   </data>
+  <data name="Reward" xml:space="preserve">
+    <value>Reward (Original)</value>
+  </data>
+  <data name="RewardRM" xml:space="preserve">
+    <value>Reward (RM)</value>
+  </data>
 </root>

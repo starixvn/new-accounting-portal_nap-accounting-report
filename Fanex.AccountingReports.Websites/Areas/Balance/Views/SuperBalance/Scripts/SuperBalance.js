@@ -282,7 +282,9 @@ Fanex.AccountingReports.Balance.SuperBalance = function () {
             {
                 CssClass: "totalRow",
                 Columns: [{ Name: "Number", Value: "Total", MergeColNumber: 4 },
-                    { Name: "BaseRM", Value: rs.BaseBalanceTotal.BaseBalance, CellAlign: "right"}]
+                    { Name: "BaseRM", Value: rs.BaseBalanceTotal.BaseBalance, CellAlign: "right" },
+                    { Name: "Reward", Value: "", CellAlign: "right" },
+                    { Name: "RewardRM", Value: rs.BaseBalanceTotal.RewardRM, CellAlign: "right" }]
             }];
         }
 
