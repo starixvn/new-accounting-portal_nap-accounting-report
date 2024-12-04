@@ -67,8 +67,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
                     CurrencyName = currencyName,
                     Balance = Convert.ToDouble(row.balance),
                     BalanceBase = Convert.ToDouble(row.balance_base),
-                    Reward = Convert.ToDouble(row.Reward),
-                    RewardRM = Convert.ToDouble(row.RewardRM),
                     InstallmentAmount = Convert.ToDouble(row.installmentamount),
                     NumberDayInstallment = Converter.ToInt(row.installmentdate)
                 };

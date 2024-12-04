@@ -2555,24 +2555,6 @@ namespace Fanex.AccountingReports.Main.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reward (Original).
-        /// </summary>
-        public static string Reward {
-            get {
-                return ResourceManager.GetString("Reward", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reward (RM).
-        /// </summary>
-        public static string RewardRM {
-            get {
-                return ResourceManager.GetString("RewardRM", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to RM.
         /// </summary>
         public static string RM {

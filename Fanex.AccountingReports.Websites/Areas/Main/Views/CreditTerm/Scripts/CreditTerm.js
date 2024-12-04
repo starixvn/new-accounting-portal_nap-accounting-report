@@ -251,16 +251,6 @@ Fanex.AccountingReports.Main.CreditTerm.CreditTerm = function () {
                 '</div>\
             </td>\
             <td>\
-                <div class="' + 'align-right width110">' +
-                    setColorToValue(parentMember.Reward) +
-                '</div>\
-            </td>\
-            <td>\
-                <div class="' + 'align-right width110">'
-                   + setColorToValue(parentMember.RewardRM) +
-                '</div>\
-            </td>\
-            <td>\
                 <div class="' + 'align-left width300">' + parentMember.AccountRemark + '</div>\
             </td>\
             <td>\
@@ -296,12 +286,6 @@ Fanex.AccountingReports.Main.CreditTerm.CreditTerm = function () {
                                     </th>\
                                     <th>\
                                         <div div class="' + 'align-center width110">Balance</div>\
-                                    </th>\
-                                    <th>\
-                                        <div div class="' + 'align-center width110">' + currencyName + '</div>\
-                                    </th>\
-                                    <th>\
-                                        <div div class="' + 'align-center width110">RM</div>\
                                     </th>\
                                     <th>\
                                         <div div class="' + 'align-center width110">' + currencyName + '</div>\
@@ -361,16 +345,6 @@ Fanex.AccountingReports.Main.CreditTerm.CreditTerm = function () {
                  "</div>\
             </td>\
             <td>\
-                <div class='align-right width110'>"
-                + setColorToValue(childRows.Reward) +
-                "</div>\
-            </td>\
-            <td>\
-                <div class='align-right width110'>"
-                    + setColorToValue(childRows.RewardRM) +
-                 "</div>\
-            </td>\
-            <td>\
                 <div id='dv" + index + "' class='align-left width440'>" + childRows.AccountRemark + "</div>\
                 <input id='txt" + index + "' type='text' \
                          onkeydown='EditRemarkKeyDown(event, " + index + ")' class='input-remark' />\
@@ -390,7 +364,7 @@ Fanex.AccountingReports.Main.CreditTerm.CreditTerm = function () {
 
     var renderNoData = function () {
         var html = '<tr>\
-                        <td colspan="12">\
+                        <td colspan="10">\
                             <div class="no-data">There is no data</div>\
                         </td>\
                     </tr>';

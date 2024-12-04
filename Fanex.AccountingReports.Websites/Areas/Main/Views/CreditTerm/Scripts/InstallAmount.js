@@ -108,18 +108,6 @@ Fanex.AccountingReports.Main.CreditTerm.InstallAmount = function () {
                                 return setColorToValue(currentCell);
                             }
                         },
-                        {
-                            Name: "Reward", Value: member.Reward,
-                            CustomCellRender: function (currentCell) {
-                                return setColorToValue(currentCell);
-                            }
-                        },
-                        {
-                            Name: "RewardRM", Value: member.RewardRM,
-                            CustomCellRender: function (currentCell) {
-                                return setColorToValue(currentCell);
-                            }
-                        },
                         { Name: "InstallmentAmount", Value: member.InstallmentAmount,
                             CustomCellRender: function (currentCell) {
                                 return setColorToValue(currentCell);
@@ -152,14 +140,6 @@ Fanex.AccountingReports.Main.CreditTerm.InstallAmount = function () {
                     CellAlign: "right"
                 },
                 { HeaderText: "Base(RM)", Name: "BalanceBase", Width: 140, HeaderAlign: "center",
-                    CellAlign: "right"
-                },
-                {
-                    HeaderText: "Reward (Original)", Name: "Reward", Width: 140, HeaderAlign: "center",
-                    CellAlign: "right"
-                },
-                {
-                    HeaderText: "Reward (RM)", Name: "RewardRM", Width: 140, HeaderAlign: "center",
                     CellAlign: "right"
                 },
                 { HeaderText: "Installment Amount", Name: "InstallmentAmount", Width: 140,

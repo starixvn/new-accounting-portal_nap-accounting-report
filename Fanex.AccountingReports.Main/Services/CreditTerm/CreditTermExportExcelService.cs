@@ -122,7 +122,7 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
         {
             var currentColumn = 0;
 
-            for (var i = 0; i < 13; i++)
+            for (var i = 0; i < 11; i++)
             {
                 worksheet.SetColumnWidth(i, 145 * NpoiExcelExtensions.FontWidth);
             }
@@ -135,11 +135,11 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
 
             var reportTitle = MainResources.CreditTermPreAgreed_ReportTitle;
             IRow row = worksheet.GetRow(currentRow) ?? worksheet.CreateRow(currentRow);
-            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn + 12, reportTitle, headerStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn + 10, reportTitle, headerStyle);
 
             currentRow += 2;
 
-            worksheet.AddMergedRegion(new CellRangeAddress(currentRow, currentRow, 0, 12));
+            worksheet.AddMergedRegion(new CellRangeAddress(currentRow, currentRow, 0, 10));
             currentRow++;
             row = worksheet.GetRow(currentRow) ?? worksheet.CreateRow(currentRow);
             currentColumn = 0;
@@ -150,8 +150,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Pre_Agreed_Amount, headerStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Balance, headerStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.BaseRM, headerStyle);
-            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Reward, headerStyle);
-            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.RewardRM, headerStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Account_Remark, headerStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Phone, headerStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Checker_Name, headerStyle);
@@ -316,8 +314,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Balance, childHeader);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, currencyParentName, childHeader);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.RM, childHeader);
-            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, currencyParentName, childHeader);
-            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.RM, childHeader);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn + 2, Labels.Account_Remark, childHeader);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow + 1, currentColumn, Labels.Remark_Time_Stamp, childHeader);
 
@@ -381,12 +377,6 @@ namespace Fanex.AccountingReports.Main.Services.Implement.CreditTerm
 
             colorDecimalStyle = this.SetColorToDecimal(childMember.BalanceBase, styleCell.DecimalStyle, cssClass);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, childMember.BalanceBase, colorDecimalStyle);
-
-            colorDecimalStyle = this.SetColorToDecimal(childMember.Reward, styleCell.DecimalStyle, cssClass);
-            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, childMember.Reward, colorDecimalStyle);
-
-            colorDecimalStyle = this.SetColorToDecimal(childMember.RewardRM, styleCell.DecimalStyle, cssClass);
-            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, currentRow, currentColumn, childMember.RewardRM, colorDecimalStyle);
 
             NpoiExcelExtensions.RenderCell(
                 ref worksheet,
