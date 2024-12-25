@@ -18,6 +18,10 @@ namespace Fanex.AccountingReports.Balance.Models.SuperBalance
 
         public decimal BaseBalance { get; set; }
 
+        public decimal Reward { get; set; }
+
+        public decimal RewardRM { get; set; }
+
         public bool HasData { get; set; }
 
         public List<SuperBalance> SuperBalanceList { get; set; }
@@ -44,6 +48,7 @@ namespace Fanex.AccountingReports.Balance.Models.SuperBalance
             }
 
             this.BaseBalance += superBalance.BaseBalance;
+            this.RewardRM += superBalance.RewardRM;
         }
     }
 }

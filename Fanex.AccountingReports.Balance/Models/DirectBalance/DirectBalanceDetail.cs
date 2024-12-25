@@ -14,5 +14,9 @@ namespace Fanex.AccountingReports.Balance.Models.DirectBalance
         public string Balance { get; set; }
 
         public string BaseBalance { get; set; }
+
+        public string Reward { get; set; }
+
+        public string RewardRM { get; set; }
     }
 }
